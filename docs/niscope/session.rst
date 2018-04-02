@@ -408,6 +408,8 @@ niscope.Session
    +-------------------------------------------------------+
    | :py:func:`get_equalization_filter_coefficients`       |
    +-------------------------------------------------------+
+   | :py:func:`get_frequency_response`                     |
+   +-------------------------------------------------------+
    | :py:func:`probe_compensation_signal_start`            |
    +-------------------------------------------------------+
    | :py:func:`probe_compensation_signal_stop`             |

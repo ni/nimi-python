@@ -1624,6 +1624,35 @@ niscope.Session methods
             session.channels['0,1'].get_equalization_filter_coefficients()
 
 
+.. py:method:: get_frequency_response()
+
+    Gets the frequency response of the digitizer for the current
+    configurations of the channel properties. Not all digitizers support
+    this method.
+
+    
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session.channels['0,1'].get_frequency_response()
+
+
+    :rtype: int
+    :return:
+
+
+            Returns the number of frequencies in the returned spectrum.
+
+            
+
+
+
 .. py:method:: probe_compensation_signal_start()
 
     Starts the 1 kHz square wave output on PFI 1 for probe compensation.

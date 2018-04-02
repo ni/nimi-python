@@ -53,7 +53,6 @@ functions_codegen_method = {
     'SampleRate':                       { 'codegen_method': 'no',       },
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
-    'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch): add back when #606 is fixed
     'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
     'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
     'FetchBinary8':                     { 'codegen_method': 'private',  },
@@ -103,10 +102,9 @@ functions_buffer_info = {
     'error_message':                            { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ConfigureEqualizationFilterCoefficients':  { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'GetEqualizationFilterCoefficients':        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'numberOfCoefficients'}, }, }, },
-    # TODO(marcoskirsch): Won't work until we fix #606
-    # 'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
-    #                                                               4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
-    #                                                               5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetFrequencyResponse':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
+                                                                  4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, },
+                                                                  5: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'FetchMeasurement':                         { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchMeasurementStats':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, },
@@ -608,6 +606,14 @@ functions_array = {
     'FetchDispatcher':                               { 'parameters': { 2: { 'use_array': True, }, }, },
     'Read':                                          { 'parameters': { 4: { 'use_array': True, }, }, },
     'ReadMeasurement':                               { 'parameters': { 4: { 'use_array': True, }, }, },
+    'GetFrequencyResponse':                          { 'parameters': { 3: { 'use_array': True, },
+                                                                       4: { 'use_array': True, },
+                                                                       5: { 'use_array': True, }, }, },
+}
+
+# There are some parameters that are needed in the C function call we use under the hood, but that we do not want in the Python API
+functions_remove_from_python_api = {
+    'GetFrequencyResponse':                          { 'parameters': { 6: { 'use_in_python_api': False, }, }, },
 }
 
 

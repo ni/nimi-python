@@ -215,10 +215,10 @@ def filter_parameters(function, parameter_usage_options):
     # If we are being called looking for the ivi-dance, len or code param, we do not care about the size param so we do
     #  not call back into ourselves, to avoid infinite recursion
     if parameter_usage_options not in [ParameterUsageOptions.IVI_DANCE_PARAMETER, ParameterUsageOptions.LEN_PARAMETER]:
-        # Find the size parameter - we are assuming there can only be one
-        size_parameter = find_size_parameter(filter_ivi_dance_parameter(function), function['parameters'])
+        # Find the size parameter - we are assuming there can only be one type, either from ivi-dance or len
+        size_parameter = find_size_parameter(filter_ivi_dance_parameters(function), function['parameters'])
         if size_parameter is None:
-            size_parameter = find_size_parameter(filter_len_parameter(function), function['parameters'])
+            size_parameter = find_size_parameter(filter_len_parameters(function), function['parameters'])
     for x in function['parameters']:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
@@ -258,42 +258,40 @@ def filter_parameters(function, parameter_usage_options):
     return parameters_to_use
 
 
-def filter_ivi_dance_parameter(function):
-    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
+def filter_ivi_dance_parameters(function):
+    '''Returns the ivi-dance parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the ivi-dance.
 
-    asserts if more than one parameter found
+    asserts all parameters that use ivi-dance reference the same parameter
     Args:
         function: function whose parameters should be checked
 
     Return:
         None if no ivi-dance parameter found
-        Parameter dict if one is found
+        Parameters dict if one is found
     '''
     params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
-    if len(params) == 0:
-        return None
-    assert len(params) == 1, 'Found several ivi-dance parameters, expected only one. Found: {0}'.format([x['name'] for x in params])
-    return params[0]
+    if len(params) > 0:
+        size_param = params[0]['size']['value']
+        assert all(x['size']['value'] == size_param for x in params)
+    return params
 
 
-def filter_len_parameter(function):
-    '''Returns the len parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
+def filter_len_parameters(function):
+    '''Returns the len parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the value of a different parameter.
 
-
-    asserts if more than one parameter found
-
+    asserts all parameters that use len reference the same parameter
     Args:
         function: function whose parameters should be checked
 
     Return:
         None if no len parameter found
-        Parameter dict if one is found
+        Parameters dict if one is found
     '''
     params = filter_parameters(function, ParameterUsageOptions.LEN_PARAMETER)
-    if len(params) == 0:
-        return None
-    assert len(params) == 1, 'Found more than one len parameter: {0}'.format(pp.pformat(params))
-    return params[0]
+    if len(params) > 0:
+        size_param = params[0]['size']['value']
+        assert all(x['size']['value'] == size_param for x in params)
+    return params
 
 
 def filter_codegen_functions(functions):
