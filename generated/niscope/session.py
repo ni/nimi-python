@@ -2039,6 +2039,113 @@ class _SessionBase(object):
         '''
         return self._get_equalization_filter_coefficients(self.equalization_num_coefficients)
 
+    def read(self, num_samples=None, relative_to=enums.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0)):
+        '''read
+
+        Initiates an acquisition, waits for it to complete, and retrieves the
+        data. The process is similar to calling _initiate_acquisition,
+        acquisition_status, and _fetch. The only difference is
+        that with _read, you enable all channels specified with
+        **channelList** before the acquisition; in the other method, you enable
+        the channels with configure_vertical.
+
+        This method may return multiple waveforms depending on the number of
+        channels, the acquisition type, and the number of records you specify.
+
+        Note: Some functionality, such as time stamping, is not supported in all digitizers.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].read(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+
+        Args:
+            num_samples (datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+
+            relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
+
+            offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+
+            record_number (int): Zero-based index of the first record to fetch.  Use NUM_RECORDS to set the number of records to fetch.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
+
+            timeout (float): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
+
+
+        Returns:
+            wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
+
+                -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
+                -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+                -  **x_increment** (float) the time between points in the acquired waveform in seconds
+                -  **channel** (str) channel name this waveform was asquire from
+                -  **record** (int) record number of this waveform
+                -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
+
+                    .. math::
+
+                        voltage = binary data * gain factor + offset
+
+                -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
+
+                    .. math::
+
+                        voltage = binary data * gain factor + offset
+
+                - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+
+        '''
+        import sys
+
+        # Set the fetch attributes
+        with _NoChannel(session=self):
+            self._fetch_relative_to = relative_to
+            self._fetch_offset = offset
+            self._fetch_record_number = record_number
+            self._fetch_num_records = -1 if num_records is None else num_records
+            if num_samples is None:
+                num_samples = self.horz_record_length
+
+        wfm, wfm_info = self._read(num_samples, timeout)
+
+        if sys.version_info.major >= 3:
+            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
+            mv = memoryview(wfm)
+
+        for i in range(len(wfm_info)):
+            start = i * num_samples
+            # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
+            # since the length of the wfm will tell us that information
+            end = start + wfm_info[i].actual_samples
+            del wfm_info[i].actual_samples
+            if sys.version_info.major >= 3:
+                wfm_info[i].waveform = mv[start:end]
+            else:
+                # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
+                # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
+                wfm_info[i].waveform = array.array('d', wfm[start:end])
+
+        lwfm_i = len(wfm_info)
+        lrcl = len(self._repeated_capability_list)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
+        actual_num_records = int(lwfm_i / lrcl)
+        i = 0
+        for chan in self._repeated_capability_list:
+            for rec in range(offset, offset + actual_num_records):
+                wfm_info[i].channel = chan
+                wfm_info[i].record = rec
+                i += 1
+
+        return wfm_info
+
     def _fetch(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch
 
@@ -2050,7 +2157,7 @@ class _SessionBase(object):
         channels, the acquisition type, and the number of records you specify.
 
         Note:
-        You can use read instead of this method. read
+        You can use _read instead of this method. _read
         starts an acquisition on all enabled channels, waits for the acquisition
         to complete, and returns the waveform for the specified channel.
 
@@ -2151,7 +2258,7 @@ class _SessionBase(object):
         channels, the acquisition type, and the number of records you specify.
 
         Note:
-        You can use read instead of this method. read
+        You can use _read instead of this method. _read
         starts an acquisition on all enabled channels, waits for the acquisition
         to complete, and returns the waveform for the specified channel.
 
@@ -3182,13 +3289,13 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return frequencies_array, amplitudes_array, phases_array
 
-    def read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
-        '''read
+    def _read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
+        '''_read
 
         Initiates an acquisition, waits for it to complete, and retrieves the
         data. The process is similar to calling _initiate_acquisition,
         acquisition_status, and _fetch. The only difference is
-        that with read, you enable all channels specified with
+        that with _read, you enable all channels specified with
         **channelList** before the acquisition; in the other method, you enable
         the channels with configure_vertical.
 
@@ -3207,7 +3314,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].read(num_samples, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._read(num_samples, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             num_samples (int): The maximum number of samples to fetch for each waveform. If the
