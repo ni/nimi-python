@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Forwards to _fetch() with a nicer interface'''
+    '''Forwards to _fetch()/_read() with a nicer interface'''
     import build.helper as helper
 
     suffix = method_template['method_python_name_suffix']
@@ -21,7 +21,7 @@
             if num_samples is None:
                 num_samples = self.horz_record_length
 
-        wfm, wfm_info = self._fetch(num_samples, timeout)
+        wfm, wfm_info = self._${f['python_name']}(num_samples, timeout)
 
         if sys.version_info.major >= 3:
             # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
