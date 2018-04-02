@@ -120,6 +120,11 @@ functions_array = {
                                                               5: { 'use_array': True, }, }, },
 }
 
+# We want to use a common name for self_cal across all drivers
+functions_name = {
+    'CalSelfCalibrate': { 'python_name': 'self_cal', },
+}
+
 functions_self_test = {
     'self_test': {
         'codegen_method': 'private',

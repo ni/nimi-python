@@ -551,6 +551,7 @@ functions_python_name = {
     'FetchDispatcher':                        { 'python_name': 'fetch', },
     'FancyFetch':                             { 'python_name': 'fetch', },
     'FancyGetEqualizationFilterCoefficients': { 'python_name': 'get_equalization_filter_coefficients', },
+    'CalSelfCalibrate':                       { 'python_name': 'self_cal', },  # We want to use a common name for self_cal across all drivers
 }
 
 # Set parameter name to Waveform instead of Wfm, even for private functions (for consistency)
