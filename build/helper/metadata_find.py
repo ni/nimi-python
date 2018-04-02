@@ -6,10 +6,10 @@ def find_parameter(name, parameters):
 
 
 def find_size_parameter(parameter_list, parameters):
-    '''Returns the parameter that is used to specify the size of another parameter. Applies to 'ivi-dance' and 'passed-in'.'''
+    '''Returns the parameter that is used to specify the size other parameters. Applies to 'ivi-dance' and 'passed-in'.'''
     if len(parameter_list) == 0:
         return None
-    # We verified earlier that all paramers have the same size parameter, so we only need to use the first one
+    # Assumption: all paramers have the same size parameter, so we only need to use the first one
     try:
         # Try first as a list
         return find_parameter(parameter_list[0]['size']['value'], parameters)
