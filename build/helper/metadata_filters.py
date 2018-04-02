@@ -259,7 +259,7 @@ def filter_parameters(function, parameter_usage_options):
 
 
 def filter_ivi_dance_parameters(function):
-    '''Returns the ivi-dance parameters of a session method if there are any. This are the parameters whose size is determined at runtime.
+    '''Returns the ivi-dance parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the ivi-dance.
 
     asserts all parameters that use ivi-dance reference the same parameter
     Args:
@@ -267,7 +267,7 @@ def filter_ivi_dance_parameters(function):
 
     Return:
         None if no ivi-dance parameter found
-        Parameter dict if one is found
+        Parameters dict if one is found
     '''
     params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
     if len(params) > 0:
@@ -277,17 +277,15 @@ def filter_ivi_dance_parameters(function):
 
 
 def filter_len_parameters(function):
-    '''Returns the len parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
+    '''Returns the len parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the value of a different parameter.
 
-
-    asserts if more than one parameter found
-
+    asserts all parameters that use len reference the same parameter
     Args:
         function: function whose parameters should be checked
 
     Return:
         None if no len parameter found
-        Parameter dict if one is found
+        Parameters dict if one is found
     '''
     params = filter_parameters(function, ParameterUsageOptions.LEN_PARAMETER)
     return params
