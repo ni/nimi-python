@@ -259,9 +259,9 @@ def filter_parameters(function, parameter_usage_options):
 
 
 def filter_ivi_dance_parameters(function):
-    '''Returns the ivi-dance parameter of a session method if there is one. This is the parameter whose size is determined at runtime.
+    '''Returns the ivi-dance parameters of a session method if there are any. This are the parameters whose size is determined at runtime.
 
-    asserts if more than one parameter found
+    asserts all parameters that use ivi-dance reference the same parameter
     Args:
         function: function whose parameters should be checked
 
