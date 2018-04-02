@@ -59,6 +59,7 @@ functions_codegen_method = {
     'FetchBinary16':                    { 'codegen_method': 'private',  },
     'FetchBinary32':                    { 'codegen_method': 'private',  },
     'Fetch':                            { 'codegen_method': 'private',  },
+    'Read':                             { 'codegen_method': 'private',  },
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
     'ClearWaveformProcessing':          { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
@@ -233,6 +234,8 @@ functions_converters = {
                                                                    'python_type': 'datetime.timedelta', }, }, },
     'Read':                                 { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_type': 'datetime.timedelta', }, }, },
+    'FancyRead':                            { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
+                                                                   'python_type': 'datetime.timedelta', }, }, },
     'ReadMeasurement':                      { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_type': 'datetime.timedelta', }, }, },
     'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
@@ -383,6 +386,125 @@ Returns an array of classed with the following timing and scaling information ab
 Returns the waveform from a previously initiated acquisition that the
 digitizer acquires for the specified channel. This function returns
 scaled voltage waveforms.
+
+This function may return multiple waveforms depending on the number of
+channels, the acquisition type, and the number of records you specify.''',
+            'note': 'Some functionality, such as time stamping, is not supported in all digitizers.',
+        },
+    },
+    'FancyRead': {
+        'codegen_method': 'python-only',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'The instrument handle you obtain from niScope_init that identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channelList',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': 'The channel to configure.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': None,
+                'name': 'numSamples',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': 'FetchRelativeTo',
+                'default_value': 'FetchRelativeTo.PRETRIGGER',
+                'name': 'relativeTo',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Position to start fetching within one record.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'offset',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': 0,
+                'name': 'recordNumber',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
+                },
+            },
+            {
+                'direction': 'in',
+                'default_value': None,
+                'name': 'numRecords',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of records to fetch. Use -1 to fetch all configured records.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Timeout',
+                'type': 'ViReal64',
+                'default_value': 'datetime.timedelta(seconds=5.0)',
+                'documentation': {
+                    'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'wfmInfo',
+                'type': 'struct niScope_wfmInfo[]',
+                'documentation': {
+                    'description': '''
+Returns an array of classed with the following timing and scaling information about each waveform:
+
+-  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
+-  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
+-  **x_increment** (float) the time between points in the acquired waveform in seconds
+-  **channel** (str) channel name this waveform was asquire from
+-  **record** (int) record number of this waveform
+-  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
+
+    .. math::
+
+        voltage = binary data * gain factor + offset
+
+-  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
+
+    .. math::
+
+        voltage = binary data * gain factor + offset
+
+- **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+''',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Initiates an acquisition, waits for it to complete, and retrieves the
+data. The process is similar to calling niScope_InitiateAcquisition,
+niScope_AcquisitionStatus, and niScope_Fetch. The only difference is
+that with niScope_Read, you enable all channels specified with
+**channelList** before the acquisition; in the other method, you enable
+the channels with niScope_ConfigureVertical.
 
 This function may return multiple waveforms depending on the number of
 channels, the acquisition type, and the number of records you specify.''',
@@ -550,6 +672,7 @@ channels, the acquisition type, and the number of records you specify.''',
 functions_python_name = {
     'FetchDispatcher':                        { 'python_name': 'fetch', },
     'FancyFetch':                             { 'python_name': 'fetch', },
+    'FancyRead':                              { 'python_name': 'read', },
     'FancyGetEqualizationFilterCoefficients': { 'python_name': 'get_equalization_filter_coefficients', },
 }
 
@@ -582,6 +705,9 @@ functions_method_templates = {
         { 'session_filename': 'fetch_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '_into', },
     ], },
     'FancyFetch':      { 'method_templates': [
+        { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
+    'FancyRead':      { 'method_templates': [
         { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
     'FancyGetEqualizationFilterCoefficients':      { 'method_templates': [
