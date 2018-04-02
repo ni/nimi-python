@@ -215,7 +215,7 @@ def filter_parameters(function, parameter_usage_options):
     # If we are being called looking for the ivi-dance, len or code param, we do not care about the size param so we do
     #  not call back into ourselves, to avoid infinite recursion
     if parameter_usage_options not in [ParameterUsageOptions.IVI_DANCE_PARAMETER, ParameterUsageOptions.LEN_PARAMETER]:
-        # Find the size parameter - we are assuming there can only be one
+        # Find the size parameter - we are assuming there can only be one type, either from ivi-dance or len
         size_parameter = find_size_parameter(filter_ivi_dance_parameters(function), function['parameters'])
         if size_parameter is None:
             size_parameter = find_size_parameter(filter_len_parameters(function), function['parameters'])
