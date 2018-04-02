@@ -23,6 +23,10 @@ def test_self_test():
         session.self_test()
 
 
+def test_self_cal(session):
+    session.self_cal()
+
+
 def test_get_channel_name(session):
     name = session.get_channel_name(1)
     assert name == '0'
