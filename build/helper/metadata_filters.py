@@ -288,6 +288,9 @@ def filter_len_parameters(function):
         Parameters dict if one is found
     '''
     params = filter_parameters(function, ParameterUsageOptions.LEN_PARAMETER)
+    if len(params) > 0:
+        size_param = params[0]['size']['value']
+        assert all(x['size']['value'] == size_param for x in params)
     return params
 
 
