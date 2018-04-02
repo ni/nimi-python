@@ -18,6 +18,7 @@ class Library(object):
         self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDCPower_Abort_cfunc = None
+        self.niDCPower_CalSelfCalibrate_cfunc = None
         self.niDCPower_Commit_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
         self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc = None
@@ -76,6 +77,14 @@ class Library(object):
                 self.niDCPower_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Abort_cfunc(vi)
+
+    def niDCPower_CalSelfCalibrate(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_CalSelfCalibrate_cfunc is None:
+                self.niDCPower_CalSelfCalibrate_cfunc = self._library.niDCPower_CalSelfCalibrate
+                self.niDCPower_CalSelfCalibrate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_CalSelfCalibrate_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_CalSelfCalibrate_cfunc(vi, channel_name)
 
     def niDCPower_Commit(self, vi):  # noqa: N802
         with self._func_lock:
