@@ -30,11 +30,13 @@ def test_read(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
+    test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    waveform, waveforms = session.channels[test_channels].read(test_record_length)
-    assert len(waveform) == test_num_channels * test_record_length
-    assert len(waveforms) == test_num_channels
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    waveforms = session.channels[test_channels].read(num_samples=test_record_length, num_records=test_num_records)
+    assert len(waveforms) == test_num_channels * test_num_records
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].waveform) == test_record_length
 
 
 def test_fetch(session):
