@@ -80,13 +80,14 @@ All notable changes to this project will be documented in this file.
             * `VideoSignalFormat._1080I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_59_94_FIELDS_PER_SECOND`
             * `VideoSignalFormat._1080I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_60_FIELDS_PER_SECOND`
             * `VideoSignalFormat._1080P_24_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080P_24_FRAMES_PER_SECOND`
-        * Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
+        * Self cal function renamed to `self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
     * #### Removed
         * Following properties are now removed (use parameters to fetch calls):
             * `fetch_relative_to`
             * `fetch_offset`
             * `fetch_record_number`
             * `fetch_num_records`
+        * Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
 
 ## 0.7.0 - 2018-02-20
 * ### ALL
