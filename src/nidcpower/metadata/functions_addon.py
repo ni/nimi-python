@@ -44,6 +44,9 @@ functions_codegen_method = {
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
     'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
 }
 
 # Attach the given parameter to the given enum from enums.py
