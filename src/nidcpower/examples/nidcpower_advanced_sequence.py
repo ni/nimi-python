@@ -29,17 +29,17 @@ def example(resource_name, channels, options, steps, voltage_start, voltage_fina
         session.source_delay = datetime.timedelta(seconds=0.1)
         session.voltage_level_autorange = True
         session.current_level_autorange = True
-        session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=attribute_ids)
+        session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=attribute_ids)
         voltages = create_sweep(voltage_start, voltage_final, steps)
         currents = create_sweep(current_start, current_final, steps)
 
         for v in voltages:
-            session.create_advanced_sequence_step()
+            session._create_advanced_sequence_step()
             session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
             session.voltage_level = v
 
         for c in currents:
-            session.create_advanced_sequence_step()
+            session._create_advanced_sequence_step()
             session.output_function = nidcpower.OutputFunction.DC_CURRENT
             session.current_level = c
 
