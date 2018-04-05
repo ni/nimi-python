@@ -189,55 +189,55 @@ functions_default_value = {
 # Converted parameters
 functions_converters = {
     'ConfigureTriggerDigital':              { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', },
+                                                                   'python_type': 'float or datetime.timedelta', },
                                                               4: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'ConfigureTriggerEdge':                 { 'parameters': { 5: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', },
+                                                                   'python_type': 'float or datetime.timedelta', },
                                                               6: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'ConfigureTriggerHysteresis':           { 'parameters': { 6: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', },
+                                                                   'python_type': 'float or datetime.timedelta', },
                                                               7: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'ConfigureTriggerSoftware':             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', },
+                                                                   'python_type': 'float or datetime.timedelta', },
                                                               2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'ConfigureTriggerVideo':                { 'parameters': { 8: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', },
+                                                                   'python_type': 'float or datetime.timedelta', },
                                                               9: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'ConfigureTriggerWindow':               { 'parameters': { 6: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', },
+                                                                   'python_type': 'float or datetime.timedelta', },
                                                               7: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'Fetch':                                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchArrayMeasurement':                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchBinary16':                        { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchBinary32':                        { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchBinary8':                         { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchComplex':                         { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchComplexBinary16':                 { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchMeasurement':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FetchMeasurementStats':                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FancyFetch':                           { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'Read':                                 { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'FancyRead':                            { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'ReadMeasurement':                      { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'datetime.timedelta', }, }, },
+                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                    'python_type': 'dict', }, }, },
 }
@@ -357,7 +357,7 @@ Raises `SelfTestFailureError` on self test failure. Attributes on exception obje
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
                     'description': '''
-Returns an array of classed with the following timing and scaling information about each waveform:
+Returns an array of classes with the following timing and scaling information about each waveform:
 
 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -473,7 +473,7 @@ channels, the acquisition type, and the number of records you specify.''',
                 'type': 'struct niScope_wfmInfo[]',
                 'documentation': {
                     'description': '''
-Returns an array of classed with the following timing and scaling information about each waveform:
+Returns an array of classes with the following timing and scaling information about each waveform:
 
 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
