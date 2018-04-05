@@ -165,7 +165,7 @@ functions_additional_functions = {
             'description': '''
 Runs the instrument self-test routine and returns the test result(s).
 
-Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+Raises `SelfTestError` on self test failure. Attributes on exception object:
 
 - code - failure code from driver
 - message - status message from driver

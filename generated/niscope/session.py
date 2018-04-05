@@ -4705,7 +4705,7 @@ class Session(_SessionBase):
         Runs the instrument self-test routine and returns the test result(s). Refer to the
         device-specific help topics for an explanation of the message contents.
 
-        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+        Raises `SelfTestError` on self test failure. Properties on exception object:
 
         - code - failure code from driver
         - message - status message from driver

@@ -1522,7 +1522,7 @@ nidmm.Session methods
     On the NI 4080/4082 and NI 4070/4072, the error code 1013 indicates that
     you should check the fuse and replace it, if necessary.
 
-    Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+    Raises `SelfTestError` on self test failure. Properties on exception object:
 
     - code - failure code from driver
     - message - status message from driver

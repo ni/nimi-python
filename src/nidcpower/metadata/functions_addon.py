@@ -183,7 +183,7 @@ channels of your PXIe-4162/4163 with the channels input of
 niDCPower_InitializeWithChannels. You cannot self test a subset of
 PXIe-4162/4163 channels.
 
-Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+Raises `SelfTestError` on self test failure. Attributes on exception object:
 
 - code - failure code from driver
 - message - status message from driver

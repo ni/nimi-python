@@ -2245,7 +2245,7 @@ nifgen.Session methods
 
     Runs the instrument self-test routine and returns the test result(s).
 
-    Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+    Raises `SelfTestError` on self test failure. Properties on exception object:
 
     - code - failure code from driver
     - message - status message from driver
