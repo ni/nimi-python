@@ -47,6 +47,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
     * #### Added
     * #### Changed
+        * `Session.export_signal()` signal_identifier now has a default of "". This moves it to the end of the parameter list [#801](https://github.com/ni/nimi-python/issues/801)
     * #### Removed
         * `Session.cal_adc_input` attribute and `Session.enums.CalADCInput` enum - External Cal not supported in Python
 * ### NI-SCOPE
