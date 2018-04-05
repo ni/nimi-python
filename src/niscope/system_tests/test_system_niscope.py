@@ -243,7 +243,7 @@ def test_acquisition_status(session):
 
 
 def test_self_cal(session):
-    session.cal_self_calibrate(niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+    session.self_cal(niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
 
 def test_probe_compensation_signal(session):

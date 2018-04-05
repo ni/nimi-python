@@ -43,10 +43,12 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `Session.fetch_multiple()` now returns list of named tuples instead of multiple arrays. See [documentation](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple)
+        * `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
     * #### Removed
 * ### NI-FGEN
     * #### Added
     * #### Changed
+        * `Session.export_signal()` signal_identifier now has a default of "". This moves it to the end of the parameter list [#801](https://github.com/ni/nimi-python/issues/801)
     * #### Removed
         * `SampleClockTimebaseSource`, `SampleClockSource`, and `ReferenceClockSource` enums removed
         * `Session.cal_adc_input` attribute and `Session.enums.CalADCInput` enum - External Cal not supported in Python
@@ -81,13 +83,14 @@ All notable changes to this project will be documented in this file.
             * `VideoSignalFormat._1080I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_59_94_FIELDS_PER_SECOND`
             * `VideoSignalFormat._1080I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_60_FIELDS_PER_SECOND`
             * `VideoSignalFormat._1080P_24_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080P_24_FRAMES_PER_SECOND`
-        * Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
+        * `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
     * #### Removed
         * Following properties are now removed (use parameters to fetch calls):
             * `fetch_relative_to`
             * `fetch_offset`
             * `fetch_record_number`
             * `fetch_num_records`
+        * Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
 
 ## 0.7.0 - 2018-02-20
 * ### ALL

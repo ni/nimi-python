@@ -335,7 +335,7 @@ def test_set_waveform_next_write_position(session):
 
 def test_export_signal(session):
     expected_trigger_terminal = "PXI_Trig0"
-    session.export_signal(nifgen.Signal.START_TRIGGER, "", expected_trigger_terminal)
+    session.export_signal(nifgen.Signal.START_TRIGGER, expected_trigger_terminal)
     assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
 
 
