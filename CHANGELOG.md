@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
         * All exceptions raised by the Python bindings inherit from `<driver>.Error`
         * Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
             * This encapsulates any error that is returned by the underlying driver
+        * All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
     * #### Removed
 * ### NI-DMM
     * #### Added
