@@ -13,7 +13,7 @@ The following is a basic example of using the **niscope** module to open a sessi
         with session.initiate():
             waveforms = session.channels[0,1].fetch(num_records=5)
         for wfm in waveforms:
-            print('Channel {0}, record {1} samples acquired: {2:,}\n'.format(wfm.channel, wfm.record, len(wfm.waveform)))
+            print('Channel {0}, record {1} samples acquired: {2:,}\n'.format(wfm.channel, wfm.record, len(wfm.samples)))
 
         # Find all channel 1 records (Note channel name is always a sting even if integers used in channel[])
         chan1 = [wfm for wfm in waveforms if wfm.channel == '0']
@@ -42,7 +42,7 @@ The waveform returned from `fetch <http://nimi-python.readthedocs.io/en/master/n
 
                 voltage = binary data * gain factor + offset
 
-        - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+        - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
     - Such that all record 0 waveforms are first. For example, with a channel list of 0,1, you would have the following index values:
 
@@ -95,7 +95,7 @@ The waveform_infos returned from `fetch_into <http://nimi-python.readthedocs.io/
 
                 voltage = binary data * gain factor + offset
 
-        - **waveform** (numpy array of datatype used) floating point array of samples. Length will be of the actual samples acquired
+        - **samples** (numpy array of datatype used) floating point array of samples. Length will be of the actual samples acquired
 
             .. note::
 
