@@ -129,6 +129,7 @@ functions_default_value = {
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
+    'ExportSignal':                                 { 'parameters': { 2: { 'default_value': '""', }, }, },
 }
 
 # Converted parameters
