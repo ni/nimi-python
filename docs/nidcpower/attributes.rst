@@ -3845,15 +3845,13 @@ nidcpower.Session properties
 .. py:attribute:: self_calibration_persistence
 
     Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the :py:meth:`nidcpower.Session.reset_device` method is called or the machine  is powered down.
-    This property affects the behavior of the :py:meth:`nidcpower.Session.CalSelfCalibrate` method. When set to  :py:data:`~nidcpower.SelfCalibrationPersistence.KEEP_IN_MEMORY`, the values calculated by the :py:meth:`nidcpower.Session.CalSelfCalibrate` method are used in  the existing session, as well as in all further sessions until you call the :py:meth:`nidcpower.Session.reset_device` method  or restart the machine. When you set this property to :py:data:`~nidcpower.SelfCalibrationPersistence.WRITE_TO_EEPROM`, the values calculated  by the :py:meth:`nidcpower.Session.CalSelfCalibrate` method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the :py:meth:`nidcpower.Session.CalSelfCalibrate` method is made.
+    This property affects the behavior of the :py:meth:`nidcpower.Session.self_cal` method. When set to  :py:data:`~nidcpower.SelfCalibrationPersistence.KEEP_IN_MEMORY`, the values calculated by the :py:meth:`nidcpower.Session.self_cal` method are used in  the existing session, as well as in all further sessions until you call the :py:meth:`nidcpower.Session.reset_device` method  or restart the machine. When you set this property to :py:data:`~nidcpower.SelfCalibrationPersistence.WRITE_TO_EEPROM`, the values calculated  by the :py:meth:`nidcpower.Session.self_cal` method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the :py:meth:`nidcpower.Session.self_cal` method is made.
     about supported devices.
     Default Value: :py:data:`~nidcpower.SelfCalibrationPersistence.KEEP_IN_MEMORY`
 
 
 
     .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 

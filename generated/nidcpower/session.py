@@ -1756,14 +1756,11 @@ class _SessionBase(object):
     '''Type: enums.SelfCalibrationPersistence
 
     Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the reset_device method is called or the machine  is powered down.
-    This property affects the behavior of the CalSelfCalibrate method. When set to  SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the CalSelfCalibrate method are used in  the existing session, as well as in all further sessions until you call the reset_device method  or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated  by the CalSelfCalibrate method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the CalSelfCalibrate method is made.
+    This property affects the behavior of the self_cal method. When set to  SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the self_cal method are used in  the existing session, as well as in all further sessions until you call the reset_device method  or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated  by the self_cal method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the self_cal method is made.
     about supported devices.
     Default Value: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Sense, 1150013)
     '''Type: enums.Sense
@@ -2310,6 +2307,51 @@ class _SessionBase(object):
             return "Failed to retrieve error description."
 
     ''' These are code-generated '''
+
+    def self_cal(self):
+        '''self_cal
+
+        Performs a self-calibration upon the specified channel(s).
+
+        This method disables the output, performs several internal
+        calculations, and updates calibration values. The updated calibration
+        values are written to the device hardware if the
+        self_calibration_persistence property is set to
+        SelfCalibrationPersistence.WRITE_TO_EEPROM. Refer to the
+        self_calibration_persistence property topic for more
+        information about the settings for this property.
+
+        When calling self_cal with the PXIe-4162/4163,
+        specify all channels of your PXIe-4162/4163 with the channelName input.
+        You cannot self-calibrate a subset of PXIe-4162/4163 channels.
+
+        Refer to the
+        `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__ topic for
+        more information about this method.
+
+        **Related Topics:**
+
+        `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__
+
+        Note:
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].self_cal()
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDCPower_CalSelfCalibrate(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         '''configure_aperture_time
@@ -4665,7 +4707,7 @@ class Session(_SessionBase):
         _initialize_with_channels. You cannot self test a subset of
         PXIe-4162/4163 channels.
 
-        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+        Raises `SelfTestError` on self test failure. Properties on exception object:
 
         - code - failure code from driver
         - message - status message from driver
