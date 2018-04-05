@@ -1717,8 +1717,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(num_wfms_ctype.value)
 
-    def cal_self_calibrate(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
-        '''cal_self_calibrate
+    def self_cal(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
+        '''self_cal
 
         Self-calibrates most NI digitizers, including all SMC-based devices and
         most Traditional NI-DAQ (Legacy) devices. To verify that your digitizer
@@ -1746,7 +1746,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+            session.channels['0,1'].self_cal(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
 
         Args:
             option (enums.Option): The calibration option. Use VI_NULL for a normal self-calibration
@@ -4705,7 +4705,7 @@ class Session(_SessionBase):
         Runs the instrument self-test routine and returns the test result(s). Refer to the
         device-specific help topics for an explanation of the message contents.
 
-        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+        Raises `SelfTestError` on self test failure. Properties on exception object:
 
         - code - failure code from driver
         - message - status message from driver

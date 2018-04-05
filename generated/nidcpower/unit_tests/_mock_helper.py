@@ -17,6 +17,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
+        self._defaults['CalSelfCalibrate'] = {}
+        self._defaults['CalSelfCalibrate']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
@@ -167,6 +169,11 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
+
+    def niDCPower_CalSelfCalibrate(self, vi, channel_name):  # noqa: N802
+        if self._defaults['CalSelfCalibrate']['return'] != 0:
+            return self._defaults['CalSelfCalibrate']['return']
+        return self._defaults['CalSelfCalibrate']['return']
 
     def niDCPower_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -626,6 +633,8 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niDCPower_Abort.side_effect = MockFunctionCallError("niDCPower_Abort")
         mock_library.niDCPower_Abort.return_value = 0
+        mock_library.niDCPower_CalSelfCalibrate.side_effect = MockFunctionCallError("niDCPower_CalSelfCalibrate")
+        mock_library.niDCPower_CalSelfCalibrate.return_value = 0
         mock_library.niDCPower_Commit.side_effect = MockFunctionCallError("niDCPower_Commit")
         mock_library.niDCPower_Commit.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")

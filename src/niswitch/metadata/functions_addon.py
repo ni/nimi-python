@@ -116,7 +116,7 @@ functions_additional_functions = {
             'description': '''
 Verifies that the driver can communicate with the switch module.
 
-Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+Raises `SelfTestError` on self test failure. Attributes on exception object:
 
 - code - failure code from driver
 - message - status message from driver

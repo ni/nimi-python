@@ -2481,7 +2481,7 @@ class Session(_SessionBase):
 
         Verifies that the driver can communicate with the switch module.
 
-        Raises `SelfTestFailureError` on self test failure. Properties on exception object:
+        Raises `SelfTestError` on self test failure. Properties on exception object:
 
         - code - failure code from driver
         - message - status message from driver
