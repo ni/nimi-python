@@ -1941,16 +1941,13 @@ class _SessionBase(object):
             session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method raises.
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
-            offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+            offset (int): Offset in samples to start fetching data within each record. The offset can be positive or negative.
 
-            record_number (int): Zero-based index of the first record to fetch.  Use NUM_RECORDS to set the number of records to fetch.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            record_number (int): Zero-based index of the first record to fetch.
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
@@ -2063,16 +2060,13 @@ class _SessionBase(object):
             session.channels['0,1'].read(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method raises.
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
-            offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+            offset (int): Offset in samples to start fetching data within each record. The offset can be positive or negative.
 
-            record_number (int): Zero-based index of the first record to fetch.  Use NUM_RECORDS to set the number of records to fetch.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            record_number (int): Zero-based index of the first record to fetch.
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
@@ -2792,12 +2786,9 @@ class _SessionBase(object):
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
-            offset (int): Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to. The offset can be positive or negative.
+            offset (int): Offset in samples to start fetching data within each record.The offset can be positive or negative.
 
-            record_number (int): Zero-based index of the first record to fetch.  Use NUM_RECORDS to set the number of records to fetch.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            record_number (int): Zero-based index of the first record to fetch.
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 

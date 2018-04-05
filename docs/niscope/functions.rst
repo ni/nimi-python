@@ -1218,7 +1218,7 @@ niscope.Session methods
     :param num_samples:
 
 
-        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method raises.
 
         
 
@@ -1236,7 +1236,7 @@ niscope.Session methods
     :param offset:
 
 
-        Offset in samples to start fetching data within each record. The offset is applied relative to :py:data:`niscope.Session.fetch_relative_to`. The offset can be positive or negative.
+        Offset in samples to start fetching data within each record. The offset can be positive or negative.
 
         
 
@@ -1245,11 +1245,9 @@ niscope.Session methods
     :param record_number:
 
 
-        Zero-based index of the first record to fetch.  Use :py:data:`niscope.Session.NUM_RECORDS` to set the number of records to fetch.
+        Zero-based index of the first record to fetch.
 
         
-
-        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
     :type record_number: int
@@ -1360,7 +1358,7 @@ niscope.Session methods
     :param offset:
 
 
-        Offset in samples to start fetching data within each record. The offset is applied relative to :py:data:`niscope.Session.fetch_relative_to`. The offset can be positive or negative.
+        Offset in samples to start fetching data within each record.The offset can be positive or negative.
 
         
 
@@ -1369,11 +1367,9 @@ niscope.Session methods
     :param record_number:
 
 
-        Zero-based index of the first record to fetch.  Use :py:data:`niscope.Session.NUM_RECORDS` to set the number of records to fetch.
+        Zero-based index of the first record to fetch.
 
         
-
-        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
     :type record_number: int
@@ -1699,7 +1695,7 @@ niscope.Session methods
     :param num_samples:
 
 
-        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+        The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method raises.
 
         
 
@@ -1717,7 +1713,7 @@ niscope.Session methods
     :param offset:
 
 
-        Offset in samples to start fetching data within each record. The offset is applied relative to :py:data:`niscope.Session.fetch_relative_to`. The offset can be positive or negative.
+        Offset in samples to start fetching data within each record. The offset can be positive or negative.
 
         
 
@@ -1726,11 +1722,9 @@ niscope.Session methods
     :param record_number:
 
 
-        Zero-based index of the first record to fetch.  Use :py:data:`niscope.Session.NUM_RECORDS` to set the number of records to fetch.
+        Zero-based index of the first record to fetch.
 
         
-
-        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
     :type record_number: int

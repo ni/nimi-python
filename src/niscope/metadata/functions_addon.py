@@ -289,7 +289,7 @@ Raises `SelfTestFailureError` on self test failure. Attributes on exception obje
                 'name': 'channelList',
                 'type': 'ViChar[]',
                 'documentation': {
-                    'description': 'The channel to configure.',
+                    'description': 'The channel(s) to fetch from.',
                 },
             },
             {
@@ -298,7 +298,7 @@ Raises `SelfTestFailureError` on self test failure. Attributes on exception obje
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
+                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function raises.',
                 },
             },
             {
@@ -317,7 +317,7 @@ Raises `SelfTestFailureError` on self test failure. Attributes on exception obje
                 'name': 'offset',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
+                    'description': 'Offset in samples to start fetching data within each record. The offset can be positive or negative.',
                 },
             },
             {
@@ -326,7 +326,7 @@ Raises `SelfTestFailureError` on self test failure. Attributes on exception obje
                 'name': 'recordNumber',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
+                    'description': 'Zero-based index of the first record to fetch.',
                 },
             },
             {
@@ -407,7 +407,7 @@ channels, the acquisition type, and the number of records you specify.''',
                 'name': 'channelList',
                 'type': 'ViChar[]',
                 'documentation': {
-                    'description': 'The channel to configure.',
+                    'description': 'The channel(s) to read from.',
                 },
             },
             {
@@ -416,7 +416,7 @@ channels, the acquisition type, and the number of records you specify.''',
                 'name': 'numSamples',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function throws an exception.',
+                    'description': 'The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the function raises.',
                 },
             },
             {
@@ -435,7 +435,7 @@ channels, the acquisition type, and the number of records you specify.''',
                 'name': 'offset',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
+                    'description': 'Offset in samples to start fetching data within each record. The offset can be positive or negative.',
                 },
             },
             {
@@ -444,7 +444,7 @@ channels, the acquisition type, and the number of records you specify.''',
                 'name': 'recordNumber',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
+                    'description': 'Zero-based index of the first record to fetch.',
                 },
             },
             {
@@ -528,7 +528,7 @@ channels, the acquisition type, and the number of records you specify.''',
                 'name': 'channelList',
                 'type': 'ViChar[]',
                 'documentation': {
-                    'description': 'The channel to configure.',
+                    'description': 'The channel(s) to fetch from.',
                 },
             },
             {
@@ -570,7 +570,7 @@ Example:
                 'name': 'offset',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Offset in samples to start fetching data within each record. The offset is applied relative to NISCOPE_ATTR_FETCH_RELATIVE_TO. The offset can be positive or negative.',
+                    'description': 'Offset in samples to start fetching data within each record.The offset can be positive or negative.',
                 },
             },
             {
@@ -579,7 +579,7 @@ Example:
                 'name': 'recordNumber',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'Zero-based index of the first record to fetch.  Use NISCOPE_ATTR_NUM_RECORDS to set the number of records to fetch.',
+                    'description': 'Zero-based index of the first record to fetch.',
                 },
             },
             {
