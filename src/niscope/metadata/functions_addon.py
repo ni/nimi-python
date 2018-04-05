@@ -263,7 +263,7 @@ functions_additional_functions = {
 Runs the instrument self-test routine and returns the test result(s). Refer to the
 device-specific help topics for an explanation of the message contents.
 
-Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+Raises `SelfTestError` on self test failure. Attributes on exception object:
 
 - code - failure code from driver
 - message - status message from driver
@@ -674,6 +674,7 @@ functions_python_name = {
     'FancyFetch':                             { 'python_name': 'fetch', },
     'FancyRead':                              { 'python_name': 'read', },
     'FancyGetEqualizationFilterCoefficients': { 'python_name': 'get_equalization_filter_coefficients', },
+    'CalSelfCalibrate':                       { 'python_name': 'self_cal', },  # We want to use a common name for self_cal across all drivers
 }
 
 # Set parameter name to Waveform instead of Wfm, even for private functions (for consistency)

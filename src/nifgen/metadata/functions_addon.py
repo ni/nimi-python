@@ -129,6 +129,7 @@ functions_default_value = {
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
+    'ExportSignal':                                 { 'parameters': { 2: { 'default_value': '""', }, }, },
 }
 
 # Converted parameters
@@ -165,7 +166,7 @@ functions_additional_functions = {
             'description': '''
 Runs the instrument self-test routine and returns the test result(s).
 
-Raises `SelfTestFailureError` on self test failure. Attributes on exception object:
+Raises `SelfTestError` on self test failure. Attributes on exception object:
 
 - code - failure code from driver
 - message - status message from driver
