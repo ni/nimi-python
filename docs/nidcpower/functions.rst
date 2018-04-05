@@ -752,7 +752,7 @@ nidcpower.Session methods
         .. note:: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
 
-    :type timeout: datetime.timedelta
+    :type timeout: float or datetime.timedelta
 
     :rtype: list of Measurement
     :return:
@@ -1466,6 +1466,6 @@ nidcpower.Session methods
             application.
 
 
-    :type timeout: datetime.timedelta
+    :type timeout: float or datetime.timedelta
 
 

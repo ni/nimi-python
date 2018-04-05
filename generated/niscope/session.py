@@ -1941,7 +1941,7 @@ class _SessionBase(object):
             session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            num_samples (datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+            num_samples (float or datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
@@ -1958,7 +1958,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
+            wfm_info (list of WaveformInfo): Returns an array of classes with the following timing and scaling information about each waveform:
 
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -2004,11 +2004,11 @@ class _SessionBase(object):
             end = start + wfm_info[i].actual_samples
             del wfm_info[i].actual_samples
             if sys.version_info.major >= 3:
-                wfm_info[i].waveform = mv[start:end]
+                wfm_info[i].samples = mv[start:end]
             else:
                 # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
                 # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                wfm_info[i].waveform = array.array('d', wfm[start:end])
+                wfm_info[i].samples = array.array('d', wfm[start:end])
 
         lwfm_i = len(wfm_info)
         lrcl = len(self._repeated_capability_list)
@@ -2063,7 +2063,7 @@ class _SessionBase(object):
             session.channels['0,1'].read(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            num_samples (datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+            num_samples (float or datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
@@ -2080,7 +2080,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
+            wfm_info (list of WaveformInfo): Returns an array of classes with the following timing and scaling information about each waveform:
 
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -2126,11 +2126,11 @@ class _SessionBase(object):
             end = start + wfm_info[i].actual_samples
             del wfm_info[i].actual_samples
             if sys.version_info.major >= 3:
-                wfm_info[i].waveform = mv[start:end]
+                wfm_info[i].samples = mv[start:end]
             else:
                 # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
                 # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                wfm_info[i].waveform = array.array('d', wfm[start:end])
+                wfm_info[i].samples = array.array('d', wfm[start:end])
 
         lwfm_i = len(wfm_info)
         lrcl = len(self._repeated_capability_list)
@@ -2181,7 +2181,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the method returns an error.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2303,7 +2303,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2429,7 +2429,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2555,7 +2555,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2681,7 +2681,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced methods are not in the Python API for this driver.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2868,7 +2868,7 @@ class _SessionBase(object):
                     start = i * num_samples
                     end = start + wfm_info[i].actual_samples
                     del wfm_info[i].actual_samples
-                    wfm_info[i].waveform = mv[start:end]
+                    wfm_info[i].samples = mv[start:end]
 
                 i += 1
 
@@ -2902,7 +2902,7 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -2965,7 +2965,7 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed on each fetched waveform.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -3323,7 +3323,7 @@ class _SessionBase(object):
                 timeout of 0 was used. If it fails to complete within the timeout
                 period, the method returns an error.
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -3420,7 +3420,7 @@ class _SessionBase(object):
                 measurement <REPLACE_DRIVER_SPECIFIC_URL_2(scalar_measurements_refs)>`__
                 to be performed
 
-            timeout (datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
                 parameter tells NI-SCOPE to fetch whatever is currently available. Using
                 -1 for this parameter implies infinite timeout.
 
@@ -4086,11 +4086,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
+            holdoff (float or datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
+            delay (float or datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4143,11 +4143,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
+            holdoff (float or datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
+            delay (float or datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4214,11 +4214,11 @@ class Session(_SessionBase):
                 the digitizer. Refer to trigger_slope for more
                 information.
 
-            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
+            holdoff (float or datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
+            delay (float or datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4280,11 +4280,11 @@ class Session(_SessionBase):
         more information.
 
         Args:
-            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
+            holdoff (float or datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
+            delay (float or datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4350,11 +4350,11 @@ class Session(_SessionBase):
 
                 Default value: 1
 
-            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
+            holdoff (float or datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
+            delay (float or datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 
@@ -4424,11 +4424,11 @@ class Session(_SessionBase):
             trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
                 trigger_coupling for more information.
 
-            holdoff (datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
+            holdoff (float or datetime.timedelta): The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
                 trigger_holdoff for more information.
 
-            delay (datetime.timedelta): How long the digitizer waits after receiving the trigger to start
+            delay (float or datetime.timedelta): How long the digitizer waits after receiving the trigger to start
                 acquiring data. Refer to trigger_delay_time for more
                 information.
 

@@ -501,7 +501,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: datetime.timedelta
+    :type holdoff: float or datetime.timedelta
     :param delay:
 
 
@@ -512,7 +512,7 @@ niscope.Session methods
         
 
 
-    :type delay: datetime.timedelta
+    :type delay: float or datetime.timedelta
 
 .. py:method:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -590,7 +590,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: datetime.timedelta
+    :type holdoff: float or datetime.timedelta
     :param delay:
 
 
@@ -601,7 +601,7 @@ niscope.Session methods
         
 
 
-    :type delay: datetime.timedelta
+    :type delay: float or datetime.timedelta
 
 .. py:method:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -696,7 +696,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: datetime.timedelta
+    :type holdoff: float or datetime.timedelta
     :param delay:
 
 
@@ -707,7 +707,7 @@ niscope.Session methods
         
 
 
-    :type delay: datetime.timedelta
+    :type delay: float or datetime.timedelta
 
 .. py:method:: configure_trigger_immediate()
 
@@ -759,7 +759,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: datetime.timedelta
+    :type holdoff: float or datetime.timedelta
     :param delay:
 
 
@@ -770,7 +770,7 @@ niscope.Session methods
         
 
 
-    :type delay: datetime.timedelta
+    :type delay: float or datetime.timedelta
 
 .. py:method:: configure_trigger_video(trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -886,7 +886,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: datetime.timedelta
+    :type holdoff: float or datetime.timedelta
     :param delay:
 
 
@@ -897,7 +897,7 @@ niscope.Session methods
         
 
 
-    :type delay: datetime.timedelta
+    :type delay: float or datetime.timedelta
 
 .. py:method:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -988,7 +988,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: datetime.timedelta
+    :type holdoff: float or datetime.timedelta
     :param delay:
 
 
@@ -999,7 +999,7 @@ niscope.Session methods
         
 
 
-    :type delay: datetime.timedelta
+    :type delay: float or datetime.timedelta
 
 .. py:method:: configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
@@ -1223,7 +1223,7 @@ niscope.Session methods
         
 
 
-    :type num_samples: datetime.timedelta
+    :type num_samples: float or datetime.timedelta
     :param relative_to:
 
 
@@ -1276,7 +1276,7 @@ niscope.Session methods
     :return:
 
 
-            Returns an array of classed with the following timing and scaling information about each waveform:
+            Returns an array of classes with the following timing and scaling information about each waveform:
 
             -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
             -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -1473,7 +1473,7 @@ niscope.Session methods
         
 
 
-    :type timeout: datetime.timedelta
+    :type timeout: float or datetime.timedelta
 
     :rtype: list of float
     :return:
@@ -1547,7 +1547,7 @@ niscope.Session methods
         
 
 
-    :type timeout: datetime.timedelta
+    :type timeout: float or datetime.timedelta
 
     :rtype: tuple (result, mean, stdev, min, max, num_in_stats)
 
@@ -1704,7 +1704,7 @@ niscope.Session methods
         
 
 
-    :type num_samples: datetime.timedelta
+    :type num_samples: float or datetime.timedelta
     :param relative_to:
 
 
@@ -1757,7 +1757,7 @@ niscope.Session methods
     :return:
 
 
-            Returns an array of classed with the following timing and scaling information about each waveform:
+            Returns an array of classes with the following timing and scaling information about each waveform:
 
             -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
             -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -1833,7 +1833,7 @@ niscope.Session methods
         
 
 
-    :type timeout: datetime.timedelta
+    :type timeout: float or datetime.timedelta
 
     :rtype: array.array("d")
     :return:

@@ -2396,7 +2396,7 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
+            timeout (float or datetime.timedelta): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
 
                 Note: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -2453,7 +2453,7 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (float or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -4612,7 +4612,7 @@ class Session(_SessionBase):
                 | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +-------------------------------------------------------+--------------------------------------------------+
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (float or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
