@@ -1223,7 +1223,7 @@ niscope.Session methods
         
 
 
-    :type num_samples: float or datetime.timedelta
+    :type num_samples: int
     :param relative_to:
 
 
@@ -1270,7 +1270,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float
+    :type timeout: float or datetime.timedelta
 
     :rtype: list of WaveformInfo
     :return:
@@ -1295,7 +1295,7 @@ niscope.Session methods
 
                     voltage = binary data * gain factor + offset
 
-            - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+            - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
             
 
@@ -1419,7 +1419,7 @@ niscope.Session methods
 
                     voltage = binary data * gain factor + offset
 
-            - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+            - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
             
 
@@ -1704,7 +1704,7 @@ niscope.Session methods
         
 
 
-    :type num_samples: float or datetime.timedelta
+    :type num_samples: int
     :param relative_to:
 
 
@@ -1751,7 +1751,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float
+    :type timeout: float or datetime.timedelta
 
     :rtype: list of WaveformInfo
     :return:
@@ -1776,7 +1776,7 @@ niscope.Session methods
 
                     voltage = binary data * gain factor + offset
 
-            - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+            - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
             
 

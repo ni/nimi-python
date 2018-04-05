@@ -230,11 +230,7 @@ functions_converters = {
                                                                    'python_type': 'float or datetime.timedelta', }, }, },
     'FetchMeasurementStats':                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_type': 'float or datetime.timedelta', }, }, },
-    'FancyFetch':                           { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'float or datetime.timedelta', }, }, },
     'Read':                                 { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                   'python_type': 'float or datetime.timedelta', }, }, },
-    'FancyRead':                            { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_type': 'float or datetime.timedelta', }, }, },
     'ReadMeasurement':                      { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                    'python_type': 'float or datetime.timedelta', }, }, },
@@ -346,6 +342,8 @@ Raises `SelfTestFailureError` on self test failure. Attributes on exception obje
                 'direction': 'in',
                 'name': 'Timeout',
                 'type': 'ViReal64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_type': 'float or datetime.timedelta',
                 'default_value': 'datetime.timedelta(seconds=5.0)',
                 'documentation': {
                     'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.',
@@ -376,7 +374,7 @@ Returns an array of classes with the following timing and scaling information ab
 
         voltage = binary data * gain factor + offset
 
-- **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+- **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 ''',
                 },
             },
@@ -462,6 +460,8 @@ channels, the acquisition type, and the number of records you specify.''',
                 'direction': 'in',
                 'name': 'Timeout',
                 'type': 'ViReal64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_type': 'float or datetime.timedelta',
                 'default_value': 'datetime.timedelta(seconds=5.0)',
                 'documentation': {
                     'description': 'The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.',
@@ -492,7 +492,7 @@ Returns an array of classes with the following timing and scaling information ab
 
         voltage = binary data * gain factor + offset
 
-- **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+- **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 ''',
                 },
             },
@@ -625,7 +625,7 @@ Returns an array of classed with the following timing and scaling information ab
 
         voltage = binary data * gain factor + offset
 
-- **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+- **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 ''',
                 },
             },

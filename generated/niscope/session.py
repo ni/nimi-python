@@ -1941,7 +1941,7 @@ class _SessionBase(object):
             session.channels['0,1'].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            num_samples (float or datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
@@ -1954,7 +1954,7 @@ class _SessionBase(object):
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
-            timeout (float): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
+            timeout (float or datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
 
         Returns:
@@ -1977,7 +1977,7 @@ class _SessionBase(object):
 
                         voltage = binary data * gain factor + offset
 
-                - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+                - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
         '''
         import sys
@@ -2063,7 +2063,7 @@ class _SessionBase(object):
             session.channels['0,1'].read(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            num_samples (float or datetime.timedelta): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
+            num_samples (int): The maximum number of samples to fetch for each waveform. If the acquisition finishes with fewer points than requested, some devices return partial data if the acquisition finished, was aborted, or a timeout of 0 was used. If it fails to complete within the timeout period, the method throws an exception.
 
             relative_to (enums.FetchRelativeTo): Position to start fetching within one record.
 
@@ -2076,7 +2076,7 @@ class _SessionBase(object):
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
-            timeout (float): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
+            timeout (float or datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
 
         Returns:
@@ -2099,7 +2099,7 @@ class _SessionBase(object):
 
                         voltage = binary data * gain factor + offset
 
-                - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+                - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
         '''
         import sys
@@ -2824,7 +2824,7 @@ class _SessionBase(object):
 
                         voltage = binary data * gain factor + offset
 
-                - **waveform** (array of float) floating point array of samples. Length will be of the actual samples acquired
+                - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
         '''
         import numpy
