@@ -19,7 +19,6 @@ functions_codegen_method = {
     'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CalSelfCalibrate':                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'ConnectInternalReference':        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                 { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
@@ -118,6 +117,11 @@ functions_default_value = {
 functions_array = {
     'FetchMultiple':                        { 'parameters': { 4: { 'use_array': True, }, 
                                                               5: { 'use_array': True, }, }, },
+}
+
+# We want to use a common name for self_cal across all drivers
+functions_name = {
+    'CalSelfCalibrate': { 'python_name': 'self_cal', },
 }
 
 functions_self_test = {

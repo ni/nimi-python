@@ -1285,6 +1285,48 @@ nidcpower.Session methods
 
 
 
+.. py:method:: self_cal()
+
+    Performs a self-calibration upon the specified channel(s).
+
+    This method disables the output, performs several internal
+    calculations, and updates calibration values. The updated calibration
+    values are written to the device hardware if the
+    :py:data:`nidcpower.Session.self_calibration_persistence` property is set to
+    :py:data:`~nidcpower.SelfCalibrationPersistence.WRITE_TO_EEPROM`. Refer to the
+    :py:data:`nidcpower.Session.self_calibration_persistence` property topic for more
+    information about the settings for this property.
+
+    When calling :py:meth:`nidcpower.Session.self_cal` with the PXIe-4162/4163,
+    specify all channels of your PXIe-4162/4163 with the channelName input.
+    You cannot self-calibrate a subset of PXIe-4162/4163 channels.
+
+    Refer to the
+    `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__ topic for
+    more information about this method.
+
+    **Related Topics:**
+
+    `Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__
+
+    
+
+    .. note:: This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session.channels['0,1'].self_cal()
+
+
 .. py:method:: self_test()
 
     Performs the device self-test routine and returns the test result(s).

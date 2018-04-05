@@ -110,53 +110,6 @@ niscope.Session methods
 
 
 
-.. py:method:: cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
-
-    Self-calibrates most NI digitizers, including all SMC-based devices and
-    most Traditional NI-DAQ (Legacy) devices. To verify that your digitizer
-    supports self-calibration, refer to `Features Supported by
-    Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__.
-
-    For SMC-based digitizers, if the self-calibration is performed
-    successfully in a regular session, the calibration constants are
-    immediately stored in the self-calibration area of the EEPROM. If the
-    self-calibration is performed in an external calibration session, the
-    calibration constants take effect immediately for the duration of the
-    session. However, they are not stored in the EEPROM until
-    :py:meth:`niscope.Session.CalEnd` is called with **action** set to
-    :py:data:`~niscope.NISCOPE_VAL_ACTION_STORE` and no errors occur.
-
-    
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session.channels['0,1'].cal_self_calibrate(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
-
-
-    :param option:
-
-
-        The calibration option. Use VI_NULL for a normal self-calibration
-        operation or :py:data:`~niscope.NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION` to
-        restore the previous calibration.
-
-        
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-    :type option: :py:data:`niscope.Option`
-
 .. py:method:: clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
     Clears the waveform stats on the channel and measurement you specify. If
@@ -1882,6 +1835,53 @@ niscope.Session methods
     
 
 
+
+.. py:method:: self_cal(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+
+    Self-calibrates most NI digitizers, including all SMC-based devices and
+    most Traditional NI-DAQ (Legacy) devices. To verify that your digitizer
+    supports self-calibration, refer to `Features Supported by
+    Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__.
+
+    For SMC-based digitizers, if the self-calibration is performed
+    successfully in a regular session, the calibration constants are
+    immediately stored in the self-calibration area of the EEPROM. If the
+    self-calibration is performed in an external calibration session, the
+    calibration constants take effect immediately for the duration of the
+    session. However, they are not stored in the EEPROM until
+    :py:meth:`niscope.Session.CalEnd` is called with **action** set to
+    :py:data:`~niscope.NISCOPE_VAL_ACTION_STORE` and no errors occur.
+
+    
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+        .. code:: python
+
+            session.channels['0,1'].self_cal(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+
+
+    :param option:
+
+
+        The calibration option. Use VI_NULL for a normal self-calibration
+        operation or :py:data:`~niscope.NISCOPE_VAL_CAL_RESTORE_EXTERNAL_CALIBRATION` to
+        restore the previous calibration.
+
+        
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+    :type option: :py:data:`niscope.Option`
 
 .. py:method:: self_test()
 
