@@ -30,11 +30,13 @@ def test_read(session):
     test_record_length = 2000
     test_channels = range(2)
     test_num_channels = 2
+    test_num_records = 3
     session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
-    waveform, waveforms = session.channels[test_channels].read(test_record_length)
-    assert len(waveform) == test_num_channels * test_record_length
-    assert len(waveforms) == test_num_channels
+    session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+    waveforms = session.channels[test_channels].read(num_samples=test_record_length, num_records=test_num_records)
+    assert len(waveforms) == test_num_channels * test_num_records
+    for i in range(len(waveforms)):
+        assert len(waveforms[i].samples) == test_record_length
 
 
 def test_fetch(session):
@@ -49,7 +51,7 @@ def test_fetch(session):
         waveforms = session.channels[test_channels].fetch(num_samples=test_record_length, num_records=test_num_records)
     assert len(waveforms) == test_num_channels * test_num_records
     for i in range(len(waveforms)):
-        assert len(waveforms[i].waveform) == test_record_length
+        assert len(waveforms[i].samples) == test_record_length
 
 
 def test_fetch_defaults(session):
@@ -63,7 +65,7 @@ def test_fetch_defaults(session):
         waveforms = session.channels[test_channels].fetch()
     assert len(waveforms) == test_num_channels
     for i in range(len(waveforms)):
-        assert len(waveforms[i].waveform) == test_record_length
+        assert len(waveforms[i].samples) == test_record_length
 
 
 def test_fetch_binary8_into(session):
@@ -86,7 +88,7 @@ def test_fetch_binary8_into(session):
     for i in range(len(waveforms)):
         if sys.version_info.major >= 3:
             # Only python 3 will have the record memory view in the wfm_info
-            record_wfm = waveforms[i].waveform
+            record_wfm = waveforms[i].samples
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
@@ -118,13 +120,13 @@ def test_fetch_binary16_into(session):
     for i in range(len(waveforms)):
         if sys.version_info.major >= 3:
             # Only python 3 will have the record memory view in the wfm_info
-            record_wfm = waveforms[i].waveform
+            record_wfm = waveforms[i].samples
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
             try:
-                waveforms[i].waveform
+                waveforms[i].samples
                 assert False
             except AttributeError:
                 pass
@@ -150,13 +152,13 @@ def test_fetch_binary32_into(session):
     for i in range(len(waveforms)):
         if sys.version_info.major >= 3:
             # Only python 3 will have the record memory view in the wfm_info
-            record_wfm = waveforms[i].waveform
+            record_wfm = waveforms[i].samples
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
             try:
-                waveforms[i].waveform
+                waveforms[i].samples
                 assert False
             except AttributeError:
                 pass
@@ -182,13 +184,13 @@ def test_fetch_double_into(session):
     for i in range(len(waveforms)):
         if sys.version_info.major >= 3:
             # Only python 3 will have the record memory view in the wfm_info
-            record_wfm = waveforms[i].waveform
+            record_wfm = waveforms[i].samples
             assert len(record_wfm) == test_record_length
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
             try:
-                waveforms[i].waveform
+                waveforms[i].samples
                 assert False
             except AttributeError:
                 pass
