@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Forwards to _fetch() with a nicer interface'''
+    '''Forwards to _fetch()/_read() with a nicer interface'''
     import build.helper as helper
 
     suffix = method_template['method_python_name_suffix']
@@ -21,7 +21,7 @@
             if num_samples is None:
                 num_samples = self.horz_record_length
 
-        wfm, wfm_info = self._fetch(num_samples, timeout)
+        wfm, wfm_info = self._${f['python_name']}(num_samples, timeout)
 
         if sys.version_info.major >= 3:
             # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
@@ -34,11 +34,11 @@
             end = start + wfm_info[i].actual_samples
             del wfm_info[i].actual_samples
             if sys.version_info.major >= 3:
-                wfm_info[i].waveform = mv[start:end]
+                wfm_info[i].samples = mv[start:end]
             else:
                 # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
                 # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                wfm_info[i].waveform = array.array('d', wfm[start:end])
+                wfm_info[i].samples = array.array('d', wfm[start:end])
 
         lwfm_i = len(wfm_info)
         lrcl = len(self._repeated_capability_list)

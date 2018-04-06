@@ -91,7 +91,7 @@ class WaveformInfo(object):
         string_representation += row_format_g.format('offset', self.offset) + '\n'
         string_representation += row_format_g.format('gain', self.gain)
         try:
-            string_representation += row_format_g.format('wfm length', len(self.wfm))
+            string_representation += row_format_g.format('wfm length', len(self.samples))
         except AttributeError:
             pass
         return string_representation
