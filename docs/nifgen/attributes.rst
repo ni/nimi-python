@@ -3895,17 +3895,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+----------------------------+
-    | Characteristic | Value                      |
-    +================+============================+
-    | Datatype       | enums.ReferenceClockSource |
-    +----------------+----------------------------+
-    | Permissions    | read-write                 |
-    +----------------+----------------------------+
-    | Channel Based  | False                      |
-    +----------------+----------------------------+
-    | Resettable     | Yes                        |
-    +----------------+----------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | str        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | Yes        |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3977,17 +3977,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+-------------------------+
-    | Characteristic | Value                   |
-    +================+=========================+
-    | Datatype       | enums.SampleClockSource |
-    +----------------+-------------------------+
-    | Permissions    | read-write              |
-    +----------------+-------------------------+
-    | Channel Based  | False                   |
-    +----------------+-------------------------+
-    | Resettable     | Yes                     |
-    +----------------+-------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | str        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | Yes        |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4035,17 +4035,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+---------------------------------+
-    | Characteristic | Value                           |
-    +================+=================================+
-    | Datatype       | enums.SampleClockTimebaseSource |
-    +----------------+---------------------------------+
-    | Permissions    | read-write                      |
-    +----------------+---------------------------------+
-    | Channel Based  | False                           |
-    +----------------+---------------------------------+
-    | Resettable     | Yes                             |
-    +----------------+---------------------------------+
+    +----------------+------------+
+    | Characteristic | Value      |
+    +================+============+
+    | Datatype       | str        |
+    +----------------+------------+
+    | Permissions    | read-write |
+    +----------------+------------+
+    | Channel Based  | False      |
+    +----------------+------------+
+    | Resettable     | Yes        |
+    +----------------+------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

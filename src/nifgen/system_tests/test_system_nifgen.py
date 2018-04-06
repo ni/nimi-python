@@ -375,6 +375,11 @@ def test_user_standard_waveform(session):
     session.clear_user_standard_waveform()
 
 
+def test_routing_attribute(session):
+    session.digital_edge_start_trigger_source = 'ClkIn'
+    assert session.digital_edge_start_trigger_source == 'ClkIn'
+
+
 # TODO(bhaswath): Doesn't work, issue #596
 '''
 def test_fir_filter_coefficients():

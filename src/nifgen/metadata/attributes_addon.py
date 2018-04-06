@@ -45,6 +45,12 @@ attributes_codegen_method = {
     1150227: { "codegen_method": "no" },  # CAL_ADC_INPUT - Calibration Attribute
 }
 
+attributes_remove_enum = {
+    1150367: { 'enum': None, },
+    1150112: { 'enum': None, },
+    1150113: { 'enum': None, },
+}
+
 attributes_converters = {
     1150409: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'python_type': 'datetime.timedelta', },  # STREAMING_WRITE_TIMEOUT
