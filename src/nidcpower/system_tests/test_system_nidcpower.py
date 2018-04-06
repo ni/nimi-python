@@ -188,7 +188,7 @@ def test_query_min_current_limit(single_channel_session):
 
 def test_create_advanced_sequence(single_channel_session):
     ids = [1150008, 1250001, 1150009]  # work around #507
-    single_channel_session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
+    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
 
 
 # TODO(marcoskirsch): Doesn't work, issue #515
@@ -279,10 +279,10 @@ def test_configure_digital_edge_start_trigger(single_channel_session):
 def test_create_and_delete_advanced_sequence_step(single_channel_session):
     ids = [1250001]  # work around #507
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
-    single_channel_session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
-    single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
+    single_channel_session._create_advanced_sequence_step(set_as_active_step=True)
     single_channel_session.voltage_level = 1
-    single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
+    single_channel_session._delete_advanced_sequence(sequence_name='my_sequence')
 
 
 def test_send_software_edge_trigger_error(session):
