@@ -1155,7 +1155,7 @@ nidcpower.Session methods
 
     :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
 
-.. py:method:: set_sequence(source_delays, values=None)
+.. py:method:: set_sequence(values, source_delays)
 
     Configures a series of voltage or current outputs and corresponding
     source delays. The source mode must be set to
@@ -1188,21 +1188,9 @@ nidcpower.Session methods
 
         .. code:: python
 
-            session.channels['0,1'].set_sequence(source_delays, values=None)
+            session.channels['0,1'].set_sequence(values, source_delays)
 
 
-    :param source_delays:
-
-
-        Specifies the source delay that follows the configuration of each value
-        in the sequence.
-        **Valid Values**:
-        The valid values are between 0 and 167 seconds.
-
-        
-
-
-    :type source_delays: list of float
     :param values:
 
 
@@ -1217,6 +1205,18 @@ nidcpower.Session methods
 
 
     :type values: list of float
+    :param source_delays:
+
+
+        Specifies the source delay that follows the configuration of each value
+        in the sequence.
+        **Valid Values**:
+        The valid values are between 0 and 167 seconds.
+
+        
+
+
+    :type source_delays: list of float
 
 .. py:method:: wait_for_event(event_id, timeout=datetime.timedelta(seconds=10.0))
 
