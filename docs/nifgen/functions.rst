@@ -2450,7 +2450,7 @@ nifgen.Session methods
         
 
 
-    :type max_time: datetime.timedelta
+    :type max_time: float or datetime.timedelta
 
 .. py:method:: write_script(script)
 

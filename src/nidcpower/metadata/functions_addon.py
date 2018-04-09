@@ -43,6 +43,9 @@ functions_codegen_method = {
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
     'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -348,11 +351,11 @@ Fields in Measurement:
 # Converted parameters
 functions_converters = {
     'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_type': 'datetime.timedelta', }, }, },
+                                                               'python_type': 'float or datetime.timedelta', }, }, },
     'FancyFetchMultiple':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_type': 'datetime.timedelta', }, }, },
+                                                               'python_type': 'float or datetime.timedelta', }, }, },
     'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_type': 'datetime.timedelta', }, }, },
+                                                               'python_type': 'float or datetime.timedelta', }, }, },
     'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                'python_type': 'dict', }, }, },
 }

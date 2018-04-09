@@ -46,6 +46,10 @@ All notable changes to this project will be documented in this file.
         * `Session.fetch_multiple()` now returns list of named tuples instead of multiple arrays. See [documentation](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple)
         * `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
     * #### Removed
+        * Advanced Sequence functions - until [#504](https://github.com/ni/nimi-python/issues/504) can be fixed in a proper way
+            * `create_advanced_sequence()`
+            * `create_advanced_sequence_step()`
+            * `delete_advanced_sequence()`
 * ### NI-FGEN
     * #### Added
     * #### Changed
@@ -55,11 +59,12 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
-        * `Session.fetch()` and `Session.fetch_into()` updated
+        * `Session.fetch()`, `Session.read()` and `Session.fetch_into()` updated
             * Takes additional parameters that modify fetch behavior
             * Add resulting record as part of the waveform info
             * Channel name and record number added to waveform info
-            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch) 
+            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch), 
+                [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read), 
                 and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
         * Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
         * Enum values and attribute names that start with an underscore + digit have been renamed

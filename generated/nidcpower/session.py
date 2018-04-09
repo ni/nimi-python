@@ -2438,7 +2438,7 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
+            timeout (float or datetime.timedelta): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
 
                 Note: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -2495,7 +2495,7 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (float or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -3947,11 +3947,11 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
-        '''create_advanced_sequence
+    def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
+        '''_create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
-        create_advanced_sequence_step method to add steps to the
+        _create_advanced_sequence_step method to add steps to the
         active advanced sequence.
 
         **Support for this method**
@@ -3975,7 +3975,7 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-        create_advanced_sequence_step
+        _create_advanced_sequence_step
 
         Note:
         This method is not supported on all devices. Refer to `Supported
@@ -4089,12 +4089,12 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_advanced_sequence_step(self, set_as_active_step=True):
-        '''create_advanced_sequence_step
+    def _create_advanced_sequence_step(self, set_as_active_step=True):
+        '''_create_advanced_sequence_step
 
         Creates a new advanced sequence step in the advanced sequence specified
         by the Active advanced sequence. When you create an advanced sequence
-        step, each property you passed to the create_advanced_sequence
+        step, each property you passed to the _create_advanced_sequence
         method is reset to its default value for that step unless otherwise
         specified.
 
@@ -4113,7 +4113,7 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-        create_advanced_sequence
+        _create_advanced_sequence
 
         Note:
         This method is not supported on all devices. Refer to `Supported
@@ -4131,8 +4131,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def delete_advanced_sequence(self, sequence_name):
-        '''delete_advanced_sequence
+    def _delete_advanced_sequence(self, sequence_name):
+        '''_delete_advanced_sequence
 
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
@@ -4654,7 +4654,7 @@ class Session(_SessionBase):
                 | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
                 +-------------------------------------------------------+--------------------------------------------------+
 
-            timeout (datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (float or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
