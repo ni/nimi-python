@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * `Session.fetch_multiple()` now returns list of named tuples instead of multiple arrays. See [documentation](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple)
         * `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
+        * `Session.set_sequence()` values parameter no longer has a default value and must be passed in [#797](https://github.com/ni/nimi-python/issues/797)
     * #### Removed
         * Advanced Sequence functions - until [#504](https://github.com/ni/nimi-python/issues/504) can be fixed in a proper way
             * `create_advanced_sequence()`
