@@ -1403,7 +1403,7 @@ class Session(_SessionBase):
                 `LabWindows/CVI Trigger
                 Routing <cvitrigger_routing>`__ section.
 
-            sample_interval (float): Sets the amount of time in seconds the DMM waits between measurement
+            sample_interval (float in seconds or datetime.timedelta): Sets the amount of time in seconds the DMM waits between measurement
                 cycles. The driver sets sample_interval to this value.
                 Specify a sample interval to add settling time between measurement
                 cycles or to decrease the measurement rate. **sample_interval** only
@@ -1660,7 +1660,7 @@ class Session(_SessionBase):
                 `LabWindows/CVI Trigger
                 Routing <cvitrigger_routing>`__ section.
 
-            trigger_delay (float): Specifies the time that the DMM waits after it has received a trigger
+            trigger_delay (float in seconds or datetime.timedelta): Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
                 trigger_delay property to this value. By default,
                 **trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM
@@ -1760,7 +1760,7 @@ class Session(_SessionBase):
         _initiate before calling this method.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1804,7 +1804,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1853,7 +1853,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1897,7 +1897,7 @@ class Session(_SessionBase):
             waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2390,7 +2390,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2433,7 +2433,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2528,7 +2528,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (int): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
