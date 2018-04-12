@@ -3449,7 +3449,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_sequence(self, source_delays, values=None):
+    def set_sequence(self, values, source_delays):
         '''set_sequence
 
         Configures a series of voltage or current outputs and corresponding
@@ -3480,20 +3480,20 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].set_sequence(source_delays, values=None)
+            session.channels['0,1'].set_sequence(values, source_delays)
 
         Args:
-            source_delays (list of float): Specifies the source delay that follows the configuration of each value
-                in the sequence.
-                **Valid Values**:
-                The valid values are between 0 and 167 seconds.
-
             values (list of float): Specifies the series of voltage levels or current levels, depending on
                 the configured `output
                 method <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
                 **Valid values**:
                 The valid values for this parameter are defined by the voltage level
                 range or current level range.
+
+            source_delays (list of float): Specifies the source delay that follows the configuration of each value
+                in the sequence.
+                **Valid Values**:
+                The valid values are between 0 and 167 seconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
