@@ -135,9 +135,9 @@ functions_default_value = {
 # Converted parameters
 functions_converters = {
     'AdjustSampleClockRelativeDelay':               { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                           'python_type': 'float or datetime.timedelta', }, }, },
+                                                                           'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'WaitUntilDone':                                { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                                           'python_type': 'float or datetime.timedelta', }, }, },
+                                                                           'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'InitializeWithChannels':                       { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                            'python_type': 'dict', }, }, },
 }

@@ -136,23 +136,23 @@ functions_remove_parameters_from_python = {
 # Converted parameters
 functions_converters = {
     'ConfigureMultiPoint':      { 'parameters': { 4: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'ConfigureTrigger':         { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'Fetch':                    { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'FetchMultiPoint':          { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'FetchWaveform':            { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'Read':                     { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'ReadMultiPoint':           { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'ReadWaveform':             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                       'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                       'python_type': 'float in seconds or datetime.timedelta', }, }, },
     'InitWithOptions':          { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                       'python_api_converter_type': 'dict', }, }, },
+                                                       'python_type': 'dict', }, }, },
 }
 
 # Functions not in original metadata.
