@@ -42,7 +42,7 @@ functions_codegen_method = {
     'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
-    'MeasureMultiple':                 { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
+    'MeasureMultiple':                 { 'codegen_method': 'private',  },  # Fancy Measure Public wrapper
     'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
     'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
