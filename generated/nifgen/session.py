@@ -1157,7 +1157,7 @@ class _SessionBase(object):
     Use in conjunction with streaming_space_available_in_waveform.
     '''
     streaming_write_timeout = _attributes.AttributeViReal64TimeDeltaSeconds(1150409)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
@@ -3429,7 +3429,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            session (nifgen.Session): A session object representing the device.
+            session (int): A session object representing the device.
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)

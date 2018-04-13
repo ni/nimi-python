@@ -369,7 +369,7 @@ class _SessionBase(object):
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
     '''
     sample_interval = _attributes.AttributeViReal64TimeDeltaSeconds(1250303)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Specifies the amount of time in seconds the DMM waits between measurement cycles.  This property only applies when the sample_trigger property is set to INTERVAL.
     On the NI 4060, the value for this property is used as the settling time.  When this property is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
@@ -394,7 +394,7 @@ class _SessionBase(object):
     A string containing the serial number of the instrument. This property corresponds  to the serial number label that is attached to most products.
     '''
     settle_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150028)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Specifies the settling time in seconds. To override the default settling time,  set this property. To return to the default, set this property to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
     The NI 4050 and NI 4060 are not supported.
@@ -549,7 +549,7 @@ class _SessionBase(object):
     Refer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.
     '''
     trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1250005)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Specifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.
     The NI 4065 and NI 4070/4071/4072 use the value specified in this property as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
@@ -1152,7 +1152,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            session (nidmm.Session): A session object representing the device.
+            session (int): A session object representing the device.
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)

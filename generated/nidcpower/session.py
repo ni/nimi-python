@@ -723,7 +723,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_complete_event_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
     for information about supported devices.
@@ -763,7 +763,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     measure_record_delta_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150065)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this property after the desired measurement settings are committed.
     for information about supported devices.
@@ -1445,7 +1445,7 @@ class _SessionBase(object):
         var = session.channels['0,1'].pulse_current_limit_range
     '''
     pulse_off_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150094)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Determines the length, in seconds, of the off phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1463,7 +1463,7 @@ class _SessionBase(object):
         var = session.channels['0,1'].pulse_off_time
     '''
     pulse_on_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150093)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Determines the length, in seconds, of the on phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1905,7 +1905,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     source_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: datetime.timedelta
+    '''Type: float
 
     Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  measure_when property is set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
@@ -3615,7 +3615,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            session (nidcpower.Session): A session object representing the device.
+            session (int): A session object representing the device.
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
