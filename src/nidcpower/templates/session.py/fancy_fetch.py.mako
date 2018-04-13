@@ -29,9 +29,5 @@
 
         voltage_measurements, current_measurements${in_compliance_return} = self._${f['python_name']}(${param_list})
 
-        measurements = []
-        for i in range(${array_size}):
-            measurements.append(Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}))
-
-        return measurements
+        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}) for i in range(${array_size})]
 
