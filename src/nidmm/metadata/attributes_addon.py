@@ -29,11 +29,11 @@ attributes_codegen_method = {
 
 attributes_converters = {
     1150028: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_type': 'datetime.timedelta', },  # SETTLE_TIME
+               'type_in_documentation': 'float in seconds or datetime.timedelta', },  # SETTLE_TIME
     1250005: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_type': 'datetime.timedelta', },  # TRIGGER_DELAY
+               'type_in_documentation': 'float in seconds or datetime.timedelta', },  # TRIGGER_DELAY
     1250303: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_type': 'datetime.timedelta', },  # SAMPLE_INTERVAL
+               'type_in_documentation': 'float in seconds or datetime.timedelta', },  # SAMPLE_INTERVAL
 }
 
 

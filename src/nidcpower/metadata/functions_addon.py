@@ -350,13 +350,13 @@ Fields in Measurement:
 # Converted parameters
 functions_converters = {
     'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_type': 'float in seconds or datetime.timedelta', }, }, },
+                                                               'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'FancyFetchMultiple':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_type': 'float in seconds or datetime.timedelta', }, }, },
+                                                               'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_type': 'float in seconds or datetime.timedelta', }, }, },
+                                                               'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                               'python_type': 'dict', }, }, },
+                                                               'type_in_documentation': 'dict', }, }, },
 }
 
 
