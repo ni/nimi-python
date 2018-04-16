@@ -115,7 +115,7 @@ class _SessionBase(object):
     An property of type float with read/write access.
     '''
     read_write_double_with_converter = _attributes.AttributeViReal64TimeDeltaSeconds(1000007)
-    '''Type: datetime.timedelta
+    '''Type: float in seconds or datetime.timedelta
 
     Property in seconds
     '''
@@ -130,7 +130,7 @@ class _SessionBase(object):
     An property of type integer with read/write access.
     '''
     read_write_integer_with_converter = _attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
-    '''Type: datetime.timedelta
+    '''Type: float in seconds or datetime.timedelta
 
     Property in milliseconds
     '''

@@ -65,12 +65,17 @@ def _add_python_parameter_name(parameter):
 
 
 def _add_python_type(item, config):
-    '''Adds the type to use in the Python API to the item metadata, if not already there'''
+    '''Adds the type to use in the Python API and the documentation to the item metadata, if not already there'''
     if 'python_type' not in item:
         if item['enum'] is None:
             item['python_type'] = get_python_type_for_api_type(item['type'], config)
         else:
             item['python_type'] = 'enums.' + item['enum']
+
+    # If 'type_in_documentation' isn't in the item, use 'python_type'
+    if 'type_in_documentation' not in item:
+        item['type_in_documentation'] = item['python_type']
+
     return item
 
 
@@ -296,7 +301,7 @@ def _setup_init_function(functions, config):
         for p in init_function['parameters']:
             if p['name'] == 'vi':
                 p['documentation']['description'] = session_return_text
-                p['python_type'] = config['module_name'] + '.Session'
+                p['type_in_documentation'] = config['module_name'] + '.Session'
                 p['python_name'] = 'session'
             elif p['python_name'] == 'option_string':
                 p['python_name'] = 'options'
@@ -656,6 +661,7 @@ def test_add_all_metadata_simple():
                     'enum': None,
                     'numpy': False,
                     'python_type': 'int',
+                    'type_in_documentation': 'int',
                     'use_array': False,
                     'is_buffer': False,
                     'use_list': False,
@@ -686,6 +692,7 @@ def test_add_all_metadata_simple():
                     'enum': None,
                     'numpy': False,
                     'python_type': 'str',
+                    'type_in_documentation': 'str',
                     'use_array': False,
                     'is_buffer': False,
                     'use_list': False,
@@ -719,6 +726,7 @@ def test_add_all_metadata_simple():
                 },
                 'python_name': 'vi',
                 'python_type': 'int',
+                'type_in_documentation': 'int',
                 'ctypes_variable_name': 'vi_ctype',
                 'ctypes_type': 'ViSession',
                 'ctypes_type_library_call': 'ViSession',
@@ -748,6 +756,7 @@ def test_add_all_metadata_simple():
                 },
                 'python_name': 'status',
                 'python_type': 'str',
+                'type_in_documentation': 'str',
                 'ctypes_variable_name': 'status_ctype',
                 'ctypes_type': 'ViString',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
@@ -815,6 +824,7 @@ def test_add_attributes_metadata_simple():
             'resettable': 'No',
             'type': 'ViBoolean',
             'python_type': 'bool',
+            'type_in_documentation': 'bool',
             'attribute_class': 'AttributeViBoolean',
         },
     }

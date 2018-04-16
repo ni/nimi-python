@@ -4627,17 +4627,17 @@ nifgen.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | datetime.timedelta |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | Yes                |
-    +----------------+--------------------+
+    +----------------+----------------------------------------+
+    | Characteristic | Value                                  |
+    +================+========================================+
+    | Datatype       | float in seconds or datetime.timedelta |
+    +----------------+----------------------------------------+
+    | Permissions    | read-write                             |
+    +----------------+----------------------------------------+
+    | Channel Based  | False                                  |
+    +----------------+----------------------------------------+
+    | Resettable     | Yes                                    |
+    +----------------+----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

@@ -47,7 +47,7 @@ attributes_codegen_method = {
 
 attributes_converters = {
     1150409: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_type': 'datetime.timedelta', },  # STREAMING_WRITE_TIMEOUT
+               'type_in_documentation': 'float in seconds or datetime.timedelta', },  # STREAMING_WRITE_TIMEOUT
 }
 
 

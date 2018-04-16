@@ -1640,17 +1640,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | datetime.timedelta |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+----------------------------------------+
+    | Characteristic | Value                                  |
+    +================+========================================+
+    | Datatype       | float in seconds or datetime.timedelta |
+    +----------------+----------------------------------------+
+    | Permissions    | read-write                             |
+    +----------------+----------------------------------------+
+    | Channel Based  | False                                  |
+    +----------------+----------------------------------------+
+    | Resettable     | No                                     |
+    +----------------+----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -1763,17 +1763,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | datetime.timedelta |
-    +----------------+--------------------+
-    | Permissions    | read only          |
-    +----------------+--------------------+
-    | Channel Based  | False              |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+----------------------------------------+
+    | Characteristic | Value                                  |
+    +================+========================================+
+    | Datatype       | float in seconds or datetime.timedelta |
+    +----------------+----------------------------------------+
+    | Permissions    | read only                              |
+    +----------------+----------------------------------------+
+    | Channel Based  | False                                  |
+    +----------------+----------------------------------------+
+    | Resettable     | No                                     |
+    +----------------+----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3190,17 +3190,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | datetime.timedelta |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | True               |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+----------------------------------------+
+    | Characteristic | Value                                  |
+    +================+========================================+
+    | Datatype       | float in seconds or datetime.timedelta |
+    +----------------+----------------------------------------+
+    | Permissions    | read-write                             |
+    +----------------+----------------------------------------+
+    | Channel Based  | True                                   |
+    +----------------+----------------------------------------+
+    | Resettable     | No                                     |
+    +----------------+----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3231,17 +3231,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | datetime.timedelta |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | True               |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+----------------------------------------+
+    | Characteristic | Value                                  |
+    +================+========================================+
+    | Datatype       | float in seconds or datetime.timedelta |
+    +----------------+----------------------------------------+
+    | Permissions    | read-write                             |
+    +----------------+----------------------------------------+
+    | Channel Based  | True                                   |
+    +----------------+----------------------------------------+
+    | Resettable     | No                                     |
+    +----------------+----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4333,17 +4333,17 @@ nidcpower.Session properties
 
     The following table lists the characteristics of this property.
 
-    +----------------+--------------------+
-    | Characteristic | Value              |
-    +================+====================+
-    | Datatype       | datetime.timedelta |
-    +----------------+--------------------+
-    | Permissions    | read-write         |
-    +----------------+--------------------+
-    | Channel Based  | True               |
-    +----------------+--------------------+
-    | Resettable     | No                 |
-    +----------------+--------------------+
+    +----------------+----------------------------------------+
+    | Characteristic | Value                                  |
+    +================+========================================+
+    | Datatype       | float in seconds or datetime.timedelta |
+    +----------------+----------------------------------------+
+    | Permissions    | read-write                             |
+    +----------------+----------------------------------------+
+    | Channel Based  | True                                   |
+    +----------------+----------------------------------------+
+    | Resettable     | No                                     |
+    +----------------+----------------------------------------+
 
     .. tip::
         This property corresponds to the following LabVIEW Property or C Attribute:

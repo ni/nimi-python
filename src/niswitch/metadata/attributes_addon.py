@@ -19,9 +19,9 @@ attributes_codegen_method = {
 
 attributes_converters = {
     1250004: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # SETTLING_TIME
+               'type_in_documentation': 'float in seconds or datetime.timedelta', },  # SETTLING_TIME
     1250025: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-               'python_api_converter_type': 'datetime.timedelta', },  # SCAN_DELAY
+               'type_in_documentation': 'float in seconds or datetime.timedelta', },  # SCAN_DELAY
 }
 
 
