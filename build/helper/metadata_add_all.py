@@ -301,7 +301,7 @@ def _setup_init_function(functions, config):
         for p in init_function['parameters']:
             if p['name'] == 'vi':
                 p['documentation']['description'] = session_return_text
-                p['python_type'] = config['module_name'] + '.Session'
+                p['type_in_documentation'] = config['module_name'] + '.Session'
                 p['python_name'] = 'session'
             elif p['python_name'] == 'option_string':
                 p['python_name'] = 'options'

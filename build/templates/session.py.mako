@@ -130,7 +130,7 @@ if attributes[attribute]['channel_based'] == 'True':
     ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
-    '''Type: ${attributes[attribute]['python_type']}
+    '''Type: ${attributes[attribute]['type_in_documentation']}
 
     ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''
