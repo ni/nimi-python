@@ -74,11 +74,11 @@ functions_default_value = {
 # Converted parameters
 functions_converters = {
     'Read':                             { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
-                                                               'python_type': 'datetime.timedelta', }, }, },
+                                                               'type_in_documentation': 'datetime.timedelta', }, }, },
     'ReadFromChannel':                  { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_microseconds', 
-                                                               'python_type': 'datetime.timedelta', }, }, },
+                                                               'type_in_documentation': 'datetime.timedelta', }, }, },
     'InitWithOptions':                  { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                               'python_type': 'dict', }, }, },
+                                                               'type_in_documentation': 'dict', }, }, },
 }
 
 # Manually provided Python names for methods, rather than deriving from original names.

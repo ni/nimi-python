@@ -454,7 +454,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float or datetime.timedelta
+    :type holdoff: float in seconds or datetime.timedelta
     :param delay:
 
 
@@ -465,7 +465,7 @@ niscope.Session methods
         
 
 
-    :type delay: float or datetime.timedelta
+    :type delay: float in seconds or datetime.timedelta
 
 .. py:method:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -543,7 +543,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float or datetime.timedelta
+    :type holdoff: float in seconds or datetime.timedelta
     :param delay:
 
 
@@ -554,7 +554,7 @@ niscope.Session methods
         
 
 
-    :type delay: float or datetime.timedelta
+    :type delay: float in seconds or datetime.timedelta
 
 .. py:method:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -649,7 +649,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float or datetime.timedelta
+    :type holdoff: float in seconds or datetime.timedelta
     :param delay:
 
 
@@ -660,7 +660,7 @@ niscope.Session methods
         
 
 
-    :type delay: float or datetime.timedelta
+    :type delay: float in seconds or datetime.timedelta
 
 .. py:method:: configure_trigger_immediate()
 
@@ -712,7 +712,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float or datetime.timedelta
+    :type holdoff: float in seconds or datetime.timedelta
     :param delay:
 
 
@@ -723,7 +723,7 @@ niscope.Session methods
         
 
 
-    :type delay: float or datetime.timedelta
+    :type delay: float in seconds or datetime.timedelta
 
 .. py:method:: configure_trigger_video(trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -839,7 +839,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float or datetime.timedelta
+    :type holdoff: float in seconds or datetime.timedelta
     :param delay:
 
 
@@ -850,7 +850,7 @@ niscope.Session methods
         
 
 
-    :type delay: float or datetime.timedelta
+    :type delay: float in seconds or datetime.timedelta
 
 .. py:method:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
@@ -941,7 +941,7 @@ niscope.Session methods
         
 
 
-    :type holdoff: float or datetime.timedelta
+    :type holdoff: float in seconds or datetime.timedelta
     :param delay:
 
 
@@ -952,7 +952,7 @@ niscope.Session methods
         
 
 
-    :type delay: float or datetime.timedelta
+    :type delay: float in seconds or datetime.timedelta
 
 .. py:method:: configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
 
@@ -1422,7 +1422,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float or datetime.timedelta
+    :type timeout: float in seconds or datetime.timedelta
 
     :rtype: list of float
     :return:
@@ -1496,7 +1496,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float or datetime.timedelta
+    :type timeout: float in seconds or datetime.timedelta
 
     :rtype: tuple (result, mean, stdev, min, max, num_in_stats)
 
@@ -1780,7 +1780,7 @@ niscope.Session methods
         
 
 
-    :type timeout: float or datetime.timedelta
+    :type timeout: float in seconds or datetime.timedelta
 
     :rtype: array.array("d")
     :return:

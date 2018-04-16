@@ -18,7 +18,7 @@ ${helper.get_rst_header_snippet(module_name + '.Session properties', '=')}
 a = attributes[attr]
 table_contents = [
          ('Characteristic', 'Value'),
-         ('Datatype', a['python_type']),
+         ('Datatype', a['type_in_documentation']),
          ('Permissions', a['access']),
          ('Channel Based', a['channel_based']),
          ('Resettable', a['resettable']),

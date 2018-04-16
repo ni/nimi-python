@@ -23,7 +23,7 @@ for attr in helper.sorted_attrs(helper.filter_codegen_attributes_public_only(att
     if attributes[attr]['enum'] is not None:
         t = ':py:data:`' + attributes[attr]["enum"] + '`'
     else:
-        t = attributes[attr]["python_type"]
+        t = attributes[attr]["type_in_documentation"]
 
     table_contents.append((':py:attr:`' + attributes[attr]["python_name"] + '`', t))
 

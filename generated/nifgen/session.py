@@ -1157,7 +1157,7 @@ class _SessionBase(object):
     Use in conjunction with streaming_space_available_in_waveform.
     '''
     streaming_write_timeout = _attributes.AttributeViReal64TimeDeltaSeconds(1150409)
-    '''Type: datetime.timedelta
+    '''Type: float in seconds or datetime.timedelta
 
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
@@ -4768,7 +4768,7 @@ class Session(_SessionBase):
         expired.
 
         Args:
-            max_time (float or datetime.timedelta): Specifies the timeout value in milliseconds.
+            max_time (float in seconds or datetime.timedelta): Specifies the timeout value in milliseconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
         * All exceptions raised by the Python bindings inherit from `<driver>.Error`
         * Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
             * This encapsulates any error that is returned by the underlying driver
+        * All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
     * #### Removed
 * ### NI-DMM
     * #### Added
@@ -44,6 +45,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * `Session.fetch_multiple()` and `Session.measure_multiple()` now return list of named tuples instead of multiple arrays. See [fetch_multiple](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple) and [measure_multiple](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.measure_multiple)
         * `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
+        * `Session.set_sequence()` values parameter no longer has a default value and must be passed in. Parameter order has changed as a result of this - issue [#797](https://github.com/ni/nimi-python/issues/797)
     * #### Removed
         * Advanced Sequence functions - until [#504](https://github.com/ni/nimi-python/issues/504) can be fixed in a proper way
             * `create_advanced_sequence()`
@@ -380,4 +382,5 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 -->
+
 

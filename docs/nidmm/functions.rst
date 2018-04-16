@@ -276,7 +276,7 @@ nidmm.Session methods
         .. note:: This property is not used on the NI 4080/4081/4082 and the NI 4050.
 
 
-    :type sample_interval: float
+    :type sample_interval: float in seconds or datetime.timedelta
 
 .. py:method:: configure_open_cable_comp_values(conductance, susceptance)
 
@@ -591,7 +591,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type trigger_delay: float
+    :type trigger_delay: float in seconds or datetime.timedelta
 
 .. py:method:: configure_waveform_acquisition(measurement_function, range, rate, waveform_points)
 
@@ -703,7 +703,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type maximum_time: int
+    :type maximum_time: float in seconds or datetime.timedelta
 
     :rtype: float
     :return:
@@ -761,7 +761,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type maximum_time: int
+    :type maximum_time: float in seconds or datetime.timedelta
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -828,7 +828,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type maximum_time: int
+    :type maximum_time: float in seconds or datetime.timedelta
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -891,7 +891,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type maximum_time: int
+    :type maximum_time: float in seconds or datetime.timedelta
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1275,7 +1275,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type maximum_time: int
+    :type maximum_time: float in seconds or datetime.timedelta
 
     :rtype: float
     :return:
@@ -1332,7 +1332,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type maximum_time: int
+    :type maximum_time: float in seconds or datetime.timedelta
 
     :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1453,7 +1453,7 @@ nidmm.Session methods
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-    :type maximum_time: int
+    :type maximum_time: float in seconds or datetime.timedelta
 
     :rtype: tuple (waveform_array, actual_number_of_points)
 
