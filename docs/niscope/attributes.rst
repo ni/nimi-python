@@ -2144,12 +2144,10 @@ niscope.Session properties
 
 .. py:attribute:: meas_array_gain
 
-    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to :py:data:`~niscope.NISCOPE_VAL_ARRAY_GAIN` for more information.
+    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_GAIN` for more information.
     Default: 1.0
 
 
-
-    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2184,12 +2182,10 @@ niscope.Session properties
 
 .. py:attribute:: meas_array_offset
 
-    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to :py:data:`~niscope.NISCOPE_VAL_ARRAY_OFFSET` for more information.
+    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to :py:data:`~niscope.ArrayMeasurement.ARRAY_OFFSET` for more information.
     Default: 0.0
 
 
-
-    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2593,11 +2589,11 @@ niscope.Session properties
 
     Specifies the FIR window type. The possible choices are:
     :py:data:`~niscope.NISCOPE_VAL_NONE`
-    :py:data:`~niscope.NISCOPE_VAL_HANNING_WINDOW`
-    :py:data:`~niscope.NISCOPE_VAL_HAMMING_WINDOW`
-    :py:data:`~niscope.NISCOPE_VAL_TRIANGLE_WINDOW`
-    :py:data:`~niscope.NISCOPE_VAL_FLAT_TOP_WINDOW`
-    :py:data:`~niscope.NISCOPE_VAL_BLACKMAN_WINDOW`
+    :py:data:`~niscope.ArrayMeasurement.HANNING_WINDOW`
+    :py:data:`~niscope.ArrayMeasurement.HAMMING_WINDOW`
+    :py:data:`~niscope.ArrayMeasurement.TRIANGLE_WINDOW`
+    :py:data:`~niscope.ArrayMeasurement.FLAT_TOP_WINDOW`
+    :py:data:`~niscope.ArrayMeasurement.BLACKMAN_WINDOW`
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
     Default: :py:data:`~niscope.NISCOPE_VAL_NONE`
 
@@ -2676,14 +2672,12 @@ niscope.Session properties
 
 .. py:attribute:: meas_interpolation_sampling_factor
 
-    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling :py:meth:`niscope.Session.FetchWaveformMeasurementArray` with the :py:data:`~niscope.NISCOPE_VAL_POLYNOMIAL_INTERPOLATION` measurement resamples the waveform to 2,500 points.
+    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling :py:meth:`niscope.Session.FetchWaveformMeasurementArray` with the :py:data:`~niscope.ArrayMeasurement.POLYNOMIAL_INTERPOLATION` measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
 
 
     .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -2756,12 +2750,10 @@ niscope.Session properties
 
 .. py:attribute:: meas_other_channel
 
-    Specifies the second channel for two-channel measurements, such as :py:data:`~niscope.NISCOPE_VAL_ADD_CHANNELS`. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
+    Specifies the second channel for two-channel measurements, such as :py:data:`~niscope.ArrayMeasurement.ADD_CHANNELS`. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
 
 
-
-    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the

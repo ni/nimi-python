@@ -789,11 +789,8 @@ class _SessionBase(object):
     meas_array_gain = _attributes.AttributeViReal64(1150043)
     '''Type: float
 
-    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to NISCOPE_VAL_ARRAY_GAIN for more information.
+    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to ArrayMeasurement.ARRAY_GAIN for more information.
     Default: 1.0
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -807,11 +804,8 @@ class _SessionBase(object):
     meas_array_offset = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
-    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to NISCOPE_VAL_ARRAY_OFFSET for more information.
+    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to ArrayMeasurement.ARRAY_OFFSET for more information.
     Default: 0.0
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -963,11 +957,11 @@ class _SessionBase(object):
 
     Specifies the FIR window type. The possible choices are:
     NISCOPE_VAL_NONE
-    NISCOPE_VAL_HANNING_WINDOW
-    NISCOPE_VAL_HAMMING_WINDOW
-    NISCOPE_VAL_TRIANGLE_WINDOW
-    NISCOPE_VAL_FLAT_TOP_WINDOW
-    NISCOPE_VAL_BLACKMAN_WINDOW
+    ArrayMeasurement.HANNING_WINDOW
+    ArrayMeasurement.HAMMING_WINDOW
+    ArrayMeasurement.TRIANGLE_WINDOW
+    ArrayMeasurement.FLAT_TOP_WINDOW
+    ArrayMeasurement.BLACKMAN_WINDOW
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
     Default: NISCOPE_VAL_NONE
 
@@ -1001,14 +995,11 @@ class _SessionBase(object):
     meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
     '''Type: float
 
-    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the NISCOPE_VAL_POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
+    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1037,11 +1028,8 @@ class _SessionBase(object):
     meas_other_channel = _attributes.AttributeViString(1150018)
     '''Type: str
 
-    Specifies the second channel for two-channel measurements, such as NISCOPE_VAL_ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
+    Specifies the second channel for two-channel measurements, such as ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (usually channels). If set or get directly on the
@@ -1690,6 +1678,31 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    def _actual_meas_wfm_size(self, array_meas_function):
+        '''_actual_meas_wfm_size
+
+        Returns the total available size of an array measurement acquisition.
+
+        Args:
+            array_meas_function (enums.ArrayMeasurement): The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to perform.
+
+
+        Returns:
+            meas_waveform_size (int): Returns the size (in number of samples) of the resulting analysis
+                waveform.
+
+        '''
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
+        meas_waveform_size_ctype = _visatype.ViInt32()  # case S200
+        error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, None if meas_waveform_size_ctype is None else (ctypes.pointer(meas_waveform_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(meas_waveform_size_ctype.value)
+
     def _actual_num_wfms(self):
         '''_actual_num_wfms
 
@@ -1716,6 +1729,45 @@ class _SessionBase(object):
         error_code = self._library.niScope_ActualNumWfms(vi_ctype, channel_list_ctype, None if num_wfms_ctype is None else (ctypes.pointer(num_wfms_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(num_wfms_ctype.value)
+
+    def _add_waveform_processing(self, meas_function):
+        '''_add_waveform_processing
+
+        Adds one measurement to the list of processing steps that are completed
+        before the measurement. The processing is added on a per channel basis,
+        and the processing measurements are completed in the same order they are
+        registered. All measurement library parameters—the properties starting
+        with MEAS—are cached at the time of registering the
+        processing, and this set of parameters is used during the processing
+        step. The processing measurements are streamed, so the result of the
+        first processing step is used as the input for the next step. The
+        processing is done before any other measurements.
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1']._add_waveform_processing(meas_function)
+
+        Args:
+            meas_function (enums.ArrayMeasurement): The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to add.
+
+        '''
+        if type(meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        meas_function_ctype = _visatype.ViInt32(meas_function.value)  # case S130
+        error_code = self._library.niScope_AddWaveformProcessing(vi_ctype, channel_list_ctype, meas_function_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def self_cal(self, option=enums.Option.SELF_CALIBRATE_ALL_CHANNELS):
         '''self_cal
@@ -1805,6 +1857,30 @@ class _SessionBase(object):
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
         error_code = self._library.niScope_ClearWaveformMeasurementStats(vi_ctype, channel_list_ctype, clearable_measurement_function_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _clear_waveform_processing(self):
+        '''_clear_waveform_processing
+
+        Clears the list of processing steps assigned to the given channel. The
+        processing is added using the _add_waveform_processing method,
+        where the processing steps are completed in the same order in which they
+        are registered. The processing measurements are streamed, so the result
+        of the first processing step is used as the input for the next step. The
+        processing is also done before any other measurements.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1']._clear_waveform_processing()
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niScope_ClearWaveformProcessing(vi_ctype, channel_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2368,6 +2444,99 @@ class _SessionBase(object):
         error_code = self._library.niScope_Fetch(vi_ctype, channel_list_ctype, timeout_ctype, num_samples_ctype, waveform_ctype, wfm_info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
+
+    def _fetch_array_measurement(self, array_meas_function, timeout=datetime.timedelta(seconds=5.0)):
+        '''_fetch_array_measurement
+
+        Obtains a waveform from the digitizer and returns the specified
+        measurement array. This method may return multiple waveforms depending
+        on the number of channels, the acquisition type, and the number of
+        records you specify.
+
+        Note:
+        Some functionality, such as time stamping, is not supported in all
+        digitizers. Refer to `Features Supported by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
+        more information.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1']._fetch_array_measurement(array_meas_function, meas_wfm_size, timeout=datetime.timedelta(seconds=5.0))
+
+        Args:
+            array_meas_function (enums.ArrayMeasurement): The `array
+                measurement <REPLACE_DRIVER_SPECIFIC_URL_2(array_measurements_refs)>`__
+                to perform.
+
+            timeout (float or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this
+                parameter tells NI-SCOPE to fetch whatever is currently available. Using
+                -1 for this parameter implies infinite timeout.
+
+
+        Returns:
+            meas_wfm (list of float): Returns an array whose length is the number of waveforms times
+                **measWfmSize**; call _actual_num_wfms to determine the number of
+                waveforms; call _actual_meas_wfm_size to determine the size of each
+                waveform.
+
+                NI-SCOPE returns this data sequentially, so all record 0 waveforms are
+                first. For example, with channel list of 0, 1, you would have the
+                following index values:
+
+                index 0 = record 0, channel 0
+
+                index *x* = record 0, channel 1
+
+                index 2\ *x* = record 1, channel 0
+
+                index 3\ *x* = record 1, channel 1
+
+                Where *x* = the record length
+
+            wfm_info (list of WaveformInfo): Returns an array of structures with the following timing and scaling
+                information about each waveform:
+
+                -  **relativeInitialX**—the time (in seconds) from the trigger to the
+                   first sample in the fetched waveform
+                -  **absoluteInitialX**—timestamp (in seconds) of the first fetched
+                   sample. This timestamp is comparable between records and
+                   acquisitions; devices that do not support this parameter use 0 for
+                   this output.
+                -  **xIncrement**—the time between points in the acquired waveform in
+                   seconds
+                -  **actualSamples**—the actual number of samples fetched and placed in
+                   the waveform array
+                -  **gain**—the gain factor of the given channel; useful for scaling
+                   binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                -  **offset**—the offset factor of the given channel; useful for scaling
+                   binary data with the following formula:
+
+                voltage = binary data × gain factor + offset
+
+                Call _actual_num_wfms to determine the size of this array.
+
+        '''
+        if type(array_meas_function) is not enums.ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
+        meas_wfm_size_ctype = _visatype.ViInt32(self._actual_meas_wfm_size(array_meas_function))  # case S120
+        meas_wfm_size = (self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())  # case B560
+        meas_wfm_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=meas_wfm_size)  # case B560
+        wfm_info_size = self._actual_num_wfms()  # case B560
+        wfm_info_ctype = get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
+        error_code = self._library.niScope_FetchArrayMeasurement(vi_ctype, channel_list_ctype, timeout_ctype, array_meas_function_ctype, meas_wfm_size_ctype, meas_wfm_ctype, wfm_info_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [float(meas_wfm_ctype[i]) for i in range((self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms()))], [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
     def _fetch_binary16_into_numpy(self, num_samples, waveform, timeout=datetime.timedelta(seconds=5.0)):
         '''_fetch_binary16
@@ -3075,6 +3244,42 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
+    def _get_attribute_vi_int64(self, attribute_id):
+        '''_get_attribute_vi_int64
+
+        Queries the value of a ViInt64 property. You can use this method to
+        get the values of instrument-specific properties and inherent IVI
+        properties. If the property represents an instrument state, this
+        method performs instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular property.
+        -  State caching is enabled and the currently cached value is invalid.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1']._get_attribute_vi_int64(attribute_id)
+
+        Args:
+            attribute_id (int): The ID of an property.
+
+
+        Returns:
+            value (int): Returns the current value of the property.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViInt64()  # case S200
+        error_code = self._library.niScope_GetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(value_ctype.value)
+
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -3529,6 +3734,55 @@ class _SessionBase(object):
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViInt32(value)  # case S150
         error_code = self._library.niScope_SetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_int64(self, attribute_id, value):
+        '''_set_attribute_vi_int64
+
+        Sets the value of a ViInt64 property. This is a low-level method that
+        you can use to set the values of instrument-specific properties and
+        inherent IVI properties. If the property represents an instrument
+        state, this method performs instrument I/O in the following cases:
+
+        -  State caching is disabled for the entire session or for the
+           particular property.
+        -  State caching is enabled and the currently cached value is invalid or
+           is different than the value you specify.
+
+        Note:
+        NI-SCOPE contains high-level methods that set most of the instrument
+        properties. Use the high-level methods as much as possible because
+        they handle order dependencies and multithread locking for you. In
+        addition, high-level methods perform status checking only after
+        setting all of the properties. In contrast, when you set multiple
+        properties using the Set Property methods, the methods check the
+        instrument status after each call. Also, when state caching is enabled,
+        the high-level methods that configure multiple properties perform
+        instrument I/O only for the properties whose value you change. Thus, you
+        can safely call the high-level methods without the penalty of
+        redundant instrument I/O.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        niscope.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        niscope.Session instance, and calling this method on the result.:
+
+            session.channels['0,1']._set_attribute_vi_int64(attribute_id, value)
+
+        Args:
+            attribute_id (int): The ID of an property.
+
+            value (int): The value that you want to set the property. Some values might not be
+                valid depending on the current settings of the instrument session.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViInt64(value)  # case S150
+        error_code = self._library.niScope_SetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

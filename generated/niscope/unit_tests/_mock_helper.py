@@ -20,15 +20,22 @@ class SideEffectsHelper(object):
         self._defaults['AcquisitionStatus'] = {}
         self._defaults['AcquisitionStatus']['return'] = 0
         self._defaults['AcquisitionStatus']['acquisitionStatus'] = None
+        self._defaults['ActualMeasWfmSize'] = {}
+        self._defaults['ActualMeasWfmSize']['return'] = 0
+        self._defaults['ActualMeasWfmSize']['measWaveformSize'] = None
         self._defaults['ActualNumWfms'] = {}
         self._defaults['ActualNumWfms']['return'] = 0
         self._defaults['ActualNumWfms']['numWfms'] = None
+        self._defaults['AddWaveformProcessing'] = {}
+        self._defaults['AddWaveformProcessing']['return'] = 0
         self._defaults['AutoSetup'] = {}
         self._defaults['AutoSetup']['return'] = 0
         self._defaults['CalSelfCalibrate'] = {}
         self._defaults['CalSelfCalibrate']['return'] = 0
         self._defaults['ClearWaveformMeasurementStats'] = {}
         self._defaults['ClearWaveformMeasurementStats']['return'] = 0
+        self._defaults['ClearWaveformProcessing'] = {}
+        self._defaults['ClearWaveformProcessing']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureChanCharacteristics'] = {}
@@ -63,6 +70,10 @@ class SideEffectsHelper(object):
         self._defaults['Fetch']['return'] = 0
         self._defaults['Fetch']['Waveform'] = None
         self._defaults['Fetch']['wfmInfo'] = None
+        self._defaults['FetchArrayMeasurement'] = {}
+        self._defaults['FetchArrayMeasurement']['return'] = 0
+        self._defaults['FetchArrayMeasurement']['measWfm'] = None
+        self._defaults['FetchArrayMeasurement']['wfmInfo'] = None
         self._defaults['FetchBinary16'] = {}
         self._defaults['FetchBinary16']['return'] = 0
         self._defaults['FetchBinary16']['Waveform'] = None
@@ -92,6 +103,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViInt32'] = {}
         self._defaults['GetAttributeViInt32']['return'] = 0
         self._defaults['GetAttributeViInt32']['Value'] = None
+        self._defaults['GetAttributeViInt64'] = {}
+        self._defaults['GetAttributeViInt64']['return'] = 0
+        self._defaults['GetAttributeViInt64']['Value'] = None
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['Value'] = None
@@ -137,6 +151,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
         self._defaults['SetAttributeViInt32']['return'] = 0
+        self._defaults['SetAttributeViInt64'] = {}
+        self._defaults['SetAttributeViInt64']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
@@ -170,6 +186,15 @@ class SideEffectsHelper(object):
         acquisition_status.contents.value = self._defaults['AcquisitionStatus']['acquisitionStatus']
         return self._defaults['AcquisitionStatus']['return']
 
+    def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
+        if self._defaults['ActualMeasWfmSize']['return'] != 0:
+            return self._defaults['ActualMeasWfmSize']['return']
+        # meas_waveform_size
+        if self._defaults['ActualMeasWfmSize']['measWaveformSize'] is None:
+            raise MockFunctionCallError("niScope_ActualMeasWfmSize", param='measWaveformSize')
+        meas_waveform_size.contents.value = self._defaults['ActualMeasWfmSize']['measWaveformSize']
+        return self._defaults['ActualMeasWfmSize']['return']
+
     def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
         if self._defaults['ActualNumWfms']['return'] != 0:
             return self._defaults['ActualNumWfms']['return']
@@ -178,6 +203,11 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_ActualNumWfms", param='numWfms')
         num_wfms.contents.value = self._defaults['ActualNumWfms']['numWfms']
         return self._defaults['ActualNumWfms']['return']
+
+    def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
+        if self._defaults['AddWaveformProcessing']['return'] != 0:
+            return self._defaults['AddWaveformProcessing']['return']
+        return self._defaults['AddWaveformProcessing']['return']
 
     def niScope_AutoSetup(self, vi):  # noqa: N802
         if self._defaults['AutoSetup']['return'] != 0:
@@ -193,6 +223,11 @@ class SideEffectsHelper(object):
         if self._defaults['ClearWaveformMeasurementStats']['return'] != 0:
             return self._defaults['ClearWaveformMeasurementStats']['return']
         return self._defaults['ClearWaveformMeasurementStats']['return']
+
+    def niScope_ClearWaveformProcessing(self, vi, channel_list):  # noqa: N802
+        if self._defaults['ClearWaveformProcessing']['return'] != 0:
+            return self._defaults['ClearWaveformProcessing']['return']
+        return self._defaults['ClearWaveformProcessing']['return']
 
     def niScope_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -295,6 +330,33 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             wfm_info_ref[i] = test_value[i]
         return self._defaults['Fetch']['return']
+
+    def niScope_FetchArrayMeasurement(self, vi, channel_list, timeout, array_meas_function, meas_wfm_size, meas_wfm, wfm_info):  # noqa: N802
+        if self._defaults['FetchArrayMeasurement']['return'] != 0:
+            return self._defaults['FetchArrayMeasurement']['return']
+        # meas_wfm
+        if self._defaults['FetchArrayMeasurement']['measWfm'] is None:
+            raise MockFunctionCallError("niScope_FetchArrayMeasurement", param='measWfm')
+        test_value = self._defaults['FetchArrayMeasurement']['measWfm']
+        try:
+            meas_wfm_ref = meas_wfm.contents
+        except AttributeError:
+            meas_wfm_ref = meas_wfm
+        assert len(meas_wfm_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            meas_wfm_ref[i] = test_value[i]
+        # wfm_info
+        if self._defaults['FetchArrayMeasurement']['wfmInfo'] is None:
+            raise MockFunctionCallError("niScope_FetchArrayMeasurement", param='wfmInfo')
+        test_value = self._defaults['FetchArrayMeasurement']['wfmInfo']
+        try:
+            wfm_info_ref = wfm_info.contents
+        except AttributeError:
+            wfm_info_ref = wfm_info
+        assert len(wfm_info_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            wfm_info_ref[i] = test_value[i]
+        return self._defaults['FetchArrayMeasurement']['return']
 
     def niScope_FetchBinary16(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['FetchBinary16']['return'] != 0:
@@ -482,6 +544,15 @@ class SideEffectsHelper(object):
         value.contents.value = self._defaults['GetAttributeViInt32']['Value']
         return self._defaults['GetAttributeViInt32']['return']
 
+    def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
+        if self._defaults['GetAttributeViInt64']['return'] != 0:
+            return self._defaults['GetAttributeViInt64']['return']
+        # value
+        if self._defaults['GetAttributeViInt64']['Value'] is None:
+            raise MockFunctionCallError("niScope_GetAttributeViInt64", param='Value')
+        value.contents.value = self._defaults['GetAttributeViInt64']['Value']
+        return self._defaults['GetAttributeViInt64']['return']
+
     def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
             return self._defaults['GetAttributeViReal64']['return']
@@ -662,6 +733,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViInt32']['return']
         return self._defaults['SetAttributeViInt32']['return']
 
+    def niScope_SetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
+        if self._defaults['SetAttributeViInt64']['return'] != 0:
+            return self._defaults['SetAttributeViInt64']['return']
+        return self._defaults['SetAttributeViInt64']['return']
+
     def niScope_SetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['SetAttributeViReal64']['return'] != 0:
             return self._defaults['SetAttributeViReal64']['return']
@@ -706,14 +782,20 @@ class SideEffectsHelper(object):
         mock_library.niScope_Abort.return_value = 0
         mock_library.niScope_AcquisitionStatus.side_effect = MockFunctionCallError("niScope_AcquisitionStatus")
         mock_library.niScope_AcquisitionStatus.return_value = 0
+        mock_library.niScope_ActualMeasWfmSize.side_effect = MockFunctionCallError("niScope_ActualMeasWfmSize")
+        mock_library.niScope_ActualMeasWfmSize.return_value = 0
         mock_library.niScope_ActualNumWfms.side_effect = MockFunctionCallError("niScope_ActualNumWfms")
         mock_library.niScope_ActualNumWfms.return_value = 0
+        mock_library.niScope_AddWaveformProcessing.side_effect = MockFunctionCallError("niScope_AddWaveformProcessing")
+        mock_library.niScope_AddWaveformProcessing.return_value = 0
         mock_library.niScope_AutoSetup.side_effect = MockFunctionCallError("niScope_AutoSetup")
         mock_library.niScope_AutoSetup.return_value = 0
         mock_library.niScope_CalSelfCalibrate.side_effect = MockFunctionCallError("niScope_CalSelfCalibrate")
         mock_library.niScope_CalSelfCalibrate.return_value = 0
         mock_library.niScope_ClearWaveformMeasurementStats.side_effect = MockFunctionCallError("niScope_ClearWaveformMeasurementStats")
         mock_library.niScope_ClearWaveformMeasurementStats.return_value = 0
+        mock_library.niScope_ClearWaveformProcessing.side_effect = MockFunctionCallError("niScope_ClearWaveformProcessing")
+        mock_library.niScope_ClearWaveformProcessing.return_value = 0
         mock_library.niScope_Commit.side_effect = MockFunctionCallError("niScope_Commit")
         mock_library.niScope_Commit.return_value = 0
         mock_library.niScope_ConfigureChanCharacteristics.side_effect = MockFunctionCallError("niScope_ConfigureChanCharacteristics")
@@ -746,6 +828,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_ExportSignal.return_value = 0
         mock_library.niScope_Fetch.side_effect = MockFunctionCallError("niScope_Fetch")
         mock_library.niScope_Fetch.return_value = 0
+        mock_library.niScope_FetchArrayMeasurement.side_effect = MockFunctionCallError("niScope_FetchArrayMeasurement")
+        mock_library.niScope_FetchArrayMeasurement.return_value = 0
         mock_library.niScope_FetchBinary16.side_effect = MockFunctionCallError("niScope_FetchBinary16")
         mock_library.niScope_FetchBinary16.return_value = 0
         mock_library.niScope_FetchBinary32.side_effect = MockFunctionCallError("niScope_FetchBinary32")
@@ -760,6 +844,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_GetAttributeViBoolean.return_value = 0
         mock_library.niScope_GetAttributeViInt32.side_effect = MockFunctionCallError("niScope_GetAttributeViInt32")
         mock_library.niScope_GetAttributeViInt32.return_value = 0
+        mock_library.niScope_GetAttributeViInt64.side_effect = MockFunctionCallError("niScope_GetAttributeViInt64")
+        mock_library.niScope_GetAttributeViInt64.return_value = 0
         mock_library.niScope_GetAttributeViReal64.side_effect = MockFunctionCallError("niScope_GetAttributeViReal64")
         mock_library.niScope_GetAttributeViReal64.return_value = 0
         mock_library.niScope_GetAttributeViString.side_effect = MockFunctionCallError("niScope_GetAttributeViString")
@@ -792,6 +878,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_SetAttributeViBoolean.return_value = 0
         mock_library.niScope_SetAttributeViInt32.side_effect = MockFunctionCallError("niScope_SetAttributeViInt32")
         mock_library.niScope_SetAttributeViInt32.return_value = 0
+        mock_library.niScope_SetAttributeViInt64.side_effect = MockFunctionCallError("niScope_SetAttributeViInt64")
+        mock_library.niScope_SetAttributeViInt64.return_value = 0
         mock_library.niScope_SetAttributeViReal64.side_effect = MockFunctionCallError("niScope_SetAttributeViReal64")
         mock_library.niScope_SetAttributeViReal64.return_value = 0
         mock_library.niScope_SetAttributeViString.side_effect = MockFunctionCallError("niScope_SetAttributeViString")
