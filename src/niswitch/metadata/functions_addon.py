@@ -85,11 +85,11 @@ functions_default_value = {
 
 functions_converters = {
     'ConfigureScanTrigger':              { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'WaitForDebounce':                   { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'WaitForScanComplete':               { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
-                                                                'python_api_converter_type': 'datetime.timedelta', }, }, },
+                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
 }
 
 

@@ -490,7 +490,7 @@ class _SessionBase(object):
     '''
     scan_advanced_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
     scan_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1250025)
-    '''Type: float
+    '''Type: float in seconds or datetime.timedelta
 
     This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
@@ -528,7 +528,7 @@ class _SessionBase(object):
     This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
     settling_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250004)
-    '''Type: float
+    '''Type: float in seconds or datetime.timedelta
 
     This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
@@ -1649,7 +1649,7 @@ class Session(_SessionBase):
                 scan_advanced_output topic in the NI Switches Help for
                 a list of valid values.
 
-            scan_delay (float): The minimum length of time you want the switch device to wait after it
+            scan_delay (float in seconds or datetime.timedelta): The minimum length of time you want the switch device to wait after it
                 creates a path until it asserts a trigger on the scan advanced output
                 line. The driver uses this value to set the Scan Delay property. The
                 scan delay is in addition to the settling time.The driver uses this
@@ -2425,7 +2425,7 @@ class Session(_SessionBase):
         NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
         Args:
-            maximum_time_ms (int): Specifies the maximum length of time to wait for all relays in the
+            maximum_time_ms (float in seconds or datetime.timedelta): Specifies the maximum length of time to wait for all relays in the
                 switch module to activate or deactivate. If the specified time elapses
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
@@ -2447,7 +2447,7 @@ class Session(_SessionBase):
         error.
 
         Args:
-            maximum_time_ms (int): Specifies the maximum length of time to wait for the switch module to
+            maximum_time_ms (float in seconds or datetime.timedelta): Specifies the maximum length of time to wait for the switch module to
                 stop scanning. If the specified time elapses before the scan ends,
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms
