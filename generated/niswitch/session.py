@@ -490,7 +490,7 @@ class _SessionBase(object):
     '''
     scan_advanced_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
     scan_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1250025)
-    '''Type: float
+    '''Type: float in seconds or datetime.timedelta
 
     This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
@@ -528,7 +528,7 @@ class _SessionBase(object):
     This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
     settling_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250004)
-    '''Type: float
+    '''Type: float in seconds or datetime.timedelta
 
     This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
@@ -1463,7 +1463,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            session (int): A session object representing the device.
+            session (niswitch.Session): A session object representing the device.
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
