@@ -493,7 +493,7 @@ def add_all_enum_metadata(enums, config):
     _add_enum_codegen_method(enums, config)
     for e in enums:
         enums[e] = _add_enum_value_python_name(enums[e], config)
-        enums[e]['python_name'] = enums[e]['python_name'] if 'python_name' in enums[e] else e
+        enums[e]['python_name'] = ('_' if enums[e]['codegen_method'] == 'private' else '') + (enums[e]['python_name'] if 'python_name' in enums[e] else e)
 
     return enums
 
