@@ -15,6 +15,12 @@ def single_channel_session():
         yield simulated_session
 
 
+@pytest.fixture(scope='function')
+def multiple_channel_session():
+    with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        yield simulated_session
+
+
 def test_self_test():
     # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
     # Update to use the session created with 'session' function above after internal NI bug is fixed.
@@ -318,3 +324,13 @@ def test_set_get_vi_int_64_attribute(session):
     session.channels['0'].active_advanced_sequence_step = 1
     read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
     assert read_advanced_sequence_step == 1
+
+
+def test_channel_format_types():
+    with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        assert simulated_session.channel_count == 2
+    with nidcpower.Session('4162', range(2), False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        assert simulated_session.channel_count == 2
+    with nidcpower.Session('4162', '0,1', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
+        assert simulated_session.channel_count == 2
+
