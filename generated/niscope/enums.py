@@ -24,7 +24,7 @@ class AcquisitionType(Enum):
     '''
 
 
-class ArrayMeasurement(Enum):
+class _ArrayMeasurement(Enum):
     NO_MEASUREMENT = 4000
     '''
     None

@@ -789,7 +789,7 @@ class _SessionBase(object):
     meas_array_gain = _attributes.AttributeViReal64(1150043)
     '''Type: float
 
-    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to ArrayMeasurement.ARRAY_GAIN for more information.
+    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to _ArrayMeasurement.ARRAY_GAIN for more information.
     Default: 1.0
 
     Tip:
@@ -804,7 +804,7 @@ class _SessionBase(object):
     meas_array_offset = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
-    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to ArrayMeasurement.ARRAY_OFFSET for more information.
+    Every element of an array is added to this scalar value during the Array Offset measurement. Refer to _ArrayMeasurement.ARRAY_OFFSET for more information.
     Default: 0.0
 
     Tip:
@@ -957,11 +957,11 @@ class _SessionBase(object):
 
     Specifies the FIR window type. The possible choices are:
     NISCOPE_VAL_NONE
-    ArrayMeasurement.HANNING_WINDOW
-    ArrayMeasurement.HAMMING_WINDOW
-    ArrayMeasurement.TRIANGLE_WINDOW
-    ArrayMeasurement.FLAT_TOP_WINDOW
-    ArrayMeasurement.BLACKMAN_WINDOW
+    _ArrayMeasurement.HANNING_WINDOW
+    _ArrayMeasurement.HAMMING_WINDOW
+    _ArrayMeasurement.TRIANGLE_WINDOW
+    _ArrayMeasurement.FLAT_TOP_WINDOW
+    _ArrayMeasurement.BLACKMAN_WINDOW
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
     Default: NISCOPE_VAL_NONE
 
@@ -995,7 +995,7 @@ class _SessionBase(object):
     meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
     '''Type: float
 
-    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
+    The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the _ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
 
     Note:
@@ -1028,7 +1028,7 @@ class _SessionBase(object):
     meas_other_channel = _attributes.AttributeViString(1150018)
     '''Type: str
 
-    Specifies the second channel for two-channel measurements, such as ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
+    Specifies the second channel for two-channel measurements, such as _ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
 
     Tip:
