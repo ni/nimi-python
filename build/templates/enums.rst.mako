@@ -15,7 +15,7 @@ Enums used in ${driver_name}
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
 
-.. py:data:: ${enum_name}
+.. py:data:: ${enums[enum_name]['python_name']}
     % for enum_value in enums[enum_name]['values']:
 
     .. py:attribute:: ${enum_name}.${enum_value['python_name']}
