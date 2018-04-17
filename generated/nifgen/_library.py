@@ -442,13 +442,13 @@ class Library(object):
                 self.niFgen_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalSupported_cfunc(vi, self_cal_supported)
 
-    def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
+    def niFgen_InitializeWithChannels(self, resource_name, channels, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_InitializeWithChannels_cfunc is None:
                 self.niFgen_InitializeWithChannels_cfunc = self._library.niFgen_InitializeWithChannels
                 self.niFgen_InitializeWithChannels_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niFgen_InitializeWithChannels_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_InitializeWithChannels_cfunc(resource_name, channel_name, reset_device, option_string, vi)
+        return self.niFgen_InitializeWithChannels_cfunc(resource_name, channels, reset_device, option_string, vi)
 
     def niFgen_InitiateGeneration(self, vi):  # noqa: N802
         with self._func_lock:
