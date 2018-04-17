@@ -13,6 +13,7 @@ Enums used in ${driver_name}
 .. py:currentmodule:: ${module_name}
 
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
+% if enums[enum_name]['codegen_method'] == 'public':  # For documentation we only want public enums
 
 
 .. py:data:: ${enums[enum_name]['python_name']}
@@ -22,4 +23,5 @@ Enums used in ${driver_name}
 
 ${helper.get_documentation_for_node_rst(enum_value, config, indent=8)}
     % endfor
+% endif
 % endfor
