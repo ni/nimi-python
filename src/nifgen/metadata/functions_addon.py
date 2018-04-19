@@ -6,7 +6,7 @@
 functions_codegen_method = {
     'init':                                 { 'codegen_method': 'no',       },
     'InitWithOptions':                      { 'codegen_method': 'no',       },
-    'InitializeWithChannels':               { 'codegen_method': 'private',  },
+    'InitializeWithChannels':               { 'codegen_method': 'private', 'public_method': '__init__', },
     'close':                                { 'codegen_method': 'private',  },
     'CheckAttribute.*':                     { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
     'InitiateGeneration':                   { 'codegen_method': 'private',  },
@@ -20,12 +20,12 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
-    'CreateWaveformF64':                    { 'codegen_method': 'private',  },  # Called from public method create_waveform()
-    'CreateWaveformI16':                    { 'codegen_method': 'private',  },  # Called from public method create_waveform()
-    'WriteBinary16Waveform':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
-    'WriteNamedWaveformF64':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
-    'WriteNamedWaveformI16':                { 'codegen_method': 'private',  },  # Called from public method write_waveform()
-    'WriteWaveform':                        { 'codegen_method': 'private',  },  # Called from public method write_waveform()
+    'CreateWaveformF64':                    { 'codegen_method': 'private', 'public_method': 'create_waveform', },  # Called from public method create_waveform()
+    'CreateWaveformI16':                    { 'codegen_method': 'private', 'public_method': 'create_waveform', },  # Called from public method create_waveform()
+    'WriteBinary16Waveform':                { 'codegen_method': 'private', 'public_method': 'write_waveform', },  # Called from public method write_waveform()
+    'WriteNamedWaveformF64':                { 'codegen_method': 'private', 'public_method': 'write_waveform', },  # Called from public method write_waveform()
+    'WriteNamedWaveformI16':                { 'codegen_method': 'private', 'public_method': 'write_waveform', },  # Called from public method write_waveform()
+    'WriteWaveform':                        { 'codegen_method': 'private', 'public_method': 'write_waveform', },  # Called from public method write_waveform()
     'Disable.+':                            { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'Enable.+':                             { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'P2P':                                  { 'codegen_method': 'no',       },  # P2P not supported in Python API
@@ -63,9 +63,9 @@ functions_codegen_method = {
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
-    'GetExtCalLastDateAndTime':             { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'self_test':                            { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'public_method': 'get_ext_cal_last_date_and_time', },  # Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private', 'public_method': 'get_self_cal_last_date_and_time', },  # Public wrapper to allow datetime
+    'self_test':                            { 'codegen_method': 'private', 'public_method': 'self_test', },  # Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py
