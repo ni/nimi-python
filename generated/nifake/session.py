@@ -97,22 +97,22 @@ class _SessionBase(object):
     float_enum = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.FloatEnum, 1000005)
     '''Type: enums.FloatEnum
 
-    An property with an enum that is also a float
+    A property with an enum that is also a float
     '''
     read_write_bool = _attributes.AttributeViBoolean(1000000)
     '''Type: bool
 
-    An property of type bool with read/write access.
+    A property of type bool with read/write access.
     '''
     read_write_color = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Color, 1000003)
     '''Type: enums.Color
 
-    An property of type Color with read/write access.
+    A property of type Color with read/write access.
     '''
     read_write_double = _attributes.AttributeViReal64(1000001)
     '''Type: float
 
-    An property of type float with read/write access.
+    A property of type float with read/write access.
     '''
     read_write_double_with_converter = _attributes.AttributeViReal64TimeDeltaSeconds(1000007)
     '''Type: float in seconds or datetime.timedelta
@@ -122,12 +122,12 @@ class _SessionBase(object):
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 
-    An property of type 64-bit integer with read/write access.
+    A property of type 64-bit integer with read/write access.
     '''
     read_write_integer = _attributes.AttributeViInt32(1000004)
     '''Type: int
 
-    An property of type integer with read/write access.
+    A property of type integer with read/write access.
     '''
     read_write_integer_with_converter = _attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
     '''Type: float in seconds or datetime.timedelta
@@ -137,7 +137,7 @@ class _SessionBase(object):
     read_write_string = _attributes.AttributeViString(1000002)
     '''Type: str
 
-    An property of type string with read/write access.
+    A property of type string with read/write access.
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -203,7 +203,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
 
         Returns:
@@ -232,7 +232,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
 
         Returns:
@@ -261,7 +261,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
 
         Returns:
@@ -290,7 +290,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
 
         Returns:
@@ -319,7 +319,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -399,7 +399,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (bool): Pass the value that you want to set the property to.
 
@@ -426,7 +426,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (int): Pass the value that you want to set the property to.
 
@@ -453,7 +453,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (int): Pass the value that you want to set the property to.
 
@@ -480,7 +480,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (float): Pass the value that you want to set the property to.
 
@@ -507,7 +507,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (str): Pass the value that you want to set the property to.
 
@@ -561,7 +561,7 @@ class Session(_SessionBase):
                 { 'simulate': False }
 
                 You do not have to specify a value for all the properties. If you do not
-                specify a value for an property, the default value is used.
+                specify a value for a property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
