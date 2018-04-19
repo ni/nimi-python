@@ -240,7 +240,7 @@ class _SessionBase(object):
 
     Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
     The instrument driver can choose to always cache or to never cache  particular properties regardless of the setting of this property.
-    The default value is True.   Use __init__  to override this value.
+    The default value is True.   Use _init_with_options  to override this value.
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -459,7 +459,7 @@ class _SessionBase(object):
     '''Type: str
 
     This property indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  __init__, or through the IVI Configuration Utility.
+    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  _init_with_options, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this property returns an empty string.
     '''
     enable_dc_restore = _attributes.AttributeViBoolean(1150093)
@@ -564,7 +564,7 @@ class _SessionBase(object):
     fetch_interleaved_iq_data = _attributes.AttributeViBoolean(1150311)
     '''Type: bool
 
-    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  fetch() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
+    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  _fetch() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: True
     '''
     fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
@@ -734,7 +734,7 @@ class _SessionBase(object):
     '''Type: str
 
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource descriptor, this property contains that  value.You can pass a logical name to Init or __init__. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    If you initialize the instrument driver with the resource descriptor, this property contains that  value.You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -742,7 +742,7 @@ class _SessionBase(object):
     logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
-    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or __init__. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or _init_with_options. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -1247,7 +1247,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver methods.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this property to  False to disable range checking and maximize performance.
-    The default value is True.   Use the __init__  method to override this value.
+    The default value is True.   Use the _init_with_options  method to override this value.
     '''
     ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
     '''Type: str
@@ -1281,7 +1281,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 properties.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is False.   Use the __init__  method to override this value.
+    The default value is False.   Use the _init_with_options  method to override this value.
     '''
     ref_clk_rate = _attributes.AttributeViReal64(1150090)
     '''Type: float
@@ -1376,7 +1376,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-    The default value is False.   Use the __init__  method to override this value.
+    The default value is False.   Use the _init_with_options  method to override this value.
     '''
     slave_trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
     '''Type: float in seconds or datetime.timedelta
@@ -2041,8 +2041,8 @@ class _SessionBase(object):
 
         Initiates an acquisition, waits for it to complete, and retrieves the
         data. The process is similar to calling _initiate_acquisition,
-        acquisition_status, and fetch. The only difference is
-        that with read, you enable all channels specified with
+        acquisition_status, and _fetch. The only difference is
+        that with _read, you enable all channels specified with
         **channelList** before the acquisition; in the other method, you enable
         the channels with configure_vertical.
 
@@ -2151,7 +2151,7 @@ class _SessionBase(object):
         channels, the acquisition type, and the number of records you specify.
 
         Note:
-        You can use read instead of this method. read
+        You can use _read instead of this method. _read
         starts an acquisition on all enabled channels, waits for the acquisition
         to complete, and returns the waveform for the specified channel.
 
@@ -2252,7 +2252,7 @@ class _SessionBase(object):
         channels, the acquisition type, and the number of records you specify.
 
         Note:
-        You can use read instead of this method. read
+        You can use _read instead of this method. _read
         starts an acquisition on all enabled channels, waits for the acquisition
         to complete, and returns the waveform for the specified channel.
 
@@ -3285,8 +3285,8 @@ class _SessionBase(object):
 
         Initiates an acquisition, waits for it to complete, and retrieves the
         data. The process is similar to calling _initiate_acquisition,
-        acquisition_status, and fetch. The only difference is
-        that with read, you enable all channels specified with
+        acquisition_status, and _fetch. The only difference is
+        that with _read, you enable all channels specified with
         **channelList** before the acquisition; in the other method, you enable
         the channels with configure_vertical.
 

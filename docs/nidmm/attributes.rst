@@ -239,7 +239,7 @@ nidmm.Session properties
 
 .. py:attribute:: cache
 
-    Specifies whether to cache the value of properties. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular properties regardless of the setting of this  property. The default value is True (1). Use the :py:meth:`nidmm.Session.__init__`  method to override this value.
+    Specifies whether to cache the value of properties. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular properties regardless of the setting of this  property. The default value is True (1). Use the :py:meth:`nidmm.Session._init_with_options`  method to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -995,7 +995,7 @@ nidmm.Session properties
 .. py:attribute:: range_check
 
     Specifies whether to validate property values and method parameters. If  enabled, the instrument driver validates the parameter values passed to  driver methods. Range checking parameters is very useful for debugging.  After the user program is validated, this property can be set to False (0) to  disable range checking and maximize performance.
-    The default value is True (1). Use the :py:meth:`nidmm.Session.__init__` method to  override this value.
+    The default value is True (1). Use the :py:meth:`nidmm.Session._init_with_options` method to  override this value.
 
     The following table lists the characteristics of this property.
 
@@ -1020,7 +1020,7 @@ nidmm.Session properties
 .. py:attribute:: record_coercions
 
     Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 properties. Call :py:meth:`nidmm.Session.GetNextCoercionRecord` to extract  and delete the oldest coercion record from the list.
-    The default value is False (0). Use the :py:meth:`nidmm.Session.__init__` method to  override this value.
+    The default value is False (0). Use the :py:meth:`nidmm.Session._init_with_options` method to  override this value.
 
 
 
@@ -1328,7 +1328,7 @@ nidmm.Session properties
 .. py:attribute:: simulate
 
     Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver methods perform range checking and  call IVI Get and Set methods, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver methods return calculated values.
-    The default value is False (0). Use the :py:meth:`nidmm.Session.__init__` method to  override this setting.
+    The default value is False (0). Use the :py:meth:`nidmm.Session._init_with_options` method to  override this setting.
     Simulate can only be set within the InitWithOptions method.  The property value cannot be changed outside of the method.
 
     The following table lists the characteristics of this property.

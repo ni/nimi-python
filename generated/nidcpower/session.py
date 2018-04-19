@@ -193,7 +193,7 @@ class _SessionBase(object):
     Specifies whether to cache the value of properties.
     When caching is enabled, NI-DCPower records the current power supply settings and avoids sending  redundant commands to the device. Enabling caching can significantly increase execution speed.
     NI-DCPower might always cache or never cache particular properties regardless of the setting of this property.
-    Use the __init__ method to override this value.
+    Use the _initialize_with_channels method to override this value.
     Default Value: True
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
@@ -600,8 +600,8 @@ class _SessionBase(object):
     '''Type: str
 
     Indicates the Driver Setup string that you specified when initializing the driver.
-    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the __init__ method or through the  IVI Configuration Utility.
-    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the __init__ method. If you do not specify a Driver Setup string, this property returns an empty string.
+    Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the _initialize_with_channels method or through the  IVI Configuration Utility.
+    You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the _initialize_with_channels method. If you do not specify a Driver Setup string, this property returns an empty string.
     '''
     exported_measure_trigger_output_terminal = _attributes.AttributeViString(1150037)
     '''Type: str
@@ -709,7 +709,7 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the logical name you specified when opening the current IVI session.
-    You can pass a logical name to the __init__ method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
+    You can pass a logical name to the _initialize_with_channels method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
     '''
     measure_buffer_size = _attributes.AttributeViInt32(1150077)
     '''Type: int
@@ -806,7 +806,7 @@ class _SessionBase(object):
 
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
-    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
+    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the _fetch_multiple method.
     '''
     output_capacitance = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
     '''Type: enums.OutputCapacitance
@@ -852,7 +852,7 @@ class _SessionBase(object):
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the output_function property, you also must set the  voltage level or current level in addition to  enabling the output
     the _initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
-    Default Value: The default value is True if you use the __init__ method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
+    Default Value: The default value is True if you use the _initialize_with_channels method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
@@ -1663,7 +1663,7 @@ class _SessionBase(object):
     Specifies whether NI-DCPower queries the device status after each operation.
     Querying the device status is useful for debugging. After you validate your program, you can set this  property to False to disable status checking and maximize performance.
     NI-DCPower ignores status checking for particular properties regardless of the setting of this property.
-    Use the __init__ method to override this value.
+    Use the _initialize_with_channels method to override this value.
     Default Value: True
     '''
     range_check = _attributes.AttributeViBoolean(1050002)
@@ -1671,7 +1671,7 @@ class _SessionBase(object):
 
     Specifies whether to validate property values and method parameters.
     If this property is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower methods.  Range checking parameters is useful for debugging. After you validate your program, you can set this  property to False to disable range checking and maximize performance.
-    Use the __init__ method to override this value.
+    Use the _initialize_with_channels method to override this value.
     Default Value: True
     '''
     ready_for_pulse_trigger_event_output_terminal = _attributes.AttributeViString(1150102)
@@ -1704,7 +1704,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 properties.  Call the GetNextCoercionRecord method to read and delete the earliest coercion record from the list.
-    Default Value: The default value is False. Use the __init__ method to override this value.
+    Default Value: The default value is False. Use the _initialize_with_channels method to override this value.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -4702,9 +4702,9 @@ class Session(_SessionBase):
         Performs the device self-test routine and returns the test result(s).
         Calling this method implicitly calls the reset method.
 
-        When calling self_test with the PXIe-4162/4163, specify all
+        When calling _self_test with the PXIe-4162/4163, specify all
         channels of your PXIe-4162/4163 with the channels input of
-        __init__. You cannot self test a subset of
+        _initialize_with_channels. You cannot self test a subset of
         PXIe-4162/4163 channels.
 
         Raises `SelfTestError` on self test failure. Properties on exception object:
@@ -4746,9 +4746,9 @@ class Session(_SessionBase):
         Performs the device self-test routine and returns the test result(s).
         Calling this method implicitly calls the reset method.
 
-        When calling self_test with the PXIe-4162/4163, specify all
+        When calling _self_test with the PXIe-4162/4163, specify all
         channels of your PXIe-4162/4163 with the channels input of
-        __init__. You cannot self test a subset of
+        _initialize_with_channels. You cannot self test a subset of
         PXIe-4162/4163 channels.
 
         Returns:

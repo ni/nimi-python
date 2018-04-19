@@ -1096,9 +1096,9 @@ nidcpower.Session methods
     Performs the device self-test routine and returns the test result(s).
     Calling this method implicitly calls the :py:meth:`nidcpower.Session.reset` method.
 
-    When calling :py:meth:`nidcpower.Session.self_test` with the PXIe-4162/4163, specify all
+    When calling :py:meth:`nidcpower.Session._self_test` with the PXIe-4162/4163, specify all
     channels of your PXIe-4162/4163 with the channels input of
-    :py:meth:`nidcpower.Session.__init__`. You cannot self test a subset of
+    :py:meth:`nidcpower.Session._initialize_with_channels`. You cannot self test a subset of
     PXIe-4162/4163 channels.
 
     Raises `SelfTestError` on self test failure. Properties on exception object:

@@ -164,8 +164,8 @@ nifgen.Session methods
         You can create multiple arbitrary waveforms using one of the following
         niFgen Create Waveform methods:
 
-        -  :py:meth:`nifgen.Session.create_waveform`
-        -  :py:meth:`nifgen.Session.create_waveform`
+        -  :py:meth:`nifgen.Session._create_waveform_f64`
+        -  :py:meth:`nifgen.Session._create_waveform_i16`
         -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
         -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
         -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
@@ -376,8 +376,8 @@ nifgen.Session methods
         create an arbitrary waveform using one of the following niFgen Create
         Waveform methods:
 
-        -  :py:meth:`nifgen.Session.create_waveform`
-        -  :py:meth:`nifgen.Session.create_waveform`
+        -  :py:meth:`nifgen.Session._create_waveform_f64`
+        -  :py:meth:`nifgen.Session._create_waveform_i16`
         -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
         -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
         -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
@@ -2259,7 +2259,7 @@ nifgen.Session methods
     +----------------+------------------+
 
     .. note:: When used on some signal generators, the device is reset after the
-        :py:meth:`nifgen.Session.self_test` method runs. If you use the :py:meth:`nifgen.Session.self_test`
+        :py:meth:`nifgen.Session._self_test` method runs. If you use the :py:meth:`nifgen.Session._self_test`
         method, your device may not be in its previously configured state
         after the method runs.
 

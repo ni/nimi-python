@@ -304,8 +304,8 @@ nifgen.Session properties
 .. py:attribute:: arb_waveform_handle
 
     Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform methods:
-    :py:meth:`nifgen.Session.create_waveform`
-    :py:meth:`nifgen.Session.create_waveform`
+    :py:meth:`nifgen.Session._create_waveform_f64`
+    :py:meth:`nifgen.Session._create_waveform_i16`
     :py:meth:`nifgen.Session.create_waveform_from_file_i16`
     :py:meth:`nifgen.Session.create_waveform_from_file_f64`
     :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
