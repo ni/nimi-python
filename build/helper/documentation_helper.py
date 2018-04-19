@@ -330,10 +330,7 @@ def _replace_func_python_name(f_match):
     if f_match:
         fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
         try:
-            if 'public_method' in config['functions'][fname]:
-                fname = config['functions'][fname]['public_method']
-            else:
-                fname = config['functions'][fname]['python_name']
+            fname = config['functions'][fname]['python_name']
         except KeyError:
             print('Warning: "{0}" not found in function metadata. Typo? Generated code will be funky!'.format(fname))
     else:
