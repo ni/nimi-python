@@ -166,8 +166,8 @@ class _SessionBase(object):
     '''Type: int
 
     Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform methods:
-    _create_waveform_f64
-    _create_waveform_i16
+    create_waveform
+    create_waveform
     create_waveform_from_file_i16
     create_waveform_from_file_f64
     CreateWaveformFromFileHWS
@@ -1452,8 +1452,8 @@ class _SessionBase(object):
                 create an arbitrary waveform using one of the following niFgen Create
                 Waveform methods:
 
-                -  _create_waveform_f64
-                -  _create_waveform_i16
+                -  create_waveform
+                -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
                 -  CreateWaveformFromFileHWS
@@ -2921,7 +2921,7 @@ class _SessionBase(object):
         handle passed must have been created by a call to the
         nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 method.
 
-        By default, the subsequent call to the _write_binary16_waveform
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
@@ -2978,7 +2978,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_named_waveform_f64
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetNamedWaveformNextWritePosition method. If streaming is
@@ -3026,7 +3026,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_named_waveform_f64
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetNamedWaveformNextWritePosition method. If streaming is
@@ -3072,7 +3072,7 @@ class _SessionBase(object):
 
         Writes binary data to the named waveform in onboard memory.
 
-        By default, the subsequent call to the _write_named_waveform_i16
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetNamedWaveformNextWritePosition method. If streaming is
@@ -3155,7 +3155,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_waveform method
+        By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
         nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
@@ -3204,7 +3204,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_waveform method
+        By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
         nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
@@ -3551,8 +3551,8 @@ class Session(_SessionBase):
                 You can create multiple arbitrary waveforms using one of the following
                 niFgen Create Waveform methods:
 
-                -  _create_waveform_f64
-                -  _create_waveform_i16
+                -  create_waveform
+                -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
                 -  CreateWaveformFromFileHWS
@@ -4828,7 +4828,7 @@ class Session(_SessionBase):
 
         Note:
         When used on some signal generators, the device is reset after the
-        _self_test method runs. If you use the _self_test
+        self_test method runs. If you use the self_test
         method, your device may not be in its previously configured state
         after the method runs.
         '''
@@ -4861,7 +4861,7 @@ class Session(_SessionBase):
 
         Note:
         When used on some signal generators, the device is reset after the
-        _self_test method runs. If you use the _self_test
+        self_test method runs. If you use the self_test
         method, your device may not be in its previously configured state
         after the method runs.
 
