@@ -943,6 +943,21 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    def get_cal_interval(self):
+        '''get_cal_interval
+
+        Returns the recommended maximum interval, in **months**, between external calibrations.
+
+        Returns:
+            months (datetime.timedelta): Specifies the recommended maximum interval, in **months**, between external calibrations.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        months_ctype = _visatype.ViInt32()  # case S200
+        error_code = self._library.niFake_GetCalInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_month_to_timedelta(int(months_ctype.value))
+
     def get_custom_type(self):
         '''get_custom_type
 

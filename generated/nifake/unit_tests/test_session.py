@@ -1091,6 +1091,14 @@ class TestSession(object):
             assert isinstance(last_cal, datetime.datetime)
             assert datetime.datetime(year, month, day, hour, minute) == last_cal
 
+    def test_get_cal_interval(self):
+        self.patched_library.niFake_GetCalInterval = self.side_effects_helper.niFake_GetCalInterval
+        self.side_effects_helper['GetCalInterval']['Months'] = 24
+        with nifake.Session('dev1') as session:
+            last_cal = session.get_cal_interval()
+            assert isinstance(last_cal, datetime.timedelta)
+            assert 730 == last_cal.days
+
     def test_matcher_prints(self):
         assert _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(<class 'ctypes.c_ulong'>, 42)"
         assert _matchers.ViInt32Matcher(4).__repr__() == "ViInt32Matcher(<class 'ctypes.c_long'>, 4)"

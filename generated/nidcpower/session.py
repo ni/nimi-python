@@ -4318,7 +4318,7 @@ class Session(_SessionBase):
         external calibrations.
 
         Returns:
-            months (int): Specifies the recommended maximum interval, in **months**, between
+            months (datetime.timedelta): Specifies the recommended maximum interval, in **months**, between
                 external calibrations.
 
         '''
@@ -4326,7 +4326,7 @@ class Session(_SessionBase):
         months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(months_ctype.value)
+        return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
