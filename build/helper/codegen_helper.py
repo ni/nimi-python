@@ -118,6 +118,10 @@ def _get_output_param_return_snippet(output_parameter, parameters, config):
         else:
             snippet = return_type_snippet + output_parameter['ctypes_variable_name'] + val_suffix + ')'
 
+    # Handle output converter
+    if 'python_api_converter_name' in output_parameter:
+        snippet = '_converters.' + output_parameter['python_api_converter_name'] + '(' + snippet + ')'
+
     return snippet
 
 
