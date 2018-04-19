@@ -79,6 +79,8 @@ functions_converters = {
                                                                'type_in_documentation': 'datetime.timedelta', }, }, },
     'InitWithOptions':                  { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                'type_in_documentation': 'dict', }, }, },
+    'GetCalInterval':                   { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
+                                                               'type_in_documentation': 'datetime.timedelta', }, }, },
 }
 
 # Manually provided Python names for methods, rather than deriving from original names.
