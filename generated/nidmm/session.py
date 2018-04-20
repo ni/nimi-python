@@ -242,7 +242,7 @@ class _SessionBase(object):
     Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM methods.
     The default value is False.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call GetNextInterchangeWarning  to extract interchange warnings.  Call ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when an property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
+    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when a property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -662,7 +662,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
 
         Returns:
@@ -701,7 +701,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
 
         Returns:
@@ -740,7 +740,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
 
         Returns:
@@ -782,7 +782,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -863,7 +863,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (bool): Pass the value that you want to set the property to.
 
@@ -914,7 +914,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (int): Pass the value that you want to set the property to.
 
@@ -965,7 +965,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (float): Pass the value that you want to set the property to.
 
@@ -1016,7 +1016,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property.
+            attribute_id (int): Pass the ID of a property.
 
             attribute_value (str): Pass the value that you want to set the property to.
 
@@ -1129,7 +1129,7 @@ class Session(_SessionBase):
                 { 'simulate': False }
 
                 You do not have to specify a value for all the properties. If you do not
-                specify a value for an property, the default value is used.
+                specify a value for a property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }

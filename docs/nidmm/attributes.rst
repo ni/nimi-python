@@ -609,7 +609,7 @@ nidmm.Session properties
     Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM methods.
     The default value is False.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call :py:meth:`nidmm.Session.GetNextInterchangeWarning`  to extract interchange warnings.  Call :py:meth:`nidmm.Session.ClearInterchangeWarnings`  to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when an property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
+    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when a property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
 
 
 

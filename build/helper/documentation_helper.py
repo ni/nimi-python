@@ -410,6 +410,9 @@ def _fix_references(node, doc, cfg, make_link=False):
     # Several other standard replacements
     doc = re.sub(r'\bVI_FALSE\b', 'False', doc)
     doc = re.sub(r'\bVI_TRUE\b', 'True', doc)
+    doc = re.sub(r'\ban attribute\b', 'a property', doc)
+    doc = re.sub(r'\bAn attribute\b', 'A property', doc)
+    doc = re.sub(r'\bAn Attribute\b', 'A Property', doc)
     doc = re.sub(r'\battribute\b', 'property', doc)
     doc = re.sub(r'\battributes\b', 'properties', doc)
     doc = re.sub(r'\bAttribute\b', 'Property', doc)
