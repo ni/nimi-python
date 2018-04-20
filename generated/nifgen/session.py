@@ -4358,7 +4358,7 @@ class Session(_SessionBase):
         months.
 
         Returns:
-            months (int): Specifies the recommended interval between external calibrations in
+            months (datetime.timedelta): Specifies the recommended interval between external calibrations in
                 months.
 
         '''
@@ -4366,7 +4366,7 @@ class Session(_SessionBase):
         months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(months_ctype.value)
+        return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     def get_hardware_state(self):
         '''get_hardware_state

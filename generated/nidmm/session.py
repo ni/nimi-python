@@ -2078,7 +2078,7 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Returns:
-            months (int): Returns the recommended number of **months** between external
+            months (datetime.timedelta): Returns the recommended number of **months** between external
                 calibrations.
 
         '''
@@ -2086,7 +2086,7 @@ class Session(_SessionBase):
         months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDMM_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(months_ctype.value)
+        return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
