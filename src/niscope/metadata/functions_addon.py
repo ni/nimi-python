@@ -61,7 +61,6 @@ functions_codegen_method = {
     'Fetch':                            { 'codegen_method': 'private',  },
     'Read':                             { 'codegen_method': 'private',  },
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
-    '.etAttributeViInt64':              { 'codegen_method': 'private',  },  # NI-SCOPE has no ViInt64 attributes.
     'ClearWaveformProcessing':          { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
     'AddWaveformProcessing':            { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
     'FetchArrayMeasurement':            { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
