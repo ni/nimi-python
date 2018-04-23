@@ -160,9 +160,15 @@ def test_measure_multiple(session):
         # session is open to all 12 channels on the device
         measurements = session.measure_multiple()
         assert len(measurements) == 12
+        assert measurements[1].in_compliance is None
+        assert measurements[1].voltage == 0.0
+        assert measurements[1].current == 0.00001
         # now a subset of the channels
         measurements = session.channels[range(4)].measure_multiple()
         assert len(measurements) == 4
+        assert measurements[1].in_compliance is None
+        assert measurements[1].voltage == 0.0
+        assert measurements[1].current == 0.00001
 
 
 def test_query_max_current_limit(single_channel_session):
