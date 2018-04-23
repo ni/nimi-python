@@ -4,7 +4,7 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                  { 'codegen_method': 'private', 'public_method': '__init__', },
+    'InitWithOptions':                  { 'codegen_method': 'private', 'public_method_name': '__init__', },
     'InitiateAcquisition':              { 'codegen_method': 'private',  },
     'close':                            { 'codegen_method': 'private',  },
     'CheckAttribute.+':                 { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
@@ -55,18 +55,18 @@ functions_codegen_method = {
     'errorHandler':                     { 'codegen_method': 'no',       },
     'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
     'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
-    'FetchBinary8':                     { 'codegen_method': 'private', 'public_method': 'fetch_into', },
-    'FetchBinary16':                    { 'codegen_method': 'private', 'public_method': 'fetch_into', },
-    'FetchBinary32':                    { 'codegen_method': 'private', 'public_method': 'fetch_into', },
-    'Fetch':                            { 'codegen_method': 'private', 'public_method': 'fetch', },
-    'Read':                             { 'codegen_method': 'private', 'public_method': 'read', },
+    'FetchBinary8':                     { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },
+    'FetchBinary16':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },
+    'FetchBinary32':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },
+    'Fetch':                            { 'codegen_method': 'private', 'public_method_name': 'fetch', },
+    'Read':                             { 'codegen_method': 'private', 'public_method_name': 'read', },
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
     'ClearWaveformProcessing':          { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
     'AddWaveformProcessing':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
     'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
     'ActualMeasWfmSize':                { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
-    'self_test':                        { 'codegen_method': 'private', 'public_method': 'self_test', },  # Public wrapper that raises
+    'self_test':                        { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private', },  # We use it internally so the customer doesn't have to.}
 }
 

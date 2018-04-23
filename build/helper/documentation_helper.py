@@ -331,7 +331,7 @@ def _replace_func_python_name(f_match):
         fname = f_match.group(1).replace('.', '').replace(',', '').replace('\\', '')
         try:
             if 'public_method' in config['functions'][fname]:
-                fname = config['functions'][fname]['public_method']
+                fname = config['functions'][fname]['public_method_name']
             else:
                 fname = config['functions'][fname]['python_name']
         except KeyError:
