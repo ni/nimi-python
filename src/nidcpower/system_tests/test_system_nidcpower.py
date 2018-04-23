@@ -310,8 +310,8 @@ def test_get_ext_cal_last_temp(session):
 
 
 def test_get_ext_cal_recommended_interval(session):
-    months = session.get_ext_cal_recommended_interval()
-    assert months == 12
+    interval = session.get_ext_cal_recommended_interval()
+    assert interval.days == 365
 
 
 def test_set_get_vi_int_64_attribute(session):

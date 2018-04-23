@@ -357,6 +357,8 @@ functions_converters = {
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                'type_in_documentation': 'dict', }, }, },
+    'GetExtCalRecommendedInterval':     { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
+                                                               'type_in_documentation': 'datetime.timedelta', }, }, },
 }
 
 

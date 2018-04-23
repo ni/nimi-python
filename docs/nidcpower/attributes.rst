@@ -1487,7 +1487,7 @@ nidcpower.Session properties
     Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower methods. True specifies that interchangeability checking is enabled.
     Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` method to retrieve  interchange warnings.
     Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` method to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when an property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
+    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when a property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
     Default Value: False
 
 
