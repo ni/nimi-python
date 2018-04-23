@@ -2067,4 +2067,28 @@ functions = {
             'description': 'Performs a self-test.',
         },
     },
+    'GetCalInterval': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'Months',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Specifies the recommended maximum interval, in **months**, between external calibrations.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns the recommended maximum interval, in **months**, between external calibrations.',
+        },
+    },
 }

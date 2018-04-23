@@ -75,6 +75,9 @@ class SideEffectsHelper(object):
         self._defaults['GetCalDateAndTime']['Year'] = None
         self._defaults['GetCalDateAndTime']['Hour'] = None
         self._defaults['GetCalDateAndTime']['Minute'] = None
+        self._defaults['GetCalInterval'] = {}
+        self._defaults['GetCalInterval']['return'] = 0
+        self._defaults['GetCalInterval']['Months'] = None
         self._defaults['GetCustomType'] = {}
         self._defaults['GetCustomType']['return'] = 0
         self._defaults['GetCustomType']['cs'] = None
@@ -391,6 +394,15 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Minute')
         minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
         return self._defaults['GetCalDateAndTime']['return']
+
+    def niFake_GetCalInterval(self, vi, months):  # noqa: N802
+        if self._defaults['GetCalInterval']['return'] != 0:
+            return self._defaults['GetCalInterval']['return']
+        # months
+        if self._defaults['GetCalInterval']['Months'] is None:
+            raise MockFunctionCallError("niFake_GetCalInterval", param='Months')
+        months.contents.value = self._defaults['GetCalInterval']['Months']
+        return self._defaults['GetCalInterval']['return']
 
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
         if self._defaults['GetCustomType']['return'] != 0:
@@ -714,6 +726,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAttributeViString.return_value = 0
         mock_library.niFake_GetCalDateAndTime.side_effect = MockFunctionCallError("niFake_GetCalDateAndTime")
         mock_library.niFake_GetCalDateAndTime.return_value = 0
+        mock_library.niFake_GetCalInterval.side_effect = MockFunctionCallError("niFake_GetCalInterval")
+        mock_library.niFake_GetCalInterval.return_value = 0
         mock_library.niFake_GetCustomType.side_effect = MockFunctionCallError("niFake_GetCustomType")
         mock_library.niFake_GetCustomType.return_value = 0
         mock_library.niFake_GetCustomTypeArray.side_effect = MockFunctionCallError("niFake_GetCustomTypeArray")

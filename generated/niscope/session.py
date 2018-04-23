@@ -3192,7 +3192,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
 
         Returns:
@@ -3229,7 +3229,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
 
         Returns:
@@ -3301,7 +3301,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
 
         Returns:
@@ -3349,7 +3349,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3674,7 +3674,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
             value (bool): The value that you want to set the property to. Some values might not
                 be valid depending on the current settings of the instrument session.
@@ -3723,7 +3723,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
             value (int): The value that you want to set the property. Some values might not be
                 valid depending on the current settings of the instrument session.
@@ -3821,7 +3821,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
             value (float): The value that you want to set the property to. Some values might not
                 be valid depending on the current settings of the instrument session.
@@ -3872,7 +3872,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
             value (str): The value that you want to set the property to. Some values might not
                 be valid depending on the current settings of the instrument session.
@@ -3994,7 +3994,7 @@ class Session(_SessionBase):
                 { 'simulate': False }
 
                 You do not have to specify a value for all the properties. If you do not
-                specify a value for an property, the default value is used.
+                specify a value for a property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
