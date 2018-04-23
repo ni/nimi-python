@@ -2413,11 +2413,11 @@ class _SessionBase(object):
     def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
-        Returns arrays of the measured voltage and current values on the
-        specified output channel(s). Each call to this method blocks other
-        method calls until the measurements are returned from the device. The
-        order of the measurements returned in the array corresponds to the order
-        on the specified output channel(s).
+        Returns an list of named tuples (Measurement) that were
+        previously taken and are stored in the NI-DCPower buffer. This method
+        should not be used when the measure_when property is
+        set to MeasureWhen.ON_DEMAND. You must first call
+        _initiate before calling this method.
 
         Fields in Measurement:
 
@@ -2461,11 +2461,11 @@ class _SessionBase(object):
     def measure_multiple(self):
         '''measure_multiple
 
-        Returns an list of named tuples (Measurement) that were
-        previously taken and are stored in the NI-DCPower buffer. This method
-        should not be used when the measure_when property is
-        set to MeasureWhen.ON_DEMAND. You must first call
-        _initiate before calling this method.
+        Returns an list of named tuples (Measurement) containing the measured voltage
+        and current values on the specified output channel(s). Each call to this method
+        blocks other method calls until the measurements are returned from the device.
+        The order of the measurements returned in the array corresponds to the order
+        on the specified output channel(s).
 
         Fields in Measurement:
 
