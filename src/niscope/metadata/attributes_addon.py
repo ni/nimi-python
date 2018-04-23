@@ -160,6 +160,7 @@ attributes_codegen_method = {
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
     1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
     1150080: { "codegen_method": "private" },  # FETCH_NUM_RECORDS - Fetch attribute
+    1150043: { "codegen_method": "private" },  # MEAS_ARRAY_GAIN - Measurement library private - #810
 }
 
 
