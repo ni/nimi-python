@@ -470,7 +470,7 @@ nidcpower.Session methods
 
 .. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
-    Returns an list of named tuples (Measurement) that were
+    Returns a list of named tuples (Measurement) that were
     previously taken and are stored in the NI-DCPower buffer. This method
     should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
@@ -721,7 +721,7 @@ nidcpower.Session methods
 
 .. py:method:: measure_multiple()
 
-    Returns an list of named tuples (Measurement) containing the measured voltage
+    Returns a list of named tuples (Measurement) containing the measured voltage
     and current values on the specified output channel(s). Each call to this method
     blocks other method calls until the measurements are returned from the device.
     The order of the measurements returned in the array corresponds to the order

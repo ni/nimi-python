@@ -269,7 +269,7 @@ List of named tuples with fields:
         ],
         'documentation': {
             'description': '''
-Returns an list of named tuples (Measurement) that were
+Returns a list of named tuples (Measurement) that were
 previously taken and are stored in the NI-DCPower buffer. This function
 should not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is
 set to NIDCPOWER_VAL_ON_DEMAND. You must first call
@@ -336,7 +336,7 @@ List of named tuples with fields:
         ],
         'documentation': {
             'description': '''
-Returns an list of named tuples (Measurement) containing the measured voltage
+Returns a list of named tuples (Measurement) containing the measured voltage
 and current values on the specified output channel(s). Each call to this function
 blocks other function calls until the measurements are returned from the device.
 The order of the measurements returned in the array corresponds to the order
