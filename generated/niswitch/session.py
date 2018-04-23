@@ -211,7 +211,7 @@ class _SessionBase(object):
     Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  connect, set_path and _initiate_scan methods.
     The default value is False.
     Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call GetNextInterchangeWarning to extract interchange warnings.   Call the ClearInterchangeWarnings method to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group.  Interchangeability warnings can  occur when an property affects the behavior of the instrument and you  have not set that property, or the property has been invalidated since you set it.
+    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group.  Interchangeability warnings can  occur when a property affects the behavior of the instrument and you  have not set that property, or the property has been invalidated since you set it.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -688,17 +688,17 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
                 dialog box allows you to see all IVI properties or only the properties
                 of the ViInt32 type. If you choose to see all IVI properties, the data
                 types appear to the right of the property names in the list box. The
                 data types that are not consistent with this method are dim. If you
-                select an property data type that is dim, LabWindows/CVI transfers you
+                select a property data type that is dim, LabWindows/CVI transfers you
                 to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
                 change this ring control to a manual input box. - If the property in
@@ -743,17 +743,17 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
                 dialog box allows you to see all IVI properties or only the properties
                 of the ViInt32 type. If you choose to see all IVI properties, the data
                 types appear to the right of the property names in the list box. The
                 data types that are not consistent with this method are dim. If you
-                select an property data type that is dim, LabWindows/CVI transfers you
+                select a property data type that is dim, LabWindows/CVI transfers you
                 to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
                 change this ring control to a manual input box. - If the property in
@@ -798,17 +798,17 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
                 dialog box allows you to see all IVI properties or only the properties
                 of the ViInt32 type. If you choose to see all IVI properties, the data
                 types appear to the right of the property names in the list box. The
                 data types that are not consistent with this method are dim. If you
-                select an property data type that is dim, LabWindows/CVI transfers you
+                select a property data type that is dim, LabWindows/CVI transfers you
                 to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
                 change this ring control to a manual input box. - If the property in
@@ -865,17 +865,17 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . A ring control at the top of the
                 dialog box allows you to see all IVI properties or only the properties
                 of the ViInt32 type. If you choose to see all IVI properties, the data
                 types appear to the right of the property names in the list box. The
                 data types that are not consistent with this method are dim. If you
-                select an property data type that is dim, LabWindows/CVI transfers you
+                select a property data type that is dim, LabWindows/CVI transfers you
                 to the method panel for the corresponding method that is consistent
                 with the data type. - If you want to enter a variable name, press to
                 change this ring control to a manual input box. - If the property in
@@ -965,18 +965,18 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . Read-only properties appear dim
                 in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
                 all IVI properties or only the properties of the ViInt32 type. If you
                 choose to see all IVI properties, the data types appear to the right of
                 the property names in the list box. The data types that are not
-                consistent with this method are dim. If you select an property data
+                consistent with this method are dim. If you select a property data
                 type that is dim, LabWindows/CVI transfers you to the method panel for
                 the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to
@@ -1032,18 +1032,18 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . Read-only properties appear dim
                 in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
                 all IVI properties or only the properties of the ViInt32 type. If you
                 choose to see all IVI properties, the data types appear to the right of
                 the property names in the list box. The data types that are not
-                consistent with this method are dim. If you select an property data
+                consistent with this method are dim. If you select a property data
                 type that is dim, LabWindows/CVI transfers you to the method panel for
                 the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to
@@ -1099,18 +1099,18 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . Read-only properties appear dim
                 in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
                 all IVI properties or only the properties of the ViInt32 type. If you
                 choose to see all IVI properties, the data types appear to the right of
                 the property names in the list box. The data types that are not
-                consistent with this method are dim. If you select an property data
+                consistent with this method are dim. If you select a property data
                 type that is dim, LabWindows/CVI transfers you to the method panel for
                 the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to
@@ -1166,18 +1166,18 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Pass the ID of an property. From the method panel window, you can use
+            attribute_id (int): Pass the ID of a property. From the method panel window, you can use
                 this control as follows. - Click on the control or press , , or , to
                 display a dialog box containing a hierarchical list of the available
                 properties. Properties whose value cannot be set are dim. Help text is
-                shown for each property. Select an property by double-clicking on it
+                shown for each property. Select a property by double-clicking on it
                 or by selecting it and then pressing . Read-only properties appear dim
                 in the list box. If you select a read-only property, an error message
                 appears. A ring control at the top of the dialog box allows you to see
                 all IVI properties or only the properties of the ViInt32 type. If you
                 choose to see all IVI properties, the data types appear to the right of
                 the property names in the list box. The data types that are not
-                consistent with this method are dim. If you select an property data
+                consistent with this method are dim. If you select a property data
                 type that is dim, LabWindows/CVI transfers you to the method panel for
                 the corresponding method that is consistent with the data type. - If
                 you want to enter a variable name, press to change this ring control to

@@ -18,7 +18,7 @@ As a prerequisite to using the ${module_name} module, you must install the ${dri
 
 The nimi-python modules (i.e. for **${driver_name}**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install ${module_name}
+  $ python -m pip install ${module_name}~=${config['module_version']}
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::
