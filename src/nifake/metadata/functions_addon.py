@@ -10,11 +10,11 @@ functions_codegen_method = {
     '.etAttribute.+':           { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     '.etAttributeViSession':    { 'codegen_method': 'no',       },  # Except ViSession ones that aren't applicable to Python
     'error_message':            { 'codegen_method': 'private',  },
-    'GetCalDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
+    'GetCalDateAndTime':        { 'codegen_method': 'private',  },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
     'GetError':                 { 'codegen_method': 'private',  },
     'GetErrorMessage':          { 'codegen_method': 'no',       },
     'ClearError':               { 'codegen_method': 'no',       },
-    'self_test':                { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'self_test':                { 'codegen_method': 'private',  },  # 'fancy_self_test' Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py

@@ -39,10 +39,10 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
-    'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
+    'FetchMultiple':                   { 'codegen_method': 'private',  },  # 'FancyFetchMultiple' Public wrapper
+    'self_test':                       { 'codegen_method': 'private',  },  # 'fancy_self_test' Public wrapper that raises
     'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix

@@ -27,7 +27,7 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
-    'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'self_test':                       { 'codegen_method': 'private',  },  # 'fancy_self_test' Public wrapper that raises
 }
 
 # Override the 'python' name for some functions.

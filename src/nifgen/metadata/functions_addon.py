@@ -63,9 +63,9 @@ functions_codegen_method = {
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
-    'GetExtCalLastDateAndTime':             { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'self_test':                            { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'GetExtCalLastDateAndTime':             { 'codegen_method': 'private',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private',  },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
+    'self_test':                            { 'codegen_method': 'private',  },  # 'fancy_self_test' Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py
