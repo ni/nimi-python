@@ -54,6 +54,7 @@ def _add_python_method_name(function, name):
             function['python_name'] = '_' + camelcase_to_snakecase(name)
         else:
             function['python_name'] = camelcase_to_snakecase(name)
+            assert 'public_method_name' not in function, "'public_method_name' not allowed to be set: function['public_method_name'] = '{0}', function['python_name'] = '{1}'".format(function['public_method_name'], function['python_name'])
     return function
 
 
