@@ -2142,44 +2142,6 @@ niscope.Session properties
             - LabVIEW Property: **Horizontal:Maximum RIS Rate**
             - C Attribute: **NISCOPE_ATTR_MAX_RIS_RATE**
 
-.. py:attribute:: meas_array_gain
-
-    Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to :py:data:`~niscope._ArrayMeasurement.ARRAY_GAIN` for more information.
-    Default: 1.0
-
-
-
-
-    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
-        meas_array_gain.Session object, then the set/get will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        meas_array_gain.Session instance, and calling set/get value on the result.:
-
-        .. code:: python
-
-            session['0,1'].meas_array_gain = var
-            var = session['0,1'].meas_array_gain
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | float      |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Waveform Measurement:Array Gain**
-            - C Attribute: **NISCOPE_ATTR_MEAS_ARRAY_GAIN**
-
 .. py:attribute:: meas_array_offset
 
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to :py:data:`~niscope._ArrayMeasurement.ARRAY_OFFSET` for more information.

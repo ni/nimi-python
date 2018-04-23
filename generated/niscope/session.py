@@ -786,7 +786,7 @@ class _SessionBase(object):
 
     Returns the maximum sample rate in RIS mode in Hz.
     '''
-    meas_array_gain = _attributes.AttributeViReal64(1150043)
+    _meas_array_gain = _attributes.AttributeViReal64(1150043)
     '''Type: float
 
     Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to _ArrayMeasurement.ARRAY_GAIN for more information.
