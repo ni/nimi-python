@@ -111,12 +111,15 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     '''Convert a repeated capabilities object to a comma delimited list
 
     Args:
-        repeated_capability (str, list, tuple, slice) -
+        repeated_capability (str, list, tuple, slice, None) -
         prefix (str) - common prefix for all strings
 
     Returns:
         rep_cal_list (list of str) - list of each repeated capability item with ranges expanded and prefix added
     '''
+    # We need to explicitly handle None here. Everything else we can pass on to the singledispatch functions
+    if repeated_capability is None:
+        return []
     return [prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)]
 
 
@@ -127,7 +130,7 @@ def convert_repeated_capabilities_from_init(repeated_capability, encoding):
     this was so we use a prefix of ''
 
     Args:
-        repeated_capability (str, list, tuple, slice) -
+        repeated_capability (str, list, tuple, slice, None) -
         encoding (str) - ignored for this converter
 
     Returns:

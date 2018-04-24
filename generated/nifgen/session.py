@@ -3180,7 +3180,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, channels="", reset_device=False, options={}):
+    def __init__(self, resource_name, channel_name=None, reset_device=False, options={}):
         '''An NI-FGEN session to a National Instruments Signal Generator.
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -3236,7 +3236,7 @@ class Session(_SessionBase):
                 | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
                 +-----------+--------------------------------------+------------------------+---------------------------------+
 
-            channels (str): Specifies the channel that this VI uses.
+            channel_name (str): Specifies the channel that this VI uses.
 
                 **Default Value**: "0"
 
@@ -3288,14 +3288,14 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        channels = _converters.convert_repeated_capabilities_from_init(channels, self._encoding)
+        channel_name = _converters.convert_repeated_capabilities_from_init(channel_name, self._encoding)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _initialize_with_channels().
-        self._vi = self._initialize_with_channels(resource_name, channels, reset_device, options)
+        self._vi = self._initialize_with_channels(resource_name, channel_name, reset_device, options)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -3305,7 +3305,7 @@ class Session(_SessionBase):
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
-        param_list.append("channels=" + pp.pformat(channels))
+        param_list.append("channel_name=" + pp.pformat(channel_name))
         param_list.append("reset_device=" + pp.pformat(reset_device))
         param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
@@ -4358,7 +4358,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
-    def _initialize_with_channels(self, resource_name, channels="", reset_device=False, option_string=""):
+    def _initialize_with_channels(self, resource_name, channel_name=None, reset_device=False, option_string=""):
         '''_initialize_with_channels
 
         Creates and returns a new NI-FGEN session to the specified channel of a
@@ -4414,7 +4414,7 @@ class Session(_SessionBase):
                 | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
                 +-----------+--------------------------------------+------------------------+---------------------------------+
 
-            channels (str): Specifies the channel that this VI uses.
+            channel_name (str): Specifies the channel that this VI uses.
 
                 **Default Value**: "0"
 
@@ -4487,11 +4487,11 @@ class Session(_SessionBase):
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C020
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
         vi_ctype = _visatype.ViSession()  # case S200
-        error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
+        error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 

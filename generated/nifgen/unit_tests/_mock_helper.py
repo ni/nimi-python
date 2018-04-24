@@ -591,7 +591,7 @@ class SideEffectsHelper(object):
         self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
 
-    def niFgen_InitializeWithChannels(self, resource_name, channels, reset_device, option_string, vi):  # noqa: N802
+    def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitializeWithChannels']['return'] != 0:
             return self._defaults['InitializeWithChannels']['return']
         # vi
