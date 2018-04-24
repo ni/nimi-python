@@ -111,13 +111,32 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     '''Convert a repeated capabilities object to a comma delimited list
 
     Args:
-        repeated_capability (str, list, tuple, slice) -
+        repeated_capability (str, list, tuple, slice, None) -
         prefix (str) - common prefix for all strings
 
     Returns:
         rep_cal_list (list of str) - list of each repeated capability item with ranges expanded and prefix added
     '''
+    # We need to explicitly handle None here. Everything else we can pass on to the singledispatch functions
+    if repeated_capability is None:
+        return []
     return [prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)]
+
+
+def convert_repeated_capabilities_from_init(repeated_capability, encoding):
+    '''Convert a repeated capabilities object to a comma delimited list
+
+    Parameter list is so it can be called from the code generated __init__(). We know it is for channels when called
+    this was so we use a prefix of ''
+
+    Args:
+        repeated_capability (str, list, tuple, slice, None) -
+        encoding (str) - ignored for this converter
+
+    Returns:
+        rep_cal (str) - comma delimited string of each repeated capability item with ranges expanded
+    '''
+    return ','.join(convert_repeated_capabilities(repeated_capability, ''))
 
 
 def _convert_timedelta(value, library_type, scaling):
@@ -427,6 +446,11 @@ def test_repeated_capabilies_slice_prefix():
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = convert_repeated_capabilities(slice(None, 2), prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+
+
+def test_repeated_capabilies_from_init():
+    test_result = convert_repeated_capabilities_from_init((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), '')
+    assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
 
 
 def test_string_to_list_channel():

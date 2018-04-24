@@ -117,7 +117,7 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': '""', },
+    'InitializeWithChannels':                       { 'parameters': { 1: { 'default_value': None, },
                                                                       2: { 'default_value': False, },
                                                                       3: { 'default_value': '""', }, }, },
     'ConfigureFreqList':                            { 'parameters': { 4: { 'default_value': 0.0, },
@@ -139,7 +139,10 @@ functions_converters = {
     'WaitUntilDone':                                { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
                                                                            'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'InitializeWithChannels':                       { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                                           'type_in_documentation': 'dict', }, }, },
+                                                                           'type_in_documentation': 'dict', }, 
+                                                                      1: { 'is_repeated_capability': False,
+                                                                           'python_api_converter_name': 'convert_repeated_capabilities_from_init', 
+                                                                           'type_in_documentation': 'str, list, range, tuple', }, }, },
     'GetExtCalRecommendedInterval':                 { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
                                                                            'type_in_documentation': 'datetime.timedelta', }, }, },
 }

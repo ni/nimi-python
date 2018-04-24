@@ -3571,7 +3571,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
-    def __init__(self, resource_name, channels="", reset=False, options={}):
+    def __init__(self, resource_name, channels=None, reset=False, options={}):
         '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
@@ -3657,6 +3657,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        channels = _converters.convert_repeated_capabilities_from_init(channels, self._encoding)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
@@ -4463,7 +4464,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
-    def _initialize_with_channels(self, resource_name, channels="", reset=False, option_string=""):
+    def _initialize_with_channels(self, resource_name, channels=None, reset=False, option_string=""):
         '''_initialize_with_channels
 
         Creates and returns a new NI-DCPower session to the power supply or SMU

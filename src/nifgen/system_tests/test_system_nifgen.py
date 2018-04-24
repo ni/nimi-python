@@ -7,7 +7,7 @@ import pytest
 
 @pytest.fixture(scope='function')
 def session():
-    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
         yield simulated_session
 
 
@@ -43,7 +43,7 @@ def test_method_get_self_cal_supported(session):
 
 def test_get_self_cal_last_date_and_time():
     try:
-        with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
             session.get_self_cal_last_date_and_time()
             assert False
     except nifgen.Error as e:
@@ -132,7 +132,7 @@ def test_disable(session):
 
 
 def test_get_ext_cal_last_date_and_time():
-    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 throws out unrecoverable error on calling get_ext_cal_last_date_and_time()
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 throws out unrecoverable error on calling get_ext_cal_last_date_and_time()
         try:
             session.get_ext_cal_last_date_and_time()
             assert False
@@ -153,7 +153,7 @@ def test_get_ext_cal_recommended_interval(session):
 
 
 def test_get_hardware_state():
-    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
         assert session.get_hardware_state() == nifgen.HardwareState.IDLE
 
 
@@ -218,7 +218,7 @@ def test_create_arb_sequence(session):
 
 
 def test_create_advanced_arb_sequence():
-    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
         seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
         waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
@@ -378,7 +378,7 @@ def test_user_standard_waveform(session):
 # TODO(bhaswath): Doesn't work, issue #596
 '''
 def test_fir_filter_coefficients():
-    with nifgen.Session('', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
         coeff_array = [1, 0, -1]
         session.configure_custom_fir_filter_coefficients(coeff_array)
         session.commit()
@@ -397,4 +397,17 @@ def test_send_software_edge_trigger(session):
     session.create_waveform(waveform_data)
     with session.initiate():
         session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
+
+
+def test_channel_format_types():
+    with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+        assert simulated_session.num_channels == 2
+    with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+        assert simulated_session.num_channels == 2
+    with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+        assert simulated_session.num_channels == 2
+    with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
+        assert simulated_session.num_channels == 2
+    with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
+        assert simulated_session.num_channels == 2
 
