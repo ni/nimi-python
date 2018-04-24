@@ -140,7 +140,7 @@ functions_converters = {
                                                                            'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'InitializeWithChannels':                       { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                            'type_in_documentation': 'dict', }, 
-                                                                      1: { 'name': 'channels',  # need to set the name so it doesn't look like a repeated capability to the codegenerator. Could also use 'is_repeated_capability': False
+                                                                      1: { 'is_repeated_capability': False,
                                                                            'python_api_converter_name': 'convert_repeated_capabilities_from_init', 
                                                                            'type_in_documentation': 'str, list, range, tuple', }, }, },
 }
