@@ -54,6 +54,7 @@ def _add_python_method_name(function, name):
             function['python_name'] = '_' + camelcase_to_snakecase(name)
         else:
             function['python_name'] = camelcase_to_snakecase(name)
+            assert 'public_method_name' not in function, "'public_method_name' not allowed to be set: function['public_method_name'] = '{0}', function['python_name'] = '{1}'".format(function['public_method_name'], function['python_name'])
     return function
 
 
@@ -250,7 +251,7 @@ def _add_has_repeated_capability(f):
     if 'has_repeated_capability' not in f:
         f['has_repeated_capability'] = False
         for p in f['parameters']:
-            f['has_repeated_capability'] = f['has_repeated_capability'] or p['name'] in _repeated_capability_parameter_names
+            f['has_repeated_capability'] = f['has_repeated_capability'] or p['is_repeated_capability']
 
 
 def _add_render_in_session_base(f):
@@ -327,8 +328,6 @@ def add_all_function_metadata(functions, config):
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
-        _add_has_repeated_capability(functions[f])
-        _add_render_in_session_base(functions[f])
         _add_method_templates(functions[f])
         for p in functions[f]['parameters']:
             _add_enum(p)
@@ -345,6 +344,10 @@ def add_all_function_metadata(functions, config):
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
+
+        # We can't do these until the parameters have been processed
+        _add_has_repeated_capability(functions[f])
+        _add_render_in_session_base(functions[f])
 
     _setup_init_function(functions, config)
 

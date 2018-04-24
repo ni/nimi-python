@@ -1236,7 +1236,7 @@ class Session(_SessionBase):
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
-        _init_with_topology creates a new IVI instrument driver session
+        __init__ creates a new IVI instrument driver session
         for the switch specified in the resourceName parameter. The driver uses
         the topology specified in the topology parameter and overrides the
         topology specified in MAX. Note: When initializing an NI SwitchBlock
@@ -1973,7 +1973,7 @@ class Session(_SessionBase):
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
-        _init_with_topology creates a new IVI instrument driver session
+        __init__ creates a new IVI instrument driver session
         for the switch specified in the resourceName parameter. The driver uses
         the topology specified in the topology parameter and overrides the
         topology specified in MAX. Note: When initializing an NI SwitchBlock
@@ -2201,7 +2201,7 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
-                _init_with_topology, InitWithOptions, or init
+                __init__, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
 
                 Note:

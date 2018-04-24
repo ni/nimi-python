@@ -1622,8 +1622,8 @@ niscope.Session methods
 
     Initiates an acquisition, waits for it to complete, and retrieves the
     data. The process is similar to calling :py:meth:`niscope.Session._initiate_acquisition`,
-    :py:meth:`niscope.Session.acquisition_status`, and :py:meth:`niscope.Session._fetch`. The only difference is
-    that with :py:meth:`niscope.Session._read`, you enable all channels specified with
+    :py:meth:`niscope.Session.acquisition_status`, and :py:meth:`niscope.Session.fetch`. The only difference is
+    that with :py:meth:`niscope.Session.read`, you enable all channels specified with
     **channelList** before the acquisition; in the other method, you enable
     the channels with :py:meth:`niscope.Session.configure_vertical`.
 

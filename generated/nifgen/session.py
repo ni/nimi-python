@@ -166,8 +166,8 @@ class _SessionBase(object):
     '''Type: int
 
     Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform methods:
-    _create_waveform_f64
-    _create_waveform_i16
+    create_waveform
+    create_waveform
     create_waveform_from_file_i16
     create_waveform_from_file_f64
     CreateWaveformFromFileHWS
@@ -1452,8 +1452,8 @@ class _SessionBase(object):
                 create an arbitrary waveform using one of the following niFgen Create
                 Waveform methods:
 
-                -  _create_waveform_f64
-                -  _create_waveform_i16
+                -  create_waveform
+                -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
                 -  CreateWaveformFromFileHWS
@@ -2440,147 +2440,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
-    def _initialize_with_channels(self, resource_name, reset_device=False, option_string=""):
-        '''_initialize_with_channels
-
-        Creates and returns a new NI-FGEN session to the specified channel of a
-        waveform generator that is used in all subsequent NI-FGEN method
-        calls.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string="")
-
-        Args:
-            resource_name (str): Caution:
-                Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
-                However, all IVI names, such as logical names, are case-sensitive. If
-                you use logical names, driver session names, or virtual names in your
-                program, you must ensure that the name you use matches the name in the
-                IVI Configuration Store file exactly, without any variations in the case
-                of the characters.
-
-                | Specifies the resource name of the device to initialize.
-
-                For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
-                the device number assigned by MAX, as shown in Example 1.
-
-                For NI-DAQmx devices, the syntax is just the device name specified in
-                MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
-                in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
-                right-clicking on the name in MAX and entering a new name.
-
-                An alternate syntax for NI-DAQmx devices consists of DAQ::\ *NI-DAQmx
-                device name*, as shown in Example 3. This naming convention allows for
-                the use of an NI-DAQmx device in an application that was originally
-                designed for a Traditional NI-DAQ device. For example, if the
-                application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
-                MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
-
-                If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
-                exists with that same name, the NI-DAQmx device is matched first.
-
-                You can also pass in the name of an IVI logical name or an IVI virtual
-                name configured with the IVI Configuration utility, as shown in Example
-                5. A logical name identifies a particular virtual instrument. A virtual
-                name identifies a specific device and specifies the initial settings for
-                the session.
-
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | Example # | Device Type                          | Syntax                 | Variable                        |
-                +===========+======================================+========================+=================================+
-                | 1         | Traditional NI-DAQ device            | DAQ::\ *1*             | (*1* = device number)           |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 2         | NI-DAQmx device                      | *myDAQmxDevice*        | (*myDAQmxDevice* = device name) |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 3         | NI-DAQmx device                      | DAQ::\ *myDAQmxDevice* | (*myDAQmxDevice* = device name) |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 4         | NI-DAQmx device                      | DAQ::\ *2*             | (*2* = device name)             |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-                | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
-                +-----------+--------------------------------------+------------------------+---------------------------------+
-
-            reset_device (bool): Specifies whether you want to reset the device during the initialization
-                procedure. True specifies that the device is reset and performs the
-                same method as the nifgen_Reset method.
-
-                ****Defined Values****
-
-                **Default Value**: False
-
-                +-------+---------------------+
-                | True  | Reset device        |
-                +-------+---------------------+
-                | False | Do not reset device |
-                +-------+---------------------+
-
-            option_string (str): Sets the initial value of certain session properties.
-
-                The syntax for **optionString** is
-
-                <*attributeName*> = <*value*>
-
-                where
-
-                *attributeName* is the name of the property and *value* is the value to
-                which the property is set
-
-                To set multiple properties, separate them with a comma.
-
-                If you pass NULL or an empty string for this parameter, the session uses
-                the default values for these properties. You can override the default
-                values by assigning a value explicitly in a string that you pass for
-                this parameter.
-
-                You do not have to specify all of the properties and may leave any of
-                them out. However, if you do not specify one of the properties, its
-                default value is used.
-
-                If simulation is enabled (Simulate=1), you may specify the device that
-                you want to simulate. To specify a device, enter the following syntax in
-                **optionString**.
-
-                DriverSetup=Model:<*driver model number*>;Channels:<*channel
-                names*>;BoardType:<*module type*>;MemorySize:<*size of onboard memory in
-                bytes*>
-
-                **Syntax Examples**
-
-                **Properties and **Defined Values****
-
-                **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
-
-                +------------------+-------------------------+-------------+
-                | Property Name    | Property                | Values      |
-                +==================+=========================+=============+
-                | RangeCheck       | range_check             | True, False |
-                +------------------+-------------------------+-------------+
-                | QueryInstrStatus | query_instrument_status | True, False |
-                +------------------+-------------------------+-------------+
-                | Cache            | cache                   | True, False |
-                +------------------+-------------------------+-------------+
-                | Simulate         | simulate                | True, False |
-                +------------------+-------------------------+-------------+
-
-
-        Returns:
-            vi (int): Returns a session handle that you can use to identify the device in all
-                subsequent NI-FGEN method calls.
-
-        '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S200
-        error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
-
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -2921,7 +2780,7 @@ class _SessionBase(object):
         handle passed must have been created by a call to the
         nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 method.
 
-        By default, the subsequent call to the _write_binary16_waveform
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
@@ -2978,7 +2837,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_named_waveform_f64
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetNamedWaveformNextWritePosition method. If streaming is
@@ -3026,7 +2885,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_named_waveform_f64
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetNamedWaveformNextWritePosition method. If streaming is
@@ -3072,7 +2931,7 @@ class _SessionBase(object):
 
         Writes binary data to the named waveform in onboard memory.
 
-        By default, the subsequent call to the _write_named_waveform_i16
+        By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
         nifgen_SetNamedWaveformNextWritePosition method. If streaming is
@@ -3155,7 +3014,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_waveform method
+        By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
         nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
@@ -3204,7 +3063,7 @@ class _SessionBase(object):
         -  nifgen_CreateWaveformFromFileF64
         -  nifgen_CreateWaveformFromFileHWS
 
-        By default, the subsequent call to the _write_waveform method
+        By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
         nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
@@ -3321,20 +3180,12 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-FGEN session to a National Instruments Signal Generator.'''
 
-    def __init__(self, resource_name, reset_device=False, options={}):
+    def __init__(self, resource_name, channel_name=None, reset_device=False, options={}):
         '''An NI-FGEN session to a National Instruments Signal Generator.
 
         Creates and returns a new NI-FGEN session to the specified channel of a
         waveform generator that is used in all subsequent NI-FGEN method
         calls.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-            session.channels['0,1']._initialize_with_channels(resource_name, reset_device=False, option_string="")
 
         Args:
             resource_name (str): Caution:
@@ -3385,6 +3236,10 @@ class Session(_SessionBase):
                 | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
                 +-----------+--------------------------------------+------------------------+---------------------------------+
 
+            channel_name (str): Specifies the channel that this VI uses.
+
+                **Default Value**: "0"
+
             reset_device (bool): Specifies whether you want to reset the device during the initialization
                 procedure. True specifies that the device is reset and performs the
                 same method as the nifgen_Reset method.
@@ -3433,13 +3288,14 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        channel_name = _converters.convert_repeated_capabilities_from_init(channel_name, self._encoding)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
         # Call specified init function
         self._vi = 0  # This must be set before calling _initialize_with_channels().
-        self._vi = self._initialize_with_channels(resource_name, reset_device, options)
+        self._vi = self._initialize_with_channels(resource_name, channel_name, reset_device, options)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
@@ -3449,6 +3305,7 @@ class Session(_SessionBase):
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("channel_name=" + pp.pformat(channel_name))
         param_list.append("reset_device=" + pp.pformat(reset_device))
         param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
@@ -3551,8 +3408,8 @@ class Session(_SessionBase):
                 You can create multiple arbitrary waveforms using one of the following
                 niFgen Create Waveform methods:
 
-                -  _create_waveform_f64
-                -  _create_waveform_i16
+                -  create_waveform
+                -  create_waveform
                 -  create_waveform_from_file_i16
                 -  create_waveform_from_file_f64
                 -  CreateWaveformFromFileHWS
@@ -4501,6 +4358,143 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
+    def _initialize_with_channels(self, resource_name, channel_name=None, reset_device=False, option_string=""):
+        '''_initialize_with_channels
+
+        Creates and returns a new NI-FGEN session to the specified channel of a
+        waveform generator that is used in all subsequent NI-FGEN method
+        calls.
+
+        Args:
+            resource_name (str): Caution:
+                Traditional NI-DAQ and NI-DAQmx device names are not case-sensitive.
+                However, all IVI names, such as logical names, are case-sensitive. If
+                you use logical names, driver session names, or virtual names in your
+                program, you must ensure that the name you use matches the name in the
+                IVI Configuration Store file exactly, without any variations in the case
+                of the characters.
+
+                | Specifies the resource name of the device to initialize.
+
+                For Traditional NI-DAQ devices, the syntax is DAQ::\ *n*, where *n* is
+                the device number assigned by MAX, as shown in Example 1.
+
+                For NI-DAQmx devices, the syntax is just the device name specified in
+                MAX, as shown in Example 2. Typical default names for NI-DAQmx devices
+                in MAX are Dev1 or PXI1Slot1. You can rename an NI-DAQmx device by
+                right-clicking on the name in MAX and entering a new name.
+
+                An alternate syntax for NI-DAQmx devices consists of DAQ::\ *NI-DAQmx
+                device name*, as shown in Example 3. This naming convention allows for
+                the use of an NI-DAQmx device in an application that was originally
+                designed for a Traditional NI-DAQ device. For example, if the
+                application expects DAQ::1, you can rename the NI-DAQmx device to 1 in
+                MAX and pass in DAQ::1 for the resource name, as shown in Example 4.
+
+                If you use the DAQ::\ *n* syntax and an NI-DAQmx device name already
+                exists with that same name, the NI-DAQmx device is matched first.
+
+                You can also pass in the name of an IVI logical name or an IVI virtual
+                name configured with the IVI Configuration utility, as shown in Example
+                5. A logical name identifies a particular virtual instrument. A virtual
+                name identifies a specific device and specifies the initial settings for
+                the session.
+
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | Example # | Device Type                          | Syntax                 | Variable                        |
+                +===========+======================================+========================+=================================+
+                | 1         | Traditional NI-DAQ device            | DAQ::\ *1*             | (*1* = device number)           |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 2         | NI-DAQmx device                      | *myDAQmxDevice*        | (*myDAQmxDevice* = device name) |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 3         | NI-DAQmx device                      | DAQ::\ *myDAQmxDevice* | (*myDAQmxDevice* = device name) |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 4         | NI-DAQmx device                      | DAQ::\ *2*             | (*2* = device name)             |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+                | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
+                +-----------+--------------------------------------+------------------------+---------------------------------+
+
+            channel_name (str): Specifies the channel that this VI uses.
+
+                **Default Value**: "0"
+
+            reset_device (bool): Specifies whether you want to reset the device during the initialization
+                procedure. True specifies that the device is reset and performs the
+                same method as the nifgen_Reset method.
+
+                ****Defined Values****
+
+                **Default Value**: False
+
+                +-------+---------------------+
+                | True  | Reset device        |
+                +-------+---------------------+
+                | False | Do not reset device |
+                +-------+---------------------+
+
+            option_string (str): Sets the initial value of certain session properties.
+
+                The syntax for **optionString** is
+
+                <*attributeName*> = <*value*>
+
+                where
+
+                *attributeName* is the name of the property and *value* is the value to
+                which the property is set
+
+                To set multiple properties, separate them with a comma.
+
+                If you pass NULL or an empty string for this parameter, the session uses
+                the default values for these properties. You can override the default
+                values by assigning a value explicitly in a string that you pass for
+                this parameter.
+
+                You do not have to specify all of the properties and may leave any of
+                them out. However, if you do not specify one of the properties, its
+                default value is used.
+
+                If simulation is enabled (Simulate=1), you may specify the device that
+                you want to simulate. To specify a device, enter the following syntax in
+                **optionString**.
+
+                DriverSetup=Model:<*driver model number*>;Channels:<*channel
+                names*>;BoardType:<*module type*>;MemorySize:<*size of onboard memory in
+                bytes*>
+
+                **Syntax Examples**
+
+                **Properties and **Defined Values****
+
+                **Default Values**: "Simulate=0,RangeCheck=1,QueryInstrStatus=1,Cache=1"
+
+                +------------------+-------------------------+-------------+
+                | Property Name    | Property                | Values      |
+                +==================+=========================+=============+
+                | RangeCheck       | range_check             | True, False |
+                +------------------+-------------------------+-------------+
+                | QueryInstrStatus | query_instrument_status | True, False |
+                +------------------+-------------------------+-------------+
+                | Cache            | cache                   | True, False |
+                +------------------+-------------------------+-------------+
+                | Simulate         | simulate                | True, False |
+                +------------------+-------------------------+-------------+
+
+
+        Returns:
+            vi (int): Returns a session handle that you can use to identify the device in all
+                subsequent NI-FGEN method calls.
+
+        '''
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C020
+        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        vi_ctype = _visatype.ViSession()  # case S200
+        error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(vi_ctype.value)
+
     def _initiate_generation(self):
         '''_initiate_generation
 
@@ -4828,7 +4822,7 @@ class Session(_SessionBase):
 
         Note:
         When used on some signal generators, the device is reset after the
-        _self_test method runs. If you use the _self_test
+        self_test method runs. If you use the self_test
         method, your device may not be in its previously configured state
         after the method runs.
         '''
@@ -4861,7 +4855,7 @@ class Session(_SessionBase):
 
         Note:
         When used on some signal generators, the device is reset after the
-        _self_test method runs. If you use the _self_test
+        self_test method runs. If you use the self_test
         method, your device may not be in its previously configured state
         after the method runs.
 
