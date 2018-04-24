@@ -39,11 +39,11 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'public_method_name': 'get_ext_cal_last_date_and_time', },  # Public wrapper to allow datetime
-    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'public_method_name': 'get_self_cal_last_date_and_time', },  # Public wrapper to allow datetime
-    'FetchMultiple':                   { 'codegen_method': 'private', 'public_method_name': 'fetch_multiple', },  # Fancy Fetch Public wrapper
-    'MeasureMultiple':                 { 'codegen_method': 'private', 'public_method_name': 'measure_multiple', },  # Fancy Measure Public wrapper
-    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # Public wrapper that raises
+    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'public_method_name': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'public_method_name': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
+    'FetchMultiple':                   { 'codegen_method': 'private', 'public_method_name': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
+    'MeasureMultiple':                 { 'codegen_method': 'private', 'public_method_name': 'measure_multiple',                },  # 'FancyMeasureMultiple' Public wrapper
+    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
     'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix

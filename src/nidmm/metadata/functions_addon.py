@@ -49,8 +49,8 @@ functions_codegen_method = {
     'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },
     'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetCalDateAndTime':               { 'codegen_method': 'private', 'public_method_name': 'get_cal_date_and_time', },  # Public wrapper to allow datetime
-    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # Public wrapper that raises
+    'GetCalDateAndTime':               { 'codegen_method': 'private', 'public_method_name': 'get_cal_date_and_time', },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
+    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test',             },  # 'fancy_self_test' Public wrapper that raises
 }
 
 # Attach the given parameter to the given enum from enums.py
