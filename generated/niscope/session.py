@@ -933,7 +933,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_transient_waveform_percent = var
         var = session.channels['0,1'].meas_filter_transient_waveform_percent
     '''
-    _meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150035)
+    _meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._FilterType, 1150035)
     '''Type: enums.FilterType
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
@@ -952,7 +952,7 @@ class _SessionBase(object):
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
     '''
-    _meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
+    _meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._FIRFilterWindow, 1150042)
     '''Type: enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
@@ -1040,7 +1040,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_other_channel = var
         var = session.channels['0,1'].meas_other_channel
     '''
-    _meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
+    _meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._PercentageMethod, 1150045)
     '''Type: enums.PercentageMethod
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
@@ -1067,7 +1067,7 @@ class _SessionBase(object):
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
     '''
-    _meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
+    _meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._RefLevelUnits, 1150016)
     '''Type: enums.RefLevelUnits
 
     Specifies the units of the reference levels.
