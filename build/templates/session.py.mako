@@ -9,6 +9,7 @@ ${encoding_tag}
 
     config = template_parameters['metadata'].config
     attributes = config['attributes']
+    enums = config['enums']
     functions = helper.filter_codegen_functions(config['functions'])
 
     module_name = config['module_name']
@@ -125,7 +126,7 @@ if attributes[attribute]['channel_based'] == 'True':
     attributes[attribute]['documentation']['tip'] = helper.rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
 %>\
     %if attributes[attribute]['enum']:
-    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${attributes[attribute]['enum']}, ${attribute})
+    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
     %else:
     ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
