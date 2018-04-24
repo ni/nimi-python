@@ -97,7 +97,7 @@ functions_remove_from_python_api = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '""', },
+    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': None, },
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '""', }, }, },
     'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
