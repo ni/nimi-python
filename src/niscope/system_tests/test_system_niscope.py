@@ -212,23 +212,23 @@ def test_reset(session):
 
 
 def test_reset_device(session):
-    deault_meas_percentage_method = session.meas_percentage_method
-    assert deault_meas_percentage_method == niscope.PercentageMethod.BASETOP
-    session.meas_percentage_method = niscope.PercentageMethod.MINMAX
-    non_default_meas_percentage_method = session.meas_percentage_method
-    assert non_default_meas_percentage_method == niscope.PercentageMethod.MINMAX
+    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    assert deault_meas_time_histogram_high_time == 0.0005
+    session._meas_time_histogram_high_time = 0.0010
+    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_device()
-    assert session.meas_percentage_method == niscope.PercentageMethod.BASETOP
+    assert session._meas_time_histogram_high_time == 0.0005
 
 
 def test_reset_with_defaults(session):
-    deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
     assert deault_meas_time_histogram_high_time == 0.0005
-    session.meas_time_histogram_high_time = 0.0010
-    non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    session._meas_time_histogram_high_time = 0.0010
+    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
     assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_with_defaults()
-    assert session.meas_time_histogram_high_time == 0.0005
+    assert session._meas_time_histogram_high_time == 0.0005
 
 
 def test_get_error(session):
@@ -309,7 +309,7 @@ def test_disable(session):
 
 def test_configure_ref_levels(session):
     session.configure_ref_levels()
-    assert 90.0 == session.meas_chan_high_ref_level
+    assert 90.0 == session._meas_chan_high_ref_level
 
 
 def test_configure_trigger_digital(session):
