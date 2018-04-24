@@ -1487,7 +1487,7 @@ nidcpower.Session properties
     Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower methods. True specifies that interchangeability checking is enabled.
     Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` method to retrieve  interchange warnings.
     Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` method to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when an property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
+    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when a property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
     Default Value: False
 
 
@@ -1876,7 +1876,7 @@ nidcpower.Session properties
 
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  :py:data:`~nidcpower.MeasureWhen.ON_MEASURE_TRIGGER`, the :py:data:`nidcpower.Session.measure_trigger_type` property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
-    Default Value: If the :py:data:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SINGLE_POINT`, the default value is  :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. This value supports only the :py:meth:`nidcpower.Session.measure` method and :py:meth:`nidcpower.Session.measure_multiple`  method. If the :py:data:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SEQUENCE`, the default value is  :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE`. This value supports only the :py:meth:`nidcpower.Session._fetch_multiple` method.
+    Default Value: If the :py:data:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SINGLE_POINT`, the default value is  :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. This value supports only the :py:meth:`nidcpower.Session.measure` method and :py:meth:`nidcpower.Session._measure_multiple`  method. If the :py:data:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SEQUENCE`, the default value is  :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE`. This value supports only the :py:meth:`nidcpower.Session._fetch_multiple` method.
 
     The following table lists the characteristics of this property.
 
@@ -3757,7 +3757,7 @@ nidcpower.Session properties
 
     Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or  returns a measurement that has already begun or completed(False).
     for information about supported devices.
-    When you set the :py:data:`nidcpower.Session.samples_to_average` property in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the :py:meth:`nidcpower.Session.measure_multiple` method. To  force a synchronization in the running state, set this property to True, and then run the :py:meth:`nidcpower.Session.measure_multiple`  method, specifying all channels in the channel name parameter. You can set the  :py:data:`nidcpower.Session.reset_average_before_measurement` property to False after the :py:meth:`nidcpower.Session.measure_multiple` method  completes.
+    When you set the :py:data:`nidcpower.Session.samples_to_average` property in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the :py:meth:`nidcpower.Session._measure_multiple` method. To  force a synchronization in the running state, set this property to True, and then run the :py:meth:`nidcpower.Session._measure_multiple`  method, specifying all channels in the channel name parameter. You can set the  :py:data:`nidcpower.Session.reset_average_before_measurement` property to False after the :py:meth:`nidcpower.Session._measure_multiple` method  completes.
     Default Value: True
 
 

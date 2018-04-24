@@ -42,6 +42,7 @@ functions_codegen_method = {
     'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
     'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
+    'MeasureMultiple':                 { 'codegen_method': 'private',  },  # Fancy Measure Public wrapper
     'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
     'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
@@ -119,6 +120,8 @@ functions_default_value = {
 functions_array = {
     'FetchMultiple':                        { 'parameters': { 4: { 'use_array': True, }, 
                                                               5: { 'use_array': True, }, }, },
+    'MeasureMultiple':                      { 'parameters': { 2: { 'use_array': True, }, 
+                                                              3: { 'use_array': True, }, }, },
 }
 
 # We want to use a common name for self_cal across all drivers
@@ -266,7 +269,7 @@ List of named tuples with fields:
         ],
         'documentation': {
             'description': '''
-Returns an list of named tuples (Measurement) that were
+Returns a list of named tuples (Measurement) that were
 previously taken and are stored in the NI-DCPower buffer. This function
 should not be used when the NIDCPOWER_ATTR_MEASURE_WHEN attribute is
 set to NIDCPOWER_VAL_ON_DEMAND. You must first call
@@ -277,6 +280,73 @@ Fields in Measurement:
 - **voltage** (float)
 - **current** (float)
 - **in_compliance** (bool)
+
+''',
+            'note': 'This function is not supported on all devices. Refer to `Supported Functions by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.',
+        },
+    },
+    'FancyMeasureMultiple': {
+        'returns': 'ViStatus',
+        'codegen_method': 'python-only',
+        'python_name': 'measure_multiple',
+        'method_templates': [
+            { 'session_filename': 'fancy_fetch', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower_InitializeWithChannels function.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': '''
+Specifies the output channel(s) to which this configuration value
+applies. Specify multiple channels by using a channel list or a channel
+range. A channel list is a comma (,) separated sequence of channel names
+(for example, 0,2 specifies channels 0 and 2). A channel range is a
+lower bound channel followed by a hyphen (-) or colon (:) followed by an
+upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).
+In the Running state, multiple output channel configurations are
+performed sequentially based on the order specified in this parameter.
+''',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'measurements',
+                'type': 'ViReal64[]',
+                'python_type': 'Measurement',
+                'documentation': {
+                    'description': '''
+List of named tuples with fields:
+
+- **voltage** (float)
+- **current** (float)
+- **in_compliance** (bool) - Always None
+''',
+                },
+            },
+        ],
+        'documentation': {
+            'description': '''
+Returns a list of named tuples (Measurement) containing the measured voltage
+and current values on the specified output channel(s). Each call to this function
+blocks other function calls until the measurements are returned from the device.
+The order of the measurements returned in the array corresponds to the order
+on the specified output channel(s).
+
+Fields in Measurement:
+
+- **voltage** (float)
+- **current** (float)
+- **in_compliance** (bool) - Always None
 
 ''',
             'note': 'This function is not supported on all devices. Refer to `Supported Functions by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.',
@@ -360,6 +430,8 @@ functions_converters = {
                                                           1: { 'is_repeated_capability': False,
                                                                'python_api_converter_name': 'convert_repeated_capabilities_from_init', 
                                                                'type_in_documentation': 'str, list, range, tuple', }, }, },
+    'GetExtCalRecommendedInterval':     { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
+                                                               'type_in_documentation': 'datetime.timedelta', }, }, },
 }
 
 

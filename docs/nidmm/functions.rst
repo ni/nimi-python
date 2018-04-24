@@ -1069,7 +1069,7 @@ nidmm.Session methods
 
 
 
-    :rtype: int
+    :rtype: datetime.timedelta
     :return:
 
 

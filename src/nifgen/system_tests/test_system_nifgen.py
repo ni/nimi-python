@@ -148,8 +148,8 @@ def test_get_ext_cal_last_temp(session):
 
 
 def test_get_ext_cal_recommended_interval(session):
-    recommended_interval = session.get_ext_cal_recommended_interval()
-    assert recommended_interval == 24  # recommended external cal interval is 24 months
+    interval = session.get_ext_cal_recommended_interval()
+    assert interval.days == 730  # recommended external cal interval is 24 months
 
 
 def test_get_hardware_state():

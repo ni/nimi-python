@@ -143,6 +143,8 @@ functions_converters = {
                                                                       1: { 'is_repeated_capability': False,
                                                                            'python_api_converter_name': 'convert_repeated_capabilities_from_init', 
                                                                            'type_in_documentation': 'str, list, range, tuple', }, }, },
+    'GetExtCalRecommendedInterval':                 { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
+                                                                           'type_in_documentation': 'datetime.timedelta', }, }, },
 }
 
 # Functions not in original metadata.

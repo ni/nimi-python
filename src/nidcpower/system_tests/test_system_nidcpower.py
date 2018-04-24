@@ -164,11 +164,17 @@ def test_fetch_multiple(single_channel_session):
 def test_measure_multiple(session):
     with session.initiate():
         # session is open to all 12 channels on the device
-        voltage_measurements, current_measurements = session.measure_multiple()
-        assert len(voltage_measurements) == len(current_measurements) == 12
+        measurements = session.measure_multiple()
+        assert len(measurements) == 12
+        assert measurements[1].in_compliance is None
+        assert measurements[1].voltage == 0.0
+        assert measurements[1].current == 0.00001
         # now a subset of the channels
-        voltage_measurements, current_measurements = session.channels[range(4)].measure_multiple()
-        assert len(voltage_measurements) == len(current_measurements) == 4
+        measurements = session.channels[range(4)].measure_multiple()
+        assert len(measurements) == 4
+        assert measurements[1].in_compliance is None
+        assert measurements[1].voltage == 0.0
+        assert measurements[1].current == 0.00001
 
 
 def test_query_max_current_limit(single_channel_session):
@@ -316,8 +322,8 @@ def test_get_ext_cal_last_temp(session):
 
 
 def test_get_ext_cal_recommended_interval(session):
-    months = session.get_ext_cal_recommended_interval()
-    assert months == 12
+    interval = session.get_ext_cal_recommended_interval()
+    assert interval.days == 365
 
 
 def test_set_get_vi_int_64_attribute(session):

@@ -593,7 +593,7 @@ class _SessionBase(object):
 
     Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  _initiate_generation.
     Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call GetNextInterchangeWarning to extract interchange warnings.   Call ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group. Interchangeability warnings can  occur when an property affects the behavior of the device and you  have not set that property, or the property has been invalidated since you set it.
+    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group. Interchangeability warnings can  occur when a property affects the behavior of the device and you  have not set that property, or the property has been invalidated since you set it.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -2199,7 +2199,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
 
         Returns:
@@ -2236,7 +2236,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
 
         Returns:
@@ -2275,7 +2275,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
 
         Returns:
@@ -2332,7 +2332,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2477,7 +2477,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
             attribute_value (bool): Specifies the value to which you want to set the property. **Default
                 Value**: None
@@ -2532,7 +2532,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
             attribute_value (int): Specifies the value to which you want to set the property. **Default
                 Value**: None
@@ -2587,7 +2587,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
             attribute_value (float): Specifies the value to which you want to set the property. **Default
                 Value**: None
@@ -2642,7 +2642,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property.
+            attribute_id (int): Specifies the ID of a property.
 
             attribute_value (str): Specifies the value to which you want to set the property. **Default
                 Value**: None
@@ -3261,7 +3261,7 @@ class Session(_SessionBase):
                 { 'simulate': False }
 
                 You do not have to specify a value for all the properties. If you do not
-                specify a value for an property, the default value is used.
+                specify a value for a property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
@@ -4215,7 +4215,7 @@ class Session(_SessionBase):
         months.
 
         Returns:
-            months (int): Specifies the recommended interval between external calibrations in
+            months (datetime.timedelta): Specifies the recommended interval between external calibrations in
                 months.
 
         '''
@@ -4223,7 +4223,7 @@ class Session(_SessionBase):
         months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niFgen_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(months_ctype.value)
+        return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     def get_hardware_state(self):
         '''get_hardware_state

@@ -683,7 +683,7 @@ class _SessionBase(object):
     Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower methods. True specifies that interchangeability checking is enabled.
     Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the GetNextInterchangeWarning method to retrieve  interchange warnings.
     Call the GetNextInterchangeWarning method to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when an property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
+    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when a property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
     Default Value: False
 
     Note:
@@ -806,7 +806,7 @@ class _SessionBase(object):
 
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
-    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the _fetch_multiple method.
+    Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and _measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the _fetch_multiple method.
     '''
     output_capacitance = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
     '''Type: enums.OutputCapacitance
@@ -1714,7 +1714,7 @@ class _SessionBase(object):
 
     Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or  returns a measurement that has already begun or completed(False).
     for information about supported devices.
-    When you set the samples_to_average property in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the measure_multiple method. To  force a synchronization in the running state, set this property to True, and then run the measure_multiple  method, specifying all channels in the channel name parameter. You can set the  reset_average_before_measurement property to False after the measure_multiple method  completes.
+    When you set the samples_to_average property in the Running state, the output channel measurements might  move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a  session, you can force a synchronization in the running state before you run the _measure_multiple method. To  force a synchronization in the running state, set this property to True, and then run the _measure_multiple  method, specifying all channels in the channel name parameter. You can set the  reset_average_before_measurement property to False after the _measure_multiple method  completes.
     Default Value: True
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
@@ -2413,7 +2413,7 @@ class _SessionBase(object):
     def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
-        Returns an list of named tuples (Measurement) that were
+        Returns a list of named tuples (Measurement) that were
         previously taken and are stored in the NI-DCPower buffer. This method
         should not be used when the measure_when property is
         set to MeasureWhen.ON_DEMAND. You must first call
@@ -2456,11 +2456,47 @@ class _SessionBase(object):
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
 
-        measurements = []
-        for i in range(count):
-            measurements.append(Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]))
+        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
-        return measurements
+    def measure_multiple(self):
+        '''measure_multiple
+
+        Returns a list of named tuples (Measurement) containing the measured voltage
+        and current values on the specified output channel(s). Each call to this method
+        blocks other method calls until the measurements are returned from the device.
+        The order of the measurements returned in the array corresponds to the order
+        on the specified output channel(s).
+
+        Fields in Measurement:
+
+        - **voltage** (float)
+        - **current** (float)
+        - **in_compliance** (bool) - Always None
+
+        Note: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].measure_multiple()
+
+        Returns:
+            measurements (list of Measurement): List of named tuples with fields:
+
+                - **voltage** (float)
+                - **current** (float)
+                - **in_compliance** (bool) - Always None
+
+        '''
+        import collections
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+
+        voltage_measurements, current_measurements = self._measure_multiple()
+
+        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
     def _fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''_fetch_multiple
@@ -2553,19 +2589,19 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Help text is shown for each property.
-                   Select an property by double-clicking on it or by selecting it and
+                   Select a property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
                    properties or only the properties of type ViBoolean. If you choose to
                    see all IVI properties, the data types appear to the right of the
                    property names in the list box. Properties with data types other
-                   than ViBoolean are dim. If you select an property data type that is
+                   than ViBoolean are dim. If you select a property data type that is
                    dim, LabWindows/CVI transfers you to the method panel for the
                    corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -2607,19 +2643,19 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int32(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Help text is shown for each property.
-                   Select an property by double-clicking on it or by selecting it and
+                   Select a property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
                    properties or only the properties of type ViInt32. If you choose to
                    see all IVI properties, the data types appear to the right of the
                    property names in the list box. Properties with data types other
-                   than ViInt32 are dim. If you select an property data type that is
+                   than ViInt32 are dim. If you select a property data type that is
                    dim, LabWindows/CVI transfers you to the method panel for the
                    corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -2661,19 +2697,19 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Help text is shown for each property.
-                   Select an property by double-clicking on it or by selecting it and
+                   Select a property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
                    properties or only the properties of type ViReal64. If you choose to
                    see all IVI properties, the data types appear to the right of the
                    property names in the list box. Properties with data types other
-                   than ViReal64 are dim. If you select an property data type that is
+                   than ViReal64 are dim. If you select a property data type that is
                    dim, LabWindows/CVI transfers you to the method panel for the
                    corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -2715,19 +2751,19 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_real64(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Help text is shown for each property.
-                   Select an property by double-clicking on it or by selecting it and
+                   Select a property by double-clicking on it or by selecting it and
                    then pressing **Enter**.
                 -  A ring control at the top of the dialog box allows you to see all IVI
                    properties or only the properties of type ViReal64. If you choose to
                    see all IVI properties, the data types appear to the right of the
                    property names in the list box. Properties with data types other
-                   than ViReal64 are dim. If you select an property data type that is
+                   than ViReal64 are dim. If you select a property data type that is
                    dim, LabWindows/CVI transfers you to the method panel for the
                    corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -2769,19 +2805,19 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_string(attribute_id)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press or the
                    spacebar to display a dialog box containing hierarchical list of the
                    available properties. Help text is shown for each property. Select
-                   an property by double-clicking on it or by selecting it and then
+                   a property by double-clicking on it or by selecting it and then
                    pressing .
                 -  A ring control at the top of the dialog box allows you to see all IVI
                    properties or only the properties of type ViString. If you choose to
                    see all IVI properties, the data types appear to the right of the
                    property names in the list box. Properties with data types other
-                   than ViString are dimmed. If you select an property data type that
+                   than ViString are dimmed. If you select a property data type that
                    is dimmed, LabWindows/CVI transfers you to the method panel for the
                    corresponding method that is consistent with the data type.
                 -  If you want to enter a variable name, press to change this ring
@@ -2878,7 +2914,7 @@ class _SessionBase(object):
         Returns the measured value of either the voltage or current on the
         specified output channel. Each call to this method blocks other
         method calls until the hardware returns the **measurement**. To
-        measure multiple output channels, use the measure_multiple
+        measure multiple output channels, use the _measure_multiple
         method.
 
         Tip:
@@ -2915,8 +2951,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
-    def measure_multiple(self):
-        '''measure_multiple
+    def _measure_multiple(self):
+        '''_measure_multiple
 
         Returns arrays of the measured voltage and current values on the
         specified output channel(s). Each call to this method blocks other
@@ -2930,15 +2966,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].measure_multiple()
+            session.channels['0,1']._measure_multiple()
 
         Returns:
-            voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
+            voltage_measurements (array.array("d")): Returns an array of voltage measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
 
-            current_measurements (list of float): Returns an array of current measurements. The measurements in the array
+            current_measurements (array.array("d")): Returns an array of current measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
@@ -2947,12 +2983,14 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         voltage_measurements_size = self._parse_channel_count()  # case B560
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=voltage_measurements_size)  # case B560
+        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
+        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
         current_measurements_size = self._parse_channel_count()  # case B560
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=current_measurements_size)  # case B560
+        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
+        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(voltage_measurements_ctype[i]) for i in range(self._parse_channel_count())], [float(current_measurements_ctype[i]) for i in range(self._parse_channel_count())]
+        return voltage_measurements_array, current_measurements_array
 
     def _parse_channel_count(self):
         '''_parse_channel_count
@@ -3180,13 +3218,13 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Properties whose value cannot be set are
-                   dim. Help text is shown for each property. Select an property by
+                   dim. Help text is shown for each property. Select a property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
                 -  Read-only properties appear dim in the list box. If you select a
                    read-only property, an error message appears. A ring control at the
@@ -3194,7 +3232,7 @@ class _SessionBase(object):
                    the properties of type ViBoolean. If you choose to see all IVI
                    properties, the data types appear to the right of the property names
                    in the list box. Properties with data types other than ViBoolean are
-                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   dim. If you select a property data type that is dim, LabWindows/CVI
                    transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -3237,13 +3275,13 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Properties whose value cannot be set are
-                   dim. Help text is shown for each property. Select an property by
+                   dim. Help text is shown for each property. Select a property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
                 -  Read-only properties appear dim in the list box. If you select a
                    read-only property, an error message appears. A ring control at the
@@ -3251,7 +3289,7 @@ class _SessionBase(object):
                    the properties of type ViInt32. If you choose to see all IVI
                    properties, the data types appear to the right of the property names
                    in the list box. Properties with data types other than ViInt32 are
-                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   dim. If you select a property data type that is dim, LabWindows/CVI
                    transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -3294,13 +3332,13 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Properties whose value cannot be set are
-                   dim. Help text is shown for each property. Select an property by
+                   dim. Help text is shown for each property. Select a property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
                 -  Read-only properties appear dim in the list box. If you select a
                    read-only property, an error message appears. A ring control at the
@@ -3308,7 +3346,7 @@ class _SessionBase(object):
                    the properties of type ViReal64. If you choose to see all IVI
                    properties, the data types appear to the right of the property names
                    in the list box. Properties with data types other than ViReal64 are
-                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   dim. If you select a property data type that is dim, LabWindows/CVI
                    transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -3351,13 +3389,13 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Properties whose value cannot be set are
-                   dim. Help text is shown for each property. Select an property by
+                   dim. Help text is shown for each property. Select a property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
                 -  Read-only properties appear dim in the list box. If you select a
                    read-only property, an error message appears. A ring control at the
@@ -3365,7 +3403,7 @@ class _SessionBase(object):
                    the properties of type ViReal64. If you choose to see all IVI
                    properties, the data types appear to the right of the property names
                    in the list box. Properties with data types other than ViReal64 are
-                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   dim. If you select a property data type that is dim, LabWindows/CVI
                    transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -3408,13 +3446,13 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
-            attribute_id (int): Specifies the ID of an property. From the method panel window, you
+            attribute_id (int): Specifies the ID of a property. From the method panel window, you
                 can use this control as follows.
 
                 -  In the method panel window, click on the control or press **Enter**
                    or the spacebar to display a dialog box containing hierarchical list
                    of the available properties. Properties whose value cannot be set are
-                   dim. Help text is shown for each property. Select an property by
+                   dim. Help text is shown for each property. Select a property by
                    double-clicking on it or by selecting it and then pressing **Enter**.
                 -  Read-only properties appear dim in the list box. If you select a
                    read-only property, an error message appears. A ring control at the
@@ -3422,7 +3460,7 @@ class _SessionBase(object):
                    the properties of type ViString. If you choose to see all IVI
                    properties, the data types appear to the right of the property names
                    in the list box. Properties with data types other than ViString are
-                   dim. If you select an property data type that is dim, LabWindows/CVI
+                   dim. If you select a property data type that is dim, LabWindows/CVI
                    transfers you to the method panel for the corresponding method
                    that is consistent with the data type.
                 -  If you want to enter a variable name, press **Ctrl**\ +\ **T** to
@@ -3592,7 +3630,7 @@ class Session(_SessionBase):
                 { 'simulate': False }
 
                 You do not have to specify a value for all the properties. If you do not
-                specify a value for an property, the default value is used.
+                specify a value for a property, the default value is used.
 
                 Advanced Example:
                 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
@@ -4319,7 +4357,7 @@ class Session(_SessionBase):
         external calibrations.
 
         Returns:
-            months (int): Specifies the recommended maximum interval, in **months**, between
+            months (datetime.timedelta): Specifies the recommended maximum interval, in **months**, between
                 external calibrations.
 
         '''
@@ -4327,7 +4365,7 @@ class Session(_SessionBase):
         months_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(months_ctype.value)
+        return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
@@ -4485,7 +4523,7 @@ class Session(_SessionBase):
                 "Simulate=0"
 
                 You do not have to specify a value for all the properties. If you do not
-                specify a value for an property, the default value is used.
+                specify a value for a property, the default value is used.
 
                 For more information about simulating a device, refer to `Simulating a
                 Power Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.

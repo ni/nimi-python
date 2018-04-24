@@ -167,6 +167,10 @@ def convert_timedelta_to_microseconds(value, library_type):
     return _convert_timedelta(value, library_type, 1000000)
 
 
+def convert_month_to_timedelta(months):
+    return datetime.timedelta(days=(30.4167 * months))
+
+
 # This converter is not called from the normal codegen path for function. Instead it is
 # call from init and is a special case. Also, it just returns a string rather than a ctype object
 def convert_init_with_options_dictionary(values, encoding):
