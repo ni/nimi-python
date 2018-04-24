@@ -406,4 +406,8 @@ def test_channel_format_types():
         assert simulated_session.num_channels == 2
     with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
         assert simulated_session.num_channels == 2
+    with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
+        assert simulated_session.num_channels == 2
+    with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
+        assert simulated_session.num_channels == 2
 
