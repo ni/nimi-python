@@ -125,7 +125,7 @@ class MeasureWhen(Enum):
     '''
     ON_DEMAND = 1026
     '''
-    Acquires a measurement when the measure method or _measure_multiple method is called.
+    Acquires a measurement when the measure method or measure_multiple method is called.
     '''
     ON_MEASURE_TRIGGER = 1027
     '''

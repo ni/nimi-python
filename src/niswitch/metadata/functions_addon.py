@@ -4,7 +4,7 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitWithTopology':                { 'codegen_method': 'private',       },
+    'InitWithTopology':                { 'codegen_method': 'private', 'public_method_name': '__init__', },
     'InitWithOptions':                 { 'codegen_method': 'no',       },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
@@ -27,7 +27,7 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
-    'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # Public wrapper that raises
 }
 
 # Override the 'python' name for some functions.
