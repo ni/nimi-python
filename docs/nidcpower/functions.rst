@@ -470,7 +470,7 @@ nidcpower.Session methods
 
 .. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
-    Returns an list of named tuples (Measurement) that were
+    Returns a list of named tuples (Measurement) that were
     previously taken and are stored in the NI-DCPower buffer. This method
     should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
@@ -721,13 +721,21 @@ nidcpower.Session methods
 
 .. py:method:: measure_multiple()
 
-    Returns arrays of the measured voltage and current values on the
-    specified output channel(s). Each call to this method blocks other
-    method calls until the measurements are returned from the device. The
-    order of the measurements returned in the array corresponds to the order
+    Returns a list of named tuples (Measurement) containing the measured voltage
+    and current values on the specified output channel(s). Each call to this method
+    blocks other method calls until the measurements are returned from the device.
+    The order of the measurements returned in the array corresponds to the order
     on the specified output channel(s).
 
+    Fields in Measurement:
+
+    - **voltage** (float)
+    - **current** (float)
+    - **in_compliance** (bool) - Always None
+
     
+
+    .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
 
     .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
@@ -740,28 +748,15 @@ nidcpower.Session methods
             session.channels['0,1'].measure_multiple()
 
 
-    :rtype: tuple (voltage_measurements, current_measurements)
-
-        WHERE
-
-        voltage_measurements (list of float): 
+    :rtype: list of Measurement
+    :return:
 
 
-            Returns an array of voltage measurements. The measurements in the array
-            are returned in the same order as the channels specified in
-            **channelName**. Ensure that sufficient space has been allocated for the
-            returned array.
+            List of named tuples with fields:
 
-            
-
-
-        current_measurements (list of float): 
-
-
-            Returns an array of current measurements. The measurements in the array
-            are returned in the same order as the channels specified in
-            **channelName**. Ensure that sufficient space has been allocated for the
-            returned array.
+            - **voltage** (float)
+            - **current** (float)
+            - **in_compliance** (bool) - Always None
 
             
 

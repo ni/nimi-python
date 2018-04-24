@@ -2413,7 +2413,7 @@ class _SessionBase(object):
     def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
-        Returns an list of named tuples (Measurement) that were
+        Returns a list of named tuples (Measurement) that were
         previously taken and are stored in the NI-DCPower buffer. This method
         should not be used when the measure_when property is
         set to MeasureWhen.ON_DEMAND. You must first call
@@ -2456,11 +2456,47 @@ class _SessionBase(object):
 
         voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
 
-        measurements = []
-        for i in range(count):
-            measurements.append(Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]))
+        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
-        return measurements
+    def measure_multiple(self):
+        '''measure_multiple
+
+        Returns a list of named tuples (Measurement) containing the measured voltage
+        and current values on the specified output channel(s). Each call to this method
+        blocks other method calls until the measurements are returned from the device.
+        The order of the measurements returned in the array corresponds to the order
+        on the specified output channel(s).
+
+        Fields in Measurement:
+
+        - **voltage** (float)
+        - **current** (float)
+        - **in_compliance** (bool) - Always None
+
+        Note: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].measure_multiple()
+
+        Returns:
+            measurements (list of Measurement): List of named tuples with fields:
+
+                - **voltage** (float)
+                - **current** (float)
+                - **in_compliance** (bool) - Always None
+
+        '''
+        import collections
+        Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
+
+        voltage_measurements, current_measurements = self._measure_multiple()
+
+        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
     def _fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''_fetch_multiple
@@ -2915,8 +2951,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
-    def measure_multiple(self):
-        '''measure_multiple
+    def _measure_multiple(self):
+        '''_measure_multiple
 
         Returns arrays of the measured voltage and current values on the
         specified output channel(s). Each call to this method blocks other
@@ -2930,15 +2966,15 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].measure_multiple()
+            session.channels['0,1']._measure_multiple()
 
         Returns:
-            voltage_measurements (list of float): Returns an array of voltage measurements. The measurements in the array
+            voltage_measurements (array.array("d")): Returns an array of voltage measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
 
-            current_measurements (list of float): Returns an array of current measurements. The measurements in the array
+            current_measurements (array.array("d")): Returns an array of current measurements. The measurements in the array
                 are returned in the same order as the channels specified in
                 **channelName**. Ensure that sufficient space has been allocated for the
                 returned array.
@@ -2947,12 +2983,14 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         voltage_measurements_size = self._parse_channel_count()  # case B560
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=voltage_measurements_size)  # case B560
+        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
+        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
         current_measurements_size = self._parse_channel_count()  # case B560
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=current_measurements_size)  # case B560
+        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
+        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(voltage_measurements_ctype[i]) for i in range(self._parse_channel_count())], [float(current_measurements_ctype[i]) for i in range(self._parse_channel_count())]
+        return voltage_measurements_array, current_measurements_array
 
     def _parse_channel_count(self):
         '''_parse_channel_count

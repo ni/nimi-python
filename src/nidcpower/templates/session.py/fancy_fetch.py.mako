@@ -4,6 +4,20 @@
     import build.helper as helper
 
     suffix = method_template['method_python_name_suffix']
+
+    # We explicitly only support fetch_multiple and measure_multiple
+    if f['python_name'] == 'fetch_multiple':
+        in_compliance_value = 'in_compliance[i]'
+        in_compliance_return = ', in_compliance'
+        param_list = 'count, timeout'
+        array_size = 'count'  # This is what is used for the array sizes
+    elif f['python_name'] == 'measure_multiple':
+        in_compliance_value = 'None'
+        in_compliance_return = ''
+        param_list = ''
+        array_size = 'self._parse_channel_count()'  # This is what is used for the array sizes
+    else:
+        raise ValueError('Only fetch_multiple and measure_multiple are supported. Got {0}'.format(f['python_name']))
 %>\
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
@@ -13,11 +27,7 @@
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
+        voltage_measurements, current_measurements${in_compliance_return} = self._${f['python_name']}(${param_list})
 
-        measurements = []
-        for i in range(count):
-            measurements.append(Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]))
-
-        return measurements
+        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}) for i in range(${array_size})]
 
