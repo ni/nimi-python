@@ -230,7 +230,7 @@ class ExportableSignals(Enum):
     FIVE_V_OUT = 13
 
 
-class FIRFilterWindow(Enum):
+class _FIRFilterWindow(Enum):
     NONE = 0
     '''
     No window.
@@ -280,7 +280,7 @@ class FetchRelativeTo(Enum):
     '''
 
 
-class FilterType(Enum):
+class _FilterType(Enum):
     LOWPASS = 0
     '''
     Specifies lowpass as the filter type.
@@ -347,7 +347,7 @@ class OverflowErrorReporting(Enum):
     '''
 
 
-class PercentageMethod(Enum):
+class _PercentageMethod(Enum):
     LOWHIGH = 0
     '''
     Specifies that the reference level percentages should be computed using
@@ -383,7 +383,7 @@ class RISMethod(Enum):
     '''
 
 
-class RefLevelUnits(Enum):
+class _RefLevelUnits(Enum):
     VOLTS = 0
     '''
     Specifies that the reference levels are given in units of volts.

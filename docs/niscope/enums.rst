@@ -396,69 +396,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: FIRFilterWindow
-
-    .. py:attribute:: FIRFilterWindow.NONE
-
-
-
-        No window.
-
-        
-
-
-
-    .. py:attribute:: FIRFilterWindow.HANNING
-
-
-
-        Specifies a Hanning window.
-
-        
-
-
-
-    .. py:attribute:: FIRFilterWindow.FLAT_TOP
-
-
-
-        Specifies a Flat Top window.
-
-        
-
-
-
-    .. py:attribute:: FIRFilterWindow.HAMMING
-
-
-
-        Specifies a Hamming window.
-
-        
-
-
-
-    .. py:attribute:: FIRFilterWindow.TRIANGLE
-
-
-
-        Specifies a Triangle window.
-
-        
-
-
-
-    .. py:attribute:: FIRFilterWindow.BLACKMAN
-
-
-
-        Specifies a Blackman window.
-
-        
-
-
-
-
 .. py:data:: FetchRelativeTo
 
     .. py:attribute:: FetchRelativeTo.READ_POINTER
@@ -506,49 +443,6 @@ Enums used in NI-SCOPE
 
 
         Fetch at the first posttrigger sample.
-
-        
-
-
-
-
-.. py:data:: FilterType
-
-    .. py:attribute:: FilterType.LOWPASS
-
-
-
-        Specifies lowpass as the filter type.
-
-        
-
-
-
-    .. py:attribute:: FilterType.HIGHPASS
-
-
-
-        Specifies highpass as the filter type.
-
-        
-
-
-
-    .. py:attribute:: FilterType.BANDPASS
-
-
-
-        Specifies bandpass as the filter type.
-
-        
-
-
-
-    .. py:attribute:: FilterType.BANDSTOP
-
-
-
-        Specifies bandstop as the filter type.
 
         
 
@@ -657,40 +551,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: PercentageMethod
-
-    .. py:attribute:: PercentageMethod.LOWHIGH
-
-
-
-        Specifies that the reference level percentages should be computed using
-        the low/high method,
-
-        
-
-
-
-    .. py:attribute:: PercentageMethod.MINMAX
-
-
-
-        Reference level percentages are computed using the min/max method.
-
-        
-
-
-
-    .. py:attribute:: PercentageMethod.BASETOP
-
-
-
-        Reference level percentages are computed using the base/top method.
-
-        
-
-
-
-
 .. py:data:: RISMethod
 
     .. py:attribute:: RISMethod.EXACT_NUM_AVERAGES
@@ -729,30 +589,6 @@ Enums used in NI-SCOPE
 
 
         Limits the waveforms in the various bins to be within 200 ps of the center of the bin.
-
-        
-
-
-
-
-.. py:data:: RefLevelUnits
-
-    .. py:attribute:: RefLevelUnits.VOLTS
-
-
-
-        Specifies that the reference levels are given in units of volts.
-
-        
-
-
-
-    .. py:attribute:: RefLevelUnits.PERCENTAGE
-
-
-
-        (Default) Specifies that the reference levels are given in percentage
-        units.
 
         
 

@@ -801,7 +801,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_array_gain = var
         var = session.channels['0,1'].meas_array_gain
     '''
-    meas_array_offset = _attributes.AttributeViReal64(1150044)
+    _meas_array_offset = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to _ArrayMeasurement.ARRAY_OFFSET for more information.
@@ -816,7 +816,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_array_offset = var
         var = session.channels['0,1'].meas_array_offset
     '''
-    meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
+    _meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
     '''Type: float
 
     Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based properties such as MEAS_HIGH_REF if you use  this property to set various channels to different values.
@@ -834,7 +834,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_chan_high_ref_level = var
         var = session.channels['0,1'].meas_chan_high_ref_level
     '''
-    meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
+    _meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
     '''Type: float
 
     Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_LOW_REF if you use this property to set various channels to different values.
@@ -852,7 +852,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_chan_low_ref_level = var
         var = session.channels['0,1'].meas_chan_low_ref_level
     '''
-    meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
+    _meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
     '''Type: float
 
     Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_MID_REF if you use this property to set various channels to different values.
@@ -870,7 +870,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_chan_mid_ref_level = var
         var = session.channels['0,1'].meas_chan_mid_ref_level
     '''
-    meas_filter_center_freq = _attributes.AttributeViReal64(1150032)
+    _meas_filter_center_freq = _attributes.AttributeViReal64(1150032)
     '''Type: float
 
     The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by meas_filter_width, where the cutoff frequencies are the center ± width.
@@ -885,7 +885,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_center_freq = var
         var = session.channels['0,1'].meas_filter_center_freq
     '''
-    meas_filter_cutoff_freq = _attributes.AttributeViReal64(1150031)
+    _meas_filter_cutoff_freq = _attributes.AttributeViReal64(1150031)
     '''Type: float
 
     Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
@@ -900,25 +900,25 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_cutoff_freq = var
         var = session.channels['0,1'].meas_filter_cutoff_freq
     '''
-    meas_filter_order = _attributes.AttributeViInt32(1150036)
+    _meas_filter_order = _attributes.AttributeViInt32(1150036)
     '''Type: int
 
     Specifies the order of an IIR filter. All positive integers are valid.
     Default: 2
     '''
-    meas_filter_ripple = _attributes.AttributeViReal64(1150033)
+    _meas_filter_ripple = _attributes.AttributeViReal64(1150033)
     '''Type: float
 
     Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
     Default: 0.1 dB
     '''
-    meas_filter_taps = _attributes.AttributeViInt32(1150037)
+    _meas_filter_taps = _attributes.AttributeViInt32(1150037)
     '''Type: int
 
     Defines the number of taps (coefficients) for an FIR filter.
     Default: 25
     '''
-    meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
+    _meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
     '''Type: float
 
     The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
@@ -933,7 +933,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_filter_transient_waveform_percent = var
         var = session.channels['0,1'].meas_filter_transient_waveform_percent
     '''
-    meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150035)
+    _meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150035)
     '''Type: enums.FilterType
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
@@ -946,13 +946,13 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    meas_filter_width = _attributes.AttributeViReal64(1150041)
+    _meas_filter_width = _attributes.AttributeViReal64(1150041)
     '''Type: float
 
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
     '''
-    meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
+    _meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FIRFilterWindow, 1150042)
     '''Type: enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
@@ -977,7 +977,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_fir_filter_window = var
         var = session.channels['0,1'].meas_fir_filter_window
     '''
-    meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
+    _meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
     '''Type: float
 
     Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
@@ -992,7 +992,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_hysteresis_percent = var
         var = session.channels['0,1'].meas_hysteresis_percent
     '''
-    meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
+    _meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
     '''Type: float
 
     The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the _ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
@@ -1010,7 +1010,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_interpolation_sampling_factor = var
         var = session.channels['0,1'].meas_interpolation_sampling_factor
     '''
-    meas_last_acq_histogram_size = _attributes.AttributeViInt32(1150020)
+    _meas_last_acq_histogram_size = _attributes.AttributeViInt32(1150020)
     '''Type: int
 
     Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
@@ -1025,7 +1025,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_last_acq_histogram_size = var
         var = session.channels['0,1'].meas_last_acq_histogram_size
     '''
-    meas_other_channel = _attributes.AttributeViString(1150018)
+    _meas_other_channel = _attributes.AttributeViString(1150018)
     '''Type: str
 
     Specifies the second channel for two-channel measurements, such as _ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
@@ -1040,7 +1040,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_other_channel = var
         var = session.channels['0,1'].meas_other_channel
     '''
-    meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
+    _meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PercentageMethod, 1150045)
     '''Type: enums.PercentageMethod
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
@@ -1061,13 +1061,13 @@ class _SessionBase(object):
         session.channels['0,1'].meas_percentage_method = var
         var = session.channels['0,1'].meas_percentage_method
     '''
-    meas_polynomial_interpolation_order = _attributes.AttributeViInt32(1150029)
+    _meas_polynomial_interpolation_order = _attributes.AttributeViInt32(1150029)
     '''Type: int
 
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
     '''
-    meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
+    _meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefLevelUnits, 1150016)
     '''Type: enums.RefLevelUnits
 
     Specifies the units of the reference levels.
@@ -1087,13 +1087,13 @@ class _SessionBase(object):
         session.channels['0,1'].meas_ref_level_units = var
         var = session.channels['0,1'].meas_ref_level_units
     '''
-    meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
+    _meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
     '''Type: float
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
     '''
-    meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
+    _meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
@@ -1108,13 +1108,13 @@ class _SessionBase(object):
         session.channels['0,1'].meas_time_histogram_high_volts = var
         var = session.channels['0,1'].meas_time_histogram_high_volts
     '''
-    meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
+    _meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
     '''Type: float
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
     '''
-    meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
+    _meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
@@ -1129,7 +1129,7 @@ class _SessionBase(object):
         session.channels['0,1'].meas_time_histogram_low_volts = var
         var = session.channels['0,1'].meas_time_histogram_low_volts
     '''
-    meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
+    _meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with clear_waveform_measurement_stats.
@@ -1144,19 +1144,19 @@ class _SessionBase(object):
         session.channels['0,1'].meas_time_histogram_size = var
         var = session.channels['0,1'].meas_time_histogram_size
     '''
-    meas_voltage_histogram_high_volts = _attributes.AttributeViReal64(1150023)
+    _meas_voltage_histogram_high_volts = _attributes.AttributeViReal64(1150023)
     '''Type: float
 
     Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
     Default: 10.0 V
     '''
-    meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
+    _meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
     Default: -10.0 V
     '''
-    meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
+    _meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method clear_waveform_measurement_stats.
@@ -3265,7 +3265,7 @@ class _SessionBase(object):
             session.channels['0,1']._get_attribute_vi_int64(attribute_id)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
 
         Returns:
@@ -3772,7 +3772,7 @@ class _SessionBase(object):
             session.channels['0,1']._set_attribute_vi_int64(attribute_id, value)
 
         Args:
-            attribute_id (int): The ID of an property.
+            attribute_id (int): The ID of a property.
 
             value (int): The value that you want to set the property. Some values might not be
                 valid depending on the current settings of the instrument session.
