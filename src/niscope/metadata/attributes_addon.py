@@ -160,7 +160,35 @@ attributes_codegen_method = {
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
     1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
     1150080: { "codegen_method": "private" },  # FETCH_NUM_RECORDS - Fetch attribute
+    1150016: { "codegen_method": "private" },  # MEAS_REF_LEVEL_UNITS - Measurement library private - #810
+    1150018: { "codegen_method": "private" },  # MEAS_OTHER_CHANNEL - Measurement library private - #810
+    1150019: { "codegen_method": "private" },  # MEAS_HYSTERESIS_PERCENT - Measurement library private - #810
+    1150020: { "codegen_method": "private" },  # MEAS_LAST_ACQ_HISTOGRAM_SIZE - Measurement library private - #810
+    1150021: { "codegen_method": "private" },  # MEAS_VOLTAGE_HISTOGRAM_SIZE - Measurement library private - #810
+    1150022: { "codegen_method": "private" },  # MEAS_VOLTAGE_HISTOGRAM_LOW_VOLTS - Measurement library private - #810
+    1150023: { "codegen_method": "private" },  # MEAS_VOLTAGE_HISTOGRAM_HIGH_VOLTS - Measurement library private - #810
+    1150024: { "codegen_method": "private" },  # MEAS_TIME_HISTOGRAM_SIZE - Measurement library private - #810
+    1150025: { "codegen_method": "private" },  # MEAS_TIME_HISTOGRAM_LOW_VOLTS - Measurement library private - #810
+    1150026: { "codegen_method": "private" },  # MEAS_TIME_HISTOGRAM_HIGH_VOLTS - Measurement library private - #810
+    1150027: { "codegen_method": "private" },  # MEAS_TIME_HISTOGRAM_LOW_TIME - Measurement library private - #810
+    1150028: { "codegen_method": "private" },  # MEAS_TIME_HISTOGRAM_HIGH_TIME - Measurement library private - #810
+    1150029: { "codegen_method": "private" },  # MEAS_POLYNOMIAL_INTERPOLATION_ORDER - Measurement library private - #810
+    1150030: { "codegen_method": "private" },  # MEAS_INTERPOLATION_SAMPLING_FACTOR - Measurement library private - #810
+    1150031: { "codegen_method": "private" },  # MEAS_FILTER_CUTOFF_FREQ - Measurement library private - #810
+    1150032: { "codegen_method": "private" },  # MEAS_FILTER_CENTER_FREQ - Measurement library private - #810
+    1150033: { "codegen_method": "private" },  # MEAS_FILTER_RIPPLE - Measurement library private - #810
+    1150034: { "codegen_method": "private" },  # MEAS_FILTER_TRANSIENT_WAVEFORM_PERCENT - Measurement library private - #810
+    1150035: { "codegen_method": "private" },  # MEAS_FILTER_TYPE - Measurement library private - #810
+    1150036: { "codegen_method": "private" },  # MEAS_FILTER_ORDER - Measurement library private - #810
+    1150037: { "codegen_method": "private" },  # MEAS_FILTER_TAPS - Measurement library private - #810
+    1150038: { "codegen_method": "private" },  # MEAS_CHAN_LOW_REF_LEVEL - Measurement library private - #810
+    1150039: { "codegen_method": "private" },  # MEAS_CHAN_MID_REF_LEVEL - Measurement library private - #810
+    1150040: { "codegen_method": "private" },  # MEAS_CHAN_HIGH_REF_LEVEL - Measurement library private - #810
+    1150041: { "codegen_method": "private" },  # MEAS_FILTER_WIDTH - Measurement library private - #810
+    1150042: { "codegen_method": "private" },  # MEAS_FIR_FILTER_WINDOW - Measurement library private - #810
     1150043: { "codegen_method": "private" },  # MEAS_ARRAY_GAIN - Measurement library private - #810
+    1150044: { "codegen_method": "private" },  # MEAS_ARRAY_OFFSET - Measurement library private - #810
+    1150045: { "codegen_method": "private" },  # MEAS_PERCENTAGE_METHOD - Measurement library private - #810
 }
 
 
