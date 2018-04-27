@@ -426,7 +426,7 @@ niscope.Session properties
 
     Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
     The instrument driver can choose to always cache or to never cache  particular properties regardless of the setting of this property.
-    The default value is True.   Use :py:meth:`niscope.Session._init_with_options`  to override this value.
+    The default value is True.   Use :py:meth:`niscope.Session.__init__`  to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -1069,7 +1069,7 @@ niscope.Session properties
 .. py:attribute:: driver_setup
 
     This property indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  :py:meth:`niscope.Session._init_with_options`, or through the IVI Configuration Utility.
+    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  :py:meth:`niscope.Session.__init__`, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this property returns an empty string.
 
     The following table lists the characteristics of this property.
@@ -1413,7 +1413,7 @@ niscope.Session properties
 
 .. py:attribute:: fetch_interleaved_iq_data
 
-    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  :py:meth:`niscope.Session._fetch`() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
+    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  :py:meth:`niscope.Session.fetch`() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: True
 
     The following table lists the characteristics of this property.
@@ -1970,7 +1970,7 @@ niscope.Session properties
 .. py:attribute:: io_resource_descriptor
 
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource descriptor, this property contains that  value.You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session._init_with_options`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    If you initialize the instrument driver with the resource descriptor, this property contains that  value.You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session.__init__`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
 
 
@@ -1998,7 +1998,7 @@ niscope.Session properties
 
 .. py:attribute:: logical_name
 
-    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session._init_with_options`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session.__init__`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
 
 
 
@@ -2414,7 +2414,7 @@ niscope.Session properties
 .. py:attribute:: range_check
 
     Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver methods.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this property to  False to disable range checking and maximize performance.
-    The default value is True.   Use the :py:meth:`niscope.Session._init_with_options`  method to override this value.
+    The default value is True.   Use the :py:meth:`niscope.Session.__init__`  method to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -2562,7 +2562,7 @@ niscope.Session properties
 .. py:attribute:: record_coercions
 
     Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 properties.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is False.   Use the :py:meth:`niscope.Session._init_with_options`  method to override this value.
+    The default value is False.   Use the :py:meth:`niscope.Session.__init__`  method to override this value.
 
     The following table lists the characteristics of this property.
 
@@ -2943,7 +2943,7 @@ niscope.Session properties
 .. py:attribute:: simulate
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-    The default value is False.   Use the :py:meth:`niscope.Session._init_with_options`  method to override this value.
+    The default value is False.   Use the :py:meth:`niscope.Session.__init__`  method to override this value.
 
     The following table lists the characteristics of this property.
 

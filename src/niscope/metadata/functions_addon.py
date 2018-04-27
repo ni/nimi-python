@@ -4,7 +4,7 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                  { 'codegen_method': 'private',  },
+    'InitWithOptions':                  { 'codegen_method': 'private', 'public_method_name': '__init__', },
     'InitiateAcquisition':              { 'codegen_method': 'private',  },
     'close':                            { 'codegen_method': 'private',  },
     'CheckAttribute.+':                 { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
@@ -55,18 +55,18 @@ functions_codegen_method = {
     'errorHandler':                     { 'codegen_method': 'no',       },
     'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
     'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
-    'FetchBinary8':                     { 'codegen_method': 'private',  },
-    'FetchBinary16':                    { 'codegen_method': 'private',  },
-    'FetchBinary32':                    { 'codegen_method': 'private',  },
-    'Fetch':                            { 'codegen_method': 'private',  },
-    'Read':                             { 'codegen_method': 'private',  },
+    'FetchBinary8':                     { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
+    'FetchBinary16':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
+    'FetchBinary32':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
+    'Fetch':                            { 'codegen_method': 'private', 'public_method_name': 'fetch',      },  # 'FancyFetch' Public wrapper
+    'Read':                             { 'codegen_method': 'private', 'public_method_name': 'read',       },  # 'FancyRead' Public wrapper
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ClearWaveformProcessing':          { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
     'AddWaveformProcessing':            { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
     'FetchArrayMeasurement':            { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
     'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
-    'self_test':                        { 'codegen_method': 'private',  },  # Public wrapper that raises
-    'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.}
+    'self_test':                        { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
+    'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
 }
 
 # Attach the given parameter to the given enum from enums.py

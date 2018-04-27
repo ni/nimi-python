@@ -4,7 +4,7 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitializeWithChannels':          { 'codegen_method': 'private',  },
+    'InitializeWithChannels':          { 'codegen_method': 'private', 'public_method_name': '__init__', },
     'InitWithOptions':                 { 'codegen_method': 'no',       },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
@@ -39,11 +39,11 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private',  },  # Public wrapper to allow datetime
-    'FetchMultiple':                   { 'codegen_method': 'private',  },  # Fancy Fetch Public wrapper
-    'MeasureMultiple':                 { 'codegen_method': 'private',  },  # Fancy Measure Public wrapper
-    'self_test':                       { 'codegen_method': 'private',  },  # Public wrapper that raises
+    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'public_method_name': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'public_method_name': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
+    'FetchMultiple':                   { 'codegen_method': 'private', 'public_method_name': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
+    'MeasureMultiple':                 { 'codegen_method': 'private', 'public_method_name': 'measure_multiple',                },  # 'FancyMeasureMultiple' Public wrapper
+    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
     'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
@@ -98,7 +98,7 @@ functions_remove_from_python_api = {
 
 # Default values for method parameters
 functions_default_value = {
-    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': '""', },
+    'InitializeWithChannels':                        { 'parameters': { 1: { 'default_value': None, },
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '""', }, }, },
     'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
@@ -426,7 +426,10 @@ functions_converters = {
     'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                               'type_in_documentation': 'dict', }, }, },
+                                                               'type_in_documentation': 'dict', }, 
+                                                          1: { 'is_repeated_capability': False,
+                                                               'python_api_converter_name': 'convert_repeated_capabilities_from_init', 
+                                                               'type_in_documentation': 'str, list, range, tuple', }, }, },
     'GetExtCalRecommendedInterval':     { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
                                                                'type_in_documentation': 'datetime.timedelta', }, }, },
 }
