@@ -116,7 +116,7 @@ The waveform_infos returned from `fetch_into <http://nimi-python.readthedocs.io/
     - index *x* = record 0, channel 1
     - index 2\ *x* = record 1, channel 0
     - index 3\ *x* = record 1, channel 1
-    - ...
+    - etc.
     - Where *x* = the record length
 
 
