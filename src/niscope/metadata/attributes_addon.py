@@ -189,6 +189,7 @@ attributes_codegen_method = {
     1150043: { "codegen_method": "private" },  # MEAS_ARRAY_GAIN - Measurement library private - #810
     1150044: { "codegen_method": "private" },  # MEAS_ARRAY_OFFSET - Measurement library private - #810
     1150045: { "codegen_method": "private" },  # MEAS_PERCENTAGE_METHOD - Measurement library private - #810
+    1150081: { "codegen_method": "private" },  # FETCH_MEAS_NUM_SAMPLES - Measurement library private - #810
 }
 
 
