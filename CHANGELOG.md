@@ -1,7 +1,8 @@
 # Changelog
 
 * [Unreleased](#unreleased)
-* [0.7.0](#060---2018-02-20)
+* [0.8.0](#080---2018-04-27)
+* [0.7.0](#070---2018-02-20)
 * [0.6.0](#060---2017-12-20)
 * [0.5.0](#050---2017-11-27)
 * [0.4.0](#040---2017-11-07)
@@ -11,17 +12,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## 0.8.0 - 2018-04-27
 * ### ALL
-    * #### Added
     * #### Changed
         * All exceptions raised by the Python bindings inherit from `<driver>.Error`
         * Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
             * This encapsulates any error that is returned by the underlying driver
         * All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
-    * #### Removed
 * ### NI-DMM
-    * #### Added
     * #### Changed
         * Enum values that start with an underscore + digit have been renamed
             * `Function._2_WIRE_RES` --> `Function.TWO_WIRE_RES`
@@ -32,17 +30,7 @@ All notable changes to this project will be documented in this file.
             * `TransducerType._2_WIRE_RTD` --> `TransducerType.TWO_WIRE_RTD`
             * `TransducerType._4_WIRE_RTD` --> `TransducerType.FOUR_WIRE_RTD`
         * `Session.get_ext_cal_recommended_interval()` now returns a `datetime.timedelta` for the interval [#794](https://github.com/ni/nimi-python/issues/794)
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-DCPower
-    * #### Added
     * #### Changed
         * `Session.fetch_multiple()` and `Session.measure_multiple()` now return list of named tuples instead of multiple arrays. See [fetch_multiple](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple) and [measure_multiple](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.measure_multiple)
         * `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
@@ -55,7 +43,6 @@ All notable changes to this project will be documented in this file.
             * `create_advanced_sequence_step()`
             * `delete_advanced_sequence()`
 * ### NI-FGEN
-    * #### Added
     * #### Changed
         * `Session.export_signal()` signal_identifier now has a default of "". This moves it to the end of the parameter list [#801](https://github.com/ni/nimi-python/issues/801)
         * `Session.get_ext_cal_recommended_interval()` now returns a `datetime.timedelta` for the interval [#794](https://github.com/ni/nimi-python/issues/794)
@@ -63,7 +50,6 @@ All notable changes to this project will be documented in this file.
         * `Session.cal_adc_input` attribute and `Session.enums.CalADCInput` enum - External Cal not supported in Python
         * Session constructor channel parameter can now use any channel format that repeated capabilities can use [#807](https://github.com/ni/nimi-python/issues/807)
 * ### NI-SCOPE
-    * #### Added
     * #### Changed
         * `Session.fetch()`, `Session.read()` and `Session.fetch_into()` updated
             * Takes additional parameters that modify fetch behavior
@@ -107,6 +93,11 @@ All notable changes to this project will be documented in this file.
             * `add_waveform_processing()`
             * `clear_waveform_processing()`
             * `fetch_array_measurement()`
+            * `clear_waveform_measurement_stats()`
+            * `fetch_measurement()`
+            * `fetch_measurement_stats()`
+            * `read_measurement()`
+            * `configure_ref_levels()`
             * `meas_ref_level_units`
             * `meas_other_channel`
             * `meas_hysteresis_percent`
@@ -136,6 +127,7 @@ All notable changes to this project will be documented in this file.
             * `meas_array_gain`
             * `meas_array_offset`
             * `meas_percentage_method`
+            * `fetch_meas_num_samples`
 
 ## 0.7.0 - 2018-02-20
 * ### ALL
