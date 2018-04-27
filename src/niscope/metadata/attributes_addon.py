@@ -156,15 +156,28 @@ attributes_codegen_method = {
     1150345: { "codegen_method": "no" },  # P2P_FIFO_ENDPOINT_COUNT - P2P Attribute
     1150354: { "codegen_method": "no" },  # P2P_ONBOARD_MEMORY_ENABLED - P2P Attribute
     1150380: { "codegen_method": "no" },  # SAMPLES_TRANSFERRED_PER_RECORD - P2P Attribute
-    1150373: { "codegen_method": "no" },  # STREAM_RELATIVE_TO - P2P Attribute
-    1150105: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - NI-TClk Attribute
-    1151002: { "codegen_method": "no" },  # MUX_MODE_REGISTER - Internal Attribute
-    1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute
-    1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute
-    1050002: { "codegen_method": "no" },  # RANGE_CHECK - IVI Attribute
-    1050006: { "codegen_method": "no" },  # RECORD_COERCIONS - IVI Attribute
-    1050515: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION - IVI Attribute
-    1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute
+    1150373: { "codegen_method": "no" },  # STREAM_RELATIVE_TO - P2P Attribute - #825
+    1150105: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - NI-TClk Attribute - #825
+    1151002: { "codegen_method": "no" },  # MUX_MODE_REGISTER - Internal Attribute - #825
+    1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute - #824
+    1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute - #824
+    1050002: { "codegen_method": "no" },  # RANGE_CHECK - IVI Attribute - #824
+    1050006: { "codegen_method": "no" },  # RECORD_COERCIONS - IVI Attribute - #824
+    1050515: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION - IVI Attribute - #824
+    1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute - #824
+    1150303: { "codegen_method": "no" },  # DDC_CENTER_FREQUENCY - Onboard Processing Attribute - #823
+    1150304: { "codegen_method": "no" },  # DDC_DATA_PROCESSING_MODE - Onboard Processing Attribute - #823
+    1150300: { "codegen_method": "no" },  # DDC_ENABLED - Onboard Processing Attribute - #823
+    1150302: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_ENABLED - Onboard Processing Attribute - #823
+    1150305: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_PHASE_I - Onboard Processing Attribute - #823
+    1150306: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_PHASE_Q - Onboard Processing Attribute - #823
+    1150310: { "codegen_method": "no" },  # DDC_Q_SOURCE - Onboard Processing Attribute - #823
+    1150307: { "codegen_method": "no" },  # DIGITAL_GAIN - Onboard Processing Attribute - #823
+    1150308: { "codegen_method": "no" },  # DIGITAL_OFFSET - Onboard Processing Attribute - #823
+    1150319: { "codegen_method": "no" },  # DITHER_ENABLED - Onboard Processing Attribute - #823
+    1150311: { "codegen_method": "no" },  # FETCH_INTERLEAVED_IQ_DATA - Onboard Processing Attribute - #823
+    1150320: { "codegen_method": "no" },  # FRACTIONAL_RESAMPLE_ENABLED - Onboard Processing Attribute - #823
+    1150309: { "codegen_method": "no" },  # OVERFLOW_ERROR_REPORTING - Onboard Processing Attribute - #823
     1150077: { "codegen_method": "private" },  # FETCH_RELATIVE_TO - Fetch attribute
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
     1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
