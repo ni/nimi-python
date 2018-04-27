@@ -61,10 +61,15 @@ functions_codegen_method = {
     'Fetch':                            { 'codegen_method': 'private', 'public_method_name': 'fetch',      },  # 'FancyFetch' Public wrapper
     'Read':                             { 'codegen_method': 'private', 'public_method_name': 'read',       },  # 'FancyRead' Public wrapper
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
-    'ClearWaveformProcessing':          { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
-    'AddWaveformProcessing':            { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
-    'FetchArrayMeasurement':            { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
-    'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # Per #809, making waveform measurement methods private
+    'ClearWaveformProcessing':          { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'AddWaveformProcessing':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'FetchArrayMeasurement':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ClearWaveformMeasurementStats':    { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'FetchMeasurement':                 { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'FetchMeasurementStats':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ReadMeasurement':                  { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ConfigureRefLevels':               { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
     'self_test':                        { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
 }
