@@ -24,7 +24,118 @@ class AcquisitionType(Enum):
     '''
 
 
-class ClearableMeasurement(Enum):
+class _ArrayMeasurement(Enum):
+    NO_MEASUREMENT = 4000
+    '''
+    None
+    '''
+    LAST_ACQ_HISTOGRAM = 4001
+    '''
+    Last Acquisition Histogram
+    '''
+    MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
+    '''
+    Multi Acquisition Voltage Histogram
+    '''
+    MULTI_ACQ_TIME_HISTOGRAM = 4005
+    '''
+    Multi Acquisition Time Histogram
+    '''
+    MULTI_ACQ_AVERAGE = 4016
+    '''
+    Multi Acquisition Average
+    '''
+    POLYNOMIAL_INTERPOLATION = 4011
+    '''
+    Polynomial Interpolation
+    '''
+    ARRAY_INTEGRAL = 4006
+    '''
+    Array Integral
+    '''
+    DERIVATIVE = 4007
+    '''
+    Derivative
+    '''
+    INVERSE = 4008
+    '''
+    Inverse
+    '''
+    MULTIPLY_CHANNELS = 4012
+    '''
+    Multiply Channels
+    '''
+    ADD_CHANNELS = 4013
+    '''
+    Add Channels
+    '''
+    SUBTRACT_CHANNELS = 4014
+    '''
+    Subtract Channels
+    '''
+    DIVIDE_CHANNELS = 4015
+    '''
+    Divide Channels
+    '''
+    ARRAY_OFFSET = 4025
+    '''
+    Array Offset
+    '''
+    ARRAY_GAIN = 4026
+    '''
+    Array Gain
+    '''
+    HANNING_WINDOW = 4009
+    '''
+    Hanning Window
+    '''
+    FLAT_TOP_WINDOW = 4010
+    '''
+    Flat Top Window
+    '''
+    HAMMING_WINDOW = 4020
+    '''
+    Hamming Window
+    '''
+    TRIANGLE_WINDOW = 4023
+    '''
+    Triangle Window
+    '''
+    BLACKMAN_WINDOW = 4024
+    '''
+    Blackman Window
+    '''
+    WINDOWED_FIR_FILTER = 4021
+    '''
+    FIR Windowed Filter
+    '''
+    BESSEL_FILTER = 4022
+    '''
+    Bessel IIR Filter
+    '''
+    BUTTERWORTH_FILTER = 4017
+    '''
+    Butterworth IIR Filter
+    '''
+    CHEBYSHEV_FILTER = 4018
+    '''
+    Chebyshev IIR Filter
+    '''
+    FFT_PHASE_SPECTRUM = 4002
+    '''
+    FFT Phase Spectrum
+    '''
+    FFT_AMP_SPECTRUM_VOLTS_RMS = 4003
+    '''
+    FFT Amp. Spectrum (Volts RMS)
+    '''
+    FFT_AMP_SPECTRUM_DB = 4019
+    '''
+    FFT Amp. Spectrum (dB)
+    '''
+
+
+class _ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
     MULTI_ACQ_TIME_HISTOGRAM = 4005
@@ -119,7 +230,7 @@ class ExportableSignals(Enum):
     FIVE_V_OUT = 13
 
 
-class FIRFilterWindow(Enum):
+class _FIRFilterWindow(Enum):
     NONE = 0
     '''
     No window.
@@ -169,7 +280,7 @@ class FetchRelativeTo(Enum):
     '''
 
 
-class FilterType(Enum):
+class _FilterType(Enum):
     LOWPASS = 0
     '''
     Specifies lowpass as the filter type.
@@ -236,7 +347,7 @@ class OverflowErrorReporting(Enum):
     '''
 
 
-class PercentageMethod(Enum):
+class _PercentageMethod(Enum):
     LOWHIGH = 0
     '''
     Specifies that the reference level percentages should be computed using
@@ -272,7 +383,7 @@ class RISMethod(Enum):
     '''
 
 
-class RefLevelUnits(Enum):
+class _RefLevelUnits(Enum):
     VOLTS = 0
     '''
     Specifies that the reference levels are given in units of volts.
@@ -295,7 +406,7 @@ class RefTriggerDetectorLocation(Enum):
     '''
 
 
-class ScalarMeasurement(Enum):
+class _ScalarMeasurement(Enum):
     NO_MEASUREMENT = 4000
     '''
     None

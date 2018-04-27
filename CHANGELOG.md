@@ -102,6 +102,40 @@ All notable changes to this project will be documented in this file.
             * `fetch_record_number`
             * `fetch_num_records`
         * Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
+        * Removed Measurement Library waveform methods and properties - issue [#809](https://github.com/ni/nimi-python/issues/809)
+            * `actual_meas_wfm_size()`
+            * `add_waveform_processing()`
+            * `clear_waveform_processing()`
+            * `fetch_array_measurement()`
+            * `meas_ref_level_units`
+            * `meas_other_channel`
+            * `meas_hysteresis_percent`
+            * `meas_last_acq_histogram_size`
+            * `meas_voltage_histogram_size`
+            * `meas_voltage_histogram_low_volts`
+            * `meas_voltage_histogram_high_volts`
+            * `meas_time_histogram_size`
+            * `meas_time_histogram_low_volts`
+            * `meas_time_histogram_high_volts`
+            * `meas_time_histogram_low_time`
+            * `meas_time_histogram_high_time`
+            * `meas_polynomial_interpolation_order`
+            * `meas_interpolation_sampling_factor`
+            * `meas_filter_cutoff_freq`
+            * `meas_filter_center_freq`
+            * `meas_filter_ripple`
+            * `meas_filter_transient_waveform_percent`
+            * `meas_filter_type`
+            * `meas_filter_order`
+            * `meas_filter_taps`
+            * `meas_chan_low_ref_level`
+            * `meas_chan_mid_ref_level`
+            * `meas_chan_high_ref_level`
+            * `meas_filter_width`
+            * `meas_fir_filter_window`
+            * `meas_array_gain`
+            * `meas_array_offset`
+            * `meas_percentage_method`
 
 ## 0.7.0 - 2018-02-20
 * ### ALL

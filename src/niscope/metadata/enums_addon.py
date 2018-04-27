@@ -827,4 +827,197 @@ replacement_enums = {
             },
         ],
     },
+    'ArrayMeasurement': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_NO_MEASUREMENT',
+                'value': 4000,
+                'documentation': {
+                    'description': 'None',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_LAST_ACQ_HISTOGRAM',
+                'value': 4001,
+                'documentation': {
+                    'description': 'Last Acquisition Histogram ',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_MULTI_ACQ_VOLTAGE_HISTOGRAM',
+                'value': 4004,
+                'documentation': {
+                    'description': 'Multi Acquisition Voltage Histogram',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_MULTI_ACQ_TIME_HISTOGRAM',
+                'value': 4005,
+                'documentation': {
+                    'description': 'Multi Acquisition Time Histogram',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_MULTI_ACQ_AVERAGE',
+                'value': 4016,
+                'documentation': {
+                    'description': 'Multi Acquisition Average',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_POLYNOMIAL_INTERPOLATION',
+                'value': 4011,
+                'documentation': {
+                    'description': 'Polynomial Interpolation',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_ARRAY_INTEGRAL',
+                'value': 4006,
+                'documentation': {
+                    'description': 'Array Integral',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_DERIVATIVE',
+                'value': 4007,
+                'documentation': {
+                    'description': 'Derivative',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_INVERSE',
+                'value': 4008,
+                'documentation': {
+                    'description': 'Inverse',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_MULTIPLY_CHANNELS',
+                'value': 4012,
+                'documentation': {
+                    'description': 'Multiply Channels',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_ADD_CHANNELS',
+                'value': 4013,
+                'documentation': {
+                    'description': 'Add Channels',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_SUBTRACT_CHANNELS',
+                'value': 4014,
+                'documentation': {
+                    'description': 'Subtract Channels',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_DIVIDE_CHANNELS',
+                'value': 4015,
+                'documentation': {
+                    'description': 'Divide Channels',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_ARRAY_OFFSET',
+                'value': 4025,
+                'documentation': {
+                    'description': 'Array Offset',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_ARRAY_GAIN',
+                'value': 4026,
+                'documentation': {
+                    'description': 'Array Gain',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_HANNING_WINDOW',
+                'value': 4009,
+                'documentation': {
+                    'description': 'Hanning Window',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_FLAT_TOP_WINDOW',
+                'value': 4010,
+                'documentation': {
+                    'description': 'Flat Top Window',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_HAMMING_WINDOW',
+                'value': 4020,
+                'documentation': {
+                    'description': 'Hamming Window',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_TRIANGLE_WINDOW',
+                'value': 4023,
+                'documentation': {
+                    'description': 'Triangle Window',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_BLACKMAN_WINDOW',
+                'value': 4024,
+                'documentation': {
+                    'description': 'Blackman Window',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_WINDOWED_FIR_FILTER',
+                'value': 4021,
+                'documentation': {
+                    'description': 'FIR Windowed Filter',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_BESSEL_FILTER',
+                'value': 4022,
+                'documentation': {
+                    'description': 'Bessel IIR Filter',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_BUTTERWORTH_FILTER',
+                'value': 4017,
+                'documentation': {
+                    'description': 'Butterworth IIR Filter',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_CHEBYSHEV_FILTER',
+                'value': 4018,
+                'documentation': {
+                    'description': 'Chebyshev IIR Filter',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_FFT_PHASE_SPECTRUM',
+                'value': 4002,
+                'documentation': {
+                    'description': 'FFT Phase Spectrum',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_FFT_AMP_SPECTRUM_VOLTS_RMS',
+                'value': 4003,
+                'documentation': {
+                    'description': 'FFT Amp. Spectrum (Volts RMS)',
+                },
+            },
+            {
+                'name': 'NISCOPE_VAL_FFT_AMP_SPECTRUM_DB',
+                'value': 4019,
+                'documentation': {
+                    'description': 'FFT Amp. Spectrum (dB)',
+                },
+            },
+        ],
+    },
 }

@@ -212,23 +212,23 @@ def test_reset(session):
 
 
 def test_reset_device(session):
-    deault_meas_percentage_method = session.meas_percentage_method
-    assert deault_meas_percentage_method == niscope.PercentageMethod.BASETOP
-    session.meas_percentage_method = niscope.PercentageMethod.MINMAX
-    non_default_meas_percentage_method = session.meas_percentage_method
-    assert non_default_meas_percentage_method == niscope.PercentageMethod.MINMAX
+    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    assert deault_meas_time_histogram_high_time == 0.0005
+    session._meas_time_histogram_high_time = 0.0010
+    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
+    assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_device()
-    assert session.meas_percentage_method == niscope.PercentageMethod.BASETOP
+    assert session._meas_time_histogram_high_time == 0.0005
 
 
 def test_reset_with_defaults(session):
-    deault_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    deault_meas_time_histogram_high_time = session._meas_time_histogram_high_time
     assert deault_meas_time_histogram_high_time == 0.0005
-    session.meas_time_histogram_high_time = 0.0010
-    non_default_meas_time_histogram_high_time = session.meas_time_histogram_high_time
+    session._meas_time_histogram_high_time = 0.0010
+    non_default_meas_time_histogram_high_time = session._meas_time_histogram_high_time
     assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_with_defaults()
-    assert session.meas_time_histogram_high_time == 0.0005
+    assert session._meas_time_histogram_high_time == 0.0005
 
 
 def test_get_error(session):
@@ -263,20 +263,6 @@ def test_configure_horizontal_timing(session):
     session.horz_sample_rate == 10000000
 
 
-def test_fetch_read_measurement(session):
-    active_channel = session.channels['0']
-    read_measurement = active_channel.read_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]  # fetching first measurement from returned array
-    expected_measurement = 10000
-    in_range = abs(read_measurement - expected_measurement) <= max(2e-02 * max(abs(read_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True, 'Actual measurement not close enough to expected: actual = {0}, expected = {1}'.format(read_measurement, expected_measurement)
-    fetch_measurement = active_channel.fetch_measurement(niscope.ScalarMeasurement.FREQUENCY)[0]
-    in_range = abs(fetch_measurement - expected_measurement) <= max(2e-02 * max(abs(fetch_measurement), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True, 'Actual measurement not close enough to expected: actual = {0}, expected = {1}'.format(fetch_measurement, expected_measurement)
-    measurement_stats = active_channel.fetch_measurement_stats(niscope.ScalarMeasurement.FREQUENCY)[0][0]  # extracting single measurement from fetch_measurement_stats
-    in_range = abs(measurement_stats - expected_measurement) <= max(2e-02 * max(abs(measurement_stats), abs(expected_measurement)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-    assert in_range is True, 'Actual measurement not close enough to expected: actual = {0}, expected = {1}'.format(measurement_stats, expected_measurement)
-
-
 def test_configure_chan_characteristics(session):
     session.vertical_range = 4.0
     session.configure_chan_characteristics(50, 0)
@@ -308,8 +294,8 @@ def test_disable(session):
 
 
 def test_configure_ref_levels(session):
-    session.configure_ref_levels()
-    assert 90.0 == session.meas_chan_high_ref_level
+    session._configure_ref_levels()
+    assert 90.0 == session._meas_chan_high_ref_level
 
 
 def test_configure_trigger_digital(session):

@@ -8,7 +8,7 @@ from enum import Enum
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
 
-class ${enum_name}(Enum):
+class ${enums[enum_name]['python_name']}(Enum):
     % for enum_value in enums[enum_name]['values']:
     % if type(enum_value['value']) is str:
     ${enum_value['python_name']} = '${enum_value['value']}'

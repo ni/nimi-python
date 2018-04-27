@@ -61,13 +61,17 @@ functions_codegen_method = {
     'Fetch':                            { 'codegen_method': 'private', 'public_method_name': 'fetch',      },  # 'FancyFetch' Public wrapper
     'Read':                             { 'codegen_method': 'private', 'public_method_name': 'read',       },  # 'FancyRead' Public wrapper
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
-    '.etAttributeViInt64':              { 'codegen_method': 'no',       },  # NI-SCOPE has no ViInt64 attributes.
-    'ClearWaveformProcessing':          { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
-    'AddWaveformProcessing':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
-    'FetchArrayMeasurement':            { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
-    'ActualMeasWfmSize':                { 'codegen_method': 'no',       },  # Per #667, removing waveform measurement methods
-    'self_test':                        { 'codegen_method': 'private', 'public_method_name': 'self_test',  },  # 'fancy_self_test' Public wrapper that raises
-    'GetEqualizationFilterCoefficients': { 'codegen_method': 'private', },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
+    'ClearWaveformProcessing':          { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'AddWaveformProcessing':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'FetchArrayMeasurement':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ActualMeasWfmSize':                { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ClearWaveformMeasurementStats':    { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'FetchMeasurement':                 { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'FetchMeasurementStats':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ReadMeasurement':                  { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'ConfigureRefLevels':               { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
+    'self_test':                        { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
+    'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -92,6 +96,9 @@ functions_enums = {
     'FetchMeasurementStats':                           { 'parameters': { 3: { 'enum': 'ScalarMeasurement',               }, }, },
     'ReadMeasurement':                                 { 'parameters': { 3: { 'enum': 'ScalarMeasurement',               }, }, },
     'AcquisitionStatus':                               { 'parameters': { 1: { 'enum': 'AcquisitionStatus',               }, }, },
+    'AddWaveformProcessing':                           { 'parameters': { 2: { 'enum': 'ArrayMeasurement',                }, }, },  # Private measurement library
+    'ActualMeasWfmSize':                               { 'parameters': { 1: { 'enum': 'ArrayMeasurement',                }, }, },  # Private measurement library
+    'FetchArrayMeasurement':                           { 'parameters': { 3: { 'enum': 'ArrayMeasurement',                }, }, },  # Private measurement library
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
@@ -124,6 +131,13 @@ functions_buffer_info = {
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
     'FetchBinary32':                            { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'(num_samples * self._actual_num_wfms())'}, },
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size(array_meas_function)'}, },  # Private measurement library
+                                                                  5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'}, },
+                                                                  6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+}
+
+functions_render_in_session_base = {
+    'ActualMeasWfmSize':               { 'render_in_session_base': True, },  # Internally called by function with a repeated capability.
 }
 
 # The extracted metadata is incorrect. Patch it here.
@@ -171,7 +185,7 @@ functions_default_value = {
                                                                        2: { 'default_value': 50.0, },
                                                                        3: { 'default_value': 90.0, }, }, },
     'CalSelfCalibrate':                              { 'parameters': { 2: { 'default_value': 'Option.SELF_CALIBRATE_ALL_CHANNELS', }, }, },
-    'ClearWaveformMeasurementStats':                 { 'parameters': { 2: { 'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS', }, }, },
+    'ClearWaveformMeasurementStats':                 { 'parameters': { 2: { 'default_value': '_ClearableMeasurement.ALL_MEASUREMENTS', }, }, },
     'ConfigureTriggerDigital':                       { 'parameters': { 2: { 'default_value': 'TriggerSlope.POSITIVE', },
                                                                        3: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
                                                                        4: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
@@ -184,6 +198,7 @@ functions_default_value = {
                                                                        4: { 'default_value': 'TriggerSlope.POSITIVE', },
                                                                        6: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
                                                                        7: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
+    'FetchArrayMeasurement':                         { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },  # Private measurement library
 }
 
 # Converted parameters
@@ -236,6 +251,8 @@ functions_converters = {
                                                                    'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'InitWithOptions':                      { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
                                                                    'type_in_documentation': 'dict', }, }, },
+    'FetchArrayMeasurement':                { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',  # Private measurement library
+                                                                   'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
 }
 
 # Functions not in original metadata.

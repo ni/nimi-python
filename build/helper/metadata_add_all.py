@@ -410,8 +410,8 @@ def _add_enum_codegen_method(enums, config):
                 elif e is not None:
                     if f_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
                         enums[e]['codegen_method'] = f_codegen_method
-                    elif f_codegen_method == 'public':
-                        enums[e]['codegen_method'] = f_codegen_method
+                    elif f_codegen_method == 'public' or f_codegen_method == 'python-only':
+                        enums[e]['codegen_method'] = 'public'
 
     # Iterate through all codegen attributes and set any enum parameters to the same level
     for a in filter_codegen_attributes(config['attributes']):
@@ -496,7 +496,7 @@ def add_all_enum_metadata(enums, config):
     _add_enum_codegen_method(enums, config)
     for e in enums:
         enums[e] = _add_enum_value_python_name(enums[e], config)
-        enums[e]['python_name'] = enums[e]['python_name'] if 'python_name' in enums[e] else e
+        enums[e]['python_name'] = ('_' if enums[e]['codegen_method'] == 'private' else '') + (enums[e]['python_name'] if 'python_name' in enums[e] else e)
 
     return enums
 
