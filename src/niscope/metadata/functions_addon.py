@@ -185,7 +185,7 @@ functions_default_value = {
                                                                        2: { 'default_value': 50.0, },
                                                                        3: { 'default_value': 90.0, }, }, },
     'CalSelfCalibrate':                              { 'parameters': { 2: { 'default_value': 'Option.SELF_CALIBRATE_ALL_CHANNELS', }, }, },
-    'ClearWaveformMeasurementStats':                 { 'parameters': { 2: { 'default_value': 'ClearableMeasurement.ALL_MEASUREMENTS', }, }, },
+    'ClearWaveformMeasurementStats':                 { 'parameters': { 2: { 'default_value': '_ClearableMeasurement.ALL_MEASUREMENTS', }, }, },
     'ConfigureTriggerDigital':                       { 'parameters': { 2: { 'default_value': 'TriggerSlope.POSITIVE', },
                                                                        3: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
                                                                        4: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
