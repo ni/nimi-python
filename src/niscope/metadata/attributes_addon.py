@@ -159,6 +159,12 @@ attributes_codegen_method = {
     1150373: { "codegen_method": "no" },  # STREAM_RELATIVE_TO - P2P Attribute
     1150105: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - NI-TClk Attribute
     1151002: { "codegen_method": "no" },  # MUX_MODE_REGISTER - Internal Attribute
+    1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute
+    1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute
+    1050002: { "codegen_method": "no" },  # RANGE_CHECK - IVI Attribute
+    1050006: { "codegen_method": "no" },  # RECORD_COERCIONS - IVI Attribute
+    1050515: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION - IVI Attribute
+    1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute
     1150077: { "codegen_method": "private" },  # FETCH_RELATIVE_TO - Fetch attribute
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
     1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
