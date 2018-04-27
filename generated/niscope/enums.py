@@ -135,7 +135,7 @@ class _ArrayMeasurement(Enum):
     '''
 
 
-class ClearableMeasurement(Enum):
+class _ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
     MULTI_ACQ_TIME_HISTOGRAM = 4005
@@ -406,7 +406,7 @@ class RefTriggerDetectorLocation(Enum):
     '''
 
 
-class ScalarMeasurement(Enum):
+class _ScalarMeasurement(Enum):
     NO_MEASUREMENT = 4000
     '''
     None

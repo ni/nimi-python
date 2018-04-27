@@ -567,7 +567,7 @@ class _SessionBase(object):
     Enables/disables interleaving of the I and Q data.  When disabled, the traditional  fetch() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
     Default Value: True
     '''
-    fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
+    _fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
     '''Type: int
 
     Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
@@ -1132,7 +1132,7 @@ class _SessionBase(object):
     _meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
     '''Type: int
 
-    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with clear_waveform_measurement_stats.
+    Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with _clear_waveform_measurement_stats.
     Default: 256
 
     Tip:
@@ -1159,7 +1159,7 @@ class _SessionBase(object):
     _meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
     '''Type: int
 
-    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method clear_waveform_measurement_stats.
+    Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method _clear_waveform_measurement_stats.
     Default: 256
     '''
     min_sample_rate = _attributes.AttributeViReal64(1150009)
@@ -1818,8 +1818,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_waveform_measurement_stats(self, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):
-        '''clear_waveform_measurement_stats
+    def _clear_waveform_measurement_stats(self, clearable_measurement_function=enums.ClearableMeasurement.ALL_MEASUREMENTS):
+        '''_clear_waveform_measurement_stats
 
         Clears the waveform stats on the channel and measurement you specify. If
         you want to clear all of the measurements, use
@@ -1829,7 +1829,7 @@ class _SessionBase(object):
         Every time a measurement is called, the statistics information is
         updated, including the min, max, mean, standard deviation, and number of
         updates. This information is fetched with
-        fetch_measurement_stats. The multi-acquisition array measurements
+        _fetch_measurement_stats. The multi-acquisition array measurements
         are also cleared with this method.
 
         Note:
@@ -1841,7 +1841,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
+            session.channels['0,1']._clear_waveform_measurement_stats(clearable_measurement_function=niscope.ClearableMeasurement.ALL_MEASUREMENTS)
 
         Args:
             clearable_measurement_function (enums.ClearableMeasurement): The `scalar
@@ -3034,8 +3034,8 @@ class _SessionBase(object):
 
         return wfm_info
 
-    def fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
-        '''fetch_measurement
+    def _fetch_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
+        '''_fetch_measurement
 
         Fetches a waveform from the digitizer and performs the specified
         waveform measurement. Refer to `Using Fetch
@@ -3055,7 +3055,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._fetch_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -3084,8 +3084,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(result_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def fetch_measurement_stats(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
-        '''fetch_measurement_stats
+    def _fetch_measurement_stats(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
+        '''_fetch_measurement_stats
 
         Obtains a waveform measurement and returns the measurement value. This
         method may return multiple statistical results depending on the number
@@ -3101,7 +3101,7 @@ class _SessionBase(object):
         methods. If a Fetch Measurement method has not been called, this
         method fetches the data on which to perform the measurement. The
         statistics are cleared by calling
-        clear_waveform_measurement_stats. Refer to `Using Fetch
+        _clear_waveform_measurement_stats. Refer to `Using Fetch
         Methods <REPLACE_DRIVER_SPECIFIC_URL_1(using_fetch_functions)>`__ for
         more information on incorporating fetch methods in your application.
 
@@ -3118,7 +3118,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_measurement_stats(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._fetch_measurement_stats(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -3134,7 +3134,7 @@ class _SessionBase(object):
             result (list of float): Returns the resulting measurement
 
             mean (list of float): Returns the mean scalar value, which is obtained by averaging each
-                fetch_measurement_stats call.
+                _fetch_measurement_stats call.
 
             stdev (list of float): Returns the standard deviation of the most recent **numInStats**
                 measurements.
@@ -3145,7 +3145,7 @@ class _SessionBase(object):
             max (list of float): Returns the largest scalar value acquired (the maximum of the
                 **numInStats** measurements).
 
-            num_in_stats (list of int): Returns the number of times fetch_measurement_stats has been
+            num_in_stats (list of int): Returns the number of times _fetch_measurement_stats has been
                 called.
 
         '''
@@ -3585,8 +3585,8 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array, [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self._actual_num_wfms())]
 
-    def read_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
-        '''read_measurement
+    def _read_measurement(self, scalar_meas_function, timeout=datetime.timedelta(seconds=5.0)):
+        '''_read_measurement
 
         Initiates an acquisition, waits for it to complete, and performs the
         specified waveform measurement for a single channel and record or for
@@ -3609,7 +3609,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         niscope.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].read_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
+            session.channels['0,1']._read_measurement(scalar_meas_function, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
             scalar_meas_function (enums.ScalarMeasurement): The `scalar
@@ -4233,8 +4233,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
-        '''configure_ref_levels
+    def _configure_ref_levels(self, low=10.0, mid=50.0, high=90.0):
+        '''_configure_ref_levels
 
         This method is included for compliance with the IviScope Class
         Specification.
@@ -4246,7 +4246,7 @@ class Session(_SessionBase):
         meas_chan_mid_ref_level
 
         This method configures the reference levels for waveform measurements.
-        Call this method before calling fetch_measurement to take a
+        Call this method before calling _fetch_measurement to take a
         rise time, fall time, width negative, width positive, duty cycle
         negative, or duty cycle positive measurement.
 

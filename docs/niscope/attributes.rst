@@ -1436,31 +1436,6 @@ niscope.Session properties
             - LabVIEW Property: **Onboard Signal Processing:DDC:Fetch Interleaved IQ Data**
             - C Attribute: **NISCOPE_ATTR_FETCH_INTERLEAVED_IQ_DATA**
 
-.. py:attribute:: fetch_meas_num_samples
-
-    Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
-    Default Value: -1
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | int        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Fetch:Fetch Meas Num Samples**
-            - C Attribute: **NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES**
-
 .. py:attribute:: flex_fir_antialias_filter_type
 
     The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
