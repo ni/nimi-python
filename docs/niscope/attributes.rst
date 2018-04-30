@@ -3,55 +3,6 @@ niscope.Session properties
 
 .. py:currentmodule:: niscope.Session
 
-.. py:attribute:: adjust_pretrigger_samples_5102
-
-    When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Horizontal:Advanced:5102 Adjust Pretrigger Samples**
-            - C Attribute: **NISCOPE_ATTR_5102_ADJUST_PRETRIGGER_SAMPLES**
-
-.. py:attribute:: five_v_out_output_terminal
-
-    Specifies the destination for the 5 Volt signal.
-    Consult your device documentation for a specific list of valid destinations.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | str        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:5 Volt Power:Output Terminal**
-            - C Attribute: **NISCOPE_ATTR_5V_OUT_OUTPUT_TERMINAL**
-
 .. py:attribute:: absolute_sample_clock_offset
 
     Gets or sets the absolute time offset of the sample clock relative to
@@ -550,30 +501,6 @@ niscope.Session properties
             - LabVIEW Property: **Vertical:Channel Terminal Configuration**
             - C Attribute: **NISCOPE_ATTR_CHANNEL_TERMINAL_CONFIGURATION**
 
-.. py:attribute:: clock_sync_pulse_source
-
-    For the NI 5102, specifies the line on which the sample clock is sent or received. For the NI 5112/5620/5621/5911,  specifies the line on which the one-time sync pulse is sent or received. This line should be the same for all devices to be synchronized.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | str        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Clocking:Clock Sync Pulse Source**
-            - C Attribute: **NISCOPE_ATTR_CLOCK_SYNC_PULSE_SOURCE**
-
 .. py:attribute:: data_transfer_block_size
 
     Specifies the maximum number of samples to transfer at one time from the device to host memory. Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may also increase the amount of page-locked memory required from the system.
@@ -645,30 +572,6 @@ niscope.Session properties
 
             - LabVIEW Property: **Fetch:Advanced:Preferred Packet Size**
             - C Attribute: **NISCOPE_ATTR_DATA_TRANSFER_PREFERRED_PACKET_SIZE**
-
-.. py:attribute:: device_number
-
-    Indicates the device number associated with the current session.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Device Specific:IF Digitizer (5620 and 5621):Advanced:Device Number**
-            - C Attribute: **NISCOPE_ATTR_DEVICE_NUMBER**
 
 .. py:attribute:: device_temperature
 
@@ -1014,30 +917,6 @@ niscope.Session properties
 
             - LabVIEW Property: **Synchronization:Start Trigger (Acq. Arm):Output Terminal**
             - C Attribute: **NISCOPE_ATTR_EXPORTED_START_TRIGGER_OUTPUT_TERMINAL**
-
-.. py:attribute:: fetch_interleaved_data
-
-    Set to True to retrieve one array with alternating values on the NI 5620/5621.  For example, this property can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to True, the resulting array will be twice the size of the actual record length.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Device Specific:IF Digitizer (5620 and 5621):Advanced:Fetch Interleaved Data**
-            - C Attribute: **NISCOPE_ATTR_FETCH_INTERLEAVED_DATA**
 
 .. py:attribute:: flex_fir_antialias_filter_type
 
@@ -2438,30 +2317,6 @@ niscope.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
             - C Attribute: **NISCOPE_ATTR_SIMULATE**
 
-.. py:attribute:: slave_trigger_delay
-
-    Specifies the delay for the trigger from the master to the slave in seconds.  This value adjusts the initial X value of the slave devices to correct for the  propagation delay between the master trigger output and slave trigger input.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | float in seconds or datetime.timedelta |
-    +----------------+----------------------------------------+
-    | Permissions    | read-write                             |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | No                                     |
-    +----------------+----------------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Slave Trigger Delay**
-            - C Attribute: **NISCOPE_ATTR_SLAVE_TRIGGER_DELAY**
-
 .. py:attribute:: specific_driver_class_spec_major_version
 
     The major version number of the class specification with which this driver is compliant.
@@ -2718,78 +2573,6 @@ niscope.Session properties
             - LabVIEW Property: **Triggering:Trigger Delay**
             - C Attribute: **NISCOPE_ATTR_TRIGGER_DELAY_TIME**
 
-.. py:attribute:: trigger_from_pfi_delay
-
-    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set :py:data:`niscope.Session.slave_trigger_delay`.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | float in seconds or datetime.timedelta |
-    +----------------+----------------------------------------+
-    | Permissions    | read only                              |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | No                                     |
-    +----------------+----------------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Trigger from PFI Delay**
-            - C Attribute: **NISCOPE_ATTR_TRIGGER_FROM_PFI_DELAY**
-
-.. py:attribute:: trigger_from_rtsi_delay
-
-    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set :py:data:`niscope.Session.slave_trigger_delay`.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | float in seconds or datetime.timedelta |
-    +----------------+----------------------------------------+
-    | Permissions    | read only                              |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | No                                     |
-    +----------------+----------------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Trigger from RTSI Delay**
-            - C Attribute: **NISCOPE_ATTR_TRIGGER_FROM_RTSI_DELAY**
-
-.. py:attribute:: trigger_from_star_delay
-
-    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this property  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set :py:data:`niscope.Session.slave_trigger_delay`.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | float in seconds or datetime.timedelta |
-    +----------------+----------------------------------------+
-    | Permissions    | read only                              |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | No                                     |
-    +----------------+----------------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Trigger from Star Delay**
-            - C Attribute: **NISCOPE_ATTR_TRIGGER_FROM_STAR_DELAY**
-
 .. py:attribute:: trigger_holdoff
 
     Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This property affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to :py:meth:`niscope.Session.configure_horizontal_timing`.
@@ -2966,78 +2749,6 @@ niscope.Session properties
 
             - LabVIEW Property: **Triggering:Trigger Source**
             - C Attribute: **NISCOPE_ATTR_TRIGGER_SOURCE**
-
-.. py:attribute:: trigger_to_pfi_delay
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  :py:data:`niscope.Session.slave_trigger_delay`.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | float in seconds or datetime.timedelta |
-    +----------------+----------------------------------------+
-    | Permissions    | read only                              |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | No                                     |
-    +----------------+----------------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Trigger to PFI Delay**
-            - C Attribute: **NISCOPE_ATTR_TRIGGER_TO_PFI_DELAY**
-
-.. py:attribute:: trigger_to_rtsi_delay
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   :py:data:`niscope.Session.slave_trigger_delay`.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | float in seconds or datetime.timedelta |
-    +----------------+----------------------------------------+
-    | Permissions    | read only                              |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | No                                     |
-    +----------------+----------------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Trigger to RTSI Delay**
-            - C Attribute: **NISCOPE_ATTR_TRIGGER_TO_RTSI_DELAY**
-
-.. py:attribute:: trigger_to_star_delay
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this property has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set :py:data:`niscope.Session.slave_trigger_delay`.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+----------------------------------------+
-    | Characteristic | Value                                  |
-    +================+========================================+
-    | Datatype       | float in seconds or datetime.timedelta |
-    +----------------+----------------------------------------+
-    | Permissions    | read only                              |
-    +----------------+----------------------------------------+
-    | Channel Based  | False                                  |
-    +----------------+----------------------------------------+
-    | Resettable     | No                                     |
-    +----------------+----------------------------------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Trigger to Star Delay**
-            - C Attribute: **NISCOPE_ATTR_TRIGGER_TO_STAR_DELAY**
 
 .. py:attribute:: trigger_type
 

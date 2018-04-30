@@ -94,17 +94,6 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    adjust_pretrigger_samples_5102 = _attributes.AttributeViBoolean(1150085)
-    '''Type: bool
-
-    When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
-    '''
-    five_v_out_output_terminal = _attributes.AttributeViString(1150129)
-    '''Type: str
-
-    Specifies the destination for the 5 Volt signal.
-    Consult your device documentation for a specific list of valid destinations.
-    '''
     absolute_sample_clock_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150374)
     '''Type: float in seconds or datetime.timedelta
 
@@ -279,11 +268,6 @@ class _SessionBase(object):
         session.channels['0,1'].channel_terminal_configuration = var
         var = session.channels['0,1'].channel_terminal_configuration
     '''
-    clock_sync_pulse_source = _attributes.AttributeViString(1150007)
-    '''Type: str
-
-    For the NI 5102, specifies the line on which the sample clock is sent or received. For the NI 5112/5620/5621/5911,  specifies the line on which the one-time sync pulse is sent or received. This line should be the same for all devices to be synchronized.
-    '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150316)
     '''Type: int
 
@@ -298,11 +282,6 @@ class _SessionBase(object):
     '''Type: int
 
     This property specifies the size of (read request|memory write) data payload. Due to alignment of the data buffers, the hardware may not always generate a packet of this size.
-    '''
-    device_number = _attributes.AttributeViInt32(1150076)
-    '''Type: int
-
-    Indicates the device number associated with the current session.
     '''
     device_temperature = _attributes.AttributeViReal64(1150086)
     '''Type: float
@@ -409,11 +388,6 @@ class _SessionBase(object):
 
     Specifies the destination to export the Start trigger.   When the start trigger is received, the digitizer begins acquiring  samples.
     Consult your device documentation for a specific list of valid destinations.
-    '''
-    fetch_interleaved_data = _attributes.AttributeViBoolean(1150072)
-    '''Type: bool
-
-    Set to True to retrieve one array with alternating values on the NI 5620/5621.  For example, this property can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to True, the resulting array will be twice the size of the actual record length.
     '''
     _fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
     '''Type: int
@@ -1191,11 +1165,6 @@ class _SessionBase(object):
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
     The default value is False.   Use the __init__  method to override this value.
     '''
-    slave_trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
-    '''Type: float in seconds or datetime.timedelta
-
-    Specifies the delay for the trigger from the master to the slave in seconds.  This value adjusts the initial X value of the slave devices to correct for the  propagation delay between the master trigger output and slave trigger input.
-    '''
     specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
     '''Type: int
 
@@ -1258,21 +1227,6 @@ class _SessionBase(object):
     Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
     Valid Values: 0.0 - 171.8
     '''
-    trigger_from_pfi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150052)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set slave_trigger_delay.
-    '''
-    trigger_from_rtsi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set slave_trigger_delay.
-    '''
-    trigger_from_star_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150050)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this property  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set slave_trigger_delay.
-    '''
     trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1250016)
     '''Type: float in seconds or datetime.timedelta
 
@@ -1316,21 +1270,6 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the source the digitizer monitors for the trigger event.
-    '''
-    trigger_to_pfi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150049)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  slave_trigger_delay.
-    '''
-    trigger_to_rtsi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150048)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   slave_trigger_delay.
-    '''
-    trigger_to_star_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150047)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this property has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set slave_trigger_delay.
     '''
     trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1250012)
     '''Type: enums.TriggerType
