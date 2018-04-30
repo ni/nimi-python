@@ -53,8 +53,9 @@ functions_codegen_method = {
     'SampleRate':                       { 'codegen_method': 'no',       },
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
-    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
-    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
+    'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # Per #823, not supporting on board processing (complex numbers #514)
     'FetchBinary8':                     { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
     'FetchBinary16':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
     'FetchBinary32':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
