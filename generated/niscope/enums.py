@@ -205,17 +205,6 @@ class _ClearableMeasurement(Enum):
     TIME_HISTOGRAM_NEW_HITS = 3011
 
 
-class DataProcessingMode(Enum):
-    REAL = 0
-    '''
-    The waveform data points are real numbers (I data).
-    '''
-    COMPLEX = 1
-    '''
-    The waveform data points are complex numbers (IQ data).
-    '''
-
-
 class ExportableSignals(Enum):
     START_TRIGGER = 2
     ADVANCE_TRIGGER = 5
@@ -326,24 +315,6 @@ class Option(Enum):
     RESTORE_EXTERNAL_CALIBRATION = 1
     '''
     Restore External Calibration.
-    '''
-
-
-class OverflowErrorReporting(Enum):
-    ERROR = 0
-    '''
-    Execution stops and NI-SCOPE returns an error when an overflow has
-    occurred in the OSP block.
-    '''
-    WARNING = 1
-    '''
-    Execution continues and NI-SCOPE returns a warning when an overflow has
-    occurred in the OSP block.
-    '''
-    DISABLED = 2
-    '''
-    NI-SCOPE does not return an error when an overflow has occurred in the
-    OSP block.
     '''
 
 
@@ -473,22 +444,6 @@ class _ScalarMeasurement(Enum):
     TIME_HISTOGRAM_MEAN_PLUS_2_STDEV = 3009
     TIME_HISTOGRAM_HITS = 3004
     TIME_HISTOGRAM_NEW_HITS = 3011
-
-
-class StreamingPositionType(Enum):
-    START = 0
-    '''
-    Data is streamed from the start trigger.
-    '''
-    REFERENCE = 1
-    '''
-    Data is streamed relative to the reference trigger and reference
-    position.
-    '''
-    SYNC = 2
-    '''
-    Data is streamed relative to the sync trigger and reference position.
-    '''
 
 
 class TerminalConfiguration(Enum):
