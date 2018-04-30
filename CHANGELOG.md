@@ -12,12 +12,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [Unreleased]
 * ### ALL
     * #### Added
     * #### Changed
+        * `SelfTestError` now inherits from `<driver>.Error` rather than `Exception` - [#830](https://github.com/ni/nimi-python/issues/830)
     * #### Removed
-        * IVI properties as applicale - some where already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
+        * IVI properties as applicable - some where already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
             * `engine_major_version`
             * `engine_minor_version`
             * `engine_revision`
@@ -59,7 +60,6 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-
 
 ## 0.8.0 - 2018-04-27
 * ### ALL
