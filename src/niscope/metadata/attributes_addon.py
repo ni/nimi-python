@@ -172,6 +172,18 @@ attributes_codegen_method = {
     1150311: { "codegen_method": "no" },  # FETCH_INTERLEAVED_IQ_DATA - Onboard Processing Attribute - #823
     1150320: { "codegen_method": "no" },  # FRACTIONAL_RESAMPLE_ENABLED - Onboard Processing Attribute - #823
     1150309: { "codegen_method": "no" },  # OVERFLOW_ERROR_REPORTING - Onboard Processing Attribute - #823
+    1150085: { "codegen_method": "no" },  # 5102_ADJUST_PRETRIGGER_SAMPLES - Onboard Processing Attribute - #822
+    1150129: { "codegen_method": "no" },  # 5V_OUT_OUTPUT_TERMINAL - Onboard Processing Attribute - #822
+    1150007: { "codegen_method": "no" },  # CLOCK_SYNC_PULSE_SOURCE - Onboard Processing Attribute - #822
+    1150076: { "codegen_method": "no" },  # DEVICE_NUMBER - Onboard Processing Attribute - #822
+    1150072: { "codegen_method": "no" },  # FETCH_INTERLEAVED_DATA - Onboard Processing Attribute - #822
+    1150052: { "codegen_method": "no" },  # TRIGGER_FROM_PFI_DELAY - Onboard Processing Attribute - #822
+    1150051: { "codegen_method": "no" },  # TRIGGER_FROM_RTSI_DELAY - Onboard Processing Attribute - #822
+    1150050: { "codegen_method": "no" },  # TRIGGER_FROM_STAR_DELAY - Onboard Processing Attribute - #822
+    1150049: { "codegen_method": "no" },  # TRIGGER_TO_PFI_DELAY - Onboard Processing Attribute - #822
+    1150048: { "codegen_method": "no" },  # TRIGGER_TO_RTSI_DELAY - Onboard Processing Attribute - #822
+    1150047: { "codegen_method": "no" },  # TRIGGER_TO_STAR_DELAY - Onboard Processing Attribute - #822
+    1150046: { "codegen_method": "no" },  # SLAVE_TRIGGER_DELAY - Onboard Processing Attribute - #822
     1150077: { "codegen_method": "private" },  # FETCH_RELATIVE_TO - Fetch attribute
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
     1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
