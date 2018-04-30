@@ -34,10 +34,6 @@ def test_multi_point_acquisition(session):
 
 
 # Attribute tests
-def test_vi_boolean_attribute(session):
-    assert session.interchange_check is False
-
-
 def test_vi_string_attribute(session):
     assert session.serial_number == 'FFFFFFFF'
     try:
@@ -323,11 +319,18 @@ def test_error_message(session):
     assert message == 'The data is not available. This can be caused by calling Fetch or FetchMultiPoint before calling Initiate or after calling Abort.'
 
 
+# No boolean attributes that aren't IVI
+'''
+def test_vi_boolean_attribute(session):
+    assert session.interchange_check is False
+
+
 def test_set_boolean_attribute(session):
     session.cache = False
     assert session.cache is False
     session.cache = True
     assert session.cache is True
+'''
 
 
 def test_get_ext_cal_recommended_interval(session):
