@@ -12,6 +12,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+
 ## 0.8.0 - 2018-04-27
 * ### ALL
     * #### Changed
