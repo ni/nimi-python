@@ -58,6 +58,18 @@ All notable changes to this project will be documented in this file.
             * `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
             * `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
             * `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `adjust_pretrigger_samples_5102` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `five_v_out_output_terminal` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `clock_sync_pulse_source` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `device_number` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `fetch_interleaved_data` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_from_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_from_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_from_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_to_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_to_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_to_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `slave_trigger_delay` [#822](https://github.com/ni/nimi-python/issues/822)
         * Methods removed
             * `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
 
