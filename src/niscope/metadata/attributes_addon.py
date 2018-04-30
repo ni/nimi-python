@@ -57,17 +57,6 @@ attributes_converters = {
 # Python API bindings release
 # We also do not need to codegen attributes that apply to P2P since it is not supported in Python
 attributes_codegen_method = {
-    1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS
-    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX
-    1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION
-    1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION
-    1050553: { "codegen_method": "no" },  # ENGINE_REVISION
-    1050322: { "codegen_method": "no" },  # IO_SESSION
-    1050051: { "codegen_method": "no" },  # DEFER_UPDATE
-    1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES
-    1050101: { "codegen_method": "no" },  # PRIMARY_ERROR
-    1050102: { "codegen_method": "no" },  # SECONDARY_ERROR
-    1050103: { "codegen_method": "no" },  # ERROR_ELABORATION
     1150010: { "codegen_method": "no" },  # TRIGGER_OUTPUT_EVENT
     1150011: { "codegen_method": "no" },  # TRIGGER_OUTPUT_SOURCE
     1150091: { "codegen_method": "no" },  # EXPORT_SAMP_CLK_OUTPUT_TERM
@@ -156,6 +145,24 @@ attributes_codegen_method = {
     1150345: { "codegen_method": "no" },  # P2P_FIFO_ENDPOINT_COUNT - P2P Attribute
     1150354: { "codegen_method": "no" },  # P2P_ONBOARD_MEMORY_ENABLED - P2P Attribute
     1150380: { "codegen_method": "no" },  # SAMPLES_TRANSFERRED_PER_RECORD - P2P Attribute
+    1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute - #824
+    1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute - #824
+    1050002: { "codegen_method": "no" },  # RANGE_CHECK - IVI Attribute - #824
+    1050006: { "codegen_method": "no" },  # RECORD_COERCIONS - IVI Attribute - #824
+    1050515: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION - IVI Attribute - #824
+    1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute - #824
+    1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS - IVI Attribute - #824
+    1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX - IVI Attribute - #824
+    1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION - IVI Attribute - #824
+    1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION - IVI Attribute - #824
+    1050553: { "codegen_method": "no" },  # ENGINE_REVISION - IVI Attribute - #824
+    1050322: { "codegen_method": "no" },  # IO_SESSION - IVI Attribute - #824
+    1050051: { "codegen_method": "no" },  # DEFER_UPDATE - IVI Attribute - #824
+    1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES - IVI Attribute - #824
+    1050101: { "codegen_method": "no" },  # PRIMARY_ERROR - IVI Attribute - #824
+    1050102: { "codegen_method": "no" },  # SECONDARY_ERROR - IVI Attribute - #824
+    1050103: { "codegen_method": "no" },  # ERROR_ELABORATION - IVI Attribute - #824
+    1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
     1150077: { "codegen_method": "private" },  # FETCH_RELATIVE_TO - Fetch attribute
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
     1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
