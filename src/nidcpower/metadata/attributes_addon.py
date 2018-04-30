@@ -4,6 +4,16 @@
 # We are not code genning attributes that have been marked as obsolete prior to the initial
 # Python API bindings release
 
+attributes_codegen_method = {
+    1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute - #824
+    1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute - #824
+    1050002: { "codegen_method": "no" },  # RANGE_CHECK - IVI Attribute - #824
+    1050006: { "codegen_method": "no" },  # RECORD_COERCIONS - IVI Attribute - #824
+    1050515: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION - IVI Attribute - #824
+    1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute - #824
+    1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
+}
+
 attributes_converters = {
     1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # MEASURE_COMPLETE_EVENT_DELAY

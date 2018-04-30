@@ -187,15 +187,6 @@ class _SessionBase(object):
 
     Note: This property does not necessarily indicate if the device is using the auxiliary
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties.
-    When caching is enabled, NI-DCPower records the current power supply settings and avoids sending  redundant commands to the device. Enabling caching can significantly increase execution speed.
-    NI-DCPower might always cache or never cache particular properties regardless of the setting of this property.
-    Use the __init__ method to override this value.
-    Default Value: True
-    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -657,11 +648,6 @@ class _SessionBase(object):
 
     Returns the number of measurements acquired that have not been fetched yet.
     '''
-    group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
-
-    Contains a comma-separated list of class-extension groups that NI-DCPower implements.
-    '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
@@ -676,18 +662,6 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the model number or name of the device that you are currently using.
-    '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower methods. True specifies that interchangeability checking is enabled.
-    Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the GetNextInterchangeWarning method to retrieve  interchange warnings.
-    Call the GetNextInterchangeWarning method to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when a property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
-    Default Value: False
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     interlock_input_open = _attributes.AttributeViBoolean(1150105)
     '''Type: bool
@@ -1666,14 +1640,6 @@ class _SessionBase(object):
     Use the __init__ method to override this value.
     Default Value: True
     '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters.
-    If this property is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower methods.  Range checking parameters is useful for debugging. After you validate your program, you can set this  property to False to disable range checking and maximize performance.
-    Use the __init__ method to override this value.
-    Default Value: True
-    '''
     ready_for_pulse_trigger_event_output_terminal = _attributes.AttributeViString(1150102)
     '''Type: str
 
@@ -1699,15 +1665,6 @@ class _SessionBase(object):
     Default Value: The default value for PXI Express devices is 250 ns
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-    '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 properties.  Call the GetNextCoercionRecord method to read and delete the earliest coercion record from the list.
-    Default Value: The default value is False. Use the __init__ method to override this value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     reset_average_before_measurement = _attributes.AttributeViBoolean(1150006)
     '''Type: bool
@@ -1938,16 +1895,6 @@ class _SessionBase(object):
     Default Value: TriggerType.NONE
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
-    '''
-    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
-    '''Type: int
-
-    Contains the major version number of the class specification with which NI-DCPower is compliant.
-    '''
-    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
-    '''Type: int
-
-    Contains the minor version number of the class specification with which NI-DCPower is compliant.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
