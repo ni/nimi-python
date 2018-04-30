@@ -59,11 +59,14 @@ def test_continuous_software_scanning(session):
 
 
 # Attribute Tests
+# No R/W non-IVI boolean attributes on all devices
+'''
 def test_vi_boolean_attribute(session):
-    session.interchange_check = False
-    assert session.interchange_check is False
-    session.interchange_check = True
-    assert session.interchange_check is True
+    session.power_down_latching_relays_after_debounce = False
+    assert session.power_down_latching_relays_after_debounce is False
+    session.power_down_latching_relays_after_debounce = True
+    assert session.power_down_latching_relays_after_debounce is True
+'''
 
 
 def test_vi_string_attribute(session):

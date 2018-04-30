@@ -384,35 +384,6 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Bus Type**
             - C Attribute: **NIFGEN_ATTR_BUS_TYPE**
 
-.. py:attribute:: cache
-
-    Specifies whether to cache the value of properties.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
-    NI-FGEN can choose to always cache or to never cache  particular properties regardless of the setting of this property.  Use :py:meth:`nifgen.Session.InitWithOptions` to override the default value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Cache**
-            - C Attribute: **NIFGEN_ATTR_CACHE**
-
 .. py:attribute:: channel_delay
 
     Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this property can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
@@ -1947,30 +1918,6 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Calibration:Gain DAC Value**
             - C Attribute: **NIFGEN_ATTR_GAIN_DAC_VALUE**
 
-.. py:attribute:: group_capabilities
-
-    Returns a string that contains a comma-separated list of class-extention groups that  NI-FGEN implements.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities**
-            - C Attribute: **NIFGEN_ATTR_GROUP_CAPABILITIES**
-
 .. py:attribute:: idle_behavior
 
     Specifies the behavior of the output during the Idle state.  The output can be configured to hold the last generated voltage before entering the Idle state or jump to the Idle Value.
@@ -2113,36 +2060,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:Instrument Identification:Model**
             - C Attribute: **NIFGEN_ATTR_INSTRUMENT_MODEL**
-
-.. py:attribute:: interchange_check
-
-    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  :py:meth:`nifgen.Session._initiate_generation`.
-    Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call :py:meth:`nifgen.Session.GetNextInterchangeWarning` to extract interchange warnings.   Call :py:meth:`nifgen.Session.ClearInterchangeWarnings` to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group. Interchangeability warnings can  occur when a property affects the behavior of the device and you  have not set that property, or the property has been invalidated since you set it.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Interchange Check**
-            - C Attribute: **NIFGEN_ATTR_INTERCHANGE_CHECK**
 
 .. py:attribute:: io_resource_descriptor
 
@@ -3751,36 +3668,6 @@ nifgen.Session properties
             - LabVIEW Property: **Instrument:Calibration:Pre-Amplifier Attenuation**
             - C Attribute: **NIFGEN_ATTR_PRE_AMPLIFIER_ATTENUATION**
 
-.. py:attribute:: range_check
-
-    Specifies whether to validate property values and method parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the methods. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
-    Default Value: True
-    Use :py:meth:`nifgen.Session.InitWithOptions` to override the default value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Range Check**
-            - C Attribute: **NIFGEN_ATTR_RANGE_CHECK**
-
 .. py:attribute:: ready_for_start_event_level_active_level
 
     Specifies the output polarity of the Ready for Start Event.
@@ -3852,36 +3739,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Events:Ready For Start:Output Terminal**
             - C Attribute: **NIFGEN_ATTR_READY_FOR_START_EVENT_OUTPUT_TERMINAL**
-
-.. py:attribute:: record_coercions
-
-    Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   Call :py:meth:`nifgen.Session.GetNextCoercionRecord` to extract and delete the oldest  coercion record from the list.
-    Default Value: False
-    Use :py:meth:`nifgen.Session.InitWithOptions` to override default value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Record Value Coercions**
-            - C Attribute: **NIFGEN_ATTR_RECORD_COERCIONS**
 
 .. py:attribute:: reference_clock_source
 
@@ -4182,54 +4039,6 @@ nifgen.Session properties
 
             - LabVIEW Property: **Instrument:Inherent IVI Attributes:User Options:Simulate**
             - C Attribute: **NIFGEN_ATTR_SIMULATE**
-
-.. py:attribute:: specific_driver_class_spec_major_version
-
-    Returns the major version number of the class specification with which NI-FGEN is compliant.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Major Version**
-            - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
-
-.. py:attribute:: specific_driver_class_spec_minor_version
-
-    Returns the minor version number of the class specification with which NI-FGEN is compliant.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Minor Version**
-            - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
 
 .. py:attribute:: specific_driver_description
 

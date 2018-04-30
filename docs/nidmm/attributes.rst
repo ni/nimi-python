@@ -237,30 +237,6 @@ nidmm.Session properties
             - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
             - C Attribute: **NIDMM_ATTR_CABLE_COMP_TYPE**
 
-.. py:attribute:: cache
-
-    Specifies whether to cache the value of properties. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular properties regardless of the setting of this  property. The default value is True (1). Use the :py:meth:`nidmm.Session.__init__`  method to override this value.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
-            - C Attribute: **NIDMM_ATTR_CACHE**
-
 .. py:attribute:: channel_count
 
     Indicates the number of channels that the specific instrument driver  supports. For each property for which the IVI_VAL_MULTI_CHANNEL flag  property is set, the IVI engine maintains a separate cache value for each  channel.
@@ -459,30 +435,6 @@ nidmm.Session properties
             - LabVIEW Property: **Configuration:Function**
             - C Attribute: **NIDMM_ATTR_FUNCTION**
 
-.. py:attribute:: group_capabilities
-
-    A string containing the capabilities and extension groups supported by the  specific driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Group Capabilities**
-            - C Attribute: **NIDMM_ATTR_GROUP_CAPABILITIES**
-
 .. py:attribute:: input_resistance
 
     Specifies the input resistance of the instrument.
@@ -603,37 +555,6 @@ nidmm.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
             - C Attribute: **NIDMM_ATTR_INSTRUMENT_PRODUCT_ID**
-
-.. py:attribute:: interchange_check
-
-    Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM methods.
-    The default value is False.
-    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call :py:meth:`nidmm.Session.GetNextInterchangeWarning`  to extract interchange warnings.  Call :py:meth:`nidmm.Session.ClearInterchangeWarnings`  to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when a property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
-            - C Attribute: **NIDMM_ATTR_INTERCHANGE_CHECK**
 
 .. py:attribute:: io_resource_descriptor
 
@@ -992,60 +913,6 @@ nidmm.Session properties
             - LabVIEW Property: **Configuration:Range**
             - C Attribute: **NIDMM_ATTR_RANGE**
 
-.. py:attribute:: range_check
-
-    Specifies whether to validate property values and method parameters. If  enabled, the instrument driver validates the parameter values passed to  driver methods. Range checking parameters is very useful for debugging.  After the user program is validated, this property can be set to False (0) to  disable range checking and maximize performance.
-    The default value is True (1). Use the :py:meth:`nidmm.Session.__init__` method to  override this value.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
-            - C Attribute: **NIDMM_ATTR_RANGE_CHECK**
-
-.. py:attribute:: record_coercions
-
-    Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 properties. Call :py:meth:`nidmm.Session.GetNextCoercionRecord` to extract  and delete the oldest coercion record from the list.
-    The default value is False (0). Use the :py:meth:`nidmm.Session.__init__` method to  override this value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
-            - C Attribute: **NIDMM_ATTR_RECORD_COERCIONS**
-
 .. py:attribute:: resolution_absolute
 
     Specifies the measurement resolution in absolute units. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
@@ -1350,54 +1217,6 @@ nidmm.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
             - C Attribute: **NIDMM_ATTR_SIMULATE**
-
-.. py:attribute:: specific_driver_class_spec_major_version
-
-    The major version number of the class specification for the specific driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Major Version**
-            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
-
-.. py:attribute:: specific_driver_class_spec_minor_version
-
-    The minor version number of the class specification for the specific driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Class Spec Minor Version**
-            - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
 
 .. py:attribute:: specific_driver_description
 
