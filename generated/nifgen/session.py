@@ -187,15 +187,6 @@ class _SessionBase(object):
 
     The bus type of the signal generator.
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.
-    NI-FGEN can choose to always cache or to never cache  particular properties regardless of the setting of this property.  Use InitWithOptions to override the default value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
-    '''
     channel_delay = _attributes.AttributeViReal64(1150369)
     '''Type: float
 
@@ -557,11 +548,6 @@ class _SessionBase(object):
 
     Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
     '''
-    group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
-
-    Returns a string that contains a comma-separated list of class-extention groups that  NI-FGEN implements.
-    '''
     idle_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
     '''Type: enums.IdleBehavior
 
@@ -587,16 +573,6 @@ class _SessionBase(object):
     '''Type: str
 
     A string that contains the model number or name of the device that you  are currently using.
-    '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  _initiate_generation.
-    Interchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call GetNextInterchangeWarning to extract interchange warnings.   Call ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group. Interchangeability warnings can  occur when a property affects the behavior of the device and you  have not set that property, or the property has been invalidated since you set it.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
@@ -947,16 +923,6 @@ class _SessionBase(object):
 
     Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
     '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the methods. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
-    Default Value: True
-    Use InitWithOptions to override the default value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
-    '''
     ready_for_start_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
     '''Type: enums.ReadyForStartEventActiveLevel
 
@@ -971,16 +937,6 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the destination terminal for the Ready for Start Event.
-    '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   Call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
-    Default Value: False
-    Use InitWithOptions to override default value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     reference_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
     '''Type: enums.ReferenceClockSource
@@ -1059,16 +1015,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
-    '''
-    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
-    '''Type: int
-
-    Returns the major version number of the class specification with which NI-FGEN is compliant.
-    '''
-    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
-    '''Type: int
-
-    Returns the minor version number of the class specification with which NI-FGEN is compliant.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str

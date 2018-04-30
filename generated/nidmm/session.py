@@ -154,11 +154,6 @@ class _SessionBase(object):
     For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties. When caching is enabled,  the instrument driver keeps track of the current instrument settings and  avoids sending redundant commands to the instrument. Thus, it significantly  increases execution speed. The instrument driver can choose always to cache  or to never cache particular properties regardless of the setting of this  property. The default value is True (1). Use the __init__  method to override this value.
-    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -205,11 +200,6 @@ class _SessionBase(object):
     Refer to the method topic in  the NI Digital Multimeters Help for device-specific information.
     If you are setting this property directly, you must also set the operation_mode property,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming properties directly, you must set the operation_mode property before  setting other configuration properties. If the operation_mode property is set to OperationMode.WAVEFORM,  the only valid method types are Method.WAVEFORM_VOLTAGE and Method.WAVEFORM_CURRENT. Set the  operation_mode property to OperationMode.IVIDMM to set all other method values.
     '''
-    group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
-
-    A string containing the capabilities and extension groups supported by the  specific driver.
-    '''
     input_resistance = _attributes.AttributeViReal64(1150029)
     '''Type: float
 
@@ -235,17 +225,6 @@ class _SessionBase(object):
     '''Type: int
 
     The PCI product ID.
-    '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    Specifies whether to perform interchangeability checking and log  interchangeability warnings when you call niDMM methods.
-    The default value is False.
-    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.  Call GetNextInterchangeWarning  to extract interchange warnings.  Call ClearInterchangeWarnings  to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group  only if you specify a value for at least one property within that group.   Interchangeability warnings can occur when a property affects the behavior  of the instrument and you have not set that property, or the property has  been invalidated since you set it.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
@@ -336,21 +315,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters. If  enabled, the instrument driver validates the parameter values passed to  driver methods. Range checking parameters is very useful for debugging.  After the user program is validated, this property can be set to False (0) to  disable range checking and maximize performance.
-    The default value is True (1). Use the __init__ method to  override this value.
-    '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI engine keeps a list of the value coercions it makes  for ViInt32 and ViReal64 properties. Call GetNextCoercionRecord to extract  and delete the oldest coercion record from the list.
-    The default value is False (0). Use the __init__ method to  override this value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
-    '''
     resolution_absolute = _attributes.AttributeViReal64(1250008)
     '''Type: float
 
@@ -426,16 +390,6 @@ class _SessionBase(object):
     Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver methods perform range checking and  call IVI Get and Set methods, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver methods return calculated values.
     The default value is False (0). Use the __init__ method to  override this setting.
     Simulate can only be set within the InitWithOptions method.  The property value cannot be changed outside of the method.
-    '''
-    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
-    '''Type: int
-
-    The major version number of the class specification for the specific driver.
-    '''
-    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
-    '''Type: int
-
-    The minor version number of the class specification for the specific driver.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str

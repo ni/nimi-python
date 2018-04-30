@@ -422,32 +422,6 @@ niscope.Session properties
             - LabVIEW Property: **Acquisition:Binary Sample Width**
             - C Attribute: **NISCOPE_ATTR_BINARY_SAMPLE_WIDTH**
 
-.. py:attribute:: cache
-
-    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
-    The instrument driver can choose to always cache or to never cache  particular properties regardless of the setting of this property.
-    The default value is True.   Use :py:meth:`niscope.Session.__init__`  to override this value.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
-            - C Attribute: **NISCOPE_ATTR_CACHE**
-
 .. py:attribute:: channel_count
 
     Indicates the number of channels that the specific instrument driver  supports.
@@ -1526,30 +1500,6 @@ niscope.Session properties
             - LabVIEW Property: **Onboard Signal Processing:Fractional Resample:Fractional Resample Enabled**
             - C Attribute: **NISCOPE_ATTR_FRACTIONAL_RESAMPLE_ENABLED**
 
-.. py:attribute:: group_capabilities
-
-    A string that contains a comma-separated list of class extension groups that this driver implements.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities**
-            - C Attribute: **NISCOPE_ATTR_GROUP_CAPABILITIES**
-
 .. py:attribute:: high_pass_filter_frequency
 
     Specifies the frequency for the highpass filter in Hz. The device uses
@@ -1885,30 +1835,6 @@ niscope.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
             - C Attribute: **NISCOPE_ATTR_INSTRUMENT_MODEL**
-
-.. py:attribute:: interchange_check
-
-    NI-SCOPE does not generate interchange warnings and therefore ignores this property.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
-            - C Attribute: **NISCOPE_ATTR_INTERCHANGE_CHECK**
 
 .. py:attribute:: interleaving_offset_correction_enabled
 
@@ -2386,31 +2312,6 @@ niscope.Session properties
             - LabVIEW Property: **Vertical:Probe Attenuation**
             - C Attribute: **NISCOPE_ATTR_PROBE_ATTENUATION**
 
-.. py:attribute:: range_check
-
-    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver methods.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this property to  False to disable range checking and maximize performance.
-    The default value is True.   Use the :py:meth:`niscope.Session.__init__`  method to override this value.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
-            - C Attribute: **NISCOPE_ATTR_RANGE_CHECK**
-
 .. py:attribute:: ready_for_advance_event_output_terminal
 
     Specifies the destination for the Ready for Advance Event.    When this event is asserted, the digitizer is ready to receive an advance trigger.
@@ -2533,31 +2434,6 @@ niscope.Session properties
 
             - LabVIEW Property: **Synchronization:Record Arm Source**
             - C Attribute: **NISCOPE_ATTR_RECORD_ARM_SOURCE**
-
-.. py:attribute:: record_coercions
-
-    Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 properties.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is False.   Use the :py:meth:`niscope.Session.__init__`  method to override this value.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
-            - C Attribute: **NISCOPE_ATTR_RECORD_COERCIONS**
 
 .. py:attribute:: ref_clk_rate
 
@@ -2963,54 +2839,6 @@ niscope.Session properties
 
             - LabVIEW Property: **Synchronization:Trigger Calibration Delay:Slave Trigger Delay**
             - C Attribute: **NISCOPE_ATTR_SLAVE_TRIGGER_DELAY**
-
-.. py:attribute:: specific_driver_class_spec_major_version
-
-    The major version number of the class specification with which this driver is compliant.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Major Version**
-            - C Attribute: **NISCOPE_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
-
-.. py:attribute:: specific_driver_class_spec_minor_version
-
-    The minor version number of the class specification with which this driver is compliant.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Minor Version**
-            - C Attribute: **NISCOPE_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
 
 .. py:attribute:: specific_driver_description
 
