@@ -12,6 +12,55 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+        * IVI properties as applicale - some where already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
+            * `engine_major_version`
+            * `engine_minor_version`
+            * `engine_revision`
+            * `primary_error`
+            * `secondary_error`
+            * `error_elaboration`
+            * `io_session_type`
+            * `io_session` / `visa_rm_session`
+            * `group_capabilities`
+            * `interchange_check`
+            * `range_check`
+            * `record_coercions`
+            * `specific_driver_class_spec_major_version`
+            * `specific_driver_class_spec_minor_version`
+            * `query_instrument_status`
+            * `cache`
+            * `specific_driver_prefix`
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+
+
 ## 0.8.0 - 2018-04-27
 * ### ALL
     * #### Changed
