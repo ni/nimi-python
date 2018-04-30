@@ -159,31 +159,31 @@ attributes_codegen_method = {
     1150373: { "codegen_method": "no" },  # STREAM_RELATIVE_TO - P2P Attribute - #825
     1150105: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - NI-TClk Attribute - #825
     1151002: { "codegen_method": "no" },  # MUX_MODE_REGISTER - Internal Attribute - #825
-    1150303: { "codegen_method": "no" },  # DDC_CENTER_FREQUENCY - Onboard Processing Attribute - #823
-    1150304: { "codegen_method": "no" },  # DDC_DATA_PROCESSING_MODE - Onboard Processing Attribute - #823
-    1150300: { "codegen_method": "no" },  # DDC_ENABLED - Onboard Processing Attribute - #823
-    1150302: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_ENABLED - Onboard Processing Attribute - #823
-    1150305: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_PHASE_I - Onboard Processing Attribute - #823
-    1150306: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_PHASE_Q - Onboard Processing Attribute - #823
-    1150310: { "codegen_method": "no" },  # DDC_Q_SOURCE - Onboard Processing Attribute - #823
-    1150307: { "codegen_method": "no" },  # DIGITAL_GAIN - Onboard Processing Attribute - #823
-    1150308: { "codegen_method": "no" },  # DIGITAL_OFFSET - Onboard Processing Attribute - #823
-    1150319: { "codegen_method": "no" },  # DITHER_ENABLED - Onboard Processing Attribute - #823
-    1150311: { "codegen_method": "no" },  # FETCH_INTERLEAVED_IQ_DATA - Onboard Processing Attribute - #823
-    1150320: { "codegen_method": "no" },  # FRACTIONAL_RESAMPLE_ENABLED - Onboard Processing Attribute - #823
-    1150309: { "codegen_method": "no" },  # OVERFLOW_ERROR_REPORTING - Onboard Processing Attribute - #823
-    1150085: { "codegen_method": "no" },  # 5102_ADJUST_PRETRIGGER_SAMPLES - Onboard Processing Attribute - #822
-    1150129: { "codegen_method": "no" },  # 5V_OUT_OUTPUT_TERMINAL - Onboard Processing Attribute - #822
-    1150007: { "codegen_method": "no" },  # CLOCK_SYNC_PULSE_SOURCE - Onboard Processing Attribute - #822
-    1150076: { "codegen_method": "no" },  # DEVICE_NUMBER - Onboard Processing Attribute - #822
-    1150072: { "codegen_method": "no" },  # FETCH_INTERLEAVED_DATA - Onboard Processing Attribute - #822
-    1150052: { "codegen_method": "no" },  # TRIGGER_FROM_PFI_DELAY - Onboard Processing Attribute - #822
-    1150051: { "codegen_method": "no" },  # TRIGGER_FROM_RTSI_DELAY - Onboard Processing Attribute - #822
-    1150050: { "codegen_method": "no" },  # TRIGGER_FROM_STAR_DELAY - Onboard Processing Attribute - #822
-    1150049: { "codegen_method": "no" },  # TRIGGER_TO_PFI_DELAY - Onboard Processing Attribute - #822
-    1150048: { "codegen_method": "no" },  # TRIGGER_TO_RTSI_DELAY - Onboard Processing Attribute - #822
-    1150047: { "codegen_method": "no" },  # TRIGGER_TO_STAR_DELAY - Onboard Processing Attribute - #822
-    1150046: { "codegen_method": "no" },  # SLAVE_TRIGGER_DELAY - Onboard Processing Attribute - #822
+    1150303: { "codegen_method": "no" },  # DDC_CENTER_FREQUENCY - Onboard Signal Processing Attribute - #823
+    1150304: { "codegen_method": "no" },  # DDC_DATA_PROCESSING_MODE - Onboard Signal Processing Attribute - #823
+    1150300: { "codegen_method": "no" },  # DDC_ENABLED - Onboard Signal Processing Attribute - #823
+    1150302: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_ENABLED - Onboard Signal Processing Attribute - #823
+    1150305: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_PHASE_I - Onboard Signal Processing Attribute - #823
+    1150306: { "codegen_method": "no" },  # DDC_FREQUENCY_TRANSLATION_PHASE_Q - Onboard Signal Processing Attribute - #823
+    1150310: { "codegen_method": "no" },  # DDC_Q_SOURCE - Onboard Signal Processing Attribute - #823
+    1150307: { "codegen_method": "no" },  # DIGITAL_GAIN - Onboard Signal Processing Attribute - #823
+    1150308: { "codegen_method": "no" },  # DIGITAL_OFFSET - Onboard Signal Processing Attribute - #823
+    1150319: { "codegen_method": "no" },  # DITHER_ENABLED - Onboard Signal Processing Attribute - #823
+    1150311: { "codegen_method": "no" },  # FETCH_INTERLEAVED_IQ_DATA - Onboard Signal Processing Attribute - #823
+    1150320: { "codegen_method": "no" },  # FRACTIONAL_RESAMPLE_ENABLED - Onboard Signal Processing Attribute - #823
+    1150309: { "codegen_method": "no" },  # OVERFLOW_ERROR_REPORTING - Onboard Signal Processing Attribute - #823
+    1150085: { "codegen_method": "no" },  # 5102_ADJUST_PRETRIGGER_SAMPLES - Onboard Signal Processing Attribute - #822
+    1150129: { "codegen_method": "no" },  # 5V_OUT_OUTPUT_TERMINAL - Onboard Signal Processing Attribute - #822
+    1150007: { "codegen_method": "no" },  # CLOCK_SYNC_PULSE_SOURCE - Onboard Signal Processing Attribute - #822
+    1150076: { "codegen_method": "no" },  # DEVICE_NUMBER - Onboard Signal Processing Attribute - #822
+    1150072: { "codegen_method": "no" },  # FETCH_INTERLEAVED_DATA - Onboard Signal Processing Attribute - #822
+    1150052: { "codegen_method": "no" },  # TRIGGER_FROM_PFI_DELAY - Onboard Signal Processing Attribute - #822
+    1150051: { "codegen_method": "no" },  # TRIGGER_FROM_RTSI_DELAY - Onboard Signal Processing Attribute - #822
+    1150050: { "codegen_method": "no" },  # TRIGGER_FROM_STAR_DELAY - Onboard Signal Processing Attribute - #822
+    1150049: { "codegen_method": "no" },  # TRIGGER_TO_PFI_DELAY - Onboard Signal Processing Attribute - #822
+    1150048: { "codegen_method": "no" },  # TRIGGER_TO_RTSI_DELAY - Onboard Signal Processing Attribute - #822
+    1150047: { "codegen_method": "no" },  # TRIGGER_TO_STAR_DELAY - Onboard Signal Processing Attribute - #822
+    1150046: { "codegen_method": "no" },  # SLAVE_TRIGGER_DELAY - Onboard Signal Processing Attribute - #822
     1150077: { "codegen_method": "private" },  # FETCH_RELATIVE_TO - Fetch attribute
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute
     1150079: { "codegen_method": "private" },  # FETCH_RECORD_NUMBER - Fetch attribute
