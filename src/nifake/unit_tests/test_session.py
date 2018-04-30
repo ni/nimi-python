@@ -449,8 +449,6 @@ class TestSession(object):
                 _matchers.ViInt16BufferMatcher(input_array_of_integers)
             )
 
-    # TODO(marcoskirsch): One of the input arrays is optional. C function receives size for both arrays, and Python code is using the wrong one for the size. See #515
-    '''
     def test_multiple_array_types_none_input(self):
         self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
         expected_output_array = [0.2, 0.4]
@@ -472,7 +470,6 @@ class TestSession(object):
                 None,
                 _matchers.ViInt16BufferMatcher(input_array_of_integers)
             )
-    '''
 
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
