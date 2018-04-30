@@ -58,6 +58,8 @@ All notable changes to this project will be documented in this file.
             * `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
             * `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
             * `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
+        * Methods removed
+            * `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
 
 ## 0.8.0 - 2018-04-27
 * ### ALL
