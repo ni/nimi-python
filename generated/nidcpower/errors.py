@@ -64,7 +64,7 @@ class InvalidRepeatedCapabilityError(Error):
         super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({0}) was found in repeated capability string ({1})'.format(invalid_character, invalid_string))
 
 
-class SelfTestError(Exception):
+class SelfTestError(Error):
     '''An error due to a failed self-test'''
 
     def __init__(self, code, msg):
