@@ -159,12 +159,6 @@ attributes_codegen_method = {
     1150373: { "codegen_method": "no" },  # STREAM_RELATIVE_TO - P2P Attribute - #825
     1150105: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - NI-TClk Attribute - #825
     1151002: { "codegen_method": "no" },  # MUX_MODE_REGISTER - Internal Attribute - #825
-    1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute - #824
-    1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute - #824
-    1050002: { "codegen_method": "no" },  # RANGE_CHECK - IVI Attribute - #824
-    1050006: { "codegen_method": "no" },  # RECORD_COERCIONS - IVI Attribute - #824
-    1050515: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION - IVI Attribute - #824
-    1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute - #824
     1150303: { "codegen_method": "no" },  # DDC_CENTER_FREQUENCY - Onboard Processing Attribute - #823
     1150304: { "codegen_method": "no" },  # DDC_DATA_PROCESSING_MODE - Onboard Processing Attribute - #823
     1150300: { "codegen_method": "no" },  # DDC_ENABLED - Onboard Processing Attribute - #823
