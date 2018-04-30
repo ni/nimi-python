@@ -449,6 +449,22 @@ class TestSession(object):
                 _matchers.ViReal64BufferMatcher(input_array_of_floats)
             )
 
+    def test_multiple_array_types_wrong_size(self):
+        self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
+        expected_output_array = [0.2, 0.4]
+        expected_output_array_of_fixed_length = [-6, -7, -8]
+        output_array_size = len(expected_output_array)
+        input_array_of_integers = [1, 2]
+        input_array_of_floats = [-1.0, -2.0, -3.0]
+        self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
+        self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
+        with nifake.Session('dev1') as session:
+            try:
+                output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers, input_array_of_floats)
+                assert False
+            except ValueError:
+                pass
+
     def test_multiple_array_types_none_input(self):
         self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
         expected_output_array = [0.2, 0.4]
