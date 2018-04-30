@@ -436,7 +436,7 @@ class TestSession(object):
         self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
         self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
         with nifake.Session('dev1') as session:
-            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
+            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers, input_array_of_floats)
             assert output_array == output_array
             assert expected_output_array_of_fixed_length == output_array_of_fixed_length
             self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
@@ -445,12 +445,26 @@ class TestSession(object):
                 _matchers.ViReal64BufferMatcher(output_array_size),
                 _matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length)),
                 _matchers.ViInt32Matcher(len(input_array_of_integers)),
-                _matchers.ViReal64BufferMatcher(input_array_of_floats),
-                _matchers.ViInt16BufferMatcher(input_array_of_integers)
+                _matchers.ViInt16BufferMatcher(input_array_of_integers),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats)
             )
 
-    # TODO(marcoskirsch): One of the input arrays is optional. C function receives size for both arrays, and Python code is using the wrong one for the size. See #515
-    '''
+    def test_multiple_array_types_wrong_size(self):
+        self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
+        expected_output_array = [0.2, 0.4]
+        expected_output_array_of_fixed_length = [-6, -7, -8]
+        output_array_size = len(expected_output_array)
+        input_array_of_integers = [1, 2]
+        input_array_of_floats = [-1.0, -2.0, -3.0]
+        self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
+        self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
+        with nifake.Session('dev1') as session:
+            try:
+                output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers, input_array_of_floats)
+                assert False
+            except ValueError:
+                pass
+
     def test_multiple_array_types_none_input(self):
         self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
         expected_output_array = [0.2, 0.4]
@@ -469,10 +483,9 @@ class TestSession(object):
                 _matchers.ViReal64BufferMatcher(output_array_size),
                 _matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length)),
                 _matchers.ViInt32Matcher(len(input_array_of_integers)),
-                None,
-                _matchers.ViInt16BufferMatcher(input_array_of_integers)
+                _matchers.ViInt16BufferMatcher(input_array_of_integers),
+                None
             )
-    '''
 
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
