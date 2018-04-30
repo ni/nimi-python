@@ -41,6 +41,23 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * Properties removed
+            * `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
+            * `oscillator_phase_dac_value` [#825](https://github.com/ni/nimi-python/issues/825)
+            * `mux_mode_register` [#825](https://github.com/ni/nimi-python/issues/825)
+            * `ddc_center_frequency` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_data_processing_mode` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_frequency_translation_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_frequency_translation_phase_i` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_frequency_translation_phase_q` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_q_source` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `digital_gain` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `digital_offset` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `dither_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
 
 ## 0.8.0 - 2018-04-27
 * ### ALL
