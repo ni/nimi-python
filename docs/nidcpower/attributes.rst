@@ -234,34 +234,6 @@ nidcpower.Session properties
             - LabVIEW Property: **Advanced:Auxiliary Power Source Available**
             - C Attribute: **NIDCPOWER_ATTR_AUXILIARY_POWER_SOURCE_AVAILABLE**
 
-.. py:attribute:: cache
-
-    Specifies whether to cache the value of properties.
-    When caching is enabled, NI-DCPower records the current power supply settings and avoids sending  redundant commands to the device. Enabling caching can significantly increase execution speed.
-    NI-DCPower might always cache or never cache particular properties regardless of the setting of this property.
-    Use the :py:meth:`nidcpower.Session.__init__` method to override this value.
-    Default Value: True
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
-            - C Attribute: **NIDCPOWER_ATTR_CACHE**
-
 .. py:attribute:: channel_count
 
     Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based properties, the IVI engine maintains a separate  cache value for each channel.
@@ -1386,30 +1358,6 @@ nidcpower.Session properties
             - LabVIEW Property: **Measurement:Fetch Backlog**
             - C Attribute: **NIDCPOWER_ATTR_FETCH_BACKLOG**
 
-.. py:attribute:: group_capabilities
-
-    Contains a comma-separated list of class-extension groups that NI-DCPower implements.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities**
-            - C Attribute: **NIDCPOWER_ATTR_GROUP_CAPABILITIES**
-
 .. py:attribute:: instrument_firmware_revision
 
     Contains the firmware revision information for the device you are currently using.
@@ -1481,38 +1429,6 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
             - C Attribute: **NIDCPOWER_ATTR_INSTRUMENT_MODEL**
-
-.. py:attribute:: interchange_check
-
-    Specifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower methods. True specifies that interchangeability checking is enabled.
-    Interchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` method to retrieve  interchange warnings.
-    Call the :py:meth:`nidcpower.Session.GetNextInterchangeWarning` method to clear the list of interchangeability warnings  without reading them.
-    Interchangeability checking examines the properties in a capability group only if you specify a value  for at least one property within that group. Interchangeability warnings can occur when a property  affects the behavior of the device and you have not set that property or when the property has been  invalidated since you set it.
-    Default Value: False
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
-            - C Attribute: **NIDCPOWER_ATTR_INTERCHANGE_CHECK**
 
 .. py:attribute:: interlock_input_open
 
@@ -3608,33 +3524,6 @@ nidcpower.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
             - C Attribute: **NIDCPOWER_ATTR_QUERY_INSTRUMENT_STATUS**
 
-.. py:attribute:: range_check
-
-    Specifies whether to validate property values and method parameters.
-    If this property is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower methods.  Range checking parameters is useful for debugging. After you validate your program, you can set this  property to False to disable range checking and maximize performance.
-    Use the :py:meth:`nidcpower.Session.__init__` method to override this value.
-    Default Value: True
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
-            - C Attribute: **NIDCPOWER_ATTR_RANGE_CHECK**
-
 .. py:attribute:: ready_for_pulse_trigger_event_output_terminal
 
     Specifies the output terminal for exporting the Ready For Pulse Trigger event.
@@ -3723,35 +3612,6 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Events:Ready For Pulse Trigger Event:Pulse:Width**
             - C Attribute: **NIDCPOWER_ATTR_READY_FOR_PULSE_TRIGGER_EVENT_PULSE_WIDTH**
-
-.. py:attribute:: record_coercions
-
-    Specifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 properties.  Call the :py:meth:`nidcpower.Session.GetNextCoercionRecord` method to read and delete the earliest coercion record from the list.
-    Default Value: The default value is False. Use the :py:meth:`nidcpower.Session.__init__` method to override this value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
-            - C Attribute: **NIDCPOWER_ATTR_RECORD_COERCIONS**
 
 .. py:attribute:: reset_average_before_measurement
 
@@ -4405,54 +4265,6 @@ nidcpower.Session properties
 
             - LabVIEW Property: **Triggers:Source Trigger:Trigger Type**
             - C Attribute: **NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE**
-
-.. py:attribute:: specific_driver_class_spec_major_version
-
-    Contains the major version number of the class specification with which NI-DCPower is compliant.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Major Version**
-            - C Attribute: **NIDCPOWER_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
-
-.. py:attribute:: specific_driver_class_spec_minor_version
-
-    Contains the minor version number of the class specification with which NI-DCPower is compliant.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Minor Version**
-            - C Attribute: **NIDCPOWER_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
 
 .. py:attribute:: specific_driver_description
 

@@ -224,13 +224,6 @@ class _SessionBase(object):
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
-    The instrument driver can choose to always cache or to never cache  particular properties regardless of the setting of this property.
-    The default value is True.   Use __init__  to override this value.
-    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -441,11 +434,6 @@ class _SessionBase(object):
 
     Note: Gets the absolute file path to the bitfile loaded on the FPGA.
     '''
-    group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
-
-    A string that contains a comma-separated list of class extension groups that this driver implements.
-    '''
     high_pass_filter_frequency = _attributes.AttributeViReal64(1150377)
     '''Type: float
 
@@ -530,11 +518,6 @@ class _SessionBase(object):
     '''Type: str
 
     A string that contains the model number of the current instrument.
-    '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    NI-SCOPE does not generate interchange warnings and therefore ignores this property.
     '''
     interleaving_offset_correction_enabled = _attributes.AttributeViBoolean(1150376)
     '''Type: bool
@@ -1030,12 +1013,6 @@ class _SessionBase(object):
         session.channels['0,1'].probe_attenuation = var
         var = session.channels['0,1'].probe_attenuation
     '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver methods.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this property to  False to disable range checking and maximize performance.
-    The default value is True.   Use the __init__  method to override this value.
-    '''
     ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
     '''Type: str
 
@@ -1063,12 +1040,6 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the record arm source.
-    '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 properties.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is False.   Use the __init__  method to override this value.
     '''
     ref_clk_rate = _attributes.AttributeViReal64(1150090)
     '''Type: float
@@ -1164,16 +1135,6 @@ class _SessionBase(object):
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
     The default value is False.   Use the __init__  method to override this value.
-    '''
-    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
-    '''Type: int
-
-    The major version number of the class specification with which this driver is compliant.
-    '''
-    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
-    '''Type: int
-
-    The minor version number of the class specification with which this driver is compliant.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str

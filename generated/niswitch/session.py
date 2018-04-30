@@ -132,16 +132,6 @@ class _SessionBase(object):
 
     This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
-    The instrument driver can choose always to cache or never to cache  particular properties regardless of the setting of this property.
-    The default value is True.   Use the InitWithOptions  method to override this value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
-    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -184,11 +174,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
-
-    A string that contains a comma-separated list of class-extention groups that  this driver implements.
-    '''
     handshaking_initiation = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HandshakingInitiation, 1150013)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
@@ -204,17 +189,6 @@ class _SessionBase(object):
     '''Type: str
 
     A string that contains the model number or name of the instrument that you  are currently using.
-    '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  connect, set_path and _initiate_scan methods.
-    The default value is False.
-    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call GetNextInterchangeWarning to extract interchange warnings.   Call the ClearInterchangeWarnings method to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group.  Interchangeability warnings can  occur when a property affects the behavior of the instrument and you  have not set that property, or the property has been invalidated since you set it.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
@@ -465,24 +439,6 @@ class _SessionBase(object):
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
     When Power Down Latching Relays After Debounce is enabled (True),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver methods.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
-    The default value is True.   Use the InitWithOptions  method to override this value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
-    '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   You call GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.
-    The default value is False.   Use the  InitWithOptions method to override this value.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
-    '''
     scan_advanced_output = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
     '''Type: enums.ScanAdvancedOutput
 
@@ -552,16 +508,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
-    '''
-    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
-    '''Type: int
-
-    The major version number of the IviSwtch class specification.
-    '''
-    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
-    '''Type: int
-
-    The minor version number of the class specification with which this driver is compliant.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
