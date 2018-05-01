@@ -60,6 +60,37 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * Properties removed
+            * `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
+            * `oscillator_phase_dac_value` [#825](https://github.com/ni/nimi-python/issues/825)
+            * `mux_mode_register` [#825](https://github.com/ni/nimi-python/issues/825)
+            * `ddc_center_frequency` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_data_processing_mode` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_frequency_translation_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_frequency_translation_phase_i` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_frequency_translation_phase_q` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `ddc_q_source` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `digital_gain` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `digital_offset` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `dither_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `adjust_pretrigger_samples_5102` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `five_v_out_output_terminal` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `clock_sync_pulse_source` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `device_number` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `fetch_interleaved_data` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_from_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_from_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_from_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_to_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_to_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `trigger_to_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+            * `slave_trigger_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+        * Methods removed
+            * `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
 
 ## 0.8.0 - 2018-04-27
 * ### ALL
