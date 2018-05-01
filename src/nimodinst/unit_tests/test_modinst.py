@@ -245,7 +245,7 @@ class TestSession(object):
             with warnings.catch_warnings(record=True) as w:
                 session[0].chassis_number
                 assert len(w) == 1
-                assert issubclass(w[0].category, nimodinst.NimodinstWarning)
+                assert issubclass(w[0].category, nimodinst.NIModInstWarning)
                 assert error_string in str(w[0].message)
 
     def test_repr_and_str(self):
