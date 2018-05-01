@@ -35,12 +35,12 @@ class DriverError(Error):
         super(DriverError, self).__init__(str(self.code) + ": " + self.description)
 
 
-class NifgenWarning(Warning):
+class NIFGENWarning(Warning):
     '''A warning originating from the NI-FGEN driver'''
 
     def __init__(self, code, description):
         assert (_is_warning(code)), "Should not create Warning if code is not positive."
-        super(NifgenWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super(NIFGENWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Error):
@@ -95,7 +95,7 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         raise DriverError(code, description)
 
     assert _is_warning(code)
-    warnings.warn(NifgenWarning(code, description))
+    warnings.warn(NIFGENWarning(code, description))
 
 
-warnings.filterwarnings("always", category=NifgenWarning)
+warnings.filterwarnings("always", category=NIFGENWarning)

@@ -35,12 +35,12 @@ class DriverError(Error):
         super(DriverError, self).__init__(str(self.code) + ": " + self.description)
 
 
-class NidmmWarning(Warning):
+class NIDMMWarning(Warning):
     '''A warning originating from the NI-DMM driver'''
 
     def __init__(self, code, description):
         assert (_is_warning(code)), "Should not create Warning if code is not positive."
-        super(NidmmWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super(NIDMMWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Error):
@@ -95,7 +95,7 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         raise DriverError(code, description)
 
     assert _is_warning(code)
-    warnings.warn(NidmmWarning(code, description))
+    warnings.warn(NIDMMWarning(code, description))
 
 
-warnings.filterwarnings("always", category=NidmmWarning)
+warnings.filterwarnings("always", category=NIDMMWarning)
