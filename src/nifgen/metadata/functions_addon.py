@@ -84,8 +84,17 @@ functions_enums = {
     'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },
 }
 
+# Need to manually set some repeated capabilities
+functions_rep_caps = {
+    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    'ConfigureSoftwareEdgeScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    'DisableScriptTrigger':                     { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    'SendSoftwareEdgeTrigger':                  { 'parameters': { 2: { 'is_repeated_capability': True, }, }, },
+}
+
 functions_issues = {
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: {'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
+    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
                                                               4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
 }
 
