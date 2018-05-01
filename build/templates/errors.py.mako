@@ -6,9 +6,10 @@ attributes    = config['attributes']
 functions     = config['functions']
 
 module_name = config['module_name']
-module_name_class = module_name.title()
 c_function_prefix = config['c_function_prefix']
 driver_name = config['driver_name']
+driver_name_class = driver_name.replace('-', '')  # We want something like 'NIDCPower' or 'NIDMM' to be PEP8 compliant
+warning_name_class = driver_name_class + 'Warning'
 %>
 
 import platform
@@ -44,12 +45,12 @@ class DriverError(Error):
         super(DriverError, self).__init__(str(self.code) + ": " + self.description)
 
 
-class ${module_name_class}Warning(Warning):
+class ${warning_name_class}(Warning):
     '''A warning originating from the ${driver_name} driver'''
 
     def __init__(self, code, description):
         assert (_is_warning(code)), "Should not create Warning if code is not positive."
-        super(${module_name_class}Warning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super(${warning_name_class}, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Error):
@@ -104,7 +105,7 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         raise DriverError(code, description)
 
     assert _is_warning(code)
-    warnings.warn(${module_name_class}Warning(code, description))
+    warnings.warn(${warning_name_class}(code, description))
 
 
-warnings.filterwarnings("always", category=${module_name_class}Warning)
+warnings.filterwarnings("always", category=${warning_name_class})
