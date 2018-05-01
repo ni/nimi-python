@@ -9,7 +9,7 @@
     if f['python_name'] == 'fetch_multiple':
         in_compliance_value = 'in_compliance[i]'
         in_compliance_return = ', in_compliance'
-        param_list = 'count, timeout'
+        param_list = 'timeout, count'
         array_size = 'count'  # This is what is used for the array sizes
     elif f['python_name'] == 'measure_multiple':
         in_compliance_value = 'None'

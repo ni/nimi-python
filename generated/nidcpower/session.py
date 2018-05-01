@@ -2401,7 +2401,7 @@ class _SessionBase(object):
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
+        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
