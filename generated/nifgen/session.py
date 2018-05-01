@@ -1487,6 +1487,168 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def configure_digital_edge_script_trigger(self, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
+        '''configure_digital_edge_script_trigger
+
+        Configures the specified Script Trigger for digital edge triggering.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].configure_digital_edge_script_trigger(source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+
+        Args:
+            source (str): Specifies which trigger source the signal generator uses.
+
+                **Defined Values**
+
+                **Default Value**: "PFI0"
+
+                +-------------+-----------------------------------+
+                | "PFI0"      | PFI 0                             |
+                +-------------+-----------------------------------+
+                | "PFI1"      | PFI 1                             |
+                +-------------+-----------------------------------+
+                | "PFI2"      | PFI 2                             |
+                +-------------+-----------------------------------+
+                | "PFI3"      | PFI 3                             |
+                +-------------+-----------------------------------+
+                | "PFI4"      | PFI 4                             |
+                +-------------+-----------------------------------+
+                | "PFI5"      | PFI 5                             |
+                +-------------+-----------------------------------+
+                | "PFI6"      | PFI 6                             |
+                +-------------+-----------------------------------+
+                | "PFI7"      | PFI 7                             |
+                +-------------+-----------------------------------+
+                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
+                +-------------+-----------------------------------+
+                | "PXI_Star"  | PXI star trigger line             |
+                +-------------+-----------------------------------+
+
+            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
+
+                ****Defined Values****
+
+                ****Default Value**:** ScriptTriggerDigitalEdgeEdge.RISING
+
+                +--------------------------------------+------------------------------------------------------------------+
+                | ScriptTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
+                +--------------------------------------+------------------------------------------------------------------+
+                | ScriptTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
+                +--------------------------------------+------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+        '''
+        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_id_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+        error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_digital_level_script_trigger(self, source, trigger_when):
+        '''configure_digital_level_script_trigger
+
+        Configures the specified Script Trigger for digital level triggering.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].configure_digital_level_script_trigger(source, trigger_when)
+
+        Args:
+            source (str): Specifies which trigger source the signal generator uses.
+
+                **Defined Values**
+
+                **Default Value**: "PFI0"
+
+                +-------------+-----------------------------------+
+                | "PFI0"      | PFI 0                             |
+                +-------------+-----------------------------------+
+                | "PFI1"      | PFI 1                             |
+                +-------------+-----------------------------------+
+                | "PFI2"      | PFI 2                             |
+                +-------------+-----------------------------------+
+                | "PFI3"      | PFI 3                             |
+                +-------------+-----------------------------------+
+                | "PFI4"      | PFI 4                             |
+                +-------------+-----------------------------------+
+                | "PFI5"      | PFI 5                             |
+                +-------------+-----------------------------------+
+                | "PFI6"      | PFI 6                             |
+                +-------------+-----------------------------------+
+                | "PFI7"      | PFI 7                             |
+                +-------------+-----------------------------------+
+                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
+                +-------------+-----------------------------------+
+                | "PXI_Star"  | PXI star trigger line             |
+                +-------------+-----------------------------------+
+
+            trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
+                level.
+
+                **Defined Values**
+
+                **Default Value**: "HighLevel"
+
+                +-------------+-------------------------------------------------+
+                | "HighLevel" | Script Trigger asserts on a high digital level. |
+                +-------------+-------------------------------------------------+
+                | "LowLevel"  | Script Trigger asserts on a low digital level.  |
+                +-------------+-------------------------------------------------+
+
+        '''
+        if type(trigger_when) is not enums.TriggerWhen:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_id_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
+        trigger_when_ctype = _visatype.ViInt32(trigger_when.value)  # case S130
+        error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
         '''configure_freq_list
 
@@ -2385,6 +2547,47 @@ class _SessionBase(object):
         error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
+
+    def send_software_edge_trigger(self, trigger):
+        '''send_software_edge_trigger
+
+        Sends a command to trigger the signal generator. This VI can act as an
+        override for an external edge trigger.
+
+        Note:
+        This VI does not override external digital edge triggers of the
+        NI 5401/5411/5431.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].send_software_edge_trigger(trigger)
+
+        Args:
+            trigger (enums.Trigger): Sets the clock mode of the signal generator.
+
+                ****Defined Values****
+
+                +---------------------------+
+                | ClockMode.DIVIDE_DOWN     |
+                +---------------------------+
+                | ClockMode.HIGH_RESOLUTION |
+                +---------------------------+
+                | ClockMode.AUTOMATIC       |
+                +---------------------------+
+
+        '''
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
+        trigger_id_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -3443,96 +3646,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
-        '''configure_digital_edge_script_trigger
-
-        Configures the specified Script Trigger for digital edge triggering.
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-
-            source (str): Specifies which trigger source the signal generator uses.
-
-                **Defined Values**
-
-                **Default Value**: "PFI0"
-
-                +-------------+-----------------------------------+
-                | "PFI0"      | PFI 0                             |
-                +-------------+-----------------------------------+
-                | "PFI1"      | PFI 1                             |
-                +-------------+-----------------------------------+
-                | "PFI2"      | PFI 2                             |
-                +-------------+-----------------------------------+
-                | "PFI3"      | PFI 3                             |
-                +-------------+-----------------------------------+
-                | "PFI4"      | PFI 4                             |
-                +-------------+-----------------------------------+
-                | "PFI5"      | PFI 5                             |
-                +-------------+-----------------------------------+
-                | "PFI6"      | PFI 6                             |
-                +-------------+-----------------------------------+
-                | "PFI7"      | PFI 7                             |
-                +-------------+-----------------------------------+
-                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
-                +-------------+-----------------------------------+
-                | "PXI_Star"  | PXI star trigger line             |
-                +-------------+-----------------------------------+
-
-            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
-
-                ****Defined Values****
-
-                ****Default Value**:** ScriptTriggerDigitalEdgeEdge.RISING
-
-                +--------------------------------------+------------------------------------------------------------------+
-                | ScriptTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
-                +--------------------------------------+------------------------------------------------------------------+
-                | ScriptTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
-                +--------------------------------------+------------------------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_start_trigger
 
@@ -3603,94 +3716,6 @@ class Session(_SessionBase):
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niFgen_ConfigureDigitalEdgeStartTrigger(vi_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_level_script_trigger(self, trigger_id, source, trigger_when):
-        '''configure_digital_level_script_trigger
-
-        Configures the specified Script Trigger for digital level triggering.
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-
-            source (str): Specifies which trigger source the signal generator uses.
-
-                **Defined Values**
-
-                **Default Value**: "PFI0"
-
-                +-------------+-----------------------------------+
-                | "PFI0"      | PFI 0                             |
-                +-------------+-----------------------------------+
-                | "PFI1"      | PFI 1                             |
-                +-------------+-----------------------------------+
-                | "PFI2"      | PFI 2                             |
-                +-------------+-----------------------------------+
-                | "PFI3"      | PFI 3                             |
-                +-------------+-----------------------------------+
-                | "PFI4"      | PFI 4                             |
-                +-------------+-----------------------------------+
-                | "PFI5"      | PFI 5                             |
-                +-------------+-----------------------------------+
-                | "PFI6"      | PFI 6                             |
-                +-------------+-----------------------------------+
-                | "PFI7"      | PFI 7                             |
-                +-------------+-----------------------------------+
-                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
-                +-------------+-----------------------------------+
-                | "PXI_Star"  | PXI star trigger line             |
-                +-------------+-----------------------------------+
-
-            trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
-                level.
-
-                **Defined Values**
-
-                **Default Value**: "HighLevel"
-
-                +-------------+-------------------------------------------------+
-                | "HighLevel" | Script Trigger asserts on a high digital level. |
-                +-------------+-------------------------------------------------+
-                | "LowLevel"  | Script Trigger asserts on a low digital level.  |
-                +-------------+-------------------------------------------------+
-
-        '''
-        if type(trigger_when) is not enums.TriggerWhen:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        trigger_when_ctype = _visatype.ViInt32(trigger_when.value)  # case S130
-        error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4663,41 +4688,6 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_SelfCal(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def send_software_edge_trigger(self, trigger, trigger_id):
-        '''send_software_edge_trigger
-
-        Sends a command to trigger the signal generator. This VI can act as an
-        override for an external edge trigger.
-
-        Note:
-        This VI does not override external digital edge triggers of the
-        NI 5401/5411/5431.
-
-        Args:
-            trigger (enums.Trigger): Sets the clock mode of the signal generator.
-
-                ****Defined Values****
-
-                +---------------------------+
-                | ClockMode.DIVIDE_DOWN     |
-                +---------------------------+
-                | ClockMode.HIGH_RESOLUTION |
-                +---------------------------+
-                | ClockMode.AUTOMATIC       |
-                +---------------------------+
-
-            trigger_id (str):
-
-        '''
-        if type(trigger) is not enums.Trigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
