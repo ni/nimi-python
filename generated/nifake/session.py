@@ -356,41 +356,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def multiple_arrays_same_size(self, values, values2, values3):
-        '''multiple_arrays_same_size
-
-        Method to test multiple arrays that must all be the same size
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifake.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifake.Session instance, and calling this method on the result.:
-
-            session.channels['0,1'].multiple_arrays_same_size(values, values2, values3)
-
-        Args:
-            values (list of float): Array 1 of a same size
-
-            values2 (list of float): Array 2 of the same size
-
-            values3 (list of float): Array 2 of the same size
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
-        values2_ctype = get_ctypes_pointer_for_buffer(value=values2, library_type=_visatype.ViReal64)  # case B550
-        values3_ctype = get_ctypes_pointer_for_buffer(value=values3, library_type=_visatype.ViReal64)  # case B550
-        size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
-        if values2 is not None and len(values2) != len(values):  # case S160
-            raise ValueError("values2 length not equal to values length")  # case S160
-        if values3 is not None and len(values3) != len(values):  # case S160
-            raise ValueError("values3 length not equal to values length")  # case S160
-        error_code = self._library.niFake_MultipleArraysSameSize(vi_ctype, channel_name_ctype, values_ctype, values2_ctype, values3_ctype, size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def read_from_channel(self, maximum_time):
         '''read_from_channel
 
