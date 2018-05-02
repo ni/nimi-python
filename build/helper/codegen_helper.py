@@ -146,8 +146,8 @@ def get_enum_type_check_snippet(parameter, indent):
     return enum_check
 
 
-def _get_buffer_parameter_for_size_parameter(parameter, parameters):
-    '''If parameter represents the size of another parameter in the C API, returns that other parameter. Otherwise None.'''
+def _get_buffer_parameters_for_size_parameter(parameter, parameters):
+    '''Return all parameters that use this parameter for size. Empty list if none'''
     buffer_params = []
     for p in parameters:
         if (p['is_buffer'] or p['is_string']) and p['size']['value'] == parameter['name']:
@@ -251,7 +251,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
     assert parameter['is_buffer'] is False
     assert parameter['numpy'] is False
-    corresponding_buffer_parameters = _get_buffer_parameter_for_size_parameter(parameter, parameters)
+    corresponding_buffer_parameters = _get_buffer_parameters_for_size_parameter(parameter, parameters)
 
     definitions = []
     definition = None
@@ -272,7 +272,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
             for i in range(1, len(corresponding_buffer_parameters)):
                 definitions.append('if {0} is not None and len({0}) != len({1}):  # case S160'.format(corresponding_buffer_parameters[i]['python_name'], corresponding_buffer_parameters[0]['python_name']))
-                definitions.append('    raise ValueError("{0} length not equal to {1} length")  # case S160'.format(corresponding_buffer_parameters[i]['python_name'], corresponding_buffer_parameters[0]['python_name']))
+                definitions.append('    raise ValueError("Length of {0} and {1} parameters do not match.")  # case S160'.format(corresponding_buffer_parameters[i]['python_name'], corresponding_buffer_parameters[0]['python_name']))
         else:
             if corresponding_buffer_parameters[0]['size']['mechanism'] == 'ivi-dance':  # We are only looking at the first one. Assumes all are the same here, assert below if not
                 # Verify all corresponding_buffer_parameters are 'out' and 'ivi-dance'
@@ -914,13 +914,13 @@ def test_get_enum_type_check_snippet():
     assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter mode must be of type ' + str(enums.Turtle))"
 
 
-def test_get_buffer_parameter_for_size_parameter_none():
-    params = _get_buffer_parameter_for_size_parameter(parameters_for_testing[0], parameters_for_testing)
+def test_get_buffer_parameters_for_size_parameter_none():
+    params = _get_buffer_parameters_for_size_parameter(parameters_for_testing[0], parameters_for_testing)
     assert len(params) == 0
 
 
-def test_get_buffer_parameter_for_size_parameter():
-    params = _get_buffer_parameter_for_size_parameter(parameters_for_testing[4], parameters_for_testing)
+def test_get_buffer_parameters_for_size_parameter():
+    params = _get_buffer_parameters_for_size_parameter(parameters_for_testing[4], parameters_for_testing)
     assert params[0] == parameters_for_testing[5]
 
 
