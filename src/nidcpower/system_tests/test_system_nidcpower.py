@@ -203,13 +203,6 @@ def test_create_advanced_sequence(single_channel_session):
     single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
 
 
-# TODO(marcoskirsch): Should raise because arrays are different size, or maybe treat [] same as None? See issue #515
-'''
-def test_set_sequence_no_source_delays(single_channel_session):
-    single_channel_session.set_sequence([0.1, 0.2, 0.3], [])
-'''
-
-
 def test_set_sequence_with_source_delays(single_channel_session):
     single_channel_session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003])
 
