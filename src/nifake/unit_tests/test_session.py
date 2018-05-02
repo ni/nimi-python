@@ -589,7 +589,7 @@ class TestSession(object):
             with warnings.catch_warnings(record=True) as w:
                 session.simple_function()
                 assert len(w) == 1
-                assert issubclass(w[0].category, nifake.NifakeWarning)
+                assert issubclass(w[0].category, nifake.DriverWarning)
                 assert test_error_desc in str(w[0].message)
 
     def test_read_with_warning(self):
@@ -608,7 +608,7 @@ class TestSession(object):
             with warnings.catch_warnings(record=True) as w:
                 assert math.isnan(session.read(test_maximum_time))
                 assert len(w) == 1
-                assert issubclass(w[0].category, nifake.NifakeWarning)
+                assert issubclass(w[0].category, nifake.DriverWarning)
                 assert test_error_desc in str(w[0].message)
 
     # Retrieving buffers and strings
