@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `SelfTestError` now inherits from `<driver>.Error` rather than `Exception` - [#830](https://github.com/ni/nimi-python/issues/830)
-        * Warning class name is now PEP8 compliant. This means the case has changed. I.e. `NidcpowerWarning` --> `NIDCPowerWarning`, or `NimodinstWarning` --> `NIModInstWarning` - [#658](https://github.com/ni/nimi-python/issues/658)
+        * Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
     * #### Removed
         * IVI properties as applicable - some where already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
             * `engine_major_version`
