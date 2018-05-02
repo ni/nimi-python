@@ -1510,21 +1510,21 @@ functions = {
             {
                 'direction': 'in',
                 'enum': None,
-                'name': 'inputArrayOfIntegers',
-                'type': 'ViInt16[]',
-                'documentation': {
-                    'description': 'Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.',
-                },
-            },        
-            {
-                'direction': 'in',
-                'enum': None,
                 'name': 'inputArrayOfFloats',
                 'type': 'ViReal64[]',
                 'documentation': {
                     'description': 'Array of floats',
                 },
             },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'inputArrayOfIntegers',
+                'type': 'ViInt16[]',
+                'documentation': {
+                    'description': 'Array of integers. Optional. If passed in then size must match that of inputArrayOfFloats.',
+                },
+            },        
         ],
         'documentation': {
             'description': 'Receives and returns multiple types of arrays.',
