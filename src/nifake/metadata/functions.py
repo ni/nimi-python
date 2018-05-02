@@ -2092,4 +2092,60 @@ functions = {
             'description': 'Returns the recommended maximum interval, in **months**, between external calibrations.',
         },
     },
+    'MultipleArraysSameSize': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Values1',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Array 1 of same size.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Values2',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Array 2 of same size.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Values3',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Array 3 of same size.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Values4',
+                'type': 'ViReal64[]',
+                'documentation': {
+                    'description': 'Array 4 of same size.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Size',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Size for all arrays',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Function to test multiple arrays that use the same size',
+        },
+    },
 }

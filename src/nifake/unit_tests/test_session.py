@@ -471,6 +471,76 @@ class TestSession(object):
                 None
             )
 
+    def test_multiple_arrays_same_size(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+        input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+        with nifake.Session('dev1') as session:
+            session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+            self.patched_library.niFake_MultipleArraysSameSize.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats1),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats2),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats3),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats4),
+                _matchers.ViInt32Matcher(len(input_array_of_floats1)),
+            )
+
+    def test_multiple_arrays_same_size_none_input(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        with nifake.Session('dev1') as session:
+            session.multiple_arrays_same_size(input_array_of_floats1, None, None, None)
+            self.patched_library.niFake_MultipleArraysSameSize.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats1),
+                None,
+                None,
+                None,
+                _matchers.ViInt32Matcher(len(input_array_of_floats1)),
+            )
+
+    def test_multiple_arrays_same_size_wrong_size_2(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430]
+        input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+        with nifake.Session('dev1') as session:
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+                assert False
+            except ValueError:
+                pass
+
+    def test_multiple_arrays_same_size_wrong_size_3(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+        input_array_of_floats3 = [4.100, 4.200, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+        with nifake.Session('dev1') as session:
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+                assert False
+            except ValueError:
+                pass
+
+    def test_multiple_arrays_same_size_wrong_size_4(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+        input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00, 45.00]
+        with nifake.Session('dev1') as session:
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+                assert False
+            except ValueError:
+                pass
+
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
         boolean_val = True

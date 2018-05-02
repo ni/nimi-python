@@ -54,7 +54,8 @@ functions_buffer_info = {
     'FetchWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
     'WriteWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfSamples'}, }, }, },
     'self_test':                             { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'MultipleArraysSameSize':                { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'Size'}, },
+    'MultipleArraysSameSize':                { 'parameters': { 1: { 'size': {'mechanism':'len', 'value':'Size'}, },
+                                                               2: { 'size': {'mechanism':'len', 'value':'Size'}, },
                                                                3: { 'size': {'mechanism':'len', 'value':'Size'}, },
                                                                4: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
 }
