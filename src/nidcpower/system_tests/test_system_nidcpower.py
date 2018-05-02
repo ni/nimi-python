@@ -206,7 +206,7 @@ def test_create_advanced_sequence(single_channel_session):
 # TODO(marcoskirsch): Doesn't work, issue #515
 '''
 def test_set_sequence_with_source_delays(single_channel_session):
-    single_channel_session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003])
+    single_channel_session.set_sequence([0.1, 0.2, 0.3])
 '''
 
 
@@ -215,6 +215,10 @@ def test_set_sequence_with_source_delays(single_channel_session):
 def test_set_sequence_no_source_delays(single_channel_session):
     single_channel_session.set_sequence([0.1, 0.2, 0.3], [])
 '''
+
+
+def test_set_sequence_with_source_delays(single_channel_session):
+    single_channel_session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003])
 
 
 # TODO(marcoskirsch): Should raise because arrays are different size. See issue #515
