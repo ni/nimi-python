@@ -3486,8 +3486,6 @@ class _SessionBase(object):
         values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
         source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
         size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
-        if source_delays is not None and len(source_delays) != len(values):  # case S160
-            raise ValueError("source_delays length not equal to values length")  # case S160
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
