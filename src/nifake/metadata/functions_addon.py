@@ -17,6 +17,15 @@ functions_codegen_method = {
     'self_test':                { 'codegen_method': 'private',  },  # 'fancy_self_test' Public wrapper that raises
 }
 
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock_session_wrapper', 'documentation_filename': 'lock_session_wrapper', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True, },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock_session_wrapper', 'documentation_filename': 'unlock_session_wrapper', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True, },
+    'InitializeWithChannels':          { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+}
+
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'GetEnumValue':                     { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },

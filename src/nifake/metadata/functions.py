@@ -2091,4 +2091,52 @@ functions = {
             'description': 'Returns the recommended maximum interval, in **months**, between external calibrations.',
         },
     },
+    'LockSession': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'callerHasLock',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Optional',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Lock.',
+        },
+    },
+    'UnlockSession': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'callerHasLock',
+                'type': 'ViBoolean',
+                'documentation': {
+                    'description': 'Optional',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Unlock',
+        },
+    },
 }
