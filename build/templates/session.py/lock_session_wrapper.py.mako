@@ -53,7 +53,7 @@
                 unlock_session.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock else None
+        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock is not None else None
         error_code = self._library.${c_function_prefix}LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return bool(caller_has_lock_ctype.value) if caller_has_lock else True
