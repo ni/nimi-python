@@ -10,5 +10,6 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        return self._get_equalization_filter_coefficients(self.equalization_num_coefficients)
+        with self.lock():
+            return self._get_equalization_filter_coefficients(self.equalization_num_coefficients)
 

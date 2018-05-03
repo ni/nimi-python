@@ -27,7 +27,8 @@
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements${in_compliance_return} = self._${f['python_name']}(${param_list})
+        with self.lock():
+            voltage_measurements, current_measurements${in_compliance_return} = self._${f['python_name']}(${param_list})
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}) for i in range(${array_size})]
+            return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=${in_compliance_value}) for i in range(${array_size})]
 
