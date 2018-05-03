@@ -87,6 +87,20 @@ class ${session_context_manager}(object):
 
 
 % endif
+% if config['use_session_lock']:
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        self._session.lock_session()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock_session()
+
+
+%endif
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -169,6 +183,11 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+% if config['use_session_lock']:
+    def lock(self):  # TODO(texasaggie97) Need to figure out how to document this
+        return _Lock(self)
+
+% endif
     def _get_error_description(self, error_code):
         '''_get_error_description
 
