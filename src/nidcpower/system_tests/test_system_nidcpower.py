@@ -203,6 +203,12 @@ def test_create_advanced_sequence(single_channel_session):
     single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
 
 
+def test_lock_context_manager(single_channel_session):
+    ids = [1150008, 1250001, 1150009]  # work around #507
+    with single_channel_session.lock():
+        single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
+
+
 # TODO(marcoskirsch): Doesn't work, issue #515
 '''
 def test_set_sequence_default_source_delays(single_channel_session):
