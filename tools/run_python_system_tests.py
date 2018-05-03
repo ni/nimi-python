@@ -16,7 +16,7 @@ args = parser.parse_args()
 
 
 print('****Installing tox to Python.****')
-subprocess.check_call(["python", '-m', 'pip', 'install', 'tox'])
+subprocess.check_call(["python", '-m', 'pip', 'install', '--upgrade', 'tox'])
 
 
 print('****Creating temporary directory.****')
