@@ -66,11 +66,11 @@ class _Lock(object):
         self._session = session
 
     def __enter__(self):
-        self._session.lock_session()
+        self._caller_has_lock = self._session.lock_session(caller_has_lock=False)
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock_session()
+        self._caller_has_lock = self._session.unlock_session(self._caller_has_lock)
 
 
 class _RepeatedCapabilities(object):
@@ -3203,6 +3203,60 @@ class _SessionBase(object):
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
             return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
+    def lock_session(self, caller_has_lock=None):
+        '''lock_session
+
+        | Obtains a multithread lock on the device session. Before doing so, the
+          software waits until all other execution threads release their locks
+          on the device session.
+        | Other threads may have obtained a lock on this session for the
+          following reasons:
+
+        -  The application called the lock_session method.
+        -  A call to NI-DCPower locked the session.
+        -  A call to the IVI engine locked the session.
+        -  After a call to the lock_session method returns
+           successfully, no other threads can access the device session until
+           you call the unlock_session method.
+        -  Use the lock_session method and the
+           unlock_session method around a sequence of calls to
+           instrument driver methods if you require that the device retain its
+           settings through the end of the sequence.
+
+        You can safely make nested calls to the lock_session method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock_session method with a call to
+        the unlock_session method. If, however, you use
+        **Caller_Has_Lock** in all calls to the lock_session and
+        unlock_session method within a method, the IVI Library
+        locks the session only once within the method regardless of the number
+        of calls you make to the lock_session method. This behavior
+        allows you to call the unlock_session method just once at
+        the end of the method.
+
+        Args:
+            caller_has_lock (bool): This parameter is optional. Default is None. If you do not want to use this parameter, pass None.
+
+                Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+
+
+        Returns:
+            (bool): Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock else None
+        error_code = self._library.niScope_LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return bool(caller_has_lock_ctype.value) if caller_has_lock else True
+
     def _read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''_read
 
@@ -3610,6 +3664,37 @@ class _SessionBase(object):
             error_code = self._library.niScope_SetAttributeViString(vi_ctype, channel_list_ctype, attribute_id_ctype, value_ctype)
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return
+
+    def unlock_session(self, caller_has_lock=None):
+        '''unlock_session
+
+        Releases a lock that you acquired on an device session using
+        lock_session. Refer to lock_session for additional
+        information on session locks.
+
+        Args:
+            caller_has_lock (bool): This parameter is optional. Default is None. If you do not want to use this parameter, pass None.
+
+                Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+
+
+        Returns:
+            (bool): Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock else None
+        error_code = self._library.niScope_UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return bool(caller_has_lock_ctype.value) if caller_has_lock else False
 
 
 class Session(_SessionBase):
@@ -4702,60 +4787,6 @@ class Session(_SessionBase):
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return
 
-    def lock_session(self, caller_has_lock=None):
-        '''lock_session
-
-        | Obtains a multithread lock on the device session. Before doing so, the
-          software waits until all other execution threads release their locks
-          on the device session.
-        | Other threads may have obtained a lock on this session for the
-          following reasons:
-
-        -  The application called the lock_session method.
-        -  A call to NI-DCPower locked the session.
-        -  A call to the IVI engine locked the session.
-        -  After a call to the lock_session method returns
-           successfully, no other threads can access the device session until
-           you call the unlock_session method.
-        -  Use the lock_session method and the
-           unlock_session method around a sequence of calls to
-           instrument driver methods if you require that the device retain its
-           settings through the end of the sequence.
-
-        You can safely make nested calls to the lock_session method
-        within the same thread. To completely unlock the session, you must
-        balance each call to the lock_session method with a call to
-        the unlock_session method. If, however, you use
-        **Caller_Has_Lock** in all calls to the lock_session and
-        unlock_session method within a method, the IVI Library
-        locks the session only once within the method regardless of the number
-        of calls you make to the lock_session method. This behavior
-        allows you to call the unlock_session method just once at
-        the end of the method.
-
-        Args:
-            caller_has_lock (bool): This parameter is optional. If you do not want to use this parameter, pass None.
-
-                Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-
-
-        Returns:
-            (bool): Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock else None
-        error_code = self._library.niScope_LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value) if caller_has_lock else True
-
     def probe_compensation_signal_start(self):
         '''probe_compensation_signal_start
 
@@ -4837,37 +4868,6 @@ class Session(_SessionBase):
             error_code = self._library.niScope_SendSoftwareTriggerEdge(vi_ctype, which_trigger_ctype)
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return
-
-    def unlock_session(self, caller_has_lock=None):
-        '''unlock_session
-
-        Releases a lock that you acquired on an device session using
-        lock_session. Refer to lock_session for additional
-        information on session locks.
-
-        Args:
-            caller_has_lock (bool): This parameter is optional. If you do not want to use this parameter, pass None.
-
-                Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-
-
-        Returns:
-            (bool): Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock else None
-        error_code = self._library.niScope_UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value) if caller_has_lock else False
 
     def _close(self):
         '''_close

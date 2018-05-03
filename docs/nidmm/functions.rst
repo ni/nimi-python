@@ -1171,7 +1171,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: lock_session(caller_has_lock)
+.. py:method:: lock_session(caller_has_lock=None)
 
     | Obtains a multithread lock on the device session. Before doing so, the
       software waits until all other execution threads release their locks
@@ -1616,7 +1616,7 @@ nidmm.Session methods
 
 
 
-.. py:method:: unlock_session(caller_has_lock)
+.. py:method:: unlock_session(caller_has_lock=None)
 
     Releases a lock that you acquired on an device session using
     :py:meth:`nidcpower.Session.lock_session`. Refer to :py:meth:`nidcpower.Session.lock_session` for additional

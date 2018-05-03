@@ -1277,7 +1277,7 @@ niscope.Session methods
             session.channels['0,1'].get_equalization_filter_coefficients()
 
 
-.. py:method:: lock_session(caller_has_lock)
+.. py:method:: lock_session(caller_has_lock=None)
 
     | Obtains a multithread lock on the device session. Before doing so, the
       software waits until all other execution threads release their locks
@@ -1600,7 +1600,7 @@ niscope.Session methods
 
     :type which_trigger: :py:data:`niscope.WhichTrigger`
 
-.. py:method:: unlock_session(caller_has_lock)
+.. py:method:: unlock_session(caller_has_lock=None)
 
     Releases a lock that you acquired on an device session using
     :py:meth:`nidcpower.Session.lock_session`. Refer to :py:meth:`nidcpower.Session.lock_session` for additional
