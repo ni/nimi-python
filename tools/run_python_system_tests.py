@@ -1,7 +1,6 @@
 import argparse
 import json
 import os
-import pip
 import subprocess
 import sys
 import tempfile
