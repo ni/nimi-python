@@ -40,6 +40,7 @@ class Library(object):
         self.niSwitch_GetRelayPosition_cfunc = None
         self.niSwitch_InitWithTopology_cfunc = None
         self.niSwitch_InitiateScan_cfunc = None
+        self.niSwitch_LockSession_cfunc = None
         self.niSwitch_RelayControl_cfunc = None
         self.niSwitch_ResetWithDefaults_cfunc = None
         self.niSwitch_RouteScanAdvancedOutput_cfunc = None
@@ -51,6 +52,7 @@ class Library(object):
         self.niSwitch_SetAttributeViString_cfunc = None
         self.niSwitch_SetContinuousScan_cfunc = None
         self.niSwitch_SetPath_cfunc = None
+        self.niSwitch_UnlockSession_cfunc = None
         self.niSwitch_WaitForDebounce_cfunc = None
         self.niSwitch_WaitForScanComplete_cfunc = None
         self.niSwitch_close_cfunc = None
@@ -242,6 +244,14 @@ class Library(object):
                 self.niSwitch_InitiateScan_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_InitiateScan_cfunc(vi)
 
+    def niSwitch_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niSwitch_LockSession_cfunc is None:
+                self.niSwitch_LockSession_cfunc = self._library.niSwitch_LockSession
+                self.niSwitch_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niSwitch_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niSwitch_LockSession_cfunc(vi, caller_has_lock)
+
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_RelayControl_cfunc is None:
@@ -329,6 +339,14 @@ class Library(object):
                 self.niSwitch_SetPath_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_SetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetPath_cfunc(vi, path_list)
+
+    def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niSwitch_UnlockSession_cfunc is None:
+                self.niSwitch_UnlockSession_cfunc = self._library.niSwitch_UnlockSession
+                self.niSwitch_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niSwitch_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niSwitch_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niSwitch_WaitForDebounce(self, vi, maximum_time_ms):  # noqa: N802
         with self._func_lock:

@@ -74,6 +74,9 @@ class SideEffectsHelper(object):
         self._defaults['InitWithTopology']['vi'] = None
         self._defaults['InitiateScan'] = {}
         self._defaults['InitiateScan']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['RelayControl'] = {}
         self._defaults['RelayControl']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -96,6 +99,9 @@ class SideEffectsHelper(object):
         self._defaults['SetContinuousScan']['return'] = 0
         self._defaults['SetPath'] = {}
         self._defaults['SetPath']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitForDebounce'] = {}
         self._defaults['WaitForDebounce']['return'] = 0
         self._defaults['WaitForScanComplete'] = {}
@@ -290,6 +296,15 @@ class SideEffectsHelper(object):
             return self._defaults['InitiateScan']['return']
         return self._defaults['InitiateScan']['return']
 
+    def niSwitch_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niSwitch_LockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
+
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         if self._defaults['RelayControl']['return'] != 0:
             return self._defaults['RelayControl']['return']
@@ -344,6 +359,15 @@ class SideEffectsHelper(object):
         if self._defaults['SetPath']['return'] != 0:
             return self._defaults['SetPath']['return']
         return self._defaults['SetPath']['return']
+
+    def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niSwitch_UnlockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
 
     def niSwitch_WaitForDebounce(self, vi, maximum_time_ms):  # noqa: N802
         if self._defaults['WaitForDebounce']['return'] != 0:
@@ -445,6 +469,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_InitWithTopology.return_value = 0
         mock_library.niSwitch_InitiateScan.side_effect = MockFunctionCallError("niSwitch_InitiateScan")
         mock_library.niSwitch_InitiateScan.return_value = 0
+        mock_library.niSwitch_LockSession.side_effect = MockFunctionCallError("niSwitch_LockSession")
+        mock_library.niSwitch_LockSession.return_value = 0
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
         mock_library.niSwitch_RelayControl.return_value = 0
         mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")
@@ -467,6 +493,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_SetContinuousScan.return_value = 0
         mock_library.niSwitch_SetPath.side_effect = MockFunctionCallError("niSwitch_SetPath")
         mock_library.niSwitch_SetPath.return_value = 0
+        mock_library.niSwitch_UnlockSession.side_effect = MockFunctionCallError("niSwitch_UnlockSession")
+        mock_library.niSwitch_UnlockSession.return_value = 0
         mock_library.niSwitch_WaitForDebounce.side_effect = MockFunctionCallError("niSwitch_WaitForDebounce")
         mock_library.niSwitch_WaitForDebounce.return_value = 0
         mock_library.niSwitch_WaitForScanComplete.side_effect = MockFunctionCallError("niSwitch_WaitForScanComplete")

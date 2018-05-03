@@ -1171,6 +1171,118 @@ nidmm.Session methods
 
 
 
+.. py:method:: lock_session()
+
+    This method obtains a multithread lock on the instrument session.
+    Before it does so, it waits until all other execution threads have
+    released their locks on the instrument session.
+
+    Other threads might have obtained a lock on this session in the
+    following ways:
+
+    -  The user application called this method.
+    -  A call to the instrument driver locked the session.
+    -  A call to the IVI Library locked the session.
+
+    After your call to this method returns successfully, no other threads
+    can access the instrument session until you call :py:meth:`nidmm.Session.unlock_session`.
+
+    Use this method and :py:meth:`nidmm.Session.unlock_session` around a sequence of calls to
+    instrument driver methods if you require that the instrument retain
+    its settings through the end of the sequence. You can safely make nested
+    calls to this method within the same thread.
+
+    To completely unlock the session, you must balance each call to this
+    method with a call to :py:meth:`nidmm.Session.unlock_session`. If, however, you use the
+    **Caller_Has_Lock** parameter in all calls to this method and
+    :py:meth:`nidmm.Session.unlock_session` within a method, the IVI Library locks the
+    session only once within the method regardless of the number of calls
+    you make to this method. This feature allows you to call
+    :py:meth:`nidmm.Session.unlock_session` just once at the end of the method.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            This parameter serves as a convenience. If you do not want to use this
+            parameter, pass VI_NULL. Use this parameter in complex methods to
+            keep track of whether you obtain a lock and, therefore, need to unlock
+            the session. To use this parameter, complete the following steps:
+
+            #. Pass the address of a local ViBoolean variable.
+            #. In the declaration of the local variable, initialize it to False
+               (0).
+            #. Pass the address of the same local variable to any other calls you
+               make to this method or :py:meth:`nidmm.Session.unlock_session` in the same method.
+
+            The parameter is an input/output parameter. This method and
+            :py:meth:`nidmm.Session.unlock_session` each inspect the current value and take the
+            following actions:
+
+            If the value is True (1), this method does not lock the session
+            again. If the value is False, this method obtains the lock and
+            sets the value of the parameter to True.
+
+            If the value is False, :py:meth:`nidmm.Session.unlock_session` does not attempt to
+            unlock the session. If the value is True, :py:meth:`nidmm.Session.unlock_session`
+            releases the lock and sets the value of the parameter to False.
+            Thus, you can, call :py:meth:`nidmm.Session.unlock_session` at the end of your method
+            without worrying about whether you actually have the lock.
+
+            **Example**
+
+            ViStatus TestFunc (ViSession vi, ViInt32 flags)
+
+            {
+
+            | ViStatus error = VI_SUCCESS;
+            | ViBoolean haveLock = False;
+            | if (flags & BIT_1)
+
+            | {
+            | viCheckErr( NIDMM_LockSession(vi, &haveLock;));
+            | viCheckErr( TakeAction1(vi));
+            | if (flags & BIT_2)
+
+            {
+
+            viCheckErr( NIDMM_UnlockSession(vi, &haveLock;));
+
+            viCheckErr( TakeAction2(vi));
+
+            viCheckErr( NIDMM_LockSession(vi, &haveLock;);
+
+            }
+
+            if (flags & BIT_3)
+
+            viCheckErr( TakeAction3(vi));
+
+            }
+
+            Error:
+
+            /\*
+
+            At this point, you cannot really be sure that you have the lock.
+            Fortunately, the haveLock variable takes care of that for you.
+
+            \*/
+
+            :py:meth:`nidmm.Session.unlock_session`(vi, &haveLock;);
+
+            return error;
+
+            }
+
+            
+
+
+
 .. py:method:: perform_open_cable_comp()
 
     For the NI 4082 and NI 4072 only, performs the open cable compensation
@@ -1548,6 +1660,102 @@ nidmm.Session methods
     
 
     .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+
+.. py:method:: unlock_session()
+
+    This method releases a lock that you acquired on an instrument session
+    using :py:meth:`nidmm.Session.lock_session`. Refer to :py:meth:`nidmm.Session.lock_session` for additional
+    information on session locks.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            This parameter serves as a convenience. If you do not want to use this
+            parameter, pass VI_NULL.
+
+            Use this parameter in complex methods to keep track of whether you
+            obtain a lock and, therefore, need to unlock the session.
+
+            To use this parameter, complete the following steps:
+
+            #. Pass the address of a local ViBoolean variable.
+            #. In the declaration of the local variable, initialize it to False
+               (0).
+            #. Pass the address of the same local variable to any other calls you
+               make to :py:meth:`nidmm.Session.lock_session` or this method in the same method.
+
+            The parameter is an input/output parameter. :py:meth:`nidmm.Session.lock_session` and this
+            method each inspect the current value and take the following actions:
+
+            If the value is True (1), :py:meth:`nidmm.Session.lock_session` does not lock the
+            session again. If the value is False, :py:meth:`nidmm.Session.lock_session` obtains the
+            lock and sets the value of the parameter to True.
+
+            If the value is False, this method does not attempt to unlock the
+            session. If the value is True, this method releases the lock and
+            sets the value of the parameter to False. Thus, you can, call this
+            method at the end of your method without worrying about whether you
+            actually have the lock.
+
+            **Example**
+
+            ViStatus TestFunc (ViSession vi, ViInt32 flags)
+
+            {
+
+            ViStatus error = VI_SUCCESS;
+
+            ViBoolean haveLock = False;
+
+            if (flags & BIT_1)
+
+            {
+
+            viCheckErr( NIDMM_LockSession(vi, &haveLock;));
+
+            viCheckErr( TakeAction1(vi));
+
+            if (flags & BIT_2)
+
+            {
+
+            viCheckErr( NIDMM_UnlockSession(vi, &haveLock;));
+
+            viCheckErr( TakeAction2(vi));
+
+            viCheckErr( NIDMM_LockSession(vi, &haveLock;);
+
+            }
+
+            if (flags & BIT_3)
+
+            viCheckErr( TakeAction3(vi));
+
+            }
+
+            Error:
+
+            /\*
+
+            At this point, you cannot really be sure that you have the lock.
+            Fortunately, the haveLock variable takes care of that for you.
+
+            \*/
+
+            :py:meth:`nidmm.Session.unlock_session`(vi, &haveLock;);
+
+            return error;
+
+            }
+
+            
 
 
 

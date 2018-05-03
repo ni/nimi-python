@@ -1277,6 +1277,55 @@ niscope.Session methods
             session.channels['0,1'].get_equalization_filter_coefficients()
 
 
+.. py:method:: lock_session()
+
+    Obtains a multithread lock on the instrument session. Before doing so,
+    it waits until all other execution threads have released their locks on
+    the instrument session. Other threads might have obtained a lock on this
+    session in the following ways:
+
+    -  Your application called :py:meth:`niscope.Session.lock_session`
+    -  A call to the instrument driver locked the session
+    -  A call to the IVI engine locked the session
+
+    After your call to :py:meth:`niscope.Session.lock_session` returns successfully, no other
+    threads can access the instrument session until you call
+    :py:meth:`niscope.Session.unlock_session`. Use :py:meth:`niscope.Session.lock_session` and
+    :py:meth:`niscope.Session.unlock_session` around a sequence of calls to instrument driver
+    methods if you require that the instrument retain its settings through
+    the end of the sequence.
+
+    You can safely make nested calls to :py:meth:`niscope.Session.lock_session` within the same
+    thread. To completely unlock the session, you must balance each call to
+    :py:meth:`niscope.Session.lock_session` with a call to :py:meth:`niscope.Session.unlock_session`. If, however,
+    you use the **callerHasLock** in all calls to :py:meth:`niscope.Session.lock_session` and
+    :py:meth:`niscope.Session.unlock_session` within a method, the IVI Library locks the
+    session only once within the method regardless of the number of calls
+    you make to :py:meth:`niscope.Session.lock_session`. This allows you to call
+    :py:meth:`niscope.Session.unlock_session` just once at the end of the method.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            This parameter serves as a convenience. If you do not want to use this
+            parameter, pass VI_NULL.
+
+            Use this parameter in complex methods to keep track of whether you
+            have obtained a lock and therefore need to unlock the session. Pass the
+            address of a local ViBoolean variable. In the declaration of the local
+            variable, initialize it to False. Pass the address of the same local
+            variable to any other calls you make to :py:meth:`niscope.Session.lock_session` or
+            :py:meth:`niscope.Session.unlock_session` in the same method.
+
+            
+
+
+
 .. py:method:: probe_compensation_signal_start()
 
     Starts the 1 kHz square wave output on PFI 1 for probe compensation.
@@ -1534,5 +1583,32 @@ niscope.Session methods
 
 
     :type which_trigger: :py:data:`niscope.WhichTrigger`
+
+.. py:method:: unlock_session()
+
+    Releases a lock that you acquired on an instrument session using
+    :py:meth:`niscope.Session.lock_session`.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            This parameter serves as a convenience; if you do not want to use this
+            parameter, pass VI_NULL.
+
+            Use this parameter in complex methods to keep track of whether you
+            have obtained a lock and therefore need to unlock the session; pass the
+            address of a local ViBoolean variable; in the declaration of the local
+            variable, initialize it to False; pass the address of the same local
+            variable to any other calls you make to :py:meth:`niscope.Session.lock_session` or
+            :py:meth:`niscope.Session.unlock_session` in the same method.
+
+            
+
+
 
 

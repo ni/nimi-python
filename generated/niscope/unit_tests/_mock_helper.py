@@ -124,6 +124,9 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['InitiateAcquisition'] = {}
         self._defaults['InitiateAcquisition']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['ProbeCompensationSignalStart'] = {}
         self._defaults['ProbeCompensationSignalStart']['return'] = 0
         self._defaults['ProbeCompensationSignalStop'] = {}
@@ -151,6 +154,9 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['reset'] = {}
@@ -610,6 +616,15 @@ class SideEffectsHelper(object):
             return self._defaults['InitiateAcquisition']['return']
         return self._defaults['InitiateAcquisition']['return']
 
+    def niScope_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niScope_LockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
+
     def niScope_ProbeCompensationSignalStart(self, vi):  # noqa: N802
         if self._defaults['ProbeCompensationSignalStart']['return'] != 0:
             return self._defaults['ProbeCompensationSignalStart']['return']
@@ -702,6 +717,15 @@ class SideEffectsHelper(object):
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
+
+    def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niScope_UnlockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
 
     def niScope_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
@@ -813,6 +837,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_InitWithOptions.return_value = 0
         mock_library.niScope_InitiateAcquisition.side_effect = MockFunctionCallError("niScope_InitiateAcquisition")
         mock_library.niScope_InitiateAcquisition.return_value = 0
+        mock_library.niScope_LockSession.side_effect = MockFunctionCallError("niScope_LockSession")
+        mock_library.niScope_LockSession.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStart.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStart")
         mock_library.niScope_ProbeCompensationSignalStart.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStop.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStop")
@@ -837,6 +863,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_SetAttributeViReal64.return_value = 0
         mock_library.niScope_SetAttributeViString.side_effect = MockFunctionCallError("niScope_SetAttributeViString")
         mock_library.niScope_SetAttributeViString.return_value = 0
+        mock_library.niScope_UnlockSession.side_effect = MockFunctionCallError("niScope_UnlockSession")
+        mock_library.niScope_UnlockSession.return_value = 0
         mock_library.niScope_close.side_effect = MockFunctionCallError("niScope_close")
         mock_library.niScope_close.return_value = 0
         mock_library.niScope_reset.side_effect = MockFunctionCallError("niScope_reset")

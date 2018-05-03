@@ -106,6 +106,9 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['PerformOpenCableComp'] = {}
         self._defaults['PerformOpenCableComp']['return'] = 0
         self._defaults['PerformOpenCableComp']['Conductance'] = None
@@ -143,6 +146,9 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -442,6 +448,15 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
+    def niDMM_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niDMM_LockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
+
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         if self._defaults['PerformOpenCableComp']['return'] != 0:
             return self._defaults['PerformOpenCableComp']['return']
@@ -565,6 +580,15 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niDMM_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niDMM_UnlockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
+
     def niDMM_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
@@ -675,6 +699,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_InitWithOptions.return_value = 0
         mock_library.niDMM_Initiate.side_effect = MockFunctionCallError("niDMM_Initiate")
         mock_library.niDMM_Initiate.return_value = 0
+        mock_library.niDMM_LockSession.side_effect = MockFunctionCallError("niDMM_LockSession")
+        mock_library.niDMM_LockSession.return_value = 0
         mock_library.niDMM_PerformOpenCableComp.side_effect = MockFunctionCallError("niDMM_PerformOpenCableComp")
         mock_library.niDMM_PerformOpenCableComp.return_value = 0
         mock_library.niDMM_PerformShortCableComp.side_effect = MockFunctionCallError("niDMM_PerformShortCableComp")
@@ -701,6 +727,8 @@ class SideEffectsHelper(object):
         mock_library.niDMM_SetAttributeViReal64.return_value = 0
         mock_library.niDMM_SetAttributeViString.side_effect = MockFunctionCallError("niDMM_SetAttributeViString")
         mock_library.niDMM_SetAttributeViString.return_value = 0
+        mock_library.niDMM_UnlockSession.side_effect = MockFunctionCallError("niDMM_UnlockSession")
+        mock_library.niDMM_UnlockSession.return_value = 0
         mock_library.niDMM_close.side_effect = MockFunctionCallError("niDMM_close")
         mock_library.niDMM_close.return_value = 0
         mock_library.niDMM_error_message.side_effect = MockFunctionCallError("niDMM_error_message")

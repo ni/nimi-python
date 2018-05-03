@@ -59,6 +59,18 @@ class _Acquisition(object):
         self._session.abort()
 
 
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        self._session.lock_session()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock_session()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -2231,6 +2243,9 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def lock(self):  # TODO(texasaggie97) Need to figure out how to document this
+        return _Lock(self)
+
     def _get_error_description(self, error_code):
         '''_get_error_description
 
@@ -2294,11 +2309,12 @@ class _SessionBase(object):
 
             session.channels['0,1'].self_cal()
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDCPower_CalSelfCalibrate(vi_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            error_code = self._library.niDCPower_CalSelfCalibrate(vi_ctype, channel_name_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         '''configure_aperture_time
@@ -2347,15 +2363,16 @@ class _SessionBase(object):
                 +--------------------------------------------+------------------------------+
 
         '''
-        if type(units) is not enums.ApertureTimeUnits:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
-        units_ctype = _visatype.ViInt32(units.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(units) is not enums.ApertureTimeUnits:
+                raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
+            units_ctype = _visatype.ViInt32(units.value)  # case S130
+            error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
@@ -2401,9 +2418,10 @@ class _SessionBase(object):
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
+        with self.lock():
+            voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
+            return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
     def measure_multiple(self):
         '''measure_multiple
@@ -2441,9 +2459,10 @@ class _SessionBase(object):
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements = self._measure_multiple()
+        with self.lock():
+            voltage_measurements, current_measurements = self._measure_multiple()
 
-        return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
+            return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
     def _fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''_fetch_multiple
@@ -2503,22 +2522,23 @@ class _SessionBase(object):
                 device.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
-        count_ctype = _visatype.ViInt32(count)  # case S190
-        voltage_measurements_size = count  # case B600
-        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B600
-        current_measurements_size = count  # case B600
-        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B600
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B600
-        in_compliance_size = count  # case B600
-        in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
-        actual_count_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+            count_ctype = _visatype.ViInt32(count)  # case S190
+            voltage_measurements_size = count  # case B600
+            voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
+            voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B600
+            current_measurements_size = count  # case B600
+            current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B600
+            current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B600
+            in_compliance_size = count  # case B600
+            in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
+            actual_count_ctype = _visatype.ViInt32()  # case S200
+            error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
@@ -2566,13 +2586,14 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean()  # case S200
-        error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(attribute_value_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViBoolean()  # case S200
+            error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return bool(attribute_value_ctype.value)
 
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
@@ -2620,13 +2641,14 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViInt32()  # case S200
+            error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_int64(self, attribute_id):
         '''_get_attribute_vi_int64
@@ -2674,13 +2696,14 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt64()  # case S200
-        error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViInt64()  # case S200
+            error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return int(attribute_value_ctype.value)
 
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
@@ -2728,13 +2751,14 @@ class _SessionBase(object):
                 it or by selecting it and then pressing **Enter**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(attribute_value_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(attribute_value_ctype.value)
 
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
@@ -2773,18 +2797,19 @@ class _SessionBase(object):
                    constants by moving to the value control and pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        attribute_value_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode(self._encoding)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            buffer_size_ctype = _visatype.ViInt32()  # case S170
+            attribute_value_ctype = None  # case C050
+            error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+            buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+            attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+            error_code = self._library.niDCPower_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buffer_size_ctype, attribute_value_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return attribute_value_ctype.value.decode(self._encoding)
 
     def get_channel_name(self, index):
         '''get_channel_name
@@ -2806,17 +2831,18 @@ class _SessionBase(object):
                 1.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_ctype.value.decode(self._encoding)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            index_ctype = _visatype.ViInt32(index)  # case S150
+            buffer_size_ctype = _visatype.ViInt32()  # case S170
+            channel_name_ctype = None  # case C050
+            error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+            buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+            channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+            error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return channel_name_ctype.value.decode(self._encoding)
 
     def _get_error(self):
         '''_get_error
@@ -2843,17 +2869,106 @@ class _SessionBase(object):
             code (int): Returns the error code for the session or execution thread.
 
         '''
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            code_ctype = _visatype.ViStatus()  # case S200
+            buffer_size_ctype = _visatype.ViInt32()  # case S170
+            description_ctype = None  # case C050
+            error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+            buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+            description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+            error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+            return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+
+    def lock_session(self):
+        '''lock_session
+
+        | Obtains a multithread lock on the device session. Before doing so, the
+          software waits until all other execution threads release their locks
+          on the device session.
+        | Other threads may have obtained a lock on this session for the
+          following reasons:
+
+        -  The application called the lock_session method.
+        -  A call to NI-DCPower locked the session.
+        -  A call to the IVI engine locked the session.
+        -  After a call to the lock_session method returns
+           successfully, no other threads can access the device session until
+           you call the unlock_session method.
+        -  Use the lock_session method and the
+           unlock_session method around a sequence of calls to
+           instrument driver methods if you require that the device retain its
+           settings through the end of the sequence.
+
+        You can safely make nested calls to the lock_session method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock_session method with a call to
+        the unlock_session method. If, however, you use
+        **Caller_Has_Lock** in all calls to the lock_session and
+        unlock_session method within a method, the IVI Library
+        locks the session only once within the method regardless of the number
+        of calls you make to the lock_session method. This behavior
+        allows you to call the unlock_session method just once at
+        the end of the method.
+
+        Returns:
+            caller_has_lock (bool): | This parameter is optional. If you do not want to use this parameter,
+                  pass VI_NULL.
+                | Use this parameter in complex methods to keep track of whether you
+                  obtain a lock and therefore need to unlock the session. Pass the
+                  address of a local ViBoolean variable. In the declaration of the local
+                  variable, initialize it to False. Pass the address of the same
+                  local variable to any other calls you make to the
+                  lock_session method or the unlock_session
+                  method in the same method.
+                | The parameter is an input/output parameter. The lock_session
+                  and unlock_session methods each inspect the current value
+                  and take the following actions.
+
+                -  If the value is True, the lock_session method does
+                   not lock the session again.
+                -  If the value is False, the lock_session method
+                   obtains the lock and sets the value of the parameter to True.
+                -  If the value is False, the unlock_session method does
+                   not attempt to unlock the session.
+                -  If the value is True, the unlock_session method
+                   releases the lock and sets the value of the parameter to False.
+
+                | Thus, you can, call the unlock_session method at the end
+                  of your method without worrying about whether you actually have the
+                  lock, as shown in the following example.
+                | ViStatus TestFunc (ViSession vi, ViInt32 flags)
+                  {
+                  ViStatus error = VI_SUCCESS;
+                  ViBoolean haveLock = False;
+                  if (flags & BIT_1)
+                  {
+                  viCheckErr( lock_session(vi, &haveLock;));
+                  viCheckErr( TakeAction1(vi));
+                  if (flags & BIT_2)
+                  {
+                  viCheckErr( unlock_session(vi, &haveLock;));
+                  viCheckErr( TakeAction2(vi));
+                  viCheckErr( lock_session(vi, &haveLock;);
+                  }
+                  if (flags & BIT_3)
+                  viCheckErr( TakeAction3(vi));
+                  }
+                  Error:
+                  /\*At this point, you cannot really be sure that you have the lock.
+                  Fortunately, the haveLock variable takes care of that for you.\*/
+                  unlock_session(vi, &haveLock;);
+                  return error;
+                | }
+
+        '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        code_ctype = _visatype.ViStatus()  # case S200
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        description_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
+        caller_has_lock_ctype = _visatype.ViBoolean()  # case S200
+        error_code = self._library.niDCPower_LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+        return bool(caller_has_lock_ctype.value)
 
     def measure(self, measurement_type):
         '''measure
@@ -2888,15 +3003,16 @@ class _SessionBase(object):
                 amps for current.
 
         '''
-        if type(measurement_type) is not enums.MeasurementTypes:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementTypes))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
-        measurement_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(measurement_ctype.value)
+        with self.lock():
+            if type(measurement_type) is not enums.MeasurementTypes:
+                raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementTypes))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
+            measurement_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(measurement_ctype.value)
 
     def _measure_multiple(self):
         '''_measure_multiple
@@ -2927,17 +3043,18 @@ class _SessionBase(object):
                 returned array.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        voltage_measurements_size = self._parse_channel_count()  # case B560
-        voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
-        voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
-        current_measurements_size = self._parse_channel_count()  # case B560
-        current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
-        current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
-        error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return voltage_measurements_array, current_measurements_array
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            voltage_measurements_size = self._parse_channel_count()  # case B560
+            voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B560
+            voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B560
+            current_measurements_size = self._parse_channel_count()  # case B560
+            current_measurements_array = array.array("d", [0] * current_measurements_size)  # case B560
+            current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B560
+            error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return voltage_measurements_array, current_measurements_array
 
     def _parse_channel_count(self):
         '''_parse_channel_count
@@ -2956,12 +3073,13 @@ class _SessionBase(object):
             number_of_channels (int):
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_channels_ctype = _visatype.ViUInt32()  # case S200
-        error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(number_of_channels_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            number_of_channels_ctype = _visatype.ViUInt32()  # case S200
+            error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return int(number_of_channels_ctype.value)
 
     def query_in_compliance(self):
         '''query_in_compliance
@@ -3002,12 +3120,13 @@ class _SessionBase(object):
             in_compliance (bool): Returns whether the device output channel is in compliance.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        in_compliance_ctype = _visatype.ViBoolean()  # case S200
-        error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, None if in_compliance_ctype is None else (ctypes.pointer(in_compliance_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(in_compliance_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            in_compliance_ctype = _visatype.ViBoolean()  # case S200
+            error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, None if in_compliance_ctype is None else (ctypes.pointer(in_compliance_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return bool(in_compliance_ctype.value)
 
     def query_max_current_limit(self, voltage_level):
         '''query_max_current_limit
@@ -3033,13 +3152,14 @@ class _SessionBase(object):
                 **voltageLevel**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
-        max_current_limit_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if max_current_limit_ctype is None else (ctypes.pointer(max_current_limit_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(max_current_limit_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
+            max_current_limit_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if max_current_limit_ctype is None else (ctypes.pointer(max_current_limit_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(max_current_limit_ctype.value)
 
     def query_max_voltage_level(self, current_limit):
         '''query_max_voltage_level
@@ -3065,13 +3185,14 @@ class _SessionBase(object):
                 with the specified **currentLimit**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        current_limit_ctype = _visatype.ViReal64(current_limit)  # case S150
-        max_voltage_level_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, None if max_voltage_level_ctype is None else (ctypes.pointer(max_voltage_level_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(max_voltage_level_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            current_limit_ctype = _visatype.ViReal64(current_limit)  # case S150
+            max_voltage_level_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, None if max_voltage_level_ctype is None else (ctypes.pointer(max_voltage_level_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(max_voltage_level_ctype.value)
 
     def query_min_current_limit(self, voltage_level):
         '''query_min_current_limit
@@ -3097,13 +3218,14 @@ class _SessionBase(object):
                 with the specified **voltageLevel**.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
-        min_current_limit_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if min_current_limit_ctype is None else (ctypes.pointer(min_current_limit_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(min_current_limit_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
+            min_current_limit_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if min_current_limit_ctype is None else (ctypes.pointer(min_current_limit_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(min_current_limit_ctype.value)
 
     def query_output_state(self, output_state):
         '''query_output_state
@@ -3139,15 +3261,16 @@ class _SessionBase(object):
                 state.
 
         '''
-        if type(output_state) is not enums.OutputStates:
-            raise TypeError('Parameter mode must be of type ' + str(enums.OutputStates))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
-        in_state_ctype = _visatype.ViBoolean()  # case S200
-        error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(in_state_ctype.value)
+        with self.lock():
+            if type(output_state) is not enums.OutputStates:
+                raise TypeError('Parameter mode must be of type ' + str(enums.OutputStates))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
+            in_state_ctype = _visatype.ViBoolean()  # case S200
+            error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return bool(in_state_ctype.value)
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -3198,13 +3321,14 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
+            error_code = self._library.niDCPower_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
@@ -3255,13 +3379,14 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
+            error_code = self._library.niDCPower_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int64
@@ -3312,13 +3437,14 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt64(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViInt64(attribute_value)  # case S150
+            error_code = self._library.niDCPower_SetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
@@ -3369,13 +3495,14 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
-        error_code = self._library.niDCPower_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
+            error_code = self._library.niDCPower_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
@@ -3426,13 +3553,14 @@ class _SessionBase(object):
                 settings of the device session.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+            attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
+            error_code = self._library.niDCPower_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def set_sequence(self, values, source_delays):
         '''set_sequence
@@ -3481,14 +3609,82 @@ class _SessionBase(object):
                 The valid values are between 0 and 167 seconds.
 
         '''
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+            values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
+            source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
+            size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
+            error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
+
+    def unlock_session(self):
+        '''unlock_session
+
+        Releases a lock that you acquired on an device session using
+        lock_session. Refer to lock_session for additional
+        information on session locks.
+
+        Returns:
+            caller_has_lock (bool): | This property is optional. If you do not want to use this property,
+                  pass VI_NULL.
+                | Use this property in complex methods to keep track of whether you
+                  obtain a lock and therefore need to unlock the session.
+                | Pass the address of a local ViBoolean variable. In the declaration of
+                  the local variable, initialize it to False. Pass the address of
+                  the same local variable to any other calls you make to
+                  lock_session or UnlockSessionin the same
+                  method.
+                | The parameter is an input/output parameter. lock_session and
+                  UnlockSessioneach inspect the current value and take the
+                  following actions.
+
+                -  If the value is True, lock_session does not lock the
+                   session again.
+                -  If the value is False, lock_session obtains the lock
+                   and sets the value of the parameter to True.
+                -  If the value is False, UnlockSessiondoes not attempt
+                   to unlock the session.
+                -  If the value is True, UnlockSessionreleases the lock
+                   and sets the value of the parameter to False.
+
+                | Thus, you can, call unlock_session at the end of your
+                  method without worrying about whether you actually have the lock, as
+                  the following example shows.
+                | ViStatus TestFunc (ViSession vi, ViInt32 flags)
+                  {
+                  ViStatus error = VI_SUCCESS;
+                  ViBoolean haveLock = False;
+                  if (flags & BIT_1)
+                  {
+                  viCheckErr( lock_session(vi, &haveLock;));
+                  viCheckErr( TakeAction1(vi));
+                  if (flags & BIT_2)
+                  {
+                  viCheckErr( unlock_session(vi, &haveLock;));
+                  viCheckErr( TakeAction2(vi));
+                  viCheckErr( lock_session(vi, &haveLock;);
+                  }
+                  if (flags & BIT_3)
+                  viCheckErr( TakeAction3(vi));
+                  }
+                  Error:
+                  /\*At this point, you cannot really be sure that you have the lock.
+                  Fortunately, the haveLock variable takes care of that for you.\*/
+                  unlock_session(vi, &haveLock;);
+                  return error;
+                  }
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
+        '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
-        source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
-        size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
-        error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        caller_has_lock_ctype = _visatype.ViBoolean()  # case S200
+        error_code = self._library.niDCPower_UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return bool(caller_has_lock_ctype.value)
 
     def _error_message(self, error_code):
         '''_error_message
@@ -3507,12 +3703,13 @@ class _SessionBase(object):
                 You must pass a ViChar array with at least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niDCPower_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code_ctype = _visatype.ViStatus(error_code)  # case S150
+            error_message_ctype = (_visatype.ViChar * 256)()  # case C070
+            error_code = self._library.niDCPower_error_message(vi_ctype, error_code_ctype, error_message_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+            return error_message_ctype.value.decode(self._encoding)
 
 
 class Session(_SessionBase):
@@ -3672,10 +3869,11 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Abort(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code = self._library.niDCPower_Abort(vi_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def commit(self):
         '''commit
@@ -3695,10 +3893,11 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code = self._library.niDCPower_Commit(vi_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def configure_digital_edge_measure_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_measure_trigger
@@ -3738,14 +3937,15 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(edge) is not enums.DigitalEdge:
+                raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+            edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+            error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def configure_digital_edge_pulse_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_pulse_trigger
@@ -3782,14 +3982,15 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(edge) is not enums.DigitalEdge:
+                raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+            edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+            error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_sequence_advance_trigger
@@ -3830,14 +4031,15 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(edge) is not enums.DigitalEdge:
+                raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+            edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+            error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def configure_digital_edge_source_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_source_trigger
@@ -3877,14 +4079,15 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(edge) is not enums.DigitalEdge:
+                raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+            edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+            error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def configure_digital_edge_start_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
         '''configure_digital_edge_start_trigger
@@ -3924,14 +4127,15 @@ class Session(_SessionBase):
                 +----------------------------+----------------------------------------------------------------+
 
         '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(edge) is not enums.DigitalEdge:
+                raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
+            edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+            error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
         '''_create_advanced_sequence
@@ -4066,14 +4270,15 @@ class Session(_SessionBase):
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        attribute_id_count_ctype = _visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
-        attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
-        set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
+            attribute_id_count_ctype = _visatype.ViInt32(0 if attribute_ids is None else len(attribute_ids))  # case S160
+            attribute_ids_ctype = get_ctypes_pointer_for_buffer(value=attribute_ids, library_type=_visatype.ViInt32)  # case B550
+            set_as_active_sequence_ctype = _visatype.ViBoolean(set_as_active_sequence)  # case S150
+            error_code = self._library.niDCPower_CreateAdvancedSequence(vi_ctype, sequence_name_ctype, attribute_id_count_ctype, attribute_ids_ctype, set_as_active_sequence_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _create_advanced_sequence_step(self, set_as_active_step=True):
         '''_create_advanced_sequence_step
@@ -4111,11 +4316,12 @@ class Session(_SessionBase):
             set_as_active_step (bool): Specifies that this current step in the active sequence is active.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
-        error_code = self._library.niDCPower_CreateAdvancedSequenceStep(vi_ctype, set_as_active_step_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            set_as_active_step_ctype = _visatype.ViBoolean(set_as_active_step)  # case S150
+            error_code = self._library.niDCPower_CreateAdvancedSequenceStep(vi_ctype, set_as_active_step_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _delete_advanced_sequence(self, sequence_name):
         '''_delete_advanced_sequence
@@ -4148,11 +4354,12 @@ class Session(_SessionBase):
             sequence_name (str): specifies the name of the sequence to delete.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_DeleteAdvancedSequence(vi_ctype, sequence_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            sequence_name_ctype = ctypes.create_string_buffer(sequence_name.encode(self._encoding))  # case C020
+            error_code = self._library.niDCPower_DeleteAdvancedSequence(vi_ctype, sequence_name_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def disable(self):
         '''disable
@@ -4164,10 +4371,11 @@ class Session(_SessionBase):
         This method opens the output relay on devices that have an output
         relay.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Disable(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code = self._library.niDCPower_Disable(vi_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def export_signal(self, signal, output_terminal, signal_identifier=""):
         '''export_signal
@@ -4239,15 +4447,16 @@ class Session(_SessionBase):
             signal_identifier (str): Reserved for future use. Pass in an empty string for this parameter.
 
         '''
-        if type(signal) is not enums.ExportSignal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ExportSignal))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
-        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
-        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(signal) is not enums.ExportSignal:
+                raise TypeError('Parameter mode must be of type ' + str(enums.ExportSignal))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            signal_ctype = _visatype.ViInt32(signal.value)  # case S130
+            signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
+            output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
+            error_code = self._library.niDCPower_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _get_ext_cal_last_date_and_time(self):
         '''_get_ext_cal_last_date_and_time
@@ -4270,15 +4479,16 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S200
-        month_ctype = _visatype.ViInt32()  # case S200
-        day_ctype = _visatype.ViInt32()  # case S200
-        hour_ctype = _visatype.ViInt32()  # case S200
-        minute_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            year_ctype = _visatype.ViInt32()  # case S200
+            month_ctype = _visatype.ViInt32()  # case S200
+            day_ctype = _visatype.ViInt32()  # case S200
+            hour_ctype = _visatype.ViInt32()  # case S200
+            minute_ctype = _visatype.ViInt32()  # case S200
+            error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_ext_cal_last_temp(self):
         '''get_ext_cal_last_temp
@@ -4291,11 +4501,12 @@ class Session(_SessionBase):
                 during the last successful external calibration.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            temperature_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(temperature_ctype.value)
 
     def get_ext_cal_recommended_interval(self):
         '''get_ext_cal_recommended_interval
@@ -4308,11 +4519,12 @@ class Session(_SessionBase):
                 external calibrations.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        months_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_month_to_timedelta(int(months_ctype.value))
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            months_ctype = _visatype.ViInt32()  # case S200
+            error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
@@ -4323,8 +4535,9 @@ class Session(_SessionBase):
             month (datetime.datetime): Indicates date and time of the last calibration.
 
         '''
-        year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
-        return datetime.datetime(year, month, day, hour, minute)
+        with self.lock():
+            year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
+            return datetime.datetime(year, month, day, hour, minute)
 
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
@@ -4337,8 +4550,9 @@ class Session(_SessionBase):
             month (datetime.datetime): Returns the date and time the device was last calibrated.
 
         '''
-        year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
-        return datetime.datetime(year, month, day, hour, minute)
+        with self.lock():
+            year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
+            return datetime.datetime(year, month, day, hour, minute)
 
     def _get_self_cal_last_date_and_time(self):
         '''_get_self_cal_last_date_and_time
@@ -4371,15 +4585,16 @@ class Session(_SessionBase):
             minute (int): Returns the **minute** in which the device was last calibrated.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S200
-        month_ctype = _visatype.ViInt32()  # case S200
-        day_ctype = _visatype.ViInt32()  # case S200
-        hour_ctype = _visatype.ViInt32()  # case S200
-        minute_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            year_ctype = _visatype.ViInt32()  # case S200
+            month_ctype = _visatype.ViInt32()  # case S200
+            day_ctype = _visatype.ViInt32()  # case S200
+            hour_ctype = _visatype.ViInt32()  # case S200
+            minute_ctype = _visatype.ViInt32()  # case S200
+            error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
@@ -4405,11 +4620,12 @@ class Session(_SessionBase):
                 during the oldest successful calibration.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            temperature_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(temperature_ctype.value)
 
     def _initialize_with_channels(self, resource_name, channels=None, reset=False, option_string=""):
         '''_initialize_with_channels
@@ -4506,10 +4722,11 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_Initiate(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code = self._library.niDCPower_Initiate(vi_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def read_current_temperature(self):
         '''read_current_temperature
@@ -4521,11 +4738,12 @@ class Session(_SessionBase):
             temperature (float): Returns the onboard **temperature**, in degrees Celsius, of the device.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            temperature_ctype = _visatype.ViReal64()  # case S200
+            error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return float(temperature_ctype.value)
 
     def reset_device(self):
         '''reset_device
@@ -4544,10 +4762,11 @@ class Session(_SessionBase):
         This will also open the output relay on devices that have an output
         relay.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_ResetDevice(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code = self._library.niDCPower_ResetDevice(vi_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def reset_with_defaults(self):
         '''reset_with_defaults
@@ -4560,10 +4779,11 @@ class Session(_SessionBase):
         method, this method can assign user-defined default values for
         configurable properties from the IVI configuration.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code = self._library.niDCPower_ResetWithDefaults(vi_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def send_software_edge_trigger(self, trigger=enums.SendSoftwareEdgeTriggerType.START):
         '''send_software_edge_trigger
@@ -4598,13 +4818,14 @@ class Session(_SessionBase):
                 +----------------------------------------------+---------------------------------------+
 
         '''
-        if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
+                raise TypeError('Parameter mode must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
+            error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def wait_for_event(self, event_id, timeout=datetime.timedelta(seconds=10.0)):
         '''wait_for_event
@@ -4650,14 +4871,15 @@ class Session(_SessionBase):
                 application.
 
         '''
-        if type(event_id) is not enums.Event:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Event))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
-        error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            if type(event_id) is not enums.Event:
+                raise TypeError('Parameter mode must be of type ' + str(enums.Event))
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
+            timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+            error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _close(self):
         '''_close
@@ -4706,10 +4928,11 @@ class Session(_SessionBase):
         | 1              | Self test failed. |
         +----------------+-------------------+
         '''
-        code, msg = self._self_test()
-        if code:
-            raise errors.SelfTestError(code, msg)
-        return None
+        with self.lock():
+            code, msg = self._self_test()
+            if code:
+                raise errors.SelfTestError(code, msg)
+            return None
 
     def reset(self):
         '''reset
@@ -4721,10 +4944,11 @@ class Session(_SessionBase):
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for
         more information about NI-DCPower software states.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDCPower_reset(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            error_code = self._library.niDCPower_reset(vi_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def _self_test(self):
         '''_self_test
@@ -4752,12 +4976,13 @@ class Session(_SessionBase):
                 least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S200
-        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            self_test_result_ctype = _visatype.ViInt16()  # case S200
+            self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
+            error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
 
 
 

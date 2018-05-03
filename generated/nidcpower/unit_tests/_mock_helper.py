@@ -99,6 +99,9 @@ class SideEffectsHelper(object):
         self._defaults['InitializeWithChannels']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['Measure'] = {}
         self._defaults['Measure']['return'] = 0
         self._defaults['Measure']['Measurement'] = None
@@ -145,6 +148,9 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetSequence'] = {}
         self._defaults['SetSequence']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitForEvent'] = {}
         self._defaults['WaitForEvent']['return'] = 0
         self._defaults['close'] = {}
@@ -438,6 +444,15 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
+    def niDCPower_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niDCPower_LockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
+
     def niDCPower_Measure(self, vi, channel_name, measurement_type, measurement):  # noqa: N802
         if self._defaults['Measure']['return'] != 0:
             return self._defaults['Measure']['return']
@@ -582,6 +597,15 @@ class SideEffectsHelper(object):
             return self._defaults['SetSequence']['return']
         return self._defaults['SetSequence']['return']
 
+    def niDCPower_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niDCPower_UnlockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
+
     def niDCPower_WaitForEvent(self, vi, event_id, timeout):  # noqa: N802
         if self._defaults['WaitForEvent']['return'] != 0:
             return self._defaults['WaitForEvent']['return']
@@ -689,6 +713,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_InitializeWithChannels.return_value = 0
         mock_library.niDCPower_Initiate.side_effect = MockFunctionCallError("niDCPower_Initiate")
         mock_library.niDCPower_Initiate.return_value = 0
+        mock_library.niDCPower_LockSession.side_effect = MockFunctionCallError("niDCPower_LockSession")
+        mock_library.niDCPower_LockSession.return_value = 0
         mock_library.niDCPower_Measure.side_effect = MockFunctionCallError("niDCPower_Measure")
         mock_library.niDCPower_Measure.return_value = 0
         mock_library.niDCPower_MeasureMultiple.side_effect = MockFunctionCallError("niDCPower_MeasureMultiple")
@@ -725,6 +751,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_SetAttributeViString.return_value = 0
         mock_library.niDCPower_SetSequence.side_effect = MockFunctionCallError("niDCPower_SetSequence")
         mock_library.niDCPower_SetSequence.return_value = 0
+        mock_library.niDCPower_UnlockSession.side_effect = MockFunctionCallError("niDCPower_UnlockSession")
+        mock_library.niDCPower_UnlockSession.return_value = 0
         mock_library.niDCPower_WaitForEvent.side_effect = MockFunctionCallError("niDCPower_WaitForEvent")
         mock_library.niDCPower_WaitForEvent.return_value = 0
         mock_library.niDCPower_close.side_effect = MockFunctionCallError("niDCPower_close")

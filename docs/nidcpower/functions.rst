@@ -672,6 +672,97 @@ nidcpower.Session methods
 
 
 
+.. py:method:: lock_session()
+
+    | Obtains a multithread lock on the device session. Before doing so, the
+      software waits until all other execution threads release their locks
+      on the device session.
+    | Other threads may have obtained a lock on this session for the
+      following reasons:
+
+    -  The application called the :py:meth:`nidcpower.Session.lock_session` method.
+    -  A call to NI-DCPower locked the session.
+    -  A call to the IVI engine locked the session.
+    -  After a call to the :py:meth:`nidcpower.Session.lock_session` method returns
+       successfully, no other threads can access the device session until
+       you call the :py:meth:`nidcpower.Session.unlock_session` method.
+    -  Use the :py:meth:`nidcpower.Session.lock_session` method and the
+       :py:meth:`nidcpower.Session.unlock_session` method around a sequence of calls to
+       instrument driver methods if you require that the device retain its
+       settings through the end of the sequence.
+
+    You can safely make nested calls to the :py:meth:`nidcpower.Session.lock_session` method
+    within the same thread. To completely unlock the session, you must
+    balance each call to the :py:meth:`nidcpower.Session.lock_session` method with a call to
+    the :py:meth:`nidcpower.Session.unlock_session` method. If, however, you use
+    **Caller_Has_Lock** in all calls to the :py:meth:`nidcpower.Session.lock_session` and
+    :py:meth:`nidcpower.Session.unlock_session` method within a method, the IVI Library
+    locks the session only once within the method regardless of the number
+    of calls you make to the :py:meth:`nidcpower.Session.lock_session` method. This behavior
+    allows you to call the :py:meth:`nidcpower.Session.unlock_session` method just once at
+    the end of the method.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            | This parameter is optional. If you do not want to use this parameter,
+              pass VI_NULL.
+            | Use this parameter in complex methods to keep track of whether you
+              obtain a lock and therefore need to unlock the session. Pass the
+              address of a local ViBoolean variable. In the declaration of the local
+              variable, initialize it to False. Pass the address of the same
+              local variable to any other calls you make to the
+              :py:meth:`nidcpower.Session.lock_session` method or the :py:meth:`nidcpower.Session.unlock_session`
+              method in the same method.
+            | The parameter is an input/output parameter. The :py:meth:`nidcpower.Session.lock_session`
+              and :py:meth:`nidcpower.Session.unlock_session` methods each inspect the current value
+              and take the following actions.
+
+            -  If the value is True, the :py:meth:`nidcpower.Session.lock_session` method does
+               not lock the session again.
+            -  If the value is False, the :py:meth:`nidcpower.Session.lock_session` method
+               obtains the lock and sets the value of the parameter to True.
+            -  If the value is False, the :py:meth:`nidcpower.Session.unlock_session` method does
+               not attempt to unlock the session.
+            -  If the value is True, the :py:meth:`nidcpower.Session.unlock_session` method
+               releases the lock and sets the value of the parameter to False.
+
+            | Thus, you can, call the :py:meth:`nidcpower.Session.unlock_session` method at the end
+              of your method without worrying about whether you actually have the
+              lock, as shown in the following example.
+            | ViStatus TestFunc (ViSession vi, ViInt32 flags)
+              {
+              ViStatus error = VI_SUCCESS;
+              ViBoolean haveLock = False;
+              if (flags & BIT_1)
+              {
+              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;));
+              viCheckErr( TakeAction1(vi));
+              if (flags & BIT_2)
+              {
+              viCheckErr( :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;));
+              viCheckErr( TakeAction2(vi));
+              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;);
+              }
+              if (flags & BIT_3)
+              viCheckErr( TakeAction3(vi));
+              }
+              Error:
+              /\*At this point, you cannot really be sure that you have the lock.
+              Fortunately, the haveLock variable takes care of that for you.\*/
+              :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;);
+              return error;
+            | }
+
+            
+
+
+
 .. py:method:: measure(measurement_type)
 
     Returns the measured value of either the voltage or current on the
@@ -1212,6 +1303,75 @@ nidcpower.Session methods
 
 
     :type source_delays: list of float
+
+.. py:method:: unlock_session()
+
+    Releases a lock that you acquired on an device session using
+    :py:meth:`nidcpower.Session.lock_session`. Refer to :py:meth:`nidcpower.Session.lock_session` for additional
+    information on session locks.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            | This property is optional. If you do not want to use this property,
+              pass VI_NULL.
+            | Use this property in complex methods to keep track of whether you
+              obtain a lock and therefore need to unlock the session.
+            | Pass the address of a local ViBoolean variable. In the declaration of
+              the local variable, initialize it to False. Pass the address of
+              the same local variable to any other calls you make to
+              :py:meth:`nidcpower.Session.lock_session` or :py:meth:`nidcpower.Session.UnlockSessionin` the same
+              method.
+            | The parameter is an input/output parameter. :py:meth:`nidcpower.Session.lock_session` and
+              :py:meth:`nidcpower.Session.UnlockSessioneach` inspect the current value and take the
+              following actions.
+
+            -  If the value is True, :py:meth:`nidcpower.Session.lock_session` does not lock the
+               session again.
+            -  If the value is False, :py:meth:`nidcpower.Session.lock_session` obtains the lock
+               and sets the value of the parameter to True.
+            -  If the value is False, :py:meth:`nidcpower.Session.UnlockSessiondoes` not attempt
+               to unlock the session.
+            -  If the value is True, :py:meth:`nidcpower.Session.UnlockSessionreleases` the lock
+               and sets the value of the parameter to False.
+
+            | Thus, you can, call :py:meth:`nidcpower.Session.unlock_session` at the end of your
+              method without worrying about whether you actually have the lock, as
+              the following example shows.
+            | ViStatus TestFunc (ViSession vi, ViInt32 flags)
+              {
+              ViStatus error = VI_SUCCESS;
+              ViBoolean haveLock = False;
+              if (flags & BIT_1)
+              {
+              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;));
+              viCheckErr( TakeAction1(vi));
+              if (flags & BIT_2)
+              {
+              viCheckErr( :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;));
+              viCheckErr( TakeAction2(vi));
+              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;);
+              }
+              if (flags & BIT_3)
+              viCheckErr( TakeAction3(vi));
+              }
+              Error:
+              /\*At this point, you cannot really be sure that you have the lock.
+              Fortunately, the haveLock variable takes care of that for you.\*/
+              :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;);
+              return error;
+              }
+
+            
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
 
 .. py:method:: wait_for_event(event_id, timeout=datetime.timedelta(seconds=10.0))
 

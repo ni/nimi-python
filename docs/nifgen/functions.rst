@@ -1975,6 +1975,116 @@ nifgen.Session methods
 
 
 
+.. py:method:: lock_session()
+
+    Obtains a multithread lock on the instrument session. Before it does so,
+    this method waits until all other execution threads have released
+    their locks on the instrument session.
+
+    Other threads might have obtained a lock on this session in the
+    following ways:
+
+    -  Your application called the :py:meth:`nifgen.Session.lock_session` method.
+    -  A call to the NI-FGEN locked the session.
+    -  A call to the IVI Engine locked the session.
+
+    After your call to the :py:meth:`nifgen.Session.lock_session` method returns
+    successfully, no other threads can access the instrument session until
+    you call the nifgen_UnlockSession method.
+
+    Use the :py:meth:`nifgen.Session.lock_session` method and the :py:meth:`nifgen.Session.unlock_session`
+    method around a sequence of calls to NI-FGEN methods if you require
+    that the instrument retain its settings through the end of the sequence.
+
+    You can safely make nested calls to the :py:meth:`nifgen.Session.lock_session` method
+    within the same thread. To completely unlock the session, you must
+    balance each call to the :py:meth:`nifgen.Session.lock_session` method with a call to the
+    :py:meth:`nifgen.Session.unlock_session` method. If, however, you use the
+    **callerHasLock** parameter in all calls to the :py:meth:`nifgen.Session.lock_session`
+    method and the :py:meth:`nifgen.Session.unlock_session` method within a method, the
+    IVI Engine locks the session only once within the method regardless of
+    the number of calls you make to the :py:meth:`nifgen.Session.lock_session` method. This
+    configuration allows you to call the :py:meth:`nifgen.Session.unlock_session` method just
+    once at the end of the method.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            Keeps track of whether you obtained a lock and therefore need to unlock
+            the session. Pass the address of a local ViBoolean variable. In the
+            declaration of the local variable, initialize it to False. Pass the
+            address of the same local variable to any other calls you make to the
+            :py:meth:`nifgen.Session.lock_session` method or the nifgen_UnlockSession method in
+            the same method.
+
+            This parameter serves as a convenience. If you do not want to use this
+            parameter, pass VI_NULL.
+
+            This parameter is an input/output parameter. The :py:meth:`nifgen.Session.lock_session`
+            method and the :py:meth:`nifgen.Session.unlock_session` method each inspect the current
+            value and take the following actions:
+
+            -  If the value is True, the :py:meth:`nifgen.Session.lock_session` method does not
+               lock the session again. If the value is False, the
+               :py:meth:`nifgen.Session.lock_session` method obtains the lock and sets the value of
+               the parameter to True.
+            -  If the value is False, the :py:meth:`nifgen.Session.unlock_session` method does
+               not attempt to unlock the session. If the value is True, the
+               :py:meth:`nifgen.Session.unlock_session` method releases the lock and sets the value
+               of the parameter to False.
+
+            Thus, you can call the :py:meth:`nifgen.Session.unlock_session` method at the end of your
+            method without worrying about whether you actually have the lock.
+
+            Example:
+
+            ViStatus TestFunc (ViSession vi, ViInt32 flags)
+            {
+
+            ViStatus error = VI_SUCCESS;
+            ViBoolean haveLock = False;
+            if (flags & BIT_1)
+            {
+
+            viCheckErr( :py:meth:`nifgen.Session.lock_session`(vi, &haveLock;));
+            viCheckErr( TakeAction1(vi));
+            if (flags & BIT_2)
+            {
+
+             viCheckErr( :py:meth:`nifgen.Session.unlock_session`(vi, &haveLock;));
+            viCheckErr( TakeAction2(vi));
+            viCheckErr( :py:meth:`nifgen.Session.lock_session`(vi, &haveLock;);
+
+            }
+            if (flags & BIT_3)
+
+             viCheckErr( TakeAction3(vi));
+
+            }
+
+            Error:
+
+            |
+
+            /\*
+            At this point, you cannot really be sure that
+            you have the lock. Fortunately, the haveLock
+            variable takes care of that for you.
+            \*/
+            :py:meth:`nifgen.Session.unlock_session`(vi, &haveLock;);
+            return error;
+
+            | }
+
+            
+
+
+
 .. py:method:: query_arb_seq_capabilities()
 
     Returns the properties of the signal generator that are related to
@@ -2432,6 +2542,91 @@ nifgen.Session methods
 
 
     :type offset: int
+
+.. py:method:: unlock_session()
+
+    Releases a lock that you acquired on an instrument session using the
+    nifgen_LockSession method.
+
+    
+
+
+
+    :rtype: bool
+    :return:
+
+
+            Keeps track of whether you obtain a lock and therefore need to unlock
+            the session.
+
+            This parameter serves as a convenience. If you do not want to use this
+            parameter, pass VI_NULL.
+
+            Pass the address of a local ViBoolean variable. In the declaration of
+            the local variable, initialize it to False. Pass the address of the
+            same local variable to any other calls you make to the
+            :py:meth:`nifgen.Session.lock_session` method or the :py:meth:`nifgen.Session.unlock_session` method in
+            the same method.
+
+            The parameter is an input/output parameter. The :py:meth:`nifgen.Session.lock_session`
+            method and the :py:meth:`nifgen.Session.unlock_session` method each inspect the current
+            value and take the following actions:
+
+            -  If the value is True, the :py:meth:`nifgen.Session.lock_session` method does not
+               lock the session again. If the value is False, the
+               :py:meth:`nifgen.Session.lock_session` method obtains the lock and sets the value of
+               the parameter to True.
+            -  If the value is False, the :py:meth:`nifgen.Session.unlock_session` method does
+               not attempt to unlock the session. If the value is True, the
+               :py:meth:`nifgen.Session.unlock_session` method releases the lock and sets the value
+               of the parameter to False.
+
+            Thus, you can, call the :py:meth:`nifgen.Session.unlock_session` method at the end of
+            your method without worrying about whether you actually have the lock.
+
+            Example:
+
+            ViStatus TestFunc (ViSession vi, ViInt32 flags)
+            {
+
+            ViStatus error = VI_SUCCESS;
+            ViBoolean haveLock = False;
+            if (flags & BIT_1)
+            {
+
+            viCheckErr(:py:meth:`nifgen.Session.lock_session`(vi, &haveLock;));
+            viCheckErr( TakeAction1(vi));
+            if (flags & BIT_2)
+            {
+
+            viCheckErr( :py:meth:`nifgen.Session.unlock_session`(vi, &haveLock;));
+            viCheckErr( TakeAction2(vi));
+            viCheckErr( :py:meth:`nifgen.Session.lock_session`(vi, &haveLock;);
+
+            }
+            if (flags & BIT_3)
+
+             viCheckErr( TakeAction3(vi));
+
+            }
+
+            Error:
+
+            |
+
+            /\*
+            At this point, you cannot really be sure that
+            you have the lock. Fortunately, the haveLock
+            variable takes care of that for you.
+            \*/
+            :py:meth:`nifgen.Session.unlock_session`(vi, &haveLock;);
+            return error;
+
+            }
+
+            
+
+
 
 .. py:method:: wait_until_done(max_time=10000)
 

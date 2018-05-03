@@ -46,6 +46,7 @@ class Library(object):
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
         self.niDCPower_Initiate_cfunc = None
+        self.niDCPower_LockSession_cfunc = None
         self.niDCPower_Measure_cfunc = None
         self.niDCPower_MeasureMultiple_cfunc = None
         self.niDCPower_ParseChannelCount_cfunc = None
@@ -64,6 +65,7 @@ class Library(object):
         self.niDCPower_SetAttributeViReal64_cfunc = None
         self.niDCPower_SetAttributeViString_cfunc = None
         self.niDCPower_SetSequence_cfunc = None
+        self.niDCPower_UnlockSession_cfunc = None
         self.niDCPower_WaitForEvent_cfunc = None
         self.niDCPower_close_cfunc = None
         self.niDCPower_error_message_cfunc = None
@@ -302,6 +304,14 @@ class Library(object):
                 self.niDCPower_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Initiate_cfunc(vi)
 
+    def niDCPower_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_LockSession_cfunc is None:
+                self.niDCPower_LockSession_cfunc = self._library.niDCPower_LockSession
+                self.niDCPower_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_LockSession_cfunc(vi, caller_has_lock)
+
     def niDCPower_Measure(self, vi, channel_name, measurement_type, measurement):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_Measure_cfunc is None:
@@ -445,6 +455,14 @@ class Library(object):
                 self.niDCPower_SetSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViUInt32]  # noqa: F405
                 self.niDCPower_SetSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetSequence_cfunc(vi, channel_name, values, source_delays, size)
+
+    def niDCPower_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_UnlockSession_cfunc is None:
+                self.niDCPower_UnlockSession_cfunc = self._library.niDCPower_UnlockSession
+                self.niDCPower_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niDCPower_WaitForEvent(self, vi, event_id, timeout):  # noqa: N802
         with self._func_lock:

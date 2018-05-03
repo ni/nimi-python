@@ -145,6 +145,9 @@ class SideEffectsHelper(object):
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['Done'] = None
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['QueryArbSeqCapabilities'] = {}
         self._defaults['QueryArbSeqCapabilities']['return'] = 0
         self._defaults['QueryArbSeqCapabilities']['maximumNumberOfSequences'] = None
@@ -188,6 +191,9 @@ class SideEffectsHelper(object):
         self._defaults['SetNamedWaveformNextWritePosition']['return'] = 0
         self._defaults['SetWaveformNextWritePosition'] = {}
         self._defaults['SetWaveformNextWritePosition']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitUntilDone'] = {}
         self._defaults['WaitUntilDone']['return'] = 0
         self._defaults['WriteBinary16Waveform'] = {}
@@ -614,6 +620,15 @@ class SideEffectsHelper(object):
         done.contents.value = self._defaults['IsDone']['Done']
         return self._defaults['IsDone']['return']
 
+    def niFgen_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niFgen_LockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
+
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         if self._defaults['QueryArbSeqCapabilities']['return'] != 0:
             return self._defaults['QueryArbSeqCapabilities']['return']
@@ -743,6 +758,15 @@ class SideEffectsHelper(object):
         if self._defaults['SetWaveformNextWritePosition']['return'] != 0:
             return self._defaults['SetWaveformNextWritePosition']['return']
         return self._defaults['SetWaveformNextWritePosition']['return']
+
+    def niFgen_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niFgen_UnlockSession", param='callerHasLock')
+        caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
 
     def niFgen_WaitUntilDone(self, vi, max_time):  # noqa: N802
         if self._defaults['WaitUntilDone']['return'] != 0:
@@ -917,6 +941,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_InitiateGeneration.return_value = 0
         mock_library.niFgen_IsDone.side_effect = MockFunctionCallError("niFgen_IsDone")
         mock_library.niFgen_IsDone.return_value = 0
+        mock_library.niFgen_LockSession.side_effect = MockFunctionCallError("niFgen_LockSession")
+        mock_library.niFgen_LockSession.return_value = 0
         mock_library.niFgen_QueryArbSeqCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbSeqCapabilities")
         mock_library.niFgen_QueryArbSeqCapabilities.return_value = 0
         mock_library.niFgen_QueryArbWfmCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbWfmCapabilities")
@@ -945,6 +971,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetNamedWaveformNextWritePosition.return_value = 0
         mock_library.niFgen_SetWaveformNextWritePosition.side_effect = MockFunctionCallError("niFgen_SetWaveformNextWritePosition")
         mock_library.niFgen_SetWaveformNextWritePosition.return_value = 0
+        mock_library.niFgen_UnlockSession.side_effect = MockFunctionCallError("niFgen_UnlockSession")
+        mock_library.niFgen_UnlockSession.return_value = 0
         mock_library.niFgen_WaitUntilDone.side_effect = MockFunctionCallError("niFgen_WaitUntilDone")
         mock_library.niFgen_WaitUntilDone.return_value = 0
         mock_library.niFgen_WriteBinary16Waveform.side_effect = MockFunctionCallError("niFgen_WriteBinary16Waveform")
