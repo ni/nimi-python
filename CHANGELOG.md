@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * Add `session.lock_session()` and `session.unlock_session()` to all drivers except nimodinst - [#846](https://github.com/ni/nimi-python/issues/846)
+        * Add `session.lock()` context manager for managing locks - [#846](https://github.com/ni/nimi-python/issues/846)
     * #### Changed
         * `SelfTestError` now inherits from `<driver>.Error` rather than `Exception` - [#830](https://github.com/ni/nimi-python/issues/830)
         * Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
