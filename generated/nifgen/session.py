@@ -2424,113 +2424,6 @@ class _SessionBase(object):
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
-    def lock_session(self):
-        '''lock_session
-
-        Obtains a multithread lock on the instrument session. Before it does so,
-        this method waits until all other execution threads have released
-        their locks on the instrument session.
-
-        Other threads might have obtained a lock on this session in the
-        following ways:
-
-        -  Your application called the lock_session method.
-        -  A call to the NI-FGEN locked the session.
-        -  A call to the IVI Engine locked the session.
-
-        After your call to the lock_session method returns
-        successfully, no other threads can access the instrument session until
-        you call the nifgen_UnlockSession method.
-
-        Use the lock_session method and the unlock_session
-        method around a sequence of calls to NI-FGEN methods if you require
-        that the instrument retain its settings through the end of the sequence.
-
-        You can safely make nested calls to the lock_session method
-        within the same thread. To completely unlock the session, you must
-        balance each call to the lock_session method with a call to the
-        unlock_session method. If, however, you use the
-        **callerHasLock** parameter in all calls to the lock_session
-        method and the unlock_session method within a method, the
-        IVI Engine locks the session only once within the method regardless of
-        the number of calls you make to the lock_session method. This
-        configuration allows you to call the unlock_session method just
-        once at the end of the method.
-
-        Returns:
-            caller_has_lock (bool): Keeps track of whether you obtained a lock and therefore need to unlock
-                the session. Pass the address of a local ViBoolean variable. In the
-                declaration of the local variable, initialize it to False. Pass the
-                address of the same local variable to any other calls you make to the
-                lock_session method or the nifgen_UnlockSession method in
-                the same method.
-
-                This parameter serves as a convenience. If you do not want to use this
-                parameter, pass VI_NULL.
-
-                This parameter is an input/output parameter. The lock_session
-                method and the unlock_session method each inspect the current
-                value and take the following actions:
-
-                -  If the value is True, the lock_session method does not
-                   lock the session again. If the value is False, the
-                   lock_session method obtains the lock and sets the value of
-                   the parameter to True.
-                -  If the value is False, the unlock_session method does
-                   not attempt to unlock the session. If the value is True, the
-                   unlock_session method releases the lock and sets the value
-                   of the parameter to False.
-
-                Thus, you can call the unlock_session method at the end of your
-                method without worrying about whether you actually have the lock.
-
-                Example:
-
-                ViStatus TestFunc (ViSession vi, ViInt32 flags)
-                {
-
-                ViStatus error = VI_SUCCESS;
-                ViBoolean haveLock = False;
-                if (flags & BIT_1)
-                {
-
-                viCheckErr( lock_session(vi, &haveLock;));
-                viCheckErr( TakeAction1(vi));
-                if (flags & BIT_2)
-                {
-
-                 viCheckErr( unlock_session(vi, &haveLock;));
-                viCheckErr( TakeAction2(vi));
-                viCheckErr( lock_session(vi, &haveLock;);
-
-                }
-                if (flags & BIT_3)
-
-                 viCheckErr( TakeAction3(vi));
-
-                }
-
-                Error:
-
-                |
-
-                /\*
-                At this point, you cannot really be sure that
-                you have the lock. Fortunately, the haveLock
-                variable takes care of that for you.
-                \*/
-                unlock_session(vi, &haveLock;);
-                return error;
-
-                | }
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean()  # case S200
-        error_code = self._library.niFgen_LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value)
-
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -2869,88 +2762,6 @@ class _SessionBase(object):
             error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return
-
-    def unlock_session(self):
-        '''unlock_session
-
-        Releases a lock that you acquired on an instrument session using the
-        nifgen_LockSession method.
-
-        Returns:
-            caller_has_lock (bool): Keeps track of whether you obtain a lock and therefore need to unlock
-                the session.
-
-                This parameter serves as a convenience. If you do not want to use this
-                parameter, pass VI_NULL.
-
-                Pass the address of a local ViBoolean variable. In the declaration of
-                the local variable, initialize it to False. Pass the address of the
-                same local variable to any other calls you make to the
-                lock_session method or the unlock_session method in
-                the same method.
-
-                The parameter is an input/output parameter. The lock_session
-                method and the unlock_session method each inspect the current
-                value and take the following actions:
-
-                -  If the value is True, the lock_session method does not
-                   lock the session again. If the value is False, the
-                   lock_session method obtains the lock and sets the value of
-                   the parameter to True.
-                -  If the value is False, the unlock_session method does
-                   not attempt to unlock the session. If the value is True, the
-                   unlock_session method releases the lock and sets the value
-                   of the parameter to False.
-
-                Thus, you can, call the unlock_session method at the end of
-                your method without worrying about whether you actually have the lock.
-
-                Example:
-
-                ViStatus TestFunc (ViSession vi, ViInt32 flags)
-                {
-
-                ViStatus error = VI_SUCCESS;
-                ViBoolean haveLock = False;
-                if (flags & BIT_1)
-                {
-
-                viCheckErr(lock_session(vi, &haveLock;));
-                viCheckErr( TakeAction1(vi));
-                if (flags & BIT_2)
-                {
-
-                viCheckErr( unlock_session(vi, &haveLock;));
-                viCheckErr( TakeAction2(vi));
-                viCheckErr( lock_session(vi, &haveLock;);
-
-                }
-                if (flags & BIT_3)
-
-                 viCheckErr( TakeAction3(vi));
-
-                }
-
-                Error:
-
-                |
-
-                /\*
-                At this point, you cannot really be sure that
-                you have the lock. Fortunately, the haveLock
-                variable takes care of that for you.
-                \*/
-                unlock_session(vi, &haveLock;);
-                return error;
-
-                }
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean()  # case S200
-        error_code = self._library.niFgen_UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value)
 
     def _write_binary16_waveform_numpy(self, waveform_handle, data):
         '''_write_binary16_waveform
@@ -3510,6 +3321,8 @@ class Session(_SessionBase):
         return _Generation(self)
 
     def close(self):
+        # We do not acquire a lock for close. There is a very small race condition where _close() is called but before
+        # self._vi is set to 0, another function is called. This will return a driver error, so we feel this is acceptable
         try:
             self._close()
         except errors.DriverError as e:
@@ -4750,6 +4563,60 @@ class Session(_SessionBase):
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return bool(done_ctype.value)
 
+    def lock_session(self, caller_has_lock=None):
+        '''lock_session
+
+        | Obtains a multithread lock on the device session. Before doing so, the
+          software waits until all other execution threads release their locks
+          on the device session.
+        | Other threads may have obtained a lock on this session for the
+          following reasons:
+
+        -  The application called the lock_session method.
+        -  A call to NI-DCPower locked the session.
+        -  A call to the IVI engine locked the session.
+        -  After a call to the lock_session method returns
+           successfully, no other threads can access the device session until
+           you call the unlock_session method.
+        -  Use the lock_session method and the
+           unlock_session method around a sequence of calls to
+           instrument driver methods if you require that the device retain its
+           settings through the end of the sequence.
+
+        You can safely make nested calls to the lock_session method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock_session method with a call to
+        the unlock_session method. If, however, you use
+        **Caller_Has_Lock** in all calls to the lock_session and
+        unlock_session method within a method, the IVI Library
+        locks the session only once within the method regardless of the number
+        of calls you make to the lock_session method. This behavior
+        allows you to call the unlock_session method just once at
+        the end of the method.
+
+        Args:
+            caller_has_lock (bool): This parameter is optional. If you do not want to use this parameter, pass None.
+
+                Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+
+
+        Returns:
+            (bool): Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock else None
+        error_code = self._library.niFgen_LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return bool(caller_has_lock_ctype.value) if caller_has_lock else True
+
     def query_arb_seq_capabilities(self):
         '''query_arb_seq_capabilities
 
@@ -4975,6 +4842,37 @@ class Session(_SessionBase):
             error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return
+
+    def unlock_session(self, caller_has_lock=None):
+        '''unlock_session
+
+        Releases a lock that you acquired on an device session using
+        lock_session. Refer to lock_session for additional
+        information on session locks.
+
+        Args:
+            caller_has_lock (bool): This parameter is optional. If you do not want to use this parameter, pass None.
+
+                Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+
+
+        Returns:
+            (bool): Use this parameter in complex methods to keep track of whether you
+                obtain a lock and therefore need to unlock the session. Pass False to the initial
+                lock_session call and store the return value into a variable. Pass in the variable as well
+                as putting the return value into the same variable for each call to lock_session or
+                unlock_session.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock else None
+        error_code = self._library.niFgen_UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return bool(caller_has_lock_ctype.value) if caller_has_lock else False
 
     def wait_until_done(self, max_time=10000):
         '''wait_until_done

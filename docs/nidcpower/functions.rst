@@ -672,7 +672,7 @@ nidcpower.Session methods
 
 
 
-.. py:method:: lock_session()
+.. py:method:: lock_session(caller_has_lock)
 
     | Obtains a multithread lock on the device session. Before doing so, the
       software waits until all other execution threads release their locks
@@ -702,64 +702,38 @@ nidcpower.Session methods
     allows you to call the :py:meth:`nidcpower.Session.unlock_session` method just once at
     the end of the method.
 
-    
 
 
+
+
+    :param caller_has_lock:
+
+
+        This parameter is optional. If you do not want to use this parameter, pass None.
+
+        Use this parameter in complex methods to keep track of whether you
+        obtain a lock and therefore need to unlock the session. Pass False to the initial
+        lock_session call and store the return value into a variable. Pass in the variable as well
+        as putting the return value into the same variable for each call to lock_session or
+        unlock_session.
+
+
+
+
+    :type caller_has_lock: bool
 
     :rtype: bool
     :return:
 
 
-            | This parameter is optional. If you do not want to use this parameter,
-              pass VI_NULL.
-            | Use this parameter in complex methods to keep track of whether you
-              obtain a lock and therefore need to unlock the session. Pass the
-              address of a local ViBoolean variable. In the declaration of the local
-              variable, initialize it to False. Pass the address of the same
-              local variable to any other calls you make to the
-              :py:meth:`nidcpower.Session.lock_session` method or the :py:meth:`nidcpower.Session.unlock_session`
-              method in the same method.
-            | The parameter is an input/output parameter. The :py:meth:`nidcpower.Session.lock_session`
-              and :py:meth:`nidcpower.Session.unlock_session` methods each inspect the current value
-              and take the following actions.
+            This parameter is optional. If you do not want to use this parameter, pass None.
 
-            -  If the value is True, the :py:meth:`nidcpower.Session.lock_session` method does
-               not lock the session again.
-            -  If the value is False, the :py:meth:`nidcpower.Session.lock_session` method
-               obtains the lock and sets the value of the parameter to True.
-            -  If the value is False, the :py:meth:`nidcpower.Session.unlock_session` method does
-               not attempt to unlock the session.
-            -  If the value is True, the :py:meth:`nidcpower.Session.unlock_session` method
-               releases the lock and sets the value of the parameter to False.
+            Use this parameter in complex methods to keep track of whether you
+            obtain a lock and therefore need to unlock the session. Pass False to the initial
+            lock_session call and store the return value into a variable. Pass in the variable as well
+            as putting the return value into the same variable for each call to lock_session or
+            unlock_session.
 
-            | Thus, you can, call the :py:meth:`nidcpower.Session.unlock_session` method at the end
-              of your method without worrying about whether you actually have the
-              lock, as shown in the following example.
-            | ViStatus TestFunc (ViSession vi, ViInt32 flags)
-              {
-              ViStatus error = VI_SUCCESS;
-              ViBoolean haveLock = False;
-              if (flags & BIT_1)
-              {
-              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;));
-              viCheckErr( TakeAction1(vi));
-              if (flags & BIT_2)
-              {
-              viCheckErr( :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;));
-              viCheckErr( TakeAction2(vi));
-              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;);
-              }
-              if (flags & BIT_3)
-              viCheckErr( TakeAction3(vi));
-              }
-              Error:
-              /\*At this point, you cannot really be sure that you have the lock.
-              Fortunately, the haveLock variable takes care of that for you.\*/
-              :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;);
-              return error;
-            | }
-
-            
 
 
 
@@ -1304,72 +1278,43 @@ nidcpower.Session methods
 
     :type source_delays: list of float
 
-.. py:method:: unlock_session()
+.. py:method:: unlock_session(caller_has_lock)
 
     Releases a lock that you acquired on an device session using
     :py:meth:`nidcpower.Session.lock_session`. Refer to :py:meth:`nidcpower.Session.lock_session` for additional
     information on session locks.
 
-    
 
 
+
+
+    :param caller_has_lock:
+
+
+        This parameter is optional. If you do not want to use this parameter, pass None.
+
+        Use this parameter in complex methods to keep track of whether you
+        obtain a lock and therefore need to unlock the session. Pass False to the initial
+        lock_session call and store the return value into a variable. Pass in the variable as well
+        as putting the return value into the same variable for each call to lock_session or
+        unlock_session.
+
+
+
+
+    :type caller_has_lock: bool
 
     :rtype: bool
     :return:
 
 
-            | This property is optional. If you do not want to use this property,
-              pass VI_NULL.
-            | Use this property in complex methods to keep track of whether you
-              obtain a lock and therefore need to unlock the session.
-            | Pass the address of a local ViBoolean variable. In the declaration of
-              the local variable, initialize it to False. Pass the address of
-              the same local variable to any other calls you make to
-              :py:meth:`nidcpower.Session.lock_session` or :py:meth:`nidcpower.Session.UnlockSessionin` the same
-              method.
-            | The parameter is an input/output parameter. :py:meth:`nidcpower.Session.lock_session` and
-              :py:meth:`nidcpower.Session.UnlockSessioneach` inspect the current value and take the
-              following actions.
+            This parameter is optional. If you do not want to use this parameter, pass None.
 
-            -  If the value is True, :py:meth:`nidcpower.Session.lock_session` does not lock the
-               session again.
-            -  If the value is False, :py:meth:`nidcpower.Session.lock_session` obtains the lock
-               and sets the value of the parameter to True.
-            -  If the value is False, :py:meth:`nidcpower.Session.UnlockSessiondoes` not attempt
-               to unlock the session.
-            -  If the value is True, :py:meth:`nidcpower.Session.UnlockSessionreleases` the lock
-               and sets the value of the parameter to False.
-
-            | Thus, you can, call :py:meth:`nidcpower.Session.unlock_session` at the end of your
-              method without worrying about whether you actually have the lock, as
-              the following example shows.
-            | ViStatus TestFunc (ViSession vi, ViInt32 flags)
-              {
-              ViStatus error = VI_SUCCESS;
-              ViBoolean haveLock = False;
-              if (flags & BIT_1)
-              {
-              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;));
-              viCheckErr( TakeAction1(vi));
-              if (flags & BIT_2)
-              {
-              viCheckErr( :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;));
-              viCheckErr( TakeAction2(vi));
-              viCheckErr( :py:meth:`nidcpower.Session.lock_session`(vi, &haveLock;);
-              }
-              if (flags & BIT_3)
-              viCheckErr( TakeAction3(vi));
-              }
-              Error:
-              /\*At this point, you cannot really be sure that you have the lock.
-              Fortunately, the haveLock variable takes care of that for you.\*/
-              :py:meth:`nidcpower.Session.unlock_session`(vi, &haveLock;);
-              return error;
-              }
-
-            
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+            Use this parameter in complex methods to keep track of whether you
+            obtain a lock and therefore need to unlock the session. Pass False to the initial
+            lock_session call and store the return value into a variable. Pass in the variable as well
+            as putting the return value into the same variable for each call to lock_session or
+            unlock_session.
 
 
 

@@ -634,6 +634,8 @@ class Session(_SessionBase):
         return _Acquisition(self)
 
     def close(self):
+        # We do not acquire a lock for close. There is a very small race condition where _close() is called but before
+        # self._vi is set to 0, another function is called. This will return a driver error, so we feel this is acceptable
         try:
             self._close()
         except errors.DriverError as e:
