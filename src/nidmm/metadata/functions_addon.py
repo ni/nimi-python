@@ -15,8 +15,6 @@ functions_codegen_method = {
     'GetErrorMessage':                 { 'codegen_method': 'no',       },
     'ClearError':                      { 'codegen_method': 'no',       },
     'Control':                         { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
     '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'GetExtCalRecommendedInterval':    { 'codegen_method': 'public',   },  # This function is useful on regular (not only calibration) sessions.
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -51,6 +49,13 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'GetCalDateAndTime':               { 'codegen_method': 'private', 'public_method_name': 'get_cal_date_and_time', },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
     'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test',             },  # 'fancy_self_test' Public wrapper that raises
+}
+
+functions_locking = {
+    'LockSession':                     { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'UnlockSession':                   { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'InitWithOptions':                 { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py

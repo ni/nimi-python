@@ -41,8 +41,6 @@ functions_codegen_method = {
     'GetError':                             { 'codegen_method': 'private',  },
     'ClearError':                           { 'codegen_method': 'no',       },
     'ErrorHandler':                         { 'codegen_method': 'no',       },
-    'LockSession':                          { 'codegen_method': 'no',       },
-    'UnlockSession':                        { 'codegen_method': 'no',       },
     'InitExtCal':                           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CloseExtCal':                          { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'RestoreLastExtCalConstants':           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -66,6 +64,13 @@ functions_codegen_method = {
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'public_method_name': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private', 'public_method_name': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
     'self_test':                            { 'codegen_method': 'private', 'public_method_name': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
+}
+
+functions_locking = {
+    'LockSession':                     { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'UnlockSession':                   { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'InitializeWithChannels':          { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py

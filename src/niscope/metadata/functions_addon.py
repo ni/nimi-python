@@ -14,8 +14,6 @@ functions_codegen_method = {
     'error_message':                    { 'codegen_method': 'private',  },
     'GetError':                         { 'codegen_method': 'private',  },
     'ClearError':                       { 'codegen_method': 'no',       },
-    'LockSession':                      { 'codegen_method': 'no',       },
-    'UnlockSession':                    { 'codegen_method': 'no',       },
     '.+ExtCal':                         { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                  { 'codegen_method': 'no',       },
@@ -73,6 +71,13 @@ functions_codegen_method = {
     'ConfigureRefLevels':               { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
     'self_test':                        { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
+}
+
+functions_locking = {
+    'LockSession':                     { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'UnlockSession':                   { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'InitWithOptions':                 { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py

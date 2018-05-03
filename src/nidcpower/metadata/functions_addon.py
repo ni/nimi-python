@@ -13,8 +13,6 @@ functions_codegen_method = {
     'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
     'ChangeExtCalPassword':            { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -47,6 +45,13 @@ functions_codegen_method = {
     'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+}
+
+functions_locking = {
+    'LockSession':                     { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'UnlockSession':                   { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'InitializeWithChannels':          { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py

@@ -14,8 +14,6 @@ functions_codegen_method = {
     'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
     'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
@@ -28,6 +26,13 @@ functions_codegen_method = {
     'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
+}
+
+functions_locking = {
+    'LockSession':                     { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'UnlockSession':                   { 'use_session_lock': False, 'is_error_handling': True },  # Don't use locking when calling 'LockSession'/'UnlockSession'. Also need to indicate use during error handling
+    'InitWithTopology':                { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
 }
 
 # Override the 'python' name for some functions.
