@@ -93,11 +93,11 @@ class _Lock(object):
         self._session = session
 
     def __enter__(self):
-        self._session.lock_session()
+        self._caller_has_lock = self._session.lock_session(caller_has_lock=False)
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock_session()
+        self._caller_has_lock = self._session.unlock_session(self._caller_has_lock)
 
 
 %endif
