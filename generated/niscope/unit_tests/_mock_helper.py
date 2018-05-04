@@ -64,8 +64,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureVertical']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
-        self._defaults['ExportSignal'] = {}
-        self._defaults['ExportSignal']['return'] = 0
         self._defaults['Fetch'] = {}
         self._defaults['Fetch']['return'] = 0
         self._defaults['Fetch']['Waveform'] = None
@@ -292,11 +290,6 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
-
-    def niScope_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        if self._defaults['ExportSignal']['return'] != 0:
-            return self._defaults['ExportSignal']['return']
-        return self._defaults['ExportSignal']['return']
 
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['Fetch']['return'] != 0:
@@ -779,8 +772,6 @@ class SideEffectsHelper(object):
         mock_library.niScope_ConfigureVertical.return_value = 0
         mock_library.niScope_Disable.side_effect = MockFunctionCallError("niScope_Disable")
         mock_library.niScope_Disable.return_value = 0
-        mock_library.niScope_ExportSignal.side_effect = MockFunctionCallError("niScope_ExportSignal")
-        mock_library.niScope_ExportSignal.return_value = 0
         mock_library.niScope_Fetch.side_effect = MockFunctionCallError("niScope_Fetch")
         mock_library.niScope_Fetch.return_value = 0
         mock_library.niScope_FetchArrayMeasurement.side_effect = MockFunctionCallError("niScope_FetchArrayMeasurement")

@@ -42,7 +42,6 @@ class Library(object):
         self.niScope_ConfigureTriggerWindow_cfunc = None
         self.niScope_ConfigureVertical_cfunc = None
         self.niScope_Disable_cfunc = None
-        self.niScope_ExportSignal_cfunc = None
         self.niScope_Fetch_cfunc = None
         self.niScope_FetchArrayMeasurement_cfunc = None
         self.niScope_FetchBinary16_cfunc = None
@@ -258,14 +257,6 @@ class Library(object):
                 self.niScope_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Disable_cfunc(vi)
-
-    def niScope_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        with self._func_lock:
-            if self.niScope_ExportSignal_cfunc is None:
-                self.niScope_ExportSignal_cfunc = self._library.niScope_ExportSignal
-                self.niScope_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niScope_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:

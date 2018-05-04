@@ -177,7 +177,11 @@ nifgen.Session properties
 .. py:attribute:: arb_marker_position
 
     Specifies the position for a marker to be asserted in the arbitrary waveform. This property defaults to -1 when no marker position is specified. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
-    Use :py:meth:`nifgen.Session.export_signal` to export the marker signal.
+    Use :py:meth:`nifgen.Session.ExportSignal` to export the marker signal.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1312,7 +1316,11 @@ nifgen.Session properties
 
 .. py:attribute:: exported_sample_clock_divisor
 
-    Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the :py:meth:`nifgen.Session.export_signal` method or the  :py:data:`nifgen.Session.exported_sample_clock_output_terminal` property.
+    Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the :py:meth:`nifgen.Session.ExportSignal` method or the  :py:data:`nifgen.Session.exported_sample_clock_output_terminal` property.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
@@ -1360,7 +1368,11 @@ nifgen.Session properties
 
 .. py:attribute:: exported_sample_clock_timebase_divisor
 
-    Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the :py:meth:`nifgen.Session.export_signal` method or the  :py:data:`nifgen.Session.exported_sample_clock_timebase_output_terminal` property.
+    Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the :py:meth:`nifgen.Session.ExportSignal` method or the  :py:data:`nifgen.Session.exported_sample_clock_timebase_output_terminal` property.
+
+
+
+    .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
     The following table lists the characteristics of this property.
 
