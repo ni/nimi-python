@@ -446,21 +446,19 @@ class TestSession(object):
                 _matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length)),
                 _matchers.ViInt32Matcher(len(input_array_of_integers)),
                 _matchers.ViReal64BufferMatcher(input_array_of_floats),
-                _matchers.ViInt16BufferMatcher(input_array_of_integers)
+                _matchers.ViInt16BufferMatcher(input_array_of_integers),
             )
 
-    # TODO(marcoskirsch): One of the input arrays is optional. C function receives size for both arrays, and Python code is using the wrong one for the size. See #515
-    '''
     def test_multiple_array_types_none_input(self):
         self.patched_library.niFake_MultipleArrayTypes.side_effect = self.side_effects_helper.niFake_MultipleArrayTypes
         expected_output_array = [0.2, 0.4]
         expected_output_array_of_fixed_length = [-6, -7, -8]
         output_array_size = len(expected_output_array)
-        input_array_of_integers = [1, 2]
+        input_array_of_floats = [0.1, 0.2]
         self.side_effects_helper['MultipleArrayTypes']['outputArray'] = expected_output_array
         self.side_effects_helper['MultipleArrayTypes']['outputArrayOfFixedLength'] = expected_output_array_of_fixed_length
         with nifake.Session('dev1') as session:
-            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_integers)
+            output_array, output_array_of_fixed_length = session.multiple_array_types(output_array_size, input_array_of_floats)
             assert output_array == output_array
             assert expected_output_array_of_fixed_length == output_array_of_fixed_length
             self.patched_library.niFake_MultipleArrayTypes.assert_called_once_with(
@@ -468,11 +466,80 @@ class TestSession(object):
                 _matchers.ViInt32Matcher(output_array_size),
                 _matchers.ViReal64BufferMatcher(output_array_size),
                 _matchers.ViReal64BufferMatcher(len(expected_output_array_of_fixed_length)),
-                _matchers.ViInt32Matcher(len(input_array_of_integers)),
-                None,
-                _matchers.ViInt16BufferMatcher(input_array_of_integers)
+                _matchers.ViInt32Matcher(len(input_array_of_floats)),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats),
+                None
             )
-    '''
+
+    def test_multiple_arrays_same_size(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+        input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+        with nifake.Session('dev1') as session:
+            session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+            self.patched_library.niFake_MultipleArraysSameSize.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats1),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats2),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats3),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats4),
+                _matchers.ViInt32Matcher(len(input_array_of_floats1)),
+            )
+
+    def test_multiple_arrays_same_size_none_input(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        with nifake.Session('dev1') as session:
+            session.multiple_arrays_same_size(input_array_of_floats1, None, None, None)
+            self.patched_library.niFake_MultipleArraysSameSize.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViReal64BufferMatcher(input_array_of_floats1),
+                None,
+                None,
+                None,
+                _matchers.ViInt32Matcher(len(input_array_of_floats1)),
+            )
+
+    def test_multiple_arrays_same_size_wrong_size_2(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430]
+        input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+        with nifake.Session('dev1') as session:
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+                assert False
+            except ValueError:
+                pass
+
+    def test_multiple_arrays_same_size_wrong_size_3(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+        input_array_of_floats3 = [4.100, 4.200, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+        with nifake.Session('dev1') as session:
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+                assert False
+            except ValueError:
+                pass
+
+    def test_multiple_arrays_same_size_wrong_size_4(self):
+        self.patched_library.niFake_MultipleArraysSameSize.side_effect = self.side_effects_helper.niFake_MultipleArraysSameSize
+        input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+        input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+        input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+        input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00, 45.00]
+        with nifake.Session('dev1') as session:
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+                assert False
+            except ValueError:
+                pass
 
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
