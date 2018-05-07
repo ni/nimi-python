@@ -6,8 +6,10 @@ Enums used in NI-SCOPE
 .. py:currentmodule:: niscope
 
 
+AcquisitionStatus
+-----------------
 
-.. py:data:: AcquisitionStatus
+.. py:class:: AcquisitionStatus
 
     .. py:attribute:: AcquisitionStatus.COMPLETE
 
@@ -21,8 +23,10 @@ Enums used in NI-SCOPE
 
 
 
+AcquisitionType
+---------------
 
-.. py:data:: AcquisitionType
+.. py:class:: AcquisitionType
 
     .. py:attribute:: AcquisitionType.NORMAL
 
@@ -54,8 +58,10 @@ Enums used in NI-SCOPE
 
 
 
+ExportableSignals
+-----------------
 
-.. py:data:: ExportableSignals
+.. py:class:: ExportableSignals
 
     .. py:attribute:: ExportableSignals.START_TRIGGER
 
@@ -101,8 +107,10 @@ Enums used in NI-SCOPE
 
 
 
+FetchRelativeTo
+---------------
 
-.. py:data:: FetchRelativeTo
+.. py:class:: FetchRelativeTo
 
     .. py:attribute:: FetchRelativeTo.READ_POINTER
 
@@ -154,8 +162,10 @@ Enums used in NI-SCOPE
 
 
 
+FlexFIRAntialiasFilterType
+--------------------------
 
-.. py:data:: FlexFIRAntialiasFilterType
+.. py:class:: FlexFIRAntialiasFilterType
 
     .. py:attribute:: FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_STANDARD
 
@@ -197,8 +207,10 @@ Enums used in NI-SCOPE
 
 
 
+Option
+------
 
-.. py:data:: Option
+.. py:class:: Option
 
     .. py:attribute:: Option.SELF_CALIBRATE_ALL_CHANNELS
 
@@ -220,8 +232,10 @@ Enums used in NI-SCOPE
 
 
 
+RISMethod
+---------
 
-.. py:data:: RISMethod
+.. py:class:: RISMethod
 
     .. py:attribute:: RISMethod.EXACT_NUM_AVERAGES
 
@@ -264,8 +278,10 @@ Enums used in NI-SCOPE
 
 
 
+RefTriggerDetectorLocation
+--------------------------
 
-.. py:data:: RefTriggerDetectorLocation
+.. py:class:: RefTriggerDetectorLocation
 
     .. py:attribute:: RefTriggerDetectorLocation.ANALOG_DETECTION_CIRCUIT
 
@@ -287,8 +303,10 @@ Enums used in NI-SCOPE
 
 
 
+TerminalConfiguration
+---------------------
 
-.. py:data:: TerminalConfiguration
+.. py:class:: TerminalConfiguration
 
     .. py:attribute:: TerminalConfiguration.SINGLE_ENDED
 
@@ -320,8 +338,10 @@ Enums used in NI-SCOPE
 
 
 
+TriggerCoupling
+---------------
 
-.. py:data:: TriggerCoupling
+.. py:class:: TriggerCoupling
 
     .. py:attribute:: TriggerCoupling.AC
 
@@ -373,8 +393,10 @@ Enums used in NI-SCOPE
 
 
 
+TriggerModifier
+---------------
 
-.. py:data:: TriggerModifier
+.. py:class:: TriggerModifier
 
     .. py:attribute:: TriggerModifier.NO_TRIGGER_MOD
 
@@ -397,8 +419,10 @@ Enums used in NI-SCOPE
 
 
 
+TriggerSlope
+------------
 
-.. py:data:: TriggerSlope
+.. py:class:: TriggerSlope
 
     .. py:attribute:: TriggerSlope.NEGATIVE
 
@@ -420,8 +444,10 @@ Enums used in NI-SCOPE
 
 
 
+TriggerType
+-----------
 
-.. py:data:: TriggerType
+.. py:class:: TriggerType
 
     .. py:attribute:: TriggerType.EDGE
 
@@ -493,8 +519,10 @@ Enums used in NI-SCOPE
 
 
 
+TriggerWindowMode
+-----------------
 
-.. py:data:: TriggerWindowMode
+.. py:class:: TriggerWindowMode
 
     .. py:attribute:: TriggerWindowMode.ENTERING
 
@@ -516,8 +544,10 @@ Enums used in NI-SCOPE
 
 
 
+VerticalCoupling
+----------------
 
-.. py:data:: VerticalCoupling
+.. py:class:: VerticalCoupling
 
     .. py:attribute:: VerticalCoupling.AC
 
@@ -549,8 +579,10 @@ Enums used in NI-SCOPE
 
 
 
+VideoPolarity
+-------------
 
-.. py:data:: VideoPolarity
+.. py:class:: VideoPolarity
 
     .. py:attribute:: VideoPolarity.POSITIVE
 
@@ -572,8 +604,10 @@ Enums used in NI-SCOPE
 
 
 
+VideoSignalFormat
+-----------------
 
-.. py:data:: VideoSignalFormat
+.. py:class:: VideoSignalFormat
 
     .. py:attribute:: VideoSignalFormat.NTSC
 
@@ -745,8 +779,10 @@ Enums used in NI-SCOPE
 
 
 
+VideoTriggerEvent
+-----------------
 
-.. py:data:: VideoTriggerEvent
+.. py:class:: VideoTriggerEvent
 
     .. py:attribute:: VideoTriggerEvent.FIELD1
 
@@ -798,8 +834,10 @@ Enums used in NI-SCOPE
 
 
 
+WhichTrigger
+------------
 
-.. py:data:: WhichTrigger
+.. py:class:: WhichTrigger
 
     .. py:attribute:: WhichTrigger.START
 
@@ -814,5 +852,8 @@ Enums used in NI-SCOPE
 
 
     .. py:attribute:: WhichTrigger.ADVANCE
+
+
+
 
 
