@@ -4,9 +4,9 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitializeWithChannels':          { 'codegen_method': 'private', 'public_method_name': '__init__', },
+    'InitializeWithChannels':          { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'InitWithOptions':                 { 'codegen_method': 'no',       },
-    'Initiate':                        { 'codegen_method': 'private',  },
+    'Initiate':                        { 'codegen_method': 'private', 'public_method_name': 'initiate', },
     'close':                           { 'codegen_method': 'private',  },
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
@@ -39,11 +39,11 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'public_method_name': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
-    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'public_method_name': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
-    'FetchMultiple':                   { 'codegen_method': 'private', 'public_method_name': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
-    'MeasureMultiple':                 { 'codegen_method': 'private', 'public_method_name': 'measure_multiple',                },  # 'FancyMeasureMultiple' Public wrapper
-    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
+    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
+    'FetchMultiple':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
+    'MeasureMultiple':                 { 'codegen_method': 'private', 'method_name_for_documentation': 'measure_multiple',                },  # 'FancyMeasureMultiple' Public wrapper
+    'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
     'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
     'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
@@ -111,29 +111,21 @@ functions_default_value = {
     'CreateAdvancedSequence':                        { 'parameters': { 4: { 'default_value': True, }, }, },
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },
-    'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
     'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=10.0)', },}, },
-    'FetchMultiple':                                 { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
     'FancyFetchMultiple':                            { 'parameters': { 3: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
 }
 
 # Parameter that need to be array.array
 functions_array = {
-    'FetchMultiple':                        { 'parameters': { 4: { 'use_array': True, }, 
+    'FetchMultiple':                        { 'parameters': { 4: { 'use_array': True, },
                                                               5: { 'use_array': True, }, }, },
-    'MeasureMultiple':                      { 'parameters': { 2: { 'use_array': True, }, 
+    'MeasureMultiple':                      { 'parameters': { 2: { 'use_array': True, },
                                                               3: { 'use_array': True, }, }, },
 }
 
 # We want to use a common name for self_cal across all drivers
 functions_name = {
     'CalSelfCalibrate': { 'python_name': 'self_cal', },
-}
-
-functions_self_test = {
-    'self_test': {
-        'codegen_method': 'private',
-    },
 }
 
 # Functions not in original metadata.
@@ -410,7 +402,7 @@ Fields in Measurement:
                 },
             },
         ],
-        'documentation': 
+        'documentation':
         {
             'description': 'Returns the date and time of the oldest successful self-calibration from among the channels in the session.',
             'note': 'This function is not supported on all devices.',
@@ -420,18 +412,18 @@ Fields in Measurement:
 
 # Converted parameters
 functions_converters = {
-    'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+    'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
-    'FancyFetchMultiple':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+    'FancyFetchMultiple':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
-    'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+    'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
-    'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                               'type_in_documentation': 'dict', }, 
+    'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary',
+                                                               'type_in_documentation': 'dict', },
                                                           1: { 'is_repeated_capability': False,
-                                                               'python_api_converter_name': 'convert_repeated_capabilities_from_init', 
+                                                               'python_api_converter_name': 'convert_repeated_capabilities_from_init',
                                                                'type_in_documentation': 'str, list, range, tuple', }, }, },
-    'GetExtCalRecommendedInterval':     { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
+    'GetExtCalRecommendedInterval':     { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta',
                                                                'type_in_documentation': 'datetime.timedelta', }, }, },
 }
 
