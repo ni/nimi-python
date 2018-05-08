@@ -47,6 +47,7 @@ class Library(object):
         self.niFake_Initiate_cfunc = None
         self.niFake_LockSession_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
+        self.niFake_MultipleArraysSameSize_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
         self.niFake_ParametersAreMultipleTypes_cfunc = None
         self.niFake_PoorlyNamedSimpleFunction_cfunc = None
@@ -292,6 +293,14 @@ class Library(object):
                 self.niFake_MultipleArrayTypes_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFake_MultipleArrayTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_MultipleArrayTypes_cfunc(vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers)
+
+    def niFake_MultipleArraysSameSize(self, vi, values1, values2, values3, values4, size):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_MultipleArraysSameSize_cfunc is None:
+                self.niFake_MultipleArraysSameSize_cfunc = self._library.niFake_MultipleArraysSameSize
+                self.niFake_MultipleArraysSameSize_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32]  # noqa: F405
+                self.niFake_MultipleArraysSameSize_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_MultipleArraysSameSize_cfunc(vi, values1, values2, values3, values4, size)
 
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
         with self._func_lock:

@@ -4,7 +4,7 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                 { 'codegen_method': 'private', 'public_method_name': '__init__', },
+    'InitWithOptions':                 { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'Initiate':                        { 'codegen_method': 'private',  },
     'close':                           { 'codegen_method': 'private',  },
     'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
@@ -47,8 +47,8 @@ functions_codegen_method = {
     'ConfigureWaveformCoupling':       { 'codegen_method': 'no',       },
     'ConfigureADCCalibration':         { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
-    'GetCalDateAndTime':               { 'codegen_method': 'private', 'public_method_name': 'get_cal_date_and_time', },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
-    'self_test':                       { 'codegen_method': 'private', 'public_method_name': 'self_test',             },  # 'fancy_self_test' Public wrapper that raises
+    'GetCalDateAndTime':               { 'codegen_method': 'private', 'method_name_for_documentation': 'get_cal_date_and_time', },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
+    'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',             },  # 'fancy_self_test' Public wrapper that raises
 }
 
 functions_locking = {

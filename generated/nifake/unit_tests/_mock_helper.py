@@ -104,6 +104,8 @@ class SideEffectsHelper(object):
         self._defaults['MultipleArrayTypes']['return'] = 0
         self._defaults['MultipleArrayTypes']['outputArray'] = None
         self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] = None
+        self._defaults['MultipleArraysSameSize'] = {}
+        self._defaults['MultipleArraysSameSize']['return'] = 0
         self._defaults['OneInputFunction'] = {}
         self._defaults['OneInputFunction']['return'] = 0
         self._defaults['ParametersAreMultipleTypes'] = {}
@@ -533,6 +535,11 @@ class SideEffectsHelper(object):
             output_array_of_fixed_length_ref[i] = test_value[i]
         return self._defaults['MultipleArrayTypes']['return']
 
+    def niFake_MultipleArraysSameSize(self, vi, values1, values2, values3, values4, size):  # noqa: N802
+        if self._defaults['MultipleArraysSameSize']['return'] != 0:
+            return self._defaults['MultipleArraysSameSize']['return']
+        return self._defaults['MultipleArraysSameSize']['return']
+
     def niFake_OneInputFunction(self, vi, a_number):  # noqa: N802
         if self._defaults['OneInputFunction']['return'] != 0:
             return self._defaults['OneInputFunction']['return']
@@ -799,6 +806,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_LockSession.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")
         mock_library.niFake_MultipleArrayTypes.return_value = 0
+        mock_library.niFake_MultipleArraysSameSize.side_effect = MockFunctionCallError("niFake_MultipleArraysSameSize")
+        mock_library.niFake_MultipleArraysSameSize.return_value = 0
         mock_library.niFake_OneInputFunction.side_effect = MockFunctionCallError("niFake_OneInputFunction")
         mock_library.niFake_OneInputFunction.return_value = 0
         mock_library.niFake_ParametersAreMultipleTypes.side_effect = MockFunctionCallError("niFake_ParametersAreMultipleTypes")
