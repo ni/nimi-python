@@ -92,7 +92,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    active_advanced_sequence = _attributes.AttributeViString(1150074)
+    _active_advanced_sequence = _attributes.AttributeViString(1150074)
     '''Type: str
 
     Specifies the advanced sequence to configure or generate.
@@ -108,7 +108,7 @@ class _SessionBase(object):
         session.channels['0,1'].active_advanced_sequence = var
         var = session.channels['0,1'].active_advanced_sequence
     '''
-    active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
+    _active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
     '''Type: int
 
     Specifies the advanced sequence step to configure.
@@ -825,7 +825,7 @@ class _SessionBase(object):
 
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the output_function property, you also must set the  voltage level or current level in addition to  enabling the output
-    the initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
+    the _initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
     Default Value: The default value is True if you use the __init__ method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
@@ -939,7 +939,7 @@ class _SessionBase(object):
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: PowerSource.AUTOMATIC
-    is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  initiate method.
+    is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  _initiate method.
 
     Note: Automatic selection is not persistent and occurs only at the time this property
     '''
@@ -2364,7 +2364,7 @@ class _SessionBase(object):
         previously taken and are stored in the NI-DCPower buffer. This method
         should not be used when the measure_when property is
         set to MeasureWhen.ON_DEMAND. You must first call
-        initiate before calling this method.
+        _initiate before calling this method.
 
         Fields in Measurement:
 
@@ -2401,7 +2401,7 @@ class _SessionBase(object):
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
+        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
@@ -2445,7 +2445,7 @@ class _SessionBase(object):
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
-    def _fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
+    def _fetch_multiple(self, timeout, count):
         '''_fetch_multiple
 
         Returns an array of voltage measurements, an array of current
@@ -2453,7 +2453,7 @@ class _SessionBase(object):
         previously taken and are stored in the NI-DCPower buffer. This method
         should not be used when the measure_when property is
         set to MeasureWhen.ON_DEMAND. You must first call
-        initiate before calling this method.
+        _initiate before calling this method.
 
         Refer to the `Acquiring
         Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
@@ -2473,11 +2473,9 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1']._fetch_multiple(timeout, count)
 
         Args:
-            count (int): Specifies the number of measurements to fetch.
-
             timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -2486,6 +2484,8 @@ class _SessionBase(object):
                 When setting the timeout interval, ensure you take into account any
                 triggers so that the timeout interval is long enough for your
                 application.
+
+            count (int): Specifies the number of measurements to fetch.
 
 
         Returns:
@@ -3543,7 +3543,7 @@ class Session(_SessionBase):
         without passing through a transitional output state, set **reset** to
         False. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        initiate method.
+        _initiate method.
 
         **Related Topics:**
 
@@ -3651,7 +3651,7 @@ class Session(_SessionBase):
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
         configuration methods called after this method are not applied until
-        the initiate method is called. If power output is enabled
+        the _initiate method is called. If power output is enabled
         when you call the abort method, the output channels remain
         in their current state and continue providing power.
 
@@ -3684,7 +3684,7 @@ class Session(_SessionBase):
         method moves the NI-DCPower session from the Uncommitted state into
         the Committed state. After calling this method, modifying any
         property reverts the NI-DCPower session to the Uncommitted state. Use
-        the initiate method to transition to the Running state.
+        the _initiate method to transition to the Running state.
         Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -4356,7 +4356,7 @@ class Session(_SessionBase):
         without passing through a transitional output state, set **reset** to
         False. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        initiate method.
+        _initiate method.
 
         **Related Topics:**
 
@@ -4485,7 +4485,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_edge_trigger(self, trigger=enums.SendSoftwareEdgeTriggerType.START):
+    def send_software_edge_trigger(self, trigger):
         '''send_software_edge_trigger
 
         Asserts the specified trigger. This method can override an external
@@ -4535,7 +4535,7 @@ class Session(_SessionBase):
         Waits until the device has generated the specified event.
 
         The session monitors whether each type of event has occurred at least
-        once since the last time this method or the initiate
+        once since the last time this method or the _initiate
         method were called. If an event has only been generated once and you
         call this method successively, the method times out. Individual
         events must be generated between separate calls of this method.

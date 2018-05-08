@@ -1023,7 +1023,7 @@ nidcpower.Session methods
 
 
 
-.. py:method:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
+.. py:method:: send_software_edge_trigger(trigger)
 
     Asserts the specified trigger. This method can override an external
     edge trigger.

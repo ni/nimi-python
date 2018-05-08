@@ -54,6 +54,9 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+        * `active_advanced_sequence` [#832](https://github.com/ni/nimi-python/issues/832)
+        * `active_advanced_sequence_step` [#832](https://github.com/ni/nimi-python/issues/832)
+        * Default value for trigger parameter on `send_software_edge_trigger()` [#832](https://github.com/ni/nimi-python/issues/832)
 * ### NI-FGEN
     * #### Added
     * #### Changed
