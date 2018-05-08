@@ -94,17 +94,6 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    adjust_pretrigger_samples_5102 = _attributes.AttributeViBoolean(1150085)
-    '''Type: bool
-
-    When set to true and the digitizer is set to master, the number of pretrigger samples  and total samples are adjusted to be able to synchronize a master and slave 5102.
-    '''
-    five_v_out_output_terminal = _attributes.AttributeViString(1150129)
-    '''Type: str
-
-    Specifies the destination for the 5 Volt signal.
-    Consult your device documentation for a specific list of valid destinations.
-    '''
     absolute_sample_clock_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150374)
     '''Type: float in seconds or datetime.timedelta
 
@@ -235,13 +224,6 @@ class _SessionBase(object):
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.  Thus,  you can significantly increase execution speed.
-    The instrument driver can choose to always cache or to never cache  particular properties regardless of the setting of this property.
-    The default value is True.   Use __init__  to override this value.
-    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -279,11 +261,6 @@ class _SessionBase(object):
         session.channels['0,1'].channel_terminal_configuration = var
         var = session.channels['0,1'].channel_terminal_configuration
     '''
-    clock_sync_pulse_source = _attributes.AttributeViString(1150007)
-    '''Type: str
-
-    For the NI 5102, specifies the line on which the sample clock is sent or received. For the NI 5112/5620/5621/5911,  specifies the line on which the one-time sync pulse is sent or received. This line should be the same for all devices to be synchronized.
-    '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150316)
     '''Type: int
 
@@ -299,161 +276,10 @@ class _SessionBase(object):
 
     This property specifies the size of (read request|memory write) data payload. Due to alignment of the data buffers, the hardware may not always generate a packet of this size.
     '''
-    ddc_center_frequency = _attributes.AttributeViReal64(1150303)
-    '''Type: float
-
-    The frequency at which the DDC block frequency translates the input data.
-    Default Value: 10 MHz
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    ddc_center_frequency.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    ddc_center_frequency.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].ddc_center_frequency = var
-        var = session.channels['0,1'].ddc_center_frequency
-    '''
-    ddc_data_processing_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataProcessingMode, 1150304)
-    '''Type: enums.DataProcessingMode
-
-    The way in which data is processed by the DDC block.
-    Valid Values:
-    Real (0)
-    Complex (1)
-    Default Value: Complex
-    '''
-    ddc_enabled = _attributes.AttributeViBoolean(1150300)
-    '''Type: bool
-
-    Enables/disables the Digital Down Converter (DDC) block of the digitizer.  When the DDC block is disabled, all DDC-related properties are disabled and  have no effect on the acquired signal.
-    Default Value: False
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    ddc_enabled.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    ddc_enabled.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].ddc_enabled = var
-        var = session.channels['0,1'].ddc_enabled
-    '''
-    ddc_frequency_translation_enabled = _attributes.AttributeViBoolean(1150302)
-    '''Type: bool
-
-    Enables/disables frequency translating the data around the user-selected center  frequency down to baseband.
-    Default Value: True
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    ddc_frequency_translation_enabled.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    ddc_frequency_translation_enabled.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].ddc_frequency_translation_enabled = var
-        var = session.channels['0,1'].ddc_frequency_translation_enabled
-    '''
-    ddc_frequency_translation_phase_i = _attributes.AttributeViReal64(1150305)
-    '''Type: float
-
-    The I center frequency phase in degrees at the first point of the acquisition.
-    Default Value: 0
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    ddc_frequency_translation_phase_i.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    ddc_frequency_translation_phase_i.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].ddc_frequency_translation_phase_i = var
-        var = session.channels['0,1'].ddc_frequency_translation_phase_i
-    '''
-    ddc_frequency_translation_phase_q = _attributes.AttributeViReal64(1150306)
-    '''Type: float
-
-    The Q center frequency phase in degrees at the first point of the acquisition.  Use this property only when ddc_data_processing_mode is set to Complex.
-    Default Value: 90
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    ddc_frequency_translation_phase_q.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    ddc_frequency_translation_phase_q.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].ddc_frequency_translation_phase_q = var
-        var = session.channels['0,1'].ddc_frequency_translation_phase_q
-    '''
-    ddc_q_source = _attributes.AttributeViString(1150310)
-    '''Type: str
-
-    Indicates the channel that is the input of the Q path of the DDC.
-    Default Value: The channel that the property is configured off of.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    ddc_q_source.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    ddc_q_source.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].ddc_q_source = var
-        var = session.channels['0,1'].ddc_q_source
-    '''
-    device_number = _attributes.AttributeViInt32(1150076)
-    '''Type: int
-
-    Indicates the device number associated with the current session.
-    '''
     device_temperature = _attributes.AttributeViReal64(1150086)
     '''Type: float
 
     Returns the temperature of the device in degrees Celsius from the onboard sensor.
-    '''
-    digital_gain = _attributes.AttributeViReal64(1150307)
-    '''Type: float
-
-    Applies gain to the specified channel in hardware before any onboard processing.
-    Valid Values:
-    -1.5 to 1.5
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    digital_gain.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    digital_gain.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].digital_gain = var
-        var = session.channels['0,1'].digital_gain
-    '''
-    digital_offset = _attributes.AttributeViReal64(1150308)
-    '''Type: float
-
-    Applies offset to the specified channel in hardware before any onboard processing.
-    Valid Values:
-    -1.5 to 1.5 V
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    digital_offset.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    digital_offset.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].digital_offset = var
-        var = session.channels['0,1'].digital_offset
-    '''
-    dither_enabled = _attributes.AttributeViBoolean(1150319)
-    '''Type: bool
-
-    Enables or Disables the analog dither on the device.  The default value is FALSE.
-    Using dither can improve the spectral performance of the device by reducing the effects of quantization.  However, adding dither increases the power level to the ADC, so you may need to either decrease the signal level or increase your vertical range.
-
-    Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    dither_enabled.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    dither_enabled.Session instance, and calling set/get value on the result.:
-
-        session.channels['0,1'].dither_enabled = var
-        var = session.channels['0,1'].dither_enabled
     '''
     driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
@@ -556,17 +382,6 @@ class _SessionBase(object):
     Specifies the destination to export the Start trigger.   When the start trigger is received, the digitizer begins acquiring  samples.
     Consult your device documentation for a specific list of valid destinations.
     '''
-    fetch_interleaved_data = _attributes.AttributeViBoolean(1150072)
-    '''Type: bool
-
-    Set to True to retrieve one array with alternating values on the NI 5620/5621.  For example, this property can be used to retrieve a single array with I and Q interleaved  instead of two separate arrays. If set to True, the resulting array will be twice the size of the actual record length.
-    '''
-    fetch_interleaved_iq_data = _attributes.AttributeViBoolean(1150311)
-    '''Type: bool
-
-    Enables/disables interleaving of the I and Q data.  When disabled, the traditional  fetch() methods will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).
-    Default Value: True
-    '''
     _fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
     '''Type: int
 
@@ -618,16 +433,6 @@ class _SessionBase(object):
     Gets the absolute file path to the bitfile loaded on the FPGA.
 
     Note: Gets the absolute file path to the bitfile loaded on the FPGA.
-    '''
-    fractional_resample_enabled = _attributes.AttributeViBoolean(1150320)
-    '''Type: bool
-
-    Enables the onboard signal processing block that resamples the input waveform to the user desired sample rate.  The default value is FALSE.
-    '''
-    group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
-
-    A string that contains a comma-separated list of class extension groups that this driver implements.
     '''
     high_pass_filter_frequency = _attributes.AttributeViReal64(1150377)
     '''Type: float
@@ -713,11 +518,6 @@ class _SessionBase(object):
     '''Type: str
 
     A string that contains the model number of the current instrument.
-    '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    NI-SCOPE does not generate interchange warnings and therefore ignores this property.
     '''
     interleaving_offset_correction_enabled = _attributes.AttributeViBoolean(1150376)
     '''Type: bool
@@ -1172,33 +972,15 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    mux_mode_register = _attributes.AttributeViInt32(1151002)
     onboard_memory_size = _attributes.AttributeViInt32(1150069)
     '''Type: int
 
     Returns the total combined amount of onboard memory for all channels in bytes.
     '''
-    oscillator_phase_dac_value = _attributes.AttributeViInt32(1150105)
-    '''Type: int
-
-    Gets or sets the binary phase DAC value that controls the delay added to the Phase Locked Loop (PLL) of the sample clock.
-
-    Note: if this value is set, sample clock adjust and TClk will not be able to do any sub-sample adjustment of the timebase sample clock.
-    '''
     output_clock_source = _attributes.AttributeViString(1150003)
     '''Type: str
 
     Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked.
-    '''
-    overflow_error_reporting = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OverflowErrorReporting, 1150309)
-    '''Type: enums.OverflowErrorReporting
-
-    Configures error reporting when the DDC block detects an overflow in any of its  stages. Overflows lead to clipping of the waveform.
-    Valid Values:
-    Warning (0)
-    Error (1)
-    Disabled (2)
-    Default Value: Warning
     '''
     pll_lock_status = _attributes.AttributeViBoolean(1151303)
     '''Type: bool
@@ -1231,12 +1013,6 @@ class _SessionBase(object):
         session.channels['0,1'].probe_attenuation = var
         var = session.channels['0,1'].probe_attenuation
     '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameters values that you  pass to driver methods.  Range checking parameters is very useful for  debugging.  After you validate your program, you can set this property to  False to disable range checking and maximize performance.
-    The default value is True.   Use the __init__  method to override this value.
-    '''
     ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
     '''Type: str
 
@@ -1264,12 +1040,6 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the record arm source.
-    '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI engine keeps a list of the value coercions it  makes for ViInt32 and ViReal64 properties.  You call  Ivi_GetNextCoercionInfo to extract and delete the oldest coercion record  from the list.
-    The default value is False.   Use the __init__  method to override this value.
     '''
     ref_clk_rate = _attributes.AttributeViReal64(1150090)
     '''Type: float
@@ -1366,21 +1136,6 @@ class _SessionBase(object):
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
     The default value is False.   Use the __init__  method to override this value.
     '''
-    slave_trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
-    '''Type: float in seconds or datetime.timedelta
-
-    Specifies the delay for the trigger from the master to the slave in seconds.  This value adjusts the initial X value of the slave devices to correct for the  propagation delay between the master trigger output and slave trigger input.
-    '''
-    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
-    '''Type: int
-
-    The major version number of the class specification with which this driver is compliant.
-    '''
-    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
-    '''Type: int
-
-    The minor version number of the class specification with which this driver is compliant.
-    '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
 
@@ -1412,14 +1167,6 @@ class _SessionBase(object):
         session.channels['0,1'].start_to_ref_trigger_holdoff = var
         var = session.channels['0,1'].start_to_ref_trigger_holdoff
     '''
-    stream_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StreamingPositionType, 1150373)
-    '''Type: enums.StreamingPositionType
-
-    Determines which trigger peer-to-peer data is streamed relative to. The
-    default value is **Start Trigger**.
-
-    Note: On the NI 5122/5622, only **Start Trigger** is valid for this property.
-    '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
     '''Type: str
 
@@ -1440,21 +1187,6 @@ class _SessionBase(object):
 
     Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
     Valid Values: 0.0 - 171.8
-    '''
-    trigger_from_pfi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150052)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the PFI lines  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting  point to set slave_trigger_delay.
-    '''
-    trigger_from_rtsi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the RTSI bus  to the trigger input in seconds.  By itself, this property has no effect on  the acquired data.  However, depending on how the trigger lines are routed  between the master and slave devices, you can use this value as a starting point  to set slave_trigger_delay.
-    '''
-    trigger_from_star_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150050)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for PXI Star  Trigger line to the trigger input in seconds.  By itself, this property  has no effect on the acquired data.  However, depending on how the trigger  lines are routed between the master and slave devices, you can use this value  as a starting point to set slave_trigger_delay.
     '''
     trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1250016)
     '''Type: float in seconds or datetime.timedelta
@@ -1499,21 +1231,6 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the source the digitizer monitors for the trigger event.
-    '''
-    trigger_to_pfi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150049)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the PFI lines in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set  slave_trigger_delay.
-    '''
-    trigger_to_rtsi_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150048)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the RTSI bus in seconds.  By itself, this property has no effect on the  acquired data.  However, depending on how the trigger lines are routed between  the master and slave devices, you can use this value as a starting point to set   slave_trigger_delay.
-    '''
-    trigger_to_star_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150047)
-    '''Type: float in seconds or datetime.timedelta
-
-    This is a factory-programmed value that specifies the delay for the trigger  to the PXI Star Trigger line in seconds.  By itself, this property has no  effect on the acquired data.  However, depending on how the trigger lines  are routed between the master and slave devices, you can use this value as  a starting point to set slave_trigger_delay.
     '''
     trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1250012)
     '''Type: enums.TriggerType
@@ -3442,48 +3159,6 @@ class _SessionBase(object):
         error_code = self._library.niScope_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
-
-    def get_frequency_response(self):
-        '''get_frequency_response
-
-        Gets the frequency response of the digitizer for the current
-        configurations of the channel properties. Not all digitizers support
-        this method.
-
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        niscope.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        niscope.Session instance, and calling this method on the result.:
-
-            session.channels['0,1'].get_frequency_response()
-
-        Returns:
-            number_of_frequencies (int): Returns the number of frequencies in the returned spectrum.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        frequencies_ctype = None  # case B580
-        amplitudes_ctype = None  # case B580
-        phases_ctype = None  # case B580
-        number_of_frequencies_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niScope_GetFrequencyResponse(vi_ctype, channel_ctype, buffer_size_ctype, frequencies_ctype, amplitudes_ctype, phases_ctype, None if number_of_frequencies_ctype is None else (ctypes.pointer(number_of_frequencies_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        frequencies_size = buffer_size_ctype.value  # case B590
-        frequencies_array = array.array("d", [0] * frequencies_size)  # case B590
-        frequencies_ctype = get_ctypes_pointer_for_buffer(value=frequencies_array, library_type=_visatype.ViReal64)  # case B590
-        amplitudes_size = buffer_size_ctype.value  # case B590
-        amplitudes_array = array.array("d", [0] * amplitudes_size)  # case B590
-        amplitudes_ctype = get_ctypes_pointer_for_buffer(value=amplitudes_array, library_type=_visatype.ViReal64)  # case B590
-        phases_size = buffer_size_ctype.value  # case B590
-        phases_array = array.array("d", [0] * phases_size)  # case B590
-        phases_ctype = get_ctypes_pointer_for_buffer(value=phases_array, library_type=_visatype.ViReal64)  # case B590
-        error_code = self._library.niScope_GetFrequencyResponse(vi_ctype, channel_ctype, buffer_size_ctype, frequencies_ctype, amplitudes_ctype, phases_ctype, None if number_of_frequencies_ctype is None else (ctypes.pointer(number_of_frequencies_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return frequencies_array, amplitudes_array, phases_array
 
     def _read(self, num_samples, timeout=datetime.timedelta(seconds=5.0)):
         '''_read

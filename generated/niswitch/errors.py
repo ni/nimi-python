@@ -35,12 +35,12 @@ class DriverError(Error):
         super(DriverError, self).__init__(str(self.code) + ": " + self.description)
 
 
-class NiswitchWarning(Warning):
+class DriverWarning(Warning):
     '''A warning originating from the NI-SWITCH driver'''
 
     def __init__(self, code, description):
         assert (_is_warning(code)), "Should not create Warning if code is not positive."
-        super(NiswitchWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super(DriverWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
 
 
 class UnsupportedConfigurationError(Error):
@@ -64,7 +64,7 @@ class InvalidRepeatedCapabilityError(Error):
         super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({0}) was found in repeated capability string ({1})'.format(invalid_character, invalid_string))
 
 
-class SelfTestError(Exception):
+class SelfTestError(Error):
     '''An error due to a failed self-test'''
 
     def __init__(self, code, msg):
@@ -95,7 +95,7 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         raise DriverError(code, description)
 
     assert _is_warning(code)
-    warnings.warn(NiswitchWarning(code, description))
+    warnings.warn(DriverWarning(code, description))
 
 
-warnings.filterwarnings("always", category=NiswitchWarning)
+warnings.filterwarnings("always", category=DriverWarning)

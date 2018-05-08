@@ -55,29 +55,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: DataProcessingMode
-
-    .. py:attribute:: DataProcessingMode.REAL
-
-
-
-        The waveform data points are real numbers (I data).
-
-        
-
-
-
-    .. py:attribute:: DataProcessingMode.COMPLEX
-
-
-
-        The waveform data points are complex numbers (IQ data).
-
-        
-
-
-
-
 .. py:data:: ExportableSignals
 
     .. py:attribute:: ExportableSignals.START_TRIGGER
@@ -244,42 +221,6 @@ Enums used in NI-SCOPE
 
 
 
-.. py:data:: OverflowErrorReporting
-
-    .. py:attribute:: OverflowErrorReporting.ERROR
-
-
-
-        Execution stops and NI-SCOPE returns an error when an overflow has
-        occurred in the OSP block.
-
-        
-
-
-
-    .. py:attribute:: OverflowErrorReporting.WARNING
-
-
-
-        Execution continues and NI-SCOPE returns a warning when an overflow has
-        occurred in the OSP block.
-
-        
-
-
-
-    .. py:attribute:: OverflowErrorReporting.DISABLED
-
-
-
-        NI-SCOPE does not return an error when an overflow has occurred in the
-        OSP block.
-
-        
-
-
-
-
 .. py:data:: RISMethod
 
     .. py:attribute:: RISMethod.EXACT_NUM_AVERAGES
@@ -341,40 +282,6 @@ Enums used in NI-SCOPE
 
 
         use the onboard signal processing logic to implement the reference trigger.  This option will trigger based on the onboard signal processed data.
-
-        
-
-
-
-
-.. py:data:: StreamingPositionType
-
-    .. py:attribute:: StreamingPositionType.START
-
-
-
-        Data is streamed from the start trigger.
-
-        
-
-
-
-    .. py:attribute:: StreamingPositionType.REFERENCE
-
-
-
-        Data is streamed relative to the reference trigger and reference
-        position.
-
-        
-
-
-
-    .. py:attribute:: StreamingPositionType.SYNC
-
-
-
-        Data is streamed relative to the sync trigger and reference position.
 
         
 

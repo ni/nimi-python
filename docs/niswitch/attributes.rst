@@ -127,36 +127,6 @@ niswitch.Session properties
             - LabVIEW Property: **Obsolete Attributes:Cabled Module Trigger Bus**
             - C Attribute: **NISWITCH_ATTR_CABLED_MODULE_TRIGGER_BUS**
 
-.. py:attribute:: cache
-
-    Specifies whether to cache the value of properties.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.
-    The instrument driver can choose always to cache or never to cache  particular properties regardless of the setting of this property.
-    The default value is True.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
-            - C Attribute: **NISWITCH_ATTR_CACHE**
-
 .. py:attribute:: channel_count
 
     Indicates the number of channels that the specific instrument  driver supports.
@@ -299,30 +269,6 @@ niswitch.Session properties
             - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Driver Setup**
             - C Attribute: **NISWITCH_ATTR_DRIVER_SETUP**
 
-.. py:attribute:: group_capabilities
-
-    A string that contains a comma-separated list of class-extention groups that  this driver implements.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | str       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities**
-            - C Attribute: **NISWITCH_ATTR_GROUP_CAPABILITIES**
-
 .. py:attribute:: handshaking_initiation
 
     
@@ -418,37 +364,6 @@ niswitch.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
             - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MODEL**
-
-.. py:attribute:: interchange_check
-
-    Specifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  :py:meth:`niswitch.Session.connect`, :py:meth:`niswitch.Session.set_path` and :py:meth:`niswitch.Session._initiate_scan` methods.
-    The default value is False.
-    Interchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call :py:meth:`niswitch.Session.GetNextInterchangeWarning` to extract interchange warnings.   Call the :py:meth:`niswitch.Session.ClearInterchangeWarnings` method to clear the list  of interchangeability warnings without reading them.
-    Interchangeability checking examines the properties in a  capability group only if you specify a value for at least one  property within that group.  Interchangeability warnings can  occur when a property affects the behavior of the instrument and you  have not set that property, or the property has been invalidated since you set it.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
-            - C Attribute: **NISWITCH_ATTR_INTERCHANGE_CHECK**
 
 .. py:attribute:: io_resource_descriptor
 
@@ -1204,64 +1119,6 @@ niswitch.Session properties
             - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
             - C Attribute: **NISWITCH_ATTR_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE**
 
-.. py:attribute:: range_check
-
-    Specifies whether to validate property values and method parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver methods.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this property to False to disable range checking and  maximize performance.
-    The default value is True.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
-            - C Attribute: **NISWITCH_ATTR_RANGE_CHECK**
-
-.. py:attribute:: record_coercions
-
-    Specifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 properties.   You call :py:meth:`niswitch.Session.GetNextCoercionRecord` to extract and delete the oldest  coercion record from the list.
-    The default value is False.   Use the  :py:meth:`niswitch.Session.InitWithOptions` method to override this value.
-
-
-
-    .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | bool       |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | False      |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
-            - C Attribute: **NISWITCH_ATTR_RECORD_COERCIONS**
-
 .. py:attribute:: scan_advanced_output
 
     This property specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
@@ -1495,54 +1352,6 @@ niswitch.Session properties
 
             - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
             - C Attribute: **NISWITCH_ATTR_SIMULATE**
-
-.. py:attribute:: specific_driver_class_spec_major_version
-
-    The major version number of the IviSwtch class specification.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Major Version**
-            - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
-
-.. py:attribute:: specific_driver_class_spec_minor_version
-
-    The minor version number of the class specification with which this driver is compliant.
-
-    The following table lists the characteristics of this property.
-
-    +----------------+-----------+
-    | Characteristic | Value     |
-    +================+===========+
-    | Datatype       | int       |
-    +----------------+-----------+
-    | Permissions    | read only |
-    +----------------+-----------+
-    | Channel Based  | False     |
-    +----------------+-----------+
-    | Resettable     | No        |
-    +----------------+-----------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Minor Version**
-            - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
 
 .. py:attribute:: specific_driver_description
 

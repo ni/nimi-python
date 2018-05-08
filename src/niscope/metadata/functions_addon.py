@@ -4,7 +4,7 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitWithOptions':                  { 'codegen_method': 'private', 'public_method_name': '__init__', },
+    'InitWithOptions':                  { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'InitiateAcquisition':              { 'codegen_method': 'private',  },
     'close':                            { 'codegen_method': 'private',  },
     'CheckAttribute.+':                 { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
@@ -53,13 +53,14 @@ functions_codegen_method = {
     'SampleRate':                       { 'codegen_method': 'no',       },
     'SendSWTrigger':                    { 'codegen_method': 'no',       },
     'errorHandler':                     { 'codegen_method': 'no',       },
-    'FetchComplex':                     { 'codegen_method': 'no',       },  # TODO(marcoskirsch): No support for complex numbers. Issue #514
-    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # TODO(marcoskirsch):No support for complex numbers. Issue #514
-    'FetchBinary8':                     { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
-    'FetchBinary16':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
-    'FetchBinary32':                    { 'codegen_method': 'private', 'public_method_name': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
-    'Fetch':                            { 'codegen_method': 'private', 'public_method_name': 'fetch',      },  # 'FancyFetch' Public wrapper
-    'Read':                             { 'codegen_method': 'private', 'public_method_name': 'read',       },  # 'FancyRead' Public wrapper
+    'FetchComplex':                     { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
+    'FetchComplexBinary16':             { 'codegen_method': 'no',       },  # No support for complex numbers. Issue #514
+    'GetFrequencyResponse':             { 'codegen_method': 'no',       },  # Per #823, not supporting on board processing (complex numbers #514)
+    'FetchBinary8':                     { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
+    'FetchBinary16':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
+    'FetchBinary32':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_into', },  # 'FetchDispatcher' Public wrapper for numpy + ease of use
+    'Fetch':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch',      },  # 'FancyFetch' Public wrapper
+    'Read':                             { 'codegen_method': 'private', 'method_name_for_documentation': 'read',       },  # 'FancyRead' Public wrapper
     'ActualNumWfms':                    { 'codegen_method': 'private',  },  # We use it internally so the customer doesn't have to.
     'ClearWaveformProcessing':          { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
     'AddWaveformProcessing':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
@@ -70,7 +71,7 @@ functions_codegen_method = {
     'FetchMeasurementStats':            { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
     'ReadMeasurement':                  { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
     'ConfigureRefLevels':               { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
-    'self_test':                        { 'codegen_method': 'private', 'public_method_name': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
+    'self_test':                        { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
 }
 
