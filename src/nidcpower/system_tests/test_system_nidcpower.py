@@ -350,3 +350,4 @@ def test_channel_format_types():
     with nidcpower.Session(resource_name='4162', reset=False, options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
         assert simulated_session.channel_count == 12
 
+
