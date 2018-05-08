@@ -8,7 +8,7 @@ nidcpower.Session methods
     Transitions the NI-DCPower session from the Running state to the
     Committed state. If a sequence is running, it is stopped. Any
     configuration methods called after this method are not applied until
-    the :py:meth:`nidcpower.Session._initiate` method is called. If power output is enabled
+    the :py:meth:`nidcpower.Session.initiate` method is called. If power output is enabled
     when you call the :py:meth:`nidcpower.Session.abort` method, the output channels remain
     in their current state and continue providing power.
 
@@ -38,7 +38,7 @@ nidcpower.Session methods
     method moves the NI-DCPower session from the Uncommitted state into
     the Committed state. After calling this method, modifying any
     property reverts the NI-DCPower session to the Uncommitted state. Use
-    the :py:meth:`nidcpower.Session._initiate` method to transition to the Running state.
+    the :py:meth:`nidcpower.Session.initiate` method to transition to the Running state.
     Refer to the `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -474,7 +474,7 @@ nidcpower.Session methods
     previously taken and are stored in the NI-DCPower buffer. This method
     should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
-    :py:meth:`nidcpower.Session._initiate` before calling this method.
+    :py:meth:`nidcpower.Session.initiate` before calling this method.
 
     Fields in Measurement:
 
@@ -1323,7 +1323,7 @@ nidcpower.Session methods
     Waits until the device has generated the specified event.
 
     The session monitors whether each type of event has occurred at least
-    once since the last time this method or the :py:meth:`nidcpower.Session._initiate`
+    once since the last time this method or the :py:meth:`nidcpower.Session.initiate`
     method were called. If an event has only been generated once and you
     call this method successively, the method times out. Individual
     events must be generated between separate calls of this method.
