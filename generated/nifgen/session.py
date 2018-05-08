@@ -3796,6 +3796,12 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         sequence_length_ctype = _visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
+        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
+        if sample_counts_array is not None and len(sample_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of sample_counts_array and waveform_handles_array parameters do not match.")  # case S160
+        if marker_location_array is not None and len(marker_location_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of marker_location_array and waveform_handles_array parameters do not match.")  # case S160
         waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=_visatype.ViInt32)  # case B550
         loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=_visatype.ViInt32)  # case B550
         sample_counts_array_ctype = get_ctypes_pointer_for_buffer(value=sample_counts_array, library_type=_visatype.ViInt32)  # case B550
