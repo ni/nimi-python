@@ -340,7 +340,3 @@ def test_configure_trigger_window(session):
     assert niscope.TriggerWindowMode.ENTERING == session.trigger_window_mode
 
 
-def test_export_signal(session):
-    expected_trigger_terminal = "VAL_PFI_0"
-    session.export_signal(niscope.ExportableSignals.START_TRIGGER, expected_trigger_terminal)
-    assert expected_trigger_terminal == session.exported_start_trigger_output_terminal

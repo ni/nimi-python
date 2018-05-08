@@ -20,6 +20,7 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
+    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828
     'CreateWaveformF64':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'CreateWaveformI16':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'WriteBinary16Waveform':                { 'codegen_method': 'private', 'method_name_for_documentation': 'write_waveform', },  # Called from public method write_waveform()

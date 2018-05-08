@@ -53,6 +53,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
         * `active_advanced_sequence` [#832](https://github.com/ni/nimi-python/issues/832)
         * `active_advanced_sequence_step` [#832](https://github.com/ni/nimi-python/issues/832)
         * Default value for trigger parameter on `send_software_edge_trigger()` [#832](https://github.com/ni/nimi-python/issues/832)
@@ -60,6 +61,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
 * ### NI-SCOPE
     * #### Added
     * #### Changed
@@ -95,6 +97,7 @@ All notable changes to this project will be documented in this file.
             * `slave_trigger_delay` [#822](https://github.com/ni/nimi-python/issues/822)
         * Methods removed
             * `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
+            * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
 
 ## 0.8.0 - 2018-04-27
 * ### ALL

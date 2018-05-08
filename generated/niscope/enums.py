@@ -205,20 +205,6 @@ class _ClearableMeasurement(Enum):
     TIME_HISTOGRAM_NEW_HITS = 3011
 
 
-class ExportableSignals(Enum):
-    START_TRIGGER = 2
-    ADVANCE_TRIGGER = 5
-    REF_TRIGGER = 1
-    END_OF_RECORD_EVENT = 4
-    END_OF_ACQUISITION_EVENT = 3
-    READY_FOR_START_EVENT = 7
-    READY_FOR_ADVANCE_EVENT = 6
-    READY_FOR_REF_EVENT = 10
-    REF_CLOCK = 100
-    SAMPLE_CLOCK = 101
-    FIVE_V_OUT = 13
-
-
 class _FIRFilterWindow(Enum):
     NONE = 0
     '''

@@ -41,8 +41,6 @@ class SideEffectsHelper(object):
         self._defaults['DeleteAdvancedSequence']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
-        self._defaults['ExportSignal'] = {}
-        self._defaults['ExportSignal']['return'] = 0
         self._defaults['FetchMultiple'] = {}
         self._defaults['FetchMultiple']['return'] = 0
         self._defaults['FetchMultiple']['voltageMeasurements'] = None
@@ -229,11 +227,6 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
-
-    def niDCPower_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        if self._defaults['ExportSignal']['return'] != 0:
-            return self._defaults['ExportSignal']['return']
-        return self._defaults['ExportSignal']['return']
 
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         if self._defaults['FetchMultiple']['return'] != 0:
@@ -657,8 +650,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_DeleteAdvancedSequence.return_value = 0
         mock_library.niDCPower_Disable.side_effect = MockFunctionCallError("niDCPower_Disable")
         mock_library.niDCPower_Disable.return_value = 0
-        mock_library.niDCPower_ExportSignal.side_effect = MockFunctionCallError("niDCPower_ExportSignal")
-        mock_library.niDCPower_ExportSignal.return_value = 0
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
         mock_library.niDCPower_FetchMultiple.return_value = 0
         mock_library.niDCPower_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_GetAttributeViBoolean")
