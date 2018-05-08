@@ -265,7 +265,7 @@ def _add_render_in_session_base(f):
 
 
 def _add_use_session_lock(f, config):
-    '''Set 'use_session_lock' based on config['use_session_lock'] unless it already exitst'''
+    '''Set 'use_session_lock' based on config['use_session_lock'] unless it already exists'''
     f['use_session_lock'] = config['use_session_lock'] if 'use_session_lock' not in f else f['use_session_lock']
 
 
