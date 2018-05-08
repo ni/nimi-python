@@ -1902,7 +1902,7 @@ nidcpower.Session properties
 
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the :py:data:`nidcpower.Session.output_function` property, you also must set the  voltage level or current level in addition to  enabling the output
-    the :py:meth:`nidcpower.Session._initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
+    the :py:meth:`nidcpower.Session.initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
     Default Value: The default value is True if you use the :py:meth:`nidcpower.Session.__init__` method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
 
@@ -2168,7 +2168,7 @@ nidcpower.Session properties
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: :py:data:`~nidcpower.PowerSource.AUTOMATIC`
-    is set to :py:data:`~nidcpower.PowerSource.AUTOMATIC`. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  :py:meth:`nidcpower.Session._initiate` method.
+    is set to :py:data:`~nidcpower.PowerSource.AUTOMATIC`. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  :py:meth:`nidcpower.Session.initiate` method.
 
 
 

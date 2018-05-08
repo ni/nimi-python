@@ -825,7 +825,7 @@ class _SessionBase(object):
 
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the output_function property, you also must set the  voltage level or current level in addition to  enabling the output
-    the _initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
+    the initiate method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
     Default Value: The default value is True if you use the __init__ method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
@@ -939,7 +939,7 @@ class _SessionBase(object):
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: PowerSource.AUTOMATIC
-    is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  _initiate method.
+    is set to PowerSource.AUTOMATIC. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  initiate method.
 
     Note: Automatic selection is not persistent and occurs only at the time this property
     '''
@@ -2364,7 +2364,7 @@ class _SessionBase(object):
         previously taken and are stored in the NI-DCPower buffer. This method
         should not be used when the measure_when property is
         set to MeasureWhen.ON_DEMAND. You must first call
-        _initiate before calling this method.
+        initiate before calling this method.
 
         Fields in Measurement:
 
@@ -2453,7 +2453,7 @@ class _SessionBase(object):
         previously taken and are stored in the NI-DCPower buffer. This method
         should not be used when the measure_when property is
         set to MeasureWhen.ON_DEMAND. You must first call
-        _initiate before calling this method.
+        initiate before calling this method.
 
         Refer to the `Acquiring
         Measurements <REPLACE_DRIVER_SPECIFIC_URL_1(acquiringmeasurements)>`__
@@ -3543,7 +3543,7 @@ class Session(_SessionBase):
         without passing through a transitional output state, set **reset** to
         False. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        _initiate method.
+        initiate method.
 
         **Related Topics:**
 
@@ -3651,7 +3651,7 @@ class Session(_SessionBase):
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
         configuration methods called after this method are not applied until
-        the _initiate method is called. If power output is enabled
+        the initiate method is called. If power output is enabled
         when you call the abort method, the output channels remain
         in their current state and continue providing power.
 
@@ -3684,7 +3684,7 @@ class Session(_SessionBase):
         method moves the NI-DCPower session from the Uncommitted state into
         the Committed state. After calling this method, modifying any
         property reverts the NI-DCPower session to the Uncommitted state. Use
-        the _initiate method to transition to the Running state.
+        the initiate method to transition to the Running state.
         Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -4356,7 +4356,7 @@ class Session(_SessionBase):
         without passing through a transitional output state, set **reset** to
         False. Then configure the device as in the previous session,
         changing only the desired settings, and then call the
-        _initiate method.
+        initiate method.
 
         **Related Topics:**
 
@@ -4535,7 +4535,7 @@ class Session(_SessionBase):
         Waits until the device has generated the specified event.
 
         The session monitors whether each type of event has occurred at least
-        once since the last time this method or the _initiate
+        once since the last time this method or the initiate
         method were called. If an event has only been generated once and you
         call this method successively, the method times out. Individual
         events must be generated between separate calls of this method.
