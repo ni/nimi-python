@@ -91,7 +91,7 @@ functions_rep_caps = {
     'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
     'ConfigureSoftwareEdgeScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
     'DisableScriptTrigger':                     { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
-    'SendSoftwareEdgeTrigger':                  { 'parameters': { 2: { 'is_repeated_capability': True, }, }, },
+    # 'SendSoftwareEdgeTrigger':                  { 'parameters': { 2: { 'is_repeated_capability': True, }, }, }, # 850
 }
 
 functions_issues = {
