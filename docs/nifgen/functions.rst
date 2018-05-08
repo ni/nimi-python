@@ -2100,7 +2100,7 @@ nifgen.Session methods
 
 
 
-.. py:method:: send_software_edge_trigger(trigger)
+.. py:method:: send_software_edge_trigger(trigger, trigger_id)
 
     Sends a command to trigger the signal generator. This VI can act as an
     override for an external edge trigger.
@@ -2110,15 +2110,6 @@ nifgen.Session methods
     .. note:: This VI does not override external digital edge triggers of the
         NI 5401/5411/5431.
 
-
-    .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
-
-        .. code:: python
-
-            session.channels['0,1'].send_software_edge_trigger(trigger)
 
 
     :param trigger:
@@ -2138,6 +2129,9 @@ nifgen.Session methods
 
 
     :type trigger: :py:data:`nifgen.Trigger`
+    :param trigger_id:
+
+    :type trigger_id: str
 
 .. py:method:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
