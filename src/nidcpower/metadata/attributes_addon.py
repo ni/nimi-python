@@ -5,20 +5,20 @@
 # Python API bindings release
 
 attributes_converters = {
-    1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+    1150046: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # MEASURE_COMPLETE_EVENT_DELAY
-    1150065: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+    1150065: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # MEASURE_RECORD_DELTA_TIME
-    1150093: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+    1150093: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # PULSE_ON_TIME
-    1150094: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+    1150094: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # PULSE_OFF_TIME
-    1150051: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
+    1150051: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # SOURCE_DELAY
 }
 
 attributes_enums = {
-    1150020: { "enum": None           },  # POWER_LINE_FREQUENCY, Don't use the enum because a bool will do
+    1150020: { "enum": None           },  # POWER_LINE_FREQUENCY, Don't use the enum because a number will do
     1050002: { "enum": None           },  # RANGE_CHECK, Don't use the enum because a bool will do
     1050003: { "enum": None           },  # QUERY_INSTRUMENT_STATUS, Don't use the enum because a bool will do
     1050004: { "enum": None           },  # CACHE, Don't use the enum because a bool will do

@@ -118,21 +118,15 @@ functions_default_value = {
 
 # Parameter that need to be array.array
 functions_array = {
-    'FetchMultiple':                        { 'parameters': { 4: { 'use_array': True, }, 
+    'FetchMultiple':                        { 'parameters': { 4: { 'use_array': True, },
                                                               5: { 'use_array': True, }, }, },
-    'MeasureMultiple':                      { 'parameters': { 2: { 'use_array': True, }, 
+    'MeasureMultiple':                      { 'parameters': { 2: { 'use_array': True, },
                                                               3: { 'use_array': True, }, }, },
 }
 
 # We want to use a common name for self_cal across all drivers
 functions_name = {
     'CalSelfCalibrate': { 'python_name': 'self_cal', },
-}
-
-functions_self_test = {
-    'self_test': {
-        'codegen_method': 'private',
-    },
 }
 
 # Functions not in original metadata.
@@ -409,7 +403,7 @@ Fields in Measurement:
                 },
             },
         ],
-        'documentation': 
+        'documentation':
         {
             'description': 'Returns the date and time of the oldest successful self-calibration from among the channels in the session.',
             'note': 'This function is not supported on all devices.',
@@ -419,18 +413,18 @@ Fields in Measurement:
 
 # Converted parameters
 functions_converters = {
-    'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+    'FetchMultiple':                    { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
-    'FancyFetchMultiple':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+    'FancyFetchMultiple':               { 'parameters': { 3: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
-    'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds', 
+    'WaitForEvent':                     { 'parameters': { 2: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
-    'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
-                                                               'type_in_documentation': 'dict', }, 
+    'InitializeWithChannels':           { 'parameters': { 3: { 'python_api_converter_name': 'convert_init_with_options_dictionary',
+                                                               'type_in_documentation': 'dict', },
                                                           1: { 'is_repeated_capability': False,
-                                                               'python_api_converter_name': 'convert_repeated_capabilities_from_init', 
+                                                               'python_api_converter_name': 'convert_repeated_capabilities_from_init',
                                                                'type_in_documentation': 'str, list, range, tuple', }, }, },
-    'GetExtCalRecommendedInterval':     { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta', 
+    'GetExtCalRecommendedInterval':     { 'parameters': { 1: { 'python_api_converter_name': 'convert_month_to_timedelta',
                                                                'type_in_documentation': 'datetime.timedelta', }, }, },
 }
 
