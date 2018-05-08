@@ -92,7 +92,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    active_advanced_sequence = _attributes.AttributeViString(1150074)
+    _active_advanced_sequence = _attributes.AttributeViString(1150074)
     '''Type: str
 
     Specifies the advanced sequence to configure or generate.
@@ -108,7 +108,7 @@ class _SessionBase(object):
         session.channels['0,1'].active_advanced_sequence = var
         var = session.channels['0,1'].active_advanced_sequence
     '''
-    active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
+    _active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
     '''Type: int
 
     Specifies the advanced sequence step to configure.
@@ -2401,7 +2401,7 @@ class _SessionBase(object):
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
+        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
@@ -2445,7 +2445,7 @@ class _SessionBase(object):
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
-    def _fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
+    def _fetch_multiple(self, timeout, count):
         '''_fetch_multiple
 
         Returns an array of voltage measurements, an array of current
@@ -2473,11 +2473,9 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1']._fetch_multiple(timeout, count)
 
         Args:
-            count (int): Specifies the number of measurements to fetch.
-
             timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -2486,6 +2484,8 @@ class _SessionBase(object):
                 When setting the timeout interval, ensure you take into account any
                 triggers so that the timeout interval is long enough for your
                 application.
+
+            count (int): Specifies the number of measurements to fetch.
 
 
         Returns:
@@ -3486,6 +3486,8 @@ class _SessionBase(object):
         values_ctype = get_ctypes_pointer_for_buffer(value=values, library_type=_visatype.ViReal64)  # case B550
         source_delays_ctype = get_ctypes_pointer_for_buffer(value=source_delays, library_type=_visatype.ViReal64)  # case B550
         size_ctype = _visatype.ViUInt32(0 if values is None else len(values))  # case S160
+        if source_delays is not None and len(source_delays) != len(values):  # case S160
+            raise ValueError("Length of source_delays and values parameters do not match.")  # case S160
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4169,86 +4171,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def export_signal(self, signal, output_terminal, signal_identifier=""):
-        '''export_signal
-
-        Routes signals (triggers and events) to the output terminal you specify.
-        The route is created when the session is commit.
-
-        **Related Topics:**
-
-        `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            signal (enums.ExportSignal): Specifies which trigger or event to export.
-                **Defined Values:**
-
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.SOURCE_COMPLETE_EVENT (1030)             | Exports the Source Complete event.             |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.MEASURE_COMPLETE_EVENT (1031)            | Exports the Measure Complete event.            |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Exports the Sequence Iteration Complete event. |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.SEQUENCE_ENGINE_DONE_EVENT (1033)        | Exports the Sequence Engine Done event.        |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.PULSE_COMPLETE_EVENT (1051)              | Exports the Pulse Complete event.              |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Exports the Ready Pulse Trigger event.         |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.START_TRIGGER (1034)                     | Exports the Start trigger.                     |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.SOURCE_TRIGGER (1035)                    | Exports the Source trigger.                    |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.MEASURE_TRIGGER (1036)                   | Exports the Measure trigger.                   |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.SEQUENCE_ADVANCE_TRIGGER (1037)          | Exports the Sequence Advance trigger.          |
-                +-------------------------------------------------------+------------------------------------------------+
-                | ExportSignal.PULSE_TRIGGER (1053)                     | Exports the Pulse trigger.                     |
-                +-------------------------------------------------------+------------------------------------------------+
-
-            output_terminal (str): Specifies where to export the selected signal.
-                **Relative Terminals**:
-
-                +-------------+----------------------+
-                | ""          | Do not export signal |
-                +-------------+----------------------+
-                | "PXI_Trig0" | PXI trigger line 0   |
-                +-------------+----------------------+
-                | "PXI_Trig1" | PXI trigger line 1   |
-                +-------------+----------------------+
-                | "PXI_Trig2" | PXI trigger line 2   |
-                +-------------+----------------------+
-                | "PXI_Trig3" | PXI trigger line 3   |
-                +-------------+----------------------+
-                | "PXI_Trig4" | PXI trigger line 4   |
-                +-------------+----------------------+
-                | "PXI_Trig5" | PXI trigger line 5   |
-                +-------------+----------------------+
-                | "PXI_Trig6" | PXI trigger line 6   |
-                +-------------+----------------------+
-                | "PXI_Trig7" | PXI trigger line 7   |
-                +-------------+----------------------+
-
-            signal_identifier (str): Reserved for future use. Pass in an empty string for this parameter.
-
-        '''
-        if type(signal) is not enums.ExportSignal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ExportSignal))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
-        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
-        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _get_ext_cal_last_date_and_time(self):
         '''_get_ext_cal_last_date_and_time
 
@@ -4565,7 +4487,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_edge_trigger(self, trigger=enums.SendSoftwareEdgeTriggerType.START):
+    def send_software_edge_trigger(self, trigger):
         '''send_software_edge_trigger
 
         Asserts the specified trigger. This method can override an external
@@ -4585,17 +4507,20 @@ class Session(_SessionBase):
             trigger (enums.SendSoftwareEdgeTriggerType): Specifies which trigger to assert.
                 **Defined Values:**
 
-                +----------------------------------------------+---------------------------------------+
-                | ExportSignal.START_TRIGGER (1034)            | Asserts the Start trigger.            |
-                +----------------------------------------------+---------------------------------------+
-                | ExportSignal.SOURCE_TRIGGER (1035)           | Asserts the Source trigger.           |
-                +----------------------------------------------+---------------------------------------+
-                | ExportSignal.MEASURE_TRIGGER (1036)          | Asserts the Measure trigger.          |
-                +----------------------------------------------+---------------------------------------+
-                | ExportSignal.SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
-                +----------------------------------------------+---------------------------------------+
-                | ExportSignal.PULSE_TRIGGER (1053             | Asserts the Pulse trigger.            |
-                +----------------------------------------------+---------------------------------------+
+                +-----------------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_START_TRIGGER (1034)            | Asserts the Start trigger.            |
+                +-----------------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SOURCE_TRIGGER (1035)           | Asserts the Source trigger.           |
+                +-----------------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_MEASURE_TRIGGER (1036)          | Asserts the Measure trigger.          |
+                +-----------------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER (1037) | Asserts the Sequence Advance trigger. |
+                +-----------------------------------------------+---------------------------------------+
+                | NIDCPOWER_VAL_PULSE_TRIGGER (1053             | Asserts the Pulse trigger.            |
+                +-----------------------------------------------+---------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
         if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
@@ -4626,19 +4551,22 @@ class Session(_SessionBase):
             event_id (enums.Event): Specifies which event to wait for.
                 **Defined Values:**
 
-                +-------------------------------------------------------+--------------------------------------------------+
-                | ExportSignal.SOURCE_COMPLETE_EVENT (1030)             | Waits for the Source Complete event.             |
-                +-------------------------------------------------------+--------------------------------------------------+
-                | ExportSignal.MEASURE_COMPLETE_EVENT (1031)            | Waits for the Measure Complete event.            |
-                +-------------------------------------------------------+--------------------------------------------------+
-                | ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Waits for the Sequence Iteration Complete event. |
-                +-------------------------------------------------------+--------------------------------------------------+
-                | ExportSignal.SEQUENCE_ENGINE_DONE_EVENT (1033)        | Waits for the Sequence Engine Done event.        |
-                +-------------------------------------------------------+--------------------------------------------------+
-                | ExportSignal.PULSE_COMPLETE_EVENT (1051 )             | Waits for the Pulse Complete event.              |
-                +-------------------------------------------------------+--------------------------------------------------+
-                | ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
-                +-------------------------------------------------------+--------------------------------------------------+
+                +--------------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT (1030)             | Waits for the Source Complete event.             |
+                +--------------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT (1031)            | Waits for the Measure Complete event.            |
+                +--------------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT (1032) | Waits for the Sequence Iteration Complete event. |
+                +--------------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT (1033)        | Waits for the Sequence Engine Done event.        |
+                +--------------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_PULSE_COMPLETE_EVENT (1051 )             | Waits for the Pulse Complete event.              |
+                +--------------------------------------------------------+--------------------------------------------------+
+                | NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT (1052)     | Waits for the Ready for Pulse Trigger event.     |
+                +--------------------------------------------------------+--------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,

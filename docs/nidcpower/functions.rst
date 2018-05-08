@@ -8,7 +8,7 @@ nidcpower.Session methods
     Transitions the NI-DCPower session from the Running state to the
     Committed state. If a sequence is running, it is stopped. Any
     configuration methods called after this method are not applied until
-    the :py:meth:`nidcpower.Session._initiate` method is called. If power output is enabled
+    the :py:meth:`nidcpower.Session.initiate` method is called. If power output is enabled
     when you call the :py:meth:`nidcpower.Session.abort` method, the output channels remain
     in their current state and continue providing power.
 
@@ -38,7 +38,7 @@ nidcpower.Session methods
     method moves the NI-DCPower session from the Uncommitted state into
     the Committed state. After calling this method, modifying any
     property reverts the NI-DCPower session to the Uncommitted state. Use
-    the :py:meth:`nidcpower.Session._initiate` method to transition to the Running state.
+    the :py:meth:`nidcpower.Session.initiate` method to transition to the Running state.
     Refer to the `Programming
     States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
     the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -380,101 +380,13 @@ nidcpower.Session methods
 
 
 
-.. py:method:: export_signal(signal, output_terminal, signal_identifier="")
-
-    Routes signals (triggers and events) to the output terminal you specify.
-    The route is created when the session is :py:meth:`nidcpower.Session.commit`.
-
-    **Related Topics:**
-
-    `Triggers <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__
-
-    
-
-    .. note:: This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-
-
-    :param signal:
-
-
-        Specifies which trigger or event to export.
-        **Defined Values:**
-
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT` (1030)             | Exports the Source Complete event.             |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.MEASURE_COMPLETE_EVENT` (1031)            | Exports the Measure Complete event.            |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT` (1032) | Exports the Sequence Iteration Complete event. |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ENGINE_DONE_EVENT` (1033)        | Exports the Sequence Engine Done event.        |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.PULSE_COMPLETE_EVENT` (1051)              | Exports the Pulse Complete event.              |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT` (1052)     | Exports the Ready Pulse Trigger event.         |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.START_TRIGGER` (1034)                     | Exports the Start trigger.                     |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SOURCE_TRIGGER` (1035)                    | Exports the Source trigger.                    |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.MEASURE_TRIGGER` (1036)                   | Exports the Measure trigger.                   |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ADVANCE_TRIGGER` (1037)          | Exports the Sequence Advance trigger.          |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.PULSE_TRIGGER` (1053)                     | Exports the Pulse trigger.                     |
-        +-----------------------------------------------------------------------------+------------------------------------------------+
-
-
-    :type signal: :py:data:`nidcpower.ExportSignal`
-    :param output_terminal:
-
-
-        Specifies where to export the selected signal.
-        **Relative Terminals**:
-
-        +-------------+----------------------+
-        | ""          | Do not export signal |
-        +-------------+----------------------+
-        | "PXI_Trig0" | PXI trigger line 0   |
-        +-------------+----------------------+
-        | "PXI_Trig1" | PXI trigger line 1   |
-        +-------------+----------------------+
-        | "PXI_Trig2" | PXI trigger line 2   |
-        +-------------+----------------------+
-        | "PXI_Trig3" | PXI trigger line 3   |
-        +-------------+----------------------+
-        | "PXI_Trig4" | PXI trigger line 4   |
-        +-------------+----------------------+
-        | "PXI_Trig5" | PXI trigger line 5   |
-        +-------------+----------------------+
-        | "PXI_Trig6" | PXI trigger line 6   |
-        +-------------+----------------------+
-        | "PXI_Trig7" | PXI trigger line 7   |
-        +-------------+----------------------+
-
-
-    :type output_terminal: str
-    :param signal_identifier:
-
-
-        Reserved for future use. Pass in an empty string for this parameter.
-
-        
-
-
-    :type signal_identifier: str
-
 .. py:method:: fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
     Returns a list of named tuples (Measurement) that were
     previously taken and are stored in the NI-DCPower buffer. This method
     should not be used when the :py:data:`nidcpower.Session.measure_when` property is
     set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
-    :py:meth:`nidcpower.Session._initiate` before calling this method.
+    :py:meth:`nidcpower.Session.initiate` before calling this method.
 
     Fields in Measurement:
 
@@ -1111,7 +1023,7 @@ nidcpower.Session methods
 
 
 
-.. py:method:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
+.. py:method:: send_software_edge_trigger(trigger)
 
     Asserts the specified trigger. This method can override an external
     edge trigger.
@@ -1135,17 +1047,19 @@ nidcpower.Session methods
         Specifies which trigger to assert.
         **Defined Values:**
 
-        +--------------------------------------------------------------------+---------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.START_TRIGGER` (1034)            | Asserts the Start trigger.            |
-        +--------------------------------------------------------------------+---------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SOURCE_TRIGGER` (1035)           | Asserts the Source trigger.           |
-        +--------------------------------------------------------------------+---------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.MEASURE_TRIGGER` (1036)          | Asserts the Measure trigger.          |
-        +--------------------------------------------------------------------+---------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ADVANCE_TRIGGER` (1037) | Asserts the Sequence Advance trigger. |
-        +--------------------------------------------------------------------+---------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.PULSE_TRIGGER` (1053             | Asserts the Pulse trigger.            |
-        +--------------------------------------------------------------------+---------------------------------------+
+        +---------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_START_TRIGGER` (1034)            | Asserts the Start trigger.            |
+        +---------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_TRIGGER` (1035)           | Asserts the Source trigger.           |
+        +---------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_TRIGGER` (1036)          | Asserts the Measure trigger.          |
+        +---------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER` (1037) | Asserts the Sequence Advance trigger. |
+        +---------------------------------------------------------------------+---------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_TRIGGER` (1053             | Asserts the Pulse trigger.            |
+        +---------------------------------------------------------------------+---------------------------------------+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type trigger: :py:data:`nidcpower.SendSoftwareEdgeTriggerType`
@@ -1218,7 +1132,7 @@ nidcpower.Session methods
     Waits until the device has generated the specified event.
 
     The session monitors whether each type of event has occurred at least
-    once since the last time this method or the :py:meth:`nidcpower.Session._initiate`
+    once since the last time this method or the :py:meth:`nidcpower.Session.initiate`
     method were called. If an event has only been generated once and you
     call this method successively, the method times out. Individual
     events must be generated between separate calls of this method.
@@ -1237,19 +1151,21 @@ nidcpower.Session methods
         Specifies which event to wait for.
         **Defined Values:**
 
-        +-----------------------------------------------------------------------------+--------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT` (1030)             | Waits for the Source Complete event.             |
-        +-----------------------------------------------------------------------------+--------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.MEASURE_COMPLETE_EVENT` (1031)            | Waits for the Measure Complete event.            |
-        +-----------------------------------------------------------------------------+--------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ITERATION_COMPLETE_EVENT` (1032) | Waits for the Sequence Iteration Complete event. |
-        +-----------------------------------------------------------------------------+--------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.SEQUENCE_ENGINE_DONE_EVENT` (1033)        | Waits for the Sequence Engine Done event.        |
-        +-----------------------------------------------------------------------------+--------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.PULSE_COMPLETE_EVENT` (1051 )             | Waits for the Pulse Complete event.              |
-        +-----------------------------------------------------------------------------+--------------------------------------------------+
-        | :py:data:`~nidcpower.ExportSignal.READY_FOR_PULSE_TRIGGER_EVENT` (1052)     | Waits for the Ready for Pulse Trigger event.     |
-        +-----------------------------------------------------------------------------+--------------------------------------------------+
+        +------------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT` (1030)             | Waits for the Source Complete event.             |
+        +------------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT` (1031)            | Waits for the Measure Complete event.            |
+        +------------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT` (1032) | Waits for the Sequence Iteration Complete event. |
+        +------------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT` (1033)        | Waits for the Sequence Engine Done event.        |
+        +------------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_PULSE_COMPLETE_EVENT` (1051 )             | Waits for the Pulse Complete event.              |
+        +------------------------------------------------------------------------------+--------------------------------------------------+
+        | :py:data:`~nidcpower.NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT` (1052)     | Waits for the Ready for Pulse Trigger event.     |
+        +------------------------------------------------------------------------------+--------------------------------------------------+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
     :type event_id: :py:data:`nidcpower.Event`

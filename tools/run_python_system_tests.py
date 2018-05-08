@@ -1,7 +1,7 @@
 import argparse
 import json
 import os
-import pip
+import subprocess
 import sys
 import tempfile
 import time
@@ -16,7 +16,8 @@ args = parser.parse_args()
 
 
 print('****Installing tox to Python.****')
-pip.main(['install', 'tox'])
+subprocess.check_call(["python", '-m', 'pip', 'install', '--upgrade', 'pip'])
+subprocess.check_call(["python", '-m', 'pip', 'install', '--upgrade', 'tox'])
 
 
 print('****Creating temporary directory.****')

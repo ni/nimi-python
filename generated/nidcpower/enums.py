@@ -71,53 +71,6 @@ class Event(Enum):
     READY_FOR_PULSE_TRIGGER = 1052
 
 
-class ExportSignal(Enum):
-    SOURCE_COMPLETE_EVENT = 1030
-    '''
-    Exports the Source Complete event.
-    '''
-    MEASURE_COMPLETE_EVENT = 1031
-    '''
-    Exports the Measure Complete event.
-    '''
-    SEQUENCE_ITERATION_COMPLETE_EVENT = 1032
-    '''
-    Exports the Sequence Iteration Complete event.
-    '''
-    SEQUENCE_ENGINE_DONE_EVENT = 1033
-    '''
-    Exports the Sequence Engine Done event.
-    '''
-    PULSE_COMPLETE_EVENT = 1051
-    '''
-    Exports the Pulse Complete event.
-    '''
-    READY_FOR_PULSE_TRIGGER_EVENT = 1052
-    '''
-    Exports the Ready Pulse Trigger event.
-    '''
-    START_TRIGGER = 1034
-    '''
-    Exports the Start trigger.
-    '''
-    SOURCE_TRIGGER = 1035
-    '''
-    Exports the Source trigger.
-    '''
-    MEASURE_TRIGGER = 1036
-    '''
-    Exports the Measure trigger.
-    '''
-    SEQUENCE_ADVANCE_TRIGGER = 1037
-    '''
-    Exports the Sequence Advance trigger.
-    '''
-    PULSE_TRIGGER = 1053
-    '''
-    Exports the Pulse trigger.
-    '''
-
-
 class MeasureWhen(Enum):
     AUTOMATICALLY_AFTER_SOURCE_COMPLETE = 1025
     '''

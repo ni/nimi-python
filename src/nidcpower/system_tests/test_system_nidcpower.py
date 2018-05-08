@@ -203,32 +203,24 @@ def test_create_advanced_sequence(single_channel_session):
     single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
 
 
-# TODO(marcoskirsch): Doesn't work, issue #515
-'''
-def test_set_sequence_default_source_delays(single_channel_session):
-    single_channel_session.set_sequence([0.1, 0.2, 0.3])
-'''
-
-
-# TODO(marcoskirsch): Should raise because arrays are different size, or maybe treat [] same as None? See issue #515
-'''
-def test_set_sequence_no_source_delays(single_channel_session):
-    single_channel_session.set_sequence([0.1, 0.2, 0.3], [])
-'''
-
-
 def test_set_sequence_with_source_delays(single_channel_session):
     single_channel_session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003])
 
 
-# TODO(marcoskirsch): Should raise because arrays are different size. See issue #515
 def test_set_sequence_with_too_many_source_delays(single_channel_session):
-    single_channel_session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003, 0.004])
+    try:
+        single_channel_session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003, 0.004])
+        assert False
+    except ValueError:
+        pass
 
 
-# TODO(marcoskirsch): Should raise because arrays are different size. See issue #515
 def test_set_sequence_with_too_few_source_delays(single_channel_session):
-    single_channel_session.set_sequence([0.1, 0.2, 0.3, 0.4], [0.001, 0.002, 0.003, 0.004])
+    try:
+        single_channel_session.set_sequence([0.1, 0.2, 0.3, 0.4], [0.001, 0.002])
+        assert False
+    except ValueError:
+        pass
 
 
 def test_wait_for_event_default_timeout(single_channel_session):
@@ -245,12 +237,6 @@ def test_commit(single_channel_session):
     non_default_current_limit = 0.00021
     single_channel_session.current_limit = non_default_current_limit
     single_channel_session.commit()
-
-
-def test_export_signal(single_channel_session):
-    expected_trigger_terminal = "/4162/Engine0/MeasureTrigger"
-    single_channel_session.export_signal(nidcpower.ExportSignal.SOURCE_COMPLETE_EVENT, expected_trigger_terminal)
-    assert expected_trigger_terminal == single_channel_session.source_complete_event_output_terminal
 
 
 def test_configure_digital_edge_measure_trigger(single_channel_session):
@@ -299,7 +285,7 @@ def test_create_and_delete_advanced_sequence_step(single_channel_session):
 
 def test_send_software_edge_trigger_error(session):
     try:
-        session.send_software_edge_trigger()
+        session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074118587  # Error : Function not available in multichannel session
@@ -327,8 +313,8 @@ def test_get_ext_cal_recommended_interval(session):
 
 
 def test_set_get_vi_int_64_attribute(session):
-    session.channels['0'].active_advanced_sequence_step = 1
-    read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
+    session.channels['0']._active_advanced_sequence_step = 1
+    read_advanced_sequence_step = session.channels['0']._active_advanced_sequence_step
     assert read_advanced_sequence_step == 1
 
 
