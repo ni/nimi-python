@@ -39,7 +39,8 @@ functions_buffer_info = {
                                                               10: { 'size': {'mechanism':'ivi-dance', 'value':'stringSize'}, }, }, },
     'MultipleArrayTypes':                    { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'outputArraySize'}, },
                                                                3: { 'size': {'mechanism':'fixed', 'value':3}, },
-                                                               5: { 'size': {'mechanism':'len', 'value':'inputArraySizes'}, }, }, },
+                                                               5: { 'size': {'mechanism':'len', 'value':'inputArraySizes'}, },
+                                                               6: { 'size': {'mechanism':'len', 'value':'inputArraySizes'}, }, }, },
     'ParametersAreMultipleTypes':            { 'parameters': { 8: { 'size': {'mechanism':'len', 'value':'stringSize'}, }, }, },
     'BoolArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
     'EnumArrayOutputFunction':               { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfElements'}, }, }, },
@@ -53,6 +54,10 @@ functions_buffer_info = {
     'FetchWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
     'WriteWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfSamples'}, }, }, },
     'self_test':                             { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'MultipleArraysSameSize':                { 'parameters': { 1: { 'size': {'mechanism':'len', 'value':'Size'}, },
+                                                               2: { 'size': {'mechanism':'len', 'value':'Size'}, },
+                                                               3: { 'size': {'mechanism':'len', 'value':'Size'}, },
+                                                               4: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to

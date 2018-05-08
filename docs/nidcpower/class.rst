@@ -123,10 +123,6 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | Property                                                        | Datatype                               |
     +=================================================================+========================================+
-    | :py:attr:`active_advanced_sequence`                             | str                                    |
-    +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`active_advanced_sequence_step`                        | int                                    |
-    +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`aperture_time`                                        | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`aperture_time_units`                                  | :py:data:`ApertureTimeUnits`           |
@@ -465,94 +461,6 @@ nidcpower.Session
 
 Properties
 ----------
-
-active_advanced_sequence
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:attribute:: active_advanced_sequence
-
-        Specifies the advanced sequence to configure or generate.
-
-
-
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
-
-
-        .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
-            active_advanced_sequence.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            active_advanced_sequence.Session instance, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session['0,1'].active_advanced_sequence = var
-                var = session['0,1'].active_advanced_sequence
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | True       |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Source:Advanced:Active Advanced Sequence**
-                - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE**
-
-active_advanced_sequence_step
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:attribute:: active_advanced_sequence_step
-
-        Specifies the advanced sequence step to configure.
-
-
-
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
-
-
-        .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
-            active_advanced_sequence_step.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            active_advanced_sequence_step.Session instance, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session['0,1'].active_advanced_sequence_step = var
-                var = session['0,1'].active_advanced_sequence_step
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | True       |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Source:Advanced:Active Advanced Sequence Step**
-                - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE_STEP**
 
 aperture_time
 ~~~~~~~~~~~~~
@@ -7358,7 +7266,7 @@ send_software_edge_trigger
 
     .. py:currentmodule:: nidcpower.Session
 
-    .. py:method:: send_software_edge_trigger(trigger=nidcpower.SendSoftwareEdgeTriggerType.START)
+    .. py:method:: send_software_edge_trigger(trigger)
 
             Asserts the specified trigger. This method can override an external
             edge trigger.
@@ -7534,10 +7442,6 @@ Properties
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | Property                                                                          | Datatype                               |
 +===================================================================================+========================================+
-| :py:attr:`nidcpower.Session.active_advanced_sequence`                             | str                                    |
-+-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.active_advanced_sequence_step`                        | int                                    |
-+-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.aperture_time`                                        | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.aperture_time_units`                                  | :py:data:`ApertureTimeUnits`           |

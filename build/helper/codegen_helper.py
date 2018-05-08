@@ -146,12 +146,13 @@ def get_enum_type_check_snippet(parameter, indent):
     return enum_check
 
 
-def _get_buffer_parameter_for_size_parameter(parameter, parameters):
-    '''If parameter represents the size of another parameter in the C API, returns that other parameter. Otherwise None.'''
+def _get_buffer_parameters_for_size_parameter(parameter, parameters):
+    '''Return all parameters that use this parameter for size. Empty list if none'''
+    buffer_params = []
     for p in parameters:
         if (p['is_buffer'] or p['is_string']) and p['size']['value'] == parameter['name']:
-            return p
-    return None
+            buffer_params.append(p)
+    return buffer_params
 
 
 class IviDanceStep(Enum):
@@ -250,7 +251,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
     assert parameter['is_buffer'] is False
     assert parameter['numpy'] is False
-    corresponding_buffer_parameter = _get_buffer_parameter_for_size_parameter(parameter, parameters)
+    corresponding_buffer_parameters = _get_buffer_parameters_for_size_parameter(parameter, parameters)
 
     definitions = []
     definition = None
@@ -264,14 +265,20 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             definition = '{0}.{1}({2}.value)  # case S130'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif 'python_api_converter_name' in parameter:
             definition = '_converters.{0}({1}, {2})  # case S140'.format(parameter['python_api_converter_name'], parameter['python_name'], module_name + '.' + parameter['ctypes_type'])
-        elif corresponding_buffer_parameter is None:
+        elif not corresponding_buffer_parameters:
             definition = '{0}.{1}({2})  # case S150'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
-        elif corresponding_buffer_parameter['direction'] == 'in':
+        elif corresponding_buffer_parameters and corresponding_buffer_parameters[0]['direction'] == 'in':  # We are only looking at the first one to see if it is 'in'. Assumes all are the same here, assert below if not
             # Parameter denotes the size of another (the "corresponding") parameter.
-            definition = '{0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameter['python_name'])
+            definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
+            for i in range(1, len(corresponding_buffer_parameters)):
+                definitions.append('if {0} is not None and len({0}) != len({1}):  # case S160'.format(corresponding_buffer_parameters[i]['python_name'], corresponding_buffer_parameters[0]['python_name']))
+                definitions.append('    raise ValueError("Length of {0} and {1} parameters do not match.")  # case S160'.format(corresponding_buffer_parameters[i]['python_name'], corresponding_buffer_parameters[0]['python_name']))
         else:
-            assert corresponding_buffer_parameter['direction'] == 'out'
-            if corresponding_buffer_parameter['size']['mechanism'] == 'ivi-dance':
+            if corresponding_buffer_parameters[0]['size']['mechanism'] == 'ivi-dance':  # We are only looking at the first one. Assumes all are the same here, assert below if not
+                # Verify all corresponding_buffer_parameters are 'out' and 'ivi-dance'
+                for p in corresponding_buffer_parameters:
+                    assert p['direction'] == 'out'
+                    assert p['size']['mechanism'] == 'ivi-dance'
                 if ivi_dance_step == IviDanceStep.QUERY_SIZE:
                     definition = '{0}.{1}()  # case S170'.format(module_name, parameter['ctypes_type'])
                 elif ivi_dance_step == IviDanceStep.GET_DATA:
@@ -279,7 +286,10 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
                 else:
                     assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
             else:
-                assert corresponding_buffer_parameter['size']['mechanism'] != 'fixed-size', 'mechanism fixed-size makes no sense here! Check metadata'
+                # Verify all corresponding_buffer_parameters are 'out' and not 'fixed-size'
+                for p in corresponding_buffer_parameters:
+                    assert p['direction'] == 'out'
+                    assert p['size']['mechanism'] != 'fixed-size'
                 definition = '{0}.{1}({2})  # case S190'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
@@ -904,14 +914,14 @@ def test_get_enum_type_check_snippet():
     assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter mode must be of type ' + str(enums.Turtle))"
 
 
-def test_get_buffer_parameter_for_size_parameter_none():
-    param = _get_buffer_parameter_for_size_parameter(parameters_for_testing[0], parameters_for_testing)
-    assert param is None
+def test_get_buffer_parameters_for_size_parameter_none():
+    params = _get_buffer_parameters_for_size_parameter(parameters_for_testing[0], parameters_for_testing)
+    assert len(params) == 0
 
 
-def test_get_buffer_parameter_for_size_parameter():
-    param = _get_buffer_parameter_for_size_parameter(parameters_for_testing[4], parameters_for_testing)
-    assert param == parameters_for_testing[5]
+def test_get_buffer_parameters_for_size_parameter():
+    params = _get_buffer_parameters_for_size_parameter(parameters_for_testing[4], parameters_for_testing)
+    assert params[0] == parameters_for_testing[5]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c050():
