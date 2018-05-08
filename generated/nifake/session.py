@@ -1251,7 +1251,6 @@ class Session(_SessionBase):
             output_array_of_fixed_length (list of float): An array of doubles with fixed size.
 
         '''
-<<<<<<< HEAD
         with self.lock():
             vi_ctype = _visatype.ViSession(self._vi)  # case S110
             output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S190
@@ -1260,27 +1259,13 @@ class Session(_SessionBase):
             output_array_of_fixed_length_size = 3  # case B570
             output_array_of_fixed_length_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_of_fixed_length_size)  # case B570
             input_array_sizes_ctype = _visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case S160
+            if input_array_of_integers is not None and len(input_array_of_integers) != len(input_array_of_floats):  # case S160
+                raise ValueError("Length of input_array_of_integers and input_array_of_floats parameters do not match.")  # case S160
             input_array_of_floats_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_floats, library_type=_visatype.ViReal64)  # case B550
             input_array_of_integers_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_integers, library_type=_visatype.ViInt16)  # case B550
             error_code = self._library.niFake_MultipleArrayTypes(vi_ctype, output_array_size_ctype, output_array_ctype, output_array_of_fixed_length_ctype, input_array_sizes_ctype, input_array_of_floats_ctype, input_array_of_integers_ctype)
             errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
             return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
-=======
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S190
-        output_array_size = output_array_size  # case B600
-        output_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_size)  # case B600
-        output_array_of_fixed_length_size = 3  # case B570
-        output_array_of_fixed_length_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=output_array_of_fixed_length_size)  # case B570
-        input_array_sizes_ctype = _visatype.ViInt32(0 if input_array_of_floats is None else len(input_array_of_floats))  # case S160
-        if input_array_of_integers is not None and len(input_array_of_integers) != len(input_array_of_floats):  # case S160
-            raise ValueError("Length of input_array_of_integers and input_array_of_floats parameters do not match.")  # case S160
-        input_array_of_floats_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_floats, library_type=_visatype.ViReal64)  # case B550
-        input_array_of_integers_ctype = get_ctypes_pointer_for_buffer(value=input_array_of_integers, library_type=_visatype.ViInt16)  # case B550
-        error_code = self._library.niFake_MultipleArrayTypes(vi_ctype, output_array_size_ctype, output_array_ctype, output_array_of_fixed_length_ctype, input_array_sizes_ctype, input_array_of_floats_ctype, input_array_of_integers_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
->>>>>>> master
 
     def multiple_arrays_same_size(self, values1, values2, values3, values4):
         '''multiple_arrays_same_size
@@ -1297,21 +1282,22 @@ class Session(_SessionBase):
             values4 (list of float): Array 4 of same size.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        values1_ctype = get_ctypes_pointer_for_buffer(value=values1, library_type=_visatype.ViReal64)  # case B550
-        values2_ctype = get_ctypes_pointer_for_buffer(value=values2, library_type=_visatype.ViReal64)  # case B550
-        values3_ctype = get_ctypes_pointer_for_buffer(value=values3, library_type=_visatype.ViReal64)  # case B550
-        values4_ctype = get_ctypes_pointer_for_buffer(value=values4, library_type=_visatype.ViReal64)  # case B550
-        size_ctype = _visatype.ViInt32(0 if values1 is None else len(values1))  # case S160
-        if values2 is not None and len(values2) != len(values1):  # case S160
-            raise ValueError("Length of values2 and values1 parameters do not match.")  # case S160
-        if values3 is not None and len(values3) != len(values1):  # case S160
-            raise ValueError("Length of values3 and values1 parameters do not match.")  # case S160
-        if values4 is not None and len(values4) != len(values1):  # case S160
-            raise ValueError("Length of values4 and values1 parameters do not match.")  # case S160
-        error_code = self._library.niFake_MultipleArraysSameSize(vi_ctype, values1_ctype, values2_ctype, values3_ctype, values4_ctype, size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        with self.lock():
+            vi_ctype = _visatype.ViSession(self._vi)  # case S110
+            values1_ctype = get_ctypes_pointer_for_buffer(value=values1, library_type=_visatype.ViReal64)  # case B550
+            values2_ctype = get_ctypes_pointer_for_buffer(value=values2, library_type=_visatype.ViReal64)  # case B550
+            values3_ctype = get_ctypes_pointer_for_buffer(value=values3, library_type=_visatype.ViReal64)  # case B550
+            values4_ctype = get_ctypes_pointer_for_buffer(value=values4, library_type=_visatype.ViReal64)  # case B550
+            size_ctype = _visatype.ViInt32(0 if values1 is None else len(values1))  # case S160
+            if values2 is not None and len(values2) != len(values1):  # case S160
+                raise ValueError("Length of values2 and values1 parameters do not match.")  # case S160
+            if values3 is not None and len(values3) != len(values1):  # case S160
+                raise ValueError("Length of values3 and values1 parameters do not match.")  # case S160
+            if values4 is not None and len(values4) != len(values1):  # case S160
+                raise ValueError("Length of values4 and values1 parameters do not match.")  # case S160
+            error_code = self._library.niFake_MultipleArraysSameSize(vi_ctype, values1_ctype, values2_ctype, values3_ctype, values4_ctype, size_ctype)
+            errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+            return
 
     def one_input_function(self, a_number):
         '''one_input_function

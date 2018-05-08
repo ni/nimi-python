@@ -305,7 +305,7 @@ def test_create_and_delete_advanced_sequence_step(single_channel_session):
 
 def test_send_software_edge_trigger_error(session):
     try:
-        session.send_software_edge_trigger()
+        session.send_software_edge_trigger(nidcpower.SendSoftwareEdgeTriggerType.START)
         assert False
     except nidcpower.Error as e:
         assert e.code == -1074118587  # Error : Function not available in multichannel session
@@ -333,8 +333,8 @@ def test_get_ext_cal_recommended_interval(session):
 
 
 def test_set_get_vi_int_64_attribute(session):
-    session.channels['0'].active_advanced_sequence_step = 1
-    read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
+    session.channels['0']._active_advanced_sequence_step = 1
+    read_advanced_sequence_step = session.channels['0']._active_advanced_sequence_step
     assert read_advanced_sequence_step == 1
 
 
