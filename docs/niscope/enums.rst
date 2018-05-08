@@ -58,55 +58,6 @@ AcquisitionType
 
 
 
-ExportableSignals
------------------
-
-.. py:class:: ExportableSignals
-
-    .. py:attribute:: ExportableSignals.START_TRIGGER
-
-
-
-    .. py:attribute:: ExportableSignals.ADVANCE_TRIGGER
-
-
-
-    .. py:attribute:: ExportableSignals.REF_TRIGGER
-
-
-
-    .. py:attribute:: ExportableSignals.END_OF_RECORD_EVENT
-
-
-
-    .. py:attribute:: ExportableSignals.END_OF_ACQUISITION_EVENT
-
-
-
-    .. py:attribute:: ExportableSignals.READY_FOR_START_EVENT
-
-
-
-    .. py:attribute:: ExportableSignals.READY_FOR_ADVANCE_EVENT
-
-
-
-    .. py:attribute:: ExportableSignals.READY_FOR_REF_EVENT
-
-
-
-    .. py:attribute:: ExportableSignals.REF_CLOCK
-
-
-
-    .. py:attribute:: ExportableSignals.SAMPLE_CLOCK
-
-
-
-    .. py:attribute:: ExportableSignals.FIVE_V_OUT
-
-
-
 FetchRelativeTo
 ---------------
 
