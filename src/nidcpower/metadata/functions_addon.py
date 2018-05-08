@@ -110,9 +110,7 @@ functions_default_value = {
     'CreateAdvancedSequence':                        { 'parameters': { 4: { 'default_value': True, }, }, },
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },
-    'SendSoftwareEdgeTrigger':                       { 'parameters': { 1: { 'default_value': 'SendSoftwareEdgeTriggerType.START', }, }, },
     'WaitForEvent':                                  { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=10.0)', },}, },
-    'FetchMultiple':                                 { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
     'FancyFetchMultiple':                            { 'parameters': { 3: { 'default_value': 'datetime.timedelta(seconds=1.0)', }, }, },
 }
 

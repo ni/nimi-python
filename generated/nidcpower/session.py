@@ -92,7 +92,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    active_advanced_sequence = _attributes.AttributeViString(1150074)
+    _active_advanced_sequence = _attributes.AttributeViString(1150074)
     '''Type: str
 
     Specifies the advanced sequence to configure or generate.
@@ -108,7 +108,7 @@ class _SessionBase(object):
         session.channels['0,1'].active_advanced_sequence = var
         var = session.channels['0,1'].active_advanced_sequence
     '''
-    active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
+    _active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
     '''Type: int
 
     Specifies the advanced sequence step to configure.
@@ -2401,7 +2401,7 @@ class _SessionBase(object):
         import collections
         Measurement = collections.namedtuple('Measurement', ['voltage', 'current', 'in_compliance'])
 
-        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(count, timeout)
+        voltage_measurements, current_measurements, in_compliance = self._fetch_multiple(timeout, count)
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
@@ -2445,7 +2445,7 @@ class _SessionBase(object):
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
-    def _fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
+    def _fetch_multiple(self, timeout, count):
         '''_fetch_multiple
 
         Returns an array of voltage measurements, an array of current
@@ -2473,11 +2473,9 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidcpower.Session instance, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+            session.channels['0,1']._fetch_multiple(timeout, count)
 
         Args:
-            count (int): Specifies the number of measurements to fetch.
-
             timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
@@ -2486,6 +2484,8 @@ class _SessionBase(object):
                 When setting the timeout interval, ensure you take into account any
                 triggers so that the timeout interval is long enough for your
                 application.
+
+            count (int): Specifies the number of measurements to fetch.
 
 
         Returns:
@@ -4565,7 +4565,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_edge_trigger(self, trigger=enums.SendSoftwareEdgeTriggerType.START):
+    def send_software_edge_trigger(self, trigger):
         '''send_software_edge_trigger
 
         Asserts the specified trigger. This method can override an external
