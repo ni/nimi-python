@@ -233,6 +233,21 @@ def test_create_advanced_arb_sequence():
         assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
+def test_create_advanced_arb_sequence_wrong_size():
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
+        marker_location_array = [0, 16]
+        loop_counts_array = [10, 20, 30]
+        session.output_mode = nifgen.OutputMode.SEQ
+        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+        try:
+            session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+            assert False
+        except ValueError:
+            pass
+
+
 def test_arb_script(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.output_mode = nifgen.OutputMode.SCRIPT

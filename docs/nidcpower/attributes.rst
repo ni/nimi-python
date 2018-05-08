@@ -3,84 +3,6 @@ nidcpower.Session properties
 
 .. py:currentmodule:: nidcpower.Session
 
-.. py:attribute:: active_advanced_sequence
-
-    Specifies the advanced sequence to configure or generate.
-
-
-
-    .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
-
-
-    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
-        active_advanced_sequence.Session object, then the set/get will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        active_advanced_sequence.Session instance, and calling set/get value on the result.:
-
-        .. code:: python
-
-            session['0,1'].active_advanced_sequence = var
-            var = session['0,1'].active_advanced_sequence
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | str        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Source:Advanced:Active Advanced Sequence**
-            - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE**
-
-.. py:attribute:: active_advanced_sequence_step
-
-    Specifies the advanced sequence step to configure.
-
-
-
-    .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
-
-
-    .. tip:: This property can use repeated capabilities (usually channels). If set or get directly on the
-        active_advanced_sequence_step.Session object, then the set/get will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        active_advanced_sequence_step.Session instance, and calling set/get value on the result.:
-
-        .. code:: python
-
-            session['0,1'].active_advanced_sequence_step = var
-            var = session['0,1'].active_advanced_sequence_step
-
-    The following table lists the characteristics of this property.
-
-    +----------------+------------+
-    | Characteristic | Value      |
-    +================+============+
-    | Datatype       | int        |
-    +----------------+------------+
-    | Permissions    | read-write |
-    +----------------+------------+
-    | Channel Based  | True       |
-    +----------------+------------+
-    | Resettable     | No         |
-    +----------------+------------+
-
-    .. tip::
-        This property corresponds to the following LabVIEW Property or C Attribute:
-
-            - LabVIEW Property: **Source:Advanced:Active Advanced Sequence Step**
-            - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE_STEP**
-
 .. py:attribute:: aperture_time
 
     Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the :py:data:`nidcpower.Session.aperture_time_units` property.
@@ -1902,7 +1824,7 @@ nidcpower.Session properties
 
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the :py:data:`nidcpower.Session.output_function` property, you also must set the  voltage level or current level in addition to  enabling the output
-    the :py:meth:`nidcpower.Session.initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
+    the :py:meth:`nidcpower.Session._initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
     Default Value: The default value is True if you use the :py:meth:`nidcpower.Session.__init__` method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
 
@@ -2168,7 +2090,7 @@ nidcpower.Session properties
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: :py:data:`~nidcpower.PowerSource.AUTOMATIC`
-    is set to :py:data:`~nidcpower.PowerSource.AUTOMATIC`. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  :py:meth:`nidcpower.Session.initiate` method.
+    is set to :py:data:`~nidcpower.PowerSource.AUTOMATIC`. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  :py:meth:`nidcpower.Session._initiate` method.
 
 
 
