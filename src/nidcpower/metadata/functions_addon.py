@@ -6,7 +6,7 @@
 functions_codegen_method = {
     'InitializeWithChannels':          { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'InitWithOptions':                 { 'codegen_method': 'no',       },
-    'Initiate':                        { 'codegen_method': 'private', 'public_method_name': 'initiate', },
+    'Initiate':                        { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
     'close':                           { 'codegen_method': 'private',  },
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
     'init':                            { 'codegen_method': 'no',       },
