@@ -63,7 +63,6 @@ All notable changes to this project will be documented in this file.
         * Some functions missed setting repeated capabilities, leaving these as parameters instead of using the repeated capabilites object.
             * `session.configure_digital_edge_script_trigger('0', source, ...)` becomes `session.script_triggers[0].configure_digital_edge_script_trigger(source, ...)`
             * `session.configure_digital_level_script_trigger('0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
-            * `session.send_software_edge_trigger('0', trigger)` becomes `session.script_triggers[0].send_software_edge_trigger(trigger)`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
 * ### NI-SCOPE
