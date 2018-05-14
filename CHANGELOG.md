@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
         * `SelfTestError` now inherits from `<driver>.Error` rather than `Exception` - [#830](https://github.com/ni/nimi-python/issues/830)
         * Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
     * #### Removed
-        * IVI properties as applicable - some where already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
+        * IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
             * `engine_major_version`
             * `engine_minor_version`
             * `engine_revision`
