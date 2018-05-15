@@ -88,6 +88,13 @@ class ${session_context_manager}(object):
 
 % endif
 % if config['use_session_lock']:
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def lock_decorator(f):
+    def aux(*xs, **kws):
+        with _Lock(xs[0]._${config['session_handle_parameter_name']}):
+            return f(*xs, **kws)
+    return aux
+
 class _Lock(object):
     def __init__(self, session):
         self._session = session
