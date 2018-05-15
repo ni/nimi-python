@@ -89,8 +89,6 @@ functions_enums = {
 functions_rep_caps = {
     'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
     'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
-    'ConfigureSoftwareEdgeScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
-    'DisableScriptTrigger':                     { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
     # 'SendSoftwareEdgeTrigger':                  { 'parameters': { 2: { 'is_repeated_capability': True, }, }, }, # 850
 }
 
