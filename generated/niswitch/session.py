@@ -64,11 +64,11 @@ class _Lock(object):
         self._session = session
 
     def __enter__(self):
-        self._caller_has_lock = self._session.lock_session(caller_has_lock=False)
+        self._session.lock_session()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._caller_has_lock = self._session.unlock_session(self._caller_has_lock)
+        self._session.unlock_session()
 
 
 class _RepeatedCapabilities(object):
@@ -895,7 +895,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def lock_session(self, caller_has_lock=None):
+    def lock_session(self):
         '''lock_session
 
         | Obtains a multithread lock on the device session. Before doing so, the
@@ -926,28 +926,11 @@ class _SessionBase(object):
         allows you to call the unlock_session method just once at
         the end of the method.
 
-        Args:
-            caller_has_lock (bool): This parameter is optional. Default is None. If you do not want to use this parameter, pass None.
-
-                Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-
-
-        Returns:
-            (bool): Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock is not None else None
-        error_code = self._library.niSwitch_LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        error_code = self._library.niSwitch_LockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value) if caller_has_lock else True
+        return
 
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
@@ -1217,7 +1200,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def unlock_session(self, caller_has_lock=None):
+    def unlock_session(self):
         '''unlock_session
 
         Releases a lock that you acquired on an device session using
@@ -1243,10 +1226,9 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock is not None else None
-        error_code = self._library.niSwitch_UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        error_code = self._library.niSwitch_UnlockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value) if caller_has_lock else False
+        return
 
     def _error_message(self, error_code):
         '''_error_message

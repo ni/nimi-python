@@ -160,46 +160,20 @@ class TestSession(object):
     # Session locking
     def test_lock_session_none(self):
         with nifake.Session('dev1') as session:
-            caller_has_lock = session.lock_session()
-            assert caller_has_lock is True
+            session.lock_session()
             self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
-
-    def test_lock_session_true(self):
-        with nifake.Session('dev1') as session:
-            caller_has_lock = session.lock_session(True)
-            assert caller_has_lock is True
-            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanPointerMatcher())
-
-    def test_lock_session_false(self):
-        with nifake.Session('dev1') as session:
-            caller_has_lock = session.lock_session(False)
-            assert caller_has_lock is True
-            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanPointerMatcher())
 
     def test_unlock_session_none(self):
         with nifake.Session('dev1') as session:
-            caller_has_lock = session.unlock_session()
-            assert caller_has_lock is False
+            session.unlock_session()
             self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
-
-    def test_unlock_session_true(self):
-        with nifake.Session('dev1') as session:
-            caller_has_lock = session.unlock_session(True)
-            assert caller_has_lock is False
-            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanPointerMatcher())
-
-    def test_unlock_session_false(self):
-        with nifake.Session('dev1') as session:
-            caller_has_lock = session.unlock_session(False)
-            assert caller_has_lock is False
-            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanPointerMatcher())
 
     def test_lock_context_manager(self):
         with nifake.Session('dev1') as session:
             with session.lock():
                 pass
-            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanPointerMatcher())
-            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanPointerMatcher())
+            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
 
     # Methods
     def test_simple_function(self):
