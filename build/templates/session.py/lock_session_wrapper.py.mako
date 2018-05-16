@@ -4,7 +4,7 @@
 
     c_function_prefix = config['c_function_prefix']
 %>\
-    def lock_session(self):
+    def ${f['python_name']}(self):
         '''lock_session
 
         | Obtains a multithread lock on the device session. Before doing so, the
