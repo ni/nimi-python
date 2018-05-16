@@ -4,7 +4,7 @@
 
     c_function_prefix = config['c_function_prefix']
 %>\
-    def lock_session(self, caller_has_lock=None):
+    def lock_session(self):
         '''lock_session
 
         | Obtains a multithread lock on the device session. Before doing so, the
@@ -35,26 +35,9 @@
         allows you to call the unlock_session method just once at
         the end of the method.
 
-        Args:
-            caller_has_lock (bool): This parameter is optional. Default is None. If you do not want to use this parameter, pass None.
-
-                Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-
-
-        Returns:
-            (bool): Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock is not None else None
-        error_code = self._library.${c_function_prefix}LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        error_code = self._library.${c_function_prefix}LockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value) if caller_has_lock else True
+        return
 

@@ -4,7 +4,7 @@
 
     c_function_prefix = config['c_function_prefix']
 %>\
-    def unlock_session(self, caller_has_lock=None):
+    def unlock_session(self):
         '''unlock_session
 
         Releases a lock that you acquired on an device session using
@@ -30,8 +30,7 @@
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean(caller_has_lock) if caller_has_lock is not None else None
-        error_code = self._library.${c_function_prefix}UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        error_code = self._library.${c_function_prefix}UnlockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return bool(caller_has_lock_ctype.value) if caller_has_lock else False
+        return
 
