@@ -61,6 +61,15 @@ class _Acquisition(object):
         self._session.abort()
 
 
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
 class _Lock(object):
     def __init__(self, session):
         self._session = session
@@ -207,6 +216,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -236,6 +246,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
@@ -265,6 +276,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
         '''_get_attribute_vi_int64
 
@@ -294,6 +306,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -323,6 +336,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -353,6 +367,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def _get_error(self):
         '''_get_error
 
@@ -403,6 +418,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
+    @ivi_synchronized
     def read_from_channel(self, maximum_time):
         '''read_from_channel
 
@@ -432,6 +448,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -459,6 +476,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
@@ -486,6 +504,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int64
 
@@ -513,6 +532,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -540,6 +560,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -579,6 +600,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
+    @ivi_synchronized
     def _error_message(self, error_code):
         '''_error_message
 
@@ -702,6 +724,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         '''abort
 
@@ -712,6 +735,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def bool_array_output_function(self, number_of_elements):
         '''bool_array_output_function
 
@@ -733,6 +757,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
+    @ivi_synchronized
     def enum_array_output_function(self, number_of_elements):
         '''enum_array_output_function
 
@@ -754,6 +779,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.Turtle(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
+    @ivi_synchronized
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         '''enum_input_function_with_defaults
 
@@ -781,6 +807,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def fetch_waveform(self, number_of_samples):
         '''fetch_waveform
 
@@ -806,6 +833,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_data_array
 
+    @ivi_synchronized
     def fetch_waveform_into(self, waveform_data):
         '''fetch_waveform
 
@@ -839,6 +867,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def get_a_boolean(self):
         '''get_a_boolean
 
@@ -856,6 +885,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(a_boolean_ctype.value)
 
+    @ivi_synchronized
     def get_a_number(self):
         '''get_a_number
 
@@ -873,6 +903,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value)
 
+    @ivi_synchronized
     def get_a_string_of_fixed_maximum_size(self):
         '''get_a_string_of_fixed_maximum_size
 
@@ -888,6 +919,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_an_ivi_dance_string(self):
         '''get_an_ivi_dance_string
 
@@ -904,6 +936,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_array_for_python_code_custom_type(self):
         '''get_array_for_python_code_custom_type
 
@@ -921,6 +954,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
 
+    @ivi_synchronized
     def get_array_for_python_code_double(self):
         '''get_array_for_python_code_double
 
@@ -938,6 +972,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
 
+    @ivi_synchronized
     def get_array_size_for_python_code(self):
         '''get_array_size_for_python_code
 
@@ -953,6 +988,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(size_out_ctype.value)
 
+    @ivi_synchronized
     def get_array_using_ivi_dance(self):
         '''get_array_using_ivi_dance
 
@@ -970,6 +1006,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(array_out_ctype[i]) for i in range(array_size_ctype.value)]
 
+    @ivi_synchronized
     def _get_cal_date_and_time(self, cal_type):
         '''_get_cal_date_and_time
 
@@ -1002,6 +1039,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_cal_interval(self):
         '''get_cal_interval
 
@@ -1017,6 +1055,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
+    @ivi_synchronized
     def get_custom_type(self):
         '''get_custom_type
 
@@ -1032,6 +1071,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return custom_struct.CustomStruct(cs_ctype)
 
+    @ivi_synchronized
     def get_custom_type_array(self, number_of_elements):
         '''get_custom_type_array
 
@@ -1053,6 +1093,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
+    @ivi_synchronized
     def get_enum_value(self):
         '''get_enum_value
 
@@ -1085,6 +1126,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_quantity_ctype.value), enums.Turtle(a_turtle_ctype.value)
 
+    @ivi_synchronized
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
 
@@ -1143,6 +1185,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
+    @ivi_synchronized
     def _initiate(self):
         '''_initiate
 
@@ -1153,6 +1196,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
         '''multiple_array_types
 
@@ -1189,6 +1233,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
 
+    @ivi_synchronized
     def multiple_arrays_same_size(self, values1, values2, values3, values4):
         '''multiple_arrays_same_size
 
@@ -1220,6 +1265,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def one_input_function(self, a_number):
         '''one_input_function
 
@@ -1235,6 +1281,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
         '''parameters_are_multiple_types
 
@@ -1283,6 +1330,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def simple_function(self):
         '''simple_function
 
@@ -1293,6 +1341,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def read(self, maximum_time):
         '''read
 
@@ -1313,6 +1362,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
+    @ivi_synchronized
     def return_a_number_and_a_string(self):
         '''return_a_number_and_a_string
 
@@ -1333,6 +1383,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def return_multiple_types(self, array_size):
         '''return_multiple_types
 
@@ -1390,6 +1441,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(a_boolean_ctype.value), int(an_int32_ctype.value), int(an_int64_ctype.value), enums.Turtle(an_int_enum_ctype.value), float(a_float_ctype.value), enums.FloatEnum(a_float_enum_ctype.value), [float(an_array_ctype[i]) for i in range(array_size_ctype.value)], a_string_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def set_custom_type(self, cs):
         '''set_custom_type
 
@@ -1405,6 +1457,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def set_custom_type_array(self, cs):
         '''set_custom_type_array
 
@@ -1421,6 +1474,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def two_input_function(self, a_number, a_string):
         '''two_input_function
 
@@ -1439,6 +1493,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def use64_bit_number(self, input):
         '''use64_bit_number
 
@@ -1461,6 +1516,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(output_ctype.value)
 
+    @ivi_synchronized
     def write_waveform(self, waveform):
         '''write_waveform
 
@@ -1478,6 +1534,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def write_waveform_numpy(self, waveform):
         '''write_waveform
 
@@ -1512,6 +1569,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -1522,6 +1580,7 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
+    @ivi_synchronized
     def _self_test(self):
         '''_self_test
 

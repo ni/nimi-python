@@ -59,6 +59,15 @@ class _Scan(object):
         self._session.abort()
 
 
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
 class _Lock(object):
     def __init__(self, session):
         self._session = session
@@ -632,6 +641,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -687,6 +697,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
@@ -742,6 +753,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -797,6 +809,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -860,6 +873,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def _get_error(self):
         '''_get_error
 
@@ -927,6 +941,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -994,6 +1009,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
@@ -1061,6 +1077,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -1128,6 +1145,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -1207,6 +1225,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
+    @ivi_synchronized
     def _error_message(self, error_code):
         '''_error_message
 
@@ -1511,6 +1530,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         '''abort
 
@@ -1523,6 +1543,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def can_connect(self, channel1, channel2):
         '''can_connect
 
@@ -1577,6 +1598,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
 
+    @ivi_synchronized
     def commit(self):
         '''commit
 
@@ -1590,6 +1612,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_scan_list(self, scanlist, scan_mode=enums.ScanMode.BREAK_BEFORE_MAKE):
         '''configure_scan_list
 
@@ -1626,6 +1649,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0)):
         '''configure_scan_trigger
 
@@ -1674,6 +1698,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def connect(self, channel1, channel2):
         '''connect
 
@@ -1715,6 +1740,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def connect_multiple(self, connection_list):
         '''connect_multiple
 
@@ -1755,6 +1781,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disable(self):
         '''disable
 
@@ -1767,6 +1794,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disconnect(self, channel1, channel2):
         '''disconnect
 
@@ -1794,6 +1822,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disconnect_all(self):
         '''disconnect_all
 
@@ -1805,6 +1834,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disconnect_multiple(self, disconnection_list):
         '''disconnect_multiple
 
@@ -1830,6 +1860,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def get_channel_name(self, index):
         '''get_channel_name
 
@@ -1855,6 +1886,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_path(self, channel1, channel2):
         '''get_path
 
@@ -1895,6 +1927,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_relay_count(self, relay_name):
         '''get_relay_count
 
@@ -1921,6 +1954,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
 
+    @ivi_synchronized
     def get_relay_name(self, index):
         '''get_relay_name
 
@@ -1946,6 +1980,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_relay_position(self, relay_name):
         '''get_relay_position
 
@@ -2222,6 +2257,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
+    @ivi_synchronized
     def _initiate_scan(self):
         '''_initiate_scan
 
@@ -2239,6 +2275,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def relay_control(self, relay_name, relay_action):
         '''relay_control
 
@@ -2271,6 +2308,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def reset_with_defaults(self):
         '''reset_with_defaults
 
@@ -2284,6 +2322,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
         '''route_scan_advanced_output
 
@@ -2324,6 +2363,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
         '''route_trigger_input
 
@@ -2365,6 +2405,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def send_software_trigger(self):
         '''send_software_trigger
 
@@ -2380,6 +2421,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def set_continuous_scan(self, continuous_scan):
         '''set_continuous_scan
 
@@ -2398,6 +2440,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def set_path(self, path_list):
         '''set_path
 
@@ -2421,6 +2464,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_debounce
 
@@ -2442,6 +2486,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_scan_complete
 
@@ -2481,6 +2526,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2504,6 +2550,7 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
+    @ivi_synchronized
     def reset(self):
         '''reset
 
@@ -2516,6 +2563,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _self_test(self):
         '''_self_test
 
