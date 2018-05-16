@@ -1384,9 +1384,9 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     def lock(self):  # TODO(texasaggie97) Need to figure out how to document this
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
-                              # act standalone as well and let the client call unlock() explicitly. If they do use
-                              # the context manager, that will handle the unlock for them
+        self._lock_session()    # We do not call _lock_session() in the context manager so that this function can
+                                # act standalone as well and let the client call unlock() explicitly. If they do use
+                                # the context manager, that will handle the unlock for them
         return _Lock(self)
 
     def _get_error_description(self, error_code):
@@ -3200,7 +3200,7 @@ class _SessionBase(object):
         You can safely make nested calls to the lock_session method
         within the same thread. To completely unlock the session, you must
         balance each call to the lock_session method with a call to
-        the unlock_session method. 
+        the unlock_session method.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niScope_LockSession(vi_ctype, None)
