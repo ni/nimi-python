@@ -88,6 +88,15 @@ class ${session_context_manager}(object):
 
 % endif
 % if config['use_session_lock']:
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
 class _Lock(object):
     def __init__(self, session):
         self._session = session
