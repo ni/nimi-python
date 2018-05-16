@@ -26,7 +26,7 @@
         You can safely make nested calls to the lock_session method
         within the same thread. To completely unlock the session, you must
         balance each call to the lock_session method with a call to
-        the unlock_session method. 
+        the unlock_session method.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.${c_function_prefix}LockSession(vi_ctype, None)
