@@ -66,11 +66,11 @@ class _Lock(object):
         self._session = session
 
     def __enter__(self):
-        self._session.lock_session()
+        # _lock_session is called from the lock() function, not here
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock_session()
+        self._session.unlock()
 
 
 class _RepeatedCapabilities(object):
@@ -1384,6 +1384,9 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     def lock(self):  # TODO(texasaggie97) Need to figure out how to document this
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+                              # act standalone as well and let the client call unlock() explicitly. If they do use
+                              # the context manager, that will handle the unlock for them
         return _Lock(self)
 
     def _get_error_description(self, error_code):
@@ -3175,7 +3178,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def lock_session(self):
+    def _lock_session(self):
         '''lock_session
 
         | Obtains a multithread lock on the device session. Before doing so, the
@@ -3605,7 +3608,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def unlock_session(self):
+    def unlock(self):
         '''unlock_session
 
         Releases a lock that you acquired on an device session using
