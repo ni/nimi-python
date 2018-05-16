@@ -30,9 +30,11 @@ functions_codegen_method = {
 
 functions_locking = {
     'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock_session_wrapper', 'documentation_filename': 'lock_session_wrapper', 'method_python_name_suffix': '', }, ],
-                                         'render_in_session_base': True, },
+                                         'render_in_session_base': True,
+                                         'codegen_method': 'private', },
     'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock_session_wrapper', 'documentation_filename': 'unlock_session_wrapper', 'method_python_name_suffix': '', }, ],
-                                         'render_in_session_base': True, },
+                                         'render_in_session_base': True,
+                                         'python_name': 'unlock', },
 }
 
 # Override the 'python' name for some functions.

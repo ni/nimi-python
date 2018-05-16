@@ -160,12 +160,12 @@ class TestSession(object):
     # Session locking
     def test_lock_session_none(self):
         with nifake.Session('dev1') as session:
-            session.lock_session()
+            session.lock()
             self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
 
     def test_unlock_session_none(self):
         with nifake.Session('dev1') as session:
-            session.unlock_session()
+            session.unlock()
             self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
 
     def test_lock_context_manager(self):

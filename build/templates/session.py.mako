@@ -97,7 +97,7 @@ class _Lock(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock_session()
+        self._session.unlock()
 
 
 %endif
