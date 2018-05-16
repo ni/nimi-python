@@ -3,6 +3,9 @@
     '''Dispatches to the appropriate "write waveform" method based on the waveform type.'''
     import build.helper as helper
 %>\
+% if f['use_session_lock']:
+    @ivi_synchronized
+% endif
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 

@@ -15,6 +15,9 @@
     len_size_parameter = helper.find_size_parameter(len_parameters, parameters)
     assert ivi_dance_size_parameter is None or len_size_parameter is None
 %>\
+% if f['use_session_lock']:
+    @ivi_synchronized
+% endif
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 

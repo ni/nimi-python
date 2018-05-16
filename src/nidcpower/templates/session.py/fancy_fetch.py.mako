@@ -19,6 +19,9 @@
     else:
         raise ValueError('Only fetch_multiple and measure_multiple are supported. Got {0}'.format(f['python_name']))
 %>\
+% if f['use_session_lock']:
+    @ivi_synchronized
+% endif
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
