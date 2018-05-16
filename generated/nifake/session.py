@@ -382,7 +382,6 @@ class _SessionBase(object):
 
         -  The application called the lock_session method.
         -  A call to NI-DCPower locked the session.
-        -  A call to the IVI engine locked the session.
         -  After a call to the lock_session method returns
            successfully, no other threads can access the device session until
            you call the unlock_session method.
@@ -394,14 +393,7 @@ class _SessionBase(object):
         You can safely make nested calls to the lock_session method
         within the same thread. To completely unlock the session, you must
         balance each call to the lock_session method with a call to
-        the unlock_session method. If, however, you use
-        **Caller_Has_Lock** in all calls to the lock_session and
-        unlock_session method within a method, the IVI Library
-        locks the session only once within the method regardless of the number
-        of calls you make to the lock_session method. This behavior
-        allows you to call the unlock_session method just once at
-        the end of the method.
-
+        the unlock_session method. 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_LockSession(vi_ctype, None)
@@ -578,24 +570,6 @@ class _SessionBase(object):
         Releases a lock that you acquired on an device session using
         lock_session. Refer to lock_session for additional
         information on session locks.
-
-        Args:
-            caller_has_lock (bool): This parameter is optional. Default is None. If you do not want to use this parameter, pass None.
-
-                Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-
-
-        Returns:
-            (bool): Use this parameter in complex methods to keep track of whether you
-                obtain a lock and therefore need to unlock the session. Pass False to the initial
-                lock_session call and store the return value into a variable. Pass in the variable as well
-                as putting the return value into the same variable for each call to lock_session or
-                unlock_session.
-
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_UnlockSession(vi_ctype, None)
