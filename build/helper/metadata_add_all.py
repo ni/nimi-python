@@ -334,7 +334,7 @@ def add_all_function_metadata(functions, config):
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
-        _add_use_session_lock(functions[f])
+        _add_use_session_lock(functions[f], config)
         for p in functions[f]['parameters']:
             _add_enum(p)
             _fix_type(p)
@@ -578,6 +578,7 @@ config_for_testing = {
     },
     'custom_types': [],
     'init_function': None,
+    'use_session_lock': False,
 }
 
 
@@ -649,6 +650,7 @@ def test_add_all_metadata_simple():
         'MakeAFoo': {
             'name': 'MakeAFoo',
             'codegen_method': 'public',
+            'use_session_lock': False,
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
             },
@@ -723,6 +725,7 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
+            'use_session_lock': False,
             'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
             'parameters': [{
                 'direction': 'in',
