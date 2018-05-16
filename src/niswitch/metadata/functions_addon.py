@@ -33,8 +33,6 @@ functions_locking = {
                                          'render_in_session_base': True, },
     'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock_session_wrapper', 'documentation_filename': 'unlock_session_wrapper', 'method_python_name_suffix': '', }, ],
                                          'render_in_session_base': True, },
-    'InitWithTopology':                { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
-    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
 }
 
 # Override the 'python' name for some functions.
