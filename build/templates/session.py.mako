@@ -185,9 +185,9 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % if config['use_session_lock']:
     def lock(self):  # TODO(texasaggie97) Need to figure out how to document this
-        self._lock_session()    # We do not call _lock_session() in the context manager so that this function can
-                                # act standalone as well and let the client call unlock() explicitly. If they do use
-                                # the context manager, that will handle the unlock for them
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
         return _Lock(self)
 
 % endif
