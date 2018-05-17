@@ -20,7 +20,7 @@ def get_diagnostic_information():
     returns: dict
     '''
     import os
-    import pip
+    import pkg_resources
     import platform
     import struct
     import sys
@@ -54,8 +54,8 @@ def get_diagnostic_information():
         os_name = 'Unknown'
         driver_version = 'Unknown'
 
-    installed_packages = pip.get_installed_distributions()
-    installed_packages_list = sorted(["%s==%s" % (i.key, i.version) for i in installed_packages])
+    installed_packages = pkg_resources.working_set
+    installed_packages_list = [{'name': i.key, 'version': i.version, } for i in installed_packages]
 
     info['OS Name'] = os_name
     info['OS Version'] = platform.version()
@@ -82,7 +82,7 @@ def print_diagnostic_information():
             print(row_format.format(key, info[key]))
     print(python_package_list + ':')
     for p in info[python_package_list]:
-        print((' ' * 12) + p)
+        print((' ' * 12) + p['name'] + '==' + p['version'])
 
     return info
 
