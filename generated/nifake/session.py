@@ -177,12 +177,6 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-    def lock(self):  # TODO(texasaggie97) Need to figure out how to document this
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
-        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
-        # that will handle the unlock for them
-        return _Lock(self)
-
     def _get_error_description(self, error_code):
         '''_get_error_description
 
@@ -374,29 +368,45 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
-    def _lock_session(self):
-        '''lock_session
+    def lock(self):
+        '''lock
 
-        | Obtains a multithread lock on the device session. Before doing so, the
-          software waits until all other execution threads release their locks
-          on the device session.
-        | Other threads may have obtained a lock on this session for the
-          following reasons:
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
 
-        -  The application called the lock_session method.
-        -  A call to NI-DCPower locked the session.
-        -  After a call to the lock_session method returns
-           successfully, no other threads can access the device session until
-           you call the unlock_session method.
-        -  Use the lock_session method and the
-           unlock_session method around a sequence of calls to
-           instrument driver methods if you require that the device retain its
-           settings through the end of the sequence.
+        Other threads may have obtained a lock on this session for the
+        following reasons:
 
-        You can safely make nested calls to the lock_session method
+            -  The application called the lock method.
+            -  A call to NI-FAKE locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
+
+        You can safely make nested calls to the lock method
         within the same thread. To completely unlock the session, you must
-        balance each call to the lock_session method with a call to
-        the unlock_session method.
+        balance each call to the lock method with a call to
+        the unlock method.
+
+        Returns:
+            lock (context manager): When used in a with statement, nifake.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
+        '''
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
+
+    def _lock_session(self):
+        '''_lock_session
+
+        Actuall call to driver
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_LockSession(vi_ctype, None)
@@ -568,10 +578,10 @@ class _SessionBase(object):
         return
 
     def unlock(self):
-        '''unlock_session
+        '''unlock
 
         Releases a lock that you acquired on an device session using
-        lock_session. Refer to lock_session for additional
+        lock. Refer to lock for additional
         information on session locks.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
