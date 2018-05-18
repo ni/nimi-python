@@ -251,7 +251,7 @@ def test_create_advanced_arb_sequence_wrong_size():
 def test_arb_script(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.output_mode = nifgen.OutputMode.SCRIPT
-    session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+    session.script_triggers[0].configure_digital_edge_script_trigger('PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
     session.write_waveform('wfmSine', waveform_data)
     session.arb_sample_rate = 10000000
     script = '''script myScript0
@@ -398,7 +398,7 @@ def test_fir_filter_coefficients():
 
 def test_configure_triggers(session):
     session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
-    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HIGH)
+    session.script_triggers[0].configure_digital_level_script_trigger('PXI_Trig0', nifgen.TriggerWhen.HIGH)
 
 
 def test_send_software_edge_trigger(session):
