@@ -154,9 +154,9 @@ class Session(object):
         self._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
-        self.device = []
+        self.devices = []
         for i in range(self._item_count):
-            self.device.append(_Device(self, i))
+            self.devices.append(_Device(self, i))
 
         self._is_frozen = True
 
