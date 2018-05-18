@@ -5,7 +5,7 @@
     c_function_prefix = config['c_function_prefix']
 %>\
     def ${f['python_name']}(self):
-        '''unlock
+        '''${f['python_name']}
 
         Releases a lock that you acquired on an device session using
         lock. Refer to lock for additional
