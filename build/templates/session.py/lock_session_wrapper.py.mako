@@ -14,7 +14,7 @@
           following reasons:
 
         -  The application called the lock_session method.
-        -  A call to NI-DCPower locked the session.
+        -  A call to ${config['driver_name']} locked the session.
         -  After a call to the lock_session method returns
            successfully, no other threads can access the device session until
            you call the unlock_session method.
