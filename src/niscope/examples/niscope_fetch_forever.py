@@ -43,7 +43,7 @@ def example(resource_name, channels, options, total_acquisition_time_in_seconds,
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Acquires one record from the given channels.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Fetch more samples than will fit in memory.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Digitizer')
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
     parser.add_argument('-t', '--time', default=100, type=int, help='Time to sample (s)')
