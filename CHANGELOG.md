@@ -104,8 +104,8 @@ All notable changes to this project will be documented in this file.
 * ### NI-ModInst
     * #### Added
     * #### Changed
-        * Indexing on the modinst session is no longer allowed
-            * `session[0].device_name` becomes `session.device[0].device_name`
+        * Indexing on `nimodinst.Session` is no longer allowed
+            * `session[0].device_name` becomes `session.devices[0].device_name`
             * This is to be consistent with other drivers
     * #### Removed
 
