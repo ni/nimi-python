@@ -15,7 +15,7 @@ When filing an issue, please fill in the requested fields as thoroughly as you c
 * Steps to reproduce issue
 
     ``` python
-    Script to reproduce if applicable
+    <Script to reproduce if applicable>
     ```
 
     * Step 1
