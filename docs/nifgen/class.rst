@@ -6053,7 +6053,7 @@ commit
 
             -  Routes are committed, so signals are exported or imported.
             -  Any Reference Clock and external clock circuits are phase-locked.
-            -  A subsequent :py:meth:`nifgen.Session._initiate_generation` method can run faster
+            -  A subsequent :py:meth:`nifgen.Session.initiate` method can run faster
                because the device is already configured.
 
             
@@ -8262,7 +8262,7 @@ wait_until_done
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: wait_until_done(max_time=10000)
+    .. py:method:: wait_until_done(max_time=datetime.timedelta(seconds=10.0))
 
             Waits until the device is done generating or until the maximum time has
             expired.

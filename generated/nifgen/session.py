@@ -3509,7 +3509,7 @@ class Session(_SessionBase):
 
         -  Routes are committed, so signals are exported or imported.
         -  Any Reference Clock and external clock circuits are phase-locked.
-        -  A subsequent _initiate_generation method can run faster
+        -  A subsequent initiate method can run faster
            because the device is already configured.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4211,7 +4211,7 @@ class Session(_SessionBase):
 
         Initiates signal generation. If you want to abort signal generation,
         call the nifgen_AbortGeneration method. After the signal generation
-        is aborted, you can call the _initiate_generation method to
+        is aborted, you can call the initiate method to
         cause the signal generator to produce a signal again.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4466,7 +4466,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_until_done(self, max_time=10000):
+    def wait_until_done(self, max_time=datetime.timedelta(seconds=10.0)):
         '''wait_until_done
 
         Waits until the device is done generating or until the maximum time has

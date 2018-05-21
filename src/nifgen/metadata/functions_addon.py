@@ -9,7 +9,7 @@ functions_codegen_method = {
     'InitializeWithChannels':               { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'close':                                { 'codegen_method': 'private',  },
     'CheckAttribute.*':                     { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
-    'InitiateGeneration':                   { 'codegen_method': 'private',  },
+    'InitiateGeneration':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
     'Configure.*':                          { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'ConfigureArbSequence':                 { 'codegen_method': 'public',   },
     'ConfigureArbWaveform':                 { 'codegen_method': 'public',   },
@@ -20,7 +20,7 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
-    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828
+    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828 - additional metadata removed #870
     'CreateWaveformF64':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'CreateWaveformI16':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'WriteBinary16Waveform':                { 'codegen_method': 'private', 'method_name_for_documentation': 'write_waveform', },  # Called from public method write_waveform()
@@ -77,7 +77,6 @@ functions_enums = {
     'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
     'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
-    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },
     'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
@@ -139,8 +138,7 @@ functions_default_value = {
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING', }, }, },
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
-    'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
-    'ExportSignal':                                 { 'parameters': { 2: { 'default_value': '""', }, }, },
+    'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 'datetime.timedelta(seconds=10.0)', }, }, },
 }
 
 # Converted parameters
