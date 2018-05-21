@@ -37,6 +37,7 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'ExportSignal':                    { 'codegen_method': 'no',       },  # remove export signal #828
     'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
     'FetchMultiple':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
@@ -48,10 +49,10 @@ functions_codegen_method = {
 }
 
 functions_locking = {
-    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock_session_wrapper', 'documentation_filename': 'lock_session_wrapper', 'method_python_name_suffix': '', }, ],
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
                                          'render_in_session_base': True,
                                          'python_name': 'lock', },
-    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock_session_wrapper', 'documentation_filename': 'unlock_session_wrapper', 'method_python_name_suffix': '', }, ],
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
                                          'render_in_session_base': True,
                                          'python_name': 'unlock', },
 }

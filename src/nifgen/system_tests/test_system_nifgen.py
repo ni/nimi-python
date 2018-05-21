@@ -251,7 +251,7 @@ def test_create_advanced_arb_sequence_wrong_size():
 def test_arb_script(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.output_mode = nifgen.OutputMode.SCRIPT
-    session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+    session.script_triggers[0].configure_digital_edge_script_trigger('PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
     session.write_waveform('wfmSine', waveform_data)
     session.arb_sample_rate = 10000000
     script = '''script myScript0
@@ -348,12 +348,6 @@ def test_set_waveform_next_write_position(session):
     session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
 
 
-def test_export_signal(session):
-    expected_trigger_terminal = "PXI_Trig0"
-    session.export_signal(nifgen.Signal.START_TRIGGER, expected_trigger_terminal)
-    assert expected_trigger_terminal == session.exported_start_trigger_output_terminal
-
-
 def test_write_waveform_from_filei64(session):
     session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
 
@@ -404,7 +398,7 @@ def test_fir_filter_coefficients():
 
 def test_configure_triggers(session):
     session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
-    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HIGH)
+    session.script_triggers[0].configure_digital_level_script_trigger('PXI_Trig0', nifgen.TriggerWhen.HIGH)
 
 
 def test_send_software_edge_trigger(session):

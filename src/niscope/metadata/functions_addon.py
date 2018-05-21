@@ -71,6 +71,7 @@ functions_codegen_method = {
     'ConfigureRefLevels':               { 'codegen_method': 'private',  },  # Per #809, making measurement library methods private
     'self_test':                        { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
+    'ExportSignal':                     { 'codegen_method': 'no',       },  # remove export signal #828
 }
 
 functions_locking = {

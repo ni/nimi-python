@@ -146,7 +146,10 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the position for a marker to be asserted in the arbitrary waveform. This property defaults to -1 when no marker position is specified. Use this property when output_mode is set to OutputMode.ARB.
-    Use export_signal to export the marker signal.
+    Use ExportSignal to export the marker signal.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     arb_offset = _attributes.AttributeViReal64(1250203)
     '''Type: float
@@ -405,7 +408,10 @@ class _SessionBase(object):
     exported_sample_clock_divisor = _attributes.AttributeViInt32(1150219)
     '''Type: int
 
-    Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the export_signal method or the  exported_sample_clock_output_terminal property.
+    Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the ExportSignal method or the  exported_sample_clock_output_terminal property.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     exported_sample_clock_output_terminal = _attributes.AttributeViString(1150320)
     '''Type: str
@@ -415,7 +421,10 @@ class _SessionBase(object):
     exported_sample_clock_timebase_divisor = _attributes.AttributeViInt32(1150230)
     '''Type: int
 
-    Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the export_signal method or the  exported_sample_clock_timebase_output_terminal property.
+    Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the ExportSignal method or the  exported_sample_clock_timebase_output_terminal property.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     exported_sample_clock_timebase_output_terminal = _attributes.AttributeViString(1150329)
     '''Type: str
@@ -1496,6 +1505,168 @@ class _SessionBase(object):
         number_of_coefficients_ctype = _visatype.ViInt32(0 if coefficients_array is None else len(coefficients_array))  # case S160
         coefficients_array_ctype = get_ctypes_pointer_for_buffer(value=coefficients_array, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_digital_edge_script_trigger(self, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
+        '''configure_digital_edge_script_trigger
+
+        Configures the specified Script Trigger for digital edge triggering.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].configure_digital_edge_script_trigger(source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+
+        Args:
+            source (str): Specifies which trigger source the signal generator uses.
+
+                **Defined Values**
+
+                **Default Value**: "PFI0"
+
+                +-------------+-----------------------------------+
+                | "PFI0"      | PFI 0                             |
+                +-------------+-----------------------------------+
+                | "PFI1"      | PFI 1                             |
+                +-------------+-----------------------------------+
+                | "PFI2"      | PFI 2                             |
+                +-------------+-----------------------------------+
+                | "PFI3"      | PFI 3                             |
+                +-------------+-----------------------------------+
+                | "PFI4"      | PFI 4                             |
+                +-------------+-----------------------------------+
+                | "PFI5"      | PFI 5                             |
+                +-------------+-----------------------------------+
+                | "PFI6"      | PFI 6                             |
+                +-------------+-----------------------------------+
+                | "PFI7"      | PFI 7                             |
+                +-------------+-----------------------------------+
+                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
+                +-------------+-----------------------------------+
+                | "PXI_Star"  | PXI star trigger line             |
+                +-------------+-----------------------------------+
+
+            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
+
+                ****Defined Values****
+
+                ****Default Value**:** ScriptTriggerDigitalEdgeEdge.RISING
+
+                +--------------------------------------+------------------------------------------------------------------+
+                | ScriptTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
+                +--------------------------------------+------------------------------------------------------------------+
+                | ScriptTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
+                +--------------------------------------+------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+        '''
+        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_id_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
+        error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_digital_level_script_trigger(self, source, trigger_when):
+        '''configure_digital_level_script_trigger
+
+        Configures the specified Script Trigger for digital level triggering.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].configure_digital_level_script_trigger(source, trigger_when)
+
+        Args:
+            source (str): Specifies which trigger source the signal generator uses.
+
+                **Defined Values**
+
+                **Default Value**: "PFI0"
+
+                +-------------+-----------------------------------+
+                | "PFI0"      | PFI 0                             |
+                +-------------+-----------------------------------+
+                | "PFI1"      | PFI 1                             |
+                +-------------+-----------------------------------+
+                | "PFI2"      | PFI 2                             |
+                +-------------+-----------------------------------+
+                | "PFI3"      | PFI 3                             |
+                +-------------+-----------------------------------+
+                | "PFI4"      | PFI 4                             |
+                +-------------+-----------------------------------+
+                | "PFI5"      | PFI 5                             |
+                +-------------+-----------------------------------+
+                | "PFI6"      | PFI 6                             |
+                +-------------+-----------------------------------+
+                | "PFI7"      | PFI 7                             |
+                +-------------+-----------------------------------+
+                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
+                +-------------+-----------------------------------+
+                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
+                +-------------+-----------------------------------+
+                | "PXI_Star"  | PXI star trigger line             |
+                +-------------+-----------------------------------+
+
+            trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
+                level.
+
+                **Defined Values**
+
+                **Default Value**: "HighLevel"
+
+                +-------------+-------------------------------------------------+
+                | "HighLevel" | Script Trigger asserts on a high digital level. |
+                +-------------+-------------------------------------------------+
+                | "LowLevel"  | Script Trigger asserts on a low digital level.  |
+                +-------------+-------------------------------------------------+
+
+        '''
+        if type(trigger_when) is not enums.TriggerWhen:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_id_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
+        trigger_when_ctype = _visatype.ViInt32(trigger_when.value)  # case S130
+        error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3512,96 +3683,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
-        '''configure_digital_edge_script_trigger
-
-        Configures the specified Script Trigger for digital edge triggering.
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-
-            source (str): Specifies which trigger source the signal generator uses.
-
-                **Defined Values**
-
-                **Default Value**: "PFI0"
-
-                +-------------+-----------------------------------+
-                | "PFI0"      | PFI 0                             |
-                +-------------+-----------------------------------+
-                | "PFI1"      | PFI 1                             |
-                +-------------+-----------------------------------+
-                | "PFI2"      | PFI 2                             |
-                +-------------+-----------------------------------+
-                | "PFI3"      | PFI 3                             |
-                +-------------+-----------------------------------+
-                | "PFI4"      | PFI 4                             |
-                +-------------+-----------------------------------+
-                | "PFI5"      | PFI 5                             |
-                +-------------+-----------------------------------+
-                | "PFI6"      | PFI 6                             |
-                +-------------+-----------------------------------+
-                | "PFI7"      | PFI 7                             |
-                +-------------+-----------------------------------+
-                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
-                +-------------+-----------------------------------+
-                | "PXI_Star"  | PXI star trigger line             |
-                +-------------+-----------------------------------+
-
-            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
-
-                ****Defined Values****
-
-                ****Default Value**:** ScriptTriggerDigitalEdgeEdge.RISING
-
-                +--------------------------------------+------------------------------------------------------------------+
-                | ScriptTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
-                +--------------------------------------+------------------------------------------------------------------+
-                | ScriptTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
-                +--------------------------------------+------------------------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_start_trigger
 
@@ -3672,94 +3753,6 @@ class Session(_SessionBase):
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niFgen_ConfigureDigitalEdgeStartTrigger(vi_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_level_script_trigger(self, trigger_id, source, trigger_when):
-        '''configure_digital_level_script_trigger
-
-        Configures the specified Script Trigger for digital level triggering.
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-
-            source (str): Specifies which trigger source the signal generator uses.
-
-                **Defined Values**
-
-                **Default Value**: "PFI0"
-
-                +-------------+-----------------------------------+
-                | "PFI0"      | PFI 0                             |
-                +-------------+-----------------------------------+
-                | "PFI1"      | PFI 1                             |
-                +-------------+-----------------------------------+
-                | "PFI2"      | PFI 2                             |
-                +-------------+-----------------------------------+
-                | "PFI3"      | PFI 3                             |
-                +-------------+-----------------------------------+
-                | "PFI4"      | PFI 4                             |
-                +-------------+-----------------------------------+
-                | "PFI5"      | PFI 5                             |
-                +-------------+-----------------------------------+
-                | "PFI6"      | PFI 6                             |
-                +-------------+-----------------------------------+
-                | "PFI7"      | PFI 7                             |
-                +-------------+-----------------------------------+
-                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
-                +-------------+-----------------------------------+
-                | "PXI_Star"  | PXI star trigger line             |
-                +-------------+-----------------------------------+
-
-            trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
-                level.
-
-                **Defined Values**
-
-                **Default Value**: "HighLevel"
-
-                +-------------+-------------------------------------------------+
-                | "HighLevel" | Script Trigger asserts on a high digital level. |
-                +-------------+-------------------------------------------------+
-                | "LowLevel"  | Script Trigger asserts on a low digital level.  |
-                +-------------+-------------------------------------------------+
-
-        '''
-        if type(trigger_when) is not enums.TriggerWhen:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        trigger_when_ctype = _visatype.ViInt32(trigger_when.value)  # case S130
-        error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -4042,143 +4035,6 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_Disable(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def export_signal(self, signal, output_terminal, signal_identifier=""):
-        '''export_signal
-
-        Routes signals (clocks, triggers, and events) to the output terminal you
-        specify.
-
-        Any routes created within a session persist after the session closes to
-        prevent signal glitching. To unconfigure signal routes created in
-        previous sessions, set **resetDevice** in the init method to
-        True or use the reset_device method.
-
-        If you export a signal with this method and commit the session, the
-        signal is routed to the output terminal you specify.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
-
-        Args:
-            signal (enums.Signal): Specifies the source of the signal to route.
-                ****Defined Values****
-
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.ONBOARD_REFERENCE_CLOCK | Onboard 10 MHz synchronization clock (PCI only)                                                                                                               |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.SYNC_OUT                | SYNC OUT signal The SYNC OUT signal is normally generated on the SYNC OUT front panel connector.                                                              |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.START_TRIGGER           | Start Trigger                                                                                                                                                 |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.MARKER_EVENT            | Marker Event                                                                                                                                                  |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.SAMPLE_CLOCK_TIMEBASE   | The clock from which the Sample Clock is derived                                                                                                              |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.SYNCHRONIZATION         | Synchronization strobe (NI 5404/5411/5431 only) A synchronization strobe is used to guarantee absolute synchronization between two or more signal generators. |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.SAMPLE_CLOCK            | Sample Clock                                                                                                                                                  |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.REFERENCE_CLOCK         | PLL Reference Clock                                                                                                                                           |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.SCRIPT_TRIGGER          | Script Trigger                                                                                                                                                |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.READY_FOR_START_EVENT   | Ready For Start Event                                                                                                                                         |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.STARTED_EVENT           | Started Event                                                                                                                                                 |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.DONE_EVENT              | Done Event                                                                                                                                                    |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Signal.DATA_MARKER_EVENT       | Data Marker Event                                                                                                                                             |
-                +--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-            output_terminal (str): Specifies the output terminal to export the signal.
-                ****Defined Values****
-
-                +-------------------+------------------------------+
-                | "" (empty string) | Do not export signal         |
-                +-------------------+------------------------------+
-                | "PFI0"            | PFI line 0                   |
-                +-------------------+------------------------------+
-                | "PFI1"            | PFI line 1                   |
-                +-------------------+------------------------------+
-                | "PFI4"            | PFI line 4                   |
-                +-------------------+------------------------------+
-                | "PFI5"            | PFI line 5                   |
-                +-------------------+------------------------------+
-                | "PXI_Trig0"       | PXI or RTSI line 0           |
-                +-------------------+------------------------------+
-                | "PXI_Trig1"       | PXI or RTSI line 1           |
-                +-------------------+------------------------------+
-                | "PXI_Trig2"       | PXI or RTSI line 2           |
-                +-------------------+------------------------------+
-                | "PXI_Trig3"       | PXI or RTSI line 3           |
-                +-------------------+------------------------------+
-                | "PXI_Trig4"       | PXI or RTSI line 4           |
-                +-------------------+------------------------------+
-                | "PXI_Trig5"       | PXI or RTSI line 5           |
-                +-------------------+------------------------------+
-                | "PXI_Trig6"       | PXI or RTSI line 6           |
-                +-------------------+------------------------------+
-                | "PXI_Trig7"       | PXI or RTSI line 7           |
-                +-------------------+------------------------------+
-                | "DDC_ClkOut"      | Clock out from DDC connector |
-                +-------------------+------------------------------+
-                | "PXI_Star"        | PXI star trigger line        |
-                +-------------------+------------------------------+
-
-                Note:
-                The following **Defined Values** are examples of possible output
-                terminals. For a complete list of the output terminals available on your
-                device, refer to the Routes topic for your device or the **Device
-                Routes** tab in MAX.
-
-            signal_identifier (str): Specifies which instance of the selected signal to export.
-                ****Defined Values****
-
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "" (empty string)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Default (for non instance-based signals) |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "ScriptTrigger0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 0                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "ScriptTrigger1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 1                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "ScriptTrigger2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 2                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "ScriptTrigger3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Script Trigger 3                         |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "Marker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 0                                 |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "Marker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 1                                 |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "Marker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 2                                 |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "Marker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Marker 3                                 |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "DataMarker0"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 0\*                          |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "DataMarker1"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 1\*                          |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "DataMarker2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 2\*                          |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | "DataMarker3"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Data Marker 3\*                          |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-                | \* These Data Marker values apply only to single-channel devices or to multichannel devices that are configured for single-channel operation. When using a device that is configured for multichannel operation, specify the channel number along with the signal identifier. For example, to export Data Marker 0 on channel 1 of a device configured for multichannel operation, use the value "1/ DataMarker0." If you do not specify a channel when using a device configured for multichannel generation, DataMarker0 generates on all channels. |                                          |
-                +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------+
-
-        '''
-        if type(signal) is not enums.Signal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Signal))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
-        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
-        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
-        error_code = self._library.niFgen_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
