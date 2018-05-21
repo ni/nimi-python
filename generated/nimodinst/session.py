@@ -154,6 +154,10 @@ class Session(object):
         self._handle, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
+        self.devices = []
+        for i in range(self._item_count):
+            self.devices.append(_Device(self, i))
+
         self._is_frozen = True
 
     def __repr__(self):
@@ -169,9 +173,6 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise AttributeError("__setattr__ not supported.")
         object.__setattr__(self, key, value)
-
-    def __getitem__(self, index):
-        return _Device(self, index)
 
     def __enter__(self):
         return self

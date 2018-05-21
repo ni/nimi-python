@@ -104,6 +104,13 @@ All notable changes to this project will be documented in this file.
         * Methods removed
             * `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
             * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+        * Indexing on `nimodinst.Session` is no longer allowed
+            * `session[0].device_name` becomes `session.devices[0].device_name`
+            * This is to be consistent with other drivers
+    * #### Removed
 
 ## 0.8.0 - 2018-04-27
 * ### ALL

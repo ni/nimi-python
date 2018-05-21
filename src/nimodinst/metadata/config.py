@@ -20,5 +20,6 @@ config = {
     'last_tested_version': '17.0.0',
     'repeated_capabilities': [],
     'use_session_lock': False,
+    'init_function': 'OpenInstalledDevicesSession',
 }
 
