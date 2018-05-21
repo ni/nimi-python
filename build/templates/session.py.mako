@@ -192,14 +192,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-% if config['use_session_lock']:
-    def lock(self):  # TODO(texasaggie97) Need to figure out how to document this
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
-        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
-        # that will handle the unlock for them
-        return _Lock(self)
-
-% endif
     def _get_error_description(self, error_code):
         '''_get_error_description
 

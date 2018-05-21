@@ -5,10 +5,10 @@
     c_function_prefix = config['c_function_prefix']
 %>\
     def ${f['python_name']}(self):
-        '''unlock_session
+        '''${f['python_name']}
 
         Releases a lock that you acquired on an device session using
-        lock_session. Refer to lock_session for additional
+        lock. Refer to lock for additional
         information on session locks.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
