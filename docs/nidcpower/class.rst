@@ -6705,9 +6705,9 @@ lock
                 with session.lock():
                     # Calls to session within a single lock context
 
-        The first with block ensures the session is closed regardless of any exceptions raised
+        The first `with` block ensures the session is closed regardless of any exceptions raised
 
-        The second with block ensures that unlock is called regardless of any exceptions raised
+        The second `with` block ensures that unlock is called regardless of any exceptions raised
 
     :rtype: context manager
     :return:
