@@ -6,8 +6,10 @@ Enums used in NI-FGEN
 .. py:currentmodule:: nifgen
 
 
+AnalogPath
+----------
 
-.. py:data:: AnalogPath
+.. py:class:: AnalogPath
 
     .. py:attribute:: AnalogPath.MAIN
 
@@ -49,8 +51,10 @@ Enums used in NI-FGEN
 
 
 
+BusType
+-------
 
-.. py:data:: BusType
+.. py:class:: BusType
 
     .. py:attribute:: BusType.INVALID
 
@@ -122,8 +126,10 @@ Enums used in NI-FGEN
 
 
 
+ByteOrder
+---------
 
-.. py:data:: ByteOrder
+.. py:class:: ByteOrder
 
     .. py:attribute:: ByteOrder.LITTLE
 
@@ -133,8 +139,10 @@ Enums used in NI-FGEN
 
 
 
+ClockMode
+---------
 
-.. py:data:: ClockMode
+.. py:class:: ClockMode
 
     .. py:attribute:: ClockMode.HIGH_RESOLUTION
 
@@ -166,8 +174,10 @@ Enums used in NI-FGEN
 
 
 
+DataMarkerEventLevelPolarity
+----------------------------
 
-.. py:data:: DataMarkerEventLevelPolarity
+.. py:class:: DataMarkerEventLevelPolarity
 
     .. py:attribute:: DataMarkerEventLevelPolarity.HIGH
 
@@ -189,8 +199,10 @@ Enums used in NI-FGEN
 
 
 
+DataProcessingMode
+------------------
 
-.. py:data:: DataProcessingMode
+.. py:class:: DataProcessingMode
 
     .. py:attribute:: DataProcessingMode.REAL
 
@@ -212,8 +224,10 @@ Enums used in NI-FGEN
 
 
 
+DoneEventActiveLevel
+--------------------
 
-.. py:data:: DoneEventActiveLevel
+.. py:class:: DoneEventActiveLevel
 
     .. py:attribute:: DoneEventActiveLevel.HIGH
 
@@ -235,8 +249,10 @@ Enums used in NI-FGEN
 
 
 
+DoneEventDelayUnits
+-------------------
 
-.. py:data:: DoneEventDelayUnits
+.. py:class:: DoneEventDelayUnits
 
     .. py:attribute:: DoneEventDelayUnits.SAMPLE_CLOCK_PERIODS
 
@@ -258,8 +274,10 @@ Enums used in NI-FGEN
 
 
 
+DoneEventOutputBehavior
+-----------------------
 
-.. py:data:: DoneEventOutputBehavior
+.. py:class:: DoneEventOutputBehavior
 
     .. py:attribute:: DoneEventOutputBehavior.PULSE
 
@@ -281,8 +299,10 @@ Enums used in NI-FGEN
 
 
 
+DoneEventPulsePolarity
+----------------------
 
-.. py:data:: DoneEventPulsePolarity
+.. py:class:: DoneEventPulsePolarity
 
     .. py:attribute:: DoneEventPulsePolarity.HIGH
 
@@ -304,8 +324,10 @@ Enums used in NI-FGEN
 
 
 
+DoneEventPulseWidthUnits
+------------------------
 
-.. py:data:: DoneEventPulseWidthUnits
+.. py:class:: DoneEventPulseWidthUnits
 
     .. py:attribute:: DoneEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
 
@@ -327,8 +349,10 @@ Enums used in NI-FGEN
 
 
 
+FilterType
+----------
 
-.. py:data:: FilterType
+.. py:class:: FilterType
 
     .. py:attribute:: FilterType.FLAT
 
@@ -380,8 +404,10 @@ Enums used in NI-FGEN
 
 
 
+HardwareState
+-------------
 
-.. py:data:: HardwareState
+.. py:class:: HardwareState
 
     .. py:attribute:: HardwareState.IDLE
 
@@ -403,8 +429,10 @@ Enums used in NI-FGEN
 
 
 
+IdleBehavior
+------------
 
-.. py:data:: IdleBehavior
+.. py:class:: IdleBehavior
 
     .. py:attribute:: IdleBehavior.HOLD_LAST
 
@@ -426,8 +454,10 @@ Enums used in NI-FGEN
 
 
 
+MarkerEventDelayUnits
+---------------------
 
-.. py:data:: MarkerEventDelayUnits
+.. py:class:: MarkerEventDelayUnits
 
     .. py:attribute:: MarkerEventDelayUnits.SAMPLE_CLOCK_PERIODS
 
@@ -449,8 +479,10 @@ Enums used in NI-FGEN
 
 
 
+MarkerEventOutputBehavior
+-------------------------
 
-.. py:data:: MarkerEventOutputBehavior
+.. py:class:: MarkerEventOutputBehavior
 
     .. py:attribute:: MarkerEventOutputBehavior.PULSE
 
@@ -483,8 +515,10 @@ Enums used in NI-FGEN
 
 
 
+MarkerEventPulsePolarity
+------------------------
 
-.. py:data:: MarkerEventPulsePolarity
+.. py:class:: MarkerEventPulsePolarity
 
     .. py:attribute:: MarkerEventPulsePolarity.HIGH
 
@@ -506,8 +540,10 @@ Enums used in NI-FGEN
 
 
 
+MarkerEventPulseWidthUnits
+--------------------------
 
-.. py:data:: MarkerEventPulseWidthUnits
+.. py:class:: MarkerEventPulseWidthUnits
 
     .. py:attribute:: MarkerEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
 
@@ -529,8 +565,10 @@ Enums used in NI-FGEN
 
 
 
+MarkerEventToggleInitialState
+-----------------------------
 
-.. py:data:: MarkerEventToggleInitialState
+.. py:class:: MarkerEventToggleInitialState
 
     .. py:attribute:: MarkerEventToggleInitialState.HIGH
 
@@ -552,8 +590,10 @@ Enums used in NI-FGEN
 
 
 
+OSPMode
+-------
 
-.. py:data:: OSPMode
+.. py:class:: OSPMode
 
     .. py:attribute:: OSPMode.IF
 
@@ -575,8 +615,10 @@ Enums used in NI-FGEN
 
 
 
+OSPOverflowErrorReporting
+-------------------------
 
-.. py:data:: OSPOverflowErrorReporting
+.. py:class:: OSPOverflowErrorReporting
 
     .. py:attribute:: OSPOverflowErrorReporting.ERROR
 
@@ -598,8 +640,10 @@ Enums used in NI-FGEN
 
 
 
+OutputMode
+----------
 
-.. py:data:: OutputMode
+.. py:class:: OutputMode
 
     .. py:attribute:: OutputMode.FUNC
 
@@ -652,8 +696,10 @@ Enums used in NI-FGEN
 
 
 
+ReadyForStartEventActiveLevel
+-----------------------------
 
-.. py:data:: ReadyForStartEventActiveLevel
+.. py:class:: ReadyForStartEventActiveLevel
 
     .. py:attribute:: ReadyForStartEventActiveLevel.HIGH
 
@@ -675,8 +721,10 @@ Enums used in NI-FGEN
 
 
 
+ReferenceClockSource
+--------------------
 
-.. py:data:: ReferenceClockSource
+.. py:class:: ReferenceClockSource
 
     .. py:attribute:: ReferenceClockSource.CLOCK_IN
 
@@ -730,8 +778,10 @@ Enums used in NI-FGEN
 
 
 
+RelativeTo
+----------
 
-.. py:data:: RelativeTo
+.. py:class:: RelativeTo
 
     .. py:attribute:: RelativeTo.START
 
@@ -741,8 +791,10 @@ Enums used in NI-FGEN
 
 
 
+SampleClockSource
+-----------------
 
-.. py:data:: SampleClockSource
+.. py:class:: SampleClockSource
 
     .. py:attribute:: SampleClockSource.CLOCK_IN
 
@@ -875,8 +927,10 @@ Enums used in NI-FGEN
 
 
 
+SampleClockTimebaseSource
+-------------------------
 
-.. py:data:: SampleClockTimebaseSource
+.. py:class:: SampleClockTimebaseSource
 
     .. py:attribute:: SampleClockTimebaseSource.CLOCK_IN
 
@@ -899,8 +953,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerDigitalEdgeEdge
+----------------------------
 
-.. py:data:: ScriptTriggerDigitalEdgeEdge
+.. py:class:: ScriptTriggerDigitalEdgeEdge
 
     .. py:attribute:: ScriptTriggerDigitalEdgeEdge.RISING
 
@@ -922,8 +978,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerDigitalLevelActiveLevel
+------------------------------------
 
-.. py:data:: ScriptTriggerDigitalLevelActiveLevel
+.. py:class:: ScriptTriggerDigitalLevelActiveLevel
 
     .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.HIGH
 
@@ -945,8 +1003,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerType
+-----------------
 
-.. py:data:: ScriptTriggerType
+.. py:class:: ScriptTriggerType
 
     .. py:attribute:: ScriptTriggerType.TRIG_NONE
 
@@ -988,8 +1048,10 @@ Enums used in NI-FGEN
 
 
 
+StartTriggerDigitalEdgeEdge
+---------------------------
 
-.. py:data:: StartTriggerDigitalEdgeEdge
+.. py:class:: StartTriggerDigitalEdgeEdge
 
     .. py:attribute:: StartTriggerDigitalEdgeEdge.RISING
 
@@ -1011,8 +1073,10 @@ Enums used in NI-FGEN
 
 
 
+StartTriggerType
+----------------
 
-.. py:data:: StartTriggerType
+.. py:class:: StartTriggerType
 
     .. py:attribute:: StartTriggerType.TRIG_NONE
 
@@ -1054,8 +1118,10 @@ Enums used in NI-FGEN
 
 
 
+StartedEventActiveLevel
+-----------------------
 
-.. py:data:: StartedEventActiveLevel
+.. py:class:: StartedEventActiveLevel
 
     .. py:attribute:: StartedEventActiveLevel.HIGH
 
@@ -1077,8 +1143,10 @@ Enums used in NI-FGEN
 
 
 
+StartedEventDelayUnits
+----------------------
 
-.. py:data:: StartedEventDelayUnits
+.. py:class:: StartedEventDelayUnits
 
     .. py:attribute:: StartedEventDelayUnits.SAMPLE_CLOCK_PERIODS
 
@@ -1100,8 +1168,10 @@ Enums used in NI-FGEN
 
 
 
+StartedEventOutputBehavior
+--------------------------
 
-.. py:data:: StartedEventOutputBehavior
+.. py:class:: StartedEventOutputBehavior
 
     .. py:attribute:: StartedEventOutputBehavior.PULSE
 
@@ -1123,8 +1193,10 @@ Enums used in NI-FGEN
 
 
 
+StartedEventPulsePolarity
+-------------------------
 
-.. py:data:: StartedEventPulsePolarity
+.. py:class:: StartedEventPulsePolarity
 
     .. py:attribute:: StartedEventPulsePolarity.HIGH
 
@@ -1146,8 +1218,10 @@ Enums used in NI-FGEN
 
 
 
+StartedEventPulseWidthUnits
+---------------------------
 
-.. py:data:: StartedEventPulseWidthUnits
+.. py:class:: StartedEventPulseWidthUnits
 
     .. py:attribute:: StartedEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
 
@@ -1169,8 +1243,10 @@ Enums used in NI-FGEN
 
 
 
+TerminalConfiguration
+---------------------
 
-.. py:data:: TerminalConfiguration
+.. py:class:: TerminalConfiguration
 
     .. py:attribute:: TerminalConfiguration.SINGLE_ENDED
 
@@ -1192,8 +1268,10 @@ Enums used in NI-FGEN
 
 
 
+Trigger
+-------
 
-.. py:data:: Trigger
+.. py:class:: Trigger
 
     .. py:attribute:: Trigger.START
 
@@ -1203,8 +1281,10 @@ Enums used in NI-FGEN
 
 
 
+TriggerMode
+-----------
 
-.. py:data:: TriggerMode
+.. py:class:: TriggerMode
 
     .. py:attribute:: TriggerMode.SINGLE
 
@@ -1252,8 +1332,10 @@ Enums used in NI-FGEN
 
 
 
+TriggerWhen
+-----------
 
-.. py:data:: TriggerWhen
+.. py:class:: TriggerWhen
 
     .. py:attribute:: TriggerWhen.HIGH
 
@@ -1263,8 +1345,10 @@ Enums used in NI-FGEN
 
 
 
+WaitBehavior
+------------
 
-.. py:data:: WaitBehavior
+.. py:class:: WaitBehavior
 
     .. py:attribute:: WaitBehavior.HOLD_LAST
 
@@ -1286,8 +1370,10 @@ Enums used in NI-FGEN
 
 
 
+Waveform
+--------
 
-.. py:data:: Waveform
+.. py:class:: Waveform
 
     .. py:attribute:: Waveform.SINE
 
@@ -1366,5 +1452,8 @@ Enums used in NI-FGEN
         User-defined waveform as defined by the :py:meth:`nifgen.Session.define_user_standard_waveform` method.
 
         
+
+
+
 
 
