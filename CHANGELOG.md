@@ -65,6 +65,31 @@ All notable changes to this project will be documented in this file.
             * `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+        * `osp_fir_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_gaussian_bt` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_flat_passband` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_data_processing_mode` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_compensate_for_filter_group_delay` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_gain` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_phase_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_phase_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_frequency` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_offset_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_offset_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_gain_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_gain_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_overflow_status` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_overflow_error_reporting` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_mode` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_frequency_shift` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_type` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_root_raised_cosine_alpha` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_raised_cosine_alpha` - [#864](https://github.com/ni/nimi-python/issues/864)
 * ### NI-SCOPE
     * #### Added
     * #### Changed
