@@ -4,12 +4,12 @@ When filing an issue, please fill in the requested fields as thoroughly as you c
 
 * Description of issue
 
-    description
+    \<Replace with a description of the issue\>
 
 * `python -c "import niscope; niscope.print_diagnostic_information()"` output (replace niscope with appropriate package name)
 
     ```
-    replace with output
+    <replace with script output>
     ```
 
 * Steps to reproduce issue
