@@ -2,4 +2,4 @@
 <%
     import build.helper as helper
 %>\
-${helper.get_function_rst(function, method_template=method_template, numpy=False, config=config, indent=indent)}
+    ${helper.get_function_rst(function, method_template=method_template, numpy=False, config=config, indent=indent)}

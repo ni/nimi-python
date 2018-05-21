@@ -1,0 +1,63 @@
+<%
+    import build.helper as helper
+
+    config = template_parameters['metadata'].config
+    module_name = config['module_name']
+    driver_name = config['driver_name']
+    enums = config['enums']
+%>\
+${helper.get_rst_header_snippet('Exceptions and Warnings', '=')}
+
+${helper.get_rst_header_snippet('DriverError', '-')}
+
+    .. py:currentmodule:: ${module_name}
+
+    .. exception:: DriverError
+
+        An error originating from the ${driver_name} driver
+
+
+${helper.get_rst_header_snippet('UnsupportedConfigurationError', '-')}
+
+    .. py:currentmodule:: ${module_name}
+
+    .. exception:: UnsupportedConfigurationError
+
+        An error due to using this module in an usupported platform.
+
+${helper.get_rst_header_snippet('DriverNotInstalledError', '-')}
+
+    .. py:currentmodule:: ${module_name}
+
+    .. exception:: DriverNotInstalledError
+
+        An error due to using this module without the driver runtime installed.
+
+${helper.get_rst_header_snippet('InvalidRepeatedCapabilityError', '-')}
+
+    .. py:currentmodule:: ${module_name}
+
+    .. exception:: InvalidRepeatedCapabilityError
+
+        An error due to an invalid character in a repeated capability
+
+
+${helper.get_rst_header_snippet('SelfTestError', '-')}
+
+    .. py:currentmodule:: ${module_name}
+
+    .. exception:: SelfTestError
+
+        An error due to a failed self-test
+
+
+${helper.get_rst_header_snippet('DriverWarning', '-')}
+
+    .. py:currentmodule:: ${module_name}
+
+    .. exception:: DriverWarning
+
+        A warning originating from the ${driver_name} driver
+
+
+
