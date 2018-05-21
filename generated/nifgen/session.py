@@ -59,6 +59,18 @@ class _Generation(object):
         self._session.abort()
 
 
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -2460,6 +2472,51 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
+    def lock(self):
+        '''lock
+
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
+
+        Other threads may have obtained a lock on this session for the
+        following reasons:
+
+            -  The application called the lock method.
+            -  A call to NI-FGEN locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
+
+        You can safely make nested calls to the lock method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock method with a call to
+        the unlock method.
+
+        Returns:
+            lock (context manager): When used in a with statement, nifgen.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
+        '''
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
+
+    def _lock_session(self):
+        '''_lock_session
+
+        Actuall call to driver
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niFgen_LockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
+
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -2791,6 +2848,18 @@ class _SessionBase(object):
         offset_ctype = _visatype.ViInt32(offset)  # case S150
         error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def unlock(self):
+        '''unlock
+
+        Releases a lock that you acquired on an device session using
+        lock. Refer to lock for additional
+        information on session locks.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niFgen_UnlockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
     def _write_binary16_waveform_numpy(self, waveform_handle, data):

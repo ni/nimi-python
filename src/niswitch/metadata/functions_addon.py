@@ -14,8 +14,6 @@ functions_codegen_method = {
     'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
     'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
@@ -28,6 +26,15 @@ functions_codegen_method = {
     'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'python_name': 'unlock', },
 }
 
 # Override the 'python' name for some functions.

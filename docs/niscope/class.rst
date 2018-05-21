@@ -418,6 +418,8 @@ niscope.Session
     +-------------------------------------------------------+
     | :py:func:`get_equalization_filter_coefficients`       |
     +-------------------------------------------------------+
+    | :py:func:`lock`                                       |
+    +-------------------------------------------------------+
     | :py:func:`probe_compensation_signal_start`            |
     +-------------------------------------------------------+
     | :py:func:`probe_compensation_signal_stop`             |
@@ -435,6 +437,8 @@ niscope.Session
     | :py:func:`self_test`                                  |
     +-------------------------------------------------------+
     | :py:func:`send_software_trigger_edge`                 |
+    +-------------------------------------------------------+
+    | :py:func:`unlock`                                     |
     +-------------------------------------------------------+
 
 
@@ -5144,6 +5148,55 @@ get_equalization_filter_coefficients
                     session.channels['0,1'].get_equalization_filter_coefficients()
 
 
+lock
+~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+.. py:method:: lock()
+
+    Obtains a multithread lock on the device session. Before doing so, the
+    software waits until all other execution threads release their locks
+    on the device session.
+
+    Other threads may have obtained a lock on this session for the
+    following reasons:
+
+        -  The application called the :py:meth:`niscope.Session.lock` method.
+        -  A call to NI-SCOPE locked the session.
+        -  After a call to the :py:meth:`niscope.Session.lock` method returns
+           successfully, no other threads can access the device session until
+           you call the :py:meth:`niscope.Session.unlock` method or exit out of the with block when using
+           lock context manager.
+        -  Use the :py:meth:`niscope.Session.lock` method and the
+           :py:meth:`niscope.Session.unlock` method around a sequence of calls to
+           instrument driver methods if you require that the device retain its
+           settings through the end of the sequence.
+
+    You can safely make nested calls to the :py:meth:`niscope.Session.lock` method
+    within the same thread. To completely unlock the session, you must
+    balance each call to the :py:meth:`niscope.Session.lock` method with a call to
+    the :py:meth:`niscope.Session.unlock` method.
+
+    One method for ensuring there are the same number of unlock method calls as there is lock calls
+    is to use lock as a context manager
+
+        .. code:: python
+
+            with niscope.Session('dev1') as session:
+                with session.lock():
+                    # Calls to session within a single lock context
+
+        The first `with` block ensures the session is closed regardless of any exceptions raised
+
+        The second `with` block ensures that unlock is called regardless of any exceptions raised
+
+    :rtype: context manager
+    :return:
+        When used in a `with` statement, :py:meth:`niscope.Session.lock` acts as
+        a context manager and unlock will be called when the `with` block is exited
+
+
 probe_compensation_signal_start
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -5447,6 +5500,19 @@ send_software_trigger_edge
 
             :type which_trigger: :py:data:`niscope.WhichTrigger`
 
+unlock
+~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+.. py:method:: unlock()
+
+    Releases a lock that you acquired on an device session using
+    :py:meth:`niscope.Session.lock`. Refer to :py:meth:`niscope.Session.unlock` for additional
+    information on session locks.
+
+
+
 
 
 Properties
@@ -5710,6 +5776,8 @@ Methods
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.get_equalization_filter_coefficients`       |
 +-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.lock`                                       |
++-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.probe_compensation_signal_start`            |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.probe_compensation_signal_stop`             |
@@ -5727,5 +5795,7 @@ Methods
 | :py:func:`niscope.Session.self_test`                                  |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.send_software_trigger_edge`                 |
++-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.unlock`                                     |
 +-----------------------------------------------------------------------+
 

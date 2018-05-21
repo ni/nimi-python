@@ -562,6 +562,8 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`is_done`                                  |
     +-----------------------------------------------------+
+    | :py:func:`lock`                                     |
+    +-----------------------------------------------------+
     | :py:func:`query_arb_seq_capabilities`               |
     +-----------------------------------------------------+
     | :py:func:`query_arb_wfm_capabilities`               |
@@ -585,6 +587,8 @@ nifgen.Session
     | :py:func:`set_named_waveform_next_write_position`   |
     +-----------------------------------------------------+
     | :py:func:`set_waveform_next_write_position`         |
+    +-----------------------------------------------------+
+    | :py:func:`unlock`                                   |
     +-----------------------------------------------------+
     | :py:func:`wait_until_done`                          |
     +-----------------------------------------------------+
@@ -7739,6 +7743,55 @@ is_done
 
 
 
+lock
+~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+.. py:method:: lock()
+
+    Obtains a multithread lock on the device session. Before doing so, the
+    software waits until all other execution threads release their locks
+    on the device session.
+
+    Other threads may have obtained a lock on this session for the
+    following reasons:
+
+        -  The application called the :py:meth:`nifgen.Session.lock` method.
+        -  A call to NI-FGEN locked the session.
+        -  After a call to the :py:meth:`nifgen.Session.lock` method returns
+           successfully, no other threads can access the device session until
+           you call the :py:meth:`nifgen.Session.unlock` method or exit out of the with block when using
+           lock context manager.
+        -  Use the :py:meth:`nifgen.Session.lock` method and the
+           :py:meth:`nifgen.Session.unlock` method around a sequence of calls to
+           instrument driver methods if you require that the device retain its
+           settings through the end of the sequence.
+
+    You can safely make nested calls to the :py:meth:`nifgen.Session.lock` method
+    within the same thread. To completely unlock the session, you must
+    balance each call to the :py:meth:`nifgen.Session.lock` method with a call to
+    the :py:meth:`nifgen.Session.unlock` method.
+
+    One method for ensuring there are the same number of unlock method calls as there is lock calls
+    is to use lock as a context manager
+
+        .. code:: python
+
+            with nifgen.Session('dev1') as session:
+                with session.lock():
+                    # Calls to session within a single lock context
+
+        The first `with` block ensures the session is closed regardless of any exceptions raised
+
+        The second `with` block ensures that unlock is called regardless of any exceptions raised
+
+    :rtype: context manager
+    :return:
+        When used in a `with` statement, :py:meth:`nifgen.Session.lock` acts as
+        a context manager and unlock will be called when the `with` block is exited
+
+
 query_arb_seq_capabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -8256,6 +8309,19 @@ set_waveform_next_write_position
 
 
             :type offset: int
+
+unlock
+~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+.. py:method:: unlock()
+
+    Releases a lock that you acquired on an device session using
+    :py:meth:`nifgen.Session.lock`. Refer to :py:meth:`nifgen.Session.unlock` for additional
+    information on session locks.
+
+
 
 wait_until_done
 ~~~~~~~~~~~~~~~
@@ -8794,6 +8860,8 @@ Methods
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.is_done`                                  |
 +--------------------------------------------------------------------+
+| :py:func:`nifgen.Session.lock`                                     |
++--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.query_arb_seq_capabilities`               |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.query_arb_wfm_capabilities`               |
@@ -8817,6 +8885,8 @@ Methods
 | :py:func:`nifgen.Session.set_named_waveform_next_write_position`   |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.set_waveform_next_write_position`         |
++--------------------------------------------------------------------+
+| :py:func:`nifgen.Session.unlock`                                   |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.wait_until_done`                          |
 +--------------------------------------------------------------------+

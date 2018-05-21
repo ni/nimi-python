@@ -50,6 +50,7 @@ class Library(object):
         self.niDMM_GetSelfCalSupported_cfunc = None
         self.niDMM_InitWithOptions_cfunc = None
         self.niDMM_Initiate_cfunc = None
+        self.niDMM_LockSession_cfunc = None
         self.niDMM_PerformOpenCableComp_cfunc = None
         self.niDMM_PerformShortCableComp_cfunc = None
         self.niDMM_Read_cfunc = None
@@ -63,6 +64,7 @@ class Library(object):
         self.niDMM_SetAttributeViInt32_cfunc = None
         self.niDMM_SetAttributeViReal64_cfunc = None
         self.niDMM_SetAttributeViString_cfunc = None
+        self.niDMM_UnlockSession_cfunc = None
         self.niDMM_close_cfunc = None
         self.niDMM_error_message_cfunc = None
         self.niDMM_reset_cfunc = None
@@ -332,6 +334,14 @@ class Library(object):
                 self.niDMM_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Initiate_cfunc(vi)
 
+    def niDMM_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_LockSession_cfunc is None:
+                self.niDMM_LockSession_cfunc = self._library.niDMM_LockSession
+                self.niDMM_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDMM_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_LockSession_cfunc(vi, caller_has_lock)
+
     def niDMM_PerformOpenCableComp(self, vi, conductance, susceptance):  # noqa: N802
         with self._func_lock:
             if self.niDMM_PerformOpenCableComp_cfunc is None:
@@ -435,6 +445,14 @@ class Library(object):
                 self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
+
+    def niDMM_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_UnlockSession_cfunc is None:
+                self.niDMM_UnlockSession_cfunc = self._library.niDMM_UnlockSession
+                self.niDMM_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDMM_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niDMM_close(self, vi):  # noqa: N802
         with self._func_lock:

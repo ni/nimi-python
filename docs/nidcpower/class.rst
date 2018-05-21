@@ -423,6 +423,8 @@ nidcpower.Session
     +------------------------------------------------------------+
     | :py:func:`get_self_cal_last_temp`                          |
     +------------------------------------------------------------+
+    | :py:func:`lock`                                            |
+    +------------------------------------------------------------+
     | :py:func:`measure`                                         |
     +------------------------------------------------------------+
     | :py:func:`measure_multiple`                                |
@@ -452,6 +454,8 @@ nidcpower.Session
     | :py:func:`send_software_edge_trigger`                      |
     +------------------------------------------------------------+
     | :py:func:`set_sequence`                                    |
+    +------------------------------------------------------------+
+    | :py:func:`unlock`                                          |
     +------------------------------------------------------------+
     | :py:func:`wait_for_event`                                  |
     +------------------------------------------------------------+
@@ -6662,6 +6666,55 @@ get_self_cal_last_temp
 
 
 
+lock
+~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+.. py:method:: lock()
+
+    Obtains a multithread lock on the device session. Before doing so, the
+    software waits until all other execution threads release their locks
+    on the device session.
+
+    Other threads may have obtained a lock on this session for the
+    following reasons:
+
+        -  The application called the :py:meth:`nidcpower.Session.lock` method.
+        -  A call to NI-DCPower locked the session.
+        -  After a call to the :py:meth:`nidcpower.Session.lock` method returns
+           successfully, no other threads can access the device session until
+           you call the :py:meth:`nidcpower.Session.unlock` method or exit out of the with block when using
+           lock context manager.
+        -  Use the :py:meth:`nidcpower.Session.lock` method and the
+           :py:meth:`nidcpower.Session.unlock` method around a sequence of calls to
+           instrument driver methods if you require that the device retain its
+           settings through the end of the sequence.
+
+    You can safely make nested calls to the :py:meth:`nidcpower.Session.lock` method
+    within the same thread. To completely unlock the session, you must
+    balance each call to the :py:meth:`nidcpower.Session.lock` method with a call to
+    the :py:meth:`nidcpower.Session.unlock` method.
+
+    One method for ensuring there are the same number of unlock method calls as there is lock calls
+    is to use lock as a context manager
+
+        .. code:: python
+
+            with nidcpower.Session('dev1') as session:
+                with session.lock():
+                    # Calls to session within a single lock context
+
+        The first `with` block ensures the session is closed regardless of any exceptions raised
+
+        The second `with` block ensures that unlock is called regardless of any exceptions raised
+
+    :rtype: context manager
+    :return:
+        When used in a `with` statement, :py:meth:`nidcpower.Session.lock` acts as
+        a context manager and unlock will be called when the `with` block is exited
+
+
 measure
 ~~~~~~~
 
@@ -7280,6 +7333,19 @@ set_sequence
 
             :type source_delays: list of float
 
+unlock
+~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+.. py:method:: unlock()
+
+    Releases a lock that you acquired on an device session using
+    :py:meth:`nidcpower.Session.lock`. Refer to :py:meth:`nidcpower.Session.unlock` for additional
+    information on session locks.
+
+
+
 wait_for_event
 ~~~~~~~~~~~~~~
 
@@ -7652,6 +7718,8 @@ Methods
 +------------------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.get_self_cal_last_temp`                          |
 +------------------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.lock`                                            |
++------------------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.measure`                                         |
 +------------------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.measure_multiple`                                |
@@ -7681,6 +7749,8 @@ Methods
 | :py:func:`nidcpower.Session.send_software_edge_trigger`                      |
 +------------------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.set_sequence`                                    |
++------------------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.unlock`                                          |
 +------------------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.wait_for_event`                                  |
 +------------------------------------------------------------------------------+

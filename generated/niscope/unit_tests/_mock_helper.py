@@ -122,6 +122,9 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['InitiateAcquisition'] = {}
         self._defaults['InitiateAcquisition']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['ProbeCompensationSignalStart'] = {}
         self._defaults['ProbeCompensationSignalStart']['return'] = 0
         self._defaults['ProbeCompensationSignalStop'] = {}
@@ -149,6 +152,9 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['reset'] = {}
@@ -175,7 +181,8 @@ class SideEffectsHelper(object):
         # acquisition_status
         if self._defaults['AcquisitionStatus']['acquisitionStatus'] is None:
             raise MockFunctionCallError("niScope_AcquisitionStatus", param='acquisitionStatus')
-        acquisition_status.contents.value = self._defaults['AcquisitionStatus']['acquisitionStatus']
+        if acquisition_status is not None:
+            acquisition_status.contents.value = self._defaults['AcquisitionStatus']['acquisitionStatus']
         return self._defaults['AcquisitionStatus']['return']
 
     def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
@@ -184,7 +191,8 @@ class SideEffectsHelper(object):
         # meas_waveform_size
         if self._defaults['ActualMeasWfmSize']['measWaveformSize'] is None:
             raise MockFunctionCallError("niScope_ActualMeasWfmSize", param='measWaveformSize')
-        meas_waveform_size.contents.value = self._defaults['ActualMeasWfmSize']['measWaveformSize']
+        if meas_waveform_size is not None:
+            meas_waveform_size.contents.value = self._defaults['ActualMeasWfmSize']['measWaveformSize']
         return self._defaults['ActualMeasWfmSize']['return']
 
     def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
@@ -193,7 +201,8 @@ class SideEffectsHelper(object):
         # num_wfms
         if self._defaults['ActualNumWfms']['numWfms'] is None:
             raise MockFunctionCallError("niScope_ActualNumWfms", param='numWfms')
-        num_wfms.contents.value = self._defaults['ActualNumWfms']['numWfms']
+        if num_wfms is not None:
+            num_wfms.contents.value = self._defaults['ActualNumWfms']['numWfms']
         return self._defaults['ActualNumWfms']['return']
 
     def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
@@ -519,7 +528,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViBoolean']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViBoolean", param='Value')
-        value.contents.value = self._defaults['GetAttributeViBoolean']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViBoolean']['Value']
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niScope_GetAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
@@ -528,7 +538,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViInt32']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViInt32", param='Value')
-        value.contents.value = self._defaults['GetAttributeViInt32']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViInt32']['Value']
         return self._defaults['GetAttributeViInt32']['return']
 
     def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
@@ -537,7 +548,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViInt64']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViInt64", param='Value')
-        value.contents.value = self._defaults['GetAttributeViInt64']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViInt64']['Value']
         return self._defaults['GetAttributeViInt64']['return']
 
     def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
@@ -546,7 +558,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViReal64']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViReal64", param='Value')
-        value.contents.value = self._defaults['GetAttributeViReal64']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViReal64']['Value']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niScope_GetAttributeViString(self, vi, channel_list, attribute_id, buf_size, value):  # noqa: N802
@@ -581,7 +594,8 @@ class SideEffectsHelper(object):
         # error_code
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niScope_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
+        if error_code is not None:
+            error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niScope_GetError", param='Description')
         if buffer_size.value == 0:
@@ -595,13 +609,24 @@ class SideEffectsHelper(object):
         # vi
         if self._defaults['InitWithOptions']['vi'] is None:
             raise MockFunctionCallError("niScope_InitWithOptions", param='vi')
-        vi.contents.value = self._defaults['InitWithOptions']['vi']
+        if vi is not None:
+            vi.contents.value = self._defaults['InitWithOptions']['vi']
         return self._defaults['InitWithOptions']['return']
 
     def niScope_InitiateAcquisition(self, vi):  # noqa: N802
         if self._defaults['InitiateAcquisition']['return'] != 0:
             return self._defaults['InitiateAcquisition']['return']
         return self._defaults['InitiateAcquisition']['return']
+
+    def niScope_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niScope_LockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
 
     def niScope_ProbeCompensationSignalStart(self, vi):  # noqa: N802
         if self._defaults['ProbeCompensationSignalStart']['return'] != 0:
@@ -696,6 +721,16 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niScope_UnlockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
+
     def niScope_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
@@ -712,7 +747,8 @@ class SideEffectsHelper(object):
         # self_test_result
         if self._defaults['self_test']['selfTestResult'] is None:
             raise MockFunctionCallError("niScope_self_test", param='selfTestResult')
-        self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niScope_self_test", param='selfTestMessage')
@@ -804,6 +840,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_InitWithOptions.return_value = 0
         mock_library.niScope_InitiateAcquisition.side_effect = MockFunctionCallError("niScope_InitiateAcquisition")
         mock_library.niScope_InitiateAcquisition.return_value = 0
+        mock_library.niScope_LockSession.side_effect = MockFunctionCallError("niScope_LockSession")
+        mock_library.niScope_LockSession.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStart.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStart")
         mock_library.niScope_ProbeCompensationSignalStart.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStop.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStop")
@@ -828,6 +866,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_SetAttributeViReal64.return_value = 0
         mock_library.niScope_SetAttributeViString.side_effect = MockFunctionCallError("niScope_SetAttributeViString")
         mock_library.niScope_SetAttributeViString.return_value = 0
+        mock_library.niScope_UnlockSession.side_effect = MockFunctionCallError("niScope_UnlockSession")
+        mock_library.niScope_UnlockSession.return_value = 0
         mock_library.niScope_close.side_effect = MockFunctionCallError("niScope_close")
         mock_library.niScope_close.return_value = 0
         mock_library.niScope_reset.side_effect = MockFunctionCallError("niScope_reset")

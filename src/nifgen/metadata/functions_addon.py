@@ -42,8 +42,6 @@ functions_codegen_method = {
     'GetError':                             { 'codegen_method': 'private',  },
     'ClearError':                           { 'codegen_method': 'no',       },
     'ErrorHandler':                         { 'codegen_method': 'no',       },
-    'LockSession':                          { 'codegen_method': 'no',       },
-    'UnlockSession':                        { 'codegen_method': 'no',       },
     'InitExtCal':                           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CloseExtCal':                          { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'RestoreLastExtCalConstants':           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -67,6 +65,15 @@ functions_codegen_method = {
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
     'self_test':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'python_name': 'unlock', },
 }
 
 # Attach the given parameter to the given enum from enums.py
