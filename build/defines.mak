@@ -66,13 +66,13 @@ DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
-    session.rst \
     enums.rst \
-    attributes.rst \
-    functions.rst \
     examples.rst \
     installation.inc \
     status.inc \
+    class.rst \
+    toc.inc \
+    errors.rst \
 
 # Files for tracking parts of the build
 WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done
