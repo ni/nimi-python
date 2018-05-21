@@ -50,24 +50,24 @@ attributes_codegen_method = {
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION - IVI Attribute - #824
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS - IVI Attribute - #824
     1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
-    1150244: { "codegen_method": "no" },  # DIRECT_DMA_ENABLED - nifgen review - StreamStor not supported - #858
-    1150274: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_ADDRESS - nifgen review - StreamStor not supported - #858
-    1150245: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_SIZE - nifgen review - StreamStor not supported - #858
-    1150223: { "codegen_method": "no" },  # GAIN_DAC_VALUE - nifgen review - external calibration - #858
-    1150224: { "codegen_method": "no" },  # OFFSET_DAC_VALUE - nifgen review - external calibration - #858
-    1150001: { "codegen_method": "no" },  # ID_QUERY_RESPONSE - nifgen review - IVI Attribute - #858
-    1150225: { "codegen_method": "no" },  # OSCILLATOR_FREQ_DAC_VALUE - nifgen review - external calibration - #858
-    1150232: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - nifgen review - external calibration - #858
-    1150229: { "codegen_method": "no" },  # POST_AMPLIFIER_ATTENUATION - nifgen review - external calibration - #858
-    1150228: { "codegen_method": "no" },  # PRE_AMPLIFIER_ATTENUATION - nifgen review - external calibration - #858
-    1150410: { "codegen_method": "no" },  # P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL - nifgen review - P2P not supported - #858
-    1150362: { "codegen_method": "no" },  # PCI_DMA_OPTIMIZATIONS_ENABLED - nifgen review - For internal use only - #858
-    1150231: { "codegen_method": "no" },  # SAMPLE_CLOCK_ABSOLUTE_DELAY - nifgen review - EOL hardware only - #858
-    1150111: { "codegen_method": "no" },  # SYNCHRONIZATION - nifgen review - EOL hardware only - #858
-    1150105: { "codegen_method": "no" },  # SYNC_DUTY_CYCLE_HIGH - nifgen review - EOL hardware only - #858
-    1150330: { "codegen_method": "no" },  # SYNC_OUT_OUTPUT_TERMINAL - nifgen review - EOL hardware only - #858
-    1250302: { "codegen_method": "no" },  # TRIGGER_SOURCE - nifgen review - EOL hardware only - #858
-    1150216: { "codegen_method": "no" },  # VIDEO_WAVEFORM_TYPE - nifgen review - EOL hardware only - #858
+    1150244: { "codegen_method": "no" },  # DIRECT_DMA_ENABLED - StreamStor not supported - #858
+    1150274: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_ADDRESS - StreamStor not supported - #858
+    1150245: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_SIZE - StreamStor not supported - #858
+    1150223: { "codegen_method": "no" },  # GAIN_DAC_VALUE - external calibration - #858
+    1150224: { "codegen_method": "no" },  # OFFSET_DAC_VALUE - external calibration - #858
+    1150001: { "codegen_method": "no" },  # ID_QUERY_RESPONSE - IVI Attribute - #858
+    1150225: { "codegen_method": "no" },  # OSCILLATOR_FREQ_DAC_VALUE - external calibration - #858
+    1150232: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - external calibration - #858
+    1150229: { "codegen_method": "no" },  # POST_AMPLIFIER_ATTENUATION - external calibration - #858
+    1150228: { "codegen_method": "no" },  # PRE_AMPLIFIER_ATTENUATION - external calibration - #858
+    1150410: { "codegen_method": "no" },  # P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL - P2P not supported - #858
+    1150362: { "codegen_method": "no" },  # PCI_DMA_OPTIMIZATIONS_ENABLED - For internal use only - #858
+    1150231: { "codegen_method": "no" },  # SAMPLE_CLOCK_ABSOLUTE_DELAY - EOL hardware only - #858
+    1150111: { "codegen_method": "no" },  # SYNCHRONIZATION - EOL hardware only - #858
+    1150105: { "codegen_method": "no" },  # SYNC_DUTY_CYCLE_HIGH - EOL hardware only - #858
+    1150330: { "codegen_method": "no" },  # SYNC_OUT_OUTPUT_TERMINAL - EOL hardware only - #858
+    1250302: { "codegen_method": "no" },  # TRIGGER_SOURCE - EOL hardware only - #858
+    1150216: { "codegen_method": "no" },  # VIDEO_WAVEFORM_TYPE - EOL hardware only - #858
 }
 
 attributes_converters = {
