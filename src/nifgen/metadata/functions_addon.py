@@ -9,7 +9,7 @@ functions_codegen_method = {
     'InitializeWithChannels':               { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'close':                                { 'codegen_method': 'private',  },
     'CheckAttribute.*':                     { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
-    'InitiateGeneration':                   { 'codegen_method': 'private',  },
+    'InitiateGeneration':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
     'Configure.*':                          { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'ConfigureArbSequence':                 { 'codegen_method': 'public',   },
     'ConfigureArbWaveform':                 { 'codegen_method': 'public',   },
