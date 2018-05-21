@@ -175,6 +175,16 @@ class TestSession(object):
             self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
             self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
 
+    def test_lock_context_manager_abnormal_exit(self):
+        with nifake.Session('dev1') as session:
+            try:
+                with session.lock():
+                    raise nifake.Error('Fake exception')
+            except nifake.Error:
+                pass
+            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+
     # Methods
     def test_simple_function(self):
         self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
