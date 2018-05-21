@@ -68,6 +68,24 @@ All notable changes to this project will be documented in this file.
             * `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+        * `direct_dma_enabled` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `direct_dma_windowaddress` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `direct_dma_window_size`  [#858](https://github.com/ni/nimi-python/issues/858)
+        * `gain_dac_value` - [#88](https://github.com/ni/nimi-python/issues/858)
+        * `offset_dac_vaue` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `id_query_respone` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `oscillator_freq_ac_value` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `oscillator_phase_dac_vale` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `post_amplifier_attenuatio` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `pre_amplifier_attenuation` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `p2p_endpoint_fullness_strt_trigger_level` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `pci_dma_optimizations_enabled` - [#858](ttps://github.com/ni/nimi-python/issues/858)
+        * `sample_clock_absolute_delay`- [#858](https://github.com/ni/nimi-python/issues/858)
+        * `synchronization` - [#858](ttps://github.com/ni/nimi-python/issues/858)
+        * `sync_duty_cycl_high` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `sync_out_output_terinal` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `trigger_source` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `video_wavefor_type` - [#858](https://github.com/ni/nimi-python/issues/858)
 * ### NI-SCOPE
     * #### Added
     * #### Changed

@@ -336,21 +336,6 @@ class _SessionBase(object):
 
     Specifies the static value that replaces data masked by digital_data_mask.
     '''
-    direct_dma_enabled = _attributes.AttributeViBoolean(1150244)
-    '''Type: bool
-
-    Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform method calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
-    '''
-    direct_dma_window_address = _attributes.AttributeViInt32(1150274)
-    '''Type: int
-
-    Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.
-    '''
-    direct_dma_window_size = _attributes.AttributeViInt32(1150245)
-    '''Type: int
-
-    Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.
-    '''
     done_event_delay = _attributes.AttributeViReal64(1150358)
     '''Type: float
 
@@ -573,11 +558,6 @@ class _SessionBase(object):
     Waveform.USER      - User-defined waveform as defined with
     define_user_standard_waveform
     '''
-    gain_dac_value = _attributes.AttributeViInt32(1150223)
-    '''Type: int
-
-    Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
-    '''
     idle_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
     '''Type: enums.IdleBehavior
 
@@ -588,7 +568,6 @@ class _SessionBase(object):
 
     Specifies the value to generate in the Idle state.  The Idle Behavior must be configured to jump to this value.
     '''
-    id_query_response = _attributes.AttributeViString(1150001)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
@@ -770,21 +749,6 @@ class _SessionBase(object):
     Indicates the number of channels that the specific instrument  driver supports.
     For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
-    offset_dac_value = _attributes.AttributeViInt32(1150224)
-    '''Type: int
-
-    Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.
-    '''
-    oscillator_freq_dac_value = _attributes.AttributeViInt32(1150225)
-    '''Type: int
-
-    Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.
-    '''
-    oscillator_phase_dac_value = _attributes.AttributeViInt32(1150232)
-    '''Type: int
-
-    The value of the oscillator phase DAC.
-    '''
     osp_carrier_enabled = _attributes.AttributeViBoolean(1150249)
     '''Type: bool
 
@@ -931,28 +895,6 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
-    p2p_endpoint_fullness_start_trigger_level = _attributes.AttributeViInt32(1150410)
-    '''Type: int
-
-    Specifies the Endpoint threshold for the Start trigger. This property is used only when start_trigger_type is set to P2P Endpoint Fullness.
-    '''
-    pci_dma_optimizations_enabled = _attributes.AttributeViBoolean(1150362)
-    '''Type: bool
-
-    Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
-    This property is only valid for PCI and PXI SMC-based devices.
-    This property is enabled (True) by default, and NI recommends leaving it enabled.
-    '''
-    post_amplifier_attenuation = _attributes.AttributeViReal64(1150229)
-    '''Type: float
-
-    Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).
-    '''
-    pre_amplifier_attenuation = _attributes.AttributeViReal64(1150228)
-    '''Type: float
-
-    Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
-    '''
     ready_for_start_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
     '''Type: enums.ReadyForStartEventActiveLevel
 
@@ -981,14 +923,6 @@ class _SessionBase(object):
     '''Type: float
 
     Sets the frequency of the signal generator reference  clock. The signal generator uses the reference clock to derive  frequencies and sample rates when generating output.
-    '''
-    sample_clock_absolute_delay = _attributes.AttributeViReal64(1150231)
-    '''Type: float
-
-    Specifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.
-    can only be applied when an external sample clock is used.
-
-    Note: For the NI 5421, absolute delay
     '''
     sample_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.SampleClockSource, 1150112)
     '''Type: enums.SampleClockSource
@@ -1142,22 +1076,6 @@ class _SessionBase(object):
 
     Returns a model code of the device. For NI-FGEN versions that support more than one device, this  property contains a comma-separated list of supported device  models.
     '''
-    synchronization = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SynchronizationSource, 1150111)
-    '''Type: enums.SynchronizationSource
-
-    Specify the source of the synchronization signal that you want to use.
-    '''
-    sync_duty_cycle_high = _attributes.AttributeViReal64(1150105)
-    '''Type: float
-
-    Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this property as a  percentage of the time the square wave is high in each cycle.
-    Units: Percentage of time the waveform is high
-    '''
-    sync_out_output_terminal = _attributes.AttributeViString(1150330)
-    '''Type: str
-
-    Specifies the terminal to which to export the SYNC OUT signal. This property is not supported for all devices.
-    '''
     terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
     '''Type: enums.TerminalConfiguration
 
@@ -1167,21 +1085,6 @@ class _SessionBase(object):
     '''Type: enums.TriggerMode
 
     Controls the trigger mode.
-    '''
-    trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSource, 1250302)
-    '''Type: enums.TriggerSource
-
-    Controls which trigger source the signal generator uses.
-    After you call the _initiate_generation method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the CYCLE_COUNT property.
-    This property is also the source for the trigger in the other trigger modes as specified by the trigger_mode property.
-
-    Note:
-    One or more of the referenced properties are not in the Python API for this driver.
-    '''
-    video_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
-    '''Type: enums.VideoWaveformType
-
-    Selects which waveform type that the NI 5431 generates. Setting this property ensures that the crystal is set to the proper frequency.
     '''
     wait_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
     '''Type: enums.WaitBehavior
@@ -3730,7 +3633,7 @@ class Session(_SessionBase):
 
         -  Routes are committed, so signals are exported or imported.
         -  Any Reference Clock and external clock circuits are phase-locked.
-        -  A subsequent _initiate_generation method can run faster
+        -  A subsequent initiate method can run faster
            because the device is already configured.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4447,7 +4350,7 @@ class Session(_SessionBase):
 
         Initiates signal generation. If you want to abort signal generation,
         call the nifgen_AbortGeneration method. After the signal generation
-        is aborted, you can call the _initiate_generation method to
+        is aborted, you can call the initiate method to
         cause the signal generator to produce a signal again.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4712,7 +4615,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, max_time=10000):
+    def wait_until_done(self, max_time=datetime.timedelta(seconds=10.0)):
         '''wait_until_done
 
         Waits until the device is done generating or until the maximum time has

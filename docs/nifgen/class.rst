@@ -216,12 +216,6 @@ nifgen.Session
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`digital_static_value`                             | int                                             |
     +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`direct_dma_enabled`                               | bool                                            |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`direct_dma_window_address`                        | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`direct_dma_window_size`                           | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`done_event_delay`                                 | float                                           |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`done_event_delay_units`                           | :py:data:`DoneEventDelayUnits`                  |
@@ -290,13 +284,9 @@ nifgen.Session
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`func_waveform`                                    | :py:data:`Waveform`                             |
     +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`gain_dac_value`                                   | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`idle_behavior`                                    | :py:data:`IdleBehavior`                         |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`idle_value`                                       | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`id_query_response`                                | str                                             |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`instrument_firmware_revision`                     | str                                             |
     +-------------------------------------------------------------+-------------------------------------------------+
@@ -366,12 +356,6 @@ nifgen.Session
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`num_channels`                                     | int                                             |
     +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`offset_dac_value`                                 | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`oscillator_freq_dac_value`                        | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`oscillator_phase_dac_value`                       | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`osp_carrier_enabled`                              | bool                                            |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`osp_carrier_frequency`                            | float                                           |
@@ -428,14 +412,6 @@ nifgen.Session
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`output_mode`                                      | :py:data:`OutputMode`                           |
     +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`p2p_endpoint_fullness_start_trigger_level`        | int                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`pci_dma_optimizations_enabled`                    | bool                                            |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`post_amplifier_attenuation`                       | float                                           |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`pre_amplifier_attenuation`                        | float                                           |
-    +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`ready_for_start_event_level_active_level`         | :py:data:`ReadyForStartEventActiveLevel`        |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`ready_for_start_event_live_status`                | bool                                            |
@@ -445,8 +421,6 @@ nifgen.Session
     | :py:attr:`reference_clock_source`                           | :py:data:`ReferenceClockSource`                 |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`ref_clock_frequency`                              | float                                           |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`sample_clock_absolute_delay`                      | float                                           |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`sample_clock_source`                              | :py:data:`SampleClockSource`                    |
     +-------------------------------------------------------------+-------------------------------------------------+
@@ -500,19 +474,9 @@ nifgen.Session
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`supported_instrument_models`                      | str                                             |
     +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`synchronization`                                  | :py:data:`SynchronizationSource`                |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`sync_duty_cycle_high`                             | float                                           |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`sync_out_output_terminal`                         | str                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`terminal_configuration`                           | :py:data:`TerminalConfiguration`                |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`trigger_mode`                                     | :py:data:`TriggerMode`                          |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`trigger_source`                                   | :py:data:`TriggerSource`                        |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`video_waveform_type`                              | :py:data:`VideoWaveformType`                    |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`wait_behavior`                                    | :py:data:`WaitBehavior`                         |
     +-------------------------------------------------------------+-------------------------------------------------+
@@ -1775,93 +1739,6 @@ digital_static_value
                 - LabVIEW Property: **Output:Data Mask:Digital Static Value**
                 - C Attribute: **NIFGEN_ATTR_DIGITAL_STATIC_VALUE**
 
-direct_dma_enabled
-~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: direct_dma_enabled
-
-        Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform method calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arbitrary Waveform:Data Transfer:Direct DMA:Direct DMA Enabled**
-                - C Attribute: **NIFGEN_ATTR_DIRECT_DMA_ENABLED**
-
-direct_dma_window_address
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: direct_dma_window_address
-
-        Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arbitrary Waveform:Data Transfer:Direct DMA:Window Address**
-                - C Attribute: **NIFGEN_ATTR_DIRECT_DMA_WINDOW_ADDRESS**
-
-direct_dma_window_size
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: direct_dma_window_size
-
-        Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arbitrary Waveform:Data Transfer:Direct DMA:Window Size in Bytes**
-                - C Attribute: **NIFGEN_ATTR_DIRECT_DMA_WINDOW_SIZE**
-
 done_event_delay
 ~~~~~~~~~~~~~~~~
 
@@ -2915,35 +2792,6 @@ func_waveform
                 - LabVIEW Property: **Standard Function:Waveform**
                 - C Attribute: **NIFGEN_ATTR_FUNC_WAVEFORM**
 
-gain_dac_value
-~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: gain_dac_value
-
-        Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Calibration:Gain DAC Value**
-                - C Attribute: **NIFGEN_ATTR_GAIN_DAC_VALUE**
-
 idle_behavior
 ~~~~~~~~~~~~~
 
@@ -3001,34 +2849,6 @@ idle_value
 
                 - LabVIEW Property: **Output:Advanced:Idle Value**
                 - C Attribute: **NIFGEN_ATTR_IDLE_VALUE**
-
-id_query_response
-~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: id_query_response
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  |         0 |
-            +----------------+-----------+
-            | Resettable     |         0 |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIFGEN_ATTR_ID_QUERY_RESPONSE**
 
 instrument_firmware_revision
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4029,93 +3849,6 @@ num_channels
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
                 - C Attribute: **NIFGEN_ATTR_NUM_CHANNELS**
 
-offset_dac_value
-~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: offset_dac_value
-
-        Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Calibration:Offset DAC Value**
-                - C Attribute: **NIFGEN_ATTR_OFFSET_DAC_VALUE**
-
-oscillator_freq_dac_value
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: oscillator_freq_dac_value
-
-        Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Calibration:Oscillator Freq DAC Value**
-                - C Attribute: **NIFGEN_ATTR_OSCILLATOR_FREQ_DAC_VALUE**
-
-oscillator_phase_dac_value
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: oscillator_phase_dac_value
-
-        The value of the oscillator phase DAC.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Clocks:Advanced:Oscillator Phase DAC Value**
-                - C Attribute: **NIFGEN_ATTR_OSCILLATOR_PHASE_DAC_VALUE**
-
 osp_carrier_enabled
 ~~~~~~~~~~~~~~~~~~~
 
@@ -4936,124 +4669,6 @@ output_mode
                 - LabVIEW Property: **Output:Output Mode**
                 - C Attribute: **NIFGEN_ATTR_OUTPUT_MODE**
 
-p2p_endpoint_fullness_start_trigger_level
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: p2p_endpoint_fullness_start_trigger_level
-
-        Specifies the Endpoint threshold for the Start trigger. This property is used only when :py:data:`nifgen.Session.start_trigger_type` is set to P2P Endpoint Fullness.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Start:P2P Endpoint Fullness:Level**
-                - C Attribute: **NIFGEN_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL**
-
-pci_dma_optimizations_enabled
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: pci_dma_optimizations_enabled
-
-        Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
-        This property is only valid for PCI and PXI SMC-based devices.
-        This property is enabled (True) by default, and NI recommends leaving it enabled.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arbitrary Waveform:Data Transfer:Advanced:PCI DMA Optimizations Enabled**
-                - C Attribute: **NIFGEN_ATTR_PCI_DMA_OPTIMIZATIONS_ENABLED**
-
-post_amplifier_attenuation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: post_amplifier_attenuation
-
-        Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Calibration:Post-Amplifier Attenuation**
-                - C Attribute: **NIFGEN_ATTR_POST_AMPLIFIER_ATTENUATION**
-
-pre_amplifier_attenuation
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: pre_amplifier_attenuation
-
-        Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Calibration:Pre-Amplifier Attenuation**
-                - C Attribute: **NIFGEN_ATTR_PRE_AMPLIFIER_ATTENUATION**
-
 ready_for_start_event_level_active_level
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -5204,40 +4819,6 @@ ref_clock_frequency
 
                 - LabVIEW Property: **Clocks:Reference Clock:Frequency**
                 - C Attribute: **NIFGEN_ATTR_REF_CLOCK_FREQUENCY**
-
-sample_clock_absolute_delay
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: sample_clock_absolute_delay
-
-        Specifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.
-        can only be applied when an external sample clock is used.
-
-
-
-        .. note:: For the NI 5421, absolute delay
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Clocks:Advanced:Sample Clock Absolute Delay**
-                - C Attribute: **NIFGEN_ATTR_SAMPLE_CLOCK_ABSOLUTE_DELAY**
 
 sample_clock_source
 ~~~~~~~~~~~~~~~~~~~
@@ -6024,94 +5605,6 @@ supported_instrument_models
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models**
                 - C Attribute: **NIFGEN_ATTR_SUPPORTED_INSTRUMENT_MODELS**
 
-synchronization
-~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: synchronization
-
-        Specify the source of the synchronization signal that you want to use.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------------------------+
-            | Characteristic | Value                       |
-            +================+=============================+
-            | Datatype       | enums.SynchronizationSource |
-            +----------------+-----------------------------+
-            | Permissions    | read-write                  |
-            +----------------+-----------------------------+
-            | Channel Based  | False                       |
-            +----------------+-----------------------------+
-            | Resettable     | No                          |
-            +----------------+-----------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:5401/5411/5431:Synchronization Source**
-                - C Attribute: **NIFGEN_ATTR_SYNCHRONIZATION**
-
-sync_duty_cycle_high
-~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: sync_duty_cycle_high
-
-        Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this property as a  percentage of the time the square wave is high in each cycle.
-        Units: Percentage of time the waveform is high
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Standard Function:Sync Duty Cycle High**
-                - C Attribute: **NIFGEN_ATTR_SYNC_DUTY_CYCLE_HIGH**
-
-sync_out_output_terminal
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: sync_out_output_terminal
-
-        Specifies the terminal to which to export the SYNC OUT signal. This property is not supported for all devices.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Standard Function:Sync Out Output Terminal**
-                - C Attribute: **NIFGEN_ATTR_SYNC_OUT_OUTPUT_TERMINAL**
-
 terminal_configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6169,70 +5662,6 @@ trigger_mode
 
                 - LabVIEW Property: **Triggers:Trigger Mode**
                 - C Attribute: **NIFGEN_ATTR_TRIGGER_MODE**
-
-trigger_source
-~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: trigger_source
-
-        Controls which trigger source the signal generator uses.
-        After you call the :py:meth:`nifgen.Session._initiate_generation` method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the :py:data:`nifgen.Session.CYCLE_COUNT` property.
-        This property is also the source for the trigger in the other trigger modes as specified by the :py:data:`nifgen.Session.trigger_mode` property.
-
-
-
-        .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+---------------------+
-            | Characteristic | Value               |
-            +================+=====================+
-            | Datatype       | enums.TriggerSource |
-            +----------------+---------------------+
-            | Permissions    | read-write          |
-            +----------------+---------------------+
-            | Channel Based  | False               |
-            +----------------+---------------------+
-            | Resettable     | Yes                 |
-            +----------------+---------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:5401/5411/5431:Trigger Source**
-                - C Attribute: **NIFGEN_ATTR_TRIGGER_SOURCE**
-
-video_waveform_type
-~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: video_waveform_type
-
-        Selects which waveform type that the NI 5431 generates. Setting this property ensures that the crystal is set to the proper frequency.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.VideoWaveformType |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | False                   |
-            +----------------+-------------------------+
-            | Resettable     | No                      |
-            +----------------+-------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:5401/5411/5431:Video Waveform Type**
-                - C Attribute: **NIFGEN_ATTR_VIDEO_WAVEFORM_TYPE**
 
 wait_behavior
 ~~~~~~~~~~~~~
@@ -6628,7 +6057,7 @@ commit
 
             -  Routes are committed, so signals are exported or imported.
             -  Any Reference Clock and external clock circuits are phase-locked.
-            -  A subsequent :py:meth:`nifgen.Session._initiate_generation` method can run faster
+            -  A subsequent :py:meth:`nifgen.Session.initiate` method can run faster
                because the device is already configured.
 
             
@@ -8899,7 +8328,7 @@ wait_until_done
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: wait_until_done(max_time=10000)
+    .. py:method:: wait_until_done(max_time=datetime.timedelta(seconds=10.0))
 
             Waits until the device is done generating or until the maximum time has
             expired.
@@ -9084,12 +8513,6 @@ Properties
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.digital_static_value`                             | int                                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.direct_dma_enabled`                               | bool                                            |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.direct_dma_window_address`                        | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.direct_dma_window_size`                           | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.done_event_delay`                                 | float                                           |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.done_event_delay_units`                           | :py:data:`DoneEventDelayUnits`                  |
@@ -9158,13 +8581,9 @@ Properties
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.func_waveform`                                    | :py:data:`Waveform`                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.gain_dac_value`                                   | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.idle_behavior`                                    | :py:data:`IdleBehavior`                         |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.idle_value`                                       | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.id_query_response`                                | str                                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.instrument_firmware_revision`                     | str                                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
@@ -9234,12 +8653,6 @@ Properties
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.num_channels`                                     | int                                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.offset_dac_value`                                 | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.oscillator_freq_dac_value`                        | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.oscillator_phase_dac_value`                       | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.osp_carrier_enabled`                              | bool                                            |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.osp_carrier_frequency`                            | float                                           |
@@ -9296,14 +8709,6 @@ Properties
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.output_mode`                                      | :py:data:`OutputMode`                           |
 +----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.p2p_endpoint_fullness_start_trigger_level`        | int                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.pci_dma_optimizations_enabled`                    | bool                                            |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.post_amplifier_attenuation`                       | float                                           |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.pre_amplifier_attenuation`                        | float                                           |
-+----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.ready_for_start_event_level_active_level`         | :py:data:`ReadyForStartEventActiveLevel`        |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.ready_for_start_event_live_status`                | bool                                            |
@@ -9313,8 +8718,6 @@ Properties
 | :py:attr:`nifgen.Session.reference_clock_source`                           | :py:data:`ReferenceClockSource`                 |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.ref_clock_frequency`                              | float                                           |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.sample_clock_absolute_delay`                      | float                                           |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.sample_clock_source`                              | :py:data:`SampleClockSource`                    |
 +----------------------------------------------------------------------------+-------------------------------------------------+
@@ -9368,19 +8771,9 @@ Properties
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.supported_instrument_models`                      | str                                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.synchronization`                                  | :py:data:`SynchronizationSource`                |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.sync_duty_cycle_high`                             | float                                           |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.sync_out_output_terminal`                         | str                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.terminal_configuration`                           | :py:data:`TerminalConfiguration`                |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.trigger_mode`                                     | :py:data:`TriggerMode`                          |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.trigger_source`                                   | :py:data:`TriggerSource`                        |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.video_waveform_type`                              | :py:data:`VideoWaveformType`                    |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.wait_behavior`                                    | :py:data:`WaitBehavior`                         |
 +----------------------------------------------------------------------------+-------------------------------------------------+
