@@ -6859,35 +6859,23 @@ configure_digital_edge_script_trigger
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: configure_digital_edge_script_trigger(trigger_id, source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+    .. py:method:: configure_digital_edge_script_trigger(source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
 
             Configures the specified Script Trigger for digital edge triggering.
 
             
 
 
+            .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+                nifgen.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nifgen.Session instance, and calling this method on the result.:
 
-            :param trigger_id:
+                .. code:: python
 
-
-                Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
+                    session.channels['0,1'].configure_digital_edge_script_trigger(source, edge=nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
 
 
-            :type trigger_id: str
             :param source:
 
 
@@ -7040,35 +7028,23 @@ configure_digital_level_script_trigger
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: configure_digital_level_script_trigger(trigger_id, source, trigger_when)
+    .. py:method:: configure_digital_level_script_trigger(source, trigger_when)
 
             Configures the specified Script Trigger for digital level triggering.
 
             
 
 
+            .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+                nifgen.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nifgen.Session instance, and calling this method on the result.:
 
-            :param trigger_id:
+                .. code:: python
 
-
-                Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
+                    session.channels['0,1'].configure_digital_level_script_trigger(source, trigger_when)
 
 
-            :type trigger_id: str
             :param source:
 
 

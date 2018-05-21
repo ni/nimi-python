@@ -29,7 +29,7 @@ nidcpower.Session
     without passing through a transitional output state, set **reset** to
     False. Then configure the device as in the previous session,
     changing only the desired settings, and then call the
-    :py:meth:`nidcpower.Session._initiate` method.
+    :py:meth:`nidcpower.Session.initiate` method.
 
     **Related Topics:**
 
@@ -2551,7 +2551,7 @@ output_enabled
 
         Specifies whether the output is enabled (True) or disabled (False).
         Depending on the value you specify for the :py:data:`nidcpower.Session.output_function` property, you also must set the  voltage level or current level in addition to  enabling the output
-        the :py:meth:`nidcpower.Session._initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
+        the :py:meth:`nidcpower.Session.initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for  more information about NI-DCPower programming states.
         Default Value: The default value is True if you use the :py:meth:`nidcpower.Session.__init__` method to open  the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
 
@@ -2852,7 +2852,7 @@ power_source
 
         Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
         Default Value: :py:data:`~nidcpower.PowerSource.AUTOMATIC`
-        is set to :py:data:`~nidcpower.PowerSource.AUTOMATIC`. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  :py:meth:`nidcpower.Session._initiate` method.
+        is set to :py:data:`~nidcpower.PowerSource.AUTOMATIC`. However, if the session is in the Committed or Uncommitted state  when you set this property, the power source selection only occurs after you call the  :py:meth:`nidcpower.Session.initiate` method.
 
 
 
@@ -6011,7 +6011,7 @@ abort
             Transitions the NI-DCPower session from the Running state to the
             Committed state. If a sequence is running, it is stopped. Any
             configuration methods called after this method are not applied until
-            the :py:meth:`nidcpower.Session._initiate` method is called. If power output is enabled
+            the :py:meth:`nidcpower.Session.initiate` method is called. If power output is enabled
             when you call the :py:meth:`nidcpower.Session.abort` method, the output channels remain
             in their current state and continue providing power.
 
@@ -6046,7 +6046,7 @@ commit
             method moves the NI-DCPower session from the Uncommitted state into
             the Committed state. After calling this method, modifying any
             property reverts the NI-DCPower session to the Uncommitted state. Use
-            the :py:meth:`nidcpower.Session._initiate` method to transition to the Running state.
+            the :py:meth:`nidcpower.Session.initiate` method to transition to the Running state.
             Refer to the `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
             the *NI DC Power Supplies and SMUs Help* for details about the specific
@@ -6434,7 +6434,7 @@ fetch_multiple
             previously taken and are stored in the NI-DCPower buffer. This method
             should not be used when the :py:data:`nidcpower.Session.measure_when` property is
             set to :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. You must first call
-            :py:meth:`nidcpower.Session._initiate` before calling this method.
+            :py:meth:`nidcpower.Session.initiate` before calling this method.
 
             Fields in Measurement:
 
@@ -7290,7 +7290,7 @@ wait_for_event
             Waits until the device has generated the specified event.
 
             The session monitors whether each type of event has occurred at least
-            once since the last time this method or the :py:meth:`nidcpower.Session._initiate`
+            once since the last time this method or the :py:meth:`nidcpower.Session.initiate`
             method were called. If an event has only been generated once and you
             call this method successively, the method times out. Individual
             events must be generated between separate calls of this method.
