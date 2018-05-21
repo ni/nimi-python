@@ -5,15 +5,5 @@ nifgen module
 
 .. include:: _static/nifgen_usage.inc
 
-API Reference
---------------
-
-.. toctree::
-   :maxdepth: 0
-
-   nifgen/session
-   nifgen/functions
-   nifgen/attributes
-   nifgen/enums
-   nifgen/examples
+.. include:: nifgen/toc.inc
 

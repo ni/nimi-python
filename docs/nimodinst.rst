@@ -5,15 +5,6 @@ nimodinst module
 
 .. include:: _static/nimodinst_usage.inc
 
-API Reference
---------------
-
-.. toctree::
-   :maxdepth: 0
-
-   nimodinst/session
-   nimodinst/functions
-   nimodinst/attributes
-   nimodinst/examples
+.. include:: nimodinst/toc.inc
 
 

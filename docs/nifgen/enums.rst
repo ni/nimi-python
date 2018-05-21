@@ -6,8 +6,10 @@ Enums used in NI-FGEN
 .. py:currentmodule:: nifgen
 
 
+AnalogPath
+----------
 
-.. py:data:: AnalogPath
+.. py:class:: AnalogPath
 
     .. py:attribute:: AnalogPath.MAIN
 
@@ -49,8 +51,10 @@ Enums used in NI-FGEN
 
 
 
+BusType
+-------
 
-.. py:data:: BusType
+.. py:class:: BusType
 
     .. py:attribute:: BusType.INVALID
 
@@ -122,8 +126,10 @@ Enums used in NI-FGEN
 
 
 
+ByteOrder
+---------
 
-.. py:data:: ByteOrder
+.. py:class:: ByteOrder
 
     .. py:attribute:: ByteOrder.LITTLE
 
@@ -133,8 +139,10 @@ Enums used in NI-FGEN
 
 
 
+ClockMode
+---------
 
-.. py:data:: ClockMode
+.. py:class:: ClockMode
 
     .. py:attribute:: ClockMode.HIGH_RESOLUTION
 
@@ -166,8 +174,10 @@ Enums used in NI-FGEN
 
 
 
+DataMarkerEventLevelPolarity
+----------------------------
 
-.. py:data:: DataMarkerEventLevelPolarity
+.. py:class:: DataMarkerEventLevelPolarity
 
     .. py:attribute:: DataMarkerEventLevelPolarity.HIGH
 
@@ -189,8 +199,10 @@ Enums used in NI-FGEN
 
 
 
+DataProcessingMode
+------------------
 
-.. py:data:: DataProcessingMode
+.. py:class:: DataProcessingMode
 
     .. py:attribute:: DataProcessingMode.REAL
 
@@ -212,8 +224,10 @@ Enums used in NI-FGEN
 
 
 
+FilterType
+----------
 
-.. py:data:: FilterType
+.. py:class:: FilterType
 
     .. py:attribute:: FilterType.FLAT
 
@@ -265,8 +279,10 @@ Enums used in NI-FGEN
 
 
 
+HardwareState
+-------------
 
-.. py:data:: HardwareState
+.. py:class:: HardwareState
 
     .. py:attribute:: HardwareState.IDLE
 
@@ -288,8 +304,10 @@ Enums used in NI-FGEN
 
 
 
+IdleBehavior
+------------
 
-.. py:data:: IdleBehavior
+.. py:class:: IdleBehavior
 
     .. py:attribute:: IdleBehavior.HOLD_LAST
 
@@ -311,8 +329,10 @@ Enums used in NI-FGEN
 
 
 
+OSPMode
+-------
 
-.. py:data:: OSPMode
+.. py:class:: OSPMode
 
     .. py:attribute:: OSPMode.IF
 
@@ -334,8 +354,10 @@ Enums used in NI-FGEN
 
 
 
+OSPOverflowErrorReporting
+-------------------------
 
-.. py:data:: OSPOverflowErrorReporting
+.. py:class:: OSPOverflowErrorReporting
 
     .. py:attribute:: OSPOverflowErrorReporting.ERROR
 
@@ -357,8 +379,10 @@ Enums used in NI-FGEN
 
 
 
+OutputMode
+----------
 
-.. py:data:: OutputMode
+.. py:class:: OutputMode
 
     .. py:attribute:: OutputMode.FUNC
 
@@ -411,8 +435,10 @@ Enums used in NI-FGEN
 
 
 
+ReferenceClockSource
+--------------------
 
-.. py:data:: ReferenceClockSource
+.. py:class:: ReferenceClockSource
 
     .. py:attribute:: ReferenceClockSource.CLOCK_IN
 
@@ -466,8 +492,10 @@ Enums used in NI-FGEN
 
 
 
+RelativeTo
+----------
 
-.. py:data:: RelativeTo
+.. py:class:: RelativeTo
 
     .. py:attribute:: RelativeTo.START
 
@@ -477,8 +505,10 @@ Enums used in NI-FGEN
 
 
 
+SampleClockSource
+-----------------
 
-.. py:data:: SampleClockSource
+.. py:class:: SampleClockSource
 
     .. py:attribute:: SampleClockSource.CLOCK_IN
 
@@ -611,8 +641,10 @@ Enums used in NI-FGEN
 
 
 
+SampleClockTimebaseSource
+-------------------------
 
-.. py:data:: SampleClockTimebaseSource
+.. py:class:: SampleClockTimebaseSource
 
     .. py:attribute:: SampleClockTimebaseSource.CLOCK_IN
 
@@ -635,8 +667,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerDigitalEdgeEdge
+----------------------------
 
-.. py:data:: ScriptTriggerDigitalEdgeEdge
+.. py:class:: ScriptTriggerDigitalEdgeEdge
 
     .. py:attribute:: ScriptTriggerDigitalEdgeEdge.RISING
 
@@ -658,8 +692,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerDigitalLevelActiveLevel
+------------------------------------
 
-.. py:data:: ScriptTriggerDigitalLevelActiveLevel
+.. py:class:: ScriptTriggerDigitalLevelActiveLevel
 
     .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.HIGH
 
@@ -681,8 +717,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerType
+-----------------
 
-.. py:data:: ScriptTriggerType
+.. py:class:: ScriptTriggerType
 
     .. py:attribute:: ScriptTriggerType.TRIG_NONE
 
@@ -724,8 +762,10 @@ Enums used in NI-FGEN
 
 
 
+StartTriggerDigitalEdgeEdge
+---------------------------
 
-.. py:data:: StartTriggerDigitalEdgeEdge
+.. py:class:: StartTriggerDigitalEdgeEdge
 
     .. py:attribute:: StartTriggerDigitalEdgeEdge.RISING
 
@@ -747,8 +787,10 @@ Enums used in NI-FGEN
 
 
 
+StartTriggerType
+----------------
 
-.. py:data:: StartTriggerType
+.. py:class:: StartTriggerType
 
     .. py:attribute:: StartTriggerType.TRIG_NONE
 
@@ -790,161 +832,10 @@ Enums used in NI-FGEN
 
 
 
+TerminalConfiguration
+---------------------
 
-.. py:data:: SynchronizationSource
-
-    .. py:attribute:: SynchronizationSource.TTL0
-
-
-
-        PXI TRIG0 or VXI TTL0
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL1
-
-
-
-        PXI TRIG1 or VXI TTL1
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL2
-
-
-
-        PXI TRIG2 or VXI TTL2
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL3
-
-
-
-        PXI TRIG3 or VXI TTL3
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL4
-
-
-
-        PXI TRIG4 or VXI TTL4
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL5
-
-
-
-        PXI TRIG5 or VXI TTL5
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL6
-
-
-
-        PXI TRIG6 or VXI TTL6
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_0
-
-
-
-        RTSI 0
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_1
-
-
-
-        RTSI 1
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_2
-
-
-
-        RTSI 2
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_3
-
-
-
-        RTSI 3
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_4
-
-
-
-        RTSI 4
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_5
-
-
-
-        RTSI 5
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_6
-
-
-
-        RTSI 6
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.NONE
-
-
-
-        No Synchronization Source
-
-        
-
-
-
-
-.. py:data:: TerminalConfiguration
+.. py:class:: TerminalConfiguration
 
     .. py:attribute:: TerminalConfiguration.SINGLE_ENDED
 
@@ -966,8 +857,10 @@ Enums used in NI-FGEN
 
 
 
+Trigger
+-------
 
-.. py:data:: Trigger
+.. py:class:: Trigger
 
     .. py:attribute:: Trigger.START
 
@@ -977,8 +870,10 @@ Enums used in NI-FGEN
 
 
 
+TriggerMode
+-----------
 
-.. py:data:: TriggerMode
+.. py:class:: TriggerMode
 
     .. py:attribute:: TriggerMode.SINGLE
 
@@ -1026,251 +921,10 @@ Enums used in NI-FGEN
 
 
 
+TriggerWhen
+-----------
 
-.. py:data:: TriggerSource
-
-    .. py:attribute:: TriggerSource.IMMEDIATE
-
-
-
-        Immediate-The signal generator does not wait for a trigger of any kind.
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.EXTERNAL
-
-
-
-        External-The signal generator waits for a trigger on the external trigger input
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.SOFTWARE_TRIG
-
-
-
-        Software Trigger-The signal generator waits until you call :py:meth:`nifgen.Session.SendSWTrigger`.
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL0
-
-
-
-        PXI TRIG0 or VXI TTL0
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL1
-
-
-
-        PXI TRIG1 or VXI TTL1
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL2
-
-
-
-        PXI TRIG2 or VXI TTL2
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL3
-
-
-
-        PXI TRIG3 or VXI TTL3
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL4
-
-
-
-        PXI TRIG4 or VXI TTL4
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL5
-
-
-
-        PXI TRIG5 or VXI TTL5
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL6
-
-
-
-        PXI TRIG6 or VXI TTL6
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PXI_STAR
-
-
-
-        PXI star
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_0
-
-
-
-        RTSI line 0
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_1
-
-
-
-        RTSI line 1
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_2
-
-
-
-        RTSI line 2
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_3
-
-
-
-        RTSI line 3
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_4
-
-
-
-        RTSI line 4
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_5
-
-
-
-        RTSI line 5
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_6
-
-
-
-        RTSI line 6
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_7
-
-
-
-        RTSI line 7
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_0
-
-
-
-        PFI 0
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_1
-
-
-
-        PFI 1
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_2
-
-
-
-        PFI 2
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_3
-
-
-
-        PFI 3
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.OTHER_TERMINAL
-
-
-
-        Specifies that another terminal is used.
-
-        
-
-
-
-
-.. py:data:: TriggerWhen
+.. py:class:: TriggerWhen
 
     .. py:attribute:: TriggerWhen.HIGH
 
@@ -1280,91 +934,10 @@ Enums used in NI-FGEN
 
 
 
+WaitBehavior
+------------
 
-.. py:data:: VideoWaveformType
-
-    .. py:attribute:: VideoWaveformType.PAL_B
-
-
-
-        PAL B Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_D
-
-
-
-        PAL D Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_G
-
-
-
-        PAL G Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_H
-
-
-
-        PAL H Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_I
-
-
-
-        PAL I Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_M
-
-
-
-        PAL M Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_N
-
-
-
-        PAL N Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.NTSC_M
-
-
-
-        NTSC M Video Type
-
-        
-
-
-
-
-.. py:data:: WaitBehavior
+.. py:class:: WaitBehavior
 
     .. py:attribute:: WaitBehavior.HOLD_LAST
 
@@ -1386,8 +959,10 @@ Enums used in NI-FGEN
 
 
 
+Waveform
+--------
 
-.. py:data:: Waveform
+.. py:class:: Waveform
 
     .. py:attribute:: Waveform.SINE
 
@@ -1466,5 +1041,8 @@ Enums used in NI-FGEN
         User-defined waveform as defined by the :py:meth:`nifgen.Session.define_user_standard_waveform` method.
 
         
+
+
+
 
 

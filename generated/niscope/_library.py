@@ -58,6 +58,7 @@ class Library(object):
         self.niScope_GetError_cfunc = None
         self.niScope_InitWithOptions_cfunc = None
         self.niScope_InitiateAcquisition_cfunc = None
+        self.niScope_LockSession_cfunc = None
         self.niScope_ProbeCompensationSignalStart_cfunc = None
         self.niScope_ProbeCompensationSignalStop_cfunc = None
         self.niScope_Read_cfunc = None
@@ -70,6 +71,7 @@ class Library(object):
         self.niScope_SetAttributeViInt64_cfunc = None
         self.niScope_SetAttributeViReal64_cfunc = None
         self.niScope_SetAttributeViString_cfunc = None
+        self.niScope_UnlockSession_cfunc = None
         self.niScope_close_cfunc = None
         self.niScope_reset_cfunc = None
         self.niScope_self_test_cfunc = None
@@ -386,6 +388,14 @@ class Library(object):
                 self.niScope_InitiateAcquisition_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_InitiateAcquisition_cfunc(vi)
 
+    def niScope_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_LockSession_cfunc is None:
+                self.niScope_LockSession_cfunc = self._library.niScope_LockSession
+                self.niScope_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niScope_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_LockSession_cfunc(vi, caller_has_lock)
+
     def niScope_ProbeCompensationSignalStart(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niScope_ProbeCompensationSignalStart_cfunc is None:
@@ -481,6 +491,14 @@ class Library(object):
                 self.niScope_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViString_cfunc(vi, channel_list, attribute_id, value)
+
+    def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_UnlockSession_cfunc is None:
+                self.niScope_UnlockSession_cfunc = self._library.niScope_UnlockSession
+                self.niScope_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niScope_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niScope_close(self, vi):  # noqa: N802
         with self._func_lock:

@@ -95,7 +95,8 @@ if p['use_array']:
         for i in range(len(test_value)):
             ${param_name}[i] = test_value[i]
 %           else:
-        ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
+        if ${p['python_name']} is not None:
+            ${p['python_name']}.contents.value = self._defaults['${func_name}']['${p['name']}']
 %           endif
 %       endif
 %    endfor

@@ -77,6 +77,24 @@ attributes_codegen_method = {
     1150355: { "codegen_method": "no" },  # MARKER_EVENT_DELAY_UNITS - nifgen review - Remove event properties - #858
     1150357: { "codegen_method": "no" },  # STARTED_EVENT_DELAY_UNITS - nifgen review - Remove event properties - #858
     1150359: { "codegen_method": "no" },  # DONE_EVENT_DELAY_UNITS - nifgen review - Remove event properties - #858
+    1150244: { "codegen_method": "no" },  # DIRECT_DMA_ENABLED - StreamStor not supported - #858
+    1150274: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_ADDRESS - StreamStor not supported - #858
+    1150245: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_SIZE - StreamStor not supported - #858
+    1150223: { "codegen_method": "no" },  # GAIN_DAC_VALUE - external calibration - #858
+    1150224: { "codegen_method": "no" },  # OFFSET_DAC_VALUE - external calibration - #858
+    1150001: { "codegen_method": "no" },  # ID_QUERY_RESPONSE - IVI Attribute - #858
+    1150225: { "codegen_method": "no" },  # OSCILLATOR_FREQ_DAC_VALUE - external calibration - #858
+    1150232: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - external calibration - #858
+    1150229: { "codegen_method": "no" },  # POST_AMPLIFIER_ATTENUATION - external calibration - #858
+    1150228: { "codegen_method": "no" },  # PRE_AMPLIFIER_ATTENUATION - external calibration - #858
+    1150410: { "codegen_method": "no" },  # P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL - P2P not supported - #858
+    1150362: { "codegen_method": "no" },  # PCI_DMA_OPTIMIZATIONS_ENABLED - For internal use only - #858
+    1150231: { "codegen_method": "no" },  # SAMPLE_CLOCK_ABSOLUTE_DELAY - EOL hardware only - #858
+    1150111: { "codegen_method": "no" },  # SYNCHRONIZATION - EOL hardware only - #858
+    1150105: { "codegen_method": "no" },  # SYNC_DUTY_CYCLE_HIGH - EOL hardware only - #858
+    1150330: { "codegen_method": "no" },  # SYNC_OUT_OUTPUT_TERMINAL - EOL hardware only - #858
+    1250302: { "codegen_method": "no" },  # TRIGGER_SOURCE - EOL hardware only - #858
+    1150216: { "codegen_method": "no" },  # VIDEO_WAVEFORM_TYPE - EOL hardware only - #858
 }
 
 attributes_converters = {

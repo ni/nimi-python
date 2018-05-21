@@ -87,6 +87,20 @@ class ${session_context_manager}(object):
 
 
 % endif
+% if config['use_session_lock']:
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
+%endif
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session

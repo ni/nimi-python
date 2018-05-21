@@ -39,6 +39,12 @@ class TestSession(object):
         self.get_ctypes_pointer_for_buffer_side_effect_count = 0
         self.get_ctypes_pointer_for_buffer_side_effect_items = []
 
+        # Mock lock/unlock
+        self.patched_library.niFake_LockSession.side_effect = self.side_effects_helper.niFake_LockSession
+        self.side_effects_helper['LockSession']['callerHasLock'] = True
+        self.patched_library.niFake_UnlockSession.side_effect = self.side_effects_helper.niFake_UnlockSession
+        self.side_effects_helper['UnlockSession']['callerHasLock'] = False
+
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
@@ -151,8 +157,35 @@ class TestSession(object):
             assert e.code == test_error_code
             assert e.description == test_error_desc
 
-    # Methods
+    # Session locking
+    def test_lock_session_none(self):
+        with nifake.Session('dev1') as session:
+            session.lock()
+            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
 
+    def test_unlock_session_none(self):
+        with nifake.Session('dev1') as session:
+            session.unlock()
+            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+
+    def test_lock_context_manager(self):
+        with nifake.Session('dev1') as session:
+            with session.lock():
+                pass
+            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+
+    def test_lock_context_manager_abnormal_exit(self):
+        with nifake.Session('dev1') as session:
+            try:
+                with session.lock():
+                    raise nifake.Error('Fake exception')
+            except nifake.Error:
+                pass
+            self.patched_library.niFake_LockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+            self.patched_library.niFake_UnlockSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), None)
+
+    # Methods
     def test_simple_function(self):
         self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
         with nifake.Session('dev1') as session:

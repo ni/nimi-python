@@ -97,6 +97,9 @@ class SideEffectsHelper(object):
         self._defaults['InitializeWithChannels']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['Measure'] = {}
         self._defaults['Measure']['return'] = 0
         self._defaults['Measure']['Measurement'] = None
@@ -143,6 +146,9 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetSequence'] = {}
         self._defaults['SetSequence']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitForEvent'] = {}
         self._defaults['WaitForEvent']['return'] = 0
         self._defaults['close'] = {}
@@ -267,7 +273,8 @@ class SideEffectsHelper(object):
         # actual_count
         if self._defaults['FetchMultiple']['actualCount'] is None:
             raise MockFunctionCallError("niDCPower_FetchMultiple", param='actualCount')
-        actual_count.contents.value = self._defaults['FetchMultiple']['actualCount']
+        if actual_count is not None:
+            actual_count.contents.value = self._defaults['FetchMultiple']['actualCount']
         return self._defaults['FetchMultiple']['return']
 
     def niDCPower_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -276,7 +283,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViBoolean']['attributeValue'] is None:
             raise MockFunctionCallError("niDCPower_GetAttributeViBoolean", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niDCPower_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -285,7 +293,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niDCPower_GetAttributeViInt32", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
         return self._defaults['GetAttributeViInt32']['return']
 
     def niDCPower_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -294,7 +303,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViInt64']['attributeValue'] is None:
             raise MockFunctionCallError("niDCPower_GetAttributeViInt64", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViInt64']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViInt64']['attributeValue']
         return self._defaults['GetAttributeViInt64']['return']
 
     def niDCPower_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -303,7 +313,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViReal64']['attributeValue'] is None:
             raise MockFunctionCallError("niDCPower_GetAttributeViReal64", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niDCPower_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
@@ -332,7 +343,8 @@ class SideEffectsHelper(object):
         # code
         if self._defaults['GetError']['Code'] is None:
             raise MockFunctionCallError("niDCPower_GetError", param='Code')
-        code.contents.value = self._defaults['GetError']['Code']
+        if code is not None:
+            code.contents.value = self._defaults['GetError']['Code']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niDCPower_GetError", param='Description')
         if buffer_size.value == 0:
@@ -346,23 +358,28 @@ class SideEffectsHelper(object):
         # year
         if self._defaults['GetExtCalLastDateAndTime']['Year'] is None:
             raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Year')
-        year.contents.value = self._defaults['GetExtCalLastDateAndTime']['Year']
+        if year is not None:
+            year.contents.value = self._defaults['GetExtCalLastDateAndTime']['Year']
         # month
         if self._defaults['GetExtCalLastDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Month')
-        month.contents.value = self._defaults['GetExtCalLastDateAndTime']['Month']
+        if month is not None:
+            month.contents.value = self._defaults['GetExtCalLastDateAndTime']['Month']
         # day
         if self._defaults['GetExtCalLastDateAndTime']['Day'] is None:
             raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Day')
-        day.contents.value = self._defaults['GetExtCalLastDateAndTime']['Day']
+        if day is not None:
+            day.contents.value = self._defaults['GetExtCalLastDateAndTime']['Day']
         # hour
         if self._defaults['GetExtCalLastDateAndTime']['Hour'] is None:
             raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Hour')
-        hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['Hour']
+        if hour is not None:
+            hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['Hour']
         # minute
         if self._defaults['GetExtCalLastDateAndTime']['Minute'] is None:
             raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Minute')
-        minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['Minute']
+        if minute is not None:
+            minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['Minute']
         return self._defaults['GetExtCalLastDateAndTime']['return']
 
     def niDCPower_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
@@ -371,7 +388,8 @@ class SideEffectsHelper(object):
         # temperature
         if self._defaults['GetExtCalLastTemp']['Temperature'] is None:
             raise MockFunctionCallError("niDCPower_GetExtCalLastTemp", param='Temperature')
-        temperature.contents.value = self._defaults['GetExtCalLastTemp']['Temperature']
+        if temperature is not None:
+            temperature.contents.value = self._defaults['GetExtCalLastTemp']['Temperature']
         return self._defaults['GetExtCalLastTemp']['return']
 
     def niDCPower_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
@@ -380,7 +398,8 @@ class SideEffectsHelper(object):
         # months
         if self._defaults['GetExtCalRecommendedInterval']['Months'] is None:
             raise MockFunctionCallError("niDCPower_GetExtCalRecommendedInterval", param='Months')
-        months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
+        if months is not None:
+            months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
 
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
@@ -389,23 +408,28 @@ class SideEffectsHelper(object):
         # year
         if self._defaults['GetSelfCalLastDateAndTime']['Year'] is None:
             raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Year')
-        year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Year']
+        if year is not None:
+            year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Year']
         # month
         if self._defaults['GetSelfCalLastDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Month')
-        month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Month']
+        if month is not None:
+            month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Month']
         # day
         if self._defaults['GetSelfCalLastDateAndTime']['Day'] is None:
             raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Day')
-        day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Day']
+        if day is not None:
+            day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Day']
         # hour
         if self._defaults['GetSelfCalLastDateAndTime']['Hour'] is None:
             raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Hour')
-        hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Hour']
+        if hour is not None:
+            hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Hour']
         # minute
         if self._defaults['GetSelfCalLastDateAndTime']['Minute'] is None:
             raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Minute')
-        minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Minute']
+        if minute is not None:
+            minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Minute']
         return self._defaults['GetSelfCalLastDateAndTime']['return']
 
     def niDCPower_GetSelfCalLastTemp(self, vi, temperature):  # noqa: N802
@@ -414,7 +438,8 @@ class SideEffectsHelper(object):
         # temperature
         if self._defaults['GetSelfCalLastTemp']['Temperature'] is None:
             raise MockFunctionCallError("niDCPower_GetSelfCalLastTemp", param='Temperature')
-        temperature.contents.value = self._defaults['GetSelfCalLastTemp']['Temperature']
+        if temperature is not None:
+            temperature.contents.value = self._defaults['GetSelfCalLastTemp']['Temperature']
         return self._defaults['GetSelfCalLastTemp']['return']
 
     def niDCPower_InitializeWithChannels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
@@ -423,7 +448,8 @@ class SideEffectsHelper(object):
         # vi
         if self._defaults['InitializeWithChannels']['vi'] is None:
             raise MockFunctionCallError("niDCPower_InitializeWithChannels", param='vi')
-        vi.contents.value = self._defaults['InitializeWithChannels']['vi']
+        if vi is not None:
+            vi.contents.value = self._defaults['InitializeWithChannels']['vi']
         return self._defaults['InitializeWithChannels']['return']
 
     def niDCPower_Initiate(self, vi):  # noqa: N802
@@ -431,13 +457,24 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
+    def niDCPower_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niDCPower_LockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
+
     def niDCPower_Measure(self, vi, channel_name, measurement_type, measurement):  # noqa: N802
         if self._defaults['Measure']['return'] != 0:
             return self._defaults['Measure']['return']
         # measurement
         if self._defaults['Measure']['Measurement'] is None:
             raise MockFunctionCallError("niDCPower_Measure", param='Measurement')
-        measurement.contents.value = self._defaults['Measure']['Measurement']
+        if measurement is not None:
+            measurement.contents.value = self._defaults['Measure']['Measurement']
         return self._defaults['Measure']['return']
 
     def niDCPower_MeasureMultiple(self, vi, channel_name, voltage_measurements, current_measurements):  # noqa: N802
@@ -473,7 +510,8 @@ class SideEffectsHelper(object):
         # number_of_channels
         if self._defaults['ParseChannelCount']['numberOfChannels'] is None:
             raise MockFunctionCallError("niDCPower_ParseChannelCount", param='numberOfChannels')
-        number_of_channels.contents.value = self._defaults['ParseChannelCount']['numberOfChannels']
+        if number_of_channels is not None:
+            number_of_channels.contents.value = self._defaults['ParseChannelCount']['numberOfChannels']
         return self._defaults['ParseChannelCount']['return']
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
@@ -482,7 +520,8 @@ class SideEffectsHelper(object):
         # in_compliance
         if self._defaults['QueryInCompliance']['inCompliance'] is None:
             raise MockFunctionCallError("niDCPower_QueryInCompliance", param='inCompliance')
-        in_compliance.contents.value = self._defaults['QueryInCompliance']['inCompliance']
+        if in_compliance is not None:
+            in_compliance.contents.value = self._defaults['QueryInCompliance']['inCompliance']
         return self._defaults['QueryInCompliance']['return']
 
     def niDCPower_QueryMaxCurrentLimit(self, vi, channel_name, voltage_level, max_current_limit):  # noqa: N802
@@ -491,7 +530,8 @@ class SideEffectsHelper(object):
         # max_current_limit
         if self._defaults['QueryMaxCurrentLimit']['maxCurrentLimit'] is None:
             raise MockFunctionCallError("niDCPower_QueryMaxCurrentLimit", param='maxCurrentLimit')
-        max_current_limit.contents.value = self._defaults['QueryMaxCurrentLimit']['maxCurrentLimit']
+        if max_current_limit is not None:
+            max_current_limit.contents.value = self._defaults['QueryMaxCurrentLimit']['maxCurrentLimit']
         return self._defaults['QueryMaxCurrentLimit']['return']
 
     def niDCPower_QueryMaxVoltageLevel(self, vi, channel_name, current_limit, max_voltage_level):  # noqa: N802
@@ -500,7 +540,8 @@ class SideEffectsHelper(object):
         # max_voltage_level
         if self._defaults['QueryMaxVoltageLevel']['maxVoltageLevel'] is None:
             raise MockFunctionCallError("niDCPower_QueryMaxVoltageLevel", param='maxVoltageLevel')
-        max_voltage_level.contents.value = self._defaults['QueryMaxVoltageLevel']['maxVoltageLevel']
+        if max_voltage_level is not None:
+            max_voltage_level.contents.value = self._defaults['QueryMaxVoltageLevel']['maxVoltageLevel']
         return self._defaults['QueryMaxVoltageLevel']['return']
 
     def niDCPower_QueryMinCurrentLimit(self, vi, channel_name, voltage_level, min_current_limit):  # noqa: N802
@@ -509,7 +550,8 @@ class SideEffectsHelper(object):
         # min_current_limit
         if self._defaults['QueryMinCurrentLimit']['minCurrentLimit'] is None:
             raise MockFunctionCallError("niDCPower_QueryMinCurrentLimit", param='minCurrentLimit')
-        min_current_limit.contents.value = self._defaults['QueryMinCurrentLimit']['minCurrentLimit']
+        if min_current_limit is not None:
+            min_current_limit.contents.value = self._defaults['QueryMinCurrentLimit']['minCurrentLimit']
         return self._defaults['QueryMinCurrentLimit']['return']
 
     def niDCPower_QueryOutputState(self, vi, channel_name, output_state, in_state):  # noqa: N802
@@ -518,7 +560,8 @@ class SideEffectsHelper(object):
         # in_state
         if self._defaults['QueryOutputState']['inState'] is None:
             raise MockFunctionCallError("niDCPower_QueryOutputState", param='inState')
-        in_state.contents.value = self._defaults['QueryOutputState']['inState']
+        if in_state is not None:
+            in_state.contents.value = self._defaults['QueryOutputState']['inState']
         return self._defaults['QueryOutputState']['return']
 
     def niDCPower_ReadCurrentTemperature(self, vi, temperature):  # noqa: N802
@@ -527,7 +570,8 @@ class SideEffectsHelper(object):
         # temperature
         if self._defaults['ReadCurrentTemperature']['Temperature'] is None:
             raise MockFunctionCallError("niDCPower_ReadCurrentTemperature", param='Temperature')
-        temperature.contents.value = self._defaults['ReadCurrentTemperature']['Temperature']
+        if temperature is not None:
+            temperature.contents.value = self._defaults['ReadCurrentTemperature']['Temperature']
         return self._defaults['ReadCurrentTemperature']['return']
 
     def niDCPower_ResetDevice(self, vi):  # noqa: N802
@@ -575,6 +619,16 @@ class SideEffectsHelper(object):
             return self._defaults['SetSequence']['return']
         return self._defaults['SetSequence']['return']
 
+    def niDCPower_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niDCPower_UnlockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
+
     def niDCPower_WaitForEvent(self, vi, event_id, timeout):  # noqa: N802
         if self._defaults['WaitForEvent']['return'] != 0:
             return self._defaults['WaitForEvent']['return']
@@ -610,7 +664,8 @@ class SideEffectsHelper(object):
         # self_test_result
         if self._defaults['self_test']['selfTestResult'] is None:
             raise MockFunctionCallError("niDCPower_self_test", param='selfTestResult')
-        self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niDCPower_self_test", param='selfTestMessage')
@@ -680,6 +735,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_InitializeWithChannels.return_value = 0
         mock_library.niDCPower_Initiate.side_effect = MockFunctionCallError("niDCPower_Initiate")
         mock_library.niDCPower_Initiate.return_value = 0
+        mock_library.niDCPower_LockSession.side_effect = MockFunctionCallError("niDCPower_LockSession")
+        mock_library.niDCPower_LockSession.return_value = 0
         mock_library.niDCPower_Measure.side_effect = MockFunctionCallError("niDCPower_Measure")
         mock_library.niDCPower_Measure.return_value = 0
         mock_library.niDCPower_MeasureMultiple.side_effect = MockFunctionCallError("niDCPower_MeasureMultiple")
@@ -716,6 +773,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_SetAttributeViString.return_value = 0
         mock_library.niDCPower_SetSequence.side_effect = MockFunctionCallError("niDCPower_SetSequence")
         mock_library.niDCPower_SetSequence.return_value = 0
+        mock_library.niDCPower_UnlockSession.side_effect = MockFunctionCallError("niDCPower_UnlockSession")
+        mock_library.niDCPower_UnlockSession.return_value = 0
         mock_library.niDCPower_WaitForEvent.side_effect = MockFunctionCallError("niDCPower_WaitForEvent")
         mock_library.niDCPower_WaitForEvent.return_value = 0
         mock_library.niDCPower_close.side_effect = MockFunctionCallError("niDCPower_close")

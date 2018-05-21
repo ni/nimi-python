@@ -6,8 +6,10 @@ Enums used in NI-SWITCH
 .. py:currentmodule:: niswitch
 
 
+HandshakingInitiation
+---------------------
 
-.. py:data:: HandshakingInitiation
+.. py:class:: HandshakingInitiation
 
     .. py:attribute:: HandshakingInitiation.MEASUREMENT_DEVICE
 
@@ -45,8 +47,10 @@ Enums used in NI-SWITCH
 
 
 
+PathCapability
+--------------
 
-.. py:data:: PathCapability
+.. py:class:: PathCapability
 
     .. py:attribute:: PathCapability.PATH_AVAILABLE
 
@@ -108,8 +112,10 @@ Enums used in NI-SWITCH
 
 
 
+RelayAction
+-----------
 
-.. py:data:: RelayAction
+.. py:class:: RelayAction
 
     .. py:attribute:: RelayAction.OPEN
 
@@ -131,8 +137,10 @@ Enums used in NI-SWITCH
 
 
 
+RelayPosition
+-------------
 
-.. py:data:: RelayPosition
+.. py:class:: RelayPosition
 
     .. py:attribute:: RelayPosition.OPEN
 
@@ -154,8 +162,10 @@ Enums used in NI-SWITCH
 
 
 
+ScanAdvancedOutput
+------------------
 
-.. py:data:: ScanAdvancedOutput
+.. py:class:: ScanAdvancedOutput
 
     .. py:attribute:: ScanAdvancedOutput.NONE
 
@@ -552,8 +562,10 @@ Enums used in NI-SWITCH
 
 
 
+ScanAdvancedPolarity
+--------------------
 
-.. py:data:: ScanAdvancedPolarity
+.. py:class:: ScanAdvancedPolarity
 
     .. py:attribute:: ScanAdvancedPolarity.RISING
 
@@ -575,8 +587,10 @@ Enums used in NI-SWITCH
 
 
 
+ScanMode
+--------
 
-.. py:data:: ScanMode
+.. py:class:: ScanMode
 
     .. py:attribute:: ScanMode.NONE
 
@@ -608,8 +622,10 @@ Enums used in NI-SWITCH
 
 
 
+TriggerInput
+------------
 
-.. py:data:: TriggerInput
+.. py:class:: TriggerInput
 
     .. py:attribute:: TriggerInput.IMMEDIATE
 
@@ -1015,8 +1031,10 @@ Enums used in NI-SWITCH
 
 
 
+TriggerInputPolarity
+--------------------
 
-.. py:data:: TriggerInputPolarity
+.. py:class:: TriggerInputPolarity
 
     .. py:attribute:: TriggerInputPolarity.RISING
 
@@ -1035,5 +1053,8 @@ Enums used in NI-SWITCH
         The trigger occurs on the falling edge of the signal.
 
         
+
+
+
 
 
