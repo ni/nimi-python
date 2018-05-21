@@ -37,6 +37,7 @@ functions_codegen_method = {
     'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
     'Disable.+Trigger':                { 'codegen_method': 'no',       },
     'revision_query':                  { 'codegen_method': 'no',       },
+    'ExportSignal':                    { 'codegen_method': 'no',       },  # remove export signal #828
     'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
     'FetchMultiple':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper

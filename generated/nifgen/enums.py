@@ -454,22 +454,6 @@ class ScriptTriggerType(Enum):
     '''
 
 
-class Signal(Enum):
-    ONBOARD_REFERENCE_CLOCK = 1019
-    SYNC_OUT = 1002
-    START_TRIGGER = 1004
-    MARKER_EVENT = 1001
-    SAMPLE_CLOCK_TIMEBASE = 1006
-    SYNCHRONIZATION = 1007
-    SAMPLE_CLOCK = 101
-    REFERENCE_CLOCK = 102
-    SCRIPT_TRIGGER = 103
-    READY_FOR_START_EVENT = 105
-    STARTED_EVENT = 106
-    DONE_EVENT = 107
-    DATA_MARKER_EVENT = 108
-
-
 class StartTriggerDigitalEdgeEdge(Enum):
     RISING = 101
     '''

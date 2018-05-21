@@ -20,6 +20,7 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
+    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828
     'CreateWaveformF64':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'CreateWaveformI16':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'WriteBinary16Waveform':                { 'codegen_method': 'private', 'method_name_for_documentation': 'write_waveform', },  # Called from public method write_waveform()
@@ -93,8 +94,15 @@ functions_enums = {
     'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },
 }
 
+# Need to manually set some repeated capabilities
+functions_rep_caps = {
+    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    # 'SendSoftwareEdgeTrigger':                  { 'parameters': { 2: { 'is_repeated_capability': True, }, }, }, # 850
+}
+
 functions_issues = {
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: {'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
+    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
                                                               4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
 }
 

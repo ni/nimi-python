@@ -45,7 +45,6 @@ class Library(object):
         self.niFgen_DeleteNamedWaveform_cfunc = None
         self.niFgen_DeleteScript_cfunc = None
         self.niFgen_Disable_cfunc = None
-        self.niFgen_ExportSignal_cfunc = None
         self.niFgen_GetAttributeViBoolean_cfunc = None
         self.niFgen_GetAttributeViInt32_cfunc = None
         self.niFgen_GetAttributeViReal64_cfunc = None
@@ -315,14 +314,6 @@ class Library(object):
                 self.niFgen_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_Disable_cfunc(vi)
-
-    def niFgen_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ExportSignal_cfunc is None:
-                self.niFgen_ExportSignal_cfunc = self._library.niFgen_ExportSignal
-                self.niFgen_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFgen_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
     def niFgen_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:

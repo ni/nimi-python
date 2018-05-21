@@ -80,8 +80,6 @@ class SideEffectsHelper(object):
         self._defaults['DeleteScript']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
-        self._defaults['ExportSignal'] = {}
-        self._defaults['ExportSignal']['return'] = 0
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['attributeValue'] = None
@@ -416,11 +414,6 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
-
-    def niFgen_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        if self._defaults['ExportSignal']['return'] != 0:
-            return self._defaults['ExportSignal']['return']
-        return self._defaults['ExportSignal']['return']
 
     def niFgen_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
@@ -953,8 +946,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_DeleteScript.return_value = 0
         mock_library.niFgen_Disable.side_effect = MockFunctionCallError("niFgen_Disable")
         mock_library.niFgen_Disable.return_value = 0
-        mock_library.niFgen_ExportSignal.side_effect = MockFunctionCallError("niFgen_ExportSignal")
-        mock_library.niFgen_ExportSignal.return_value = 0
         mock_library.niFgen_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_GetAttributeViBoolean")
         mock_library.niFgen_GetAttributeViBoolean.return_value = 0
         mock_library.niFgen_GetAttributeViInt32.side_effect = MockFunctionCallError("niFgen_GetAttributeViInt32")

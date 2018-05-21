@@ -989,61 +989,6 @@ Enums used in NI-FGEN
 
 
 
-.. py:data:: Signal
-
-    .. py:attribute:: Signal.ONBOARD_REFERENCE_CLOCK
-
-
-
-    .. py:attribute:: Signal.SYNC_OUT
-
-
-
-    .. py:attribute:: Signal.START_TRIGGER
-
-
-
-    .. py:attribute:: Signal.MARKER_EVENT
-
-
-
-    .. py:attribute:: Signal.SAMPLE_CLOCK_TIMEBASE
-
-
-
-    .. py:attribute:: Signal.SYNCHRONIZATION
-
-
-
-    .. py:attribute:: Signal.SAMPLE_CLOCK
-
-
-
-    .. py:attribute:: Signal.REFERENCE_CLOCK
-
-
-
-    .. py:attribute:: Signal.SCRIPT_TRIGGER
-
-
-
-    .. py:attribute:: Signal.READY_FOR_START_EVENT
-
-
-
-    .. py:attribute:: Signal.STARTED_EVENT
-
-
-
-    .. py:attribute:: Signal.DONE_EVENT
-
-
-
-    .. py:attribute:: Signal.DATA_MARKER_EVENT
-
-
-
-
 .. py:data:: StartTriggerDigitalEdgeEdge
 
     .. py:attribute:: StartTriggerDigitalEdgeEdge.RISING
