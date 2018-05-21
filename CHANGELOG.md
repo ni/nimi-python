@@ -65,6 +65,33 @@ All notable changes to this project will be documented in this file.
             * `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+        * `ready_for_start_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_toggle_initial_state` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_live_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `ready_for_start_event_live_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
 * ### NI-SCOPE
     * #### Added
     * #### Changed
