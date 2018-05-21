@@ -190,29 +190,6 @@ Enums used in NI-FGEN
 
 
 
-.. py:data:: DataProcessingMode
-
-    .. py:attribute:: DataProcessingMode.REAL
-
-
-
-        The waveform data points are real numbers (I data).
-
-        
-
-
-
-    .. py:attribute:: DataProcessingMode.COMPLEX
-
-
-
-        The waveform data points are complex numbers (I/Q data).
-
-        
-
-
-
-
 .. py:data:: DoneEventActiveLevel
 
     .. py:attribute:: DoneEventActiveLevel.HIGH
@@ -322,59 +299,6 @@ Enums used in NI-FGEN
 
 
         Specifies the pulse width in seconds.
-
-        
-
-
-
-
-.. py:data:: FilterType
-
-    .. py:attribute:: FilterType.FLAT
-
-
-
-        Applies a flat filter to the data with the passband value specified  in the :py:data:`nifgen.Session.osp_fir_filter_flat_passband` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.RAISED_COSINE
-
-
-
-        Applies a raised cosine filter to the data with the alpha value  specified in the :py:data:`nifgen.Session.osp_fir_filter_raised_cosine_alpha` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.ROOT_RAISED_COSINE
-
-
-
-        Applies a root raised cosine filter to the data with the alpha value  specified in the :py:data:`nifgen.Session.osp_fir_filter_root_raised_cosine_alpha` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.GAUSSIAN
-
-
-
-        Applies a Gaussian filter to the data with the BT value specified in the  :py:data:`nifgen.Session.osp_fir_filter_gaussian_bt` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.CUSTOM
-
-
-
-        Applies a custom filter to the data. If :py:data:`~nifgen.FilterType.CUSTOM` is selected,  you must provide a set of FIR filter coefficients with the  :py:meth:`nifgen.Session.configure_custom_fir_filter_coefficients` method.
 
         
 
@@ -547,52 +471,6 @@ Enums used in NI-FGEN
 
 
         Sets the initial state of the Marker event to low.
-
-        
-
-
-
-
-.. py:data:: OSPMode
-
-    .. py:attribute:: OSPMode.IF
-
-
-
-        The OSP block generates intermediate frequency (IF) data.
-
-        
-
-
-
-    .. py:attribute:: OSPMode.BASEBAND
-
-
-
-        The OSP block generates baseband data.
-
-        
-
-
-
-
-.. py:data:: OSPOverflowErrorReporting
-
-    .. py:attribute:: OSPOverflowErrorReporting.ERROR
-
-
-
-        NI-FGEN returns errors whenever an overflow has occurred in the OSP block.
-
-        
-
-
-
-    .. py:attribute:: OSPOverflowErrorReporting.DISABLED
-
-
-
-        NI-FGEN does not return errors when an overflow occurs in the OSP block.
 
         
 
