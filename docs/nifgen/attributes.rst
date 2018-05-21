@@ -4614,7 +4614,7 @@ nifgen.Session properties
 .. py:attribute:: trigger_source
 
     Controls which trigger source the signal generator uses.
-    After you call the :py:meth:`nifgen.Session._initiate_generation` method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the :py:data:`nifgen.Session.CYCLE_COUNT` property.
+    After you call the :py:meth:`nifgen.Session.initiate` method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the :py:data:`nifgen.Session.CYCLE_COUNT` property.
     This property is also the source for the trigger in the other trigger modes as specified by the :py:data:`nifgen.Session.trigger_mode` property.
 
 
