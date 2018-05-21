@@ -6,13 +6,12 @@ from nimodinst.errors import Error     # noqa: F401
 from nimodinst.session import Session  # noqa: F401
 
 
-python_package_list = 'Python Installed Packages'
-
-
 def get_diagnostic_information():
     '''Get diagnostic information about the system state that is suitable for printing or logging
 
     returns: dict
+
+    note: Python bitness may be incorrect when running in a virtual environment
     '''
     import os
     import pkg_resources
@@ -30,6 +29,10 @@ def get_diagnostic_information():
         return 'VIRTUAL_ENV' in os.environ
 
     info = {}
+    info['os'] = {}
+    info['python'] = {}
+    info['driver'] = {}
+    info['module'] = {}
     if platform.system() == 'Windows':
         try:
             import winreg as winreg
@@ -46,38 +49,43 @@ def get_diagnostic_information():
         os_name = 'Linux'
         driver_version = 'Unknown'
     else:
-        os_name = 'Unknown'
-        driver_version = 'Unknown'
+        raise SystemError('Unsupported platform: {}'.format(platform.system()))
 
     installed_packages = pkg_resources.working_set
     installed_packages_list = [{'name': i.key, 'version': i.version, } for i in installed_packages]
 
-    info['OS Name'] = os_name
-    info['OS Version'] = platform.version()
-    info['OS Bitness'] = ('64' if is_os_64bit() else '32') + ' (May be incorrect if running in a virtual env)'
-    info['Driver Name'] = "NI-ModInst"
-    info['Driver Version'] = driver_version
-    info['Python Package'] = 'nimodinst'
-    info['Python Package Version'] = "0.8.0"
-    info['Python Version'] = sys.version
-    info['Python Bitness'] = '64' if is_python_64bit() else '32'
-    info['Python Virtual Env'] = 'Yes' if is_venv() else 'No'
-    info[python_package_list] = installed_packages_list
+    info['os']['name'] = os_name
+    info['os']['version'] = platform.version()
+    info['os']['bits'] = '64' if is_os_64bit() else '32'
+    info['driver']['name'] = "NI-ModInst"
+    info['driver']['version'] = driver_version
+    info['module']['name'] = 'nimodinst'
+    info['module']['version'] = "0.8.0"
+    info['python']['version'] = sys.version
+    info['python']['bits'] = '64' if is_python_64bit() else '32'
+    info['python']['is_venv'] = is_venv()
+    info['python']['packages'] = installed_packages_list
 
     return info
 
 
 def print_diagnostic_information():
-    '''Print diagnostic information in a format suitable for issue report'''
+    '''Print diagnostic information in a format suitable for issue report
+
+    note: Python bitness may be incorrect when running in a virtual environment
+    '''
     info = get_diagnostic_information()
 
-    row_format = '{:<25}: {}'
-    for key in sorted(info):
-        if key != python_package_list:  # We are going to format this one special
-            print(row_format.format(key, info[key]))
-    print(python_package_list + ':')
-    for p in info[python_package_list]:
-        print((' ' * 12) + p['name'] + '==' + p['version'])
+    row_format = '    {:<10} {}'
+    for type in ['OS', 'Driver', 'Module', 'Python']:
+        typename = type.lower()
+        print(type + ':')
+        for item in info[typename]:
+            if item != 'packages':
+                print(row_format.format(item.title() + ':', info[typename][item]))
+    print('    Installed Packages:')
+    for p in info['python']['packages']:
+        print((' ' * 8) + p['name'] + '==' + p['version'])
 
     return info
 
