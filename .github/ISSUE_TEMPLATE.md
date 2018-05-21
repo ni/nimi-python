@@ -18,4 +18,6 @@ When filing an issue, please fill in the requested fields as thoroughly as you c
     Script to reproduce if applicable
     ```
 
-    Description
+    * Step 1
+    * Step 2
+    * etc
