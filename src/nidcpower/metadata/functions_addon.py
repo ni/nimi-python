@@ -51,9 +51,11 @@ functions_codegen_method = {
 functions_locking = {
     'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
                                          'render_in_session_base': True,
+                                         'use_session_lock': False,
                                          'python_name': 'lock', },
     'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
                                          'render_in_session_base': True,
+                                         'use_session_lock': False,
                                          'python_name': 'unlock', },
     'InitializeWithChannels':          { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
     'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
