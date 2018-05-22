@@ -6,18 +6,18 @@ When filing an issue, please fill in the requested fields as thoroughly as you c
 
     \<Replace with a description of the issue\>
 
-* `python -c "import niscope; niscope.print_diagnostic_information()"` output (replace niscope with appropriate package name)
+* `python -c "import niscope; niscope.print_diagnostic_information()"` output (replace `niscope` with appropriate package name)
 
     ```
-    <replace with script output>
+    <Replace with the output of the above command>
     ```
 
 * Steps to reproduce issue
 
     ``` python
-    <Script to reproduce if applicable>
+    <Replace with a script that clearly shows the issue, if applicable>
     ```
 
-    * Step 1
-    * Step 2
-    * etc
+    1. Step 1
+    2. Step 2
+    3. etc...
