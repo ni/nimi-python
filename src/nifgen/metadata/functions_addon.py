@@ -67,6 +67,7 @@ functions_codegen_method = {
     'self_test':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
     'ConfigureDigitalEdgeScriptTrigger':    { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_script_trigger_source & session.digital_edge_script_trigger_edge #860
     'ConfigureDigitalEdgeStartTrigger':     { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_start_trigger_source & session.digital_edge_start_trigger_edge #860
+    'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'no',       },  # Removed - Obsolete and only applies to EOL HW #860
 }
 
 functions_locking = {
