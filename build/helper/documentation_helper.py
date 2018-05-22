@@ -391,13 +391,16 @@ def _fix_references(node, doc, cfg, make_link=False):
 
     attr_search_string = '{0}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper())
     func_search_string = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', ''))
+    func_search_string_lower = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].lower().replace('_', ''))
     enum_search_string = '{0}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper())
     attr_re = re.compile(attr_search_string)
     func_re = re.compile(func_search_string)
+    func_lower_re = re.compile(func_search_string_lower)
     enum_re = re.compile(enum_search_string)
 
     doc = attr_re.sub(_replace_attribute_python_name, doc)
     doc = func_re.sub(_replace_func_python_name, doc)
+    doc = func_lower_re.sub(_replace_func_python_name, doc)
     doc = enum_re.sub(_replace_enum_python_name, doc)
 
     if 'driver_urls' in cfg:
