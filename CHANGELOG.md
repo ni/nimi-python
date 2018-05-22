@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [0.9.0](#090---2018-05-22)
 * [0.8.0](#080---2018-04-27)
 * [0.7.0](#070---2018-02-20)
 * [0.6.0](#060---2017-12-20)
@@ -13,6 +14,36 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+
+## 0.9.0 - 2018-05-22
 * ### ALL
     * #### Added
         * Add `session.lock()` and `session.unlock()` to all drivers except nimodinst - [#846](https://github.com/ni/nimi-python/issues/846)
@@ -40,28 +71,13 @@ All notable changes to this project will be documented in this file.
             * `query_instrument_status`
             * `cache`
             * `specific_driver_prefix`
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-DCPower
-    * #### Added
-    * #### Changed
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
         * `active_advanced_sequence` [#832](https://github.com/ni/nimi-python/issues/832)
         * `active_advanced_sequence_step` [#832](https://github.com/ni/nimi-python/issues/832)
         * Default value for trigger parameter on `send_software_edge_trigger()` [#832](https://github.com/ni/nimi-python/issues/832)
 * ### NI-FGEN
-    * #### Added
     * #### Changed
         * Some functions missed setting repeated capabilities, leaving these as parameters instead of using the repeated capabilites object.
             * `session.configure_digital_edge_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_edge_script_trigger(source, ...)`
@@ -142,8 +158,6 @@ All notable changes to this project will be documented in this file.
         * `trigger_source` - [#858](https://github.com/ni/nimi-python/issues/858)
         * `video_wavefor_type` - [#858](https://github.com/ni/nimi-python/issues/858)
 * ### NI-SCOPE
-    * #### Added
-    * #### Changed
     * #### Removed
         * Properties removed
             * `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
@@ -178,12 +192,10 @@ All notable changes to this project will be documented in this file.
             * `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
             * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
 * ### NI-ModInst
-    * #### Added
     * #### Changed
         * Indexing on `nimodinst.Session` is no longer allowed
             * `session[0].device_name` becomes `session.devices[0].device_name`
             * This is to be consistent with other drivers
-    * #### Removed
 
 ## 0.8.0 - 2018-04-27
 * ### ALL
@@ -556,6 +568,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Python Versioning](http://legacy.python.org/dev/peps/pep-0396/).
 
 <!--
+* [Unreleased](#unreleased)
 ## [Unreleased]
 * ### ALL
     * #### Added
