@@ -68,6 +68,58 @@ All notable changes to this project will be documented in this file.
             * `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+        * `osp_fir_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_gaussian_bt` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_flat_passband` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_data_processing_mode` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_compensate_for_filter_group_delay` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_gain` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_phase_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_phase_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_frequency` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_offset_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_offset_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_gain_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_gain_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_overflow_status` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_overflow_error_reporting` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_mode` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_frequency_shift` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_type` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_root_raised_cosine_alpha` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_raised_cosine_alpha` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `ready_for_start_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_toggle_initial_state` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_live_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `ready_for_start_event_live_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
         * `direct_dma_enabled` - [#858](https://github.com/ni/nimi-python/issues/858)
         * `direct_dma_windowaddress` - [#858](https://github.com/ni/nimi-python/issues/858)
         * `direct_dma_window_size`  [#858](https://github.com/ni/nimi-python/issues/858)
@@ -173,8 +225,8 @@ All notable changes to this project will be documented in this file.
             * Takes additional parameters that modify fetch behavior
             * Add resulting record as part of the waveform info
             * Channel name and record number added to waveform info
-            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch), 
-                [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read), 
+            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch),
+                [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read),
                 and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
         * Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
         * Enum values and attribute names that start with an underscore + digit have been renamed

@@ -336,50 +336,10 @@ class _SessionBase(object):
 
     Specifies the static value that replaces data masked by digital_data_mask.
     '''
-    done_event_delay = _attributes.AttributeViReal64(1150358)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  done_event_delay property.
-    '''
-    done_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
-    '''Type: enums.DoneEventDelayUnits
-
-    Specifies the units applied to the value of the done_event_delay property. Valid units are seconds and sample clock periods.
-    '''
-    done_event_latched_status = _attributes.AttributeViBoolean(1150351)
-    '''Type: bool
-
-    Returns the latched status of the specified Done Event.
-    '''
-    done_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventActiveLevel, 1150317)
-    '''Type: enums.DoneEventActiveLevel
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventOutputBehavior, 1150332)
-    '''Type: enums.DoneEventOutputBehavior
-
-    Specifies the output behavior for the Done Event.
-    '''
     done_event_output_terminal = _attributes.AttributeViString(1150315)
     '''Type: str
 
     Specifies the destination terminal for the Done Event.
-    '''
-    done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulsePolarity, 1150319)
-    '''Type: enums.DoneEventPulsePolarity
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_pulse_width = _attributes.AttributeViReal64(1150336)
-    '''Type: float
-
-    Specifies the pulse width for the Done Event.
-    '''
-    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
-    '''Type: enums.DoneEventPulseWidthUnits
-
-    Specifies the pulse width units for the Done Event.
     '''
     driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
@@ -617,56 +577,10 @@ class _SessionBase(object):
 
     Returns the number of markers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
-    marker_event_delay = _attributes.AttributeViReal64(1150354)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the marker_event_delay property.
-    '''
-    marker_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
-    '''Type: enums.MarkerEventDelayUnits
-
-    Specifies the units applied to the value of the marker_event_delay property.  Valid units are seconds and sample clock periods.
-    '''
-    marker_event_latched_status = _attributes.AttributeViBoolean(1150350)
-    '''Type: bool
-
-    Specifies the latched status of the specified Marker Event.
-    Write True to this property to clear the latched status of the Marker Event.
-    '''
-    marker_event_live_status = _attributes.AttributeViBoolean(1150345)
-    '''Type: bool
-
-    Returns the live status of the specified Marker Event.
-    '''
-    marker_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150342)
-    '''Type: enums.MarkerEventOutputBehavior
-
-    Specifies the output behavior for the Marker Event.
-    '''
     marker_event_output_terminal = _attributes.AttributeViString(1150312)
     '''Type: str
 
     Specifies the destination terminal for the Marker Event.
-    '''
-    marker_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulsePolarity, 1150313)
-    '''Type: enums.MarkerEventPulsePolarity
-
-    Specifies the output polarity of the Marker Event.
-    '''
-    marker_event_pulse_width = _attributes.AttributeViReal64(1150340)
-    '''Type: float
-
-    Specifies the pulse width for the Marker Event.
-    '''
-    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
-    '''Type: enums.MarkerEventPulseWidthUnits
-
-    Specifies the pulse width units for the Marker Event.
-    '''
-    marker_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150343)
-    '''Type: enums.MarkerEventToggleInitialState
-
-    Specifies the output polarity of the Marker Event.
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
@@ -749,135 +663,6 @@ class _SessionBase(object):
     Indicates the number of channels that the specific instrument  driver supports.
     For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
-    osp_carrier_enabled = _attributes.AttributeViBoolean(1150249)
-    '''Type: bool
-
-    Enables or disables generation of the carrier.
-    '''
-    osp_carrier_frequency = _attributes.AttributeViReal64(1150250)
-    '''Type: float
-
-    The frequency of the generated carrier.
-    '''
-    osp_carrier_phase_i = _attributes.AttributeViReal64(1150251)
-    '''Type: float
-
-    I Carrier Phase in degrees at the first point of the generation.
-    '''
-    osp_carrier_phase_q = _attributes.AttributeViReal64(1150252)
-    '''Type: float
-
-    Q Carrier Phase in degrees at the first point of the generation.  This property is only used when the osp_data_processing_mode  property is set to DataProcessingMode.COMPLEX.
-    '''
-    osp_cic_filter_enabled = _attributes.AttributeViBoolean(1150257)
-    '''Type: bool
-
-    Enables or disables the CIC filter.
-    The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
-    '''
-    osp_cic_filter_gain = _attributes.AttributeViReal64(1150263)
-    '''Type: float
-
-    Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this property overrides the value set by NI-FGEN.
-    '''
-    osp_cic_filter_interpolation = _attributes.AttributeViReal64(1150258)
-    '''Type: float
-
-    Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the osp_iq_rate property.
-    '''
-    osp_compensate_for_filter_group_delay = _attributes.AttributeViBoolean(1150389)
-    '''Type: bool
-
-    Compensate for OSP Filter Group Delay. If this is enabled, the Event Outputs will be aligned  with the Analog Output. The Analog output will also be aligned between synchronized devices  (using NI-TClk).
-    '''
-    osp_data_processing_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataProcessingMode, 1150247)
-    '''Type: enums.DataProcessingMode
-
-    The way in which data is processed by the OSP block.
-    '''
-    osp_enabled = _attributes.AttributeViBoolean(1150246)
-    '''Type: bool
-
-    Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related properties are disabled and have no effect on the generated signal.
-    '''
-    osp_fir_filter_enabled = _attributes.AttributeViBoolean(1150255)
-    '''Type: bool
-
-    Enables or disables the FIR filter.
-    The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
-    '''
-    osp_fir_filter_flat_passband = _attributes.AttributeViReal64(1150261)
-    '''Type: float
-
-    Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This property is used only when the osp_fir_filter_type  property is set to FilterType.FLAT.
-    '''
-    osp_fir_filter_gaussian_bt = _attributes.AttributeViReal64(1150262)
-    '''Type: float
-
-    BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the osp_fir_filter_type property is set to  FilterType.GAUSSIAN.
-    '''
-    osp_fir_filter_interpolation = _attributes.AttributeViReal64(1150256)
-    '''Type: float
-
-    Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the osp_iq_rate property.
-    '''
-    osp_fir_filter_raised_cosine_alpha = _attributes.AttributeViReal64(1150260)
-    '''Type: float
-
-    Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the osp_fir_filter_type  property is set to FilterType.RAISED_COSINE.
-    '''
-    osp_fir_filter_root_raised_cosine_alpha = _attributes.AttributeViReal64(1150259)
-    '''Type: float
-
-    Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This property is used only when the osp_fir_filter_type  property is set to FilterType.ROOT_RAISED_COSINE.
-    '''
-    osp_fir_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150253)
-    '''Type: enums.FilterType
-
-    Pulse-shaping filter type for the FIR filter.
-    '''
-    osp_frequency_shift = _attributes.AttributeViReal64(1150371)
-    '''Type: float
-
-    Specifies the amount of frequency shift applied to the baseband signal.
-    '''
-    osp_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OSPMode, 1150370)
-    '''Type: enums.OSPMode
-
-    Specifies the generation mode of the OSP, which determines the type of data contained in the output signal.
-    '''
-    osp_overflow_error_reporting = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OSPOverflowErrorReporting, 1150268)
-    '''Type: enums.OSPOverflowErrorReporting
-
-    Configures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.
-    You can use the osp_overflow_status property to query for overflow  conditions whether or not the osp_overflow_error_reporting property is  enabled. The device will continue to generate after an overflow whether or not the  osp_overflow_error_reporting property is enabled.
-    '''
-    osp_overflow_status = _attributes.AttributeViInt32(1150269)
-    '''Type: int
-
-    Returns a bit field of the overflow status in any stage of the OSP block.  This property is functional regardless of the value for the  osp_overflow_error_reporting property.
-    Write 0 to this property to clear the current osp_overflow_error_reporting value.
-    '''
-    osp_pre_filter_gain_i = _attributes.AttributeViReal64(1150264)
-    '''Type: float
-
-    Digital gain to apply to the I data stream before any filtering by the OSP block.
-    '''
-    osp_pre_filter_gain_q = _attributes.AttributeViReal64(1150265)
-    '''Type: float
-
-    Digital gain to apply to the Q data stream before any filtering by the OSP block.  This property is only used when the osp_data_processing_mode property  is set to DataProcessingMode.COMPLEX.
-    '''
-    osp_pre_filter_offset_i = _attributes.AttributeViReal64(1150266)
-    '''Type: float
-
-    Digital offset to apply to the I data stream. This offset is applied after  the Pre-Filter Gain and before any filtering.
-    '''
-    osp_pre_filter_offset_q = _attributes.AttributeViReal64(1150267)
-    '''Type: float
-
-    Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This property is used only when  the osp_data_processing_mode property is set to DataProcessingMode.COMPLEX.
-    '''
     output_enabled = _attributes.AttributeViBoolean(1250003)
     '''Type: bool
 
@@ -894,16 +679,6 @@ class _SessionBase(object):
     Sets which output mode the signal generator will use. The value you specify determines which methods and properties you use to configure the waveform the signal generator produces.
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
-    '''
-    ready_for_start_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
-    '''Type: enums.ReadyForStartEventActiveLevel
-
-    Specifies the output polarity of the Ready for Start Event.
-    '''
-    ready_for_start_event_live_status = _attributes.AttributeViBoolean(1150348)
-    '''Type: bool
-
-    Returns the live status of the specified Ready For Start Event.
     '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150310)
     '''Type: str
@@ -995,52 +770,10 @@ class _SessionBase(object):
 
     A string that contains the name of the vendor that supplies NI-FGEN.
     '''
-    started_event_delay = _attributes.AttributeViReal64(1150356)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
-    You can specify the units of the delay value by setting the started_event_delay property.
-    '''
-    started_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
-    '''Type: enums.StartedEventDelayUnits
-
-    Specifies the units applied to the value of the started_event_delay
-    property.  Valid units are seconds and sample clock periods.
-    '''
-    started_event_latched_status = _attributes.AttributeViBoolean(1150352)
-    '''Type: bool
-
-    Specifies the latched status of the Started Event.
-    '''
-    started_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventActiveLevel, 1150316)
-    '''Type: enums.StartedEventActiveLevel
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventOutputBehavior, 1150331)
-    '''Type: enums.StartedEventOutputBehavior
-
-    Specifies the output behavior for the Started Event.
-    '''
     started_event_output_terminal = _attributes.AttributeViString(1150314)
     '''Type: str
 
     Specifies the destination terminal for the Started Event.
-    '''
-    started_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulsePolarity, 1150318)
-    '''Type: enums.StartedEventPulsePolarity
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_pulse_width = _attributes.AttributeViReal64(1150335)
-    '''Type: float
-
-    Specifies the pulse width for the Started Event.
-    '''
-    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
-    '''Type: enums.StartedEventPulseWidthUnits
-
-    Specifies the pulse width units for the Started Event.
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
     '''Type: enums.StartTriggerType

@@ -84,95 +84,6 @@ class DataMarkerEventLevelPolarity(Enum):
     '''
 
 
-class DataProcessingMode(Enum):
-    REAL = 0
-    '''
-    The waveform data points are real numbers (I data).
-    '''
-    COMPLEX = 1
-    '''
-    The waveform data points are complex numbers (I/Q data).
-    '''
-
-
-class DoneEventActiveLevel(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class DoneEventDelayUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class DoneEventOutputBehavior(Enum):
-    PULSE = 101
-    '''
-    Triggers a pulse for a specified period of time.
-    '''
-    LEVEL = 102
-    '''
-    Shifts high or low while the event is active, depending  on the active state you specify.
-    '''
-
-
-class DoneEventPulsePolarity(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class DoneEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class FilterType(Enum):
-    FLAT = 0
-    '''
-    Applies a flat filter to the data with the passband value specified  in the osp_fir_filter_flat_passband property.
-    '''
-    RAISED_COSINE = 1
-    '''
-    Applies a raised cosine filter to the data with the alpha value  specified in the osp_fir_filter_raised_cosine_alpha property.
-    '''
-    ROOT_RAISED_COSINE = 2
-    '''
-    Applies a root raised cosine filter to the data with the alpha value  specified in the osp_fir_filter_root_raised_cosine_alpha property.
-    '''
-    GAUSSIAN = 3
-    '''
-    Applies a Gaussian filter to the data with the BT value specified in the  osp_fir_filter_gaussian_bt property.
-    '''
-    CUSTOM = 4
-    '''
-    Applies a custom filter to the data. If FilterType.CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  configure_custom_fir_filter_coefficients method.
-    '''
-
-
 class HardwareState(Enum):
     IDLE = 0
     WAITING_FOR_START_TRIGGER = 1
@@ -189,88 +100,6 @@ class IdleBehavior(Enum):
     JUMP_TO = 401
     '''
     While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value property.
-    '''
-
-
-class MarkerEventDelayUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class MarkerEventOutputBehavior(Enum):
-    PULSE = 101
-    '''
-    Triggers a pulse for a specified period of time.
-    '''
-    LEVEL = 102
-    '''
-    Shifts high or low while the event is active, depending  on the active state you specify.
-    '''
-    TOGGLE = 103
-    '''
-    Changes to high or low while the event is active, depending on the
-    active state you specify.
-    '''
-
-
-class MarkerEventPulsePolarity(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class MarkerEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class MarkerEventToggleInitialState(Enum):
-    HIGH = 101
-    '''
-    Sets the initial state of the Marker event to high.
-    '''
-    LOW = 102
-    '''
-    Sets the initial state of the Marker event to low.
-    '''
-
-
-class OSPMode(Enum):
-    IF = 0
-    '''
-    The OSP block generates intermediate frequency (IF) data.
-    '''
-    BASEBAND = 1
-    '''
-    The OSP block generates baseband data.
-    '''
-
-
-class OSPOverflowErrorReporting(Enum):
-    ERROR = 0
-    '''
-    NI-FGEN returns errors whenever an overflow has occurred in the OSP block.
-    '''
-    DISABLED = 2
-    '''
-    NI-FGEN does not return errors when an overflow occurs in the OSP block.
     '''
 
 
@@ -295,17 +124,6 @@ class OutputMode(Enum):
     '''
     **Script mode—**\ Allows you to use scripting to link and loop multiple
     waveforms in complex combinations.
-    '''
-
-
-class ReadyForStartEventActiveLevel(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
     '''
 
 
@@ -481,61 +299,6 @@ class StartTriggerType(Enum):
     P2P_ENDPOINT_FULLNESS = 106
     '''
     P2P Endpoint Fullness
-    '''
-
-
-class StartedEventActiveLevel(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class StartedEventDelayUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class StartedEventOutputBehavior(Enum):
-    PULSE = 101
-    '''
-    Triggers a pulse for a specified period of time.
-    '''
-    LEVEL = 102
-    '''
-    Shifts high or low while the event is active, depending  on the active state you specify.
-    '''
-
-
-class StartedEventPulsePolarity(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class StartedEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
     '''
 
 
