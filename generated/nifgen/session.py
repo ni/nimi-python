@@ -59,6 +59,15 @@ class _Generation(object):
         self._session.abort()
 
 
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
 class _Lock(object):
     def __init__(self, session):
         self._session = session
@@ -876,6 +885,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def allocate_named_waveform(self, waveform_name, waveform_size):
         '''allocate_named_waveform
 
@@ -908,6 +918,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def allocate_waveform(self, waveform_size):
         '''allocate_waveform
 
@@ -944,6 +955,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def clear_user_standard_waveform(self):
         '''clear_user_standard_waveform
 
@@ -964,6 +976,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_arb_sequence(self, sequence_handle, gain, offset):
         '''configure_arb_sequence
 
@@ -1029,6 +1042,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_arb_waveform(self, waveform_handle, gain, offset):
         '''configure_arb_waveform
 
@@ -1104,6 +1118,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_custom_fir_filter_coefficients(self, coefficients_array):
         '''configure_custom_fir_filter_coefficients
 
@@ -1144,6 +1159,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_digital_edge_script_trigger(self, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_script_trigger
 
@@ -1226,6 +1242,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_digital_level_script_trigger(self, source, trigger_when):
         '''configure_digital_level_script_trigger
 
@@ -1306,6 +1323,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
         '''configure_freq_list
 
@@ -1390,6 +1408,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_standard_waveform(self, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):
         '''configure_standard_waveform
 
@@ -1517,6 +1536,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def create_waveform(self, waveform_data_array):
         '''create_waveform
 
@@ -1559,6 +1579,7 @@ class _SessionBase(object):
 
         return self._create_waveform_f64(waveform_data_array)
 
+    @ivi_synchronized
     def _create_waveform_f64(self, waveform_data_array):
         '''_create_waveform_f64
 
@@ -1607,6 +1628,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def _create_waveform_f64_numpy(self, waveform_data_array):
         '''_create_waveform_f64
 
@@ -1662,6 +1684,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def create_waveform_from_file_f64(self, file_name, byte_order):
         '''create_waveform_from_file_f64
 
@@ -1725,6 +1748,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def create_waveform_from_file_i16(self, file_name, byte_order):
         '''create_waveform_from_file_i16
 
@@ -1788,6 +1812,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def _create_waveform_i16_numpy(self, waveform_data_array):
         '''_create_waveform_i16
 
@@ -1841,6 +1866,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def define_user_standard_waveform(self, waveform_data_array):
         '''define_user_standard_waveform
 
@@ -1887,6 +1913,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def delete_named_waveform(self, waveform_name):
         '''delete_named_waveform
 
@@ -1916,6 +1943,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def delete_script(self, script_name):
         '''delete_script
 
@@ -1941,6 +1969,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -1980,6 +2009,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
@@ -2017,6 +2047,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -2056,6 +2087,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -2113,6 +2145,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def _get_error(self):
         '''_get_error
 
@@ -2153,6 +2186,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_fir_filter_coefficients(self):
         '''get_fir_filter_coefficients
 
@@ -2250,6 +2284,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -2305,6 +2340,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
@@ -2360,6 +2396,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -2415,6 +2452,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -2470,6 +2508,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
         '''set_named_waveform_next_write_position
 
@@ -2526,6 +2565,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
         '''set_waveform_next_write_position
 
@@ -2595,6 +2635,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
+    @ivi_synchronized
     def _write_binary16_waveform_numpy(self, waveform_handle, data):
         '''_write_binary16_waveform
 
@@ -2645,6 +2686,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_named_waveform_f64(self, waveform_name, data):
         '''_write_named_waveform_f64
 
@@ -2693,6 +2735,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_named_waveform_f64_numpy(self, waveform_name, data):
         '''_write_named_waveform_f64
 
@@ -2748,6 +2791,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_named_waveform_i16_numpy(self, waveform_name, data):
         '''_write_named_waveform_i16
 
@@ -2794,6 +2838,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def write_script(self, script):
         '''write_script
 
@@ -2822,6 +2867,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_waveform(self, waveform_handle, data):
         '''_write_waveform
 
@@ -2871,6 +2917,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_waveform_numpy(self, waveform_handle, data):
         '''_write_waveform
 
@@ -2927,6 +2974,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def write_waveform(self, waveform_name_or_handle, data):
         '''write_waveform
 
@@ -2971,6 +3019,7 @@ class _SessionBase(object):
 
         return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
 
+    @ivi_synchronized
     def _error_message(self, error_code):
         '''_error_message
 
@@ -3153,6 +3202,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         '''abort
 
@@ -3165,6 +3215,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def clear_arb_memory(self):
         '''clear_arb_memory
 
@@ -3181,6 +3232,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def clear_arb_sequence(self, sequence_handle):
         '''clear_arb_sequence
 
@@ -3213,6 +3265,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def clear_arb_waveform(self, waveform_handle):
         '''clear_arb_waveform
 
@@ -3256,6 +3309,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def clear_freq_list(self, frequency_list_handle):
         '''clear_freq_list
 
@@ -3290,6 +3344,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def commit(self):
         '''commit
 
@@ -3319,6 +3374,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING):
         '''configure_digital_edge_start_trigger
 
@@ -3392,6 +3448,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
         '''create_advanced_arb_sequence
 
@@ -3511,6 +3568,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range((0 if marker_location_array is None else len(marker_location_array)))], int(sequence_handle_ctype.value)
 
+    @ivi_synchronized
     def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
         '''create_arb_sequence
 
@@ -3576,6 +3634,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
 
+    @ivi_synchronized
     def create_freq_list(self, waveform, frequency_array, duration_array):
         '''create_freq_list
 
@@ -3662,6 +3721,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(frequency_list_handle_ctype.value)
 
+    @ivi_synchronized
     def disable(self):
         '''disable
 
@@ -3674,6 +3734,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         '''_get_ext_cal_last_date_and_time
 
@@ -3704,6 +3765,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_last_temp(self):
         '''get_ext_cal_last_temp
 
@@ -3721,6 +3783,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
         '''get_ext_cal_recommended_interval
 
@@ -3738,6 +3801,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
+    @ivi_synchronized
     def get_hardware_state(self):
         '''get_hardware_state
 
@@ -3770,6 +3834,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.HardwareState(state_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
 
@@ -3782,6 +3847,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
 
@@ -3794,6 +3860,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
         '''_get_self_cal_last_date_and_time
 
@@ -3831,6 +3898,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
 
@@ -3848,6 +3916,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def get_self_cal_supported(self):
         '''get_self_cal_supported
 
@@ -4008,6 +4077,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
+    @ivi_synchronized
     def _initiate_generation(self):
         '''_initiate_generation
 
@@ -4021,6 +4091,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def is_done(self):
         '''is_done
 
@@ -4050,6 +4121,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
+    @ivi_synchronized
     def query_arb_seq_capabilities(self):
         '''query_arb_seq_capabilities
 
@@ -4086,6 +4158,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_sequences_ctype.value), int(minimum_sequence_length_ctype.value), int(maximum_sequence_length_ctype.value), int(maximum_loop_count_ctype.value)
 
+    @ivi_synchronized
     def query_arb_wfm_capabilities(self):
         '''query_arb_wfm_capabilities
 
@@ -4129,6 +4202,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_waveforms_ctype.value), int(waveform_quantum_ctype.value), int(minimum_waveform_size_ctype.value), int(maximum_waveform_size_ctype.value)
 
+    @ivi_synchronized
     def query_freq_list_capabilities(self):
         '''query_freq_list_capabilities
 
@@ -4178,6 +4252,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
 
+    @ivi_synchronized
     def read_current_temperature(self):
         '''read_current_temperature
 
@@ -4195,6 +4270,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def reset_device(self):
         '''reset_device
 
@@ -4208,6 +4284,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def reset_with_defaults(self):
         '''reset_with_defaults
 
@@ -4221,6 +4298,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_cal(self):
         '''self_cal
 
@@ -4233,6 +4311,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def send_software_edge_trigger(self, trigger, trigger_id):
         '''send_software_edge_trigger
 
@@ -4268,6 +4347,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def wait_until_done(self, max_time=datetime.timedelta(seconds=10.0)):
         '''wait_until_done
 
@@ -4315,6 +4395,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -4344,6 +4425,7 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
+    @ivi_synchronized
     def reset(self):
         '''reset
 
@@ -4361,6 +4443,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _self_test(self):
         '''_self_test
 

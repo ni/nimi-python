@@ -29,6 +29,5 @@ config = {
         {'python_name': 'script_triggers', 'prefix': 'ScriptTrigger', },
         {'python_name': 'markers', 'prefix': 'Marker', },
     ],
-    'use_session_lock': True,
 }
 
