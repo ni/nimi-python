@@ -59,6 +59,18 @@ class _Generation(object):
         self._session.abort()
 
 
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -315,65 +327,10 @@ class _SessionBase(object):
 
     Specifies the static value that replaces data masked by digital_data_mask.
     '''
-    direct_dma_enabled = _attributes.AttributeViBoolean(1150244)
-    '''Type: bool
-
-    Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform method calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
-    '''
-    direct_dma_window_address = _attributes.AttributeViInt32(1150274)
-    '''Type: int
-
-    Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.
-    '''
-    direct_dma_window_size = _attributes.AttributeViInt32(1150245)
-    '''Type: int
-
-    Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.
-    '''
-    done_event_delay = _attributes.AttributeViReal64(1150358)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  done_event_delay property.
-    '''
-    done_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
-    '''Type: enums.DoneEventDelayUnits
-
-    Specifies the units applied to the value of the done_event_delay property. Valid units are seconds and sample clock periods.
-    '''
-    done_event_latched_status = _attributes.AttributeViBoolean(1150351)
-    '''Type: bool
-
-    Returns the latched status of the specified Done Event.
-    '''
-    done_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventActiveLevel, 1150317)
-    '''Type: enums.DoneEventActiveLevel
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventOutputBehavior, 1150332)
-    '''Type: enums.DoneEventOutputBehavior
-
-    Specifies the output behavior for the Done Event.
-    '''
     done_event_output_terminal = _attributes.AttributeViString(1150315)
     '''Type: str
 
     Specifies the destination terminal for the Done Event.
-    '''
-    done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulsePolarity, 1150319)
-    '''Type: enums.DoneEventPulsePolarity
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_pulse_width = _attributes.AttributeViReal64(1150336)
-    '''Type: float
-
-    Specifies the pulse width for the Done Event.
-    '''
-    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
-    '''Type: enums.DoneEventPulseWidthUnits
-
-    Specifies the pulse width units for the Done Event.
     '''
     driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
@@ -552,11 +509,6 @@ class _SessionBase(object):
     Waveform.USER      - User-defined waveform as defined with
     define_user_standard_waveform
     '''
-    gain_dac_value = _attributes.AttributeViInt32(1150223)
-    '''Type: int
-
-    Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
-    '''
     idle_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
     '''Type: enums.IdleBehavior
 
@@ -567,7 +519,6 @@ class _SessionBase(object):
 
     Specifies the value to generate in the Idle state.  The Idle Behavior must be configured to jump to this value.
     '''
-    id_query_response = _attributes.AttributeViString(1150001)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
@@ -617,56 +568,10 @@ class _SessionBase(object):
 
     Returns the number of markers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
-    marker_event_delay = _attributes.AttributeViReal64(1150354)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the marker_event_delay property.
-    '''
-    marker_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
-    '''Type: enums.MarkerEventDelayUnits
-
-    Specifies the units applied to the value of the marker_event_delay property.  Valid units are seconds and sample clock periods.
-    '''
-    marker_event_latched_status = _attributes.AttributeViBoolean(1150350)
-    '''Type: bool
-
-    Specifies the latched status of the specified Marker Event.
-    Write True to this property to clear the latched status of the Marker Event.
-    '''
-    marker_event_live_status = _attributes.AttributeViBoolean(1150345)
-    '''Type: bool
-
-    Returns the live status of the specified Marker Event.
-    '''
-    marker_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150342)
-    '''Type: enums.MarkerEventOutputBehavior
-
-    Specifies the output behavior for the Marker Event.
-    '''
     marker_event_output_terminal = _attributes.AttributeViString(1150312)
     '''Type: str
 
     Specifies the destination terminal for the Marker Event.
-    '''
-    marker_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulsePolarity, 1150313)
-    '''Type: enums.MarkerEventPulsePolarity
-
-    Specifies the output polarity of the Marker Event.
-    '''
-    marker_event_pulse_width = _attributes.AttributeViReal64(1150340)
-    '''Type: float
-
-    Specifies the pulse width for the Marker Event.
-    '''
-    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
-    '''Type: enums.MarkerEventPulseWidthUnits
-
-    Specifies the pulse width units for the Marker Event.
-    '''
-    marker_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150343)
-    '''Type: enums.MarkerEventToggleInitialState
-
-    Specifies the output polarity of the Marker Event.
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
@@ -749,21 +654,6 @@ class _SessionBase(object):
     Indicates the number of channels that the specific instrument  driver supports.
     For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
-    offset_dac_value = _attributes.AttributeViInt32(1150224)
-    '''Type: int
-
-    Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.
-    '''
-    oscillator_freq_dac_value = _attributes.AttributeViInt32(1150225)
-    '''Type: int
-
-    Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.
-    '''
-    oscillator_phase_dac_value = _attributes.AttributeViInt32(1150232)
-    '''Type: int
-
-    The value of the oscillator phase DAC.
-    '''
     output_enabled = _attributes.AttributeViBoolean(1250003)
     '''Type: bool
 
@@ -780,38 +670,6 @@ class _SessionBase(object):
     Sets which output mode the signal generator will use. The value you specify determines which methods and properties you use to configure the waveform the signal generator produces.
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
-    '''
-    p2p_endpoint_fullness_start_trigger_level = _attributes.AttributeViInt32(1150410)
-    '''Type: int
-
-    Specifies the Endpoint threshold for the Start trigger. This property is used only when start_trigger_type is set to P2P Endpoint Fullness.
-    '''
-    pci_dma_optimizations_enabled = _attributes.AttributeViBoolean(1150362)
-    '''Type: bool
-
-    Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
-    This property is only valid for PCI and PXI SMC-based devices.
-    This property is enabled (True) by default, and NI recommends leaving it enabled.
-    '''
-    post_amplifier_attenuation = _attributes.AttributeViReal64(1150229)
-    '''Type: float
-
-    Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).
-    '''
-    pre_amplifier_attenuation = _attributes.AttributeViReal64(1150228)
-    '''Type: float
-
-    Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
-    '''
-    ready_for_start_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
-    '''Type: enums.ReadyForStartEventActiveLevel
-
-    Specifies the output polarity of the Ready for Start Event.
-    '''
-    ready_for_start_event_live_status = _attributes.AttributeViBoolean(1150348)
-    '''Type: bool
-
-    Returns the live status of the specified Ready For Start Event.
     '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150310)
     '''Type: str
@@ -831,14 +689,6 @@ class _SessionBase(object):
     '''Type: float
 
     Sets the frequency of the signal generator reference  clock. The signal generator uses the reference clock to derive  frequencies and sample rates when generating output.
-    '''
-    sample_clock_absolute_delay = _attributes.AttributeViReal64(1150231)
-    '''Type: float
-
-    Specifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.
-    can only be applied when an external sample clock is used.
-
-    Note: For the NI 5421, absolute delay
     '''
     sample_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.SampleClockSource, 1150112)
     '''Type: enums.SampleClockSource
@@ -911,52 +761,10 @@ class _SessionBase(object):
 
     A string that contains the name of the vendor that supplies NI-FGEN.
     '''
-    started_event_delay = _attributes.AttributeViReal64(1150356)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
-    You can specify the units of the delay value by setting the started_event_delay property.
-    '''
-    started_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
-    '''Type: enums.StartedEventDelayUnits
-
-    Specifies the units applied to the value of the started_event_delay
-    property.  Valid units are seconds and sample clock periods.
-    '''
-    started_event_latched_status = _attributes.AttributeViBoolean(1150352)
-    '''Type: bool
-
-    Specifies the latched status of the Started Event.
-    '''
-    started_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventActiveLevel, 1150316)
-    '''Type: enums.StartedEventActiveLevel
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventOutputBehavior, 1150331)
-    '''Type: enums.StartedEventOutputBehavior
-
-    Specifies the output behavior for the Started Event.
-    '''
     started_event_output_terminal = _attributes.AttributeViString(1150314)
     '''Type: str
 
     Specifies the destination terminal for the Started Event.
-    '''
-    started_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulsePolarity, 1150318)
-    '''Type: enums.StartedEventPulsePolarity
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_pulse_width = _attributes.AttributeViReal64(1150335)
-    '''Type: float
-
-    Specifies the pulse width for the Started Event.
-    '''
-    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
-    '''Type: enums.StartedEventPulseWidthUnits
-
-    Specifies the pulse width units for the Started Event.
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
     '''Type: enums.StartTriggerType
@@ -992,22 +800,6 @@ class _SessionBase(object):
 
     Returns a model code of the device. For NI-FGEN versions that support more than one device, this  property contains a comma-separated list of supported device  models.
     '''
-    synchronization = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SynchronizationSource, 1150111)
-    '''Type: enums.SynchronizationSource
-
-    Specify the source of the synchronization signal that you want to use.
-    '''
-    sync_duty_cycle_high = _attributes.AttributeViReal64(1150105)
-    '''Type: float
-
-    Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this property as a  percentage of the time the square wave is high in each cycle.
-    Units: Percentage of time the waveform is high
-    '''
-    sync_out_output_terminal = _attributes.AttributeViString(1150330)
-    '''Type: str
-
-    Specifies the terminal to which to export the SYNC OUT signal. This property is not supported for all devices.
-    '''
     terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
     '''Type: enums.TerminalConfiguration
 
@@ -1017,21 +809,6 @@ class _SessionBase(object):
     '''Type: enums.TriggerMode
 
     Controls the trigger mode.
-    '''
-    trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSource, 1250302)
-    '''Type: enums.TriggerSource
-
-    Controls which trigger source the signal generator uses.
-    After you call the _initiate_generation method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the CYCLE_COUNT property.
-    This property is also the source for the trigger in the other trigger modes as specified by the trigger_mode property.
-
-    Note:
-    One or more of the referenced properties are not in the Python API for this driver.
-    '''
-    video_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
-    '''Type: enums.VideoWaveformType
-
-    Selects which waveform type that the NI 5431 generates. Setting this property ensures that the crystal is set to the proper frequency.
     '''
     wait_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
     '''Type: enums.WaitBehavior
@@ -2428,6 +2205,51 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
 
+    def lock(self):
+        '''lock
+
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
+
+        Other threads may have obtained a lock on this session for the
+        following reasons:
+
+            -  The application called the lock method.
+            -  A call to NI-FGEN locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
+
+        You can safely make nested calls to the lock method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock method with a call to
+        the unlock method.
+
+        Returns:
+            lock (context manager): When used in a with statement, nifgen.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
+        '''
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
+
+    def _lock_session(self):
+        '''_lock_session
+
+        Actuall call to driver
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niFgen_LockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
+
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -2759,6 +2581,18 @@ class _SessionBase(object):
         offset_ctype = _visatype.ViInt32(offset)  # case S150
         error_code = self._library.niFgen_SetWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_handle_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def unlock(self):
+        '''unlock
+
+        Releases a lock that you acquired on an device session using
+        lock. Refer to lock for additional
+        information on session locks.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niFgen_UnlockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
     def _write_binary16_waveform_numpy(self, waveform_handle, data):
@@ -3477,7 +3311,7 @@ class Session(_SessionBase):
 
         -  Routes are committed, so signals are exported or imported.
         -  Any Reference Clock and external clock circuits are phase-locked.
-        -  A subsequent _initiate_generation method can run faster
+        -  A subsequent initiate method can run faster
            because the device is already configured.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4179,7 +4013,7 @@ class Session(_SessionBase):
 
         Initiates signal generation. If you want to abort signal generation,
         call the nifgen_AbortGeneration method. After the signal generation
-        is aborted, you can call the _initiate_generation method to
+        is aborted, you can call the initiate method to
         cause the signal generator to produce a signal again.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4434,7 +4268,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_until_done(self, max_time=10000):
+    def wait_until_done(self, max_time=datetime.timedelta(seconds=10.0)):
         '''wait_until_done
 
         Waits until the device is done generating or until the maximum time has

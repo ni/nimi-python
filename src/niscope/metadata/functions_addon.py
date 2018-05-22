@@ -14,8 +14,6 @@ functions_codegen_method = {
     'error_message':                    { 'codegen_method': 'private',  },
     'GetError':                         { 'codegen_method': 'private',  },
     'ClearError':                       { 'codegen_method': 'no',       },
-    'LockSession':                      { 'codegen_method': 'no',       },
-    'UnlockSession':                    { 'codegen_method': 'no',       },
     '.+ExtCal':                         { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                  { 'codegen_method': 'no',       },
@@ -74,6 +72,15 @@ functions_codegen_method = {
     'self_test':                        { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
     'ExportSignal':                     { 'codegen_method': 'no',       },  # remove export signal #828
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'python_name': 'unlock', },
 }
 
 # Attach the given parameter to the given enum from enums.py

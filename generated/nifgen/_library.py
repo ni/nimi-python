@@ -63,6 +63,7 @@ class Library(object):
         self.niFgen_InitializeWithChannels_cfunc = None
         self.niFgen_InitiateGeneration_cfunc = None
         self.niFgen_IsDone_cfunc = None
+        self.niFgen_LockSession_cfunc = None
         self.niFgen_QueryArbSeqCapabilities_cfunc = None
         self.niFgen_QueryArbWfmCapabilities_cfunc = None
         self.niFgen_QueryFreqListCapabilities_cfunc = None
@@ -77,6 +78,7 @@ class Library(object):
         self.niFgen_SetAttributeViString_cfunc = None
         self.niFgen_SetNamedWaveformNextWritePosition_cfunc = None
         self.niFgen_SetWaveformNextWritePosition_cfunc = None
+        self.niFgen_UnlockSession_cfunc = None
         self.niFgen_WaitUntilDone_cfunc = None
         self.niFgen_WriteBinary16Waveform_cfunc = None
         self.niFgen_WriteNamedWaveformF64_cfunc = None
@@ -457,6 +459,14 @@ class Library(object):
                 self.niFgen_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_IsDone_cfunc(vi, done)
 
+    def niFgen_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_LockSession_cfunc is None:
+                self.niFgen_LockSession_cfunc = self._library.niFgen_LockSession
+                self.niFgen_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFgen_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_LockSession_cfunc(vi, caller_has_lock)
+
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         with self._func_lock:
             if self.niFgen_QueryArbSeqCapabilities_cfunc is None:
@@ -568,6 +578,14 @@ class Library(object):
                 self.niFgen_SetWaveformNextWritePosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ViInt32]  # noqa: F405
                 self.niFgen_SetWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetWaveformNextWritePosition_cfunc(vi, channel_name, waveform_handle, relative_to, offset)
+
+    def niFgen_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_UnlockSession_cfunc is None:
+                self.niFgen_UnlockSession_cfunc = self._library.niFgen_UnlockSession
+                self.niFgen_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFgen_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niFgen_WaitUntilDone(self, vi, max_time):  # noqa: N802
         with self._func_lock:

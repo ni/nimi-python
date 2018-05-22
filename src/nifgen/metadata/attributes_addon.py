@@ -75,6 +75,51 @@ attributes_codegen_method = {
     1150253: { "codegen_method": "no" },  # OSP_FIR_FILTER_TYPE - OSP Attribute - #864
     1150259: { "codegen_method": "no" },  # OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA - OSP Attribute - #864
     1150260: { "codegen_method": "no" },  # OSP_FIR_FILTER_RAISED_COSINE_ALPHA - OSP Attribute - #864
+    1150311: { "codegen_method": "no" },  # READY_FOR_START_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
+    1150316: { "codegen_method": "no" },  # STARTED_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
+    1150317: { "codegen_method": "no" },  # DONE_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
+    1150331: { "codegen_method": "no" },  # STARTED_EVENT_OUTPUT_BEHAVIOR - Remove event properties - #858
+    1150332: { "codegen_method": "no" },  # DONE_EVENT_OUTPUT_BEHAVIOR - Remove event properties - #858
+    1150342: { "codegen_method": "no" },  # MARKER_EVENT_OUTPUT_BEHAVIOR - Remove event properties - #858
+    1150313: { "codegen_method": "no" },  # MARKER_EVENT_PULSE_POLARITY - Remove event properties - #858
+    1150318: { "codegen_method": "no" },  # STARTED_EVENT_PULSE_POLARITY - Remove event properties - #858
+    1150319: { "codegen_method": "no" },  # DONE_EVENT_PULSE_POLARITY - Remove event properties - #858
+    1150335: { "codegen_method": "no" },  # STARTED_EVENT_PULSE_WIDTH - Remove event properties - #858
+    1150336: { "codegen_method": "no" },  # DONE_EVENT_PULSE_WIDTH - Remove event properties - #858
+    1150340: { "codegen_method": "no" },  # MARKER_EVENT_PULSE_WIDTH - Remove event properties - #858
+    1150333: { "codegen_method": "no" },  # STARTED_EVENT_PULSE_WIDTH_UNITS - Remove event properties - #858
+    1150334: { "codegen_method": "no" },  # DONE_EVENT_PULSE_WIDTH_UNITS - Remove event properties - #858
+    1150341: { "codegen_method": "no" },  # MARKER_EVENT_PULSE_WIDTH_UNITS - Remove event properties - #858
+    1150343: { "codegen_method": "no" },  # MARKER_EVENT_TOGGLE_INITIAL_STATE - Remove event properties - #858
+    1150345: { "codegen_method": "no" },  # MARKER_EVENT_LIVE_STATUS - Remove event properties - #858
+    1150348: { "codegen_method": "no" },  # READY_FOR_START_EVENT_LIVE_STATUS - Remove event properties - #858
+    1150350: { "codegen_method": "no" },  # MARKER_EVENT_LATCHED_STATUS - Remove event properties - #858
+    1150351: { "codegen_method": "no" },  # DONE_EVENT_LATCHED_STATUS - Remove event properties - #858
+    1150352: { "codegen_method": "no" },  # STARTED_EVENT_LATCHED_STATUS - Remove event properties - #858
+    1150354: { "codegen_method": "no" },  # MARKER_EVENT_DELAY - Remove event properties - #858
+    1150356: { "codegen_method": "no" },  # STARTED_EVENT_DELAY - Remove event properties - #858
+    1150358: { "codegen_method": "no" },  # DONE_EVENT_DELAY - Remove event properties - #858
+    1150355: { "codegen_method": "no" },  # MARKER_EVENT_DELAY_UNITS - Remove event properties - #858
+    1150357: { "codegen_method": "no" },  # STARTED_EVENT_DELAY_UNITS - Remove event properties - #858
+    1150359: { "codegen_method": "no" },  # DONE_EVENT_DELAY_UNITS - Remove event properties - #858
+    1150244: { "codegen_method": "no" },  # DIRECT_DMA_ENABLED - StreamStor not supported - #858
+    1150274: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_ADDRESS - StreamStor not supported - #858
+    1150245: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_SIZE - StreamStor not supported - #858
+    1150223: { "codegen_method": "no" },  # GAIN_DAC_VALUE - external calibration - #858
+    1150224: { "codegen_method": "no" },  # OFFSET_DAC_VALUE - external calibration - #858
+    1150001: { "codegen_method": "no" },  # ID_QUERY_RESPONSE - IVI Attribute - #858
+    1150225: { "codegen_method": "no" },  # OSCILLATOR_FREQ_DAC_VALUE - external calibration - #858
+    1150232: { "codegen_method": "no" },  # OSCILLATOR_PHASE_DAC_VALUE - external calibration - #858
+    1150229: { "codegen_method": "no" },  # POST_AMPLIFIER_ATTENUATION - external calibration - #858
+    1150228: { "codegen_method": "no" },  # PRE_AMPLIFIER_ATTENUATION - external calibration - #858
+    1150410: { "codegen_method": "no" },  # P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL - P2P not supported - #858
+    1150362: { "codegen_method": "no" },  # PCI_DMA_OPTIMIZATIONS_ENABLED - For internal use only - #858
+    1150231: { "codegen_method": "no" },  # SAMPLE_CLOCK_ABSOLUTE_DELAY - EOL hardware only - #858
+    1150111: { "codegen_method": "no" },  # SYNCHRONIZATION - EOL hardware only - #858
+    1150105: { "codegen_method": "no" },  # SYNC_DUTY_CYCLE_HIGH - EOL hardware only - #858
+    1150330: { "codegen_method": "no" },  # SYNC_OUT_OUTPUT_TERMINAL - EOL hardware only - #858
+    1250302: { "codegen_method": "no" },  # TRIGGER_SOURCE - EOL hardware only - #858
+    1150216: { "codegen_method": "no" },  # VIDEO_WAVEFORM_TYPE - EOL hardware only - #858
 }
 
 attributes_converters = {
