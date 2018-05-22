@@ -1212,4 +1212,7 @@ class TestSession(object):
         assert _matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2), custom_struct(data=None, struct_int=43, struct_double=4.3), custom_struct(data=None, struct_int=42, struct_double=4.3)])"
 
 
-
+# not a session test per se
+def test_diagnostic_information():
+    info = nifake.print_diagnostic_information()
+    assert isinstance(info, dict)

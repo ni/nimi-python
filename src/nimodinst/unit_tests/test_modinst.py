@@ -262,3 +262,7 @@ class TestSession(object):
                 print(d)
 
 
+# not a session test per se
+def test_diagnostic_information():
+    info = nimodinst.print_diagnostic_information()
+    assert isinstance(info, dict)
