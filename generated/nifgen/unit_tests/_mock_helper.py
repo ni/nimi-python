@@ -78,6 +78,8 @@ class SideEffectsHelper(object):
         self._defaults['DeleteNamedWaveform']['return'] = 0
         self._defaults['DeleteScript'] = {}
         self._defaults['DeleteScript']['return'] = 0
+        self._defaults['DeleteWaveformDispatch'] = {}
+        self._defaults['DeleteWaveformDispatch']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
         self._defaults['GetAttributeViBoolean'] = {}
@@ -187,6 +189,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetNamedWaveformNextWritePosition'] = {}
         self._defaults['SetNamedWaveformNextWritePosition']['return'] = 0
+        self._defaults['SetNextWritePositionDispatcher'] = {}
+        self._defaults['SetNextWritePositionDispatcher']['return'] = 0
         self._defaults['SetWaveformNextWritePosition'] = {}
         self._defaults['SetWaveformNextWritePosition']['return'] = 0
         self._defaults['UnlockSession'] = {}
@@ -409,6 +413,11 @@ class SideEffectsHelper(object):
         if self._defaults['DeleteScript']['return'] != 0:
             return self._defaults['DeleteScript']['return']
         return self._defaults['DeleteScript']['return']
+
+    def niFgen_DeleteWaveformDispatch(self, vi, channel_name, waveform_name_or_handle):  # noqa: N802
+        if self._defaults['DeleteWaveformDispatch']['return'] != 0:
+            return self._defaults['DeleteWaveformDispatch']['return']
+        return self._defaults['DeleteWaveformDispatch']['return']
 
     def niFgen_Disable(self, vi):  # noqa: N802
         if self._defaults['Disable']['return'] != 0:
@@ -795,6 +804,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetNamedWaveformNextWritePosition']['return']
         return self._defaults['SetNamedWaveformNextWritePosition']['return']
 
+    def niFgen_SetNextWritePositionDispatcher(self, vi, channel_name, waveform_name_or_handle, relative_to, offset):  # noqa: N802
+        if self._defaults['SetNextWritePositionDispatcher']['return'] != 0:
+            return self._defaults['SetNextWritePositionDispatcher']['return']
+        return self._defaults['SetNextWritePositionDispatcher']['return']
+
     def niFgen_SetWaveformNextWritePosition(self, vi, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
         if self._defaults['SetWaveformNextWritePosition']['return'] != 0:
             return self._defaults['SetWaveformNextWritePosition']['return']
@@ -944,6 +958,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_DeleteNamedWaveform.return_value = 0
         mock_library.niFgen_DeleteScript.side_effect = MockFunctionCallError("niFgen_DeleteScript")
         mock_library.niFgen_DeleteScript.return_value = 0
+        mock_library.niFgen_DeleteWaveformDispatch.side_effect = MockFunctionCallError("niFgen_DeleteWaveformDispatch")
+        mock_library.niFgen_DeleteWaveformDispatch.return_value = 0
         mock_library.niFgen_Disable.side_effect = MockFunctionCallError("niFgen_Disable")
         mock_library.niFgen_Disable.return_value = 0
         mock_library.niFgen_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_GetAttributeViBoolean")
@@ -1010,6 +1026,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetAttributeViString.return_value = 0
         mock_library.niFgen_SetNamedWaveformNextWritePosition.side_effect = MockFunctionCallError("niFgen_SetNamedWaveformNextWritePosition")
         mock_library.niFgen_SetNamedWaveformNextWritePosition.return_value = 0
+        mock_library.niFgen_SetNextWritePositionDispatcher.side_effect = MockFunctionCallError("niFgen_SetNextWritePositionDispatcher")
+        mock_library.niFgen_SetNextWritePositionDispatcher.return_value = 0
         mock_library.niFgen_SetWaveformNextWritePosition.side_effect = MockFunctionCallError("niFgen_SetWaveformNextWritePosition")
         mock_library.niFgen_SetWaveformNextWritePosition.return_value = 0
         mock_library.niFgen_UnlockSession.side_effect = MockFunctionCallError("niFgen_UnlockSession")
