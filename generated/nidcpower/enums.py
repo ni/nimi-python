@@ -51,17 +51,6 @@ class DCNoiseRejection(Enum):
     '''
 
 
-class DigitalEdge(Enum):
-    RISING = 1016
-    '''
-    Asserts the trigger on the rising edge of the digital signal.
-    '''
-    FALLING = 1017
-    '''
-    Asserts the trigger on the falling edge of the digital signal.
-    '''
-
-
 class Event(Enum):
     SOURCE_COMPLETE = 1030
     MEASURE_COMPLETE = 1031

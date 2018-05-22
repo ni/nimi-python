@@ -562,31 +562,6 @@ ScriptTriggerDigitalEdgeEdge
 
 
 
-ScriptTriggerDigitalLevelActiveLevel
-------------------------------------
-
-.. py:class:: ScriptTriggerDigitalLevelActiveLevel
-
-    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.HIGH
-
-
-
-        High Level
-
-        
-
-
-
-    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.LOW
-
-
-
-        Low Level
-
-        
-
-
-
 ScriptTriggerType
 -----------------
 
@@ -788,19 +763,6 @@ TriggerMode
         
 
         .. note:: In Frequency List mode, Stepped trigger mode is the same as Burst
-
-
-
-TriggerWhen
------------
-
-.. py:class:: TriggerWhen
-
-    .. py:attribute:: TriggerWhen.HIGH
-
-
-
-    .. py:attribute:: TriggerWhen.LOW
 
 
 

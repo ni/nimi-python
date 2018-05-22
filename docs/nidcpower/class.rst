@@ -159,23 +159,13 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`dc_noise_rejection`                                   | :py:data:`DCNoiseRejection`            |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`digital_edge_measure_trigger_edge`                    | :py:data:`DigitalEdge`                 |
-    +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`digital_edge_measure_trigger_input_terminal`          | str                                    |
-    +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`digital_edge_pulse_trigger_edge`                      | :py:data:`DigitalEdge`                 |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`digital_edge_pulse_trigger_input_terminal`            | str                                    |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`digital_edge_sequence_advance_trigger_edge`           | :py:data:`DigitalEdge`                 |
-    +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`digital_edge_sequence_advance_trigger_input_terminal` | str                                    |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`digital_edge_source_trigger_edge`                     | :py:data:`DigitalEdge`                 |
-    +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`digital_edge_source_trigger_input_terminal`           | str                                    |
-    +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`digital_edge_start_trigger_edge`                      | :py:data:`DigitalEdge`                 |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`digital_edge_start_trigger_input_terminal`            | str                                    |
     +-----------------------------------------------------------------+----------------------------------------+
@@ -388,77 +378,67 @@ nidcpower.Session
 
     **Public methods**
 
-    +------------------------------------------------------------+
-    | Method name                                                |
-    +============================================================+
-    | :py:func:`abort`                                           |
-    +------------------------------------------------------------+
-    | :py:func:`commit`                                          |
-    +------------------------------------------------------------+
-    | :py:func:`configure_aperture_time`                         |
-    +------------------------------------------------------------+
-    | :py:func:`configure_digital_edge_measure_trigger`          |
-    +------------------------------------------------------------+
-    | :py:func:`configure_digital_edge_pulse_trigger`            |
-    +------------------------------------------------------------+
-    | :py:func:`configure_digital_edge_sequence_advance_trigger` |
-    +------------------------------------------------------------+
-    | :py:func:`configure_digital_edge_source_trigger`           |
-    +------------------------------------------------------------+
-    | :py:func:`configure_digital_edge_start_trigger`            |
-    +------------------------------------------------------------+
-    | :py:func:`disable`                                         |
-    +------------------------------------------------------------+
-    | :py:func:`fetch_multiple`                                  |
-    +------------------------------------------------------------+
-    | :py:func:`get_channel_name`                                |
-    +------------------------------------------------------------+
-    | :py:func:`get_ext_cal_last_date_and_time`                  |
-    +------------------------------------------------------------+
-    | :py:func:`get_ext_cal_last_temp`                           |
-    +------------------------------------------------------------+
-    | :py:func:`get_ext_cal_recommended_interval`                |
-    +------------------------------------------------------------+
-    | :py:func:`get_self_cal_last_date_and_time`                 |
-    +------------------------------------------------------------+
-    | :py:func:`get_self_cal_last_temp`                          |
-    +------------------------------------------------------------+
-    | :py:func:`lock`                                            |
-    +------------------------------------------------------------+
-    | :py:func:`measure`                                         |
-    +------------------------------------------------------------+
-    | :py:func:`measure_multiple`                                |
-    +------------------------------------------------------------+
-    | :py:func:`query_in_compliance`                             |
-    +------------------------------------------------------------+
-    | :py:func:`query_max_current_limit`                         |
-    +------------------------------------------------------------+
-    | :py:func:`query_max_voltage_level`                         |
-    +------------------------------------------------------------+
-    | :py:func:`query_min_current_limit`                         |
-    +------------------------------------------------------------+
-    | :py:func:`query_output_state`                              |
-    +------------------------------------------------------------+
-    | :py:func:`read_current_temperature`                        |
-    +------------------------------------------------------------+
-    | :py:func:`reset`                                           |
-    +------------------------------------------------------------+
-    | :py:func:`reset_device`                                    |
-    +------------------------------------------------------------+
-    | :py:func:`reset_with_defaults`                             |
-    +------------------------------------------------------------+
-    | :py:func:`self_cal`                                        |
-    +------------------------------------------------------------+
-    | :py:func:`self_test`                                       |
-    +------------------------------------------------------------+
-    | :py:func:`send_software_edge_trigger`                      |
-    +------------------------------------------------------------+
-    | :py:func:`set_sequence`                                    |
-    +------------------------------------------------------------+
-    | :py:func:`unlock`                                          |
-    +------------------------------------------------------------+
-    | :py:func:`wait_for_event`                                  |
-    +------------------------------------------------------------+
+    +---------------------------------------------+
+    | Method name                                 |
+    +=============================================+
+    | :py:func:`abort`                            |
+    +---------------------------------------------+
+    | :py:func:`commit`                           |
+    +---------------------------------------------+
+    | :py:func:`configure_aperture_time`          |
+    +---------------------------------------------+
+    | :py:func:`disable`                          |
+    +---------------------------------------------+
+    | :py:func:`fetch_multiple`                   |
+    +---------------------------------------------+
+    | :py:func:`get_channel_name`                 |
+    +---------------------------------------------+
+    | :py:func:`get_ext_cal_last_date_and_time`   |
+    +---------------------------------------------+
+    | :py:func:`get_ext_cal_last_temp`            |
+    +---------------------------------------------+
+    | :py:func:`get_ext_cal_recommended_interval` |
+    +---------------------------------------------+
+    | :py:func:`get_self_cal_last_date_and_time`  |
+    +---------------------------------------------+
+    | :py:func:`get_self_cal_last_temp`           |
+    +---------------------------------------------+
+    | :py:func:`lock`                             |
+    +---------------------------------------------+
+    | :py:func:`measure`                          |
+    +---------------------------------------------+
+    | :py:func:`measure_multiple`                 |
+    +---------------------------------------------+
+    | :py:func:`query_in_compliance`              |
+    +---------------------------------------------+
+    | :py:func:`query_max_current_limit`          |
+    +---------------------------------------------+
+    | :py:func:`query_max_voltage_level`          |
+    +---------------------------------------------+
+    | :py:func:`query_min_current_limit`          |
+    +---------------------------------------------+
+    | :py:func:`query_output_state`               |
+    +---------------------------------------------+
+    | :py:func:`read_current_temperature`         |
+    +---------------------------------------------+
+    | :py:func:`reset`                            |
+    +---------------------------------------------+
+    | :py:func:`reset_device`                     |
+    +---------------------------------------------+
+    | :py:func:`reset_with_defaults`              |
+    +---------------------------------------------+
+    | :py:func:`self_cal`                         |
+    +---------------------------------------------+
+    | :py:func:`self_test`                        |
+    +---------------------------------------------+
+    | :py:func:`send_software_edge_trigger`       |
+    +---------------------------------------------+
+    | :py:func:`set_sequence`                     |
+    +---------------------------------------------+
+    | :py:func:`unlock`                           |
+    +---------------------------------------------+
+    | :py:func:`wait_for_event`                   |
+    +---------------------------------------------+
 
 
 Properties
@@ -1323,42 +1303,6 @@ dc_noise_rejection
                 - LabVIEW Property: **Measurement:Advanced:DC Noise Rejection**
                 - C Attribute: **NIDCPOWER_ATTR_DC_NOISE_REJECTION**
 
-digital_edge_measure_trigger_edge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:attribute:: digital_edge_measure_trigger_edge
-
-        Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
-        :py:data:`nidcpower.Session.source_trigger_type` property is set to :py:data:`~nidcpower.TriggerType.DIGITAL_EDGE`.
-        for information about supported devices.
-        Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
-
-
-
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.DigitalEdge |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | False             |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Measure Trigger:Digital Edge:Edge**
-                - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_MEASURE_TRIGGER_EDGE**
-
 digital_edge_measure_trigger_input_terminal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1395,40 +1339,6 @@ digital_edge_measure_trigger_input_terminal
                 - LabVIEW Property: **Triggers:Measure Trigger:Digital Edge:Input Terminal**
                 - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_MEASURE_TRIGGER_INPUT_TERMINAL**
 
-digital_edge_pulse_trigger_edge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:attribute:: digital_edge_pulse_trigger_edge
-
-        Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
-        Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
-
-
-
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.DigitalEdge |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | False             |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Pulse Trigger:Digital Edge:Edge**
-                - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_PULSE_TRIGGER_EDGE**
-
 digital_edge_pulse_trigger_input_terminal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1463,41 +1373,6 @@ digital_edge_pulse_trigger_input_terminal
 
                 - LabVIEW Property: **Triggers:Pulse Trigger:Digital Edge:Input Terminal**
                 - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_PULSE_TRIGGER_INPUT_TERMINAL**
-
-digital_edge_sequence_advance_trigger_edge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:attribute:: digital_edge_sequence_advance_trigger_edge
-
-        Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
-        for information about supported devices.
-        Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
-
-
-
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.DigitalEdge |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | False             |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Sequence Advance Trigger:Digital Edge:Edge**
-                - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_SEQUENCE_ADVANCE_TRIGGER_EDGE**
 
 digital_edge_sequence_advance_trigger_input_terminal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1535,41 +1410,6 @@ digital_edge_sequence_advance_trigger_input_terminal
                 - LabVIEW Property: **Triggers:Sequence Advance Trigger:Digital Edge:Input Terminal**
                 - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_SEQUENCE_ADVANCE_TRIGGER_INPUT_TERMINAL**
 
-digital_edge_source_trigger_edge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:attribute:: digital_edge_source_trigger_edge
-
-        Specifies whether to configure the Source trigger to assert on the rising or falling edge.
-        for information about supported devices.
-        Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
-
-
-
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.DigitalEdge |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | False             |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Source Trigger:Digital Edge:Edge**
-                - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_SOURCE_TRIGGER_EDGE**
-
 digital_edge_source_trigger_input_terminal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1605,41 +1445,6 @@ digital_edge_source_trigger_input_terminal
 
                 - LabVIEW Property: **Triggers:Source Trigger:Digital Edge:Input Terminal**
                 - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_SOURCE_TRIGGER_INPUT_TERMINAL**
-
-digital_edge_start_trigger_edge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:attribute:: digital_edge_start_trigger_edge
-
-        Specifies whether to configure the Start trigger to assert on the rising or falling edge.
-        for information about supported devices.
-        Default Value: :py:data:`~nidcpower.DigitalEdge.RISING`
-
-
-
-        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-------------------+
-            | Characteristic | Value             |
-            +================+===================+
-            | Datatype       | enums.DigitalEdge |
-            +----------------+-------------------+
-            | Permissions    | read-write        |
-            +----------------+-------------------+
-            | Channel Based  | False             |
-            +----------------+-------------------+
-            | Resettable     | No                |
-            +----------------+-------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Start Trigger:Digital Edge:Edge**
-                - C Attribute: **NIDCPOWER_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE**
 
 digital_edge_start_trigger_input_terminal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6131,284 +5936,6 @@ configure_aperture_time
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
-configure_digital_edge_measure_trigger
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:method:: configure_digital_edge_measure_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
-
-            Configures the Measure trigger for digital edge triggering.
-
-            
-
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
-
-
-
-            :param input_terminal:
-
-
-                Specifies the input terminal for the digital edge Measure trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-                
-
-
-            :type input_terminal: str
-            :param edge:
-
-
-                Specifies whether to configure the Measure trigger to assert on the
-                rising or falling edge.
-                **Defined Values:**
-
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +--------------------------------------------------+----------------------------------------------------------------+
-
-
-            :type edge: :py:data:`nidcpower.DigitalEdge`
-
-configure_digital_edge_pulse_trigger
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:method:: configure_digital_edge_pulse_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
-
-            Configures the Pulse trigger for digital edge triggering.
-
-            
-
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
-
-
-
-            :param input_terminal:
-
-
-                Specifies the input terminal for the digital edge Pulse trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-                
-
-
-            :type input_terminal: str
-            :param edge:
-
-
-                Specifies whether to configure the Pulse trigger to assert on the rising
-                or falling edge.
-                **Defined Values:**
-
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +--------------------------------------------------+----------------------------------------------------------------+
-
-
-            :type edge: :py:data:`nidcpower.DigitalEdge`
-
-configure_digital_edge_sequence_advance_trigger
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:method:: configure_digital_edge_sequence_advance_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
-
-            Configures the Sequence Advance trigger for digital edge triggering.
-
-            
-
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
-
-
-
-            :param input_terminal:
-
-
-                Specifies the input terminal for the digital edge Sequence Advance
-                trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-                
-
-
-            :type input_terminal: str
-            :param edge:
-
-
-                Specifies whether to configure the Sequence Advance trigger to assert on
-                the rising or falling edge.
-                **Defined Values:**
-
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +--------------------------------------------------+----------------------------------------------------------------+
-
-
-            :type edge: :py:data:`nidcpower.DigitalEdge`
-
-configure_digital_edge_source_trigger
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:method:: configure_digital_edge_source_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
-
-            Configures the Source trigger for digital edge triggering.
-
-            
-
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
-
-
-
-            :param input_terminal:
-
-
-                Specifies the input terminal for the digital edge Source trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-                
-
-
-            :type input_terminal: str
-            :param edge:
-
-
-                Specifies whether to configure the Source trigger to assert on the
-                rising or falling edge.
-                **Defined Values:**
-
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +--------------------------------------------------+----------------------------------------------------------------+
-
-
-            :type edge: :py:data:`nidcpower.DigitalEdge`
-
-configure_digital_edge_start_trigger
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidcpower.Session
-
-    .. py:method:: configure_digital_edge_start_trigger(input_terminal, edge=nidcpower.DigitalEdge.RISING)
-
-            Configures the Start trigger for digital edge triggering.
-
-            
-
-            .. note:: This method is not supported on all devices. Refer to `Supported
-                Methods by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-                for more information about supported devices.
-
-
-
-            :param input_terminal:
-
-
-                Specifies the input terminal for the digital edge Start trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-                
-
-
-            :type input_terminal: str
-            :param edge:
-
-
-                Specifies whether to configure the Start trigger to assert on the rising
-                or falling edge.
-                **Defined Values:**
-
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.RISING` (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +--------------------------------------------------+----------------------------------------------------------------+
-                | :py:data:`~nidcpower.DigitalEdge.FALLING` (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +--------------------------------------------------+----------------------------------------------------------------+
-
-
-            :type edge: :py:data:`nidcpower.DigitalEdge`
-
 disable
 ~~~~~~~
 
@@ -7453,23 +6980,13 @@ Properties
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.dc_noise_rejection`                                   | :py:data:`DCNoiseRejection`            |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.digital_edge_measure_trigger_edge`                    | :py:data:`DigitalEdge`                 |
-+-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.digital_edge_measure_trigger_input_terminal`          | str                                    |
-+-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.digital_edge_pulse_trigger_edge`                      | :py:data:`DigitalEdge`                 |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.digital_edge_pulse_trigger_input_terminal`            | str                                    |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.digital_edge_sequence_advance_trigger_edge`           | :py:data:`DigitalEdge`                 |
-+-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.digital_edge_sequence_advance_trigger_input_terminal` | str                                    |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.digital_edge_source_trigger_edge`                     | :py:data:`DigitalEdge`                 |
-+-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.digital_edge_source_trigger_input_terminal`           | str                                    |
-+-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.digital_edge_start_trigger_edge`                      | :py:data:`DigitalEdge`                 |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.digital_edge_start_trigger_input_terminal`            | str                                    |
 +-----------------------------------------------------------------------------------+----------------------------------------+
@@ -7683,75 +7200,65 @@ Properties
 Methods
 -------
 
-+------------------------------------------------------------------------------+
-| Method name                                                                  |
-+==============================================================================+
-| :py:func:`nidcpower.Session.abort`                                           |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.commit`                                          |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.configure_aperture_time`                         |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.configure_digital_edge_measure_trigger`          |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.configure_digital_edge_pulse_trigger`            |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.configure_digital_edge_sequence_advance_trigger` |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.configure_digital_edge_source_trigger`           |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.configure_digital_edge_start_trigger`            |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.disable`                                         |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.fetch_multiple`                                  |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_channel_name`                                |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_ext_cal_last_date_and_time`                  |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_ext_cal_last_temp`                           |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_ext_cal_recommended_interval`                |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_self_cal_last_date_and_time`                 |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_self_cal_last_temp`                          |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.lock`                                            |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.measure`                                         |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.measure_multiple`                                |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_in_compliance`                             |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_max_current_limit`                         |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_max_voltage_level`                         |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_min_current_limit`                         |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_output_state`                              |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.read_current_temperature`                        |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.reset`                                           |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.reset_device`                                    |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.reset_with_defaults`                             |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.self_cal`                                        |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.self_test`                                       |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.send_software_edge_trigger`                      |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.set_sequence`                                    |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.unlock`                                          |
-+------------------------------------------------------------------------------+
-| :py:func:`nidcpower.Session.wait_for_event`                                  |
-+------------------------------------------------------------------------------+
++---------------------------------------------------------------+
+| Method name                                                   |
++===============================================================+
+| :py:func:`nidcpower.Session.abort`                            |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.commit`                           |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.configure_aperture_time`          |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.disable`                          |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.fetch_multiple`                   |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_channel_name`                 |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_ext_cal_last_date_and_time`   |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_ext_cal_last_temp`            |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_ext_cal_recommended_interval` |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_self_cal_last_date_and_time`  |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_self_cal_last_temp`           |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.lock`                             |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.measure`                          |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.measure_multiple`                 |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_in_compliance`              |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_max_current_limit`          |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_max_voltage_level`          |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_min_current_limit`          |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_output_state`               |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.read_current_temperature`         |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.reset`                            |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.reset_device`                     |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.reset_with_defaults`              |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.self_cal`                         |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.self_test`                        |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.send_software_edge_trigger`       |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.set_sequence`                     |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.unlock`                           |
++---------------------------------------------------------------+
+| :py:func:`nidcpower.Session.wait_for_event`                   |
++---------------------------------------------------------------+
 

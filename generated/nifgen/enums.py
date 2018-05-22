@@ -242,17 +242,6 @@ class ScriptTriggerDigitalEdgeEdge(Enum):
     '''
 
 
-class ScriptTriggerDigitalLevelActiveLevel(Enum):
-    HIGH = 101
-    '''
-    High Level
-    '''
-    LOW = 102
-    '''
-    Low Level
-    '''
-
-
 class ScriptTriggerType(Enum):
     TRIG_NONE = 101
     '''
@@ -341,11 +330,6 @@ class TriggerMode(Enum):
 
     Note: In Frequency List mode, Stepped trigger mode is the same as Burst
     '''
-
-
-class TriggerWhen(Enum):
-    HIGH = 101
-    LOW = 102
 
 
 class WaitBehavior(Enum):

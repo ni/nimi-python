@@ -23,16 +23,6 @@ class SideEffectsHelper(object):
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
         self._defaults['ConfigureApertureTime']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeMeasureTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeMeasureTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgePulseTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgePulseTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeSequenceAdvanceTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeSequenceAdvanceTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeSourceTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeSourceTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeStartTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
         self._defaults['CreateAdvancedSequence'] = {}
         self._defaults['CreateAdvancedSequence']['return'] = 0
         self._defaults['CreateAdvancedSequenceStep'] = {}
@@ -188,31 +178,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureApertureTime']['return'] != 0:
             return self._defaults['ConfigureApertureTime']['return']
         return self._defaults['ConfigureApertureTime']['return']
-
-    def niDCPower_ConfigureDigitalEdgeMeasureTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeMeasureTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeMeasureTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeMeasureTrigger']['return']
-
-    def niDCPower_ConfigureDigitalEdgePulseTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgePulseTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgePulseTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgePulseTrigger']['return']
-
-    def niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeSequenceAdvanceTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeSequenceAdvanceTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeSequenceAdvanceTrigger']['return']
-
-    def niDCPower_ConfigureDigitalEdgeSourceTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeSourceTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeSourceTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeSourceTrigger']['return']
-
-    def niDCPower_ConfigureDigitalEdgeStartTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
 
     def niDCPower_CreateAdvancedSequence(self, vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
         if self._defaults['CreateAdvancedSequence']['return'] != 0:
@@ -687,16 +652,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_Commit.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
         mock_library.niDCPower_ConfigureApertureTime.return_value = 0
-        mock_library.niDCPower_ConfigureDigitalEdgeMeasureTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeMeasureTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeMeasureTrigger.return_value = 0
-        mock_library.niDCPower_ConfigureDigitalEdgePulseTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgePulseTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgePulseTrigger.return_value = 0
-        mock_library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger.return_value = 0
-        mock_library.niDCPower_ConfigureDigitalEdgeSourceTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeSourceTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeSourceTrigger.return_value = 0
-        mock_library.niDCPower_ConfigureDigitalEdgeStartTrigger.side_effect = MockFunctionCallError("niDCPower_ConfigureDigitalEdgeStartTrigger")
-        mock_library.niDCPower_ConfigureDigitalEdgeStartTrigger.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequence.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequence")
         mock_library.niDCPower_CreateAdvancedSequence.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceStep.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStep")

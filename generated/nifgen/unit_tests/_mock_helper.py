@@ -40,12 +40,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureArbWaveform']['return'] = 0
         self._defaults['ConfigureCustomFIRFilterCoefficients'] = {}
         self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeScriptTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeScriptTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeStartTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalLevelScriptTrigger'] = {}
-        self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] = 0
         self._defaults['ConfigureFreqList'] = {}
         self._defaults['ConfigureFreqList']['return'] = 0
         self._defaults['ConfigureStandardWaveform'] = {}
@@ -288,21 +282,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] != 0:
             return self._defaults['ConfigureCustomFIRFilterCoefficients']['return']
         return self._defaults['ConfigureCustomFIRFilterCoefficients']['return']
-
-    def niFgen_ConfigureDigitalEdgeScriptTrigger(self, vi, trigger_id, source, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeScriptTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeScriptTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeScriptTrigger']['return']
-
-    def niFgen_ConfigureDigitalEdgeStartTrigger(self, vi, source, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
-
-    def niFgen_ConfigureDigitalLevelScriptTrigger(self, vi, trigger_id, source, trigger_when):  # noqa: N802
-        if self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
-        return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
 
     def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         if self._defaults['ConfigureFreqList']['return'] != 0:
@@ -914,12 +893,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ConfigureArbWaveform.return_value = 0
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_ConfigureCustomFIRFilterCoefficients")
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.return_value = 0
-        mock_library.niFgen_ConfigureDigitalEdgeScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalEdgeScriptTrigger")
-        mock_library.niFgen_ConfigureDigitalEdgeScriptTrigger.return_value = 0
-        mock_library.niFgen_ConfigureDigitalEdgeStartTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalEdgeStartTrigger")
-        mock_library.niFgen_ConfigureDigitalEdgeStartTrigger.return_value = 0
-        mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalLevelScriptTrigger")
-        mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.return_value = 0
         mock_library.niFgen_ConfigureFreqList.side_effect = MockFunctionCallError("niFgen_ConfigureFreqList")
         mock_library.niFgen_ConfigureFreqList.return_value = 0
         mock_library.niFgen_ConfigureStandardWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureStandardWaveform")

@@ -514,16 +514,6 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    digital_edge_measure_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
-    source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
-    '''
     digital_edge_measure_trigger_input_terminal = _attributes.AttributeViString(1150036)
     '''Type: str
 
@@ -534,14 +524,6 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    digital_edge_pulse_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150096)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
-    Default Value: DigitalEdge.RISING
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-    '''
     digital_edge_pulse_trigger_input_terminal = _attributes.AttributeViString(1150097)
     '''Type: str
 
@@ -550,15 +532,6 @@ class _SessionBase(object):
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-    '''
-    digital_edge_sequence_advance_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150027)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_sequence_advance_trigger_input_terminal = _attributes.AttributeViString(1150028)
     '''Type: str
@@ -570,15 +543,6 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
     '''
-    digital_edge_source_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Source trigger to assert on the rising or falling edge.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
-    '''
     digital_edge_source_trigger_input_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
 
@@ -586,15 +550,6 @@ class _SessionBase(object):
     for information about supported devices.
     You can specify any valid input terminal for this property. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
-    '''
-    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150022)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Start trigger to assert on the rising or falling edge.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
@@ -3806,244 +3761,6 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_digital_edge_measure_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_measure_trigger
-
-        Configures the Measure trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Measure trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Measure trigger to assert on the
-                rising or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_digital_edge_pulse_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_pulse_trigger
-
-        Configures the Pulse trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Pulse trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Pulse trigger to assert on the rising
-                or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_sequence_advance_trigger
-
-        Configures the Sequence Advance trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Sequence Advance
-                trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Sequence Advance trigger to assert on
-                the rising or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_digital_edge_source_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_source_trigger
-
-        Configures the Source trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Source trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Source trigger to assert on the
-                rising or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_digital_edge_start_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_start_trigger
-
-        Configures the Start trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Start trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Start trigger to assert on the rising
-                or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
