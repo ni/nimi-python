@@ -50,6 +50,31 @@ attributes_codegen_method = {
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION - IVI Attribute - #824
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS - IVI Attribute - #824
     1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
+    1150256: { "codegen_method": "no" },  # OSP_FIR_FILTER_INTERPOLATION - OSP Attribute - #864
+    1150262: { "codegen_method": "no" },  # OSP_FIR_FILTER_GAUSSIAN_BT - OSP Attribute - #864
+    1150261: { "codegen_method": "no" },  # OSP_FIR_FILTER_FLAT_PASSBAND - OSP Attribute - #864
+    1150255: { "codegen_method": "no" },  # OSP_FIR_FILTER_ENABLED - OSP Attribute - #864
+    1150246: { "codegen_method": "no" },  # OSP_ENABLED - OSP Attribute - #864
+    1150247: { "codegen_method": "no" },  # OSP_DATA_PROCESSING_MODE - OSP Attribute - #864
+    1150389: { "codegen_method": "no" },  # OSP_COMPENSATE_FOR_FILTER_GROUP_DELAY - OSP Attribute - #864
+    1150258: { "codegen_method": "no" },  # OSP_CIC_FILTER_INTERPOLATION - OSP Attribute - #864
+    1150263: { "codegen_method": "no" },  # OSP_CIC_FILTER_GAIN - OSP Attribute - #864
+    1150257: { "codegen_method": "no" },  # OSP_CIC_FILTER_ENABLED - OSP Attribute - #864
+    1150252: { "codegen_method": "no" },  # OSP_CARRIER_PHASE_Q - OSP Attribute - #864
+    1150251: { "codegen_method": "no" },  # OSP_CARRIER_PHASE_I - OSP Attribute - #864
+    1150250: { "codegen_method": "no" },  # OSP_CARRIER_FREQUENCY - OSP Attribute - #864
+    1150249: { "codegen_method": "no" },  # OSP_CARRIER_ENABLED - OSP Attribute - #864
+    1150267: { "codegen_method": "no" },  # OSP_PRE_FILTER_OFFSET_Q - OSP Attribute - #864
+    1150266: { "codegen_method": "no" },  # OSP_PRE_FILTER_OFFSET_I - OSP Attribute - #864
+    1150265: { "codegen_method": "no" },  # OSP_PRE_FILTER_GAIN_Q - OSP Attribute - #864
+    1150264: { "codegen_method": "no" },  # OSP_PRE_FILTER_GAIN_I - OSP Attribute - #864
+    1150269: { "codegen_method": "no" },  # OSP_OVERFLOW_STATUS - OSP Attribute - #864
+    1150268: { "codegen_method": "no" },  # OSP_OVERFLOW_ERROR_REPORTING - OSP Attribute - #864
+    1150370: { "codegen_method": "no" },  # OSP_MODE - OSP Attribute - #864
+    1150371: { "codegen_method": "no" },  # OSP_FREQUENCY_SHIFT - OSP Attribute - #864
+    1150253: { "codegen_method": "no" },  # OSP_FIR_FILTER_TYPE - OSP Attribute - #864
+    1150259: { "codegen_method": "no" },  # OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA - OSP Attribute - #864
+    1150260: { "codegen_method": "no" },  # OSP_FIR_FILTER_RAISED_COSINE_ALPHA - OSP Attribute - #864
     1150311: { "codegen_method": "no" },  # READY_FOR_START_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
     1150316: { "codegen_method": "no" },  # STARTED_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
     1150317: { "codegen_method": "no" },  # DONE_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
