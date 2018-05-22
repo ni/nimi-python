@@ -327,50 +327,10 @@ class _SessionBase(object):
 
     Specifies the static value that replaces data masked by digital_data_mask.
     '''
-    done_event_delay = _attributes.AttributeViReal64(1150358)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  done_event_delay property.
-    '''
-    done_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
-    '''Type: enums.DoneEventDelayUnits
-
-    Specifies the units applied to the value of the done_event_delay property. Valid units are seconds and sample clock periods.
-    '''
-    done_event_latched_status = _attributes.AttributeViBoolean(1150351)
-    '''Type: bool
-
-    Returns the latched status of the specified Done Event.
-    '''
-    done_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventActiveLevel, 1150317)
-    '''Type: enums.DoneEventActiveLevel
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventOutputBehavior, 1150332)
-    '''Type: enums.DoneEventOutputBehavior
-
-    Specifies the output behavior for the Done Event.
-    '''
     done_event_output_terminal = _attributes.AttributeViString(1150315)
     '''Type: str
 
     Specifies the destination terminal for the Done Event.
-    '''
-    done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulsePolarity, 1150319)
-    '''Type: enums.DoneEventPulsePolarity
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_pulse_width = _attributes.AttributeViReal64(1150336)
-    '''Type: float
-
-    Specifies the pulse width for the Done Event.
-    '''
-    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
-    '''Type: enums.DoneEventPulseWidthUnits
-
-    Specifies the pulse width units for the Done Event.
     '''
     driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
@@ -608,56 +568,10 @@ class _SessionBase(object):
 
     Returns the number of markers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
-    marker_event_delay = _attributes.AttributeViReal64(1150354)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the marker_event_delay property.
-    '''
-    marker_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
-    '''Type: enums.MarkerEventDelayUnits
-
-    Specifies the units applied to the value of the marker_event_delay property.  Valid units are seconds and sample clock periods.
-    '''
-    marker_event_latched_status = _attributes.AttributeViBoolean(1150350)
-    '''Type: bool
-
-    Specifies the latched status of the specified Marker Event.
-    Write True to this property to clear the latched status of the Marker Event.
-    '''
-    marker_event_live_status = _attributes.AttributeViBoolean(1150345)
-    '''Type: bool
-
-    Returns the live status of the specified Marker Event.
-    '''
-    marker_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150342)
-    '''Type: enums.MarkerEventOutputBehavior
-
-    Specifies the output behavior for the Marker Event.
-    '''
     marker_event_output_terminal = _attributes.AttributeViString(1150312)
     '''Type: str
 
     Specifies the destination terminal for the Marker Event.
-    '''
-    marker_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulsePolarity, 1150313)
-    '''Type: enums.MarkerEventPulsePolarity
-
-    Specifies the output polarity of the Marker Event.
-    '''
-    marker_event_pulse_width = _attributes.AttributeViReal64(1150340)
-    '''Type: float
-
-    Specifies the pulse width for the Marker Event.
-    '''
-    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
-    '''Type: enums.MarkerEventPulseWidthUnits
-
-    Specifies the pulse width units for the Marker Event.
-    '''
-    marker_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150343)
-    '''Type: enums.MarkerEventToggleInitialState
-
-    Specifies the output polarity of the Marker Event.
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
@@ -886,16 +800,6 @@ class _SessionBase(object):
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
-    ready_for_start_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
-    '''Type: enums.ReadyForStartEventActiveLevel
-
-    Specifies the output polarity of the Ready for Start Event.
-    '''
-    ready_for_start_event_live_status = _attributes.AttributeViBoolean(1150348)
-    '''Type: bool
-
-    Returns the live status of the specified Ready For Start Event.
-    '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150310)
     '''Type: str
 
@@ -986,52 +890,10 @@ class _SessionBase(object):
 
     A string that contains the name of the vendor that supplies NI-FGEN.
     '''
-    started_event_delay = _attributes.AttributeViReal64(1150356)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
-    You can specify the units of the delay value by setting the started_event_delay property.
-    '''
-    started_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
-    '''Type: enums.StartedEventDelayUnits
-
-    Specifies the units applied to the value of the started_event_delay
-    property.  Valid units are seconds and sample clock periods.
-    '''
-    started_event_latched_status = _attributes.AttributeViBoolean(1150352)
-    '''Type: bool
-
-    Specifies the latched status of the Started Event.
-    '''
-    started_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventActiveLevel, 1150316)
-    '''Type: enums.StartedEventActiveLevel
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventOutputBehavior, 1150331)
-    '''Type: enums.StartedEventOutputBehavior
-
-    Specifies the output behavior for the Started Event.
-    '''
     started_event_output_terminal = _attributes.AttributeViString(1150314)
     '''Type: str
 
     Specifies the destination terminal for the Started Event.
-    '''
-    started_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulsePolarity, 1150318)
-    '''Type: enums.StartedEventPulsePolarity
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_pulse_width = _attributes.AttributeViReal64(1150335)
-    '''Type: float
-
-    Specifies the pulse width for the Started Event.
-    '''
-    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
-    '''Type: enums.StartedEventPulseWidthUnits
-
-    Specifies the pulse width units for the Started Event.
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
     '''Type: enums.StartTriggerType

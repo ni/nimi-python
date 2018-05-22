@@ -50,6 +50,33 @@ attributes_codegen_method = {
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION - IVI Attribute - #824
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS - IVI Attribute - #824
     1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
+    1150311: { "codegen_method": "no" },  # READY_FOR_START_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
+    1150316: { "codegen_method": "no" },  # STARTED_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
+    1150317: { "codegen_method": "no" },  # DONE_EVENT_LEVEL_ACTIVE_LEVEL - Remove event properties - #858
+    1150331: { "codegen_method": "no" },  # STARTED_EVENT_OUTPUT_BEHAVIOR - Remove event properties - #858
+    1150332: { "codegen_method": "no" },  # DONE_EVENT_OUTPUT_BEHAVIOR - Remove event properties - #858
+    1150342: { "codegen_method": "no" },  # MARKER_EVENT_OUTPUT_BEHAVIOR - Remove event properties - #858
+    1150313: { "codegen_method": "no" },  # MARKER_EVENT_PULSE_POLARITY - Remove event properties - #858
+    1150318: { "codegen_method": "no" },  # STARTED_EVENT_PULSE_POLARITY - Remove event properties - #858
+    1150319: { "codegen_method": "no" },  # DONE_EVENT_PULSE_POLARITY - Remove event properties - #858
+    1150335: { "codegen_method": "no" },  # STARTED_EVENT_PULSE_WIDTH - Remove event properties - #858
+    1150336: { "codegen_method": "no" },  # DONE_EVENT_PULSE_WIDTH - Remove event properties - #858
+    1150340: { "codegen_method": "no" },  # MARKER_EVENT_PULSE_WIDTH - Remove event properties - #858
+    1150333: { "codegen_method": "no" },  # STARTED_EVENT_PULSE_WIDTH_UNITS - Remove event properties - #858
+    1150334: { "codegen_method": "no" },  # DONE_EVENT_PULSE_WIDTH_UNITS - Remove event properties - #858
+    1150341: { "codegen_method": "no" },  # MARKER_EVENT_PULSE_WIDTH_UNITS - Remove event properties - #858
+    1150343: { "codegen_method": "no" },  # MARKER_EVENT_TOGGLE_INITIAL_STATE - Remove event properties - #858
+    1150345: { "codegen_method": "no" },  # MARKER_EVENT_LIVE_STATUS - Remove event properties - #858
+    1150348: { "codegen_method": "no" },  # READY_FOR_START_EVENT_LIVE_STATUS - Remove event properties - #858
+    1150350: { "codegen_method": "no" },  # MARKER_EVENT_LATCHED_STATUS - Remove event properties - #858
+    1150351: { "codegen_method": "no" },  # DONE_EVENT_LATCHED_STATUS - Remove event properties - #858
+    1150352: { "codegen_method": "no" },  # STARTED_EVENT_LATCHED_STATUS - Remove event properties - #858
+    1150354: { "codegen_method": "no" },  # MARKER_EVENT_DELAY - Remove event properties - #858
+    1150356: { "codegen_method": "no" },  # STARTED_EVENT_DELAY - Remove event properties - #858
+    1150358: { "codegen_method": "no" },  # DONE_EVENT_DELAY - Remove event properties - #858
+    1150355: { "codegen_method": "no" },  # MARKER_EVENT_DELAY_UNITS - Remove event properties - #858
+    1150357: { "codegen_method": "no" },  # STARTED_EVENT_DELAY_UNITS - Remove event properties - #858
+    1150359: { "codegen_method": "no" },  # DONE_EVENT_DELAY_UNITS - Remove event properties - #858
     1150244: { "codegen_method": "no" },  # DIRECT_DMA_ENABLED - StreamStor not supported - #858
     1150274: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_ADDRESS - StreamStor not supported - #858
     1150245: { "codegen_method": "no" },  # DIRECT_DMA_WINDOW_SIZE - StreamStor not supported - #858
