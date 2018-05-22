@@ -198,7 +198,7 @@ def test_clear_waveform_memory(session):
     session.clear_user_standard_waveform()
     session.configure_arb_sequence(0, 1.0, 0)
     session.clear_arb_sequence(-1)
-    session.clear_arb_waveform(-1)
+    session.delete_waveform(-1)
 
 
 def test_query_arb_seq_capabilities(session):
@@ -345,7 +345,7 @@ def test_write_waveform_wrong_type(session):
 
 
 def test_set_waveform_next_write_position(session):
-    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
+    session.set_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
 
 
 def test_write_waveform_from_filei64(session):
@@ -359,10 +359,10 @@ def test_named_waveform_operations(session):
     waveform_data_1 = [x * (1.0 / 256.0) for x in range(256)]
     waveform_data_2 = [x * (-1.0 / 256.0) for x in range(256)]
     session.allocate_named_waveform(waveform_name, waveform_size)
-    session.set_named_waveform_next_write_position(waveform_name, nifgen.RelativeTo.START, write_offset)
+    session.set_next_write_position(waveform_name, nifgen.RelativeTo.START, write_offset)
     session.write_waveform(waveform_name, waveform_data_1)
     session.write_waveform(waveform_name, waveform_data_2)
-    session.delete_named_waveform(waveform_name)
+    session.delete_waveform(waveform_name)
 
 
 def test_write_waveform_from_file_f64(session):
