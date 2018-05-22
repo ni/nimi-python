@@ -316,7 +316,7 @@ nifgen_SetWaveformNextWritePosition function.''',
                 'direction': 'in',
                 'name': 'waveformNameOrHandle',
                 'type_in_documentation': 'str or int',
-                'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
+                'type': 'ViInt32',
                 'documentation': {
                     'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
                 },
@@ -390,7 +390,7 @@ niFgen CreateWaveform functions:
                 'direction': 'in',
                 'name': 'waveformNameOrHandle',
                 'type_in_documentation': 'str or int',
-                'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
+                'type': 'ViInt32',
                 'documentation': {
                     'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
                 },

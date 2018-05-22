@@ -66,6 +66,9 @@ All notable changes to this project will be documented in this file.
         * Some functions missed setting repeated capabilities, leaving these as parameters instead of using the repeated capabilites object.
             * `session.configure_digital_edge_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_edge_script_trigger(source, ...)`
             * `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
+        * Combined named and un-named waveform methods into one [#862](https://github.com/ni/nimi-python/issues/862)
+            * `set_waveform_next_write_position()` and `set_named_waveform_next_write_position()` becomes `set_next_write_position()`
+            * `clear_arb_waveform()` and `delete_named_waveform()` becomes `delete_waveform()`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
         * `osp_fir_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
