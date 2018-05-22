@@ -29,6 +29,5 @@ config = {
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
     ],
-    'use_session_lock': True,
 }
 
