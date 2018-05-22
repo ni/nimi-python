@@ -270,7 +270,7 @@ def _add_is_repeated_capability(parameter):
         parameter['is_repeated_capability'] = parameter['name'] in _repeated_capability_parameter_names
 
 
-def _add_use_session_lock(f, config):
+def _add_use_session_lock(f):
     '''Set 'use_session_lock' to True unless it already exists
 
     Only nimodinst doesn't have session locking and the modinst session.py.mako doesn't even look at this
@@ -337,7 +337,7 @@ def add_all_function_metadata(functions, config):
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
-        _add_use_session_lock(functions[f], config)
+        _add_use_session_lock(functions[f])
         for p in functions[f]['parameters']:
             _add_enum(p)
             _fix_type(p)
