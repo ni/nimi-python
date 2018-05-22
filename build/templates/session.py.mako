@@ -87,7 +87,6 @@ class ${session_context_manager}(object):
 
 
 % endif
-% if config['use_session_lock']:
 # From https://stackoverflow.com/questions/5929107/decorators-with-parameters
 def ivi_synchronized(f):
     def aux(*xs, **kws):
@@ -109,7 +108,6 @@ class _Lock(object):
         self._session.unlock()
 
 
-%endif
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
