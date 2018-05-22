@@ -61,7 +61,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-DMM"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nidmm'
-    info['module']['version'] = "0.8.0"
+    info['module']['version'] = "0.9.0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
