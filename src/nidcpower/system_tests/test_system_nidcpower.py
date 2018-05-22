@@ -242,7 +242,7 @@ def test_commit(single_channel_session):
 def test_configure_digital_edge_measure_trigger(single_channel_session):
     single_channel_session.measure_when = nidcpower.MeasureWhen.ON_MEASURE_TRIGGER
     expected_trigger_terminal = "/4162/PXI_Trig0"
-    single_channel_session.configure_digital_edge_measure_trigger(expected_trigger_terminal)
+    single_channel_session.digital_edge_measure_trigger_input_terminal = expected_trigger_terminal
     assert expected_trigger_terminal == single_channel_session.digital_edge_measure_trigger_input_terminal
 
 
@@ -250,19 +250,20 @@ def test_configure_digital_edge_pulse_trigger():
     # 4162 does not support pulsing... yet?
     with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4139; BoardType:PXIe') as session:
         expected_trigger_terminal = "/4139/PXI_Trig0"
-        session.configure_digital_edge_pulse_trigger(expected_trigger_terminal)
+        session.digital_edge_pulse_trigger_input_terminal = expected_trigger_terminal
         assert expected_trigger_terminal == session.digital_edge_pulse_trigger_input_terminal
 
 
+'''
 def test_configure_digital_edge_sequence_advance_trigger(single_channel_session):
     expected_trigger_terminal = "/4162/PXI_Trig0"
-    single_channel_session.configure_digital_edge_sequence_advance_trigger(expected_trigger_terminal)
+    single_channel_session.digital_edge_sequence_advance_trigger_input_terminal = expected_trigger_terminal
     assert expected_trigger_terminal == single_channel_session.digital_edge_sequence_advance_trigger_input_terminal
 
 
 def test_configure_digital_edge_source_trigger(single_channel_session):
     expected_trigger_terminal = "/4162/PXI_Trig0"
-    single_channel_session.configure_digital_edge_source_trigger(expected_trigger_terminal)
+    single_channel_session.digital_edge_source_trigger_input_terminal = expected_trigger_terminal
     assert expected_trigger_terminal == single_channel_session.digital_edge_source_trigger_input_terminal
 
 
@@ -270,8 +271,9 @@ def test_configure_digital_edge_start_trigger(single_channel_session):
     expected_trigger_terminal = "/4162/PXI_Trig0"
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
     single_channel_session.set_sequence([0.1], [0.1])
-    single_channel_session.configure_digital_edge_start_trigger(expected_trigger_terminal)
+    single_channel_session.digital_edge_start_trigger_input_terminal = expected_trigger_terminal
     assert expected_trigger_terminal == single_channel_session.digital_edge_start_trigger_input_terminal
+'''
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):
