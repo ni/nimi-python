@@ -2822,7 +2822,7 @@ sample_clock_timebase_multiplier
         Timebase Rate <p:py:meth:`niscope.Session.SampleClockTimebaseRate`.html>`__ and the actual
         sample rate, which can be higher. This property can be used in
         conjunction with the `Sample Clock Timebase Divisor
-        Property <pniscope_SampleClockTimebaseDivisor.html>`__.
+        Property <p:py:meth:`niscope.Session.SampleClockTimebaseDivisor`.html>`__.
         Some devices use multiple ADCs to sample the same channel at an
         effective sample rate that is greater than the specified clock rate.
         When providing an external sample clock use this property to indicate
