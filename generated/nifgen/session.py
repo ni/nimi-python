@@ -1973,7 +1973,7 @@ class _SessionBase(object):
     def delete_waveform(self, waveform_name_or_handle):
         '''delete_waveform
 
-        Removes a previously created arbitrary waveform from the signal generator memory and invalidates the waveform handle.
+        Removes a previously created arbitrary waveform from the signal generator memory.
 
         Note: The signal generator must not be in the Generating state when you call this method.
 
@@ -1986,7 +1986,7 @@ class _SessionBase(object):
             session.channels['0,1'].delete_waveform(waveform_name_or_handle)
 
         Args:
-            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
 
         '''
         if isinstance(waveform_name_or_handle, str):
@@ -2601,12 +2601,7 @@ class _SessionBase(object):
         that waveform begin where the last write left off, unless this method
         is called again. The waveformHandle passed in must have been created by
         a call to the nifgen_AllocateWaveform method or one of the following
-        niFgen CreateWaveform methods:
-
-        -  create_waveform
-        -  create_waveform
-        -  create_waveform_from_file_i16
-        -  create_waveform_from_file_f64
+        create_waveform method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2617,7 +2612,7 @@ class _SessionBase(object):
             session.channels['0,1'].set_next_write_position(waveform_name_or_handle, relative_to, offset)
 
         Args:
-            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
 
             relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
@@ -3069,7 +3064,7 @@ class _SessionBase(object):
             session.channels['0,1'].write_waveform(waveform_name_or_handle, data)
 
         Args:
-            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
 
             data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
 

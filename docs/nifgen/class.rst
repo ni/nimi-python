@@ -5753,7 +5753,7 @@ delete_waveform
 
     .. py:method:: delete_waveform(waveform_name_or_handle)
 
-            Removes a previously created arbitrary waveform from the signal generator memory and invalidates the waveform handle.
+            Removes a previously created arbitrary waveform from the signal generator memory.
 
             
 
@@ -5773,7 +5773,7 @@ delete_waveform
             :param waveform_name_or_handle:
 
 
-                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform` or :py:meth:`nifgen.Session.allocate_waveform`.
+                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform`, :py:meth:`nifgen.Session.allocate_waveform` or :py:meth:`nifgen.Session.create_waveform`.
 
                 
 
@@ -6506,12 +6506,7 @@ set_next_write_position
             that waveform begin where the last write left off, unless this method
             is called again. The waveformHandle passed in must have been created by
             a call to the nifgen_AllocateWaveform method or one of the following
-            niFgen CreateWaveform methods:
-
-            -  :py:meth:`nifgen.Session.create_waveform`
-            -  :py:meth:`nifgen.Session.create_waveform`
-            -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
-            -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
+            :py:meth:`nifgen.Session.create_waveform` method.
 
             
 
@@ -6529,7 +6524,7 @@ set_next_write_position
             :param waveform_name_or_handle:
 
 
-                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform` or :py:meth:`nifgen.Session.allocate_waveform`.
+                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform`, :py:meth:`nifgen.Session.allocate_waveform` or :py:meth:`nifgen.Session.create_waveform`.
 
                 
 
@@ -6666,7 +6661,7 @@ write_waveform
             :param waveform_name_or_handle:
 
 
-                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform` or :py:meth:`nifgen.Session.allocate_waveform`.
+                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform`, :py:meth:`nifgen.Session.allocate_waveform` or :py:meth:`nifgen.Session.create_waveform`.
 
                 
 
