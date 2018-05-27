@@ -248,7 +248,7 @@ after the function runs.
     },
 
     'WriteWaveformDispatcher': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'parameters': [
             {
@@ -294,6 +294,7 @@ nifgen_SetWaveformNextWritePosition function.''',
         },
     },
     'SetNextWritePositionDispatcher': {
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'parameters': [
             {
@@ -368,6 +369,7 @@ niFgen CreateWaveform functions:
 },
     },
     'DeleteWaveformDispatch': {
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'parameters': [
             {
