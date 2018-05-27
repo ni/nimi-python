@@ -267,7 +267,7 @@ after the function runs.
                 'type_in_documentation': 'str or int',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
                 },
             },
             {
@@ -319,7 +319,7 @@ nifgen_SetWaveformNextWritePosition function.''',
                 'type_in_documentation': 'str or int',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
                 },
             },
             {
@@ -389,12 +389,12 @@ niFgen_CreateWaveformF64 function.
                 'type_in_documentation': 'str or int',
                 'type': 'ViInt32',
                 'documentation': {
-                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
                 },
             },
         ],
         'documentation': {
-            'description': 'Removes a previously created arbitrary waveform from the signal generator memory and invalidates the waveform handle.',
+            'description': 'Removes a previously created arbitrary waveform from the signal generator memory.',
             'note': 'The signal generator must not be in the Generating state when you call this function.',
         },
     },
