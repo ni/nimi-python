@@ -359,12 +359,7 @@ waveform specified by the waveformHandle parameter. Subsequent writes to
 that waveform begin where the last write left off, unless this function
 is called again. The waveformHandle passed in must have been created by
 a call to the nifgen_AllocateWaveform function or one of the following
-niFgen CreateWaveform functions:
-
--  niFgen_CreateWaveformF64
--  niFgen_CreateWaveformI16
--  niFgen_CreateWaveformFromFileI16
--  niFgen_CreateWaveformFromFileF64
+niFgen_CreateWaveformF64 function.
 ''',
 },
     },
