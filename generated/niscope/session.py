@@ -1114,7 +1114,7 @@ class _SessionBase(object):
     Timebase Rate <pSampleClockTimebaseRate.html>`__ and the actual
     sample rate, which can be higher. This property can be used in
     conjunction with the `Sample Clock Timebase Divisor
-    Property <pniscope_SampleClockTimebaseDivisor.html>`__.
+    Property <pSampleClockTimebaseDivisor.html>`__.
     Some devices use multiple ADCs to sample the same channel at an
     effective sample rate that is greater than the specified clock rate.
     When providing an external sample clock use this property to indicate
