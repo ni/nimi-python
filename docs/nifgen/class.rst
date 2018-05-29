@@ -170,6 +170,8 @@ nifgen.Session
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`bus_type`                                         | :py:data:`BusType`                              |
     +-------------------------------------------------------------+-------------------------------------------------+
+    | :py:attr:`channel_count`                                    | int                                             |
+    +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`channel_delay`                                    | float                                           |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`clock_mode`                                       | :py:data:`ClockMode`                            |
@@ -319,8 +321,6 @@ nifgen.Session
     | :py:attr:`min_waveform_size`                                | int                                             |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`module_revision`                                  | str                                             |
-    +-------------------------------------------------------------+-------------------------------------------------+
-    | :py:attr:`num_channels`                                     | int                                             |
     +-------------------------------------------------------------+-------------------------------------------------+
     | :py:attr:`output_enabled`                                   | bool                                            |
     +-------------------------------------------------------------+-------------------------------------------------+
@@ -956,6 +956,36 @@ bus_type
 
                 - LabVIEW Property: **Instrument:Bus Type**
                 - C Attribute: **NIFGEN_ATTR_BUS_TYPE**
+
+channel_count
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: channel_count
+
+        Returns the number of channels that the specific instrument  driver supports.
+        For each property for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | False     |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
+                - C Attribute: **NIFGEN_ATTR_CHANNEL_COUNT**
 
 channel_delay
 ~~~~~~~~~~~~~
@@ -3220,36 +3250,6 @@ module_revision
 
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision**
                 - C Attribute: **NIFGEN_ATTR_MODULE_REVISION**
-
-num_channels
-~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: num_channels
-
-        Indicates the number of channels that the specific instrument  driver supports.
-        For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | False     |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
-                - C Attribute: **NIFGEN_ATTR_NUM_CHANNELS**
 
 output_enabled
 ~~~~~~~~~~~~~~
@@ -6848,6 +6848,8 @@ Properties
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.bus_type`                                         | :py:data:`BusType`                              |
 +----------------------------------------------------------------------------+-------------------------------------------------+
+| :py:attr:`nifgen.Session.channel_count`                                    | int                                             |
++----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.channel_delay`                                    | float                                           |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.clock_mode`                                       | :py:data:`ClockMode`                            |
@@ -6997,8 +6999,6 @@ Properties
 | :py:attr:`nifgen.Session.min_waveform_size`                                | int                                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.module_revision`                                  | str                                             |
-+----------------------------------------------------------------------------+-------------------------------------------------+
-| :py:attr:`nifgen.Session.num_channels`                                     | int                                             |
 +----------------------------------------------------------------------------+-------------------------------------------------+
 | :py:attr:`nifgen.Session.output_enabled`                                   | bool                                            |
 +----------------------------------------------------------------------------+-------------------------------------------------+
