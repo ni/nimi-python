@@ -52,7 +52,7 @@ def _main(argsv):
     parser.add_argument('-r', '--sample-rate', default=10000000.0, type=float, help='Sample Rate (Hz)')
     parser.add_argument('-s', '--samples-per-fetch', default=1000000, type=int, help='Samples per fetch')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.channels, args.option_string, args.time, args.voltage, args.sample_rate, args.chunk_size)
+    example(args.resource_name, args.channels, args.option_string, args.time, args.voltage, args.sample_rate, args.samples_per_fetch)
 
 
 def main():
