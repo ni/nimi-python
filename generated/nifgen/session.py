@@ -171,7 +171,7 @@ class _SessionBase(object):
     arb_repeat_count = _attributes.AttributeViInt32(1150328)
     '''Type: int
 
-    Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to TriggerMode.SINGLE or TriggerMode.STEPPED. This property is ignored if the triggerMode parameter is set to TriggerMode.CONTINUOUS or TriggerMode.BURST. Use this property when output_mode is set to OutputMode.ARB.
+    Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of ConfigureTriggerMode is set to TriggerMode.SINGLE or TriggerMode.STEPPED. This property is ignored if the triggerMode parameter is set to TriggerMode.CONTINUOUS or TriggerMode.BURST. Use this property when output_mode is set to OutputMode.ARB.
     When used during streaming, this property specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
     '''
     arb_sample_rate = _attributes.AttributeViReal64(1250204)
@@ -950,7 +950,7 @@ class _SessionBase(object):
         '''clear_user_standard_waveform
 
         Clears the user-defined waveform created by the
-        nifgen_DefineUserStandardWaveform method.
+        define_user_standard_waveform method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -1272,23 +1272,23 @@ class _SessionBase(object):
 
                 **Default Value**: Waveform.SINE
 
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                    |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                   |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                          |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                      |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the define_user_standard_waveform method. |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
 
             amplitude (float): Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
@@ -1416,7 +1416,7 @@ class _SessionBase(object):
         of waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
         OutputMode.SEQ before calling this method.
 
@@ -1465,7 +1465,7 @@ class _SessionBase(object):
         of waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
         OutputMode.SEQ before calling this method.
 
@@ -1649,7 +1649,7 @@ class _SessionBase(object):
         waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
         OutputMode.SEQ before calling this method.
 
@@ -1700,15 +1700,15 @@ class _SessionBase(object):
         List output mode.
 
         To select the waveform, set the **waveform** parameter to
-        Waveform.USER with either the nifgen_ConfigureStandardWaveform
-        or the nifgen_CreateFreqList method.
+        Waveform.USER with either the configure_standard_waveform
+        or the create_freq_list method.
 
         The waveform data must be scaled between –1.0 and 1.0. Use the
         **amplitude** parameter in the configure_standard_waveform
         method to generate different output voltages.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.FUNC or
         OutputMode.FREQ_LIST before calling this method.
 
@@ -1984,9 +1984,9 @@ class _SessionBase(object):
 
         The IVI Engine also maintains this error information separately for each
         thread. This feature is useful if you do not have a session handle to
-        pass to the _get_error or nifgen_ClearError methods. This
-        situation occurs when a call to the nifgen_init or
-        nifgen_InitWithOptions method fails.
+        pass to the _get_error or ClearError methods. This
+        situation occurs when a call to the init or
+        InitWithOptions method fails.
 
         Returns:
             error_code (int): The error code for the session or execution thread.
@@ -1994,7 +1994,7 @@ class _SessionBase(object):
                 A value of VI_SUCCESS (0) indicates that no error occurred. A positive
                 value indicates a warning. A negative value indicates an error.
 
-                You can call nifgen_error_message to get a text description of the
+                You can call _error_message to get a text description of the
                 value.
 
                 If you are not interested in this value, you can pass VI_NULL.
@@ -2021,7 +2021,7 @@ class _SessionBase(object):
           based on the FIR filter type and corresponding property (Alpha,
           Passband, BT) unless you are using the custom filter. If you are using
           a custom filter, the coefficients returned are those set with the
-          nifgen_ConfigureCustomFIRFilterCoefficients method coerced to the
+          configure_custom_fir_filter_coefficients method coerced to the
           quantized values used by the device.
         | To use this method, first call an instance of the
           get_fir_filter_coefficients method with the
@@ -2346,12 +2346,12 @@ class _SessionBase(object):
         method is called again. The **waveformHandle** passed in must have
         been created with a call to one of the following methods:
 
-        -  nifgen_AllocateWaveform
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  allocate_waveform
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2401,14 +2401,14 @@ class _SessionBase(object):
         waveform specified by the waveformHandle parameter. Subsequent writes to
         that waveform begin where the last write left off, unless this method
         is called again. The waveformHandle passed in must have been created by
-        a call to the nifgen_AllocateWaveform method or one of the following
+        a call to the allocate_waveform method or one of the following
         niFgen CreateWaveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2420,7 +2420,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
@@ -2467,12 +2467,12 @@ class _SessionBase(object):
 
         Writes binary data to the waveform in onboard memory. The waveform
         handle passed must have been created by a call to the
-        nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 method.
+        allocate_waveform or the create_waveform method.
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
+        set_waveform_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2488,7 +2488,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
@@ -2518,19 +2518,19 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or to one of the following niFgen
+        allocate_waveform method or to one of the following niFgen
         Create Waveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
+        set_named_waveform_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2567,19 +2567,19 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or to one of the following niFgen
+        allocate_waveform method or to one of the following niFgen
         Create Waveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
+        set_named_waveform_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2626,7 +2626,7 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
+        set_named_waveform_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2699,19 +2699,19 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or one of the following niFgen
+        allocate_waveform method or one of the following niFgen
         CreateWaveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
+        set_waveform_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2727,7 +2727,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
@@ -2749,19 +2749,19 @@ class _SessionBase(object):
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or one of the following niFgen
+        allocate_waveform method or one of the following niFgen
         CreateWaveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
+        set_waveform_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2777,7 +2777,7 @@ class _SessionBase(object):
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
@@ -2808,8 +2808,8 @@ class _SessionBase(object):
 
         By default, subsequent calls to this method
         continue writing data from the position of the last sample written. You
-        can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
-        nifgen_SetWaveformNextWritePosition method.
+        can set the write position and offset by calling the set_named_waveform_next_write_position
+        set_waveform_next_write_position method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2939,7 +2939,7 @@ class Session(_SessionBase):
 
             reset_device (bool): Specifies whether you want to reset the device during the initialization
                 procedure. True specifies that the device is reset and performs the
-                same method as the nifgen_Reset method.
+                same method as the Reset method.
 
                 ****Defined Values****
 
@@ -3033,7 +3033,7 @@ class Session(_SessionBase):
         '''abort
 
         Aborts any previously initiated signal generation. Call the
-        nifgen_InitiateGeneration method to cause the signal generator to
+        initiate method to cause the signal generator to
         produce a signal again.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3072,7 +3072,7 @@ class Session(_SessionBase):
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
                 generator to remove. You can create an arbitrary sequence using the
-                nifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence method.
+                create_arb_sequence or create_advanced_arb_sequence method.
                 These methods return a handle that you use to identify the sequence.
 
                 | **Defined Value**:
@@ -3222,7 +3222,7 @@ class Session(_SessionBase):
         Note:
         The signal generator must not be in the Generating state when you call
         this method.
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.SEQ before calling this
         method.
 
@@ -3233,14 +3233,14 @@ class Session(_SessionBase):
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform method or one of the following niFgen
+                allocate_waveform method or one of the following niFgen
                 CreateWaveform methods:
 
-                -  nifgen_CreateWaveformF64
-                -  nifgen_CreateWaveformI16
-                -  nifgen_CreateWaveformFromFileI16
-                -  nifgen_CreateWaveformFromFileF64
-                -  nifgen_CreateWaveformFromFileHWS
+                -  create_waveform
+                -  create_waveform
+                -  create_waveform_from_file_i16
+                -  create_waveform_from_file_f64
+                -  CreateWaveformFromFileHWS
 
                 **Default Value**: None
 
@@ -3252,7 +3252,7 @@ class Session(_SessionBase):
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities method.
+                query_arb_seq_capabilities method.
 
                 **Default Value**: None
 
@@ -3264,7 +3264,7 @@ class Session(_SessionBase):
                 generate. Each element of the **sampleCountsArray** must be larger than
                 the minimum waveform size, a multiple of the waveform quantum and no
                 larger than the number of samples in the corresponding waveform. You can
-                obtain these values by calling the nifgen_QueryArbWfmCapabilities
+                obtain these values by calling the query_arb_wfm_capabilities
                 method.
 
                 **Default Value**: None
@@ -3297,7 +3297,7 @@ class Session(_SessionBase):
                 **Default Value**: None
 
             sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
-                pass this handle to nifgen_ConfigureArbSequence to generate the
+                pass this handle to configure_arb_sequence to generate the
                 arbitrary sequence.
 
         '''
@@ -3327,7 +3327,7 @@ class Session(_SessionBase):
         Creates an arbitrary sequence from an array of waveform handles and an
         array of corresponding loop counts. This method returns a handle that
         identifies the sequence. You pass this handle to the
-        nifgen_ConfigureArbSequence method to specify what arbitrary sequence
+        configure_arb_sequence method to specify what arbitrary sequence
         you want the signal generator to produce.
 
         An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3336,7 +3336,7 @@ class Session(_SessionBase):
         to repeat a specific waveform is called the loop count.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.SEQ before calling this
         method.
 
@@ -3347,14 +3347,14 @@ class Session(_SessionBase):
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform method or one of the following niFgen
+                allocate_waveform method or one of the following niFgen
                 CreateWaveform methods:
 
-                -  nifgen_CreateWaveformF64
-                -  nifgen_CreateWaveformI16
-                -  nifgen_CreateWaveformFromFileI16
-                -  nifgen_CreateWaveformFromFileF64
-                -  nifgen_CreateWaveformFromFileHWS
+                -  create_waveform
+                -  create_waveform
+                -  create_waveform_from_file_i16
+                -  create_waveform_from_file_f64
+                -  CreateWaveformFromFileHWS
 
                 **Default Value**: None
 
@@ -3366,14 +3366,14 @@ class Session(_SessionBase):
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities method.
+                query_arb_seq_capabilities method.
 
                 **Default Value**: None
 
 
         Returns:
             sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
-                pass this handle to nifgen_ConfigureArbSequence to generate the
+                pass this handle to configure_arb_sequence to generate the
                 arbitrary sequence.
 
         '''
@@ -3395,7 +3395,7 @@ class Session(_SessionBase):
         two arrays should have the same number of elements, and this value must
         also be the size of the **frequencyListLength**. The method returns a
         handle that identifies the frequency list (the **frequencyListHandle**).
-        You can pass this handle to nifgen_ConfigureFreqList to specify what
+        You can pass this handle to configure_freq_list to specify what
         frequency list you want the signal generator to produce.
 
         A frequency list consists of a list of frequencies and durations. The
@@ -3416,23 +3416,23 @@ class Session(_SessionBase):
 
                 **Default Value**: Waveform.SINE
 
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                    |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                   |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                          |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                      |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the define_user_standard_waveform method. |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
 
             frequency_array (list of float): Specifies the array of frequencies to form the frequency list. The array
                 must have at least as many elements as the value you specify in
@@ -3457,7 +3457,7 @@ class Session(_SessionBase):
 
         Returns:
             frequency_list_handle (int): Returns the handle that identifies the new frequency list. You can pass
-                this handle to nifgen_ConfigureFreqList to generate the arbitrary
+                this handle to configure_freq_list to generate the arbitrary
                 sequence.
 
         '''
@@ -3754,7 +3754,7 @@ class Session(_SessionBase):
 
             reset_device (bool): Specifies whether you want to reset the device during the initialization
                 procedure. True specifies that the device is reset and performs the
-                same method as the nifgen_Reset method.
+                same method as the Reset method.
 
                 ****Defined Values****
 
@@ -3834,7 +3834,7 @@ class Session(_SessionBase):
         '''_initiate_generation
 
         Initiates signal generation. If you want to abort signal generation,
-        call the nifgen_AbortGeneration method. After the signal generation
+        call the abort method. After the signal generation
         is aborted, you can call the initiate method to
         cause the signal generator to produce a signal again.
         '''
@@ -4043,7 +4043,7 @@ class Session(_SessionBase):
         Resets the instrument and reapplies initial user–specified settings from
         the logical name that was used to initialize the session. If the session
         was created without a logical name, this method is equivalent to the
-        nifgen_reset method.
+        reset method.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ResetWithDefaults(vi_ctype)
@@ -4125,8 +4125,8 @@ class Session(_SessionBase):
         -  Destroys the NI-FGEN session and all of its properties.
         -  Deallocates any memory resources NI-FGEN uses.
 
-        Not all signal routes established by calling the nifgen_ExportSignal
-        and nifgen_RouteSignalOut methods are released when the NI-FGEN
+        Not all signal routes established by calling the ExportSignal
+        and RouteSignalOut methods are released when the NI-FGEN
         session is closed. The following table shows what happens to a signal
         route on your device when you call the _close method.
 
@@ -4140,7 +4140,7 @@ class Session(_SessionBase):
 
         Note:
         After calling _close, you cannot use NI-FGEN again until you
-        call the nifgen_init or nifgen_InitWithOptions methods.
+        call the init or InitWithOptions methods.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_close(vi_ctype)
@@ -4188,7 +4188,7 @@ class Session(_SessionBase):
 
         Note:
         For the NI 5401/5404/5411/5431, this method exhibits the same
-        behavior as the nifgen_ResetDevice method.
+        behavior as the reset_device method.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_reset(vi_ctype)

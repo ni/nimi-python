@@ -85,7 +85,7 @@ nifgen.Session
 
         Specifies whether you want to reset the device during the initialization
         procedure. True specifies that the device is reset and performs the
-        same method as the nifgen_Reset method.
+        same method as the :py:meth:`nifgen.Session.Reset` method.
 
         ****Defined Values****
 
@@ -766,7 +766,7 @@ arb_repeat_count
 
     .. py:attribute:: arb_repeat_count
 
-        Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to :py:data:`~nifgen.TriggerMode.SINGLE` or :py:data:`~nifgen.TriggerMode.STEPPED`. This property is ignored if the triggerMode parameter is set to :py:data:`~nifgen.TriggerMode.CONTINUOUS` or :py:data:`~nifgen.TriggerMode.BURST`. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
+        Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of :py:meth:`nifgen.Session.ConfigureTriggerMode` is set to :py:data:`~nifgen.TriggerMode.SINGLE` or :py:data:`~nifgen.TriggerMode.STEPPED`. This property is ignored if the triggerMode parameter is set to :py:data:`~nifgen.TriggerMode.CONTINUOUS` or :py:data:`~nifgen.TriggerMode.BURST`. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
         When used during streaming, this property specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
 
         The following table lists the characteristics of this property.
@@ -4077,7 +4077,7 @@ abort
     .. py:method:: abort()
 
             Aborts any previously initiated signal generation. Call the
-            nifgen_InitiateGeneration method to cause the signal generator to
+            :py:meth:`nifgen.Session.initiate` method to cause the signal generator to
             produce a signal again.
 
             
@@ -4218,7 +4218,7 @@ clear_arb_sequence
 
                 Specifies the handle of the arbitrary sequence that you want the signal
                 generator to remove. You can create an arbitrary sequence using the
-                nifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence method.
+                :py:meth:`nifgen.Session.create_arb_sequence` or :py:meth:`nifgen.Session.create_advanced_arb_sequence` method.
                 These methods return a handle that you use to identify the sequence.
 
                 | **Defined Value**:
@@ -4330,7 +4330,7 @@ clear_user_standard_waveform
     .. py:method:: clear_user_standard_waveform()
 
             Clears the user-defined waveform created by the
-            nifgen_DefineUserStandardWaveform method.
+            :py:meth:`nifgen.Session.define_user_standard_waveform` method.
 
             
 
@@ -4753,23 +4753,23 @@ configure_standard_waveform
 
                 **Default Value**: :py:data:`~nifgen.Waveform.SINE`
 
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                    |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                  |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                             |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                   |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                          |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                                        |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                                          |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                                        |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                                                   |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                                                   |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                                         |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                                                |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the :py:meth:`nifgen.Session.define_user_standard_waveform` method. |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
             :type waveform: :py:data:`nifgen.Waveform`
@@ -4883,7 +4883,7 @@ create_advanced_arb_sequence
 
             .. note:: The signal generator must not be in the Generating state when you call
                 this method.
-                You must call the nifgen_ConfigureOutputMode method to set the
+                You must call the :py:meth:`nifgen.Session.ConfigureOutputMode` method to set the
                 **outputMode** parameter to :py:data:`~nifgen.OutputMode.SEQ` before calling this
                 method.
 
@@ -4898,14 +4898,14 @@ create_advanced_arb_sequence
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform method or one of the following niFgen
+                :py:meth:`nifgen.Session.allocate_waveform` method or one of the following niFgen
                 CreateWaveform methods:
 
-                -  nifgen_CreateWaveformF64
-                -  nifgen_CreateWaveformI16
-                -  nifgen_CreateWaveformFromFileI16
-                -  nifgen_CreateWaveformFromFileF64
-                -  nifgen_CreateWaveformFromFileHWS
+                -  :py:meth:`nifgen.Session.create_waveform`
+                -  :py:meth:`nifgen.Session.create_waveform`
+                -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
+                -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
+                -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
                 **Default Value**: None
 
@@ -4924,7 +4924,7 @@ create_advanced_arb_sequence
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities method.
+                :py:meth:`nifgen.Session.query_arb_seq_capabilities` method.
 
                 **Default Value**: None
 
@@ -4943,7 +4943,7 @@ create_advanced_arb_sequence
                 generate. Each element of the **sampleCountsArray** must be larger than
                 the minimum waveform size, a multiple of the waveform quantum and no
                 larger than the number of samples in the corresponding waveform. You can
-                obtain these values by calling the nifgen_QueryArbWfmCapabilities
+                obtain these values by calling the :py:meth:`nifgen.Session.query_arb_wfm_capabilities`
                 method.
 
                 **Default Value**: None
@@ -4998,7 +4998,7 @@ create_advanced_arb_sequence
 
 
                     Returns the handle that identifies the new arbitrary sequence. You can
-                    pass this handle to nifgen_ConfigureArbSequence to generate the
+                    pass this handle to :py:meth:`nifgen.Session.configure_arb_sequence` to generate the
                     arbitrary sequence.
 
                     
@@ -5015,7 +5015,7 @@ create_arb_sequence
             Creates an arbitrary sequence from an array of waveform handles and an
             array of corresponding loop counts. This method returns a handle that
             identifies the sequence. You pass this handle to the
-            nifgen_ConfigureArbSequence method to specify what arbitrary sequence
+            :py:meth:`nifgen.Session.configure_arb_sequence` method to specify what arbitrary sequence
             you want the signal generator to produce.
 
             An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -5025,7 +5025,7 @@ create_arb_sequence
 
             
 
-            .. note:: You must call the nifgen_ConfigureOutputMode method to set the
+            .. note:: You must call the :py:meth:`nifgen.Session.ConfigureOutputMode` method to set the
                 **outputMode** parameter to :py:data:`~nifgen.OutputMode.SEQ` before calling this
                 method.
 
@@ -5040,14 +5040,14 @@ create_arb_sequence
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform method or one of the following niFgen
+                :py:meth:`nifgen.Session.allocate_waveform` method or one of the following niFgen
                 CreateWaveform methods:
 
-                -  nifgen_CreateWaveformF64
-                -  nifgen_CreateWaveformI16
-                -  nifgen_CreateWaveformFromFileI16
-                -  nifgen_CreateWaveformFromFileF64
-                -  nifgen_CreateWaveformFromFileHWS
+                -  :py:meth:`nifgen.Session.create_waveform`
+                -  :py:meth:`nifgen.Session.create_waveform`
+                -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
+                -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
+                -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
                 **Default Value**: None
 
@@ -5066,7 +5066,7 @@ create_arb_sequence
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities method.
+                :py:meth:`nifgen.Session.query_arb_seq_capabilities` method.
 
                 **Default Value**: None
 
@@ -5080,7 +5080,7 @@ create_arb_sequence
 
 
                     Returns the handle that identifies the new arbitrary sequence. You can
-                    pass this handle to nifgen_ConfigureArbSequence to generate the
+                    pass this handle to :py:meth:`nifgen.Session.configure_arb_sequence` to generate the
                     arbitrary sequence.
 
                     
@@ -5099,7 +5099,7 @@ create_freq_list
             two arrays should have the same number of elements, and this value must
             also be the size of the **frequencyListLength**. The method returns a
             handle that identifies the frequency list (the **frequencyListHandle**).
-            You can pass this handle to nifgen_ConfigureFreqList to specify what
+            You can pass this handle to :py:meth:`nifgen.Session.configure_freq_list` to specify what
             frequency list you want the signal generator to produce.
 
             A frequency list consists of a list of frequencies and durations. The
@@ -5125,23 +5125,23 @@ create_freq_list
 
                 **Default Value**: :py:data:`~nifgen.Waveform.SINE`
 
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                    |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                  |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                             |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                   |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                          |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
-                +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.SINE`      | Specifies that the signal generator produces a sinusoid waveform.                                                                                        |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.SQUARE`    | Specifies that the signal generator produces a square waveform.                                                                                          |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.TRIANGLE`  | Specifies that the signal generator produces a triangle waveform.                                                                                        |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.RAMP_UP`   | Specifies that the signal generator produces a positive ramp waveform.                                                                                   |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.RAMP_DOWN` | Specifies that the signal generator produces a negative ramp waveform.                                                                                   |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.DC`        | Specifies that the signal generator produces a constant voltage.                                                                                         |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.NOISE`     | Specifies that the signal generator produces white noise.                                                                                                |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nifgen.Waveform.USER`      | Specifies that the signal generator produces a user-defined waveform as defined with the :py:meth:`nifgen.Session.define_user_standard_waveform` method. |
+                +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
             :type waveform: :py:data:`nifgen.Waveform`
@@ -5185,7 +5185,7 @@ create_freq_list
 
 
                     Returns the handle that identifies the new frequency list. You can pass
-                    this handle to nifgen_ConfigureFreqList to generate the arbitrary
+                    this handle to :py:meth:`nifgen.Session.configure_freq_list` to generate the arbitrary
                     sequence.
 
                     
@@ -5399,8 +5399,8 @@ define_user_standard_waveform
             List output mode.
 
             To select the waveform, set the **waveform** parameter to
-            :py:data:`~nifgen.Waveform.USER` with either the nifgen_ConfigureStandardWaveform
-            or the nifgen_CreateFreqList method.
+            :py:data:`~nifgen.Waveform.USER` with either the :py:meth:`nifgen.Session.configure_standard_waveform`
+            or the :py:meth:`nifgen.Session.create_freq_list` method.
 
             The waveform data must be scaled between –1.0 and 1.0. Use the
             **amplitude** parameter in the :py:meth:`nifgen.Session.configure_standard_waveform`
@@ -5408,7 +5408,7 @@ define_user_standard_waveform
 
             
 
-            .. note:: You must call the nifgen_ConfigureOutputMode method to set the
+            .. note:: You must call the :py:meth:`nifgen.Session.ConfigureOutputMode` method to set the
                 **outputMode** parameter to :py:data:`~nifgen.OutputMode.FUNC` or
                 :py:data:`~nifgen.OutputMode.FREQ_LIST` before calling this method.
 
@@ -5609,7 +5609,7 @@ get_fir_filter_coefficients
               based on the FIR filter type and corresponding property (Alpha,
               Passband, BT) unless you are using the custom filter. If you are using
               a custom filter, the coefficients returned are those set with the
-              nifgen_ConfigureCustomFIRFilterCoefficients method coerced to the
+              :py:meth:`nifgen.Session.configure_custom_fir_filter_coefficients` method coerced to the
               quantized values used by the device.
             | To use this method, first call an instance of the
               :py:meth:`nifgen.Session.get_fir_filter_coefficients` method with the
@@ -6103,7 +6103,7 @@ reset
             
 
             .. note:: For the NI 5401/5404/5411/5431, this method exhibits the same
-                behavior as the nifgen_ResetDevice method.
+                behavior as the :py:meth:`nifgen.Session.reset_device` method.
 
 
 
@@ -6133,7 +6133,7 @@ reset_with_defaults
             Resets the instrument and reapplies initial user–specified settings from
             the logical name that was used to initialize the session. If the session
             was created without a logical name, this method is equivalent to the
-            nifgen_reset method.
+            :py:meth:`nifgen.Session.reset` method.
 
             
 
@@ -6236,12 +6236,12 @@ set_named_waveform_next_write_position
             method is called again. The **waveformHandle** passed in must have
             been created with a call to one of the following methods:
 
-            -  nifgen_AllocateWaveform
-            -  nifgen_CreateWaveformF64
-            -  nifgen_CreateWaveformI16
-            -  nifgen_CreateWaveformFromFileI16
-            -  nifgen_CreateWaveformFromFileF64
-            -  nifgen_CreateWaveformFromFileHWS
+            -  :py:meth:`nifgen.Session.allocate_waveform`
+            -  :py:meth:`nifgen.Session.create_waveform`
+            -  :py:meth:`nifgen.Session.create_waveform`
+            -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
+            -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
+            -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
             
 
@@ -6306,14 +6306,14 @@ set_waveform_next_write_position
             waveform specified by the waveformHandle parameter. Subsequent writes to
             that waveform begin where the last write left off, unless this method
             is called again. The waveformHandle passed in must have been created by
-            a call to the nifgen_AllocateWaveform method or one of the following
+            a call to the :py:meth:`nifgen.Session.allocate_waveform` method or one of the following
             niFgen CreateWaveform methods:
 
-            -  nifgen_CreateWaveformF64
-            -  nifgen_CreateWaveformI16
-            -  nifgen_CreateWaveformFromFileI16
-            -  nifgen_CreateWaveformFromFileF64
-            -  nifgen_CreateWaveformFromFileHWS
+            -  :py:meth:`nifgen.Session.create_waveform`
+            -  :py:meth:`nifgen.Session.create_waveform`
+            -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
+            -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
+            -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
 
             
 
@@ -6332,7 +6332,7 @@ set_waveform_next_write_position
 
 
                 Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the :py:meth:`nifgen.Session.allocate_waveform` method.
 
                 
 
@@ -6450,8 +6450,8 @@ write_waveform
 
             By default, subsequent calls to this method
             continue writing data from the position of the last sample written. You
-            can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
-            nifgen_SetWaveformNextWritePosition method.
+            can set the write position and offset by calling the :py:meth:`nifgen.Session.set_named_waveform_next_write_position`
+            :py:meth:`nifgen.Session.set_waveform_next_write_position` method.
 
             
 
