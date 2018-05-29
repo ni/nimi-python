@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
     * #### Added
     * #### Changed
+        * `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
     * #### Removed
 * ### NI-SCOPE
     * #### Added
