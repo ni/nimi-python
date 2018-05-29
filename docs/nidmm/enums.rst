@@ -561,31 +561,6 @@ MeasurementCompleteDest
 
 
 
-MeasurementDestinationSlope
----------------------------
-
-.. py:class:: MeasurementDestinationSlope
-
-    .. py:attribute:: MeasurementDestinationSlope.POSITIVE
-
-
-
-        Rising Edgs
-
-        
-
-
-
-    .. py:attribute:: MeasurementDestinationSlope.NEGATIVE
-
-
-
-        Falling Edge
-
-        
-
-
-
 OperationMode
 -------------
 
@@ -682,31 +657,6 @@ RTDType
 
 
         Performs scaling for a Pt 3928 RTD.
-
-        
-
-
-
-SampleTrigSlope
----------------
-
-.. py:class:: SampleTrigSlope
-
-    .. py:attribute:: SampleTrigSlope.POSITIVE
-
-
-
-        Rising Edgs
-
-        
-
-
-
-    .. py:attribute:: SampleTrigSlope.NEGATIVE
-
-
-
-        Falling Edge
 
         
 
@@ -1053,31 +1003,6 @@ TransducerType
 
 
         4-wire RTD
-
-        
-
-
-
-TriggerSlope
-------------
-
-.. py:class:: TriggerSlope
-
-    .. py:attribute:: TriggerSlope.POSITIVE
-
-
-
-        Rising Edgs
-
-        
-
-
-
-    .. py:attribute:: TriggerSlope.NEGATIVE
-
-
-
-        Falling Edge
 
         
 

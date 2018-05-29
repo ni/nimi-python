@@ -234,17 +234,6 @@ class MeasurementCompleteDest(Enum):
     '''
 
 
-class MeasurementDestinationSlope(Enum):
-    POSITIVE = 0
-    '''
-    Rising Edgs
-    '''
-    NEGATIVE = 1
-    '''
-    Falling Edge
-    '''
-
-
 class OperationMode(Enum):
     IVIDMM = 0
     '''
@@ -285,17 +274,6 @@ class RTDType(Enum):
     PT3928 = 6
     '''
     Performs scaling for a Pt 3928 RTD.
-    '''
-
-
-class SampleTrigSlope(Enum):
-    POSITIVE = 0
-    '''
-    Rising Edgs
-    '''
-    NEGATIVE = 1
-    '''
-    Falling Edge
     '''
 
 
@@ -440,17 +418,6 @@ class TransducerType(Enum):
     FOUR_WIRE_RTD = 4
     '''
     4-wire RTD
-    '''
-
-
-class TriggerSlope(Enum):
-    POSITIVE = 0
-    '''
-    Rising Edgs
-    '''
-    NEGATIVE = 1
-    '''
-    Falling Edge
     '''
 
 

@@ -18,15 +18,11 @@ class Library(object):
         self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niDMM_Abort_cfunc = None
-        self.niDMM_ConfigureACBandwidth_cfunc = None
         self.niDMM_ConfigureMeasurementAbsolute_cfunc = None
         self.niDMM_ConfigureMeasurementDigits_cfunc = None
         self.niDMM_ConfigureMultiPoint_cfunc = None
-        self.niDMM_ConfigureOpenCableCompValues_cfunc = None
-        self.niDMM_ConfigurePowerLineFrequency_cfunc = None
         self.niDMM_ConfigureRTDCustom_cfunc = None
         self.niDMM_ConfigureRTDType_cfunc = None
-        self.niDMM_ConfigureShortCableCompValues_cfunc = None
         self.niDMM_ConfigureThermistorCustom_cfunc = None
         self.niDMM_ConfigureThermocouple_cfunc = None
         self.niDMM_ConfigureTrigger_cfunc = None
@@ -35,18 +31,15 @@ class Library(object):
         self.niDMM_Fetch_cfunc = None
         self.niDMM_FetchMultiPoint_cfunc = None
         self.niDMM_FetchWaveform_cfunc = None
-        self.niDMM_GetApertureTimeInfo_cfunc = None
         self.niDMM_GetAttributeViBoolean_cfunc = None
         self.niDMM_GetAttributeViInt32_cfunc = None
         self.niDMM_GetAttributeViReal64_cfunc = None
         self.niDMM_GetAttributeViString_cfunc = None
-        self.niDMM_GetAutoRangeValue_cfunc = None
         self.niDMM_GetCalDateAndTime_cfunc = None
         self.niDMM_GetDevTemp_cfunc = None
         self.niDMM_GetError_cfunc = None
         self.niDMM_GetExtCalRecommendedInterval_cfunc = None
         self.niDMM_GetLastCalTemp_cfunc = None
-        self.niDMM_GetMeasurementPeriod_cfunc = None
         self.niDMM_GetSelfCalSupported_cfunc = None
         self.niDMM_InitWithOptions_cfunc = None
         self.niDMM_Initiate_cfunc = None
@@ -78,14 +71,6 @@ class Library(object):
                 self.niDMM_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Abort_cfunc(vi)
 
-    def niDMM_ConfigureACBandwidth(self, vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ConfigureACBandwidth_cfunc is None:
-                self.niDMM_ConfigureACBandwidth_cfunc = self._library.niDMM_ConfigureACBandwidth
-                self.niDMM_ConfigureACBandwidth_cfunc.argtypes = [ViSession, ViReal64, ViReal64]  # noqa: F405
-                self.niDMM_ConfigureACBandwidth_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_ConfigureACBandwidth_cfunc(vi, ac_minimum_frequency_hz, ac_maximum_frequency_hz)
-
     def niDMM_ConfigureMeasurementAbsolute(self, vi, measurement_function, range, resolution_absolute):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureMeasurementAbsolute_cfunc is None:
@@ -110,22 +95,6 @@ class Library(object):
                 self.niDMM_ConfigureMultiPoint_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureMultiPoint_cfunc(vi, trigger_count, sample_count, sample_trigger, sample_interval)
 
-    def niDMM_ConfigureOpenCableCompValues(self, vi, conductance, susceptance):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ConfigureOpenCableCompValues_cfunc is None:
-                self.niDMM_ConfigureOpenCableCompValues_cfunc = self._library.niDMM_ConfigureOpenCableCompValues
-                self.niDMM_ConfigureOpenCableCompValues_cfunc.argtypes = [ViSession, ViReal64, ViReal64]  # noqa: F405
-                self.niDMM_ConfigureOpenCableCompValues_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_ConfigureOpenCableCompValues_cfunc(vi, conductance, susceptance)
-
-    def niDMM_ConfigurePowerLineFrequency(self, vi, power_line_frequency_hz):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ConfigurePowerLineFrequency_cfunc is None:
-                self.niDMM_ConfigurePowerLineFrequency_cfunc = self._library.niDMM_ConfigurePowerLineFrequency
-                self.niDMM_ConfigurePowerLineFrequency_cfunc.argtypes = [ViSession, ViReal64]  # noqa: F405
-                self.niDMM_ConfigurePowerLineFrequency_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_ConfigurePowerLineFrequency_cfunc(vi, power_line_frequency_hz)
-
     def niDMM_ConfigureRTDCustom(self, vi, rtd_a, rtd_b, rtd_c):  # noqa: N802
         with self._func_lock:
             if self.niDMM_ConfigureRTDCustom_cfunc is None:
@@ -141,14 +110,6 @@ class Library(object):
                 self.niDMM_ConfigureRTDType_cfunc.argtypes = [ViSession, ViInt32, ViReal64]  # noqa: F405
                 self.niDMM_ConfigureRTDType_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_ConfigureRTDType_cfunc(vi, rtd_type, rtd_resistance)
-
-    def niDMM_ConfigureShortCableCompValues(self, vi, resistance, reactance):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_ConfigureShortCableCompValues_cfunc is None:
-                self.niDMM_ConfigureShortCableCompValues_cfunc = self._library.niDMM_ConfigureShortCableCompValues
-                self.niDMM_ConfigureShortCableCompValues_cfunc.argtypes = [ViSession, ViReal64, ViReal64]  # noqa: F405
-                self.niDMM_ConfigureShortCableCompValues_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_ConfigureShortCableCompValues_cfunc(vi, resistance, reactance)
 
     def niDMM_ConfigureThermistorCustom(self, vi, thermistor_a, thermistor_b, thermistor_c):  # noqa: N802
         with self._func_lock:
@@ -214,14 +175,6 @@ class Library(object):
                 self.niDMM_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_FetchWaveform_cfunc(vi, maximum_time, array_size, waveform_array, actual_number_of_points)
 
-    def niDMM_GetApertureTimeInfo(self, vi, aperture_time, aperture_time_units):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetApertureTimeInfo_cfunc is None:
-                self.niDMM_GetApertureTimeInfo_cfunc = self._library.niDMM_GetApertureTimeInfo
-                self.niDMM_GetApertureTimeInfo_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niDMM_GetApertureTimeInfo_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_GetApertureTimeInfo_cfunc(vi, aperture_time, aperture_time_units)
-
     def niDMM_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niDMM_GetAttributeViBoolean_cfunc is None:
@@ -253,14 +206,6 @@ class Library(object):
                 self.niDMM_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buffer_size, attribute_value)
-
-    def niDMM_GetAutoRangeValue(self, vi, actual_range):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetAutoRangeValue_cfunc is None:
-                self.niDMM_GetAutoRangeValue_cfunc = self._library.niDMM_GetAutoRangeValue
-                self.niDMM_GetAutoRangeValue_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niDMM_GetAutoRangeValue_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_GetAutoRangeValue_cfunc(vi, actual_range)
 
     def niDMM_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         with self._func_lock:
@@ -301,14 +246,6 @@ class Library(object):
                 self.niDMM_GetLastCalTemp_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDMM_GetLastCalTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetLastCalTemp_cfunc(vi, cal_type, temperature)
-
-    def niDMM_GetMeasurementPeriod(self, vi, period):  # noqa: N802
-        with self._func_lock:
-            if self.niDMM_GetMeasurementPeriod_cfunc is None:
-                self.niDMM_GetMeasurementPeriod_cfunc = self._library.niDMM_GetMeasurementPeriod
-                self.niDMM_GetMeasurementPeriod_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niDMM_GetMeasurementPeriod_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDMM_GetMeasurementPeriod_cfunc(vi, period)
 
     def niDMM_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
         with self._func_lock:
