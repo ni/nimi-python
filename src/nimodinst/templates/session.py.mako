@@ -94,7 +94,7 @@ class _DeviceIterable(object):
         self._param_list = 'owner=' + pp.pformat(owner) + ', count=' + pp.pformat(count)
         self._is_frozen = True
 
-    def get_next(self):
+    def _get_next(self):
         if self._current_index + 1 > self._count:
             raise StopIteration
         else:
@@ -103,10 +103,10 @@ class _DeviceIterable(object):
             return dev
 
     def next(self):
-        return self.get_next()
+        return self._get_next()
 
     def __next__(self):
-        return self.get_next()
+        return self._get_next()
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
