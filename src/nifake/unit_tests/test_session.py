@@ -1211,6 +1211,14 @@ class TestSession(object):
         assert _matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2))"
         assert _matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2), custom_struct(data=None, struct_int=43, struct_double=4.3), custom_struct(data=None, struct_int=42, struct_double=4.3)])"
 
+    def test_channel_on_session(self):
+        with nifake.Session('dev1') as session:
+            try:
+                session['100'].read_write_double = 5.0
+                assert False
+            except AttributeError:
+                pass
+
 
 # not a session test per se
 def test_diagnostic_information():
