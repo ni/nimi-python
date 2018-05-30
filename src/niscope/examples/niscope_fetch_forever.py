@@ -46,11 +46,11 @@ def _main(argsv):
     parser = argparse.ArgumentParser(description='Fetch more samples than will fit in memory.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Digitizer')
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
-    parser.add_argument('-t', '--time', default=100, type=int, help='Time to sample (s)')
+    parser.add_argument('-t', '--time', default=10, type=int, help='Time to sample (s)')
     parser.add_argument('-v', '--voltage', default=1.0, type=float, help='Voltage range (V)')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
-    parser.add_argument('-r', '--sample-rate', default=10000000.0, type=float, help='Sample Rate (Hz)')
-    parser.add_argument('-s', '--samples-per-fetch', default=1000000, type=int, help='Samples per fetch')
+    parser.add_argument('-r', '--sample-rate', default=1000.0, type=float, help='Sample Rate (Hz)')
+    parser.add_argument('-s', '--samples-per-fetch', default=100, type=int, help='Samples per fetch')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.channels, args.option_string, args.time, args.voltage, args.sample_rate, args.samples_per_fetch)
 
@@ -61,7 +61,7 @@ def main():
 
 def test_example():
     options = {'simulate': True, 'driver_setup': {'Model': '5164', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2', '0', options, 1000, 1.0, 10000000.0, 1000000)
+    example('PXI1Slot2', '0', options, 10, 1.0, 1000.0, 100)
 
 
 def test_main():
