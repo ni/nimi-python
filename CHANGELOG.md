@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-ModInst
     * #### Added
     * #### Changed
+        * Double close will now allow NI-ModInst to return error
     * #### Removed
 * ### NI-Switch
     * #### Added
