@@ -861,6 +861,9 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def __getitem__(self, key):
+        raise AttributeError('Repeated capabilities not supported on Session, use repeated capability container specific to {}'.format(key))
+
     def _get_error_description(self, error_code):
         '''_get_error_description
 
