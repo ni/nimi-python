@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
     * #### Added
     * #### Changed
+        * Fixed name `freq_voltage_autorange` became `freq_voltage_auto_range`
     * #### Removed
 * ### NI-ModInst
     * #### Added
