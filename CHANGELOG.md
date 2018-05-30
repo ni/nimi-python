@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * fetch forever example
     * #### Changed
     * #### Removed
 
