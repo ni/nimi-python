@@ -15,8 +15,6 @@ functions_codegen_method = {
     'GetErrorMessage':                 { 'codegen_method': 'no',       },
     'ClearError':                      { 'codegen_method': 'no',       },
     'Control':                         { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
     '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'GetExtCalRecommendedInterval':    { 'codegen_method': 'public',   },  # This function is useful on regular (not only calibration) sessions.
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -51,6 +49,19 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'GetCalDateAndTime':               { 'codegen_method': 'private', 'method_name_for_documentation': 'get_cal_date_and_time', },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
     'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',             },  # 'fancy_self_test' Public wrapper that raises
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'unlock', },
+    'InitWithOptions':                 { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py

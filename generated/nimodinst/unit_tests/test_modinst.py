@@ -106,7 +106,7 @@ class TestSession(object):
         self.side_effects_helper['GetExtendedErrorInfo']['return'] = -2
         with nimodinst.Session('') as session:
             try:
-                session[0].chassis_number
+                session.devices[0].chassis_number
             except nimodinst.Error as e:
                 assert e.code == -1  # we want the original error code from getting the attribute.
                 assert e.description == "Failed to retrieve error description."
@@ -117,7 +117,7 @@ class TestSession(object):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.side_effects_helper.niModInst_GetInstalledDeviceAttributeViInt32
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
         with nimodinst.Session('') as session:
-            attr_int = session[0].chassis_number
+            attr_int = session.devices[0].chassis_number
             assert(attr_int == val)
 
     def test_get_attribute_vi_int32_for_loop_index(self):
@@ -125,7 +125,7 @@ class TestSession(object):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_int_devices_looping
         index = 0
         with nimodinst.Session('') as session:
-            attr_int = session[index].chassis_number
+            attr_int = session.devices[index].chassis_number
             index += 1
             assert(attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
@@ -134,7 +134,7 @@ class TestSession(object):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = self.num_string_devices_looping
         index = 0
         with nimodinst.Session('') as session:
-            attr_int = session[index].device_name
+            attr_int = session.devices[index].device_name
             index += 1
             assert(attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
 
@@ -186,7 +186,7 @@ class TestSession(object):
     def test_cannot_add_properties_to_device_set(self):
         with nimodinst.Session('') as session:
             try:
-                session[0].non_existent_property = 5
+                session.devices[0].non_existent_property = 5
                 assert False
             except AttributeError as e:
                 assert str(e) == "__setattr__ not supported."
@@ -194,7 +194,7 @@ class TestSession(object):
     def test_cannot_add_properties_to_device_get(self):
         with nimodinst.Session('') as session:
             try:
-                session[0].non_existent_property
+                session.devices[0].non_existent_property
                 assert False
             except AttributeError as e:
                 assert str(e) == "'_Device' object has no attribute 'non_existent_property'"
@@ -203,7 +203,7 @@ class TestSession(object):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
         with nimodinst.Session('') as session:
             try:
-                session[0].chassis_number = 5
+                session.devices[0].chassis_number = 5
                 assert False
             except AttributeError as e:
                 assert str(e) == "__setattr__ not supported."
@@ -212,7 +212,7 @@ class TestSession(object):
         self.side_effects_helper['OpenInstalledDevicesSession']['deviceCount'] = 1
         with nimodinst.Session('') as session:
             try:
-                session[0].device_name = "Not Possible"
+                session.devices[0].device_name = "Not Possible"
                 assert False
             except AttributeError as e:
                 assert str(e) == "__setattr__ not supported."
@@ -227,7 +227,7 @@ class TestSession(object):
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
             try:
-                session[0].chassis_number
+                session.devices[0].chassis_number
                 assert False
             except nimodinst.Error as e:
                 assert e.code == error_code
@@ -243,7 +243,7 @@ class TestSession(object):
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
             with warnings.catch_warnings(record=True) as w:
-                session[0].chassis_number
+                session.devices[0].chassis_number
                 assert len(w) == 1
                 assert issubclass(w[0].category, nimodinst.DriverWarning)
                 assert error_string in str(w[0].message)
@@ -262,3 +262,7 @@ class TestSession(object):
                 print(d)
 
 
+# not a session test per se
+def test_diagnostic_information():
+    info = nimodinst.print_diagnostic_information()
+    assert isinstance(info, dict)

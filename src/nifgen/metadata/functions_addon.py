@@ -9,7 +9,7 @@ functions_codegen_method = {
     'InitializeWithChannels':               { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'close':                                { 'codegen_method': 'private',  },
     'CheckAttribute.*':                     { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
-    'InitiateGeneration':                   { 'codegen_method': 'private',  },
+    'InitiateGeneration':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
     'Configure.*':                          { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'ConfigureArbSequence':                 { 'codegen_method': 'public',   },
     'ConfigureArbWaveform':                 { 'codegen_method': 'public',   },
@@ -20,7 +20,7 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
-    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828
+    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828 - additional metadata removed #870
     'CreateWaveformF64':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'CreateWaveformI16':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'WriteBinary16Waveform':                { 'codegen_method': 'private', 'method_name_for_documentation': 'write_waveform', },  # Called from public method write_waveform()
@@ -42,8 +42,6 @@ functions_codegen_method = {
     'GetError':                             { 'codegen_method': 'private',  },
     'ClearError':                           { 'codegen_method': 'no',       },
     'ErrorHandler':                         { 'codegen_method': 'no',       },
-    'LockSession':                          { 'codegen_method': 'no',       },
-    'UnlockSession':                        { 'codegen_method': 'no',       },
     'InitExtCal':                           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CloseExtCal':                          { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'RestoreLastExtCalConstants':           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -69,6 +67,19 @@ functions_codegen_method = {
     'self_test':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
 }
 
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'unlock', },
+    'InitializeWithChannels':          { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+}
+
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
@@ -77,7 +88,6 @@ functions_enums = {
     'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
     'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
-    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },
     'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
@@ -85,8 +95,15 @@ functions_enums = {
     'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },
 }
 
+# Need to manually set some repeated capabilities
+functions_rep_caps = {
+    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
+    # 'SendSoftwareEdgeTrigger':                  { 'parameters': { 2: { 'is_repeated_capability': True, }, }, }, # 850
+}
+
 functions_issues = {
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: {'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
+    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
                                                               4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
 }
 
@@ -132,8 +149,7 @@ functions_default_value = {
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING', }, }, },
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
-    'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
-    'ExportSignal':                                 { 'parameters': { 2: { 'default_value': '""', }, }, },
+    'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 'datetime.timedelta(seconds=10.0)', }, }, },
 }
 
 # Converted parameters

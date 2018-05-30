@@ -12,7 +12,6 @@
             output_params_list.append(p['python_name'])
 
     output_params = ', '.join(output_params_list)
-
 %>\
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}

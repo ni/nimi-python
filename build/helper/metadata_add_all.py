@@ -270,6 +270,14 @@ def _add_is_repeated_capability(parameter):
         parameter['is_repeated_capability'] = parameter['name'] in _repeated_capability_parameter_names
 
 
+def _add_use_session_lock(f):
+    '''Set 'use_session_lock' to True unless it already exists
+
+    Only nimodinst doesn't have session locking and the modinst session.py.mako doesn't even look at this
+    '''
+    f['use_session_lock'] = True if 'use_session_lock' not in f else f['use_session_lock']
+
+
 def _add_is_session_handle(parameter):
     '''Adds a boolean 'is_session_handle' to the parameter metadata by inferring it from its type, if not previously populated.'''
     if 'is_session_handle' not in parameter:
@@ -329,6 +337,7 @@ def add_all_function_metadata(functions, config):
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
+        _add_use_session_lock(functions[f])
         for p in functions[f]['parameters']:
             _add_enum(p)
             _fix_type(p)
@@ -643,6 +652,7 @@ def test_add_all_metadata_simple():
         'MakeAFoo': {
             'name': 'MakeAFoo',
             'codegen_method': 'public',
+            'use_session_lock': True,
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
             },
@@ -717,6 +727,7 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
+            'use_session_lock': True,
             'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
             'parameters': [{
                 'direction': 'in',
