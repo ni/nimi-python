@@ -186,10 +186,12 @@ class Session(object):
         return _DeviceIterable(self, self._item_count)
 
     def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self._${config['session_handle_parameter_name']} != 0):
+        try:
             self._close_installed_devices_session()
+        except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
+            raise
+        self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):
