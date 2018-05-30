@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-import datetime
 import argparse
+import datetime
 import niscope
 import numpy as np
 import pprint
