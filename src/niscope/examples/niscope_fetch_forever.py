@@ -34,8 +34,8 @@ def example(resource_name, channels, options, total_acquisition_time_in_seconds,
                 # We do not keep the wfm_info returned from fetch_into
                 for c, wfm in zip(channel_list, waveforms):
                     # 5. fetching
-                    session.channels[c].fetch_into(wfm[current_pos:current_pos + samples_per_fetch], relative_to=niscope.FetchRelativeTo.READ_POINTER, 
-                                                 offset=0, record_number=0, num_records=1, timeout=datetime.timedelta(seconds=5.0))
+                    session.channels[c].fetch_into(wfm[current_pos:current_pos + samples_per_fetch], relative_to=niscope.FetchRelativeTo.READ_POINTER,
+                                                   offset=0, record_number=0, num_records=1, timeout=datetime.timedelta(seconds=5.0))
                 current_pos += samples_per_fetch
 
         # 6 fetch complete
