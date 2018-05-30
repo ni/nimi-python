@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * Explicitly disallow using a repeated capability on Session. `session['0'].vertical_range = 1.0` will no longer work. Instead use `session.channels['0'].vertical_range = 1.0` - [#853](https://github.com/ni/nimi-python/issues/853)
 * ### NI-DMM
     * #### Added
     * #### Changed
