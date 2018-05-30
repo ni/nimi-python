@@ -158,61 +158,61 @@ class RelativeTo(Enum):
 
 
 class SampleClockSource(Enum):
-    CLOCK_IN = '"ClkIn"'
+    CLOCK_IN = 'ClkIn'
     '''
     Specifies that the signal at the CLK IN front panel connector is used as
     the Sample Clock source.
     '''
-    DDC_CLOCK_IN = '"DDC_ClkIn"'
+    DDC_CLOCK_IN = 'DDC_ClkIn'
     '''
     Specifies that the Sample Clock from DDC connector is used as the Sample
     Clock source.
     '''
-    ONBOARD_CLOCK = '"OnboardClock"'
+    ONBOARD_CLOCK = 'OnboardClock'
     '''
     Specifies that the onboard clock is used as the Sample Clock source.
     '''
-    PXI_STAR_LINE = '"PXI_Star"'
+    PXI_STAR_LINE = 'PXI_Star'
     '''
     Specifies that the PXI\_STAR trigger line is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_0RTSI_0 = '"PXI_Trig0"'
+    PXI_TRIGGER_LINE_0RTSI_0 = 'PXI_Trig0'
     '''
     Specifies that the PXI or RTSI line 0 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_1RTSI_1 = '"PXI_Trig1"'
+    PXI_TRIGGER_LINE_1RTSI_1 = 'PXI_Trig1'
     '''
     Specifies that the PXI or RTSI line 1 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_2RTSI_2 = '"PXI_Trig2"'
+    PXI_TRIGGER_LINE_2RTSI_2 = 'PXI_Trig2'
     '''
     Specifies that the PXI or RTSI line 2 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_3RTSI_3 = '"PXI_Trig3"'
+    PXI_TRIGGER_LINE_3RTSI_3 = 'PXI_Trig3'
     '''
     Specifies that the PXI or RTSI line 3 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_4RTSI_4 = '"PXI_Trig4"'
+    PXI_TRIGGER_LINE_4RTSI_4 = 'PXI_Trig4'
     '''
     Specifies that the PXI or RTSI line 4 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_5RTSI_5 = '"PXI_Trig5"'
+    PXI_TRIGGER_LINE_5RTSI_5 = 'PXI_Trig5'
     '''
     Specifies that the PXI or RTSI line 5 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_6RTSI_6 = '"PXI_Trig6"'
+    PXI_TRIGGER_LINE_6RTSI_6 = 'PXI_Trig6'
     '''
     Specifies that the PXI or RTSI line 6 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_7RTSI_7 = '"PXI_Trig7"'
+    PXI_TRIGGER_LINE_7RTSI_7 = 'PXI_Trig7'
     '''
     Specifies that the PXI or RTSI line 7 is used as the Sample Clock
     source.
@@ -220,12 +220,12 @@ class SampleClockSource(Enum):
 
 
 class SampleClockTimebaseSource(Enum):
-    CLOCK_IN = '"ClkIn"'
+    CLOCK_IN = 'ClkIn'
     '''
     Specifies that the external signal on the CLK IN front panel connector
     is used as the source.
     '''
-    ONBOARD_CLOCK = '"OnboardClock"'
+    ONBOARD_CLOCK = 'OnboardClock'
     '''
     Specifies that the onboard Sample Clock timebase is used as the source.
     '''

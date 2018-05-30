@@ -49,6 +49,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
     * #### Added
     * #### Changed
+        * `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
     * #### Removed
         * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
             * `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`

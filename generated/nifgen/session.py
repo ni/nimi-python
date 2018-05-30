@@ -211,6 +211,12 @@ class _SessionBase(object):
 
     The bus type of the signal generator.
     '''
+    channel_count = _attributes.AttributeViInt32(1050203)
+    '''Type: int
+
+    Returns the number of channels that the specific instrument  driver supports.
+    For each property for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
+    '''
     channel_delay = _attributes.AttributeViReal64(1150369)
     '''Type: float
 
@@ -646,12 +652,6 @@ class _SessionBase(object):
     '''Type: str
 
     A string that contains the module revision  for the device that you are currently using.
-    '''
-    num_channels = _attributes.AttributeViInt32(1050203)
-    '''Type: int
-
-    Indicates the number of channels that the specific instrument  driver supports.
-    For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     output_enabled = _attributes.AttributeViBoolean(1250003)
     '''Type: bool
