@@ -16,30 +16,30 @@ def example(resource_name, channels, options, total_acquisition_time_in_seconds,
     total_samples = int(total_acquisition_time_in_seconds * sample_rate_in_hz)
     channel_list = channels.split(',')  # We need channels as a list
 
-    print('1. Creating numpy arrays')
+    # 1. Creating numpy arrays
     waveforms = [np.ndarray(total_samples, dtype=np.float64) for c in channel_list]
 
-    print('2. Opening session')
+    # 2. Opening session
     with niscope.Session(resource_name) as session:
-        print('3. Configuring')
+        # 3. Configuring
         session.configure_horizontal_timing(min_sample_rate=sample_rate_in_hz, min_num_pts=1, ref_position=0.0, num_records=1, enforce_realtime=True)
         session.channels[channel_list].configure_vertical(voltage, coupling=niscope.VerticalCoupling.DC, enabled=True)
         # We configure for a software trigger and then never send it
         session.configure_trigger_software()
         current_pos = 0
-        print('4. initating')
+        # 4. initating
         with session.initiate():
             while current_pos < total_samples:
                 # We fetch each channel at a time so we don't have to de-interleave afterwards
                 # We do not keep the wfm_info returned from fetch_into
                 for c, wfm in zip(channel_list, waveforms):
-                    print('5.{} fetching [{}:{}]'.format(c, current_pos, samples_per_fetch))
+                    # 5. fetching
                     session.channels[c].fetch_into(wfm[current_pos:current_pos + samples_per_fetch], relative_to=niscope.FetchRelativeTo.READ_POINTER, 
                                                  offset=0, record_number=0, num_records=1, timeout=datetime.timedelta(seconds=5.0))
                 current_pos += samples_per_fetch
 
-        print('6 fetch complete')
-    print('7 session closed')
+        # 6 fetch complete
+    # 7 session closed
 
 
 def _main(argsv):
