@@ -43,6 +43,9 @@ attributes_converters = {
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # SAMPLE_INTERVAL
 }
 
+attributes_name = {
+    1150044: { 'name': 'FREQ_VOLTAGE_AUTO_RANGE', },  # extracted metadata has incorrect name #874, internal NI CAR 699520
+}
 
 attributes_remove_enum = {
     1250003: { "enum": None                         },  # RESOLUTION, Don't use enum since simple value will do
