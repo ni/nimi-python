@@ -65,6 +65,10 @@ functions_codegen_method = {
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
     'self_test':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
+    'SetWaveformNextWritePosition':         { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
+    'SetNamedWaveformNextWritePosition':    { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
+    'DeleteNamedWaveform':                  { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
+    'ClearArbWaveform':                     { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
 }
 
 functions_locking = {
@@ -246,7 +250,7 @@ after the function runs.
     },
 
     'WriteWaveformDispatcher': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'parameters': [
             {
@@ -262,9 +266,10 @@ after the function runs.
             {
                 'direction': 'in',
                 'name': 'waveformNameOrHandle',
+                'type_in_documentation': 'str or int',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
                 },
             },
             {
@@ -288,6 +293,111 @@ By default, subsequent calls to this function
 continue writing data from the position of the last sample written. You
 can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
 nifgen_SetWaveformNextWritePosition function.''',
+        },
+    },
+    'SetNextWritePositionDispatcher': {
+        'codegen_method': 'python-only',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the niFgen_InitializeWithChannels function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'Specifies the channel on which to the waveform data should be loaded.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformNameOrHandle',
+                'type_in_documentation': 'str or int',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'relativeTo',
+                'type': 'ViInt32',
+                'enum': 'RelativeTo',
+                'documentation': {
+                    'description': '''
+Specifies the reference position in the waveform. This position and
+**offset** together determine where to start loading data into the
+waveform.
+
+****Defined Values****
+''',
+'table_body': [['NIFGEN_VAL_WAVEFORM_POSITION_START (0)', 'Use the start of the waveform as the reference position.'], ['NIFGEN_VAL_WAVEFORM_POSITION_CURRENT (1)', 'Use the current position within the waveform as the reference position.']],
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'offset',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the offset from **relativeTo** at which to start loading the
+data into the waveform.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Sets the position in the waveform at which the next waveform data is
+written. This function allows you to write to arbitrary locations within
+the waveform. These settings apply only to the next write to the
+waveform specified by the waveformHandle parameter. Subsequent writes to
+that waveform begin where the last write left off, unless this function
+is called again. The waveformHandle passed in must have been created by
+a call to the nifgen_AllocateWaveform function or one of the following
+niFgen_CreateWaveformF64 function.
+''',
+},
+    },
+    'DeleteWaveformDispatch': {
+        'codegen_method': 'python-only',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from niFgen_InitializeWithChannels function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'Specifies the channel onto which the named waveform is loaded.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformNameOrHandle',
+                'type_in_documentation': 'str or int',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Removes a previously created arbitrary waveform from the signal generator memory.',
+            'note': 'The signal generator must not be in the Generating state when you call this function.',
         },
     },
     # Public function that wraps driver function but returns datetime object instead of individual items
@@ -360,6 +470,8 @@ functions_python_name = {
     'AbortGeneration':                      { 'python_name': 'abort',                   },
     'CreateWaveformDispatcher':             { 'python_name': 'create_waveform'          },
     'WriteWaveformDispatcher':              { 'python_name': 'write_waveform'           },
+    'SetNextWritePositionDispatcher':       { 'python_name': 'set_next_write_position'  },
+    'DeleteWaveformDispatch':               { 'python_name': 'delete_waveform'  },
 }
 
 functions_method_templates = {
@@ -375,6 +487,12 @@ functions_method_templates = {
     ], },
     'WriteWaveformDispatcher':      { 'method_templates': [
         { 'session_filename': 'write_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
+    'SetNextWritePositionDispatcher': { 'method_templates': [
+        { 'session_filename': 'set_next_write_position', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
+    'DeleteWaveformDispatch':         { 'method_templates': [
+        { 'session_filename': 'delete_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
     'WriteWaveform':                { 'method_templates': [
         { 'session_filename': 'default_method', 'method_python_name_suffix': '', },
