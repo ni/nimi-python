@@ -26,7 +26,8 @@ def example(resource_name, options, total_acquisition_time_in_seconds, voltage, 
         # 3. Configuring
         session.configure_horizontal_timing(min_sample_rate=sample_rate_in_hz, min_num_pts=1, ref_position=0.0, num_records=1, enforce_realtime=True)
         session.channels[channel_list].configure_vertical(voltage, coupling=niscope.VerticalCoupling.DC, enabled=True)
-        # We configure for a software trigger and then never send it
+        # Configure software trigger, but never send the trigger.
+        # This starts an infinite acquisition, until you call session.abort() or session.close()
         session.configure_trigger_software()
         current_pos = 0
         # 4. initating
