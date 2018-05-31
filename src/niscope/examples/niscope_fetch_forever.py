@@ -20,7 +20,7 @@ def example(resource_name, channels, options, total_acquisition_time_in_seconds,
     waveforms = [np.ndarray(total_samples, dtype=np.float64) for c in channel_list]
 
     # 2. Opening session
-    with niscope.Session(resource_name) as session:
+    with niscope.Session(resource_name=resource_name, options=options) as session:
         # 3. Configuring
         session.configure_horizontal_timing(min_sample_rate=sample_rate_in_hz, min_num_pts=1, ref_position=0.0, num_records=1, enforce_realtime=True)
         session.channels[channel_list].configure_vertical(voltage, coupling=niscope.VerticalCoupling.DC, enabled=True)
