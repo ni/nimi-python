@@ -11,7 +11,9 @@ import sys
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
-def example(resource_name, channels, options, total_acquisition_time_in_seconds, voltage, sample_rate_in_hz, samples_per_fetch):
+# We use fetch_into which allows us to allocate a single buffer per channel and "fetch into" it a section at a time without having to 
+# reconstruct the waveform once we are done
+def example(resource_name, options, total_acquisition_time_in_seconds, voltage, sample_rate_in_hz, samples_per_fetch):
     total_samples = int(total_acquisition_time_in_seconds * sample_rate_in_hz)
     channel_list = channels.split(',')  # We need channels as a list
 
