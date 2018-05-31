@@ -160,7 +160,7 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`driver_setup`                  | str                                          |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`freq_voltage_autorange`        | float                                        |
+    | :py:attr:`freq_voltage_auto_range`       | float                                        |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`freq_voltage_range`            | float                                        |
     +------------------------------------------+----------------------------------------------+
@@ -775,12 +775,12 @@ driver_setup
                 - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
                 - C Attribute: **NIDMM_ATTR_DRIVER_SETUP**
 
-freq_voltage_autorange
-~~~~~~~~~~~~~~~~~~~~~~
+freq_voltage_auto_range
+~~~~~~~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:attribute:: freq_voltage_autorange
+    .. py:attribute:: freq_voltage_auto_range
 
         For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this property is the same as that of  :py:data:`nidmm.Session.freq_voltage_range`.
 
@@ -802,7 +802,7 @@ freq_voltage_autorange
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
-                - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTORANGE**
+                - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTO_RANGE**
 
 freq_voltage_range
 ~~~~~~~~~~~~~~~~~~
@@ -4017,7 +4017,7 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.driver_setup`                  | str                                          |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.freq_voltage_autorange`        | float                                        |
+| :py:attr:`nidmm.Session.freq_voltage_auto_range`       | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.freq_voltage_range`            | float                                        |
 +--------------------------------------------------------+----------------------------------------------+

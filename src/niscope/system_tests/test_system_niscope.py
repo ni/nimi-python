@@ -231,6 +231,16 @@ def test_reset_with_defaults(session):
     assert session._meas_time_histogram_high_time == 0.0005
 
 
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+            assert False
+    except niscope.Error as e:
+        assert e.code == -1074118609
+        assert e.description.find('Simulation does not support the selected model and board type.') != -1
+
+
 def test_get_error(session):
     try:
         session.instrument_model = ''

@@ -59,6 +59,8 @@ functions_locking = {
                                          'python_name': 'unlock', },
     'InitializeWithChannels':          { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
     'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'error_message':                   { 'use_session_lock': False,  },  # No Session for function call so cannot use session locking
+    'GetError':                        { 'use_session_lock': False,  },  # Session may not be valid during function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py
