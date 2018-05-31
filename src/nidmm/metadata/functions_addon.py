@@ -49,6 +49,13 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'GetCalDateAndTime':               { 'codegen_method': 'private', 'method_name_for_documentation': 'get_cal_date_and_time', },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
     'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',             },  # 'fancy_self_test' Public wrapper that raises
+    'ConfigureACBandwidth':            { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'ConfigureOpenCableCompValues':    { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'ConfigurePowerLineFrequency':     { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'ConfigureShortCableCompValues':   { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'GetApertureTimeInfo':             { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'GetAutoRangeValue':               { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'GetMeasurementPeriod':            { 'codegen_method': 'no',       },  # EOL hardware only #875
 }
 
 functions_locking = {
