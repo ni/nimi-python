@@ -15,13 +15,14 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 # reconstruct the waveform once we are done
 def example(resource_name, options, total_acquisition_time_in_seconds, voltage, sample_rate_in_hz, samples_per_fetch):
     total_samples = int(total_acquisition_time_in_seconds * sample_rate_in_hz)
-    channel_list = channels.split(',')  # We need channels as a list
-
-    # 1. Creating numpy arrays
-    waveforms = [np.ndarray(total_samples, dtype=np.float64) for c in channel_list]
-
-    # 2. Opening session
+    # 1. Opening session
     with niscope.Session(resource_name=resource_name, options=options) as session:
+        # We will acquire on all channels of the device
+        channel_list = [c for c in range(session.channel_count)]  # Need an actual list and not a range
+
+        # 2. Creating numpy arrays
+        waveforms = [np.ndarray(total_samples, dtype=np.float64) for c in channel_list]
+
         # 3. Configuring
         session.configure_horizontal_timing(min_sample_rate=sample_rate_in_hz, min_num_pts=1, ref_position=0.0, num_records=1, enforce_realtime=True)
         session.channels[channel_list].configure_vertical(voltage, coupling=niscope.VerticalCoupling.DC, enabled=True)
