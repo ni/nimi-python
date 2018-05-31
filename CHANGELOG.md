@@ -21,7 +21,20 @@ All notable changes to this project will be documented in this file.
 * ### NI-DMM
     * #### Added
     * #### Changed
+        * Fixed name `freq_voltage_autorange` became `freq_voltage_auto_range`
     * #### Removed
+        * `configure_ac_bandwidth()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_open_cable_comp_values()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_power_line_frequency()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_short_cable_comp_values()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_aperture_time_info()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_auto_range_value()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_measurement_period()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `latency` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `shunt_value` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `meas_dest_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `sample_trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
 * ### NI-ModInst
     * #### Added
     * #### Changed
@@ -84,6 +97,9 @@ All notable changes to this project will be documented in this file.
         * Some functions missed setting repeated capabilities, leaving these as parameters instead of using the repeated capabilites object.
             * `session.configure_digital_edge_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_edge_script_trigger(source, ...)`
             * `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
+        * Combined named and un-named waveform methods into one [#862](https://github.com/ni/nimi-python/issues/862)
+            * `set_waveform_next_write_position()` and `set_named_waveform_next_write_position()` becomes `set_next_write_position()`
+            * `clear_arb_waveform()` and `delete_named_waveform()` becomes `delete_waveform()`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
         * `osp_fir_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)

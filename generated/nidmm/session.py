@@ -204,7 +204,7 @@ class _SessionBase(object):
     Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
     If the user does not specify a Driver Setup string, this property returns  an empty string.
     '''
-    freq_voltage_autorange = _attributes.AttributeViReal64(1150044)
+    freq_voltage_auto_range = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
     For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this property is the same as that of  freq_voltage_range.
@@ -252,14 +252,6 @@ class _SessionBase(object):
 
     A string containing the resource descriptor of the instrument.
     '''
-    latency = _attributes.AttributeViInt32(1150034)
-    '''Type: int
-
-    Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
     lc_calculation_model = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCCalculationModel, 1150052)
     '''Type: enums.LCCalculationModel
 
@@ -281,11 +273,6 @@ class _SessionBase(object):
     Specifies the destination of the measurement complete (MC) signal.
     The NI 4050 is not supported.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
-    '''
-    meas_dest_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasurementDestinationSlope, 1150002)
-    '''Type: enums.MeasurementDestinationSlope
-
-    Specifies the polarity of the generated measurement complete signal.
     '''
     number_of_averages = _attributes.AttributeViInt32(1150032)
     '''Type: int
@@ -368,11 +355,6 @@ class _SessionBase(object):
     Specifies the sample trigger source.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
-    sample_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SampleTrigSlope, 1150010)
-    '''Type: enums.SampleTrigSlope
-
-    Specifies the edge of the signal from the specified sample trigger source on  which the DMM is triggered.
-    '''
     serial_number = _attributes.AttributeViString(1150054)
     '''Type: str
 
@@ -398,12 +380,6 @@ class _SessionBase(object):
 
     For the NI 4072 only, represents the active part (resistance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
-    '''
-    shunt_value = _attributes.AttributeViReal64(1150003)
-    '''Type: float
-
-    For the NI 4050 only, specifies the shunt resistance value.
-    The NI 4050 requires an external shunt resistor for current measurements.  This property should be set to the value of shunt resistor.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -536,11 +512,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSlope, 1250334)
-    '''Type: enums.TriggerSlope
-
-    Specifies the edge of the signal from the specified trigger source on which  the DMM is triggered.
     '''
     trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSource, 1250004)
     '''Type: enums.TriggerSource
@@ -1249,42 +1220,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_ac_bandwidth(self, ac_minimum_frequency_hz, ac_maximum_frequency_hz):
-        '''configure_ac_bandwidth
-
-        Configures the ac_min_freq and ac_max_freq
-        properties, which the DMM uses for AC measurements.
-
-        Args:
-            ac_minimum_frequency_hz (float): Specifies the minimum expected frequency component of the input signal
-                in hertz. This parameter affects the DMM only when you set the
-                method property to AC measurements. NI-DMM uses this
-                parameter to calculate the proper aperture for the measurement.
-                The driver sets the ac_min_freq property to this value.
-                The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
-                4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
-                NI 4050 and NI 4060.
-
-            ac_maximum_frequency_hz (float): Specifies the maximum expected frequency component of the input signal
-                in hertz within the device limits. This parameter is used only for error
-                checking and verifies that the value of this parameter is less than the
-                maximum frequency of the device.
-
-                This parameter affects the DMM only when you set the
-                method property to AC measurements. The driver sets the
-                ac_max_freq property to this value. The valid range is 1
-                Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
-                Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        ac_minimum_frequency_hz_ctype = _visatype.ViReal64(ac_minimum_frequency_hz)  # case S150
-        ac_maximum_frequency_hz_ctype = _visatype.ViReal64(ac_maximum_frequency_hz)  # case S150
-        error_code = self._library.niDMM_ConfigureACBandwidth(vi_ctype, ac_minimum_frequency_hz_ctype, ac_maximum_frequency_hz_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
         '''configure_measurement_absolute
 
@@ -1478,44 +1413,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_open_cable_comp_values(self, conductance, susceptance):
-        '''configure_open_cable_comp_values
-
-        For the NI 4082 and NI 4072 only, configures the
-        open_cable_comp_conductance and
-        open_cable_comp_susceptance properties.
-
-        Args:
-            conductance (float): Specifies the open cable compensation **conductance**.
-
-            susceptance (float): Specifies the open cable compensation **susceptance**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        conductance_ctype = _visatype.ViReal64(conductance)  # case S150
-        susceptance_ctype = _visatype.ViReal64(susceptance)  # case S150
-        error_code = self._library.niDMM_ConfigureOpenCableCompValues(vi_ctype, conductance_ctype, susceptance_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_power_line_frequency(self, power_line_frequency_hz):
-        '''configure_power_line_frequency
-
-        Specifies the powerline frequency.
-
-        Args:
-            power_line_frequency_hz (float): **Powerline Frequency** specifies the powerline frequency in hertz.
-                NI-DMM sets the Powerline Frequency property to this value.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        power_line_frequency_hz_ctype = _visatype.ViReal64(power_line_frequency_hz)  # case S150
-        error_code = self._library.niDMM_ConfigurePowerLineFrequency(vi_ctype, power_line_frequency_hz_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
         '''configure_rtd_custom
 
@@ -1584,27 +1481,6 @@ class Session(_SessionBase):
         rtd_type_ctype = _visatype.ViInt32(rtd_type.value)  # case S130
         rtd_resistance_ctype = _visatype.ViReal64(rtd_resistance)  # case S150
         error_code = self._library.niDMM_ConfigureRTDType(vi_ctype, rtd_type_ctype, rtd_resistance_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_short_cable_comp_values(self, resistance, reactance):
-        '''configure_short_cable_comp_values
-
-        For the NI 4082 and NI 4072 only, configures the
-        short_cable_comp_resistance and
-        short_cable_comp_reactance properties.
-
-        Args:
-            resistance (float): Specifies the short cable compensation **resistance**.
-
-            reactance (float): Specifies the short cable compensation **reactance**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        resistance_ctype = _visatype.ViReal64(resistance)  # case S150
-        reactance_ctype = _visatype.ViReal64(reactance)  # case S150
-        error_code = self._library.niDMM_ConfigureShortCableCompValues(vi_ctype, resistance_ctype, reactance_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2000,71 +1876,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def get_aperture_time_info(self):
-        '''get_aperture_time_info
-
-        Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
-
-        Returns:
-            aperture_time (float): Specifies the amount of time the DMM digitizes the input signal for a
-                single measurement. This parameter does not include settling time.
-                Returns the value of the aperture_time property. The
-                units of this property depend on the value of the
-                aperture_time_units property.
-                On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
-                maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
-                within the minimum and maximum ranges is allowed on the
-                NI 4070/4071/4072.
-                On the NI 4065 the minimum aperture time is 333 µs, and the maximum
-                aperture time is 78.2 s. If setting the number of averages directly, the
-                total measurement time is aperture time X the number of averages, which
-                must be less than 72.8 s. The aperture times allowed are 333 µs, 667 µs,
-                or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33 ms, and so
-                on. If you set an aperture time other than 333 µs, 667 µs, or multiples
-                of 1.11 ms, the value will be coerced up to the next supported aperture
-                time.
-                On the NI 4060, when the powerline frequency is 60, the PLCs allowed are
-                1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
-                the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
-
-            aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
-                seconds. Returns the value of the aperture_time_units
-                property.
-
-                +-------------------------------------+---+------------------+
-                | ApertureTimeUnits.SECONDS           | 0 | Seconds          |
-                +-------------------------------------+---+------------------+
-                | ApertureTimeUnits.POWER_LINE_CYCLES | 1 | Powerline Cycles |
-                +-------------------------------------+---+------------------+
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        aperture_time_ctype = _visatype.ViReal64()  # case S200
-        aperture_time_units_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niDMM_GetApertureTimeInfo(vi_ctype, None if aperture_time_ctype is None else (ctypes.pointer(aperture_time_ctype)), None if aperture_time_units_ctype is None else (ctypes.pointer(aperture_time_units_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
-
-    @ivi_synchronized
-    def get_auto_range_value(self):
-        '''get_auto_range_value
-
-        Returns the **Actual_Range** that the DMM is using, even when Auto
-        Range is off.
-
-        Returns:
-            actual_range (float): Indicates the **actual_range** the DMM is using. Returns the value of
-                the auto_range_value property. The units of the returned
-                value depend on the method.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        actual_range_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDMM_GetAutoRangeValue(vi_ctype, None if actual_range_ctype is None else (ctypes.pointer(actual_range_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(actual_range_ctype.value)
-
-    @ivi_synchronized
     def _get_cal_date_and_time(self, cal_type):
         '''_get_cal_date_and_time
 
@@ -2218,32 +2029,6 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_GetLastCalTemp(vi_ctype, cal_type_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
-
-    @ivi_synchronized
-    def get_measurement_period(self):
-        '''get_measurement_period
-
-        Returns the measurement **Period**, which is the amount of time it takes
-        to complete one measurement with the current configuration. Use this
-        method right before you begin acquiring data—after you have completely
-        configured the measurement and after all configuration methods have
-        been called.
-
-        Returns:
-            period (float): Returns the number of seconds it takes to make one measurement.
-
-                The first measurement in a multipoint acquisition requires additional
-                settling time. This method does not include this additional time or
-                any trigger_delay associated with the first measurement.
-                Time required for internal measurements, such as
-                auto_zero, is included.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        period_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDMM_GetMeasurementPeriod(vi_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(period_ctype.value)
 
     @ivi_synchronized
     def get_self_cal_supported(self):
@@ -2408,11 +2193,14 @@ class Session(_SessionBase):
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **Conductance** and **Susceptance** values. You
         can use the return values of this method as inputs to
-        configure_open_cable_comp_values.
+        ConfigureOpenCableCompValues.
 
         This method returns an error if the value of the method
         property is not set to Method.CAPACITANCE (1005) or
         Method.INDUCTANCE (1006).
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             conductance (float): **conductance** is the measured value of open cable compensation
@@ -2436,11 +2224,14 @@ class Session(_SessionBase):
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **Resistance** and **Reactance** values. You can use the return values
-        of this method as inputs to configure_short_cable_comp_values.
+        of this method as inputs to ConfigureShortCableCompValues.
 
         This method returns an error if the value of the method
         property is not set to Method.CAPACITANCE (1005) or
         Method.INDUCTANCE (1006).
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             resistance (float): **resistance** is the measured value of short cable compensation

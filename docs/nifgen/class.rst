@@ -396,8 +396,6 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`clear_arb_sequence`                       |
     +-----------------------------------------------------+
-    | :py:func:`clear_arb_waveform`                       |
-    +-----------------------------------------------------+
     | :py:func:`clear_freq_list`                          |
     +-----------------------------------------------------+
     | :py:func:`clear_user_standard_waveform`             |
@@ -434,9 +432,9 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`define_user_standard_waveform`            |
     +-----------------------------------------------------+
-    | :py:func:`delete_named_waveform`                    |
-    +-----------------------------------------------------+
     | :py:func:`delete_script`                            |
+    +-----------------------------------------------------+
+    | :py:func:`delete_waveform`                          |
     +-----------------------------------------------------+
     | :py:func:`disable`                                  |
     +-----------------------------------------------------+
@@ -480,9 +478,7 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`send_software_edge_trigger`               |
     +-----------------------------------------------------+
-    | :py:func:`set_named_waveform_next_write_position`   |
-    +-----------------------------------------------------+
-    | :py:func:`set_waveform_next_write_position`         |
+    | :py:func:`set_next_write_position`                  |
     +-----------------------------------------------------+
     | :py:func:`unlock`                                   |
     +-----------------------------------------------------+
@@ -4302,54 +4298,6 @@ clear_arb_sequence
 
             :type sequence_handle: int
 
-clear_arb_waveform
-~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:method:: clear_arb_waveform(waveform_handle)
-
-            Removes a previously created arbitrary waveform from the signal
-            generator memory and invalidates the waveform handle.
-
-            
-
-            .. note:: The signal generator must not be in the Generating state when you
-                call this method.
-
-
-
-            :param waveform_handle:
-
-
-                Specifies the handle of the arbitrary waveform that you want the signal
-                generator to remove.
-
-                You can create multiple arbitrary waveforms using one of the following
-                niFgen Create Waveform methods:
-
-                -  :py:meth:`nifgen.Session.create_waveform`
-                -  :py:meth:`nifgen.Session.create_waveform`
-                -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
-                -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
-                -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
-
-                **Defined Value**:
-
-                :py:data:`~nifgen.NIFGEN_VAL_ALL_WAVEFORMS`—Remove all waveforms from the signal
-                generator.
-
-                **Default Value**: None
-
-                
-
-                .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type waveform_handle: int
-
 clear_freq_list
 ~~~~~~~~~~~~~~~
 
@@ -5765,42 +5713,6 @@ define_user_standard_waveform
 
             :type waveform_data_array: list of float
 
-delete_named_waveform
-~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:method:: delete_named_waveform(waveform_name)
-
-            Removes a previously created arbitrary waveform from the signal
-            generator memory and invalidates the waveform handle.
-
-            
-
-            .. note:: The signal generator must not be in the Generating state when you call
-                this method.
-
-
-            .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session instance, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels['0,1'].delete_named_waveform(waveform_name)
-
-
-            :param waveform_name:
-
-
-                Specifies the name to associate with the allocated waveform.
-
-                
-
-
-            :type waveform_name: str
-
 delete_script
 ~~~~~~~~~~~~~
 
@@ -5833,6 +5745,40 @@ delete_script
 
 
             :type script_name: str
+
+delete_waveform
+~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: delete_waveform(waveform_name_or_handle)
+
+            Removes a previously created arbitrary waveform from the signal generator memory.
+
+            
+
+            .. note:: The signal generator must not be in the Generating state when you call this method.
+
+
+            .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+                nifgen.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nifgen.Session instance, and calling this method on the result.:
+
+                .. code:: python
+
+                    session.channels['0,1'].delete_waveform(waveform_name_or_handle)
+
+
+            :param waveform_name_or_handle:
+
+
+                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform`, :py:meth:`nifgen.Session.allocate_waveform` or :py:meth:`nifgen.Session.create_waveform`.
+
+                
+
+
+            :type waveform_name_or_handle: str or int
 
 disable
 ~~~~~~~
@@ -6546,84 +6492,12 @@ send_software_edge_trigger
 
             :type trigger_id: str
 
-set_named_waveform_next_write_position
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+set_next_write_position
+~~~~~~~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: set_named_waveform_next_write_position(waveform_name, relative_to, offset)
-
-            Sets the position in the waveform to which data is written at the next
-            write. This method allows you to write to arbitrary locations within
-            the waveform. These settings apply only to the next write to the
-            waveform specified by the **waveformHandle** parameter. Subsequent
-            writes to that waveform begin where the last write left off, unless this
-            method is called again. The **waveformHandle** passed in must have
-            been created with a call to one of the following methods:
-
-            -  :py:meth:`nifgen.Session.allocate_waveform`
-            -  :py:meth:`nifgen.Session.create_waveform`
-            -  :py:meth:`nifgen.Session.create_waveform`
-            -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
-            -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
-            -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session instance, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels['0,1'].set_named_waveform_next_write_position(waveform_name, relative_to, offset)
-
-
-            :param waveform_name:
-
-
-                Specifies the name to associate with the allocated waveform.
-
-                
-
-
-            :type waveform_name: str
-            :param relative_to:
-
-
-                Specifies the reference position in the waveform. This position and
-                **offset** together determine where to start loading data into the
-                waveform.
-
-                ****Defined Values****
-
-                +-------------------------------------------+-------------------------------------------------------------------------+
-                | :py:data:`~nifgen.RelativeTo.START` (0)   | Use the start of the waveform as the reference position.                |
-                +-------------------------------------------+-------------------------------------------------------------------------+
-                | :py:data:`~nifgen.RelativeTo.CURRENT` (1) | Use the current position within the waveform as the reference position. |
-                +-------------------------------------------+-------------------------------------------------------------------------+
-
-
-            :type relative_to: :py:data:`nifgen.RelativeTo`
-            :param offset:
-
-
-                Specifies the offset from the **relativeTo** parameter at which to start
-                loading the data into the waveform.
-
-                
-
-
-            :type offset: int
-
-set_waveform_next_write_position
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:method:: set_waveform_next_write_position(waveform_handle, relative_to, offset)
+    .. py:method:: set_next_write_position(waveform_name_or_handle, relative_to, offset)
 
             Sets the position in the waveform at which the next waveform data is
             written. This method allows you to write to arbitrary locations within
@@ -6632,13 +6506,7 @@ set_waveform_next_write_position
             that waveform begin where the last write left off, unless this method
             is called again. The waveformHandle passed in must have been created by
             a call to the :py:meth:`nifgen.Session.allocate_waveform` method or one of the following
-            niFgen CreateWaveform methods:
-
-            -  :py:meth:`nifgen.Session.create_waveform`
-            -  :py:meth:`nifgen.Session.create_waveform`
-            -  :py:meth:`nifgen.Session.create_waveform_from_file_i16`
-            -  :py:meth:`nifgen.Session.create_waveform_from_file_f64`
-            -  :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
+            :py:meth:`nifgen.Session.create_waveform` method.
 
             
 
@@ -6650,19 +6518,18 @@ set_waveform_next_write_position
 
                 .. code:: python
 
-                    session.channels['0,1'].set_waveform_next_write_position(waveform_handle, relative_to, offset)
+                    session.channels['0,1'].set_next_write_position(waveform_name_or_handle, relative_to, offset)
 
 
-            :param waveform_handle:
+            :param waveform_name_or_handle:
 
 
-                Specifies the handle of the arbitrary waveform previously allocated with
-                the :py:meth:`nifgen.Session.allocate_waveform` method.
+                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform`, :py:meth:`nifgen.Session.allocate_waveform` or :py:meth:`nifgen.Session.create_waveform`.
 
                 
 
 
-            :type waveform_handle: int
+            :type waveform_name_or_handle: str or int
             :param relative_to:
 
 
@@ -6775,8 +6642,8 @@ write_waveform
 
             By default, subsequent calls to this method
             continue writing data from the position of the last sample written. You
-            can set the write position and offset by calling the :py:meth:`nifgen.Session.set_named_waveform_next_write_position`
-            :py:meth:`nifgen.Session.set_waveform_next_write_position` method.
+            can set the write position and offset by calling the :py:meth:`nifgen.Session.set_next_write_position`
+            :py:meth:`nifgen.Session.set_next_write_position` method.
 
             
 
@@ -6794,12 +6661,12 @@ write_waveform
             :param waveform_name_or_handle:
 
 
-                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform` or :py:meth:`nifgen.Session.allocate_waveform`.
+                The name (str) or handle (int) of an arbitrary waveform previously allocated with :py:meth:`nifgen.Session.allocate_named_waveform`, :py:meth:`nifgen.Session.allocate_waveform` or :py:meth:`nifgen.Session.create_waveform`.
 
                 
 
 
-            :type waveform_name_or_handle: int
+            :type waveform_name_or_handle: str or int
             :param data:
 
 
@@ -7075,8 +6942,6 @@ Methods
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.clear_arb_sequence`                       |
 +--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.clear_arb_waveform`                       |
-+--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.clear_freq_list`                          |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.clear_user_standard_waveform`             |
@@ -7113,9 +6978,9 @@ Methods
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.define_user_standard_waveform`            |
 +--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.delete_named_waveform`                    |
-+--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.delete_script`                            |
++--------------------------------------------------------------------+
+| :py:func:`nifgen.Session.delete_waveform`                          |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.disable`                                  |
 +--------------------------------------------------------------------+
@@ -7159,9 +7024,7 @@ Methods
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.send_software_edge_trigger`               |
 +--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.set_named_waveform_next_write_position`   |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.set_waveform_next_write_position`         |
+| :py:func:`nifgen.Session.set_next_write_position`                  |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.unlock`                                   |
 +--------------------------------------------------------------------+
