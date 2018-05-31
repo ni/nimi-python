@@ -22,6 +22,18 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * `configure_ac_bandwidth()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_open_cable_comp_values()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_power_line_frequency()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_short_cable_comp_values()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_aperture_time_info()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_auto_range_value()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_measurement_period()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `latency` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `shunt_value` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `meas_dest_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `sample_trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
 * ### NI-ModInst
     * #### Added
     * #### Changed

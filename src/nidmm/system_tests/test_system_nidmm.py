@@ -72,14 +72,6 @@ def test_writeonly_attribute(session):
 
 
 # Function tests
-def test_method_get_aperture_time_info(session):
-    assert session.get_aperture_time_info()[1] == nidmm.ApertureTimeUnits.SECONDS  # Assuming default aperture time unit will be seconds
-
-
-def test_method_configure_power_line_frequency(session):
-    session.configure_power_line_frequency(60)
-
-
 def test_method_configure_trigger(session):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     try:
@@ -153,9 +145,7 @@ def test_get_auto_range_value(session):
     with session.initiate():
         session.fetch()
         auto_range_value_property = session.auto_range_value
-        auto_range_value_function = session.get_auto_range_value()
-        assert auto_range_value_function == auto_range_value_property
-        assert auto_range_value_function == 300   # simulated device auto_range_value to maximum 300
+        assert auto_range_value_property == 300   # simulated device auto_range_value to maximum 300
 
 
 def test_get_cal_date_time(session):
@@ -189,12 +179,6 @@ def test_self_cal(session):
         assert False
 
 
-def test_configure_ac_bandwidth(session):
-    session.configure_ac_bandwidth(2, 300)
-    assert session.ac_min_freq == 2
-    assert session.ac_max_freq == 300
-
-
 def test_configure_rtd(session):
     session.configure_rtd_type(nidmm.RTDType.CUSTOM, 110)
     assert session.temp_rtd_type == nidmm.RTDType.CUSTOM
@@ -217,15 +201,6 @@ def test_configure_thermocouple(session):
     session.configure_thermocouple(nidmm.ThermocoupleType.K, nidmm.ThermocoupleReferenceJunctionType.FIXED)
     assert session.temp_tc_type == nidmm.ThermocoupleType.K
     assert session.temp_tc_ref_junc_type == nidmm.ThermocoupleReferenceJunctionType.FIXED
-
-
-def test_configure_cable_compensation(session):
-    session.configure_open_cable_comp_values(100, 101)
-    assert session.open_cable_comp_conductance == 100
-    assert session.open_cable_comp_susceptance == 101
-    session.configure_short_cable_comp_values(100, 101)
-    assert session.short_cable_comp_resistance == 100
-    assert session.short_cable_comp_reactance == 101
 
 
 def test_configure_waveform_acquisition(session):
@@ -266,15 +241,6 @@ def test_fetch_waveform_error(session):
             assert False
     except nidmm.Error as e:
         assert e.code == -1074126845  # Max Time exceeded before operation completed
-
-
-def test_get_measurement_period():
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4072; BoardType:PXI') as session:
-            session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
-            measurement_period = session.get_measurement_period()
-            expected_period = 0.0071333333333333335  # 0.0071333333333333335 is the time required for 4072 to take a DC_VOLT measurement with range 10V on Digits_resolution 5.5
-            in_range = abs(measurement_period - expected_period) <= max(1e-09 * max(abs(measurement_period), abs(expected_period)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-            assert in_range is True
 
 
 def test_perform_cable_compensation(session):
