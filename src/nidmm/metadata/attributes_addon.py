@@ -32,6 +32,11 @@ attributes_codegen_method = {
     1050051: { "codegen_method": "no" },  # DEFER_UPDATE - IVI Attribute - #824
     1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES - IVI Attribute - #824
     1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
+    1150034: { "codegen_method": "no" },  # LATENCY - EOL hardware only - #875
+    1150003: { "codegen_method": "no" },  # SHUNT_VALUE - EOL hardware only - #875
+    1150002: { "codegen_method": "no" },  # MEAS_DEST_SLOPE - EOL hardware only - #875
+    1150010: { "codegen_method": "no" },  # SAMPLE_TRIGGER_SLOPE - EOL hardware only - #875
+    1250334: { "codegen_method": "no" },  # TRIGGER_SLOPE - EOL hardware only - #875
 }
 
 attributes_converters = {
@@ -43,6 +48,9 @@ attributes_converters = {
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # SAMPLE_INTERVAL
 }
 
+attributes_name = {
+    1150044: { 'name': 'FREQ_VOLTAGE_AUTO_RANGE', },  # extracted metadata has incorrect name #874, internal NI CAR 699520
+}
 
 attributes_remove_enum = {
     1250003: { "enum": None                         },  # RESOLUTION, Don't use enum since simple value will do

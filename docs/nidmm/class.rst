@@ -160,7 +160,7 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`driver_setup`                  | str                                          |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`freq_voltage_autorange`        | float                                        |
+    | :py:attr:`freq_voltage_auto_range`       | float                                        |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`freq_voltage_range`            | float                                        |
     +------------------------------------------+----------------------------------------------+
@@ -178,8 +178,6 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`io_resource_descriptor`        | str                                          |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`latency`                       | int                                          |
-    +------------------------------------------+----------------------------------------------+
     | :py:attr:`lc_calculation_model`          | :py:data:`LCCalculationModel`                |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`lc_number_meas_to_average`     | int                                          |
@@ -187,8 +185,6 @@ nidmm.Session
     | :py:attr:`logical_name`                  | str                                          |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`meas_complete_dest`            | :py:data:`MeasurementCompleteDest`           |
-    +------------------------------------------+----------------------------------------------+
-    | :py:attr:`meas_dest_slope`               | :py:data:`MeasurementDestinationSlope`       |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`number_of_averages`            | int                                          |
     +------------------------------------------+----------------------------------------------+
@@ -214,8 +210,6 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`sample_trigger`                | :py:data:`SampleTrigger`                     |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`sample_trigger_slope`          | :py:data:`SampleTrigSlope`                   |
-    +------------------------------------------+----------------------------------------------+
     | :py:attr:`serial_number`                 | str                                          |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`settle_time`                   | float in seconds or datetime.timedelta       |
@@ -223,8 +217,6 @@ nidmm.Session
     | :py:attr:`short_cable_comp_reactance`    | float                                        |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`short_cable_comp_resistance`   | float                                        |
-    +------------------------------------------+----------------------------------------------+
-    | :py:attr:`shunt_value`                   | float                                        |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`simulate`                      | bool                                         |
     +------------------------------------------+----------------------------------------------+
@@ -270,8 +262,6 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`trigger_delay`                 | float in seconds or datetime.timedelta       |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`trigger_slope`                 | :py:data:`TriggerSlope`                      |
-    +------------------------------------------+----------------------------------------------+
     | :py:attr:`trigger_source`                | :py:data:`TriggerSource`                     |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`waveform_coupling`             | :py:data:`WaveformCoupling`                  |
@@ -283,89 +273,75 @@ nidmm.Session
 
     **Public methods**
 
-    +----------------------------------------------+
-    | Method name                                  |
-    +==============================================+
-    | :py:func:`abort`                             |
-    +----------------------------------------------+
-    | :py:func:`configure_ac_bandwidth`            |
-    +----------------------------------------------+
-    | :py:func:`configure_measurement_absolute`    |
-    +----------------------------------------------+
-    | :py:func:`configure_measurement_digits`      |
-    +----------------------------------------------+
-    | :py:func:`configure_multi_point`             |
-    +----------------------------------------------+
-    | :py:func:`configure_open_cable_comp_values`  |
-    +----------------------------------------------+
-    | :py:func:`configure_power_line_frequency`    |
-    +----------------------------------------------+
-    | :py:func:`configure_rtd_custom`              |
-    +----------------------------------------------+
-    | :py:func:`configure_rtd_type`                |
-    +----------------------------------------------+
-    | :py:func:`configure_short_cable_comp_values` |
-    +----------------------------------------------+
-    | :py:func:`configure_thermistor_custom`       |
-    +----------------------------------------------+
-    | :py:func:`configure_thermocouple`            |
-    +----------------------------------------------+
-    | :py:func:`configure_trigger`                 |
-    +----------------------------------------------+
-    | :py:func:`configure_waveform_acquisition`    |
-    +----------------------------------------------+
-    | :py:func:`disable`                           |
-    +----------------------------------------------+
-    | :py:func:`fetch`                             |
-    +----------------------------------------------+
-    | :py:func:`fetch_multi_point`                 |
-    +----------------------------------------------+
-    | :py:func:`fetch_waveform`                    |
-    +----------------------------------------------+
-    | :py:func:`fetch_waveform_into`               |
-    +----------------------------------------------+
-    | :py:func:`get_aperture_time_info`            |
-    +----------------------------------------------+
-    | :py:func:`get_auto_range_value`              |
-    +----------------------------------------------+
-    | :py:func:`get_cal_date_and_time`             |
-    +----------------------------------------------+
-    | :py:func:`get_dev_temp`                      |
-    +----------------------------------------------+
-    | :py:func:`get_ext_cal_recommended_interval`  |
-    +----------------------------------------------+
-    | :py:func:`get_last_cal_temp`                 |
-    +----------------------------------------------+
-    | :py:func:`get_measurement_period`            |
-    +----------------------------------------------+
-    | :py:func:`get_self_cal_supported`            |
-    +----------------------------------------------+
-    | :py:func:`lock`                              |
-    +----------------------------------------------+
-    | :py:func:`perform_open_cable_comp`           |
-    +----------------------------------------------+
-    | :py:func:`perform_short_cable_comp`          |
-    +----------------------------------------------+
-    | :py:func:`read`                              |
-    +----------------------------------------------+
-    | :py:func:`read_multi_point`                  |
-    +----------------------------------------------+
-    | :py:func:`read_status`                       |
-    +----------------------------------------------+
-    | :py:func:`read_waveform`                     |
-    +----------------------------------------------+
-    | :py:func:`reset`                             |
-    +----------------------------------------------+
-    | :py:func:`reset_with_defaults`               |
-    +----------------------------------------------+
-    | :py:func:`self_cal`                          |
-    +----------------------------------------------+
-    | :py:func:`self_test`                         |
-    +----------------------------------------------+
-    | :py:func:`send_software_trigger`             |
-    +----------------------------------------------+
-    | :py:func:`unlock`                            |
-    +----------------------------------------------+
+    +---------------------------------------------+
+    | Method name                                 |
+    +=============================================+
+    | :py:func:`abort`                            |
+    +---------------------------------------------+
+    | :py:func:`configure_measurement_absolute`   |
+    +---------------------------------------------+
+    | :py:func:`configure_measurement_digits`     |
+    +---------------------------------------------+
+    | :py:func:`configure_multi_point`            |
+    +---------------------------------------------+
+    | :py:func:`configure_rtd_custom`             |
+    +---------------------------------------------+
+    | :py:func:`configure_rtd_type`               |
+    +---------------------------------------------+
+    | :py:func:`configure_thermistor_custom`      |
+    +---------------------------------------------+
+    | :py:func:`configure_thermocouple`           |
+    +---------------------------------------------+
+    | :py:func:`configure_trigger`                |
+    +---------------------------------------------+
+    | :py:func:`configure_waveform_acquisition`   |
+    +---------------------------------------------+
+    | :py:func:`disable`                          |
+    +---------------------------------------------+
+    | :py:func:`fetch`                            |
+    +---------------------------------------------+
+    | :py:func:`fetch_multi_point`                |
+    +---------------------------------------------+
+    | :py:func:`fetch_waveform`                   |
+    +---------------------------------------------+
+    | :py:func:`fetch_waveform_into`              |
+    +---------------------------------------------+
+    | :py:func:`get_cal_date_and_time`            |
+    +---------------------------------------------+
+    | :py:func:`get_dev_temp`                     |
+    +---------------------------------------------+
+    | :py:func:`get_ext_cal_recommended_interval` |
+    +---------------------------------------------+
+    | :py:func:`get_last_cal_temp`                |
+    +---------------------------------------------+
+    | :py:func:`get_self_cal_supported`           |
+    +---------------------------------------------+
+    | :py:func:`lock`                             |
+    +---------------------------------------------+
+    | :py:func:`perform_open_cable_comp`          |
+    +---------------------------------------------+
+    | :py:func:`perform_short_cable_comp`         |
+    +---------------------------------------------+
+    | :py:func:`read`                             |
+    +---------------------------------------------+
+    | :py:func:`read_multi_point`                 |
+    +---------------------------------------------+
+    | :py:func:`read_status`                      |
+    +---------------------------------------------+
+    | :py:func:`read_waveform`                    |
+    +---------------------------------------------+
+    | :py:func:`reset`                            |
+    +---------------------------------------------+
+    | :py:func:`reset_with_defaults`              |
+    +---------------------------------------------+
+    | :py:func:`self_cal`                         |
+    +---------------------------------------------+
+    | :py:func:`self_test`                        |
+    +---------------------------------------------+
+    | :py:func:`send_software_trigger`            |
+    +---------------------------------------------+
+    | :py:func:`unlock`                           |
+    +---------------------------------------------+
 
 
 Properties
@@ -799,12 +775,12 @@ driver_setup
                 - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
                 - C Attribute: **NIDMM_ATTR_DRIVER_SETUP**
 
-freq_voltage_autorange
-~~~~~~~~~~~~~~~~~~~~~~
+freq_voltage_auto_range
+~~~~~~~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:attribute:: freq_voltage_autorange
+    .. py:attribute:: freq_voltage_auto_range
 
         For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this property is the same as that of  :py:data:`nidmm.Session.freq_voltage_range`.
 
@@ -826,7 +802,7 @@ freq_voltage_autorange
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
-                - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTORANGE**
+                - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTO_RANGE**
 
 freq_voltage_range
 ~~~~~~~~~~~~~~~~~~
@@ -1063,39 +1039,6 @@ io_resource_descriptor
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
                 - C Attribute: **NIDMM_ATTR_IO_RESOURCE_DESCRIPTOR**
 
-latency
-~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:attribute:: latency
-
-        Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to :py:data:`~nidmm.NIDMM_VAL_LATENCY_AUTO` (-1),  NI-DMM chooses the transfer size.
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Multi Point Acquisition:Advanced:Latency**
-                - C Attribute: **NIDMM_ATTR_LATENCY**
-
 lc_calculation_model
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -1213,35 +1156,6 @@ meas_complete_dest
 
                 - LabVIEW Property: **Trigger:Measurement Complete Dest**
                 - C Attribute: **NIDMM_ATTR_MEAS_COMPLETE_DEST**
-
-meas_dest_slope
-~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:attribute:: meas_dest_slope
-
-        Specifies the polarity of the generated measurement complete signal.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------------------------------+
-            | Characteristic | Value                             |
-            +================+===================================+
-            | Datatype       | enums.MeasurementDestinationSlope |
-            +----------------+-----------------------------------+
-            | Permissions    | read-write                        |
-            +----------------+-----------------------------------+
-            | Channel Based  | False                             |
-            +----------------+-----------------------------------+
-            | Resettable     | No                                |
-            +----------------+-----------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Trigger:Measurement Destination Slope**
-                - C Attribute: **NIDMM_ATTR_MEAS_DEST_SLOPE**
 
 number_of_averages
 ~~~~~~~~~~~~~~~~~~
@@ -1613,35 +1527,6 @@ sample_trigger
                 - LabVIEW Property: **Multi Point Acquisition:Sample Trigger**
                 - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER**
 
-sample_trigger_slope
-~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:attribute:: sample_trigger_slope
-
-        Specifies the edge of the signal from the specified sample trigger source on  which the DMM is triggered.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------------------+
-            | Characteristic | Value                 |
-            +================+=======================+
-            | Datatype       | enums.SampleTrigSlope |
-            +----------------+-----------------------+
-            | Permissions    | read-write            |
-            +----------------+-----------------------+
-            | Channel Based  | False                 |
-            +----------------+-----------------------+
-            | Resettable     | No                    |
-            +----------------+-----------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Multi Point Acquisition:Sample Trig Slope**
-                - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER_SLOPE**
-
 serial_number
 ~~~~~~~~~~~~~
 
@@ -1764,36 +1649,6 @@ short_cable_comp_resistance
 
                 - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
                 - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE**
-
-shunt_value
-~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:attribute:: shunt_value
-
-        For the NI 4050 only, specifies the shunt resistance value.
-        The NI 4050 requires an external shunt resistor for current measurements.  This property should be set to the value of shunt resistor.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration:Measurement Options:Shunt Value**
-                - C Attribute: **NIDMM_ATTR_SHUNT_VALUE**
 
 simulate
 ~~~~~~~~
@@ -2458,35 +2313,6 @@ trigger_delay
                 - LabVIEW Property: **Trigger:Trigger Delay**
                 - C Attribute: **NIDMM_ATTR_TRIGGER_DELAY**
 
-trigger_slope
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:attribute:: trigger_slope
-
-        Specifies the edge of the signal from the specified trigger source on which  the DMM is triggered.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+--------------------+
-            | Characteristic | Value              |
-            +================+====================+
-            | Datatype       | enums.TriggerSlope |
-            +----------------+--------------------+
-            | Permissions    | read-write         |
-            +----------------+--------------------+
-            | Channel Based  | False              |
-            +----------------+--------------------+
-            | Resettable     | No                 |
-            +----------------+--------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Trigger:Trigger Slope**
-                - C Attribute: **NIDMM_ATTR_TRIGGER_SLOPE**
-
 trigger_source
 ~~~~~~~~~~~~~~
 
@@ -2623,55 +2449,6 @@ abort
             
 
 
-
-configure_ac_bandwidth
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:method:: configure_ac_bandwidth(ac_minimum_frequency_hz, ac_maximum_frequency_hz)
-
-            Configures the :py:data:`nidmm.Session.ac_min_freq` and :py:data:`nidmm.Session.ac_max_freq`
-            properties, which the DMM uses for AC measurements.
-
-            
-
-
-
-            :param ac_minimum_frequency_hz:
-
-
-                Specifies the minimum expected frequency component of the input signal
-                in hertz. This parameter affects the DMM only when you set the
-                :py:data:`nidmm.Session.method` property to AC measurements. NI-DMM uses this
-                parameter to calculate the proper aperture for the measurement.
-                The driver sets the :py:data:`nidmm.Session.ac_min_freq` property to this value.
-                The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
-                4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
-                NI 4050 and NI 4060.
-
-                
-
-
-            :type ac_minimum_frequency_hz: float
-            :param ac_maximum_frequency_hz:
-
-
-                Specifies the maximum expected frequency component of the input signal
-                in hertz within the device limits. This parameter is used only for error
-                checking and verifies that the value of this parameter is less than the
-                maximum frequency of the device.
-
-                This parameter affects the DMM only when you set the
-                :py:data:`nidmm.Session.method` property to AC measurements. The driver sets the
-                :py:data:`nidmm.Session.ac_max_freq` property to this value. The valid range is 1
-                Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
-                Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
-
-                
-
-
-            :type ac_maximum_frequency_hz: float
 
 configure_measurement_absolute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2910,64 +2687,6 @@ configure_multi_point
 
             :type sample_interval: float in seconds or datetime.timedelta
 
-configure_open_cable_comp_values
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:method:: configure_open_cable_comp_values(conductance, susceptance)
-
-            For the NI 4082 and NI 4072 only, configures the
-            :py:data:`nidmm.Session.open_cable_comp_conductance` and
-            :py:data:`nidmm.Session.open_cable_comp_susceptance` properties.
-
-            
-
-
-
-            :param conductance:
-
-
-                Specifies the open cable compensation **conductance**.
-
-                
-
-
-            :type conductance: float
-            :param susceptance:
-
-
-                Specifies the open cable compensation **susceptance**.
-
-                
-
-
-            :type susceptance: float
-
-configure_power_line_frequency
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:method:: configure_power_line_frequency(power_line_frequency_hz)
-
-            Specifies the powerline frequency.
-
-            
-
-
-
-            :param power_line_frequency_hz:
-
-
-                **Powerline Frequency** specifies the powerline frequency in hertz.
-                NI-DMM sets the Powerline Frequency property to this value.
-
-                
-
-
-            :type power_line_frequency_hz: float
-
 configure_rtd_custom
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -3067,40 +2786,6 @@ configure_rtd_type
 
 
             :type rtd_resistance: float
-
-configure_short_cable_comp_values
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:method:: configure_short_cable_comp_values(resistance, reactance)
-
-            For the NI 4082 and NI 4072 only, configures the
-            :py:data:`nidmm.Session.short_cable_comp_resistance` and
-            :py:data:`nidmm.Session.short_cable_comp_reactance` properties.
-
-            
-
-
-
-            :param resistance:
-
-
-                Specifies the short cable compensation **resistance**.
-
-                
-
-
-            :type resistance: float
-            :param reactance:
-
-
-                Specifies the short cable compensation **reactance**.
-
-                
-
-
-            :type reactance: float
 
 configure_thermistor_custom
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3617,91 +3302,6 @@ fetch_waveform_into
 
 
 
-get_aperture_time_info
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:method:: get_aperture_time_info()
-
-            Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
-
-            
-
-
-
-            :rtype: tuple (aperture_time, aperture_time_units)
-
-                WHERE
-
-                aperture_time (float): 
-
-
-                    Specifies the amount of time the DMM digitizes the input signal for a
-                    single measurement. This parameter does not include settling time.
-                    Returns the value of the :py:data:`nidmm.Session.aperture_time` property. The
-                    units of this property depend on the value of the
-                    :py:data:`nidmm.Session.aperture_time_units` property.
-                    On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
-                    maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
-                    within the minimum and maximum ranges is allowed on the
-                    NI 4070/4071/4072.
-                    On the NI 4065 the minimum aperture time is 333 µs, and the maximum
-                    aperture time is 78.2 s. If setting the number of averages directly, the
-                    total measurement time is aperture time X the number of averages, which
-                    must be less than 72.8 s. The aperture times allowed are 333 µs, 667 µs,
-                    or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33 ms, and so
-                    on. If you set an aperture time other than 333 µs, 667 µs, or multiples
-                    of 1.11 ms, the value will be coerced up to the next supported aperture
-                    time.
-                    On the NI 4060, when the powerline frequency is 60, the PLCs allowed are
-                    1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
-                    the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
-
-                    
-
-
-                aperture_time_units (:py:data:`nidmm.ApertureTimeUnits`): 
-
-
-                    Indicates the units of aperture time as powerline cycles (PLCs) or
-                    seconds. Returns the value of the :py:data:`nidmm.Session.aperture_time_units`
-                    property.
-
-                    +-------------------------------------------------------+---+------------------+
-                    | :py:data:`~nidmm.ApertureTimeUnits.SECONDS`           | 0 | Seconds          |
-                    +-------------------------------------------------------+---+------------------+
-                    | :py:data:`~nidmm.ApertureTimeUnits.POWER_LINE_CYCLES` | 1 | Powerline Cycles |
-                    +-------------------------------------------------------+---+------------------+
-
-
-
-get_auto_range_value
-~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:method:: get_auto_range_value()
-
-            Returns the **Actual_Range** that the DMM is using, even when Auto
-            Range is off.
-
-            
-
-
-
-            :rtype: float
-            :return:
-
-
-                    Indicates the **actual_range** the DMM is using. Returns the value of
-                    the :py:data:`nidmm.Session.auto_range_value` property. The units of the returned
-                    value depend on the method.
-
-                    
-
-
-
 get_cal_date_and_time
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -3851,39 +3451,6 @@ get_last_cal_temp
 
 
 
-get_measurement_period
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nidmm.Session
-
-    .. py:method:: get_measurement_period()
-
-            Returns the measurement **Period**, which is the amount of time it takes
-            to complete one measurement with the current configuration. Use this
-            method right before you begin acquiring data—after you have completely
-            configured the measurement and after all configuration methods have
-            been called.
-
-            
-
-
-
-            :rtype: float
-            :return:
-
-
-                    Returns the number of seconds it takes to make one measurement.
-
-                    The first measurement in a multipoint acquisition requires additional
-                    settling time. This method does not include this additional time or
-                    any :py:data:`nidmm.Session.trigger_delay` associated with the first measurement.
-                    Time required for internal measurements, such as
-                    :py:data:`nidmm.Session.auto_zero`, is included.
-
-                    
-
-
-
 get_self_cal_supported
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3973,13 +3540,15 @@ perform_open_cable_comp
             measurements for the current capacitance/inductance range, and returns
             open cable compensation **Conductance** and **Susceptance** values. You
             can use the return values of this method as inputs to
-            :py:meth:`nidmm.Session.configure_open_cable_comp_values`.
+            :py:meth:`nidmm.Session.ConfigureOpenCableCompValues`.
 
             This method returns an error if the value of the :py:data:`nidmm.Session.method`
             property is not set to :py:data:`~nidmm.Method.CAPACITANCE` (1005) or
             :py:data:`~nidmm.Method.INDUCTANCE` (1006).
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -4016,13 +3585,15 @@ perform_short_cable_comp
             Performs the short cable compensation measurements for the current
             capacitance/inductance range, and returns short cable compensation
             **Resistance** and **Reactance** values. You can use the return values
-            of this method as inputs to :py:meth:`nidmm.Session.configure_short_cable_comp_values`.
+            of this method as inputs to :py:meth:`nidmm.Session.ConfigureShortCableCompValues`.
 
             This method returns an error if the value of the :py:data:`nidmm.Session.method`
             property is not set to :py:data:`~nidmm.Method.CAPACITANCE` (1005) or
             :py:data:`~nidmm.Method.INDUCTANCE` (1006).
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -4446,7 +4017,7 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.driver_setup`                  | str                                          |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.freq_voltage_autorange`        | float                                        |
+| :py:attr:`nidmm.Session.freq_voltage_auto_range`       | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.freq_voltage_range`            | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
@@ -4464,8 +4035,6 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.io_resource_descriptor`        | str                                          |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.latency`                       | int                                          |
-+--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.lc_calculation_model`          | :py:data:`LCCalculationModel`                |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.lc_number_meas_to_average`     | int                                          |
@@ -4473,8 +4042,6 @@ Properties
 | :py:attr:`nidmm.Session.logical_name`                  | str                                          |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.meas_complete_dest`            | :py:data:`MeasurementCompleteDest`           |
-+--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.meas_dest_slope`               | :py:data:`MeasurementDestinationSlope`       |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.number_of_averages`            | int                                          |
 +--------------------------------------------------------+----------------------------------------------+
@@ -4500,8 +4067,6 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.sample_trigger`                | :py:data:`SampleTrigger`                     |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.sample_trigger_slope`          | :py:data:`SampleTrigSlope`                   |
-+--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.serial_number`                 | str                                          |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.settle_time`                   | float in seconds or datetime.timedelta       |
@@ -4509,8 +4074,6 @@ Properties
 | :py:attr:`nidmm.Session.short_cable_comp_reactance`    | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.short_cable_comp_resistance`   | float                                        |
-+--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.shunt_value`                   | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.simulate`                      | bool                                         |
 +--------------------------------------------------------+----------------------------------------------+
@@ -4556,8 +4119,6 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.trigger_delay`                 | float in seconds or datetime.timedelta       |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.trigger_slope`                 | :py:data:`TriggerSlope`                      |
-+--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.trigger_source`                | :py:data:`TriggerSource`                     |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.waveform_coupling`             | :py:data:`WaveformCoupling`                  |
@@ -4570,87 +4131,73 @@ Properties
 Methods
 -------
 
-+------------------------------------------------------------+
-| Method name                                                |
-+============================================================+
-| :py:func:`nidmm.Session.abort`                             |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_ac_bandwidth`            |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_measurement_absolute`    |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_measurement_digits`      |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_multi_point`             |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_open_cable_comp_values`  |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_power_line_frequency`    |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_rtd_custom`              |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_rtd_type`                |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_short_cable_comp_values` |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_thermistor_custom`       |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_thermocouple`            |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_trigger`                 |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_waveform_acquisition`    |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.disable`                           |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch`                             |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch_multi_point`                 |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch_waveform`                    |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch_waveform_into`               |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_aperture_time_info`            |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_auto_range_value`              |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_cal_date_and_time`             |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_dev_temp`                      |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_ext_cal_recommended_interval`  |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_last_cal_temp`                 |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_measurement_period`            |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.get_self_cal_supported`            |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.lock`                              |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.perform_open_cable_comp`           |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.perform_short_cable_comp`          |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.read`                              |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.read_multi_point`                  |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.read_status`                       |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.read_waveform`                     |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.reset`                             |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.reset_with_defaults`               |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.self_cal`                          |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.self_test`                         |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.send_software_trigger`             |
-+------------------------------------------------------------+
-| :py:func:`nidmm.Session.unlock`                            |
-+------------------------------------------------------------+
++-----------------------------------------------------------+
+| Method name                                               |
++===========================================================+
+| :py:func:`nidmm.Session.abort`                            |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_measurement_absolute`   |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_measurement_digits`     |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_multi_point`            |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_rtd_custom`             |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_rtd_type`               |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_thermistor_custom`      |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_thermocouple`           |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_trigger`                |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_waveform_acquisition`   |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.disable`                          |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch`                            |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch_multi_point`                |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch_waveform`                   |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch_waveform_into`              |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.get_cal_date_and_time`            |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.get_dev_temp`                     |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.get_ext_cal_recommended_interval` |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.get_last_cal_temp`                |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.get_self_cal_supported`           |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.lock`                             |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.perform_open_cable_comp`          |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.perform_short_cable_comp`         |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.read`                             |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.read_multi_point`                 |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.read_status`                      |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.read_waveform`                    |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.reset`                            |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.reset_with_defaults`              |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.self_cal`                         |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.self_test`                        |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.send_software_trigger`            |
++-----------------------------------------------------------+
+| :py:func:`nidmm.Session.unlock`                           |
++-----------------------------------------------------------+
 

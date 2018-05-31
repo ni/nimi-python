@@ -1740,8 +1740,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def delete_named_waveform(self, waveform_name):
-        '''delete_named_waveform
+    def _delete_named_waveform(self, waveform_name):
+        '''_delete_named_waveform
 
         Removes a previously created arbitrary waveform from the signal
         generator memory and invalidates the waveform handle.
@@ -1756,7 +1756,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].delete_named_waveform(waveform_name)
+            session.channels['0,1']._delete_named_waveform(waveform_name)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -1794,6 +1794,31 @@ class _SessionBase(object):
         error_code = self._library.niFgen_DeleteScript(vi_ctype, channel_name_ctype, script_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def delete_waveform(self, waveform_name_or_handle):
+        '''delete_waveform
+
+        Removes a previously created arbitrary waveform from the signal generator memory.
+
+        Note: The signal generator must not be in the Generating state when you call this method.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].delete_waveform(waveform_name_or_handle)
+
+        Args:
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
+
+        '''
+        if isinstance(waveform_name_or_handle, str):
+            return self._delete_named_waveform(waveform_name_or_handle)
+        else:
+            return self._clear_arb_waveform(waveform_name_or_handle)
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -2335,8 +2360,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
-        '''set_named_waveform_next_write_position
+    def _set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
+        '''_set_named_waveform_next_write_position
 
         Sets the position in the waveform to which data is written at the next
         write. This method allows you to write to arbitrary locations within
@@ -2359,7 +2384,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].set_named_waveform_next_write_position(waveform_name, relative_to, offset)
+            session.channels['0,1']._set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2392,8 +2417,53 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
-        '''set_waveform_next_write_position
+    def set_next_write_position(self, waveform_name_or_handle, relative_to, offset):
+        '''set_next_write_position
+
+        Sets the position in the waveform at which the next waveform data is
+        written. This method allows you to write to arbitrary locations within
+        the waveform. These settings apply only to the next write to the
+        waveform specified by the waveformHandle parameter. Subsequent writes to
+        that waveform begin where the last write left off, unless this method
+        is called again. The waveformHandle passed in must have been created by
+        a call to the allocate_waveform method or one of the following
+        create_waveform method.
+
+        Tip:
+        This method requires repeated capabilities (usually channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session instance, and calling this method on the result.:
+
+            session.channels['0,1'].set_next_write_position(waveform_name_or_handle, relative_to, offset)
+
+        Args:
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
+
+            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
+                **offset** together determine where to start loading data into the
+                waveform.
+
+                ****Defined Values****
+
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.START (0)   | Use the start of the waveform as the reference position.                |
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.CURRENT (1) | Use the current position within the waveform as the reference position. |
+                +------------------------+-------------------------------------------------------------------------+
+
+            offset (int): Specifies the offset from **relativeTo** at which to start loading the
+                data into the waveform.
+
+        '''
+        if isinstance(waveform_name_or_handle, str):
+            return self._set_named_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
+        else:
+            return self._set_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
+
+    @ivi_synchronized
+    def _set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
+        '''_set_waveform_next_write_position
 
         Sets the position in the waveform at which the next waveform data is
         written. This method allows you to write to arbitrary locations within
@@ -2416,7 +2486,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].set_waveform_next_write_position(waveform_handle, relative_to, offset)
+            session.channels['0,1']._set_waveform_next_write_position(waveform_handle, relative_to, offset)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2472,7 +2542,7 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        set_waveform_next_write_position method. If streaming is enabled,
+        set_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2530,7 +2600,7 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        set_named_waveform_next_write_position method. If streaming is
+        set_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2579,7 +2649,7 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        set_named_waveform_next_write_position method. If streaming is
+        set_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2626,7 +2696,7 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        set_named_waveform_next_write_position method. If streaming is
+        set_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2711,7 +2781,7 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        set_waveform_next_write_position method. If streaming is enabled,
+        set_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2761,7 +2831,7 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        set_waveform_next_write_position method. If streaming is enabled,
+        set_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
@@ -2808,8 +2878,8 @@ class _SessionBase(object):
 
         By default, subsequent calls to this method
         continue writing data from the position of the last sample written. You
-        can set the write position and offset by calling the set_named_waveform_next_write_position
-        set_waveform_next_write_position method.
+        can set the write position and offset by calling the set_next_write_position
+        set_next_write_position method.
 
         Tip:
         This method requires repeated capabilities (usually channels). If called directly on the
@@ -2820,7 +2890,7 @@ class _SessionBase(object):
             session.channels['0,1'].write_waveform(waveform_name_or_handle, data)
 
         Args:
-            waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
 
             data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
 
@@ -3092,8 +3162,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def clear_arb_waveform(self, waveform_handle):
-        '''clear_arb_waveform
+    def _clear_arb_waveform(self, waveform_handle):
+        '''_clear_arb_waveform
 
         Removes a previously created arbitrary waveform from the signal
         generator memory and invalidates the waveform handle.
