@@ -2145,7 +2145,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    @ivi_synchronized
     def _get_error(self):
         '''_get_error
 
@@ -3019,7 +3018,6 @@ class _SessionBase(object):
 
         return self._write_named_waveform_f64(waveform_name_or_handle, data) if use_named else self._write_waveform(waveform_name_or_handle, data)
 
-    @ivi_synchronized
     def _error_message(self, error_code):
         '''_error_message
 
