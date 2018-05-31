@@ -40,9 +40,6 @@ def example(resource_name, options, total_acquisition_time_in_seconds, voltage, 
                                                    offset=0, record_number=0, num_records=1, timeout=datetime.timedelta(seconds=5.0))
                 current_pos += samples_per_fetch
 
-        # 6 fetch complete
-    # 7 session closed
-
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Fetch more samples than will fit in memory.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
