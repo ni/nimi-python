@@ -278,11 +278,14 @@ def test_reset_method(session):
     assert default_function == function_after_reset
 
 
-def test_error_message(session):
-    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
-    # and there is no good way for us to invalidate a simulated session.
-    message = session._error_message(-1074118641)
-    assert message == 'The data is not available. This can be caused by calling Fetch or FetchMultiPoint before calling Initiate or after calling Abort.'
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+            assert False
+    except nidmm.Error as e:
+        assert e.code == -1074134964
+        assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
 
 
 # No boolean attributes that aren't IVI
