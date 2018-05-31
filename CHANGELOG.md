@@ -40,7 +40,6 @@ All notable changes to this project will be documented in this file.
         * `trigger_input_polarity` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `configure_scan_list()` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `configure_scan_trigger()` - [#881](https://github.com/ni/nimi-python/issues/881)
-        * `route_scan_advanced_output()` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `route_trigger_input()` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `set_continuous_scan()` - [#881](https://github.com/ni/nimi-python/issues/881)
 * ### NI-DCPower
