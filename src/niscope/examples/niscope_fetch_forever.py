@@ -11,7 +11,6 @@ import sys
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
-# This example is based on the C FetchForever example
 def example(resource_name, channels, options, total_acquisition_time_in_seconds, voltage, sample_rate_in_hz, samples_per_fetch):
     total_samples = int(total_acquisition_time_in_seconds * sample_rate_in_hz)
     channel_list = channels.split(',')  # We need channels as a list
