@@ -42,6 +42,7 @@ class Library(object):
         self.niSwitch_RelayControl_cfunc = None
         self.niSwitch_ResetWithDefaults_cfunc = None
         self.niSwitch_RouteScanAdvancedOutput_cfunc = None
+        self.niSwitch_RouteTriggerInput_cfunc = None
         self.niSwitch_SendSoftwareTrigger_cfunc = None
         self.niSwitch_SetAttributeViBoolean_cfunc = None
         self.niSwitch_SetAttributeViInt32_cfunc = None
@@ -255,6 +256,14 @@ class Library(object):
                 self.niSwitch_RouteScanAdvancedOutput_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ViBoolean]  # noqa: F405
                 self.niSwitch_RouteScanAdvancedOutput_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_RouteScanAdvancedOutput_cfunc(vi, scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
+
+    def niSwitch_RouteTriggerInput(self, vi, trigger_input_connector, trigger_input_bus_line, invert):  # noqa: N802
+        with self._func_lock:
+            if self.niSwitch_RouteTriggerInput_cfunc is None:
+                self.niSwitch_RouteTriggerInput_cfunc = self._library.niSwitch_RouteTriggerInput
+                self.niSwitch_RouteTriggerInput_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ViBoolean]  # noqa: F405
+                self.niSwitch_RouteTriggerInput_cfunc.restype = ViStatus  # noqa: F405
+        return self.niSwitch_RouteTriggerInput_cfunc(vi, trigger_input_connector, trigger_input_bus_line, invert)
 
     def niSwitch_SendSoftwareTrigger(self, vi):  # noqa: N802
         with self._func_lock:

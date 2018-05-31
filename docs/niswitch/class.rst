@@ -415,6 +415,8 @@ niswitch.Session
     +---------------------------------------+
     | :py:func:`route_scan_advanced_output` |
     +---------------------------------------+
+    | :py:func:`route_trigger_input`        |
+    +---------------------------------------+
     | :py:func:`self_test`                  |
     +---------------------------------------+
     | :py:func:`send_software_trigger`      |
@@ -2730,7 +2732,7 @@ route_scan_advanced_output
 
     .. py:currentmodule:: niswitch.Session
 
-    .. py:method:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
+    .. py:method:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False)
 
             Routes the scan advanced output trigger from a trigger bus line (TTLx)
             to the front or rear connector.
@@ -2743,31 +2745,86 @@ route_scan_advanced_output
 
 
                 The scan advanced trigger destination. Valid locations are the
-                :py:data:`~niswitch.NISWITCH_VAL_FRONTCONNECTOR` and :py:data:`~niswitch.NISWITCH_VAL_REARCONNECTOR`. Default
-                value: :py:data:`~niswitch.NISWITCH_VAL_FRONTCONNECTOR`
+                :py:data:`~niswitch.ScanAdvancedOutput.FRONTCONNECTOR` and :py:data:`~niswitch.ScanAdvancedOutput.REARCONNECTOR`. Default
+                value: :py:data:`~niswitch.ScanAdvancedOutput.FRONTCONNECTOR`
 
                 
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type scan_advanced_output_connector: int
+            :type scan_advanced_output_connector: :py:data:`niswitch.ScanAdvancedOutput`
             :param scan_advanced_output_bus_line:
 
 
                 The trigger line to route the scan advanced output trigger from the
-                front or rear connector. Select :py:data:`~niswitch.NISWITCH_VAL_NONE` to break an existing
-                route. Default value: None Valid Values: :py:data:`~niswitch.NISWITCH_VAL_NONE`
-                :py:data:`~niswitch.NISWITCH_VAL_TTL0` :py:data:`~niswitch.NISWITCH_VAL_TTL1` :py:data:`~niswitch.NISWITCH_VAL_TTL2`
-                :py:data:`~niswitch.NISWITCH_VAL_TTL3` :py:data:`~niswitch.NISWITCH_VAL_TTL4` :py:data:`~niswitch.NISWITCH_VAL_TTL5`
-                :py:data:`~niswitch.NISWITCH_VAL_TTL6` :py:data:`~niswitch.NISWITCH_VAL_TTL7`
+                front or rear connector. Select :py:data:`~niswitch.ScanAdvancedOutput.NONE` to break an existing
+                route. Default value: None Valid Values: :py:data:`~niswitch.ScanAdvancedOutput.NONE`
+                :py:data:`~niswitch.ScanAdvancedOutput.TTL0` :py:data:`~niswitch.ScanAdvancedOutput.TTL1` :py:data:`~niswitch.ScanAdvancedOutput.TTL2`
+                :py:data:`~niswitch.ScanAdvancedOutput.TTL3` :py:data:`~niswitch.ScanAdvancedOutput.TTL4` :py:data:`~niswitch.ScanAdvancedOutput.TTL5`
+                :py:data:`~niswitch.ScanAdvancedOutput.TTL6` :py:data:`~niswitch.ScanAdvancedOutput.TTL7`
 
                 
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type scan_advanced_output_bus_line: int
+            :type scan_advanced_output_bus_line: :py:data:`niswitch.ScanAdvancedOutput`
+            :param invert:
+
+
+                If True, inverts the input trigger signal from falling to rising or
+                vice versa. Default value: False
+
+                
+
+
+            :type invert: bool
+
+route_trigger_input
+~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niswitch.Session
+
+    .. py:method:: route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert=False)
+
+            Routes the input trigger from the front or rear connector to a trigger
+            bus line (TTLx). To disconnect the route, call this method again and
+            specify None for trigger bus line parameter.
+
+            
+
+
+
+            :param trigger_input_connector:
+
+
+                The location of the input trigger source on the switch module. Valid
+                locations are the :py:data:`~niswitch.TriggerInput.FRONTCONNECTOR` and
+                :py:data:`~niswitch.TriggerInput.REARCONNECTOR`. Default value:
+                :py:data:`~niswitch.TriggerInput.FRONTCONNECTOR`
+
+                
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type trigger_input_connector: :py:data:`niswitch.TriggerInput`
+            :param trigger_input_bus_line:
+
+
+                The trigger line to route the input trigger. Select :py:data:`~niswitch.NISWITCH_VAL_NONE`
+                to break an existing route. Default value: None Valid Values:
+                :py:data:`~niswitch.NISWITCH_VAL_NONE` :py:data:`~niswitch.TriggerInput.TTL0` :py:data:`~niswitch.TriggerInput.TTL1`
+                :py:data:`~niswitch.TriggerInput.TTL2` :py:data:`~niswitch.TriggerInput.TTL3` :py:data:`~niswitch.TriggerInput.TTL4`
+                :py:data:`~niswitch.TriggerInput.TTL5` :py:data:`~niswitch.TriggerInput.TTL6` :py:data:`~niswitch.TriggerInput.TTL7`
+
+                
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type trigger_input_bus_line: :py:data:`niswitch.TriggerInput`
             :param invert:
 
 
@@ -3074,6 +3131,8 @@ Methods
 | :py:func:`niswitch.Session.reset_with_defaults`        |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.route_scan_advanced_output` |
++--------------------------------------------------------+
+| :py:func:`niswitch.Session.route_trigger_input`        |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.self_test`                  |
 +--------------------------------------------------------+

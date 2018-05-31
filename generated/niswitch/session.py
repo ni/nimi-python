@@ -2217,26 +2217,26 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert):
+    def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
         '''route_scan_advanced_output
 
         Routes the scan advanced output trigger from a trigger bus line (TTLx)
         to the front or rear connector.
 
         Args:
-            scan_advanced_output_connector (int): The scan advanced trigger destination. Valid locations are the
-                NISWITCH_VAL_FRONTCONNECTOR and NISWITCH_VAL_REARCONNECTOR. Default
-                value: NISWITCH_VAL_FRONTCONNECTOR
+            scan_advanced_output_connector (enums.ScanAdvancedOutput): The scan advanced trigger destination. Valid locations are the
+                ScanAdvancedOutput.FRONTCONNECTOR and ScanAdvancedOutput.REARCONNECTOR. Default
+                value: ScanAdvancedOutput.FRONTCONNECTOR
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            scan_advanced_output_bus_line (int): The trigger line to route the scan advanced output trigger from the
-                front or rear connector. Select NISWITCH_VAL_NONE to break an existing
-                route. Default value: None Valid Values: NISWITCH_VAL_NONE
-                NISWITCH_VAL_TTL0 NISWITCH_VAL_TTL1 NISWITCH_VAL_TTL2
-                NISWITCH_VAL_TTL3 NISWITCH_VAL_TTL4 NISWITCH_VAL_TTL5
-                NISWITCH_VAL_TTL6 NISWITCH_VAL_TTL7
+            scan_advanced_output_bus_line (enums.ScanAdvancedOutput): The trigger line to route the scan advanced output trigger from the
+                front or rear connector. Select ScanAdvancedOutput.NONE to break an existing
+                route. Default value: None Valid Values: ScanAdvancedOutput.NONE
+                ScanAdvancedOutput.TTL0 ScanAdvancedOutput.TTL1 ScanAdvancedOutput.TTL2
+                ScanAdvancedOutput.TTL3 ScanAdvancedOutput.TTL4 ScanAdvancedOutput.TTL5
+                ScanAdvancedOutput.TTL6 ScanAdvancedOutput.TTL7
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -2245,11 +2245,57 @@ class Session(_SessionBase):
                 vice versa. Default value: False
 
         '''
+        if type(scan_advanced_output_connector) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
+        if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        scan_advanced_output_connector_ctype = _visatype.ViInt32(scan_advanced_output_connector)  # case S150
-        scan_advanced_output_bus_line_ctype = _visatype.ViInt32(scan_advanced_output_bus_line)  # case S150
+        scan_advanced_output_connector_ctype = _visatype.ViInt32(scan_advanced_output_connector.value)  # case S130
+        scan_advanced_output_bus_line_ctype = _visatype.ViInt32(scan_advanced_output_bus_line.value)  # case S130
         invert_ctype = _visatype.ViBoolean(invert)  # case S150
         error_code = self._library.niSwitch_RouteScanAdvancedOutput(vi_ctype, scan_advanced_output_connector_ctype, scan_advanced_output_bus_line_ctype, invert_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
+        '''route_trigger_input
+
+        Routes the input trigger from the front or rear connector to a trigger
+        bus line (TTLx). To disconnect the route, call this method again and
+        specify None for trigger bus line parameter.
+
+        Args:
+            trigger_input_connector (enums.TriggerInput): The location of the input trigger source on the switch module. Valid
+                locations are the TriggerInput.FRONTCONNECTOR and
+                TriggerInput.REARCONNECTOR. Default value:
+                TriggerInput.FRONTCONNECTOR
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            trigger_input_bus_line (enums.TriggerInput): The trigger line to route the input trigger. Select NISWITCH_VAL_NONE
+                to break an existing route. Default value: None Valid Values:
+                NISWITCH_VAL_NONE TriggerInput.TTL0 TriggerInput.TTL1
+                TriggerInput.TTL2 TriggerInput.TTL3 TriggerInput.TTL4
+                TriggerInput.TTL5 TriggerInput.TTL6 TriggerInput.TTL7
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            invert (bool): If True, inverts the input trigger signal from falling to rising or
+                vice versa. Default value: False
+
+        '''
+        if type(trigger_input_connector) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+        if type(trigger_input_bus_line) is not enums.TriggerInput:
+            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_input_connector_ctype = _visatype.ViInt32(trigger_input_connector.value)  # case S130
+        trigger_input_bus_line_ctype = _visatype.ViInt32(trigger_input_bus_line.value)  # case S130
+        invert_ctype = _visatype.ViBoolean(invert)  # case S150
+        error_code = self._library.niSwitch_RouteTriggerInput(vi_ctype, trigger_input_connector_ctype, trigger_input_bus_line_ctype, invert_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

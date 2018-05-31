@@ -79,6 +79,8 @@ class SideEffectsHelper(object):
         self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['RouteScanAdvancedOutput'] = {}
         self._defaults['RouteScanAdvancedOutput']['return'] = 0
+        self._defaults['RouteTriggerInput'] = {}
+        self._defaults['RouteTriggerInput']['return'] = 0
         self._defaults['SendSoftwareTrigger'] = {}
         self._defaults['SendSoftwareTrigger']['return'] = 0
         self._defaults['SetAttributeViBoolean'] = {}
@@ -311,6 +313,11 @@ class SideEffectsHelper(object):
             return self._defaults['RouteScanAdvancedOutput']['return']
         return self._defaults['RouteScanAdvancedOutput']['return']
 
+    def niSwitch_RouteTriggerInput(self, vi, trigger_input_connector, trigger_input_bus_line, invert):  # noqa: N802
+        if self._defaults['RouteTriggerInput']['return'] != 0:
+            return self._defaults['RouteTriggerInput']['return']
+        return self._defaults['RouteTriggerInput']['return']
+
     def niSwitch_SendSoftwareTrigger(self, vi):  # noqa: N802
         if self._defaults['SendSoftwareTrigger']['return'] != 0:
             return self._defaults['SendSoftwareTrigger']['return']
@@ -456,6 +463,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_ResetWithDefaults.return_value = 0
         mock_library.niSwitch_RouteScanAdvancedOutput.side_effect = MockFunctionCallError("niSwitch_RouteScanAdvancedOutput")
         mock_library.niSwitch_RouteScanAdvancedOutput.return_value = 0
+        mock_library.niSwitch_RouteTriggerInput.side_effect = MockFunctionCallError("niSwitch_RouteTriggerInput")
+        mock_library.niSwitch_RouteTriggerInput.return_value = 0
         mock_library.niSwitch_SendSoftwareTrigger.side_effect = MockFunctionCallError("niSwitch_SendSoftwareTrigger")
         mock_library.niSwitch_SendSoftwareTrigger.return_value = 0
         mock_library.niSwitch_SetAttributeViBoolean.side_effect = MockFunctionCallError("niSwitch_SetAttributeViBoolean")
