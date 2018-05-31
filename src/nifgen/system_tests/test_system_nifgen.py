@@ -21,11 +21,14 @@ def test_get_attribute_string(session):
     assert model == 'NI PXIe-5433 (2CH)'
 
 
-def test_error_message(session):
-    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
-    # and there is no good way for us to invalidate a simulated session.
-    message = session._error_message(-1074135027)
-    assert message.find('Attribute is read-only.') != -1
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe'):
+            assert False
+    except nifgen.Error as e:
+        assert e.code == -1074134944
+        assert e.description.find('Insufficient location information or resource not present in the system.') != -1
 
 
 def test_get_error(session):
