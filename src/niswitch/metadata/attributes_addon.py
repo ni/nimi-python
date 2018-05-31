@@ -22,6 +22,12 @@ attributes_codegen_method = {
     1050003: { "codegen_method": "no" },  # QUERY_INSTRUMENT_STATUS - IVI Attribute - #824
     1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
     1050302: { "codegen_method": "no" },  # SPECIFIC_DRIVER_PREFIX - IVI Attribute - #824
+    1150009: { "codegen_method": "no" },  # CABLED_MODULE_SCAN_ADVANCED_BUS - EOL HW only - #881
+    1150008: { "codegen_method": "no" },  # CABLED_MODULE_TRIGGER_BUS - EOL HW only - #881
+    1150007: { "codegen_method": "no" },  # MASTER_SLAVE_SCAN_ADVANCED_BUS - EOL HW only - #881
+    1150006: { "codegen_method": "no" },  # MASTER_SLAVE_TRIGGER_BUS - EOL HW only - #881
+    1150012: { "codegen_method": "no" },  # PARSED_SCAN_LIST - EOL HW only - #881
+    1150005: { "codegen_method": "no" },  # TRIGGER_MODE - EOL HW only - #881
 }
 
 attributes_converters = {
