@@ -34,10 +34,10 @@ def example(resource_name, options, total_acquisition_time_in_seconds, voltage, 
             while current_pos < total_samples:
                 # We fetch each channel at a time so we don't have to de-interleave afterwards
                 # We do not keep the wfm_info returned from fetch_into
-                for c, wfm in zip(channel_list, waveforms):
+                for channel, waveform in zip(channel_list, waveforms):
                     # 5. fetching - we return the slice of the waveform array that we want to "fetch into"
-                    session.channels[c].fetch_into(wfm[current_pos:current_pos + samples_per_fetch], relative_to=niscope.FetchRelativeTo.READ_POINTER,
-                                                   offset=0, record_number=0, num_records=1, timeout=datetime.timedelta(seconds=5.0))
+                    session.channels[channel].fetch_into(waveform[current_pos:current_pos + samples_per_fetch], relative_to=niscope.FetchRelativeTo.READ_POINTER,
+                                                         offset=0, record_number=0, num_records=1, timeout=datetime.timedelta(seconds=5.0))
                 current_pos += samples_per_fetch
 
 
