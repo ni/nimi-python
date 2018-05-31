@@ -151,8 +151,13 @@ def test_functions_disable(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
-def test_error_message(session):
-    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
-    # and there is no good way for us to invalidate a simulated session.
-    message = session._error_message(-1074135027)
-    assert message.endswith('(Hex 0xBFFA000D) Attribute is read-only.')
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with niswitch.Session('', 'Invalid Topology', True, True):
+            assert False
+    except niswitch.Error as e:
+        assert e.code == -1074118654
+        assert e.description.find('Invalid resource name.') != -1
+
+
