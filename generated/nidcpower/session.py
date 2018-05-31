@@ -2853,7 +2853,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_ctype.value.decode(self._encoding)
 
-    @ivi_synchronized
     def _get_error(self):
         '''_get_error
 
@@ -3599,7 +3598,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
-    @ivi_synchronized
     def _error_message(self, error_code):
         '''_error_message
 

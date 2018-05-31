@@ -3171,7 +3171,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(coefficients_ctype[i]) for i in range(number_of_coefficients_ctype.value)]
 
-    @ivi_synchronized
     def _get_error(self):
         '''_get_error
 
@@ -3676,6 +3675,26 @@ class _SessionBase(object):
         error_code = self._library.niScope_UnlockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
+
+    def _error_message(self, error_code):
+        '''_error_message
+
+        Takes the **Error_Code** returned by the instrument driver methods, interprets it, and returns it as a user-readable string.
+
+        Args:
+            error_code (int): The **error_code** returned from the instrument. The default is 0, indicating VI_SUCCESS.
+
+
+        Returns:
+            error_message (str): The error information formatted into a string.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
+        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
+        error_code = self._library.niScope_error_message(vi_ctype, error_code_ctype, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_message_ctype.value.decode(self._encoding)
 
 
 class Session(_SessionBase):

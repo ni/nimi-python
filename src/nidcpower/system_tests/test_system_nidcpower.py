@@ -43,11 +43,14 @@ def test_get_attribute_string(session):
     assert model == 'NI PXIe-4162'
 
 
-def test_error_message(session):
-    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
-    # and there is no good way for us to invalidate a simulated session.
-    message = session._error_message(-1074135027)
-    assert message.find('Attribute is read-only.') != -1
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+            assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074134964
+        assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
 
 
 def test_get_error(session):
@@ -329,4 +332,5 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 12
     with nidcpower.Session(resource_name='4162', reset=False, options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
         assert simulated_session.channel_count == 12
+
 
