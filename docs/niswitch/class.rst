@@ -279,10 +279,6 @@ niswitch.Session
     +------------------------------------------------------+----------------------------------------+
     | :py:attr:`bandwidth`                                 | float                                  |
     +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`cabled_module_scan_advanced_bus`           | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`cabled_module_trigger_bus`                 | int                                    |
-    +------------------------------------------------------+----------------------------------------+
     | :py:attr:`channel_count`                             | int                                    |
     +------------------------------------------------------+----------------------------------------+
     | :py:attr:`characteristic_impedance`                  | float                                  |
@@ -315,10 +311,6 @@ niswitch.Session
     +------------------------------------------------------+----------------------------------------+
     | :py:attr:`logical_name`                              | str                                    |
     +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`master_slave_scan_advanced_bus`            | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`master_slave_trigger_bus`                  | int                                    |
-    +------------------------------------------------------+----------------------------------------+
     | :py:attr:`max_ac_voltage`                            | float                                  |
     +------------------------------------------------------+----------------------------------------+
     | :py:attr:`max_carry_ac_current`                      | float                                  |
@@ -344,8 +336,6 @@ niswitch.Session
     | :py:attr:`num_of_columns`                            | int                                    |
     +------------------------------------------------------+----------------------------------------+
     | :py:attr:`num_of_rows`                               | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`parsed_scan_list`                          | str                                    |
     +------------------------------------------------------+----------------------------------------+
     | :py:attr:`power_down_latching_relays_after_debounce` | bool                                   |
     +------------------------------------------------------+----------------------------------------+
@@ -379,8 +369,6 @@ niswitch.Session
     +------------------------------------------------------+----------------------------------------+
     | :py:attr:`trigger_input_polarity`                    | :py:data:`TriggerInputPolarity`        |
     +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`trigger_mode`                              | int                                    |
-    +------------------------------------------------------+----------------------------------------+
     | :py:attr:`wire_mode`                                 | int                                    |
     +------------------------------------------------------+----------------------------------------+
 
@@ -394,10 +382,6 @@ niswitch.Session
     | :py:func:`can_connect`                |
     +---------------------------------------+
     | :py:func:`commit`                     |
-    +---------------------------------------+
-    | :py:func:`configure_scan_list`        |
-    +---------------------------------------+
-    | :py:func:`configure_scan_trigger`     |
     +---------------------------------------+
     | :py:func:`connect`                    |
     +---------------------------------------+
@@ -431,13 +415,9 @@ niswitch.Session
     +---------------------------------------+
     | :py:func:`route_scan_advanced_output` |
     +---------------------------------------+
-    | :py:func:`route_trigger_input`        |
-    +---------------------------------------+
     | :py:func:`self_test`                  |
     +---------------------------------------+
     | :py:func:`send_software_trigger`      |
-    +---------------------------------------+
-    | :py:func:`set_continuous_scan`        |
     +---------------------------------------+
     | :py:func:`set_path`                   |
     +---------------------------------------+
@@ -537,64 +517,6 @@ bandwidth
 
                 - LabVIEW Property: **Module Characteristics:Bandwidth**
                 - C Attribute: **NISWITCH_ATTR_BANDWIDTH**
-
-cabled_module_scan_advanced_bus
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: cabled_module_scan_advanced_bus
-
-        This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_scan_advanced_output` method instead.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Obsolete Attributes:Cabled Module Scan Advanced Bus**
-                - C Attribute: **NISWITCH_ATTR_CABLED_MODULE_SCAN_ADVANCED_BUS**
-
-cabled_module_trigger_bus
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: cabled_module_trigger_bus
-
-        This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_trigger_input` method instead.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Obsolete Attributes:Cabled Module Trigger Bus**
-                - C Attribute: **NISWITCH_ATTR_CABLED_MODULE_TRIGGER_BUS**
 
 channel_count
 ~~~~~~~~~~~~~
@@ -1117,64 +1039,6 @@ logical_name
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
                 - C Attribute: **NISWITCH_ATTR_LOGICAL_NAME**
 
-master_slave_scan_advanced_bus
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: master_slave_scan_advanced_bus
-
-        This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_scan_advanced_output` method instead.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Obsolete Attributes:Master Slave Scan Advanced Bus**
-                - C Attribute: **NISWITCH_ATTR_MASTER_SLAVE_SCAN_ADVANCED_BUS**
-
-master_slave_trigger_bus
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: master_slave_trigger_bus
-
-        This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_trigger_input` method instead.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Obsolete Attributes:Master Slave Trigger Bus**
-                - C Attribute: **NISWITCH_ATTR_MASTER_SLAVE_TRIGGER_BUS**
-
 max_ac_voltage
 ~~~~~~~~~~~~~~
 
@@ -1694,35 +1558,6 @@ num_of_rows
                 - LabVIEW Property: **Matrix Configuration:Number of Rows**
                 - C Attribute: **NISWITCH_ATTR_NUM_OF_ROWS**
 
-parsed_scan_list
-~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: parsed_scan_list
-
-        This property has been deprecated and may be removed from a future release of  NI-SWITCH.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | False     |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Obsolete Attributes:Parsed Scan List**
-                - C Attribute: **NISWITCH_ATTR_PARSED_SCAN_LIST**
-
 power_down_latching_relays_after_debounce
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1852,7 +1687,7 @@ scan_list
 
     .. py:attribute:: scan_list
 
-        This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The :py:meth:`niswitch.Session._initiate_scan`  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
+        This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The :py:meth:`niswitch.Session.initiate`  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
         The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
         To create a path between two channels, use the following character between  the two channel names:
         -> (a dash followed by a '>' sign)
@@ -2230,35 +2065,6 @@ trigger_input_polarity
                 - LabVIEW Property: **Scanning Configuration:Trigger Input Polarity**
                 - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT_POLARITY**
 
-trigger_mode
-~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: trigger_mode
-
-        This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the :py:meth:`niswitch.Session.route_trigger_input` and/or :py:meth:`niswitch.Session.route_scan_advanced_output`  methods instead.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Obsolete Attributes:Trigger Mode**
-                - C Attribute: **NISWITCH_ATTR_TRIGGER_MODE**
-
 wire_mode
 ~~~~~~~~~
 
@@ -2315,7 +2121,7 @@ abort
     .. py:method:: abort()
 
             Aborts the scan in progress. Initiate a scan with
-            :py:meth:`niswitch.Session._initiate_scan`. If the switch module is not scanning,
+            :py:meth:`niswitch.Session.initiate`. If the switch module is not scanning,
             NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
 
             
@@ -2403,123 +2209,12 @@ commit
 
             Downloads the configured scan list and trigger settings to hardware.
             Calling :py:meth:`niswitch.Session.commit` optional as it is implicitly called during
-            :py:meth:`niswitch.Session._initiate_scan`. Use :py:meth:`niswitch.Session.commit` to arm triggers in a given
+            :py:meth:`niswitch.Session.initiate`. Use :py:meth:`niswitch.Session.commit` to arm triggers in a given
             order or to control when expensive hardware operations are performed.
 
             
 
 
-
-configure_scan_list
-~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:method:: configure_scan_list(scanlist, scan_mode=niswitch.ScanMode.BREAK_BEFORE_MAKE)
-
-            Configures the scan list and scan mode used for scanning. Refer to
-            Devices Overview to determine if the switch module supports scanning.
-            The scan list is comprised of a list of channel connections separated by
-            semi-colons. For example, the following scan list will scan the first
-            three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
-            to Scan Lists for more information on scan list syntax To see the status
-            of the scan, call either :py:meth:`niswitch.Session.IsScanning` or
-            :py:meth:`niswitch.Session.wait_for_scan_complete`. Use the :py:meth:`niswitch.Session.configure_scan_trigger`
-            method to configure the scan trigger. Use the :py:meth:`niswitch.Session._initiate_scan`
-            method to start the scan.
-
-            
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-
-
-            :param scanlist:
-
-
-                The scan list to use. The driver uses this value to set the Scan List
-                property. Default value: None
-
-                
-
-
-            :type scanlist: str
-            :param scan_mode:
-
-
-                Specifies how the switch module breaks existing connections when
-                scanning. The driver uses this value to set the Scan Mode property.
-                Refer to scan modes for more information. Default value: Break Before
-                Make
-
-                
-
-
-            :type scan_mode: :py:data:`niswitch.ScanMode`
-
-configure_scan_trigger
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:method:: configure_scan_trigger(trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0))
-
-            Configures the scan triggers for the scan list established with
-            :py:meth:`niswitch.Session.configure_scan_list`. Refer to Devices Overview to determine if
-            the switch module supports scanning. :py:meth:`niswitch.Session.configure_scan_trigger` sets
-            the location that the switch expects to receive an input trigger to
-            advance through the scan list. This method also sets the location
-            where it outputs a scan advanced signal after it completes an entry in
-            the scan list.
-
-            
-
-
-
-            :param trigger_input:
-
-
-                Trigger source you want the switch module to use during scanning. The
-                driver uses this value to set the :py:data:`niswitch.Session.trigger_input`
-                property. The switch device waits for the trigger you specify when it
-                encounters a semicolon in the scanlist. When the trigger occurs, the
-                switch device advances to the next entry in the scanlist. Refer to the
-                :py:data:`niswitch.Session.trigger_input` topic in the NI Switches Help for a list
-                of valid values.
-
-                
-
-
-            :type trigger_input: :py:data:`niswitch.TriggerInput`
-            :param scan_advanced_output:
-
-
-                Output destination of the scan advanced trigger signal. The driver uses
-                this value to set the :py:data:`niswitch.Session.scan_advanced_output` property.
-                After the switch processes each entry in the scan list, it waits the
-                length of time you specify in the Scan Delay parameter and then asserts
-                a trigger on the line you specify with this parameter. Refer to the
-                :py:data:`niswitch.Session.scan_advanced_output` topic in the NI Switches Help for
-                a list of valid values.
-
-                
-
-
-            :type scan_advanced_output: :py:data:`niswitch.ScanAdvancedOutput`
-            :param scan_delay:
-
-
-                The minimum length of time you want the switch device to wait after it
-                creates a path until it asserts a trigger on the scan advanced output
-                line. The driver uses this value to set the Scan Delay property. The
-                scan delay is in addition to the settling time.The driver uses this
-                value to set the :py:data:`niswitch.Session.scan_delay` property. Express this
-                value in seconds. Default value: 0.0 s
-
-                
-
-
-            :type scan_delay: float in seconds or datetime.timedelta
 
 connect
 ~~~~~~~
@@ -3035,7 +2730,7 @@ route_scan_advanced_output
 
     .. py:currentmodule:: niswitch.Session
 
-    .. py:method:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False)
+    .. py:method:: route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
 
             Routes the scan advanced output trigger from a trigger bus line (TTLx)
             to the front or rear connector.
@@ -3048,86 +2743,31 @@ route_scan_advanced_output
 
 
                 The scan advanced trigger destination. Valid locations are the
-                :py:data:`~niswitch.ScanAdvancedOutput.FRONTCONNECTOR` and :py:data:`~niswitch.ScanAdvancedOutput.REARCONNECTOR`. Default
-                value: :py:data:`~niswitch.ScanAdvancedOutput.FRONTCONNECTOR`
+                :py:data:`~niswitch.NISWITCH_VAL_FRONTCONNECTOR` and :py:data:`~niswitch.NISWITCH_VAL_REARCONNECTOR`. Default
+                value: :py:data:`~niswitch.NISWITCH_VAL_FRONTCONNECTOR`
 
                 
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type scan_advanced_output_connector: :py:data:`niswitch.ScanAdvancedOutput`
+            :type scan_advanced_output_connector: int
             :param scan_advanced_output_bus_line:
 
 
                 The trigger line to route the scan advanced output trigger from the
-                front or rear connector. Select :py:data:`~niswitch.ScanAdvancedOutput.NONE` to break an existing
-                route. Default value: None Valid Values: :py:data:`~niswitch.ScanAdvancedOutput.NONE`
-                :py:data:`~niswitch.ScanAdvancedOutput.TTL0` :py:data:`~niswitch.ScanAdvancedOutput.TTL1` :py:data:`~niswitch.ScanAdvancedOutput.TTL2`
-                :py:data:`~niswitch.ScanAdvancedOutput.TTL3` :py:data:`~niswitch.ScanAdvancedOutput.TTL4` :py:data:`~niswitch.ScanAdvancedOutput.TTL5`
-                :py:data:`~niswitch.ScanAdvancedOutput.TTL6` :py:data:`~niswitch.ScanAdvancedOutput.TTL7`
+                front or rear connector. Select :py:data:`~niswitch.NISWITCH_VAL_NONE` to break an existing
+                route. Default value: None Valid Values: :py:data:`~niswitch.NISWITCH_VAL_NONE`
+                :py:data:`~niswitch.NISWITCH_VAL_TTL0` :py:data:`~niswitch.NISWITCH_VAL_TTL1` :py:data:`~niswitch.NISWITCH_VAL_TTL2`
+                :py:data:`~niswitch.NISWITCH_VAL_TTL3` :py:data:`~niswitch.NISWITCH_VAL_TTL4` :py:data:`~niswitch.NISWITCH_VAL_TTL5`
+                :py:data:`~niswitch.NISWITCH_VAL_TTL6` :py:data:`~niswitch.NISWITCH_VAL_TTL7`
 
                 
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type scan_advanced_output_bus_line: :py:data:`niswitch.ScanAdvancedOutput`
-            :param invert:
-
-
-                If True, inverts the input trigger signal from falling to rising or
-                vice versa. Default value: False
-
-                
-
-
-            :type invert: bool
-
-route_trigger_input
-~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:method:: route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert=False)
-
-            Routes the input trigger from the front or rear connector to a trigger
-            bus line (TTLx). To disconnect the route, call this method again and
-            specify None for trigger bus line parameter.
-
-            
-
-
-
-            :param trigger_input_connector:
-
-
-                The location of the input trigger source on the switch module. Valid
-                locations are the :py:data:`~niswitch.TriggerInput.FRONTCONNECTOR` and
-                :py:data:`~niswitch.TriggerInput.REARCONNECTOR`. Default value:
-                :py:data:`~niswitch.TriggerInput.FRONTCONNECTOR`
-
-                
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type trigger_input_connector: :py:data:`niswitch.TriggerInput`
-            :param trigger_input_bus_line:
-
-
-                The trigger line to route the input trigger. Select :py:data:`~niswitch.NISWITCH_VAL_NONE`
-                to break an existing route. Default value: None Valid Values:
-                :py:data:`~niswitch.NISWITCH_VAL_NONE` :py:data:`~niswitch.TriggerInput.TTL0` :py:data:`~niswitch.TriggerInput.TTL1`
-                :py:data:`~niswitch.TriggerInput.TTL2` :py:data:`~niswitch.TriggerInput.TTL3` :py:data:`~niswitch.TriggerInput.TTL4`
-                :py:data:`~niswitch.TriggerInput.TTL5` :py:data:`~niswitch.TriggerInput.TTL6` :py:data:`~niswitch.TriggerInput.TTL7`
-
-                
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type trigger_input_bus_line: :py:data:`niswitch.TriggerInput`
+            :type scan_advanced_output_bus_line: int
             :param invert:
 
 
@@ -3172,40 +2812,16 @@ send_software_trigger
 
             Sends a software trigger to the switch module specified in the NI-SWITCH
             session. When the trigger input is set to :py:data:`~niswitch.TriggerInput.SOFTWARE_TRIG`
-            through either the :py:meth:`niswitch.Session.configure_scan_trigger` or the
+            through either the :py:meth:`niswitch.Session.ConfigureScanTrigger` or the
             :py:data:`niswitch.Session.trigger_input` property, the scan does not proceed from
             a semi-colon (wait for trigger) until :py:meth:`niswitch.Session.send_software_trigger` is
             called.
 
             
 
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-set_continuous_scan
-~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:method:: set_continuous_scan(continuous_scan)
-
-            Sets the to loop continuously through the scan list or to stop scanning
-            after one pass through the scan list.
-
-            
-
-
-
-            :param continuous_scan:
-
-
-                If True, loops continuously through the scan list during scanning.
-                If False, the scan stops after one pass through the scan list.
-                Default value: False
-
-                
-
-
-            :type continuous_scan: bool
 
 set_path
 ~~~~~~~~
@@ -3322,10 +2938,6 @@ Properties
 +-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.bandwidth`                                 | float                                  |
 +-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.cabled_module_scan_advanced_bus`           | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.cabled_module_trigger_bus`                 | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.channel_count`                             | int                                    |
 +-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.characteristic_impedance`                  | float                                  |
@@ -3358,10 +2970,6 @@ Properties
 +-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.logical_name`                              | str                                    |
 +-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.master_slave_scan_advanced_bus`            | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.master_slave_trigger_bus`                  | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.max_ac_voltage`                            | float                                  |
 +-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.max_carry_ac_current`                      | float                                  |
@@ -3387,8 +2995,6 @@ Properties
 | :py:attr:`niswitch.Session.num_of_columns`                            | int                                    |
 +-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.num_of_rows`                               | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.parsed_scan_list`                          | str                                    |
 +-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.power_down_latching_relays_after_debounce` | bool                                   |
 +-----------------------------------------------------------------------+----------------------------------------+
@@ -3422,8 +3028,6 @@ Properties
 +-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.trigger_input_polarity`                    | :py:data:`TriggerInputPolarity`        |
 +-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.trigger_mode`                              | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niswitch.Session.wire_mode`                                 | int                                    |
 +-----------------------------------------------------------------------+----------------------------------------+
 
@@ -3438,10 +3042,6 @@ Methods
 | :py:func:`niswitch.Session.can_connect`                |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.commit`                     |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.configure_scan_list`        |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.configure_scan_trigger`     |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.connect`                    |
 +--------------------------------------------------------+
@@ -3475,13 +3075,9 @@ Methods
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.route_scan_advanced_output` |
 +--------------------------------------------------------+
-| :py:func:`niswitch.Session.route_trigger_input`        |
-+--------------------------------------------------------+
 | :py:func:`niswitch.Session.self_test`                  |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.send_software_trigger`      |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.set_continuous_scan`        |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.set_path`                   |
 +--------------------------------------------------------+

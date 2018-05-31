@@ -22,10 +22,6 @@ class SideEffectsHelper(object):
         self._defaults['CanConnect']['pathCapability'] = None
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
-        self._defaults['ConfigureScanList'] = {}
-        self._defaults['ConfigureScanList']['return'] = 0
-        self._defaults['ConfigureScanTrigger'] = {}
-        self._defaults['ConfigureScanTrigger']['return'] = 0
         self._defaults['Connect'] = {}
         self._defaults['Connect']['return'] = 0
         self._defaults['ConnectMultiple'] = {}
@@ -83,8 +79,6 @@ class SideEffectsHelper(object):
         self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['RouteScanAdvancedOutput'] = {}
         self._defaults['RouteScanAdvancedOutput']['return'] = 0
-        self._defaults['RouteTriggerInput'] = {}
-        self._defaults['RouteTriggerInput']['return'] = 0
         self._defaults['SendSoftwareTrigger'] = {}
         self._defaults['SendSoftwareTrigger']['return'] = 0
         self._defaults['SetAttributeViBoolean'] = {}
@@ -95,8 +89,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
-        self._defaults['SetContinuousScan'] = {}
-        self._defaults['SetContinuousScan']['return'] = 0
         self._defaults['SetPath'] = {}
         self._defaults['SetPath']['return'] = 0
         self._defaults['UnlockSession'] = {}
@@ -143,16 +135,6 @@ class SideEffectsHelper(object):
         if self._defaults['Commit']['return'] != 0:
             return self._defaults['Commit']['return']
         return self._defaults['Commit']['return']
-
-    def niSwitch_ConfigureScanList(self, vi, scanlist, scan_mode):  # noqa: N802
-        if self._defaults['ConfigureScanList']['return'] != 0:
-            return self._defaults['ConfigureScanList']['return']
-        return self._defaults['ConfigureScanList']['return']
-
-    def niSwitch_ConfigureScanTrigger(self, vi, scan_delay, trigger_input, scan_advanced_output):  # noqa: N802
-        if self._defaults['ConfigureScanTrigger']['return'] != 0:
-            return self._defaults['ConfigureScanTrigger']['return']
-        return self._defaults['ConfigureScanTrigger']['return']
 
     def niSwitch_Connect(self, vi, channel1, channel2):  # noqa: N802
         if self._defaults['Connect']['return'] != 0:
@@ -329,11 +311,6 @@ class SideEffectsHelper(object):
             return self._defaults['RouteScanAdvancedOutput']['return']
         return self._defaults['RouteScanAdvancedOutput']['return']
 
-    def niSwitch_RouteTriggerInput(self, vi, trigger_input_connector, trigger_input_bus_line, invert):  # noqa: N802
-        if self._defaults['RouteTriggerInput']['return'] != 0:
-            return self._defaults['RouteTriggerInput']['return']
-        return self._defaults['RouteTriggerInput']['return']
-
     def niSwitch_SendSoftwareTrigger(self, vi):  # noqa: N802
         if self._defaults['SendSoftwareTrigger']['return'] != 0:
             return self._defaults['SendSoftwareTrigger']['return']
@@ -358,11 +335,6 @@ class SideEffectsHelper(object):
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
-
-    def niSwitch_SetContinuousScan(self, vi, continuous_scan):  # noqa: N802
-        if self._defaults['SetContinuousScan']['return'] != 0:
-            return self._defaults['SetContinuousScan']['return']
-        return self._defaults['SetContinuousScan']['return']
 
     def niSwitch_SetPath(self, vi, path_list):  # noqa: N802
         if self._defaults['SetPath']['return'] != 0:
@@ -440,10 +412,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_CanConnect.return_value = 0
         mock_library.niSwitch_Commit.side_effect = MockFunctionCallError("niSwitch_Commit")
         mock_library.niSwitch_Commit.return_value = 0
-        mock_library.niSwitch_ConfigureScanList.side_effect = MockFunctionCallError("niSwitch_ConfigureScanList")
-        mock_library.niSwitch_ConfigureScanList.return_value = 0
-        mock_library.niSwitch_ConfigureScanTrigger.side_effect = MockFunctionCallError("niSwitch_ConfigureScanTrigger")
-        mock_library.niSwitch_ConfigureScanTrigger.return_value = 0
         mock_library.niSwitch_Connect.side_effect = MockFunctionCallError("niSwitch_Connect")
         mock_library.niSwitch_Connect.return_value = 0
         mock_library.niSwitch_ConnectMultiple.side_effect = MockFunctionCallError("niSwitch_ConnectMultiple")
@@ -488,8 +456,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_ResetWithDefaults.return_value = 0
         mock_library.niSwitch_RouteScanAdvancedOutput.side_effect = MockFunctionCallError("niSwitch_RouteScanAdvancedOutput")
         mock_library.niSwitch_RouteScanAdvancedOutput.return_value = 0
-        mock_library.niSwitch_RouteTriggerInput.side_effect = MockFunctionCallError("niSwitch_RouteTriggerInput")
-        mock_library.niSwitch_RouteTriggerInput.return_value = 0
         mock_library.niSwitch_SendSoftwareTrigger.side_effect = MockFunctionCallError("niSwitch_SendSoftwareTrigger")
         mock_library.niSwitch_SendSoftwareTrigger.return_value = 0
         mock_library.niSwitch_SetAttributeViBoolean.side_effect = MockFunctionCallError("niSwitch_SetAttributeViBoolean")
@@ -500,8 +466,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_SetAttributeViReal64.return_value = 0
         mock_library.niSwitch_SetAttributeViString.side_effect = MockFunctionCallError("niSwitch_SetAttributeViString")
         mock_library.niSwitch_SetAttributeViString.return_value = 0
-        mock_library.niSwitch_SetContinuousScan.side_effect = MockFunctionCallError("niSwitch_SetContinuousScan")
-        mock_library.niSwitch_SetContinuousScan.return_value = 0
         mock_library.niSwitch_SetPath.side_effect = MockFunctionCallError("niSwitch_SetPath")
         mock_library.niSwitch_SetPath.return_value = 0
         mock_library.niSwitch_UnlockSession.side_effect = MockFunctionCallError("niSwitch_UnlockSession")
