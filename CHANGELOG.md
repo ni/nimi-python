@@ -53,7 +53,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
-        * fetch forever example
+        * `niscope_fetch_forever.py` example
     * #### Changed
     * #### Removed
 
