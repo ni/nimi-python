@@ -698,7 +698,7 @@ channels, the acquisition type, and the number of records you specify.''',
             'description': 'Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.',
         },
     },
-    # niScope metadata is missing error_message but we need it for error handling
+    # niScope metadata is missing error_message but we need it for error handling - NI internal CAR #700582
     'error_message': {
         'returns': 'ViStatus',
         'parameters': [
