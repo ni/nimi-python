@@ -55,6 +55,8 @@ functions_enums = {
     'GetRelayPosition':             { 'parameters': { 2: { 'enum': 'RelayPosition',            }, }, },
     'RelayControl':                 { 'parameters': { 2: { 'enum': 'RelayAction',              }, }, },
     'CanConnect':                   { 'parameters': { 3: { 'enum': 'PathCapability',           }, }, },
+    'RouteScanAdvancedOutput':      { 'parameters': { 1: { 'enum': 'ScanAdvancedOutput',       },
+                                                      2: { 'enum': 'ScanAdvancedOutput',       }, }, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
@@ -83,6 +85,7 @@ functions_default_value = {
                                                   2: { 'default_value': False, },
                                                   3: { 'default_value': False, },
                                                   4: { 'default_value': '""', }, }, },
+    'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
     'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=5000)', }, }, },
     'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=5000)', }, }, },
 }
