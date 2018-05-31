@@ -73,6 +73,7 @@ class Library(object):
         self.niScope_SetAttributeViString_cfunc = None
         self.niScope_UnlockSession_cfunc = None
         self.niScope_close_cfunc = None
+        self.niScope_error_message_cfunc = None
         self.niScope_reset_cfunc = None
         self.niScope_self_test_cfunc = None
 
@@ -507,6 +508,14 @@ class Library(object):
                 self.niScope_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niScope_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_close_cfunc(vi)
+
+    def niScope_error_message(self, vi, error_code, error_message):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_error_message_cfunc is None:
+                self.niScope_error_message_cfunc = self._library.niScope_error_message
+                self.niScope_error_message_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_error_message_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_error_message_cfunc(vi, error_code, error_message)
 
     def niScope_reset(self, vi):  # noqa: N802
         with self._func_lock:
