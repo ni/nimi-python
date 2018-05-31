@@ -696,6 +696,39 @@ channels, the acquisition type, and the number of records you specify.''',
             'description': 'Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.',
         },
     },
+    # niScope metadata is missing error_message but we need it for error handling
+    'error_message': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init or niScope_InitWithOptions. The default is None.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'errorCode',
+                'type': 'ViStatus',
+                'documentation': {
+                    'description': 'The **error_code** returned from the instrument. The default is 0, indicating VI_SUCCESS.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'errorMessage',
+                'type': 'ViChar[ ]',
+                'documentation': {
+                    'description': 'The error information formatted into a string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Takes the **Error_Code** returned by the instrument driver functions, interprets it, and returns it as a user-readable string.',
+        },
+    },
 }
 
 # Override the 'python' name for some functions.
