@@ -28,7 +28,6 @@ functions_codegen_method = {
     'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'ConfigureScanList':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
     'ConfigureScanTrigger':            { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
-    # 'RouteScanAdvancedOutput':         { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
     'RouteTriggerInput':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
     'SetContinuousScan':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
 }
