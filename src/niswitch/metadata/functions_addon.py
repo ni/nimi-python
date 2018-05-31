@@ -28,7 +28,6 @@ functions_codegen_method = {
     'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'ConfigureScanList':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
     'ConfigureScanTrigger':            { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
-    'RouteTriggerInput':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
     'SetContinuousScan':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
 }
 
@@ -57,6 +56,8 @@ functions_enums = {
     'CanConnect':                   { 'parameters': { 3: { 'enum': 'PathCapability',           }, }, },
     'RouteScanAdvancedOutput':      { 'parameters': { 1: { 'enum': 'ScanAdvancedOutput',       },
                                                       2: { 'enum': 'ScanAdvancedOutput',       }, }, },
+    'RouteTriggerInput':            { 'parameters': { 1: { 'enum': 'TriggerInput',             },
+                                                      2: { 'enum': 'TriggerInput',             }, }, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
@@ -86,6 +87,7 @@ functions_default_value = {
                                                   3: { 'default_value': False, },
                                                   4: { 'default_value': '""', }, }, },
     'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
+    'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },
     'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=5000)', }, }, },
     'WaitForScanComplete':      { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=5000)', }, }, },
 }
