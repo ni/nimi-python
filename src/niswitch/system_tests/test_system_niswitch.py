@@ -44,9 +44,11 @@ def test_continuous_software_scanning(session):
         assert session.scan_list == scan_list
         session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
         session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.TTL0)
-        session.configure_scan_list(scan_list, niswitch.ScanMode.BREAK_BEFORE_MAKE)
-        session.configure_scan_trigger(niswitch.TriggerInput.SOFTWARE_TRIG, niswitch.ScanAdvancedOutput.NONE)
-        session.set_continuous_scan(True)
+        session.trigger_input = niswitch.TriggerInput.SOFTWARE_TRIG
+        session.scan_advanced_output = niswitch.ScanAdvancedOutput.NONE
+        session.scan_list = scan_list
+        session.scan_mode = niswitch.ScanMode.BREAK_BEFORE_MAKE
+        session.continuous_scan = True
         session.commit()
         with session.initiate():
             assert session.is_scanning is True
