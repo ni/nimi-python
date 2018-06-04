@@ -191,7 +191,10 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
-        raise AttributeError('Repeated capabilities not supported on Session, use repeated capability container specific to {}'.format(key))
+        rep_caps = []
+% for rep_cap in config['repeated_capabilities']:
+        rep_caps.append("${rep_cap['python_name']}")
+% endfor
         raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
 
     def _get_error_description(self, error_code):
