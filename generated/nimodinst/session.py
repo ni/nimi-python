@@ -116,7 +116,7 @@ class _DeviceIterable(object):
         self._param_list = 'owner=' + pp.pformat(owner) + ', count=' + pp.pformat(count)
         self._is_frozen = True
 
-    def get_next(self):
+    def _get_next(self):
         if self._current_index + 1 > self._count:
             raise StopIteration
         else:
@@ -125,10 +125,10 @@ class _DeviceIterable(object):
             return dev
 
     def next(self):
-        return self.get_next()
+        return self._get_next()
 
     def __next__(self):
-        return self.get_next()
+        return self._get_next()
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('nimodinst', self.__class__.__name__, self._param_list)
@@ -208,10 +208,12 @@ class Session(object):
         return _DeviceIterable(self, self._item_count)
 
     def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self._handle != 0):
+        try:
             self._close_installed_devices_session()
+        except errors.DriverError as e:
             self._handle = 0
+            raise
+        self._handle = 0
 
     ''' These are code-generated '''
     def _close_installed_devices_session(self):
