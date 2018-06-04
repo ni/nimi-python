@@ -39,11 +39,24 @@ All notable changes to this project will be documented in this file.
 * ### NI-ModInst
     * #### Added
     * #### Changed
+        * Double close will now allow NI-ModInst to return error
     * #### Removed
 * ### NI-Switch
     * #### Added
     * #### Changed
     * #### Removed
+        * `cabled_module_scan_advanced_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `cabled_module_trigger_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `master_slave_scan_advanced_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `master_slave_trigger_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `parsed_scan_list` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `trigger_mode` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `scan_advanced_polarity` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `trigger_input_polarity` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `configure_scan_list()` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `configure_scan_trigger()` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `route_trigger_input()` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `set_continuous_scan()` - [#881](https://github.com/ni/nimi-python/issues/881)
 * ### NI-DCPower
     * #### Added
     * #### Changed
@@ -55,6 +68,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * `niscope_fetch_forever.py` example
     * #### Changed
     * #### Removed
 

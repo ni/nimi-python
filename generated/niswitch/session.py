@@ -143,16 +143,6 @@ class _SessionBase(object):
         session.channels['0,1'].bandwidth = var
         var = session.channels['0,1'].bandwidth
     '''
-    cabled_module_scan_advanced_bus = _attributes.AttributeViInt32(1150009)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
-    '''
-    cabled_module_trigger_bus = _attributes.AttributeViInt32(1150008)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
-    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -271,16 +261,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
-    '''
-    master_slave_scan_advanced_bus = _attributes.AttributeViInt32(1150007)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
-    '''
-    master_slave_trigger_bus = _attributes.AttributeViInt32(1150006)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
     '''
     max_ac_voltage = _attributes.AttributeViReal64(1250007)
     '''Type: float
@@ -449,11 +429,6 @@ class _SessionBase(object):
     This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
     The wire_mode property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
     '''
-    parsed_scan_list = _attributes.AttributeViString(1150012)
-    '''Type: str
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.
-    '''
     power_down_latching_relays_after_debounce = _attributes.AttributeViBoolean(1150017)
     '''Type: bool
 
@@ -477,7 +452,7 @@ class _SessionBase(object):
     scan_list = _attributes.AttributeViString(1250020)
     '''Type: str
 
-    This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The _initiate_scan  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
+    This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The initiate  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
     The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
     To create a path between two channels, use the following character between  the two channel names:
     -> (a dash followed by a '>' sign)
@@ -564,11 +539,6 @@ class _SessionBase(object):
     '''Type: enums.TriggerInputPolarity
 
     Determines the behavior of the trigger Input.
-    '''
-    trigger_mode = _attributes.AttributeViInt32(1150005)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input and/or route_scan_advanced_output  methods instead.
     '''
     wire_mode = _attributes.AttributeViInt32(1250017)
     '''Type: int
@@ -1546,7 +1516,7 @@ class Session(_SessionBase):
         '''abort
 
         Aborts the scan in progress. Initiate a scan with
-        _initiate_scan. If the switch module is not scanning,
+        initiate. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1615,97 +1585,11 @@ class Session(_SessionBase):
 
         Downloads the configured scan list and trigger settings to hardware.
         Calling commit optional as it is implicitly called during
-        _initiate_scan. Use commit to arm triggers in a given
+        initiate. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_scan_list(self, scanlist, scan_mode=enums.ScanMode.BREAK_BEFORE_MAKE):
-        '''configure_scan_list
-
-        Configures the scan list and scan mode used for scanning. Refer to
-        Devices Overview to determine if the switch module supports scanning.
-        The scan list is comprised of a list of channel connections separated by
-        semi-colons. For example, the following scan list will scan the first
-        three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
-        to Scan Lists for more information on scan list syntax To see the status
-        of the scan, call either IsScanning or
-        wait_for_scan_complete. Use the configure_scan_trigger
-        method to configure the scan trigger. Use the _initiate_scan
-        method to start the scan.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
-
-        Args:
-            scanlist (str): The scan list to use. The driver uses this value to set the Scan List
-                property. Default value: None
-
-            scan_mode (enums.ScanMode): Specifies how the switch module breaks existing connections when
-                scanning. The driver uses this value to set the Scan Mode property.
-                Refer to scan modes for more information. Default value: Break Before
-                Make
-
-        '''
-        if type(scan_mode) is not enums.ScanMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        scanlist_ctype = ctypes.create_string_buffer(scanlist.encode(self._encoding))  # case C020
-        scan_mode_ctype = _visatype.ViInt32(scan_mode.value)  # case S130
-        error_code = self._library.niSwitch_ConfigureScanList(vi_ctype, scanlist_ctype, scan_mode_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0)):
-        '''configure_scan_trigger
-
-        Configures the scan triggers for the scan list established with
-        configure_scan_list. Refer to Devices Overview to determine if
-        the switch module supports scanning. configure_scan_trigger sets
-        the location that the switch expects to receive an input trigger to
-        advance through the scan list. This method also sets the location
-        where it outputs a scan advanced signal after it completes an entry in
-        the scan list.
-
-        Args:
-            trigger_input (enums.TriggerInput): Trigger source you want the switch module to use during scanning. The
-                driver uses this value to set the trigger_input
-                property. The switch device waits for the trigger you specify when it
-                encounters a semicolon in the scanlist. When the trigger occurs, the
-                switch device advances to the next entry in the scanlist. Refer to the
-                trigger_input topic in the NI Switches Help for a list
-                of valid values.
-
-            scan_advanced_output (enums.ScanAdvancedOutput): Output destination of the scan advanced trigger signal. The driver uses
-                this value to set the scan_advanced_output property.
-                After the switch processes each entry in the scan list, it waits the
-                length of time you specify in the Scan Delay parameter and then asserts
-                a trigger on the line you specify with this parameter. Refer to the
-                scan_advanced_output topic in the NI Switches Help for
-                a list of valid values.
-
-            scan_delay (float in seconds or datetime.timedelta): The minimum length of time you want the switch device to wait after it
-                creates a path until it asserts a trigger on the scan advanced output
-                line. The driver uses this value to set the Scan Delay property. The
-                scan delay is in addition to the settling time.The driver uses this
-                value to set the scan_delay property. Express this
-                value in seconds. Default value: 0.0 s
-
-        '''
-        if type(trigger_input) is not enums.TriggerInput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
-        if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, _visatype.ViReal64)  # case S140
-        trigger_input_ctype = _visatype.ViInt32(trigger_input.value)  # case S130
-        scan_advanced_output_ctype = _visatype.ViInt32(scan_advanced_output.value)  # case S130
-        error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2422,32 +2306,16 @@ class Session(_SessionBase):
 
         Sends a software trigger to the switch module specified in the NI-SWITCH
         session. When the trigger input is set to TriggerInput.SOFTWARE_TRIG
-        through either the configure_scan_trigger or the
+        through either the ConfigureScanTrigger or the
         trigger_input property, the scan does not proceed from
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_SendSoftwareTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def set_continuous_scan(self, continuous_scan):
-        '''set_continuous_scan
-
-        Sets the to loop continuously through the scan list or to stop scanning
-        after one pass through the scan list.
-
-        Args:
-            continuous_scan (bool): If True, loops continuously through the scan list during scanning.
-                If False, the scan stops after one pass through the scan list.
-                Default value: False
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        continuous_scan_ctype = _visatype.ViBoolean(continuous_scan)  # case S150
-        error_code = self._library.niSwitch_SetContinuousScan(vi_ctype, continuous_scan_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
