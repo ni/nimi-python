@@ -1216,7 +1216,7 @@ class TestSession(object):
             try:
                 session['100'].read_write_double = 5.0
                 assert False
-            except AttributeError:
+            except TypeError:
                 pass
 
 
