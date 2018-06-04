@@ -116,31 +116,6 @@ DCNoiseRejection
 
 
 
-DigitalEdge
------------
-
-.. py:class:: DigitalEdge
-
-    .. py:attribute:: DigitalEdge.RISING
-
-
-
-        Asserts the trigger on the rising edge of the digital signal.
-
-        
-
-
-
-    .. py:attribute:: DigitalEdge.FALLING
-
-
-
-        Asserts the trigger on the falling edge of the digital signal.
-
-        
-
-
-
 Event
 -----
 

@@ -65,6 +65,9 @@ functions_codegen_method = {
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
     'self_test':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
+    'ConfigureDigitalEdgeScriptTrigger':    { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_script_trigger_source & session.digital_edge_script_trigger_edge #860
+    'ConfigureDigitalEdgeStartTrigger':     { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_start_trigger_source & session.digital_edge_start_trigger_edge #860
+    'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'no',       },  # Removed - Obsolete and only applies to EOL HW #860
     'SetWaveformNextWritePosition':         { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
     'SetNamedWaveformNextWritePosition':    { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
     'DeleteNamedWaveform':                  { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
@@ -91,21 +94,11 @@ functions_enums = {
     'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
     'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
     'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
-    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
-    'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
     'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
-    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },
-}
-
-# Need to manually set some repeated capabilities
-functions_rep_caps = {
-    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
-    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 1: { 'is_repeated_capability': True, }, }, },
-    # 'SendSoftwareEdgeTrigger':                  { 'parameters': { 2: { 'is_repeated_capability': True, }, }, }, # 850
 }
 
 functions_issues = {

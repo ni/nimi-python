@@ -21,11 +21,6 @@ class Library(object):
         self.niDCPower_CalSelfCalibrate_cfunc = None
         self.niDCPower_Commit_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc = None
         self.niDCPower_CreateAdvancedSequence_cfunc = None
         self.niDCPower_CreateAdvancedSequenceStep_cfunc = None
         self.niDCPower_DeleteAdvancedSequence_cfunc = None
@@ -102,46 +97,6 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
-
-    def niDCPower_ConfigureDigitalEdgeMeasureTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger
-                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgePulseTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger
-                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger
-                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgeSourceTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger
-                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgeStartTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger
-                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc(vi, input_terminal, edge)
 
     def niDCPower_CreateAdvancedSequence(self, vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
         with self._func_lock:

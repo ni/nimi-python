@@ -29,9 +29,6 @@ class Library(object):
         self.niFgen_ConfigureArbSequence_cfunc = None
         self.niFgen_ConfigureArbWaveform_cfunc = None
         self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc = None
-        self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc = None
-        self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc = None
-        self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc = None
         self.niFgen_ConfigureFreqList_cfunc = None
         self.niFgen_ConfigureStandardWaveform_cfunc = None
         self.niFgen_CreateAdvancedArbSequence_cfunc = None
@@ -185,30 +182,6 @@ class Library(object):
                 self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc(vi, channel_name, number_of_coefficients, coefficients_array)
-
-    def niFgen_ConfigureDigitalEdgeScriptTrigger(self, vi, trigger_id, source, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc is None:
-                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger
-                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc(vi, trigger_id, source, edge)
-
-    def niFgen_ConfigureDigitalEdgeStartTrigger(self, vi, source, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc is None:
-                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc = self._library.niFgen_ConfigureDigitalEdgeStartTrigger
-                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc(vi, source, edge)
-
-    def niFgen_ConfigureDigitalLevelScriptTrigger(self, vi, trigger_id, source, trigger_when):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc is None:
-                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc = self._library.niFgen_ConfigureDigitalLevelScriptTrigger
-                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc(vi, trigger_id, source, trigger_when)
 
     def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         with self._func_lock:

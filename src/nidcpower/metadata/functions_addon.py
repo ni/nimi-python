@@ -4,48 +4,53 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'InitializeWithChannels':          { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
-    'InitWithOptions':                 { 'codegen_method': 'no',       },
-    'Initiate':                        { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
-    'close':                           { 'codegen_method': 'private',  },
-    '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
-    'init':                            { 'codegen_method': 'no',       },
-    'error_message':                   { 'codegen_method': 'private',  },
-    'GetError':                        { 'codegen_method': 'private',  },
-    'ClearError':                      { 'codegen_method': 'no',       },
-    'ChangeExtCalPassword':            { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CloseExtCal':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'InitExtCal':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'ConnectInternalReference':        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    '.+UserDefined.+':                 { 'codegen_method': 'no',       },
-    'SetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetAttributeViSession':           { 'codegen_method': 'no',       },
-    'GetNextInterchangeWarning':       { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'ResetInterchangeCheck':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'ClearInterchangeWarnings':        { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'GetNextCoercionRecord':           { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'error_query':                     { 'codegen_method': 'no',       },
-    'ConfigureAutoZero':               { 'codegen_method': 'no',       },
-    'ConfigureCurrent.+':              { 'codegen_method': 'no',       },
-    'ConfigureOutput.+':               { 'codegen_method': 'no',       },
-    'ConfigurePowerLineFrequency':     { 'codegen_method': 'no',       },
-    'ConfigurePulse.+':                { 'codegen_method': 'no',       },
-    'ConfigureSense':                  { 'codegen_method': 'no',       },
-    'ConfigureVoltageL.+':             { 'codegen_method': 'no',       },
-    'ConfigureSourceMode':             { 'codegen_method': 'no',       },
-    'ConfigureSoftwareEdge.+Trigger':  { 'codegen_method': 'no',       },
-    'Disable.+Trigger':                { 'codegen_method': 'no',       },
-    'revision_query':                  { 'codegen_method': 'no',       },
-    'ExportSignal':                    { 'codegen_method': 'no',       },  # remove export signal #828
-    'GetExtCalLastDateAndTime':        { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
-    'GetSelfCalLastDateAndTime':       { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
-    'FetchMultiple':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
-    'MeasureMultiple':                 { 'codegen_method': 'private', 'method_name_for_documentation': 'measure_multiple',                },  # 'FancyMeasureMultiple' Public wrapper
-    'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
-    'CreateAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
-    'CreateAdvancedSequenceStep':      { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
-    'DeleteAdvancedSequence':          { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'InitializeWithChannels':                     { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
+    'InitWithOptions':                            { 'codegen_method': 'no',       },
+    'Initiate':                                   { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
+    'close':                                      { 'codegen_method': 'private',  },
+    '.etAttribute.+':                             { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
+    'init':                                       { 'codegen_method': 'no',       },
+    'error_message':                              { 'codegen_method': 'private',  },
+    'GetError':                                   { 'codegen_method': 'private',  },
+    'ClearError':                                 { 'codegen_method': 'no',       },
+    'ChangeExtCalPassword':                       { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CloseExtCal':                                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'InitExtCal':                                 { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'CalAdjust.+':                                { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    'ConnectInternalReference':                   { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
+    '.+UserDefined.+':                            { 'codegen_method': 'no',       },
+    'SetAttributeViSession':                      { 'codegen_method': 'no',       },
+    'GetAttributeViSession':                      { 'codegen_method': 'no',       },
+    'GetNextInterchangeWarning':                  { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ResetInterchangeCheck':                      { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'ClearInterchangeWarnings':                   { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'GetNextCoercionRecord':                      { 'codegen_method': 'no',       },  # Not applicable to Python API
+    'error_query':                                { 'codegen_method': 'no',       },
+    'ConfigureAutoZero':                          { 'codegen_method': 'no',       },
+    'ConfigureCurrent.+':                         { 'codegen_method': 'no',       },
+    'ConfigureOutput.+':                          { 'codegen_method': 'no',       },
+    'ConfigurePowerLineFrequency':                { 'codegen_method': 'no',       },
+    'ConfigurePulse.+':                           { 'codegen_method': 'no',       },
+    'ConfigureSense':                             { 'codegen_method': 'no',       },
+    'ConfigureVoltageL.+':                        { 'codegen_method': 'no',       },
+    'ConfigureSourceMode':                        { 'codegen_method': 'no',       },
+    'ConfigureSoftwareEdge.+Trigger':             { 'codegen_method': 'no',       },
+    'Disable.+Trigger':                           { 'codegen_method': 'no',       },
+    'revision_query':                             { 'codegen_method': 'no',       },
+    'ExportSignal':                               { 'codegen_method': 'no',       },  # remove export signal #828
+    'GetExtCalLastDateAndTime':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
+    'GetSelfCalLastDateAndTime':                  { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
+    'FetchMultiple':                              { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
+    'MeasureMultiple':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'measure_multiple',                },  # 'FancyMeasureMultiple' Public wrapper
+    'self_test':                                  { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
+    'CreateAdvancedSequence':                     { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'CreateAdvancedSequenceStep':                 { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'DeleteAdvancedSequence':                     { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'ConfigureDigitalEdgeMeasureTrigger':         { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_measure_trigger_edge & session.digital_edge_measure_trigger_input_terminal #860
+    'ConfigureDigitalEdgePulseTrigger':           { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_pulse_trigger_edge & session.digital_edge_pulse_trigger_input_terminal #860
+    'ConfigureDigitalEdgeSequenceAdvanceTrigger': { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_sequence_advance_trigger_edge & session.digital_edge_sequence_advance_trigger_input_terminal #860
+    'ConfigureDigitalEdgeSourceTrigger':          { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_source_trigger_edge & session.digital_edge_source_trigger_input_terminal #860
+    'ConfigureDigitalEdgeStartTrigger':           { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_start_trigger_edge & session.digital_edge_start_trigger_input_terminal #860
 }
 
 functions_locking = {
@@ -67,11 +72,6 @@ functions_locking = {
 functions_enums = {
     'ConfigureAutoZero':                            { 'parameters': { 2: { 'enum': 'AutoZero',                    }, }, },
     'ConfigureApertureTime':                        { 'parameters': { 3: { 'enum': 'ApertureTimeUnits',           }, }, },
-    'ConfigureDigitalEdgeMeasureTrigger':           { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
-    'ConfigureDigitalEdgePulseTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
-    'ConfigureDigitalEdgeSequenceAdvanceTrigger':   { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
-    'ConfigureDigitalEdgeSourceTrigger':            { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
-    'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'enum': 'DigitalEdge',                 }, }, },
     'SendSoftwareEdgeTrigger':                      { 'parameters': { 1: { 'enum': 'SendSoftwareEdgeTriggerType', }, }, },
     'WaitForEvent':                                 { 'parameters': { 1: { 'enum': 'Event',                       }, }, },
     'Measure':                                      { 'parameters': { 2: { 'enum': 'MeasurementTypes',            }, }, },
@@ -117,11 +117,6 @@ functions_default_value = {
                                                                        2: { 'default_value': False, },
                                                                        3: { 'default_value': '""', }, }, },
     'ConfigureApertureTime':                         { 'parameters': { 3: { 'default_value': 'ApertureTimeUnits.SECONDS', }, }, },
-    'ConfigureDigitalEdgeMeasureTrigger':            { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
-    'ConfigureDigitalEdgePulseTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
-    'ConfigureDigitalEdgeSequenceAdvanceTrigger':    { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
-    'ConfigureDigitalEdgeSourceTrigger':             { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
-    'ConfigureDigitalEdgeStartTrigger':              { 'parameters': { 2: { 'default_value': 'DigitalEdge.RISING', }, }, },
     'CreateAdvancedSequence':                        { 'parameters': { 4: { 'default_value': True, }, }, },
     'CreateAdvancedSequenceStep':                    { 'parameters': { 1: { 'default_value': True, }, }, },
     'ExportSignal':                                  { 'parameters': { 2: { 'default_value': '""', }, }, },

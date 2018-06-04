@@ -120,6 +120,8 @@ attributes_codegen_method = {
     1150330: { "codegen_method": "no" },  # SYNC_OUT_OUTPUT_TERMINAL - EOL hardware only - #858
     1250302: { "codegen_method": "no" },  # TRIGGER_SOURCE - EOL hardware only - #858
     1150216: { "codegen_method": "no" },  # VIDEO_WAVEFORM_TYPE - EOL hardware only - #858
+    1150294: { "codegen_method": "no" },  # DIGITAL_LEVEL_SCRIPT_TRIGGER_ACTIVE_LEVEL - EOL hardware only - #860
+    1150293: { "codegen_method": "no" },  # DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE - EOL hardware only - #860
 }
 
 attributes_converters = {
