@@ -400,11 +400,6 @@ def test_fir_filter_coefficients():
 '''
 
 
-def test_configure_triggers(session):
-    session.digital_edge_start_trigger_source = 'PFI0'
-    session.digital_edge_start_trigger_edge = nifgen.StartTriggerDigitalEdgeEdge.FALLING
-
-
 def test_send_software_edge_trigger(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.create_waveform(waveform_data)
