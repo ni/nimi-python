@@ -2252,6 +2252,11 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def __getitem__(self, key):
+        rep_caps = []
+        rep_caps.append("channels")
+        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+
     def _get_error_description(self, error_code):
         '''_get_error_description
 
