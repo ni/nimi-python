@@ -3,6 +3,12 @@ from .codegen_helper import get_params_snippet
 from .documentation_snippets import attr_note_text
 from .documentation_snippets import enum_note_text
 from .documentation_snippets import func_note_text
+from .documentation_snippets import rep_cap_attr_desc_docstring_r
+from .documentation_snippets import rep_cap_attr_desc_docstring_rw
+from .documentation_snippets import rep_cap_attr_desc_docstring_w
+from .documentation_snippets import rep_cap_attr_desc_rst_r
+from .documentation_snippets import rep_cap_attr_desc_rst_rw
+from .documentation_snippets import rep_cap_attr_desc_rst_w
 from .documentation_snippets import rep_cap_method_desc_docstring
 from .documentation_snippets import rep_cap_method_desc_rst
 from .helper import get_array_type_for_api_type
@@ -121,6 +127,22 @@ def get_rst_admonition_snippet(node, admonition, d, config, indent=0):
         return ''
 
 
+def add_attribute_rep_cap_tip_rst(attr, config):
+    '''Add the appropriate (r/w/rw/none) rst formatted tip for an attribute'''
+    if 'repeated_capability_type' in attr:
+        if attr['access'] == 'read only':
+            tip = rep_cap_attr_desc_rst_r
+        elif attr['access'] == 'write only':
+            tip = rep_cap_attr_desc_rst_w
+        else:
+            tip = rep_cap_attr_desc_rst_rw
+
+        if 'documentation' not in attr:
+            attr['documentation'] = {}
+
+        attr['documentation']['tip'] = tip.format(config['module_name'], attr['repeated_capability_type'], attr["name"].lower())
+
+
 def get_documentation_for_node_rst(node, config, indent=0):
     '''Returns any documentaion information formatted for rst
 
@@ -182,6 +204,22 @@ def get_docstring_admonition_snippet(node, admonition, d, config, indent=0, extr
         return a
     else:
         return ''
+
+
+def add_attribute_rep_cap_tip_docstring(attr, config):
+    '''Add the appropriate (r/w/rw/none) docstring formatted tip for an attribute'''
+    if 'repeated_capability_type' in attr:
+        if attr['access'] == 'read only':
+            tip = rep_cap_attr_desc_docstring_r
+        elif attr['access'] == 'write only':
+            tip = rep_cap_attr_desc_docstring_w
+        else:
+            tip = rep_cap_attr_desc_docstring_rw
+
+        if 'documentation' not in attr:
+            attr['documentation'] = {}
+
+        attr['documentation']['tip'] = tip.format(config['module_name'], attr['repeated_capability_type'], attr["name"].lower())
 
 
 def get_documentation_for_node_docstring(node, config, indent=0):
