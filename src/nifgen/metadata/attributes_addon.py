@@ -129,4 +129,27 @@ attributes_converters = {
                'type_in_documentation': 'float in seconds or datetime.timedelta', },  # STREAMING_WRITE_TIMEOUT
 }
 
+attributes_rep_cap_type = {
+    1150290: { 'repeated_capability_type': 'script_triggers', },
+    1150291: { 'repeated_capability_type': 'script_triggers', },
+    1150292: { 'repeated_capability_type': 'script_triggers', },
+    1150293: { 'repeated_capability_type': 'script_triggers', },
+    1150294: { 'repeated_capability_type': 'script_triggers', },
+    1150295: { 'repeated_capability_type': 'script_triggers', },
+    1150312: { 'repeated_capability_type': 'markers', },
+    1150313: { 'repeated_capability_type': 'markers', },
+    1150327: { 'repeated_capability_type': 'markers', },
+    1150337: { 'repeated_capability_type': 'markers', },
+    1150338: { 'repeated_capability_type': 'markers', },
+    1150339: { 'repeated_capability_type': 'markers', },
+    1150340: { 'repeated_capability_type': 'markers', },
+    1150341: { 'repeated_capability_type': 'markers', },
+    1150342: { 'repeated_capability_type': 'markers', },
+    1150343: { 'repeated_capability_type': 'markers', },
+    1150345: { 'repeated_capability_type': 'markers', },
+    1150350: { 'repeated_capability_type': 'markers', },
+    1150354: { 'repeated_capability_type': 'markers', },
+    1150355: { 'repeated_capability_type': 'markers', },
+}
+
 
