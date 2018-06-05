@@ -16,18 +16,17 @@
         | Refer to the FIR Filter topic for your device in the *NI Signal
           Generators Help* for more information about FIR filter coefficients.
           This method is supported only for the NI 5441.
-        | **Default Value**: None
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
         nifgen.Session instance, and calling this method on the result.:
 
-            session.channels['0,1'].get_fir_filter_coefficients(array_size, coefficients_array, number_of_coefficients_read)
+            session.channels[0,1].get_fir_filter_coefficients()
 
         Returns:
-            coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
+            coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
                 FIR filter coefficients. For the NI 5441, provide a symmetric array of
                 95 coefficients to this parameter.
 
