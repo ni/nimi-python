@@ -12,9 +12,16 @@ This property can use repeated capabilities (usually channels). If set or get di
 {0}.Session object, then the set/get will use all repeated capabilities in the session.
 You can specify a subset of repeated capabilities using the Python index notation on an
 {0}.Session instance, and calling set/get value on the result.:
+rep_cap_attr_desc_desc_rst = rep_cap_attr_desc + '''
+.. code:: python
 
-    session.channels['0,1'].{0} = var
-    var = session.channels['0,1'].{0}
+    session.{1}[0,1].{2} = var
+    var = session.{1}[0,1].{2}
+'''
+
+rep_cap_attr_desc_desc_docstring = rep_cap_attr_desc + '''
+    session.{1}[0,1].{2} = var
+    var = session.{1}[0,1].{2}
 '''
 
 rep_cap_method_desc_rst = rep_cap_method_desc + '''
