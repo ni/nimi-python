@@ -316,14 +316,14 @@ def test_configure_trigger_digital(session):
 
 def test_configure_trigger_edge(session):
     assert niscope.TriggerSlope.POSITIVE == session.trigger_slope
-    session.configure_trigger_edge('0', niscope.TriggerCoupling.DC)
+    session.configure_trigger_edge('0', 0.0, niscope.TriggerCoupling.DC)
     session.commit()
     assert '0' == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
 
 def test_configure_trigger_hysteresis(session):
-    session.configure_trigger_hysteresis('1', niscope.TriggerCoupling.DC)
+    session.configure_trigger_hysteresis('1', 0.0, 0.05, niscope.TriggerCoupling.DC)
     assert '1' == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
