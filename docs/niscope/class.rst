@@ -4285,7 +4285,7 @@ configure_trigger_edge
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_edge(trigger_source, trigger_coupling, level=0.0, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_edge(trigger_source, level, trigger_coupling, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
             Configures common properties for analog edge triggering.
 
@@ -4320,16 +4320,6 @@ configure_trigger_edge
 
 
             :type trigger_source: str
-            :param trigger_coupling:
-
-
-                Applies coupling and filtering options to the trigger signal. Refer to
-                :py:data:`niscope.Session.trigger_coupling` for more information.
-
-                
-
-
-            :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
             :param level:
 
 
@@ -4340,6 +4330,16 @@ configure_trigger_edge
 
 
             :type level: float
+            :param trigger_coupling:
+
+
+                Applies coupling and filtering options to the trigger signal. Refer to
+                :py:data:`niscope.Session.trigger_coupling` for more information.
+
+                
+
+
+            :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
             :param slope:
 
 
@@ -4379,7 +4379,7 @@ configure_trigger_hysteresis
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_hysteresis(trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_hysteresis(trigger_source, level, hysteresis, trigger_coupling, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
 
             Configures common properties for analog hysteresis triggering. This kind
             of trigger specifies an additional value, specified in the
@@ -4418,16 +4418,6 @@ configure_trigger_hysteresis
 
 
             :type trigger_source: str
-            :param trigger_coupling:
-
-
-                Applies coupling and filtering options to the trigger signal. Refer to
-                :py:data:`niscope.Session.trigger_coupling` for more information.
-
-                
-
-
-            :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
             :param level:
 
 
@@ -4451,6 +4441,16 @@ configure_trigger_hysteresis
 
 
             :type hysteresis: float
+            :param trigger_coupling:
+
+
+                Applies coupling and filtering options to the trigger signal. Refer to
+                :py:data:`niscope.Session.trigger_coupling` for more information.
+
+                
+
+
+            :type trigger_coupling: :py:data:`niscope.TriggerCoupling`
             :param slope:
 
 
