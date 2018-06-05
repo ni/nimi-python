@@ -5557,43 +5557,34 @@ get_fir_filter_coefficients
               a custom filter, the coefficients returned are those set with the
               :py:meth:`nifgen.Session.configure_custom_fir_filter_coefficients` method coerced to the
               quantized values used by the device.
-            | To use this method, first call an instance of the
-              :py:meth:`nifgen.Session.get_fir_filter_coefficients` method with the
-              **coefficientsArray** parameter set to VI_NULL. Calling the method
-              in this state returns the current size of the **coefficientsArray** as
-              the value of the **numberOfCoefficientsRead** parameter. Create an
-              array of this size, and call the :py:meth:`nifgen.Session.get_fir_filter_coefficients`
-              method a second time, passing the new array as the
-              **coefficientsArray** parameter and the size as the **arraySize**
-              parameter. This second method call populates the array with the FIR
-              filter coefficients.
             | Refer to the FIR Filter topic for your device in the *NI Signal
               Generators Help* for more information about FIR filter coefficients.
               This method is supported only for the NI 5441.
-            | **Default Value**: None
-
-            
 
 
-            .. tip:: This method requires repeated capabilities (usually channels). If called directly on the
+            .. tip:: This method requires repeated capabilities (channels). If called directly on the
                 nifgen.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
                 nifgen.Session instance, and calling this method on the result.:
 
                 .. code:: python
 
-                    session.channels['0,1'].get_fir_filter_coefficients()
+                    session.channels[0,1].get_fir_filter_coefficients(array_size, number_of_coefficients_read)
 
 
-            :rtype: int
+            :rtype: list of float
             :return:
 
 
-                    Specifies the array of data containing the number of coefficients you
-                    want to read.
+                    Specifies the array of data the onboard signal processor uses for the
+                    FIR filter coefficients. For the NI 5441, provide a symmetric array of
+                    95 coefficients to this parameter. 
 
-                    
+                    The coefficients should range between -1.00 and +1.00.
 
+
+
+
 
 
 get_hardware_state
