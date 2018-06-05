@@ -251,7 +251,9 @@ def _add_has_repeated_capability(f):
     if 'has_repeated_capability' not in f:
         f['has_repeated_capability'] = False
         for p in f['parameters']:
-            f['has_repeated_capability'] = f['has_repeated_capability'] or p['is_repeated_capability']
+            if p['is_repeated_capability']:
+                f['has_repeated_capability'] = True
+                f['repeated_capability_type'] = p['repeated_capability_type']
 
 
 def _add_render_in_session_base(f):
@@ -267,7 +269,11 @@ def _add_render_in_session_base(f):
 def _add_is_repeated_capability(parameter):
     '''Adds a boolean 'is_repeated_capability' to the parameter metadata by inferring it from its name, if not previously populated.'''
     if 'is_repeated_capability' not in parameter:
-        parameter['is_repeated_capability'] = parameter['name'] in _repeated_capability_parameter_names
+        if parameter['name'] in _repeated_capability_parameter_names:
+            parameter['is_repeated_capability'] = True
+            parameter['repeated_capability_type'] = 'channels'
+        else:
+            parameter['is_repeated_capability'] = False
 
 
 def _add_use_session_lock(f):
@@ -385,6 +391,12 @@ def _add_default_attribute_class(a, attributes):
         attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
 
 
+def _add_repeated_capability_type(a, attributes):
+    '''Add 'repeated_capability_type' if not already there.'''
+    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based'] == 'True':
+        attributes[a]['repeated_capability_type'] = 'channels'
+
+
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config, use_re=False)
@@ -394,6 +406,7 @@ def add_all_attribute_metadata(attributes, config):
         _add_enum(attributes[a])
         _add_python_name(a, attributes)
         _add_python_type(attributes[a], config)
+        _add_repeated_capability_type(a, attributes)
         _add_default_attribute_class(a, attributes)
 
     return attributes
@@ -657,6 +670,7 @@ def test_add_all_metadata_simple():
                 'description': 'Performs a foo, and performs it well.'
             },
             'has_repeated_capability': True,
+            'repeated_capability_type': 'channels',
             'is_error_handling': False,
             'render_in_session_base': True,
             'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
@@ -701,6 +715,7 @@ def test_add_all_metadata_simple():
                         'description': 'The channel to call this on.'
                     },
                     'is_repeated_capability': True,
+                    'repeated_capability_type': 'channels',
                     'is_session_handle': False,
                     'enum': None,
                     'numpy': False,
