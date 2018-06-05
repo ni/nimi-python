@@ -388,16 +388,16 @@ def test_user_standard_waveform(session):
     session.clear_user_standard_waveform()
 
 
-# TODO(bhaswath): Doesn't work, issue #596
-'''
 def test_fir_filter_coefficients():
     with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
-        coeff_array = [1, 0, -1]
+        coeff_array = [0 for i in range(95)]
+        coeff_array[0] = -1.0
+        coeff_array[2] = 1.0
         session.configure_custom_fir_filter_coefficients(coeff_array)
         session.commit()
-        array, size = session.get_fir_filter_coefficients()
-        assert size == len(coeff_array)
-'''
+        array = session.get_fir_filter_coefficients()
+        assert len(array) == len(coeff_array)
+        assert array == coeff_array
 
 
 def test_send_software_edge_trigger(session):
