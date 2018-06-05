@@ -101,11 +101,6 @@ functions_enums = {
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
 }
 
-functions_issues = {
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
-                                                              4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
-}
-
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
     'GetError':                             { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'errorDescriptionBufferSize'}, }, }, },
@@ -116,7 +111,6 @@ functions_buffer_info = {
     'ConfigureCustomFIRFilterCoefficients': { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'CreateWaveform(I16|F64)':              { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
     'DefineUserStandardWaveform':           { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },  # TODO(marcoskirsch): #537
     'Write.*Waveform':                      { 'parameters': { 4: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
     'CreateAdvancedArbSequence':            { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, },
                                                               3: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, },
@@ -500,6 +494,9 @@ functions_method_templates = {
     ], },
     'WriteNamedWaveformI16':        { 'method_templates': [
         { 'session_filename': 'numpy_write_method', 'method_python_name_suffix': '_numpy', },
+    ], },
+    'GetFIRFilterCoefficients':     { 'method_templates': [
+        { 'session_filename': 'get_fir_filter_coefficients', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
 }
 
