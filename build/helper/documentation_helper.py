@@ -135,6 +135,7 @@ def add_attribute_rep_cap_tip_rst(attr, config):
         elif attr['access'] == 'write only':
             tip = rep_cap_attr_desc_rst_w
         else:
+            assert attr['access'] == 'read-write'
             tip = rep_cap_attr_desc_rst_rw
 
         if 'documentation' not in attr:
@@ -214,6 +215,7 @@ def add_attribute_rep_cap_tip_docstring(attr, config):
         elif attr['access'] == 'write only':
             tip = rep_cap_attr_desc_docstring_w
         else:
+            assert attr['access'] == 'read-write'
             tip = rep_cap_attr_desc_docstring_rw
 
         if 'documentation' not in attr:
