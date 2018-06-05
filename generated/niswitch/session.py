@@ -140,7 +140,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].bandwidth = var
         var = session.channels[0,1].bandwidth
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
@@ -160,7 +159,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].characteristic_impedance = var
         var = session.channels[0,1].characteristic_impedance
     '''
     continuous_scan = _attributes.AttributeViBoolean(1150002)
@@ -274,7 +272,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_ac_voltage = var
         var = session.channels[0,1].max_ac_voltage
     '''
     max_carry_ac_current = _attributes.AttributeViReal64(1250011)
@@ -289,7 +286,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_carry_ac_current = var
         var = session.channels[0,1].max_carry_ac_current
     '''
     max_carry_ac_power = _attributes.AttributeViReal64(1250015)
@@ -304,7 +300,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_carry_ac_power = var
         var = session.channels[0,1].max_carry_ac_power
     '''
     max_carry_dc_current = _attributes.AttributeViReal64(1250010)
@@ -319,7 +314,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_carry_dc_current = var
         var = session.channels[0,1].max_carry_dc_current
     '''
     max_carry_dc_power = _attributes.AttributeViReal64(1250014)
@@ -334,7 +328,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_carry_dc_power = var
         var = session.channels[0,1].max_carry_dc_power
     '''
     max_dc_voltage = _attributes.AttributeViReal64(1250006)
@@ -349,7 +342,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_dc_voltage = var
         var = session.channels[0,1].max_dc_voltage
     '''
     max_switching_ac_current = _attributes.AttributeViReal64(1250009)
@@ -364,7 +356,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_switching_ac_current = var
         var = session.channels[0,1].max_switching_ac_current
     '''
     max_switching_ac_power = _attributes.AttributeViReal64(1250013)
@@ -379,7 +370,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_switching_ac_power = var
         var = session.channels[0,1].max_switching_ac_power
     '''
     max_switching_dc_current = _attributes.AttributeViReal64(1250008)
@@ -394,7 +384,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_switching_dc_current = var
         var = session.channels[0,1].max_switching_dc_current
     '''
     max_switching_dc_power = _attributes.AttributeViReal64(1250012)
@@ -409,7 +398,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].max_switching_dc_power = var
         var = session.channels[0,1].max_switching_dc_power
     '''
     number_of_relays = _attributes.AttributeViInt32(1150014)
@@ -552,7 +540,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].wire_mode = var
         var = session.channels[0,1].wire_mode
     '''
 

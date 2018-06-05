@@ -497,7 +497,6 @@ bandwidth
 
             .. code:: python
 
-                session.channels[0,1].bandwidth = var
                 var = session.channels[0,1].bandwidth
 
         The following table lists the characteristics of this property.
@@ -569,7 +568,6 @@ characteristic_impedance
 
             .. code:: python
 
-                session.channels[0,1].characteristic_impedance = var
                 var = session.channels[0,1].characteristic_impedance
 
         The following table lists the characteristics of this property.
@@ -1061,7 +1059,6 @@ max_ac_voltage
 
             .. code:: python
 
-                session.channels[0,1].max_ac_voltage = var
                 var = session.channels[0,1].max_ac_voltage
 
         The following table lists the characteristics of this property.
@@ -1104,7 +1101,6 @@ max_carry_ac_current
 
             .. code:: python
 
-                session.channels[0,1].max_carry_ac_current = var
                 var = session.channels[0,1].max_carry_ac_current
 
         The following table lists the characteristics of this property.
@@ -1147,7 +1143,6 @@ max_carry_ac_power
 
             .. code:: python
 
-                session.channels[0,1].max_carry_ac_power = var
                 var = session.channels[0,1].max_carry_ac_power
 
         The following table lists the characteristics of this property.
@@ -1190,7 +1185,6 @@ max_carry_dc_current
 
             .. code:: python
 
-                session.channels[0,1].max_carry_dc_current = var
                 var = session.channels[0,1].max_carry_dc_current
 
         The following table lists the characteristics of this property.
@@ -1233,7 +1227,6 @@ max_carry_dc_power
 
             .. code:: python
 
-                session.channels[0,1].max_carry_dc_power = var
                 var = session.channels[0,1].max_carry_dc_power
 
         The following table lists the characteristics of this property.
@@ -1276,7 +1269,6 @@ max_dc_voltage
 
             .. code:: python
 
-                session.channels[0,1].max_dc_voltage = var
                 var = session.channels[0,1].max_dc_voltage
 
         The following table lists the characteristics of this property.
@@ -1319,7 +1311,6 @@ max_switching_ac_current
 
             .. code:: python
 
-                session.channels[0,1].max_switching_ac_current = var
                 var = session.channels[0,1].max_switching_ac_current
 
         The following table lists the characteristics of this property.
@@ -1362,7 +1353,6 @@ max_switching_ac_power
 
             .. code:: python
 
-                session.channels[0,1].max_switching_ac_power = var
                 var = session.channels[0,1].max_switching_ac_power
 
         The following table lists the characteristics of this property.
@@ -1405,7 +1395,6 @@ max_switching_dc_current
 
             .. code:: python
 
-                session.channels[0,1].max_switching_dc_current = var
                 var = session.channels[0,1].max_switching_dc_current
 
         The following table lists the characteristics of this property.
@@ -1448,7 +1437,6 @@ max_switching_dc_power
 
             .. code:: python
 
-                session.channels[0,1].max_switching_dc_power = var
                 var = session.channels[0,1].max_switching_dc_power
 
         The following table lists the characteristics of this property.
@@ -2087,7 +2075,6 @@ wire_mode
 
             .. code:: python
 
-                session.channels[0,1].wire_mode = var
                 var = session.channels[0,1].wire_mode
 
         The following table lists the characteristics of this property.

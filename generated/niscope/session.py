@@ -148,7 +148,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].accessory_gain = var
         var = session.channels[0,1].accessory_gain
     '''
     accessory_offset = _attributes.AttributeViReal64(1150280)
@@ -169,7 +168,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].accessory_offset = var
         var = session.channels[0,1].accessory_offset
     '''
     acquisition_start_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250109)
@@ -382,7 +380,6 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels[0,1].equalization_num_coefficients = var
         var = session.channels[0,1].equalization_num_coefficients
     '''
     exported_advance_trigger_output_terminal = _attributes.AttributeViString(1150109)

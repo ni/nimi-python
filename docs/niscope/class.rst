@@ -510,7 +510,6 @@ accessory_gain
 
             .. code:: python
 
-                session.channels[0,1].accessory_gain = var
                 var = session.channels[0,1].accessory_gain
 
         The following table lists the characteristics of this property.
@@ -558,7 +557,6 @@ accessory_offset
 
             .. code:: python
 
-                session.channels[0,1].accessory_offset = var
                 var = session.channels[0,1].accessory_offset
 
         The following table lists the characteristics of this property.
@@ -1371,7 +1369,6 @@ equalization_num_coefficients
 
             .. code:: python
 
-                session.channels[0,1].equalization_num_coefficients = var
                 var = session.channels[0,1].equalization_num_coefficients
 
         The following table lists the characteristics of this property.

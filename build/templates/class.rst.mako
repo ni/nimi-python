@@ -94,8 +94,7 @@ table_contents = [
          ]
 table = helper.as_rest_table(table_contents)
 
-if 'repeated_capability_type' in a and 'documentation' in a:
-    a['documentation']['tip'] = helper.rep_cap_attr_desc_desc_rst.format(module_name, a['repeated_capability_type'], a["name"].lower())
+helper.add_attribute_rep_cap_tip_rst(a, config)
 
 desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 %>\
