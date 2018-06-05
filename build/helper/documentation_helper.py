@@ -473,7 +473,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
+        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['repeated_capability_type'], function['python_name'], get_params_snippet(function, session_method))
 
     rst = '.. py:method:: ' + function['python_name'] + suffix + '('
     rst += get_params_snippet(function, session_method) + ')'
@@ -547,7 +547,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     docstring = ''
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
+        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['repeated_capability_type'], function['python_name'], get_params_snippet(function, session_method))
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 

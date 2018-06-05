@@ -94,20 +94,8 @@ table_contents = [
          ]
 table = helper.as_rest_table(table_contents)
 
-rep_cap_attr_desc = '''
-This property can use repeated capabilities (usually channels). If set or get directly on the 
-{0}.Session object, then the set/get will use all repeated capabilities in the session. 
-You can specify a subset of repeated capabilities using the Python index notation on an 
-{0}.Session instance, and calling set/get value on the result.:
-
-.. code:: python
-
-    session['0,1'].{0} = var
-    var = session['0,1'].{0}
-'''
-
-if a['channel_based'] == 'True':
-    a['documentation']['tip'] = rep_cap_attr_desc.format(a["name"].lower())
+if 'repeated_capability_type' in a and 'documentation' in a:
+    a['documentation']['tip'] = helper.rep_cap_attr_desc_desc_rst.format(module_name, a['repeated_capability_type'], a["name"].lower())
 
 desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 %>\

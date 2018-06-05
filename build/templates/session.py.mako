@@ -143,8 +143,8 @@ class _SessionBase(object):
 
 % for attribute in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
 <%
-if attributes[attribute]['channel_based'] == 'True':
-    attributes[attribute]['documentation']['tip'] = helper.rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
+if 'repeated_capability_type' in attributes[attribute] and 'documentation' in attributes[attribute]:
+    attributes[attribute]['documentation']['tip'] = helper.rep_cap_attr_desc_desc_docstring.format(module_name, attributes[attribute]['repeated_capability_type'], attributes[attribute]["name"].lower())
 %>\
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
