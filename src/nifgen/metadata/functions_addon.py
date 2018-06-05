@@ -496,7 +496,7 @@ functions_method_templates = {
         { 'session_filename': 'numpy_write_method', 'method_python_name_suffix': '_numpy', },
     ], },
     'GetFIRFilterCoefficients':     { 'method_templates': [
-        { 'session_filename': 'get_fir_filter_coefficients', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        { 'session_filename': 'get_fir_filter_coefficients', 'documentation_filename': 'get_fir_filter_coefficients', 'method_python_name_suffix': '', },
     ], },
 }
 
