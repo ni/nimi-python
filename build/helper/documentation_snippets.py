@@ -14,14 +14,34 @@ You can specify a subset of repeated capabilities using the Python index notatio
 {0}.Session repeated capabilities container, and calling set/get value on the result.:
 '''
 
-rep_cap_attr_desc_desc_rst = rep_cap_attr_desc + '''
+rep_cap_attr_desc_rst_r = rep_cap_attr_desc + '''
+.. code:: python
+
+    var = session.{1}[0,1].{2}
+'''
+
+rep_cap_attr_desc_rst_w = rep_cap_attr_desc + '''
+.. code:: python
+
+    session.{1}[0,1].{2} = var
+'''
+
+rep_cap_attr_desc_rst_rw = rep_cap_attr_desc + '''
 .. code:: python
 
     session.{1}[0,1].{2} = var
     var = session.{1}[0,1].{2}
 '''
 
-rep_cap_attr_desc_desc_docstring = rep_cap_attr_desc + '''
+rep_cap_attr_desc_docstring_r = rep_cap_attr_desc + '''
+    var = session.{1}[0,1].{2}
+'''
+
+rep_cap_attr_desc_docstring_w = rep_cap_attr_desc + '''
+    session.{1}[0,1].{2} = var
+'''
+
+rep_cap_attr_desc_docstring_rw = rep_cap_attr_desc + '''
     session.{1}[0,1].{2} = var
     var = session.{1}[0,1].{2}
 '''
