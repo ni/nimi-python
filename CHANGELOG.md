@@ -90,6 +90,16 @@ All notable changes to this project will be documented in this file.
         * `niscope_fetch_forever.py` example
     * #### Changed
     * #### Removed
+        * Removed default value for `level` parameter on `configure_trigger_edge()`
+            * parameter list is now
+                ``` python
+                configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+                ```
+        * Removed default values for `level` and `hysteresis` parameters on `configure_trigger_hysteresis()`
+            * parameter list is now
+                ``` python
+                configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+                ```
 
 ## 0.9.0 - 2018-05-22
 * ### ALL
