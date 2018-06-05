@@ -88,7 +88,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
         * Removed default value for `level` parameter on `configure_trigger_edge()`
-            * paramater list is now
+            * parameter list is now
                 ``` python
                 configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
                 ```
