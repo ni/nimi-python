@@ -4171,7 +4171,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_edge(self, trigger_source, trigger_coupling, level=0.0, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
+    def configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_edge
 
         Configures common properties for analog edge triggering.
@@ -4198,11 +4198,11 @@ class Session(_SessionBase):
             trigger_source (str): Specifies the trigger source. Refer to trigger_source
                 for defined values.
 
-            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                trigger_coupling for more information.
-
             level (float): The voltage threshold for the trigger. Refer to
                 trigger_level for more information.
+
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+                trigger_coupling for more information.
 
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to trigger_slope for more
@@ -4233,7 +4233,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger_hysteresis(self, trigger_source, trigger_coupling, level=0.0, hysteresis=0.05, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
+    def configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0)):
         '''configure_trigger_hysteresis
 
         Configures common properties for analog hysteresis triggering. This kind
@@ -4264,9 +4264,6 @@ class Session(_SessionBase):
             trigger_source (str): Specifies the trigger source. Refer to trigger_source
                 for defined values.
 
-            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
-                trigger_coupling for more information.
-
             level (float): The voltage threshold for the trigger. Refer to
                 trigger_level for more information.
 
@@ -4275,6 +4272,9 @@ class Session(_SessionBase):
                 hysteresis value you specify with this parameter, has the slope you
                 specify with **slope**, and passes through the **level**. Refer to
                 trigger_hysteresis for defined values.
+
+            trigger_coupling (enums.TriggerCoupling): Applies coupling and filtering options to the trigger signal. Refer to
+                trigger_coupling for more information.
 
             slope (enums.TriggerSlope): Specifies whether you want a rising edge or a falling edge to trigger
                 the digitizer. Refer to trigger_slope for more
