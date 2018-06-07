@@ -82,6 +82,7 @@ All notable changes to this project will be documented in this file.
             * `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
             * `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
             * `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
+        * Removed `send_software_edge_trigger()` - [#850](https://github.com/ni/nimi-python/issues/850)
 * ### NI-SCOPE
     * #### Added
         * `niscope_fetch_forever.py` example
