@@ -6249,38 +6249,27 @@ send_software_edge_trigger
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: send_software_edge_trigger(trigger, trigger_id)
+    .. py:method:: send_software_edge_trigger()
 
-            Sends a command to trigger the signal generator. This VI can act as an
-            override for an external edge trigger.
+        Sends a command to trigger the signal generator. This VI can act as an
+        override for an external edge trigger.
 
-            
+        If called directly on the session, this will send a software start trigger.
 
-            .. note:: This VI does not override external digital edge triggers of the
-                NI 5401/5411/5431.
+        ..code:: python
 
+            session.send_software_edge_trigger()
 
+        If called using the script trigger repeated capability container, this will
+        send a software trigger to the specified script trigger
 
-            :param trigger:
+        ..code:: python
 
+            session.script_triggers[1].send_software_edge_trigger()
 
-                Sets the clock mode of the signal generator.
+        ..note::
+            This method does not override external digital edge triggers of the NI 5401/5411/5431.
 
-                ****Defined Values****
-
-                +----------------------------------------------+
-                | :py:data:`~nifgen.ClockMode.DIVIDE_DOWN`     |
-                +----------------------------------------------+
-                | :py:data:`~nifgen.ClockMode.HIGH_RESOLUTION` |
-                +----------------------------------------------+
-                | :py:data:`~nifgen.ClockMode.AUTOMATIC`       |
-                +----------------------------------------------+
-
-
-            :type trigger: :py:data:`nifgen.Trigger`
-            :param trigger_id:
-
-            :type trigger_id: str
 
 set_next_write_position
 ~~~~~~~~~~~~~~~~~~~~~~~
