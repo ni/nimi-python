@@ -466,6 +466,8 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`self_test`                                |
     +-----------------------------------------------------+
+    | :py:func:`send_software_edge_trigger`               |
+    +-----------------------------------------------------+
     | :py:func:`set_next_write_position`                  |
     +-----------------------------------------------------+
     | :py:func:`unlock`                                   |
@@ -6242,7 +6244,6 @@ self_test
 
 
 
-<<<<<<< HEAD
 send_software_edge_trigger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6267,11 +6268,10 @@ send_software_edge_trigger
             session.script_triggers[1].send_software_edge_trigger()
 
         ..note::
+
             This method does not override external digital edge triggers of the NI 5401/5411/5431.
 
 
-=======
->>>>>>> master
 set_next_write_position
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6791,6 +6791,8 @@ Methods
 | :py:func:`nifgen.Session.self_cal`                                 |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.self_test`                                |
++--------------------------------------------------------------------+
+| :py:func:`nifgen.Session.send_software_edge_trigger`               |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.set_next_write_position`                  |
 +--------------------------------------------------------------------+
