@@ -86,6 +86,15 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * `niscope_fetch_forever.py` example
     * #### Changed
+        * `send_software_edge_trigger()` no longer takes any parameters.
+            * To send a start software trigger, call it on the session directly:
+                    ``` python
+                    session.send_software_edge_trigger()
+                    ```
+            * To send a script software trigger, call it on the script triggers container:
+                    ``` python
+                    session.script_triggers[1].send_software_edge_trigger()
+                    ```
     * #### Removed
         * Removed default value for `level` parameter on `configure_trigger_edge()`
             * parameter list is now
