@@ -72,6 +72,7 @@ functions_codegen_method = {
     'SetNamedWaveformNextWritePosition':    { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
     'DeleteNamedWaveform':                  { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
     'ClearArbWaveform':                     { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
+    'SendSoftwareEdgeTrigger':              { 'codegen_method': 'no',       },  # See #850
 }
 
 functions_locking = {
