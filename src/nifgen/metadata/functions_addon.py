@@ -101,6 +101,11 @@ functions_enums = {
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
 }
 
+functions_send_software_edge_trigger = {
+    'SendSoftwareEdgeTrigger':                  { 'method_templates': [ { 'session_filename': 'send_software_edge_trigger', 'documentation_filename': 'send_software_edge_trigger', 'method_python_name_suffix': '', }, ],
+                                                  'render_in_session_base': True, },
+}
+
 functions_issues = {
     'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
                                                               4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
