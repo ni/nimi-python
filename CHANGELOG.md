@@ -77,14 +77,12 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
-        * `get_fir_filter_coefficients()` cleaned up and fixed - [#535](https://github.com/ni/nimi-python/issues/535), [#596](https://github.com/ni/nimi-python/issues/596)
-            * No input parameters
-            * Only return coefficients array
     * #### Removed
         * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
             * `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
             * `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
             * `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
+        * Removed `get_fir_filter_coefficients()` - [#535](https://github.com/ni/nimi-python/issues/535), [#596](https://github.com/ni/nimi-python/issues/596)
 * ### NI-SCOPE
     * #### Added
         * `niscope_fetch_forever.py` example
