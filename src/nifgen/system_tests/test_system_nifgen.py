@@ -388,6 +388,7 @@ def test_user_standard_waveform(session):
     session.clear_user_standard_waveform()
 
 
+''' Removed due to OSP disabled - #891
 def test_fir_filter_coefficients():
     with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
         coeff_array = [0 for i in range(95)]
@@ -398,6 +399,7 @@ def test_fir_filter_coefficients():
         array = session.get_fir_filter_coefficients()
         assert len(array) == len(coeff_array)
         assert array == coeff_array
+'''
 
 
 def test_send_software_edge_trigger(session):
