@@ -400,11 +400,21 @@ def test_fir_filter_coefficients():
 '''
 
 
-def test_send_software_edge_trigger(session):
+def test_send_software_edge_trigger_start(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.create_waveform(waveform_data)
     with session.initiate():
-        session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
+        session.send_software_edge_trigger()
+
+
+def test_send_software_edge_trigger_script(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    session.create_waveform(waveform_data)
+    session.output_mode = nifgen.OutputMode.SCRIPT
+    session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
+    session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
+    with session.initiate():
+        session.script_triggers[0].send_software_edge_trigger()
 
 
 def test_channel_format_types():
