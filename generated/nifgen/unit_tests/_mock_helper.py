@@ -103,8 +103,6 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['Months'] = None
-        self._defaults['GetFIRFilterCoefficients'] = {}
-        self._defaults['GetFIRFilterCoefficients']['return'] = 0
         self._defaults['GetHardwareState'] = {}
         self._defaults['GetHardwareState']['return'] = 0
         self._defaults['GetHardwareState']['state'] = None
@@ -494,11 +492,6 @@ class SideEffectsHelper(object):
         if months is not None:
             months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
-
-    def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
-        if self._defaults['GetFIRFilterCoefficients']['return'] != 0:
-            return self._defaults['GetFIRFilterCoefficients']['return']
-        return self._defaults['GetFIRFilterCoefficients']['return']
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
         if self._defaults['GetHardwareState']['return'] != 0:
@@ -911,8 +904,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetExtCalLastTemp.return_value = 0
         mock_library.niFgen_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niFgen_GetExtCalRecommendedInterval")
         mock_library.niFgen_GetExtCalRecommendedInterval.return_value = 0
-        mock_library.niFgen_GetFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_GetFIRFilterCoefficients")
-        mock_library.niFgen_GetFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_GetHardwareState.side_effect = MockFunctionCallError("niFgen_GetHardwareState")
         mock_library.niFgen_GetHardwareState.return_value = 0
         mock_library.niFgen_GetLastExtCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime")
