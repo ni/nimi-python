@@ -4167,42 +4167,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def send_software_edge_trigger(self, trigger, trigger_id):
-        '''send_software_edge_trigger
-
-        Sends a command to trigger the signal generator. This VI can act as an
-        override for an external edge trigger.
-
-        Note:
-        This VI does not override external digital edge triggers of the
-        NI 5401/5411/5431.
-
-        Args:
-            trigger (enums.Trigger): Sets the clock mode of the signal generator.
-
-                ****Defined Values****
-
-                +---------------------------+
-                | ClockMode.DIVIDE_DOWN     |
-                +---------------------------+
-                | ClockMode.HIGH_RESOLUTION |
-                +---------------------------+
-                | ClockMode.AUTOMATIC       |
-                +---------------------------+
-
-            trigger_id (str):
-
-        '''
-        if type(trigger) is not enums.Trigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def wait_until_done(self, max_time=datetime.timedelta(seconds=10.0)):
         '''wait_until_done
 
