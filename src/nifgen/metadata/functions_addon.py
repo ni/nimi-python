@@ -73,7 +73,6 @@ functions_codegen_method = {
     'SetNamedWaveformNextWritePosition':    { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
     'DeleteNamedWaveform':                  { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
     'ClearArbWaveform':                     { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
-    'SendSoftwareEdgeTrigger':              { 'codegen_method': 'no',       },  # See #850
 }
 
 functions_locking = {
@@ -100,7 +99,11 @@ functions_enums = {
     'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
-    'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
+}
+
+functions_send_software_edge_trigger = {
+    'SendSoftwareEdgeTrigger':                  { 'method_templates': [ { 'session_filename': 'send_software_edge_trigger', 'documentation_filename': 'send_software_edge_trigger', 'method_python_name_suffix': '', }, ],
+                                                  'render_in_session_base': True, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.

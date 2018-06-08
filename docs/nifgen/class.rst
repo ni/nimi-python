@@ -464,6 +464,8 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`self_test`                                |
     +-----------------------------------------------------+
+    | :py:func:`send_software_edge_trigger`               |
+    +-----------------------------------------------------+
     | :py:func:`set_next_write_position`                  |
     +-----------------------------------------------------+
     | :py:func:`unlock`                                   |
@@ -6187,6 +6189,34 @@ self_test
 
 
 
+send_software_edge_trigger
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: send_software_edge_trigger()
+
+        Sends a command to trigger the signal generator. This VI can act as an
+        override for an external edge trigger.
+
+        If called directly on the session, this will send a software start trigger.
+
+        ..code:: python
+
+            session.send_software_edge_trigger()
+
+        If called using the script trigger repeated capability container, this will
+        send a software trigger to the specified script trigger
+
+        ..code:: python
+
+            session.script_triggers[1].send_software_edge_trigger()
+
+        ..note::
+
+            This method does not override external digital edge triggers of the NI 5401/5411/5431.
+
+
 set_next_write_position
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6704,6 +6734,8 @@ Methods
 | :py:func:`nifgen.Session.self_cal`                                 |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.self_test`                                |
++--------------------------------------------------------------------+
+| :py:func:`nifgen.Session.send_software_edge_trigger`               |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.set_next_write_position`                  |
 +--------------------------------------------------------------------+

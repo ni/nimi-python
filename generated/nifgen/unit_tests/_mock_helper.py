@@ -165,6 +165,8 @@ class SideEffectsHelper(object):
         self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['SelfCal'] = {}
         self._defaults['SelfCal']['return'] = 0
+        self._defaults['SendSoftwareEdgeTrigger'] = {}
+        self._defaults['SendSoftwareEdgeTrigger']['return'] = 0
         self._defaults['SetAttributeViBoolean'] = {}
         self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViInt32'] = {}
@@ -716,6 +718,11 @@ class SideEffectsHelper(object):
             return self._defaults['SelfCal']['return']
         return self._defaults['SelfCal']['return']
 
+    def niFgen_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_id):  # noqa: N802
+        if self._defaults['SendSoftwareEdgeTrigger']['return'] != 0:
+            return self._defaults['SendSoftwareEdgeTrigger']['return']
+        return self._defaults['SendSoftwareEdgeTrigger']['return']
+
     def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['SetAttributeViBoolean']['return'] != 0:
             return self._defaults['SetAttributeViBoolean']['return']
@@ -931,6 +938,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ResetWithDefaults.return_value = 0
         mock_library.niFgen_SelfCal.side_effect = MockFunctionCallError("niFgen_SelfCal")
         mock_library.niFgen_SelfCal.return_value = 0
+        mock_library.niFgen_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niFgen_SendSoftwareEdgeTrigger")
+        mock_library.niFgen_SendSoftwareEdgeTrigger.return_value = 0
         mock_library.niFgen_SetAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_SetAttributeViBoolean")
         mock_library.niFgen_SetAttributeViBoolean.return_value = 0
         mock_library.niFgen_SetAttributeViInt32.side_effect = MockFunctionCallError("niFgen_SetAttributeViInt32")

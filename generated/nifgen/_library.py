@@ -67,6 +67,7 @@ class Library(object):
         self.niFgen_ResetDevice_cfunc = None
         self.niFgen_ResetWithDefaults_cfunc = None
         self.niFgen_SelfCal_cfunc = None
+        self.niFgen_SendSoftwareEdgeTrigger_cfunc = None
         self.niFgen_SetAttributeViBoolean_cfunc = None
         self.niFgen_SetAttributeViInt32_cfunc = None
         self.niFgen_SetAttributeViReal64_cfunc = None
@@ -484,6 +485,14 @@ class Library(object):
                 self.niFgen_SelfCal_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_SelfCal_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SelfCal_cfunc(vi)
+
+    def niFgen_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_id):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_SendSoftwareEdgeTrigger_cfunc is None:
+                self.niFgen_SendSoftwareEdgeTrigger_cfunc = self._library.niFgen_SendSoftwareEdgeTrigger
+                self.niFgen_SendSoftwareEdgeTrigger_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_SendSoftwareEdgeTrigger_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_SendSoftwareEdgeTrigger_cfunc(vi, trigger, trigger_id)
 
     def niFgen_SetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
