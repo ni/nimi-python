@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.0.0](#090---2018-06-08)
 * [0.9.0](#090---2018-05-22)
 * [0.8.0](#080---2018-04-27)
 * [0.7.0](#070---2018-02-20)
@@ -13,14 +13,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## 1.0.0 - 2018-06-08
 * ### ALL
-    * #### Added
-    * #### Changed
     * #### Removed
         * Explicitly disallow using a repeated capability on Session. `session[0].vertical_range = 1.0` will no longer work. Instead use `session.channels[0].vertical_range = 1.0` - [#853](https://github.com/ni/nimi-python/issues/853)
 * ### NI-DMM
-    * #### Added
     * #### Changed
         * Fixed name `freq_voltage_autorange` became `freq_voltage_auto_range`
     * #### Removed
@@ -37,13 +34,9 @@ All notable changes to this project will be documented in this file.
         * `sample_trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
         * `trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
 * ### NI-ModInst
-    * #### Added
     * #### Changed
         * Double close will now allow NI-ModInst to return error
-    * #### Removed
 * ### NI-Switch
-    * #### Added
-    * #### Changed
     * #### Removed
         * `cabled_module_scan_advanced_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `cabled_module_trigger_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
@@ -58,8 +51,6 @@ All notable changes to this project will be documented in this file.
         * `route_trigger_input()` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `set_continuous_scan()` - [#881](https://github.com/ni/nimi-python/issues/881)
 * ### NI-DCPower
-    * #### Added
-    * #### Changed
     * #### Removed
         * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
             * `configure_digital_edge_measure_trigger()` - use `session.digital_edge_measure_trigger_edge` & `session.digital_edge_measure_trigger_input_terminal`
@@ -74,7 +65,6 @@ All notable changes to this project will be documented in this file.
             * `digital_edge_source_trigger_edge`
             * `digital_edge_start_trigger_edge`
 * ### NI-FGEN
-    * #### Added
     * #### Changed
         * `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
         * `send_software_edge_trigger()` no longer takes any parameters.
@@ -95,7 +85,6 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
         * `niscope_fetch_forever.py` example
-    * #### Changed
     * #### Removed
         * Removed default value for `level` parameter on `configure_trigger_edge()`
             * parameter list is now
