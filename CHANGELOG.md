@@ -77,15 +77,6 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
-    * #### Removed
-        * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
-            * `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
-            * `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
-            * `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
-* ### NI-SCOPE
-    * #### Added
-        * `niscope_fetch_forever.py` example
-    * #### Changed
         * `send_software_edge_trigger()` no longer takes any parameters.
             * To send a start software trigger, call it on the session directly:
                     ``` python
@@ -95,6 +86,15 @@ All notable changes to this project will be documented in this file.
                     ``` python
                     session.script_triggers[1].send_software_edge_trigger()
                     ```
+    * #### Removed
+        * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
+            * `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
+            * `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
+            * `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
+* ### NI-SCOPE
+    * #### Added
+        * `niscope_fetch_forever.py` example
+    * #### Changed
     * #### Removed
         * Removed default value for `level` parameter on `configure_trigger_edge()`
             * parameter list is now
