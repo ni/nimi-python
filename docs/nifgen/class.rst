@@ -434,8 +434,6 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`get_ext_cal_recommended_interval`         |
     +-----------------------------------------------------+
-    | :py:func:`get_fir_filter_coefficients`              |
-    +-----------------------------------------------------+
     | :py:func:`get_hardware_state`                       |
     +-----------------------------------------------------+
     | :py:func:`get_self_cal_last_date_and_time`          |
@@ -5656,59 +5654,6 @@ get_ext_cal_recommended_interval
 
 
 
-get_fir_filter_coefficients
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:method:: get_fir_filter_coefficients()
-
-            | Returns the FIR filter coefficients used by the onboard signal
-              processing block. These coefficients are determined by NI-FGEN and
-              based on the FIR filter type and corresponding property (Alpha,
-              Passband, BT) unless you are using the custom filter. If you are using
-              a custom filter, the coefficients returned are those set with the
-              :py:meth:`nifgen.Session.configure_custom_fir_filter_coefficients` method coerced to the
-              quantized values used by the device.
-            | To use this method, first call an instance of the
-              :py:meth:`nifgen.Session.get_fir_filter_coefficients` method with the
-              **coefficientsArray** parameter set to VI_NULL. Calling the method
-              in this state returns the current size of the **coefficientsArray** as
-              the value of the **numberOfCoefficientsRead** parameter. Create an
-              array of this size, and call the :py:meth:`nifgen.Session.get_fir_filter_coefficients`
-              method a second time, passing the new array as the
-              **coefficientsArray** parameter and the size as the **arraySize**
-              parameter. This second method call populates the array with the FIR
-              filter coefficients.
-            | Refer to the FIR Filter topic for your device in the *NI Signal
-              Generators Help* for more information about FIR filter coefficients.
-              This method is supported only for the NI 5441.
-            | **Default Value**: None
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_fir_filter_coefficients()
-
-
-            :rtype: int
-            :return:
-
-
-                    Specifies the array of data containing the number of coefficients you
-                    want to read.
-
-                    
-
-
-
 get_hardware_state
 ~~~~~~~~~~~~~~~~~~
 
@@ -6729,8 +6674,6 @@ Methods
 | :py:func:`nifgen.Session.get_ext_cal_last_temp`                    |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.get_ext_cal_recommended_interval`         |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_fir_filter_coefficients`              |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.get_hardware_state`                       |
 +--------------------------------------------------------------------+

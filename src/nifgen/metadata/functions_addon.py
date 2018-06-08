@@ -60,6 +60,7 @@ functions_codegen_method = {
     'revision_query':                       { 'codegen_method': 'no',       },
     '.+Complex.+':                          { 'codegen_method': 'no',       },
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
+    'GetFIRFilterCoefficients':             { 'codegen_method': 'no',       },  # Removed - applies to OSP only #596 - If this is removed, the commented out snippet below needs to be added back to templates to use
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
@@ -102,11 +103,6 @@ functions_enums = {
     'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
 }
 
-functions_issues = {
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
-                                                              4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
-}
-
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
     'GetError':                             { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'errorDescriptionBufferSize'}, }, }, },
@@ -117,7 +113,6 @@ functions_buffer_info = {
     'ConfigureCustomFIRFilterCoefficients': { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'CreateWaveform(I16|F64)':              { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
     'DefineUserStandardWaveform':           { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },  # TODO(marcoskirsch): #537
     'Write.*Waveform':                      { 'parameters': { 4: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
     'CreateAdvancedArbSequence':            { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, },
                                                               3: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, },
@@ -503,6 +498,11 @@ functions_method_templates = {
         { 'session_filename': 'numpy_write_method', 'method_python_name_suffix': '_numpy', },
     ], },
 }
+
+# We keep this information because we will need it again if we ever enable OSP and need this function
+# 'GetFIRFilterCoefficients':     { 'method_templates': [
+#     { 'session_filename': 'get_fir_filter_coefficients', 'documentation_filename': 'get_fir_filter_coefficients', 'method_python_name_suffix': '', },
+# ], },
 
 functions_numpy = {
     'CreateWaveformF64':            { 'parameters': { 3: { 'numpy': True, }, }, },
