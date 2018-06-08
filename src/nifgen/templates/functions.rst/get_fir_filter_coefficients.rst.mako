@@ -1,6 +1,7 @@
 <%page args="function, config, method_template, indent"/>\
 <%
     import build.helper as helper
+    # This file is not currently used - will be enabled when OSP is enabled.
 %>\
     .. py:method:: get_fir_filter_coefficients()
 

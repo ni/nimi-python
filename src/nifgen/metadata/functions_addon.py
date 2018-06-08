@@ -60,7 +60,7 @@ functions_codegen_method = {
     'revision_query':                       { 'codegen_method': 'no',       },
     '.+Complex.+':                          { 'codegen_method': 'no',       },
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
-    'GetFIRFilterCoefficients':             { 'codegen_method': 'no',       },  # Removed - applies to OSP only #596
+    'GetFIRFilterCoefficients':             { 'codegen_method': 'no',       },  # Removed - applies to OSP only #596 - If this is removed, the commented out snippet below needs to be added back to templates to use
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime

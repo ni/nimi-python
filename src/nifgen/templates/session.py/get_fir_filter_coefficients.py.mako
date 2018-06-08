@@ -2,6 +2,7 @@
 <%
     '''Special implementation of get_fir_filter_coefficients(). Not quite IVI-dance since the size is returned in an out parameter instead of the error_code'''
     import build.helper as helper
+    # This file is not currently used - will be enabled when OSP is enabled.
 %>\
     def get_fir_filter_coefficients(self):
         '''get_fir_filter_coefficients
