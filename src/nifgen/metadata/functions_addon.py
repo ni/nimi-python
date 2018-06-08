@@ -98,7 +98,6 @@ functions_enums = {
     'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
-    'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
 }
 
 functions_send_software_edge_trigger = {
