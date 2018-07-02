@@ -9,7 +9,7 @@ The following is a basic example of using the **nise** module to open a session 
     # Configure the session.
 
     with nise.Session('dev1') as session:
-        #TODO
+        #FRANKTODO
 
 Additional examples for NI Switch Executive are located in src/nise/examples/ directory.
 
