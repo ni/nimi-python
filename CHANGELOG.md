@@ -43,6 +43,11 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI Switch Executive
+    * #### Added
+        * Initial Release
+    * #### Changed
+    * #### Removed
 
 ## 1.0.0 - 2018-06-08
 * ### ALL
