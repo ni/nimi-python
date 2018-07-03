@@ -41,8 +41,8 @@ functions_default_value = {
     'Connect':                      { 'parameters': { 2: { 'default_value': 'MulticonnectMode.DEFAULT',              },
                                                       3: { 'default_value': True,                                    }, }, },
     'ConnectAndDisconnect':         { 'parameters': { 3: { 'default_value': 'MulticonnectMode.DEFAULT',              },
-                                                      4: { 'default_value': 'OperationOrder.BREAK_AFTER_MAKE',       },
+                                                      4: { 'default_value': 'OperationOrder.AFTER',                  },
                                                       5: { 'default_value': True,                                    }, }, },
     'WaitForDebounce':              { 'parameters': { 1: { 'default_value': -1,                                      }, }, },
-    'ExpandRouteSpec':              { 'parameters': { 2: { 'default_value': 'ExpandAction.EXPAND_TO_ROUTES',         }, }, },
+    'ExpandRouteSpec':              { 'parameters': { 2: { 'default_value': 'ExpandAction.ROUTES',                   }, }, },
 }
