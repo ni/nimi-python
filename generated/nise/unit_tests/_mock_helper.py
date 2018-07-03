@@ -54,7 +54,7 @@ class SideEffectsHelper(object):
         self._defaults['IsDebounced']['isDebounced'] = None
         self._defaults['OpenSession'] = {}
         self._defaults['OpenSession']['return'] = 0
-        self._defaults['OpenSession']['sessionHandle'] = None
+        self._defaults['OpenSession']['vi'] = None
         self._defaults['WaitForDebounce'] = {}
         self._defaults['WaitForDebounce']['return'] = 0
 
@@ -64,32 +64,32 @@ class SideEffectsHelper(object):
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-    def niSE_CloseSession(self, session_handle):  # noqa: N802
+    def niSE_CloseSession(self, vi):  # noqa: N802
         if self._defaults['CloseSession']['return'] != 0:
             return self._defaults['CloseSession']['return']
         return self._defaults['CloseSession']['return']
 
-    def niSE_Connect(self, session_handle, connect_spec, multiconnect_mode, wait_for_debounce):  # noqa: N802
+    def niSE_Connect(self, vi, connect_spec, multiconnect_mode, wait_for_debounce):  # noqa: N802
         if self._defaults['Connect']['return'] != 0:
             return self._defaults['Connect']['return']
         return self._defaults['Connect']['return']
 
-    def niSE_ConnectAndDisconnect(self, session_handle, connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce):  # noqa: N802
+    def niSE_ConnectAndDisconnect(self, vi, connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce):  # noqa: N802
         if self._defaults['ConnectAndDisconnect']['return'] != 0:
             return self._defaults['ConnectAndDisconnect']['return']
         return self._defaults['ConnectAndDisconnect']['return']
 
-    def niSE_Disconnect(self, session_handle, disconnect_spec):  # noqa: N802
+    def niSE_Disconnect(self, vi, disconnect_spec):  # noqa: N802
         if self._defaults['Disconnect']['return'] != 0:
             return self._defaults['Disconnect']['return']
         return self._defaults['Disconnect']['return']
 
-    def niSE_DisconnectAll(self, session_handle):  # noqa: N802
+    def niSE_DisconnectAll(self, vi):  # noqa: N802
         if self._defaults['DisconnectAll']['return'] != 0:
             return self._defaults['DisconnectAll']['return']
         return self._defaults['DisconnectAll']['return']
 
-    def niSE_ExpandRouteSpec(self, session_handle, route_spec, expand_action, expanded_route_spec, expanded_route_spec_size):  # noqa: N802
+    def niSE_ExpandRouteSpec(self, vi, route_spec, expand_action, expanded_route_spec, expanded_route_spec_size):  # noqa: N802
         if self._defaults['ExpandRouteSpec']['return'] != 0:
             return self._defaults['ExpandRouteSpec']['return']
         # expanded_route_spec_size
@@ -104,7 +104,7 @@ class SideEffectsHelper(object):
         expanded_route_spec.value = self._defaults['ExpandRouteSpec']['expandedRouteSpec'].encode('ascii')
         return self._defaults['ExpandRouteSpec']['return']
 
-    def niSE_FindRoute(self, session_handle, channel1, channel2, route_spec, route_spec_size, path_capability):  # noqa: N802
+    def niSE_FindRoute(self, vi, channel1, channel2, route_spec, route_spec_size, path_capability):  # noqa: N802
         if self._defaults['FindRoute']['return'] != 0:
             return self._defaults['FindRoute']['return']
         # route_spec_size
@@ -124,7 +124,7 @@ class SideEffectsHelper(object):
         route_spec.value = self._defaults['FindRoute']['routeSpec'].encode('ascii')
         return self._defaults['FindRoute']['return']
 
-    def niSE_GetAllConnections(self, session_handle, route_spec, route_spec_size):  # noqa: N802
+    def niSE_GetAllConnections(self, vi, route_spec, route_spec_size):  # noqa: N802
         if self._defaults['GetAllConnections']['return'] != 0:
             return self._defaults['GetAllConnections']['return']
         # route_spec_size
@@ -139,7 +139,7 @@ class SideEffectsHelper(object):
         route_spec.value = self._defaults['GetAllConnections']['routeSpec'].encode('ascii')
         return self._defaults['GetAllConnections']['return']
 
-    def niSE_GetError(self, session_handle, error_number, error_description, error_description_size):  # noqa: N802
+    def niSE_GetError(self, vi, error_number, error_description, error_description_size):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
             return self._defaults['GetError']['return']
         # error_number
@@ -159,7 +159,7 @@ class SideEffectsHelper(object):
         error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
         return self._defaults['GetError']['return']
 
-    def niSE_GetIviDeviceSession(self, session_handle, ivi_logical_name, ivi_session_handle):  # noqa: N802
+    def niSE_GetIviDeviceSession(self, vi, ivi_logical_name, ivi_session_handle):  # noqa: N802
         if self._defaults['GetIviDeviceSession']['return'] != 0:
             return self._defaults['GetIviDeviceSession']['return']
         # ivi_session_handle
@@ -169,7 +169,7 @@ class SideEffectsHelper(object):
             ivi_session_handle.contents.value = self._defaults['GetIviDeviceSession']['iviSessionHandle']
         return self._defaults['GetIviDeviceSession']['return']
 
-    def niSE_IsConnected(self, session_handle, route_spec, is_connected):  # noqa: N802
+    def niSE_IsConnected(self, vi, route_spec, is_connected):  # noqa: N802
         if self._defaults['IsConnected']['return'] != 0:
             return self._defaults['IsConnected']['return']
         # is_connected
@@ -179,7 +179,7 @@ class SideEffectsHelper(object):
             is_connected.contents.value = self._defaults['IsConnected']['isConnected']
         return self._defaults['IsConnected']['return']
 
-    def niSE_IsDebounced(self, session_handle, is_debounced):  # noqa: N802
+    def niSE_IsDebounced(self, vi, is_debounced):  # noqa: N802
         if self._defaults['IsDebounced']['return'] != 0:
             return self._defaults['IsDebounced']['return']
         # is_debounced
@@ -189,17 +189,17 @@ class SideEffectsHelper(object):
             is_debounced.contents.value = self._defaults['IsDebounced']['isDebounced']
         return self._defaults['IsDebounced']['return']
 
-    def niSE_OpenSession(self, virtual_device_name, option_string, session_handle):  # noqa: N802
+    def niSE_OpenSession(self, virtual_device_name, option_string, vi):  # noqa: N802
         if self._defaults['OpenSession']['return'] != 0:
             return self._defaults['OpenSession']['return']
-        # session_handle
-        if self._defaults['OpenSession']['sessionHandle'] is None:
-            raise MockFunctionCallError("niSE_OpenSession", param='sessionHandle')
-        if session_handle is not None:
-            session_handle.contents.value = self._defaults['OpenSession']['sessionHandle']
+        # vi
+        if self._defaults['OpenSession']['vi'] is None:
+            raise MockFunctionCallError("niSE_OpenSession", param='vi')
+        if vi is not None:
+            vi.contents.value = self._defaults['OpenSession']['vi']
         return self._defaults['OpenSession']['return']
 
-    def niSE_WaitForDebounce(self, session_handle, maximum_time_ms):  # noqa: N802
+    def niSE_WaitForDebounce(self, vi, maximum_time_ms):  # noqa: N802
         if self._defaults['WaitForDebounce']['return'] != 0:
             return self._defaults['WaitForDebounce']['return']
         return self._defaults['WaitForDebounce']['return']

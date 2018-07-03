@@ -12,7 +12,7 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -36,7 +36,7 @@ niSE_GetError is not being performed.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -61,7 +61,7 @@ virtual device again until you call niSE_OpenSession.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -146,7 +146,7 @@ has debounced.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -278,7 +278,7 @@ then reopened.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -323,7 +323,7 @@ specification string but reports the error on completion.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -347,7 +347,7 @@ of the switch states for the system.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -446,7 +446,7 @@ niSE_ConnectAndDisconnect) that use route specification strings.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -569,7 +569,7 @@ specification strings.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -637,7 +637,7 @@ that use route specification strings.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -731,7 +731,7 @@ errorNumber and errorDescription can change the function's behavior.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -779,7 +779,7 @@ undefined, and potentially unwanted, behavior.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -829,7 +829,7 @@ returns true if connected.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
@@ -885,7 +885,7 @@ information about valid entries for the option string.
             },
             {
                 'direction': 'out',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': 'The session referencing this NI Switch Executive virtual device session.',
@@ -916,7 +916,7 @@ virtual device from a single process at a time.
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'sessionHandle',
+                'name': 'vi',
                 'type': 'ViSession',
 'documentation': {
 'description': '''
