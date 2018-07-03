@@ -5,10 +5,10 @@
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
 functions_codegen_method = {
-    'OpenSession':                     { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },#1
-    'CloseSession':                    { 'codegen_method': 'private',  },#1
-    'GetError':                        { 'codegen_method': 'private',  },#1
-    'ClearError':                      { 'codegen_method': 'no',       },#1
+    'OpenSession':                  { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
+    'CloseSession':                 { 'codegen_method': 'private',                                              },
+    'GetError':                     { 'codegen_method': 'private',                                              },
+    'ClearError':                   { 'codegen_method': 'no',                                                   },
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -22,9 +22,10 @@ functions_enums = {
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
-#    'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-#    'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-#    'ReadMultiPoint':               { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'GetError':                     { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'errorDescriptionSize'     }, }, }, },
+    'FindRoute':                    { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'routeSpecSize'            }, }, }, },
+    'ExpandRouteSpec':              { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'expandedRouteSpecSize'    }, }, }, },
+    'GetAllConnections':            { 'parameters': { 1: { 'size': {'mechanism':'ivi-dance', 'value':'routeSpecSize'            }, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -36,10 +37,12 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-#    'InitWithOptions':           { 'parameters': { 1: { 'default_value': False, },
-#                                                   2: { 'default_value': False, },
-#                                                   3: { 'default_value': '""', }, }, },
-#    'ConfigureMultiPoint':       { 'parameters': { 3: { 'default_value': 'SampleTrigger.IMMEDIATE', },
-#                                                   4: { 'default_value': 'datetime.timedelta(seconds=-1)', }, }, },
-#    'ConfigureThermocouple':     { 'parameters': { 2: { 'default_value': 'ThermocoupleReferenceJunctionType.FIXED', }, }, },
+    'OpenSession':                  { 'parameters': { 1: { 'default_value': '',                                      }, }, },
+    'Connect':                      { 'parameters': { 2: { 'default_value': 'MulticonnectMode.DEFAULT',              },
+                                                      3: { 'default_value': True,                                    }, }, },
+    'ConnectAndDisconnect':         { 'parameters': { 3: { 'default_value': 'MulticonnectMode.DEFAULT',              },
+                                                      4: { 'default_value': 'OperationOrder.BREAK_AFTER_MAKE',       },
+                                                      5: { 'default_value': True,                                    }, }, },
+    'WaitForDebounce':              { 'parameters': { 1: { 'default_value': -1,                                      }, }, },
+    'ExpandRouteSpec':              { 'parameters': { 2: { 'default_value': 'ExpandAction.EXPAND_TO_ROUTES',         }, }, },
 }

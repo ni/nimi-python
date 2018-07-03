@@ -188,19 +188,6 @@ class _SessionBase(object):
                 pass NULL for this parameter if you are not interested in the return
                 value.
 
-            error_description (NISEBuffer): By reference buffer which is to be filled with the error description
-                string. You may pass NULL for this parameter if you are not interested
-                in the return value. To obtain the error description string, you should
-                pass a buffer to this parameter. The size of the buffer required may be
-                obtained by calling the method with NULL for this parameter and a
-                valid NISEInt32 to the error description size parameter. The error
-                description size will contain the size needed to hold the entire route
-                specification (including the NULL termination character). Common
-                operation is to call the method twice. The first time you call the
-                method you can determine the size needed to hold the route
-                specification string. Allocate a buffer of the appropriate size and then
-                re-call the method to obtain the entire buffer.
-
             error_description_size (NISEInt32): As input, it is the size of the error description string buffer. As
                 output, it is the Size of the entire error description string (may be
                 larger than the buffer size as the method always returns the size
@@ -222,8 +209,12 @@ class _SessionBase(object):
         error_description_ctype = _visatype.NISEBuffer()  # case S200
         error_description_size_ctype = _visatype.NISEInt32()  # case S200
         error_code = self._library.niSE_GetError(session_handle_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), None if error_description_ctype is None else (ctypes.pointer(error_description_ctype)), None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_description_size_ctype = _visatype.NISEInt32()  # case S200
+        error_description_ctype = _visatype.NISEBuffer()  # case S200
+        error_code = self._library.niSE_GetError(session_handle_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), None if error_description_ctype is None else (ctypes.pointer(error_description_ctype)), None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return NISEInt32(error_number_ctype.value), NISEBuffer(error_description_ctype.value), NISEInt32(error_description_size_ctype.value)
+        return NISEInt32(error_number_ctype.value), NISEBuffer(error_description_ctype.value)
 
 
 class Session(_SessionBase):
@@ -341,7 +332,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def connect(self, session_handle, connect_spec, multiconnect_mode, wait_for_debounce):
+    def connect(self, session_handle, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
         '''connect
 
         Connects the routes specified by the connection specification. When
@@ -405,7 +396,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def connect_and_disconnect(self, session_handle, connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce):
+    def connect_and_disconnect(self, session_handle, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.BREAK_AFTER_MAKE, wait_for_debounce=True):
         '''connect_and_disconnect
 
         Connects routes and disconnects routes in a similar fashion to
@@ -559,7 +550,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def expand_route_spec(self, session_handle, route_spec, expand_action):
+    def expand_route_spec(self, session_handle, route_spec, expand_action=enums.ExpandAction.EXPAND_TO_ROUTES):
         '''expand_route_spec
 
         Expands a route spec string to yield more information about the routes
@@ -593,21 +584,6 @@ class Session(_SessionBase):
 
 
         Returns:
-            expanded_route_spec (NISEBuffer): The expanded route spec. Route specification strings can be directly
-                passed to connect, disconnect, or connect_and_disconnect
-                Refer to Route Specification Strings in the NI Switch Executive Help for
-                more information. You may pass NULL for this parameter if you are not
-                interested in the return value. To obtain the route specification
-                string, you should pass a buffer to this parameter. The size of the
-                buffer required may be obtained by calling the method with NULL for
-                this parameter and a valid NISEInt32 to routeSpecSize. The routeSpecSize
-                will contain the size needed to hold the entire route specification
-                (including the NULL termination character). Common operation is to call
-                the method twice. The first time you call the method you can
-                determine the size needed to hold the route specification string.
-                Allocate a buffer of the appropriate size and then re-call the method
-                to obtain the entire buffer.
-
             expanded_route_spec_size (NISEInt32): The routeSpecSize is an NISEInt32 that is passed by reference into the
                 method. As an input, it is the size of the route spec string buffer
                 being passed. If the route spec string is larger than the string buffer
@@ -628,8 +604,12 @@ class Session(_SessionBase):
         expanded_route_spec_ctype = _visatype.NISEBuffer()  # case S200
         expanded_route_spec_size_ctype = _visatype.NISEInt32()  # case S200
         error_code = self._library.niSE_ExpandRouteSpec(session_handle_ctype, route_spec_ctype, expand_action_ctype, None if expanded_route_spec_ctype is None else (ctypes.pointer(expanded_route_spec_ctype)), None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        expanded_route_spec_size_ctype = _visatype.NISEInt32()  # case S200
+        expanded_route_spec_ctype = _visatype.NISEBuffer()  # case S200
+        error_code = self._library.niSE_ExpandRouteSpec(session_handle_ctype, route_spec_ctype, expand_action_ctype, None if expanded_route_spec_ctype is None else (ctypes.pointer(expanded_route_spec_ctype)), None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBuffer(expanded_route_spec_ctype.value), NISEInt32(expanded_route_spec_size_ctype.value)
+        return NISEBuffer(expanded_route_spec_ctype.value)
 
     @ivi_synchronized
     def find_route(self, session_handle, channel1, channel2):
@@ -658,23 +638,6 @@ class Session(_SessionBase):
 
 
         Returns:
-            route_spec (NISEBuffer): The fully specified route path complete with delimiting square
-                bracketsâ€”if the route exists or is possible. An example of a fully
-                specified route string is: [A->Switch1/r0->B] Route specification
-                strings can be directly passed to connect, disconnect, or
-                connect_and_disconnect Refer to Route Specification Strings in the
-                NI Switch Executive Help for more information. You may pass NULL for
-                this parameter if you are not interested in the return value. To obtain
-                the route specification string, you should pass a buffer to this
-                parameter. The size of the buffer required may be obtained by calling
-                the method with NULL for this parameter and a valid NISEInt32 to
-                routeSpecSize. The routeSpecSize will contain the size needed to hold
-                the entire route specification (including the NULL termination
-                character). Common operation is to call the method twice. The first
-                time you call the method you can determine the size needed to hold the
-                route specification string. Allocate a buffer of the appropriate size
-                and then re-call the method to obtain the entire buffer.
-
             route_spec_size (NISEInt32): The routeSpecSize is an NISEInt32 that is passed by reference into the
                 method. As an input, it is the size of the route string buffer being
                 passed. If the route string is larger than the string buffer being
@@ -713,8 +676,12 @@ class Session(_SessionBase):
         route_spec_size_ctype = _visatype.NISEInt32()  # case S200
         path_capability_ctype = _visatype.NISEInt32()  # case S200
         error_code = self._library.niSE_FindRoute(session_handle_ctype, channel1_ctype, channel2_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        route_spec_size_ctype = _visatype.NISEInt32()  # case S200
+        route_spec_ctype = _visatype.NISEBuffer()  # case S200
+        error_code = self._library.niSE_FindRoute(session_handle_ctype, channel1_ctype, channel2_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBuffer(route_spec_ctype.value), NISEInt32(route_spec_size_ctype.value), enums.PathCapability(path_capability_ctype.value)
+        return NISEBuffer(route_spec_ctype.value), enums.PathCapability(path_capability_ctype.value)
 
     @ivi_synchronized
     def get_all_connections(self, session_handle):
@@ -732,22 +699,6 @@ class Session(_SessionBase):
 
 
         Returns:
-            route_spec (NISEBuffer): The route spec of all currently connected routes and route groups. Route
-                specification strings can be directly passed to connect,
-                disconnect, connect_and_disconnect, or expand_route_spec
-                Refer to Route Specification Strings in the NI Switch Executive Help for
-                more information. You may pass NULL for this parameter if you are not
-                interested in the return value. To obtain the route specification
-                string, you should pass a buffer to this parameter. The size of the
-                buffer required may be obtained by calling the method with NULL for
-                this parameter and a valid NISEInt32 to routeSpecSize. The routeSpecSize
-                will contain the size needed to hold the entire route specification
-                (including the NULL termination character). Common operation is to call
-                the method twice. The first time you call the method you can
-                determine the size needed to hold the route specification string.
-                Allocate a buffer of the appropriate size and then re-call the method
-                to obtain the entire buffer.
-
             route_spec_size (NISEInt32): The routeSpecSize is an NISEInt32 that is passed by reference into the
                 method. As an input, it is the size of the route spec string buffer
                 being passed. If the route spec string is larger than the string buffer
@@ -764,8 +715,12 @@ class Session(_SessionBase):
         route_spec_ctype = _visatype.NISEBuffer()  # case S200
         route_spec_size_ctype = _visatype.NISEInt32()  # case S200
         error_code = self._library.niSE_GetAllConnections(session_handle_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        route_spec_size_ctype = _visatype.NISEInt32()  # case S200
+        route_spec_ctype = _visatype.NISEBuffer()  # case S200
+        error_code = self._library.niSE_GetAllConnections(session_handle_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBuffer(route_spec_ctype.value), NISEInt32(route_spec_size_ctype.value)
+        return NISEBuffer(route_spec_ctype.value)
 
     @ivi_synchronized
     def get_ivi_device_session(self, session_handle, ivi_logical_name):
@@ -859,7 +814,7 @@ class Session(_SessionBase):
         return NISEBoolean(is_debounced_ctype.value)
 
     @ivi_synchronized
-    def _open_session(self, virtual_device_name, option_string):
+    def _open_session(self, virtual_device_name, option_string=):
         '''_open_session
 
         Opens a session to a specified NI Switch Executive virtual device. Opens
@@ -898,7 +853,7 @@ class Session(_SessionBase):
         return NISESession(session_handle_ctype.value)
 
     @ivi_synchronized
-    def wait_for_debounce(self, session_handle, maximum_time_ms):
+    def wait_for_debounce(self, session_handle, maximum_time_ms=-1):
         '''wait_for_debounce
 
         Waits for all of the switches in the NI Switch Executive virtual device

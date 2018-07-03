@@ -121,7 +121,7 @@ connect
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: connect(session_handle, connect_spec, multiconnect_mode, wait_for_debounce)
+    .. py:method:: connect(session_handle, connect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, wait_for_debounce=True)
 
             Connects the routes specified by the connection specification. When
             connecting, it may allow for multiconnection based on the
@@ -208,7 +208,7 @@ connect_and_disconnect
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: connect_and_disconnect(session_handle, connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce)
+    .. py:method:: connect_and_disconnect(session_handle, connect_spec, disconnect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, operation_order=nise.OperationOrder.BREAK_AFTER_MAKE, wait_for_debounce=True)
 
             Connects routes and disconnects routes in a similar fashion to
             :py:meth:`nise.Session.connect` and :py:meth:`nise.Session.disconnect` except that the operations happen in
@@ -416,7 +416,7 @@ expand_route_spec
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: expand_route_spec(session_handle, route_spec, expand_action)
+    .. py:method:: expand_route_spec(session_handle, route_spec, expand_action=nise.ExpandAction.EXPAND_TO_ROUTES)
 
             Expands a route spec string to yield more information about the routes
             and route groups within the spec. The route specification string
@@ -471,32 +471,8 @@ expand_route_spec
 
             :type expand_action: :py:data:`nise.ExpandAction`
 
-            :rtype: tuple (expanded_route_spec, expanded_route_spec_size)
-
-                WHERE
-
-                expanded_route_spec (NISEBuffer): 
-
-
-                    The expanded route spec. Route specification strings can be directly
-                    passed to :py:meth:`nise.Session.connect`, :py:meth:`nise.Session.disconnect`, or :py:meth:`nise.Session.connect_and_disconnect`
-                    Refer to Route Specification Strings in the NI Switch Executive Help for
-                    more information. You may pass NULL for this parameter if you are not
-                    interested in the return value. To obtain the route specification
-                    string, you should pass a buffer to this parameter. The size of the
-                    buffer required may be obtained by calling the method with NULL for
-                    this parameter and a valid NISEInt32 to routeSpecSize. The routeSpecSize
-                    will contain the size needed to hold the entire route specification
-                    (including the NULL termination character). Common operation is to call
-                    the method twice. The first time you call the method you can
-                    determine the size needed to hold the route specification string.
-                    Allocate a buffer of the appropriate size and then re-call the method
-                    to obtain the entire buffer.
-
-                    
-
-
-                expanded_route_spec_size (NISEInt32): 
+            :rtype: NISEInt32
+            :return:
 
 
                     The routeSpecSize is an NISEInt32 that is passed by reference into the
@@ -567,32 +543,9 @@ find_route
 
             :type channel2: NISEConstString
 
-            :rtype: tuple (route_spec, route_spec_size, path_capability)
+            :rtype: tuple (route_spec_size, path_capability)
 
                 WHERE
-
-                route_spec (NISEBuffer): 
-
-
-                    The fully specified route path complete with delimiting square
-                    bracketsâ€”if the route exists or is possible. An example of a fully
-                    specified route string is: [A->Switch1/r0->B] Route specification
-                    strings can be directly passed to :py:meth:`nise.Session.connect`, :py:meth:`nise.Session.disconnect`, or
-                    :py:meth:`nise.Session.connect_and_disconnect` Refer to Route Specification Strings in the
-                    NI Switch Executive Help for more information. You may pass NULL for
-                    this parameter if you are not interested in the return value. To obtain
-                    the route specification string, you should pass a buffer to this
-                    parameter. The size of the buffer required may be obtained by calling
-                    the method with NULL for this parameter and a valid NISEInt32 to
-                    routeSpecSize. The routeSpecSize will contain the size needed to hold
-                    the entire route specification (including the NULL termination
-                    character). Common operation is to call the method twice. The first
-                    time you call the method you can determine the size needed to hold the
-                    route specification string. Allocate a buffer of the appropriate size
-                    and then re-call the method to obtain the entire buffer.
-
-                    
-
 
                 route_spec_size (NISEInt32): 
 
@@ -665,33 +618,8 @@ get_all_connections
 
             :type session_handle: NISESession
 
-            :rtype: tuple (route_spec, route_spec_size)
-
-                WHERE
-
-                route_spec (NISEBuffer): 
-
-
-                    The route spec of all currently connected routes and route groups. Route
-                    specification strings can be directly passed to :py:meth:`nise.Session.connect`,
-                    :py:meth:`nise.Session.disconnect`, :py:meth:`nise.Session.connect_and_disconnect`, or :py:meth:`nise.Session.expand_route_spec`
-                    Refer to Route Specification Strings in the NI Switch Executive Help for
-                    more information. You may pass NULL for this parameter if you are not
-                    interested in the return value. To obtain the route specification
-                    string, you should pass a buffer to this parameter. The size of the
-                    buffer required may be obtained by calling the method with NULL for
-                    this parameter and a valid NISEInt32 to routeSpecSize. The routeSpecSize
-                    will contain the size needed to hold the entire route specification
-                    (including the NULL termination character). Common operation is to call
-                    the method twice. The first time you call the method you can
-                    determine the size needed to hold the route specification string.
-                    Allocate a buffer of the appropriate size and then re-call the method
-                    to obtain the entire buffer.
-
-                    
-
-
-                route_spec_size (NISEInt32): 
+            :rtype: NISEInt32
+            :return:
 
 
                     The routeSpecSize is an NISEInt32 that is passed by reference into the
@@ -856,7 +784,7 @@ wait_for_debounce
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: wait_for_debounce(session_handle, maximum_time_ms)
+    .. py:method:: wait_for_debounce(session_handle, maximum_time_ms=-1)
 
             Waits for all of the switches in the NI Switch Executive virtual device
             to debounce. This method does not return until either the switching
