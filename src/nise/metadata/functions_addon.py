@@ -46,3 +46,20 @@ functions_default_value = {
     'WaitForDebounce':              { 'parameters': { 1: { 'default_value': -1,                                      }, }, },
     'ExpandRouteSpec':              { 'parameters': { 2: { 'default_value': 'ExpandAction.ROUTES',                   }, }, },
 }
+
+functions_locking = {
+    'ClearError':                   { 'use_session_lock': False,  },  # No locking in this API
+    'CloseSession':                 { 'use_session_lock': False,  },  # No locking in this API
+    'Connect':                      { 'use_session_lock': False,  },  # No locking in this API
+    'ConnectAndDisconnect':         { 'use_session_lock': False,  },  # No locking in this API
+    'Disconnect':                   { 'use_session_lock': False,  },  # No locking in this API
+    'DisconnectAll':                { 'use_session_lock': False,  },  # No locking in this API
+    'ExpandRouteSpec':              { 'use_session_lock': False,  },  # No locking in this API
+    'FindRoute':                    { 'use_session_lock': False,  },  # No locking in this API
+    'GetAllConnections':            { 'use_session_lock': False,  },  # No locking in this API
+    'GetIviDeviceSession':          { 'use_session_lock': False,  },  # No locking in this API
+    'IsConnected':                  { 'use_session_lock': False,  },  # No locking in this API
+    'IsDebounced':                  { 'use_session_lock': False,  },  # No locking in this API
+    'OpenSession':                  { 'use_session_lock': False,  },  # No locking in this API
+    'WaitForDebounce':              { 'use_session_lock': False,  },  # No locking in this API
+}
