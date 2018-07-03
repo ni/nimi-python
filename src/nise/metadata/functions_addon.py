@@ -37,7 +37,7 @@ functions_is_error_handling = {
 
 # Default values for method parameters
 functions_default_value = {
-    'OpenSession':                  { 'parameters': { 1: { 'default_value': '',                                      }, }, },
+    'OpenSession':                  { 'parameters': { 1: { 'default_value': '""',                                    }, }, },
     'Connect':                      { 'parameters': { 2: { 'default_value': 'MulticonnectMode.DEFAULT',              },
                                                       3: { 'default_value': True,                                    }, }, },
     'ConnectAndDisconnect':         { 'parameters': { 3: { 'default_value': 'MulticonnectMode.DEFAULT',              },

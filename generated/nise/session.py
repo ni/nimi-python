@@ -814,7 +814,7 @@ class Session(_SessionBase):
         return NISEBoolean(is_debounced_ctype.value)
 
     @ivi_synchronized
-    def _open_session(self, virtual_device_name, option_string=):
+    def _open_session(self, virtual_device_name, option_string=""):
         '''_open_session
 
         Opens a session to a specified NI Switch Executive virtual device. Opens
