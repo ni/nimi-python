@@ -156,7 +156,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def _get_error(self, session_handle):
+    def _get_error(self):
         '''_get_error
 
         Get error information of the first error that occurred. If a valid
@@ -177,21 +177,16 @@ class _SessionBase(object):
         of the parameters are NULL tolerant. Note that passing NULL for both
         errorNumber and errorDescription can change the method's behavior.
 
-        Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-
         Returns:
-            error_number (NISEInt32): By reference parameter which returns the error number of the first error
+            error_number (int): By reference parameter which returns the error number of the first error
                 which occurred on the session since the error was last cleared. You may
                 pass NULL for this parameter if you are not interested in the return
                 value.
 
-            error_description_size (NISEInt32): As input, it is the size of the error description string buffer. As
+            error_description_size (int): As input, it is the size of the error description string buffer. As
                 output, it is the Size of the entire error description string (may be
                 larger than the buffer size as the method always returns the size
-                needed to hold the entire buffer). This parameter is a NISEInt32 that is
+                needed to hold the entire buffer). This parameter is a ViInt32 that is
                 passed by reference into the method. As an input, it is the size of
                 the error description buffer being passed. If the error description
                 string is larger than the string buffer being passed, only the portion
@@ -204,17 +199,17 @@ class _SessionBase(object):
                 value for it.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        error_number_ctype = _visatype.NISEInt32()  # case S200
-        error_description_ctype = _visatype.NISEBuffer()  # case S200
-        error_description_size_ctype = _visatype.NISEInt32()  # case S200
-        error_code = self._library.niSE_GetError(session_handle_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), None if error_description_ctype is None else (ctypes.pointer(error_description_ctype)), None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        error_number_ctype = _visatype.ViInt32()  # case S200
+        error_description_ctype = None  # case C050
+        error_description_size_ctype = _visatype.ViInt32()  # case S200
+        error_code = self._library.niSE_GetError(session_handle_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_description_size_ctype = _visatype.NISEInt32()  # case S200
-        error_description_ctype = _visatype.NISEBuffer()  # case S200
-        error_code = self._library.niSE_GetError(session_handle_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), None if error_description_ctype is None else (ctypes.pointer(error_description_ctype)), None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
+        error_description_size_ctype = _visatype.ViInt32()  # case S200
+        error_description_ctype = (_visatype.ViChar * error_description_size_ctype.value)()  # case C060
+        error_code = self._library.niSE_GetError(session_handle_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return NISEInt32(error_number_ctype.value), NISEBuffer(error_description_ctype.value)
+        return int(error_number_ctype.value), error_description_ctype.value.decode(self._encoding)
 
 
 class Session(_SessionBase):
@@ -239,9 +234,9 @@ class Session(_SessionBase):
         virtual device from a single process at a time.
 
         Args:
-            virtual_device_name (NISEConstString): The name of the NI Switch Executive virtual device.
+            virtual_device_name (str): The name of the NI Switch Executive virtual device.
 
-            options (NISEConstString): Specifies the initial value of certain properties for the session. The
+            options (str): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -271,7 +266,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            session_handle (NISESession): The session referencing this NI Switch Executive virtual device session.
+            session_handle (int): The session referencing this NI Switch Executive virtual device session.
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
@@ -311,8 +306,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    @ivi_synchronized
-    def _close_session(self, session_handle):
+    def _close_session(self):
         '''_close_session
 
         Reduces the reference count of open sessions by one. If the reference
@@ -320,19 +314,13 @@ class Session(_SessionBase):
         driver uses and closes any open IVI switch sessions. After calling the
         _close_session method, you should not use the NI Switch Executive
         virtual device again until you call __init__.
-
-        Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
         error_code = self._library.niSE_CloseSession(session_handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    @ivi_synchronized
-    def connect(self, session_handle, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
+    def connect(self, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
         '''connect
 
         Connects the routes specified by the connection specification. When
@@ -347,10 +335,7 @@ class Session(_SessionBase):
         has debounced.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            connect_spec (NISEConstString): String describing the connections to be made. The route specification
+            connect_spec (str): String describing the connections to be made. The route specification
                 strings are best summarized as a series of routes delimited by
                 ampersands. The specified routes may be route names, route group names,
                 or fully specified route paths delimited by square brackets. Some
@@ -379,7 +364,7 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            wait_for_debounce (NISEBoolean): Waits (if true) for switches to debounce between its connect and
+            wait_for_debounce (bool): Waits (if true) for switches to debounce between its connect and
                 disconnect operations. If false, it immediately begins the second
                 operation after completing the first. The order of connect and
                 disconnect operation is set by the Operation Order input.
@@ -387,16 +372,15 @@ class Session(_SessionBase):
         '''
         if type(multiconnect_mode) is not enums.MulticonnectMode:
             raise TypeError('Parameter mode must be of type ' + str(enums.MulticonnectMode))
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        connect_spec_ctype = _visatype.NISEConstString(connect_spec)  # case S150
-        multiconnect_mode_ctype = _visatype.NISEInt32(multiconnect_mode.value)  # case S130
-        wait_for_debounce_ctype = _visatype.NISEBoolean(wait_for_debounce)  # case S150
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
+        multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
+        wait_for_debounce_ctype = _visatype.ViBoolean(wait_for_debounce)  # case S150
         error_code = self._library.niSE_Connect(session_handle_ctype, connect_spec_ctype, multiconnect_mode_ctype, wait_for_debounce_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    @ivi_synchronized
-    def connect_and_disconnect(self, session_handle, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):
+    def connect_and_disconnect(self, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):
         '''connect_and_disconnect
 
         Connects routes and disconnects routes in a similar fashion to
@@ -419,10 +403,7 @@ class Session(_SessionBase):
         then reopened.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            connect_spec (NISEConstString): String describing the connections to be made. The route specification
+            connect_spec (str): String describing the connections to be made. The route specification
                 strings are best summarized as a series of routes delimited by
                 ampersands. The specified routes may be route names, route group names,
                 or fully specified route paths delimited by square brackets. Some
@@ -431,7 +412,7 @@ class Session(_SessionBase):
                 [A->Switch1/r0->B] Refer to Route Specification Strings in the NI Switch
                 Executive Help for more information.
 
-            disconnect_spec (NISEConstString): String describing the disconnections to be made. The route specification
+            disconnect_spec (str): String describing the disconnections to be made. The route specification
                 strings are best summarized as a series of routes delimited by
                 ampersands. The specified routes may be route names, route group names,
                 or fully specified route paths delimited by square brackets. Some
@@ -477,7 +458,7 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            wait_for_debounce (NISEBoolean): Waits (if true) for switches to debounce between its connect and
+            wait_for_debounce (bool): Waits (if true) for switches to debounce between its connect and
                 disconnect operations. If false, it immediately begins the second
                 operation after completing the first. The order of connect and
                 disconnect operation is set by the Operation Order input.
@@ -487,18 +468,17 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.MulticonnectMode))
         if type(operation_order) is not enums.OperationOrder:
             raise TypeError('Parameter mode must be of type ' + str(enums.OperationOrder))
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        connect_spec_ctype = _visatype.NISEConstString(connect_spec)  # case S150
-        disconnect_spec_ctype = _visatype.NISEConstString(disconnect_spec)  # case S150
-        multiconnect_mode_ctype = _visatype.NISEInt32(multiconnect_mode.value)  # case S130
-        operation_order_ctype = _visatype.NISEInt32(operation_order.value)  # case S130
-        wait_for_debounce_ctype = _visatype.NISEBoolean(wait_for_debounce)  # case S150
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
+        disconnect_spec_ctype = ctypes.create_string_buffer(disconnect_spec.encode(self._encoding))  # case C020
+        multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
+        operation_order_ctype = _visatype.ViInt32(operation_order.value)  # case S130
+        wait_for_debounce_ctype = _visatype.ViBoolean(wait_for_debounce)  # case S150
         error_code = self._library.niSE_ConnectAndDisconnect(session_handle_ctype, connect_spec_ctype, disconnect_spec_ctype, multiconnect_mode_ctype, operation_order_ctype, wait_for_debounce_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    @ivi_synchronized
-    def disconnect(self, session_handle, disconnect_spec):
+    def disconnect(self, disconnect_spec):
         '''disconnect
 
         Disconnects the routes specified in the Disconnection Specification. If
@@ -511,10 +491,7 @@ class Session(_SessionBase):
         specification string but reports the error on completion.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            disconnect_spec (NISEConstString): String describing the disconnections to be made. The route specification
+            disconnect_spec (str): String describing the disconnections to be made. The route specification
                 strings are best summarized as a series of routes delimited by
                 ampersands. The specified routes may be route names, route group names,
                 or fully specified route paths delimited by square brackets. Some
@@ -524,33 +501,26 @@ class Session(_SessionBase):
                 Executive Help for more information.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        disconnect_spec_ctype = _visatype.NISEConstString(disconnect_spec)  # case S150
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        disconnect_spec_ctype = ctypes.create_string_buffer(disconnect_spec.encode(self._encoding))  # case C020
         error_code = self._library.niSE_Disconnect(session_handle_ctype, disconnect_spec_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    @ivi_synchronized
-    def disconnect_all(self, session_handle):
+    def disconnect_all(self):
         '''disconnect_all
 
         Disconnects all connections on every IVI switch device managed by the
         NISE session reference passed to this method. disconnect_all
         ignores all multiconnect modes. Calling disconnect_all resets all
         of the switch states for the system.
-
-        Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
         error_code = self._library.niSE_DisconnectAll(session_handle_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    @ivi_synchronized
-    def expand_route_spec(self, session_handle, route_spec, expand_action=enums.ExpandAction.ROUTES):
+    def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES):
         '''expand_route_spec
 
         Expands a route spec string to yield more information about the routes
@@ -560,10 +530,7 @@ class Session(_SessionBase):
         connect_and_disconnect) that use route specification strings.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            route_spec (NISEConstString): String describing the routes and route groups to expand. The route
+            route_spec (str): String describing the routes and route groups to expand. The route
                 specification strings are best summarized as a series of routes
                 delimited by ampersands. The specified routes may be route names, route
                 group names, or fully specified route paths delimited by square
@@ -584,7 +551,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            expanded_route_spec_size (NISEInt32): The routeSpecSize is an NISEInt32 that is passed by reference into the
+            expanded_route_spec_size (int): The routeSpecSize is an ViInt32 that is passed by reference into the
                 method. As an input, it is the size of the route spec string buffer
                 being passed. If the route spec string is larger than the string buffer
                 being passed, only the portion of the route spec string that can fit in
@@ -598,21 +565,20 @@ class Session(_SessionBase):
         '''
         if type(expand_action) is not enums.ExpandAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExpandAction))
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        route_spec_ctype = _visatype.NISEConstString(route_spec)  # case S150
-        expand_action_ctype = _visatype.NISEInt32(expand_action.value)  # case S130
-        expanded_route_spec_ctype = _visatype.NISEBuffer()  # case S200
-        expanded_route_spec_size_ctype = _visatype.NISEInt32()  # case S200
-        error_code = self._library.niSE_ExpandRouteSpec(session_handle_ctype, route_spec_ctype, expand_action_ctype, None if expanded_route_spec_ctype is None else (ctypes.pointer(expanded_route_spec_ctype)), None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
+        expand_action_ctype = _visatype.ViInt32(expand_action.value)  # case S130
+        expanded_route_spec_ctype = None  # case C050
+        expanded_route_spec_size_ctype = _visatype.ViInt32()  # case S200
+        error_code = self._library.niSE_ExpandRouteSpec(session_handle_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        expanded_route_spec_size_ctype = _visatype.NISEInt32()  # case S200
-        expanded_route_spec_ctype = _visatype.NISEBuffer()  # case S200
-        error_code = self._library.niSE_ExpandRouteSpec(session_handle_ctype, route_spec_ctype, expand_action_ctype, None if expanded_route_spec_ctype is None else (ctypes.pointer(expanded_route_spec_ctype)), None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
+        expanded_route_spec_size_ctype = _visatype.ViInt32()  # case S200
+        expanded_route_spec_ctype = (_visatype.ViChar * expanded_route_spec_size_ctype.value)()  # case C060
+        error_code = self._library.niSE_ExpandRouteSpec(session_handle_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBuffer(expanded_route_spec_ctype.value)
+        return expanded_route_spec_ctype.value.decode(self._encoding)
 
-    @ivi_synchronized
-    def find_route(self, session_handle, channel1, channel2):
+    def find_route(self, channel1, channel2):
         '''find_route
 
         Finds an existing or potential route between channel 1 and channel 2.
@@ -625,20 +591,17 @@ class Session(_SessionBase):
         specification strings.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            channel1 (NISEConstString): Channel name of one of the endpoints of the route to find. The channel
+            channel1 (str): Channel name of one of the endpoints of the route to find. The channel
                 name must either be a channel alias name or a name in the
                 device/ivichannel syntax. Examples: MyChannel Switch1/R0
 
-            channel2 (NISEConstString): Channel name of one of the endpoints of the route to find. The channel
+            channel2 (str): Channel name of one of the endpoints of the route to find. The channel
                 name must either be a channel alias name or a name in the
                 device/ivichannel syntax. Examples: MyChannel Switch1/R0
 
 
         Returns:
-            route_spec_size (NISEInt32): The routeSpecSize is an NISEInt32 that is passed by reference into the
+            route_spec_size (int): The routeSpecSize is an ViInt32 that is passed by reference into the
                 method. As an input, it is the size of the route string buffer being
                 passed. If the route string is larger than the string buffer being
                 passed, only the portion of the route string that can fit in the string
@@ -669,22 +632,21 @@ class Session(_SessionBase):
                 implicit path already exists.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        channel1_ctype = _visatype.NISEConstString(channel1)  # case S150
-        channel2_ctype = _visatype.NISEConstString(channel2)  # case S150
-        route_spec_ctype = _visatype.NISEBuffer()  # case S200
-        route_spec_size_ctype = _visatype.NISEInt32()  # case S200
-        path_capability_ctype = _visatype.NISEInt32()  # case S200
-        error_code = self._library.niSE_FindRoute(session_handle_ctype, channel1_ctype, channel2_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
+        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
+        route_spec_ctype = None  # case C050
+        route_spec_size_ctype = _visatype.ViInt32()  # case S200
+        path_capability_ctype = _visatype.ViInt32()  # case S200
+        error_code = self._library.niSE_FindRoute(session_handle_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        route_spec_size_ctype = _visatype.NISEInt32()  # case S200
-        route_spec_ctype = _visatype.NISEBuffer()  # case S200
-        error_code = self._library.niSE_FindRoute(session_handle_ctype, channel1_ctype, channel2_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
+        route_spec_size_ctype = _visatype.ViInt32()  # case S200
+        route_spec_ctype = (_visatype.ViChar * route_spec_size_ctype.value)()  # case C060
+        error_code = self._library.niSE_FindRoute(session_handle_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBuffer(route_spec_ctype.value), enums.PathCapability(path_capability_ctype.value)
+        return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
 
-    @ivi_synchronized
-    def get_all_connections(self, session_handle):
+    def get_all_connections(self):
         '''get_all_connections
 
         Returns the top-level connected routes and route groups. The route
@@ -693,13 +655,8 @@ class Session(_SessionBase):
         disconnect, connect_and_disconnect, and expand_route_spec)
         that use route specification strings.
 
-        Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-
         Returns:
-            route_spec_size (NISEInt32): The routeSpecSize is an NISEInt32 that is passed by reference into the
+            route_spec_size (int): The routeSpecSize is an ViInt32 that is passed by reference into the
                 method. As an input, it is the size of the route spec string buffer
                 being passed. If the route spec string is larger than the string buffer
                 being passed, only the portion of the route spec string that can fit in
@@ -711,19 +668,18 @@ class Session(_SessionBase):
                 value for routeSpecSize and routeSpec.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        route_spec_ctype = _visatype.NISEBuffer()  # case S200
-        route_spec_size_ctype = _visatype.NISEInt32()  # case S200
-        error_code = self._library.niSE_GetAllConnections(session_handle_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        route_spec_ctype = None  # case C050
+        route_spec_size_ctype = _visatype.ViInt32()  # case S200
+        error_code = self._library.niSE_GetAllConnections(session_handle_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        route_spec_size_ctype = _visatype.NISEInt32()  # case S200
-        route_spec_ctype = _visatype.NISEBuffer()  # case S200
-        error_code = self._library.niSE_GetAllConnections(session_handle_ctype, None if route_spec_ctype is None else (ctypes.pointer(route_spec_ctype)), None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
+        route_spec_size_ctype = _visatype.ViInt32()  # case S200
+        route_spec_ctype = (_visatype.ViChar * route_spec_size_ctype.value)()  # case C060
+        error_code = self._library.niSE_GetAllConnections(session_handle_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBuffer(route_spec_ctype.value)
+        return route_spec_ctype.value.decode(self._encoding)
 
-    @ivi_synchronized
-    def get_ivi_device_session(self, session_handle, ivi_logical_name):
+    def get_ivi_device_session(self, ivi_logical_name):
         '''get_ivi_device_session
 
         Retrieves an IVI instrument session for an IVI switching device that is
@@ -737,10 +693,7 @@ class Session(_SessionBase):
         undefined, and potentially unwanted, behavior.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            ivi_logical_name (NISEConstString): The IVI logical name of the IVI device for which to retrieve an IVI
+            ivi_logical_name (str): The IVI logical name of the IVI device for which to retrieve an IVI
                 session.
 
 
@@ -748,25 +701,21 @@ class Session(_SessionBase):
             ivi_session_handle (int): The IVI instrument handle of the specified IVI device.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        ivi_logical_name_ctype = _visatype.NISEConstString(ivi_logical_name)  # case S150
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        ivi_logical_name_ctype = ctypes.create_string_buffer(ivi_logical_name.encode(self._encoding))  # case C020
         ivi_session_handle_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niSE_GetIviDeviceSession(session_handle_ctype, ivi_logical_name_ctype, None if ivi_session_handle_ctype is None else (ctypes.pointer(ivi_session_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(ivi_session_handle_ctype.value)
 
-    @ivi_synchronized
-    def is_connected(self, session_handle, route_spec):
+    def is_connected(self, route_spec):
         '''is_connected
 
         Checks whether the specified routes and routes groups are connected. It
         returns true if connected.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            route_spec (NISEConstString): String describing the connections to check. The route specification
+            route_spec (str): String describing the connections to check. The route specification
                 strings are best summarized as a series of routes delimited by
                 ampersands. The specified routes may be route names, route group names,
                 or fully specified route paths delimited by square brackets. Some
@@ -777,19 +726,18 @@ class Session(_SessionBase):
 
 
         Returns:
-            is_connected (NISEBoolean): Returns TRUE if the routes and routes groups are connected or FALSE if
+            is_connected (bool): Returns TRUE if the routes and routes groups are connected or FALSE if
                 they are not.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        route_spec_ctype = _visatype.NISEConstString(route_spec)  # case S150
-        is_connected_ctype = _visatype.NISEBoolean()  # case S200
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
+        is_connected_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niSE_IsConnected(session_handle_ctype, route_spec_ctype, None if is_connected_ctype is None else (ctypes.pointer(is_connected_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBoolean(is_connected_ctype.value)
+        return bool(is_connected_ctype.value)
 
-    @ivi_synchronized
-    def is_debounced(self, session_handle):
+    def is_debounced(self):
         '''is_debounced
 
         Checks to see if the switching system is debounced or not. This method
@@ -797,23 +745,17 @@ class Session(_SessionBase):
         fully debounced. This method is similar to the IviSwtch specific
         method.
 
-        Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-
         Returns:
-            is_debounced (NISEBoolean): Returns TRUE if the system is fully debounced or FALSE if it is still
+            is_debounced (bool): Returns TRUE if the system is fully debounced or FALSE if it is still
                 settling.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        is_debounced_ctype = _visatype.NISEBoolean()  # case S200
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        is_debounced_ctype = _visatype.ViBoolean()  # case S200
         error_code = self._library.niSE_IsDebounced(session_handle_ctype, None if is_debounced_ctype is None else (ctypes.pointer(is_debounced_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISEBoolean(is_debounced_ctype.value)
+        return bool(is_debounced_ctype.value)
 
-    @ivi_synchronized
     def _open_session(self, virtual_device_name, option_string=""):
         '''_open_session
 
@@ -833,27 +775,26 @@ class Session(_SessionBase):
         virtual device from a single process at a time.
 
         Args:
-            virtual_device_name (NISEConstString): The name of the NI Switch Executive virtual device.
+            virtual_device_name (str): The name of the NI Switch Executive virtual device.
 
-            option_string (NISEConstString): The option string can be used to pass information to each of the IVI
+            option_string (str): The option string can be used to pass information to each of the IVI
                 devices on startup. It can be used to set things such as simulation,
                 range checking, etc. Consult your driver documentation for more
                 information about valid entries for the option string.
 
 
         Returns:
-            session_handle (NISESession): The session referencing this NI Switch Executive virtual device session.
+            session_handle (int): The session referencing this NI Switch Executive virtual device session.
 
         '''
-        virtual_device_name_ctype = _visatype.NISEConstString(virtual_device_name)  # case S150
-        option_string_ctype = _visatype.NISEConstString(option_string)  # case S150
-        session_handle_ctype = _visatype.NISESession()  # case S200
+        virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        session_handle_ctype = _visatype.ViSession()  # case S200
         error_code = self._library.niSE_OpenSession(virtual_device_name_ctype, option_string_ctype, None if session_handle_ctype is None else (ctypes.pointer(session_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return NISESession(session_handle_ctype.value)
+        return int(session_handle_ctype.value)
 
-    @ivi_synchronized
-    def wait_for_debounce(self, session_handle, maximum_time_ms=-1):
+    def wait_for_debounce(self, maximum_time_ms=-1):
         '''wait_for_debounce
 
         Waits for all of the switches in the NI Switch Executive virtual device
@@ -867,17 +808,14 @@ class Session(_SessionBase):
         signals connected to the switching system.
 
         Args:
-            session_handle (NISESession): The Session handle that you obtain from __init__. The handle
-                identifies a particular session to the virtual switch device.
-
-            maximum_time_ms (NISEInt32): The amount of time to wait (in milliseconds) for the debounce to
+            maximum_time_ms (int): The amount of time to wait (in milliseconds) for the debounce to
                 complete. A value of 0 checks for debouncing once and returns an error
                 if the system is not debounced at that time. A value of -1 means to
                 block for an infinite period of time until the system is debounced.
 
         '''
-        session_handle_ctype = _visatype.NISESession(session_handle)  # case S150
-        maximum_time_ms_ctype = _visatype.NISEInt32(maximum_time_ms)  # case S150
+        session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
+        maximum_time_ms_ctype = _visatype.ViInt32(maximum_time_ms)  # case S150
         error_code = self._library.niSE_WaitForDebounce(session_handle_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

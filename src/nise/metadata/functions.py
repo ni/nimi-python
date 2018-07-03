@@ -8,12 +8,12 @@
 
 functions = {
     'ClearError': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -32,12 +32,12 @@ niSE_GetError is not being performed.
 },
     },
     'CloseSession': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -57,12 +57,12 @@ virtual device again until you call niSE_OpenSession.
 },
     },
     'Connect': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -73,7 +73,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'connectSpec',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 String describing the connections to be made. The route specification
@@ -90,7 +90,7 @@ Executive Help for more information.
             {
                 'direction': 'in',
                 'name': 'multiconnectMode',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 This value sets the connection mode for the function. The mode might be
@@ -115,7 +115,7 @@ and not to route segments.
             {
                 'direction': 'in',
                 'name': 'waitForDebounce',
-                'type': 'NISEBoolean',
+                'type': 'ViBoolean',
 'documentation': {
 'description': '''
 Waits (if true) for switches to debounce between its connect and
@@ -142,12 +142,12 @@ has debounced.
 },
     },
     'ConnectAndDisconnect': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -158,7 +158,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'connectSpec',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 String describing the connections to be made. The route specification
@@ -175,7 +175,7 @@ Executive Help for more information.
             {
                 'direction': 'in',
                 'name': 'disconnectSpec',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 String describing the disconnections to be made. The route specification
@@ -192,7 +192,7 @@ Executive Help for more information.
             {
                 'direction': 'in',
                 'name': 'multiconnectMode',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 This value sets the connection mode for the function. The mode might be
@@ -219,7 +219,7 @@ entire routes and not to route segments.
             {
                 'direction': 'in',
                 'name': 'operationOrder',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 Sets the order of the operation for the function. Defined values are
@@ -239,7 +239,7 @@ connect first or disconnect first.
             {
                 'direction': 'in',
                 'name': 'waitForDebounce',
-                'type': 'NISEBoolean',
+                'type': 'ViBoolean',
 'documentation': {
 'description': '''
 Waits (if true) for switches to debounce between its connect and
@@ -274,12 +274,12 @@ then reopened.
 },
     },
     'Disconnect': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -290,7 +290,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'disconnectSpec',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 String describing the disconnections to be made. The route specification
@@ -319,12 +319,12 @@ specification string but reports the error on completion.
 },
     },
     'DisconnectAll': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -343,12 +343,12 @@ of the switch states for the system.
 },
     },
     'ExpandRouteSpec': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -359,7 +359,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'routeSpec',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 String describing the routes and route groups to expand. The route
@@ -376,7 +376,7 @@ in the NI Switch Executive Help for more information.
             {
                 'direction': 'in',
                 'name': 'expandAction',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 This value sets the expand action for the function. The action might be
@@ -391,7 +391,7 @@ route spec strings. Example: [Dev1/c0->Dev1/r0->Dev1/c1]
             {
                 'direction': 'out',
                 'name': 'expandedRouteSpec',
-                'type': 'NISEBuffer',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 The expanded route spec. Route specification strings can be directly
@@ -401,7 +401,7 @@ more information. You may pass NULL for this parameter if you are not
 interested in the return value. To obtain the route specification
 string, you should pass a buffer to this parameter. The size of the
 buffer required may be obtained by calling the function with NULL for
-this parameter and a valid NISEInt32 to routeSpecSize. The routeSpecSize
+this parameter and a valid ViInt32 to routeSpecSize. The routeSpecSize
 will contain the size needed to hold the entire route specification
 (including the NULL termination character). Common operation is to call
 the function twice. The first time you call the function you can
@@ -414,10 +414,10 @@ to obtain the entire buffer.
             {
                 'direction': 'out',
                 'name': 'expandedRouteSpecSize',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
-The routeSpecSize is an NISEInt32 that is passed by reference into the
+The routeSpecSize is an ViInt32 that is passed by reference into the
 function. As an input, it is the size of the route spec string buffer
 being passed. If the route spec string is larger than the string buffer
 being passed, only the portion of the route spec string that can fit in
@@ -442,12 +442,12 @@ niSE_ConnectAndDisconnect) that use route specification strings.
 },
     },
     'FindRoute': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -458,7 +458,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'channel1',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 Channel name of one of the endpoints of the route to find. The channel
@@ -470,7 +470,7 @@ device/ivichannel syntax. Examples: MyChannel Switch1/R0
             {
                 'direction': 'in',
                 'name': 'channel2',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 Channel name of one of the endpoints of the route to find. The channel
@@ -482,7 +482,7 @@ device/ivichannel syntax. Examples: MyChannel Switch1/R0
             {
                 'direction': 'out',
                 'name': 'routeSpec',
-                'type': 'NISEBuffer',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 The fully specified route path complete with delimiting square
@@ -494,7 +494,7 @@ NI Switch Executive Help for more information. You may pass NULL for
 this parameter if you are not interested in the return value. To obtain
 the route specification string, you should pass a buffer to this
 parameter. The size of the buffer required may be obtained by calling
-the function with NULL for this parameter and a valid NISEInt32 to
+the function with NULL for this parameter and a valid ViInt32 to
 routeSpecSize. The routeSpecSize will contain the size needed to hold
 the entire route specification (including the NULL termination
 character). Common operation is to call the function twice. The first
@@ -507,10 +507,10 @@ and then re-call the function to obtain the entire buffer.
             {
                 'direction': 'out',
                 'name': 'routeSpecSize',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
-The routeSpecSize is an NISEInt32 that is passed by reference into the
+The routeSpecSize is an ViInt32 that is passed by reference into the
 function. As an input, it is the size of the route string buffer being
 passed. If the route string is larger than the string buffer being
 passed, only the portion of the route string that can fit in the string
@@ -526,7 +526,7 @@ routeSpecSize and routeSpec.
             {
                 'direction': 'out',
                 'name': 'pathCapability',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 The return value which expresses the capability of finding a valid route
@@ -565,12 +565,12 @@ specification strings.
 },
     },
     'GetAllConnections': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -581,7 +581,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'out',
                 'name': 'routeSpec',
-                'type': 'NISEBuffer',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 The route spec of all currently connected routes and route groups. Route
@@ -592,7 +592,7 @@ more information. You may pass NULL for this parameter if you are not
 interested in the return value. To obtain the route specification
 string, you should pass a buffer to this parameter. The size of the
 buffer required may be obtained by calling the function with NULL for
-this parameter and a valid NISEInt32 to routeSpecSize. The routeSpecSize
+this parameter and a valid ViInt32 to routeSpecSize. The routeSpecSize
 will contain the size needed to hold the entire route specification
 (including the NULL termination character). Common operation is to call
 the function twice. The first time you call the function you can
@@ -605,10 +605,10 @@ to obtain the entire buffer.
             {
                 'direction': 'out',
                 'name': 'routeSpecSize',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
-The routeSpecSize is an NISEInt32 that is passed by reference into the
+The routeSpecSize is an ViInt32 that is passed by reference into the
 function. As an input, it is the size of the route spec string buffer
 being passed. If the route spec string is larger than the string buffer
 being passed, only the portion of the route spec string that can fit in
@@ -633,12 +633,12 @@ that use route specification strings.
 },
     },
     'GetError': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -649,7 +649,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'out',
                 'name': 'errorNumber',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 By reference parameter which returns the error number of the first error
@@ -662,7 +662,7 @@ value.
             {
                 'direction': 'out',
                 'name': 'errorDescription',
-                'type': 'NISEBuffer',
+                'type': 'ViChar[]',
 'documentation': {
 'description': '''
 By reference buffer which is to be filled with the error description
@@ -670,7 +670,7 @@ string. You may pass NULL for this parameter if you are not interested
 in the return value. To obtain the error description string, you should
 pass a buffer to this parameter. The size of the buffer required may be
 obtained by calling the function with NULL for this parameter and a
-valid NISEInt32 to the error description size parameter. The error
+valid ViInt32 to the error description size parameter. The error
 description size will contain the size needed to hold the entire route
 specification (including the NULL termination character). Common
 operation is to call the function twice. The first time you call the
@@ -683,13 +683,13 @@ re-call the function to obtain the entire buffer.
             {
                 'direction': 'out',
                 'name': 'errorDescriptionSize',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 As input, it is the size of the error description string buffer. As
 output, it is the Size of the entire error description string (may be
 larger than the buffer size as the function always returns the size
-needed to hold the entire buffer). This parameter is a NISEInt32 that is
+needed to hold the entire buffer). This parameter is a ViInt32 that is
 passed by reference into the function. As an input, it is the size of
 the error description buffer being passed. If the error description
 string is larger than the string buffer being passed, only the portion
@@ -727,12 +727,12 @@ errorNumber and errorDescription can change the function's behavior.
 },
     },
     'GetIviDeviceSession': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -743,7 +743,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'iviLogicalName',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 The IVI logical name of the IVI device for which to retrieve an IVI
@@ -775,12 +775,12 @@ undefined, and potentially unwanted, behavior.
 },
     },
     'IsConnected': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -791,7 +791,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'routeSpec',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 String describing the connections to check. The route specification
@@ -808,7 +808,7 @@ Executive Help for more information.
             {
                 'direction': 'out',
                 'name': 'isConnected',
-                'type': 'NISEBoolean',
+                'type': 'ViBoolean',
 'documentation': {
 'description': '''
 Returns TRUE if the routes and routes groups are connected or FALSE if
@@ -825,12 +825,12 @@ returns true if connected.
 },
     },
     'IsDebounced': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -841,7 +841,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'out',
                 'name': 'isDebounced',
-                'type': 'NISEBoolean',
+                'type': 'ViBoolean',
 'documentation': {
 'description': '''
 Returns TRUE if the system is fully debounced or FALSE if it is still
@@ -865,7 +865,7 @@ function.
             {
                 'direction': 'in',
                 'name': 'virtualDeviceName',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': 'The name of the NI Switch Executive virtual device.',
 },
@@ -873,7 +873,7 @@ function.
             {
                 'direction': 'in',
                 'name': 'optionString',
-                'type': 'NISEConstString',
+                'type': 'ViConstString',
 'documentation': {
 'description': '''
 The option string can be used to pass information to each of the IVI
@@ -886,7 +886,7 @@ information about valid entries for the option string.
             {
                 'direction': 'out',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': 'The session referencing this NI Switch Executive virtual device session.',
 },
@@ -912,12 +912,12 @@ virtual device from a single process at a time.
 },
     },
     'WaitForDebounce': {
-        'returns': 'NISEStatus',
+        'returns': 'ViStatus',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'sessionHandle',
-                'type': 'NISESession',
+                'type': 'ViSession',
 'documentation': {
 'description': '''
 The Session handle that you obtain from niSE_OpenSession. The handle
@@ -928,7 +928,7 @@ identifies a particular session to the virtual switch device.
             {
                 'direction': 'in',
                 'name': 'maximumTimeMs',
-                'type': 'NISEInt32',
+                'type': 'ViInt32',
 'documentation': {
 'description': '''
 The amount of time to wait (in milliseconds) for the debounce to

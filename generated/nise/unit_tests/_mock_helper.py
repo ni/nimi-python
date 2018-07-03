@@ -101,12 +101,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSE_ExpandRouteSpec", param='expandedRouteSpec')
         if expanded_route_spec_size.value == 0:
             return len(self._defaults['ExpandRouteSpec']['expandedRouteSpec'])
-        try:
-            expanded_route_spec_ref = expanded_route_spec.contents
-        except AttributeError:
-            expanded_route_spec_ref = expanded_route_spec
-        for i in range(len(self._defaults['ExpandRouteSpec']['expandedRouteSpec'])):
-            expanded_route_spec_ref[i] = self._defaults['ExpandRouteSpec']['expandedRouteSpec'][i]
+        expanded_route_spec.value = self._defaults['ExpandRouteSpec']['expandedRouteSpec'].encode('ascii')
         return self._defaults['ExpandRouteSpec']['return']
 
     def niSE_FindRoute(self, session_handle, channel1, channel2, route_spec, route_spec_size, path_capability):  # noqa: N802
@@ -126,12 +121,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSE_FindRoute", param='routeSpec')
         if route_spec_size.value == 0:
             return len(self._defaults['FindRoute']['routeSpec'])
-        try:
-            route_spec_ref = route_spec.contents
-        except AttributeError:
-            route_spec_ref = route_spec
-        for i in range(len(self._defaults['FindRoute']['routeSpec'])):
-            route_spec_ref[i] = self._defaults['FindRoute']['routeSpec'][i]
+        route_spec.value = self._defaults['FindRoute']['routeSpec'].encode('ascii')
         return self._defaults['FindRoute']['return']
 
     def niSE_GetAllConnections(self, session_handle, route_spec, route_spec_size):  # noqa: N802
@@ -146,12 +136,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSE_GetAllConnections", param='routeSpec')
         if route_spec_size.value == 0:
             return len(self._defaults['GetAllConnections']['routeSpec'])
-        try:
-            route_spec_ref = route_spec.contents
-        except AttributeError:
-            route_spec_ref = route_spec
-        for i in range(len(self._defaults['GetAllConnections']['routeSpec'])):
-            route_spec_ref[i] = self._defaults['GetAllConnections']['routeSpec'][i]
+        route_spec.value = self._defaults['GetAllConnections']['routeSpec'].encode('ascii')
         return self._defaults['GetAllConnections']['return']
 
     def niSE_GetError(self, session_handle, error_number, error_description, error_description_size):  # noqa: N802
@@ -171,12 +156,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSE_GetError", param='errorDescription')
         if error_description_size.value == 0:
             return len(self._defaults['GetError']['errorDescription'])
-        try:
-            error_description_ref = error_description.contents
-        except AttributeError:
-            error_description_ref = error_description
-        for i in range(len(self._defaults['GetError']['errorDescription'])):
-            error_description_ref[i] = self._defaults['GetError']['errorDescription'][i]
+        error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niSE_GetIviDeviceSession(self, session_handle, ivi_logical_name, ivi_session_handle):  # noqa: N802

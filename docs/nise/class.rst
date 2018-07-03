@@ -34,7 +34,7 @@ nise.Session
         
 
 
-    :type virtual_device_name: NISEConstString
+    :type virtual_device_name: str
 
     :param options:
         
@@ -68,7 +68,7 @@ nise.Session
         +-------------------------+---------+
 
 
-    :type options: NISEConstString
+    :type options: str
 
 
     **Properties**
@@ -121,7 +121,7 @@ connect
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: connect(session_handle, connect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, wait_for_debounce=True)
+    .. py:method:: connect(connect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, wait_for_debounce=True)
 
             Connects the routes specified by the connection specification. When
             connecting, it may allow for multiconnection based on the
@@ -138,16 +138,6 @@ connect
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param connect_spec:
 
 
@@ -163,7 +153,7 @@ connect
                 
 
 
-            :type connect_spec: NISEConstString
+            :type connect_spec: str
             :param multiconnect_mode:
 
 
@@ -201,14 +191,14 @@ connect
                 
 
 
-            :type wait_for_debounce: NISEBoolean
+            :type wait_for_debounce: bool
 
 connect_and_disconnect
 ~~~~~~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: connect_and_disconnect(session_handle, connect_spec, disconnect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, operation_order=nise.OperationOrder.AFTER, wait_for_debounce=True)
+    .. py:method:: connect_and_disconnect(connect_spec, disconnect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, operation_order=nise.OperationOrder.AFTER, wait_for_debounce=True)
 
             Connects routes and disconnects routes in a similar fashion to
             :py:meth:`nise.Session.connect` and :py:meth:`nise.Session.disconnect` except that the operations happen in
@@ -233,16 +223,6 @@ connect_and_disconnect
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param connect_spec:
 
 
@@ -258,7 +238,7 @@ connect_and_disconnect
                 
 
 
-            :type connect_spec: NISEConstString
+            :type connect_spec: str
             :param disconnect_spec:
 
 
@@ -274,7 +254,7 @@ connect_and_disconnect
                 
 
 
-            :type disconnect_spec: NISEConstString
+            :type disconnect_spec: str
             :param multiconnect_mode:
 
 
@@ -335,14 +315,14 @@ connect_and_disconnect
                 
 
 
-            :type wait_for_debounce: NISEBoolean
+            :type wait_for_debounce: bool
 
 disconnect
 ~~~~~~~~~~
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: disconnect(session_handle, disconnect_spec)
+    .. py:method:: disconnect(disconnect_spec)
 
             Disconnects the routes specified in the Disconnection Specification. If
             any of the specified routes were originally connected in a
@@ -357,16 +337,6 @@ disconnect
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param disconnect_spec:
 
 
@@ -382,14 +352,14 @@ disconnect
                 
 
 
-            :type disconnect_spec: NISEConstString
+            :type disconnect_spec: str
 
 disconnect_all
 ~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: disconnect_all(session_handle)
+    .. py:method:: disconnect_all()
 
             Disconnects all connections on every IVI switch device managed by the
             NISE session reference passed to this method. :py:meth:`nise.Session.disconnect_all`
@@ -400,23 +370,12 @@ disconnect_all
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
-
 expand_route_spec
 ~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: expand_route_spec(session_handle, route_spec, expand_action=nise.ExpandAction.ROUTES)
+    .. py:method:: expand_route_spec(route_spec, expand_action=nise.ExpandAction.ROUTES)
 
             Expands a route spec string to yield more information about the routes
             and route groups within the spec. The route specification string
@@ -428,16 +387,6 @@ expand_route_spec
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param route_spec:
 
 
@@ -453,7 +402,7 @@ expand_route_spec
                 
 
 
-            :type route_spec: NISEConstString
+            :type route_spec: str
             :param expand_action:
 
 
@@ -471,11 +420,11 @@ expand_route_spec
 
             :type expand_action: :py:data:`nise.ExpandAction`
 
-            :rtype: NISEInt32
+            :rtype: int
             :return:
 
 
-                    The routeSpecSize is an NISEInt32 that is passed by reference into the
+                    The routeSpecSize is an ViInt32 that is passed by reference into the
                     method. As an input, it is the size of the route spec string buffer
                     being passed. If the route spec string is larger than the string buffer
                     being passed, only the portion of the route spec string that can fit in
@@ -495,7 +444,7 @@ find_route
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: find_route(session_handle, channel1, channel2)
+    .. py:method:: find_route(channel1, channel2)
 
             Finds an existing or potential route between channel 1 and channel 2.
             The returned route specification contains the route specification and
@@ -510,16 +459,6 @@ find_route
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param channel1:
 
 
@@ -530,7 +469,7 @@ find_route
                 
 
 
-            :type channel1: NISEConstString
+            :type channel1: str
             :param channel2:
 
 
@@ -541,16 +480,16 @@ find_route
                 
 
 
-            :type channel2: NISEConstString
+            :type channel2: str
 
             :rtype: tuple (route_spec_size, path_capability)
 
                 WHERE
 
-                route_spec_size (NISEInt32): 
+                route_spec_size (int): 
 
 
-                    The routeSpecSize is an NISEInt32 that is passed by reference into the
+                    The routeSpecSize is an ViInt32 that is passed by reference into the
                     method. As an input, it is the size of the route string buffer being
                     passed. If the route string is larger than the string buffer being
                     passed, only the portion of the route string that can fit in the string
@@ -595,7 +534,7 @@ get_all_connections
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: get_all_connections(session_handle)
+    .. py:method:: get_all_connections()
 
             Returns the top-level connected routes and route groups. The route
             specification string returned from :py:meth:`nise.Session.get_all_connections` can be passed
@@ -607,22 +546,11 @@ get_all_connections
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
-
-            :rtype: NISEInt32
+            :rtype: int
             :return:
 
 
-                    The routeSpecSize is an NISEInt32 that is passed by reference into the
+                    The routeSpecSize is an ViInt32 that is passed by reference into the
                     method. As an input, it is the size of the route spec string buffer
                     being passed. If the route spec string is larger than the string buffer
                     being passed, only the portion of the route spec string that can fit in
@@ -642,7 +570,7 @@ get_ivi_device_session
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: get_ivi_device_session(session_handle, ivi_logical_name)
+    .. py:method:: get_ivi_device_session(ivi_logical_name)
 
             Retrieves an IVI instrument session for an IVI switching device that is
             being managed by the NI Switch Executive. The retrieved session handle
@@ -658,16 +586,6 @@ get_ivi_device_session
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param ivi_logical_name:
 
 
@@ -677,7 +595,7 @@ get_ivi_device_session
                 
 
 
-            :type ivi_logical_name: NISEConstString
+            :type ivi_logical_name: str
 
             :rtype: int
             :return:
@@ -694,7 +612,7 @@ is_connected
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: is_connected(session_handle, route_spec)
+    .. py:method:: is_connected(route_spec)
 
             Checks whether the specified routes and routes groups are connected. It
             returns true if connected.
@@ -703,16 +621,6 @@ is_connected
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param route_spec:
 
 
@@ -728,9 +636,9 @@ is_connected
                 
 
 
-            :type route_spec: NISEConstString
+            :type route_spec: str
 
-            :rtype: NISEBoolean
+            :rtype: bool
             :return:
 
 
@@ -746,7 +654,7 @@ is_debounced
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: is_debounced(session_handle)
+    .. py:method:: is_debounced()
 
             Checks to see if the switching system is debounced or not. This method
             does not wait for debouncing to occur. It returns true if the system is
@@ -757,18 +665,7 @@ is_debounced
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
-
-            :rtype: NISEBoolean
+            :rtype: bool
             :return:
 
 
@@ -784,7 +681,7 @@ wait_for_debounce
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: wait_for_debounce(session_handle, maximum_time_ms=-1)
+    .. py:method:: wait_for_debounce(maximum_time_ms=-1)
 
             Waits for all of the switches in the NI Switch Executive virtual device
             to debounce. This method does not return until either the switching
@@ -800,16 +697,6 @@ wait_for_debounce
 
 
 
-            :param session_handle:
-
-
-                The Session handle that you obtain from :py:meth:`nise.Session.__init__`. The handle
-                identifies a particular session to the virtual switch device.
-
-                
-
-
-            :type session_handle: NISESession
             :param maximum_time_ms:
 
 
@@ -821,7 +708,7 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: NISEInt32
+            :type maximum_time_ms: int
 
 
 
