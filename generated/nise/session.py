@@ -396,7 +396,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def connect_and_disconnect(self, session_handle, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.BREAK_AFTER_MAKE, wait_for_debounce=True):
+    def connect_and_disconnect(self, session_handle, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):
         '''connect_and_disconnect
 
         Connects routes and disconnects routes in a similar fashion to
@@ -550,7 +550,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def expand_route_spec(self, session_handle, route_spec, expand_action=enums.ExpandAction.EXPAND_TO_ROUTES):
+    def expand_route_spec(self, session_handle, route_spec, expand_action=enums.ExpandAction.ROUTES):
         '''expand_route_spec
 
         Expands a route spec string to yield more information about the routes

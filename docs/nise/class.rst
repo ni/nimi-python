@@ -208,7 +208,7 @@ connect_and_disconnect
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: connect_and_disconnect(session_handle, connect_spec, disconnect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, operation_order=nise.OperationOrder.BREAK_AFTER_MAKE, wait_for_debounce=True)
+    .. py:method:: connect_and_disconnect(session_handle, connect_spec, disconnect_spec, multiconnect_mode=nise.MulticonnectMode.DEFAULT, operation_order=nise.OperationOrder.AFTER, wait_for_debounce=True)
 
             Connects routes and disconnects routes in a similar fashion to
             :py:meth:`nise.Session.connect` and :py:meth:`nise.Session.disconnect` except that the operations happen in
@@ -416,7 +416,7 @@ expand_route_spec
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: expand_route_spec(session_handle, route_spec, expand_action=nise.ExpandAction.EXPAND_TO_ROUTES)
+    .. py:method:: expand_route_spec(session_handle, route_spec, expand_action=nise.ExpandAction.ROUTES)
 
             Expands a route spec string to yield more information about the routes
             and route groups within the spec. The route specification string
