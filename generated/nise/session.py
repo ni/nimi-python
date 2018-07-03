@@ -225,7 +225,7 @@ class Session(_SessionBase):
         Executive method calls. NI Switch Executive uses a reference counting
         scheme to manage open session handles to an NI Switch Executive virtual
         device. Each call to __init__ must be matched with a subsequent
-        call to _close_session. Successive calls to __init__ with
+        call to _close. Successive calls to __init__ with
         the same virtual device name always returns the same session handle. NI
         Switch Executive disconnects its communication with the IVI switches
         after all session handles are closed to a given virtual device. The
@@ -306,13 +306,13 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _close_session(self):
-        '''_close_session
+    def _close(self):
+        '''_close
 
         Reduces the reference count of open sessions by one. If the reference
         count goes to 0, the method deallocates any memory resources the
         driver uses and closes any open IVI switch sessions. After calling the
-        _close_session method, you should not use the NI Switch Executive
+        _close method, you should not use the NI Switch Executive
         virtual device again until you call __init__.
         '''
         session_handle_ctype = _visatype.ViSession(self._session_handle)  # case S110
@@ -766,7 +766,7 @@ class Session(_SessionBase):
         Executive method calls. NI Switch Executive uses a reference counting
         scheme to manage open session handles to an NI Switch Executive virtual
         device. Each call to __init__ must be matched with a subsequent
-        call to _close_session. Successive calls to __init__ with
+        call to _close. Successive calls to __init__ with
         the same virtual device name always returns the same session handle. NI
         Switch Executive disconnects its communication with the IVI switches
         after all session handles are closed to a given virtual device. The

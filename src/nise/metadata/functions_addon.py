@@ -63,3 +63,8 @@ functions_locking = {
     'OpenSession':                  { 'use_session_lock': False,  },  # No locking in this API
     'WaitForDebounce':              { 'use_session_lock': False,  },  # No locking in this API
 }
+
+# We want to use a common name for close across all drivers
+functions_name = {
+    'CloseSession': { 'python_name': '_close', },
+}
