@@ -6,10 +6,8 @@ The following is a basic example of using the **nise** module to open a session 
 .. code-block:: python
 
     import nise
-    # Configure the session.
-
-    with nise.Session('dev1') as session:
-        #FRANKTODO
+    with nise.Session('SwitchExecutiveExample', '') as session:
+        session.connect(connection)
 
 Additional examples for NI Switch Executive are located in src/nise/examples/ directory.
 
