@@ -5,7 +5,7 @@ import pytest
 
 @pytest.fixture(scope='function')
 def session():
-    with nise.Session('SwitchExecutiveExample', "") as simulated_session:
+    with nise.Session('SwitchExecutiveExample') as simulated_session:
         yield simulated_session
 
 
