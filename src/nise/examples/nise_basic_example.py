@@ -1,5 +1,4 @@
 #!/usr/bin/python
-#FRANKTODO
 import argparse
 import nise
 import sys
