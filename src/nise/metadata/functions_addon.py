@@ -1,6 +1,5 @@
 # These dictionaries are merged with the extracted function metadata at build time.
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
-#FRANKTODO
 
 # By default all functions in functions.py are "public".
 # This will override that with private (prefixes name with '_'), or don't generate at all
