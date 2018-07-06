@@ -155,7 +155,6 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    @ivi_synchronized
     def _get_error(self):
         '''_get_error
 
