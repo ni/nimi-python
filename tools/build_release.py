@@ -83,7 +83,6 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config.py', ] + passthrough_params))
         call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config.py', ] + passthrough_params)
-        
 
         logging.info('Rebuild to update generated files')
         logging.info(pp.pformat(tox_cmd))
