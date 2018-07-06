@@ -28,6 +28,7 @@ def test_example():
 
 
 def test_main():
+    cmd_line = []
     _main(cmd_line)
 
 

@@ -1,4 +1,3 @@
-#FRANKTODO
 import nise
 import pytest
 
@@ -42,7 +41,8 @@ def test_get_all_connections(session):
     session.connect(test_connection)
     assert session.is_connected(test_connection) is True
     connections = session.get_all_connections()
-#    assert connections == "test_connection"
+#    assert connections == test_connection
+    assert connections == ''
     session.disconnect(test_connection)
     assert session.is_connected(test_connection) is False
 
@@ -51,14 +51,16 @@ def test_find_route(session):
     test_channel_1 = 'DCPower'
     test_channel_2 = 'Scope'
     route, capability = session.find_route(test_channel_1, test_channel_2)
-#    assert route == "[DCPower->SampleMatrix1/r0->Scope]"
+#    assert route == '[DCPower->SampleMatrix1/r0->Scope]'
+    assert route == ''
     assert capability == nise.PathCapability.PATH_AVAILABLE
 
 
 def test_expand_route_spec(session):
     test_connection = 'DIOToUUT'
     route_spec = session.expand_route_spec(test_connection)
-#    assert route_spec == "DIO_0ToUUT_IO_0_Leg1 & DIO_1ToUUT_IO_1_Leg1 & DIO_2ToUUT_IO_2 & DIO_3ToUUT_IO_3 & DIO_0ToUUT_IO_0_Leg2 & DIO_1ToUUT_IO_1_Leg2"
+#    assert route_spec == 'DIO_0ToUUT_IO_0_Leg1 & DIO_1ToUUT_IO_1_Leg1 & DIO_2ToUUT_IO_2 & DIO_3ToUUT_IO_3 & DIO_0ToUUT_IO_0_Leg2 & DIO_1ToUUT_IO_1_Leg2;
+    assert route_spec == ''
 
 
 def test_is_debounced_wait_for_debounce(session):
@@ -72,7 +74,6 @@ def test_is_debounced_wait_for_debounce(session):
 
 
 def test_get_ivi_device_session(session):
-    test_connection = 'DIOToUUT'
     matrix_1 = session.get_ivi_device_session("SampleMatrix1")
     matrix_2 = session.get_ivi_device_session("SampleMatrix2")
     assert isinstance(matrix_1, int)
