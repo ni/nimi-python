@@ -5,7 +5,7 @@ import sys
 
 
 def example(virtual_device_name, connection, options):
-    with nise.Session(virtual_device_name = virtual_device_name, options=options) as session:
+    with nise.Session(virtual_device_name=virtual_device_name, options=options) as session:
         print('Opening session to', virtual_device_name)
         session.connect(connection)
         print(connection, ' is now connected.')
@@ -26,7 +26,7 @@ def main():
 
 def test_example():
     options = {}
-    example('SwitchExecutiveExample', 'DIOToUUT')
+    example('SwitchExecutiveExample', 'DIOToUUT', options)
 
 
 def test_main():
