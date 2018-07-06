@@ -101,6 +101,11 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    not_supported = _attributes.AttributeViBoolean(1000000)
+    '''Type: bool
+
+    A property of type bool with read/write access.
+    '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
@@ -269,6 +274,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -793,7 +799,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
-    def wait_for_debounce(self, maximum_time_ms=-1):
+    def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=-1)):
         '''wait_for_debounce
 
         Waits for all of the switches in the NI Switch Executive virtual device
@@ -807,14 +813,14 @@ class Session(_SessionBase):
         signals connected to the switching system.
 
         Args:
-            maximum_time_ms (int): The amount of time to wait (in milliseconds) for the debounce to
+            maximum_time_ms (float in seconds or datetime.timedelta): The amount of time to wait (in milliseconds) for the debounce to
                 complete. A value of 0 checks for debouncing once and returns an error
                 if the system is not debounced at that time. A value of -1 means to
                 block for an infinite period of time until the system is debounced.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _visatype.ViInt32(maximum_time_ms)  # case S150
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, _visatype.ViInt32)  # case S140
         error_code = self._library.niSE_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

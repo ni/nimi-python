@@ -73,11 +73,11 @@ nise.Session
 
     **Properties**
 
-    +----------+----------+
-    | Property | Datatype |
-    +==========+==========+
-    | Property | Datatype |
-    +----------+----------+
+    +--------------------------+----------+
+    | Property                 | Datatype |
+    +==========================+==========+
+    | :py:attr:`not_supported` | bool     |
+    +--------------------------+----------+
 
     **Public methods**
 
@@ -110,6 +110,35 @@ nise.Session
 
 Properties
 ----------
+
+not_supported
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nise.Session
+
+    .. py:attribute:: not_supported
+
+        A property of type bool with read/write access.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | False      |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Attributes Not Supported**
+                - C Attribute: **NISE_ATTR_NOT_SUPPORTED**
 
 
 Methods
@@ -681,7 +710,7 @@ wait_for_debounce
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: wait_for_debounce(maximum_time_ms=-1)
+    .. py:method:: wait_for_debounce(maximum_time_ms=datetime.timedelta(milliseconds=-1))
 
             Waits for all of the switches in the NI Switch Executive virtual device
             to debounce. This method does not return until either the switching
@@ -708,18 +737,18 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: int
+            :type maximum_time_ms: float in seconds or datetime.timedelta
 
 
 
 Properties
 ----------
 
-+----------+----------+
-| Property | Datatype |
-+==========+==========+
-| Property | Datatype |
-+----------+----------+
++---------------------------------------+----------+
+| Property                              | Datatype |
++=======================================+==========+
+| :py:attr:`nise.Session.not_supported` | bool     |
++---------------------------------------+----------+
 
 Methods
 -------

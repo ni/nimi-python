@@ -42,7 +42,7 @@ functions_default_value = {
     'ConnectAndDisconnect':         { 'parameters': { 3: { 'default_value': 'MulticonnectMode.DEFAULT',              },
                                                       4: { 'default_value': 'OperationOrder.AFTER',                  },
                                                       5: { 'default_value': True,                                    }, }, },
-    'WaitForDebounce':              { 'parameters': { 1: { 'default_value': -1,                                      }, }, },
+    'WaitForDebounce':              { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=-1)',   }, }, },
     'ExpandRouteSpec':              { 'parameters': { 2: { 'default_value': 'ExpandAction.ROUTES',                   }, }, },
 }
 
@@ -67,4 +67,12 @@ functions_locking = {
 # We want to use a common name for close across all drivers
 functions_name = {
     'CloseSession': { 'python_name': '_close', },
+}
+
+# Converted parameters
+functions_converters = {
+    'WaitForDebounce':                  { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                                                               'type_in_documentation': 'float in seconds or datetime.timedelta',       }, }, },
+    'OpenSession':                      { 'parameters': { 1: { 'python_api_converter_name': 'convert_init_with_options_dictionary', 
+                                                               'type_in_documentation': 'dict',                                         }, }, },
 }
