@@ -220,7 +220,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_number_ctype = _visatype.ViInt32()  # case S200
-        error_description_ctype = (_visatype.ViChar * 1024)()  # case C070
+        error_description_ctype = (_visatype.ViChar * error_description_size[0])()  # case C070
         error_description_size_ctype = get_ctypes_pointer_for_buffer(value=error_description_size, library_type=_visatype.ViInt32)  # case B550
         error_code = self._library.niSE_GetError(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, error_description_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
@@ -599,7 +599,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
         expand_action_ctype = _visatype.ViInt32(expand_action.value)  # case S130
-        expanded_route_spec_ctype = (_visatype.ViChar * 1024)()  # case C070
+        expanded_route_spec_ctype = (_visatype.ViChar * expanded_route_spec_size[0])()  # case C070
         expanded_route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=expanded_route_spec_size, library_type=_visatype.ViInt32)  # case B550
         error_code = self._library.niSE_ExpandRouteSpec(vi_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, expanded_route_spec_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -679,7 +679,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        route_spec_ctype = (_visatype.ViChar * 1024)()  # case C070
+        route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C070
         route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
         path_capability_ctype = _visatype.ViInt32()  # case S200
         error_code = self._library.niSE_FindRoute(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, route_spec_size_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
@@ -727,7 +727,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        route_spec_ctype = (_visatype.ViChar * 1024)()  # case C070
+        route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C070
         route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
         error_code = self._library.niSE_GetAllConnections(vi_ctype, route_spec_ctype, route_spec_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

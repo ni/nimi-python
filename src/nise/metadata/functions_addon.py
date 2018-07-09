@@ -21,14 +21,14 @@ functions_enums = {
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
-    'GetError':                     { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
-                                                      3: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
-    'FindRoute':                    { 'parameters': { 3: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
-                                                      4: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
-    'ExpandRouteSpec':              { 'parameters': { 3: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
-                                                      4: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
-    'GetAllConnections':            { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
-                                                      2: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
+    'GetError':                     { 'parameters': { 2: { 'size': {'mechanism':'python-code', 'value':'error_description_size[0]'     }, }, # Match NI Switch Executive Examples
+                                                      3: { 'size': {'mechanism':'fixed', 'value':1                                     }, }, }, },
+    'FindRoute':                    { 'parameters': { 3: { 'size': {'mechanism':'python-code', 'value':'route_spec_size[0]'            }, }, # Match NI Switch Executive Examples
+                                                      4: { 'size': {'mechanism':'fixed', 'value':1                                     }, }, }, },
+    'ExpandRouteSpec':              { 'parameters': { 3: { 'size': {'mechanism':'python-code', 'value':'expanded_route_spec_size[0]'   }, }, # Match NI Switch Executive Examples
+                                                      4: { 'size': {'mechanism':'fixed', 'value':1                                     }, }, }, },
+    'GetAllConnections':            { 'parameters': { 1: { 'size': {'mechanism':'python-code', 'value':'route_spec_size[0]'            }, }, # Match NI Switch Executive Examples
+                                                      2: { 'size': {'mechanism':'fixed', 'value':1                                     }, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
