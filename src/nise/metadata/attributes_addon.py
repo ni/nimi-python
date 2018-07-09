@@ -15,3 +15,17 @@ attributes_name = {
 attributes_remove_enum = {
 }
 
+attributes_additional_attributes = {
+    1000000: {
+        'access': 'read-write',
+        'channel_based': 'False',
+        'enum': None,
+        'lv_property': 'Attributes Not Supported',
+        'name': 'NOT_SUPPORTED',
+        'resettable': 'No',
+        'type': 'ViBoolean',
+        'documentation': {
+            'description':'An attribute of type bool with read/write access.',
+        },
+    },
+}
