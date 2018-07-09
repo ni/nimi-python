@@ -160,7 +160,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    def _get_error(self):
+    def _get_error(self, error_description_size=[1024]):
         '''_get_error
 
         Get error information of the first error that occurred. If a valid
@@ -181,13 +181,8 @@ class _SessionBase(object):
         of the parameters are NULL tolerant. Note that passing NULL for both
         errorNumber and errorDescription can change the method's behavior.
 
-        Returns:
-            error_number (int): By reference parameter which returns the error number of the first error
-                which occurred on the session since the error was last cleared. You may
-                pass NULL for this parameter if you are not interested in the return
-                value.
-
-            error_description_size (int): As input, it is the size of the error description string buffer. As
+        Args:
+            error_description_size (list of int): As input, it is the size of the error description string buffer. As
                 output, it is the Size of the entire error description string (may be
                 larger than the buffer size as the method always returns the size
                 needed to hold the entire buffer). This parameter is a ViInt32 that is
@@ -202,16 +197,32 @@ class _SessionBase(object):
                 may pass NULL for this parameter if you are not interested in the return
                 value for it.
 
+
+        Returns:
+            error_number (int): By reference parameter which returns the error number of the first error
+                which occurred on the session since the error was last cleared. You may
+                pass NULL for this parameter if you are not interested in the return
+                value.
+
+            error_description (str): By reference buffer which is to be filled with the error description
+                string. You may pass NULL for this parameter if you are not interested
+                in the return value. To obtain the error description string, you should
+                pass a buffer to this parameter. The size of the buffer required may be
+                obtained by calling the method with NULL for this parameter and a
+                valid ViInt32 to the error description size parameter. The error
+                description size will contain the size needed to hold the entire route
+                specification (including the NULL termination character). Common
+                operation is to call the method twice. The first time you call the
+                method you can determine the size needed to hold the route
+                specification string. Allocate a buffer of the appropriate size and then
+                re-call the method to obtain the entire buffer.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_number_ctype = _visatype.ViInt32()  # case S200
-        error_description_ctype = None  # case C050
-        error_description_size_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niSE_GetError(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_description_size_ctype = _visatype.ViInt32()  # case S200
-        error_description_ctype = (_visatype.ViChar * error_description_size_ctype.value)()  # case C060
-        error_code = self._library.niSE_GetError(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, None if error_description_size_ctype is None else (ctypes.pointer(error_description_size_ctype)))
+        error_description_ctype = (_visatype.ViChar * 1024)()  # case C070
+        error_description_size_ctype = get_ctypes_pointer_for_buffer(value=error_description_size, library_type=_visatype.ViInt32)  # case B550
+        error_code = self._library.niSE_GetError(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, error_description_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_number_ctype.value), error_description_ctype.value.decode(self._encoding)
 
@@ -525,7 +536,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES):
+    def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES, expanded_route_spec_size=[1024]):
         '''expand_route_spec
 
         Expands a route spec string to yield more information about the routes
@@ -554,9 +565,7 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-
-        Returns:
-            expanded_route_spec_size (int): The routeSpecSize is an ViInt32 that is passed by reference into the
+            expanded_route_spec_size (list of int): The routeSpecSize is an ViInt32 that is passed by reference into the
                 method. As an input, it is the size of the route spec string buffer
                 being passed. If the route spec string is larger than the string buffer
                 being passed, only the portion of the route spec string that can fit in
@@ -567,23 +576,36 @@ class Session(_SessionBase):
                 may pass NULL for this parameter if you are not interested in the return
                 value for routeSpecSize and routeSpec.
 
+
+        Returns:
+            expanded_route_spec (str): The expanded route spec. Route specification strings can be directly
+                passed to connect, disconnect, or connect_and_disconnect
+                Refer to Route Specification Strings in the NI Switch Executive Help for
+                more information. You may pass NULL for this parameter if you are not
+                interested in the return value. To obtain the route specification
+                string, you should pass a buffer to this parameter. The size of the
+                buffer required may be obtained by calling the method with NULL for
+                this parameter and a valid ViInt32 to routeSpecSize. The routeSpecSize
+                will contain the size needed to hold the entire route specification
+                (including the NULL termination character). Common operation is to call
+                the method twice. The first time you call the method you can
+                determine the size needed to hold the route specification string.
+                Allocate a buffer of the appropriate size and then re-call the method
+                to obtain the entire buffer.
+
         '''
         if type(expand_action) is not enums.ExpandAction:
             raise TypeError('Parameter mode must be of type ' + str(enums.ExpandAction))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
         expand_action_ctype = _visatype.ViInt32(expand_action.value)  # case S130
-        expanded_route_spec_ctype = None  # case C050
-        expanded_route_spec_size_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niSE_ExpandRouteSpec(vi_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        expanded_route_spec_size_ctype = _visatype.ViInt32()  # case S200
-        expanded_route_spec_ctype = (_visatype.ViChar * expanded_route_spec_size_ctype.value)()  # case C060
-        error_code = self._library.niSE_ExpandRouteSpec(vi_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, None if expanded_route_spec_size_ctype is None else (ctypes.pointer(expanded_route_spec_size_ctype)))
+        expanded_route_spec_ctype = (_visatype.ViChar * 1024)()  # case C070
+        expanded_route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=expanded_route_spec_size, library_type=_visatype.ViInt32)  # case B550
+        error_code = self._library.niSE_ExpandRouteSpec(vi_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, expanded_route_spec_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return expanded_route_spec_ctype.value.decode(self._encoding)
 
-    def find_route(self, channel1, channel2):
+    def find_route(self, channel1, channel2, route_spec_size=[1024]):
         '''find_route
 
         Finds an existing or potential route between channel 1 and channel 2.
@@ -604,9 +626,7 @@ class Session(_SessionBase):
                 name must either be a channel alias name or a name in the
                 device/ivichannel syntax. Examples: MyChannel Switch1/R0
 
-
-        Returns:
-            route_spec_size (int): The routeSpecSize is an ViInt32 that is passed by reference into the
+            route_spec_size (list of int): The routeSpecSize is an ViInt32 that is passed by reference into the
                 method. As an input, it is the size of the route string buffer being
                 passed. If the route string is larger than the string buffer being
                 passed, only the portion of the route string that can fit in the string
@@ -616,6 +636,25 @@ class Session(_SessionBase):
                 the size needed to hold the entire buffer. You may pass NULL for this
                 parameter if you are not interested in the return value for
                 routeSpecSize and routeSpec.
+
+
+        Returns:
+            route_spec (str): The fully specified route path complete with delimiting square
+                bracketsâ€”if the route exists or is possible. An example of a fully
+                specified route string is: [A->Switch1/r0->B] Route specification
+                strings can be directly passed to connect, disconnect, or
+                connect_and_disconnect Refer to Route Specification Strings in the
+                NI Switch Executive Help for more information. You may pass NULL for
+                this parameter if you are not interested in the return value. To obtain
+                the route specification string, you should pass a buffer to this
+                parameter. The size of the buffer required may be obtained by calling
+                the method with NULL for this parameter and a valid ViInt32 to
+                routeSpecSize. The routeSpecSize will contain the size needed to hold
+                the entire route specification (including the NULL termination
+                character). Common operation is to call the method twice. The first
+                time you call the method you can determine the size needed to hold the
+                route specification string. Allocate a buffer of the appropriate size
+                and then re-call the method to obtain the entire buffer.
 
             path_capability (enums.PathCapability): The return value which expresses the capability of finding a valid route
                 between Channel 1 and Channel 2. Refer to the table below for value
@@ -640,18 +679,14 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        route_spec_ctype = None  # case C050
-        route_spec_size_ctype = _visatype.ViInt32()  # case S200
+        route_spec_ctype = (_visatype.ViChar * 1024)()  # case C070
+        route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
         path_capability_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niSE_FindRoute(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        route_spec_size_ctype = _visatype.ViInt32()  # case S200
-        route_spec_ctype = (_visatype.ViChar * route_spec_size_ctype.value)()  # case C060
-        error_code = self._library.niSE_FindRoute(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)), None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
+        error_code = self._library.niSE_FindRoute(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, route_spec_size_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
 
-    def get_all_connections(self):
+    def get_all_connections(self, route_spec_size=[1024]):
         '''get_all_connections
 
         Returns the top-level connected routes and route groups. The route
@@ -660,8 +695,8 @@ class Session(_SessionBase):
         disconnect, connect_and_disconnect, and expand_route_spec)
         that use route specification strings.
 
-        Returns:
-            route_spec_size (int): The routeSpecSize is an ViInt32 that is passed by reference into the
+        Args:
+            route_spec_size (list of int): The routeSpecSize is an ViInt32 that is passed by reference into the
                 method. As an input, it is the size of the route spec string buffer
                 being passed. If the route spec string is larger than the string buffer
                 being passed, only the portion of the route spec string that can fit in
@@ -672,15 +707,29 @@ class Session(_SessionBase):
                 may pass NULL for this parameter if you are not interested in the return
                 value for routeSpecSize and routeSpec.
 
+
+        Returns:
+            route_spec (str): The route spec of all currently connected routes and route groups. Route
+                specification strings can be directly passed to connect,
+                disconnect, connect_and_disconnect, or expand_route_spec
+                Refer to Route Specification Strings in the NI Switch Executive Help for
+                more information. You may pass NULL for this parameter if you are not
+                interested in the return value. To obtain the route specification
+                string, you should pass a buffer to this parameter. The size of the
+                buffer required may be obtained by calling the method with NULL for
+                this parameter and a valid ViInt32 to routeSpecSize. The routeSpecSize
+                will contain the size needed to hold the entire route specification
+                (including the NULL termination character). Common operation is to call
+                the method twice. The first time you call the method you can
+                determine the size needed to hold the route specification string.
+                Allocate a buffer of the appropriate size and then re-call the method
+                to obtain the entire buffer.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        route_spec_ctype = None  # case C050
-        route_spec_size_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niSE_GetAllConnections(vi_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        route_spec_size_ctype = _visatype.ViInt32()  # case S200
-        route_spec_ctype = (_visatype.ViChar * route_spec_size_ctype.value)()  # case C060
-        error_code = self._library.niSE_GetAllConnections(vi_ctype, route_spec_ctype, None if route_spec_size_ctype is None else (ctypes.pointer(route_spec_size_ctype)))
+        route_spec_ctype = (_visatype.ViChar * 1024)()  # case C070
+        route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
+        error_code = self._library.niSE_GetAllConnections(vi_ctype, route_spec_ctype, route_spec_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding)
 

@@ -41,8 +41,7 @@ def test_get_all_connections(session):
     session.connect(test_connection)
     assert session.is_connected(test_connection) is True
     connections = session.get_all_connections()
-#    assert connections == test_connection
-    assert connections == ''
+    assert connections == test_connection
     session.disconnect(test_connection)
     assert session.is_connected(test_connection) is False
 
@@ -51,16 +50,23 @@ def test_find_route(session):
     test_channel_1 = 'DCPower'
     test_channel_2 = 'Scope'
     route, capability = session.find_route(test_channel_1, test_channel_2)
-#    assert route == '[DCPower->SampleMatrix1/r0->Scope]'
-    assert route == ''
+    assert route == '[SampleMatrix1/c0->SampleMatrix1/r0->SampleMatrix1/c1]'
+    assert capability == nise.PathCapability.PATH_AVAILABLE
+
+
+def test_find_route_different_length(session):
+    test_channel_1 = 'DCPower'
+    test_channel_2 = 'Scope'
+    length = [5]
+    route, capability = session.find_route(test_channel_1, test_channel_2, length)
+    assert route == '[Sam'
     assert capability == nise.PathCapability.PATH_AVAILABLE
 
 
 def test_expand_route_spec(session):
     test_connection = 'DIOToUUT'
     route_spec = session.expand_route_spec(test_connection)
-#    assert route_spec == 'DIO_0ToUUT_IO_0_Leg1 & DIO_1ToUUT_IO_1_Leg1 & DIO_2ToUUT_IO_2 & DIO_3ToUUT_IO_3 & DIO_0ToUUT_IO_0_Leg2 & DIO_1ToUUT_IO_1_Leg2;
-    assert route_spec == ''
+    assert route_spec == 'DIO_0ToUUT_IO_0_Leg1 & DIO_1ToUUT_IO_1_Leg1 & DIO_2ToUUT_IO_2 & DIO_3ToUUT_IO_3 & DIO_0ToUUT_IO_0_Leg2 & DIO_1ToUUT_IO_1_Leg2'
 
 
 def test_is_debounced_wait_for_debounce(session):
@@ -87,4 +93,4 @@ def test_error(session):
         session.connect(test_connection)
     except nise.Error as e:
         assert e.code == -29007
-#        assert e.description.find('The route specification string contains invalid characters or could not be understood.') != -1
+        assert e.description.find('The route specification string contains invalid characters or could not be understood.') != -1

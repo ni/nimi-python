@@ -27,21 +27,17 @@ class SideEffectsHelper(object):
         self._defaults['DisconnectAll']['return'] = 0
         self._defaults['ExpandRouteSpec'] = {}
         self._defaults['ExpandRouteSpec']['return'] = 0
-        self._defaults['ExpandRouteSpec']['expandedRouteSpecSize'] = None
         self._defaults['ExpandRouteSpec']['expandedRouteSpec'] = None
         self._defaults['FindRoute'] = {}
         self._defaults['FindRoute']['return'] = 0
-        self._defaults['FindRoute']['routeSpecSize'] = None
-        self._defaults['FindRoute']['pathCapability'] = None
         self._defaults['FindRoute']['routeSpec'] = None
+        self._defaults['FindRoute']['pathCapability'] = None
         self._defaults['GetAllConnections'] = {}
         self._defaults['GetAllConnections']['return'] = 0
-        self._defaults['GetAllConnections']['routeSpecSize'] = None
         self._defaults['GetAllConnections']['routeSpec'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorNumber'] = None
-        self._defaults['GetError']['errorDescriptionSize'] = None
         self._defaults['GetError']['errorDescription'] = None
         self._defaults['GetIviDeviceSession'] = {}
         self._defaults['GetIviDeviceSession']['return'] = 0
@@ -92,51 +88,48 @@ class SideEffectsHelper(object):
     def niSE_ExpandRouteSpec(self, vi, route_spec, expand_action, expanded_route_spec, expanded_route_spec_size):  # noqa: N802
         if self._defaults['ExpandRouteSpec']['return'] != 0:
             return self._defaults['ExpandRouteSpec']['return']
-        # expanded_route_spec_size
-        if self._defaults['ExpandRouteSpec']['expandedRouteSpecSize'] is None:
-            raise MockFunctionCallError("niSE_ExpandRouteSpec", param='expandedRouteSpecSize')
-        if expanded_route_spec_size is not None:
-            expanded_route_spec_size.contents.value = self._defaults['ExpandRouteSpec']['expandedRouteSpecSize']
+        # expanded_route_spec
         if self._defaults['ExpandRouteSpec']['expandedRouteSpec'] is None:
             raise MockFunctionCallError("niSE_ExpandRouteSpec", param='expandedRouteSpec')
-        if expanded_route_spec_size.value == 0:
-            return len(self._defaults['ExpandRouteSpec']['expandedRouteSpec'])
-        expanded_route_spec.value = self._defaults['ExpandRouteSpec']['expandedRouteSpec'].encode('ascii')
+        test_value = self._defaults['ExpandRouteSpec']['expandedRouteSpec']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(expanded_route_spec) >= len(test_value)
+        for i in range(len(test_value)):
+            expanded_route_spec[i] = test_value[i]
         return self._defaults['ExpandRouteSpec']['return']
 
     def niSE_FindRoute(self, vi, channel1, channel2, route_spec, route_spec_size, path_capability):  # noqa: N802
         if self._defaults['FindRoute']['return'] != 0:
             return self._defaults['FindRoute']['return']
-        # route_spec_size
-        if self._defaults['FindRoute']['routeSpecSize'] is None:
-            raise MockFunctionCallError("niSE_FindRoute", param='routeSpecSize')
-        if route_spec_size is not None:
-            route_spec_size.contents.value = self._defaults['FindRoute']['routeSpecSize']
+        # route_spec
+        if self._defaults['FindRoute']['routeSpec'] is None:
+            raise MockFunctionCallError("niSE_FindRoute", param='routeSpec')
+        test_value = self._defaults['FindRoute']['routeSpec']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(route_spec) >= len(test_value)
+        for i in range(len(test_value)):
+            route_spec[i] = test_value[i]
         # path_capability
         if self._defaults['FindRoute']['pathCapability'] is None:
             raise MockFunctionCallError("niSE_FindRoute", param='pathCapability')
         if path_capability is not None:
             path_capability.contents.value = self._defaults['FindRoute']['pathCapability']
-        if self._defaults['FindRoute']['routeSpec'] is None:
-            raise MockFunctionCallError("niSE_FindRoute", param='routeSpec')
-        if route_spec_size.value == 0:
-            return len(self._defaults['FindRoute']['routeSpec'])
-        route_spec.value = self._defaults['FindRoute']['routeSpec'].encode('ascii')
         return self._defaults['FindRoute']['return']
 
     def niSE_GetAllConnections(self, vi, route_spec, route_spec_size):  # noqa: N802
         if self._defaults['GetAllConnections']['return'] != 0:
             return self._defaults['GetAllConnections']['return']
-        # route_spec_size
-        if self._defaults['GetAllConnections']['routeSpecSize'] is None:
-            raise MockFunctionCallError("niSE_GetAllConnections", param='routeSpecSize')
-        if route_spec_size is not None:
-            route_spec_size.contents.value = self._defaults['GetAllConnections']['routeSpecSize']
+        # route_spec
         if self._defaults['GetAllConnections']['routeSpec'] is None:
             raise MockFunctionCallError("niSE_GetAllConnections", param='routeSpec')
-        if route_spec_size.value == 0:
-            return len(self._defaults['GetAllConnections']['routeSpec'])
-        route_spec.value = self._defaults['GetAllConnections']['routeSpec'].encode('ascii')
+        test_value = self._defaults['GetAllConnections']['routeSpec']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(route_spec) >= len(test_value)
+        for i in range(len(test_value)):
+            route_spec[i] = test_value[i]
         return self._defaults['GetAllConnections']['return']
 
     def niSE_GetError(self, vi, error_number, error_description, error_description_size):  # noqa: N802
@@ -147,16 +140,15 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSE_GetError", param='errorNumber')
         if error_number is not None:
             error_number.contents.value = self._defaults['GetError']['errorNumber']
-        # error_description_size
-        if self._defaults['GetError']['errorDescriptionSize'] is None:
-            raise MockFunctionCallError("niSE_GetError", param='errorDescriptionSize')
-        if error_description_size is not None:
-            error_description_size.contents.value = self._defaults['GetError']['errorDescriptionSize']
+        # error_description
         if self._defaults['GetError']['errorDescription'] is None:
             raise MockFunctionCallError("niSE_GetError", param='errorDescription')
-        if error_description_size.value == 0:
-            return len(self._defaults['GetError']['errorDescription'])
-        error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
+        test_value = self._defaults['GetError']['errorDescription']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(error_description) >= len(test_value)
+        for i in range(len(test_value)):
+            error_description[i] = test_value[i]
         return self._defaults['GetError']['return']
 
     def niSE_GetIviDeviceSession(self, vi, ivi_logical_name, ivi_session_handle):  # noqa: N802

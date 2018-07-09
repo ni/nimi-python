@@ -404,7 +404,7 @@ expand_route_spec
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: expand_route_spec(route_spec, expand_action=nise.ExpandAction.ROUTES)
+    .. py:method:: expand_route_spec(route_spec, expand_action=nise.ExpandAction.ROUTES, expanded_route_spec_size=[1024])
 
             Expands a route spec string to yield more information about the routes
             and route groups within the spec. The route specification string
@@ -448,21 +448,43 @@ expand_route_spec
 
 
             :type expand_action: :py:data:`nise.ExpandAction`
+            :param expanded_route_spec_size:
 
-            :rtype: int
+
+                The routeSpecSize is an ViInt32 that is passed by reference into the
+                method. As an input, it is the size of the route spec string buffer
+                being passed. If the route spec string is larger than the string buffer
+                being passed, only the portion of the route spec string that can fit in
+                the string buffer is copied into it. On return from the method,
+                routeSpecSize holds the size required to hold the entire route spec
+                string. Note that this size may be larger than the buffer size as the
+                method always returns the size needed to hold the entire buffer. You
+                may pass NULL for this parameter if you are not interested in the return
+                value for routeSpecSize and routeSpec.
+
+                
+
+
+            :type expanded_route_spec_size: list of int
+
+            :rtype: str
             :return:
 
 
-                    The routeSpecSize is an ViInt32 that is passed by reference into the
-                    method. As an input, it is the size of the route spec string buffer
-                    being passed. If the route spec string is larger than the string buffer
-                    being passed, only the portion of the route spec string that can fit in
-                    the string buffer is copied into it. On return from the method,
-                    routeSpecSize holds the size required to hold the entire route spec
-                    string. Note that this size may be larger than the buffer size as the
-                    method always returns the size needed to hold the entire buffer. You
-                    may pass NULL for this parameter if you are not interested in the return
-                    value for routeSpecSize and routeSpec.
+                    The expanded route spec. Route specification strings can be directly
+                    passed to :py:meth:`nise.Session.connect`, :py:meth:`nise.Session.disconnect`, or :py:meth:`nise.Session.connect_and_disconnect`
+                    Refer to Route Specification Strings in the NI Switch Executive Help for
+                    more information. You may pass NULL for this parameter if you are not
+                    interested in the return value. To obtain the route specification
+                    string, you should pass a buffer to this parameter. The size of the
+                    buffer required may be obtained by calling the method with NULL for
+                    this parameter and a valid ViInt32 to routeSpecSize. The routeSpecSize
+                    will contain the size needed to hold the entire route specification
+                    (including the NULL termination character). Common operation is to call
+                    the method twice. The first time you call the method you can
+                    determine the size needed to hold the route specification string.
+                    Allocate a buffer of the appropriate size and then re-call the method
+                    to obtain the entire buffer.
 
                     
 
@@ -473,7 +495,7 @@ find_route
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: find_route(channel1, channel2)
+    .. py:method:: find_route(channel1, channel2, route_spec_size=[1024])
 
             Finds an existing or potential route between channel 1 and channel 2.
             The returned route specification contains the route specification and
@@ -510,24 +532,48 @@ find_route
 
 
             :type channel2: str
+            :param route_spec_size:
 
-            :rtype: tuple (route_spec_size, path_capability)
+
+                The routeSpecSize is an ViInt32 that is passed by reference into the
+                method. As an input, it is the size of the route string buffer being
+                passed. If the route string is larger than the string buffer being
+                passed, only the portion of the route string that can fit in the string
+                buffer is copied into it. On return from the method, routeSpecSize
+                holds the size required to hold the entire route string. Note that this
+                size may be larger than the buffer size as the method always returns
+                the size needed to hold the entire buffer. You may pass NULL for this
+                parameter if you are not interested in the return value for
+                routeSpecSize and routeSpec.
+
+                
+
+
+            :type route_spec_size: list of int
+
+            :rtype: tuple (route_spec, path_capability)
 
                 WHERE
 
-                route_spec_size (int): 
+                route_spec (str): 
 
 
-                    The routeSpecSize is an ViInt32 that is passed by reference into the
-                    method. As an input, it is the size of the route string buffer being
-                    passed. If the route string is larger than the string buffer being
-                    passed, only the portion of the route string that can fit in the string
-                    buffer is copied into it. On return from the method, routeSpecSize
-                    holds the size required to hold the entire route string. Note that this
-                    size may be larger than the buffer size as the method always returns
-                    the size needed to hold the entire buffer. You may pass NULL for this
-                    parameter if you are not interested in the return value for
-                    routeSpecSize and routeSpec.
+                    The fully specified route path complete with delimiting square
+                    bracketsâ€”if the route exists or is possible. An example of a fully
+                    specified route string is: [A->Switch1/r0->B] Route specification
+                    strings can be directly passed to :py:meth:`nise.Session.connect`, :py:meth:`nise.Session.disconnect`, or
+                    :py:meth:`nise.Session.connect_and_disconnect` Refer to Route Specification Strings in the
+                    NI Switch Executive Help for more information. You may pass NULL for
+                    this parameter if you are not interested in the return value. To obtain
+                    the route specification string, you should pass a buffer to this
+                    parameter. The size of the buffer required may be obtained by calling
+                    the method with NULL for this parameter and a valid ViInt32 to
+                    routeSpecSize. The routeSpecSize will contain the size needed to hold
+                    the entire route specification (including the NULL termination
+                    character). Common operation is to call the method twice. The first
+                    time you call the method you can determine the size needed to hold the
+                    route specification string. Allocate a buffer of the appropriate size
+                    and then re-call the method to obtain the entire buffer.
 
                     
 
@@ -563,7 +609,7 @@ get_all_connections
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: get_all_connections()
+    .. py:method:: get_all_connections(route_spec_size=[1024])
 
             Returns the top-level connected routes and route groups. The route
             specification string returned from :py:meth:`nise.Session.get_all_connections` can be passed
@@ -575,20 +621,44 @@ get_all_connections
 
 
 
-            :rtype: int
+            :param route_spec_size:
+
+
+                The routeSpecSize is an ViInt32 that is passed by reference into the
+                method. As an input, it is the size of the route spec string buffer
+                being passed. If the route spec string is larger than the string buffer
+                being passed, only the portion of the route spec string that can fit in
+                the string buffer is copied into it. On return from the method,
+                routeSpecSize holds the size required to hold the entire route spec
+                string. Note that this size may be larger than the buffer size as the
+                method always returns the size needed to hold the entire buffer. You
+                may pass NULL for this parameter if you are not interested in the return
+                value for routeSpecSize and routeSpec.
+
+                
+
+
+            :type route_spec_size: list of int
+
+            :rtype: str
             :return:
 
 
-                    The routeSpecSize is an ViInt32 that is passed by reference into the
-                    method. As an input, it is the size of the route spec string buffer
-                    being passed. If the route spec string is larger than the string buffer
-                    being passed, only the portion of the route spec string that can fit in
-                    the string buffer is copied into it. On return from the method,
-                    routeSpecSize holds the size required to hold the entire route spec
-                    string. Note that this size may be larger than the buffer size as the
-                    method always returns the size needed to hold the entire buffer. You
-                    may pass NULL for this parameter if you are not interested in the return
-                    value for routeSpecSize and routeSpec.
+                    The route spec of all currently connected routes and route groups. Route
+                    specification strings can be directly passed to :py:meth:`nise.Session.connect`,
+                    :py:meth:`nise.Session.disconnect`, :py:meth:`nise.Session.connect_and_disconnect`, or :py:meth:`nise.Session.expand_route_spec`
+                    Refer to Route Specification Strings in the NI Switch Executive Help for
+                    more information. You may pass NULL for this parameter if you are not
+                    interested in the return value. To obtain the route specification
+                    string, you should pass a buffer to this parameter. The size of the
+                    buffer required may be obtained by calling the method with NULL for
+                    this parameter and a valid ViInt32 to routeSpecSize. The routeSpecSize
+                    will contain the size needed to hold the entire route specification
+                    (including the NULL termination character). Common operation is to call
+                    the method twice. The first time you call the method you can
+                    determine the size needed to hold the route specification string.
+                    Allocate a buffer of the appropriate size and then re-call the method
+                    to obtain the entire buffer.
 
                     
 
