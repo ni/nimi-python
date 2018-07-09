@@ -21,13 +21,13 @@ functions_enums = {
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
-    'GetError':                     { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':1024     }, },
+    'GetError':                     { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
                                                       3: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
-    'FindRoute':                    { 'parameters': { 3: { 'size': {'mechanism':'fixed', 'value':1024     }, },
+    'FindRoute':                    { 'parameters': { 3: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
                                                       4: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
-    'ExpandRouteSpec':              { 'parameters': { 3: { 'size': {'mechanism':'fixed', 'value':1024     }, },
+    'ExpandRouteSpec':              { 'parameters': { 3: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
                                                       4: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
-    'GetAllConnections':            { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':1024     }, },
+    'GetAllConnections':            { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':1024     }, }, # Match NI Switch Executive Examples
                                                       2: { 'size': {'mechanism':'fixed', 'value':1        }, }, }, },
 }
 
@@ -55,24 +55,24 @@ functions_default_value = {
 }
 
 functions_locking = {
-    'ClearError':                   { 'use_session_lock': False,  },  # No locking in this API
-    'CloseSession':                 { 'use_session_lock': False,  },  # No locking in this API
-    'Connect':                      { 'use_session_lock': False,  },  # No locking in this API
-    'ConnectAndDisconnect':         { 'use_session_lock': False,  },  # No locking in this API
-    'Disconnect':                   { 'use_session_lock': False,  },  # No locking in this API
-    'DisconnectAll':                { 'use_session_lock': False,  },  # No locking in this API
-    'ExpandRouteSpec':              { 'use_session_lock': False,  },  # No locking in this API
-    'FindRoute':                    { 'use_session_lock': False,  },  # No locking in this API
-    'GetAllConnections':            { 'use_session_lock': False,  },  # No locking in this API
-    'GetIviDeviceSession':          { 'use_session_lock': False,  },  # No locking in this API
-    'IsConnected':                  { 'use_session_lock': False,  },  # No locking in this API
-    'IsDebounced':                  { 'use_session_lock': False,  },  # No locking in this API
-    'OpenSession':                  { 'use_session_lock': False,  },  # No locking in this API
-    'WaitForDebounce':              { 'use_session_lock': False,  },  # No locking in this API
-    'GetError':                     { 'use_session_lock': False,  },  # No locking in this API
+    'ClearError':                   { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'CloseSession':                 { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'Connect':                      { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'ConnectAndDisconnect':         { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'Disconnect':                   { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'DisconnectAll':                { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'ExpandRouteSpec':              { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'FindRoute':                    { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'GetAllConnections':            { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'GetIviDeviceSession':          { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'IsConnected':                  { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'IsDebounced':                  { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'OpenSession':                  { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'WaitForDebounce':              { 'use_session_lock': False,  },  # Issue #896 No locking in this API
+    'GetError':                     { 'use_session_lock': False,  },  # Issue #896 No locking in this API
 }
 
-# We want to use a common name for close across all drivers
+# We want to use a common name for close across all drivers Issue #898
 functions_name = {
     'CloseSession': { 'python_name': '_close', },
 }
@@ -85,13 +85,6 @@ functions_converters = {
                                                            'type_in_documentation': 'dict',                                         }, }, },
 }
 
-# We should not return the size as this isn't useful to anyone. See test_find_route_different_length for how to change the length.
-functions_remove_parameters_from_python = {
-    'GetError':                     { 'parameters': { 3: { 'use_in_python_api': False, }, }, },
-    'FindRoute':                    { 'parameters': { 4: { 'use_in_python_api': False, }, }, },
-    'ExpandRouteSpec':              { 'parameters': { 4: { 'use_in_python_api': False, }, }, },
-    'GetAllConnections':            { 'parameters': { 2: { 'use_in_python_api': False, }, }, },
-}
 
 # Switch executive is bad and uses an output as an input. Need to create pointer (array) to use API, but it needs to be input.
 functions_bad_source_metadata = {
