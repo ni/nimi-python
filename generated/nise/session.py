@@ -640,7 +640,7 @@ class Session(_SessionBase):
 
         Returns:
             route_spec (str): The fully specified route path complete with delimiting square
-                bracketsâ€”if the route exists or is possible. An example of a fully
+                brackets if the route exists or is possible. An example of a fully
                 specified route string is: [A->Switch1/r0->B] Route specification
                 strings can be directly passed to connect, disconnect, or
                 connect_and_disconnect Refer to Route Specification Strings in the

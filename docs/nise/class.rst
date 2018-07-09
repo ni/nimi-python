@@ -559,7 +559,7 @@ find_route
 
 
                     The fully specified route path complete with delimiting square
-                    bracketsâ€”if the route exists or is possible. An example of a fully
+                    brackets if the route exists or is possible. An example of a fully
                     specified route string is: [A->Switch1/r0->B] Route specification
                     strings can be directly passed to :py:meth:`nise.Session.connect`, :py:meth:`nise.Session.disconnect`, or
                     :py:meth:`nise.Session.connect_and_disconnect` Refer to Route Specification Strings in the
