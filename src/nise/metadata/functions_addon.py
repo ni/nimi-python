@@ -85,8 +85,7 @@ functions_converters = {
                                                            'type_in_documentation': 'dict',                                         }, }, },
 }
 
-
-# Switch executive is bad and uses an output as an input. Need to create pointer (array) to use API, but it needs to be input.
+# Switch executive is bad and uses an output as an input. Need to create pointer (array) to use API, but it needs to be input so it can be set by the user.
 functions_bad_source_metadata = {
     'GetError':                     { 'parameters': { 3: { 'direction': 'in', 'type': 'ViInt32[]',  }, }, },
     'FindRoute':                    { 'parameters': { 4: { 'direction': 'in', 'type': 'ViInt32[]',  }, }, },
