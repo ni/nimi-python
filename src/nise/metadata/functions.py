@@ -486,7 +486,7 @@ device/ivichannel syntax. Examples: MyChannel Switch1/R0
 'documentation': {
 'description': '''
 The fully specified route path complete with delimiting square
-bracketsâ€”if the route exists or is possible. An example of a fully
+brackets if the route exists or is possible. An example of a fully
 specified route string is: [A->Switch1/r0->B] Route specification
 strings can be directly passed to niSE_Connect, niSE_Disconnect, or
 niSE_ConnectAndDisconnect Refer to Route Specification Strings in the
