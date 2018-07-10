@@ -4,7 +4,6 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-import nise._attributes as _attributes
 import nise._converters as _converters
 import nise._library_singleton as _library_singleton
 import nise._visatype as _visatype
@@ -100,12 +99,6 @@ class _SessionBase(object):
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
-
-    not_supported = _attributes.AttributeViBoolean(1000000)
-    '''Type: bool
-
-    A property of type bool with read/write access.
-    '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list

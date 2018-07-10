@@ -14,19 +14,3 @@ attributes_name = {
 
 attributes_remove_enum = {
 }
-
-# I need to have fake attributes so that we do not get errors from flake8 as all other drivers are expected to use attributes. Issue #901
-attributes_additional_attributes = {
-    1000000: {
-        'access': 'read-write',
-        'channel_based': 'False',
-        'enum': None,
-        'lv_property': 'Attributes Not Supported',
-        'name': 'NOT_SUPPORTED',
-        'resettable': 'No',
-        'type': 'ViBoolean',
-        'documentation': {
-            'description':'An attribute of type bool with read/write access.',
-        },
-    },
-}
