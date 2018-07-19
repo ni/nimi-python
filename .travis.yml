@@ -5,6 +5,9 @@ jobs:
     include:
       # We put 3.6 first since this is where flake8 and docs are testted
       - python: 3.6
+      # We put pypy towards the beginning because for some reason the build takes much longer
+      - python: pypy
+      - python: pypy3
       - python: 2.7
       - python: 3.4
       - python: 3.5
@@ -17,8 +20,6 @@ jobs:
       - python: nightly
         dist: xenial
         sudo: true
-      - python: pypy
-      - python: pypy3
 matrix:
     allow_failures:
         - python: 3.7
