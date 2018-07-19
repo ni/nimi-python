@@ -3,8 +3,10 @@ cache: pip
 dist: trusty
 language: python
 # For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
+# We leave 3.6 first since this is where flake8 and docs are testted
 python:
   - 3.6
+  - 3.7
   - 3.5
   - 3.4
   - 2.7
