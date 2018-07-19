@@ -1,7 +1,7 @@
-sudo: false
-cache: pip
-dist: trusty
+sudo: required
+dist: xenial
 language: python
+cache: pip
 # For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
 # We leave 3.6 first since this is where flake8 and docs are testted
 python:
