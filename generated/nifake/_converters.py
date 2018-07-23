@@ -388,7 +388,7 @@ def test_repeated_capabilies_unicode():
 
 
 def test_repeated_capabilies_raw():
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
+    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
