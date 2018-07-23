@@ -933,6 +933,29 @@ class Session(_SessionBase):
         return a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
+    def get_a_string_using_python_code(self, a_number):
+        '''get_a_string_using_python_code
+
+        Returns a number and a string.
+
+        Note: This method rules!
+
+        Args:
+            a_number (int): Contains a number.
+
+
+        Returns:
+            a_string (str): Contains a string of length aNumber.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_number_ctype = _visatype.ViInt16(a_number)  # case S150
+        a_string_ctype = (_visatype.ViChar * a_number)()  # case C080
+        error_code = self._library.niFake_GetAStringUsingPythonCode(vi_ctype, a_number_ctype, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return a_string_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def get_an_ivi_dance_string(self):
         '''get_an_ivi_dance_string
 

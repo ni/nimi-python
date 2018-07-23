@@ -202,6 +202,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
+    C080. Output buffer with mechanism python-code:                            visatype.ViChar * <python_code>
     '''
     definitions = []
     definition = None
@@ -225,6 +226,13 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
         elif parameter['size']['mechanism'] == 'fixed':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
             definition = '({0}.ViChar * {2})()  # case C070'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+
+        elif parameter['size']['mechanism'] == 'python-code':
+            assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
+            definition = '({0}.ViChar * {2})()  # case C080'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+
+        else:
+            assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
 
     if definition is not None:
         definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
