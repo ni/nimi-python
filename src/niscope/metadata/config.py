@@ -13,7 +13,7 @@ config = {
             '64bit': {'name': 'niscope_64.dll', 'type': 'cdll'},
         },
         'Linux': {
-            '64bit': {'name': 'libniScope_64.so', 'type': 'cdll'},
+            '64bit': {'name': 'libniscope.so', 'type': 'cdll'},
         },
     },
     'context_manager_name': {

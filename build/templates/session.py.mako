@@ -26,7 +26,9 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
+% if attributes:
 import ${module_name}._attributes as _attributes
+% endif
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
@@ -163,7 +165,9 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParameterUs
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
+% if attributes:
 
+% endif
     def __init__(self, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
