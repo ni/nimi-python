@@ -202,7 +202,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
-    C080. Output buffer with mechanism fixed-size:                             visatype.ViChar * <python_code>
+    C080. Output buffer with mechanism python-code:                             visatype.ViChar * <python_code>
     '''
     definitions = []
     definition = None
