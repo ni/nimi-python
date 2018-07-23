@@ -68,6 +68,7 @@ functions_buffer_info = {
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
     'FetchWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
     'WriteWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfSamples'}, }, }, },
+    'GetAStringUsingPythonCode':             { 'parameters': { 2: { 'size': {'mechanism':'python-code', 'value':'a_number'}, }, }, },
     'self_test':                             { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'MultipleArraysSameSize':                { 'parameters': { 1: { 'size': {'mechanism':'len', 'value':'Size'}, },
                                                                2: { 'size': {'mechanism':'len', 'value':'Size'}, },
