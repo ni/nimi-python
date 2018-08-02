@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * Support for Python 3.7
     * #### Changed
     * #### Removed
 * ### NI-DMM
