@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 import nifgen._visatype as _visatype
 import nifgen.errors as errors
 

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 import niscope._visatype as _visatype
 import niscope.errors as errors
 
