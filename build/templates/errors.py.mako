@@ -1,4 +1,9 @@
+<%
+# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
+encoding_tag = '# -*- coding: utf-8 -*-'
+%>\
 #!/usr/bin/python
+${encoding_tag}
 # This file was generated
 <%
 config        = template_parameters['metadata'].config
