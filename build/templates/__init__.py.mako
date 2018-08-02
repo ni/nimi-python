@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # This file was generated
 <%
 enums = template_parameters['metadata'].enums
