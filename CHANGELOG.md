@@ -688,6 +688,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
 -->
 
 
