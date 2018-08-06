@@ -39,9 +39,6 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorNumber'] = None
         self._defaults['GetError']['errorDescription'] = None
-        self._defaults['GetIviDeviceSession'] = {}
-        self._defaults['GetIviDeviceSession']['return'] = 0
-        self._defaults['GetIviDeviceSession']['iviSessionHandle'] = None
         self._defaults['IsConnected'] = {}
         self._defaults['IsConnected']['return'] = 0
         self._defaults['IsConnected']['isConnected'] = None
@@ -151,16 +148,6 @@ class SideEffectsHelper(object):
             error_description[i] = test_value[i]
         return self._defaults['GetError']['return']
 
-    def niSE_GetIviDeviceSession(self, vi, ivi_logical_name, ivi_session_handle):  # noqa: N802
-        if self._defaults['GetIviDeviceSession']['return'] != 0:
-            return self._defaults['GetIviDeviceSession']['return']
-        # ivi_session_handle
-        if self._defaults['GetIviDeviceSession']['iviSessionHandle'] is None:
-            raise MockFunctionCallError("niSE_GetIviDeviceSession", param='iviSessionHandle')
-        if ivi_session_handle is not None:
-            ivi_session_handle.contents.value = self._defaults['GetIviDeviceSession']['iviSessionHandle']
-        return self._defaults['GetIviDeviceSession']['return']
-
     def niSE_IsConnected(self, vi, route_spec, is_connected):  # noqa: N802
         if self._defaults['IsConnected']['return'] != 0:
             return self._defaults['IsConnected']['return']
@@ -216,8 +203,6 @@ class SideEffectsHelper(object):
         mock_library.niSE_GetAllConnections.return_value = 0
         mock_library.niSE_GetError.side_effect = MockFunctionCallError("niSE_GetError")
         mock_library.niSE_GetError.return_value = 0
-        mock_library.niSE_GetIviDeviceSession.side_effect = MockFunctionCallError("niSE_GetIviDeviceSession")
-        mock_library.niSE_GetIviDeviceSession.return_value = 0
         mock_library.niSE_IsConnected.side_effect = MockFunctionCallError("niSE_IsConnected")
         mock_library.niSE_IsConnected.return_value = 0
         mock_library.niSE_IsDebounced.side_effect = MockFunctionCallError("niSE_IsDebounced")

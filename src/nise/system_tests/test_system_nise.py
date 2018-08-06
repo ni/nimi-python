@@ -79,14 +79,6 @@ def test_is_debounced_wait_for_debounce(session):
     assert session.is_connected(test_connection) is False
 
 
-def test_get_ivi_device_session(session):
-    matrix_1 = session.get_ivi_device_session("SampleMatrix1")
-    matrix_2 = session.get_ivi_device_session("SampleMatrix2")
-    assert isinstance(matrix_1, int)
-    assert isinstance(matrix_2, int)
-    assert matrix_1 != matrix_2
-
-
 def test_error(session):
     test_connection = 'FakeConnection'
     try:

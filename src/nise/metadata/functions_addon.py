@@ -6,6 +6,7 @@ functions_codegen_method = {
     'CloseSession':                 { 'codegen_method': 'private',                                              },
     'GetError':                     { 'codegen_method': 'private',                                              },
     'ClearError':                   { 'codegen_method': 'no',                                                   },
+    'GetIviDeviceSession':          { 'codegen_method': 'no',                                                   },  # There is no IVI Python API
 }
 
 functions_enums = {

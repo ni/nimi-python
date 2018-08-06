@@ -98,8 +98,6 @@ nise.Session
     +-----------------------------------+
     | :py:func:`get_all_connections`    |
     +-----------------------------------+
-    | :py:func:`get_ivi_device_session` |
-    +-----------------------------------+
     | :py:func:`is_connected`           |
     +-----------------------------------+
     | :py:func:`is_debounced`           |
@@ -635,48 +633,6 @@ get_all_connections
 
 
 
-get_ivi_device_session
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nise.Session
-
-    .. py:method:: get_ivi_device_session(ivi_logical_name)
-
-            Retrieves an IVI instrument session for an IVI switching device that is
-            being managed by the NI Switch Executive. The retrieved session handle
-            can be used to access instrument specific functionality through the
-            instrument driver. The retrieved handle should not be closed. Note: Use
-            caution when using the session handle. Calling methods on an
-            instrument driver can invalidate the NI Switch Executive configuration
-            and cache. You should not use the retrieved session handle to make or
-            break connections or modify the configuration channels as this can cause
-            undefined, and potentially unwanted, behavior.
-
-            
-
-
-
-            :param ivi_logical_name:
-
-
-                The IVI logical name of the IVI device for which to retrieve an IVI
-                session.
-
-                
-
-
-            :type ivi_logical_name: str
-
-            :rtype: int
-            :return:
-
-
-                    The IVI instrument handle of the specified IVI device.
-
-                    
-
-
-
 is_connected
 ~~~~~~~~~~~~
 
@@ -810,8 +766,6 @@ Methods
 | :py:func:`nise.Session.find_route`             |
 +------------------------------------------------+
 | :py:func:`nise.Session.get_all_connections`    |
-+------------------------------------------------+
-| :py:func:`nise.Session.get_ivi_device_session` |
 +------------------------------------------------+
 | :py:func:`nise.Session.is_connected`           |
 +------------------------------------------------+

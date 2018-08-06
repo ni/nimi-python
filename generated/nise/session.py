@@ -726,35 +726,6 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding)
 
-    def get_ivi_device_session(self, ivi_logical_name):
-        '''get_ivi_device_session
-
-        Retrieves an IVI instrument session for an IVI switching device that is
-        being managed by the NI Switch Executive. The retrieved session handle
-        can be used to access instrument specific functionality through the
-        instrument driver. The retrieved handle should not be closed. Note: Use
-        caution when using the session handle. Calling methods on an
-        instrument driver can invalidate the NI Switch Executive configuration
-        and cache. You should not use the retrieved session handle to make or
-        break connections or modify the configuration channels as this can cause
-        undefined, and potentially unwanted, behavior.
-
-        Args:
-            ivi_logical_name (str): The IVI logical name of the IVI device for which to retrieve an IVI
-                session.
-
-
-        Returns:
-            ivi_session_handle (int): The IVI instrument handle of the specified IVI device.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        ivi_logical_name_ctype = ctypes.create_string_buffer(ivi_logical_name.encode(self._encoding))  # case C020
-        ivi_session_handle_ctype = _visatype.ViSession()  # case S200
-        error_code = self._library.niSE_GetIviDeviceSession(vi_ctype, ivi_logical_name_ctype, None if ivi_session_handle_ctype is None else (ctypes.pointer(ivi_session_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(ivi_session_handle_ctype.value)
-
     def is_connected(self, route_spec):
         '''is_connected
 

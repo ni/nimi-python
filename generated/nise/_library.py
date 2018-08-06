@@ -26,7 +26,6 @@ class Library(object):
         self.niSE_FindRoute_cfunc = None
         self.niSE_GetAllConnections_cfunc = None
         self.niSE_GetError_cfunc = None
-        self.niSE_GetIviDeviceSession_cfunc = None
         self.niSE_IsConnected_cfunc = None
         self.niSE_IsDebounced_cfunc = None
         self.niSE_OpenSession_cfunc = None
@@ -103,14 +102,6 @@ class Library(object):
                 self.niSE_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niSE_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niSE_GetError_cfunc(vi, error_number, error_description, error_description_size)
-
-    def niSE_GetIviDeviceSession(self, vi, ivi_logical_name, ivi_session_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niSE_GetIviDeviceSession_cfunc is None:
-                self.niSE_GetIviDeviceSession_cfunc = self._library.niSE_GetIviDeviceSession
-                self.niSE_GetIviDeviceSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
-                self.niSE_GetIviDeviceSession_cfunc.restype = ViStatus  # noqa: F405
-        return self.niSE_GetIviDeviceSession_cfunc(vi, ivi_logical_name, ivi_session_handle)
 
     def niSE_IsConnected(self, vi, route_spec, is_connected):  # noqa: N802
         with self._func_lock:
