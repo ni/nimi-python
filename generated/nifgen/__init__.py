@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 from nifgen.enums import *          # noqa: F403,F401,H303
