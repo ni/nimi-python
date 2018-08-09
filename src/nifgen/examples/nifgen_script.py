@@ -47,8 +47,8 @@ def generate_gaussian_noise():
     return noise
 
 
-def example(resource_name, options, shape):
-    with nifgen.Session(resource_name=resource_name, options=options) as session:
+def example(resource_name, options, shape, channel):
+    with nifgen.Session(resource_name=resource_name, options=options, channel_name=channel) as session:
         # CONFIGURATION
         # 1-Set the mode to Script
         session.output_mode = nifgen.OutputMode.SCRIPT
@@ -71,12 +71,12 @@ def example(resource_name, options, shape):
         noise = generate_gaussian_noise()
 
         # 4-Writes data to the waveform in onboard memory.
-        session.channels[0].write_waveform('sine', sine)        # (waveform_name, data)
-        session.channels[0].write_waveform('rampup', ramp_up)
-        session.channels[0].write_waveform('rampdown', ramp_down)
-        session.channels[0].write_waveform('square', square)
-        session.channels[0].write_waveform('triangle', triangle)
-        session.channels[0].write_waveform('noise', noise)
+        session.channels[channel].write_waveform('sine', sine)        # (waveform_name, data)
+        session.channels[channel].write_waveform('rampup', ramp_up)
+        session.channels[channel].write_waveform('rampdown', ramp_down)
+        session.channels[channel].write_waveform('square', square)
+        session.channels[channel].write_waveform('triangle', triangle)
+        session.channels[channel].write_waveform('noise', noise)
 
         # 5-Write Script
         script_sine = 'script Script\nrepeat until scriptTrigger0\nGenerate sine \nend repeat\nend script'
@@ -104,6 +104,7 @@ def example(resource_name, options, shape):
         elif shape is 'MULTI':
             session.channels[0].write_script(script_multi)
 
+        session.channels[channel].write_script(script)
         session.script_to_generate = 'Script'
 
         # LAUNCH
@@ -121,18 +122,19 @@ def _main(argsv):
     parser = argparse.ArgumentParser(description='Continuously generates an arbitrary waveform.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='AWG2', help='Resource name of a National Instruments Arbitrary Waveform Generator')
     parser.add_argument('-s', '--shape', default='NOISE', help='Shape of the signal to generate')
+    parser.add_argument('-c', '--channel', default='0', help='Channel to use when generating')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.option_string, args.shape.upper())
+    example(args.resource_name, args.option_string, args.shape.upper(), args.channel)
 
 
 def test_example():
     options = {'simulate': True, 'driver_setup': {'Model': '5433 (2CH)', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2', options, 100000, 1.0, 0.0, 5.0)
+    example('PXI1Slot2', options, 'SINE', '0')
 
 
 def test_main():
-    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', ]
+    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', '--channel', '0', ]
     _main(cmd_line)
 
 
