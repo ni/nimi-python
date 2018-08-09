@@ -1,8 +1,4 @@
-<%
-# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
-encoding_tag = '# -*- coding: utf-8 -*-'
-%>\
-${encoding_tag}
+${template_parameters['encoding_tag']}
 '''Matcher classes used by unit tests in order to set mock expectations.
 These work well with our visatype definitions.
 '''

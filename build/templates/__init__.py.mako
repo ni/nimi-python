@@ -1,3 +1,4 @@
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
 enums = template_parameters['metadata'].enums
