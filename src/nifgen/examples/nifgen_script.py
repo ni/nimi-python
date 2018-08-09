@@ -103,6 +103,9 @@ def example(resource_name, options, shape, channel):
             script = script_noise
         elif shape == 'MULTI':
             script = script_multi
+        else:
+            print('Unknown shape: {}'.format(shape))
+            sys.exit(1)
 
         session.channels[channel].write_script(script)
         session.script_to_generate = 'Script'
