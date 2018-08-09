@@ -89,20 +89,20 @@ def example(resource_name, options, shape, channel):
 
         # 6-Script to generate
         ''' SINE / SQUARE / TRIANGLE / RAMP_UP / RAMP_DOWN / NOISE / MULTI '''
-        if shape is 'SINE':
-            session.channels[0].write_script(script_sine)
-        elif shape is 'RAMP_UP':
-            session.channels[0].write_script(script_ramp_up)
-        elif shape is 'RAMP_DOWN':
-            session.channels[0].write_script(script_ramp_down)
-        elif shape is 'SQUARE':
-            session.channels[0].write_script(script_square)
-        elif shape is 'TRIANGLE':
-            session.channels[0].write_script(script_triangle)
-        elif shape is 'NOISE':
-            session.channels[0].write_script(script_noise)
-        elif shape is 'MULTI':
-            session.channels[0].write_script(script_multi)
+        if shape == 'SINE':
+            script = script_sine
+        elif shape == 'RAMP_UP':
+            script = script_ramp_up
+        elif shape == 'RAMP_DOWN':
+            script = script_ramp_down
+        elif shape == 'SQUARE':
+            script = script_square
+        elif shape == 'TRIANGLE':
+            script = script_triangle
+        elif shape == 'NOISE':
+            script = script_noise
+        elif shape == 'MULTI':
+            script = script_multi
 
         session.channels[channel].write_script(script)
         session.script_to_generate = 'Script'
