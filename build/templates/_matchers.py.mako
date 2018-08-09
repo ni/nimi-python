@@ -1,4 +1,5 @@
 ${template_parameters['encoding_tag']}
+# This file was generated
 '''Matcher classes used by unit tests in order to set mock expectations.
 These work well with our visatype definitions.
 '''
