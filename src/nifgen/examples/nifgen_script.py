@@ -8,36 +8,36 @@ import time
 
 
 def generate_sinewave():
-    time = np.arange(0, 10, 0.01)                # np.arange(Start, Stop, Step)
+    time = np.arange(0, 10, 0.01)                 # np.arange(Start, Stop, Step)
     amplitude = np.sin(time)
-    sinewave = amplitude.tolist()               # List of Float
+    sinewave = amplitude.tolist()                 # List of Float
     return sinewave
 
 
 def generate_rampup():
     ramp = np.arange(0, 0.5, 0.01)                # numpy.arange([start,]stop, [step,]dtype=None(
-    ramp_up = ramp.tolist()                     # List of Float
+    ramp_up = ramp.tolist()                       # List of Float
     return ramp_up
 
 
 def generate_ramdown():
     ramp = np.arange(0, 0.5, 0.01)                # numpy.arange([start,]stop, [step,]dtype=None)
-    ramp_down = ramp.tolist()                   # List of Float
-    ramp_down.reverse()                         # Reverse list to get a ramp down
+    ramp_down = ramp.tolist()                     # List of Float
+    ramp_down.reverse()                           # Reverse list to get a ramp down
     return ramp_down
 
 
 def generate_square():
-    time = np.arange(0, 10, 0.01)                # np.arange(Start, Stop, Step)
-    square_build = signal.square(time, 0.5)      # signal.square(time,duty_cycle)
-    square = square_build.tolist()              # List of Float
+    time = np.arange(0, 10, 0.01)                 # np.arange(Start, Stop, Step)
+    square_build = signal.square(time, 0.5)       # signal.square(time,duty_cycle)
+    square = square_build.tolist()                # List of Float
     return square
 
 
 def generate_triangle():
-    time = np.linspace(0, 1, 200)               # np.arange(Start, Stop, Step)
-    triangle_build = signal.sawtooth(time)      # signal.square(time,width)
-    triangle = triangle_build.tolist()          # List of Float
+    time = np.linspace(0, 1, 200)                 # np.arange(Start, Stop, Step)
+    triangle_build = signal.sawtooth(time)        # signal.square(time,width)
+    triangle = triangle_build.tolist()            # List of Float
     return triangle
 
 
