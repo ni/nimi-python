@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 import nimodinst._visatype as _visatype
 import nimodinst.errors as errors
 

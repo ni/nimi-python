@@ -1,3 +1,4 @@
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
 import build.helper as helper
