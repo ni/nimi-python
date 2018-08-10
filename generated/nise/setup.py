@@ -28,7 +28,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.0.1.dev0',
+    version='0.9.0.dev0',
     description='NI Switch Executive Python API',
     long_description=read_contents('README.rst'),
     author='National Instruments',
