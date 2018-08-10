@@ -1,4 +1,4 @@
-#!/usr/bin/python
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
 config        = template_parameters['metadata'].config

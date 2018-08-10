@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 import niswitch._visatype as _visatype
 import niswitch.errors as errors
 

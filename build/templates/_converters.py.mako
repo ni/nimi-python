@@ -1,3 +1,5 @@
+${template_parameters['encoding_tag']}
+# This file was generated
 <%
     config = template_parameters['metadata'].config
     module_name = config['module_name']

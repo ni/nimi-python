@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 import nidmm._visatype as _visatype
 import nidmm.errors as errors
 

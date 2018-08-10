@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 '''Matcher classes used by unit tests in order to set mock expectations.
 These work well with our visatype definitions.
 '''

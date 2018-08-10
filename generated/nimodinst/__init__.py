@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# -*- coding: utf-8 -*-
 # This file was generated
 
 from nimodinst.errors import DriverWarning   # noqa: F401

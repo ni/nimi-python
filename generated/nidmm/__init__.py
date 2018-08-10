@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# -*- coding: utf-8 -*-
 # This file was generated
 
 from nidmm.enums import *          # noqa: F403,F401,H303
