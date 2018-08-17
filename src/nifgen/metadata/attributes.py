@@ -2515,6 +2515,33 @@ Specifies the initial amount of data, in samples per channel, that the writer pe
 'description': 'Gets the absolute file path to the bitfile loaded on the FPGA.',
 },
     },
+    1150413: {
+        'access': 'read-write',
+        'channel_based': 'False',
+        'lv_property': 'Output:Absolute Delay',
+        'name': 'ABSOLUTE_DELAY',
+        'resettable': 'Yes',
+        'type': 'ViReal64',
+'documentation': {
+'description': '''
+Specifies the sub-Sample Clock delay, in seconds, to apply to the
+waveform. Use this property to reduce the trigger jitter when
+synchronizing multiple devices with NI-TClk. This property can also help
+maintain synchronization repeatability by writing the absolute delay
+value of a previous measurement to the current session.
+To set this property, the waveform generator must be in the Idle
+(Configuration) state.
+**Units**: seconds (s)
+**Valid Values**: Plus or minus half of one Sample Clock period
+**Default Value**: 0.0
+**Supported Waveform Generators**: PXIe-5413/5423/5433
+''',
+'note': '''
+If this property is set, NI-TClk cannot perform any sub-Sample Clock
+adjustment.
+''',
+},
+    },
     1250001: {
         'access': 'read-write',
         'channel_based': 'False',
@@ -2879,11 +2906,12 @@ This attribute is also the source for the trigger in the other trigger modes as 
         'channel_based': False,
         'enum': None,
         'lv_property': '',
-        'name': 'BURST_COUNT',
+        'name': 'CYCLE_COUNT',
         'resettable': False,
         'type': 'ViInt32',
 'documentation': {
-'description': 'The number of times to repeat each waveform in burst trigger mode.',
+'description': 'Specifies the number of cycles that you want the signal generator to produce after it receives a trigger./n For standard and arbitrary waveforms, a cycle is one period of the waveform./n An arbitrary sequence consists of multiple arbitrary waveforms in a sequence. Each waveform can be repeated a discrete number of times before the next waveform is produced. For arbitrary sequences, a cycle is one complete progression through the generation of all iterations of all waveforms in the sequence./n/n',
+'note': 'The NI 5411/5421 arbitrary waveform generators support only continuous generation./n',
 },
     },
 }

@@ -140,6 +140,8 @@ nifgen.Session
     +-------------------------------------------------------------+-----------------------------------------+
     | Property                                                    | Datatype                                |
     +=============================================================+=========================================+
+    | :py:attr:`absolute_delay`                                   | float                                   |
+    +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`all_marker_events_latched_status`                 | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`all_marker_events_live_status`                    | int                                     |
@@ -480,6 +482,50 @@ nifgen.Session
 
 Properties
 ----------
+
+absolute_delay
+~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: absolute_delay
+
+        Specifies the sub-Sample Clock delay, in seconds, to apply to the
+        waveform. Use this property to reduce the trigger jitter when
+        synchronizing multiple devices with NI-TClk. This property can also help
+        maintain synchronization repeatability by writing the absolute delay
+        value of a previous measurement to the current session.
+        To set this property, the waveform generator must be in the Idle
+        (Configuration) state.
+        **Units**: seconds (s)
+        **Valid Values**: Plus or minus half of one Sample Clock period
+        **Default Value**: 0.0
+        **Supported Waveform Generators**: PXIe-5413/5423/5433
+
+
+
+        .. note:: If this property is set, NI-TClk cannot perform any sub-Sample Clock
+            adjustment.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | False      |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Output:Absolute Delay**
+                - C Attribute: **NIFGEN_ATTR_ABSOLUTE_DELAY**
 
 all_marker_events_latched_status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6410,6 +6456,8 @@ Properties
 +----------------------------------------------------------------------------+-----------------------------------------+
 | Property                                                                   | Datatype                                |
 +============================================================================+=========================================+
+| :py:attr:`nifgen.Session.absolute_delay`                                   | float                                   |
++----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.all_marker_events_latched_status`                 | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.all_marker_events_live_status`                    | int                                     |

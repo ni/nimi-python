@@ -113,6 +113,25 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    absolute_delay = _attributes.AttributeViReal64(1150413)
+    '''Type: float
+
+    Specifies the sub-Sample Clock delay, in seconds, to apply to the
+    waveform. Use this property to reduce the trigger jitter when
+    synchronizing multiple devices with NI-TClk. This property can also help
+    maintain synchronization repeatability by writing the absolute delay
+    value of a previous measurement to the current session.
+    To set this property, the waveform generator must be in the Idle
+    (Configuration) state.
+    **Units**: seconds (s)
+    **Valid Values**: Plus or minus half of one Sample Clock period
+    **Default Value**: 0.0
+    **Supported Waveform Generators**: PXIe-5413/5423/5433
+
+    Note:
+    If this property is set, NI-TClk cannot perform any sub-Sample Clock
+    adjustment.
+    '''
     all_marker_events_latched_status = _attributes.AttributeViInt32(1150349)
     '''Type: int
 
