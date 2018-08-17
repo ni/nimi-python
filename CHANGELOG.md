@@ -18,30 +18,52 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * generated metadata
+        * Driver Version Tested Against
     * #### Removed
 * ### NI-DMM
     * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
     * #### Changed
     * #### Removed
 * ### NI-ModInst
     * #### Added
     * #### Changed
+        * Driver Version Tested Against
     * #### Removed
 * ### NI-Switch
     * #### Added
     * #### Changed
+        * Driver Version Tested Against
     * #### Removed
 * ### NI-DCPower
     * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
     * #### Changed
+        * generated metadata
+        * Driver Version Tested Against
     * #### Removed
 * ### NI-FGEN
     * #### Added
     * #### Changed
+        * generated metadata
+        * Driver Version Tested Against
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
     * #### Changed
+        * generated metadata
+        * Driver Version Tested Against
     * #### Removed
 
 ## 1.0.0 - 2018-06-08
