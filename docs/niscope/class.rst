@@ -412,11 +412,19 @@ niscope.Session
     +-------------------------------------------------------+
     | :py:func:`disable`                                    |
     +-------------------------------------------------------+
+    | :py:func:`export_attribute_configuration_buffer`      |
+    +-------------------------------------------------------+
+    | :py:func:`export_attribute_configuration_file`        |
+    +-------------------------------------------------------+
     | :py:func:`fetch`                                      |
     +-------------------------------------------------------+
     | :py:func:`fetch_into`                                 |
     +-------------------------------------------------------+
     | :py:func:`get_equalization_filter_coefficients`       |
+    +-------------------------------------------------------+
+    | :py:func:`import_attribute_configuration_buffer`      |
+    +-------------------------------------------------------+
+    | :py:func:`import_attribute_configuration_file`        |
     +-------------------------------------------------------+
     | :py:func:`lock`                                       |
     +-------------------------------------------------------+
@@ -4883,6 +4891,79 @@ disable
 
 
 
+export_attribute_configuration_buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: export_attribute_configuration_buffer()
+
+            Exports the property configuration of the session to a configuration
+            buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑SCOPE returns an
+            error.
+
+            **Related Topics:**
+
+            `Properties and Property
+            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+            `Setting Properties Before Reading
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+
+
+export_attribute_configuration_file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: export_attribute_configuration_file(file_path)
+
+            Exports the property configuration of the session to the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑SCOPE returns an
+            error.
+
+            **Related Topics:**
+
+            `Properties and Property
+            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+            `Setting Properties Before Reading
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .niscopeconfig
+
+                
+
+
+            :type file_path: str
+
 fetch
 ~~~~~
 
@@ -5144,6 +5225,88 @@ get_equalization_filter_coefficients
 
                     session.channels[0,1].get_equalization_filter_coefficients()
 
+
+import_attribute_configuration_buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: import_attribute_configuration_buffer(configuration)
+
+            Imports a property configuration to the session from the specified
+            configuration buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            **Related Topics:**
+
+            `Properties and Property
+            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+            `Setting Properties Before Reading
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+            .. note:: You cannot call this method while the session is in a running state,
+                such as while acquiring a signal.
+
+
+
+            :param configuration:
+
+
+                Specifies the byte array buffer that contains the property
+                configuration to import.
+
+                
+
+
+            :type configuration: list of int
+
+import_attribute_configuration_file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: import_attribute_configuration_file(file_path)
+
+            Imports a property configuration to the session from the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            **Related Topics:**
+
+            `Properties and Property
+            Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+            `Setting Properties Before Reading
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+            .. note:: You cannot call this method while the session is in a running state,
+                such as while acquiring a signal.
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .niscopeconfig
+
+                
+
+
+            :type file_path: str
 
 lock
 ~~~~
@@ -5767,11 +5930,19 @@ Methods
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.disable`                                    |
 +-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.export_attribute_configuration_buffer`      |
++-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.export_attribute_configuration_file`        |
++-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.fetch`                                      |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.fetch_into`                                 |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.get_equalization_filter_coefficients`       |
++-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.import_attribute_configuration_buffer`      |
++-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.import_attribute_configuration_file`        |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.lock`                                       |
 +-----------------------------------------------------------------------+

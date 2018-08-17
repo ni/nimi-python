@@ -149,6 +149,8 @@ functions_buffer_info = {
     'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size(array_meas_function)'}, },  # Private measurement library
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'}, },
                                                                   6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'ExportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'sizeInBytes'}, }, }, },
+    'ImportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'sizeInBytes'}, }, }, },
 }
 
 functions_render_in_session_base = {
@@ -161,6 +163,8 @@ functions_bad_source_metadata = {
     'GetFrequencyResponse':                     { 'parameters': { 3: { 'direction': 'out'},
                                                                   4: { 'direction': 'out'},
                                                                   5: { 'direction': 'out'}, }, },
+    'ExportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'direction': 'out', 'type': 'ViInt8[]'}, }, },
+    'ImportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'type': 'ViInt8[]'}, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
