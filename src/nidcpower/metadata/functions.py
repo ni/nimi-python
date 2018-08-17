@@ -3682,6 +3682,165 @@ for more information about supported devices.
 ''',
 },
     },
+    'ExportAttributeConfigurationBuffer': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. **vi** is obtained from the
+niDCPower_InitializeWithChannels function.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Size',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the size, in bytes, of the byte array to export. If you enter
+0, this function returns the needed size.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Configuration',
+                'type': 'ViAddr',
+'documentation': {
+'description': '''
+Specifies the byte array buffer to be populated with the exported
+attribute configuration.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Exports the attribute configuration of the session to the specified
+configuration buffer.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers and the same number of configured
+channels.
+
+This function verifies that the attributes you have configured for the
+session are valid. If the configuration is invalid, NI‑DCPower returns
+an error.
+
+**Support for this Function**
+
+Calling this function in `Sequence Source
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+**Channel Mapping Behavior for Multichannel Sessions**
+
+When importing and exporting session attribute configurations between
+NI‑DCPower sessions that were initialized with different channels, the
+configurations of the exporting channels are mapped to the importing
+channels in the order you specify in the **channelName** input to the
+niDCPower_InitializeWithChannels function.
+
+For example, if your entry for **channelName** is 0,1 for the exporting
+session and 1,2 for the importing session:
+
+-  The configuration exported from channel 0 is imported into channel 1.
+-  The configuration exported from channel 1 is imported into channel 2.
+
+**Related Topics:**
+
+`Using Properties and
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+`Setting Properties and Attributes Before Reading
+Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': '''
+This function will return an error if the total number of channels
+initialized for the exporting session is not equal to the total number
+of channels initialized for the importing session.
+''',
+},
+    },
+    'ExportAttributeConfigurationFile': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. **vi** is obtained from the
+niDCPower_InitializeWithChannels function.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'filePath',
+                'type': 'ViConstString',
+'documentation': {
+'description': '''
+Specifies the absolute path to the file to contain the exported
+attribute configuration. If you specify an empty or relative path, this
+function returns an error.
+**Default file extension:** .nidcpowerconfig
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Exports the attribute configuration of the session to the specified
+file.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers and the same number of configured
+channels.
+
+This function verifies that the attributes you have configured for the
+session are valid. If the configuration is invalid, NI‑DCPower returns
+an error.
+
+**Support for this Function**
+
+Calling this function in `Sequence Source
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+**Channel Mapping Behavior for Multichannel Sessions**
+
+When importing and exporting session attribute configurations between
+NI‑DCPower sessions that were initialized with different channels, the
+configurations of the exporting channels are mapped to the importing
+channels in the order you specify in the **channelName** input to the
+niDCPower_InitializeWithChannels function.
+
+For example, if your entry for **channelName** is 0,1 for the exporting
+session and 1,2 for the importing session:
+
+-  The configuration exported from channel 0 is imported into channel 1.
+-  The configuration exported from channel 1 is imported into channel 2.
+
+**Related Topics:**
+
+`Using Properties and
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+`Setting Properties and Attributes Before Reading
+Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': '''
+This function will return an error if the total number of channels
+initialized for the exporting session is not equal to the total number
+of channels initialized for the importing session.
+''',
+},
+    },
     'ExportSignal': {
         'returns': 'ViStatus',
         'parameters': [
@@ -4971,6 +5130,163 @@ This function is not supported on all devices. Refer to `Supported
 Functions by
 Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
 for more information about supported devices.
+''',
+},
+    },
+    'ImportAttributeConfigurationBuffer': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. **vi** is obtained from the
+niDCPower_InitializeWithChannels function.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Size',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the size, in bytes, of the byte array to import. If you enter
+0, this function returns the needed size.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Configuration',
+                'type': 'ViAddr',
+'documentation': {
+'description': '''
+Specifies the byte array buffer that contains the attribute
+configuration to import.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Imports an attribute configuration to the session from the specified
+configuration buffer.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers and the same number of configured
+channels.
+
+**Support for this Function**
+
+Calling this function in `Sequence Source
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+**Channel Mapping Behavior for Multichannel Sessions**
+
+When importing and exporting session attribute configurations between
+NI‑DCPower sessions that were initialized with different channels, the
+configurations of the exporting channels are mapped to the importing
+channels in the order you specify in the **channelName** input to the
+niDCPower_InitializeWithChannels function.
+
+For example, if your entry for **channelName** is 0,1 for the exporting
+session and 1,2 for the importing session:
+
+-  The configuration exported from channel 0 is imported into channel 1.
+-  The configuration exported from channel 1 is imported into channel 2.
+
+**Related Topics:**
+
+`Programming
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+`Using Properties and
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+`Setting Properties and Attributes Before Reading
+Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': '''
+This function will return an error if the total number of channels
+initialized for the exporting session is not equal to the total number
+of channels initialized for the importing session.
+''',
+},
+    },
+    'ImportAttributeConfigurationFile': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. **vi** is obtained from the
+niDCPower_InitializeWithChannels function.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'filePath',
+                'type': 'ViConstString',
+'documentation': {
+'description': '''
+Specifies the absolute path to the file containing the attribute
+configuration to import. If you specify an empty or relative path, this
+function returns an error.
+**Default File Extension:** .nidcpowerconfig
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Imports an attribute configuration to the session from the specified
+file.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers and the same number of configured
+channels.
+
+**Support for this Function**
+
+Calling this function in `Sequence Source
+Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+**Channel Mapping Behavior for Multichannel Sessions**
+
+When importing and exporting session attribute configurations between
+NI‑DCPower sessions that were initialized with different channels, the
+configurations of the exporting channels are mapped to the importing
+channels in the order you specify in the **channelName** input to the
+niDCPower_InitializeWithChannels function.
+
+For example, if your entry for **channelName** is 0,1 for the exporting
+session and 1,2 for the importing session:
+
+-  The configuration exported from channel 0 is imported into channel 1.
+-  The configuration exported from channel 1 is imported into channel 2.
+
+**Related Topics:**
+
+`Programming
+States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+`Using Properties and
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+`Setting Properties and Attributes Before Reading
+Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': '''
+This function will return an error if the total number of channels
+initialized for the exporting session is not equal to the total number
+of channels initialized for the importing session.
 ''',
 },
     },

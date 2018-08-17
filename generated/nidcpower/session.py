@@ -826,6 +826,7 @@ class _SessionBase(object):
     current_limit_low
     voltage_level_range
     current_limit_range
+    compliance_limit_symmetry
     When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following properties to configure the channel when  OutputFunction.DC_CURRENT is selected:
     current_level
     voltage_limit
@@ -833,7 +834,7 @@ class _SessionBase(object):
     voltage_limit_low
     current_level_range
     voltage_limit_range
-    Default Value: OutputFunction.DC_VOLTAGE
+    compliance_limit_symmetry
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -4008,6 +4009,125 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        '''export_attribute_configuration_buffer
+
+        Exports the property configuration of the session to the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DCPower returns
+        an error.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_ctype.value  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(configuration_ctype[i]) for i in range(size_ctype.value)]
+
+    @ivi_synchronized
+    def export_attribute_configuration_file(self, file_path):
+        '''export_attribute_configuration_file
+
+        Exports the property configuration of the session to the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DCPower returns
+        an error.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .nidcpowerconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         '''_get_ext_cal_last_date_and_time
 
@@ -4175,6 +4295,123 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
+
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        '''import_attribute_configuration_buffer
+
+        Imports a property configuration to the session from the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            configuration (list of int): Specifies the byte array buffer that contains the property
+                configuration to import.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_file(self, file_path):
+        '''import_attribute_configuration_file
+
+        Imports a property configuration to the session from the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .nidcpowerconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDCPower_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def _initialize_with_channels(self, resource_name, channels=None, reset=False, option_string=""):
         '''_initialize_with_channels
