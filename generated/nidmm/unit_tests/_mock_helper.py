@@ -38,6 +38,11 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureWaveformAcquisition']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer'] = {}
+        self._defaults['ExportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] = None
+        self._defaults['ExportAttributeConfigurationFile'] = {}
+        self._defaults['ExportAttributeConfigurationFile']['return'] = 0
         self._defaults['Fetch'] = {}
         self._defaults['Fetch']['return'] = 0
         self._defaults['Fetch']['Reading'] = None
@@ -84,6 +89,10 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
+        self._defaults['ImportAttributeConfigurationBuffer'] = {}
+        self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ImportAttributeConfigurationFile'] = {}
+        self._defaults['ImportAttributeConfigurationFile']['return'] = 0
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -204,6 +213,26 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
+
+    def niDMM_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        if self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] is None:
+            raise MockFunctionCallError("niDMM_ExportAttributeConfigurationBuffer", param='Configuration')
+        if size.value == 0:
+            return len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])
+        try:
+            configuration_ref = configuration.contents
+        except AttributeError:
+            configuration_ref = configuration
+        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])):
+            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['Configuration'][i]
+        return self._defaults['ExportAttributeConfigurationBuffer']['return']
+
+    def niDMM_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationFile']['return']
+        return self._defaults['ExportAttributeConfigurationFile']['return']
 
     def niDMM_Fetch(self, vi, maximum_time, reading):  # noqa: N802
         if self._defaults['Fetch']['return'] != 0:
@@ -381,6 +410,16 @@ class SideEffectsHelper(object):
         if self_cal_supported is not None:
             self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
+
+    def niDMM_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationBuffer']['return']
+        return self._defaults['ImportAttributeConfigurationBuffer']['return']
+
+    def niDMM_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationFile']['return']
+        return self._defaults['ImportAttributeConfigurationFile']['return']
 
     def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
@@ -616,6 +655,10 @@ class SideEffectsHelper(object):
         mock_library.niDMM_ConfigureWaveformAcquisition.return_value = 0
         mock_library.niDMM_Disable.side_effect = MockFunctionCallError("niDMM_Disable")
         mock_library.niDMM_Disable.return_value = 0
+        mock_library.niDMM_ExportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niDMM_ExportAttributeConfigurationBuffer")
+        mock_library.niDMM_ExportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niDMM_ExportAttributeConfigurationFile.side_effect = MockFunctionCallError("niDMM_ExportAttributeConfigurationFile")
+        mock_library.niDMM_ExportAttributeConfigurationFile.return_value = 0
         mock_library.niDMM_Fetch.side_effect = MockFunctionCallError("niDMM_Fetch")
         mock_library.niDMM_Fetch.return_value = 0
         mock_library.niDMM_FetchMultiPoint.side_effect = MockFunctionCallError("niDMM_FetchMultiPoint")
@@ -642,6 +685,10 @@ class SideEffectsHelper(object):
         mock_library.niDMM_GetLastCalTemp.return_value = 0
         mock_library.niDMM_GetSelfCalSupported.side_effect = MockFunctionCallError("niDMM_GetSelfCalSupported")
         mock_library.niDMM_GetSelfCalSupported.return_value = 0
+        mock_library.niDMM_ImportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niDMM_ImportAttributeConfigurationBuffer")
+        mock_library.niDMM_ImportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niDMM_ImportAttributeConfigurationFile.side_effect = MockFunctionCallError("niDMM_ImportAttributeConfigurationFile")
+        mock_library.niDMM_ImportAttributeConfigurationFile.return_value = 0
         mock_library.niDMM_InitWithOptions.side_effect = MockFunctionCallError("niDMM_InitWithOptions")
         mock_library.niDMM_InitWithOptions.return_value = 0
         mock_library.niDMM_Initiate.side_effect = MockFunctionCallError("niDMM_Initiate")

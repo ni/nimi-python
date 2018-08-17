@@ -3,6 +3,7 @@ import math
 import nidmm
 import numpy
 import pytest
+import tempfile
 import time
 
 
@@ -276,6 +277,31 @@ def test_reset_method(session):
     session.reset()
     function_after_reset = session.function
     assert default_function == function_after_reset
+
+
+def test_import_export_buffer(session):
+    test_value_1 = 1
+    test_value_2 = 2
+    session.sample_count = test_value_1
+    assert session.sample_count == test_value_1
+    buffer = session.export_attribute_configuration_buffer()
+    session.sample_count = test_value_2
+    assert session.sample_count == test_value_2
+    session.import_attribute_configuration_buffer(buffer)
+    assert session.sample_count == test_value_1
+
+
+def test_import_export_file(session):
+    test_value_1 = 1
+    test_value_2 = 2
+    path = tempfile.gettempdir() + 'test.txt'
+    session.sample_count = test_value_1
+    assert session.sample_count == test_value_1
+    session.export_attribute_configuration_file(path)
+    session.sample_count = test_value_2
+    assert session.sample_count == test_value_2
+    session.import_attribute_configuration_file(path)
+    assert session.sample_count == test_value_1
 
 
 def test_error_message():
