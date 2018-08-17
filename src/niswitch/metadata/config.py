@@ -23,7 +23,7 @@ config = {
     },
     'init_function': 'InitWithTopology',
     'custom_types': [],
-    'last_tested_version': '17.0.0',
+    'last_tested_version': '18.0.0',
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
     ],
