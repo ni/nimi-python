@@ -738,7 +738,7 @@ class _SessionBase(object):
 
     A string that contains the module revision  for the device that you are currently using.
     '''
-    num_channels = _attributes.AttributeViInt32(1050203)
+    channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
     Indicates the number of channels that the specific instrument  driver supports.

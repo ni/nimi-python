@@ -318,7 +318,7 @@ nifgen.Session
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`module_revision`                                  | str                                     |
     +-------------------------------------------------------------+-----------------------------------------+
-    | :py:attr:`num_channels`                                     | int                                     |
+    | :py:attr:`channel_count`                                    | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`output_enabled`                                   | bool                                    |
     +-------------------------------------------------------------+-----------------------------------------+
@@ -3295,12 +3295,12 @@ module_revision
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision**
                 - C Attribute: **NIFGEN_ATTR_MODULE_REVISION**
 
-num_channels
-~~~~~~~~~~~~
+channel_count
+~~~~~~~~~~~~~
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:attribute:: num_channels
+    .. py:attribute:: channel_count
 
         Indicates the number of channels that the specific instrument  driver supports.
         For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
@@ -6634,7 +6634,7 @@ Properties
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.module_revision`                                  | str                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
-| :py:attr:`nifgen.Session.num_channels`                                     | int                                     |
+| :py:attr:`nifgen.Session.channel_count`                                    | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.output_enabled`                                   | bool                                    |
 +----------------------------------------------------------------------------+-----------------------------------------+
