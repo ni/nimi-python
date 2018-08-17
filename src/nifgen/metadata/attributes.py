@@ -150,13 +150,13 @@ Specifies an optional string that contains additional information concerning the
         'access': 'read only',
         'channel_based': 'False',
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count',
-        'name': 'CHANNEL_COUNT',
+        'name': 'NUM_CHANNELS',
         'resettable': 'No',
         'type': 'ViInt32',
 'documentation': {
 'description': '''
-Returns the number of channels that the specific instrument  driver supports.
-For each attribute for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
+Indicates the number of channels that the specific instrument  driver supports.
+For each attribute for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
 ''',
 },
     },
