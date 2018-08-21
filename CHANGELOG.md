@@ -43,7 +43,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
-        * Format of the waveform_info type
+        * Format of output of wavefrom_info.__str__()
     * #### Removed
 
 ## 1.0.0 - 2018-06-08
