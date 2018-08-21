@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
+        * Format of the waveform_info type
     * #### Removed
 
 ## 1.0.0 - 2018-06-08
