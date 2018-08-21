@@ -77,8 +77,8 @@ class WaveformInfo(object):
         row_format_s = '{:<20}: {:}'
         string_representation = ''
         try:
-            string_representation += row_format_s.format('channel', self.channel)
-            string_representation += row_format_d.format('record', self.record)
+            string_representation += row_format_s.format('channel', self.channel) + '\n'
+            string_representation += row_format_d.format('record', self.record) + '\n'
         except AttributeError:
             pass
         string_representation += row_format_g.format('Absolute X0', self.absolute_initial_x) + '\n'
@@ -89,9 +89,9 @@ class WaveformInfo(object):
         except AttributeError:
             pass
         string_representation += row_format_g.format('offset', self.offset) + '\n'
-        string_representation += row_format_g.format('gain', self.gain)
+        string_representation += row_format_g.format('gain', self.gain) + '\n'
         try:
-            string_representation += row_format_g.format('wfm length', len(self.samples))
+            string_representation += row_format_g.format('wfm length', len(self.samples)) + '\n'
         except AttributeError:
             pass
         return string_representation
