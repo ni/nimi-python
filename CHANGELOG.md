@@ -19,8 +19,8 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * Support for Python 3.7
     * #### Changed
-        * generated metadata
-        * Driver Version Tested Against
+        * Updated generated metadata
+        * Updated "Driver Version Tested Against"
     * #### Removed
 * ### NI-DMM
     * #### Added
@@ -33,12 +33,10 @@ All notable changes to this project will be documented in this file.
 * ### NI-ModInst
     * #### Added
     * #### Changed
-        * Driver Version Tested Against
     * #### Removed
 * ### NI-Switch
     * #### Added
     * #### Changed
-        * Driver Version Tested Against
     * #### Removed
 * ### NI-DCPower
     * #### Added
@@ -47,14 +45,10 @@ All notable changes to this project will be documented in this file.
         * import_attribute_configuration_buffer function
         * import_attribute_configuration_buffer function
     * #### Changed
-        * generated metadata
-        * Driver Version Tested Against
     * #### Removed
 * ### NI-FGEN
     * #### Added
     * #### Changed
-        * generated metadata
-        * Driver Version Tested Against
     * #### Removed
 * ### NI-SCOPE
     * #### Added
@@ -63,8 +57,6 @@ All notable changes to this project will be documented in this file.
         * import_attribute_configuration_buffer function
         * import_attribute_configuration_buffer function
     * #### Changed
-        * generated metadata
-        * Driver Version Tested Against
         * Format of output of wavefrom_info.__str__()
     * #### Removed
 
