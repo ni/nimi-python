@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
+        * Format of output of wavefrom_info.__str__()
     * #### Removed
 * ### NI Switch Executive
     * #### Added
