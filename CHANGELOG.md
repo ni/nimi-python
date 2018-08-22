@@ -1,4 +1,4 @@
- # Changelog
+# Changelog
 
 * [Unreleased](#unreleased)
 * [1.0.0](#090---2018-06-08)
