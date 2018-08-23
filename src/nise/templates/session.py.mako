@@ -98,33 +98,6 @@ class _Lock(object):
         self._session.unlock()
 
 
-class _RepeatedCapabilities(object):
-    def __init__(self, session, prefix):
-        self._session = session
-        self._prefix = prefix
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
-
-        return _SessionBase(${config['session_handle_parameter_name']}=self._session._${config['session_handle_parameter_name']}, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
-
-
-# This is a very simple context manager we can use when we need to
-# call functions from _SessionBase that require no channels. It is tied to the specific
-# implementation of _SessionBase and how repeated capabilities are handled.
-class _NoChannel(object):
-    def __init__(self, session):
-        self._session = session
-
-    def __enter__(self):
-        self._repeated_capability_cache = self._session._repeated_capability
-        self._session._repeated_capability = ''
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self._session._repeated_capability = self._repeated_capability_cache
-
-
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
@@ -136,16 +109,13 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParameterUs
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
-    def __init__(self, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
-        self._repeated_capability_list = repeated_capability_list
-        self._repeated_capability = ','.join(repeated_capability_list)
+    def __init__(self, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
@@ -155,13 +125,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
-
-    def __getitem__(self, key):
-        rep_caps = []
-% for rep_cap in config['repeated_capabilities']:
-        rep_caps.append("${rep_cap['python_name']}")
-% endfor
-        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -204,7 +167,7 @@ class Session(_SessionBase):
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
-        super(Session, self).__init__(repeated_capability_list=[], ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
+        super(Session, self).__init__(${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
 % for p in init_function['parameters']:
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
@@ -216,11 +179,6 @@ class Session(_SessionBase):
         # Call specified init function
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
-
-        # Instantiate any repeated capability objects
-% for rep_cap in config['repeated_capabilities']:
-        self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}')
-% endfor
 
         # Store the parameter list for later printing in __repr__
         param_list = []

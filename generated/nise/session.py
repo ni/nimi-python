@@ -67,48 +67,18 @@ class _Lock(object):
         self._session.unlock()
 
 
-class _RepeatedCapabilities(object):
-    def __init__(self, session, prefix):
-        self._session = session
-        self._prefix = prefix
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
-
-        return _SessionBase(vi=self._session._vi, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
-
-
-# This is a very simple context manager we can use when we need to
-# call functions from _SessionBase that require no channels. It is tied to the specific
-# implementation of _SessionBase and how repeated capabilities are handled.
-class _NoChannel(object):
-    def __init__(self, session):
-        self._session = session
-
-    def __enter__(self):
-        self._repeated_capability_cache = self._session._repeated_capability
-        self._session._repeated_capability = ''
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self._session._repeated_capability = self._repeated_capability_cache
-
-
 class _SessionBase(object):
     '''Base class for all NI Switch Executive sessions.'''
 
     _is_frozen = False
 
-    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
-        self._repeated_capability_list = repeated_capability_list
-        self._repeated_capability = ','.join(repeated_capability_list)
+    def __init__(self, vi, library, encoding, freeze_it=False):
         self._vi = vi
         self._library = library
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
@@ -118,10 +88,6 @@ class _SessionBase(object):
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('nise', self.__class__.__name__, self._param_list)
-
-    def __getitem__(self, key):
-        rep_caps = []
-        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -271,7 +237,7 @@ class Session(_SessionBase):
             session (nise.Session): A session object representing the device.
 
         '''
-        super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        super(Session, self).__init__(vi=None, library=None, encoding=None, freeze_it=False)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
@@ -279,8 +245,6 @@ class Session(_SessionBase):
         # Call specified init function
         self._vi = 0  # This must be set before calling _open_session().
         self._vi = self._open_session(virtual_device_name, options)
-
-        # Instantiate any repeated capability objects
 
         # Store the parameter list for later printing in __repr__
         param_list = []
