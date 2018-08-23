@@ -46,8 +46,6 @@ def get_ctypes_and_array(value, array_type):
     return value_array
 
 
-
-
 class _SessionBase(object):
     '''Base class for all NI Switch Executive sessions.'''
 

@@ -8,11 +8,6 @@ ${template_parameters['encoding_tag']}
     functions = helper.filter_codegen_functions(config['functions'])
 
     module_name = config['module_name']
-
-    session_context_manager = None
-    if 'task' in config['context_manager_name']:
-        session_context_manager = '_' + config['context_manager_name']['task'].title()
-        session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
 %>\
 import array  # noqa: F401
 import ctypes
@@ -62,21 +57,6 @@ def get_ctypes_and_array(value, array_type):
         value_array = None
 
     return value_array
-
-
-% if session_context_manager is not None:
-class ${session_context_manager}(object):
-    def __init__(self, session):
-        self._session = session
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self._session.${session_context_manager_abort}()
-
-
-% endif
 
 
 class _SessionBase(object):
