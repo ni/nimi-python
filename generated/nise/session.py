@@ -79,8 +79,8 @@ class _RepeatedCapabilities(object):
         return _SessionBase(vi=self._session._vi, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
-# This is a very simple context manager we can use when we need to set/get attributes
-# or call functions from _SessionBase that require no channels. It is tied to the specific
+# This is a very simple context manager we can use when we need to
+# call functions from _SessionBase that require no channels. It is tied to the specific
 # implementation of _SessionBase and how repeated capabilities are handled.
 class _NoChannel(object):
     def __init__(self, session):
@@ -97,7 +97,6 @@ class _NoChannel(object):
 class _SessionBase(object):
     '''Base class for all NI Switch Executive sessions.'''
 
-    # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -119,11 +118,6 @@ class _SessionBase(object):
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('nise', self.__class__.__name__, self._param_list)
-
-    def __setattr__(self, key, value):
-        if self._is_frozen and key not in dir(self):
-            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
-        object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
         rep_caps = []

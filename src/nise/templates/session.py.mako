@@ -4,13 +4,10 @@ ${template_parameters['encoding_tag']}
     import build.helper as helper
 
     config = template_parameters['metadata'].config
-    attributes = config['attributes']
     enums = config['enums']
     functions = helper.filter_codegen_functions(config['functions'])
 
     module_name = config['module_name']
-
-    attributes = helper.filter_codegen_attributes(config['attributes'])
 
     session_context_manager = None
     if 'task' in config['context_manager_name']:
@@ -22,9 +19,6 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
-% if attributes:
-import ${module_name}._attributes as _attributes
-% endif
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
@@ -118,8 +112,8 @@ class _RepeatedCapabilities(object):
         return _SessionBase(${config['session_handle_parameter_name']}=self._session._${config['session_handle_parameter_name']}, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
-# This is a very simple context manager we can use when we need to set/get attributes
-# or call functions from _SessionBase that require no channels. It is tied to the specific
+# This is a very simple context manager we can use when we need to
+# call functions from _SessionBase that require no channels. It is tied to the specific
 # implementation of _SessionBase and how repeated capabilities are handled.
 class _NoChannel(object):
     def __init__(self, session):
@@ -136,34 +130,14 @@ class _NoChannel(object):
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
-    # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-% for attribute in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
-<%
-helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
-%>\
-    %if attributes[attribute]['enum']:
-    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
-    %else:
-    ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
-    %endif
-%   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
-    '''Type: ${attributes[attribute]['type_in_documentation']}
-
-    ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
-    '''
-%   endif
-% endfor
 <%
 init_function = config['functions']['_init_function']
 init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
-% if attributes:
-
-% endif
     def __init__(self, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
@@ -183,11 +157,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
-
-    def __setattr__(self, key, value):
-        if self._is_frozen and key not in dir(self):
-            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
-        object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
         rep_caps = []
