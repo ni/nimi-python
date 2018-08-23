@@ -12,6 +12,9 @@ config = {
             '32bit': {'name': 'nise.dll', 'type': 'windll'},
             '64bit': {'name': 'nise.dll', 'type': 'cdll'},
         },
+        'Linux': {
+            '64bit': {'name': 'libnise.so', 'type': 'cdll'},
+        },
     },
     'context_manager_name': {},
     'init_function': 'OpenSession',

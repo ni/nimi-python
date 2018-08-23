@@ -11,7 +11,8 @@ import threading
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Windows': {'32bit': {'name': 'nise.dll', 'type': 'windll'},
+_library_info = {'Linux': {'64bit': {'name': 'libnise.so', 'type': 'cdll'}},
+                 'Windows': {'32bit': {'name': 'nise.dll', 'type': 'windll'},
                              '64bit': {'name': 'nise.dll', 'type': 'cdll'}}}
 
 
