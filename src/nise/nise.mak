@@ -1,7 +1,8 @@
 include $(BUILD_HELPER_DIR)/defines.mak
 include $(BUILD_HELPER_DIR)/tools.mak
 
-MODULE_FILES_TO_GENERATE := $(DEFAULT_PY_FILES_TO_GENERATE)
+# We want everything but _attributes.py
+MODULE_FILES_TO_GENERATE := $(filter-out _attributes.py,$(DEFAULT_PY_FILES_TO_GENERATE))
 
 MODULE_FILES_TO_COPY := $(DEFAULT_PY_FILES_TO_COPY)
 
