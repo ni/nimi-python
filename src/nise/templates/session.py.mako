@@ -12,7 +12,6 @@ ${template_parameters['encoding_tag']}
     session_context_manager = None
     if 'task' in config['context_manager_name']:
         session_context_manager = '_' + config['context_manager_name']['task'].title()
-        session_context_manager_initiate = functions[config['context_manager_name']['initiate_function']]['python_name']
         session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
 %>\
 import array  # noqa: F401
@@ -69,7 +68,6 @@ def get_ctypes_and_array(value, array_type):
 class ${session_context_manager}(object):
     def __init__(self, session):
         self._session = session
-        self._session.${session_context_manager_initiate}()
 
     def __enter__(self):
         return self
@@ -238,9 +236,6 @@ class Session(_SessionBase):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
-
-    def initiate(self):
-        return ${session_context_manager}(self)
 
     def close(self):
         try:
