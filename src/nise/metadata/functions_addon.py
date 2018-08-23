@@ -50,24 +50,6 @@ functions_default_value = {
     'GetAllConnections':            { 'parameters': { 2: { 'default_value': [1024],                                  }, }, }, # Match NI Switch Executive Examples
 }
 
-functions_locking = {
-    'ClearError':                   { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'CloseSession':                 { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'Connect':                      { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'ConnectAndDisconnect':         { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'Disconnect':                   { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'DisconnectAll':                { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'ExpandRouteSpec':              { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'FindRoute':                    { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'GetAllConnections':            { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'GetIviDeviceSession':          { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'IsConnected':                  { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'IsDebounced':                  { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'OpenSession':                  { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'WaitForDebounce':              { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-    'GetError':                     { 'use_session_lock': False,  },  # Issue #896 No locking in this API
-}
-
 functions_name = {
     'CloseSession': { 'python_name': '_close', }, # Issue #898
 }

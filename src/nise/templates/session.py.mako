@@ -77,25 +77,6 @@ class ${session_context_manager}(object):
 
 
 % endif
-# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
-def ivi_synchronized(f):
-    def aux(*xs, **kws):
-        session = xs[0]  # parameter 0 is 'self' which is the session object
-        with session.lock():
-            return f(*xs, **kws)
-    return aux
-
-
-class _Lock(object):
-    def __init__(self, session):
-        self._session = session
-
-    def __enter__(self):
-        # _lock_session is called from the lock() function, not here
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock()
 
 
 class _SessionBase(object):
@@ -152,9 +133,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-% if functions[func_name]['use_session_lock']:
-    @ivi_synchronized
-% endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
@@ -207,9 +185,6 @@ class Session(_SessionBase):
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-% if functions[func_name]['use_session_lock']:
-    @ivi_synchronized
-% endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor

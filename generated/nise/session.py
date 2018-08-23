@@ -46,25 +46,6 @@ def get_ctypes_and_array(value, array_type):
     return value_array
 
 
-# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
-def ivi_synchronized(f):
-    def aux(*xs, **kws):
-        session = xs[0]  # parameter 0 is 'self' which is the session object
-        with session.lock():
-            return f(*xs, **kws)
-    return aux
-
-
-class _Lock(object):
-    def __init__(self, session):
-        self._session = session
-
-    def __enter__(self):
-        # _lock_session is called from the lock() function, not here
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock()
 
 
 class _SessionBase(object):
