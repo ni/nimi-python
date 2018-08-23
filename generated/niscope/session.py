@@ -1435,8 +1435,8 @@ class _SessionBase(object):
                 waveform.
 
         '''
-        if type(array_meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        if type(array_meas_function) is not enums._ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
         meas_waveform_size_ctype = _visatype.ViInt32()  # case S200
@@ -1503,8 +1503,8 @@ class _SessionBase(object):
                 to add.
 
         '''
-        if type(meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        if type(meas_function) is not enums._ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         meas_function_ctype = _visatype.ViInt32(meas_function.value)  # case S130
@@ -1596,8 +1596,8 @@ class _SessionBase(object):
                 to clear the stats for.
 
         '''
-        if type(clearable_measurement_function) is not enums.ClearableMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ClearableMeasurement))
+        if type(clearable_measurement_function) is not enums._ClearableMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums._ClearableMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
@@ -2278,8 +2278,8 @@ class _SessionBase(object):
                 Call _actual_num_wfms to determine the size of this array.
 
         '''
-        if type(array_meas_function) is not enums.ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ArrayMeasurement))
+        if type(array_meas_function) is not enums._ArrayMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -2832,8 +2832,8 @@ class _SessionBase(object):
                 _actual_num_wfms to determine the array length.
 
         '''
-        if type(scalar_meas_function) is not enums.ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
+        if type(scalar_meas_function) is not enums._ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -2910,8 +2910,8 @@ class _SessionBase(object):
                 called.
 
         '''
-        if type(scalar_meas_function) is not enums.ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
+        if type(scalar_meas_function) is not enums._ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -3398,8 +3398,8 @@ class _SessionBase(object):
                 _actual_num_wfms to determine the array length.
 
         '''
-        if type(scalar_meas_function) is not enums.ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScalarMeasurement))
+        if type(scalar_meas_function) is not enums._ScalarMeasurement:
+            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140

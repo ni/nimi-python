@@ -503,6 +503,31 @@ def _add_enum_value_python_name(enum_info, config):
     return enum_info
 
 
+def fixup_enum_names(config):
+    '''Fix enum types for private enums
+
+    Now that we have all the metadata calculated, we need to fix any enum types in attributes and functions
+    where the underlying enum is private. At the time the 'python_type' was set, we hadn't yet calculated
+    whether the enum would be private or not. We couldn't because we needed to process all the functions and
+    attributes first.
+    '''
+    # Check all the functions that will be code generated
+    for f in config['functions']:
+        if config['functions'][f]['codegen_method'] != 'no':
+            for p in config['functions'][f]['parameters']:
+                if p['enum'] is not None and config['enums'][p['enum']]['codegen_method'] == 'private':
+                    # We need to update the python type since the enum is private
+                    p['python_type'] = 'enums.' + config['enums'][p['enum']]['python_name']
+
+    # Check all attributes that will be code generated
+    for a in config['attributes']:
+        attr = config['attributes'][a]
+        if attr['codegen_method'] != 'no':
+            if attr['enum'] is not None and config['enums'][attr['enum']]['codegen_method'] == 'private':
+                # We need to update the python type since the enum is private
+                attr['python_type'] = 'enums.' + config['enums'][attr['enum']]['python_name']
+
+
 def add_all_enum_metadata(enums, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     enums = merge_helper(enums, 'enums', config, use_re=False)
@@ -542,6 +567,8 @@ def add_all_metadata(functions, attributes, enums, config):
     add_notes_re_links(config)
 
     square_up_tables(config)
+
+    fixup_enum_names(config)
 
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
     metadata_dir = os.path.join('bin', 'processed_metadata')
