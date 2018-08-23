@@ -7,6 +7,7 @@
 enums_codegen_method = {
 }
 
+# Need additional enums for functions that use enums. Enum names & values come from LabVIEW API
 enums_additional_enums = {
     'MulticonnectMode': {
         'values': [
