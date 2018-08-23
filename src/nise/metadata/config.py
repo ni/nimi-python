@@ -4,6 +4,7 @@ config = {
     'module_version': '0.1.0.dev0',
     'c_function_prefix': 'niSE_',
     'driver_name': 'NI Switch Executive',
+    'driver_registry': 'Switch Executive',
     'session_class_description': 'An NI Switch Executive session',
     'session_handle_parameter_name': 'vi',
     'library_info':

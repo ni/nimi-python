@@ -1,10 +1,26 @@
-# -*- coding: utf-8 -*-
+${template_parameters['encoding_tag']}
 # This file was generated
+<%
+enums = template_parameters['metadata'].enums
+config = template_parameters['metadata'].config
+module_name = config['module_name']
+%>
+% if len(enums) > 0:
+from ${module_name}.enums import *          # noqa: F403,F401,H303
+% endif
+from ${module_name}.errors import DriverWarning   # noqa: F401
+from ${module_name}.errors import Error     # noqa: F401
+from ${module_name}.session import Session  # noqa: F401
+<%
+ # Blank lines are to make each import separate so that they do not need to be sorted
+ # Otherwise flake8 test fails
+%>\
+% for c in config['custom_types']:
 
-from nise.enums import *          # noqa: F403,F401,H303
-from nise.errors import DriverWarning   # noqa: F401
-from nise.errors import Error     # noqa: F401
-from nise.session import Session  # noqa: F401
+from ${module_name}.${c['file_name']} import ${c['python_name']}  # noqa: F401
+
+from ${module_name}.${c['file_name']} import ${c['ctypes_type']}  # noqa: F401
+% endfor
 
 
 def get_diagnostic_information():
@@ -42,7 +58,7 @@ def get_diagnostic_information():
 
         os_name = 'Windows'
         try:
-            driver_version_key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\National Instruments\Switch Executive\CurrentVersion")
+            driver_version_key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\National Instruments\${config['driver_registry']}\CurrentVersion")
             driver_version = winreg.QueryValueEx(driver_version_key, "Version")[0]
         except WindowsError:
             driver_version = 'Unknown'
@@ -58,10 +74,10 @@ def get_diagnostic_information():
     info['os']['name'] = os_name
     info['os']['version'] = platform.version()
     info['os']['bits'] = '64' if is_os_64bit() else '32'
-    info['driver']['name'] = "NI Switch Executive"
+    info['driver']['name'] = "${config['driver_name']}"
     info['driver']['version'] = driver_version
-    info['module']['name'] = 'nise'
-    info['module']['version'] = "0.1.0.dev0"
+    info['module']['name'] = '${module_name}'
+    info['module']['version'] = "${config['module_version']}"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
