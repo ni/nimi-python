@@ -45,6 +45,11 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * Format of output of wavefrom_info.__str__()
     * #### Removed
+* ### NI Switch Executive
+    * #### Added
+        * Initial Release
+    * #### Changed
+    * #### Removed
 
 ## 1.0.0 - 2018-06-08
 * ### ALL
@@ -682,6 +687,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 * ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
     * #### Added
     * #### Changed
     * #### Removed

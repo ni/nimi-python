@@ -78,7 +78,7 @@ following installed:
 In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Tests:
 
 * Install corresponding driver runtimes.
-    * Download the latest installers for NI-DMM, NI-SCOPE, NI-DCPower, NI-SWITCH, NI-FGEN
+    * Download the latest installers for NI-DMM, NI-SCOPE, NI-DCPower, NI-SWITCH, NI-FGEN, NI Switch Executive
     from [ni.com](http://www.ni.com/downloads/ni-drivers/)
     * NI-ModInst is included as part of these runtimes.
     * NI-TClk is included as part of NI-SCOPE and NI-FGEN.
