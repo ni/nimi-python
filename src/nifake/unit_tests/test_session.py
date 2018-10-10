@@ -1232,7 +1232,7 @@ class TestSession(object):
                 pass
 
 
-# not a session tests per se
+# not session tests per se
 def test_diagnostic_information():
     info = nifake.print_diagnostic_information()
     assert isinstance(info, dict)
