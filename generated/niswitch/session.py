@@ -3,6 +3,7 @@
 import array  # noqa: F401
 import ctypes
 import datetime
+import warnings
 
 import niswitch._attributes as _attributes
 import niswitch._converters as _converters
@@ -10,6 +11,7 @@ import niswitch._library_singleton as _library_singleton
 import niswitch._visatype as _visatype
 import niswitch.enums as enums
 import niswitch.errors as errors
+from niswitch.errors import DriverWarning
 
 # Used for __repr__
 import pprint
@@ -557,6 +559,8 @@ class _SessionBase(object):
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
+
+        warnings.filterwarnings("always", category=DriverWarning)
 
         self._is_frozen = freeze_it
 

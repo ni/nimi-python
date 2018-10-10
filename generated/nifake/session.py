@@ -3,6 +3,7 @@
 import array  # noqa: F401
 import ctypes
 import datetime
+import warnings
 
 import nifake._attributes as _attributes
 import nifake._converters as _converters
@@ -10,6 +11,7 @@ import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
 import nifake.enums as enums
 import nifake.errors as errors
+from nifake.errors import DriverWarning
 
 import nifake.custom_struct as custom_struct  # noqa: F401
 
@@ -175,6 +177,8 @@ class _SessionBase(object):
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
+
+        warnings.filterwarnings("always", category=DriverWarning)
 
         self._is_frozen = freeze_it
 

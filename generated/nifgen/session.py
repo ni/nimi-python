@@ -3,6 +3,7 @@
 import array  # noqa: F401
 import ctypes
 import datetime
+import warnings
 
 import nifgen._attributes as _attributes
 import nifgen._converters as _converters
@@ -10,6 +11,7 @@ import nifgen._library_singleton as _library_singleton
 import nifgen._visatype as _visatype
 import nifgen.enums as enums
 import nifgen.errors as errors
+from nifgen.errors import DriverWarning
 
 # Used for __repr__
 import pprint
@@ -921,6 +923,8 @@ class _SessionBase(object):
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
+
+        warnings.filterwarnings("always", category=DriverWarning)
 
         self._is_frozen = freeze_it
 
