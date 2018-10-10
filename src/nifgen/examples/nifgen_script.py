@@ -7,41 +7,41 @@ import sys
 import time
 
 
-def generate_sinewave():
+def calculate_sinewave():
     time = np.arange(0, 10, 0.01)                 # np.arange(Start, Stop, Step)
     amplitude = np.sin(time)
     sinewave = amplitude.tolist()                 # List of Float
     return sinewave
 
 
-def generate_rampup():
+def calculate_rampup():
     ramp = np.arange(0, 0.5, 0.01)                # numpy.arange([start,]stop, [step,]dtype=None(
     ramp_up = ramp.tolist()                       # List of Float
     return ramp_up
 
 
-def generate_ramdown():
+def calculate_rampdown():
     ramp = np.arange(0, 0.5, 0.01)                # numpy.arange([start,]stop, [step,]dtype=None)
     ramp_down = ramp.tolist()                     # List of Float
     ramp_down.reverse()                           # Reverse list to get a ramp down
     return ramp_down
 
 
-def generate_square():
+def calculate_square():
     time = np.arange(0, 10, 0.01)                 # np.arange(Start, Stop, Step)
     square_build = signal.square(time, 0.5)       # signal.square(time,duty_cycle)
     square = square_build.tolist()                # List of Float
     return square
 
 
-def generate_triangle():
+def calculate_triangle():
     time = np.linspace(0, 1, 200)                 # np.arange(Start, Stop, Step)
     triangle_build = signal.sawtooth(time)        # signal.square(time,width)
     triangle = triangle_build.tolist()            # List of Float
     return triangle
 
 
-def generate_gaussian_noise():
+def calculate_gaussian_noise():
     random_noise = np.random.normal(0, 0.1, 300)  # random.normal(center, scale, size)
     noise = random_noise.tolist()
     return noise
