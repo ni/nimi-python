@@ -50,10 +50,10 @@ def calculate_gaussian_noise():
 def example(resource_name, options, shape, channel):
     with nifgen.Session(resource_name=resource_name, options=options, channel_name=channel) as session:
         # CONFIGURATION
-        # 1-Set the mode to Script
+        # 1 - Set the mode to Script
         session.output_mode = nifgen.OutputMode.SCRIPT
 
-        # 2-Configure Trigger:
+        # 2 - Configure Trigger:
         # SOFTWARE TRIGGER: used in the script
         session.script_triggers[0].script_trigger_type = nifgen.ScriptTriggerType.SOFTWARE_EDGE  # TRIG_NONE / DIGITAL_EDGE / DIGITAL_LEVEL / SOFTWARE_EDGE
         session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING  # RISING / FAILING
@@ -62,8 +62,7 @@ def example(resource_name, options, shape, channel):
         # session.script_triggers[1].digital_edge_script_trigger_source = 'PFI0'
         # session.script_triggers[1].digital_edge_script_trigger_edge = session.script_triggers[0].ScriptTriggerDigitalEdgeEdge.RISING
 
-        # 3-Generate Signal
-        # 5-Write Script
+        # 3 - Calculate and write different waveform data to the device's onboard memory
         session.channels[channel].write_waveform('sine', calculate_sinewave())        # (waveform_name, data)
         session.channels[channel].write_waveform('rampup', calculate_rampup())
         session.channels[channel].write_waveform('rampdown', calculate_rampdown())
@@ -71,6 +70,7 @@ def example(resource_name, options, shape, channel):
         session.channels[channel].write_waveform('triangle', calculate_triangle())
         session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
 
+        # 4 - Write Script
         script_sine = 'script Script\nrepeat until scriptTrigger0\nGenerate sine \nend repeat\nend script'
         script_ramp_up = 'script Script\nrepeat until scriptTrigger0\nGenerate rampup\nend repeat\nend script'
         script_ramp_down = 'script Script\nrepeat until scriptTrigger0\nGenerate rampdown\nend repeat\nend script'
@@ -79,8 +79,8 @@ def example(resource_name, options, shape, channel):
         script_noise = 'script Script\nrepeat until scriptTrigger0\nGenerate noise \nend repeat\nend script'
         script_multi = 'script Script\nrepeat until scriptTrigger0\nGenerate triangle\nend repeat\nrepeat until scriptTrigger0\nGenerate sine\nend repeat\nend script'
 
-        # 6-Script to generate
         ''' SINE / SQUARE / TRIANGLE / RAMP_UP / RAMP_DOWN / NOISE / MULTI '''
+        # 5 - Script to generate
         if shape == 'SINE':
             script = script_sine
         elif shape == 'RAMP_UP':
