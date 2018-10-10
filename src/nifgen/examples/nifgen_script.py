@@ -72,21 +72,21 @@ def example(resource_name, options, shape, channel):
 
         # 4 - Write Script
         script_sine = 'script Script\nrepeat until scriptTrigger0\nGenerate sine \nend repeat\nend script'
-        script_ramp_up = 'script Script\nrepeat until scriptTrigger0\nGenerate rampup\nend repeat\nend script'
-        script_ramp_down = 'script Script\nrepeat until scriptTrigger0\nGenerate rampdown\nend repeat\nend script'
+        script_rampup = 'script Script\nrepeat until scriptTrigger0\nGenerate rampup\nend repeat\nend script'
+        script_rampdown = 'script Script\nrepeat until scriptTrigger0\nGenerate rampdown\nend repeat\nend script'
         script_square = 'script Script\nrepeat until scriptTrigger0\nGenerate square\nend repeat\nend script'
         script_triangle = 'script Script\nrepeat until scriptTrigger0\nGenerate triangle\nend repeat\nend script'
         script_noise = 'script Script\nrepeat until scriptTrigger0\nGenerate noise \nend repeat\nend script'
         script_multi = 'script Script\nrepeat until scriptTrigger0\nGenerate triangle\nend repeat\nrepeat until scriptTrigger0\nGenerate sine\nend repeat\nend script'
 
-        ''' SINE / SQUARE / TRIANGLE / RAMP_UP / RAMP_DOWN / NOISE / MULTI '''
         # 5 - Script to generate
+        ''' SINE / SQUARE / TRIANGLE / RAMPUP / RAMPDOWN / NOISE / MULTI '''
         if shape == 'SINE':
             script = script_sine
-        elif shape == 'RAMP_UP':
-            script = script_ramp_up
-        elif shape == 'RAMP_DOWN':
-            script = script_ramp_down
+        elif shape == 'RAMPUP':
+            script = script_rampup
+        elif shape == 'RAMPDOWN':
+            script = script_rampdown
         elif shape == 'SQUARE':
             script = script_square
         elif shape == 'TRIANGLE':
