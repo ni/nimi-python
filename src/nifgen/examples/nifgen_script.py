@@ -63,22 +63,14 @@ def example(resource_name, options, shape, channel):
         # session.script_triggers[1].digital_edge_script_trigger_edge = session.script_triggers[0].ScriptTriggerDigitalEdgeEdge.RISING
 
         # 3-Generate Signal
-        sine = generate_sinewave()
-        ramp_up = generate_rampup()
-        ramp_down = generate_ramdown()
-        square = generate_square()
-        triangle = generate_triangle()
-        noise = generate_gaussian_noise()
-
-        # 4-Writes data to the waveform in onboard memory.
-        session.channels[channel].write_waveform('sine', sine)        # (waveform_name, data)
-        session.channels[channel].write_waveform('rampup', ramp_up)
-        session.channels[channel].write_waveform('rampdown', ramp_down)
-        session.channels[channel].write_waveform('square', square)
-        session.channels[channel].write_waveform('triangle', triangle)
-        session.channels[channel].write_waveform('noise', noise)
-
         # 5-Write Script
+        session.channels[channel].write_waveform('sine', calculate_sinewave())        # (waveform_name, data)
+        session.channels[channel].write_waveform('rampup', calculate_rampup())
+        session.channels[channel].write_waveform('rampdown', calculate_rampdown())
+        session.channels[channel].write_waveform('square', calculate_square())
+        session.channels[channel].write_waveform('triangle', calculate_triangle())
+        session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
+
         script_sine = 'script Script\nrepeat until scriptTrigger0\nGenerate sine \nend repeat\nend script'
         script_ramp_up = 'script Script\nrepeat until scriptTrigger0\nGenerate rampup\nend repeat\nend script'
         script_ramp_down = 'script Script\nrepeat until scriptTrigger0\nGenerate rampdown\nend repeat\nend script'
