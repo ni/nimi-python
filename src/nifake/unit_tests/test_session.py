@@ -1232,7 +1232,12 @@ class TestSession(object):
                 pass
 
 
-# not a session test per se
+# not a session tests per se
 def test_diagnostic_information():
     info = nifake.print_diagnostic_information()
     assert isinstance(info, dict)
+
+
+def test_dunder_version():
+    print('Version = {}'.format(nifake.__version__))
+    assert type(nifake.__version__) is str

@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
+
+__version__ = '1.0.1.dev0'
+
 from niscope.enums import *          # noqa: F403,F401,H303
 from niscope.errors import DriverWarning   # noqa: F401
 from niscope.errors import Error     # noqa: F401
