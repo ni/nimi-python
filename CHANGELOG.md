@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
         * Support for Python 3.7
+        * \_\_version\_\_ for all drivers
     * #### Changed
     * #### Removed
 * ### NI-DMM
