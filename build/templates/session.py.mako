@@ -21,6 +21,7 @@ ${template_parameters['encoding_tag']}
 import array  # noqa: F401
 import ctypes
 import datetime
+import warnings
 
 % if attributes:
 import ${module_name}._attributes as _attributes
@@ -30,6 +31,7 @@ import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
 import ${module_name}.enums as enums
 import ${module_name}.errors as errors
+from ${module_name}.errors import DriverWarning
 % for c in config['custom_types']:
 
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
@@ -178,6 +180,8 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
+
+        warnings.filterwarnings("always", category=DriverWarning)
 
         self._is_frozen = freeze_it
 
