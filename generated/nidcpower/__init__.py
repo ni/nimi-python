@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
+
+__version__ = '1.0.1.dev0'
+
 from nidcpower.enums import *          # noqa: F403,F401,H303
 from nidcpower.errors import DriverWarning   # noqa: F401
 from nidcpower.errors import Error     # noqa: F401

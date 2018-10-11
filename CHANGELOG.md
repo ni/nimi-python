@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
         * Support for Python 3.7
+        * \_\_version\_\_ for all drivers
     * #### Changed
         * No longer globally set warnings filter for `DriverWarning` - if you want all warnings from the driver, you will need to set `warnings.filterwarnings("always", category=<driver>.DriverWarning)` in your code
     * #### Removed
