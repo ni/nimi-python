@@ -445,7 +445,7 @@ def _fix_references(node, doc, cfg, make_link=False):
 
     if 'driver_urls' in cfg:
         for url_key in cfg['driver_urls']:
-            url_re = re.compile(r'{0}\((.+?)\)'.format(url_key))
+            url_re = re.compile('{0}\((.+?)\)'.format(url_key))
             config['url_key'] = url_key
             doc = url_re.sub(_replace_urls, doc)
 
