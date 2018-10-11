@@ -17,10 +17,11 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
-        * Support for Python 3.7
-        * \_\_version\_\_ for all drivers
+        * Support for Python 3.7 - [#895](https://github.com/ni/nimi-python/issues/895)
+        * \_\_version\_\_ for all drivers - [#928](https://github.com/ni/nimi-python/issues/928)
     * #### Changed
         * No longer globally set warnings filter for `DriverWarning` - if you want all warnings from the driver, you will need to set `warnings.filterwarnings("always", category=<driver>.DriverWarning)` in your code
+        * Fix \_\_repr\_\_ for niscope.WaveformInfo - [#920](https://github.com/ni/nimi-python/issues/920)
     * #### Removed
 * ### NI-DMM
     * #### Added
