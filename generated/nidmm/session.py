@@ -3,7 +3,6 @@
 import array  # noqa: F401
 import ctypes
 import datetime
-import warnings
 
 import nidmm._attributes as _attributes
 import nidmm._converters as _converters
@@ -11,7 +10,6 @@ import nidmm._library_singleton as _library_singleton
 import nidmm._visatype as _visatype
 import nidmm.enums as enums
 import nidmm.errors as errors
-from nidmm.errors import DriverWarning
 
 # Used for __repr__
 import pprint
@@ -552,8 +550,6 @@ class _SessionBase(object):
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
-
-        warnings.filterwarnings("always", category=DriverWarning)
 
         self._is_frozen = freeze_it
 

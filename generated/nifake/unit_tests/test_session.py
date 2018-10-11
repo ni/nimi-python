@@ -678,6 +678,9 @@ class TestSession(object):
                 pass
 
     def test_method_with_warning(self):
+        # We want to capture all of our warnings, not just the first one
+        warnings.filterwarnings("always", category=nifake.DriverWarning)
+
         test_error_code = 42
         test_error_desc = "The answer to the ultimate question, only positive"
         self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
@@ -693,6 +696,9 @@ class TestSession(object):
                 assert test_error_desc in str(w[0].message)
 
     def test_read_with_warning(self):
+        # We want to capture all of our warnings, not just the first one
+        warnings.filterwarnings("always", category=nifake.DriverWarning)
+
         test_maximum_time_s = 10.0
         test_maximum_time = datetime.timedelta(seconds=test_maximum_time_s)
         test_reading = float('nan')
@@ -1236,3 +1242,5 @@ class TestSession(object):
 def test_diagnostic_information():
     info = nifake.print_diagnostic_information()
     assert isinstance(info, dict)
+
+

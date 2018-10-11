@@ -3,7 +3,6 @@
 import array  # noqa: F401
 import ctypes
 import datetime
-import warnings
 
 import niscope._attributes as _attributes
 import niscope._converters as _converters
@@ -11,7 +10,6 @@ import niscope._library_singleton as _library_singleton
 import niscope._visatype as _visatype
 import niscope.enums as enums
 import niscope.errors as errors
-from niscope.errors import DriverWarning
 
 import niscope.waveform_info as waveform_info  # noqa: F401
 
@@ -1380,8 +1378,6 @@ class _SessionBase(object):
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
-
-        warnings.filterwarnings("always", category=DriverWarning)
 
         self._is_frozen = freeze_it
 
