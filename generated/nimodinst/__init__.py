@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
+
+__version__ = '1.0.1.dev0'
+
 from nimodinst.errors import DriverWarning   # noqa: F401
 from nimodinst.errors import Error     # noqa: F401
 from nimodinst.session import Session  # noqa: F401

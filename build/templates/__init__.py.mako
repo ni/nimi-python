@@ -5,6 +5,9 @@ enums = template_parameters['metadata'].enums
 config = template_parameters['metadata'].config
 module_name = config['module_name']
 %>
+
+__version__ = '${config['module_version']}'
+
 % if len(enums) > 0:
 from ${module_name}.enums import *          # noqa: F403,F401,H303
 % endif

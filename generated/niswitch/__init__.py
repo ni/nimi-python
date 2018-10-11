@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
+
+__version__ = '1.0.1.dev0'
+
 from niswitch.enums import *          # noqa: F403,F401,H303
 from niswitch.errors import DriverWarning   # noqa: F401
 from niswitch.errors import Error     # noqa: F401
