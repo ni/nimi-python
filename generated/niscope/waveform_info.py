@@ -66,7 +66,7 @@ class WaveformInfo(object):
             self.reserved1 = reserved1
             self.reserved2 = reserved2
 
-        # Additional fields added during fetch or fetch_into
+        # Additional fields filled in during fetch or fetch_into
         self.channel = None
         self.record = None
         self.samples = None
