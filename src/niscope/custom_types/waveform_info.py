@@ -66,6 +66,11 @@ class WaveformInfo(object):
             self.reserved1 = reserved1
             self.reserved2 = reserved2
 
+        # Additional fields filled in during fetch or fetch_into
+        self.channel = None
+        self.record = None
+        self.samples = None
+
     def __repr__(self):
         return '{0}(absolute_initial_x={1}, relative_initial_x={2}, x_increment={3}, actual_samples={4}, offset={5}, gain={6})'.format(
             self.__class__.__name__, self.absolute_initial_x, self.relative_initial_x, self.x_increment,
