@@ -72,9 +72,17 @@ class WaveformInfo(object):
         self.samples = None
 
     def __repr__(self):
-        return '{0}(absolute_initial_x={1}, relative_initial_x={2}, x_increment={3}, actual_samples={4}, offset={5}, gain={6})'.format(
-            self.__class__.__name__, self.absolute_initial_x, self.relative_initial_x, self.x_increment,
-            self.actual_samples if hasattr(self, 'actual_samples') else 0, self.offset, self.gain)
+        parameter_list = [
+            'absolute_initial_x={}'.format(self.absolute_initial_x),
+            'relative_initial_x={}'.format(self.relative_initial_x),
+            'x_increment={}'.format(self.x_increment),
+            'offset={}'.format(self.offset),
+            'gain={}'.format(self.gain),
+        ]
+        if self.actual_samples is not None:  # We explicitly look for not None to differentiate from 0
+            parameter_list.append('actual_samples'.format(self.actual_samples))
+
+        return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
 
     def __str__(self):
         row_format_g = '{:<20}: {:,.6g}\n'
