@@ -89,24 +89,19 @@ class WaveformInfo(object):
         row_format_d = '{:<20}: {:,}\n'
         row_format_s = '{:<20}: {:}\n'
         string_representation = ''
-        try:
+        if self.channel is not None:  # We explicitly look for not None to differentiate from empty string
             string_representation += row_format_s.format('channel', self.channel)
+        if self.record is not None:  # We explicitly look for not None to differentiate from 0
             string_representation += row_format_d.format('record', self.record)
-        except AttributeError:
-            pass
         string_representation += row_format_g.format('Absolute X0', self.absolute_initial_x)
         string_representation += row_format_g.format('Relative X0', self.relative_initial_x)
         string_representation += row_format_g.format('dt', self.x_increment)
-        try:
+        if self.actual_samples is not None:  # We explicitly look for not None to differentiate from 0
             string_representation += row_format_d.format('actual samples', self.actual_samples)
-        except AttributeError:
-            pass
         string_representation += row_format_g.format('offset', self.offset)
         string_representation += row_format_g.format('gain', self.gain)
-        try:
+        if self.samples is not None:  # We explicitly look for not None to differentiate from empty array
             string_representation += row_format_g.format('wfm length', len(self.samples))
-        except AttributeError:
-            pass
         return string_representation
 
 
