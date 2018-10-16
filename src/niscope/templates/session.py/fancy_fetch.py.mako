@@ -29,10 +29,10 @@
 
         for i in range(len(wfm_info)):
             start = i * num_samples
-            end = start + wfm_info[i].actual_samples
+            end = start + wfm_info[i]._actual_samples
             # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
             # since the length of the wfm will tell us that information
-            wfm_info[i].actual_samples = None
+            wfm_info[i]._actual_samples = None
             if sys.version_info.major >= 3:
                 wfm_info[i].samples = mv[start:end]
             else:

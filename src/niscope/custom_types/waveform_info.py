@@ -45,26 +45,28 @@ class struct_niScope_wfmInfo(ctypes.Structure):  # noqa N801
 
 class WaveformInfo(object):
     def __init__(self, data=None, absolute_initial_x=0.0, relative_initial_x=0.0,
-                 x_increment=0.0, actual_samples=None, offset=0.0, gain=0.0,
+                 x_increment=0.0, offset=0.0, gain=0.0,
                  reserved1=0.0, reserved2=0.0):
         if data is not None:
             self.absolute_initial_x = data.absolute_initial_x
             self.relative_initial_x = data.relative_initial_x
             self.x_increment = data.x_increment
-            self.actual_samples = data.actual_samples
             self.offset = data.offset
             self.gain = data.gain
             self.reserved1 = data.reserved1
             self.reserved2 = data.reserved2
+            self._actual_samples = data.actual_samples
         else:
             self.absolute_initial_x = absolute_initial_x
             self.relative_initial_x = relative_initial_x
             self.x_increment = x_increment
-            self.actual_samples = actual_samples
             self.offset = offset
             self.gain = gain
             self.reserved1 = reserved1
             self.reserved2 = reserved2
+            # _actual_samples is only used to calculate the end of the waveform we extract from the
+            # entire 1D array of samples. It is only filled in when calling into the niscope driver.
+            self._actual_samples = None
 
         # Additional fields filled in during fetch or fetch_into
         self.channel = None
@@ -79,8 +81,6 @@ class WaveformInfo(object):
             'offset={}'.format(self.offset),
             'gain={}'.format(self.gain),
         ]
-        if self.actual_samples is not None:  # We explicitly look for not None to differentiate from 0
-            parameter_list.append('actual_samples'.format(self.actual_samples))
 
         return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
 
@@ -99,13 +99,14 @@ class WaveformInfo(object):
         string_representation += row_format_g.format('Absolute X0', self.absolute_initial_x)
         string_representation += row_format_g.format('Relative X0', self.relative_initial_x)
         string_representation += row_format_g.format('dt', self.x_increment)
-        if self.actual_samples is not None:  # We explicitly look for not None to differentiate from 0
-            string_representation += row_format_d.format('actual samples', self.actual_samples)
-
         string_representation += row_format_g.format('offset', self.offset)
         string_representation += row_format_g.format('gain', self.gain)
         if self.samples is not None:  # We explicitly look for not None to differentiate from empty array
             string_representation += row_format_g.format('wfm length', len(self.samples))
+
+        # Put possible private variable last
+        if self._actual_samples is not None:  # We explicitly look for not None to differentiate from 0
+            string_representation += row_format_d.format('_actual samples', self._actual_samples)
 
         return string_representation
 
