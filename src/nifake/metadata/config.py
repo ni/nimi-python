@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nifake',
-    'module_version': '1.0.1.dev0',
+    'module_version': '1.0.1',
     'c_function_prefix': 'niFake_',
     'driver_name': 'NI-FAKE',
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',

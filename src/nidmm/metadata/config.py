@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nidmm',
-    'module_version': '1.0.1.dev0',
+    'module_version': '1.0.1',
     'c_function_prefix': 'niDMM_',
     'driver_name': 'NI-DMM',
     'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
