@@ -8,7 +8,7 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
-default_python_cmd = ['py', '-2']
+default_python_cmd = ['python']
 
 
 def configure_logging(lvl=logging.WARNING, logfile=None):
@@ -52,7 +52,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     logging.info(pp.pformat(args))
 
-    python_cmd = list(args.python_cmd) if args.python_cmd is not None else default_python_cmd
+    python_cmd = [args.python_cmd] if args.python_cmd is not None else default_python_cmd
 
     tox_cmd = python_cmd + ['-m', 'tox']
     twine_cmd = python_cmd + ['-m', 'twine']
