@@ -1,7 +1,8 @@
 # Changelog
 
 * [Unreleased](#unreleased)
-* [1.0.0](#090---2018-06-08)
+* [1.0.1](#101---2018-10-17)
+* [1.0.0](#100---2018-06-08)
 * [0.9.0](#090---2018-05-22)
 * [0.8.0](#080---2018-04-27)
 * [0.7.0](#070---2018-02-20)
@@ -17,11 +18,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
-        * Support for Python 3.7 - [#895](https://github.com/ni/nimi-python/issues/895)
-        * \_\_version\_\_ for all drivers - [#928](https://github.com/ni/nimi-python/issues/928)
     * #### Changed
-        * No longer globally set warnings filter for `DriverWarning` - if you want all warnings from the driver, you will need to set `warnings.filterwarnings("always", category=<driver>.DriverWarning)` in your code
-        * Fix \_\_repr\_\_ for niscope.WaveformInfo - [#920](https://github.com/ni/nimi-python/issues/920)
     * #### Removed
 * ### NI-DMM
     * #### Added
@@ -46,13 +43,28 @@ All notable changes to this project will be documented in this file.
 * ### NI-SCOPE
     * #### Added
     * #### Changed
-        * Format of output of wavefrom_info.__str__()
     * #### Removed
 * ### NI Switch Executive
     * #### Added
-        * Initial Release
     * #### Changed
     * #### Removed
+
+
+## 1.0.1 - 2018-10-17
+* ### ALL
+    * #### Added
+        * Support for Python 3.7 - [#895](https://github.com/ni/nimi-python/issues/895)
+        * \_\_version\_\_ for all drivers - [#928](https://github.com/ni/nimi-python/issues/928)
+    * #### Changed
+        * No longer globally set warnings filter for `DriverWarning` - if you want all warnings from the driver, you will need to set `warnings.filterwarnings("always", category=<driver>.DriverWarning)` in your code
+        * Fix \_\_repr\_\_ for niscope.WaveformInfo - [#920](https://github.com/ni/nimi-python/issues/920)
+* ### NI-SCOPE
+    * #### Changed
+        * Format of output of wavefrom_info.__str__()
+* ### NI Switch Executive
+    * #### Added
+        * Initial Release
+
 
 ## 1.0.0 - 2018-06-08
 * ### ALL
