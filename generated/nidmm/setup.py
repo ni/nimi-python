@@ -29,7 +29,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.0.1',
+    version='1.0.2.dev0',
     description='NI-DMM Python API',
     long_description=read_contents('README.rst'),
     author='National Instruments',
