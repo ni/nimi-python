@@ -1,5 +1,6 @@
 # Changelog
 
+* [Unreleased](#unreleased)
 * [1.0.1](#101---2018-10-17)
 * [1.0.0](#100---2018-06-08)
 * [0.9.0](#090---2018-05-22)
@@ -13,6 +14,41 @@
 * [0.1.0](#010---2017-09-01)
 
 All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+
 
 ## 1.0.1 - 2018-10-17
 * ### ALL
