@@ -1222,9 +1222,9 @@ class TestSession(object):
         assert _matchers.ViAttrMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViAttrMatcher(" + str(nifake._visatype.ViAttr) + ", 42)"
         assert _matchers.ViInt32Matcher(4).__repr__() == "ViInt32Matcher(" + str(nifake._visatype.ViInt32) + ", 4)"
         assert _matchers.ViStringMatcher('0-24').__repr__() == "ViStringMatcher('0-24')"
-        assert _matchers.ViReal64Matcher(-42.0).__repr__() == "ViReal64Matcher(<class 'ctypes.c_double'>, -42.0)"
-        assert _matchers.ViReal64PointerMatcher().__repr__() == "ViReal64PointerMatcher(<class 'ctypes.c_double'>)"
-        assert _matchers.ViInt32PointerMatcher().__repr__() == "ViInt32PointerMatcher(<class 'ctypes.c_long'>)"
+        assert _matchers.ViReal64Matcher(-42.0).__repr__() == "ViReal64Matcher(" + str(nifake._visatype.ViReal64) + ", -42.0)"
+        assert _matchers.ViReal64PointerMatcher().__repr__() == "ViReal64PointerMatcher(" + str(nifake._visatype.ViReal64) + ")"
+        assert _matchers.ViInt32PointerMatcher().__repr__() == "ViInt32PointerMatcher(" + str(nifake._visatype.ViInt32) + ")"
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
         cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
         assert _matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2))"
