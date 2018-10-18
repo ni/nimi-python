@@ -7,20 +7,22 @@ These are aliased directly to ctypes types so can be used directly to call into 
 '''
 
 
-ViStatus = ctypes.c_long
-ViRsrc = ctypes.c_char_p
-ViSession = ctypes.c_ulong
 ViChar = ctypes.c_char
-ViUInt32 = ctypes.c_ulong
-ViInt32 = ctypes.c_long
-ViInt16 = ctypes.c_short
 ViInt8 = ctypes.c_int8
-ViUInt16 = ctypes.c_ushort
-ViInt64 = ctypes.c_longlong
+ViInt16 = ctypes.c_int16
+ViUInt16 = ctypes.c_uint16
+ViInt32 = ctypes.c_int32
+ViUInt32 = ctypes.c_uint32
+ViInt64 = ctypes.c_int64
 ViString = ctypes.c_char_p
-ViAttr = ctypes.c_long
-ViConstString = ViString
-ViBoolean = ctypes.c_ushort
 ViReal32 = ctypes.c_float
 ViReal64 = ctypes.c_double
+
+# Types that are based on other visatypes
+ViBoolean = ViUInt16
+ViStatus = ViInt32
+ViSession = ViUInt32
+ViAttr = ViUInt32
+ViConstString = ViString
+ViRsrc = ViString
 
