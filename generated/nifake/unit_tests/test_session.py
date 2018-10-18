@@ -1218,8 +1218,9 @@ class TestSession(object):
             assert 730 == last_cal.days
 
     def test_matcher_prints(self):
-        assert _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(<class 'ctypes.c_ulong'>, 42)"
-        assert _matchers.ViInt32Matcher(4).__repr__() == "ViInt32Matcher(<class 'ctypes.c_long'>, 4)"
+        assert _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(" + str(nifake._visatype.ViSession) + ", 42)"
+        assert _matchers.ViAttrMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViAttrMatcher(" + str(nifake._visatype.ViAttr) + ", 42)"
+        assert _matchers.ViInt32Matcher(4).__repr__() == "ViInt32Matcher(" + str(nifake._visatype.ViInt32) + ", 4)"
         assert _matchers.ViStringMatcher('0-24').__repr__() == "ViStringMatcher('0-24')"
         assert _matchers.ViReal64Matcher(-42.0).__repr__() == "ViReal64Matcher(<class 'ctypes.c_double'>, -42.0)"
         assert _matchers.ViReal64PointerMatcher().__repr__() == "ViReal64PointerMatcher(<class 'ctypes.c_double'>)"
