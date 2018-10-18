@@ -3,7 +3,7 @@
 
 functions_codegen_method = {
     'OpenSession':                  { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
-    'CloseSession':                 { 'codegen_method': 'private',                                              },
+    'CloseSession':                 { 'codegen_method': 'private', 'method_name_for_documentation': 'close',    },
     'GetError':                     { 'codegen_method': 'private',                                              },
     'ClearError':                   { 'codegen_method': 'no',                                                   },
     'GetIviDeviceSession':          { 'codegen_method': 'no',                                                   },  # There is no IVI Python API
