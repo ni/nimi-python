@@ -8,6 +8,8 @@ ${template_parameters['encoding_tag']}
     functions = helper.filter_codegen_functions(config['functions'])
 
     module_name = config['module_name']
+
+    close_function_name = 'close' if 'close_function' not in config else helper.camelcase_to_snakecase(config['close_function'])
 %>\
 import array  # noqa: F401
 import ctypes
@@ -155,7 +157,7 @@ class Session(_SessionBase):
 
     def close(self):
         try:
-            self._close()
+            self._${close_function_name}()
         except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
             raise

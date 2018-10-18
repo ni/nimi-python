@@ -50,10 +50,6 @@ functions_default_value = {
     'GetAllConnections':            { 'parameters': { 2: { 'default_value': [1024],                                  }, }, }, # Match NI Switch Executive Examples
 }
 
-functions_name = {
-    'CloseSession': { 'python_name': '_close', }, # Issue #898
-}
-
 functions_converters = {
     'WaitForDebounce':              { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
                                                            'type_in_documentation': 'float in seconds or datetime.timedelta',       }, }, },
