@@ -12,7 +12,7 @@ ${template_parameters['encoding_tag']}
 
     attributes = helper.filter_codegen_attributes(config['attributes'])
 
-    close_function_name = 'close' if 'close_function' not in config else helper.camelcase_to_snakecase(config['close_function'])
+    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 
     session_context_manager = None
     if 'task' in config['context_manager_name']:

@@ -9,7 +9,7 @@ ${template_parameters['encoding_tag']}
 
     module_name = config['module_name']
 
-    close_function_name = 'close' if 'close_function' not in config else helper.camelcase_to_snakecase(config['close_function'])
+    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 %>\
 import array  # noqa: F401
 import ctypes
