@@ -53,6 +53,8 @@ class Library(object):
             if self.${c_func_name}_cfunc is None:
                 self.${c_func_name}_cfunc = self._library.${c_func_name}
                 self.${c_func_name}_cfunc.argtypes = [${param_ctypes_library}]  # noqa: F405
+% if f['returns'] != 'ViStatus':
                 self.${c_func_name}_cfunc.restype = ${f['returns']}  # noqa: F405
+% endif
         return self.${c_func_name}_cfunc(${param_names_library})
 % endfor
