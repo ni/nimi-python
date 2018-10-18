@@ -22,6 +22,7 @@ config = {
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
+    'close_function': 'close',
     'custom_types': [
         {'file_name': 'waveform_info', 'python_name': 'WaveformInfo', 'ctypes_type': 'struct_niScope_wfmInfo', },
     ],

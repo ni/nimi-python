@@ -22,6 +22,7 @@ config = {
         'abort_function': 'AbortGeneration',
     },
     'init_function': 'InitializeWithChannels',
+    'close_function': 'close',
     'custom_types': [],
     'last_tested_version': '17.1.0',
     'repeated_capabilities': [
