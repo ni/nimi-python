@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Update visatype definitions to work on Linux as well as Windows - [#911](https://github.com/ni/nimi-python/issues/911)
     * #### Removed
 * ### NI-DMM
     * #### Added
