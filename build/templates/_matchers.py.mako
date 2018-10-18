@@ -21,10 +21,10 @@ class _ScalarMatcher(object):
 
     def __eq__(self, other):
         if not isinstance(other, self.expected_type):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+            print("{0}: Unexpected type. Expected: {1}. Received: {2}".format(self.__class__.__name__, self.expected_type, type(other)))
             return False
         if other.value != self.expected_value:
-            print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, other.value))
+            print("{0}: Unexpected value. Expected: {1}. Received: {2}".format(self.__class__.__name__, self.expected_value, other.value))
             return False
         return True
 
