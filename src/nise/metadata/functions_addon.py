@@ -3,7 +3,7 @@
 
 functions_codegen_method = {
     'OpenSession':                  { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
-    'CloseSession':                 { 'codegen_method': 'private',                                              },
+    'CloseSession':                 { 'codegen_method': 'private', 'method_name_for_documentation': 'close',    },
     'GetError':                     { 'codegen_method': 'private',                                              },
     'ClearError':                   { 'codegen_method': 'no',                                                   },
     'GetIviDeviceSession':          { 'codegen_method': 'no',                                                   },  # There is no IVI Python API
@@ -48,10 +48,6 @@ functions_default_value = {
     'ExpandRouteSpec':              { 'parameters': { 2: { 'default_value': 'ExpandAction.ROUTES',                   },
                                                       4: { 'default_value': [1024],                                  }, }, }, # Match NI Switch Executive Examples
     'GetAllConnections':            { 'parameters': { 2: { 'default_value': [1024],                                  }, }, }, # Match NI Switch Executive Examples
-}
-
-functions_name = {
-    'CloseSession': { 'python_name': '_close', }, # Issue #898
 }
 
 functions_converters = {

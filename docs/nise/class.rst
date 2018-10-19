@@ -14,7 +14,7 @@ nise.Session
     Executive method calls. NI Switch Executive uses a reference counting
     scheme to manage open session handles to an NI Switch Executive virtual
     device. Each call to :py:meth:`nise.Session.__init__` must be matched with a subsequent
-    call to :py:meth:`nise.Session._close`. Successive calls to :py:meth:`nise.Session.__init__` with
+    call to :py:meth:`nise.Session.close`. Successive calls to :py:meth:`nise.Session.__init__` with
     the same virtual device name always returns the same session handle. NI
     Switch Executive disconnects its communication with the IVI switches
     after all session handles are closed to a given virtual device. The

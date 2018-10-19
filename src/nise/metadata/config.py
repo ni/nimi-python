@@ -19,6 +19,7 @@ config = {
     },
     'context_manager_name': {},
     'init_function': 'OpenSession',
+    'close_function': 'CloseSession',
     'driver_urls': {
         'REPLACE_DRIVER_SPECIFIC_URL_1': 'http://zone.ni.com/reference/en-XX/help/370404J-01/',
     },

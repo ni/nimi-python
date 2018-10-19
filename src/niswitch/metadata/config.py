@@ -22,6 +22,7 @@ config = {
         'abort_function': 'AbortScan',
     },
     'init_function': 'InitWithTopology',
+    'close_function': 'close',
     'custom_types': [],
     'last_tested_version': '17.0.0',
     'repeated_capabilities': [

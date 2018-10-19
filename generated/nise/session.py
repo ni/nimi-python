@@ -172,7 +172,7 @@ class Session(_SessionBase):
         Executive method calls. NI Switch Executive uses a reference counting
         scheme to manage open session handles to an NI Switch Executive virtual
         device. Each call to __init__ must be matched with a subsequent
-        call to _close. Successive calls to __init__ with
+        call to close. Successive calls to __init__ with
         the same virtual device name always returns the same session handle. NI
         Switch Executive disconnects its communication with the IVI switches
         after all session handles are closed to a given virtual device. The
@@ -241,7 +241,7 @@ class Session(_SessionBase):
 
     def close(self):
         try:
-            self._close()
+            self._close_session()
         except errors.DriverError as e:
             self._vi = 0
             raise
@@ -249,13 +249,13 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    def _close(self):
-        '''_close
+    def _close_session(self):
+        '''_close_session
 
         Reduces the reference count of open sessions by one. If the reference
         count goes to 0, the method deallocates any memory resources the
         driver uses and closes any open IVI switch sessions. After calling the
-        _close method, you should not use the NI Switch Executive
+        close method, you should not use the NI Switch Executive
         virtual device again until you call __init__.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -718,7 +718,7 @@ class Session(_SessionBase):
         Executive method calls. NI Switch Executive uses a reference counting
         scheme to manage open session handles to an NI Switch Executive virtual
         device. Each call to __init__ must be matched with a subsequent
-        call to _close. Successive calls to __init__ with
+        call to close. Successive calls to __init__ with
         the same virtual device name always returns the same session handle. NI
         Switch Executive disconnects its communication with the IVI switches
         after all session handles are closed to a given virtual device. The
