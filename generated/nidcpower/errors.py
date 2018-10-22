@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# -*- coding: utf-8 -*-
 # This file was generated
 
 
@@ -98,4 +98,3 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
     warnings.warn(DriverWarning(code, description))
 
 
-warnings.filterwarnings("always", category=DriverWarning)

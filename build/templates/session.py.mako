@@ -1,8 +1,4 @@
-<%
-# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
-encoding_tag = '# -*- coding: utf-8 -*-'
-%>\
-${encoding_tag}
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
     import build.helper as helper
@@ -15,6 +11,8 @@ ${encoding_tag}
     module_name = config['module_name']
 
     attributes = helper.filter_codegen_attributes(config['attributes'])
+
+    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 
     session_context_manager = None
     if 'task' in config['context_manager_name']:
@@ -279,7 +277,7 @@ class Session(_SessionBase):
 
     def close(self):
         try:
-            self._close()
+            self._${close_function_name}()
         except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
             raise
