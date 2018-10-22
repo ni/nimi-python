@@ -24,7 +24,7 @@ config = {
     'init_function': 'InitializeWithChannels',
     'close_function': 'close',
     'custom_types': [],
-    'last_tested_version': '17.6.0',
+    'last_tested_version': '18.1.1',
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
     ],

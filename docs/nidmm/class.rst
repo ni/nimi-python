@@ -273,75 +273,83 @@ nidmm.Session
 
     **Public methods**
 
-    +---------------------------------------------+
-    | Method name                                 |
-    +=============================================+
-    | :py:func:`abort`                            |
-    +---------------------------------------------+
-    | :py:func:`configure_measurement_absolute`   |
-    +---------------------------------------------+
-    | :py:func:`configure_measurement_digits`     |
-    +---------------------------------------------+
-    | :py:func:`configure_multi_point`            |
-    +---------------------------------------------+
-    | :py:func:`configure_rtd_custom`             |
-    +---------------------------------------------+
-    | :py:func:`configure_rtd_type`               |
-    +---------------------------------------------+
-    | :py:func:`configure_thermistor_custom`      |
-    +---------------------------------------------+
-    | :py:func:`configure_thermocouple`           |
-    +---------------------------------------------+
-    | :py:func:`configure_trigger`                |
-    +---------------------------------------------+
-    | :py:func:`configure_waveform_acquisition`   |
-    +---------------------------------------------+
-    | :py:func:`disable`                          |
-    +---------------------------------------------+
-    | :py:func:`fetch`                            |
-    +---------------------------------------------+
-    | :py:func:`fetch_multi_point`                |
-    +---------------------------------------------+
-    | :py:func:`fetch_waveform`                   |
-    +---------------------------------------------+
-    | :py:func:`fetch_waveform_into`              |
-    +---------------------------------------------+
-    | :py:func:`get_cal_date_and_time`            |
-    +---------------------------------------------+
-    | :py:func:`get_dev_temp`                     |
-    +---------------------------------------------+
-    | :py:func:`get_ext_cal_recommended_interval` |
-    +---------------------------------------------+
-    | :py:func:`get_last_cal_temp`                |
-    +---------------------------------------------+
-    | :py:func:`get_self_cal_supported`           |
-    +---------------------------------------------+
-    | :py:func:`lock`                             |
-    +---------------------------------------------+
-    | :py:func:`perform_open_cable_comp`          |
-    +---------------------------------------------+
-    | :py:func:`perform_short_cable_comp`         |
-    +---------------------------------------------+
-    | :py:func:`read`                             |
-    +---------------------------------------------+
-    | :py:func:`read_multi_point`                 |
-    +---------------------------------------------+
-    | :py:func:`read_status`                      |
-    +---------------------------------------------+
-    | :py:func:`read_waveform`                    |
-    +---------------------------------------------+
-    | :py:func:`reset`                            |
-    +---------------------------------------------+
-    | :py:func:`reset_with_defaults`              |
-    +---------------------------------------------+
-    | :py:func:`self_cal`                         |
-    +---------------------------------------------+
-    | :py:func:`self_test`                        |
-    +---------------------------------------------+
-    | :py:func:`send_software_trigger`            |
-    +---------------------------------------------+
-    | :py:func:`unlock`                           |
-    +---------------------------------------------+
+    +--------------------------------------------------+
+    | Method name                                      |
+    +==================================================+
+    | :py:func:`abort`                                 |
+    +--------------------------------------------------+
+    | :py:func:`configure_measurement_absolute`        |
+    +--------------------------------------------------+
+    | :py:func:`configure_measurement_digits`          |
+    +--------------------------------------------------+
+    | :py:func:`configure_multi_point`                 |
+    +--------------------------------------------------+
+    | :py:func:`configure_rtd_custom`                  |
+    +--------------------------------------------------+
+    | :py:func:`configure_rtd_type`                    |
+    +--------------------------------------------------+
+    | :py:func:`configure_thermistor_custom`           |
+    +--------------------------------------------------+
+    | :py:func:`configure_thermocouple`                |
+    +--------------------------------------------------+
+    | :py:func:`configure_trigger`                     |
+    +--------------------------------------------------+
+    | :py:func:`configure_waveform_acquisition`        |
+    +--------------------------------------------------+
+    | :py:func:`disable`                               |
+    +--------------------------------------------------+
+    | :py:func:`export_attribute_configuration_buffer` |
+    +--------------------------------------------------+
+    | :py:func:`export_attribute_configuration_file`   |
+    +--------------------------------------------------+
+    | :py:func:`fetch`                                 |
+    +--------------------------------------------------+
+    | :py:func:`fetch_multi_point`                     |
+    +--------------------------------------------------+
+    | :py:func:`fetch_waveform`                        |
+    +--------------------------------------------------+
+    | :py:func:`fetch_waveform_into`                   |
+    +--------------------------------------------------+
+    | :py:func:`get_cal_date_and_time`                 |
+    +--------------------------------------------------+
+    | :py:func:`get_dev_temp`                          |
+    +--------------------------------------------------+
+    | :py:func:`get_ext_cal_recommended_interval`      |
+    +--------------------------------------------------+
+    | :py:func:`get_last_cal_temp`                     |
+    +--------------------------------------------------+
+    | :py:func:`get_self_cal_supported`                |
+    +--------------------------------------------------+
+    | :py:func:`import_attribute_configuration_buffer` |
+    +--------------------------------------------------+
+    | :py:func:`import_attribute_configuration_file`   |
+    +--------------------------------------------------+
+    | :py:func:`lock`                                  |
+    +--------------------------------------------------+
+    | :py:func:`perform_open_cable_comp`               |
+    +--------------------------------------------------+
+    | :py:func:`perform_short_cable_comp`              |
+    +--------------------------------------------------+
+    | :py:func:`read`                                  |
+    +--------------------------------------------------+
+    | :py:func:`read_multi_point`                      |
+    +--------------------------------------------------+
+    | :py:func:`read_status`                           |
+    +--------------------------------------------------+
+    | :py:func:`read_waveform`                         |
+    +--------------------------------------------------+
+    | :py:func:`reset`                                 |
+    +--------------------------------------------------+
+    | :py:func:`reset_with_defaults`                   |
+    +--------------------------------------------------+
+    | :py:func:`self_cal`                              |
+    +--------------------------------------------------+
+    | :py:func:`self_test`                             |
+    +--------------------------------------------------+
+    | :py:func:`send_software_trigger`                 |
+    +--------------------------------------------------+
+    | :py:func:`unlock`                                |
+    +--------------------------------------------------+
 
 
 Properties
@@ -2510,8 +2518,9 @@ configure_measurement_absolute
 
 
                 Specifies the absolute resolution for the measurement. NI-DMM sets
-                :py:data:`nidmm.Session.resolution_absolute` to this value. This parameter is
-                ignored when the **Range** parameter is set to
+                :py:data:`nidmm.Session.resolution_absolute` to this value. The PXIe-4080/4081/4082
+                uses the resolution you specify. The NI 4065 and NI 4070/4071/4072
+                ignore this parameter when the **Range** parameter is set to
                 :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON` (-1.0) or :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE`
                 (-3.0). The default is 0.001 V.
 
@@ -2589,8 +2598,9 @@ configure_measurement_digits
                 Specifies the resolution of the measurement in digits. The driver sets
                 the `Devices Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a
                 list of valid ranges. The driver sets :py:data:`nidmm.Session.resolution_digits`
-                property to this value. This parameter is ignored when the **Range**
-                parameter is set to :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON` (-1.0) or
+                property to this value. The PXIe-4080/4081/4082 uses the resolution you
+                specify. The NI 4065 and NI 4070/4071/4072 ignore this parameter when
+                the **Range** parameter is set to :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ON` (-1.0) or
                 :py:data:`~nidmm.NIDMM_VAL_AUTO_RANGE_ONCE` (-3.0). The default is 5½.
 
                 
@@ -3042,6 +3052,113 @@ disable
 
 
 
+export_attribute_configuration_buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: export_attribute_configuration_buffer()
+
+            Exports the property configuration of the session to the specified
+            configuration buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑DMM returns an
+            error.
+
+            **Coercion Behavior for Certain Devices**
+
+            Imported and exported property configurations contain coerced values
+            for the following NI‑DMM devices:
+
+            -  PXI/PCI/PCIe/USB‑4065
+            -  PXI/PCI‑4070
+            -  PXI‑4071
+            -  PXI‑4072
+
+            NI‑DMM coerces property values when the value you set is within the
+            allowed range for the property but is not one of the discrete valid
+            values the property supports. For example, for a property that
+            coerces values up, if you choose a value of 4 when the adjacent valid
+            values are 1 and 10, the property coerces the value to 10.
+
+            **Related Topics:**
+
+            `Using Properties and Properties with
+            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+
+            `Setting Properties Before Reading
+            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+
+            
+
+            .. note:: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+
+
+export_attribute_configuration_file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: export_attribute_configuration_file(file_path)
+
+            Exports the property configuration of the session to the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑DMM returns an
+            error.
+
+            **Coercion Behavior for Certain Devices**
+
+            Imported and exported property configurations contain coerced values
+            for the following NI‑DMM devices:
+
+            -  PXI/PCI/PCIe/USB‑4065
+            -  PXI/PCI‑4070
+            -  PXI‑4071
+            -  PXI‑4072
+
+            NI‑DMM coerces property values when the value you set is within the
+            allowed range for the property but is not one of the discrete valid
+            values the property supports. For example, for a property that
+            coerces values up, if you choose a value of 4 when the adjacent valid
+            values are 1 and 10, the property coerces the value to 10.
+
+            **Related Topics:**
+
+            `Using Properties and Properties with
+            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+
+            `Setting Properties Before Reading
+            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+
+            
+
+            .. note:: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:**\  .nidmmconfig
+
+                
+
+
+            :type file_path: str
+
 fetch
 ~~~~~
 
@@ -3479,6 +3596,116 @@ get_self_cal_supported
                     +-------+---+-------------------------------------------------------------+
 
 
+
+import_attribute_configuration_buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: import_attribute_configuration_buffer(configuration)
+
+            Imports a property configuration to the session from the specified
+            configuration buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers.
+
+            **Coercion Behavior for Certain Devices**
+
+            Imported and exported property configurations contain coerced values
+            for the following NI‑DMM devices:
+
+            -  PXI/PCI/PCIe/USB‑4065
+            -  PXI/PCI‑4070
+            -  PXI‑4071
+            -  PXI‑4072
+
+            NI‑DMM coerces property values when the value you set is within the
+            allowed range for the property but is not one of the discrete valid
+            values the property supports. For example, for a property that
+            coerces values up, if you choose a value of 4 when the adjacent valid
+            values are 1 and 10, the property coerces the value to 10.
+
+            **Related Topics:**
+
+            `Using Properties and Properties with
+            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+
+            `Setting Properties Before Reading
+            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+
+            
+
+            .. note:: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+
+
+            :param configuration:
+
+
+                Specifies the byte array buffer that contains the property
+                configuration to import.
+
+                
+
+
+            :type configuration: list of int
+
+import_attribute_configuration_file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: import_attribute_configuration_file(file_path)
+
+            Imports a property configuration to the session from the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers.
+
+            **Coercion Behavior for Certain Devices**
+
+            Imported and exported property configurations contain coerced values
+            for the following NI‑DMM devices:
+
+            -  PXI/PCI/PCIe/USB‑4065
+            -  PXI/PCI‑4070
+            -  PXI‑4071
+            -  PXI‑4072
+
+            NI‑DMM coerces property values when the value you set is within the
+            allowed range for the property but is not one of the discrete valid
+            values the property supports. For example, for a property that
+            coerces values up, if you choose a value of 4 when the adjacent valid
+            values are 1 and 10, the property coerces the value to 10.
+
+            **Related Topics:**
+
+            `Using Properties and Properties with
+            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+
+            `Setting Properties Before Reading
+            Properties <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__
+
+            
+
+            .. note:: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:**\  .nidmmconfig
+
+                
+
+
+            :type file_path: str
 
 lock
 ~~~~
@@ -4131,73 +4358,81 @@ Properties
 Methods
 -------
 
-+-----------------------------------------------------------+
-| Method name                                               |
-+===========================================================+
-| :py:func:`nidmm.Session.abort`                            |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_measurement_absolute`   |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_measurement_digits`     |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_multi_point`            |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_rtd_custom`             |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_rtd_type`               |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_thermistor_custom`      |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_thermocouple`           |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_trigger`                |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.configure_waveform_acquisition`   |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.disable`                          |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch`                            |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch_multi_point`                |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch_waveform`                   |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.fetch_waveform_into`              |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.get_cal_date_and_time`            |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.get_dev_temp`                     |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.get_ext_cal_recommended_interval` |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.get_last_cal_temp`                |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.get_self_cal_supported`           |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.lock`                             |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.perform_open_cable_comp`          |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.perform_short_cable_comp`         |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.read`                             |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.read_multi_point`                 |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.read_status`                      |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.read_waveform`                    |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.reset`                            |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.reset_with_defaults`              |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.self_cal`                         |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.self_test`                        |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.send_software_trigger`            |
-+-----------------------------------------------------------+
-| :py:func:`nidmm.Session.unlock`                           |
-+-----------------------------------------------------------+
++----------------------------------------------------------------+
+| Method name                                                    |
++================================================================+
+| :py:func:`nidmm.Session.abort`                                 |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_measurement_absolute`        |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_measurement_digits`          |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_multi_point`                 |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_rtd_custom`                  |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_rtd_type`                    |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_thermistor_custom`           |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_thermocouple`                |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_trigger`                     |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.configure_waveform_acquisition`        |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.disable`                               |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.export_attribute_configuration_buffer` |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.export_attribute_configuration_file`   |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch`                                 |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch_multi_point`                     |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch_waveform`                        |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.fetch_waveform_into`                   |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.get_cal_date_and_time`                 |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.get_dev_temp`                          |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.get_ext_cal_recommended_interval`      |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.get_last_cal_temp`                     |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.get_self_cal_supported`                |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.import_attribute_configuration_buffer` |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.import_attribute_configuration_file`   |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.lock`                                  |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.perform_open_cable_comp`               |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.perform_short_cable_comp`              |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.read`                                  |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.read_multi_point`                      |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.read_status`                           |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.read_waveform`                         |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.reset`                                 |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.reset_with_defaults`                   |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.self_cal`                              |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.self_test`                             |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.send_software_trigger`                 |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.unlock`                                |
++----------------------------------------------------------------+
 

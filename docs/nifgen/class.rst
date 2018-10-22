@@ -140,6 +140,8 @@ nifgen.Session
     +-------------------------------------------------------------+-----------------------------------------+
     | Property                                                    | Datatype                                |
     +=============================================================+=========================================+
+    | :py:attr:`absolute_delay`                                   | float                                   |
+    +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`all_marker_events_latched_status`                 | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`all_marker_events_live_status`                    | int                                     |
@@ -169,8 +171,6 @@ nifgen.Session
     | :py:attr:`aux_power_enabled`                                | bool                                    |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`bus_type`                                         | :py:data:`BusType`                      |
-    +-------------------------------------------------------------+-----------------------------------------+
-    | :py:attr:`channel_count`                                    | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`channel_delay`                                    | float                                   |
     +-------------------------------------------------------------+-----------------------------------------+
@@ -317,6 +317,8 @@ nifgen.Session
     | :py:attr:`min_waveform_size`                                | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`module_revision`                                  | str                                     |
+    +-------------------------------------------------------------+-----------------------------------------+
+    | :py:attr:`channel_count`                                    | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`output_enabled`                                   | bool                                    |
     +-------------------------------------------------------------+-----------------------------------------+
@@ -480,6 +482,50 @@ nifgen.Session
 
 Properties
 ----------
+
+absolute_delay
+~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: absolute_delay
+
+        Specifies the sub-Sample Clock delay, in seconds, to apply to the
+        waveform. Use this property to reduce the trigger jitter when
+        synchronizing multiple devices with NI-TClk. This property can also help
+        maintain synchronization repeatability by writing the absolute delay
+        value of a previous measurement to the current session.
+        To set this property, the waveform generator must be in the Idle
+        (Configuration) state.
+        **Units**: seconds (s)
+        **Valid Values**: Plus or minus half of one Sample Clock period
+        **Default Value**: 0.0
+        **Supported Waveform Generators**: PXIe-5413/5423/5433
+
+
+
+        .. note:: If this property is set, NI-TClk cannot perform any sub-Sample Clock
+            adjustment.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | False      |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Output:Absolute Delay**
+                - C Attribute: **NIFGEN_ATTR_ABSOLUTE_DELAY**
 
 all_marker_events_latched_status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -951,36 +997,6 @@ bus_type
 
                 - LabVIEW Property: **Instrument:Bus Type**
                 - C Attribute: **NIFGEN_ATTR_BUS_TYPE**
-
-channel_count
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: channel_count
-
-        Returns the number of channels that the specific instrument  driver supports.
-        For each property for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | False     |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
-                - C Attribute: **NIFGEN_ATTR_CHANNEL_COUNT**
 
 channel_delay
 ~~~~~~~~~~~~~
@@ -3278,6 +3294,36 @@ module_revision
 
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision**
                 - C Attribute: **NIFGEN_ATTR_MODULE_REVISION**
+
+channel_count
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: channel_count
+
+        Indicates the number of channels that the specific instrument  driver supports.
+        For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | False     |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
+                - C Attribute: **NIFGEN_ATTR_NUM_CHANNELS**
 
 output_enabled
 ~~~~~~~~~~~~~~
@@ -6410,6 +6456,8 @@ Properties
 +----------------------------------------------------------------------------+-----------------------------------------+
 | Property                                                                   | Datatype                                |
 +============================================================================+=========================================+
+| :py:attr:`nifgen.Session.absolute_delay`                                   | float                                   |
++----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.all_marker_events_latched_status`                 | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.all_marker_events_live_status`                    | int                                     |
@@ -6439,8 +6487,6 @@ Properties
 | :py:attr:`nifgen.Session.aux_power_enabled`                                | bool                                    |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.bus_type`                                         | :py:data:`BusType`                      |
-+----------------------------------------------------------------------------+-----------------------------------------+
-| :py:attr:`nifgen.Session.channel_count`                                    | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.channel_delay`                                    | float                                   |
 +----------------------------------------------------------------------------+-----------------------------------------+
@@ -6587,6 +6633,8 @@ Properties
 | :py:attr:`nifgen.Session.min_waveform_size`                                | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.module_revision`                                  | str                                     |
++----------------------------------------------------------------------------+-----------------------------------------+
+| :py:attr:`nifgen.Session.channel_count`                                    | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.output_enabled`                                   | bool                                    |
 +----------------------------------------------------------------------------+-----------------------------------------+

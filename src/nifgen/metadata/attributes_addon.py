@@ -152,4 +152,8 @@ attributes_rep_cap_type = {
     1150355: { 'repeated_capability_type': 'markers', },
 }
 
+attributes_python_name = {
+    1050203: { 'python_name': 'channel_count', },
+}
+
 

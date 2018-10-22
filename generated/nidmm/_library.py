@@ -29,6 +29,8 @@ class Library(object):
         self.niDMM_ConfigureTrigger_cfunc = None
         self.niDMM_ConfigureWaveformAcquisition_cfunc = None
         self.niDMM_Disable_cfunc = None
+        self.niDMM_ExportAttributeConfigurationBuffer_cfunc = None
+        self.niDMM_ExportAttributeConfigurationFile_cfunc = None
         self.niDMM_Fetch_cfunc = None
         self.niDMM_FetchMultiPoint_cfunc = None
         self.niDMM_FetchWaveform_cfunc = None
@@ -42,6 +44,8 @@ class Library(object):
         self.niDMM_GetExtCalRecommendedInterval_cfunc = None
         self.niDMM_GetLastCalTemp_cfunc = None
         self.niDMM_GetSelfCalSupported_cfunc = None
+        self.niDMM_ImportAttributeConfigurationBuffer_cfunc = None
+        self.niDMM_ImportAttributeConfigurationFile_cfunc = None
         self.niDMM_InitWithOptions_cfunc = None
         self.niDMM_Initiate_cfunc = None
         self.niDMM_LockSession_cfunc = None
@@ -152,6 +156,22 @@ class Library(object):
                 self.niDMM_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_Disable_cfunc(vi)
 
+    def niDMM_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_ExportAttributeConfigurationBuffer_cfunc is None:
+                self.niDMM_ExportAttributeConfigurationBuffer_cfunc = self._library.niDMM_ExportAttributeConfigurationBuffer
+                self.niDMM_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDMM_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_ExportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
+
+    def niDMM_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_ExportAttributeConfigurationFile_cfunc is None:
+                self.niDMM_ExportAttributeConfigurationFile_cfunc = self._library.niDMM_ExportAttributeConfigurationFile
+                self.niDMM_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_ExportAttributeConfigurationFile_cfunc(vi, file_path)
+
     def niDMM_Fetch(self, vi, maximum_time, reading):  # noqa: N802
         with self._func_lock:
             if self.niDMM_Fetch_cfunc is None:
@@ -255,6 +275,22 @@ class Library(object):
                 self.niDMM_GetSelfCalSupported_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDMM_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_GetSelfCalSupported_cfunc(vi, self_cal_supported)
+
+    def niDMM_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_ImportAttributeConfigurationBuffer_cfunc is None:
+                self.niDMM_ImportAttributeConfigurationBuffer_cfunc = self._library.niDMM_ImportAttributeConfigurationBuffer
+                self.niDMM_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDMM_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_ImportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
+
+    def niDMM_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_ImportAttributeConfigurationFile_cfunc is None:
+                self.niDMM_ImportAttributeConfigurationFile_cfunc = self._library.niDMM_ImportAttributeConfigurationFile
+                self.niDMM_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_ImportAttributeConfigurationFile_cfunc(vi, file_path)
 
     def niDMM_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:

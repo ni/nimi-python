@@ -19,10 +19,16 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Updated generated metadata
+        * Updated "Driver Version Tested Against"
         * Update visatype definitions to work on Linux as well as Windows - [#911](https://github.com/ni/nimi-python/issues/911)
     * #### Removed
 * ### NI-DMM
     * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
     * #### Changed
     * #### Removed
 * ### NI-ModInst
@@ -35,6 +41,10 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
     * #### Changed
     * #### Removed
 * ### NI-FGEN
@@ -43,6 +53,10 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
     * #### Changed
     * #### Removed
 * ### NI Switch Executive

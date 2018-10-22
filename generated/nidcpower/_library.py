@@ -26,6 +26,8 @@ class Library(object):
         self.niDCPower_CreateAdvancedSequenceStep_cfunc = None
         self.niDCPower_DeleteAdvancedSequence_cfunc = None
         self.niDCPower_Disable_cfunc = None
+        self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = None
+        self.niDCPower_ExportAttributeConfigurationFile_cfunc = None
         self.niDCPower_FetchMultiple_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
         self.niDCPower_GetAttributeViInt32_cfunc = None
@@ -39,6 +41,8 @@ class Library(object):
         self.niDCPower_GetExtCalRecommendedInterval_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
+        self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = None
+        self.niDCPower_ImportAttributeConfigurationFile_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
         self.niDCPower_Initiate_cfunc = None
         self.niDCPower_LockSession_cfunc = None
@@ -130,6 +134,22 @@ class Library(object):
                 self.niDCPower_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Disable_cfunc(vi)
+
+    def niDCPower_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ExportAttributeConfigurationBuffer_cfunc is None:
+                self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = self._library.niDCPower_ExportAttributeConfigurationBuffer
+                self.niDCPower_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ExportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
+
+    def niDCPower_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ExportAttributeConfigurationFile_cfunc is None:
+                self.niDCPower_ExportAttributeConfigurationFile_cfunc = self._library.niDCPower_ExportAttributeConfigurationFile
+                self.niDCPower_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ExportAttributeConfigurationFile_cfunc(vi, file_path)
 
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         with self._func_lock:
@@ -234,6 +254,22 @@ class Library(object):
                 self.niDCPower_GetSelfCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDCPower_GetSelfCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetSelfCalLastTemp_cfunc(vi, temperature)
+
+    def niDCPower_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ImportAttributeConfigurationBuffer_cfunc is None:
+                self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = self._library.niDCPower_ImportAttributeConfigurationBuffer
+                self.niDCPower_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ImportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
+
+    def niDCPower_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ImportAttributeConfigurationFile_cfunc is None:
+                self.niDCPower_ImportAttributeConfigurationFile_cfunc = self._library.niDCPower_ImportAttributeConfigurationFile
+                self.niDCPower_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ImportAttributeConfigurationFile_cfunc(vi, file_path)
 
     def niDCPower_InitializeWithChannels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
         with self._func_lock:

@@ -4530,6 +4530,148 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        '''export_attribute_configuration_buffer
+
+        Exports the property configuration of the session to a configuration
+        buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑SCOPE returns an
+        error.
+
+        **Related Topics:**
+
+        `Properties and Property
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+        `Setting Properties Before Reading
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_in_bytes_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niScope_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_in_bytes_ctype.value  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        error_code = self._library.niScope_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(configuration_ctype[i]) for i in range(size_in_bytes_ctype.value)]
+
+    @ivi_synchronized
+    def export_attribute_configuration_file(self, file_path):
+        '''export_attribute_configuration_file
+
+        Exports the property configuration of the session to the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑SCOPE returns an
+        error.
+
+        **Related Topics:**
+
+        `Properties and Property
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+        `Setting Properties Before Reading
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Args:
+            file_path (str): Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .niscopeconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niScope_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        '''import_attribute_configuration_buffer
+
+        Imports a property configuration to the session from the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        **Related Topics:**
+
+        `Properties and Property
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+        `Setting Properties Before Reading
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        You cannot call this method while the session is in a running state,
+        such as while acquiring a signal.
+
+        Args:
+            configuration (list of int): Specifies the byte array buffer that contains the property
+                configuration to import.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niScope_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_file(self, file_path):
+        '''import_attribute_configuration_file
+
+        Imports a property configuration to the session from the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        **Related Topics:**
+
+        `Properties and Property
+        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+        `Setting Properties Before Reading
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        You cannot call this method while the session is in a running state,
+        such as while acquiring a signal.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .niscopeconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niScope_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
 

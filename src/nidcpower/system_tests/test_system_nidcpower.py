@@ -1,6 +1,7 @@
 import datetime
 import nidcpower
 import pytest
+import tempfile
 
 
 @pytest.fixture(scope='function')
@@ -240,6 +241,31 @@ def test_commit(single_channel_session):
     non_default_current_limit = 0.00021
     single_channel_session.current_limit = non_default_current_limit
     single_channel_session.commit()
+
+
+def test_import_export_buffer(single_channel_session):
+    test_value_1 = 1
+    test_value_2 = 2
+    single_channel_session.voltage_level = test_value_1
+    assert single_channel_session.voltage_level == test_value_1
+    buffer = single_channel_session.export_attribute_configuration_buffer()
+    single_channel_session.voltage_level = test_value_2
+    assert single_channel_session.voltage_level == test_value_2
+    single_channel_session.import_attribute_configuration_buffer(buffer)
+    assert single_channel_session.voltage_level == test_value_1
+
+
+def test_import_export_file(single_channel_session):
+    test_value_1 = 1
+    test_value_2 = 2
+    path = tempfile.gettempdir() + 'test.txt'
+    single_channel_session.voltage_level = test_value_1
+    assert single_channel_session.voltage_level == test_value_1
+    single_channel_session.export_attribute_configuration_file(path)
+    single_channel_session.voltage_level = test_value_2
+    assert single_channel_session.voltage_level == test_value_2
+    single_channel_session.import_attribute_configuration_file(path)
+    assert single_channel_session.voltage_level == test_value_1
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):

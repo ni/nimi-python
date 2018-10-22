@@ -43,6 +43,8 @@ class Library(object):
         self.niScope_ConfigureTriggerWindow_cfunc = None
         self.niScope_ConfigureVertical_cfunc = None
         self.niScope_Disable_cfunc = None
+        self.niScope_ExportAttributeConfigurationBuffer_cfunc = None
+        self.niScope_ExportAttributeConfigurationFile_cfunc = None
         self.niScope_Fetch_cfunc = None
         self.niScope_FetchArrayMeasurement_cfunc = None
         self.niScope_FetchBinary16_cfunc = None
@@ -57,6 +59,8 @@ class Library(object):
         self.niScope_GetAttributeViString_cfunc = None
         self.niScope_GetEqualizationFilterCoefficients_cfunc = None
         self.niScope_GetError_cfunc = None
+        self.niScope_ImportAttributeConfigurationBuffer_cfunc = None
+        self.niScope_ImportAttributeConfigurationFile_cfunc = None
         self.niScope_InitWithOptions_cfunc = None
         self.niScope_InitiateAcquisition_cfunc = None
         self.niScope_LockSession_cfunc = None
@@ -262,6 +266,22 @@ class Library(object):
                 self.niScope_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_Disable_cfunc(vi)
 
+    def niScope_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_ExportAttributeConfigurationBuffer_cfunc is None:
+                self.niScope_ExportAttributeConfigurationBuffer_cfunc = self._library.niScope_ExportAttributeConfigurationBuffer
+                self.niScope_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niScope_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
+
+    def niScope_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_ExportAttributeConfigurationFile_cfunc is None:
+                self.niScope_ExportAttributeConfigurationFile_cfunc = self._library.niScope_ExportAttributeConfigurationFile
+                self.niScope_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_ExportAttributeConfigurationFile_cfunc(vi, file_path)
+
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niScope_Fetch_cfunc is None:
@@ -373,6 +393,22 @@ class Library(object):
                 self.niScope_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetError_cfunc(vi, error_code, buffer_size, description)
+
+    def niScope_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_ImportAttributeConfigurationBuffer_cfunc is None:
+                self.niScope_ImportAttributeConfigurationBuffer_cfunc = self._library.niScope_ImportAttributeConfigurationBuffer
+                self.niScope_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niScope_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
+
+    def niScope_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_ImportAttributeConfigurationFile_cfunc is None:
+                self.niScope_ImportAttributeConfigurationFile_cfunc = self._library.niScope_ImportAttributeConfigurationFile
+                self.niScope_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_ImportAttributeConfigurationFile_cfunc(vi, file_path)
 
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:

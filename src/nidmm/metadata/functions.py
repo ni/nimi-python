@@ -1180,8 +1180,9 @@ trigger and sample trigger are set to IMMEDIATE.
 'documentation': {
 'description': '''
 Specifies the absolute resolution for the measurement. NI-DMM sets
-NIDMM_ATTR_RESOLUTION_ABSOLUTE to this value. This parameter is
-ignored when the **Range** parameter is set to
+NIDMM_ATTR_RESOLUTION_ABSOLUTE to this value. The PXIe-4080/4081/4082
+uses the resolution you specify. The NI 4065 and NI 4070/4071/4072
+ignore this parameter when the **Range** parameter is set to
 NIDMM_VAL_AUTO_RANGE_ON (-1.0) or NIDMM_VAL_AUTO_RANGE_ONCE
 (-3.0). The default is 0.001 V.
 ''',
@@ -1263,8 +1264,9 @@ trigger and sample trigger are set to IMMEDIATE.
 Specifies the resolution of the measurement in digits. The driver sets
 the `Devices Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a
 list of valid ranges. The driver sets NIDMM_ATTR_RESOLUTION_DIGITS
-attribute to this value. This parameter is ignored when the **Range**
-parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
+attribute to this value. The PXIe-4080/4081/4082 uses the resolution you
+specify. The NI 4065 and NI 4070/4071/4072 ignore this parameter when
+the **Range** parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
 NIDMM_VAL_AUTO_RANGE_ONCE (-3.0). The default is 5½.
 ''',
 'note': '''
@@ -2142,6 +2144,151 @@ Places the instrument in a quiescent state where it has minimal or no
 impact on the system to which it is connected. If a measurement is in
 progress when this function is called, the measurement is aborted.
 ''',
+},
+    },
+    'ExportAttributeConfigurationBuffer': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. You obtain the **vi**
+parameter from niDMM_init or niDMM_InitWithOptions. The default is
+None.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Size',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the size, in bytes, of the byte array to export. If you enter
+0, this function returns the needed size.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Configuration',
+                'type': 'ViAddr',
+'documentation': {
+'description': '''
+Specifies the byte array buffer to be populated with the exported
+attribute configuration.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Exports the attribute configuration of the session to the specified
+configuration buffer.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers.
+
+This function verifies that the attributes you have configured for the
+session are valid. If the configuration is invalid, NI‑DMM returns an
+error.
+
+**Coercion Behavior for Certain Devices**
+
+Imported and exported attribute configurations contain coerced values
+for the following NI‑DMM devices:
+
+-  PXI/PCI/PCIe/USB‑4065
+-  PXI/PCI‑4070
+-  PXI‑4071
+-  PXI‑4072
+
+NI‑DMM coerces attribute values when the value you set is within the
+allowed range for the attribute but is not one of the discrete valid
+values the attribute supports. For example, for an attribute that
+coerces values up, if you choose a value of 4 when the adjacent valid
+values are 1 and 10, the attribute coerces the value to 10.
+
+**Related Topics:**
+
+`Using Attributes and Properties with
+NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__
+
+`Setting Attributes Before Reading
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.',
+},
+    },
+    'ExportAttributeConfigurationFile': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. You obtain the **vi**
+parameter from niDMM_init or niDMM_InitWithOptions. The default is
+None.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'filePath',
+                'type': 'ViConstString',
+'documentation': {
+'description': '''
+Specifies the absolute path to the file to contain the exported
+attribute configuration. If you specify an empty or relative path, this
+function returns an error.
+**Default file extension:**\  .nidmmconfig
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Exports the attribute configuration of the session to the specified
+file.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers.
+
+This function verifies that the attributes you have configured for the
+session are valid. If the configuration is invalid, NI‑DMM returns an
+error.
+
+**Coercion Behavior for Certain Devices**
+
+Imported and exported attribute configurations contain coerced values
+for the following NI‑DMM devices:
+
+-  PXI/PCI/PCIe/USB‑4065
+-  PXI/PCI‑4070
+-  PXI‑4071
+-  PXI‑4072
+
+NI‑DMM coerces attribute values when the value you set is within the
+allowed range for the attribute but is not one of the discrete valid
+values the attribute supports. For example, for an attribute that
+coerces values up, if you choose a value of 4 when the adjacent valid
+values are 1 and 10, the attribute coerces the value to 10.
+
+**Related Topics:**
+
+`Using Attributes and Properties with
+NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__
+
+`Setting Attributes Before Reading
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.',
 },
     },
     'Fetch': {
@@ -3620,6 +3767,143 @@ given session.
 Returns a Boolean value that expresses whether or not the DMM that you
 are using can perform self-calibration.
 ''',
+},
+    },
+    'ImportAttributeConfigurationBuffer': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. You obtain the **vi**
+parameter from niDMM_init or niDMM_InitWithOptions. The default is
+None.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Size',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the size, in bytes, of the byte array to import. If you enter
+0, this function returns the needed size.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Configuration',
+                'type': 'ViAddr',
+'documentation': {
+'description': '''
+Specifies the byte array buffer that contains the attribute
+configuration to import.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Imports an attribute configuration to the session from the specified
+configuration buffer.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers.
+
+**Coercion Behavior for Certain Devices**
+
+Imported and exported attribute configurations contain coerced values
+for the following NI‑DMM devices:
+
+-  PXI/PCI/PCIe/USB‑4065
+-  PXI/PCI‑4070
+-  PXI‑4071
+-  PXI‑4072
+
+NI‑DMM coerces attribute values when the value you set is within the
+allowed range for the attribute but is not one of the discrete valid
+values the attribute supports. For example, for an attribute that
+coerces values up, if you choose a value of 4 when the adjacent valid
+values are 1 and 10, the attribute coerces the value to 10.
+
+**Related Topics:**
+
+`Using Attributes and Properties with
+NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__
+
+`Setting Attributes Before Reading
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.',
+},
+    },
+    'ImportAttributeConfigurationFile': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+Identifies a particular instrument session. You obtain the **vi**
+parameter from niDMM_init or niDMM_InitWithOptions. The default is
+None.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'filePath',
+                'type': 'ViConstString',
+'documentation': {
+'description': '''
+Specifies the absolute path to the file containing the attribute
+configuration to import. If you specify an empty or relative path, this
+function returns an error.
+**Default File Extension:**\  .nidmmconfig
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Imports an attribute configuration to the session from the specified
+file.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers.
+
+**Coercion Behavior for Certain Devices**
+
+Imported and exported attribute configurations contain coerced values
+for the following NI‑DMM devices:
+
+-  PXI/PCI/PCIe/USB‑4065
+-  PXI/PCI‑4070
+-  PXI‑4071
+-  PXI‑4072
+
+NI‑DMM coerces attribute values when the value you set is within the
+allowed range for the attribute but is not one of the discrete valid
+values the attribute supports. For example, for an attribute that
+coerces values up, if you choose a value of 4 when the adjacent valid
+values are 1 and 10, the attribute coerces the value to 10.
+
+**Related Topics:**
+
+`Using Attributes and Properties with
+NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__
+
+`Setting Attributes Before Reading
+Attributes <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__
+''',
+'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.',
 },
     },
     'InitExtCal': {

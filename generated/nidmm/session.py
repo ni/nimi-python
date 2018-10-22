@@ -1262,8 +1262,9 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             resolution_absolute (float): Specifies the absolute resolution for the measurement. NI-DMM sets
-                resolution_absolute to this value. This parameter is
-                ignored when the **Range** parameter is set to
+                resolution_absolute to this value. The PXIe-4080/4081/4082
+                uses the resolution you specify. The NI 4065 and NI 4070/4071/4072
+                ignore this parameter when the **Range** parameter is set to
                 NIDMM_VAL_AUTO_RANGE_ON (-1.0) or NIDMM_VAL_AUTO_RANGE_ONCE
                 (-3.0). The default is 0.001 V.
 
@@ -1330,8 +1331,9 @@ class Session(_SessionBase):
             resolution_digits (float): Specifies the resolution of the measurement in digits. The driver sets
                 the `Devices Overview <devices>`__ for a
                 list of valid ranges. The driver sets resolution_digits
-                property to this value. This parameter is ignored when the **Range**
-                parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
+                property to this value. The PXIe-4080/4081/4082 uses the resolution you
+                specify. The NI 4065 and NI 4070/4071/4072 ignore this parameter when
+                the **Range** parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
                 NIDMM_VAL_AUTO_RANGE_ONCE (-3.0). The default is 5½.
 
                 Note:
@@ -1685,6 +1687,111 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_Disable(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        '''export_attribute_configuration_buffer
+
+        Exports the property configuration of the session to the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DMM returns an
+        error.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <setting_before_reading_attributes>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niDMM_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_ctype.value  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        error_code = self._library.niDMM_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(configuration_ctype[i]) for i in range(size_ctype.value)]
+
+    @ivi_synchronized
+    def export_attribute_configuration_file(self, file_path):
+        '''export_attribute_configuration_file
+
+        Exports the property configuration of the session to the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DMM returns an
+        error.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <setting_before_reading_attributes>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:**\  .nidmmconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDMM_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2055,6 +2162,103 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_GetSelfCalSupported(vi_ctype, None if self_cal_supported_ctype is None else (ctypes.pointer(self_cal_supported_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
+
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        '''import_attribute_configuration_buffer
+
+        Imports a property configuration to the session from the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <setting_before_reading_attributes>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+        Args:
+            configuration (list of int): Specifies the byte array buffer that contains the property
+                configuration to import.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niDMM_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_file(self, file_path):
+        '''import_attribute_configuration_file
+
+        Imports a property configuration to the session from the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:**\  .nidmmconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDMM_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options

@@ -32,6 +32,11 @@ class SideEffectsHelper(object):
         self._defaults['DeleteAdvancedSequence']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer'] = {}
+        self._defaults['ExportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] = None
+        self._defaults['ExportAttributeConfigurationFile'] = {}
+        self._defaults['ExportAttributeConfigurationFile']['return'] = 0
         self._defaults['FetchMultiple'] = {}
         self._defaults['FetchMultiple']['return'] = 0
         self._defaults['FetchMultiple']['voltageMeasurements'] = None
@@ -83,6 +88,10 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalLastTemp'] = {}
         self._defaults['GetSelfCalLastTemp']['return'] = 0
         self._defaults['GetSelfCalLastTemp']['Temperature'] = None
+        self._defaults['ImportAttributeConfigurationBuffer'] = {}
+        self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ImportAttributeConfigurationFile'] = {}
+        self._defaults['ImportAttributeConfigurationFile']['return'] = 0
         self._defaults['InitializeWithChannels'] = {}
         self._defaults['InitializeWithChannels']['return'] = 0
         self._defaults['InitializeWithChannels']['vi'] = None
@@ -199,6 +208,26 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
+
+    def niDCPower_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        if self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] is None:
+            raise MockFunctionCallError("niDCPower_ExportAttributeConfigurationBuffer", param='Configuration')
+        if size.value == 0:
+            return len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])
+        try:
+            configuration_ref = configuration.contents
+        except AttributeError:
+            configuration_ref = configuration
+        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])):
+            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['Configuration'][i]
+        return self._defaults['ExportAttributeConfigurationBuffer']['return']
+
+    def niDCPower_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationFile']['return']
+        return self._defaults['ExportAttributeConfigurationFile']['return']
 
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         if self._defaults['FetchMultiple']['return'] != 0:
@@ -407,6 +436,16 @@ class SideEffectsHelper(object):
         if temperature is not None:
             temperature.contents.value = self._defaults['GetSelfCalLastTemp']['Temperature']
         return self._defaults['GetSelfCalLastTemp']['return']
+
+    def niDCPower_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationBuffer']['return']
+        return self._defaults['ImportAttributeConfigurationBuffer']['return']
+
+    def niDCPower_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationFile']['return']
+        return self._defaults['ImportAttributeConfigurationFile']['return']
 
     def niDCPower_InitializeWithChannels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
         if self._defaults['InitializeWithChannels']['return'] != 0:
@@ -661,6 +700,10 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_DeleteAdvancedSequence.return_value = 0
         mock_library.niDCPower_Disable.side_effect = MockFunctionCallError("niDCPower_Disable")
         mock_library.niDCPower_Disable.return_value = 0
+        mock_library.niDCPower_ExportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niDCPower_ExportAttributeConfigurationBuffer")
+        mock_library.niDCPower_ExportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niDCPower_ExportAttributeConfigurationFile.side_effect = MockFunctionCallError("niDCPower_ExportAttributeConfigurationFile")
+        mock_library.niDCPower_ExportAttributeConfigurationFile.return_value = 0
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
         mock_library.niDCPower_FetchMultiple.return_value = 0
         mock_library.niDCPower_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_GetAttributeViBoolean")
@@ -687,6 +730,10 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_GetSelfCalLastDateAndTime.return_value = 0
         mock_library.niDCPower_GetSelfCalLastTemp.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastTemp")
         mock_library.niDCPower_GetSelfCalLastTemp.return_value = 0
+        mock_library.niDCPower_ImportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niDCPower_ImportAttributeConfigurationBuffer")
+        mock_library.niDCPower_ImportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niDCPower_ImportAttributeConfigurationFile.side_effect = MockFunctionCallError("niDCPower_ImportAttributeConfigurationFile")
+        mock_library.niDCPower_ImportAttributeConfigurationFile.return_value = 0
         mock_library.niDCPower_InitializeWithChannels.side_effect = MockFunctionCallError("niDCPower_InitializeWithChannels")
         mock_library.niDCPower_InitializeWithChannels.return_value = 0
         mock_library.niDCPower_Initiate.side_effect = MockFunctionCallError("niDCPower_Initiate")

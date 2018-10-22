@@ -3,6 +3,7 @@ import niscope
 import numpy
 import pytest
 import sys
+import tempfile
 
 
 @pytest.fixture(scope='function')
@@ -310,6 +311,31 @@ def test_configure_trigger_hysteresis(session):
     session.configure_trigger_hysteresis('1', 0.0, 0.05, niscope.TriggerCoupling.DC)
     assert '1' == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
+
+
+def test_import_export_buffer(session):
+    test_value_1 = 1
+    test_value_2 = 5
+    session.vertical_range = test_value_1
+    assert session.vertical_range == test_value_1
+    buffer = session.export_attribute_configuration_buffer()
+    session.vertical_range = test_value_2
+    assert session.vertical_range == test_value_2
+    session.import_attribute_configuration_buffer(buffer)
+    assert session.vertical_range == test_value_1
+
+
+def test_import_export_file(session):
+    test_value_1 = 1
+    test_value_2 = 5
+    path = tempfile.gettempdir() + 'test.txt'
+    session.vertical_range = test_value_1
+    assert session.vertical_range == test_value_1
+    session.export_attribute_configuration_file(path)
+    session.vertical_range = test_value_2
+    assert session.vertical_range == test_value_2
+    session.import_attribute_configuration_file(path)
+    assert session.vertical_range == test_value_1
 
 
 def test_configure_trigger_software(session):
