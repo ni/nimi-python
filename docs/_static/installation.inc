@@ -11,5 +11,6 @@ Driver specific installation instructions can be found on Read The Docs:
 * `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
 * `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
 * `nimodinst <http://nimi-python.readthedocs.io/en/master/nimodinst.html#installation>`_
+* `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
 
 

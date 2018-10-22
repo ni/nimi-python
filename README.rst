@@ -54,6 +54,7 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 * NI-SCOPE (Python module: niscope)
 * NI-SWITCH (Python module: niswitch)
 * NI-ModInst (Python module: nimodinst)
+* NI Switch Executive (Python module: nise)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -258,6 +259,45 @@ NI-SCOPE Python API Status
 
 
 
+NI Switch Executive Python API Status
+-------------------------------------
+
++-------------------------------+---------------------+
+| NI Switch Executive (nise)    |                     |
++===============================+=====================+
+| Driver Version Tested Against | 18.0.0              |
++-------------------------------+---------------------+
+| PyPI Version                  | |niseLatestVersion| |
++-------------------------------+---------------------+
+| Supported Python Version      | |nisePythonVersion| |
++-------------------------------+---------------------+
+| Open Issues                   | |niseOpenIssues|    |
++-------------------------------+---------------------+
+| Open Pull Requests            | |niseOpenPRs|       |
++-------------------------------+---------------------+
+
+
+.. |niseLatestVersion| image:: http://img.shields.io/pypi/v/nise.svg
+    :alt: Latest NI Switch Executive Version
+    :target: http://pypi.python.org/pypi/nise
+
+
+.. |nisePythonVersion| image:: http://img.shields.io/pypi/pyversions/nise.svg
+    :alt: NI Switch Executive supported Python versions
+    :target: http://pypi.python.org/pypi/nise
+
+
+.. |niseOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nise.svg
+    :alt: Open Issues + Pull Requests for NI Switch Executive
+    :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anise
+
+
+.. |niseOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nise.svg
+    :alt: Pull Requests for NI Switch Executive
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anise
+
+
+
 NI-SWITCH Python API Status
 ---------------------------
 
@@ -309,6 +349,7 @@ Driver specific installation instructions can be found on Read The Docs:
 * `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
 * `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
 * `nimodinst <http://nimi-python.readthedocs.io/en/master/nimodinst.html#installation>`_
+* `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
 
 
 Contributing

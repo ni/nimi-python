@@ -8,7 +8,7 @@ As a prerequisite to using the nimodinst module, you must install the NI-ModInst
 
 The nimi-python modules (i.e. for **NI-ModInst**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nimodinst~=1.0.1.dev0
+  $ python -m pip install nimodinst~=1.0.2.dev0
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::

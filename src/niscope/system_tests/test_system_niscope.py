@@ -94,11 +94,7 @@ def test_fetch_binary8_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].wfm
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_fetch_binary16_into(session):
@@ -126,11 +122,7 @@ def test_fetch_binary16_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].samples
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_fetch_binary32_into(session):
@@ -158,11 +150,7 @@ def test_fetch_binary32_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].samples
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_fetch_double_into(session):
@@ -190,11 +178,7 @@ def test_fetch_double_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].samples
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_self_test(session):
