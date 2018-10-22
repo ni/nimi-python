@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 import argparse
 import nifgen
 import numpy as np
@@ -47,6 +48,54 @@ def calculate_gaussian_noise():
     return noise
 
 
+script_all = '''
+script scriptmulti
+repeat until scriptTrigger0
+Generate triangle
+end repeat
+repeat until scriptTrigger0
+Generate sine
+end repeat
+end script
+
+script scriptsine
+repeat until scriptTrigger0
+Generate sine
+end repeat
+end script
+
+script scriptrampup
+repeat until scriptTrigger0
+Generate rampup
+end repeat
+end script
+
+script scriptrampdown
+repeat until scriptTrigger0
+Generate rampdown
+end repeat
+end script
+
+script scriptsquare
+repeat until scriptTrigger0
+Generate square
+end repeat
+end script
+
+script scripttriangle
+repeat until scriptTrigger0
+Generate triangle
+end repeat
+end script
+
+script scriptnoise
+repeat until scriptTrigger0
+Generate noise
+end repeat
+end script
+'''
+
+
 def example(resource_name, options, shape, channel):
     with nifgen.Session(resource_name=resource_name, options=options, channel_name=channel) as session:
         # CONFIGURATION
@@ -70,53 +119,25 @@ def example(resource_name, options, shape, channel):
         session.channels[channel].write_waveform('triangle', calculate_triangle())
         session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
 
-        # 4 - Write Script
-        script_sine = 'script Script\nrepeat until scriptTrigger0\nGenerate sine \nend repeat\nend script'
-        script_rampup = 'script Script\nrepeat until scriptTrigger0\nGenerate rampup\nend repeat\nend script'
-        script_rampdown = 'script Script\nrepeat until scriptTrigger0\nGenerate rampdown\nend repeat\nend script'
-        script_square = 'script Script\nrepeat until scriptTrigger0\nGenerate square\nend repeat\nend script'
-        script_triangle = 'script Script\nrepeat until scriptTrigger0\nGenerate triangle\nend repeat\nend script'
-        script_noise = 'script Script\nrepeat until scriptTrigger0\nGenerate noise \nend repeat\nend script'
-        script_multi = 'script Script\nrepeat until scriptTrigger0\nGenerate triangle\nend repeat\nrepeat until scriptTrigger0\nGenerate sine\nend repeat\nend script'
-
-        # 5 - Script to generate
+        # 4 - Script to generate
         ''' SINE / SQUARE / TRIANGLE / RAMPUP / RAMPDOWN / NOISE / MULTI '''
-        if shape == 'SINE':
-            script = script_sine
-        elif shape == 'RAMPUP':
-            script = script_rampup
-        elif shape == 'RAMPDOWN':
-            script = script_rampdown
-        elif shape == 'SQUARE':
-            script = script_square
-        elif shape == 'TRIANGLE':
-            script = script_triangle
-        elif shape == 'NOISE':
-            script = script_noise
-        elif shape == 'MULTI':
-            script = script_multi
-        else:
-            print('Unknown shape: {}'.format(shape))
-            sys.exit(1)
+        script_name = 'script{}'.format(shape.lower())
+        num_triggers = 2 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
 
-        session.channels[channel].write_script(script)
-        session.script_to_generate = 'Script'
+        session.channels[channel].write_script(script_all)
+        session.script_to_generate = script_name
 
         # LAUNCH
         with session.initiate():
-            time.sleep(10)
-            if shape is 'MULTI':
-                for x in range(2):
-                    time.sleep(2)
-                    session.script_triggers[0].send_software_edge_trigger()
-            else:
+            for x in range(num_triggers):
+                time.sleep(10)
                 session.script_triggers[0].send_software_edge_trigger()
 
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Continuously generates an arbitrary waveform.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Arbitrary Waveform Generator')
-    parser.add_argument('-s', '--shape', default='NOISE', help='Shape of the signal to generate')
+    parser.add_argument('-s', '--shape', default='SINE', help='Shape of the signal to generate')
     parser.add_argument('-c', '--channel', default='0', help='Channel to use when generating')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
