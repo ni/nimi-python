@@ -50,48 +50,67 @@ def calculate_gaussian_noise():
 
 script_all = '''
 script scriptmulti
-repeat until scriptTrigger0
-Generate triangle
-end repeat
-repeat until scriptTrigger0
-Generate sine
-end repeat
+  repeat until scriptTrigger0
+    Generate rampup
+    Generate sine
+    Generate rampdown
+  end repeat
+  repeat until scriptTrigger0
+    Generate rampdown
+    Generate square
+    Generate rampup
+  end repeat
+  repeat until scriptTrigger0
+    Generate rampup
+    Generate rampdown
+  end repeat
+  repeat until scriptTrigger0
+    Generate sine
+  end repeat
+  repeat until scriptTrigger0
+    Generate triangle
+  end repeat
+  repeat until scriptTrigger0
+    Generate rampdown
+    Generate noise
+    Generate rampup
+  end repeat
 end script
 
 script scriptsine
-repeat until scriptTrigger0
-Generate sine
-end repeat
+  repeat until scriptTrigger0
+    Generate sine
+  end repeat
 end script
 
 script scriptrampup
-repeat until scriptTrigger0
-Generate rampup
-end repeat
+  repeat until scriptTrigger0
+    Generate rampup
+  end repeat
 end script
 
 script scriptrampdown
-repeat until scriptTrigger0
-Generate rampdown
-end repeat
+  repeat until scriptTrigger0
+    Generate rampdown
+  end repeat
 end script
 
 script scriptsquare
-repeat until scriptTrigger0
-Generate square
-end repeat
+  repeat until scriptTrigger0
+    Generate square
+  end repeat
 end script
 
 script scripttriangle
-repeat until scriptTrigger0
-Generate triangle
-end repeat
+  repeat until scriptTrigger0
+    Generate triangle
+  end repeat
 end script
 
 script scriptnoise
-repeat until scriptTrigger0
-Generate noise
-end repeat
+  repeat until scriptTrigger0
+    Generate noise
+  end repeat
 end script
 '''
 
@@ -122,7 +141,7 @@ def example(resource_name, options, shape, channel):
         # 4 - Script to generate
         ''' SINE / SQUARE / TRIANGLE / RAMPUP / RAMPDOWN / NOISE / MULTI '''
         script_name = 'script{}'.format(shape.lower())
-        num_triggers = 2 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
+        num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
 
         session.channels[channel].write_script(script_all)
         session.script_to_generate = script_name
