@@ -125,10 +125,6 @@ def example(resource_name, options, shape, channel):
         # SOFTWARE TRIGGER: used in the script
         session.script_triggers[0].script_trigger_type = nifgen.ScriptTriggerType.SOFTWARE_EDGE  # TRIG_NONE / DIGITAL_EDGE / DIGITAL_LEVEL / SOFTWARE_EDGE
         session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING  # RISING / FAILING
-        # PFI TRIGGER: not used right now
-        # session.script_triggers[1].script_trigger_type = nifgen.script_triggers[0].ScriptTriggerType.DIGITAL_EDGE
-        # session.script_triggers[1].digital_edge_script_trigger_source = 'PFI0'
-        # session.script_triggers[1].digital_edge_script_trigger_edge = session.script_triggers[0].ScriptTriggerDigitalEdgeEdge.RISING
 
         # 3 - Calculate and write different waveform data to the device's onboard memory
         session.channels[channel].write_waveform('sine', calculate_sinewave())        # (waveform_name, data)
