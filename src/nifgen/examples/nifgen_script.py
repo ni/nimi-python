@@ -48,7 +48,7 @@ def calculate_gaussian_noise():
     return noise
 
 
-script_all = '''
+SCRIPT_ALL = '''
 script scriptmulti
   repeat until scriptTrigger0
     Generate rampup
@@ -143,7 +143,7 @@ def example(resource_name, options, shape, channel):
         script_name = 'script{}'.format(shape.lower())
         num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
 
-        session.channels[channel].write_script(script_all)
+        session.channels[channel].write_script(SCRIPT_ALL)
         session.script_to_generate = script_name
 
         # LAUNCH
