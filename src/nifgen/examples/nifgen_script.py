@@ -150,7 +150,7 @@ def example(resource_name, options, shape, channel):
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Continuously generates an arbitrary waveform.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Generate different shape waveforms.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Arbitrary Waveform Generator')
     parser.add_argument('-s', '--shape', default='SINE', help='Shape of the signal to generate')
     parser.add_argument('-c', '--channel', default='0', help='Channel to use when generating')
