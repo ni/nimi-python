@@ -135,7 +135,7 @@ def example(resource_name, options, shape, channel):
         session.channels[channel].write_waveform('noise', calculate_gaussian_noise())
 
         # 4 - Script to generate
-        # supported shaped: SINE / SQUARE / TRIANGLE / RAMPUP / RAMPDOWN / NOISE / MULTI
+        # supported shapes: SINE / SQUARE / TRIANGLE / RAMPUP / RAMPDOWN / NOISE / MULTI
         script_name = 'script{}'.format(shape.lower())
         num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs two triggers, all others need one
 
