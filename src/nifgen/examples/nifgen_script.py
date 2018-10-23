@@ -51,65 +51,65 @@ def calculate_gaussian_noise():
 SCRIPT_ALL = '''
 script scriptmulti
   repeat until scriptTrigger0
-    Generate rampup
-    Generate sine
-    Generate rampdown
+    generate rampup
+    generate sine
+    generate rampdown
   end repeat
   repeat until scriptTrigger0
-    Generate rampdown
-    Generate square
-    Generate rampup
+    generate rampdown
+    generate square
+    generate rampup
   end repeat
   repeat until scriptTrigger0
-    Generate rampup
-    Generate rampdown
+    generate rampup
+    generate rampdown
   end repeat
   repeat until scriptTrigger0
-    Generate sine
+    generate sine
   end repeat
   repeat until scriptTrigger0
-    Generate triangle
+    generate triangle
   end repeat
   repeat until scriptTrigger0
-    Generate rampdown
-    Generate noise
-    Generate rampup
+    generate rampdown
+    generate noise
+    generate rampup
   end repeat
 end script
 
 script scriptsine
   repeat until scriptTrigger0
-    Generate sine
+    generate sine
   end repeat
 end script
 
 script scriptrampup
   repeat until scriptTrigger0
-    Generate rampup
+    generate rampup
   end repeat
 end script
 
 script scriptrampdown
   repeat until scriptTrigger0
-    Generate rampdown
+    generate rampdown
   end repeat
 end script
 
 script scriptsquare
   repeat until scriptTrigger0
-    Generate square
+    generate square
   end repeat
 end script
 
 script scripttriangle
   repeat until scriptTrigger0
-    Generate triangle
+    generate triangle
   end repeat
 end script
 
 script scriptnoise
   repeat until scriptTrigger0
-    Generate noise
+    generate noise
   end repeat
 end script
 '''
