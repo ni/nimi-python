@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 import ctypes
@@ -50,7 +51,6 @@ class Library(object):
         self.niFgen_GetExtCalLastDateAndTime_cfunc = None
         self.niFgen_GetExtCalLastTemp_cfunc = None
         self.niFgen_GetExtCalRecommendedInterval_cfunc = None
-        self.niFgen_GetFIRFilterCoefficients_cfunc = None
         self.niFgen_GetHardwareState_cfunc = None
         self.niFgen_GetLastExtCalLastDateAndTime_cfunc = None
         self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = None
@@ -350,14 +350,6 @@ class Library(object):
                 self.niFgen_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFgen_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalRecommendedInterval_cfunc(vi, months)
-
-    def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_GetFIRFilterCoefficients_cfunc is None:
-                self.niFgen_GetFIRFilterCoefficients_cfunc = self._library.niFgen_GetFIRFilterCoefficients
-                self.niFgen_GetFIRFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niFgen_GetFIRFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_GetFIRFilterCoefficients_cfunc(vi, channel_name, array_size, coefficients_array, number_of_coefficients_read)
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
         with self._func_lock:

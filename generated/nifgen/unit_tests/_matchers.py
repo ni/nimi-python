@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 '''Matcher classes used by unit tests in order to set mock expectations.
 These work well with our visatype definitions.
 '''
@@ -19,10 +21,10 @@ class _ScalarMatcher(object):
 
     def __eq__(self, other):
         if not isinstance(other, self.expected_type):
-            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
+            print("{0}: Unexpected type. Expected: {1}. Received: {2}".format(self.__class__.__name__, self.expected_type, type(other)))
             return False
         if other.value != self.expected_value:
-            print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, other.value))
+            print("{0}: Unexpected value. Expected: {1}. Received: {2}".format(self.__class__.__name__, self.expected_value, other.value))
             return False
         return True
 
@@ -214,6 +216,11 @@ class ViInt16Matcher(_ScalarMatcher):
 class ViInt32Matcher(_ScalarMatcher):
     def __init__(self, expected_value):
         _ScalarMatcher.__init__(self, _visatype.ViInt32, expected_value)
+
+
+class ViAttrMatcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, _visatype.ViAttr, expected_value)
 
 
 class ViInt64Matcher(_ScalarMatcher):

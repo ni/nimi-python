@@ -388,23 +388,35 @@ def test_user_standard_waveform(session):
     session.clear_user_standard_waveform()
 
 
-# TODO(bhaswath): Doesn't work, issue #596
-'''
+''' Removed due to OSP disabled - #891
 def test_fir_filter_coefficients():
     with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
-        coeff_array = [1, 0, -1]
+        coeff_array = [0 for i in range(95)]
+        coeff_array[0] = -1.0
+        coeff_array[2] = 1.0
         session.configure_custom_fir_filter_coefficients(coeff_array)
         session.commit()
-        array, size = session.get_fir_filter_coefficients()
-        assert size == len(coeff_array)
+        array = session.get_fir_filter_coefficients()
+        assert len(array) == len(coeff_array)
+        assert array == coeff_array
 '''
 
 
-def test_send_software_edge_trigger(session):
+def test_send_software_edge_trigger_start(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.create_waveform(waveform_data)
     with session.initiate():
-        session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
+        session.send_software_edge_trigger()
+
+
+def test_send_software_edge_trigger_script(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    session.create_waveform(waveform_data)
+    session.output_mode = nifgen.OutputMode.SCRIPT
+    session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
+    session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
+    with session.initiate():
+        session.script_triggers[0].send_software_edge_trigger()
 
 
 def test_channel_format_types():

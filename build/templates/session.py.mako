@@ -1,8 +1,4 @@
-<%
-# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
-encoding_tag = '# -*- coding: utf-8 -*-'
-%>\
-${encoding_tag}
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
     import build.helper as helper
@@ -16,6 +12,8 @@ ${encoding_tag}
 
     attributes = helper.filter_codegen_attributes(config['attributes'])
 
+    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
+
     session_context_manager = None
     if 'task' in config['context_manager_name']:
         session_context_manager = '_' + config['context_manager_name']['task'].title()
@@ -26,7 +24,9 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
+% if attributes:
 import ${module_name}._attributes as _attributes
+% endif
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
@@ -163,7 +163,9 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParameterUs
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
+% if attributes:
 
+% endif
     def __init__(self, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
@@ -233,7 +235,7 @@ class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
-        '''${config['session_class_description']}
+        r'''${config['session_class_description']}
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
@@ -275,8 +277,8 @@ class Session(_SessionBase):
 
     def close(self):
         try:
-            self._close()
-        except errors.DriverError as e:
+            self._${close_function_name}()
+        except errors.DriverError:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0

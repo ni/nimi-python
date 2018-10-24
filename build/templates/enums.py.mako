@@ -1,3 +1,4 @@
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
 import build.helper as helper
@@ -16,7 +17,7 @@ class ${enums[enum_name]['python_name']}(Enum):
     ${enum_value['python_name']} = ${enum_value['value']}
     % endif
     % if 'documentation' in enum_value and len(helper.get_documentation_for_node_docstring(enum_value, config, indent=4).strip()) > 0:
-    '''
+    r'''
     ${helper.get_documentation_for_node_docstring(enum_value, config, indent=4)}
     '''
     % endif

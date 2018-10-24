@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 import platform
@@ -10,7 +11,7 @@ import threading
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libniScope_64.so', 'type': 'cdll'}},
+_library_info = {'Linux': {'64bit': {'name': 'libniscope.so', 'type': 'cdll'}},
                  'Windows': {'32bit': {'name': 'niscope_32.dll', 'type': 'windll'},
                              '64bit': {'name': 'niscope_64.dll', 'type': 'cdll'}}}
 

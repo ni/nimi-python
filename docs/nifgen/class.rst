@@ -140,6 +140,8 @@ nifgen.Session
     +-------------------------------------------------------------+-----------------------------------------+
     | Property                                                    | Datatype                                |
     +=============================================================+=========================================+
+    | :py:attr:`absolute_delay`                                   | float                                   |
+    +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`all_marker_events_latched_status`                 | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`all_marker_events_live_status`                    | int                                     |
@@ -169,8 +171,6 @@ nifgen.Session
     | :py:attr:`aux_power_enabled`                                | bool                                    |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`bus_type`                                         | :py:data:`BusType`                      |
-    +-------------------------------------------------------------+-----------------------------------------+
-    | :py:attr:`channel_count`                                    | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`channel_delay`                                    | float                                   |
     +-------------------------------------------------------------+-----------------------------------------+
@@ -318,6 +318,8 @@ nifgen.Session
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`module_revision`                                  | str                                     |
     +-------------------------------------------------------------+-----------------------------------------+
+    | :py:attr:`channel_count`                                    | int                                     |
+    +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`output_enabled`                                   | bool                                    |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`output_impedance`                                 | float                                   |
@@ -434,8 +436,6 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`get_ext_cal_recommended_interval`         |
     +-----------------------------------------------------+
-    | :py:func:`get_fir_filter_coefficients`              |
-    +-----------------------------------------------------+
     | :py:func:`get_hardware_state`                       |
     +-----------------------------------------------------+
     | :py:func:`get_self_cal_last_date_and_time`          |
@@ -482,6 +482,50 @@ nifgen.Session
 
 Properties
 ----------
+
+absolute_delay
+~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: absolute_delay
+
+        Specifies the sub-Sample Clock delay, in seconds, to apply to the
+        waveform. Use this property to reduce the trigger jitter when
+        synchronizing multiple devices with NI-TClk. This property can also help
+        maintain synchronization repeatability by writing the absolute delay
+        value of a previous measurement to the current session.
+        To set this property, the waveform generator must be in the Idle
+        (Configuration) state.
+        **Units**: seconds (s)
+        **Valid Values**: Plus or minus half of one Sample Clock period
+        **Default Value**: 0.0
+        **Supported Waveform Generators**: PXIe-5413/5423/5433
+
+
+
+        .. note:: If this property is set, NI-TClk cannot perform any sub-Sample Clock
+            adjustment.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | False      |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Output:Absolute Delay**
+                - C Attribute: **NIFGEN_ATTR_ABSOLUTE_DELAY**
 
 all_marker_events_latched_status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -953,36 +997,6 @@ bus_type
 
                 - LabVIEW Property: **Instrument:Bus Type**
                 - C Attribute: **NIFGEN_ATTR_BUS_TYPE**
-
-channel_count
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: channel_count
-
-        Returns the number of channels that the specific instrument  driver supports.
-        For each property for which IVI_VAL_MULTI_CHANNEL  is set, the IVI Engine maintains a separate cache value for each channel.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | False     |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
-                - C Attribute: **NIFGEN_ATTR_CHANNEL_COUNT**
 
 channel_delay
 ~~~~~~~~~~~~~
@@ -3280,6 +3294,36 @@ module_revision
 
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Instrument Identification:Module Revision**
                 - C Attribute: **NIFGEN_ATTR_MODULE_REVISION**
+
+channel_count
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: channel_count
+
+        Indicates the number of channels that the specific instrument  driver supports.
+        For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | False     |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Capabilities:Channel Count**
+                - C Attribute: **NIFGEN_ATTR_NUM_CHANNELS**
 
 output_enabled
 ~~~~~~~~~~~~~~
@@ -5658,59 +5702,6 @@ get_ext_cal_recommended_interval
 
 
 
-get_fir_filter_coefficients
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:method:: get_fir_filter_coefficients()
-
-            | Returns the FIR filter coefficients used by the onboard signal
-              processing block. These coefficients are determined by NI-FGEN and
-              based on the FIR filter type and corresponding property (Alpha,
-              Passband, BT) unless you are using the custom filter. If you are using
-              a custom filter, the coefficients returned are those set with the
-              :py:meth:`nifgen.Session.configure_custom_fir_filter_coefficients` method coerced to the
-              quantized values used by the device.
-            | To use this method, first call an instance of the
-              :py:meth:`nifgen.Session.get_fir_filter_coefficients` method with the
-              **coefficientsArray** parameter set to VI_NULL. Calling the method
-              in this state returns the current size of the **coefficientsArray** as
-              the value of the **numberOfCoefficientsRead** parameter. Create an
-              array of this size, and call the :py:meth:`nifgen.Session.get_fir_filter_coefficients`
-              method a second time, passing the new array as the
-              **coefficientsArray** parameter and the size as the **arraySize**
-              parameter. This second method call populates the array with the FIR
-              filter coefficients.
-            | Refer to the FIR Filter topic for your device in the *NI Signal
-              Generators Help* for more information about FIR filter coefficients.
-              This method is supported only for the NI 5441.
-            | **Default Value**: None
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_fir_filter_coefficients()
-
-
-            :rtype: int
-            :return:
-
-
-                    Specifies the array of data containing the number of coefficients you
-                    want to read.
-
-                    
-
-
-
 get_hardware_state
 ~~~~~~~~~~~~~~~~~~
 
@@ -6249,38 +6240,28 @@ send_software_edge_trigger
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: send_software_edge_trigger(trigger, trigger_id)
+    .. py:method:: send_software_edge_trigger()
 
-            Sends a command to trigger the signal generator. This VI can act as an
-            override for an external edge trigger.
+        Sends a command to trigger the signal generator. This VI can act as an
+        override for an external edge trigger.
 
-            
+        If called directly on the session, this will send a software start trigger.
 
-            .. note:: This VI does not override external digital edge triggers of the
-                NI 5401/5411/5431.
+        ..code:: python
 
+            session.send_software_edge_trigger()
 
+        If called using the script trigger repeated capability container, this will
+        send a software trigger to the specified script trigger
 
-            :param trigger:
+        ..code:: python
 
+            session.script_triggers[1].send_software_edge_trigger()
 
-                Sets the clock mode of the signal generator.
+        ..note::
 
-                ****Defined Values****
+            This method does not override external digital edge triggers of the NI 5401/5411/5431.
 
-                +----------------------------------------------+
-                | :py:data:`~nifgen.ClockMode.DIVIDE_DOWN`     |
-                +----------------------------------------------+
-                | :py:data:`~nifgen.ClockMode.HIGH_RESOLUTION` |
-                +----------------------------------------------+
-                | :py:data:`~nifgen.ClockMode.AUTOMATIC`       |
-                +----------------------------------------------+
-
-
-            :type trigger: :py:data:`nifgen.Trigger`
-            :param trigger_id:
-
-            :type trigger_id: str
 
 set_next_write_position
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -6475,6 +6456,8 @@ Properties
 +----------------------------------------------------------------------------+-----------------------------------------+
 | Property                                                                   | Datatype                                |
 +============================================================================+=========================================+
+| :py:attr:`nifgen.Session.absolute_delay`                                   | float                                   |
++----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.all_marker_events_latched_status`                 | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.all_marker_events_live_status`                    | int                                     |
@@ -6504,8 +6487,6 @@ Properties
 | :py:attr:`nifgen.Session.aux_power_enabled`                                | bool                                    |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.bus_type`                                         | :py:data:`BusType`                      |
-+----------------------------------------------------------------------------+-----------------------------------------+
-| :py:attr:`nifgen.Session.channel_count`                                    | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.channel_delay`                                    | float                                   |
 +----------------------------------------------------------------------------+-----------------------------------------+
@@ -6653,6 +6634,8 @@ Properties
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.module_revision`                                  | str                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
+| :py:attr:`nifgen.Session.channel_count`                                    | int                                     |
++----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.output_enabled`                                   | bool                                    |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.output_impedance`                                 | float                                   |
@@ -6769,8 +6752,6 @@ Methods
 | :py:func:`nifgen.Session.get_ext_cal_last_temp`                    |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.get_ext_cal_recommended_interval`         |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_fir_filter_coefficients`              |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.get_hardware_state`                       |
 +--------------------------------------------------------------------+

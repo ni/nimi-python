@@ -8,7 +8,7 @@ The following is a basic example of using the **nidcpower** module to open a ses
     import nidcpower
     # Configure the session.
 
-    with nidcpower.Session('dev1') as session:
+    with nidcpower.Session(resource_name='PXI1Slot2', channels='0') as session:
         session.measure_record_length = 20
         session.measure_record_length_is_finite = True
         session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE

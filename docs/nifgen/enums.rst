@@ -702,19 +702,6 @@ TerminalConfiguration
 
 
 
-Trigger
--------
-
-.. py:class:: Trigger
-
-    .. py:attribute:: Trigger.START
-
-
-
-    .. py:attribute:: Trigger.SCRIPT
-
-
-
 TriggerMode
 -----------
 

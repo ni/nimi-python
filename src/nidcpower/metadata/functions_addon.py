@@ -82,20 +82,22 @@ functions_enums = {
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
-    'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'BufferSize'}, }, }, },
-    'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'GetCalUserDefinedInfo':        { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
-    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'GetChannelName':               { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'SetSequence':                  { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'Size'}, },
-                                                      3: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
-    'CreateAdvancedSequence':       { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'attributeIdCount'}, }, }, },
-    'FetchMultiple':                { 'parameters': { 4: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
-                                                      5: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
-                                                      6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, },
-    'MeasureMultiple':              { 'parameters': { 2: { 'size': {'mechanism':'python-code', 'value':'self._parse_channel_count()'}, },
-                                                      3: { 'size': {'mechanism':'python-code', 'value':'self._parse_channel_count()'}, }, }, }
+    'GetError':                                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'BufferSize'}, }, }, },
+    'self_test':                                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'GetAttributeViString':                     { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetCalUserDefinedInfo':                    { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
+    'error_message':                            { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'GetChannelName':                           { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'SetSequence':                              { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'Size'}, },
+                                                                  3: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
+    'CreateAdvancedSequence':                   { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'attributeIdCount'}, }, }, },
+    'FetchMultiple':                            { 'parameters': { 4: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
+                                                                  5: { 'size': {'mechanism':'passed-in', 'value':'Count'}, },
+                                                                  6: { 'size': {'mechanism':'passed-in', 'value':'Count'}, }, }, },
+    'MeasureMultiple':                          { 'parameters': { 2: { 'size': {'mechanism':'python-code', 'value':'self._parse_channel_count()'}, },
+                                                                  3: { 'size': {'mechanism':'python-code', 'value':'self._parse_channel_count()'}, }, }, },
+    'ExportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'Size'}, }, }, },
+    'ImportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -436,4 +438,9 @@ functions_converters = {
                                                                'type_in_documentation': 'datetime.timedelta', }, }, },
 }
 
+# The extracted metadata is incorrect. Patch it here.
+functions_bad_source_metadata = {
+    'ExportAttributeConfigurationBuffer':                     { 'parameters': { 2: { 'direction': 'out', 'type': 'ViInt8[]'}, }, },
+    'ImportAttributeConfigurationBuffer':                     { 'parameters': { 2: { 'type': 'ViInt8[]'}, }, },
+}
 

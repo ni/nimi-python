@@ -1083,6 +1083,44 @@ functions = {
             'note': 'This function rules!',
         },
     },
+    
+    'GetAStringUsingPythonCode': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'aNumber',
+                'type': 'ViInt16',
+                'documentation': {
+                    'description': 'Contains a number.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'aString',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': 'Contains a string of length aNumber.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns a number and a string.',
+            'note': 'This function rules!',
+        },
+    },
 
     'Use64BitNumber': {
         'codegen_method': 'public',

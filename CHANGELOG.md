@@ -1,6 +1,8 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.0.1](#101---2018-10-17)
+* [1.0.0](#100---2018-06-08)
 * [0.9.0](#090---2018-05-22)
 * [0.8.0](#080---2018-04-27)
 * [0.7.0](#070---2018-02-20)
@@ -17,10 +19,73 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Updated generated metadata
+        * Updated "Driver Version Tested Against"
+        * Update visatype definitions to work on Linux as well as Windows - [#911](https://github.com/ni/nimi-python/issues/911)
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+
+
+## 1.0.1 - 2018-10-17
+* ### ALL
+    * #### Added
+        * Support for Python 3.7 - [#895](https://github.com/ni/nimi-python/issues/895)
+        * \_\_version\_\_ for all drivers - [#928](https://github.com/ni/nimi-python/issues/928)
+    * #### Changed
+        * No longer globally set warnings filter for `DriverWarning` - if you want all warnings from the driver, you will need to set `warnings.filterwarnings("always", category=<driver>.DriverWarning)` in your code
+        * Fix \_\_repr\_\_ for niscope.WaveformInfo - [#920](https://github.com/ni/nimi-python/issues/920)
+* ### NI-SCOPE
+    * #### Changed
+        * Format of output of wavefrom_info.__str__()
+* ### NI Switch Executive
+    * #### Added
+        * Initial Release
+
+
+## 1.0.0 - 2018-06-08
+* ### ALL
     * #### Removed
         * Explicitly disallow using a repeated capability on Session. `session[0].vertical_range = 1.0` will no longer work. Instead use `session.channels[0].vertical_range = 1.0` - [#853](https://github.com/ni/nimi-python/issues/853)
 * ### NI-DMM
-    * #### Added
     * #### Changed
         * Fixed name `freq_voltage_autorange` became `freq_voltage_auto_range`
     * #### Removed
@@ -37,13 +102,9 @@ All notable changes to this project will be documented in this file.
         * `sample_trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
         * `trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
 * ### NI-ModInst
-    * #### Added
     * #### Changed
         * Double close will now allow NI-ModInst to return error
-    * #### Removed
 * ### NI-Switch
-    * #### Added
-    * #### Changed
     * #### Removed
         * `cabled_module_scan_advanced_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `cabled_module_trigger_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
@@ -58,8 +119,6 @@ All notable changes to this project will be documented in this file.
         * `route_trigger_input()` - [#881](https://github.com/ni/nimi-python/issues/881)
         * `set_continuous_scan()` - [#881](https://github.com/ni/nimi-python/issues/881)
 * ### NI-DCPower
-    * #### Added
-    * #### Changed
     * #### Removed
         * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
             * `configure_digital_edge_measure_trigger()` - use `session.digital_edge_measure_trigger_edge` & `session.digital_edge_measure_trigger_input_terminal`
@@ -74,18 +133,26 @@ All notable changes to this project will be documented in this file.
             * `digital_edge_source_trigger_edge`
             * `digital_edge_start_trigger_edge`
 * ### NI-FGEN
-    * #### Added
     * #### Changed
         * `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
+        * `send_software_edge_trigger()` no longer takes any parameters.
+            * To send a start software trigger, call it on the session directly:
+                    ``` python
+                    session.send_software_edge_trigger()
+                    ```
+            * To send a script software trigger, call it on the script triggers container:
+                    ``` python
+                    session.script_triggers[1].send_software_edge_trigger()
+                    ```
     * #### Removed
         * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
             * `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
             * `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
             * `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
+        * Removed `get_fir_filter_coefficients()` - [#535](https://github.com/ni/nimi-python/issues/535), [#596](https://github.com/ni/nimi-python/issues/596)
 * ### NI-SCOPE
     * #### Added
         * `niscope_fetch_forever.py` example
-    * #### Changed
     * #### Removed
         * Removed default value for `level` parameter on `configure_trigger_edge()`
             * parameter list is now
@@ -650,6 +717,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 * ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
     * #### Added
     * #### Changed
     * #### Removed

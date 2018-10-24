@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
@@ -38,6 +39,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAStringOfFixedMaximumSize'] = {}
         self._defaults['GetAStringOfFixedMaximumSize']['return'] = 0
         self._defaults['GetAStringOfFixedMaximumSize']['aString'] = None
+        self._defaults['GetAStringUsingPythonCode'] = {}
+        self._defaults['GetAStringUsingPythonCode']['return'] = 0
+        self._defaults['GetAStringUsingPythonCode']['aString'] = None
         self._defaults['GetAnIviDanceString'] = {}
         self._defaults['GetAnIviDanceString']['return'] = 0
         self._defaults['GetAnIviDanceString']['aString'] = None
@@ -268,6 +272,20 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             a_string[i] = test_value[i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
+
+    def niFake_GetAStringUsingPythonCode(self, vi, a_number, a_string):  # noqa: N802
+        if self._defaults['GetAStringUsingPythonCode']['return'] != 0:
+            return self._defaults['GetAStringUsingPythonCode']['return']
+        # a_string
+        if self._defaults['GetAStringUsingPythonCode']['aString'] is None:
+            raise MockFunctionCallError("niFake_GetAStringUsingPythonCode", param='aString')
+        test_value = self._defaults['GetAStringUsingPythonCode']['aString']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(a_string) >= len(test_value)
+        for i in range(len(test_value)):
+            a_string[i] = test_value[i]
+        return self._defaults['GetAStringUsingPythonCode']['return']
 
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         if self._defaults['GetAnIviDanceString']['return'] != 0:
@@ -766,6 +784,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetANumber.return_value = 0
         mock_library.niFake_GetAStringOfFixedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize")
         mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
+        mock_library.niFake_GetAStringUsingPythonCode.side_effect = MockFunctionCallError("niFake_GetAStringUsingPythonCode")
+        mock_library.niFake_GetAStringUsingPythonCode.return_value = 0
         mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
         mock_library.niFake_GetAnIviDanceString.return_value = 0
         mock_library.niFake_GetArrayForPythonCodeCustomType.side_effect = MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType")

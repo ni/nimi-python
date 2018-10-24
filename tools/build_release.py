@@ -8,7 +8,7 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
-default_python_cmd = ['py', '-2']
+default_python_cmd = ['python']
 
 
 def configure_logging(lvl=logging.WARNING, logfile=None):
@@ -52,7 +52,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     logging.info(pp.pformat(args))
 
-    python_cmd = list(args.python_cmd) if args.python_cmd is not None else default_python_cmd
+    python_cmd = [args.python_cmd] if args.python_cmd is not None else default_python_cmd
 
     tox_cmd = python_cmd + ['-m', 'tox']
     twine_cmd = python_cmd + ['-m', 'twine']
@@ -81,6 +81,8 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config.py', ] + passthrough_params))
         call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config.py', ] + passthrough_params)
+        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config.py', ] + passthrough_params))
+        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config.py', ] + passthrough_params)
 
         logging.info('Rebuild to update generated files')
         logging.info(pp.pformat(tox_cmd))
@@ -96,7 +98,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     if args.upload:
         logging.info('Uploading to PyPI')
-        complete_twine_cmd = twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*']
+        complete_twine_cmd = twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*', 'bin/nise/dist/*']
         logging.info(pp.pformat(complete_twine_cmd))
         if not args.test:
             call(complete_twine_cmd)

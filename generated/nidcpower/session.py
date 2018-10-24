@@ -826,6 +826,7 @@ class _SessionBase(object):
     current_limit_low
     voltage_level_range
     current_limit_range
+    compliance_limit_symmetry
     When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following properties to configure the channel when  OutputFunction.DC_CURRENT is selected:
     current_level
     voltage_limit
@@ -833,7 +834,7 @@ class _SessionBase(object):
     voltage_limit_low
     current_level_range
     voltage_limit_range
-    Default Value: OutputFunction.DC_VOLTAGE
+    compliance_limit_symmetry
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2238,7 +2239,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def self_cal(self):
-        '''self_cal
+        r'''self_cal
 
         Performs a self-calibration upon the specified channel(s).
 
@@ -2284,7 +2285,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
-        '''configure_aperture_time
+        r'''configure_aperture_time
 
         Configures the aperture time on the specified channel(s).
 
@@ -2432,7 +2433,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _fetch_multiple(self, timeout, count):
-        '''_fetch_multiple
+        r'''_fetch_multiple
 
         Returns an array of voltage measurements, an array of current
         measurements, and an array of compliance measurements that were
@@ -2508,7 +2509,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
-        '''_get_attribute_vi_boolean
+        r'''_get_attribute_vi_boolean
 
         | Queries the value of a ViBoolean property.
         | You can use this method to get the values of device-specific
@@ -2563,7 +2564,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
-        '''_get_attribute_vi_int32
+        r'''_get_attribute_vi_int32
 
         | Queries the value of a ViInt32 property.
         | You can use this method to get the values of device-specific
@@ -2618,7 +2619,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
-        '''_get_attribute_vi_int64
+        r'''_get_attribute_vi_int64
 
         | Queries the value of a ViInt64 property.
         | You can use this method to get the values of device-specific
@@ -2673,7 +2674,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
-        '''_get_attribute_vi_real64
+        r'''_get_attribute_vi_real64
 
         | Queries the value of a ViReal64 property.
         | You can use this method to get the values of device-specific
@@ -2728,7 +2729,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
-        '''_get_attribute_vi_string
+        r'''_get_attribute_vi_string
 
         | Queries the value of a ViString property.
         | You can use this method to get the values of device-specific
@@ -2779,7 +2780,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def get_channel_name(self, index):
-        '''get_channel_name
+        r'''get_channel_name
 
         Retrieves the output **channelName** that corresponds to the requested
         **index**. Use the channel_count property to
@@ -2811,7 +2812,7 @@ class _SessionBase(object):
         return channel_name_ctype.value.decode(self._encoding)
 
     def _get_error(self):
-        '''_get_error
+        r'''_get_error
 
         | Retrieves and then clears the IVI error information for the session or
           the current execution thread unless **bufferSize** is 0, in which case
@@ -2894,7 +2895,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def measure(self, measurement_type):
-        '''measure
+        r'''measure
 
         Returns the measured value of either the voltage or current on the
         specified output channel. Each call to this method blocks other
@@ -2938,7 +2939,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _measure_multiple(self):
-        '''_measure_multiple
+        r'''_measure_multiple
 
         Returns arrays of the measured voltage and current values on the
         specified output channel(s). Each call to this method blocks other
@@ -2980,7 +2981,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _parse_channel_count(self):
-        '''_parse_channel_count
+        r'''_parse_channel_count
 
         Returns the number of channels.
 
@@ -3005,7 +3006,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def query_in_compliance(self):
-        '''query_in_compliance
+        r'''query_in_compliance
 
         Queries the specified output device to determine if it is operating at
         the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
@@ -3052,7 +3053,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def query_max_current_limit(self, voltage_level):
-        '''query_max_current_limit
+        r'''query_max_current_limit
 
         Queries the maximum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
@@ -3085,7 +3086,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def query_max_voltage_level(self, current_limit):
-        '''query_max_voltage_level
+        r'''query_max_voltage_level
 
         Queries the maximum voltage level on an output channel if the output
         channel is set to the specified **currentLimit**.
@@ -3118,7 +3119,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def query_min_current_limit(self, voltage_level):
-        '''query_min_current_limit
+        r'''query_min_current_limit
 
         Queries the minimum current limit on an output channel if the output
         channel is set to the specified **voltageLevel**.
@@ -3151,7 +3152,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def query_output_state(self, output_state):
-        '''query_output_state
+        r'''query_output_state
 
         Queries the specified output channel to determine if the output channel
         is currently in the state specified by **outputState**.
@@ -3196,7 +3197,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_boolean
+        r'''_set_attribute_vi_boolean
 
         | Sets the value of a ViBoolean property.
         | This is a low-level method that you can use to set the values of
@@ -3254,7 +3255,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int32
+        r'''_set_attribute_vi_int32
 
         | Sets the value of a ViInt32 property.
         | This is a low-level method that you can use to set the values of
@@ -3312,7 +3313,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int64
+        r'''_set_attribute_vi_int64
 
         | Sets the value of a ViInt64 property.
         | This is a low-level method that you can use to set the values of
@@ -3370,7 +3371,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_real64
+        r'''_set_attribute_vi_real64
 
         | Sets the value of a ViReal64 property.
         | This is a low-level method that you can use to set the values of
@@ -3428,7 +3429,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_string
+        r'''_set_attribute_vi_string
 
         | Sets the value of a ViString property.
         | This is a low-level method that you can use to set the values of
@@ -3486,7 +3487,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def set_sequence(self, values, source_delays):
-        '''set_sequence
+        r'''set_sequence
 
         Configures a series of voltage or current outputs and corresponding
         source delays. The source mode must be set to
@@ -3556,7 +3557,7 @@ class _SessionBase(object):
         return
 
     def _error_message(self, error_code):
-        '''_error_message
+        r'''_error_message
 
         Converts a status code returned by an instrument driver method into a
         user-readable string.
@@ -3584,7 +3585,7 @@ class Session(_SessionBase):
     '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.'''
 
     def __init__(self, resource_name, channels=None, reset=False, options={}):
-        '''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
+        r'''An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
         specified in **resource name** to be used in all subsequent NI-DCPower
@@ -3703,7 +3704,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._vi = 0
             raise
         self._vi = 0
@@ -3712,7 +3713,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def abort(self):
-        '''abort
+        r'''abort
 
         Transitions the NI-DCPower session from the Running state to the
         Committed state. If a sequence is running, it is stopped. Any
@@ -3745,7 +3746,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def commit(self):
-        '''commit
+        r'''commit
 
         Applies previously configured settings to the device. Calling this
         method moves the NI-DCPower session from the Uncommitted state into
@@ -3769,11 +3770,13 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
-        '''_create_advanced_sequence
+        r'''_create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
         _create_advanced_sequence_step method to add steps to the
         active advanced sequence.
+
+        You can create multiple advanced sequences in a session.
 
         **Support for this method**
 
@@ -3814,89 +3817,113 @@ class Session(_SessionBase):
                 in advanced sequencing. An ✕ indicates that the property cannot be
                 configured in advanced sequencing.
 
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | Property                       | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
-                +================================+===========+=========+=========+=========+=========+===================+===================+================+
-                | dc_noise_rejection             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | aperture_time                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | measure_record_length          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | sense                          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | ovp_enabled                    | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | ovp_limit                      | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_delay               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_off_time                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_on_time                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | source_delay                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_compensation_frequency | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_gain_bandwidth         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_pole_zero_ratio        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_compensation_frequency | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_gain_bandwidth         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_pole_zero_ratio        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_level                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_level_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_limit                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_limit_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_limit                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_limit_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_level                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_level_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | output_enabled                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | output_function                | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | output_resistance              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_current_level       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_voltage_limit       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_level            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_level_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_limit            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_limit_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_current_limit       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_voltage_level       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_limit            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_limit_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_level            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_level_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | transient_response             | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
+                +================================+===========+===========+===========+===========+===========+=====================+=====================+================+
+                | dc_noise_rejection             | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✕                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | aperture_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | measure_record_length          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | sense                          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_enabled                    | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_limit                      | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_delay               | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_off_time                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_on_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | source_delay                   | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_enabled                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_function                | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_resistance              | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | transient_response             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
@@ -3912,7 +3939,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _create_advanced_sequence_step(self, set_as_active_step=True):
-        '''_create_advanced_sequence_step
+        r'''_create_advanced_sequence_step
 
         Creates a new advanced sequence step in the advanced sequence specified
         by the Active advanced sequence. When you create an advanced sequence
@@ -3955,7 +3982,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _delete_advanced_sequence(self, sequence_name):
-        '''_delete_advanced_sequence
+        r'''_delete_advanced_sequence
 
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
@@ -3993,7 +4020,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def disable(self):
-        '''disable
+        r'''disable
 
         This method performs the same actions as the reset
         method, except that this method also immediately sets the
@@ -4008,8 +4035,127 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        r'''export_attribute_configuration_buffer
+
+        Exports the property configuration of the session to the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DCPower returns
+        an error.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_ctype.value  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(configuration_ctype[i]) for i in range(size_ctype.value)]
+
+    @ivi_synchronized
+    def export_attribute_configuration_file(self, file_path):
+        r'''export_attribute_configuration_file
+
+        Exports the property configuration of the session to the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DCPower returns
+        an error.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .nidcpowerconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
-        '''_get_ext_cal_last_date_and_time
+        r'''_get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful calibration. The time
         returned is 24-hour (military) local time; for example, if the device
@@ -4041,7 +4187,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
-        '''get_ext_cal_last_temp
+        r'''get_ext_cal_last_temp
 
         Returns the onboard **temperature** of the device, in degrees Celsius,
         during the last successful external calibration.
@@ -4059,7 +4205,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
-        '''get_ext_cal_recommended_interval
+        r'''get_ext_cal_recommended_interval
 
         Returns the recommended maximum interval, in **months**, between
         external calibrations.
@@ -4105,7 +4251,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
-        '''_get_self_cal_last_date_and_time
+        r'''_get_self_cal_last_date_and_time
 
         Returns the date and time of the oldest successful self-calibration from
         among the channels in the session.
@@ -4147,7 +4293,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_self_cal_last_temp(self):
-        '''get_self_cal_last_temp
+        r'''get_self_cal_last_temp
 
         Returns the onboard temperature of the device, in degrees Celsius,
         during the oldest successful self-calibration from among the channels in
@@ -4176,8 +4322,125 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        r'''import_attribute_configuration_buffer
+
+        Imports a property configuration to the session from the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            configuration (list of int): Specifies the byte array buffer that contains the property
+                configuration to import.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_file(self, file_path):
+        r'''import_attribute_configuration_file
+
+        Imports a property configuration to the session from the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .nidcpowerconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDCPower_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def _initialize_with_channels(self, resource_name, channels=None, reset=False, option_string=""):
-        '''_initialize_with_channels
+        r'''_initialize_with_channels
 
         Creates and returns a new NI-DCPower session to the power supply or SMU
         specified in **resource name** to be used in all subsequent NI-DCPower
@@ -4257,7 +4520,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _initiate(self):
-        '''_initiate
+        r'''_initiate
 
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
@@ -4279,7 +4542,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def read_current_temperature(self):
-        '''read_current_temperature
+        r'''read_current_temperature
 
         Returns the current onboard **temperature**, in degrees Celsius, of the
         device.
@@ -4296,7 +4559,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def reset_device(self):
-        '''reset_device
+        r'''reset_device
 
         Resets the device to a known state. The method disables power
         generation, resets session properties to their default values, clears
@@ -4319,7 +4582,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def reset_with_defaults(self):
-        '''reset_with_defaults
+        r'''reset_with_defaults
 
         Resets the device to a known state. This method disables power
         generation, resets session properties to their default values, commits
@@ -4336,7 +4599,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger):
-        '''send_software_edge_trigger
+        r'''send_software_edge_trigger
 
         Asserts the specified trigger. This method can override an external
         edge trigger.
@@ -4381,7 +4644,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def wait_for_event(self, event_id, timeout=datetime.timedelta(seconds=10.0)):
-        '''wait_for_event
+        r'''wait_for_event
 
         Waits until the device has generated the specified event.
 
@@ -4437,7 +4700,7 @@ class Session(_SessionBase):
         return
 
     def _close(self):
-        '''_close
+        r'''_close
 
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
@@ -4491,7 +4754,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def reset(self):
-        '''reset
+        r'''reset
 
         Resets the device to a known state. This method disables power
         generation, resets session properties to their default values, commits
@@ -4507,7 +4770,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _self_test(self):
-        '''_self_test
+        r'''_self_test
 
         Performs the device self-test routine and returns the test result(s).
         Calling this method implicitly calls the reset method.

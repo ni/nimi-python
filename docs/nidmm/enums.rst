@@ -345,7 +345,7 @@ Function
 
 
 
-        NI 4065, and NI 4070/4071/4072 supported.
+        NI 4065, NI 4070/4071/4072, and NI 4080/4081/4182 supported.
 
         
 

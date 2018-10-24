@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file was generated
 import nimodinst._visatype as _visatype
 import nimodinst.errors as errors
 
@@ -51,7 +53,6 @@ def _(repeated_capability, prefix):
 
 
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
-@_convert_repeated_capabilities.register(six.string_types)  # noqa: F811
 @_convert_repeated_capabilities.register(six.text_type)  # noqa: F811
 @_convert_repeated_capabilities.register(str)  # noqa: F811
 def _(repeated_capability, prefix):
@@ -375,6 +376,30 @@ def test_repeated_capabilies_tuple_prefix():
     test_result_list = convert_repeated_capabilities(('0', '1'), prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = convert_repeated_capabilities((0, 1), prefix='ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+
+
+def test_repeated_capabilies_unicode():
+    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+    test_result_list = convert_repeated_capabilities('ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+
+
+def test_repeated_capabilies_raw():
+    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+    test_result_list = convert_repeated_capabilities('ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
+    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
+    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 

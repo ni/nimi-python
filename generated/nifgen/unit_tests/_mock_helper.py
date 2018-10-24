@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
@@ -103,10 +104,6 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['Months'] = None
-        self._defaults['GetFIRFilterCoefficients'] = {}
-        self._defaults['GetFIRFilterCoefficients']['return'] = 0
-        self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] = None
-        self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] = None
         self._defaults['GetHardwareState'] = {}
         self._defaults['GetHardwareState']['return'] = 0
         self._defaults['GetHardwareState']['state'] = None
@@ -496,26 +493,6 @@ class SideEffectsHelper(object):
         if months is not None:
             months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
-
-    def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
-        if self._defaults['GetFIRFilterCoefficients']['return'] != 0:
-            return self._defaults['GetFIRFilterCoefficients']['return']
-        # number_of_coefficients_read
-        if self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] is None:
-            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='numberOfCoefficientsRead')
-        if number_of_coefficients_read is not None:
-            number_of_coefficients_read.contents.value = self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead']
-        if self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] is None:
-            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='coefficientsArray')
-        if array_size.value == 0:
-            return len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])
-        try:
-            coefficients_array_ref = coefficients_array.contents
-        except AttributeError:
-            coefficients_array_ref = coefficients_array
-        for i in range(len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])):
-            coefficients_array_ref[i] = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'][i]
-        return self._defaults['GetFIRFilterCoefficients']['return']
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
         if self._defaults['GetHardwareState']['return'] != 0:
@@ -928,8 +905,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetExtCalLastTemp.return_value = 0
         mock_library.niFgen_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niFgen_GetExtCalRecommendedInterval")
         mock_library.niFgen_GetExtCalRecommendedInterval.return_value = 0
-        mock_library.niFgen_GetFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_GetFIRFilterCoefficients")
-        mock_library.niFgen_GetFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_GetHardwareState.side_effect = MockFunctionCallError("niFgen_GetHardwareState")
         mock_library.niFgen_GetHardwareState.return_value = 0
         mock_library.niFgen_GetLastExtCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime")

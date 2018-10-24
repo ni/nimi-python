@@ -378,67 +378,75 @@ nidcpower.Session
 
     **Public methods**
 
-    +---------------------------------------------+
-    | Method name                                 |
-    +=============================================+
-    | :py:func:`abort`                            |
-    +---------------------------------------------+
-    | :py:func:`commit`                           |
-    +---------------------------------------------+
-    | :py:func:`configure_aperture_time`          |
-    +---------------------------------------------+
-    | :py:func:`disable`                          |
-    +---------------------------------------------+
-    | :py:func:`fetch_multiple`                   |
-    +---------------------------------------------+
-    | :py:func:`get_channel_name`                 |
-    +---------------------------------------------+
-    | :py:func:`get_ext_cal_last_date_and_time`   |
-    +---------------------------------------------+
-    | :py:func:`get_ext_cal_last_temp`            |
-    +---------------------------------------------+
-    | :py:func:`get_ext_cal_recommended_interval` |
-    +---------------------------------------------+
-    | :py:func:`get_self_cal_last_date_and_time`  |
-    +---------------------------------------------+
-    | :py:func:`get_self_cal_last_temp`           |
-    +---------------------------------------------+
-    | :py:func:`lock`                             |
-    +---------------------------------------------+
-    | :py:func:`measure`                          |
-    +---------------------------------------------+
-    | :py:func:`measure_multiple`                 |
-    +---------------------------------------------+
-    | :py:func:`query_in_compliance`              |
-    +---------------------------------------------+
-    | :py:func:`query_max_current_limit`          |
-    +---------------------------------------------+
-    | :py:func:`query_max_voltage_level`          |
-    +---------------------------------------------+
-    | :py:func:`query_min_current_limit`          |
-    +---------------------------------------------+
-    | :py:func:`query_output_state`               |
-    +---------------------------------------------+
-    | :py:func:`read_current_temperature`         |
-    +---------------------------------------------+
-    | :py:func:`reset`                            |
-    +---------------------------------------------+
-    | :py:func:`reset_device`                     |
-    +---------------------------------------------+
-    | :py:func:`reset_with_defaults`              |
-    +---------------------------------------------+
-    | :py:func:`self_cal`                         |
-    +---------------------------------------------+
-    | :py:func:`self_test`                        |
-    +---------------------------------------------+
-    | :py:func:`send_software_edge_trigger`       |
-    +---------------------------------------------+
-    | :py:func:`set_sequence`                     |
-    +---------------------------------------------+
-    | :py:func:`unlock`                           |
-    +---------------------------------------------+
-    | :py:func:`wait_for_event`                   |
-    +---------------------------------------------+
+    +--------------------------------------------------+
+    | Method name                                      |
+    +==================================================+
+    | :py:func:`abort`                                 |
+    +--------------------------------------------------+
+    | :py:func:`commit`                                |
+    +--------------------------------------------------+
+    | :py:func:`configure_aperture_time`               |
+    +--------------------------------------------------+
+    | :py:func:`disable`                               |
+    +--------------------------------------------------+
+    | :py:func:`export_attribute_configuration_buffer` |
+    +--------------------------------------------------+
+    | :py:func:`export_attribute_configuration_file`   |
+    +--------------------------------------------------+
+    | :py:func:`fetch_multiple`                        |
+    +--------------------------------------------------+
+    | :py:func:`get_channel_name`                      |
+    +--------------------------------------------------+
+    | :py:func:`get_ext_cal_last_date_and_time`        |
+    +--------------------------------------------------+
+    | :py:func:`get_ext_cal_last_temp`                 |
+    +--------------------------------------------------+
+    | :py:func:`get_ext_cal_recommended_interval`      |
+    +--------------------------------------------------+
+    | :py:func:`get_self_cal_last_date_and_time`       |
+    +--------------------------------------------------+
+    | :py:func:`get_self_cal_last_temp`                |
+    +--------------------------------------------------+
+    | :py:func:`import_attribute_configuration_buffer` |
+    +--------------------------------------------------+
+    | :py:func:`import_attribute_configuration_file`   |
+    +--------------------------------------------------+
+    | :py:func:`lock`                                  |
+    +--------------------------------------------------+
+    | :py:func:`measure`                               |
+    +--------------------------------------------------+
+    | :py:func:`measure_multiple`                      |
+    +--------------------------------------------------+
+    | :py:func:`query_in_compliance`                   |
+    +--------------------------------------------------+
+    | :py:func:`query_max_current_limit`               |
+    +--------------------------------------------------+
+    | :py:func:`query_max_voltage_level`               |
+    +--------------------------------------------------+
+    | :py:func:`query_min_current_limit`               |
+    +--------------------------------------------------+
+    | :py:func:`query_output_state`                    |
+    +--------------------------------------------------+
+    | :py:func:`read_current_temperature`              |
+    +--------------------------------------------------+
+    | :py:func:`reset`                                 |
+    +--------------------------------------------------+
+    | :py:func:`reset_device`                          |
+    +--------------------------------------------------+
+    | :py:func:`reset_with_defaults`                   |
+    +--------------------------------------------------+
+    | :py:func:`self_cal`                              |
+    +--------------------------------------------------+
+    | :py:func:`self_test`                             |
+    +--------------------------------------------------+
+    | :py:func:`send_software_edge_trigger`            |
+    +--------------------------------------------------+
+    | :py:func:`set_sequence`                          |
+    +--------------------------------------------------+
+    | :py:func:`unlock`                                |
+    +--------------------------------------------------+
+    | :py:func:`wait_for_event`                        |
+    +--------------------------------------------------+
 
 
 Properties
@@ -2413,6 +2421,7 @@ output_function
         :py:data:`nidcpower.Session.current_limit_low`
         :py:data:`nidcpower.Session.voltage_level_range`
         :py:data:`nidcpower.Session.current_limit_range`
+        :py:data:`nidcpower.Session.compliance_limit_symmetry`
         When :py:data:`~nidcpower.OutputFunction.DC_CURRENT` is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following properties to configure the channel when  :py:data:`~nidcpower.OutputFunction.DC_CURRENT` is selected:
         :py:data:`nidcpower.Session.current_level`
         :py:data:`nidcpower.Session.voltage_limit`
@@ -2420,7 +2429,7 @@ output_function
         :py:data:`nidcpower.Session.voltage_limit_low`
         :py:data:`nidcpower.Session.current_level_range`
         :py:data:`nidcpower.Session.voltage_limit_range`
-        Default Value: :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`
+        :py:data:`nidcpower.Session.compliance_limit_symmetry`
 
 
 
@@ -5954,6 +5963,125 @@ disable
 
 
 
+export_attribute_configuration_buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: export_attribute_configuration_buffer()
+
+            Exports the property configuration of the session to the specified
+            configuration buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers and the same number of configured
+            channels.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑DCPower returns
+            an error.
+
+            **Support for this Method**
+
+            Calling this method in `Sequence Source
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+            **Channel Mapping Behavior for Multichannel Sessions**
+
+            When importing and exporting session property configurations between
+            NI‑DCPower sessions that were initialized with different channels, the
+            configurations of the exporting channels are mapped to the importing
+            channels in the order you specify in the **channelName** input to the
+            :py:meth:`nidcpower.Session.__init__` method.
+
+            For example, if your entry for **channelName** is 0,1 for the exporting
+            session and 1,2 for the importing session:
+
+            -  The configuration exported from channel 0 is imported into channel 1.
+            -  The configuration exported from channel 1 is imported into channel 2.
+
+            **Related Topics:**
+
+            `Using Properties and
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+            `Setting Properties and Properties Before Reading
+            Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+            .. note:: This method will return an error if the total number of channels
+                initialized for the exporting session is not equal to the total number
+                of channels initialized for the importing session.
+
+
+
+export_attribute_configuration_file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: export_attribute_configuration_file(file_path)
+
+            Exports the property configuration of the session to the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers and the same number of configured
+            channels.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑DCPower returns
+            an error.
+
+            **Support for this Method**
+
+            Calling this method in `Sequence Source
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+            **Channel Mapping Behavior for Multichannel Sessions**
+
+            When importing and exporting session property configurations between
+            NI‑DCPower sessions that were initialized with different channels, the
+            configurations of the exporting channels are mapped to the importing
+            channels in the order you specify in the **channelName** input to the
+            :py:meth:`nidcpower.Session.__init__` method.
+
+            For example, if your entry for **channelName** is 0,1 for the exporting
+            session and 1,2 for the importing session:
+
+            -  The configuration exported from channel 0 is imported into channel 1.
+            -  The configuration exported from channel 1 is imported into channel 2.
+
+            **Related Topics:**
+
+            `Using Properties and
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+            `Setting Properties and Properties Before Reading
+            Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+            .. note:: This method will return an error if the total number of channels
+                initialized for the exporting session is not equal to the total number
+                of channels initialized for the importing session.
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .nidcpowerconfig
+
+                
+
+
+            :type file_path: str
+
 fetch_multiple
 ~~~~~~~~~~~~~~
 
@@ -6192,6 +6320,134 @@ get_self_cal_last_temp
                     
 
 
+
+import_attribute_configuration_buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: import_attribute_configuration_buffer(configuration)
+
+            Imports a property configuration to the session from the specified
+            configuration buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers and the same number of configured
+            channels.
+
+            **Support for this Method**
+
+            Calling this method in `Sequence Source
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+            **Channel Mapping Behavior for Multichannel Sessions**
+
+            When importing and exporting session property configurations between
+            NI‑DCPower sessions that were initialized with different channels, the
+            configurations of the exporting channels are mapped to the importing
+            channels in the order you specify in the **channelName** input to the
+            :py:meth:`nidcpower.Session.__init__` method.
+
+            For example, if your entry for **channelName** is 0,1 for the exporting
+            session and 1,2 for the importing session:
+
+            -  The configuration exported from channel 0 is imported into channel 1.
+            -  The configuration exported from channel 1 is imported into channel 2.
+
+            **Related Topics:**
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            `Using Properties and
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+            `Setting Properties and Properties Before Reading
+            Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+            .. note:: This method will return an error if the total number of channels
+                initialized for the exporting session is not equal to the total number
+                of channels initialized for the importing session.
+
+
+
+            :param configuration:
+
+
+                Specifies the byte array buffer that contains the property
+                configuration to import.
+
+                
+
+
+            :type configuration: list of int
+
+import_attribute_configuration_file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: import_attribute_configuration_file(file_path)
+
+            Imports a property configuration to the session from the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers and the same number of configured
+            channels.
+
+            **Support for this Method**
+
+            Calling this method in `Sequence Source
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+            **Channel Mapping Behavior for Multichannel Sessions**
+
+            When importing and exporting session property configurations between
+            NI‑DCPower sessions that were initialized with different channels, the
+            configurations of the exporting channels are mapped to the importing
+            channels in the order you specify in the **channelName** input to the
+            :py:meth:`nidcpower.Session.__init__` method.
+
+            For example, if your entry for **channelName** is 0,1 for the exporting
+            session and 1,2 for the importing session:
+
+            -  The configuration exported from channel 0 is imported into channel 1.
+            -  The configuration exported from channel 1 is imported into channel 2.
+
+            **Related Topics:**
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            `Using Properties and
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+            `Setting Properties and Properties Before Reading
+            Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+            
+
+            .. note:: This method will return an error if the total number of channels
+                initialized for the exporting session is not equal to the total number
+                of channels initialized for the importing session.
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .nidcpowerconfig
+
+                
+
+
+            :type file_path: str
 
 lock
 ~~~~
@@ -7200,65 +7456,73 @@ Properties
 Methods
 -------
 
-+---------------------------------------------------------------+
-| Method name                                                   |
-+===============================================================+
-| :py:func:`nidcpower.Session.abort`                            |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.commit`                           |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.configure_aperture_time`          |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.disable`                          |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.fetch_multiple`                   |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_channel_name`                 |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_ext_cal_last_date_and_time`   |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_ext_cal_last_temp`            |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_ext_cal_recommended_interval` |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_self_cal_last_date_and_time`  |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.get_self_cal_last_temp`           |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.lock`                             |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.measure`                          |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.measure_multiple`                 |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_in_compliance`              |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_max_current_limit`          |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_max_voltage_level`          |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_min_current_limit`          |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.query_output_state`               |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.read_current_temperature`         |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.reset`                            |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.reset_device`                     |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.reset_with_defaults`              |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.self_cal`                         |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.self_test`                        |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.send_software_edge_trigger`       |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.set_sequence`                     |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.unlock`                           |
-+---------------------------------------------------------------+
-| :py:func:`nidcpower.Session.wait_for_event`                   |
-+---------------------------------------------------------------+
++--------------------------------------------------------------------+
+| Method name                                                        |
++====================================================================+
+| :py:func:`nidcpower.Session.abort`                                 |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.commit`                                |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.configure_aperture_time`               |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.disable`                               |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.export_attribute_configuration_buffer` |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.export_attribute_configuration_file`   |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.fetch_multiple`                        |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_channel_name`                      |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_ext_cal_last_date_and_time`        |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_ext_cal_last_temp`                 |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_ext_cal_recommended_interval`      |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_self_cal_last_date_and_time`       |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.get_self_cal_last_temp`                |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.import_attribute_configuration_buffer` |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.import_attribute_configuration_file`   |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.lock`                                  |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.measure`                               |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.measure_multiple`                      |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_in_compliance`                   |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_max_current_limit`               |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_max_voltage_level`               |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_min_current_limit`               |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.query_output_state`                    |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.read_current_temperature`              |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.reset`                                 |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.reset_device`                          |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.reset_with_defaults`                   |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.self_cal`                              |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.self_test`                             |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.send_software_edge_trigger`            |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.set_sequence`                          |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.unlock`                                |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.wait_for_event`                        |
++--------------------------------------------------------------------+
 
