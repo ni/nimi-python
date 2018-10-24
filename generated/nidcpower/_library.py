@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 import ctypes
@@ -21,15 +22,12 @@ class Library(object):
         self.niDCPower_CalSelfCalibrate_cfunc = None
         self.niDCPower_Commit_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc = None
-        self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc = None
         self.niDCPower_CreateAdvancedSequence_cfunc = None
         self.niDCPower_CreateAdvancedSequenceStep_cfunc = None
         self.niDCPower_DeleteAdvancedSequence_cfunc = None
         self.niDCPower_Disable_cfunc = None
+        self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = None
+        self.niDCPower_ExportAttributeConfigurationFile_cfunc = None
         self.niDCPower_FetchMultiple_cfunc = None
         self.niDCPower_GetAttributeViBoolean_cfunc = None
         self.niDCPower_GetAttributeViInt32_cfunc = None
@@ -43,8 +41,11 @@ class Library(object):
         self.niDCPower_GetExtCalRecommendedInterval_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
         self.niDCPower_GetSelfCalLastTemp_cfunc = None
+        self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = None
+        self.niDCPower_ImportAttributeConfigurationFile_cfunc = None
         self.niDCPower_InitializeWithChannels_cfunc = None
         self.niDCPower_Initiate_cfunc = None
+        self.niDCPower_LockSession_cfunc = None
         self.niDCPower_Measure_cfunc = None
         self.niDCPower_MeasureMultiple_cfunc = None
         self.niDCPower_ParseChannelCount_cfunc = None
@@ -63,6 +64,7 @@ class Library(object):
         self.niDCPower_SetAttributeViReal64_cfunc = None
         self.niDCPower_SetAttributeViString_cfunc = None
         self.niDCPower_SetSequence_cfunc = None
+        self.niDCPower_UnlockSession_cfunc = None
         self.niDCPower_WaitForEvent_cfunc = None
         self.niDCPower_close_cfunc = None
         self.niDCPower_error_message_cfunc = None
@@ -101,46 +103,6 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
 
-    def niDCPower_ConfigureDigitalEdgeMeasureTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger
-                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeMeasureTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgePulseTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger
-                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgePulseTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger
-                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgeSourceTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger
-                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeSourceTrigger_cfunc(vi, input_terminal, edge)
-
-    def niDCPower_ConfigureDigitalEdgeStartTrigger(self, vi, input_terminal, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc is None:
-                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger
-                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDCPower_ConfigureDigitalEdgeStartTrigger_cfunc(vi, input_terminal, edge)
-
     def niDCPower_CreateAdvancedSequence(self, vi, sequence_name, attribute_id_count, attribute_ids, set_as_active_sequence):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_CreateAdvancedSequence_cfunc is None:
@@ -172,6 +134,22 @@ class Library(object):
                 self.niDCPower_Disable_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Disable_cfunc(vi)
+
+    def niDCPower_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ExportAttributeConfigurationBuffer_cfunc is None:
+                self.niDCPower_ExportAttributeConfigurationBuffer_cfunc = self._library.niDCPower_ExportAttributeConfigurationBuffer
+                self.niDCPower_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ExportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
+
+    def niDCPower_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ExportAttributeConfigurationFile_cfunc is None:
+                self.niDCPower_ExportAttributeConfigurationFile_cfunc = self._library.niDCPower_ExportAttributeConfigurationFile
+                self.niDCPower_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ExportAttributeConfigurationFile_cfunc(vi, file_path)
 
     def niDCPower_FetchMultiple(self, vi, channel_name, timeout, count, voltage_measurements, current_measurements, in_compliance, actual_count):  # noqa: N802
         with self._func_lock:
@@ -277,6 +255,22 @@ class Library(object):
                 self.niDCPower_GetSelfCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetSelfCalLastTemp_cfunc(vi, temperature)
 
+    def niDCPower_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ImportAttributeConfigurationBuffer_cfunc is None:
+                self.niDCPower_ImportAttributeConfigurationBuffer_cfunc = self._library.niDCPower_ImportAttributeConfigurationBuffer
+                self.niDCPower_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ImportAttributeConfigurationBuffer_cfunc(vi, size, configuration)
+
+    def niDCPower_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ImportAttributeConfigurationFile_cfunc is None:
+                self.niDCPower_ImportAttributeConfigurationFile_cfunc = self._library.niDCPower_ImportAttributeConfigurationFile
+                self.niDCPower_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ImportAttributeConfigurationFile_cfunc(vi, file_path)
+
     def niDCPower_InitializeWithChannels(self, resource_name, channels, reset, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niDCPower_InitializeWithChannels_cfunc is None:
@@ -292,6 +286,14 @@ class Library(object):
                 self.niDCPower_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDCPower_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_Initiate_cfunc(vi)
+
+    def niDCPower_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_LockSession_cfunc is None:
+                self.niDCPower_LockSession_cfunc = self._library.niDCPower_LockSession
+                self.niDCPower_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_LockSession_cfunc(vi, caller_has_lock)
 
     def niDCPower_Measure(self, vi, channel_name, measurement_type, measurement):  # noqa: N802
         with self._func_lock:
@@ -436,6 +438,14 @@ class Library(object):
                 self.niDCPower_SetSequence_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViUInt32]  # noqa: F405
                 self.niDCPower_SetSequence_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetSequence_cfunc(vi, channel_name, values, source_delays, size)
+
+    def niDCPower_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_UnlockSession_cfunc is None:
+                self.niDCPower_UnlockSession_cfunc = self._library.niDCPower_UnlockSession
+                self.niDCPower_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niDCPower_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niDCPower_WaitForEvent(self, vi, event_id, timeout):  # noqa: N802
         with self._func_lock:

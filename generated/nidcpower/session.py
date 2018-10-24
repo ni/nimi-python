@@ -59,6 +59,27 @@ class _Acquisition(object):
         self._session.abort()
 
 
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -100,13 +121,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    active_advanced_sequence.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    active_advanced_sequence.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].active_advanced_sequence = var
-        var = session.channels['0,1'].active_advanced_sequence
+        session.channels[0,1].active_advanced_sequence = var
+        var = session.channels[0,1].active_advanced_sequence
     '''
     _active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
     '''Type: int
@@ -116,13 +137,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    active_advanced_sequence_step.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    active_advanced_sequence_step.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].active_advanced_sequence_step = var
-        var = session.channels['0,1'].active_advanced_sequence_step
+        session.channels[0,1].active_advanced_sequence_step = var
+        var = session.channels[0,1].active_advanced_sequence_step
     '''
     aperture_time = _attributes.AttributeViReal64(1150058)
     '''Type: float
@@ -135,13 +156,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    aperture_time.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    aperture_time.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].aperture_time = var
-        var = session.channels['0,1'].aperture_time
+        session.channels[0,1].aperture_time = var
+        var = session.channels[0,1].aperture_time
     '''
     aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
     '''Type: enums.ApertureTimeUnits
@@ -154,13 +175,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    aperture_time_units.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    aperture_time_units.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].aperture_time_units = var
-        var = session.channels['0,1'].aperture_time_units
+        session.channels[0,1].aperture_time_units = var
+        var = session.channels[0,1].aperture_time_units
     '''
     auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutoZero, 1150055)
     '''Type: enums.AutoZero
@@ -170,13 +191,13 @@ class _SessionBase(object):
     Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    auto_zero.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    auto_zero.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].auto_zero = var
-        var = session.channels['0,1'].auto_zero
+        session.channels[0,1].auto_zero = var
+        var = session.channels[0,1].auto_zero
     '''
     auxiliary_power_source_available = _attributes.AttributeViBoolean(1150002)
     '''Type: bool
@@ -219,13 +240,13 @@ class _SessionBase(object):
     information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    compliance_limit_symmetry.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    compliance_limit_symmetry.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].compliance_limit_symmetry = var
-        var = session.channels['0,1'].compliance_limit_symmetry
+        session.channels[0,1].compliance_limit_symmetry = var
+        var = session.channels[0,1].compliance_limit_symmetry
     '''
     current_compensation_frequency = _attributes.AttributeViReal64(1150071)
     '''Type: float
@@ -237,13 +258,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_compensation_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_compensation_frequency.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_compensation_frequency = var
-        var = session.channels['0,1'].current_compensation_frequency
+        session.channels[0,1].current_compensation_frequency = var
+        var = session.channels[0,1].current_compensation_frequency
     '''
     current_gain_bandwidth = _attributes.AttributeViReal64(1150070)
     '''Type: float
@@ -255,13 +276,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_gain_bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_gain_bandwidth.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_gain_bandwidth = var
-        var = session.channels['0,1'].current_gain_bandwidth
+        session.channels[0,1].current_gain_bandwidth = var
+        var = session.channels[0,1].current_gain_bandwidth
     '''
     current_level = _attributes.AttributeViReal64(1150009)
     '''Type: float
@@ -274,13 +295,13 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_level.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_level.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_level = var
-        var = session.channels['0,1'].current_level
+        session.channels[0,1].current_level = var
+        var = session.channels[0,1].current_level
     '''
     current_level_autorange = _attributes.AttributeViInt32(1150017)
     '''Type: bool
@@ -292,13 +313,13 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_level_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_level_autorange.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_level_autorange = var
-        var = session.channels['0,1'].current_level_autorange
+        session.channels[0,1].current_level_autorange = var
+        var = session.channels[0,1].current_level_autorange
     '''
     current_level_range = _attributes.AttributeViReal64(1150011)
     '''Type: float
@@ -312,13 +333,13 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current level range to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_level_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_level_range = var
-        var = session.channels['0,1'].current_level_range
+        session.channels[0,1].current_level_range = var
+        var = session.channels[0,1].current_level_range
     '''
     current_limit = _attributes.AttributeViReal64(1250005)
     '''Type: float
@@ -334,13 +355,13 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_limit.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_limit.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_limit = var
-        var = session.channels['0,1'].current_limit
+        session.channels[0,1].current_limit = var
+        var = session.channels[0,1].current_limit
     '''
     current_limit_autorange = _attributes.AttributeViInt32(1150016)
     '''Type: bool
@@ -352,13 +373,13 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_limit_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_limit_autorange.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_limit_autorange = var
-        var = session.channels['0,1'].current_limit_autorange
+        session.channels[0,1].current_limit_autorange = var
+        var = session.channels[0,1].current_limit_autorange
     '''
     current_limit_high = _attributes.AttributeViReal64(1150187)
     '''Type: float
@@ -395,13 +416,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_limit_high.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_limit_high = var
-        var = session.channels['0,1'].current_limit_high
+        session.channels[0,1].current_limit_high = var
+        var = session.channels[0,1].current_limit_high
     '''
     current_limit_low = _attributes.AttributeViReal64(1150188)
     '''Type: float
@@ -438,13 +459,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_limit_low.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_limit_low = var
-        var = session.channels['0,1'].current_limit_low
+        session.channels[0,1].current_limit_low = var
+        var = session.channels[0,1].current_limit_low
     '''
     current_limit_range = _attributes.AttributeViReal64(1150004)
     '''Type: float
@@ -458,13 +479,13 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_limit_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_limit_range = var
-        var = session.channels['0,1'].current_limit_range
+        session.channels[0,1].current_limit_range = var
+        var = session.channels[0,1].current_limit_range
     '''
     current_pole_zero_ratio = _attributes.AttributeViReal64(1150072)
     '''Type: float
@@ -476,13 +497,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    current_pole_zero_ratio.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    current_pole_zero_ratio.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].current_pole_zero_ratio = var
-        var = session.channels['0,1'].current_pole_zero_ratio
+        session.channels[0,1].current_pole_zero_ratio = var
+        var = session.channels[0,1].current_pole_zero_ratio
     '''
     dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
     '''Type: enums.DCNoiseRejection
@@ -490,16 +511,6 @@ class _SessionBase(object):
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
     for information about supported devices.
     Default Value: TransientResponse.NORMAL
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
-    '''
-    digital_edge_measure_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Measure trigger to assert on the rising or falling edge.
-    source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
@@ -513,14 +524,6 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
-    digital_edge_pulse_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150096)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Pulse trigger to assert on the rising or falling edge.
-    Default Value: DigitalEdge.RISING
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-    '''
     digital_edge_pulse_trigger_input_terminal = _attributes.AttributeViString(1150097)
     '''Type: str
 
@@ -529,15 +532,6 @@ class _SessionBase(object):
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-    '''
-    digital_edge_sequence_advance_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150027)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
     digital_edge_sequence_advance_trigger_input_terminal = _attributes.AttributeViString(1150028)
     '''Type: str
@@ -549,15 +543,6 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
     '''
-    digital_edge_source_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Source trigger to assert on the rising or falling edge.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
-    '''
     digital_edge_source_trigger_input_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
 
@@ -565,15 +550,6 @@ class _SessionBase(object):
     for information about supported devices.
     You can specify any valid input terminal for this property. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-    Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
-    '''
-    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150022)
-    '''Type: enums.DigitalEdge
-
-    Specifies whether to configure the Start trigger to assert on the rising or falling edge.
-    for information about supported devices.
-    Default Value: DigitalEdge.RISING
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
     '''
@@ -792,13 +768,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    output_capacitance.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    output_capacitance.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].output_capacitance = var
-        var = session.channels['0,1'].output_capacitance
+        session.channels[0,1].output_capacitance = var
+        var = session.channels[0,1].output_capacitance
     '''
     output_connected = _attributes.AttributeViBoolean(1150060)
     '''Type: bool
@@ -812,13 +788,13 @@ class _SessionBase(object):
     Note: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    output_connected.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    output_connected.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].output_connected = var
-        var = session.channels['0,1'].output_connected
+        session.channels[0,1].output_connected = var
+        var = session.channels[0,1].output_connected
     '''
     output_enabled = _attributes.AttributeViBoolean(1250006)
     '''Type: bool
@@ -831,13 +807,13 @@ class _SessionBase(object):
     Note: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    output_enabled.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    output_enabled.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].output_enabled = var
-        var = session.channels['0,1'].output_enabled
+        session.channels[0,1].output_enabled = var
+        var = session.channels[0,1].output_enabled
     '''
     output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputFunction, 1150008)
     '''Type: enums.OutputFunction
@@ -850,6 +826,7 @@ class _SessionBase(object):
     current_limit_low
     voltage_level_range
     current_limit_range
+    compliance_limit_symmetry
     When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the  output voltage is below the voltage limit. You can use the following properties to configure the channel when  OutputFunction.DC_CURRENT is selected:
     current_level
     voltage_limit
@@ -857,16 +834,16 @@ class _SessionBase(object):
     voltage_limit_low
     current_level_range
     voltage_limit_range
-    Default Value: OutputFunction.DC_VOLTAGE
+    compliance_limit_symmetry
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    output_function.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    output_function.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].output_function = var
-        var = session.channels['0,1'].output_function
+        session.channels[0,1].output_function = var
+        var = session.channels[0,1].output_function
     '''
     output_resistance = _attributes.AttributeViReal64(1150061)
     '''Type: float
@@ -878,13 +855,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic for information
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    output_resistance.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    output_resistance.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].output_resistance = var
-        var = session.channels['0,1'].output_resistance
+        session.channels[0,1].output_resistance = var
+        var = session.channels[0,1].output_resistance
     '''
     overranging_enabled = _attributes.AttributeViBoolean(1150007)
     '''Type: bool
@@ -926,13 +903,13 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    power_line_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    power_line_frequency.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].power_line_frequency = var
-        var = session.channels['0,1'].power_line_frequency
+        session.channels[0,1].power_line_frequency = var
+        var = session.channels[0,1].power_line_frequency
     '''
     power_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSource, 1150000)
     '''Type: enums.PowerSource
@@ -958,13 +935,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_current_level.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_current_level.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_current_level = var
-        var = session.channels['0,1'].pulse_bias_current_level
+        session.channels[0,1].pulse_bias_current_level = var
+        var = session.channels[0,1].pulse_bias_current_level
     '''
     pulse_bias_current_limit = _attributes.AttributeViReal64(1150083)
     '''Type: float
@@ -976,13 +953,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_current_limit.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_current_limit.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_current_limit = var
-        var = session.channels['0,1'].pulse_bias_current_limit
+        session.channels[0,1].pulse_bias_current_limit = var
+        var = session.channels[0,1].pulse_bias_current_limit
     '''
     pulse_bias_current_limit_high = _attributes.AttributeViReal64(1150195)
     '''Type: float
@@ -1022,13 +999,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_current_limit_high.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_current_limit_high = var
-        var = session.channels['0,1'].pulse_bias_current_limit_high
+        session.channels[0,1].pulse_bias_current_limit_high = var
+        var = session.channels[0,1].pulse_bias_current_limit_high
     '''
     pulse_bias_current_limit_low = _attributes.AttributeViReal64(1150196)
     '''Type: float
@@ -1068,13 +1045,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_current_limit_low.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_current_limit_low = var
-        var = session.channels['0,1'].pulse_bias_current_limit_low
+        session.channels[0,1].pulse_bias_current_limit_low = var
+        var = session.channels[0,1].pulse_bias_current_limit_low
     '''
     pulse_bias_delay = _attributes.AttributeViReal64(1150092)
     '''Type: float
@@ -1086,13 +1063,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_delay.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_delay.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_delay = var
-        var = session.channels['0,1'].pulse_bias_delay
+        session.channels[0,1].pulse_bias_delay = var
+        var = session.channels[0,1].pulse_bias_delay
     '''
     pulse_bias_voltage_level = _attributes.AttributeViReal64(1150082)
     '''Type: float
@@ -1104,13 +1081,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_voltage_level.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_voltage_level.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_voltage_level = var
-        var = session.channels['0,1'].pulse_bias_voltage_level
+        session.channels[0,1].pulse_bias_voltage_level = var
+        var = session.channels[0,1].pulse_bias_voltage_level
     '''
     pulse_bias_voltage_limit = _attributes.AttributeViReal64(1150089)
     '''Type: float
@@ -1122,13 +1099,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_voltage_limit.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_voltage_limit = var
-        var = session.channels['0,1'].pulse_bias_voltage_limit
+        session.channels[0,1].pulse_bias_voltage_limit = var
+        var = session.channels[0,1].pulse_bias_voltage_limit
     '''
     pulse_bias_voltage_limit_high = _attributes.AttributeViReal64(1150191)
     '''Type: float
@@ -1168,13 +1145,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_voltage_limit_high.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_voltage_limit_high = var
-        var = session.channels['0,1'].pulse_bias_voltage_limit_high
+        session.channels[0,1].pulse_bias_voltage_limit_high = var
+        var = session.channels[0,1].pulse_bias_voltage_limit_high
     '''
     pulse_bias_voltage_limit_low = _attributes.AttributeViReal64(1150192)
     '''Type: float
@@ -1214,13 +1191,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_bias_voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_bias_voltage_limit_low.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_bias_voltage_limit_low = var
-        var = session.channels['0,1'].pulse_bias_voltage_limit_low
+        session.channels[0,1].pulse_bias_voltage_limit_low = var
+        var = session.channels[0,1].pulse_bias_voltage_limit_low
     '''
     pulse_complete_event_output_terminal = _attributes.AttributeViString(1150099)
     '''Type: str
@@ -1259,13 +1236,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_current_level.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_current_level.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_current_level = var
-        var = session.channels['0,1'].pulse_current_level
+        session.channels[0,1].pulse_current_level = var
+        var = session.channels[0,1].pulse_current_level
     '''
     pulse_current_level_range = _attributes.AttributeViReal64(1150090)
     '''Type: float
@@ -1278,13 +1255,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_current_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_current_level_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_current_level_range = var
-        var = session.channels['0,1'].pulse_current_level_range
+        session.channels[0,1].pulse_current_level_range = var
+        var = session.channels[0,1].pulse_current_level_range
     '''
     pulse_current_limit = _attributes.AttributeViReal64(1150081)
     '''Type: float
@@ -1299,13 +1276,13 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_current_limit.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_current_limit.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_current_limit = var
-        var = session.channels['0,1'].pulse_current_limit
+        session.channels[0,1].pulse_current_limit = var
+        var = session.channels[0,1].pulse_current_limit
     '''
     pulse_current_limit_high = _attributes.AttributeViReal64(1150193)
     '''Type: float
@@ -1345,13 +1322,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_current_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_current_limit_high.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_current_limit_high = var
-        var = session.channels['0,1'].pulse_current_limit_high
+        session.channels[0,1].pulse_current_limit_high = var
+        var = session.channels[0,1].pulse_current_limit_high
     '''
     pulse_current_limit_low = _attributes.AttributeViReal64(1150194)
     '''Type: float
@@ -1391,13 +1368,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_current_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_current_limit_low.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_current_limit_low = var
-        var = session.channels['0,1'].pulse_current_limit_low
+        session.channels[0,1].pulse_current_limit_low = var
+        var = session.channels[0,1].pulse_current_limit_low
     '''
     pulse_current_limit_range = _attributes.AttributeViReal64(1150085)
     '''Type: float
@@ -1410,13 +1387,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_current_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_current_limit_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_current_limit_range = var
-        var = session.channels['0,1'].pulse_current_limit_range
+        session.channels[0,1].pulse_current_limit_range = var
+        var = session.channels[0,1].pulse_current_limit_range
     '''
     pulse_off_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150094)
     '''Type: float in seconds or datetime.timedelta
@@ -1428,13 +1405,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_off_time.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_off_time.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_off_time = var
-        var = session.channels['0,1'].pulse_off_time
+        session.channels[0,1].pulse_off_time = var
+        var = session.channels[0,1].pulse_off_time
     '''
     pulse_on_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150093)
     '''Type: float in seconds or datetime.timedelta
@@ -1446,13 +1423,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_on_time.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_on_time.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_on_time = var
-        var = session.channels['0,1'].pulse_on_time
+        session.channels[0,1].pulse_on_time = var
+        var = session.channels[0,1].pulse_on_time
     '''
     pulse_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150095)
     '''Type: enums.TriggerType
@@ -1472,13 +1449,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_voltage_level.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_voltage_level.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_voltage_level = var
-        var = session.channels['0,1'].pulse_voltage_level
+        session.channels[0,1].pulse_voltage_level = var
+        var = session.channels[0,1].pulse_voltage_level
     '''
     pulse_voltage_level_range = _attributes.AttributeViReal64(1150084)
     '''Type: float
@@ -1491,13 +1468,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_voltage_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_voltage_level_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_voltage_level_range = var
-        var = session.channels['0,1'].pulse_voltage_level_range
+        session.channels[0,1].pulse_voltage_level_range = var
+        var = session.channels[0,1].pulse_voltage_level_range
     '''
     pulse_voltage_limit = _attributes.AttributeViReal64(1150087)
     '''Type: float
@@ -1512,13 +1489,13 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_voltage_limit.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_voltage_limit = var
-        var = session.channels['0,1'].pulse_voltage_limit
+        session.channels[0,1].pulse_voltage_limit = var
+        var = session.channels[0,1].pulse_voltage_limit
     '''
     pulse_voltage_limit_high = _attributes.AttributeViReal64(1150189)
     '''Type: float
@@ -1558,13 +1535,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_voltage_limit_high.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_voltage_limit_high = var
-        var = session.channels['0,1'].pulse_voltage_limit_high
+        session.channels[0,1].pulse_voltage_limit_high = var
+        var = session.channels[0,1].pulse_voltage_limit_high
     '''
     pulse_voltage_limit_low = _attributes.AttributeViReal64(1150190)
     '''Type: float
@@ -1604,13 +1581,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_voltage_limit_low.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_voltage_limit_low = var
-        var = session.channels['0,1'].pulse_voltage_limit_low
+        session.channels[0,1].pulse_voltage_limit_low = var
+        var = session.channels[0,1].pulse_voltage_limit_low
     '''
     pulse_voltage_limit_range = _attributes.AttributeViReal64(1150091)
     '''Type: float
@@ -1623,13 +1600,13 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the output channel.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    pulse_voltage_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    pulse_voltage_limit_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].pulse_voltage_limit_range = var
-        var = session.channels['0,1'].pulse_voltage_limit_range
+        session.channels[0,1].pulse_voltage_limit_range = var
+        var = session.channels[0,1].pulse_voltage_limit_range
     '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
     '''Type: bool
@@ -1677,13 +1654,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    reset_average_before_measurement.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    reset_average_before_measurement.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].reset_average_before_measurement = var
-        var = session.channels['0,1'].reset_average_before_measurement
+        session.channels[0,1].reset_average_before_measurement = var
+        var = session.channels[0,1].reset_average_before_measurement
     '''
     samples_to_average = _attributes.AttributeViInt32(1150003)
     '''Type: int
@@ -1701,13 +1678,13 @@ class _SessionBase(object):
     NI PXIe-4154—500
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    samples_to_average.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    samples_to_average.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].samples_to_average = var
-        var = session.channels['0,1'].samples_to_average
+        session.channels[0,1].samples_to_average = var
+        var = session.channels[0,1].samples_to_average
     '''
     self_calibration_persistence = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
     '''Type: enums.SelfCalibrationPersistence
@@ -1727,13 +1704,13 @@ class _SessionBase(object):
     Default Value: The default value is Sense.LOCAL if the device supports local sense.  Otherwise, the default and only supported value is Sense.REMOTE.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    sense.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    sense.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].sense = var
-        var = session.channels['0,1'].sense
+        session.channels[0,1].sense = var
+        var = session.channels[0,1].sense
     '''
     sequence_advance_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150026)
     '''Type: enums.TriggerType
@@ -1873,13 +1850,13 @@ class _SessionBase(object):
     Refer to Supported Properties by Device for information about supported devices.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    source_delay.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    source_delay.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].source_delay = var
-        var = session.channels['0,1'].source_delay
+        session.channels[0,1].source_delay = var
+        var = session.channels[0,1].source_delay
     '''
     source_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SourceMode, 1150054)
     '''Type: enums.SourceMode
@@ -1940,13 +1917,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    transient_response.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    transient_response.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].transient_response = var
-        var = session.channels['0,1'].transient_response
+        session.channels[0,1].transient_response = var
+        var = session.channels[0,1].transient_response
     '''
     voltage_compensation_frequency = _attributes.AttributeViReal64(1150068)
     '''Type: float
@@ -1958,13 +1935,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_compensation_frequency.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_compensation_frequency.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_compensation_frequency = var
-        var = session.channels['0,1'].voltage_compensation_frequency
+        session.channels[0,1].voltage_compensation_frequency = var
+        var = session.channels[0,1].voltage_compensation_frequency
     '''
     voltage_gain_bandwidth = _attributes.AttributeViReal64(1150067)
     '''Type: float
@@ -1976,13 +1953,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_gain_bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_gain_bandwidth.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_gain_bandwidth = var
-        var = session.channels['0,1'].voltage_gain_bandwidth
+        session.channels[0,1].voltage_gain_bandwidth = var
+        var = session.channels[0,1].voltage_gain_bandwidth
     '''
     voltage_level = _attributes.AttributeViReal64(1250001)
     '''Type: float
@@ -1995,13 +1972,13 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage level to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_level.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_level.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_level = var
-        var = session.channels['0,1'].voltage_level
+        session.channels[0,1].voltage_level = var
+        var = session.channels[0,1].voltage_level
     '''
     voltage_level_autorange = _attributes.AttributeViInt32(1150015)
     '''Type: bool
@@ -2013,13 +1990,13 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_level_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_level_autorange.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_level_autorange = var
-        var = session.channels['0,1'].voltage_level_autorange
+        session.channels[0,1].voltage_level_autorange = var
+        var = session.channels[0,1].voltage_level_autorange
     '''
     voltage_level_range = _attributes.AttributeViReal64(1150005)
     '''Type: float
@@ -2033,13 +2010,13 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage level range to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_level_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_level_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_level_range = var
-        var = session.channels['0,1'].voltage_level_range
+        session.channels[0,1].voltage_level_range = var
+        var = session.channels[0,1].voltage_level_range
     '''
     voltage_limit = _attributes.AttributeViReal64(1150010)
     '''Type: float
@@ -2055,13 +2032,13 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_limit.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_limit.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_limit = var
-        var = session.channels['0,1'].voltage_limit
+        session.channels[0,1].voltage_limit = var
+        var = session.channels[0,1].voltage_limit
     '''
     voltage_limit_autorange = _attributes.AttributeViInt32(1150018)
     '''Type: bool
@@ -2073,13 +2050,13 @@ class _SessionBase(object):
     Default Value: AutoZero.OFF
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_limit_autorange.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_limit_autorange.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_limit_autorange = var
-        var = session.channels['0,1'].voltage_limit_autorange
+        session.channels[0,1].voltage_limit_autorange = var
+        var = session.channels[0,1].voltage_limit_autorange
     '''
     voltage_limit_high = _attributes.AttributeViReal64(1150185)
     '''Type: float
@@ -2116,13 +2093,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_limit_high.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_limit_high.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_limit_high = var
-        var = session.channels['0,1'].voltage_limit_high
+        session.channels[0,1].voltage_limit_high = var
+        var = session.channels[0,1].voltage_limit_high
     '''
     voltage_limit_low = _attributes.AttributeViReal64(1150186)
     '''Type: float
@@ -2159,13 +2136,13 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_limit_low.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_limit_low.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_limit_low = var
-        var = session.channels['0,1'].voltage_limit_low
+        session.channels[0,1].voltage_limit_low = var
+        var = session.channels[0,1].voltage_limit_low
     '''
     voltage_limit_range = _attributes.AttributeViReal64(1150012)
     '''Type: float
@@ -2179,13 +2156,13 @@ class _SessionBase(object):
     Note: The channel must be enabled for the specified voltage limit range to take effect. Refer to the
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_limit_range.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_limit_range.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_limit_range = var
-        var = session.channels['0,1'].voltage_limit_range
+        session.channels[0,1].voltage_limit_range = var
+        var = session.channels[0,1].voltage_limit_range
     '''
     voltage_pole_zero_ratio = _attributes.AttributeViReal64(1150069)
     '''Type: float
@@ -2197,13 +2174,13 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    voltage_pole_zero_ratio.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    voltage_pole_zero_ratio.Session instance, and calling set/get value on the result.:
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].voltage_pole_zero_ratio = var
-        var = session.channels['0,1'].voltage_pole_zero_ratio
+        session.channels[0,1].voltage_pole_zero_ratio = var
+        var = session.channels[0,1].voltage_pole_zero_ratio
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -2231,6 +2208,11 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def __getitem__(self, key):
+        rep_caps = []
+        rep_caps.append("channels")
+        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+
     def _get_error_description(self, error_code):
         '''_get_error_description
 
@@ -2255,6 +2237,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def self_cal(self):
         '''self_cal
 
@@ -2287,12 +2270,12 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].self_cal()
+            session.channels[0,1].self_cal()
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -2300,6 +2283,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_aperture_time(self, aperture_time, units=enums.ApertureTimeUnits.SECONDS):
         '''configure_aperture_time
 
@@ -2326,12 +2310,12 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+            session.channels[0,1].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
 
         Args:
             aperture_time (float): Specifies the aperture time. Refer to the *Aperture Time* topic for your
@@ -2357,6 +2341,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def fetch_multiple(self, count, timeout=datetime.timedelta(seconds=1.0)):
         '''fetch_multiple
 
@@ -2375,12 +2360,12 @@ class _SessionBase(object):
         Note: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+            session.channels[0,1].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
 
         Args:
             count (int): Specifies the number of measurements to fetch.
@@ -2405,6 +2390,7 @@ class _SessionBase(object):
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=in_compliance[i]) for i in range(count)]
 
+    @ivi_synchronized
     def measure_multiple(self):
         '''measure_multiple
 
@@ -2423,12 +2409,12 @@ class _SessionBase(object):
         Note: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].measure_multiple()
+            session.channels[0,1].measure_multiple()
 
         Returns:
             measurements (list of Measurement): List of named tuples with fields:
@@ -2445,6 +2431,7 @@ class _SessionBase(object):
 
         return [Measurement(voltage=voltage_measurements[i], current=current_measurements[i], in_compliance=None) for i in range(self._parse_channel_count())]
 
+    @ivi_synchronized
     def _fetch_multiple(self, timeout, count):
         '''_fetch_multiple
 
@@ -2468,12 +2455,12 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._fetch_multiple(timeout, count)
+            session.channels[0,1]._fetch_multiple(timeout, count)
 
         Args:
             timeout (float in seconds or datetime.timedelta): Specifies the maximum time allowed for this method to complete, in
@@ -2520,6 +2507,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
 
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -2528,12 +2516,12 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -2574,6 +2562,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
@@ -2582,12 +2571,12 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -2628,6 +2617,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
         '''_get_attribute_vi_int64
 
@@ -2636,12 +2626,12 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_int64(attribute_id)
+            session.channels[0,1]._get_attribute_vi_int64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -2682,6 +2672,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -2690,12 +2681,12 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -2736,6 +2727,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -2744,12 +2736,12 @@ class _SessionBase(object):
           properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels[0,1]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -2786,6 +2778,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_channel_name(self, index):
         '''get_channel_name
 
@@ -2794,12 +2787,12 @@ class _SessionBase(object):
         determine the upper bound of valid values for **index**.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].get_channel_name(index)
+            session.channels[0,1].get_channel_name(index)
 
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
@@ -2855,6 +2848,52 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
+    def lock(self):
+        '''lock
+
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
+
+        Other threads may have obtained a lock on this session for the
+        following reasons:
+
+            -  The application called the lock method.
+            -  A call to NI-DCPower locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
+
+        You can safely make nested calls to the lock method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock method with a call to
+        the unlock method.
+
+        Returns:
+            lock (context manager): When used in a with statement, nidcpower.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
+        '''
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
+
+    def _lock_session(self):
+        '''_lock_session
+
+        Actuall call to driver
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niDCPower_LockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
+
+    @ivi_synchronized
     def measure(self, measurement_type):
         '''measure
 
@@ -2865,12 +2904,12 @@ class _SessionBase(object):
         method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].measure(measurement_type)
+            session.channels[0,1].measure(measurement_type)
 
         Args:
             measurement_type (enums.MeasurementTypes): Specifies whether a voltage or current value is measured.
@@ -2898,6 +2937,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
 
+    @ivi_synchronized
     def _measure_multiple(self):
         '''_measure_multiple
 
@@ -2908,12 +2948,12 @@ class _SessionBase(object):
         on the specified output channel(s).
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._measure_multiple()
+            session.channels[0,1]._measure_multiple()
 
         Returns:
             voltage_measurements (array.array("d")): Returns an array of voltage measurements. The measurements in the array
@@ -2939,18 +2979,19 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array
 
+    @ivi_synchronized
     def _parse_channel_count(self):
         '''_parse_channel_count
 
         Returns the number of channels.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._parse_channel_count()
+            session.channels[0,1]._parse_channel_count()
 
         Returns:
             number_of_channels (int):
@@ -2963,6 +3004,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_channels_ctype.value)
 
+    @ivi_synchronized
     def query_in_compliance(self):
         '''query_in_compliance
 
@@ -2991,12 +3033,12 @@ class _SessionBase(object):
         One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].query_in_compliance()
+            session.channels[0,1].query_in_compliance()
 
         Returns:
             in_compliance (bool): Returns whether the device output channel is in compliance.
@@ -3009,6 +3051,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_compliance_ctype.value)
 
+    @ivi_synchronized
     def query_max_current_limit(self, voltage_level):
         '''query_max_current_limit
 
@@ -3016,12 +3059,12 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].query_max_current_limit(voltage_level)
+            session.channels[0,1].query_max_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -3041,6 +3084,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_current_limit_ctype.value)
 
+    @ivi_synchronized
     def query_max_voltage_level(self, current_limit):
         '''query_max_voltage_level
 
@@ -3048,12 +3092,12 @@ class _SessionBase(object):
         channel is set to the specified **currentLimit**.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].query_max_voltage_level(current_limit)
+            session.channels[0,1].query_max_voltage_level(current_limit)
 
         Args:
             current_limit (float): Specifies the current limit to use when calculating the
@@ -3073,6 +3117,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_voltage_level_ctype.value)
 
+    @ivi_synchronized
     def query_min_current_limit(self, voltage_level):
         '''query_min_current_limit
 
@@ -3080,12 +3125,12 @@ class _SessionBase(object):
         channel is set to the specified **voltageLevel**.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].query_min_current_limit(voltage_level)
+            session.channels[0,1].query_min_current_limit(voltage_level)
 
         Args:
             voltage_level (float): Specifies the voltage level to use when calculating the
@@ -3105,6 +3150,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(min_current_limit_ctype.value)
 
+    @ivi_synchronized
     def query_output_state(self, output_state):
         '''query_output_state
 
@@ -3116,12 +3162,12 @@ class _SessionBase(object):
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].query_output_state(output_state)
+            session.channels[0,1].query_output_state(output_state)
 
         Args:
             output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
@@ -3149,6 +3195,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_state_ctype.value)
 
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -3157,12 +3204,12 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -3206,6 +3253,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
@@ -3214,12 +3262,12 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -3263,6 +3311,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int64
 
@@ -3271,12 +3320,12 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_int64(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_int64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -3320,6 +3369,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -3328,12 +3378,12 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -3377,6 +3427,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -3385,12 +3436,12 @@ class _SessionBase(object):
           device-specific properties and inherent IVI properties.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property. From the method panel window, you
@@ -3434,6 +3485,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def set_sequence(self, values, source_delays):
         '''set_sequence
 
@@ -3460,12 +3512,12 @@ class _SessionBase(object):
         for more information about supported devices.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidcpower.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session instance, and calling this method on the result.:
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].set_sequence(values, source_delays)
+            session.channels[0,1].set_sequence(values, source_delays)
 
         Args:
             values (list of float): Specifies the series of voltage levels or current levels, depending on
@@ -3490,6 +3542,18 @@ class _SessionBase(object):
             raise ValueError("Length of source_delays and values parameters do not match.")  # case S160
         error_code = self._library.niDCPower_SetSequence(vi_ctype, channel_name_ctype, values_ctype, source_delays_ctype, size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def unlock(self):
+        '''unlock
+
+        Releases a lock that you acquired on an device session using
+        lock. Refer to lock for additional
+        information on session locks.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niDCPower_UnlockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
     def _error_message(self, error_code):
@@ -3647,6 +3711,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         '''abort
 
@@ -3679,6 +3744,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def commit(self):
         '''commit
 
@@ -3702,245 +3768,15 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_measure_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_measure_trigger
-
-        Configures the Measure trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Measure trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Measure trigger to assert on the
-                rising or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeMeasureTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_edge_pulse_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_pulse_trigger
-
-        Configures the Pulse trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Pulse trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Pulse trigger to assert on the rising
-                or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgePulseTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_edge_sequence_advance_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_sequence_advance_trigger
-
-        Configures the Sequence Advance trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Sequence Advance
-                trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Sequence Advance trigger to assert on
-                the rising or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSequenceAdvanceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_edge_source_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_source_trigger
-
-        Configures the Source trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Source trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Source trigger to assert on the
-                rising or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeSourceTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_edge_start_trigger(self, input_terminal, edge=enums.DigitalEdge.RISING):
-        '''configure_digital_edge_start_trigger
-
-        Configures the Start trigger for digital edge triggering.
-
-        Note:
-        This method is not supported on all devices. Refer to `Supported
-        Methods by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
-        for more information about supported devices.
-
-        Args:
-            input_terminal (str): Specifies the input terminal for the digital edge Start trigger.
-
-                You can specify any valid input terminal for this method. Valid
-                terminals are listed in MAX under the **Device Routes** tab. For
-                PXIe-4162/4163, refer to the Signal Routing topic for the device to
-                determine which routes are available. This information is not available
-                on a Device Routes tab in MAX.
-
-                Input terminals can be specified in one of two ways. If the device is
-                named Dev1 and your terminal is PXI_Trig0, you can specify the terminal
-                with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the
-                shortened terminal name, PXI_Trig0. The input terminal can also be a
-                terminal from another device. For example, you can set the input
-                terminal on Dev1 to be /Dev2/SourceCompleteEvent.
-
-            edge (enums.DigitalEdge): Specifies whether to configure the Start trigger to assert on the rising
-                or falling edge.
-                **Defined Values:**
-
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.RISING (1016)  | Asserts the trigger on the rising edge of the digital signal.  |
-                +----------------------------+----------------------------------------------------------------+
-                | DigitalEdge.FALLING (1017) | Asserts the trigger on the falling edge of the digital signal. |
-                +----------------------------+----------------------------------------------------------------+
-
-        '''
-        if type(edge) is not enums.DigitalEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.DigitalEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        input_terminal_ctype = ctypes.create_string_buffer(input_terminal.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niDCPower_ConfigureDigitalEdgeStartTrigger(vi_ctype, input_terminal_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+    @ivi_synchronized
     def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
         '''_create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
         _create_advanced_sequence_step method to add steps to the
         active advanced sequence.
+
+        You can create multiple advanced sequences in a session.
 
         **Support for this method**
 
@@ -3981,89 +3817,113 @@ class Session(_SessionBase):
                 in advanced sequencing. An ✕ indicates that the property cannot be
                 configured in advanced sequencing.
 
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | Property                       | PXIe-4135 | NI 4136 | NI 4137 | NI 4138 | NI 4139 | NI 4140/4142/4144 | NI 4141/4143/4145 | PXIe-4162/4163 |
-                +================================+===========+=========+=========+=========+=========+===================+===================+================+
-                | dc_noise_rejection             | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | aperture_time                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | measure_record_length          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | sense                          | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | ovp_enabled                    | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | ovp_limit                      | ✓         | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_delay               | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_off_time                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_on_time                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | source_delay                   | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_compensation_frequency | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_gain_bandwidth         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_pole_zero_ratio        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_compensation_frequency | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_gain_bandwidth         | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_pole_zero_ratio        | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_level                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_level_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_limit                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_limit_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_limit                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | current_limit_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_level                  | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | voltage_level_range            | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | output_enabled                 | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | output_function                | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | output_resistance              | ✓         | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_current_level       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_voltage_limit       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_level            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_level_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_limit            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_limit_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_current_limit       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_bias_voltage_level       | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_limit            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_current_limit_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_level            | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | pulse_voltage_level_range      | ✓         | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
-                | transient_response             | ✓         | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓              |
-                +--------------------------------+-----------+---------+---------+---------+---------+-------------------+-------------------+----------------+
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
+                +================================+===========+===========+===========+===========+===========+=====================+=====================+================+
+                | dc_noise_rejection             | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✕                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | aperture_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | measure_record_length          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | sense                          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_enabled                    | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_limit                      | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_delay               | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_off_time                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_on_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | source_delay                   | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_enabled                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_function                | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_resistance              | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | transient_response             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
@@ -4077,6 +3937,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _create_advanced_sequence_step(self, set_as_active_step=True):
         '''_create_advanced_sequence_step
 
@@ -4119,6 +3980,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _delete_advanced_sequence(self, sequence_name):
         '''_delete_advanced_sequence
 
@@ -4156,6 +4018,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disable(self):
         '''disable
 
@@ -4171,6 +4034,126 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        '''export_attribute_configuration_buffer
+
+        Exports the property configuration of the session to the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DCPower returns
+        an error.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_ctype.value  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(configuration_ctype[i]) for i in range(size_ctype.value)]
+
+    @ivi_synchronized
+    def export_attribute_configuration_file(self, file_path):
+        '''export_attribute_configuration_file
+
+        Exports the property configuration of the session to the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DCPower returns
+        an error.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .nidcpowerconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         '''_get_ext_cal_last_date_and_time
 
@@ -4202,6 +4185,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_last_temp(self):
         '''get_ext_cal_last_temp
 
@@ -4219,6 +4203,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
         '''get_ext_cal_recommended_interval
 
@@ -4236,6 +4221,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
+    @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
 
@@ -4248,6 +4234,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
 
@@ -4262,6 +4249,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
         '''_get_self_cal_last_date_and_time
 
@@ -4303,6 +4291,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
 
@@ -4332,6 +4321,123 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
+
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        '''import_attribute_configuration_buffer
+
+        Imports a property configuration to the session from the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            configuration (list of int): Specifies the byte array buffer that contains the property
+                configuration to import.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_file(self, file_path):
+        '''import_attribute_configuration_file
+
+        Imports a property configuration to the session from the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers and the same number of configured
+        channels.
+
+        **Support for this Method**
+
+        Calling this method in `Sequence Source
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ is unsupported.
+
+        **Channel Mapping Behavior for Multichannel Sessions**
+
+        When importing and exporting session property configurations between
+        NI‑DCPower sessions that were initialized with different channels, the
+        configurations of the exporting channels are mapped to the importing
+        channels in the order you specify in the **channelName** input to the
+        __init__ method.
+
+        For example, if your entry for **channelName** is 0,1 for the exporting
+        session and 1,2 for the importing session:
+
+        -  The configuration exported from channel 0 is imported into channel 1.
+        -  The configuration exported from channel 1 is imported into channel 2.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        `Using Properties and
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(using_properties_and_attributes)>`__
+
+        `Setting Properties and Properties Before Reading
+        Them <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Note:
+        This method will return an error if the total number of channels
+        initialized for the exporting session is not equal to the total number
+        of channels initialized for the importing session.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .nidcpowerconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDCPower_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def _initialize_with_channels(self, resource_name, channels=None, reset=False, option_string=""):
         '''_initialize_with_channels
@@ -4412,6 +4518,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
+    @ivi_synchronized
     def _initiate(self):
         '''_initiate
 
@@ -4433,6 +4540,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def read_current_temperature(self):
         '''read_current_temperature
 
@@ -4449,6 +4557,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def reset_device(self):
         '''reset_device
 
@@ -4471,6 +4580,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def reset_with_defaults(self):
         '''reset_with_defaults
 
@@ -4487,6 +4597,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def send_software_edge_trigger(self, trigger):
         '''send_software_edge_trigger
 
@@ -4531,6 +4642,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def wait_for_event(self, event_id, timeout=datetime.timedelta(seconds=10.0)):
         '''wait_for_event
 
@@ -4610,6 +4722,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -4639,6 +4752,7 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
+    @ivi_synchronized
     def reset(self):
         '''reset
 
@@ -4654,6 +4768,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _self_test(self):
         '''_self_test
 

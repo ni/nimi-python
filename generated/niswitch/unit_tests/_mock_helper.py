@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
@@ -22,10 +23,6 @@ class SideEffectsHelper(object):
         self._defaults['CanConnect']['pathCapability'] = None
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
-        self._defaults['ConfigureScanList'] = {}
-        self._defaults['ConfigureScanList']['return'] = 0
-        self._defaults['ConfigureScanTrigger'] = {}
-        self._defaults['ConfigureScanTrigger']['return'] = 0
         self._defaults['Connect'] = {}
         self._defaults['Connect']['return'] = 0
         self._defaults['ConnectMultiple'] = {}
@@ -74,6 +71,9 @@ class SideEffectsHelper(object):
         self._defaults['InitWithTopology']['vi'] = None
         self._defaults['InitiateScan'] = {}
         self._defaults['InitiateScan']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['RelayControl'] = {}
         self._defaults['RelayControl']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -92,10 +92,11 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
-        self._defaults['SetContinuousScan'] = {}
-        self._defaults['SetContinuousScan']['return'] = 0
         self._defaults['SetPath'] = {}
         self._defaults['SetPath']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitForDebounce'] = {}
         self._defaults['WaitForDebounce']['return'] = 0
         self._defaults['WaitForScanComplete'] = {}
@@ -129,23 +130,14 @@ class SideEffectsHelper(object):
         # path_capability
         if self._defaults['CanConnect']['pathCapability'] is None:
             raise MockFunctionCallError("niSwitch_CanConnect", param='pathCapability')
-        path_capability.contents.value = self._defaults['CanConnect']['pathCapability']
+        if path_capability is not None:
+            path_capability.contents.value = self._defaults['CanConnect']['pathCapability']
         return self._defaults['CanConnect']['return']
 
     def niSwitch_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
             return self._defaults['Commit']['return']
         return self._defaults['Commit']['return']
-
-    def niSwitch_ConfigureScanList(self, vi, scanlist, scan_mode):  # noqa: N802
-        if self._defaults['ConfigureScanList']['return'] != 0:
-            return self._defaults['ConfigureScanList']['return']
-        return self._defaults['ConfigureScanList']['return']
-
-    def niSwitch_ConfigureScanTrigger(self, vi, scan_delay, trigger_input, scan_advanced_output):  # noqa: N802
-        if self._defaults['ConfigureScanTrigger']['return'] != 0:
-            return self._defaults['ConfigureScanTrigger']['return']
-        return self._defaults['ConfigureScanTrigger']['return']
 
     def niSwitch_Connect(self, vi, channel1, channel2):  # noqa: N802
         if self._defaults['Connect']['return'] != 0:
@@ -183,7 +175,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViBoolean']['attributeValue'] is None:
             raise MockFunctionCallError("niSwitch_GetAttributeViBoolean", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niSwitch_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -192,7 +185,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niSwitch_GetAttributeViInt32", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
         return self._defaults['GetAttributeViInt32']['return']
 
     def niSwitch_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -201,7 +195,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViReal64']['attributeValue'] is None:
             raise MockFunctionCallError("niSwitch_GetAttributeViReal64", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niSwitch_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
@@ -230,7 +225,8 @@ class SideEffectsHelper(object):
         # code
         if self._defaults['GetError']['Code'] is None:
             raise MockFunctionCallError("niSwitch_GetError", param='Code')
-        code.contents.value = self._defaults['GetError']['Code']
+        if code is not None:
+            code.contents.value = self._defaults['GetError']['Code']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niSwitch_GetError", param='Description')
         if buffer_size.value == 0:
@@ -254,7 +250,8 @@ class SideEffectsHelper(object):
         # relay_count
         if self._defaults['GetRelayCount']['relayCount'] is None:
             raise MockFunctionCallError("niSwitch_GetRelayCount", param='relayCount')
-        relay_count.contents.value = self._defaults['GetRelayCount']['relayCount']
+        if relay_count is not None:
+            relay_count.contents.value = self._defaults['GetRelayCount']['relayCount']
         return self._defaults['GetRelayCount']['return']
 
     def niSwitch_GetRelayName(self, vi, index, relay_name_buffer_size, relay_name_buffer):  # noqa: N802
@@ -273,7 +270,8 @@ class SideEffectsHelper(object):
         # relay_position
         if self._defaults['GetRelayPosition']['relayPosition'] is None:
             raise MockFunctionCallError("niSwitch_GetRelayPosition", param='relayPosition')
-        relay_position.contents.value = self._defaults['GetRelayPosition']['relayPosition']
+        if relay_position is not None:
+            relay_position.contents.value = self._defaults['GetRelayPosition']['relayPosition']
         return self._defaults['GetRelayPosition']['return']
 
     def niSwitch_InitWithTopology(self, resource_name, topology, simulate, reset_device, vi):  # noqa: N802
@@ -282,13 +280,24 @@ class SideEffectsHelper(object):
         # vi
         if self._defaults['InitWithTopology']['vi'] is None:
             raise MockFunctionCallError("niSwitch_InitWithTopology", param='vi')
-        vi.contents.value = self._defaults['InitWithTopology']['vi']
+        if vi is not None:
+            vi.contents.value = self._defaults['InitWithTopology']['vi']
         return self._defaults['InitWithTopology']['return']
 
     def niSwitch_InitiateScan(self, vi):  # noqa: N802
         if self._defaults['InitiateScan']['return'] != 0:
             return self._defaults['InitiateScan']['return']
         return self._defaults['InitiateScan']['return']
+
+    def niSwitch_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niSwitch_LockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
 
     def niSwitch_RelayControl(self, vi, relay_name, relay_action):  # noqa: N802
         if self._defaults['RelayControl']['return'] != 0:
@@ -335,15 +344,20 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
-    def niSwitch_SetContinuousScan(self, vi, continuous_scan):  # noqa: N802
-        if self._defaults['SetContinuousScan']['return'] != 0:
-            return self._defaults['SetContinuousScan']['return']
-        return self._defaults['SetContinuousScan']['return']
-
     def niSwitch_SetPath(self, vi, path_list):  # noqa: N802
         if self._defaults['SetPath']['return'] != 0:
             return self._defaults['SetPath']['return']
         return self._defaults['SetPath']['return']
+
+    def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niSwitch_UnlockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
 
     def niSwitch_WaitForDebounce(self, vi, maximum_time_ms):  # noqa: N802
         if self._defaults['WaitForDebounce']['return'] != 0:
@@ -385,7 +399,8 @@ class SideEffectsHelper(object):
         # self_test_result
         if self._defaults['self_test']['selfTestResult'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestResult')
-        self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
@@ -405,10 +420,6 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_CanConnect.return_value = 0
         mock_library.niSwitch_Commit.side_effect = MockFunctionCallError("niSwitch_Commit")
         mock_library.niSwitch_Commit.return_value = 0
-        mock_library.niSwitch_ConfigureScanList.side_effect = MockFunctionCallError("niSwitch_ConfigureScanList")
-        mock_library.niSwitch_ConfigureScanList.return_value = 0
-        mock_library.niSwitch_ConfigureScanTrigger.side_effect = MockFunctionCallError("niSwitch_ConfigureScanTrigger")
-        mock_library.niSwitch_ConfigureScanTrigger.return_value = 0
         mock_library.niSwitch_Connect.side_effect = MockFunctionCallError("niSwitch_Connect")
         mock_library.niSwitch_Connect.return_value = 0
         mock_library.niSwitch_ConnectMultiple.side_effect = MockFunctionCallError("niSwitch_ConnectMultiple")
@@ -445,6 +456,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_InitWithTopology.return_value = 0
         mock_library.niSwitch_InitiateScan.side_effect = MockFunctionCallError("niSwitch_InitiateScan")
         mock_library.niSwitch_InitiateScan.return_value = 0
+        mock_library.niSwitch_LockSession.side_effect = MockFunctionCallError("niSwitch_LockSession")
+        mock_library.niSwitch_LockSession.return_value = 0
         mock_library.niSwitch_RelayControl.side_effect = MockFunctionCallError("niSwitch_RelayControl")
         mock_library.niSwitch_RelayControl.return_value = 0
         mock_library.niSwitch_ResetWithDefaults.side_effect = MockFunctionCallError("niSwitch_ResetWithDefaults")
@@ -463,10 +476,10 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_SetAttributeViReal64.return_value = 0
         mock_library.niSwitch_SetAttributeViString.side_effect = MockFunctionCallError("niSwitch_SetAttributeViString")
         mock_library.niSwitch_SetAttributeViString.return_value = 0
-        mock_library.niSwitch_SetContinuousScan.side_effect = MockFunctionCallError("niSwitch_SetContinuousScan")
-        mock_library.niSwitch_SetContinuousScan.return_value = 0
         mock_library.niSwitch_SetPath.side_effect = MockFunctionCallError("niSwitch_SetPath")
         mock_library.niSwitch_SetPath.return_value = 0
+        mock_library.niSwitch_UnlockSession.side_effect = MockFunctionCallError("niSwitch_UnlockSession")
+        mock_library.niSwitch_UnlockSession.return_value = 0
         mock_library.niSwitch_WaitForDebounce.side_effect = MockFunctionCallError("niSwitch_WaitForDebounce")
         mock_library.niSwitch_WaitForDebounce.return_value = 0
         mock_library.niSwitch_WaitForScanComplete.side_effect = MockFunctionCallError("niSwitch_WaitForScanComplete")

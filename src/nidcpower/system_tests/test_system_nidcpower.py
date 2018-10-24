@@ -1,6 +1,7 @@
 import datetime
 import nidcpower
 import pytest
+import tempfile
 
 
 @pytest.fixture(scope='function')
@@ -43,11 +44,14 @@ def test_get_attribute_string(session):
     assert model == 'NI PXIe-4162'
 
 
-def test_error_message(session):
-    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
-    # and there is no good way for us to invalidate a simulated session.
-    message = session._error_message(-1074135027)
-    assert message.find('Attribute is read-only.') != -1
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with nidcpower.Session('4162', [0, 1], False, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+            assert False
+    except nidcpower.Error as e:
+        assert e.code == -1074134964
+        assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
 
 
 def test_get_error(session):
@@ -239,39 +243,29 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
-def test_configure_digital_edge_measure_trigger(single_channel_session):
-    single_channel_session.measure_when = nidcpower.MeasureWhen.ON_MEASURE_TRIGGER
-    expected_trigger_terminal = "/4162/PXI_Trig0"
-    single_channel_session.configure_digital_edge_measure_trigger(expected_trigger_terminal)
-    assert expected_trigger_terminal == single_channel_session.digital_edge_measure_trigger_input_terminal
+def test_import_export_buffer(single_channel_session):
+    test_value_1 = 1
+    test_value_2 = 2
+    single_channel_session.voltage_level = test_value_1
+    assert single_channel_session.voltage_level == test_value_1
+    buffer = single_channel_session.export_attribute_configuration_buffer()
+    single_channel_session.voltage_level = test_value_2
+    assert single_channel_session.voltage_level == test_value_2
+    single_channel_session.import_attribute_configuration_buffer(buffer)
+    assert single_channel_session.voltage_level == test_value_1
 
 
-def test_configure_digital_edge_pulse_trigger():
-    # 4162 does not support pulsing... yet?
-    with nidcpower.Session('', '0', False, 'Simulate=1, DriverSetup=Model:4139; BoardType:PXIe') as session:
-        expected_trigger_terminal = "/4139/PXI_Trig0"
-        session.configure_digital_edge_pulse_trigger(expected_trigger_terminal)
-        assert expected_trigger_terminal == session.digital_edge_pulse_trigger_input_terminal
-
-
-def test_configure_digital_edge_sequence_advance_trigger(single_channel_session):
-    expected_trigger_terminal = "/4162/PXI_Trig0"
-    single_channel_session.configure_digital_edge_sequence_advance_trigger(expected_trigger_terminal)
-    assert expected_trigger_terminal == single_channel_session.digital_edge_sequence_advance_trigger_input_terminal
-
-
-def test_configure_digital_edge_source_trigger(single_channel_session):
-    expected_trigger_terminal = "/4162/PXI_Trig0"
-    single_channel_session.configure_digital_edge_source_trigger(expected_trigger_terminal)
-    assert expected_trigger_terminal == single_channel_session.digital_edge_source_trigger_input_terminal
-
-
-def test_configure_digital_edge_start_trigger(single_channel_session):
-    expected_trigger_terminal = "/4162/PXI_Trig0"
-    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
-    single_channel_session.set_sequence([0.1], [0.1])
-    single_channel_session.configure_digital_edge_start_trigger(expected_trigger_terminal)
-    assert expected_trigger_terminal == single_channel_session.digital_edge_start_trigger_input_terminal
+def test_import_export_file(single_channel_session):
+    test_value_1 = 1
+    test_value_2 = 2
+    path = tempfile.gettempdir() + 'test.txt'
+    single_channel_session.voltage_level = test_value_1
+    assert single_channel_session.voltage_level == test_value_1
+    single_channel_session.export_attribute_configuration_file(path)
+    single_channel_session.voltage_level = test_value_2
+    assert single_channel_session.voltage_level == test_value_2
+    single_channel_session.import_attribute_configuration_file(path)
+    assert single_channel_session.voltage_level == test_value_1
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):
@@ -329,4 +323,5 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 12
     with nidcpower.Session(resource_name='4162', reset=False, options='Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as simulated_session:
         assert simulated_session.channel_count == 12
+
 

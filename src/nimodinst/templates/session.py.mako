@@ -10,6 +10,8 @@
     c_function_prefix = config['c_function_prefix']
 
     functions = helper.filter_codegen_functions(functions)
+
+    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 %>\
 
 import ctypes
@@ -94,7 +96,7 @@ class _DeviceIterable(object):
         self._param_list = 'owner=' + pp.pformat(owner) + ', count=' + pp.pformat(count)
         self._is_frozen = True
 
-    def get_next(self):
+    def _get_next(self):
         if self._current_index + 1 > self._count:
             raise StopIteration
         else:
@@ -103,10 +105,10 @@ class _DeviceIterable(object):
             return dev
 
     def next(self):
-        return self.get_next()
+        return self._get_next()
 
     def __next__(self):
-        return self.get_next()
+        return self._get_next()
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('${module_name}', self.__class__.__name__, self._param_list)
@@ -132,6 +134,10 @@ class Session(object):
         self._${config['session_handle_parameter_name']}, self._item_count = self._open_installed_devices_session(driver)
         self._param_list = "driver=" + pp.pformat(driver)
 
+        self.devices = []
+        for i in range(self._item_count):
+            self.devices.append(_Device(self, i))
+
         self._is_frozen = True
 
     def __repr__(self):
@@ -147,9 +153,6 @@ class Session(object):
         if self._is_frozen and key not in dir(self):
             raise AttributeError("__setattr__ not supported.")
         object.__setattr__(self, key, value)
-
-    def __getitem__(self, index):
-        return _Device(self, index)
 
     def __enter__(self):
         return self
@@ -185,10 +188,12 @@ class Session(object):
         return _DeviceIterable(self, self._item_count)
 
     def close(self):
-        # TODO(marcoskirsch): Should we raise an exception on double close? Look at what File does.
-        if(self._${config['session_handle_parameter_name']} != 0):
-            self._close_installed_devices_session()
+        try:
+            self._${close_function_name}()
+        except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
+            raise
+        self._${config['session_handle_parameter_name']} = 0
 
     ''' These are code-generated '''
 % for func_name in sorted(functions):

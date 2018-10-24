@@ -6,8 +6,10 @@ Enums used in NI-DMM
 .. py:currentmodule:: nidmm
 
 
+ADCCalibration
+--------------
 
-.. py:data:: ADCCalibration
+.. py:class:: ADCCalibration
 
     .. py:attribute:: ADCCalibration.AUTO
 
@@ -39,8 +41,10 @@ Enums used in NI-DMM
 
 
 
+AcquisitionStatus
+-----------------
 
-.. py:data:: AcquisitionStatus
+.. py:class:: AcquisitionStatus
 
     .. py:attribute:: AcquisitionStatus.RUNNING
 
@@ -92,8 +96,10 @@ Enums used in NI-DMM
 
 
 
+ApertureTimeUnits
+-----------------
 
-.. py:data:: ApertureTimeUnits
+.. py:class:: ApertureTimeUnits
 
     .. py:attribute:: ApertureTimeUnits.SECONDS
 
@@ -115,8 +121,10 @@ Enums used in NI-DMM
 
 
 
+AutoZero
+--------
 
-.. py:data:: AutoZero
+.. py:class:: AutoZero
 
     .. py:attribute:: AutoZero.AUTO
 
@@ -158,8 +166,10 @@ Enums used in NI-DMM
 
 
 
+CableCompensationType
+---------------------
 
-.. py:data:: CableCompensationType
+.. py:class:: CableCompensationType
 
     .. py:attribute:: CableCompensationType.NONE
 
@@ -201,8 +211,10 @@ Enums used in NI-DMM
 
 
 
+DCNoiseRejection
+----------------
 
-.. py:data:: DCNoiseRejection
+.. py:class:: DCNoiseRejection
 
     .. py:attribute:: DCNoiseRejection.AUTO
 
@@ -244,8 +256,10 @@ Enums used in NI-DMM
 
 
 
+Function
+--------
 
-.. py:data:: Function
+.. py:class:: Function
 
     .. py:attribute:: Function.DC_VOLTS
 
@@ -331,7 +345,7 @@ Enums used in NI-DMM
 
 
 
-        NI 4065, and NI 4070/4071/4072 supported.
+        NI 4065, NI 4070/4071/4072, and NI 4080/4081/4182 supported.
 
         
 
@@ -397,8 +411,10 @@ Enums used in NI-DMM
 
 
 
+LCCalculationModel
+------------------
 
-.. py:data:: LCCalculationModel
+.. py:class:: LCCalculationModel
 
     .. py:attribute:: LCCalculationModel.AUTO
 
@@ -430,8 +446,10 @@ Enums used in NI-DMM
 
 
 
+MeasurementCompleteDest
+-----------------------
 
-.. py:data:: MeasurementCompleteDest
+.. py:class:: MeasurementCompleteDest
 
     .. py:attribute:: MeasurementCompleteDest.NONE
 
@@ -543,31 +561,10 @@ Enums used in NI-DMM
 
 
 
+OperationMode
+-------------
 
-.. py:data:: MeasurementDestinationSlope
-
-    .. py:attribute:: MeasurementDestinationSlope.POSITIVE
-
-
-
-        Rising Edgs
-
-        
-
-
-
-    .. py:attribute:: MeasurementDestinationSlope.NEGATIVE
-
-
-
-        Falling Edge
-
-        
-
-
-
-
-.. py:data:: OperationMode
+.. py:class:: OperationMode
 
     .. py:attribute:: OperationMode.IVIDMM
 
@@ -589,8 +586,10 @@ Enums used in NI-DMM
 
 
 
+RTDType
+-------
 
-.. py:data:: RTDType
+.. py:class:: RTDType
 
     .. py:attribute:: RTDType.CUSTOM
 
@@ -663,31 +662,10 @@ Enums used in NI-DMM
 
 
 
+SampleTrigger
+-------------
 
-.. py:data:: SampleTrigSlope
-
-    .. py:attribute:: SampleTrigSlope.POSITIVE
-
-
-
-        Rising Edgs
-
-        
-
-
-
-    .. py:attribute:: SampleTrigSlope.NEGATIVE
-
-
-
-        Falling Edge
-
-        
-
-
-
-
-.. py:data:: SampleTrigger
+.. py:class:: SampleTrigger
 
     .. py:attribute:: SampleTrigger.IMMEDIATE
 
@@ -839,8 +817,10 @@ Enums used in NI-DMM
 
 
 
+ThermistorType
+--------------
 
-.. py:data:: ThermistorType
+.. py:class:: ThermistorType
 
     .. py:attribute:: ThermistorType.CUSTOM
 
@@ -882,8 +862,10 @@ Enums used in NI-DMM
 
 
 
+ThermocoupleReferenceJunctionType
+---------------------------------
 
-.. py:data:: ThermocoupleReferenceJunctionType
+.. py:class:: ThermocoupleReferenceJunctionType
 
     .. py:attribute:: ThermocoupleReferenceJunctionType.FIXED
 
@@ -896,8 +878,10 @@ Enums used in NI-DMM
 
 
 
+ThermocoupleType
+----------------
 
-.. py:data:: ThermocoupleType
+.. py:class:: ThermocoupleType
 
     .. py:attribute:: ThermocoupleType.B
 
@@ -979,8 +963,10 @@ Enums used in NI-DMM
 
 
 
+TransducerType
+--------------
 
-.. py:data:: TransducerType
+.. py:class:: TransducerType
 
     .. py:attribute:: TransducerType.THERMOCOUPLE
 
@@ -1022,31 +1008,10 @@ Enums used in NI-DMM
 
 
 
+TriggerSource
+-------------
 
-.. py:data:: TriggerSlope
-
-    .. py:attribute:: TriggerSlope.POSITIVE
-
-
-
-        Rising Edgs
-
-        
-
-
-
-    .. py:attribute:: TriggerSlope.NEGATIVE
-
-
-
-        Falling Edge
-
-        
-
-
-
-
-.. py:data:: TriggerSource
+.. py:class:: TriggerSource
 
     .. py:attribute:: TriggerSource.IMMEDIATE
 
@@ -1188,8 +1153,10 @@ Enums used in NI-DMM
 
 
 
+WaveformCoupling
+----------------
 
-.. py:data:: WaveformCoupling
+.. py:class:: WaveformCoupling
 
     .. py:attribute:: WaveformCoupling.AC
 
@@ -1208,5 +1175,8 @@ Enums used in NI-DMM
         DC Coupled
 
         
+
+
+
 
 

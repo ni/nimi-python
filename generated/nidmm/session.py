@@ -59,6 +59,27 @@ class _Acquisition(object):
         self._session.abort()
 
 
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -183,7 +204,7 @@ class _SessionBase(object):
     Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
     If the user does not specify a Driver Setup string, this property returns  an empty string.
     '''
-    freq_voltage_autorange = _attributes.AttributeViReal64(1150044)
+    freq_voltage_auto_range = _attributes.AttributeViReal64(1150044)
     '''Type: float
 
     For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this property is the same as that of  freq_voltage_range.
@@ -231,14 +252,6 @@ class _SessionBase(object):
 
     A string containing the resource descriptor of the instrument.
     '''
-    latency = _attributes.AttributeViInt32(1150034)
-    '''Type: int
-
-    Specifies the number of measurements transferred at a time from the  instrument to an internal buffer. When set to NIDMM_VAL_LATENCY_AUTO (-1),  NI-DMM chooses the transfer size.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
     lc_calculation_model = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCCalculationModel, 1150052)
     '''Type: enums.LCCalculationModel
 
@@ -260,11 +273,6 @@ class _SessionBase(object):
     Specifies the destination of the measurement complete (MC) signal.
     The NI 4050 is not supported.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
-    '''
-    meas_dest_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasurementDestinationSlope, 1150002)
-    '''Type: enums.MeasurementDestinationSlope
-
-    Specifies the polarity of the generated measurement complete signal.
     '''
     number_of_averages = _attributes.AttributeViInt32(1150032)
     '''Type: int
@@ -347,11 +355,6 @@ class _SessionBase(object):
     Specifies the sample trigger source.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
-    sample_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SampleTrigSlope, 1150010)
-    '''Type: enums.SampleTrigSlope
-
-    Specifies the edge of the signal from the specified sample trigger source on  which the DMM is triggered.
-    '''
     serial_number = _attributes.AttributeViString(1150054)
     '''Type: str
 
@@ -377,12 +380,6 @@ class _SessionBase(object):
 
     For the NI 4072 only, represents the active part (resistance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
-    '''
-    shunt_value = _attributes.AttributeViReal64(1150003)
-    '''Type: float
-
-    For the NI 4050 only, specifies the shunt resistance value.
-    The NI 4050 requires an external shunt resistor for current measurements.  This property should be set to the value of shunt resistor.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -516,11 +513,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSlope, 1250334)
-    '''Type: enums.TriggerSlope
-
-    Specifies the edge of the signal from the specified trigger source on which  the DMM is triggered.
-    '''
     trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSource, 1250004)
     '''Type: enums.TriggerSource
 
@@ -569,6 +561,10 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def __getitem__(self, key):
+        rep_caps = []
+        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+
     def _get_error_description(self, error_code):
         '''_get_error_description
 
@@ -593,6 +589,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -608,12 +605,12 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -632,6 +629,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
@@ -647,12 +645,12 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -671,6 +669,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -686,12 +685,12 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -710,6 +709,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -728,12 +728,12 @@ class _SessionBase(object):
            parameter.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels[0,1]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -779,6 +779,52 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
+    def lock(self):
+        '''lock
+
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
+
+        Other threads may have obtained a lock on this session for the
+        following reasons:
+
+            -  The application called the lock method.
+            -  A call to NI-DMM locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
+
+        You can safely make nested calls to the lock method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock method with a call to
+        the unlock method.
+
+        Returns:
+            lock (context manager): When used in a with statement, nidmm.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
+        '''
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
+
+    def _lock_session(self):
+        '''_lock_session
+
+        Actuall call to driver
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niDMM_LockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
+
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -809,12 +855,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -830,6 +876,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
@@ -860,12 +907,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -881,6 +928,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -911,12 +959,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -932,6 +980,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -962,12 +1011,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session instance, and calling this method on the result.:
+        nidmm.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -981,6 +1030,18 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niDMM_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def unlock(self):
+        '''unlock
+
+        Releases a lock that you acquired on an device session using
+        lock. Refer to lock for additional
+        information on session locks.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niDMM_UnlockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
     def _error_message(self, error_code):
@@ -1148,6 +1209,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         '''abort
 
@@ -1159,41 +1221,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_ac_bandwidth(self, ac_minimum_frequency_hz, ac_maximum_frequency_hz):
-        '''configure_ac_bandwidth
-
-        Configures the ac_min_freq and ac_max_freq
-        properties, which the DMM uses for AC measurements.
-
-        Args:
-            ac_minimum_frequency_hz (float): Specifies the minimum expected frequency component of the input signal
-                in hertz. This parameter affects the DMM only when you set the
-                method property to AC measurements. NI-DMM uses this
-                parameter to calculate the proper aperture for the measurement.
-                The driver sets the ac_min_freq property to this value.
-                The valid range is 1 Hz–300 kHz for the NI 4080/4081/4082 and the NI
-                4070/4071/4072, 10 Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the
-                NI 4050 and NI 4060.
-
-            ac_maximum_frequency_hz (float): Specifies the maximum expected frequency component of the input signal
-                in hertz within the device limits. This parameter is used only for error
-                checking and verifies that the value of this parameter is less than the
-                maximum frequency of the device.
-
-                This parameter affects the DMM only when you set the
-                method property to AC measurements. The driver sets the
-                ac_max_freq property to this value. The valid range is 1
-                Hz–300 kHz for the NI 4080/4081/4082 and the NI 4070/4071/4072, 10
-                Hz–100 Hz for the NI 4065, and 20 Hz–25 kHz for the NI 4050 and NI 4060.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        ac_minimum_frequency_hz_ctype = _visatype.ViReal64(ac_minimum_frequency_hz)  # case S150
-        ac_maximum_frequency_hz_ctype = _visatype.ViReal64(ac_maximum_frequency_hz)  # case S150
-        error_code = self._library.niDMM_ConfigureACBandwidth(vi_ctype, ac_minimum_frequency_hz_ctype, ac_maximum_frequency_hz_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+    @ivi_synchronized
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
         '''configure_measurement_absolute
 
@@ -1234,8 +1262,9 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             resolution_absolute (float): Specifies the absolute resolution for the measurement. NI-DMM sets
-                resolution_absolute to this value. This parameter is
-                ignored when the **Range** parameter is set to
+                resolution_absolute to this value. The PXIe-4080/4081/4082
+                uses the resolution you specify. The NI 4065 and NI 4070/4071/4072
+                ignore this parameter when the **Range** parameter is set to
                 NIDMM_VAL_AUTO_RANGE_ON (-1.0) or NIDMM_VAL_AUTO_RANGE_ONCE
                 (-3.0). The default is 0.001 V.
 
@@ -1259,6 +1288,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
         '''configure_measurement_digits
 
@@ -1301,8 +1331,9 @@ class Session(_SessionBase):
             resolution_digits (float): Specifies the resolution of the measurement in digits. The driver sets
                 the `Devices Overview <devices>`__ for a
                 list of valid ranges. The driver sets resolution_digits
-                property to this value. This parameter is ignored when the **Range**
-                parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
+                property to this value. The PXIe-4080/4081/4082 uses the resolution you
+                specify. The NI 4065 and NI 4070/4071/4072 ignore this parameter when
+                the **Range** parameter is set to NIDMM_VAL_AUTO_RANGE_ON (-1.0) or
                 NIDMM_VAL_AUTO_RANGE_ONCE (-3.0). The default is 5½.
 
                 Note:
@@ -1325,6 +1356,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
         '''configure_multi_point
 
@@ -1384,42 +1416,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_open_cable_comp_values(self, conductance, susceptance):
-        '''configure_open_cable_comp_values
-
-        For the NI 4082 and NI 4072 only, configures the
-        open_cable_comp_conductance and
-        open_cable_comp_susceptance properties.
-
-        Args:
-            conductance (float): Specifies the open cable compensation **conductance**.
-
-            susceptance (float): Specifies the open cable compensation **susceptance**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        conductance_ctype = _visatype.ViReal64(conductance)  # case S150
-        susceptance_ctype = _visatype.ViReal64(susceptance)  # case S150
-        error_code = self._library.niDMM_ConfigureOpenCableCompValues(vi_ctype, conductance_ctype, susceptance_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_power_line_frequency(self, power_line_frequency_hz):
-        '''configure_power_line_frequency
-
-        Specifies the powerline frequency.
-
-        Args:
-            power_line_frequency_hz (float): **Powerline Frequency** specifies the powerline frequency in hertz.
-                NI-DMM sets the Powerline Frequency property to this value.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        power_line_frequency_hz_ctype = _visatype.ViReal64(power_line_frequency_hz)  # case S150
-        error_code = self._library.niDMM_ConfigurePowerLineFrequency(vi_ctype, power_line_frequency_hz_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+    @ivi_synchronized
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
         '''configure_rtd_custom
 
@@ -1447,6 +1444,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_rtd_type(self, rtd_type, rtd_resistance):
         '''configure_rtd_type
 
@@ -1490,26 +1488,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_short_cable_comp_values(self, resistance, reactance):
-        '''configure_short_cable_comp_values
-
-        For the NI 4082 and NI 4072 only, configures the
-        short_cable_comp_resistance and
-        short_cable_comp_reactance properties.
-
-        Args:
-            resistance (float): Specifies the short cable compensation **resistance**.
-
-            reactance (float): Specifies the short cable compensation **reactance**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        resistance_ctype = _visatype.ViReal64(resistance)  # case S150
-        reactance_ctype = _visatype.ViReal64(reactance)  # case S150
-        error_code = self._library.niDMM_ConfigureShortCableCompValues(vi_ctype, resistance_ctype, reactance_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+    @ivi_synchronized
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
         '''configure_thermistor_custom
 
@@ -1546,6 +1525,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):
         '''configure_thermocouple
 
@@ -1595,6 +1575,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_trigger(self, trigger_source, trigger_delay=datetime.timedelta(seconds=-1)):
         '''configure_trigger
 
@@ -1640,6 +1621,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
         '''configure_waveform_acquisition
 
@@ -1695,6 +1677,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disable(self):
         '''disable
 
@@ -1707,6 +1690,112 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        '''export_attribute_configuration_buffer
+
+        Exports the property configuration of the session to the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DMM returns an
+        error.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <setting_before_reading_attributes>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niDMM_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_ctype.value  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        error_code = self._library.niDMM_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(configuration_ctype[i]) for i in range(size_ctype.value)]
+
+    @ivi_synchronized
+    def export_attribute_configuration_file(self, file_path):
+        '''export_attribute_configuration_file
+
+        Exports the property configuration of the session to the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑DMM returns an
+        error.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <setting_before_reading_attributes>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:**\  .nidmmconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDMM_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def fetch(self, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch
 
@@ -1740,6 +1829,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
+    @ivi_synchronized
     def fetch_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_multi_point
 
@@ -1794,6 +1884,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return reading_array_array
 
+    @ivi_synchronized
     def fetch_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_waveform
 
@@ -1840,6 +1931,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array_array
 
+    @ivi_synchronized
     def fetch_waveform_into(self, waveform_array, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''fetch_waveform
 
@@ -1892,69 +1984,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def get_aperture_time_info(self):
-        '''get_aperture_time_info
-
-        Returns the DMM **Aperture_Time** and **Aperture_Time_Units**.
-
-        Returns:
-            aperture_time (float): Specifies the amount of time the DMM digitizes the input signal for a
-                single measurement. This parameter does not include settling time.
-                Returns the value of the aperture_time property. The
-                units of this property depend on the value of the
-                aperture_time_units property.
-                On the NI 4070/4071/4072, the minimum aperture time is 8.89 µs, and the
-                maximum aperture time is 149 s. Any number of powerline cycles (PLCs)
-                within the minimum and maximum ranges is allowed on the
-                NI 4070/4071/4072.
-                On the NI 4065 the minimum aperture time is 333 µs, and the maximum
-                aperture time is 78.2 s. If setting the number of averages directly, the
-                total measurement time is aperture time X the number of averages, which
-                must be less than 72.8 s. The aperture times allowed are 333 µs, 667 µs,
-                or multiples of 1.11 ms—for example 1.11 ms, 2.22 ms, 3.33 ms, and so
-                on. If you set an aperture time other than 333 µs, 667 µs, or multiples
-                of 1.11 ms, the value will be coerced up to the next supported aperture
-                time.
-                On the NI 4060, when the powerline frequency is 60, the PLCs allowed are
-                1 PLC, 6 PLC, 12 PLC, and 120 PLC. When the powerline frequency is 50,
-                the PLCs allowed are 1 PLC, 5 PLC, 10 PLC, and 100 PLC.
-
-            aperture_time_units (enums.ApertureTimeUnits): Indicates the units of aperture time as powerline cycles (PLCs) or
-                seconds. Returns the value of the aperture_time_units
-                property.
-
-                +-------------------------------------+---+------------------+
-                | ApertureTimeUnits.SECONDS           | 0 | Seconds          |
-                +-------------------------------------+---+------------------+
-                | ApertureTimeUnits.POWER_LINE_CYCLES | 1 | Powerline Cycles |
-                +-------------------------------------+---+------------------+
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        aperture_time_ctype = _visatype.ViReal64()  # case S200
-        aperture_time_units_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niDMM_GetApertureTimeInfo(vi_ctype, None if aperture_time_ctype is None else (ctypes.pointer(aperture_time_ctype)), None if aperture_time_units_ctype is None else (ctypes.pointer(aperture_time_units_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(aperture_time_ctype.value), enums.ApertureTimeUnits(aperture_time_units_ctype.value)
-
-    def get_auto_range_value(self):
-        '''get_auto_range_value
-
-        Returns the **Actual_Range** that the DMM is using, even when Auto
-        Range is off.
-
-        Returns:
-            actual_range (float): Indicates the **actual_range** the DMM is using. Returns the value of
-                the auto_range_value property. The units of the returned
-                value depend on the method.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        actual_range_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDMM_GetAutoRangeValue(vi_ctype, None if actual_range_ctype is None else (ctypes.pointer(actual_range_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(actual_range_ctype.value)
-
+    @ivi_synchronized
     def _get_cal_date_and_time(self, cal_type):
         '''_get_cal_date_and_time
 
@@ -2001,6 +2031,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(month_ctype.value), int(day_ctype.value), int(year_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_dev_temp(self, options=""):
         '''get_dev_temp
 
@@ -2023,6 +2054,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
         '''get_ext_cal_recommended_interval
 
@@ -2042,6 +2074,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
+    @ivi_synchronized
     def get_cal_date_and_time(self, cal_type):
         '''get_cal_date_and_time
 
@@ -2071,6 +2104,7 @@ class Session(_SessionBase):
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def get_last_cal_temp(self, cal_type):
         '''get_last_cal_temp
 
@@ -2105,31 +2139,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
-    def get_measurement_period(self):
-        '''get_measurement_period
-
-        Returns the measurement **Period**, which is the amount of time it takes
-        to complete one measurement with the current configuration. Use this
-        method right before you begin acquiring data—after you have completely
-        configured the measurement and after all configuration methods have
-        been called.
-
-        Returns:
-            period (float): Returns the number of seconds it takes to make one measurement.
-
-                The first measurement in a multipoint acquisition requires additional
-                settling time. This method does not include this additional time or
-                any trigger_delay associated with the first measurement.
-                Time required for internal measurements, such as
-                auto_zero, is included.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        period_ctype = _visatype.ViReal64()  # case S200
-        error_code = self._library.niDMM_GetMeasurementPeriod(vi_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(period_ctype.value)
-
+    @ivi_synchronized
     def get_self_cal_supported(self):
         '''get_self_cal_supported
 
@@ -2152,6 +2162,103 @@ class Session(_SessionBase):
         error_code = self._library.niDMM_GetSelfCalSupported(vi_ctype, None if self_cal_supported_ctype is None else (ctypes.pointer(self_cal_supported_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
+
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        '''import_attribute_configuration_buffer
+
+        Imports a property configuration to the session from the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <setting_before_reading_attributes>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+        Args:
+            configuration (list of int): Specifies the byte array buffer that contains the property
+                configuration to import.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niDMM_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_file(self, file_path):
+        '''import_attribute_configuration_file
+
+        Imports a property configuration to the session from the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers.
+
+        **Coercion Behavior for Certain Devices**
+
+        Imported and exported property configurations contain coerced values
+        for the following NI‑DMM devices:
+
+        -  PXI/PCI/PCIe/USB‑4065
+        -  PXI/PCI‑4070
+        -  PXI‑4071
+        -  PXI‑4072
+
+        NI‑DMM coerces property values when the value you set is within the
+        allowed range for the property but is not one of the discrete valid
+        values the property supports. For example, for a property that
+        coerces values up, if you choose a value of 4 when the adjacent valid
+        values are 1 and 10, the property coerces the value to 10.
+
+        **Related Topics:**
+
+        `Using Properties and Properties with
+        NI‑DMM <properties>`__
+
+        `Setting Properties Before Reading
+        Properties <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__
+
+        Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:**\  .nidmmconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDMM_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         '''_init_with_options
@@ -2269,6 +2376,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
+    @ivi_synchronized
     def _initiate(self):
         '''_initiate
 
@@ -2283,6 +2391,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def perform_open_cable_comp(self):
         '''perform_open_cable_comp
 
@@ -2290,11 +2399,14 @@ class Session(_SessionBase):
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **Conductance** and **Susceptance** values. You
         can use the return values of this method as inputs to
-        configure_open_cable_comp_values.
+        ConfigureOpenCableCompValues.
 
         This method returns an error if the value of the method
         property is not set to Method.CAPACITANCE (1005) or
         Method.INDUCTANCE (1006).
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             conductance (float): **conductance** is the measured value of open cable compensation
@@ -2311,17 +2423,21 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(conductance_ctype.value), float(susceptance_ctype.value)
 
+    @ivi_synchronized
     def perform_short_cable_comp(self):
         '''perform_short_cable_comp
 
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **Resistance** and **Reactance** values. You can use the return values
-        of this method as inputs to configure_short_cable_comp_values.
+        of this method as inputs to ConfigureShortCableCompValues.
 
         This method returns an error if the value of the method
         property is not set to Method.CAPACITANCE (1005) or
         Method.INDUCTANCE (1006).
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             resistance (float): **resistance** is the measured value of short cable compensation
@@ -2338,6 +2454,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
+    @ivi_synchronized
     def read(self, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read
 
@@ -2370,6 +2487,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
 
+    @ivi_synchronized
     def read_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read_multi_point
 
@@ -2423,6 +2541,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return reading_array_array
 
+    @ivi_synchronized
     def read_status(self):
         '''read_status
 
@@ -2467,6 +2586,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
+    @ivi_synchronized
     def read_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
         '''read_waveform
 
@@ -2518,6 +2638,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_array_array
 
+    @ivi_synchronized
     def reset_with_defaults(self):
         '''reset_with_defaults
 
@@ -2531,6 +2652,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_cal(self):
         '''self_cal
 
@@ -2547,6 +2669,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def send_software_trigger(self):
         '''send_software_trigger
 
@@ -2576,6 +2699,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2600,6 +2724,7 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
+    @ivi_synchronized
     def reset(self):
         '''reset
 
@@ -2612,6 +2737,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _self_test(self):
         '''_self_test
 

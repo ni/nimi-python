@@ -626,7 +626,7 @@ Clock source.
         'values': [
             {
                 'name': 'CLOCK_IN',
-                'value': '"ClkIn"',
+                'value': 'ClkIn',
 'documentation': {
 'description': '''
 Specifies that the signal at the CLK IN front panel connector is used as
@@ -636,7 +636,7 @@ the Sample Clock source.
             },
             {
                 'name': 'DDC_CLOCK_IN',
-                'value': '"DDC_ClkIn"',
+                'value': 'DDC_ClkIn',
 'documentation': {
 'description': '''
 Specifies that the Sample Clock from DDC connector is used as the Sample
@@ -646,14 +646,14 @@ Clock source.
             },
             {
                 'name': 'ONBOARD_CLOCK',
-                'value': '"OnboardClock"',
+                'value': 'OnboardClock',
 'documentation': {
 'description': 'Specifies that the onboard clock is used as the Sample Clock source.',
 },
             },
             {
                 'name': 'PXI_STAR_LINE',
-                'value': '"PXI_Star"',
+                'value': 'PXI_Star',
 'documentation': {
 'description': '''
 Specifies that the PXI\_STAR trigger line is used as the Sample Clock
@@ -663,7 +663,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_0RTSI_0',
-                'value': '"PXI_Trig0"',
+                'value': 'PXI_Trig0',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 0 is used as the Sample Clock
@@ -673,7 +673,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_1RTSI_1',
-                'value': '"PXI_Trig1"',
+                'value': 'PXI_Trig1',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 1 is used as the Sample Clock
@@ -683,7 +683,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_2RTSI_2',
-                'value': '"PXI_Trig2"',
+                'value': 'PXI_Trig2',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 2 is used as the Sample Clock
@@ -693,7 +693,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_3RTSI_3',
-                'value': '"PXI_Trig3"',
+                'value': 'PXI_Trig3',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 3 is used as the Sample Clock
@@ -703,7 +703,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_4RTSI_4',
-                'value': '"PXI_Trig4"',
+                'value': 'PXI_Trig4',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 4 is used as the Sample Clock
@@ -713,7 +713,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_5RTSI_5',
-                'value': '"PXI_Trig5"',
+                'value': 'PXI_Trig5',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 5 is used as the Sample Clock
@@ -723,7 +723,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_6RTSI_6',
-                'value': '"PXI_Trig6"',
+                'value': 'PXI_Trig6',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 6 is used as the Sample Clock
@@ -733,7 +733,7 @@ source.
             },
             {
                 'name': 'PXI_TRIGGER_LINE_7RTSI_7',
-                'value': '"PXI_Trig7"',
+                'value': 'PXI_Trig7',
 'documentation': {
 'description': '''
 Specifies that the PXI or RTSI line 7 is used as the Sample Clock
@@ -747,7 +747,7 @@ source.
         'values': [
             {
                 'name': 'CLOCK_IN',
-                'value': '"ClkIn"',
+                'value': 'ClkIn',
 'documentation': {
 'description': '''
 Specifies that the external signal on the CLK IN front panel connector
@@ -757,7 +757,7 @@ is used as the source.
             },
             {
                 'name': 'ONBOARD_CLOCK',
-                'value': '"OnboardClock"',
+                'value': 'OnboardClock',
 'documentation': {
 'description': 'Specifies that the onboard Sample Clock timebase is used as the source.',
 },

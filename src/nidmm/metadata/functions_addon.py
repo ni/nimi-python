@@ -15,8 +15,6 @@ functions_codegen_method = {
     'GetErrorMessage':                 { 'codegen_method': 'no',       },
     'ClearError':                      { 'codegen_method': 'no',       },
     'Control':                         { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
     '.+ExtCal':                        { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'GetExtCalRecommendedInterval':    { 'codegen_method': 'public',   },  # This function is useful on regular (not only calibration) sessions.
     'CalAdjust.+':                     { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -51,6 +49,28 @@ functions_codegen_method = {
     'revision_query':                  { 'codegen_method': 'no',       },
     'GetCalDateAndTime':               { 'codegen_method': 'private', 'method_name_for_documentation': 'get_cal_date_and_time', },  # 'GetLastCalDateAndTime' Public wrapper to allow datetime
     'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',             },  # 'fancy_self_test' Public wrapper that raises
+    'ConfigureACBandwidth':            { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'ConfigureOpenCableCompValues':    { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'ConfigurePowerLineFrequency':     { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'ConfigureShortCableCompValues':   { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'GetApertureTimeInfo':             { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'GetAutoRangeValue':               { 'codegen_method': 'no',       },  # Use corresponding attribute instead #875
+    'GetMeasurementPeriod':            { 'codegen_method': 'no',       },  # EOL hardware only #875
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'unlock', },
+    'InitWithOptions':                 { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'error_message':                   { 'use_session_lock': False,  },  # No Session for function call so cannot use session locking
+    'GetError':                        { 'use_session_lock': False,  },  # Session may not be valid during function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -70,15 +90,17 @@ functions_enums = {
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
-    'GetError':                     { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'self_test':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
-    'ReadMultiPoint':               { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
-    'FetchMultiPoint':              { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
-    'FetchWaveform':                { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
-    'ReadWaveform':                 { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
-    'GetAttributeViString':         { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
-    'GetCalUserDefinedInfo':        { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
-    'error_message':                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'GetError':                                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'self_test':                                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'ReadMultiPoint':                           { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'FetchMultiPoint':                          { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'FetchWaveform':                            { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'ReadWaveform':                             { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'arraySize'}, }, }, },
+    'GetAttributeViString':                     { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
+    'GetCalUserDefinedInfo':                    { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
+    'error_message':                            { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
+    'ExportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'Size'}, }, }, },
+    'ImportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -251,4 +273,9 @@ functions_array = {
     'FetchWaveform':                       { 'parameters': { 3: { 'use_array': True, }, }, },
 }
 
+# The extracted metadata is incorrect. Patch it here.
+functions_bad_source_metadata = {
+    'ExportAttributeConfigurationBuffer':                     { 'parameters': { 2: { 'direction': 'out', 'type': 'ViInt8[]'}, }, },
+    'ImportAttributeConfigurationBuffer':                     { 'parameters': { 2: { 'type': 'ViInt8[]'}, }, },
+}
 

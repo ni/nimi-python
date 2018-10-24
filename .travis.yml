@@ -1,17 +1,35 @@
-sudo: false
-cache: pip
-dist: trusty
+group: travis_latest
 language: python
-# For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
-python:
-  - 3.6
-  - 3.5
-  - 3.4
-  - 2.7
-  - pypy3.5-5.9.0
-  - pypy2.7-5.8.0
+cache: pip
+jobs:
+    include:
+      # We put 3.6 first since this is where flake8 and docs are tested
+      - python: 3.6
+      # We put pypy towards the beginning because for some reason the build takes much longer, this starts it earlier 
+      # so multiple others can be running while these continue to run.
+      - python: pypy
+      - python: pypy3
+      - python: 2.7
+      - python: 3.4
+      - python: 3.5
+      # Python 3.7+ needs OpenSSL 1.0.2+ which isn't supported on trusty - use xenial and sudo: true based on workarounds
+      # in Travis issues (this is from multiple issues)
+      - python: 3.7
+        dist: xenial
+        sudo: true
+      - python: 3.8-dev
+        dist: xenial
+        sudo: true
+      - python: nightly
+        dist: xenial
+        sudo: true
+matrix:
+    allow_failures:
+        - python: 3.8-dev
+        - python: nightly
 
 install:
+  - travis_retry pip install --upgrade pip
   - travis_retry pip install --upgrade tox tox-travis coveralls codecov
 
 script:
@@ -21,6 +39,4 @@ script:
 after_success:
   - travis_retry coveralls --rcfile=tools/coverage_unit_tests.rc
   - travis_retry codecov
-
-
 

@@ -25,7 +25,7 @@ Refer to your driver documentation for device-specific information and detailed 
 .. include:: _static/license.inc
 
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 4
    :caption: Drivers
    :hidden:
 
@@ -35,6 +35,7 @@ Refer to your driver documentation for device-specific information and detailed 
    niscope
    niswitch
    nimodinst
+   nise
 
 Indices and tables
 ==================

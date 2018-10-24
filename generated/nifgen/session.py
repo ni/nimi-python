@@ -59,6 +59,27 @@ class _Generation(object):
         self._session.abort()
 
 
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -92,6 +113,25 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    absolute_delay = _attributes.AttributeViReal64(1150413)
+    '''Type: float
+
+    Specifies the sub-Sample Clock delay, in seconds, to apply to the
+    waveform. Use this property to reduce the trigger jitter when
+    synchronizing multiple devices with NI-TClk. This property can also help
+    maintain synchronization repeatability by writing the absolute delay
+    value of a previous measurement to the current session.
+    To set this property, the waveform generator must be in the Idle
+    (Configuration) state.
+    **Units**: seconds (s)
+    **Valid Values**: Plus or minus half of one Sample Clock period
+    **Default Value**: 0.0
+    **Supported Waveform Generators**: PXIe-5413/5423/5433
+
+    Note:
+    If this property is set, NI-TClk cannot perform any sub-Sample Clock
+    adjustment.
+    '''
     all_marker_events_latched_status = _attributes.AttributeViInt32(1150349)
     '''Type: int
 
@@ -138,6 +178,15 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
+
+    Tip:
+    This property can use repeated capabilities (markers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.markers[0,1].arb_marker_position = var
+        var = session.markers[0,1].arb_marker_position
     '''
     arb_offset = _attributes.AttributeViReal64(1250203)
     '''Type: float
@@ -150,7 +199,7 @@ class _SessionBase(object):
     arb_repeat_count = _attributes.AttributeViInt32(1150328)
     '''Type: int
 
-    Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of nifgen_ConfigureTriggerMode is set to TriggerMode.SINGLE or TriggerMode.STEPPED. This property is ignored if the triggerMode parameter is set to TriggerMode.CONTINUOUS or TriggerMode.BURST. Use this property when output_mode is set to OutputMode.ARB.
+    Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of ConfigureTriggerMode is set to TriggerMode.SINGLE or TriggerMode.STEPPED. This property is ignored if the triggerMode parameter is set to TriggerMode.CONTINUOUS or TriggerMode.BURST. Use this property when output_mode is set to OutputMode.ARB.
     When used during streaming, this property specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
     '''
     arb_sample_rate = _attributes.AttributeViReal64(1250204)
@@ -215,16 +264,43 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the bit number to assign to the Data Marker Event.
+
+    Tip:
+    This property can use repeated capabilities (markers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.markers[0,1].data_marker_event_data_bit_number = var
+        var = session.markers[0,1].data_marker_event_data_bit_number
     '''
     data_marker_event_level_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
     '''Type: enums.DataMarkerEventLevelPolarity
 
     Specifies the output polarity of the Data marker event.
+
+    Tip:
+    This property can use repeated capabilities (markers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.markers[0,1].data_marker_event_level_polarity = var
+        var = session.markers[0,1].data_marker_event_level_polarity
     '''
     data_marker_event_output_terminal = _attributes.AttributeViString(1150339)
     '''Type: str
 
     Specifies the destination terminal for the Data Marker Event.
+
+    Tip:
+    This property can use repeated capabilities (markers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.markers[0,1].data_marker_event_output_terminal = var
+        var = session.markers[0,1].data_marker_event_output_terminal
     '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150241)
     '''Type: int
@@ -263,11 +339,29 @@ class _SessionBase(object):
     '''Type: enums.ScriptTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
+
+    Tip:
+    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.script_triggers[0,1].digital_edge_script_trigger_edge = var
+        var = session.script_triggers[0,1].digital_edge_script_trigger_edge
     '''
     digital_edge_script_trigger_source = _attributes.AttributeViString(1150291)
     '''Type: str
 
     Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
+
+    Tip:
+    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.script_triggers[0,1].digital_edge_script_trigger_source = var
+        var = session.script_triggers[0,1].digital_edge_script_trigger_source
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
     '''Type: enums.StartTriggerDigitalEdgeEdge
@@ -295,16 +389,6 @@ class _SessionBase(object):
     Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range plus or minus 1.0 (assuming floating point data).  If the product exceeds these limits, the signal generator clips the output signal, and an error results.
     Some signal generators support both digital gain and an analog gain (analog gain is specified with the func_amplitude property or the arb_gain property). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a method of analog gain, so only analog gain makes full use of the resolution of the DAC.
     '''
-    digital_level_script_trigger_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150294)
-    '''Type: enums.ScriptTriggerDigitalLevelActiveLevel
-
-    Specifies the active level for the Script trigger. This property is used when script_trigger_type is set to Digital Level.
-    '''
-    digital_level_script_trigger_source = _attributes.AttributeViString(1150293)
-    '''Type: str
-
-    Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Level.
-    '''
     digital_pattern_enabled = _attributes.AttributeViBoolean(1150101)
     '''Type: bool
 
@@ -315,65 +399,10 @@ class _SessionBase(object):
 
     Specifies the static value that replaces data masked by digital_data_mask.
     '''
-    direct_dma_enabled = _attributes.AttributeViBoolean(1150244)
-    '''Type: bool
-
-    Enable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform method calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.
-    '''
-    direct_dma_window_address = _attributes.AttributeViInt32(1150274)
-    '''Type: int
-
-    Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.
-    '''
-    direct_dma_window_size = _attributes.AttributeViInt32(1150245)
-    '''Type: int
-
-    Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.
-    '''
-    done_event_delay = _attributes.AttributeViReal64(1150358)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  done_event_delay property.
-    '''
-    done_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventDelayUnits, 1150359)
-    '''Type: enums.DoneEventDelayUnits
-
-    Specifies the units applied to the value of the done_event_delay property. Valid units are seconds and sample clock periods.
-    '''
-    done_event_latched_status = _attributes.AttributeViBoolean(1150351)
-    '''Type: bool
-
-    Returns the latched status of the specified Done Event.
-    '''
-    done_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventActiveLevel, 1150317)
-    '''Type: enums.DoneEventActiveLevel
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventOutputBehavior, 1150332)
-    '''Type: enums.DoneEventOutputBehavior
-
-    Specifies the output behavior for the Done Event.
-    '''
     done_event_output_terminal = _attributes.AttributeViString(1150315)
     '''Type: str
 
     Specifies the destination terminal for the Done Event.
-    '''
-    done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulsePolarity, 1150319)
-    '''Type: enums.DoneEventPulsePolarity
-
-    Specifies the output polarity of the Done Event.
-    '''
-    done_event_pulse_width = _attributes.AttributeViReal64(1150336)
-    '''Type: float
-
-    Specifies the pulse width for the Done Event.
-    '''
-    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
-    '''Type: enums.DoneEventPulseWidthUnits
-
-    Specifies the pulse width units for the Done Event.
     '''
     driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
@@ -427,6 +456,15 @@ class _SessionBase(object):
 
     Specifies the output terminal for the exported Script trigger.
     Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
+
+    Tip:
+    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.script_triggers[0,1].exported_script_trigger_output_terminal = var
+        var = session.script_triggers[0,1].exported_script_trigger_output_terminal
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150283)
     '''Type: str
@@ -552,11 +590,6 @@ class _SessionBase(object):
     Waveform.USER      - User-defined waveform as defined with
     define_user_standard_waveform
     '''
-    gain_dac_value = _attributes.AttributeViInt32(1150223)
-    '''Type: int
-
-    Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.
-    '''
     idle_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
     '''Type: enums.IdleBehavior
 
@@ -567,7 +600,6 @@ class _SessionBase(object):
 
     Specifies the value to generate in the Idle state.  The Idle Behavior must be configured to jump to this value.
     '''
-    id_query_response = _attributes.AttributeViString(1150001)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
@@ -617,56 +649,19 @@ class _SessionBase(object):
 
     Returns the number of markers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
-    marker_event_delay = _attributes.AttributeViReal64(1150354)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the marker_event_delay property.
-    '''
-    marker_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventDelayUnits, 1150355)
-    '''Type: enums.MarkerEventDelayUnits
-
-    Specifies the units applied to the value of the marker_event_delay property.  Valid units are seconds and sample clock periods.
-    '''
-    marker_event_latched_status = _attributes.AttributeViBoolean(1150350)
-    '''Type: bool
-
-    Specifies the latched status of the specified Marker Event.
-    Write True to this property to clear the latched status of the Marker Event.
-    '''
-    marker_event_live_status = _attributes.AttributeViBoolean(1150345)
-    '''Type: bool
-
-    Returns the live status of the specified Marker Event.
-    '''
-    marker_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150342)
-    '''Type: enums.MarkerEventOutputBehavior
-
-    Specifies the output behavior for the Marker Event.
-    '''
     marker_event_output_terminal = _attributes.AttributeViString(1150312)
     '''Type: str
 
     Specifies the destination terminal for the Marker Event.
-    '''
-    marker_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulsePolarity, 1150313)
-    '''Type: enums.MarkerEventPulsePolarity
 
-    Specifies the output polarity of the Marker Event.
-    '''
-    marker_event_pulse_width = _attributes.AttributeViReal64(1150340)
-    '''Type: float
+    Tip:
+    This property can use repeated capabilities (markers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
 
-    Specifies the pulse width for the Marker Event.
-    '''
-    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
-    '''Type: enums.MarkerEventPulseWidthUnits
-
-    Specifies the pulse width units for the Marker Event.
-    '''
-    marker_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150343)
-    '''Type: enums.MarkerEventToggleInitialState
-
-    Specifies the output polarity of the Marker Event.
+        session.markers[0,1].marker_event_output_terminal = var
+        var = session.markers[0,1].marker_event_output_terminal
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
@@ -743,155 +738,11 @@ class _SessionBase(object):
 
     A string that contains the module revision  for the device that you are currently using.
     '''
-    num_channels = _attributes.AttributeViInt32(1050203)
+    channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
     Indicates the number of channels that the specific instrument  driver supports.
     For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
-    '''
-    offset_dac_value = _attributes.AttributeViInt32(1150224)
-    '''Type: int
-
-    Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.
-    '''
-    oscillator_freq_dac_value = _attributes.AttributeViInt32(1150225)
-    '''Type: int
-
-    Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.
-    '''
-    oscillator_phase_dac_value = _attributes.AttributeViInt32(1150232)
-    '''Type: int
-
-    The value of the oscillator phase DAC.
-    '''
-    osp_carrier_enabled = _attributes.AttributeViBoolean(1150249)
-    '''Type: bool
-
-    Enables or disables generation of the carrier.
-    '''
-    osp_carrier_frequency = _attributes.AttributeViReal64(1150250)
-    '''Type: float
-
-    The frequency of the generated carrier.
-    '''
-    osp_carrier_phase_i = _attributes.AttributeViReal64(1150251)
-    '''Type: float
-
-    I Carrier Phase in degrees at the first point of the generation.
-    '''
-    osp_carrier_phase_q = _attributes.AttributeViReal64(1150252)
-    '''Type: float
-
-    Q Carrier Phase in degrees at the first point of the generation.  This property is only used when the osp_data_processing_mode  property is set to DataProcessingMode.COMPLEX.
-    '''
-    osp_cic_filter_enabled = _attributes.AttributeViBoolean(1150257)
-    '''Type: bool
-
-    Enables or disables the CIC filter.
-    The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
-    '''
-    osp_cic_filter_gain = _attributes.AttributeViReal64(1150263)
-    '''Type: float
-
-    Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this property overrides the value set by NI-FGEN.
-    '''
-    osp_cic_filter_interpolation = _attributes.AttributeViReal64(1150258)
-    '''Type: float
-
-    Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the osp_iq_rate property.
-    '''
-    osp_compensate_for_filter_group_delay = _attributes.AttributeViBoolean(1150389)
-    '''Type: bool
-
-    Compensate for OSP Filter Group Delay. If this is enabled, the Event Outputs will be aligned  with the Analog Output. The Analog output will also be aligned between synchronized devices  (using NI-TClk).
-    '''
-    osp_data_processing_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataProcessingMode, 1150247)
-    '''Type: enums.DataProcessingMode
-
-    The way in which data is processed by the OSP block.
-    '''
-    osp_enabled = _attributes.AttributeViBoolean(1150246)
-    '''Type: bool
-
-    Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related properties are disabled and have no effect on the generated signal.
-    '''
-    osp_fir_filter_enabled = _attributes.AttributeViBoolean(1150255)
-    '''Type: bool
-
-    Enables or disables the FIR filter.
-    The osp_cic_filter_enabled and osp_fir_filter_enabled  properties must have the same enable/disable setting.
-    '''
-    osp_fir_filter_flat_passband = _attributes.AttributeViReal64(1150261)
-    '''Type: float
-
-    Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This property is used only when the osp_fir_filter_type  property is set to FilterType.FLAT.
-    '''
-    osp_fir_filter_gaussian_bt = _attributes.AttributeViReal64(1150262)
-    '''Type: float
-
-    BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the osp_fir_filter_type property is set to  FilterType.GAUSSIAN.
-    '''
-    osp_fir_filter_interpolation = _attributes.AttributeViReal64(1150256)
-    '''Type: float
-
-    Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the osp_iq_rate property.
-    '''
-    osp_fir_filter_raised_cosine_alpha = _attributes.AttributeViReal64(1150260)
-    '''Type: float
-
-    Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the osp_fir_filter_type  property is set to FilterType.RAISED_COSINE.
-    '''
-    osp_fir_filter_root_raised_cosine_alpha = _attributes.AttributeViReal64(1150259)
-    '''Type: float
-
-    Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This property is used only when the osp_fir_filter_type  property is set to FilterType.ROOT_RAISED_COSINE.
-    '''
-    osp_fir_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150253)
-    '''Type: enums.FilterType
-
-    Pulse-shaping filter type for the FIR filter.
-    '''
-    osp_frequency_shift = _attributes.AttributeViReal64(1150371)
-    '''Type: float
-
-    Specifies the amount of frequency shift applied to the baseband signal.
-    '''
-    osp_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OSPMode, 1150370)
-    '''Type: enums.OSPMode
-
-    Specifies the generation mode of the OSP, which determines the type of data contained in the output signal.
-    '''
-    osp_overflow_error_reporting = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OSPOverflowErrorReporting, 1150268)
-    '''Type: enums.OSPOverflowErrorReporting
-
-    Configures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.
-    You can use the osp_overflow_status property to query for overflow  conditions whether or not the osp_overflow_error_reporting property is  enabled. The device will continue to generate after an overflow whether or not the  osp_overflow_error_reporting property is enabled.
-    '''
-    osp_overflow_status = _attributes.AttributeViInt32(1150269)
-    '''Type: int
-
-    Returns a bit field of the overflow status in any stage of the OSP block.  This property is functional regardless of the value for the  osp_overflow_error_reporting property.
-    Write 0 to this property to clear the current osp_overflow_error_reporting value.
-    '''
-    osp_pre_filter_gain_i = _attributes.AttributeViReal64(1150264)
-    '''Type: float
-
-    Digital gain to apply to the I data stream before any filtering by the OSP block.
-    '''
-    osp_pre_filter_gain_q = _attributes.AttributeViReal64(1150265)
-    '''Type: float
-
-    Digital gain to apply to the Q data stream before any filtering by the OSP block.  This property is only used when the osp_data_processing_mode property  is set to DataProcessingMode.COMPLEX.
-    '''
-    osp_pre_filter_offset_i = _attributes.AttributeViReal64(1150266)
-    '''Type: float
-
-    Digital offset to apply to the I data stream. This offset is applied after  the Pre-Filter Gain and before any filtering.
-    '''
-    osp_pre_filter_offset_q = _attributes.AttributeViReal64(1150267)
-    '''Type: float
-
-    Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This property is used only when  the osp_data_processing_mode property is set to DataProcessingMode.COMPLEX.
     '''
     output_enabled = _attributes.AttributeViBoolean(1250003)
     '''Type: bool
@@ -909,38 +760,6 @@ class _SessionBase(object):
     Sets which output mode the signal generator will use. The value you specify determines which methods and properties you use to configure the waveform the signal generator produces.
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
-    '''
-    p2p_endpoint_fullness_start_trigger_level = _attributes.AttributeViInt32(1150410)
-    '''Type: int
-
-    Specifies the Endpoint threshold for the Start trigger. This property is used only when start_trigger_type is set to P2P Endpoint Fullness.
-    '''
-    pci_dma_optimizations_enabled = _attributes.AttributeViBoolean(1150362)
-    '''Type: bool
-
-    Controls whether or not NI-FGEN allows performance optimizations for DMA transfers.
-    This property is only valid for PCI and PXI SMC-based devices.
-    This property is enabled (True) by default, and NI recommends leaving it enabled.
-    '''
-    post_amplifier_attenuation = _attributes.AttributeViReal64(1150229)
-    '''Type: float
-
-    Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).
-    '''
-    pre_amplifier_attenuation = _attributes.AttributeViReal64(1150228)
-    '''Type: float
-
-    Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).
-    '''
-    ready_for_start_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReadyForStartEventActiveLevel, 1150311)
-    '''Type: enums.ReadyForStartEventActiveLevel
-
-    Specifies the output polarity of the Ready for Start Event.
-    '''
-    ready_for_start_event_live_status = _attributes.AttributeViBoolean(1150348)
-    '''Type: bool
-
-    Returns the live status of the specified Ready For Start Event.
     '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150310)
     '''Type: str
@@ -960,14 +779,6 @@ class _SessionBase(object):
     '''Type: float
 
     Sets the frequency of the signal generator reference  clock. The signal generator uses the reference clock to derive  frequencies and sample rates when generating output.
-    '''
-    sample_clock_absolute_delay = _attributes.AttributeViReal64(1150231)
-    '''Type: float
-
-    Specifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.
-    can only be applied when an external sample clock is used.
-
-    Note: For the NI 5421, absolute delay
     '''
     sample_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.SampleClockSource, 1150112)
     '''Type: enums.SampleClockSource
@@ -1009,6 +820,15 @@ class _SessionBase(object):
     '''Type: enums.ScriptTriggerType
 
     Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
+
+    Tip:
+    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    nifgen.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.script_triggers[0,1].script_trigger_type = var
+        var = session.script_triggers[0,1].script_trigger_type
     '''
     serial_number = _attributes.AttributeViString(1150243)
     '''Type: str
@@ -1040,52 +860,10 @@ class _SessionBase(object):
 
     A string that contains the name of the vendor that supplies NI-FGEN.
     '''
-    started_event_delay = _attributes.AttributeViReal64(1150356)
-    '''Type: float
-
-    Specifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.
-    You can specify the units of the delay value by setting the started_event_delay property.
-    '''
-    started_event_delay_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventDelayUnits, 1150357)
-    '''Type: enums.StartedEventDelayUnits
-
-    Specifies the units applied to the value of the started_event_delay
-    property.  Valid units are seconds and sample clock periods.
-    '''
-    started_event_latched_status = _attributes.AttributeViBoolean(1150352)
-    '''Type: bool
-
-    Specifies the latched status of the Started Event.
-    '''
-    started_event_level_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventActiveLevel, 1150316)
-    '''Type: enums.StartedEventActiveLevel
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventOutputBehavior, 1150331)
-    '''Type: enums.StartedEventOutputBehavior
-
-    Specifies the output behavior for the Started Event.
-    '''
     started_event_output_terminal = _attributes.AttributeViString(1150314)
     '''Type: str
 
     Specifies the destination terminal for the Started Event.
-    '''
-    started_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulsePolarity, 1150318)
-    '''Type: enums.StartedEventPulsePolarity
-
-    Specifies the output polarity of the Started Event.
-    '''
-    started_event_pulse_width = _attributes.AttributeViReal64(1150335)
-    '''Type: float
-
-    Specifies the pulse width for the Started Event.
-    '''
-    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
-    '''Type: enums.StartedEventPulseWidthUnits
-
-    Specifies the pulse width units for the Started Event.
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
     '''Type: enums.StartTriggerType
@@ -1121,22 +899,6 @@ class _SessionBase(object):
 
     Returns a model code of the device. For NI-FGEN versions that support more than one device, this  property contains a comma-separated list of supported device  models.
     '''
-    synchronization = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SynchronizationSource, 1150111)
-    '''Type: enums.SynchronizationSource
-
-    Specify the source of the synchronization signal that you want to use.
-    '''
-    sync_duty_cycle_high = _attributes.AttributeViReal64(1150105)
-    '''Type: float
-
-    Controls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this property as a  percentage of the time the square wave is high in each cycle.
-    Units: Percentage of time the waveform is high
-    '''
-    sync_out_output_terminal = _attributes.AttributeViString(1150330)
-    '''Type: str
-
-    Specifies the terminal to which to export the SYNC OUT signal. This property is not supported for all devices.
-    '''
     terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
     '''Type: enums.TerminalConfiguration
 
@@ -1146,21 +908,6 @@ class _SessionBase(object):
     '''Type: enums.TriggerMode
 
     Controls the trigger mode.
-    '''
-    trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSource, 1250302)
-    '''Type: enums.TriggerSource
-
-    Controls which trigger source the signal generator uses.
-    After you call the _initiate_generation method, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the CYCLE_COUNT property.
-    This property is also the source for the trigger in the other trigger modes as specified by the trigger_mode property.
-
-    Note:
-    One or more of the referenced properties are not in the Python API for this driver.
-    '''
-    video_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoWaveformType, 1150216)
-    '''Type: enums.VideoWaveformType
-
-    Selects which waveform type that the NI 5431 generates. Setting this property ensures that the crystal is set to the proper frequency.
     '''
     wait_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
     '''Type: enums.WaitBehavior
@@ -1204,6 +951,13 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def __getitem__(self, key):
+        rep_caps = []
+        rep_caps.append("channels")
+        rep_caps.append("script_triggers")
+        rep_caps.append("markers")
+        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+
     def _get_error_description(self, error_code):
         '''_get_error_description
 
@@ -1228,6 +982,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def allocate_named_waveform(self, waveform_name, waveform_size):
         '''allocate_named_waveform
 
@@ -1237,12 +992,12 @@ class _SessionBase(object):
         Waveform methods.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].allocate_named_waveform(waveform_name, waveform_size)
+            session.channels[0,1].allocate_named_waveform(waveform_name, waveform_size)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -1260,6 +1015,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def allocate_waveform(self, waveform_size):
         '''allocate_waveform
 
@@ -1272,12 +1028,12 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].allocate_waveform(waveform_size)
+            session.channels[0,1].allocate_waveform(waveform_size)
 
         Args:
             waveform_size (int): Specifies, in samples, the size of the waveform to allocate.
@@ -1296,19 +1052,20 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def clear_user_standard_waveform(self):
         '''clear_user_standard_waveform
 
         Clears the user-defined waveform created by the
-        nifgen_DefineUserStandardWaveform method.
+        define_user_standard_waveform method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].clear_user_standard_waveform()
+            session.channels[0,1].clear_user_standard_waveform()
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1316,6 +1073,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_arb_sequence(self, sequence_handle, gain, offset):
         '''configure_arb_sequence
 
@@ -1328,12 +1086,12 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].configure_arb_sequence(sequence_handle, gain, offset)
+            session.channels[0,1].configure_arb_sequence(sequence_handle, gain, offset)
 
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
@@ -1381,6 +1139,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_arb_waveform(self, waveform_handle, gain, offset):
         '''configure_arb_waveform
 
@@ -1393,12 +1152,12 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].configure_arb_waveform(waveform_handle, gain, offset)
+            session.channels[0,1].configure_arb_waveform(waveform_handle, gain, offset)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform you want the signal
@@ -1456,6 +1215,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_custom_fir_filter_coefficients(self, coefficients_array):
         '''configure_custom_fir_filter_coefficients
 
@@ -1472,12 +1232,12 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].configure_custom_fir_filter_coefficients(coefficients_array)
+            session.channels[0,1].configure_custom_fir_filter_coefficients(coefficients_array)
 
         Args:
             coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
@@ -1496,6 +1256,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
         '''configure_freq_list
 
@@ -1509,12 +1270,12 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
+            session.channels[0,1].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
         Args:
             frequency_list_handle (int): Specifies the handle of the frequency list that you want the signal
@@ -1580,6 +1341,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def configure_standard_waveform(self, waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0):
         '''configure_standard_waveform
 
@@ -1601,12 +1363,12 @@ class _SessionBase(object):
         One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
+            session.channels[0,1].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
@@ -1617,23 +1379,23 @@ class _SessionBase(object):
 
                 **Default Value**: Waveform.SINE
 
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                    |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                   |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                          |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                      |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the define_user_standard_waveform method. |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
 
             amplitude (float): Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
@@ -1707,6 +1469,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def create_waveform(self, waveform_data_array):
         '''create_waveform
 
@@ -1715,12 +1478,12 @@ class _SessionBase(object):
         Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].create_waveform(waveform_data_array)
+            session.channels[0,1].create_waveform(waveform_data_array)
 
         Args:
             waveform_data_array (list of float): Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
@@ -1749,6 +1512,7 @@ class _SessionBase(object):
 
         return self._create_waveform_f64(waveform_data_array)
 
+    @ivi_synchronized
     def _create_waveform_f64(self, waveform_data_array):
         '''_create_waveform_f64
 
@@ -1759,17 +1523,17 @@ class _SessionBase(object):
         of waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._create_waveform_f64(waveform_data_array)
+            session.channels[0,1]._create_waveform_f64(waveform_data_array)
 
         Args:
             waveform_data_array (array.array("d")): Specifies the array of data you want to use for the new arbitrary
@@ -1797,6 +1561,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def _create_waveform_f64_numpy(self, waveform_data_array):
         '''_create_waveform_f64
 
@@ -1807,17 +1572,17 @@ class _SessionBase(object):
         of waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._create_waveform_f64(waveform_data_array)
+            session.channels[0,1]._create_waveform_f64(waveform_data_array)
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.float64)): Specifies the array of data you want to use for the new arbitrary
@@ -1852,6 +1617,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def create_waveform_from_file_f64(self, file_name, byte_order):
         '''create_waveform_from_file_f64
 
@@ -1868,12 +1634,12 @@ class _SessionBase(object):
         outputs.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].create_waveform_from_file_f64(file_name, byte_order)
+            session.channels[0,1].create_waveform_from_file_f64(file_name, byte_order)
 
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
@@ -1915,6 +1681,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def create_waveform_from_file_i16(self, file_name, byte_order):
         '''create_waveform_from_file_i16
 
@@ -1931,12 +1698,12 @@ class _SessionBase(object):
         generate different voltage outputs.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].create_waveform_from_file_i16(file_name, byte_order)
+            session.channels[0,1].create_waveform_from_file_i16(file_name, byte_order)
 
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
@@ -1978,6 +1745,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def _create_waveform_i16_numpy(self, waveform_data_array):
         '''_create_waveform_i16
 
@@ -1988,17 +1756,17 @@ class _SessionBase(object):
         waveforms, or deleting the waveform when it is no longer needed.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.ARB or
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._create_waveform_i16(waveform_data_array)
+            session.channels[0,1]._create_waveform_i16(waveform_data_array)
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.int16)): Specify the array of data that you want to use for the new arbitrary
@@ -2031,6 +1799,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
 
+    @ivi_synchronized
     def define_user_standard_waveform(self, waveform_data_array):
         '''define_user_standard_waveform
 
@@ -2038,25 +1807,25 @@ class _SessionBase(object):
         List output mode.
 
         To select the waveform, set the **waveform** parameter to
-        Waveform.USER with either the nifgen_ConfigureStandardWaveform
-        or the nifgen_CreateFreqList method.
+        Waveform.USER with either the configure_standard_waveform
+        or the create_freq_list method.
 
         The waveform data must be scaled between –1.0 and 1.0. Use the
         **amplitude** parameter in the configure_standard_waveform
         method to generate different output voltages.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.FUNC or
         OutputMode.FREQ_LIST before calling this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].define_user_standard_waveform(waveform_data_array)
+            session.channels[0,1].define_user_standard_waveform(waveform_data_array)
 
         Args:
             waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
@@ -2077,8 +1846,9 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def delete_named_waveform(self, waveform_name):
-        '''delete_named_waveform
+    @ivi_synchronized
+    def _delete_named_waveform(self, waveform_name):
+        '''_delete_named_waveform
 
         Removes a previously created arbitrary waveform from the signal
         generator memory and invalidates the waveform handle.
@@ -2088,12 +1858,12 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].delete_named_waveform(waveform_name)
+            session.channels[0,1]._delete_named_waveform(waveform_name)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2106,18 +1876,19 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def delete_script(self, script_name):
         '''delete_script
 
         Deletes the specified script from onboard memory.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].delete_script(script_name)
+            session.channels[0,1].delete_script(script_name)
 
         Args:
             script_name (str): Specifies the name of the script you want to delete. The script name
@@ -2131,6 +1902,32 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
+    def delete_waveform(self, waveform_name_or_handle):
+        '''delete_waveform
+
+        Removes a previously created arbitrary waveform from the signal generator memory.
+
+        Note: The signal generator must not be in the Generating state when you call this method.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].delete_waveform(waveform_name_or_handle)
+
+        Args:
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
+
+        '''
+        if isinstance(waveform_name_or_handle, str):
+            return self._delete_named_waveform(waveform_name_or_handle)
+        else:
+            return self._clear_arb_waveform(waveform_name_or_handle)
+
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -2146,12 +1943,12 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2170,6 +1967,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
@@ -2183,12 +1981,12 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2207,6 +2005,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -2222,12 +2021,12 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2246,6 +2045,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -2279,12 +2079,12 @@ class _SessionBase(object):
         parameter.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels[0,1]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2315,9 +2115,9 @@ class _SessionBase(object):
 
         The IVI Engine also maintains this error information separately for each
         thread. This feature is useful if you do not have a session handle to
-        pass to the _get_error or nifgen_ClearError methods. This
-        situation occurs when a call to the nifgen_init or
-        nifgen_InitWithOptions method fails.
+        pass to the _get_error or ClearError methods. This
+        situation occurs when a call to the init or
+        InitWithOptions method fails.
 
         Returns:
             error_code (int): The error code for the session or execution thread.
@@ -2325,7 +2125,7 @@ class _SessionBase(object):
                 A value of VI_SUCCESS (0) indicates that no error occurred. A positive
                 value indicates a warning. A negative value indicates an error.
 
-                You can call nifgen_error_message to get a text description of the
+                You can call _error_message to get a text description of the
                 value.
 
                 If you are not interested in this value, you can pass VI_NULL.
@@ -2343,58 +2143,87 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
-    def get_fir_filter_coefficients(self):
-        '''get_fir_filter_coefficients
+    def lock(self):
+        '''lock
 
-        | Returns the FIR filter coefficients used by the onboard signal
-          processing block. These coefficients are determined by NI-FGEN and
-          based on the FIR filter type and corresponding property (Alpha,
-          Passband, BT) unless you are using the custom filter. If you are using
-          a custom filter, the coefficients returned are those set with the
-          nifgen_ConfigureCustomFIRFilterCoefficients method coerced to the
-          quantized values used by the device.
-        | To use this method, first call an instance of the
-          get_fir_filter_coefficients method with the
-          **coefficientsArray** parameter set to VI_NULL. Calling the method
-          in this state returns the current size of the **coefficientsArray** as
-          the value of the **numberOfCoefficientsRead** parameter. Create an
-          array of this size, and call the get_fir_filter_coefficients
-          method a second time, passing the new array as the
-          **coefficientsArray** parameter and the size as the **arraySize**
-          parameter. This second method call populates the array with the FIR
-          filter coefficients.
-        | Refer to the FIR Filter topic for your device in the *NI Signal
-          Generators Help* for more information about FIR filter coefficients.
-          This method is supported only for the NI 5441.
-        | **Default Value**: None
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
 
-        Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        Other threads may have obtained a lock on this session for the
+        following reasons:
 
-            session.channels['0,1'].get_fir_filter_coefficients()
+            -  The application called the lock method.
+            -  A call to NI-FGEN locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
+
+        You can safely make nested calls to the lock method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock method with a call to
+        the unlock method.
 
         Returns:
-            number_of_coefficients_read (int): Specifies the array of data containing the number of coefficients you
-                want to read.
+            lock (context manager): When used in a with statement, nifgen.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
+        '''
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
 
+    def _lock_session(self):
+        '''_lock_session
+
+        Actuall call to driver
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        array_size_ctype = _visatype.ViInt32()  # case S170
-        coefficients_array_ctype = None  # case B580
-        number_of_coefficients_read_ctype = _visatype.ViInt32()  # case S200
-        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        coefficients_array_size = array_size_ctype.value  # case B590
-        coefficients_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=coefficients_array_size)  # case B590
-        error_code = self._library.niFgen_GetFIRFilterCoefficients(vi_ctype, channel_name_ctype, array_size_ctype, coefficients_array_ctype, None if number_of_coefficients_read_ctype is None else (ctypes.pointer(number_of_coefficients_read_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(coefficients_array_ctype[i]) for i in range(array_size_ctype.value)], int(number_of_coefficients_read_ctype.value)
+        error_code = self._library.niFgen_LockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
 
+    @ivi_synchronized
+    def send_software_edge_trigger(self):
+        '''send_software_edge_trigger
+
+        Sends a command to trigger the signal generator. This VI can act as an
+        override for an external edge trigger.
+
+        If called directly on the session, this will send a software start trigger.
+
+            session.send_software_edge_trigger()
+
+        If called using the script trigger repeated capability container, this will
+        send a software trigger to the specified script trigger
+
+            session.script_triggers[1].send_software_edge_trigger()
+
+        Note:
+        This method does not override external digital edge triggers of the
+        NI 5401/5411/5431.
+        '''
+        # We look at whether we are called directly on the session or a repeated capability container to determine how to behave
+        if len(self._repeated_capability) > 0:
+            trigger_id = self._repeated_capability
+            trigger = 103  # enums.Trigger.SCRIPT
+        else:
+            trigger_id = "None"
+            trigger = 1004  # enums.Trigger.START
+
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        trigger_ctype = _visatype.ViInt32(trigger)  # case S130
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
+        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -2424,12 +2253,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2450,6 +2279,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
@@ -2479,12 +2309,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2505,6 +2335,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -2534,12 +2365,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2560,6 +2391,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -2589,12 +2421,12 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2615,8 +2447,9 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
-        '''set_named_waveform_next_write_position
+    @ivi_synchronized
+    def _set_named_waveform_next_write_position(self, waveform_name, relative_to, offset):
+        '''_set_named_waveform_next_write_position
 
         Sets the position in the waveform to which data is written at the next
         write. This method allows you to write to arbitrary locations within
@@ -2626,20 +2459,20 @@ class _SessionBase(object):
         method is called again. The **waveformHandle** passed in must have
         been created with a call to one of the following methods:
 
-        -  nifgen_AllocateWaveform
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  allocate_waveform
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].set_named_waveform_next_write_position(waveform_name, relative_to, offset)
+            session.channels[0,1]._set_named_waveform_next_write_position(waveform_name, relative_to, offset)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2671,8 +2504,9 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
-        '''set_waveform_next_write_position
+    @ivi_synchronized
+    def set_next_write_position(self, waveform_name_or_handle, relative_to, offset):
+        '''set_next_write_position
 
         Sets the position in the waveform at which the next waveform data is
         written. This method allows you to write to arbitrary locations within
@@ -2680,26 +2514,71 @@ class _SessionBase(object):
         waveform specified by the waveformHandle parameter. Subsequent writes to
         that waveform begin where the last write left off, unless this method
         is called again. The waveformHandle passed in must have been created by
-        a call to the nifgen_AllocateWaveform method or one of the following
-        niFgen CreateWaveform methods:
-
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        a call to the allocate_waveform method or one of the following
+        create_waveform method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].set_waveform_next_write_position(waveform_handle, relative_to, offset)
+            session.channels[0,1].set_next_write_position(waveform_name_or_handle, relative_to, offset)
+
+        Args:
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
+
+            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
+                **offset** together determine where to start loading data into the
+                waveform.
+
+                ****Defined Values****
+
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.START (0)   | Use the start of the waveform as the reference position.                |
+                +------------------------+-------------------------------------------------------------------------+
+                | RelativeTo.CURRENT (1) | Use the current position within the waveform as the reference position. |
+                +------------------------+-------------------------------------------------------------------------+
+
+            offset (int): Specifies the offset from **relativeTo** at which to start loading the
+                data into the waveform.
+
+        '''
+        if isinstance(waveform_name_or_handle, str):
+            return self._set_named_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
+        else:
+            return self._set_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
+
+    @ivi_synchronized
+    def _set_waveform_next_write_position(self, waveform_handle, relative_to, offset):
+        '''_set_waveform_next_write_position
+
+        Sets the position in the waveform at which the next waveform data is
+        written. This method allows you to write to arbitrary locations within
+        the waveform. These settings apply only to the next write to the
+        waveform specified by the waveformHandle parameter. Subsequent writes to
+        that waveform begin where the last write left off, unless this method
+        is called again. The waveformHandle passed in must have been created by
+        a call to the allocate_waveform method or one of the following
+        niFgen CreateWaveform methods:
+
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nifgen.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._set_waveform_next_write_position(waveform_handle, relative_to, offset)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             relative_to (enums.RelativeTo): Specifies the reference position in the waveform. This position and
                 **offset** together determine where to start loading data into the
@@ -2728,33 +2607,46 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def unlock(self):
+        '''unlock
+
+        Releases a lock that you acquired on an device session using
+        lock. Refer to lock for additional
+        information on session locks.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niFgen_UnlockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
+
+    @ivi_synchronized
     def _write_binary16_waveform_numpy(self, waveform_handle, data):
         '''_write_binary16_waveform
 
         Writes binary data to the waveform in onboard memory. The waveform
         handle passed must have been created by a call to the
-        nifgen_AllocateWaveform or the nifgen_CreateWaveformI16 method.
+        allocate_waveform or the create_waveform method.
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
+        set_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._write_binary16_waveform(waveform_handle, data)
+            session.channels[0,1]._write_binary16_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             data (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**. The binary data
@@ -2778,36 +2670,37 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_named_waveform_f64(self, waveform_name, data):
         '''_write_named_waveform_f64
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or to one of the following niFgen
+        allocate_waveform method or to one of the following niFgen
         Create Waveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
+        set_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._write_named_waveform_f64(waveform_name, data)
+            session.channels[0,1]._write_named_waveform_f64(waveform_name, data)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2826,36 +2719,37 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_named_waveform_f64_numpy(self, waveform_name, data):
         '''_write_named_waveform_f64
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or to one of the following niFgen
+        allocate_waveform method or to one of the following niFgen
         Create Waveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
+        set_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._write_named_waveform_f64(waveform_name, data)
+            session.channels[0,1]._write_named_waveform_f64(waveform_name, data)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2881,6 +2775,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_named_waveform_i16_numpy(self, waveform_name, data):
         '''_write_named_waveform_i16
 
@@ -2889,19 +2784,19 @@ class _SessionBase(object):
         By default, the subsequent call to the write_waveform
         method continues writing data from the position of the last sample
         written. You can set the write position and offset by calling the
-        nifgen_SetNamedWaveformNextWritePosition method. If streaming is
+        set_next_write_position method. If streaming is
         enabled, you can write more data than the allocated waveform size in
         onboard memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._write_named_waveform_i16(waveform_name, data)
+            session.channels[0,1]._write_named_waveform_i16(waveform_name, data)
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2927,6 +2822,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def write_script(self, script):
         '''write_script
 
@@ -2934,12 +2830,12 @@ class _SessionBase(object):
         generation of waveforms.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].write_script(script)
+            session.channels[0,1].write_script(script)
 
         Args:
             script (str): Contains the text of the script you want to use for your generation
@@ -2955,40 +2851,41 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_waveform(self, waveform_handle, data):
         '''_write_waveform
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or one of the following niFgen
+        allocate_waveform method or one of the following niFgen
         CreateWaveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
+        set_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._write_waveform(waveform_handle, data)
+            session.channels[0,1]._write_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             data (array.array("d")): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
@@ -3004,40 +2901,41 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _write_waveform_numpy(self, waveform_handle, data):
         '''_write_waveform
 
         Writes floating-point data to the waveform in onboard memory. The
         waveform handle passed in must have been created by a call to the
-        nifgen_AllocateWaveform method or one of the following niFgen
+        allocate_waveform method or one of the following niFgen
         CreateWaveform methods:
 
-        -  nifgen_CreateWaveformF64
-        -  nifgen_CreateWaveformI16
-        -  nifgen_CreateWaveformFromFileI16
-        -  nifgen_CreateWaveformFromFileF64
-        -  nifgen_CreateWaveformFromFileHWS
+        -  create_waveform
+        -  create_waveform
+        -  create_waveform_from_file_i16
+        -  create_waveform_from_file_f64
+        -  CreateWaveformFromFileHWS
 
         By default, the subsequent call to the write_waveform method
         continues writing data from the position of the last sample written. You
         can set the write position and offset by calling the
-        nifgen_SetWaveformNextWritePosition method. If streaming is enabled,
+        set_next_write_position method. If streaming is enabled,
         you can write more data than the allocated waveform size in onboard
         memory. Refer to the
         `Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._write_waveform(waveform_handle, data)
+            session.channels[0,1]._write_waveform(waveform_handle, data)
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
-                the nifgen_AllocateWaveform method.
+                the allocate_waveform method.
 
             data (numpy.array(dtype=numpy.float64)): Specifies the array of data to load into the waveform. The array must
                 have at least as many elements as the value in **size**.
@@ -3060,6 +2958,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def write_waveform(self, waveform_name_or_handle, data):
         '''write_waveform
 
@@ -3067,19 +2966,19 @@ class _SessionBase(object):
 
         By default, subsequent calls to this method
         continue writing data from the position of the last sample written. You
-        can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
-        nifgen_SetWaveformNextWritePosition method.
+        can set the write position and offset by calling the set_next_write_position
+        set_next_write_position method.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session instance, and calling this method on the result.:
+        nifgen.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1'].write_waveform(waveform_name_or_handle, data)
+            session.channels[0,1].write_waveform(waveform_name_or_handle, data)
 
         Args:
-            waveform_name_or_handle (int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform or allocate_waveform.
+            waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
 
             data (list of float): Array of data to load into the waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
 
@@ -3197,7 +3096,7 @@ class Session(_SessionBase):
 
             reset_device (bool): Specifies whether you want to reset the device during the initialization
                 procedure. True specifies that the device is reset and performs the
-                same method as the nifgen_Reset method.
+                same method as the Reset method.
 
                 ****Defined Values****
 
@@ -3286,11 +3185,12 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         '''abort
 
         Aborts any previously initiated signal generation. Call the
-        nifgen_InitiateGeneration method to cause the signal generator to
+        initiate method to cause the signal generator to
         produce a signal again.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3298,6 +3198,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def clear_arb_memory(self):
         '''clear_arb_memory
 
@@ -3314,6 +3215,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def clear_arb_sequence(self, sequence_handle):
         '''clear_arb_sequence
 
@@ -3327,7 +3229,7 @@ class Session(_SessionBase):
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
                 generator to remove. You can create an arbitrary sequence using the
-                nifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence method.
+                create_arb_sequence or create_advanced_arb_sequence method.
                 These methods return a handle that you use to identify the sequence.
 
                 | **Defined Value**:
@@ -3346,8 +3248,9 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_arb_waveform(self, waveform_handle):
-        '''clear_arb_waveform
+    @ivi_synchronized
+    def _clear_arb_waveform(self, waveform_handle):
+        '''_clear_arb_waveform
 
         Removes a previously created arbitrary waveform from the signal
         generator memory and invalidates the waveform handle.
@@ -3389,6 +3292,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def clear_freq_list(self, frequency_list_handle):
         '''clear_freq_list
 
@@ -3423,6 +3327,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def commit(self):
         '''commit
 
@@ -3444,7 +3349,7 @@ class Session(_SessionBase):
 
         -  Routes are committed, so signals are exported or imported.
         -  Any Reference Clock and external clock circuits are phase-locked.
-        -  A subsequent _initiate_generation method can run faster
+        -  A subsequent initiate method can run faster
            because the device is already configured.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3452,257 +3357,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_digital_edge_script_trigger(self, trigger_id, source, edge=enums.ScriptTriggerDigitalEdgeEdge.RISING):
-        '''configure_digital_edge_script_trigger
-
-        Configures the specified Script Trigger for digital edge triggering.
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-
-            source (str): Specifies which trigger source the signal generator uses.
-
-                **Defined Values**
-
-                **Default Value**: "PFI0"
-
-                +-------------+-----------------------------------+
-                | "PFI0"      | PFI 0                             |
-                +-------------+-----------------------------------+
-                | "PFI1"      | PFI 1                             |
-                +-------------+-----------------------------------+
-                | "PFI2"      | PFI 2                             |
-                +-------------+-----------------------------------+
-                | "PFI3"      | PFI 3                             |
-                +-------------+-----------------------------------+
-                | "PFI4"      | PFI 4                             |
-                +-------------+-----------------------------------+
-                | "PFI5"      | PFI 5                             |
-                +-------------+-----------------------------------+
-                | "PFI6"      | PFI 6                             |
-                +-------------+-----------------------------------+
-                | "PFI7"      | PFI 7                             |
-                +-------------+-----------------------------------+
-                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
-                +-------------+-----------------------------------+
-                | "PXI_Star"  | PXI star trigger line             |
-                +-------------+-----------------------------------+
-
-            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the edge to detect.
-
-                ****Defined Values****
-
-                ****Default Value**:** ScriptTriggerDigitalEdgeEdge.RISING
-
-                +--------------------------------------+------------------------------------------------------------------+
-                | ScriptTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
-                +--------------------------------------+------------------------------------------------------------------+
-                | ScriptTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
-                +--------------------------------------+------------------------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_edge_start_trigger(self, source, edge=enums.StartTriggerDigitalEdgeEdge.RISING):
-        '''configure_digital_edge_start_trigger
-
-        Configures the Start Trigger for digital edge triggering.
-
-        Args:
-            source (str): Specifies which trigger source the signal generator uses.
-
-                **Defined Values**
-
-                **Default Value**: "PFI0"
-
-                +-------------+-----------------------------------+
-                | "PFI0"      | PFI 0                             |
-                +-------------+-----------------------------------+
-                | "PFI1"      | PFI 1                             |
-                +-------------+-----------------------------------+
-                | "PFI2"      | PFI 2                             |
-                +-------------+-----------------------------------+
-                | "PFI3"      | PFI 3                             |
-                +-------------+-----------------------------------+
-                | "PFI4"      | PFI 4                             |
-                +-------------+-----------------------------------+
-                | "PFI5"      | PFI 5                             |
-                +-------------+-----------------------------------+
-                | "PFI6"      | PFI 6                             |
-                +-------------+-----------------------------------+
-                | "PFI7"      | PFI 7                             |
-                +-------------+-----------------------------------+
-                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
-                +-------------+-----------------------------------+
-                | "PXI_Star"  | PXI star trigger line             |
-                +-------------+-----------------------------------+
-
-            edge (enums.StartTriggerDigitalEdgeEdge): Specifies the edge to detect.
-
-                ****Defined Values****
-
-                ****Default Value**:** StartTriggerDigitalEdgeEdge.RISING
-
-                +-------------------------------------+------------------------------------------------------------------+
-                | StartTriggerDigitalEdgeEdge.RISING  | Occurs when the signal transitions from low level to high level. |
-                +-------------------------------------+------------------------------------------------------------------+
-                | StartTriggerDigitalEdgeEdge.FALLING | Occurs when the signal transitions from high level to low level. |
-                +-------------------------------------+------------------------------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
-            raise TypeError('Parameter mode must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        error_code = self._library.niFgen_ConfigureDigitalEdgeStartTrigger(vi_ctype, source_ctype, edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_digital_level_script_trigger(self, trigger_id, source, trigger_when):
-        '''configure_digital_level_script_trigger
-
-        Configures the specified Script Trigger for digital level triggering.
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger used for triggering.
-
-                **Defined Values**
-
-                **Default Value**: "ScriptTrigger0"
-
-                +------------------+------------------+
-                | "ScriptTrigger0" | Script Trigger 0 |
-                +------------------+------------------+
-                | "ScriptTrigger1" | Script Trigger 1 |
-                +------------------+------------------+
-                | "ScriptTrigger2" | Script Trigger 2 |
-                +------------------+------------------+
-                | "ScriptTrigger3" | Script Trigger 3 |
-                +------------------+------------------+
-
-            source (str): Specifies which trigger source the signal generator uses.
-
-                **Defined Values**
-
-                **Default Value**: "PFI0"
-
-                +-------------+-----------------------------------+
-                | "PFI0"      | PFI 0                             |
-                +-------------+-----------------------------------+
-                | "PFI1"      | PFI 1                             |
-                +-------------+-----------------------------------+
-                | "PFI2"      | PFI 2                             |
-                +-------------+-----------------------------------+
-                | "PFI3"      | PFI 3                             |
-                +-------------+-----------------------------------+
-                | "PFI4"      | PFI 4                             |
-                +-------------+-----------------------------------+
-                | "PFI5"      | PFI 5                             |
-                +-------------+-----------------------------------+
-                | "PFI6"      | PFI 6                             |
-                +-------------+-----------------------------------+
-                | "PFI7"      | PFI 7                             |
-                +-------------+-----------------------------------+
-                | "PXI_Trig0" | PXI trigger line 0 or RTSI line 0 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig1" | PXI trigger line 1 or RTSI line 1 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig2" | PXI trigger line 2 or RTSI line 2 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig3" | PXI trigger line 3 or RTSI line 3 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig4" | PXI trigger line 4 or RTSI line 4 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig5" | PXI trigger line 5 or RTSI line 5 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig6" | PXI trigger line 6 or RTSI line 6 |
-                +-------------+-----------------------------------+
-                | "PXI_Trig7" | PXI trigger line 7 or RTSI line 7 |
-                +-------------+-----------------------------------+
-                | "PXI_Star"  | PXI star trigger line             |
-                +-------------+-----------------------------------+
-
-            trigger_when (enums.TriggerWhen): Specifies whether the Script Trigger asserts on a high or low digital
-                level.
-
-                **Defined Values**
-
-                **Default Value**: "HighLevel"
-
-                +-------------+-------------------------------------------------+
-                | "HighLevel" | Script Trigger asserts on a high digital level. |
-                +-------------+-------------------------------------------------+
-                | "LowLevel"  | Script Trigger asserts on a low digital level.  |
-                +-------------+-------------------------------------------------+
-
-        '''
-        if type(trigger_when) is not enums.TriggerWhen:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWhen))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        trigger_when_ctype = _visatype.ViInt32(trigger_when.value)  # case S130
-        error_code = self._library.niFgen_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, trigger_when_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+    @ivi_synchronized
     def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array=None, marker_location_array=None):
         '''create_advanced_arb_sequence
 
@@ -3724,7 +3379,7 @@ class Session(_SessionBase):
         Note:
         The signal generator must not be in the Generating state when you call
         this method.
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.SEQ before calling this
         method.
 
@@ -3735,14 +3390,14 @@ class Session(_SessionBase):
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform method or one of the following niFgen
+                allocate_waveform method or one of the following niFgen
                 CreateWaveform methods:
 
-                -  nifgen_CreateWaveformF64
-                -  nifgen_CreateWaveformI16
-                -  nifgen_CreateWaveformFromFileI16
-                -  nifgen_CreateWaveformFromFileF64
-                -  nifgen_CreateWaveformFromFileHWS
+                -  create_waveform
+                -  create_waveform
+                -  create_waveform_from_file_i16
+                -  create_waveform_from_file_f64
+                -  CreateWaveformFromFileHWS
 
                 **Default Value**: None
 
@@ -3754,7 +3409,7 @@ class Session(_SessionBase):
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities method.
+                query_arb_seq_capabilities method.
 
                 **Default Value**: None
 
@@ -3766,7 +3421,7 @@ class Session(_SessionBase):
                 generate. Each element of the **sampleCountsArray** must be larger than
                 the minimum waveform size, a multiple of the waveform quantum and no
                 larger than the number of samples in the corresponding waveform. You can
-                obtain these values by calling the nifgen_QueryArbWfmCapabilities
+                obtain these values by calling the query_arb_wfm_capabilities
                 method.
 
                 **Default Value**: None
@@ -3799,7 +3454,7 @@ class Session(_SessionBase):
                 **Default Value**: None
 
             sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
-                pass this handle to nifgen_ConfigureArbSequence to generate the
+                pass this handle to configure_arb_sequence to generate the
                 arbitrary sequence.
 
         '''
@@ -3822,13 +3477,14 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range((0 if marker_location_array is None else len(marker_location_array)))], int(sequence_handle_ctype.value)
 
+    @ivi_synchronized
     def create_arb_sequence(self, waveform_handles_array, loop_counts_array):
         '''create_arb_sequence
 
         Creates an arbitrary sequence from an array of waveform handles and an
         array of corresponding loop counts. This method returns a handle that
         identifies the sequence. You pass this handle to the
-        nifgen_ConfigureArbSequence method to specify what arbitrary sequence
+        configure_arb_sequence method to specify what arbitrary sequence
         you want the signal generator to produce.
 
         An arbitrary sequence consists of multiple waveforms. For each waveform,
@@ -3837,7 +3493,7 @@ class Session(_SessionBase):
         to repeat a specific waveform is called the loop count.
 
         Note:
-        You must call the nifgen_ConfigureOutputMode method to set the
+        You must call the ConfigureOutputMode method to set the
         **outputMode** parameter to OutputMode.SEQ before calling this
         method.
 
@@ -3848,14 +3504,14 @@ class Session(_SessionBase):
                 **waveformHandlesArray** element has a corresponding **loopCountsArray**
                 element that indicates how many times that waveform is repeated. You
                 obtain waveform handles when you create arbitrary waveforms with the
-                nifgen_AllocateWaveform method or one of the following niFgen
+                allocate_waveform method or one of the following niFgen
                 CreateWaveform methods:
 
-                -  nifgen_CreateWaveformF64
-                -  nifgen_CreateWaveformI16
-                -  nifgen_CreateWaveformFromFileI16
-                -  nifgen_CreateWaveformFromFileF64
-                -  nifgen_CreateWaveformFromFileHWS
+                -  create_waveform
+                -  create_waveform
+                -  create_waveform_from_file_i16
+                -  create_waveform_from_file_f64
+                -  CreateWaveformFromFileHWS
 
                 **Default Value**: None
 
@@ -3867,14 +3523,14 @@ class Session(_SessionBase):
                 element of the **loopCountsArray** must be less than or equal to the
                 maximum number of loop counts that the signal generator allows. You can
                 obtain the maximum loop count from **maximumLoopCount** in the
-                nifgen_QueryArbSeqCapabilities method.
+                query_arb_seq_capabilities method.
 
                 **Default Value**: None
 
 
         Returns:
             sequence_handle (int): Returns the handle that identifies the new arbitrary sequence. You can
-                pass this handle to nifgen_ConfigureArbSequence to generate the
+                pass this handle to configure_arb_sequence to generate the
                 arbitrary sequence.
 
         '''
@@ -3887,6 +3543,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
 
+    @ivi_synchronized
     def create_freq_list(self, waveform, frequency_array, duration_array):
         '''create_freq_list
 
@@ -3895,7 +3552,7 @@ class Session(_SessionBase):
         two arrays should have the same number of elements, and this value must
         also be the size of the **frequencyListLength**. The method returns a
         handle that identifies the frequency list (the **frequencyListHandle**).
-        You can pass this handle to nifgen_ConfigureFreqList to specify what
+        You can pass this handle to configure_freq_list to specify what
         frequency list you want the signal generator to produce.
 
         A frequency list consists of a list of frequencies and durations. The
@@ -3916,23 +3573,23 @@ class Session(_SessionBase):
 
                 **Default Value**: Waveform.SINE
 
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                    |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                                  |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                             |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                                   |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                          |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
-                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the nifgen_DefineUserStandardWaveform method. |
-                +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SINE      | Specifies that the signal generator produces a sinusoid waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.SQUARE    | Specifies that the signal generator produces a square waveform.                                                                |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.TRIANGLE  | Specifies that the signal generator produces a triangle waveform.                                                              |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_UP   | Specifies that the signal generator produces a positive ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.RAMP_DOWN | Specifies that the signal generator produces a negative ramp waveform.                                                         |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.DC        | Specifies that the signal generator produces a constant voltage.                                                               |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.NOISE     | Specifies that the signal generator produces white noise.                                                                      |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
+                | Waveform.USER      | Specifies that the signal generator produces a user-defined waveform as defined with the define_user_standard_waveform method. |
+                +--------------------+--------------------------------------------------------------------------------------------------------------------------------+
 
             frequency_array (list of float): Specifies the array of frequencies to form the frequency list. The array
                 must have at least as many elements as the value you specify in
@@ -3957,7 +3614,7 @@ class Session(_SessionBase):
 
         Returns:
             frequency_list_handle (int): Returns the handle that identifies the new frequency list. You can pass
-                this handle to nifgen_ConfigureFreqList to generate the arbitrary
+                this handle to configure_freq_list to generate the arbitrary
                 sequence.
 
         '''
@@ -3973,6 +3630,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(frequency_list_handle_ctype.value)
 
+    @ivi_synchronized
     def disable(self):
         '''disable
 
@@ -3985,6 +3643,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         '''_get_ext_cal_last_date_and_time
 
@@ -4015,6 +3674,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_last_temp(self):
         '''get_ext_cal_last_temp
 
@@ -4032,6 +3692,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
         '''get_ext_cal_recommended_interval
 
@@ -4049,6 +3710,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
 
+    @ivi_synchronized
     def get_hardware_state(self):
         '''get_hardware_state
 
@@ -4081,6 +3743,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.HardwareState(state_ctype.value)
 
+    @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
 
@@ -4093,6 +3756,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
         '''get_self_cal_last_date_and_time
 
@@ -4105,6 +3769,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
         return datetime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
         '''_get_self_cal_last_date_and_time
 
@@ -4142,6 +3807,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
+    @ivi_synchronized
     def get_self_cal_last_temp(self):
         '''get_self_cal_last_temp
 
@@ -4159,6 +3825,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def get_self_cal_supported(self):
         '''get_self_cal_supported
 
@@ -4244,7 +3911,7 @@ class Session(_SessionBase):
 
             reset_device (bool): Specifies whether you want to reset the device during the initialization
                 procedure. True specifies that the device is reset and performs the
-                same method as the nifgen_Reset method.
+                same method as the Reset method.
 
                 ****Defined Values****
 
@@ -4319,12 +3986,13 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
+    @ivi_synchronized
     def _initiate_generation(self):
         '''_initiate_generation
 
         Initiates signal generation. If you want to abort signal generation,
-        call the nifgen_AbortGeneration method. After the signal generation
-        is aborted, you can call the _initiate_generation method to
+        call the abort method. After the signal generation
+        is aborted, you can call the initiate method to
         cause the signal generator to produce a signal again.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4332,6 +4000,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def is_done(self):
         '''is_done
 
@@ -4361,6 +4030,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
+    @ivi_synchronized
     def query_arb_seq_capabilities(self):
         '''query_arb_seq_capabilities
 
@@ -4397,6 +4067,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_sequences_ctype.value), int(minimum_sequence_length_ctype.value), int(maximum_sequence_length_ctype.value), int(maximum_loop_count_ctype.value)
 
+    @ivi_synchronized
     def query_arb_wfm_capabilities(self):
         '''query_arb_wfm_capabilities
 
@@ -4440,6 +4111,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_waveforms_ctype.value), int(waveform_quantum_ctype.value), int(minimum_waveform_size_ctype.value), int(maximum_waveform_size_ctype.value)
 
+    @ivi_synchronized
     def query_freq_list_capabilities(self):
         '''query_freq_list_capabilities
 
@@ -4489,6 +4161,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
 
+    @ivi_synchronized
     def read_current_temperature(self):
         '''read_current_temperature
 
@@ -4506,6 +4179,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
+    @ivi_synchronized
     def reset_device(self):
         '''reset_device
 
@@ -4519,19 +4193,21 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def reset_with_defaults(self):
         '''reset_with_defaults
 
         Resets the instrument and reapplies initial user–specified settings from
         the logical name that was used to initialize the session. If the session
         was created without a logical name, this method is equivalent to the
-        nifgen_reset method.
+        reset method.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_cal(self):
         '''self_cal
 
@@ -4544,42 +4220,8 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def send_software_edge_trigger(self, trigger, trigger_id):
-        '''send_software_edge_trigger
-
-        Sends a command to trigger the signal generator. This VI can act as an
-        override for an external edge trigger.
-
-        Note:
-        This VI does not override external digital edge triggers of the
-        NI 5401/5411/5431.
-
-        Args:
-            trigger (enums.Trigger): Sets the clock mode of the signal generator.
-
-                ****Defined Values****
-
-                +---------------------------+
-                | ClockMode.DIVIDE_DOWN     |
-                +---------------------------+
-                | ClockMode.HIGH_RESOLUTION |
-                +---------------------------+
-                | ClockMode.AUTOMATIC       |
-                +---------------------------+
-
-            trigger_id (str):
-
-        '''
-        if type(trigger) is not enums.Trigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Trigger))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
-        error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def wait_until_done(self, max_time=10000):
+    @ivi_synchronized
+    def wait_until_done(self, max_time=datetime.timedelta(seconds=10.0)):
         '''wait_until_done
 
         Waits until the device is done generating or until the maximum time has
@@ -4604,8 +4246,8 @@ class Session(_SessionBase):
         -  Destroys the NI-FGEN session and all of its properties.
         -  Deallocates any memory resources NI-FGEN uses.
 
-        Not all signal routes established by calling the nifgen_ExportSignal
-        and nifgen_RouteSignalOut methods are released when the NI-FGEN
+        Not all signal routes established by calling the ExportSignal
+        and RouteSignalOut methods are released when the NI-FGEN
         session is closed. The following table shows what happens to a signal
         route on your device when you call the _close method.
 
@@ -4619,13 +4261,14 @@ class Session(_SessionBase):
 
         Note:
         After calling _close, you cannot use NI-FGEN again until you
-        call the nifgen_init or nifgen_InitWithOptions methods.
+        call the init or InitWithOptions methods.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_close(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -4655,6 +4298,7 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
+    @ivi_synchronized
     def reset(self):
         '''reset
 
@@ -4665,13 +4309,14 @@ class Session(_SessionBase):
 
         Note:
         For the NI 5401/5404/5411/5431, this method exhibits the same
-        behavior as the nifgen_ResetDevice method.
+        behavior as the reset_device method.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _self_test(self):
         '''_self_test
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 from enum import Enum
@@ -84,95 +85,6 @@ class DataMarkerEventLevelPolarity(Enum):
     '''
 
 
-class DataProcessingMode(Enum):
-    REAL = 0
-    '''
-    The waveform data points are real numbers (I data).
-    '''
-    COMPLEX = 1
-    '''
-    The waveform data points are complex numbers (I/Q data).
-    '''
-
-
-class DoneEventActiveLevel(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class DoneEventDelayUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class DoneEventOutputBehavior(Enum):
-    PULSE = 101
-    '''
-    Triggers a pulse for a specified period of time.
-    '''
-    LEVEL = 102
-    '''
-    Shifts high or low while the event is active, depending  on the active state you specify.
-    '''
-
-
-class DoneEventPulsePolarity(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class DoneEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class FilterType(Enum):
-    FLAT = 0
-    '''
-    Applies a flat filter to the data with the passband value specified  in the osp_fir_filter_flat_passband property.
-    '''
-    RAISED_COSINE = 1
-    '''
-    Applies a raised cosine filter to the data with the alpha value  specified in the osp_fir_filter_raised_cosine_alpha property.
-    '''
-    ROOT_RAISED_COSINE = 2
-    '''
-    Applies a root raised cosine filter to the data with the alpha value  specified in the osp_fir_filter_root_raised_cosine_alpha property.
-    '''
-    GAUSSIAN = 3
-    '''
-    Applies a Gaussian filter to the data with the BT value specified in the  osp_fir_filter_gaussian_bt property.
-    '''
-    CUSTOM = 4
-    '''
-    Applies a custom filter to the data. If FilterType.CUSTOM is selected,  you must provide a set of FIR filter coefficients with the  configure_custom_fir_filter_coefficients method.
-    '''
-
-
 class HardwareState(Enum):
     IDLE = 0
     WAITING_FOR_START_TRIGGER = 1
@@ -189,88 +101,6 @@ class IdleBehavior(Enum):
     JUMP_TO = 401
     '''
     While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value property.
-    '''
-
-
-class MarkerEventDelayUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class MarkerEventOutputBehavior(Enum):
-    PULSE = 101
-    '''
-    Triggers a pulse for a specified period of time.
-    '''
-    LEVEL = 102
-    '''
-    Shifts high or low while the event is active, depending  on the active state you specify.
-    '''
-    TOGGLE = 103
-    '''
-    Changes to high or low while the event is active, depending on the
-    active state you specify.
-    '''
-
-
-class MarkerEventPulsePolarity(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class MarkerEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class MarkerEventToggleInitialState(Enum):
-    HIGH = 101
-    '''
-    Sets the initial state of the Marker event to high.
-    '''
-    LOW = 102
-    '''
-    Sets the initial state of the Marker event to low.
-    '''
-
-
-class OSPMode(Enum):
-    IF = 0
-    '''
-    The OSP block generates intermediate frequency (IF) data.
-    '''
-    BASEBAND = 1
-    '''
-    The OSP block generates baseband data.
-    '''
-
-
-class OSPOverflowErrorReporting(Enum):
-    ERROR = 0
-    '''
-    NI-FGEN returns errors whenever an overflow has occurred in the OSP block.
-    '''
-    DISABLED = 2
-    '''
-    NI-FGEN does not return errors when an overflow occurs in the OSP block.
     '''
 
 
@@ -295,17 +125,6 @@ class OutputMode(Enum):
     '''
     **Script mode—**\ Allows you to use scripting to link and loop multiple
     waveforms in complex combinations.
-    '''
-
-
-class ReadyForStartEventActiveLevel(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
     '''
 
 
@@ -340,61 +159,61 @@ class RelativeTo(Enum):
 
 
 class SampleClockSource(Enum):
-    CLOCK_IN = '"ClkIn"'
+    CLOCK_IN = 'ClkIn'
     '''
     Specifies that the signal at the CLK IN front panel connector is used as
     the Sample Clock source.
     '''
-    DDC_CLOCK_IN = '"DDC_ClkIn"'
+    DDC_CLOCK_IN = 'DDC_ClkIn'
     '''
     Specifies that the Sample Clock from DDC connector is used as the Sample
     Clock source.
     '''
-    ONBOARD_CLOCK = '"OnboardClock"'
+    ONBOARD_CLOCK = 'OnboardClock'
     '''
     Specifies that the onboard clock is used as the Sample Clock source.
     '''
-    PXI_STAR_LINE = '"PXI_Star"'
+    PXI_STAR_LINE = 'PXI_Star'
     '''
     Specifies that the PXI\_STAR trigger line is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_0RTSI_0 = '"PXI_Trig0"'
+    PXI_TRIGGER_LINE_0RTSI_0 = 'PXI_Trig0'
     '''
     Specifies that the PXI or RTSI line 0 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_1RTSI_1 = '"PXI_Trig1"'
+    PXI_TRIGGER_LINE_1RTSI_1 = 'PXI_Trig1'
     '''
     Specifies that the PXI or RTSI line 1 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_2RTSI_2 = '"PXI_Trig2"'
+    PXI_TRIGGER_LINE_2RTSI_2 = 'PXI_Trig2'
     '''
     Specifies that the PXI or RTSI line 2 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_3RTSI_3 = '"PXI_Trig3"'
+    PXI_TRIGGER_LINE_3RTSI_3 = 'PXI_Trig3'
     '''
     Specifies that the PXI or RTSI line 3 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_4RTSI_4 = '"PXI_Trig4"'
+    PXI_TRIGGER_LINE_4RTSI_4 = 'PXI_Trig4'
     '''
     Specifies that the PXI or RTSI line 4 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_5RTSI_5 = '"PXI_Trig5"'
+    PXI_TRIGGER_LINE_5RTSI_5 = 'PXI_Trig5'
     '''
     Specifies that the PXI or RTSI line 5 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_6RTSI_6 = '"PXI_Trig6"'
+    PXI_TRIGGER_LINE_6RTSI_6 = 'PXI_Trig6'
     '''
     Specifies that the PXI or RTSI line 6 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_7RTSI_7 = '"PXI_Trig7"'
+    PXI_TRIGGER_LINE_7RTSI_7 = 'PXI_Trig7'
     '''
     Specifies that the PXI or RTSI line 7 is used as the Sample Clock
     source.
@@ -402,12 +221,12 @@ class SampleClockSource(Enum):
 
 
 class SampleClockTimebaseSource(Enum):
-    CLOCK_IN = '"ClkIn"'
+    CLOCK_IN = 'ClkIn'
     '''
     Specifies that the external signal on the CLK IN front panel connector
     is used as the source.
     '''
-    ONBOARD_CLOCK = '"OnboardClock"'
+    ONBOARD_CLOCK = 'OnboardClock'
     '''
     Specifies that the onboard Sample Clock timebase is used as the source.
     '''
@@ -421,17 +240,6 @@ class ScriptTriggerDigitalEdgeEdge(Enum):
     FALLING = 102
     '''
     Falling Edge
-    '''
-
-
-class ScriptTriggerDigitalLevelActiveLevel(Enum):
-    HIGH = 101
-    '''
-    High Level
-    '''
-    LOW = 102
-    '''
-    Low Level
     '''
 
 
@@ -484,124 +292,6 @@ class StartTriggerType(Enum):
     '''
 
 
-class StartedEventActiveLevel(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class StartedEventDelayUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class StartedEventOutputBehavior(Enum):
-    PULSE = 101
-    '''
-    Triggers a pulse for a specified period of time.
-    '''
-    LEVEL = 102
-    '''
-    Shifts high or low while the event is active, depending  on the active state you specify.
-    '''
-
-
-class StartedEventPulsePolarity(Enum):
-    HIGH = 101
-    '''
-    When the operation is ready to start, the Ready for Start  event level is high.
-    '''
-    LOW = 102
-    '''
-    When the operation is ready to start, the Ready for Start  event level is low.
-    '''
-
-
-class StartedEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    '''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    '''
-    Specifies the pulse width in seconds.
-    '''
-
-
-class SynchronizationSource(Enum):
-    TTL0 = 111
-    '''
-    PXI TRIG0 or VXI TTL0
-    '''
-    TTL1 = 112
-    '''
-    PXI TRIG1 or VXI TTL1
-    '''
-    TTL2 = 113
-    '''
-    PXI TRIG2 or VXI TTL2
-    '''
-    TTL3 = 114
-    '''
-    PXI TRIG3 or VXI TTL3
-    '''
-    TTL4 = 115
-    '''
-    PXI TRIG4 or VXI TTL4
-    '''
-    TTL5 = 116
-    '''
-    PXI TRIG5 or VXI TTL5
-    '''
-    TTL6 = 117
-    '''
-    PXI TRIG6 or VXI TTL6
-    '''
-    RTSI_0 = 141
-    '''
-    RTSI 0
-    '''
-    RTSI_1 = 142
-    '''
-    RTSI 1
-    '''
-    RTSI_2 = 143
-    '''
-    RTSI 2
-    '''
-    RTSI_3 = 144
-    '''
-    RTSI 3
-    '''
-    RTSI_4 = 145
-    '''
-    RTSI 4
-    '''
-    RTSI_5 = 146
-    '''
-    RTSI 5
-    '''
-    RTSI_6 = 147
-    '''
-    RTSI 6
-    '''
-    NONE = 1000
-    '''
-    No Synchronization Source
-    '''
-
-
 class TerminalConfiguration(Enum):
     SINGLE_ENDED = 300
     '''
@@ -611,11 +301,6 @@ class TerminalConfiguration(Enum):
     '''
     Differential operation
     '''
-
-
-class Trigger(Enum):
-    START = 1004
-    SCRIPT = 103
 
 
 class TriggerMode(Enum):
@@ -640,145 +325,6 @@ class TriggerMode(Enum):
     trigger mode.
 
     Note: In Frequency List mode, Stepped trigger mode is the same as Burst
-    '''
-
-
-class TriggerSource(Enum):
-    IMMEDIATE = 0
-    '''
-    Immediate-The signal generator does not wait for a trigger of any kind.
-    '''
-    EXTERNAL = 1
-    '''
-    External-The signal generator waits for a trigger on the external trigger input
-    '''
-    SOFTWARE_TRIG = 2
-    '''
-    Software Trigger-The signal generator waits until you call SendSWTrigger.
-    '''
-    TTL0 = 111
-    '''
-    PXI TRIG0 or VXI TTL0
-    '''
-    TTL1 = 112
-    '''
-    PXI TRIG1 or VXI TTL1
-    '''
-    TTL2 = 113
-    '''
-    PXI TRIG2 or VXI TTL2
-    '''
-    TTL3 = 114
-    '''
-    PXI TRIG3 or VXI TTL3
-    '''
-    TTL4 = 115
-    '''
-    PXI TRIG4 or VXI TTL4
-    '''
-    TTL5 = 116
-    '''
-    PXI TRIG5 or VXI TTL5
-    '''
-    TTL6 = 117
-    '''
-    PXI TRIG6 or VXI TTL6
-    '''
-    PXI_STAR = 131
-    '''
-    PXI star
-    '''
-    RTSI_0 = 141
-    '''
-    RTSI line 0
-    '''
-    RTSI_1 = 142
-    '''
-    RTSI line 1
-    '''
-    RTSI_2 = 143
-    '''
-    RTSI line 2
-    '''
-    RTSI_3 = 144
-    '''
-    RTSI line 3
-    '''
-    RTSI_4 = 145
-    '''
-    RTSI line 4
-    '''
-    RTSI_5 = 146
-    '''
-    RTSI line 5
-    '''
-    RTSI_6 = 147
-    '''
-    RTSI line 6
-    '''
-    RTSI_7 = 1010
-    '''
-    RTSI line 7
-    '''
-    PFI_0 = 1011
-    '''
-    PFI 0
-    '''
-    PFI_1 = 1012
-    '''
-    PFI 1
-    '''
-    PFI_2 = 1013
-    '''
-    PFI 2
-    '''
-    PFI_3 = 1014
-    '''
-    PFI 3
-    '''
-    OTHER_TERMINAL = 1018
-    '''
-    Specifies that another terminal is used.
-    '''
-
-
-class TriggerWhen(Enum):
-    HIGH = 101
-    LOW = 102
-
-
-class VideoWaveformType(Enum):
-    PAL_B = 0
-    '''
-    PAL B Video Type
-    '''
-    PAL_D = 1
-    '''
-    PAL D Video Type
-    '''
-    PAL_G = 2
-    '''
-    PAL G Video Type
-    '''
-    PAL_H = 3
-    '''
-    PAL H Video Type
-    '''
-    PAL_I = 4
-    '''
-    PAL I Video Type
-    '''
-    PAL_M = 5
-    '''
-    PAL M Video Type
-    '''
-    PAL_N = 6
-    '''
-    PAL N Video Type
-    '''
-    NTSC_M = 7
-    '''
-    NTSC M Video Type
     '''
 
 

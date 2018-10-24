@@ -6,8 +6,10 @@ Enums used in NI-DCPower
 .. py:currentmodule:: nidcpower
 
 
+ApertureTimeUnits
+-----------------
 
-.. py:data:: ApertureTimeUnits
+.. py:class:: ApertureTimeUnits
 
     .. py:attribute:: ApertureTimeUnits.SECONDS
 
@@ -29,8 +31,10 @@ Enums used in NI-DCPower
 
 
 
+AutoZero
+--------
 
-.. py:data:: AutoZero
+.. py:class:: AutoZero
 
     .. py:attribute:: AutoZero.OFF
 
@@ -62,8 +66,10 @@ Enums used in NI-DCPower
 
 
 
+ComplianceLimitSymmetry
+-----------------------
 
-.. py:data:: ComplianceLimitSymmetry
+.. py:class:: ComplianceLimitSymmetry
 
     .. py:attribute:: ComplianceLimitSymmetry.SYMMETRIC
 
@@ -85,8 +91,10 @@ Enums used in NI-DCPower
 
 
 
+DCNoiseRejection
+----------------
 
-.. py:data:: DCNoiseRejection
+.. py:class:: DCNoiseRejection
 
     .. py:attribute:: DCNoiseRejection.SECOND_ORDER
 
@@ -108,31 +116,10 @@ Enums used in NI-DCPower
 
 
 
+Event
+-----
 
-.. py:data:: DigitalEdge
-
-    .. py:attribute:: DigitalEdge.RISING
-
-
-
-        Asserts the trigger on the rising edge of the digital signal.
-
-        
-
-
-
-    .. py:attribute:: DigitalEdge.FALLING
-
-
-
-        Asserts the trigger on the falling edge of the digital signal.
-
-        
-
-
-
-
-.. py:data:: Event
+.. py:class:: Event
 
     .. py:attribute:: Event.SOURCE_COMPLETE
 
@@ -158,8 +145,10 @@ Enums used in NI-DCPower
 
 
 
+MeasureWhen
+-----------
 
-.. py:data:: MeasureWhen
+.. py:class:: MeasureWhen
 
     .. py:attribute:: MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
 
@@ -191,8 +180,10 @@ Enums used in NI-DCPower
 
 
 
+MeasurementTypes
+----------------
 
-.. py:data:: MeasurementTypes
+.. py:class:: MeasurementTypes
 
     .. py:attribute:: MeasurementTypes.CURRENT
 
@@ -214,8 +205,10 @@ Enums used in NI-DCPower
 
 
 
+OutputCapacitance
+-----------------
 
-.. py:data:: OutputCapacitance
+.. py:class:: OutputCapacitance
 
     .. py:attribute:: OutputCapacitance.LOW
 
@@ -237,8 +230,10 @@ Enums used in NI-DCPower
 
 
 
+OutputFunction
+--------------
 
-.. py:data:: OutputFunction
+.. py:class:: OutputFunction
 
     .. py:attribute:: OutputFunction.DC_VOLTAGE
 
@@ -280,8 +275,10 @@ Enums used in NI-DCPower
 
 
 
+OutputStates
+------------
 
-.. py:data:: OutputStates
+.. py:class:: OutputStates
 
     .. py:attribute:: OutputStates.VOLTAGE
 
@@ -303,8 +300,10 @@ Enums used in NI-DCPower
 
 
 
+Polarity
+--------
 
-.. py:data:: Polarity
+.. py:class:: Polarity
 
     .. py:attribute:: Polarity.HIGH
 
@@ -326,8 +325,10 @@ Enums used in NI-DCPower
 
 
 
+PowerSource
+-----------
 
-.. py:data:: PowerSource
+.. py:class:: PowerSource
 
     .. py:attribute:: PowerSource.INTERNAL
 
@@ -359,8 +360,10 @@ Enums used in NI-DCPower
 
 
 
+PowerSourceInUse
+----------------
 
-.. py:data:: PowerSourceInUse
+.. py:class:: PowerSourceInUse
 
     .. py:attribute:: PowerSourceInUse.INTERNAL
 
@@ -382,8 +385,10 @@ Enums used in NI-DCPower
 
 
 
+SelfCalibrationPersistence
+--------------------------
 
-.. py:data:: SelfCalibrationPersistence
+.. py:class:: SelfCalibrationPersistence
 
     .. py:attribute:: SelfCalibrationPersistence.KEEP_IN_MEMORY
 
@@ -405,8 +410,10 @@ Enums used in NI-DCPower
 
 
 
+SendSoftwareEdgeTriggerType
+---------------------------
 
-.. py:data:: SendSoftwareEdgeTriggerType
+.. py:class:: SendSoftwareEdgeTriggerType
 
     .. py:attribute:: SendSoftwareEdgeTriggerType.START
 
@@ -428,8 +435,10 @@ Enums used in NI-DCPower
 
 
 
+Sense
+-----
 
-.. py:data:: Sense
+.. py:class:: Sense
 
     .. py:attribute:: Sense.LOCAL
 
@@ -451,8 +460,10 @@ Enums used in NI-DCPower
 
 
 
+SourceMode
+----------
 
-.. py:data:: SourceMode
+.. py:class:: SourceMode
 
     .. py:attribute:: SourceMode.SINGLE_POINT
 
@@ -474,8 +485,10 @@ Enums used in NI-DCPower
 
 
 
+TransientResponse
+-----------------
 
-.. py:data:: TransientResponse
+.. py:class:: TransientResponse
 
     .. py:attribute:: TransientResponse.NORMAL
 
@@ -517,8 +530,10 @@ Enums used in NI-DCPower
 
 
 
+TriggerType
+-----------
 
-.. py:data:: TriggerType
+.. py:class:: TriggerType
 
     .. py:attribute:: TriggerType.NONE
 
@@ -547,5 +562,8 @@ Enums used in NI-DCPower
         The data operation starts when a software trigger occurs.
 
         
+
+
+
 
 

@@ -3,6 +3,7 @@ import math
 import nidmm
 import numpy
 import pytest
+import tempfile
 import time
 
 
@@ -72,14 +73,6 @@ def test_writeonly_attribute(session):
 
 
 # Function tests
-def test_method_get_aperture_time_info(session):
-    assert session.get_aperture_time_info()[1] == nidmm.ApertureTimeUnits.SECONDS  # Assuming default aperture time unit will be seconds
-
-
-def test_method_configure_power_line_frequency(session):
-    session.configure_power_line_frequency(60)
-
-
 def test_method_configure_trigger(session):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     try:
@@ -153,9 +146,7 @@ def test_get_auto_range_value(session):
     with session.initiate():
         session.fetch()
         auto_range_value_property = session.auto_range_value
-        auto_range_value_function = session.get_auto_range_value()
-        assert auto_range_value_function == auto_range_value_property
-        assert auto_range_value_function == 300   # simulated device auto_range_value to maximum 300
+        assert auto_range_value_property == 300   # simulated device auto_range_value to maximum 300
 
 
 def test_get_cal_date_time(session):
@@ -189,12 +180,6 @@ def test_self_cal(session):
         assert False
 
 
-def test_configure_ac_bandwidth(session):
-    session.configure_ac_bandwidth(2, 300)
-    assert session.ac_min_freq == 2
-    assert session.ac_max_freq == 300
-
-
 def test_configure_rtd(session):
     session.configure_rtd_type(nidmm.RTDType.CUSTOM, 110)
     assert session.temp_rtd_type == nidmm.RTDType.CUSTOM
@@ -217,15 +202,6 @@ def test_configure_thermocouple(session):
     session.configure_thermocouple(nidmm.ThermocoupleType.K, nidmm.ThermocoupleReferenceJunctionType.FIXED)
     assert session.temp_tc_type == nidmm.ThermocoupleType.K
     assert session.temp_tc_ref_junc_type == nidmm.ThermocoupleReferenceJunctionType.FIXED
-
-
-def test_configure_cable_compensation(session):
-    session.configure_open_cable_comp_values(100, 101)
-    assert session.open_cable_comp_conductance == 100
-    assert session.open_cable_comp_susceptance == 101
-    session.configure_short_cable_comp_values(100, 101)
-    assert session.short_cable_comp_resistance == 100
-    assert session.short_cable_comp_reactance == 101
 
 
 def test_configure_waveform_acquisition(session):
@@ -268,15 +244,6 @@ def test_fetch_waveform_error(session):
         assert e.code == -1074126845  # Max Time exceeded before operation completed
 
 
-def test_get_measurement_period():
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4072; BoardType:PXI') as session:
-            session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 10, 5.5)
-            measurement_period = session.get_measurement_period()
-            expected_period = 0.0071333333333333335  # 0.0071333333333333335 is the time required for 4072 to take a DC_VOLT measurement with range 10V on Digits_resolution 5.5
-            in_range = abs(measurement_period - expected_period) <= max(1e-09 * max(abs(measurement_period), abs(expected_period)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-            assert in_range is True
-
-
 def test_perform_cable_compensation(session):
     session.configure_measurement_digits(nidmm.Function.CAPACITANCE, 0.002, 5.5)
     conductance, susceptance = session.perform_open_cable_comp()
@@ -312,11 +279,39 @@ def test_reset_method(session):
     assert default_function == function_after_reset
 
 
-def test_error_message(session):
-    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
-    # and there is no good way for us to invalidate a simulated session.
-    message = session._error_message(-1074118641)
-    assert message == 'The data is not available. This can be caused by calling Fetch or FetchMultiPoint before calling Initiate or after calling Abort.'
+def test_import_export_buffer(session):
+    test_value_1 = 1
+    test_value_2 = 2
+    session.sample_count = test_value_1
+    assert session.sample_count == test_value_1
+    buffer = session.export_attribute_configuration_buffer()
+    session.sample_count = test_value_2
+    assert session.sample_count == test_value_2
+    session.import_attribute_configuration_buffer(buffer)
+    assert session.sample_count == test_value_1
+
+
+def test_import_export_file(session):
+    test_value_1 = 1
+    test_value_2 = 2
+    path = tempfile.gettempdir() + 'test.txt'
+    session.sample_count = test_value_1
+    assert session.sample_count == test_value_1
+    session.export_attribute_configuration_file(path)
+    session.sample_count = test_value_2
+    assert session.sample_count == test_value_2
+    session.import_attribute_configuration_file(path)
+    assert session.sample_count == test_value_1
+
+
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+            assert False
+    except nidmm.Error as e:
+        assert e.code == -1074134964
+        assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
 
 
 # No boolean attributes that aren't IVI

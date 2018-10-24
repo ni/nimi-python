@@ -1,8 +1,4 @@
-<%
-# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
-encoding_tag = '# -*- coding: utf-8 -*-'
-%>\
-${encoding_tag}
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
     import build.helper as helper
@@ -16,6 +12,8 @@ ${encoding_tag}
 
     attributes = helper.filter_codegen_attributes(config['attributes'])
 
+    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
+
     session_context_manager = None
     if 'task' in config['context_manager_name']:
         session_context_manager = '_' + config['context_manager_name']['task'].title()
@@ -26,7 +24,9 @@ import array  # noqa: F401
 import ctypes
 import datetime
 
+% if attributes:
 import ${module_name}._attributes as _attributes
+% endif
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
@@ -87,6 +87,27 @@ class ${session_context_manager}(object):
 
 
 % endif
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -122,8 +143,7 @@ class _SessionBase(object):
 
 % for attribute in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
 <%
-if attributes[attribute]['channel_based'] == 'True':
-    attributes[attribute]['documentation']['tip'] = helper.rep_cap_attr_desc.format(attributes[attribute]["name"].lower())
+helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
 %>\
     %if attributes[attribute]['enum']:
     ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
@@ -143,7 +163,9 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParameterUs
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
+% if attributes:
 
+% endif
     def __init__(self, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
@@ -168,6 +190,13 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         if self._is_frozen and key not in dir(self):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
+
+    def __getitem__(self, key):
+        rep_caps = []
+% for rep_cap in config['repeated_capabilities']:
+        rep_caps.append("${rep_cap['python_name']}")
+% endfor
+        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -195,6 +224,9 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if functions[func_name]['use_session_lock']:
+    @ivi_synchronized
+% endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor
@@ -245,7 +277,7 @@ class Session(_SessionBase):
 
     def close(self):
         try:
-            self._close()
+            self._${close_function_name}()
         except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
             raise
@@ -255,6 +287,9 @@ class Session(_SessionBase):
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
+% if functions[func_name]['use_session_lock']:
+    @ivi_synchronized
+% endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
 % endfor
 % endfor

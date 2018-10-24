@@ -54,6 +54,7 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 * NI-SCOPE (Python module: niscope)
 * NI-SWITCH (Python module: niswitch)
 * NI-ModInst (Python module: nimodinst)
+* NI Switch Executive (Python module: nise)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -69,7 +70,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 17.6.0                   |
+| Driver Version Tested Against | 18.1.1                   |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -108,7 +109,7 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
-| Driver Version Tested Against | 17.1.0               |
+| Driver Version Tested Against | 18.1.0               |
 +-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
@@ -147,7 +148,7 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 17.1.0                |
+| Driver Version Tested Against | 18.1.0                |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
@@ -186,7 +187,7 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 17.0.0                   |
+| Driver Version Tested Against | 18.0.0                   |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
@@ -225,7 +226,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 17.0.2                 |
+| Driver Version Tested Against | 18.1.0                 |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
@@ -258,13 +259,52 @@ NI-SCOPE Python API Status
 
 
 
+NI Switch Executive Python API Status
+-------------------------------------
+
++-------------------------------+---------------------+
+| NI Switch Executive (nise)    |                     |
++===============================+=====================+
+| Driver Version Tested Against | 18.0.0              |
++-------------------------------+---------------------+
+| PyPI Version                  | |niseLatestVersion| |
++-------------------------------+---------------------+
+| Supported Python Version      | |nisePythonVersion| |
++-------------------------------+---------------------+
+| Open Issues                   | |niseOpenIssues|    |
++-------------------------------+---------------------+
+| Open Pull Requests            | |niseOpenPRs|       |
++-------------------------------+---------------------+
+
+
+.. |niseLatestVersion| image:: http://img.shields.io/pypi/v/nise.svg
+    :alt: Latest NI Switch Executive Version
+    :target: http://pypi.python.org/pypi/nise
+
+
+.. |nisePythonVersion| image:: http://img.shields.io/pypi/pyversions/nise.svg
+    :alt: NI Switch Executive supported Python versions
+    :target: http://pypi.python.org/pypi/nise
+
+
+.. |niseOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nise.svg
+    :alt: Open Issues + Pull Requests for NI Switch Executive
+    :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anise
+
+
+.. |niseOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nise.svg
+    :alt: Pull Requests for NI Switch Executive
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anise
+
+
+
 NI-SWITCH Python API Status
 ---------------------------
 
 +-------------------------------+-------------------------+
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
-| Driver Version Tested Against | 17.0.0                  |
+| Driver Version Tested Against | 18.0.0                  |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+
@@ -309,12 +349,13 @@ Driver specific installation instructions can be found on Read The Docs:
 * `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
 * `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
 * `nimodinst <http://nimi-python.readthedocs.io/en/master/nimodinst.html#installation>`_
+* `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
 
 
 Contributing
 ============
 
-We welcome contributions! You can clone the project repository, build it, and install it by `following these instructions <https://github.com/ni/nimi-python/blob/readme-contributing-link/CONTRIBUTING.md>`_.
+We welcome contributions! You can clone the project repository, build it, and install it by `following these instructions <https://github.com/ni/nimi-python/blob/master/CONTRIBUTING.md>`_.
 
 Usage
 ------
@@ -343,32 +384,13 @@ a request through the NI support portal at `ni.com <http://www.ni.com>`_.
 Bugs / Feature Requests
 =======================
 
-To report a bug or submit a feature request, please use the
+To report a bug or submit a feature request specific to NI Modular Instruments Python bindings (nimi-python), please use the
 `GitHub issues page <https://github.com/ni/nimi-python/issues>`_.
 
-Information to Include When Asking for Help
--------------------------------------------
+Fill in the issue template as completely as possible and we will respond as soon
+as we can.
 
-Please include **all** of the following information when opening an issue:
-
-- Detailed steps on how to reproduce the problem and full traceback, if
-  applicable. Code samples are encouraged!
-
-- The python version used::
-
-  $ python -c "import sys; print(sys.version)"
-
-- The module (i.e. **nidmm**) and its version::
-
-  $ python -m pip list
-
-- The version of the driver used (i.e. **NI-DMM 17.1**). Follow
-  `this KB article <http://digital.ni.com/express.nsf/bycode/ex8amn>`_
-  to determine the version you have installed.
-
-- The operating system, version, and bitness. For example 64-bit Windows 7.
-
-
+For hardware support or any other questions not specific to this GitHub project, please visit [NI Community Forums](https://forums.ni.com/).
 .. _documentation-section:
 
 Documentation

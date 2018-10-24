@@ -2622,6 +2622,117 @@ RTSI and PFI lines.
 ''',
 },
     },
+    'ExportAttributeConfigurationBuffer': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+The instrument handle you obtain from niScope_init that identifies a
+particular instrument session.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'sizeInBytes',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the size, in bytes, of the byte array to export. If you enter
+0, this function returns the needed size.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Configuration',
+                'type': 'ViAddr',
+'documentation': {
+'description': '''
+Specifies the byte array buffer to be populated with the exported
+attribute configuration.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Exports the attribute configuration of the session to a configuration
+buffer.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers, channel counts, and onboard memory
+sizes.
+
+This function verifies that the attributes you have configured for the
+session are valid. If the configuration is invalid, NI‑SCOPE returns an
+error.
+
+**Related Topics:**
+
+`Attributes and Attribute
+Functions <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+`Setting Attributes Before Reading
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+},
+    },
+    'ExportAttributeConfigurationFile': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+The instrument handle you obtain from niScope_init that identifies a
+particular instrument session.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'filePath',
+                'type': 'ViConstString',
+'documentation': {
+'description': '''
+Specifies the absolute path to the file to contain the exported
+attribute configuration. If you specify an empty or relative path, this
+function returns an error.
+**Default file extension:** .niscopeconfig
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Exports the attribute configuration of the session to the specified
+file.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers, channel counts, and onboard memory
+sizes.
+
+This function verifies that the attributes you have configured for the
+session are valid. If the configuration is invalid, NI‑SCOPE returns an
+error.
+
+**Related Topics:**
+
+`Attributes and Attribute
+Functions <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+`Setting Attributes Before Reading
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+},
+    },
     'ExportSignal': {
         'returns': 'ViStatus',
         'parameters': [
@@ -5034,6 +5145,117 @@ Returns a writer endpoint that can be used with NI-P2P to configure a
 peer-to-peer stream with a digitizer endpoint.
 
 -  `Peer-to-Peer Streaming <digitizers.chm::/5160_P2P.html>`__
+''',
+},
+    },
+    'ImportAttributeConfigurationBuffer': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+The instrument handle you obtain from niScope_init that identifies a
+particular instrument session.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'sizeInBytes',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the size, in bytes, of the byte array to import. If you enter
+0, this function returns the needed size.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'Configuration',
+                'type': 'ViAddr',
+'documentation': {
+'description': '''
+Specifies the byte array buffer that contains the attribute
+configuration to import.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Imports an attribute configuration to the session from the specified
+configuration buffer.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers, channel counts, and onboard memory
+sizes.
+
+**Related Topics:**
+
+`Attributes and Attribute
+Functions <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+`Setting Attributes Before Reading
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': '''
+You cannot call this function while the session is in a running state,
+such as while acquiring a signal.
+''',
+},
+    },
+    'ImportAttributeConfigurationFile': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+'documentation': {
+'description': '''
+The instrument handle you obtain from niScope_init that identifies a
+particular instrument session.
+''',
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'filePath',
+                'type': 'ViConstString',
+'documentation': {
+'description': '''
+Specifies the absolute path to the file containing the attribute
+configuration to import. If you specify an empty or relative path, this
+function returns an error.
+**Default File Extension:** .niscopeconfig
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Imports an attribute configuration to the session from the specified
+file.
+
+You can export and import session attribute configurations only between
+devices with identical model numbers, channel counts, and onboard memory
+sizes.
+
+**Related Topics:**
+
+`Attributes and Attribute
+Functions <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
+
+`Setting Attributes Before Reading
+Attributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+''',
+'note': '''
+You cannot call this function while the session is in a running state,
+such as while acquiring a signal.
 ''',
 },
     },

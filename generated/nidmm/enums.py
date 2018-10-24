@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 from enum import Enum
@@ -144,7 +145,7 @@ class Function(Enum):
     '''
     TEMPERATURE = 108
     '''
-    NI 4065, and NI 4070/4071/4072 supported.
+    NI 4065, NI 4070/4071/4072, and NI 4080/4081/4182 supported.
     '''
     AC_VOLTS_DC_COUPLED = 1001
     '''
@@ -234,17 +235,6 @@ class MeasurementCompleteDest(Enum):
     '''
 
 
-class MeasurementDestinationSlope(Enum):
-    POSITIVE = 0
-    '''
-    Rising Edgs
-    '''
-    NEGATIVE = 1
-    '''
-    Falling Edge
-    '''
-
-
 class OperationMode(Enum):
     IVIDMM = 0
     '''
@@ -285,17 +275,6 @@ class RTDType(Enum):
     PT3928 = 6
     '''
     Performs scaling for a Pt 3928 RTD.
-    '''
-
-
-class SampleTrigSlope(Enum):
-    POSITIVE = 0
-    '''
-    Rising Edgs
-    '''
-    NEGATIVE = 1
-    '''
-    Falling Edge
     '''
 
 
@@ -440,17 +419,6 @@ class TransducerType(Enum):
     FOUR_WIRE_RTD = 4
     '''
     4-wire RTD
-    '''
-
-
-class TriggerSlope(Enum):
-    POSITIVE = 0
-    '''
-    Rising Edgs
-    '''
-    NEGATIVE = 1
-    '''
-    Falling Edge
     '''
 
 

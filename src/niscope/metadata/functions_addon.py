@@ -14,8 +14,6 @@ functions_codegen_method = {
     'error_message':                    { 'codegen_method': 'private',  },
     'GetError':                         { 'codegen_method': 'private',  },
     'ClearError':                       { 'codegen_method': 'no',       },
-    'LockSession':                      { 'codegen_method': 'no',       },
-    'UnlockSession':                    { 'codegen_method': 'no',       },
     '.+ExtCal':                         { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CalAdjust.+':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     '.+UserDefined.+':                  { 'codegen_method': 'no',       },
@@ -74,6 +72,21 @@ functions_codegen_method = {
     'self_test':                        { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
     'GetEqualizationFilterCoefficients': { 'codegen_method': 'private',  },  # 'FancyGetEqualizationFilterCoefficients' Public wrapper
     'ExportSignal':                     { 'codegen_method': 'no',       },  # remove export signal #828
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'unlock', },
+    'InitWithOptions':                 { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'error_message':                   { 'use_session_lock': False,  },  # No Session for function call so cannot use session locking
+    'GetError':                        { 'use_session_lock': False,  },  # Session may not be valid during function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -136,6 +149,8 @@ functions_buffer_info = {
     'FetchArrayMeasurement':                    { 'parameters': { 4: { 'size': {'mechanism':'python-code', 'value':'self._actual_meas_wfm_size(array_meas_function)'}, },  # Private measurement library
                                                                   5: { 'size': {'mechanism':'python-code', 'value':'(self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())'}, },
                                                                   6: { 'size': {'mechanism':'python-code', 'value':'self._actual_num_wfms()'}, }, }, },
+    'ExportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'ivi-dance', 'value':'sizeInBytes'}, }, }, },
+    'ImportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'sizeInBytes'}, }, }, },
 }
 
 functions_render_in_session_base = {
@@ -148,6 +163,8 @@ functions_bad_source_metadata = {
     'GetFrequencyResponse':                     { 'parameters': { 3: { 'direction': 'out'},
                                                                   4: { 'direction': 'out'},
                                                                   5: { 'direction': 'out'}, }, },
+    'ExportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'direction': 'out', 'type': 'ViInt8[]'}, }, },
+    'ImportAttributeConfigurationBuffer':       { 'parameters': { 2: { 'type': 'ViInt8[]'}, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
@@ -191,13 +208,10 @@ functions_default_value = {
     'ConfigureTriggerDigital':                       { 'parameters': { 2: { 'default_value': 'TriggerSlope.POSITIVE', },
                                                                        3: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
                                                                        4: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
-    'ConfigureTriggerEdge':                          { 'parameters': { 2: { 'default_value': 0.0, },
-                                                                       3: { 'default_value': 'TriggerSlope.POSITIVE', },
+    'ConfigureTriggerEdge':                          { 'parameters': { 3: { 'default_value': 'TriggerSlope.POSITIVE', },
                                                                        5: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
                                                                        6: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
-    'ConfigureTriggerHysteresis':                    { 'parameters': { 2: { 'default_value': 0.0, },
-                                                                       3: { 'default_value': 0.05, },
-                                                                       4: { 'default_value': 'TriggerSlope.POSITIVE', },
+    'ConfigureTriggerHysteresis':                    { 'parameters': { 4: { 'default_value': 'TriggerSlope.POSITIVE', },
                                                                        6: { 'default_value': 'datetime.timedelta(seconds=0.0)', },
                                                                        7: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
     'FetchArrayMeasurement':                         { 'parameters': { 2: { 'default_value': 'datetime.timedelta(seconds=5.0)', }, }, },  # Private measurement library
@@ -683,6 +697,39 @@ channels, the acquisition type, and the number of records you specify.''',
         ],
         'documentation': {
             'description': 'Retrieves the custom coefficients for the equalization FIR filter on the device. This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. Because this filter is a generic FIR filter, any coefficients are valid. Coefficient values should be between +1 and –1.',
+        },
+    },
+    # niScope metadata is missing error_message but we need it for error handling - NI internal CAR #700582
+    'error_message': {
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niScope_init or niScope_InitWithOptions. The default is None.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'errorCode',
+                'type': 'ViStatus',
+                'documentation': {
+                    'description': 'The **error_code** returned from the instrument. The default is 0, indicating VI_SUCCESS.',
+                },
+            },
+            {
+                'direction': 'out',
+                'name': 'errorMessage',
+                'type': 'ViChar[ ]',
+                'documentation': {
+                    'description': 'The error information formatted into a string.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Takes the **Error_Code** returned by the instrument driver functions, interprets it, and returns it as a user-readable string.',
         },
     },
 }

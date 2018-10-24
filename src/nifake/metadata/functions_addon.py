@@ -17,6 +17,21 @@ functions_codegen_method = {
     'self_test':                { 'codegen_method': 'private',  },  # 'fancy_self_test' Public wrapper that raises
 }
 
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'unlock', },
+    'InitWithOptions':                 { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'error_message':                   { 'use_session_lock': False,  },  # No Session for function call so cannot use session locking
+    'GetError':                        { 'use_session_lock': False,  },  # Session may not be valid during function call so cannot use session locking
+}
+
 # Attach the given parameter to the given enum from enums.py
 functions_enums = {
     'GetEnumValue':                     { 'parameters': { 2: { 'enum': 'Turtle',    }, }, },
@@ -53,6 +68,7 @@ functions_buffer_info = {
                                                                2: { 'size': {'mechanism':'python-code', 'value':'self.get_array_size_for_python_code()'}, }, }, },
     'FetchWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'passed-in', 'value':'numberOfSamples'}, }, }, },
     'WriteWaveform':                         { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'numberOfSamples'}, }, }, },
+    'GetAStringUsingPythonCode':             { 'parameters': { 2: { 'size': {'mechanism':'python-code', 'value':'a_number'}, }, }, },
     'self_test':                             { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'MultipleArraysSameSize':                { 'parameters': { 1: { 'size': {'mechanism':'len', 'value':'Size'}, },
                                                                2: { 'size': {'mechanism':'len', 'value':'Size'}, },

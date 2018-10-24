@@ -64,7 +64,7 @@ following installed:
             - Can not use spaces, instead you can use wildcards
             - Ex: c:\Program*\Python*\python.exe
         - path 2
-            - Should be the path to the 64 bit python 3 where pythone.exe exists
+            - Should be the path to the 64 bit python 3 where python3.exe exists
         - Ex: `"c:\Program Files (x86)\Python27\python" -m tox --scan c:/Program*/Python*/python.exe c:/Program*/Python*/python3.exe`
         - This should list out each version of python installed plus one more for python3
 
@@ -78,7 +78,7 @@ following installed:
 In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Tests:
 
 * Install corresponding driver runtimes.
-    * Download the latest installers for NI-DMM, NI-SCOPE, NI-DCPower, NI-SWITCH, NI-FGEN
+    * Download the latest installers for NI-DMM, NI-SCOPE, NI-DCPower, NI-SWITCH, NI-FGEN, NI Switch Executive
     from [ni.com](http://www.ni.com/downloads/ni-drivers/)
     * NI-ModInst is included as part of these runtimes.
     * NI-TClk is included as part of NI-SCOPE and NI-FGEN.

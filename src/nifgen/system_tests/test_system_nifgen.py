@@ -21,11 +21,14 @@ def test_get_attribute_string(session):
     assert model == 'NI PXIe-5433 (2CH)'
 
 
-def test_error_message(session):
-    # Calling the private function directly, as _get_error_message() only gets called when you have an invalid session,
-    # and there is no good way for us to invalidate a simulated session.
-    message = session._error_message(-1074135027)
-    assert message.find('Attribute is read-only.') != -1
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe'):
+            assert False
+    except nifgen.Error as e:
+        assert e.code == -1074134944
+        assert e.description.find('Insufficient location information or resource not present in the system.') != -1
 
 
 def test_get_error(session):
@@ -198,7 +201,7 @@ def test_clear_waveform_memory(session):
     session.clear_user_standard_waveform()
     session.configure_arb_sequence(0, 1.0, 0)
     session.clear_arb_sequence(-1)
-    session.clear_arb_waveform(-1)
+    session.delete_waveform(-1)
 
 
 def test_query_arb_seq_capabilities(session):
@@ -251,7 +254,8 @@ def test_create_advanced_arb_sequence_wrong_size():
 def test_arb_script(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.output_mode = nifgen.OutputMode.SCRIPT
-    session.configure_digital_edge_script_trigger('ScriptTrigger0', 'PFI0', nifgen.ScriptTriggerDigitalEdgeEdge.RISING)
+    session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
+    session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
     session.write_waveform('wfmSine', waveform_data)
     session.arb_sample_rate = 10000000
     script = '''script myScript0
@@ -345,7 +349,7 @@ def test_write_waveform_wrong_type(session):
 
 
 def test_set_waveform_next_write_position(session):
-    session.set_waveform_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
+    session.set_next_write_position(session.allocate_waveform(10), nifgen.RelativeTo.START, 5)
 
 
 def test_write_waveform_from_filei64(session):
@@ -359,10 +363,10 @@ def test_named_waveform_operations(session):
     waveform_data_1 = [x * (1.0 / 256.0) for x in range(256)]
     waveform_data_2 = [x * (-1.0 / 256.0) for x in range(256)]
     session.allocate_named_waveform(waveform_name, waveform_size)
-    session.set_named_waveform_next_write_position(waveform_name, nifgen.RelativeTo.START, write_offset)
+    session.set_next_write_position(waveform_name, nifgen.RelativeTo.START, write_offset)
     session.write_waveform(waveform_name, waveform_data_1)
     session.write_waveform(waveform_name, waveform_data_2)
-    session.delete_named_waveform(waveform_name)
+    session.delete_waveform(waveform_name)
 
 
 def test_write_waveform_from_file_f64(session):
@@ -384,39 +388,46 @@ def test_user_standard_waveform(session):
     session.clear_user_standard_waveform()
 
 
-# TODO(bhaswath): Doesn't work, issue #596
-'''
+''' Removed due to OSP disabled - #891
 def test_fir_filter_coefficients():
     with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
-        coeff_array = [1, 0, -1]
+        coeff_array = [0 for i in range(95)]
+        coeff_array[0] = -1.0
+        coeff_array[2] = 1.0
         session.configure_custom_fir_filter_coefficients(coeff_array)
         session.commit()
-        array, size = session.get_fir_filter_coefficients()
-        assert size == len(coeff_array)
+        array = session.get_fir_filter_coefficients()
+        assert len(array) == len(coeff_array)
+        assert array == coeff_array
 '''
 
 
-def test_configure_triggers(session):
-    session.configure_digital_edge_start_trigger('PFI0', nifgen.StartTriggerDigitalEdgeEdge.FALLING)
-    session.configure_digital_level_script_trigger('ScriptTrigger0', 'PXI_Trig0', nifgen.TriggerWhen.HIGH)
-
-
-def test_send_software_edge_trigger(session):
+def test_send_software_edge_trigger_start(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.create_waveform(waveform_data)
     with session.initiate():
-        session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
+        session.send_software_edge_trigger()
+
+
+def test_send_software_edge_trigger_script(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    session.create_waveform(waveform_data)
+    session.output_mode = nifgen.OutputMode.SCRIPT
+    session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
+    session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
+    with session.initiate():
+        session.script_triggers[0].send_software_edge_trigger()
 
 
 def test_channel_format_types():
     with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
-        assert simulated_session.num_channels == 2
+        assert simulated_session.channel_count == 2
     with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
-        assert simulated_session.num_channels == 2
+        assert simulated_session.channel_count == 2
     with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
-        assert simulated_session.num_channels == 2
+        assert simulated_session.channel_count == 2
     with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
-        assert simulated_session.num_channels == 2
+        assert simulated_session.channel_count == 2
     with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
-        assert simulated_session.num_channels == 2
+        assert simulated_session.channel_count == 2
 

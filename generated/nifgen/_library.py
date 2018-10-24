@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 import ctypes
@@ -29,9 +30,6 @@ class Library(object):
         self.niFgen_ConfigureArbSequence_cfunc = None
         self.niFgen_ConfigureArbWaveform_cfunc = None
         self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc = None
-        self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc = None
-        self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc = None
-        self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc = None
         self.niFgen_ConfigureFreqList_cfunc = None
         self.niFgen_ConfigureStandardWaveform_cfunc = None
         self.niFgen_CreateAdvancedArbSequence_cfunc = None
@@ -53,7 +51,6 @@ class Library(object):
         self.niFgen_GetExtCalLastDateAndTime_cfunc = None
         self.niFgen_GetExtCalLastTemp_cfunc = None
         self.niFgen_GetExtCalRecommendedInterval_cfunc = None
-        self.niFgen_GetFIRFilterCoefficients_cfunc = None
         self.niFgen_GetHardwareState_cfunc = None
         self.niFgen_GetLastExtCalLastDateAndTime_cfunc = None
         self.niFgen_GetLastSelfCalLastDateAndTime_cfunc = None
@@ -63,6 +60,7 @@ class Library(object):
         self.niFgen_InitializeWithChannels_cfunc = None
         self.niFgen_InitiateGeneration_cfunc = None
         self.niFgen_IsDone_cfunc = None
+        self.niFgen_LockSession_cfunc = None
         self.niFgen_QueryArbSeqCapabilities_cfunc = None
         self.niFgen_QueryArbWfmCapabilities_cfunc = None
         self.niFgen_QueryFreqListCapabilities_cfunc = None
@@ -77,13 +75,13 @@ class Library(object):
         self.niFgen_SetAttributeViString_cfunc = None
         self.niFgen_SetNamedWaveformNextWritePosition_cfunc = None
         self.niFgen_SetWaveformNextWritePosition_cfunc = None
+        self.niFgen_UnlockSession_cfunc = None
         self.niFgen_WaitUntilDone_cfunc = None
         self.niFgen_WriteBinary16Waveform_cfunc = None
         self.niFgen_WriteNamedWaveformF64_cfunc = None
         self.niFgen_WriteNamedWaveformI16_cfunc = None
         self.niFgen_WriteScript_cfunc = None
         self.niFgen_WriteWaveform_cfunc = None
-        self.niFgen_WriteWaveformDispatcher_cfunc = None
         self.niFgen_close_cfunc = None
         self.niFgen_error_message_cfunc = None
         self.niFgen_reset_cfunc = None
@@ -184,30 +182,6 @@ class Library(object):
                 self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc(vi, channel_name, number_of_coefficients, coefficients_array)
-
-    def niFgen_ConfigureDigitalEdgeScriptTrigger(self, vi, trigger_id, source, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc is None:
-                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc = self._library.niFgen_ConfigureDigitalEdgeScriptTrigger
-                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ConfigureDigitalEdgeScriptTrigger_cfunc(vi, trigger_id, source, edge)
-
-    def niFgen_ConfigureDigitalEdgeStartTrigger(self, vi, source, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc is None:
-                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc = self._library.niFgen_ConfigureDigitalEdgeStartTrigger
-                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ConfigureDigitalEdgeStartTrigger_cfunc(vi, source, edge)
-
-    def niFgen_ConfigureDigitalLevelScriptTrigger(self, vi, trigger_id, source, trigger_when):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc is None:
-                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc = self._library.niFgen_ConfigureDigitalLevelScriptTrigger
-                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ConfigureDigitalLevelScriptTrigger_cfunc(vi, trigger_id, source, trigger_when)
 
     def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         with self._func_lock:
@@ -377,14 +351,6 @@ class Library(object):
                 self.niFgen_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetExtCalRecommendedInterval_cfunc(vi, months)
 
-    def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_GetFIRFilterCoefficients_cfunc is None:
-                self.niFgen_GetFIRFilterCoefficients_cfunc = self._library.niFgen_GetFIRFilterCoefficients
-                self.niFgen_GetFIRFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niFgen_GetFIRFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_GetFIRFilterCoefficients_cfunc(vi, channel_name, array_size, coefficients_array, number_of_coefficients_read)
-
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetHardwareState_cfunc is None:
@@ -456,6 +422,14 @@ class Library(object):
                 self.niFgen_IsDone_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFgen_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_IsDone_cfunc(vi, done)
+
+    def niFgen_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_LockSession_cfunc is None:
+                self.niFgen_LockSession_cfunc = self._library.niFgen_LockSession
+                self.niFgen_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFgen_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_LockSession_cfunc(vi, caller_has_lock)
 
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         with self._func_lock:
@@ -569,6 +543,14 @@ class Library(object):
                 self.niFgen_SetWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetWaveformNextWritePosition_cfunc(vi, channel_name, waveform_handle, relative_to, offset)
 
+    def niFgen_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_UnlockSession_cfunc is None:
+                self.niFgen_UnlockSession_cfunc = self._library.niFgen_UnlockSession
+                self.niFgen_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFgen_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_UnlockSession_cfunc(vi, caller_has_lock)
+
     def niFgen_WaitUntilDone(self, vi, max_time):  # noqa: N802
         with self._func_lock:
             if self.niFgen_WaitUntilDone_cfunc is None:
@@ -616,14 +598,6 @@ class Library(object):
                 self.niFgen_WriteWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFgen_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_WriteWaveform_cfunc(vi, channel_name, waveform_handle, size, data)
-
-    def niFgen_WriteWaveformDispatcher(self, vi, channel_name, waveform_name_or_handle, size, data):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_WriteWaveformDispatcher_cfunc is None:
-                self.niFgen_WriteWaveformDispatcher_cfunc = self._library.niFgen_WriteWaveformDispatcher
-                self.niFgen_WriteWaveformDispatcher_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niFgen_WriteWaveformDispatcher_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_WriteWaveformDispatcher_cfunc(vi, channel_name, waveform_name_or_handle, size, data)
 
     def niFgen_close(self, vi):  # noqa: N802
         with self._func_lock:

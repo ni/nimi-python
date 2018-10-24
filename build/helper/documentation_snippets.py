@@ -1,30 +1,59 @@
 # Different documentation snippets we add to the generated documentation
 
 rep_cap_method_desc = '''
-This method requires repeated capabilities (usually channels). If called directly on the
+This method requires repeated capabilities ({1}). If called directly on the
 {0}.Session object, then the method will use all repeated capabilities in the session.
 You can specify a subset of repeated capabilities using the Python index notation on an
-{0}.Session instance, and calling this method on the result.:
+{0}.Session repeated capabilities container, and calling this method on the result.:
 '''
 
 rep_cap_attr_desc = '''
-This property can use repeated capabilities (usually channels). If set or get directly on the
+This property can use repeated capabilities ({1}). If set or get directly on the
 {0}.Session object, then the set/get will use all repeated capabilities in the session.
 You can specify a subset of repeated capabilities using the Python index notation on an
-{0}.Session instance, and calling set/get value on the result.:
+{0}.Session repeated capabilities container, and calling set/get value on the result.:
+'''
 
-    session.channels['0,1'].{0} = var
-    var = session.channels['0,1'].{0}
+rep_cap_attr_desc_rst_r = rep_cap_attr_desc + '''
+.. code:: python
+
+    var = session.{1}[0,1].{2}
+'''
+
+rep_cap_attr_desc_rst_w = rep_cap_attr_desc + '''
+.. code:: python
+
+    session.{1}[0,1].{2} = var
+'''
+
+rep_cap_attr_desc_rst_rw = rep_cap_attr_desc + '''
+.. code:: python
+
+    session.{1}[0,1].{2} = var
+    var = session.{1}[0,1].{2}
+'''
+
+rep_cap_attr_desc_docstring_r = rep_cap_attr_desc + '''
+    var = session.{1}[0,1].{2}
+'''
+
+rep_cap_attr_desc_docstring_w = rep_cap_attr_desc + '''
+    session.{1}[0,1].{2} = var
+'''
+
+rep_cap_attr_desc_docstring_rw = rep_cap_attr_desc + '''
+    session.{1}[0,1].{2} = var
+    var = session.{1}[0,1].{2}
 '''
 
 rep_cap_method_desc_rst = rep_cap_method_desc + '''
 .. code:: python
 
-    session.channels['0,1'].{1}({2})
+    session.{1}[0,1].{2}({3})
 '''
 
 rep_cap_method_desc_docstring = rep_cap_method_desc + '''
-    session.channels['0,1'].{1}({2})
+    session.{1}[0,1].{2}({3})
 '''
 
 func_note_text = '''

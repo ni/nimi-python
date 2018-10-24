@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
@@ -38,6 +39,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAStringOfFixedMaximumSize'] = {}
         self._defaults['GetAStringOfFixedMaximumSize']['return'] = 0
         self._defaults['GetAStringOfFixedMaximumSize']['aString'] = None
+        self._defaults['GetAStringUsingPythonCode'] = {}
+        self._defaults['GetAStringUsingPythonCode']['return'] = 0
+        self._defaults['GetAStringUsingPythonCode']['aString'] = None
         self._defaults['GetAnIviDanceString'] = {}
         self._defaults['GetAnIviDanceString']['return'] = 0
         self._defaults['GetAnIviDanceString']['aString'] = None
@@ -97,6 +101,9 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['MultipleArrayTypes'] = {}
         self._defaults['MultipleArrayTypes']['return'] = 0
         self._defaults['MultipleArrayTypes']['outputArray'] = None
@@ -145,6 +152,9 @@ class SideEffectsHelper(object):
         self._defaults['SetCustomTypeArray']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
         self._defaults['TwoInputFunction']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['Use64BitNumber'] = {}
         self._defaults['Use64BitNumber']['return'] = 0
         self._defaults['Use64BitNumber']['output'] = None
@@ -225,7 +235,8 @@ class SideEffectsHelper(object):
         # actual_number_of_samples
         if self._defaults['FetchWaveform']['actualNumberOfSamples'] is None:
             raise MockFunctionCallError("niFake_FetchWaveform", param='actualNumberOfSamples')
-        actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
+        if actual_number_of_samples is not None:
+            actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
         return self._defaults['FetchWaveform']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
@@ -234,7 +245,8 @@ class SideEffectsHelper(object):
         # a_boolean
         if self._defaults['GetABoolean']['aBoolean'] is None:
             raise MockFunctionCallError("niFake_GetABoolean", param='aBoolean')
-        a_boolean.contents.value = self._defaults['GetABoolean']['aBoolean']
+        if a_boolean is not None:
+            a_boolean.contents.value = self._defaults['GetABoolean']['aBoolean']
         return self._defaults['GetABoolean']['return']
 
     def niFake_GetANumber(self, vi, a_number):  # noqa: N802
@@ -243,7 +255,8 @@ class SideEffectsHelper(object):
         # a_number
         if self._defaults['GetANumber']['aNumber'] is None:
             raise MockFunctionCallError("niFake_GetANumber", param='aNumber')
-        a_number.contents.value = self._defaults['GetANumber']['aNumber']
+        if a_number is not None:
+            a_number.contents.value = self._defaults['GetANumber']['aNumber']
         return self._defaults['GetANumber']['return']
 
     def niFake_GetAStringOfFixedMaximumSize(self, vi, a_string):  # noqa: N802
@@ -259,6 +272,20 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             a_string[i] = test_value[i]
         return self._defaults['GetAStringOfFixedMaximumSize']['return']
+
+    def niFake_GetAStringUsingPythonCode(self, vi, a_number, a_string):  # noqa: N802
+        if self._defaults['GetAStringUsingPythonCode']['return'] != 0:
+            return self._defaults['GetAStringUsingPythonCode']['return']
+        # a_string
+        if self._defaults['GetAStringUsingPythonCode']['aString'] is None:
+            raise MockFunctionCallError("niFake_GetAStringUsingPythonCode", param='aString')
+        test_value = self._defaults['GetAStringUsingPythonCode']['aString']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(a_string) >= len(test_value)
+        for i in range(len(test_value)):
+            a_string[i] = test_value[i]
+        return self._defaults['GetAStringUsingPythonCode']['return']
 
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         if self._defaults['GetAnIviDanceString']['return'] != 0:
@@ -308,7 +335,8 @@ class SideEffectsHelper(object):
         # size_out
         if self._defaults['GetArraySizeForPythonCode']['sizeOut'] is None:
             raise MockFunctionCallError("niFake_GetArraySizeForPythonCode", param='sizeOut')
-        size_out.contents.value = self._defaults['GetArraySizeForPythonCode']['sizeOut']
+        if size_out is not None:
+            size_out.contents.value = self._defaults['GetArraySizeForPythonCode']['sizeOut']
         return self._defaults['GetArraySizeForPythonCode']['return']
 
     def niFake_GetArrayUsingIVIDance(self, vi, array_size, array_out):  # noqa: N802
@@ -332,7 +360,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViBoolean']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViBoolean", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niFake_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -341,7 +370,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViInt32", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
         return self._defaults['GetAttributeViInt32']['return']
 
     def niFake_GetAttributeViInt64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -350,7 +380,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViInt64']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViInt64", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViInt64']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViInt64']['attributeValue']
         return self._defaults['GetAttributeViInt64']['return']
 
     def niFake_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -359,7 +390,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViReal64']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViReal64", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niFake_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
@@ -378,23 +410,28 @@ class SideEffectsHelper(object):
         # month
         if self._defaults['GetCalDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Month')
-        month.contents.value = self._defaults['GetCalDateAndTime']['Month']
+        if month is not None:
+            month.contents.value = self._defaults['GetCalDateAndTime']['Month']
         # day
         if self._defaults['GetCalDateAndTime']['Day'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Day')
-        day.contents.value = self._defaults['GetCalDateAndTime']['Day']
+        if day is not None:
+            day.contents.value = self._defaults['GetCalDateAndTime']['Day']
         # year
         if self._defaults['GetCalDateAndTime']['Year'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Year')
-        year.contents.value = self._defaults['GetCalDateAndTime']['Year']
+        if year is not None:
+            year.contents.value = self._defaults['GetCalDateAndTime']['Year']
         # hour
         if self._defaults['GetCalDateAndTime']['Hour'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Hour')
-        hour.contents.value = self._defaults['GetCalDateAndTime']['Hour']
+        if hour is not None:
+            hour.contents.value = self._defaults['GetCalDateAndTime']['Hour']
         # minute
         if self._defaults['GetCalDateAndTime']['Minute'] is None:
             raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Minute')
-        minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
+        if minute is not None:
+            minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
         return self._defaults['GetCalDateAndTime']['return']
 
     def niFake_GetCalInterval(self, vi, months):  # noqa: N802
@@ -403,7 +440,8 @@ class SideEffectsHelper(object):
         # months
         if self._defaults['GetCalInterval']['Months'] is None:
             raise MockFunctionCallError("niFake_GetCalInterval", param='Months')
-        months.contents.value = self._defaults['GetCalInterval']['Months']
+        if months is not None:
+            months.contents.value = self._defaults['GetCalInterval']['Months']
         return self._defaults['GetCalInterval']['return']
 
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
@@ -439,11 +477,13 @@ class SideEffectsHelper(object):
         # a_quantity
         if self._defaults['GetEnumValue']['aQuantity'] is None:
             raise MockFunctionCallError("niFake_GetEnumValue", param='aQuantity')
-        a_quantity.contents.value = self._defaults['GetEnumValue']['aQuantity']
+        if a_quantity is not None:
+            a_quantity.contents.value = self._defaults['GetEnumValue']['aQuantity']
         # a_turtle
         if self._defaults['GetEnumValue']['aTurtle'] is None:
             raise MockFunctionCallError("niFake_GetEnumValue", param='aTurtle')
-        a_turtle.contents.value = self._defaults['GetEnumValue']['aTurtle']
+        if a_turtle is not None:
+            a_turtle.contents.value = self._defaults['GetEnumValue']['aTurtle']
         return self._defaults['GetEnumValue']['return']
 
     def niFake_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
@@ -452,7 +492,8 @@ class SideEffectsHelper(object):
         # error_code
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niFake_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
+        if error_code is not None:
+            error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niFake_GetError", param='description')
         if buffer_size.value == 0:
@@ -466,13 +507,24 @@ class SideEffectsHelper(object):
         # vi
         if self._defaults['InitWithOptions']['vi'] is None:
             raise MockFunctionCallError("niFake_InitWithOptions", param='vi')
-        vi.contents.value = self._defaults['InitWithOptions']['vi']
+        if vi is not None:
+            vi.contents.value = self._defaults['InitWithOptions']['vi']
         return self._defaults['InitWithOptions']['return']
 
     def niFake_Initiate(self, vi):  # noqa: N802
         if self._defaults['Initiate']['return'] != 0:
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
+
+    def niFake_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niFake_LockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
 
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         if self._defaults['MultipleArrayTypes']['return'] != 0:
@@ -527,7 +579,8 @@ class SideEffectsHelper(object):
         # reading
         if self._defaults['Read']['reading'] is None:
             raise MockFunctionCallError("niFake_Read", param='reading')
-        reading.contents.value = self._defaults['Read']['reading']
+        if reading is not None:
+            reading.contents.value = self._defaults['Read']['reading']
         return self._defaults['Read']['return']
 
     def niFake_ReadFromChannel(self, vi, channel_name, maximum_time, reading):  # noqa: N802
@@ -536,7 +589,8 @@ class SideEffectsHelper(object):
         # reading
         if self._defaults['ReadFromChannel']['reading'] is None:
             raise MockFunctionCallError("niFake_ReadFromChannel", param='reading')
-        reading.contents.value = self._defaults['ReadFromChannel']['reading']
+        if reading is not None:
+            reading.contents.value = self._defaults['ReadFromChannel']['reading']
         return self._defaults['ReadFromChannel']['return']
 
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
@@ -545,7 +599,8 @@ class SideEffectsHelper(object):
         # a_number
         if self._defaults['ReturnANumberAndAString']['aNumber'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aNumber')
-        a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
+        if a_number is not None:
+            a_number.contents.value = self._defaults['ReturnANumberAndAString']['aNumber']
         # a_string
         if self._defaults['ReturnANumberAndAString']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnANumberAndAString", param='aString')
@@ -563,27 +618,33 @@ class SideEffectsHelper(object):
         # a_boolean
         if self._defaults['ReturnMultipleTypes']['aBoolean'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aBoolean')
-        a_boolean.contents.value = self._defaults['ReturnMultipleTypes']['aBoolean']
+        if a_boolean is not None:
+            a_boolean.contents.value = self._defaults['ReturnMultipleTypes']['aBoolean']
         # an_int32
         if self._defaults['ReturnMultipleTypes']['anInt32'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt32')
-        an_int32.contents.value = self._defaults['ReturnMultipleTypes']['anInt32']
+        if an_int32 is not None:
+            an_int32.contents.value = self._defaults['ReturnMultipleTypes']['anInt32']
         # an_int64
         if self._defaults['ReturnMultipleTypes']['anInt64'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anInt64')
-        an_int64.contents.value = self._defaults['ReturnMultipleTypes']['anInt64']
+        if an_int64 is not None:
+            an_int64.contents.value = self._defaults['ReturnMultipleTypes']['anInt64']
         # an_int_enum
         if self._defaults['ReturnMultipleTypes']['anIntEnum'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anIntEnum')
-        an_int_enum.contents.value = self._defaults['ReturnMultipleTypes']['anIntEnum']
+        if an_int_enum is not None:
+            an_int_enum.contents.value = self._defaults['ReturnMultipleTypes']['anIntEnum']
         # a_float
         if self._defaults['ReturnMultipleTypes']['aFloat'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloat')
-        a_float.contents.value = self._defaults['ReturnMultipleTypes']['aFloat']
+        if a_float is not None:
+            a_float.contents.value = self._defaults['ReturnMultipleTypes']['aFloat']
         # a_float_enum
         if self._defaults['ReturnMultipleTypes']['aFloatEnum'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aFloatEnum')
-        a_float_enum.contents.value = self._defaults['ReturnMultipleTypes']['aFloatEnum']
+        if a_float_enum is not None:
+            a_float_enum.contents.value = self._defaults['ReturnMultipleTypes']['aFloatEnum']
         # an_array
         if self._defaults['ReturnMultipleTypes']['anArray'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='anArray')
@@ -642,13 +703,24 @@ class SideEffectsHelper(object):
             return self._defaults['TwoInputFunction']['return']
         return self._defaults['TwoInputFunction']['return']
 
+    def niFake_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niFake_UnlockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
+
     def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
         if self._defaults['Use64BitNumber']['return'] != 0:
             return self._defaults['Use64BitNumber']['return']
         # output
         if self._defaults['Use64BitNumber']['output'] is None:
             raise MockFunctionCallError("niFake_Use64BitNumber", param='output')
-        output.contents.value = self._defaults['Use64BitNumber']['output']
+        if output is not None:
+            output.contents.value = self._defaults['Use64BitNumber']['output']
         return self._defaults['Use64BitNumber']['return']
 
     def niFake_WriteWaveform(self, vi, number_of_samples, waveform):  # noqa: N802
@@ -681,7 +753,8 @@ class SideEffectsHelper(object):
         # self_test_result
         if self._defaults['self_test']['selfTestResult'] is None:
             raise MockFunctionCallError("niFake_self_test", param='selfTestResult')
-        self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niFake_self_test", param='selfTestMessage')
@@ -711,6 +784,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetANumber.return_value = 0
         mock_library.niFake_GetAStringOfFixedMaximumSize.side_effect = MockFunctionCallError("niFake_GetAStringOfFixedMaximumSize")
         mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
+        mock_library.niFake_GetAStringUsingPythonCode.side_effect = MockFunctionCallError("niFake_GetAStringUsingPythonCode")
+        mock_library.niFake_GetAStringUsingPythonCode.return_value = 0
         mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
         mock_library.niFake_GetAnIviDanceString.return_value = 0
         mock_library.niFake_GetArrayForPythonCodeCustomType.side_effect = MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType")
@@ -747,6 +822,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_InitWithOptions.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
         mock_library.niFake_Initiate.return_value = 0
+        mock_library.niFake_LockSession.side_effect = MockFunctionCallError("niFake_LockSession")
+        mock_library.niFake_LockSession.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")
         mock_library.niFake_MultipleArrayTypes.return_value = 0
         mock_library.niFake_MultipleArraysSameSize.side_effect = MockFunctionCallError("niFake_MultipleArraysSameSize")
@@ -781,6 +858,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetCustomTypeArray.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
         mock_library.niFake_TwoInputFunction.return_value = 0
+        mock_library.niFake_UnlockSession.side_effect = MockFunctionCallError("niFake_UnlockSession")
+        mock_library.niFake_UnlockSession.return_value = 0
         mock_library.niFake_Use64BitNumber.side_effect = MockFunctionCallError("niFake_Use64BitNumber")
         mock_library.niFake_Use64BitNumber.return_value = 0
         mock_library.niFake_WriteWaveform.side_effect = MockFunctionCallError("niFake_WriteWaveform")

@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'niscope',
-    'module_version': '0.8.0',
+    'module_version': '1.0.2.dev0',
     'c_function_prefix': 'niScope_',
     'driver_name': 'NI-SCOPE',
     'session_class_description': 'An NI-SCOPE session to a National Instruments Digitizer.',
@@ -13,7 +13,7 @@ config = {
             '64bit': {'name': 'niscope_64.dll', 'type': 'cdll'},
         },
         'Linux': {
-            '64bit': {'name': 'libniScope_64.so', 'type': 'cdll'},
+            '64bit': {'name': 'libniscope.so', 'type': 'cdll'},
         },
     },
     'context_manager_name': {
@@ -22,10 +22,11 @@ config = {
         'abort_function': 'Abort',
     },
     'init_function': 'InitWithOptions',
+    'close_function': 'close',
     'custom_types': [
         {'file_name': 'waveform_info', 'python_name': 'WaveformInfo', 'ctypes_type': 'struct_niScope_wfmInfo', },
     ],
-    'last_tested_version': '17.0.2',
+    'last_tested_version': '18.1.0',
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
     ],

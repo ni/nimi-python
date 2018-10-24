@@ -3,6 +3,12 @@ from .codegen_helper import get_params_snippet
 from .documentation_snippets import attr_note_text
 from .documentation_snippets import enum_note_text
 from .documentation_snippets import func_note_text
+from .documentation_snippets import rep_cap_attr_desc_docstring_r
+from .documentation_snippets import rep_cap_attr_desc_docstring_rw
+from .documentation_snippets import rep_cap_attr_desc_docstring_w
+from .documentation_snippets import rep_cap_attr_desc_rst_r
+from .documentation_snippets import rep_cap_attr_desc_rst_rw
+from .documentation_snippets import rep_cap_attr_desc_rst_w
 from .documentation_snippets import rep_cap_method_desc_docstring
 from .documentation_snippets import rep_cap_method_desc_rst
 from .helper import get_array_type_for_api_type
@@ -121,6 +127,23 @@ def get_rst_admonition_snippet(node, admonition, d, config, indent=0):
         return ''
 
 
+def add_attribute_rep_cap_tip_rst(attr, config):
+    '''Add the appropriate (r/w/rw/none) rst formatted tip for an attribute'''
+    if 'repeated_capability_type' in attr:
+        if attr['access'] == 'read only':
+            tip = rep_cap_attr_desc_rst_r
+        elif attr['access'] == 'write only':
+            tip = rep_cap_attr_desc_rst_w
+        else:
+            assert attr['access'] == 'read-write'
+            tip = rep_cap_attr_desc_rst_rw
+
+        if 'documentation' not in attr:
+            attr['documentation'] = {}
+
+        attr['documentation']['tip'] = tip.format(config['module_name'], attr['repeated_capability_type'], attr["name"].lower())
+
+
 def get_documentation_for_node_rst(node, config, indent=0):
     '''Returns any documentaion information formatted for rst
 
@@ -182,6 +205,23 @@ def get_docstring_admonition_snippet(node, admonition, d, config, indent=0, extr
         return a
     else:
         return ''
+
+
+def add_attribute_rep_cap_tip_docstring(attr, config):
+    '''Add the appropriate (r/w/rw/none) docstring formatted tip for an attribute'''
+    if 'repeated_capability_type' in attr:
+        if attr['access'] == 'read only':
+            tip = rep_cap_attr_desc_docstring_r
+        elif attr['access'] == 'write only':
+            tip = rep_cap_attr_desc_docstring_w
+        else:
+            assert attr['access'] == 'read-write'
+            tip = rep_cap_attr_desc_docstring_rw
+
+        if 'documentation' not in attr:
+            attr['documentation'] = {}
+
+        attr['documentation']['tip'] = tip.format(config['module_name'], attr['repeated_capability_type'], attr["name"].lower())
 
 
 def get_documentation_for_node_docstring(node, config, indent=0):
@@ -391,13 +431,16 @@ def _fix_references(node, doc, cfg, make_link=False):
 
     attr_search_string = '{0}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper())
     func_search_string = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', ''))
+    func_search_string_lower = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].lower().replace('_', ''))
     enum_search_string = '{0}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper())
     attr_re = re.compile(attr_search_string)
     func_re = re.compile(func_search_string)
+    func_lower_re = re.compile(func_search_string_lower)
     enum_re = re.compile(enum_search_string)
 
     doc = attr_re.sub(_replace_attribute_python_name, doc)
     doc = func_re.sub(_replace_func_python_name, doc)
+    doc = func_lower_re.sub(_replace_func_python_name, doc)
     doc = enum_re.sub(_replace_enum_python_name, doc)
 
     if 'driver_urls' in cfg:
@@ -470,7 +513,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
+        function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['repeated_capability_type'], function['python_name'], get_params_snippet(function, session_method))
 
     rst = '.. py:method:: ' + function['python_name'] + suffix + '('
     rst += get_params_snippet(function, session_method) + ')'
@@ -544,7 +587,7 @@ def get_function_docstring(function, numpy, config, indent=0):
 
     docstring = ''
     if function['has_repeated_capability'] is True:
-        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['python_name'], get_params_snippet(function, session_method))
+        function['documentation']['tip'] = rep_cap_method_desc_docstring.format(config['module_name'], function['repeated_capability_type'], function['python_name'], get_params_snippet(function, session_method))
 
     docstring += get_documentation_for_node_docstring(function, config, indent)
 

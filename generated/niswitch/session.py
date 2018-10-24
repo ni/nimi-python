@@ -59,6 +59,27 @@ class _Scan(object):
         self._session.abort()
 
 
+# From https://stackoverflow.com/questions/5929107/decorators-with-parameters
+def ivi_synchronized(f):
+    def aux(*xs, **kws):
+        session = xs[0]  # parameter 0 is 'self' which is the session object
+        with session.lock():
+            return f(*xs, **kws)
+    return aux
+
+
+class _Lock(object):
+    def __init__(self, session):
+        self._session = session
+
+    def __enter__(self):
+        # _lock_session is called from the lock() function, not here
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.unlock()
+
+
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -99,13 +120,13 @@ class _SessionBase(object):
     Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    analog_bus_sharing_enable.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    analog_bus_sharing_enable.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].analog_bus_sharing_enable = var
-        var = session.channels['0,1'].analog_bus_sharing_enable
+        session.channels[0,1].analog_bus_sharing_enable = var
+        var = session.channels[0,1].analog_bus_sharing_enable
     '''
     bandwidth = _attributes.AttributeViReal64(1250005)
     '''Type: float
@@ -114,23 +135,12 @@ class _SessionBase(object):
     The units are hertz.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    bandwidth.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    bandwidth.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].bandwidth = var
-        var = session.channels['0,1'].bandwidth
-    '''
-    cabled_module_scan_advanced_bus = _attributes.AttributeViInt32(1150009)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
-    '''
-    cabled_module_trigger_bus = _attributes.AttributeViInt32(1150008)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
+        var = session.channels[0,1].bandwidth
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -144,13 +154,12 @@ class _SessionBase(object):
     The units are ohms.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    characteristic_impedance.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    characteristic_impedance.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].characteristic_impedance = var
-        var = session.channels['0,1'].characteristic_impedance
+        var = session.channels[0,1].characteristic_impedance
     '''
     continuous_scan = _attributes.AttributeViBoolean(1150002)
     '''Type: bool
@@ -205,13 +214,13 @@ class _SessionBase(object):
     After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The connect method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    is_configuration_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    is_configuration_channel.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].is_configuration_channel = var
-        var = session.channels['0,1'].is_configuration_channel
+        session.channels[0,1].is_configuration_channel = var
+        var = session.channels[0,1].is_configuration_channel
     '''
     is_debounced = _attributes.AttributeViBoolean(1250002)
     '''Type: bool
@@ -229,13 +238,13 @@ class _SessionBase(object):
     This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The connect method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    is_source_channel.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    is_source_channel.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].is_source_channel = var
-        var = session.channels['0,1'].is_source_channel
+        session.channels[0,1].is_source_channel = var
+        var = session.channels[0,1].is_source_channel
     '''
     is_waiting_for_trig = _attributes.AttributeViBoolean(1150004)
     '''Type: bool
@@ -251,16 +260,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    master_slave_scan_advanced_bus = _attributes.AttributeViInt32(1150007)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_scan_advanced_output method instead.
-    '''
-    master_slave_trigger_bus = _attributes.AttributeViInt32(1150006)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input method instead.
-    '''
     max_ac_voltage = _attributes.AttributeViReal64(1250007)
     '''Type: float
 
@@ -268,13 +267,12 @@ class _SessionBase(object):
     The units are volts RMS.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_ac_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_ac_voltage.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_ac_voltage = var
-        var = session.channels['0,1'].max_ac_voltage
+        var = session.channels[0,1].max_ac_voltage
     '''
     max_carry_ac_current = _attributes.AttributeViReal64(1250011)
     '''Type: float
@@ -283,13 +281,12 @@ class _SessionBase(object):
     The units are amperes RMS.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_carry_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_carry_ac_current.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_carry_ac_current = var
-        var = session.channels['0,1'].max_carry_ac_current
+        var = session.channels[0,1].max_carry_ac_current
     '''
     max_carry_ac_power = _attributes.AttributeViReal64(1250015)
     '''Type: float
@@ -298,13 +295,12 @@ class _SessionBase(object):
     The units are volt-amperes.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_carry_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_carry_ac_power.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_carry_ac_power = var
-        var = session.channels['0,1'].max_carry_ac_power
+        var = session.channels[0,1].max_carry_ac_power
     '''
     max_carry_dc_current = _attributes.AttributeViReal64(1250010)
     '''Type: float
@@ -313,13 +309,12 @@ class _SessionBase(object):
     The units are amperes.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_carry_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_carry_dc_current.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_carry_dc_current = var
-        var = session.channels['0,1'].max_carry_dc_current
+        var = session.channels[0,1].max_carry_dc_current
     '''
     max_carry_dc_power = _attributes.AttributeViReal64(1250014)
     '''Type: float
@@ -328,13 +323,12 @@ class _SessionBase(object):
     The units are watts.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_carry_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_carry_dc_power.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_carry_dc_power = var
-        var = session.channels['0,1'].max_carry_dc_power
+        var = session.channels[0,1].max_carry_dc_power
     '''
     max_dc_voltage = _attributes.AttributeViReal64(1250006)
     '''Type: float
@@ -343,13 +337,12 @@ class _SessionBase(object):
     The units are volts.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_dc_voltage.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_dc_voltage.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_dc_voltage = var
-        var = session.channels['0,1'].max_dc_voltage
+        var = session.channels[0,1].max_dc_voltage
     '''
     max_switching_ac_current = _attributes.AttributeViReal64(1250009)
     '''Type: float
@@ -358,13 +351,12 @@ class _SessionBase(object):
     The units are amperes RMS.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_switching_ac_current.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_switching_ac_current.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_switching_ac_current = var
-        var = session.channels['0,1'].max_switching_ac_current
+        var = session.channels[0,1].max_switching_ac_current
     '''
     max_switching_ac_power = _attributes.AttributeViReal64(1250013)
     '''Type: float
@@ -373,13 +365,12 @@ class _SessionBase(object):
     The units are volt-amperes.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_switching_ac_power.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_switching_ac_power.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_switching_ac_power = var
-        var = session.channels['0,1'].max_switching_ac_power
+        var = session.channels[0,1].max_switching_ac_power
     '''
     max_switching_dc_current = _attributes.AttributeViReal64(1250008)
     '''Type: float
@@ -388,13 +379,12 @@ class _SessionBase(object):
     The units are amperes.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_switching_dc_current.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_switching_dc_current.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_switching_dc_current = var
-        var = session.channels['0,1'].max_switching_dc_current
+        var = session.channels[0,1].max_switching_dc_current
     '''
     max_switching_dc_power = _attributes.AttributeViReal64(1250012)
     '''Type: float
@@ -403,13 +393,12 @@ class _SessionBase(object):
     The units are watts.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    max_switching_dc_power.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    max_switching_dc_power.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].max_switching_dc_power = var
-        var = session.channels['0,1'].max_switching_dc_power
+        var = session.channels[0,1].max_switching_dc_power
     '''
     number_of_relays = _attributes.AttributeViInt32(1150014)
     '''Type: int
@@ -427,11 +416,6 @@ class _SessionBase(object):
 
     This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
     The wire_mode property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
-    '''
-    parsed_scan_list = _attributes.AttributeViString(1150012)
-    '''Type: str
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.
     '''
     power_down_latching_relays_after_debounce = _attributes.AttributeViBoolean(1150017)
     '''Type: bool
@@ -456,7 +440,7 @@ class _SessionBase(object):
     scan_list = _attributes.AttributeViString(1250020)
     '''Type: str
 
-    This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The _initiate_scan  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
+    This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The initiate  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
     The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
     To create a path between two channels, use the following character between  the two channel names:
     -> (a dash followed by a '>' sign)
@@ -492,13 +476,13 @@ class _SessionBase(object):
     Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    settling_time.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    settling_time.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].settling_time = var
-        var = session.channels['0,1'].settling_time
+        session.channels[0,1].settling_time = var
+        var = session.channels[0,1].settling_time
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -544,11 +528,6 @@ class _SessionBase(object):
 
     Determines the behavior of the trigger Input.
     '''
-    trigger_mode = _attributes.AttributeViInt32(1150005)
-    '''Type: int
-
-    This property has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the route_trigger_input and/or route_scan_advanced_output  methods instead.
-    '''
     wire_mode = _attributes.AttributeViInt32(1250017)
     '''Type: int
 
@@ -556,13 +535,12 @@ class _SessionBase(object):
     This property affects the values of the num_of_rows and  num_of_columns properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
     Tip:
-    This property can use repeated capabilities (usually channels). If set or get directly on the
-    wire_mode.Session object, then the set/get will use all repeated capabilities in the session.
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    wire_mode.Session instance, and calling set/get value on the result.:
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
 
-        session.channels['0,1'].wire_mode = var
-        var = session.channels['0,1'].wire_mode
+        var = session.channels[0,1].wire_mode
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -590,6 +568,11 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def __getitem__(self, key):
+        rep_caps = []
+        rep_caps.append("channels")
+        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+
     def _get_error_description(self, error_code):
         '''_get_error_description
 
@@ -614,6 +597,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
         '''_get_attribute_vi_boolean
 
@@ -626,12 +610,12 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_boolean(attribute_id)
+            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -669,6 +653,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
         '''_get_attribute_vi_int32
 
@@ -681,12 +666,12 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_int32(attribute_id)
+            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -724,6 +709,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
         '''_get_attribute_vi_real64
 
@@ -736,12 +722,12 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_real64(attribute_id)
+            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -779,6 +765,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
         '''_get_attribute_vi_string
 
@@ -803,12 +790,12 @@ class _SessionBase(object):
         a negative number for the Array Size parameter.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._get_attribute_vi_string(attribute_id)
+            session.channels[0,1]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -880,6 +867,52 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(code_ctype.value), description_ctype.value.decode(self._encoding)
 
+    def lock(self):
+        '''lock
+
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
+
+        Other threads may have obtained a lock on this session for the
+        following reasons:
+
+            -  The application called the lock method.
+            -  A call to NI-SWITCH locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
+
+        You can safely make nested calls to the lock method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock method with a call to
+        the unlock method.
+
+        Returns:
+            lock (context manager): When used in a with statement, niswitch.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
+        '''
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
+
+    def _lock_session(self):
+        '''_lock_session
+
+        Actuall call to driver
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niSwitch_LockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
+
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
         '''_set_attribute_vi_boolean
 
@@ -903,12 +936,12 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_boolean(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -947,6 +980,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
         '''_set_attribute_vi_int32
 
@@ -970,12 +1004,12 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_int32(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -1014,6 +1048,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
         '''_set_attribute_vi_real64
 
@@ -1037,12 +1072,12 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_real64(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -1081,6 +1116,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
         '''_set_attribute_vi_string
 
@@ -1104,12 +1140,12 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (usually channels). If called directly on the
+        This method requires repeated capabilities (channels). If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session instance, and calling this method on the result.:
+        niswitch.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels['0,1']._set_attribute_vi_string(attribute_id, attribute_value)
+            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -1146,6 +1182,18 @@ class _SessionBase(object):
         attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
         error_code = self._library.niSwitch_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def unlock(self):
+        '''unlock
+
+        Releases a lock that you acquired on an device session using
+        lock. Refer to lock for additional
+        information on session locks.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niSwitch_UnlockSession(vi_ctype, None)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return
 
     def _error_message(self, error_code):
@@ -1452,11 +1500,12 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         '''abort
 
         Aborts the scan in progress. Initiate a scan with
-        _initiate_scan. If the switch module is not scanning,
+        initiate. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1464,6 +1513,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def can_connect(self, channel1, channel2):
         '''can_connect
 
@@ -1518,12 +1568,13 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
 
+    @ivi_synchronized
     def commit(self):
         '''commit
 
         Downloads the configured scan list and trigger settings to hardware.
         Calling commit optional as it is implicitly called during
-        _initiate_scan. Use commit to arm triggers in a given
+        initiate. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1531,90 +1582,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_scan_list(self, scanlist, scan_mode=enums.ScanMode.BREAK_BEFORE_MAKE):
-        '''configure_scan_list
-
-        Configures the scan list and scan mode used for scanning. Refer to
-        Devices Overview to determine if the switch module supports scanning.
-        The scan list is comprised of a list of channel connections separated by
-        semi-colons. For example, the following scan list will scan the first
-        three channels of a multiplexer: com0->ch0; com0->ch1; com0->ch2; Refer
-        to Scan Lists for more information on scan list syntax To see the status
-        of the scan, call either IsScanning or
-        wait_for_scan_complete. Use the configure_scan_trigger
-        method to configure the scan trigger. Use the _initiate_scan
-        method to start the scan.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
-
-        Args:
-            scanlist (str): The scan list to use. The driver uses this value to set the Scan List
-                property. Default value: None
-
-            scan_mode (enums.ScanMode): Specifies how the switch module breaks existing connections when
-                scanning. The driver uses this value to set the Scan Mode property.
-                Refer to scan modes for more information. Default value: Break Before
-                Make
-
-        '''
-        if type(scan_mode) is not enums.ScanMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanMode))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        scanlist_ctype = ctypes.create_string_buffer(scanlist.encode(self._encoding))  # case C020
-        scan_mode_ctype = _visatype.ViInt32(scan_mode.value)  # case S130
-        error_code = self._library.niSwitch_ConfigureScanList(vi_ctype, scanlist_ctype, scan_mode_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_scan_trigger(self, trigger_input, scan_advanced_output, scan_delay=datetime.timedelta(seconds=0.0)):
-        '''configure_scan_trigger
-
-        Configures the scan triggers for the scan list established with
-        configure_scan_list. Refer to Devices Overview to determine if
-        the switch module supports scanning. configure_scan_trigger sets
-        the location that the switch expects to receive an input trigger to
-        advance through the scan list. This method also sets the location
-        where it outputs a scan advanced signal after it completes an entry in
-        the scan list.
-
-        Args:
-            trigger_input (enums.TriggerInput): Trigger source you want the switch module to use during scanning. The
-                driver uses this value to set the trigger_input
-                property. The switch device waits for the trigger you specify when it
-                encounters a semicolon in the scanlist. When the trigger occurs, the
-                switch device advances to the next entry in the scanlist. Refer to the
-                trigger_input topic in the NI Switches Help for a list
-                of valid values.
-
-            scan_advanced_output (enums.ScanAdvancedOutput): Output destination of the scan advanced trigger signal. The driver uses
-                this value to set the scan_advanced_output property.
-                After the switch processes each entry in the scan list, it waits the
-                length of time you specify in the Scan Delay parameter and then asserts
-                a trigger on the line you specify with this parameter. Refer to the
-                scan_advanced_output topic in the NI Switches Help for
-                a list of valid values.
-
-            scan_delay (float in seconds or datetime.timedelta): The minimum length of time you want the switch device to wait after it
-                creates a path until it asserts a trigger on the scan advanced output
-                line. The driver uses this value to set the Scan Delay property. The
-                scan delay is in addition to the settling time.The driver uses this
-                value to set the scan_delay property. Express this
-                value in seconds. Default value: 0.0 s
-
-        '''
-        if type(trigger_input) is not enums.TriggerInput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
-        if type(scan_advanced_output) is not enums.ScanAdvancedOutput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        scan_delay_ctype = _converters.convert_timedelta_to_seconds(scan_delay, _visatype.ViReal64)  # case S140
-        trigger_input_ctype = _visatype.ViInt32(trigger_input.value)  # case S130
-        scan_advanced_output_ctype = _visatype.ViInt32(scan_advanced_output.value)  # case S130
-        error_code = self._library.niSwitch_ConfigureScanTrigger(vi_ctype, scan_delay_ctype, trigger_input_ctype, scan_advanced_output_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+    @ivi_synchronized
     def connect(self, channel1, channel2):
         '''connect
 
@@ -1656,6 +1624,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def connect_multiple(self, connection_list):
         '''connect_multiple
 
@@ -1696,6 +1665,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disable(self):
         '''disable
 
@@ -1708,6 +1678,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disconnect(self, channel1, channel2):
         '''disconnect
 
@@ -1735,6 +1706,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disconnect_all(self):
         '''disconnect_all
 
@@ -1746,6 +1718,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def disconnect_multiple(self, disconnection_list):
         '''disconnect_multiple
 
@@ -1771,6 +1744,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def get_channel_name(self, index):
         '''get_channel_name
 
@@ -1796,6 +1770,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return channel_name_buffer_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_path(self, channel1, channel2):
         '''get_path
 
@@ -1836,6 +1811,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return path_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_relay_count(self, relay_name):
         '''get_relay_count
 
@@ -1862,6 +1838,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
 
+    @ivi_synchronized
     def get_relay_name(self, index):
         '''get_relay_name
 
@@ -1887,6 +1864,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return relay_name_buffer_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
     def get_relay_position(self, relay_name):
         '''get_relay_position
 
@@ -2163,6 +2141,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
 
+    @ivi_synchronized
     def _initiate_scan(self):
         '''_initiate_scan
 
@@ -2180,6 +2159,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def relay_control(self, relay_name, relay_action):
         '''relay_control
 
@@ -2212,6 +2192,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def reset_with_defaults(self):
         '''reset_with_defaults
 
@@ -2225,6 +2206,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
         '''route_scan_advanced_output
 
@@ -2265,6 +2247,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
         '''route_trigger_input
 
@@ -2306,39 +2289,26 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def send_software_trigger(self):
         '''send_software_trigger
 
         Sends a software trigger to the switch module specified in the NI-SWITCH
         session. When the trigger input is set to TriggerInput.SOFTWARE_TRIG
-        through either the configure_scan_trigger or the
+        through either the ConfigureScanTrigger or the
         trigger_input property, the scan does not proceed from
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_SendSoftwareTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_continuous_scan(self, continuous_scan):
-        '''set_continuous_scan
-
-        Sets the to loop continuously through the scan list or to stop scanning
-        after one pass through the scan list.
-
-        Args:
-            continuous_scan (bool): If True, loops continuously through the scan list during scanning.
-                If False, the scan stops after one pass through the scan list.
-                Default value: False
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        continuous_scan_ctype = _visatype.ViBoolean(continuous_scan)  # case S150
-        error_code = self._library.niSwitch_SetContinuousScan(vi_ctype, continuous_scan_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
+    @ivi_synchronized
     def set_path(self, path_list):
         '''set_path
 
@@ -2362,6 +2332,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_debounce
 
@@ -2383,6 +2354,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
         '''wait_for_scan_complete
 
@@ -2422,6 +2394,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2445,6 +2418,7 @@ class Session(_SessionBase):
             raise errors.SelfTestError(code, msg)
         return None
 
+    @ivi_synchronized
     def reset(self):
         '''reset
 
@@ -2457,6 +2431,7 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    @ivi_synchronized
     def _self_test(self):
         '''_self_test
 

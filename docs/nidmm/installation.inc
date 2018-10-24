@@ -8,7 +8,7 @@ As a prerequisite to using the nidmm module, you must install the NI-DMM runtime
 
 The nimi-python modules (i.e. for **NI-DMM**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nidmm~=0.8.0
+  $ python -m pip install nidmm~=1.0.2.dev0
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::

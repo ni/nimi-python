@@ -3,6 +3,7 @@ import niscope
 import numpy
 import pytest
 import sys
+import tempfile
 
 
 @pytest.fixture(scope='function')
@@ -93,11 +94,7 @@ def test_fetch_binary8_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].wfm
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_fetch_binary16_into(session):
@@ -125,11 +122,7 @@ def test_fetch_binary16_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].samples
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_fetch_binary32_into(session):
@@ -157,11 +150,7 @@ def test_fetch_binary32_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].samples
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_fetch_double_into(session):
@@ -189,11 +178,7 @@ def test_fetch_double_into(session):
             for j in range(len(record_wfm)):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
         else:
-            try:
-                waveforms[i].samples
-                assert False
-            except AttributeError:
-                pass
+            assert waveforms[i].samples is None
 
 
 def test_self_test(session):
@@ -229,6 +214,16 @@ def test_reset_with_defaults(session):
     assert non_default_meas_time_histogram_high_time == 0.0010
     session.reset_with_defaults()
     assert session._meas_time_histogram_high_time == 0.0005
+
+
+def test_error_message():
+    try:
+        # We pass in an invalid model name to force going to error_message
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+            assert False
+    except niscope.Error as e:
+        assert e.code == -1074118609
+        assert e.description.find('Simulation does not support the selected model and board type.') != -1
 
 
 def test_get_error(session):
@@ -306,16 +301,41 @@ def test_configure_trigger_digital(session):
 
 def test_configure_trigger_edge(session):
     assert niscope.TriggerSlope.POSITIVE == session.trigger_slope
-    session.configure_trigger_edge('0', niscope.TriggerCoupling.DC)
+    session.configure_trigger_edge('0', 0.0, niscope.TriggerCoupling.DC)
     session.commit()
     assert '0' == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
 
 def test_configure_trigger_hysteresis(session):
-    session.configure_trigger_hysteresis('1', niscope.TriggerCoupling.DC)
+    session.configure_trigger_hysteresis('1', 0.0, 0.05, niscope.TriggerCoupling.DC)
     assert '1' == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
+
+
+def test_import_export_buffer(session):
+    test_value_1 = 1
+    test_value_2 = 5
+    session.vertical_range = test_value_1
+    assert session.vertical_range == test_value_1
+    buffer = session.export_attribute_configuration_buffer()
+    session.vertical_range = test_value_2
+    assert session.vertical_range == test_value_2
+    session.import_attribute_configuration_buffer(buffer)
+    assert session.vertical_range == test_value_1
+
+
+def test_import_export_file(session):
+    test_value_1 = 1
+    test_value_2 = 5
+    path = tempfile.gettempdir() + 'test.txt'
+    session.vertical_range = test_value_1
+    assert session.vertical_range == test_value_1
+    session.export_attribute_configuration_file(path)
+    session.vertical_range = test_value_2
+    assert session.vertical_range == test_value_2
+    session.import_attribute_configuration_file(path)
+    assert session.vertical_range == test_value_1
 
 
 def test_configure_trigger_software(session):

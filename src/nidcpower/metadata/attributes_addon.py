@@ -14,6 +14,11 @@ attributes_codegen_method = {
     1050004: { "codegen_method": "no"      },  # CACHE - IVI Attribute - #824
     1150074: { "codegen_method": "private" },  # ACTIVE_ADVANCED_SEQUENCE - Advanced Sequence Attribute - #793
     1150075: { "codegen_method": "private" },  # ACTIVE_ADVANCED_SEQUENCE_STEP - Advanced Sequence Attribute - #793
+    1150035: { "codegen_method": "no"      },  # DIGITAL_EDGE_MEASURE_TRIGGER_EDGE - Backplane only, always falling edge - #860
+    1150096: { "codegen_method": "no"      },  # DIGITAL_EDGE_PULSE_TRIGGER_EDGE - Backplane only, always falling edge - #860
+    1150027: { "codegen_method": "no"      },  # DIGITAL_EDGE_SEQUENCE_ADVANCE_TRIGGER_EDGE - Backplane only, always falling edge - #860
+    1150031: { "codegen_method": "no"      },  # DIGITAL_EDGE_SOURCE_TRIGGER_EDGE - Backplane only, always falling edge - #860
+    1150022: { "codegen_method": "no"      },  # DIGITAL_EDGE_START_TRIGGER_EDGE - Backplane only, always falling edge - #860
 }
 
 attributes_converters = {

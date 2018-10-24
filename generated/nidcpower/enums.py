@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 from enum import Enum
@@ -48,17 +49,6 @@ class DCNoiseRejection(Enum):
     NORMAL = 1044
     '''
     Normal rejection of DC noise.
-    '''
-
-
-class DigitalEdge(Enum):
-    RISING = 1016
-    '''
-    Asserts the trigger on the rising edge of the digital signal.
-    '''
-    FALLING = 1017
-    '''
-    Asserts the trigger on the falling edge of the digital signal.
     '''
 
 

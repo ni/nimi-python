@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
@@ -40,12 +41,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureArbWaveform']['return'] = 0
         self._defaults['ConfigureCustomFIRFilterCoefficients'] = {}
         self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeScriptTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeScriptTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeStartTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalLevelScriptTrigger'] = {}
-        self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] = 0
         self._defaults['ConfigureFreqList'] = {}
         self._defaults['ConfigureFreqList']['return'] = 0
         self._defaults['ConfigureStandardWaveform'] = {}
@@ -109,10 +104,6 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['Months'] = None
-        self._defaults['GetFIRFilterCoefficients'] = {}
-        self._defaults['GetFIRFilterCoefficients']['return'] = 0
-        self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] = None
-        self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] = None
         self._defaults['GetHardwareState'] = {}
         self._defaults['GetHardwareState']['return'] = 0
         self._defaults['GetHardwareState']['state'] = None
@@ -143,6 +134,9 @@ class SideEffectsHelper(object):
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['Done'] = None
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['QueryArbSeqCapabilities'] = {}
         self._defaults['QueryArbSeqCapabilities']['return'] = 0
         self._defaults['QueryArbSeqCapabilities']['maximumNumberOfSequences'] = None
@@ -186,6 +180,9 @@ class SideEffectsHelper(object):
         self._defaults['SetNamedWaveformNextWritePosition']['return'] = 0
         self._defaults['SetWaveformNextWritePosition'] = {}
         self._defaults['SetWaveformNextWritePosition']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitUntilDone'] = {}
         self._defaults['WaitUntilDone']['return'] = 0
         self._defaults['WriteBinary16Waveform'] = {}
@@ -198,8 +195,6 @@ class SideEffectsHelper(object):
         self._defaults['WriteScript']['return'] = 0
         self._defaults['WriteWaveform'] = {}
         self._defaults['WriteWaveform']['return'] = 0
-        self._defaults['WriteWaveformDispatcher'] = {}
-        self._defaults['WriteWaveformDispatcher']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -234,7 +229,8 @@ class SideEffectsHelper(object):
         # waveform_handle
         if self._defaults['AllocateWaveform']['waveformHandle'] is None:
             raise MockFunctionCallError("niFgen_AllocateWaveform", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['AllocateWaveform']['waveformHandle']
+        if waveform_handle is not None:
+            waveform_handle.contents.value = self._defaults['AllocateWaveform']['waveformHandle']
         return self._defaults['AllocateWaveform']['return']
 
     def niFgen_ClearArbMemory(self, vi):  # noqa: N802
@@ -282,21 +278,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureCustomFIRFilterCoefficients']['return']
         return self._defaults['ConfigureCustomFIRFilterCoefficients']['return']
 
-    def niFgen_ConfigureDigitalEdgeScriptTrigger(self, vi, trigger_id, source, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeScriptTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeScriptTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeScriptTrigger']['return']
-
-    def niFgen_ConfigureDigitalEdgeStartTrigger(self, vi, source, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
-
-    def niFgen_ConfigureDigitalLevelScriptTrigger(self, vi, trigger_id, source, trigger_when):  # noqa: N802
-        if self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
-        return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
-
     def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         if self._defaults['ConfigureFreqList']['return'] != 0:
             return self._defaults['ConfigureFreqList']['return']
@@ -324,7 +305,8 @@ class SideEffectsHelper(object):
         # sequence_handle
         if self._defaults['CreateAdvancedArbSequence']['sequenceHandle'] is None:
             raise MockFunctionCallError("niFgen_CreateAdvancedArbSequence", param='sequenceHandle')
-        sequence_handle.contents.value = self._defaults['CreateAdvancedArbSequence']['sequenceHandle']
+        if sequence_handle is not None:
+            sequence_handle.contents.value = self._defaults['CreateAdvancedArbSequence']['sequenceHandle']
         return self._defaults['CreateAdvancedArbSequence']['return']
 
     def niFgen_CreateArbSequence(self, vi, sequence_length, waveform_handles_array, loop_counts_array, sequence_handle):  # noqa: N802
@@ -333,7 +315,8 @@ class SideEffectsHelper(object):
         # sequence_handle
         if self._defaults['CreateArbSequence']['sequenceHandle'] is None:
             raise MockFunctionCallError("niFgen_CreateArbSequence", param='sequenceHandle')
-        sequence_handle.contents.value = self._defaults['CreateArbSequence']['sequenceHandle']
+        if sequence_handle is not None:
+            sequence_handle.contents.value = self._defaults['CreateArbSequence']['sequenceHandle']
         return self._defaults['CreateArbSequence']['return']
 
     def niFgen_CreateFreqList(self, vi, waveform, frequency_list_length, frequency_array, duration_array, frequency_list_handle):  # noqa: N802
@@ -342,7 +325,8 @@ class SideEffectsHelper(object):
         # frequency_list_handle
         if self._defaults['CreateFreqList']['frequencyListHandle'] is None:
             raise MockFunctionCallError("niFgen_CreateFreqList", param='frequencyListHandle')
-        frequency_list_handle.contents.value = self._defaults['CreateFreqList']['frequencyListHandle']
+        if frequency_list_handle is not None:
+            frequency_list_handle.contents.value = self._defaults['CreateFreqList']['frequencyListHandle']
         return self._defaults['CreateFreqList']['return']
 
     def niFgen_CreateWaveformF64(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
@@ -351,7 +335,8 @@ class SideEffectsHelper(object):
         # waveform_handle
         if self._defaults['CreateWaveformF64']['waveformHandle'] is None:
             raise MockFunctionCallError("niFgen_CreateWaveformF64", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformF64']['waveformHandle']
+        if waveform_handle is not None:
+            waveform_handle.contents.value = self._defaults['CreateWaveformF64']['waveformHandle']
         return self._defaults['CreateWaveformF64']['return']
 
     def niFgen_CreateWaveformFromFileF64(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
@@ -360,7 +345,8 @@ class SideEffectsHelper(object):
         # waveform_handle
         if self._defaults['CreateWaveformFromFileF64']['waveformHandle'] is None:
             raise MockFunctionCallError("niFgen_CreateWaveformFromFileF64", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformFromFileF64']['waveformHandle']
+        if waveform_handle is not None:
+            waveform_handle.contents.value = self._defaults['CreateWaveformFromFileF64']['waveformHandle']
         return self._defaults['CreateWaveformFromFileF64']['return']
 
     def niFgen_CreateWaveformFromFileI16(self, vi, channel_name, file_name, byte_order, waveform_handle):  # noqa: N802
@@ -369,7 +355,8 @@ class SideEffectsHelper(object):
         # waveform_handle
         if self._defaults['CreateWaveformFromFileI16']['waveformHandle'] is None:
             raise MockFunctionCallError("niFgen_CreateWaveformFromFileI16", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformFromFileI16']['waveformHandle']
+        if waveform_handle is not None:
+            waveform_handle.contents.value = self._defaults['CreateWaveformFromFileI16']['waveformHandle']
         return self._defaults['CreateWaveformFromFileI16']['return']
 
     def niFgen_CreateWaveformI16(self, vi, channel_name, waveform_size, waveform_data_array, waveform_handle):  # noqa: N802
@@ -378,7 +365,8 @@ class SideEffectsHelper(object):
         # waveform_handle
         if self._defaults['CreateWaveformI16']['waveformHandle'] is None:
             raise MockFunctionCallError("niFgen_CreateWaveformI16", param='waveformHandle')
-        waveform_handle.contents.value = self._defaults['CreateWaveformI16']['waveformHandle']
+        if waveform_handle is not None:
+            waveform_handle.contents.value = self._defaults['CreateWaveformI16']['waveformHandle']
         return self._defaults['CreateWaveformI16']['return']
 
     def niFgen_DefineUserStandardWaveform(self, vi, channel_name, waveform_size, waveform_data_array):  # noqa: N802
@@ -407,7 +395,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViBoolean']['attributeValue'] is None:
             raise MockFunctionCallError("niFgen_GetAttributeViBoolean", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViBoolean']['attributeValue']
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niFgen_GetAttributeViInt32(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -416,7 +405,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niFgen_GetAttributeViInt32", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViInt32']['attributeValue']
         return self._defaults['GetAttributeViInt32']['return']
 
     def niFgen_GetAttributeViReal64(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -425,7 +415,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetAttributeViReal64']['attributeValue'] is None:
             raise MockFunctionCallError("niFgen_GetAttributeViReal64", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetAttributeViReal64']['attributeValue']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niFgen_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
@@ -444,7 +435,8 @@ class SideEffectsHelper(object):
         # error_code
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niFgen_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
+        if error_code is not None:
+            error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['errorDescription'] is None:
             raise MockFunctionCallError("niFgen_GetError", param='errorDescription')
         if error_description_buffer_size.value == 0:
@@ -458,23 +450,28 @@ class SideEffectsHelper(object):
         # year
         if self._defaults['GetExtCalLastDateAndTime']['Year'] is None:
             raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Year')
-        year.contents.value = self._defaults['GetExtCalLastDateAndTime']['Year']
+        if year is not None:
+            year.contents.value = self._defaults['GetExtCalLastDateAndTime']['Year']
         # month
         if self._defaults['GetExtCalLastDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Month')
-        month.contents.value = self._defaults['GetExtCalLastDateAndTime']['Month']
+        if month is not None:
+            month.contents.value = self._defaults['GetExtCalLastDateAndTime']['Month']
         # day
         if self._defaults['GetExtCalLastDateAndTime']['Day'] is None:
             raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Day')
-        day.contents.value = self._defaults['GetExtCalLastDateAndTime']['Day']
+        if day is not None:
+            day.contents.value = self._defaults['GetExtCalLastDateAndTime']['Day']
         # hour
         if self._defaults['GetExtCalLastDateAndTime']['Hour'] is None:
             raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Hour')
-        hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['Hour']
+        if hour is not None:
+            hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['Hour']
         # minute
         if self._defaults['GetExtCalLastDateAndTime']['Minute'] is None:
             raise MockFunctionCallError("niFgen_GetExtCalLastDateAndTime", param='Minute')
-        minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['Minute']
+        if minute is not None:
+            minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['Minute']
         return self._defaults['GetExtCalLastDateAndTime']['return']
 
     def niFgen_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
@@ -483,7 +480,8 @@ class SideEffectsHelper(object):
         # temperature
         if self._defaults['GetExtCalLastTemp']['Temperature'] is None:
             raise MockFunctionCallError("niFgen_GetExtCalLastTemp", param='Temperature')
-        temperature.contents.value = self._defaults['GetExtCalLastTemp']['Temperature']
+        if temperature is not None:
+            temperature.contents.value = self._defaults['GetExtCalLastTemp']['Temperature']
         return self._defaults['GetExtCalLastTemp']['return']
 
     def niFgen_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
@@ -492,27 +490,9 @@ class SideEffectsHelper(object):
         # months
         if self._defaults['GetExtCalRecommendedInterval']['Months'] is None:
             raise MockFunctionCallError("niFgen_GetExtCalRecommendedInterval", param='Months')
-        months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
+        if months is not None:
+            months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
-
-    def niFgen_GetFIRFilterCoefficients(self, vi, channel_name, array_size, coefficients_array, number_of_coefficients_read):  # noqa: N802
-        if self._defaults['GetFIRFilterCoefficients']['return'] != 0:
-            return self._defaults['GetFIRFilterCoefficients']['return']
-        # number_of_coefficients_read
-        if self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead'] is None:
-            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='numberOfCoefficientsRead')
-        number_of_coefficients_read.contents.value = self._defaults['GetFIRFilterCoefficients']['numberOfCoefficientsRead']
-        if self._defaults['GetFIRFilterCoefficients']['coefficientsArray'] is None:
-            raise MockFunctionCallError("niFgen_GetFIRFilterCoefficients", param='coefficientsArray')
-        if array_size.value == 0:
-            return len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])
-        try:
-            coefficients_array_ref = coefficients_array.contents
-        except AttributeError:
-            coefficients_array_ref = coefficients_array
-        for i in range(len(self._defaults['GetFIRFilterCoefficients']['coefficientsArray'])):
-            coefficients_array_ref[i] = self._defaults['GetFIRFilterCoefficients']['coefficientsArray'][i]
-        return self._defaults['GetFIRFilterCoefficients']['return']
 
     def niFgen_GetHardwareState(self, vi, state):  # noqa: N802
         if self._defaults['GetHardwareState']['return'] != 0:
@@ -520,7 +500,8 @@ class SideEffectsHelper(object):
         # state
         if self._defaults['GetHardwareState']['state'] is None:
             raise MockFunctionCallError("niFgen_GetHardwareState", param='state')
-        state.contents.value = self._defaults['GetHardwareState']['state']
+        if state is not None:
+            state.contents.value = self._defaults['GetHardwareState']['state']
         return self._defaults['GetHardwareState']['return']
 
     def niFgen_GetLastExtCalLastDateAndTime(self, vi, month):  # noqa: N802
@@ -529,7 +510,8 @@ class SideEffectsHelper(object):
         # month
         if self._defaults['GetLastExtCalLastDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime", param='Month')
-        month.contents.value = self._defaults['GetLastExtCalLastDateAndTime']['Month']
+        if month is not None:
+            month.contents.value = self._defaults['GetLastExtCalLastDateAndTime']['Month']
         return self._defaults['GetLastExtCalLastDateAndTime']['return']
 
     def niFgen_GetLastSelfCalLastDateAndTime(self, vi, month):  # noqa: N802
@@ -538,7 +520,8 @@ class SideEffectsHelper(object):
         # month
         if self._defaults['GetLastSelfCalLastDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niFgen_GetLastSelfCalLastDateAndTime", param='Month')
-        month.contents.value = self._defaults['GetLastSelfCalLastDateAndTime']['Month']
+        if month is not None:
+            month.contents.value = self._defaults['GetLastSelfCalLastDateAndTime']['Month']
         return self._defaults['GetLastSelfCalLastDateAndTime']['return']
 
     def niFgen_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
@@ -547,23 +530,28 @@ class SideEffectsHelper(object):
         # year
         if self._defaults['GetSelfCalLastDateAndTime']['Year'] is None:
             raise MockFunctionCallError("niFgen_GetSelfCalLastDateAndTime", param='Year')
-        year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Year']
+        if year is not None:
+            year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Year']
         # month
         if self._defaults['GetSelfCalLastDateAndTime']['Month'] is None:
             raise MockFunctionCallError("niFgen_GetSelfCalLastDateAndTime", param='Month')
-        month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Month']
+        if month is not None:
+            month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Month']
         # day
         if self._defaults['GetSelfCalLastDateAndTime']['Day'] is None:
             raise MockFunctionCallError("niFgen_GetSelfCalLastDateAndTime", param='Day')
-        day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Day']
+        if day is not None:
+            day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Day']
         # hour
         if self._defaults['GetSelfCalLastDateAndTime']['Hour'] is None:
             raise MockFunctionCallError("niFgen_GetSelfCalLastDateAndTime", param='Hour')
-        hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Hour']
+        if hour is not None:
+            hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Hour']
         # minute
         if self._defaults['GetSelfCalLastDateAndTime']['Minute'] is None:
             raise MockFunctionCallError("niFgen_GetSelfCalLastDateAndTime", param='Minute')
-        minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Minute']
+        if minute is not None:
+            minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Minute']
         return self._defaults['GetSelfCalLastDateAndTime']['return']
 
     def niFgen_GetSelfCalLastTemp(self, vi, temperature):  # noqa: N802
@@ -572,7 +560,8 @@ class SideEffectsHelper(object):
         # temperature
         if self._defaults['GetSelfCalLastTemp']['Temperature'] is None:
             raise MockFunctionCallError("niFgen_GetSelfCalLastTemp", param='Temperature')
-        temperature.contents.value = self._defaults['GetSelfCalLastTemp']['Temperature']
+        if temperature is not None:
+            temperature.contents.value = self._defaults['GetSelfCalLastTemp']['Temperature']
         return self._defaults['GetSelfCalLastTemp']['return']
 
     def niFgen_GetSelfCalSupported(self, vi, self_cal_supported):  # noqa: N802
@@ -581,7 +570,8 @@ class SideEffectsHelper(object):
         # self_cal_supported
         if self._defaults['GetSelfCalSupported']['selfCalSupported'] is None:
             raise MockFunctionCallError("niFgen_GetSelfCalSupported", param='selfCalSupported')
-        self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
+        if self_cal_supported is not None:
+            self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
 
     def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
@@ -590,7 +580,8 @@ class SideEffectsHelper(object):
         # vi
         if self._defaults['InitializeWithChannels']['vi'] is None:
             raise MockFunctionCallError("niFgen_InitializeWithChannels", param='vi')
-        vi.contents.value = self._defaults['InitializeWithChannels']['vi']
+        if vi is not None:
+            vi.contents.value = self._defaults['InitializeWithChannels']['vi']
         return self._defaults['InitializeWithChannels']['return']
 
     def niFgen_InitiateGeneration(self, vi):  # noqa: N802
@@ -604,8 +595,19 @@ class SideEffectsHelper(object):
         # done
         if self._defaults['IsDone']['Done'] is None:
             raise MockFunctionCallError("niFgen_IsDone", param='Done')
-        done.contents.value = self._defaults['IsDone']['Done']
+        if done is not None:
+            done.contents.value = self._defaults['IsDone']['Done']
         return self._defaults['IsDone']['return']
+
+    def niFgen_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niFgen_LockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
 
     def niFgen_QueryArbSeqCapabilities(self, vi, maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count):  # noqa: N802
         if self._defaults['QueryArbSeqCapabilities']['return'] != 0:
@@ -613,19 +615,23 @@ class SideEffectsHelper(object):
         # maximum_number_of_sequences
         if self._defaults['QueryArbSeqCapabilities']['maximumNumberOfSequences'] is None:
             raise MockFunctionCallError("niFgen_QueryArbSeqCapabilities", param='maximumNumberOfSequences')
-        maximum_number_of_sequences.contents.value = self._defaults['QueryArbSeqCapabilities']['maximumNumberOfSequences']
+        if maximum_number_of_sequences is not None:
+            maximum_number_of_sequences.contents.value = self._defaults['QueryArbSeqCapabilities']['maximumNumberOfSequences']
         # minimum_sequence_length
         if self._defaults['QueryArbSeqCapabilities']['minimumSequenceLength'] is None:
             raise MockFunctionCallError("niFgen_QueryArbSeqCapabilities", param='minimumSequenceLength')
-        minimum_sequence_length.contents.value = self._defaults['QueryArbSeqCapabilities']['minimumSequenceLength']
+        if minimum_sequence_length is not None:
+            minimum_sequence_length.contents.value = self._defaults['QueryArbSeqCapabilities']['minimumSequenceLength']
         # maximum_sequence_length
         if self._defaults['QueryArbSeqCapabilities']['maximumSequenceLength'] is None:
             raise MockFunctionCallError("niFgen_QueryArbSeqCapabilities", param='maximumSequenceLength')
-        maximum_sequence_length.contents.value = self._defaults['QueryArbSeqCapabilities']['maximumSequenceLength']
+        if maximum_sequence_length is not None:
+            maximum_sequence_length.contents.value = self._defaults['QueryArbSeqCapabilities']['maximumSequenceLength']
         # maximum_loop_count
         if self._defaults['QueryArbSeqCapabilities']['maximumLoopCount'] is None:
             raise MockFunctionCallError("niFgen_QueryArbSeqCapabilities", param='maximumLoopCount')
-        maximum_loop_count.contents.value = self._defaults['QueryArbSeqCapabilities']['maximumLoopCount']
+        if maximum_loop_count is not None:
+            maximum_loop_count.contents.value = self._defaults['QueryArbSeqCapabilities']['maximumLoopCount']
         return self._defaults['QueryArbSeqCapabilities']['return']
 
     def niFgen_QueryArbWfmCapabilities(self, vi, maximum_number_of_waveforms, waveform_quantum, minimum_waveform_size, maximum_waveform_size):  # noqa: N802
@@ -634,19 +640,23 @@ class SideEffectsHelper(object):
         # maximum_number_of_waveforms
         if self._defaults['QueryArbWfmCapabilities']['maximumNumberOfWaveforms'] is None:
             raise MockFunctionCallError("niFgen_QueryArbWfmCapabilities", param='maximumNumberOfWaveforms')
-        maximum_number_of_waveforms.contents.value = self._defaults['QueryArbWfmCapabilities']['maximumNumberOfWaveforms']
+        if maximum_number_of_waveforms is not None:
+            maximum_number_of_waveforms.contents.value = self._defaults['QueryArbWfmCapabilities']['maximumNumberOfWaveforms']
         # waveform_quantum
         if self._defaults['QueryArbWfmCapabilities']['waveformQuantum'] is None:
             raise MockFunctionCallError("niFgen_QueryArbWfmCapabilities", param='waveformQuantum')
-        waveform_quantum.contents.value = self._defaults['QueryArbWfmCapabilities']['waveformQuantum']
+        if waveform_quantum is not None:
+            waveform_quantum.contents.value = self._defaults['QueryArbWfmCapabilities']['waveformQuantum']
         # minimum_waveform_size
         if self._defaults['QueryArbWfmCapabilities']['minimumWaveformSize'] is None:
             raise MockFunctionCallError("niFgen_QueryArbWfmCapabilities", param='minimumWaveformSize')
-        minimum_waveform_size.contents.value = self._defaults['QueryArbWfmCapabilities']['minimumWaveformSize']
+        if minimum_waveform_size is not None:
+            minimum_waveform_size.contents.value = self._defaults['QueryArbWfmCapabilities']['minimumWaveformSize']
         # maximum_waveform_size
         if self._defaults['QueryArbWfmCapabilities']['maximumWaveformSize'] is None:
             raise MockFunctionCallError("niFgen_QueryArbWfmCapabilities", param='maximumWaveformSize')
-        maximum_waveform_size.contents.value = self._defaults['QueryArbWfmCapabilities']['maximumWaveformSize']
+        if maximum_waveform_size is not None:
+            maximum_waveform_size.contents.value = self._defaults['QueryArbWfmCapabilities']['maximumWaveformSize']
         return self._defaults['QueryArbWfmCapabilities']['return']
 
     def niFgen_QueryFreqListCapabilities(self, vi, maximum_number_of_freq_lists, minimum_frequency_list_length, maximum_frequency_list_length, minimum_frequency_list_duration, maximum_frequency_list_duration, frequency_list_duration_quantum):  # noqa: N802
@@ -655,27 +665,33 @@ class SideEffectsHelper(object):
         # maximum_number_of_freq_lists
         if self._defaults['QueryFreqListCapabilities']['maximumNumberOfFreqLists'] is None:
             raise MockFunctionCallError("niFgen_QueryFreqListCapabilities", param='maximumNumberOfFreqLists')
-        maximum_number_of_freq_lists.contents.value = self._defaults['QueryFreqListCapabilities']['maximumNumberOfFreqLists']
+        if maximum_number_of_freq_lists is not None:
+            maximum_number_of_freq_lists.contents.value = self._defaults['QueryFreqListCapabilities']['maximumNumberOfFreqLists']
         # minimum_frequency_list_length
         if self._defaults['QueryFreqListCapabilities']['minimumFrequencyListLength'] is None:
             raise MockFunctionCallError("niFgen_QueryFreqListCapabilities", param='minimumFrequencyListLength')
-        minimum_frequency_list_length.contents.value = self._defaults['QueryFreqListCapabilities']['minimumFrequencyListLength']
+        if minimum_frequency_list_length is not None:
+            minimum_frequency_list_length.contents.value = self._defaults['QueryFreqListCapabilities']['minimumFrequencyListLength']
         # maximum_frequency_list_length
         if self._defaults['QueryFreqListCapabilities']['maximumFrequencyListLength'] is None:
             raise MockFunctionCallError("niFgen_QueryFreqListCapabilities", param='maximumFrequencyListLength')
-        maximum_frequency_list_length.contents.value = self._defaults['QueryFreqListCapabilities']['maximumFrequencyListLength']
+        if maximum_frequency_list_length is not None:
+            maximum_frequency_list_length.contents.value = self._defaults['QueryFreqListCapabilities']['maximumFrequencyListLength']
         # minimum_frequency_list_duration
         if self._defaults['QueryFreqListCapabilities']['minimumFrequencyListDuration'] is None:
             raise MockFunctionCallError("niFgen_QueryFreqListCapabilities", param='minimumFrequencyListDuration')
-        minimum_frequency_list_duration.contents.value = self._defaults['QueryFreqListCapabilities']['minimumFrequencyListDuration']
+        if minimum_frequency_list_duration is not None:
+            minimum_frequency_list_duration.contents.value = self._defaults['QueryFreqListCapabilities']['minimumFrequencyListDuration']
         # maximum_frequency_list_duration
         if self._defaults['QueryFreqListCapabilities']['maximumFrequencyListDuration'] is None:
             raise MockFunctionCallError("niFgen_QueryFreqListCapabilities", param='maximumFrequencyListDuration')
-        maximum_frequency_list_duration.contents.value = self._defaults['QueryFreqListCapabilities']['maximumFrequencyListDuration']
+        if maximum_frequency_list_duration is not None:
+            maximum_frequency_list_duration.contents.value = self._defaults['QueryFreqListCapabilities']['maximumFrequencyListDuration']
         # frequency_list_duration_quantum
         if self._defaults['QueryFreqListCapabilities']['frequencyListDurationQuantum'] is None:
             raise MockFunctionCallError("niFgen_QueryFreqListCapabilities", param='frequencyListDurationQuantum')
-        frequency_list_duration_quantum.contents.value = self._defaults['QueryFreqListCapabilities']['frequencyListDurationQuantum']
+        if frequency_list_duration_quantum is not None:
+            frequency_list_duration_quantum.contents.value = self._defaults['QueryFreqListCapabilities']['frequencyListDurationQuantum']
         return self._defaults['QueryFreqListCapabilities']['return']
 
     def niFgen_ReadCurrentTemperature(self, vi, temperature):  # noqa: N802
@@ -684,7 +700,8 @@ class SideEffectsHelper(object):
         # temperature
         if self._defaults['ReadCurrentTemperature']['Temperature'] is None:
             raise MockFunctionCallError("niFgen_ReadCurrentTemperature", param='Temperature')
-        temperature.contents.value = self._defaults['ReadCurrentTemperature']['Temperature']
+        if temperature is not None:
+            temperature.contents.value = self._defaults['ReadCurrentTemperature']['Temperature']
         return self._defaults['ReadCurrentTemperature']['return']
 
     def niFgen_ResetDevice(self, vi):  # noqa: N802
@@ -737,6 +754,16 @@ class SideEffectsHelper(object):
             return self._defaults['SetWaveformNextWritePosition']['return']
         return self._defaults['SetWaveformNextWritePosition']['return']
 
+    def niFgen_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niFgen_UnlockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
+
     def niFgen_WaitUntilDone(self, vi, max_time):  # noqa: N802
         if self._defaults['WaitUntilDone']['return'] != 0:
             return self._defaults['WaitUntilDone']['return']
@@ -766,11 +793,6 @@ class SideEffectsHelper(object):
         if self._defaults['WriteWaveform']['return'] != 0:
             return self._defaults['WriteWaveform']['return']
         return self._defaults['WriteWaveform']['return']
-
-    def niFgen_WriteWaveformDispatcher(self, vi, channel_name, waveform_name_or_handle, size, data):  # noqa: N802
-        if self._defaults['WriteWaveformDispatcher']['return'] != 0:
-            return self._defaults['WriteWaveformDispatcher']['return']
-        return self._defaults['WriteWaveformDispatcher']['return']
 
     def niFgen_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
@@ -802,7 +824,8 @@ class SideEffectsHelper(object):
         # self_test_result
         if self._defaults['self_test']['selfTestResult'] is None:
             raise MockFunctionCallError("niFgen_self_test", param='selfTestResult')
-        self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niFgen_self_test", param='selfTestMessage')
@@ -840,12 +863,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ConfigureArbWaveform.return_value = 0
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_ConfigureCustomFIRFilterCoefficients")
         mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.return_value = 0
-        mock_library.niFgen_ConfigureDigitalEdgeScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalEdgeScriptTrigger")
-        mock_library.niFgen_ConfigureDigitalEdgeScriptTrigger.return_value = 0
-        mock_library.niFgen_ConfigureDigitalEdgeStartTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalEdgeStartTrigger")
-        mock_library.niFgen_ConfigureDigitalEdgeStartTrigger.return_value = 0
-        mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.side_effect = MockFunctionCallError("niFgen_ConfigureDigitalLevelScriptTrigger")
-        mock_library.niFgen_ConfigureDigitalLevelScriptTrigger.return_value = 0
         mock_library.niFgen_ConfigureFreqList.side_effect = MockFunctionCallError("niFgen_ConfigureFreqList")
         mock_library.niFgen_ConfigureFreqList.return_value = 0
         mock_library.niFgen_ConfigureStandardWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureStandardWaveform")
@@ -888,8 +905,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetExtCalLastTemp.return_value = 0
         mock_library.niFgen_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niFgen_GetExtCalRecommendedInterval")
         mock_library.niFgen_GetExtCalRecommendedInterval.return_value = 0
-        mock_library.niFgen_GetFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_GetFIRFilterCoefficients")
-        mock_library.niFgen_GetFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_GetHardwareState.side_effect = MockFunctionCallError("niFgen_GetHardwareState")
         mock_library.niFgen_GetHardwareState.return_value = 0
         mock_library.niFgen_GetLastExtCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime")
@@ -908,6 +923,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_InitiateGeneration.return_value = 0
         mock_library.niFgen_IsDone.side_effect = MockFunctionCallError("niFgen_IsDone")
         mock_library.niFgen_IsDone.return_value = 0
+        mock_library.niFgen_LockSession.side_effect = MockFunctionCallError("niFgen_LockSession")
+        mock_library.niFgen_LockSession.return_value = 0
         mock_library.niFgen_QueryArbSeqCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbSeqCapabilities")
         mock_library.niFgen_QueryArbSeqCapabilities.return_value = 0
         mock_library.niFgen_QueryArbWfmCapabilities.side_effect = MockFunctionCallError("niFgen_QueryArbWfmCapabilities")
@@ -936,6 +953,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetNamedWaveformNextWritePosition.return_value = 0
         mock_library.niFgen_SetWaveformNextWritePosition.side_effect = MockFunctionCallError("niFgen_SetWaveformNextWritePosition")
         mock_library.niFgen_SetWaveformNextWritePosition.return_value = 0
+        mock_library.niFgen_UnlockSession.side_effect = MockFunctionCallError("niFgen_UnlockSession")
+        mock_library.niFgen_UnlockSession.return_value = 0
         mock_library.niFgen_WaitUntilDone.side_effect = MockFunctionCallError("niFgen_WaitUntilDone")
         mock_library.niFgen_WaitUntilDone.return_value = 0
         mock_library.niFgen_WriteBinary16Waveform.side_effect = MockFunctionCallError("niFgen_WriteBinary16Waveform")
@@ -948,8 +967,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_WriteScript.return_value = 0
         mock_library.niFgen_WriteWaveform.side_effect = MockFunctionCallError("niFgen_WriteWaveform")
         mock_library.niFgen_WriteWaveform.return_value = 0
-        mock_library.niFgen_WriteWaveformDispatcher.side_effect = MockFunctionCallError("niFgen_WriteWaveformDispatcher")
-        mock_library.niFgen_WriteWaveformDispatcher.return_value = 0
         mock_library.niFgen_close.side_effect = MockFunctionCallError("niFgen_close")
         mock_library.niFgen_close.return_value = 0
         mock_library.niFgen_error_message.side_effect = MockFunctionCallError("niFgen_error_message")

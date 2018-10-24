@@ -251,7 +251,9 @@ def _add_has_repeated_capability(f):
     if 'has_repeated_capability' not in f:
         f['has_repeated_capability'] = False
         for p in f['parameters']:
-            f['has_repeated_capability'] = f['has_repeated_capability'] or p['is_repeated_capability']
+            if p['is_repeated_capability']:
+                f['has_repeated_capability'] = True
+                f['repeated_capability_type'] = p['repeated_capability_type']
 
 
 def _add_render_in_session_base(f):
@@ -267,7 +269,19 @@ def _add_render_in_session_base(f):
 def _add_is_repeated_capability(parameter):
     '''Adds a boolean 'is_repeated_capability' to the parameter metadata by inferring it from its name, if not previously populated.'''
     if 'is_repeated_capability' not in parameter:
-        parameter['is_repeated_capability'] = parameter['name'] in _repeated_capability_parameter_names
+        if parameter['name'] in _repeated_capability_parameter_names:
+            parameter['is_repeated_capability'] = True
+            parameter['repeated_capability_type'] = 'channels'
+        else:
+            parameter['is_repeated_capability'] = False
+
+
+def _add_use_session_lock(f):
+    '''Set 'use_session_lock' to True unless it already exists
+
+    Only nimodinst doesn't have session locking and the modinst session.py.mako doesn't even look at this
+    '''
+    f['use_session_lock'] = True if 'use_session_lock' not in f else f['use_session_lock']
 
 
 def _add_is_session_handle(parameter):
@@ -329,6 +343,7 @@ def add_all_function_metadata(functions, config):
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
+        _add_use_session_lock(functions[f])
         for p in functions[f]['parameters']:
             _add_enum(p)
             _fix_type(p)
@@ -376,6 +391,12 @@ def _add_default_attribute_class(a, attributes):
         attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
 
 
+def _add_repeated_capability_type(a, attributes):
+    '''Add 'repeated_capability_type' if not already there.'''
+    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based'] == 'True':
+        attributes[a]['repeated_capability_type'] = 'channels'
+
+
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config, use_re=False)
@@ -385,6 +406,7 @@ def add_all_attribute_metadata(attributes, config):
         _add_enum(attributes[a])
         _add_python_name(a, attributes)
         _add_python_type(attributes[a], config)
+        _add_repeated_capability_type(a, attributes)
         _add_default_attribute_class(a, attributes)
 
     return attributes
@@ -481,6 +503,31 @@ def _add_enum_value_python_name(enum_info, config):
     return enum_info
 
 
+def fixup_enum_names(config):
+    '''Fix enum types for private enums
+
+    Now that we have all the metadata calculated, we need to fix any enum types in attributes and functions
+    where the underlying enum is private. At the time the 'python_type' was set, we hadn't yet calculated
+    whether the enum would be private or not. We couldn't because we needed to process all the functions and
+    attributes first.
+    '''
+    # Check all the functions that will be code generated
+    for f in config['functions']:
+        if config['functions'][f]['codegen_method'] != 'no':
+            for p in config['functions'][f]['parameters']:
+                if p['enum'] is not None and config['enums'][p['enum']]['codegen_method'] == 'private':
+                    # We need to update the python type since the enum is private
+                    p['python_type'] = 'enums.' + config['enums'][p['enum']]['python_name']
+
+    # Check all attributes that will be code generated
+    for a in config['attributes']:
+        attr = config['attributes'][a]
+        if attr['codegen_method'] != 'no':
+            if attr['enum'] is not None and config['enums'][attr['enum']]['codegen_method'] == 'private':
+                # We need to update the python type since the enum is private
+                attr['python_type'] = 'enums.' + config['enums'][attr['enum']]['python_name']
+
+
 def add_all_enum_metadata(enums, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     enums = merge_helper(enums, 'enums', config, use_re=False)
@@ -520,6 +567,8 @@ def add_all_metadata(functions, attributes, enums, config):
     add_notes_re_links(config)
 
     square_up_tables(config)
+
+    fixup_enum_names(config)
 
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
     metadata_dir = os.path.join('bin', 'processed_metadata')
@@ -643,10 +692,12 @@ def test_add_all_metadata_simple():
         'MakeAFoo': {
             'name': 'MakeAFoo',
             'codegen_method': 'public',
+            'use_session_lock': True,
             'documentation': {
                 'description': 'Performs a foo, and performs it well.'
             },
             'has_repeated_capability': True,
+            'repeated_capability_type': 'channels',
             'is_error_handling': False,
             'render_in_session_base': True,
             'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
@@ -691,6 +742,7 @@ def test_add_all_metadata_simple():
                         'description': 'The channel to call this on.'
                     },
                     'is_repeated_capability': True,
+                    'repeated_capability_type': 'channels',
                     'is_session_handle': False,
                     'enum': None,
                     'numpy': False,
@@ -717,6 +769,7 @@ def test_add_all_metadata_simple():
         'MakeAPrivateMethod': {
             'codegen_method': 'private',
             'returns': 'ViStatus',
+            'use_session_lock': True,
             'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
             'parameters': [{
                 'direction': 'in',

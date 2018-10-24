@@ -9,7 +9,7 @@ functions_codegen_method = {
     'InitializeWithChannels':               { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'close':                                { 'codegen_method': 'private',  },
     'CheckAttribute.*':                     { 'codegen_method': 'no',       },  # Not supported in Python API. Issue #529
-    'InitiateGeneration':                   { 'codegen_method': 'private',  },
+    'InitiateGeneration':                   { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
     'Configure.*':                          { 'codegen_method': 'no',       },  # Use corresponding attribute instead
     'ConfigureArbSequence':                 { 'codegen_method': 'public',   },
     'ConfigureArbWaveform':                 { 'codegen_method': 'public',   },
@@ -20,7 +20,7 @@ functions_codegen_method = {
     'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'public',   },
     'ConfigureFreqList':                    { 'codegen_method': 'public',   },
     'ConfigureStandardWaveform':            { 'codegen_method': 'public',   },
-    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828
+    'ExportSignal':                         { 'codegen_method': 'no',       },  # remove export signal #828 - additional metadata removed #870
     'CreateWaveformF64':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'CreateWaveformI16':                    { 'codegen_method': 'private', 'method_name_for_documentation': 'create_waveform', },  # Called from public method create_waveform()
     'WriteBinary16Waveform':                { 'codegen_method': 'private', 'method_name_for_documentation': 'write_waveform', },  # Called from public method write_waveform()
@@ -42,8 +42,6 @@ functions_codegen_method = {
     'GetError':                             { 'codegen_method': 'private',  },
     'ClearError':                           { 'codegen_method': 'no',       },
     'ErrorHandler':                         { 'codegen_method': 'no',       },
-    'LockSession':                          { 'codegen_method': 'no',       },
-    'UnlockSession':                        { 'codegen_method': 'no',       },
     'InitExtCal':                           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'CloseExtCal':                          { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
     'RestoreLastExtCalConstants':           { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
@@ -62,11 +60,34 @@ functions_codegen_method = {
     'revision_query':                       { 'codegen_method': 'no',       },
     '.+Complex.+':                          { 'codegen_method': 'no',       },
     'GetStreamEndpointHandle':              { 'codegen_method': 'no',       },
+    'GetFIRFilterCoefficients':             { 'codegen_method': 'no',       },  # Removed - applies to OSP only #596 - If this is removed, the commented out snippet below needs to be added back to templates to use
     'AdjustSampleClockRelativeDelay':       { 'codegen_method': 'no',       },  # This is used internally by NI-TClk, but not by end users.
     '.etAttributeViInt64':                  { 'codegen_method': 'no',       },  # NI-FGEN has no ViInt64 attributes.
     'GetExtCalLastDateAndTime':             { 'codegen_method': 'private', 'method_name_for_documentation': 'get_ext_cal_last_date_and_time',  },  # 'GetLastExtCalLastDateAndTime' Public wrapper to allow datetime
     'GetSelfCalLastDateAndTime':            { 'codegen_method': 'private', 'method_name_for_documentation': 'get_self_cal_last_date_and_time', },  # 'GetLastSelfCalLastDateAndTime' Public wrapper to allow datetime
     'self_test':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
+    'ConfigureDigitalEdgeScriptTrigger':    { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_script_trigger_source & session.digital_edge_script_trigger_edge #860
+    'ConfigureDigitalEdgeStartTrigger':     { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_start_trigger_source & session.digital_edge_start_trigger_edge #860
+    'ConfigureDigitalLevelScriptTrigger':   { 'codegen_method': 'no',       },  # Removed - Obsolete and only applies to EOL HW #860
+    'SetWaveformNextWritePosition':         { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
+    'SetNamedWaveformNextWritePosition':    { 'codegen_method': 'private', 'method_name_for_documentation': 'set_next_write_position',         },  # 'set_next_write_position' Public wrapper to combine named and not named
+    'DeleteNamedWaveform':                  { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
+    'ClearArbWaveform':                     { 'codegen_method': 'private', 'method_name_for_documentation': 'delete_waveform',                 },  # 'delete_waveform' Public wrapper to combine named and not named
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'unlock', },
+    'InitializeWithChannels':          { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'error_message':                   { 'use_session_lock': False,  },  # No Session for function call so cannot use session locking
+    'GetError':                        { 'use_session_lock': False,  },  # Session may not be valid during function call so cannot use session locking
 }
 
 # Attach the given parameter to the given enum from enums.py
@@ -74,20 +95,15 @@ functions_enums = {
     'CreateFreqList':                           { 'parameters': { 1: { 'enum': 'Waveform',                  }, }, },
     'CreateWaveformFromFileF64':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
     'CreateWaveformFromFileI16':                { 'parameters': { 3: { 'enum': 'ByteOrder',                 }, }, },
-    'ConfigureDigitalEdgeScriptTrigger':        { 'parameters': { 3: { 'enum': 'ScriptTriggerDigitalEdgeEdge', }, }, },
-    'ConfigureDigitalEdgeStartTrigger':         { 'parameters': { 2: { 'enum': 'StartTriggerDigitalEdgeEdge', }, }, },
     'ConfigureStandardWaveform':                { 'parameters': { 2: { 'enum': 'Waveform' }, }, },
-    'ExportSignal':                             { 'parameters': { 1: { 'enum': 'Signal',                    }, }, },
     'SetNamedWaveformNextWritePosition':        { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'SetWaveformNextWritePosition':             { 'parameters': { 3: { 'enum': 'RelativeTo',                }, }, },
     'GetHardwareState':                         { 'parameters': { 1: { 'enum': 'HardwareState',             }, }, },
-    'SendSoftwareEdgeTrigger':                  { 'parameters': { 1: { 'enum': 'Trigger',                   }, }, },  # TODO: issue #538
-    'ConfigureDigitalLevelScriptTrigger':       { 'parameters': { 3: { 'enum': 'TriggerWhen',               }, }, },
 }
 
-functions_issues = {
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: {'direction':'out'},  # TODO(marcoskirsch): Remove when #534 solved
-                                                              4: { 'direction':'out', 'is_buffer': False, 'type':'ViInt32', }, }, },
+functions_send_software_edge_trigger = {
+    'SendSoftwareEdgeTrigger':                  { 'method_templates': [ { 'session_filename': 'send_software_edge_trigger', 'documentation_filename': 'send_software_edge_trigger', 'method_python_name_suffix': '', }, ],
+                                                  'render_in_session_base': True, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
@@ -100,7 +116,6 @@ functions_buffer_info = {
     'ConfigureCustomFIRFilterCoefficients': { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'CreateWaveform(I16|F64)':              { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
     'DefineUserStandardWaveform':           { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'waveformSize'}, }, }, },
-    'GetFIRFilterCoefficients':             { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'arraySize'}, }, }, },  # TODO(marcoskirsch): #537
     'Write.*Waveform':                      { 'parameters': { 4: { 'size': {'mechanism':'len', 'value':'Size'}, }, }, },
     'CreateAdvancedArbSequence':            { 'parameters': { 2: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, },
                                                               3: { 'size': {'mechanism':'len', 'value':'sequenceLength'}, },
@@ -132,8 +147,7 @@ functions_default_value = {
     'ConfigureDigitalEdgeStartTrigger':             { 'parameters': { 2: { 'default_value': 'StartTriggerDigitalEdgeEdge.RISING', }, }, },
     'CreateAdvancedArbSequence':                    { 'parameters': { 4: { 'default_value': None, },
                                                                       5: { 'default_value': None, }, }, },
-    'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 10000, }, }, },
-    'ExportSignal':                                 { 'parameters': { 2: { 'default_value': '""', }, }, },
+    'WaitUntilDone':                                { 'parameters': { 1: { 'default_value': 'datetime.timedelta(seconds=10.0)', }, }, },
 }
 
 # Converted parameters
@@ -228,7 +242,7 @@ after the function runs.
     },
 
     'WriteWaveformDispatcher': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'returns': 'ViStatus',
         'parameters': [
             {
@@ -244,9 +258,10 @@ after the function runs.
             {
                 'direction': 'in',
                 'name': 'waveformNameOrHandle',
+                'type_in_documentation': 'str or int',
                 'type': 'ViInt32',  #TODO(marcoskirsch): Don't care, except for documentation
                 'documentation': {
-                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform or niFgen_AllocateWaveform.',
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
                 },
             },
             {
@@ -270,6 +285,111 @@ By default, subsequent calls to this function
 continue writing data from the position of the last sample written. You
 can set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition
 nifgen_SetWaveformNextWritePosition function.''',
+        },
+    },
+    'SetNextWritePositionDispatcher': {
+        'codegen_method': 'python-only',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the niFgen_InitializeWithChannels function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'Specifies the channel on which to the waveform data should be loaded.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformNameOrHandle',
+                'type_in_documentation': 'str or int',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'relativeTo',
+                'type': 'ViInt32',
+                'enum': 'RelativeTo',
+                'documentation': {
+                    'description': '''
+Specifies the reference position in the waveform. This position and
+**offset** together determine where to start loading data into the
+waveform.
+
+****Defined Values****
+''',
+'table_body': [['NIFGEN_VAL_WAVEFORM_POSITION_START (0)', 'Use the start of the waveform as the reference position.'], ['NIFGEN_VAL_WAVEFORM_POSITION_CURRENT (1)', 'Use the current position within the waveform as the reference position.']],
+},
+            },
+            {
+                'direction': 'in',
+                'name': 'offset',
+                'type': 'ViInt32',
+'documentation': {
+'description': '''
+Specifies the offset from **relativeTo** at which to start loading the
+data into the waveform.
+''',
+},
+            },
+        ],
+'documentation': {
+'description': '''
+Sets the position in the waveform at which the next waveform data is
+written. This function allows you to write to arbitrary locations within
+the waveform. These settings apply only to the next write to the
+waveform specified by the waveformHandle parameter. Subsequent writes to
+that waveform begin where the last write left off, unless this function
+is called again. The waveformHandle passed in must have been created by
+a call to the nifgen_AllocateWaveform function or one of the following
+niFgen_CreateWaveformF64 function.
+''',
+},
+    },
+    'DeleteWaveformDispatch': {
+        'codegen_method': 'python-only',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from niFgen_InitializeWithChannels function and identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'documentation': {
+                    'description': 'Specifies the channel onto which the named waveform is loaded.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformNameOrHandle',
+                'type_in_documentation': 'str or int',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'The name (str) or handle (int) of an arbitrary waveform previously allocated with niFgen_AllocateNamedWaveform, niFgen_AllocateWaveform or niFgen_CreateWaveformF64.',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Removes a previously created arbitrary waveform from the signal generator memory.',
+            'note': 'The signal generator must not be in the Generating state when you call this function.',
         },
     },
     # Public function that wraps driver function but returns datetime object instead of individual items
@@ -342,6 +462,8 @@ functions_python_name = {
     'AbortGeneration':                      { 'python_name': 'abort',                   },
     'CreateWaveformDispatcher':             { 'python_name': 'create_waveform'          },
     'WriteWaveformDispatcher':              { 'python_name': 'write_waveform'           },
+    'SetNextWritePositionDispatcher':       { 'python_name': 'set_next_write_position'  },
+    'DeleteWaveformDispatch':               { 'python_name': 'delete_waveform'  },
 }
 
 functions_method_templates = {
@@ -358,6 +480,12 @@ functions_method_templates = {
     'WriteWaveformDispatcher':      { 'method_templates': [
         { 'session_filename': 'write_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
     ], },
+    'SetNextWritePositionDispatcher': { 'method_templates': [
+        { 'session_filename': 'set_next_write_position', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
+    'DeleteWaveformDispatch':         { 'method_templates': [
+        { 'session_filename': 'delete_waveform', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+    ], },
     'WriteWaveform':                { 'method_templates': [
         { 'session_filename': 'default_method', 'method_python_name_suffix': '', },
         { 'session_filename': 'numpy_write_method', 'method_python_name_suffix': '_numpy', },
@@ -373,6 +501,11 @@ functions_method_templates = {
         { 'session_filename': 'numpy_write_method', 'method_python_name_suffix': '_numpy', },
     ], },
 }
+
+# We keep this information because we will need it again if we ever enable OSP and need this function
+# 'GetFIRFilterCoefficients':     { 'method_templates': [
+#     { 'session_filename': 'get_fir_filter_coefficients', 'documentation_filename': 'get_fir_filter_coefficients', 'method_python_name_suffix': '', },
+# ], },
 
 functions_numpy = {
     'CreateWaveformF64':            { 'parameters': { 3: { 'numpy': True, }, }, },

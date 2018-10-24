@@ -6,8 +6,10 @@ Enums used in NI-FGEN
 .. py:currentmodule:: nifgen
 
 
+AnalogPath
+----------
 
-.. py:data:: AnalogPath
+.. py:class:: AnalogPath
 
     .. py:attribute:: AnalogPath.MAIN
 
@@ -49,8 +51,10 @@ Enums used in NI-FGEN
 
 
 
+BusType
+-------
 
-.. py:data:: BusType
+.. py:class:: BusType
 
     .. py:attribute:: BusType.INVALID
 
@@ -122,8 +126,10 @@ Enums used in NI-FGEN
 
 
 
+ByteOrder
+---------
 
-.. py:data:: ByteOrder
+.. py:class:: ByteOrder
 
     .. py:attribute:: ByteOrder.LITTLE
 
@@ -133,8 +139,10 @@ Enums used in NI-FGEN
 
 
 
+ClockMode
+---------
 
-.. py:data:: ClockMode
+.. py:class:: ClockMode
 
     .. py:attribute:: ClockMode.HIGH_RESOLUTION
 
@@ -166,8 +174,10 @@ Enums used in NI-FGEN
 
 
 
+DataMarkerEventLevelPolarity
+----------------------------
 
-.. py:data:: DataMarkerEventLevelPolarity
+.. py:class:: DataMarkerEventLevelPolarity
 
     .. py:attribute:: DataMarkerEventLevelPolarity.HIGH
 
@@ -189,199 +199,10 @@ Enums used in NI-FGEN
 
 
 
+HardwareState
+-------------
 
-.. py:data:: DataProcessingMode
-
-    .. py:attribute:: DataProcessingMode.REAL
-
-
-
-        The waveform data points are real numbers (I data).
-
-        
-
-
-
-    .. py:attribute:: DataProcessingMode.COMPLEX
-
-
-
-        The waveform data points are complex numbers (I/Q data).
-
-        
-
-
-
-
-.. py:data:: DoneEventActiveLevel
-
-    .. py:attribute:: DoneEventActiveLevel.HIGH
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is high.
-
-        
-
-
-
-    .. py:attribute:: DoneEventActiveLevel.LOW
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is low.
-
-        
-
-
-
-
-.. py:data:: DoneEventDelayUnits
-
-    .. py:attribute:: DoneEventDelayUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: DoneEventDelayUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
-
-        
-
-
-
-
-.. py:data:: DoneEventOutputBehavior
-
-    .. py:attribute:: DoneEventOutputBehavior.PULSE
-
-
-
-        Triggers a pulse for a specified period of time.
-
-        
-
-
-
-    .. py:attribute:: DoneEventOutputBehavior.LEVEL
-
-
-
-        Shifts high or low while the event is active, depending  on the active state you specify.
-
-        
-
-
-
-
-.. py:data:: DoneEventPulsePolarity
-
-    .. py:attribute:: DoneEventPulsePolarity.HIGH
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is high.
-
-        
-
-
-
-    .. py:attribute:: DoneEventPulsePolarity.LOW
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is low.
-
-        
-
-
-
-
-.. py:data:: DoneEventPulseWidthUnits
-
-    .. py:attribute:: DoneEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: DoneEventPulseWidthUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
-
-        
-
-
-
-
-.. py:data:: FilterType
-
-    .. py:attribute:: FilterType.FLAT
-
-
-
-        Applies a flat filter to the data with the passband value specified  in the :py:data:`nifgen.Session.osp_fir_filter_flat_passband` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.RAISED_COSINE
-
-
-
-        Applies a raised cosine filter to the data with the alpha value  specified in the :py:data:`nifgen.Session.osp_fir_filter_raised_cosine_alpha` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.ROOT_RAISED_COSINE
-
-
-
-        Applies a root raised cosine filter to the data with the alpha value  specified in the :py:data:`nifgen.Session.osp_fir_filter_root_raised_cosine_alpha` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.GAUSSIAN
-
-
-
-        Applies a Gaussian filter to the data with the BT value specified in the  :py:data:`nifgen.Session.osp_fir_filter_gaussian_bt` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.CUSTOM
-
-
-
-        Applies a custom filter to the data. If :py:data:`~nifgen.FilterType.CUSTOM` is selected,  you must provide a set of FIR filter coefficients with the  :py:meth:`nifgen.Session.configure_custom_fir_filter_coefficients` method.
-
-        
-
-
-
-
-.. py:data:: HardwareState
+.. py:class:: HardwareState
 
     .. py:attribute:: HardwareState.IDLE
 
@@ -403,8 +224,10 @@ Enums used in NI-FGEN
 
 
 
+IdleBehavior
+------------
 
-.. py:data:: IdleBehavior
+.. py:class:: IdleBehavior
 
     .. py:attribute:: IdleBehavior.HOLD_LAST
 
@@ -426,180 +249,10 @@ Enums used in NI-FGEN
 
 
 
+OutputMode
+----------
 
-.. py:data:: MarkerEventDelayUnits
-
-    .. py:attribute:: MarkerEventDelayUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: MarkerEventDelayUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
-
-        
-
-
-
-
-.. py:data:: MarkerEventOutputBehavior
-
-    .. py:attribute:: MarkerEventOutputBehavior.PULSE
-
-
-
-        Triggers a pulse for a specified period of time.
-
-        
-
-
-
-    .. py:attribute:: MarkerEventOutputBehavior.LEVEL
-
-
-
-        Shifts high or low while the event is active, depending  on the active state you specify.
-
-        
-
-
-
-    .. py:attribute:: MarkerEventOutputBehavior.TOGGLE
-
-
-
-        Changes to high or low while the event is active, depending on the
-        active state you specify.
-
-        
-
-
-
-
-.. py:data:: MarkerEventPulsePolarity
-
-    .. py:attribute:: MarkerEventPulsePolarity.HIGH
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is high.
-
-        
-
-
-
-    .. py:attribute:: MarkerEventPulsePolarity.LOW
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is low.
-
-        
-
-
-
-
-.. py:data:: MarkerEventPulseWidthUnits
-
-    .. py:attribute:: MarkerEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: MarkerEventPulseWidthUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
-
-        
-
-
-
-
-.. py:data:: MarkerEventToggleInitialState
-
-    .. py:attribute:: MarkerEventToggleInitialState.HIGH
-
-
-
-        Sets the initial state of the Marker event to high.
-
-        
-
-
-
-    .. py:attribute:: MarkerEventToggleInitialState.LOW
-
-
-
-        Sets the initial state of the Marker event to low.
-
-        
-
-
-
-
-.. py:data:: OSPMode
-
-    .. py:attribute:: OSPMode.IF
-
-
-
-        The OSP block generates intermediate frequency (IF) data.
-
-        
-
-
-
-    .. py:attribute:: OSPMode.BASEBAND
-
-
-
-        The OSP block generates baseband data.
-
-        
-
-
-
-
-.. py:data:: OSPOverflowErrorReporting
-
-    .. py:attribute:: OSPOverflowErrorReporting.ERROR
-
-
-
-        NI-FGEN returns errors whenever an overflow has occurred in the OSP block.
-
-        
-
-
-
-    .. py:attribute:: OSPOverflowErrorReporting.DISABLED
-
-
-
-        NI-FGEN does not return errors when an overflow occurs in the OSP block.
-
-        
-
-
-
-
-.. py:data:: OutputMode
+.. py:class:: OutputMode
 
     .. py:attribute:: OutputMode.FUNC
 
@@ -652,31 +305,10 @@ Enums used in NI-FGEN
 
 
 
+ReferenceClockSource
+--------------------
 
-.. py:data:: ReadyForStartEventActiveLevel
-
-    .. py:attribute:: ReadyForStartEventActiveLevel.HIGH
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is high.
-
-        
-
-
-
-    .. py:attribute:: ReadyForStartEventActiveLevel.LOW
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is low.
-
-        
-
-
-
-
-.. py:data:: ReferenceClockSource
+.. py:class:: ReferenceClockSource
 
     .. py:attribute:: ReferenceClockSource.CLOCK_IN
 
@@ -730,8 +362,10 @@ Enums used in NI-FGEN
 
 
 
+RelativeTo
+----------
 
-.. py:data:: RelativeTo
+.. py:class:: RelativeTo
 
     .. py:attribute:: RelativeTo.START
 
@@ -741,8 +375,10 @@ Enums used in NI-FGEN
 
 
 
+SampleClockSource
+-----------------
 
-.. py:data:: SampleClockSource
+.. py:class:: SampleClockSource
 
     .. py:attribute:: SampleClockSource.CLOCK_IN
 
@@ -875,8 +511,10 @@ Enums used in NI-FGEN
 
 
 
+SampleClockTimebaseSource
+-------------------------
 
-.. py:data:: SampleClockTimebaseSource
+.. py:class:: SampleClockTimebaseSource
 
     .. py:attribute:: SampleClockTimebaseSource.CLOCK_IN
 
@@ -899,8 +537,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerDigitalEdgeEdge
+----------------------------
 
-.. py:data:: ScriptTriggerDigitalEdgeEdge
+.. py:class:: ScriptTriggerDigitalEdgeEdge
 
     .. py:attribute:: ScriptTriggerDigitalEdgeEdge.RISING
 
@@ -922,31 +562,10 @@ Enums used in NI-FGEN
 
 
 
+ScriptTriggerType
+-----------------
 
-.. py:data:: ScriptTriggerDigitalLevelActiveLevel
-
-    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.HIGH
-
-
-
-        High Level
-
-        
-
-
-
-    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.LOW
-
-
-
-        Low Level
-
-        
-
-
-
-
-.. py:data:: ScriptTriggerType
+.. py:class:: ScriptTriggerType
 
     .. py:attribute:: ScriptTriggerType.TRIG_NONE
 
@@ -988,8 +607,10 @@ Enums used in NI-FGEN
 
 
 
+StartTriggerDigitalEdgeEdge
+---------------------------
 
-.. py:data:: StartTriggerDigitalEdgeEdge
+.. py:class:: StartTriggerDigitalEdgeEdge
 
     .. py:attribute:: StartTriggerDigitalEdgeEdge.RISING
 
@@ -1011,8 +632,10 @@ Enums used in NI-FGEN
 
 
 
+StartTriggerType
+----------------
 
-.. py:data:: StartTriggerType
+.. py:class:: StartTriggerType
 
     .. py:attribute:: StartTriggerType.TRIG_NONE
 
@@ -1054,276 +677,10 @@ Enums used in NI-FGEN
 
 
 
+TerminalConfiguration
+---------------------
 
-.. py:data:: StartedEventActiveLevel
-
-    .. py:attribute:: StartedEventActiveLevel.HIGH
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is high.
-
-        
-
-
-
-    .. py:attribute:: StartedEventActiveLevel.LOW
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is low.
-
-        
-
-
-
-
-.. py:data:: StartedEventDelayUnits
-
-    .. py:attribute:: StartedEventDelayUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: StartedEventDelayUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
-
-        
-
-
-
-
-.. py:data:: StartedEventOutputBehavior
-
-    .. py:attribute:: StartedEventOutputBehavior.PULSE
-
-
-
-        Triggers a pulse for a specified period of time.
-
-        
-
-
-
-    .. py:attribute:: StartedEventOutputBehavior.LEVEL
-
-
-
-        Shifts high or low while the event is active, depending  on the active state you specify.
-
-        
-
-
-
-
-.. py:data:: StartedEventPulsePolarity
-
-    .. py:attribute:: StartedEventPulsePolarity.HIGH
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is high.
-
-        
-
-
-
-    .. py:attribute:: StartedEventPulsePolarity.LOW
-
-
-
-        When the operation is ready to start, the Ready for Start  event level is low.
-
-        
-
-
-
-
-.. py:data:: StartedEventPulseWidthUnits
-
-    .. py:attribute:: StartedEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: StartedEventPulseWidthUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
-
-        
-
-
-
-
-.. py:data:: SynchronizationSource
-
-    .. py:attribute:: SynchronizationSource.TTL0
-
-
-
-        PXI TRIG0 or VXI TTL0
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL1
-
-
-
-        PXI TRIG1 or VXI TTL1
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL2
-
-
-
-        PXI TRIG2 or VXI TTL2
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL3
-
-
-
-        PXI TRIG3 or VXI TTL3
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL4
-
-
-
-        PXI TRIG4 or VXI TTL4
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL5
-
-
-
-        PXI TRIG5 or VXI TTL5
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.TTL6
-
-
-
-        PXI TRIG6 or VXI TTL6
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_0
-
-
-
-        RTSI 0
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_1
-
-
-
-        RTSI 1
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_2
-
-
-
-        RTSI 2
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_3
-
-
-
-        RTSI 3
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_4
-
-
-
-        RTSI 4
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_5
-
-
-
-        RTSI 5
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.RTSI_6
-
-
-
-        RTSI 6
-
-        
-
-
-
-    .. py:attribute:: SynchronizationSource.NONE
-
-
-
-        No Synchronization Source
-
-        
-
-
-
-
-.. py:data:: TerminalConfiguration
+.. py:class:: TerminalConfiguration
 
     .. py:attribute:: TerminalConfiguration.SINGLE_ENDED
 
@@ -1345,19 +702,10 @@ Enums used in NI-FGEN
 
 
 
+TriggerMode
+-----------
 
-.. py:data:: Trigger
-
-    .. py:attribute:: Trigger.START
-
-
-
-    .. py:attribute:: Trigger.SCRIPT
-
-
-
-
-.. py:data:: TriggerMode
+.. py:class:: TriggerMode
 
     .. py:attribute:: TriggerMode.SINGLE
 
@@ -1405,345 +753,10 @@ Enums used in NI-FGEN
 
 
 
+WaitBehavior
+------------
 
-.. py:data:: TriggerSource
-
-    .. py:attribute:: TriggerSource.IMMEDIATE
-
-
-
-        Immediate-The signal generator does not wait for a trigger of any kind.
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.EXTERNAL
-
-
-
-        External-The signal generator waits for a trigger on the external trigger input
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.SOFTWARE_TRIG
-
-
-
-        Software Trigger-The signal generator waits until you call :py:meth:`nifgen.Session.SendSWTrigger`.
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL0
-
-
-
-        PXI TRIG0 or VXI TTL0
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL1
-
-
-
-        PXI TRIG1 or VXI TTL1
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL2
-
-
-
-        PXI TRIG2 or VXI TTL2
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL3
-
-
-
-        PXI TRIG3 or VXI TTL3
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL4
-
-
-
-        PXI TRIG4 or VXI TTL4
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL5
-
-
-
-        PXI TRIG5 or VXI TTL5
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.TTL6
-
-
-
-        PXI TRIG6 or VXI TTL6
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PXI_STAR
-
-
-
-        PXI star
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_0
-
-
-
-        RTSI line 0
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_1
-
-
-
-        RTSI line 1
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_2
-
-
-
-        RTSI line 2
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_3
-
-
-
-        RTSI line 3
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_4
-
-
-
-        RTSI line 4
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_5
-
-
-
-        RTSI line 5
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_6
-
-
-
-        RTSI line 6
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.RTSI_7
-
-
-
-        RTSI line 7
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_0
-
-
-
-        PFI 0
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_1
-
-
-
-        PFI 1
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_2
-
-
-
-        PFI 2
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.PFI_3
-
-
-
-        PFI 3
-
-        
-
-
-
-    .. py:attribute:: TriggerSource.OTHER_TERMINAL
-
-
-
-        Specifies that another terminal is used.
-
-        
-
-
-
-
-.. py:data:: TriggerWhen
-
-    .. py:attribute:: TriggerWhen.HIGH
-
-
-
-    .. py:attribute:: TriggerWhen.LOW
-
-
-
-
-.. py:data:: VideoWaveformType
-
-    .. py:attribute:: VideoWaveformType.PAL_B
-
-
-
-        PAL B Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_D
-
-
-
-        PAL D Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_G
-
-
-
-        PAL G Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_H
-
-
-
-        PAL H Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_I
-
-
-
-        PAL I Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_M
-
-
-
-        PAL M Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.PAL_N
-
-
-
-        PAL N Video Type
-
-        
-
-
-
-    .. py:attribute:: VideoWaveformType.NTSC_M
-
-
-
-        NTSC M Video Type
-
-        
-
-
-
-
-.. py:data:: WaitBehavior
+.. py:class:: WaitBehavior
 
     .. py:attribute:: WaitBehavior.HOLD_LAST
 
@@ -1765,8 +778,10 @@ Enums used in NI-FGEN
 
 
 
+Waveform
+--------
 
-.. py:data:: Waveform
+.. py:class:: Waveform
 
     .. py:attribute:: Waveform.SINE
 
@@ -1845,5 +860,8 @@ Enums used in NI-FGEN
         User-defined waveform as defined by the :py:meth:`nifgen.Session.define_user_standard_waveform` method.
 
         
+
+
+
 
 

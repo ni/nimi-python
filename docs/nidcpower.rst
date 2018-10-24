@@ -5,15 +5,5 @@ nidcpower module
 
 .. include:: _static/nidcpower_usage.inc
 
-API Reference
---------------
-
-.. toctree::
-   :maxdepth: 0
-
-   nidcpower/session
-   nidcpower/functions
-   nidcpower/attributes
-   nidcpower/enums
-   nidcpower/examples
+.. include:: nidcpower/toc.inc
 

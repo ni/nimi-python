@@ -1,6 +1,9 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.0.1](#101---2018-10-17)
+* [1.0.0](#100---2018-06-08)
+* [0.9.0](#090---2018-05-22)
 * [0.8.0](#080---2018-04-27)
 * [0.7.0](#070---2018-02-20)
 * [0.6.0](#060---2017-12-20)
@@ -16,10 +19,163 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Updated generated metadata
+        * Updated "Driver Version Tested Against"
+        * Update visatype definitions to work on Linux as well as Windows - [#911](https://github.com/ni/nimi-python/issues/911)
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+
+
+## 1.0.1 - 2018-10-17
+* ### ALL
+    * #### Added
+        * Support for Python 3.7 - [#895](https://github.com/ni/nimi-python/issues/895)
+        * \_\_version\_\_ for all drivers - [#928](https://github.com/ni/nimi-python/issues/928)
+    * #### Changed
+        * No longer globally set warnings filter for `DriverWarning` - if you want all warnings from the driver, you will need to set `warnings.filterwarnings("always", category=<driver>.DriverWarning)` in your code
+        * Fix \_\_repr\_\_ for niscope.WaveformInfo - [#920](https://github.com/ni/nimi-python/issues/920)
+* ### NI-SCOPE
+    * #### Changed
+        * Format of output of wavefrom_info.__str__()
+* ### NI Switch Executive
+    * #### Added
+        * Initial Release
+
+
+## 1.0.0 - 2018-06-08
+* ### ALL
+    * #### Removed
+        * Explicitly disallow using a repeated capability on Session. `session[0].vertical_range = 1.0` will no longer work. Instead use `session.channels[0].vertical_range = 1.0` - [#853](https://github.com/ni/nimi-python/issues/853)
+* ### NI-DMM
+    * #### Changed
+        * Fixed name `freq_voltage_autorange` became `freq_voltage_auto_range`
+    * #### Removed
+        * `configure_ac_bandwidth()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_open_cable_comp_values()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_power_line_frequency()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `configure_short_cable_comp_values()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_aperture_time_info()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_auto_range_value()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `get_measurement_period()` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `latency` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `shunt_value` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `meas_dest_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `sample_trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
+        * `trigger_slope` - [#875](https://github.com/ni/nimi-python/issues/875)
+* ### NI-ModInst
+    * #### Changed
+        * Double close will now allow NI-ModInst to return error
+* ### NI-Switch
+    * #### Removed
+        * `cabled_module_scan_advanced_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `cabled_module_trigger_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `master_slave_scan_advanced_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `master_slave_trigger_bus` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `parsed_scan_list` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `trigger_mode` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `scan_advanced_polarity` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `trigger_input_polarity` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `configure_scan_list()` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `configure_scan_trigger()` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `route_trigger_input()` - [#881](https://github.com/ni/nimi-python/issues/881)
+        * `set_continuous_scan()` - [#881](https://github.com/ni/nimi-python/issues/881)
+* ### NI-DCPower
+    * #### Removed
+        * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
+            * `configure_digital_edge_measure_trigger()` - use `session.digital_edge_measure_trigger_edge` & `session.digital_edge_measure_trigger_input_terminal`
+            * `configure_digital_edge_pulse_trigger()` - use `session.digital_edge_pulse_trigger_edge` & `session.digital_edge_pulse_trigger_input_terminal`
+            * `configure_digital_edge_sequence_advance_trigger()` - use `session.digital_edge_sequence_advance_trigger_edge` & `session.digital_edge_sequence_advance_trigger_input_terminal`
+            * `configure_digital_edge_source_trigger()` - use `session.digital_edge_source_trigger_edge` & `session.digital_edge_source_trigger_input_terminal`
+            * `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_edge` & `session.digital_edge_start_trigger_input_terminal`
+        * Remove polarity attributes for triggers that are PXI backplane only (only support rising edge) [#860](https://github.com/ni/nimi-python/issues/860)
+            * `digital_edge_measure_trigger_edge`
+            * `digital_edge_pulse_trigger_edge`
+            * `digital_edge_sequence_advance_trigger_edge`
+            * `digital_edge_source_trigger_edge`
+            * `digital_edge_start_trigger_edge`
+* ### NI-FGEN
+    * #### Changed
+        * `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
+        * `send_software_edge_trigger()` no longer takes any parameters.
+            * To send a start software trigger, call it on the session directly:
+                    ``` python
+                    session.send_software_edge_trigger()
+                    ```
+            * To send a script software trigger, call it on the script triggers container:
+                    ``` python
+                    session.script_triggers[1].send_software_edge_trigger()
+                    ```
+    * #### Removed
+        * Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
+            * `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
+            * `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
+            * `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
+        * Removed `get_fir_filter_coefficients()` - [#535](https://github.com/ni/nimi-python/issues/535), [#596](https://github.com/ni/nimi-python/issues/596)
+* ### NI-SCOPE
+    * #### Added
+        * `niscope_fetch_forever.py` example
+    * #### Removed
+        * Removed default value for `level` parameter on `configure_trigger_edge()`
+            * parameter list is now
+                ``` python
+                configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+                ```
+        * Removed default values for `level` and `hysteresis` parameters on `configure_trigger_hysteresis()`
+            * parameter list is now
+                ``` python
+                configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+                ```
+
+## 0.9.0 - 2018-05-22
+* ### ALL
+    * #### Added
+        * Add `session.lock()` and `session.unlock()` to all drivers except nimodinst - [#846](https://github.com/ni/nimi-python/issues/846)
+        * `session.lock()` returns a context manager for managing locks - [#846](https://github.com/ni/nimi-python/issues/846)
+        * Fix thread-safety issues by using IVI session lock where aplicable
+    * #### Changed
         * `SelfTestError` now inherits from `<driver>.Error` rather than `Exception` - [#830](https://github.com/ni/nimi-python/issues/830)
         * Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
     * #### Removed
-        * IVI properties as applicable - some where already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
+        * IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
             * `engine_major_version`
             * `engine_minor_version`
             * `engine_revision`
@@ -37,34 +193,93 @@ All notable changes to this project will be documented in this file.
             * `query_instrument_status`
             * `cache`
             * `specific_driver_prefix`
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-DCPower
-    * #### Added
-    * #### Changed
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
         * `active_advanced_sequence` [#832](https://github.com/ni/nimi-python/issues/832)
         * `active_advanced_sequence_step` [#832](https://github.com/ni/nimi-python/issues/832)
         * Default value for trigger parameter on `send_software_edge_trigger()` [#832](https://github.com/ni/nimi-python/issues/832)
 * ### NI-FGEN
-    * #### Added
     * #### Changed
+        * Some functions missed setting repeated capabilities, leaving these as parameters instead of using the repeated capabilites object.
+            * `session.configure_digital_edge_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_edge_script_trigger(source, ...)`
+            * `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
+        * Combined named and un-named waveform methods into one [#862](https://github.com/ni/nimi-python/issues/862)
+            * `set_waveform_next_write_position()` and `set_named_waveform_next_write_position()` becomes `set_next_write_position()`
+            * `clear_arb_waveform()` and `delete_named_waveform()` becomes `delete_waveform()`
     * #### Removed
         * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+        * `osp_fir_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_gaussian_bt` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_flat_passband` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_data_processing_mode` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_compensate_for_filter_group_delay` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_gain` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_cic_filter_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_phase_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_phase_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_frequency` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_carrier_enabled` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_offset_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_offset_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_gain_q` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_pre_filter_gain_i` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_overflow_status` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_overflow_error_reporting` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_mode` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_frequency_shift` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_type` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_root_raised_cosine_alpha` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `osp_fir_filter_raised_cosine_alpha` - [#864](https://github.com/ni/nimi-python/issues/864)
+        * `ready_for_start_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_level_active_level` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_output_behavior` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_polarity` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_width` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_pulse_width_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_toggle_initial_state` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_live_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `ready_for_start_event_live_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_latched_status` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_delay` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `marker_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `started_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `done_event_delay_units` - [#859](https://github.com/ni/nimi-python/issues/859)
+        * `direct_dma_enabled` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `direct_dma_windowaddress` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `direct_dma_window_size`  [#858](https://github.com/ni/nimi-python/issues/858)
+        * `gain_dac_value` - [#88](https://github.com/ni/nimi-python/issues/858)
+        * `offset_dac_vaue` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `id_query_respone` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `oscillator_freq_ac_value` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `oscillator_phase_dac_vale` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `post_amplifier_attenuatio` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `pre_amplifier_attenuation` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `p2p_endpoint_fullness_strt_trigger_level` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `pci_dma_optimizations_enabled` - [#858](ttps://github.com/ni/nimi-python/issues/858)
+        * `sample_clock_absolute_delay`- [#858](https://github.com/ni/nimi-python/issues/858)
+        * `synchronization` - [#858](ttps://github.com/ni/nimi-python/issues/858)
+        * `sync_duty_cycl_high` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `sync_out_output_terinal` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `trigger_source` - [#858](https://github.com/ni/nimi-python/issues/858)
+        * `video_wavefor_type` - [#858](https://github.com/ni/nimi-python/issues/858)
 * ### NI-SCOPE
-    * #### Added
-    * #### Changed
     * #### Removed
         * Properties removed
             * `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
@@ -98,6 +313,11 @@ All notable changes to this project will be documented in this file.
         * Methods removed
             * `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
             * `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+* ### NI-ModInst
+    * #### Changed
+        * Indexing on `nimodinst.Session` is no longer allowed
+            * `session[0].device_name` becomes `session.devices[0].device_name`
+            * This is to be consistent with other drivers
 
 ## 0.8.0 - 2018-04-27
 * ### ALL
@@ -142,8 +362,8 @@ All notable changes to this project will be documented in this file.
             * Takes additional parameters that modify fetch behavior
             * Add resulting record as part of the waveform info
             * Channel name and record number added to waveform info
-            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch), 
-                [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read), 
+            * See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch),
+                [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read),
                 and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
         * Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
         * Enum values and attribute names that start with an underscore + digit have been renamed
@@ -470,6 +690,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Python Versioning](http://legacy.python.org/dev/peps/pep-0396/).
 
 <!--
+* [Unreleased](#unreleased)
 ## [Unreleased]
 * ### ALL
     * #### Added
@@ -496,6 +717,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 * ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
     * #### Added
     * #### Changed
     * #### Removed

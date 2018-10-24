@@ -7,6 +7,8 @@ from build.helper.codegen_helper import IviDanceStep  # noqa: F401
 
 from build.helper.parameter_usage_options import ParameterUsageOptions  # noqa: F401
 
+from build.helper.documentation_helper import add_attribute_rep_cap_tip_docstring  # noqa: F401
+from build.helper.documentation_helper import add_attribute_rep_cap_tip_rst  # noqa: F401
 from build.helper.documentation_helper import add_notes_re_links  # noqa: F401
 from build.helper.documentation_helper import as_rest_table  # noqa: F401
 from build.helper.documentation_helper import find_attribute_by_name  # noqa: F401
@@ -21,8 +23,6 @@ from build.helper.documentation_helper import get_rst_header_snippet  # noqa: F4
 from build.helper.documentation_helper import get_rst_picture_reference  # noqa: F401
 from build.helper.documentation_helper import rep_cap_method_desc_rst  # noqa: F401
 from build.helper.documentation_helper import square_up_tables  # noqa: F401
-
-from build.helper.documentation_snippets import rep_cap_attr_desc  # noqa: F401
 
 from build.helper.helper import camelcase_to_snakecase  # noqa: F401
 from build.helper.helper import get_array_type_for_api_type  # noqa: F401

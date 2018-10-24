@@ -1,4 +1,4 @@
-#!/usr/bin/python
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
 config        = template_parameters['metadata'].config
@@ -106,4 +106,3 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
     warnings.warn(DriverWarning(code, description))
 
 
-warnings.filterwarnings("always", category=DriverWarning)

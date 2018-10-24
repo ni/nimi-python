@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
@@ -64,6 +65,11 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureVertical']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer'] = {}
+        self._defaults['ExportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] = None
+        self._defaults['ExportAttributeConfigurationFile'] = {}
+        self._defaults['ExportAttributeConfigurationFile']['return'] = 0
         self._defaults['Fetch'] = {}
         self._defaults['Fetch']['return'] = 0
         self._defaults['Fetch']['Waveform'] = None
@@ -117,11 +123,18 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['Description'] = None
+        self._defaults['ImportAttributeConfigurationBuffer'] = {}
+        self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ImportAttributeConfigurationFile'] = {}
+        self._defaults['ImportAttributeConfigurationFile']['return'] = 0
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['InitiateAcquisition'] = {}
         self._defaults['InitiateAcquisition']['return'] = 0
+        self._defaults['LockSession'] = {}
+        self._defaults['LockSession']['return'] = 0
+        self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['ProbeCompensationSignalStart'] = {}
         self._defaults['ProbeCompensationSignalStart']['return'] = 0
         self._defaults['ProbeCompensationSignalStop'] = {}
@@ -149,8 +162,14 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['UnlockSession'] = {}
+        self._defaults['UnlockSession']['return'] = 0
+        self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
+        self._defaults['error_message'] = {}
+        self._defaults['error_message']['return'] = 0
+        self._defaults['error_message']['errorMessage'] = None
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
         self._defaults['self_test'] = {}
@@ -175,7 +194,8 @@ class SideEffectsHelper(object):
         # acquisition_status
         if self._defaults['AcquisitionStatus']['acquisitionStatus'] is None:
             raise MockFunctionCallError("niScope_AcquisitionStatus", param='acquisitionStatus')
-        acquisition_status.contents.value = self._defaults['AcquisitionStatus']['acquisitionStatus']
+        if acquisition_status is not None:
+            acquisition_status.contents.value = self._defaults['AcquisitionStatus']['acquisitionStatus']
         return self._defaults['AcquisitionStatus']['return']
 
     def niScope_ActualMeasWfmSize(self, vi, array_meas_function, meas_waveform_size):  # noqa: N802
@@ -184,7 +204,8 @@ class SideEffectsHelper(object):
         # meas_waveform_size
         if self._defaults['ActualMeasWfmSize']['measWaveformSize'] is None:
             raise MockFunctionCallError("niScope_ActualMeasWfmSize", param='measWaveformSize')
-        meas_waveform_size.contents.value = self._defaults['ActualMeasWfmSize']['measWaveformSize']
+        if meas_waveform_size is not None:
+            meas_waveform_size.contents.value = self._defaults['ActualMeasWfmSize']['measWaveformSize']
         return self._defaults['ActualMeasWfmSize']['return']
 
     def niScope_ActualNumWfms(self, vi, channel_list, num_wfms):  # noqa: N802
@@ -193,7 +214,8 @@ class SideEffectsHelper(object):
         # num_wfms
         if self._defaults['ActualNumWfms']['numWfms'] is None:
             raise MockFunctionCallError("niScope_ActualNumWfms", param='numWfms')
-        num_wfms.contents.value = self._defaults['ActualNumWfms']['numWfms']
+        if num_wfms is not None:
+            num_wfms.contents.value = self._defaults['ActualNumWfms']['numWfms']
         return self._defaults['ActualNumWfms']['return']
 
     def niScope_AddWaveformProcessing(self, vi, channel_list, meas_function):  # noqa: N802
@@ -290,6 +312,26 @@ class SideEffectsHelper(object):
         if self._defaults['Disable']['return'] != 0:
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
+
+    def niScope_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        if self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] is None:
+            raise MockFunctionCallError("niScope_ExportAttributeConfigurationBuffer", param='Configuration')
+        if size_in_bytes.value == 0:
+            return len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])
+        try:
+            configuration_ref = configuration.contents
+        except AttributeError:
+            configuration_ref = configuration
+        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])):
+            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['Configuration'][i]
+        return self._defaults['ExportAttributeConfigurationBuffer']['return']
+
+    def niScope_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationFile']['return']
+        return self._defaults['ExportAttributeConfigurationFile']['return']
 
     def niScope_Fetch(self, vi, channel_list, timeout, num_samples, waveform, wfm_info):  # noqa: N802
         if self._defaults['Fetch']['return'] != 0:
@@ -519,7 +561,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViBoolean']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViBoolean", param='Value')
-        value.contents.value = self._defaults['GetAttributeViBoolean']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViBoolean']['Value']
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niScope_GetAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
@@ -528,7 +571,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViInt32']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViInt32", param='Value')
-        value.contents.value = self._defaults['GetAttributeViInt32']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViInt32']['Value']
         return self._defaults['GetAttributeViInt32']['return']
 
     def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
@@ -537,7 +581,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViInt64']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViInt64", param='Value')
-        value.contents.value = self._defaults['GetAttributeViInt64']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViInt64']['Value']
         return self._defaults['GetAttributeViInt64']['return']
 
     def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
@@ -546,7 +591,8 @@ class SideEffectsHelper(object):
         # value
         if self._defaults['GetAttributeViReal64']['Value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViReal64", param='Value')
-        value.contents.value = self._defaults['GetAttributeViReal64']['Value']
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViReal64']['Value']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niScope_GetAttributeViString(self, vi, channel_list, attribute_id, buf_size, value):  # noqa: N802
@@ -581,7 +627,8 @@ class SideEffectsHelper(object):
         # error_code
         if self._defaults['GetError']['errorCode'] is None:
             raise MockFunctionCallError("niScope_GetError", param='errorCode')
-        error_code.contents.value = self._defaults['GetError']['errorCode']
+        if error_code is not None:
+            error_code.contents.value = self._defaults['GetError']['errorCode']
         if self._defaults['GetError']['Description'] is None:
             raise MockFunctionCallError("niScope_GetError", param='Description')
         if buffer_size.value == 0:
@@ -589,19 +636,40 @@ class SideEffectsHelper(object):
         description.value = self._defaults['GetError']['Description'].encode('ascii')
         return self._defaults['GetError']['return']
 
+    def niScope_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationBuffer']['return']
+        return self._defaults['ImportAttributeConfigurationBuffer']['return']
+
+    def niScope_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationFile']['return']
+        return self._defaults['ImportAttributeConfigurationFile']['return']
+
     def niScope_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
         # vi
         if self._defaults['InitWithOptions']['vi'] is None:
             raise MockFunctionCallError("niScope_InitWithOptions", param='vi')
-        vi.contents.value = self._defaults['InitWithOptions']['vi']
+        if vi is not None:
+            vi.contents.value = self._defaults['InitWithOptions']['vi']
         return self._defaults['InitWithOptions']['return']
 
     def niScope_InitiateAcquisition(self, vi):  # noqa: N802
         if self._defaults['InitiateAcquisition']['return'] != 0:
             return self._defaults['InitiateAcquisition']['return']
         return self._defaults['InitiateAcquisition']['return']
+
+    def niScope_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['LockSession']['return'] != 0:
+            return self._defaults['LockSession']['return']
+        # caller_has_lock
+        if self._defaults['LockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niScope_LockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
+        return self._defaults['LockSession']['return']
 
     def niScope_ProbeCompensationSignalStart(self, vi):  # noqa: N802
         if self._defaults['ProbeCompensationSignalStart']['return'] != 0:
@@ -696,10 +764,34 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        if self._defaults['UnlockSession']['return'] != 0:
+            return self._defaults['UnlockSession']['return']
+        # caller_has_lock
+        if self._defaults['UnlockSession']['callerHasLock'] is None:
+            raise MockFunctionCallError("niScope_UnlockSession", param='callerHasLock')
+        if caller_has_lock is not None:
+            caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
+        return self._defaults['UnlockSession']['return']
+
     def niScope_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
             return self._defaults['close']['return']
         return self._defaults['close']['return']
+
+    def niScope_error_message(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['error_message']['return'] != 0:
+            return self._defaults['error_message']['return']
+        # error_message
+        if self._defaults['error_message']['errorMessage'] is None:
+            raise MockFunctionCallError("niScope_error_message", param='errorMessage')
+        test_value = self._defaults['error_message']['errorMessage']
+        if sys.version_info.major > 2 and type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(error_message) >= len(test_value)
+        for i in range(len(test_value)):
+            error_message[i] = test_value[i]
+        return self._defaults['error_message']['return']
 
     def niScope_reset(self, vi):  # noqa: N802
         if self._defaults['reset']['return'] != 0:
@@ -712,7 +804,8 @@ class SideEffectsHelper(object):
         # self_test_result
         if self._defaults['self_test']['selfTestResult'] is None:
             raise MockFunctionCallError("niScope_self_test", param='selfTestResult')
-        self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
         # self_test_message
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niScope_self_test", param='selfTestMessage')
@@ -772,6 +865,10 @@ class SideEffectsHelper(object):
         mock_library.niScope_ConfigureVertical.return_value = 0
         mock_library.niScope_Disable.side_effect = MockFunctionCallError("niScope_Disable")
         mock_library.niScope_Disable.return_value = 0
+        mock_library.niScope_ExportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niScope_ExportAttributeConfigurationBuffer")
+        mock_library.niScope_ExportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niScope_ExportAttributeConfigurationFile.side_effect = MockFunctionCallError("niScope_ExportAttributeConfigurationFile")
+        mock_library.niScope_ExportAttributeConfigurationFile.return_value = 0
         mock_library.niScope_Fetch.side_effect = MockFunctionCallError("niScope_Fetch")
         mock_library.niScope_Fetch.return_value = 0
         mock_library.niScope_FetchArrayMeasurement.side_effect = MockFunctionCallError("niScope_FetchArrayMeasurement")
@@ -800,10 +897,16 @@ class SideEffectsHelper(object):
         mock_library.niScope_GetEqualizationFilterCoefficients.return_value = 0
         mock_library.niScope_GetError.side_effect = MockFunctionCallError("niScope_GetError")
         mock_library.niScope_GetError.return_value = 0
+        mock_library.niScope_ImportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niScope_ImportAttributeConfigurationBuffer")
+        mock_library.niScope_ImportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niScope_ImportAttributeConfigurationFile.side_effect = MockFunctionCallError("niScope_ImportAttributeConfigurationFile")
+        mock_library.niScope_ImportAttributeConfigurationFile.return_value = 0
         mock_library.niScope_InitWithOptions.side_effect = MockFunctionCallError("niScope_InitWithOptions")
         mock_library.niScope_InitWithOptions.return_value = 0
         mock_library.niScope_InitiateAcquisition.side_effect = MockFunctionCallError("niScope_InitiateAcquisition")
         mock_library.niScope_InitiateAcquisition.return_value = 0
+        mock_library.niScope_LockSession.side_effect = MockFunctionCallError("niScope_LockSession")
+        mock_library.niScope_LockSession.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStart.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStart")
         mock_library.niScope_ProbeCompensationSignalStart.return_value = 0
         mock_library.niScope_ProbeCompensationSignalStop.side_effect = MockFunctionCallError("niScope_ProbeCompensationSignalStop")
@@ -828,8 +931,12 @@ class SideEffectsHelper(object):
         mock_library.niScope_SetAttributeViReal64.return_value = 0
         mock_library.niScope_SetAttributeViString.side_effect = MockFunctionCallError("niScope_SetAttributeViString")
         mock_library.niScope_SetAttributeViString.return_value = 0
+        mock_library.niScope_UnlockSession.side_effect = MockFunctionCallError("niScope_UnlockSession")
+        mock_library.niScope_UnlockSession.return_value = 0
         mock_library.niScope_close.side_effect = MockFunctionCallError("niScope_close")
         mock_library.niScope_close.return_value = 0
+        mock_library.niScope_error_message.side_effect = MockFunctionCallError("niScope_error_message")
+        mock_library.niScope_error_message.return_value = 0
         mock_library.niScope_reset.side_effect = MockFunctionCallError("niScope_reset")
         mock_library.niScope_reset.return_value = 0
         mock_library.niScope_self_test.side_effect = MockFunctionCallError("niScope_self_test")

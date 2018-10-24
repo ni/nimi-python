@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 
 import ctypes
@@ -27,6 +28,7 @@ class Library(object):
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
+        self.niFake_GetAStringUsingPythonCode_cfunc = None
         self.niFake_GetAnIviDanceString_cfunc = None
         self.niFake_GetArrayForPythonCodeCustomType_cfunc = None
         self.niFake_GetArrayForPythonCodeDouble_cfunc = None
@@ -45,6 +47,7 @@ class Library(object):
         self.niFake_GetError_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
+        self.niFake_LockSession_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
         self.niFake_MultipleArraysSameSize_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
@@ -62,6 +65,7 @@ class Library(object):
         self.niFake_SetCustomType_cfunc = None
         self.niFake_SetCustomTypeArray_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
+        self.niFake_UnlockSession_cfunc = None
         self.niFake_Use64BitNumber_cfunc = None
         self.niFake_WriteWaveform_cfunc = None
         self.niFake_close_cfunc = None
@@ -131,6 +135,14 @@ class Library(object):
                 self.niFake_GetAStringOfFixedMaximumSize_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAStringOfFixedMaximumSize_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAStringOfFixedMaximumSize_cfunc(vi, a_string)
+
+    def niFake_GetAStringUsingPythonCode(self, vi, a_number, a_string):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetAStringUsingPythonCode_cfunc is None:
+                self.niFake_GetAStringUsingPythonCode_cfunc = self._library.niFake_GetAStringUsingPythonCode
+                self.niFake_GetAStringUsingPythonCode_cfunc.argtypes = [ViSession, ViInt16, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_GetAStringUsingPythonCode_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetAStringUsingPythonCode_cfunc(vi, a_number, a_string)
 
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         with self._func_lock:
@@ -276,6 +288,14 @@ class Library(object):
                 self.niFake_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Initiate_cfunc(vi)
 
+    def niFake_LockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_LockSession_cfunc is None:
+                self.niFake_LockSession_cfunc = self._library.niFake_LockSession
+                self.niFake_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFake_LockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_LockSession_cfunc(vi, caller_has_lock)
+
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         with self._func_lock:
             if self.niFake_MultipleArrayTypes_cfunc is None:
@@ -411,6 +431,14 @@ class Library(object):
                 self.niFake_TwoInputFunction_cfunc.argtypes = [ViSession, ViReal64, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_TwoInputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_TwoInputFunction_cfunc(vi, a_number, a_string)
+
+    def niFake_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_UnlockSession_cfunc is None:
+                self.niFake_UnlockSession_cfunc = self._library.niFake_UnlockSession
+                self.niFake_UnlockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
+                self.niFake_UnlockSession_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_UnlockSession_cfunc(vi, caller_has_lock)
 
     def niFake_Use64BitNumber(self, vi, input, output):  # noqa: N802
         with self._func_lock:

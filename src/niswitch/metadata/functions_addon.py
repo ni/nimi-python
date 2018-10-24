@@ -6,7 +6,7 @@
 functions_codegen_method = {
     'InitWithTopology':                { 'codegen_method': 'private', 'method_name_for_documentation': '__init__', },
     'InitWithOptions':                 { 'codegen_method': 'no',       },
-    'Initiate':                        { 'codegen_method': 'private',  },
+    'Initiate':                        { 'codegen_method': 'private', 'method_name_for_documentation': 'initiate', },
     'close':                           { 'codegen_method': 'private',  },
     'CheckAttribute.+':                { 'codegen_method': 'no',       },  # We do not include any Check Attribute functions
     '.etAttribute.+':                  { 'codegen_method': 'private',  },  # All Set/Get Attribute functions are private
@@ -14,8 +14,6 @@ functions_codegen_method = {
     'error_message':                   { 'codegen_method': 'private',  },
     'GetError':                        { 'codegen_method': 'private',  },
     'ClearError':                      { 'codegen_method': 'no',       },
-    'LockSession':                     { 'codegen_method': 'no',       },
-    'UnlockSession':                   { 'codegen_method': 'no',       },
     'SetAttributeViSession':           { 'codegen_method': 'no',       },
     'GetAttributeViSession':           { 'codegen_method': 'no',       },
     'Scan':                            { 'codegen_method': 'no',       },  # Not exposed in LabVIEW API.
@@ -28,6 +26,24 @@ functions_codegen_method = {
     'IsDebounced':                     { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'IsScanning':                      { 'codegen_method': 'no',       },  # Equivalent attribute is available
     'self_test':                       { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test', },  # 'fancy_self_test' Public wrapper that raises
+    'ConfigureScanList':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
+    'ConfigureScanTrigger':            { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
+    'SetContinuousScan':               { 'codegen_method': 'no',       },  # Equivalent attribute is available - #881
+}
+
+functions_locking = {
+    'LockSession':                     { 'method_templates': [ { 'session_filename': 'lock', 'documentation_filename': 'lock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'lock', },
+    'UnlockSession':                   { 'method_templates': [ { 'session_filename': 'unlock', 'documentation_filename': 'unlock', 'method_python_name_suffix': '', }, ],
+                                         'render_in_session_base': True,
+                                         'use_session_lock': False,
+                                         'python_name': 'unlock', },
+    'InitWithTopology':                { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'close':                           { 'use_session_lock': False,  },  # Session not valid during complete function call so cannot use session locking
+    'error_message':                   { 'use_session_lock': False,  },  # No Session for function call so cannot use session locking
+    'GetError':                        { 'use_session_lock': False,  },  # Session may not be valid during function call so cannot use session locking
 }
 
 # Override the 'python' name for some functions.
@@ -44,9 +60,6 @@ functions_enums = {
                                                       2: { 'enum': 'ScanAdvancedOutput',       }, }, },
     'RouteTriggerInput':            { 'parameters': { 1: { 'enum': 'TriggerInput',             },
                                                       2: { 'enum': 'TriggerInput',             }, }, },
-    'ConfigureScanList':            { 'parameters': { 2: { 'enum': 'ScanMode',                 }, }, },
-    'ConfigureScanTrigger':         { 'parameters': { 2: { 'enum': 'TriggerInput',             },
-                                                      3: { 'enum': 'ScanAdvancedOutput',       }, }, },
 }
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
@@ -75,8 +88,6 @@ functions_default_value = {
                                                   2: { 'default_value': False, },
                                                   3: { 'default_value': False, },
                                                   4: { 'default_value': '""', }, }, },
-    'ConfigureScanList':        { 'parameters': { 2: { 'default_value': 'ScanMode.BREAK_BEFORE_MAKE', }, }, },
-    'ConfigureScanTrigger':     { 'parameters': { 1: { 'default_value': 'datetime.timedelta(seconds=0.0)', }, }, },
     'RouteScanAdvancedOutput':  { 'parameters': { 3: { 'default_value': False, }, }, },
     'RouteTriggerInput':        { 'parameters': { 3: { 'default_value': False, }, }, },
     'WaitForDebounce':          { 'parameters': { 1: { 'default_value': 'datetime.timedelta(milliseconds=5000)', }, }, },
@@ -84,8 +95,6 @@ functions_default_value = {
 }
 
 functions_converters = {
-    'ConfigureScanTrigger':              { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_seconds',
-                                                                'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'WaitForDebounce':                   { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',
                                                                 'type_in_documentation': 'float in seconds or datetime.timedelta', }, }, },
     'WaitForScanComplete':               { 'parameters': { 1: { 'python_api_converter_name': 'convert_timedelta_to_milliseconds',

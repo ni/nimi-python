@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file was generated
 import sys  # noqa: F401   - Not all mock_helpers will need this
 
@@ -58,7 +59,8 @@ class SideEffectsHelper(object):
         # attribute_value
         if self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue'] is None:
             raise MockFunctionCallError("niModInst_GetInstalledDeviceAttributeViInt32", param='attributeValue')
-        attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue']
+        if attribute_value is not None:
+            attribute_value.contents.value = self._defaults['GetInstalledDeviceAttributeViInt32']['attributeValue']
         return self._defaults['GetInstalledDeviceAttributeViInt32']['return']
 
     def niModInst_GetInstalledDeviceAttributeViString(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
@@ -77,11 +79,13 @@ class SideEffectsHelper(object):
         # handle
         if self._defaults['OpenInstalledDevicesSession']['handle'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='handle')
-        handle.contents.value = self._defaults['OpenInstalledDevicesSession']['handle']
+        if handle is not None:
+            handle.contents.value = self._defaults['OpenInstalledDevicesSession']['handle']
         # device_count
         if self._defaults['OpenInstalledDevicesSession']['deviceCount'] is None:
             raise MockFunctionCallError("niModInst_OpenInstalledDevicesSession", param='deviceCount')
-        device_count.contents.value = self._defaults['OpenInstalledDevicesSession']['deviceCount']
+        if device_count is not None:
+            device_count.contents.value = self._defaults['OpenInstalledDevicesSession']['deviceCount']
         return self._defaults['OpenInstalledDevicesSession']['return']
 
     # Helper function to setup Mock object with default side effects and return values
