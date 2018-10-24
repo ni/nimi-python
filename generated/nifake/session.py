@@ -217,7 +217,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
-        '''_get_attribute_vi_boolean
+        r'''_get_attribute_vi_boolean
 
         Queries the value of a ViBoolean property.
 
@@ -247,7 +247,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
-        '''_get_attribute_vi_int32
+        r'''_get_attribute_vi_int32
 
         Queries the value of a ViInt32 property.
 
@@ -277,7 +277,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute_id):
-        '''_get_attribute_vi_int64
+        r'''_get_attribute_vi_int64
 
         Queries the value of a ViInt64 property.
 
@@ -307,7 +307,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
-        '''_get_attribute_vi_real64
+        r'''_get_attribute_vi_real64
 
         Queries the value of a ViReal property.
 
@@ -337,7 +337,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
-        '''_get_attribute_vi_string
+        r'''_get_attribute_vi_string
 
         Queries the value of a ViBoolean property.
 
@@ -367,7 +367,7 @@ class _SessionBase(object):
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _get_error(self):
-        '''_get_error
+        r'''_get_error
 
         Returns the error information associated with the session.
 
@@ -434,7 +434,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def read_from_channel(self, maximum_time):
-        '''read_from_channel
+        r'''read_from_channel
 
         Acquires a single measurement and returns the measured value.
 
@@ -464,7 +464,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_boolean
+        r'''_set_attribute_vi_boolean
 
         This method sets the value of a ViBoolean property.
 
@@ -492,7 +492,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int32
+        r'''_set_attribute_vi_int32
 
         This method sets the value of a ViInt32 property.
 
@@ -520,7 +520,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int64
+        r'''_set_attribute_vi_int64
 
         This method sets the value of a ViInt64 property.
 
@@ -548,7 +548,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_real64
+        r'''_set_attribute_vi_real64
 
         This method sets the value of a ViReal64 property.
 
@@ -576,7 +576,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_string
+        r'''_set_attribute_vi_string
 
         This method sets the value of a ViString property.
 
@@ -615,7 +615,7 @@ class _SessionBase(object):
         return
 
     def _error_message(self, error_code):
-        '''_error_message
+        r'''_error_message
 
         Takes the errorCode returned by a functiona and returns it as a user-readable string.
 
@@ -639,7 +639,7 @@ class Session(_SessionBase):
     '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation'''
 
     def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
-        '''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
+        r'''An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation
 
         Creates a new IVI instrument driver session.
 
@@ -730,7 +730,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._vi = 0
             raise
         self._vi = 0
@@ -739,7 +739,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def abort(self):
-        '''abort
+        r'''abort
 
         Aborts a previously initiated thingie.
         '''
@@ -750,7 +750,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def bool_array_output_function(self, number_of_elements):
-        '''bool_array_output_function
+        r'''bool_array_output_function
 
         This method returns an array of booleans.
 
@@ -772,7 +772,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def enum_array_output_function(self, number_of_elements):
-        '''enum_array_output_function
+        r'''enum_array_output_function
 
         This method returns an array of enums, stored as 16 bit integers under the hood.
 
@@ -794,7 +794,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
-        '''enum_input_function_with_defaults
+        r'''enum_input_function_with_defaults
 
         This method takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.
 
@@ -822,7 +822,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def fetch_waveform(self, number_of_samples):
-        '''fetch_waveform
+        r'''fetch_waveform
 
         Returns waveform data.
 
@@ -848,7 +848,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def fetch_waveform_into(self, waveform_data):
-        '''fetch_waveform
+        r'''fetch_waveform
 
         Returns waveform data.
 
@@ -882,7 +882,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_a_boolean(self):
-        '''get_a_boolean
+        r'''get_a_boolean
 
         Returns a boolean.
 
@@ -900,7 +900,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_a_number(self):
-        '''get_a_number
+        r'''get_a_number
 
         Returns a number.
 
@@ -918,7 +918,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_a_string_of_fixed_maximum_size(self):
-        '''get_a_string_of_fixed_maximum_size
+        r'''get_a_string_of_fixed_maximum_size
 
         Illustrates resturning a string of fixed size.
 
@@ -934,7 +934,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_a_string_using_python_code(self, a_number):
-        '''get_a_string_using_python_code
+        r'''get_a_string_using_python_code
 
         Returns a number and a string.
 
@@ -957,7 +957,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_an_ivi_dance_string(self):
-        '''get_an_ivi_dance_string
+        r'''get_an_ivi_dance_string
 
         Returns a string using the IVI dance.
         '''
@@ -974,7 +974,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_array_for_python_code_custom_type(self):
-        '''get_array_for_python_code_custom_type
+        r'''get_array_for_python_code_custom_type
 
         This method returns an array for use in python-code size mechanism.
 
@@ -992,7 +992,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_array_for_python_code_double(self):
-        '''get_array_for_python_code_double
+        r'''get_array_for_python_code_double
 
         This method returns an array for use in python-code size mechanism.
 
@@ -1010,7 +1010,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_array_size_for_python_code(self):
-        '''get_array_size_for_python_code
+        r'''get_array_size_for_python_code
 
         This method returns the size of the array for use in python-code size mechanism.
 
@@ -1026,7 +1026,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_array_using_ivi_dance(self):
-        '''get_array_using_ivi_dance
+        r'''get_array_using_ivi_dance
 
         This method returns an array of float whose size is determined with the IVI dance.
         '''
@@ -1044,7 +1044,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _get_cal_date_and_time(self, cal_type):
-        '''_get_cal_date_and_time
+        r'''_get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -1077,7 +1077,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_cal_interval(self):
-        '''get_cal_interval
+        r'''get_cal_interval
 
         Returns the recommended maximum interval, in **months**, between external calibrations.
 
@@ -1093,7 +1093,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_custom_type(self):
-        '''get_custom_type
+        r'''get_custom_type
 
         This method returns a custom type.
 
@@ -1109,7 +1109,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_custom_type_array(self, number_of_elements):
-        '''get_custom_type_array
+        r'''get_custom_type_array
 
         This method returns a custom type.
 
@@ -1131,7 +1131,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_enum_value(self):
-        '''get_enum_value
+        r'''get_enum_value
 
         Returns an enum value
 
@@ -1180,7 +1180,7 @@ class Session(_SessionBase):
         return datetime.datetime(year, month, day, hour, minute)
 
     def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
-        '''_init_with_options
+        r'''_init_with_options
 
         Creates a new IVI instrument driver session.
 
@@ -1223,7 +1223,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _initiate(self):
-        '''_initiate
+        r'''_initiate
 
         Initiates a thingie.
         '''
@@ -1234,7 +1234,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
-        '''multiple_array_types
+        r'''multiple_array_types
 
         Receives and returns multiple types of arrays.
 
@@ -1271,7 +1271,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def multiple_arrays_same_size(self, values1, values2, values3, values4):
-        '''multiple_arrays_same_size
+        r'''multiple_arrays_same_size
 
         Method to test multiple arrays that use the same size
 
@@ -1303,7 +1303,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def one_input_function(self, a_number):
-        '''one_input_function
+        r'''one_input_function
 
         This method takes one parameter other than the session.
 
@@ -1319,7 +1319,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
-        '''parameters_are_multiple_types
+        r'''parameters_are_multiple_types
 
         Has parameters of multiple types.
 
@@ -1368,7 +1368,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def simple_function(self):
-        '''simple_function
+        r'''simple_function
 
         This method takes no parameters other than the session.
         '''
@@ -1379,7 +1379,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def read(self, maximum_time):
-        '''read
+        r'''read
 
         Acquires a single measurement and returns the measured value.
 
@@ -1400,7 +1400,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def return_a_number_and_a_string(self):
-        '''return_a_number_and_a_string
+        r'''return_a_number_and_a_string
 
         Returns a number and a string.
 
@@ -1421,7 +1421,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def return_multiple_types(self, array_size):
-        '''return_multiple_types
+        r'''return_multiple_types
 
         Returns multiple types.
 
@@ -1479,7 +1479,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def set_custom_type(self, cs):
-        '''set_custom_type
+        r'''set_custom_type
 
         This method takes a custom type.
 
@@ -1495,7 +1495,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def set_custom_type_array(self, cs):
-        '''set_custom_type_array
+        r'''set_custom_type_array
 
         This method takes an array of custom types.
 
@@ -1512,7 +1512,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def two_input_function(self, a_number, a_string):
-        '''two_input_function
+        r'''two_input_function
 
         This method takes two parameters other than the session.
 
@@ -1531,7 +1531,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def use64_bit_number(self, input):
-        '''use64_bit_number
+        r'''use64_bit_number
 
         Returns a number and a string.
 
@@ -1554,7 +1554,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def write_waveform(self, waveform):
-        '''write_waveform
+        r'''write_waveform
 
         Writes waveform to the driver
 
@@ -1572,7 +1572,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def write_waveform_numpy(self, waveform):
-        '''write_waveform
+        r'''write_waveform
 
         Writes waveform to the driver
 
@@ -1596,7 +1596,7 @@ class Session(_SessionBase):
         return
 
     def _close(self):
-        '''_close
+        r'''_close
 
         Closes the specified session and deallocates resources that it reserved.
         '''
@@ -1618,7 +1618,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _self_test(self):
-        '''_self_test
+        r'''_self_test
 
         Performs a self-test.
 

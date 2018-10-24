@@ -591,7 +591,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
-        '''_get_attribute_vi_boolean
+        r'''_get_attribute_vi_boolean
 
         Queries the value of a ViBoolean property. You can use this method to
         get the values of instrument-specific properties and inherent IVI
@@ -631,7 +631,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
-        '''_get_attribute_vi_int32
+        r'''_get_attribute_vi_int32
 
         Queries the value of a ViInt32 property. You can use this method to
         get the values of instrument-specific properties and inherent IVI
@@ -671,7 +671,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
-        '''_get_attribute_vi_real64
+        r'''_get_attribute_vi_real64
 
         Queries the value of a ViReal64 property. You can use this method to
         get the values of instrument-specific properties and inherent IVI
@@ -711,7 +711,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
-        '''_get_attribute_vi_string
+        r'''_get_attribute_vi_string
 
         Queries the value of a ViString property. You can use this method to
         get the values of instrument-specific properties and inherent IVI
@@ -753,7 +753,7 @@ class _SessionBase(object):
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _get_error(self):
-        '''_get_error
+        r'''_get_error
 
         Returns the error information associated with the
         **Instrument_Handle**. This method retrieves and then clears the
@@ -826,7 +826,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_boolean
+        r'''_set_attribute_vi_boolean
 
         This method sets the value of a ViBoolean property.
 
@@ -878,7 +878,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int32
+        r'''_set_attribute_vi_int32
 
         This method sets the value of a ViInt32 property.
 
@@ -930,7 +930,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_real64
+        r'''_set_attribute_vi_real64
 
         This method sets the value of a ViReal64 property.
 
@@ -982,7 +982,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_string
+        r'''_set_attribute_vi_string
 
         This method sets the value of a ViString property.
 
@@ -1045,7 +1045,7 @@ class _SessionBase(object):
         return
 
     def _error_message(self, error_code):
-        '''_error_message
+        r'''_error_message
 
         Takes the **Error_Code** returned by the instrument driver methods,
         interprets it, and returns it as a user-readable string.
@@ -1071,7 +1071,7 @@ class Session(_SessionBase):
     '''An NI-DMM session to a National Instruments Digital Multimeter'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
-        '''An NI-DMM session to a National Instruments Digital Multimeter
+        r'''An NI-DMM session to a National Instruments Digital Multimeter
 
         This method completes the following tasks:
 
@@ -1202,7 +1202,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._vi = 0
             raise
         self._vi = 0
@@ -1211,7 +1211,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def abort(self):
-        '''abort
+        r'''abort
 
         Aborts a previously initiated measurement and returns the DMM to the
         Idle state.
@@ -1223,7 +1223,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_measurement_absolute(self, measurement_function, range, resolution_absolute):
-        '''configure_measurement_absolute
+        r'''configure_measurement_absolute
 
         Configures the common properties of the measurement. These properties
         include method, range, and
@@ -1290,7 +1290,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_measurement_digits(self, measurement_function, range, resolution_digits):
-        '''configure_measurement_digits
+        r'''configure_measurement_digits
 
         Configures the common properties of the measurement. These properties
         include method, range, and
@@ -1358,7 +1358,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
-        '''configure_multi_point
+        r'''configure_multi_point
 
         Configures the properties for multipoint measurements. These properties
         include trigger_count, sample_count,
@@ -1418,7 +1418,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_rtd_custom(self, rtd_a, rtd_b, rtd_c):
-        '''configure_rtd_custom
+        r'''configure_rtd_custom
 
         Configures the A, B, and C parameters for a custom RTD.
 
@@ -1446,7 +1446,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_rtd_type(self, rtd_type, rtd_resistance):
-        '''configure_rtd_type
+        r'''configure_rtd_type
 
         Configures the RTD Type and RTD Resistance parameters for an RTD.
 
@@ -1490,7 +1490,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_thermistor_custom(self, thermistor_a, thermistor_b, thermistor_c):
-        '''configure_thermistor_custom
+        r'''configure_thermistor_custom
 
         Configures the A, B, and C parameters for a custom thermistor.
 
@@ -1527,7 +1527,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_thermocouple(self, thermocouple_type, reference_junction_type=enums.ThermocoupleReferenceJunctionType.FIXED):
-        '''configure_thermocouple
+        r'''configure_thermocouple
 
         Configures the thermocouple type and reference junction type for a
         chosen thermocouple.
@@ -1577,7 +1577,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_trigger(self, trigger_source, trigger_delay=datetime.timedelta(seconds=-1)):
-        '''configure_trigger
+        r'''configure_trigger
 
         Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
         `Triggering <trigger>`__ and `Using
@@ -1623,7 +1623,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def configure_waveform_acquisition(self, measurement_function, range, rate, waveform_points):
-        '''configure_waveform_acquisition
+        r'''configure_waveform_acquisition
 
         Configures the DMM for waveform acquisitions. This feature is supported
         on the NI 4080/4081/4082 and the NI 4070/4071/4072.
@@ -1679,7 +1679,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def disable(self):
-        '''disable
+        r'''disable
 
         Places the instrument in a quiescent state where it has minimal or no
         impact on the system to which it is connected. If a measurement is in
@@ -1692,7 +1692,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def export_attribute_configuration_buffer(self):
-        '''export_attribute_configuration_buffer
+        r'''export_attribute_configuration_buffer
 
         Exports the property configuration of the session to the specified
         configuration buffer.
@@ -1744,7 +1744,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def export_attribute_configuration_file(self, file_path):
-        '''export_attribute_configuration_file
+        r'''export_attribute_configuration_file
 
         Exports the property configuration of the session to the specified
         file.
@@ -1797,7 +1797,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def fetch(self, maximum_time=datetime.timedelta(milliseconds=-1)):
-        '''fetch
+        r'''fetch
 
         Returns the value from a previously initiated measurement. You must call
         _initiate before calling this method.
@@ -1831,7 +1831,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def fetch_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
-        '''fetch_multi_point
+        r'''fetch_multi_point
 
         Returns an array of values from a previously initiated multipoint
         measurement. The number of measurements the DMM makes is determined by
@@ -1886,7 +1886,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def fetch_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
-        '''fetch_waveform
+        r'''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
         values from a previously initiated waveform acquisition. You must call
@@ -1933,7 +1933,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def fetch_waveform_into(self, waveform_array, maximum_time=datetime.timedelta(milliseconds=-1)):
-        '''fetch_waveform
+        r'''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
         values from a previously initiated waveform acquisition. You must call
@@ -1986,7 +1986,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _get_cal_date_and_time(self, cal_type):
-        '''_get_cal_date_and_time
+        r'''_get_cal_date_and_time
 
         Returns the date and time of the last calibration performed.
 
@@ -2033,7 +2033,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_dev_temp(self, options=""):
-        '''get_dev_temp
+        r'''get_dev_temp
 
         Returns the current **Temperature** of the device.
 
@@ -2056,7 +2056,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
-        '''get_ext_cal_recommended_interval
+        r'''get_ext_cal_recommended_interval
 
         Returns the recommended interval between external recalibration in
         **Months**.
@@ -2106,7 +2106,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_last_cal_temp(self, cal_type):
-        '''get_last_cal_temp
+        r'''get_last_cal_temp
 
         Returns the **Temperature** during the last calibration procedure.
 
@@ -2141,7 +2141,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_self_cal_supported(self):
-        '''get_self_cal_supported
+        r'''get_self_cal_supported
 
         Returns a Boolean value that expresses whether or not the DMM that you
         are using can perform self-calibration.
@@ -2165,7 +2165,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
-        '''import_attribute_configuration_buffer
+        r'''import_attribute_configuration_buffer
 
         Imports a property configuration to the session from the specified
         configuration buffer.
@@ -2213,7 +2213,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def import_attribute_configuration_file(self, file_path):
-        '''import_attribute_configuration_file
+        r'''import_attribute_configuration_file
 
         Imports a property configuration to the session from the specified
         file.
@@ -2261,7 +2261,7 @@ class Session(_SessionBase):
         return
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
-        '''_init_with_options
+        r'''_init_with_options
 
         This method completes the following tasks:
 
@@ -2378,7 +2378,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _initiate(self):
-        '''_initiate
+        r'''_initiate
 
         Initiates an acquisition. After you call this method, the DMM leaves
         the Idle state and enters the Wait-for-Trigger state. If trigger is set
@@ -2393,7 +2393,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def perform_open_cable_comp(self):
-        '''perform_open_cable_comp
+        r'''perform_open_cable_comp
 
         For the NI 4082 and NI 4072 only, performs the open cable compensation
         measurements for the current capacitance/inductance range, and returns
@@ -2425,7 +2425,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def perform_short_cable_comp(self):
-        '''perform_short_cable_comp
+        r'''perform_short_cable_comp
 
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
@@ -2456,7 +2456,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def read(self, maximum_time=datetime.timedelta(milliseconds=-1)):
-        '''read
+        r'''read
 
         Acquires a single measurement and returns the measured value.
 
@@ -2489,7 +2489,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def read_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
-        '''read_multi_point
+        r'''read_multi_point
 
         Acquires multiple measurements and returns an array of measured values.
         The number of measurements the DMM makes is determined by the values you
@@ -2543,7 +2543,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def read_status(self):
-        '''read_status
+        r'''read_status
 
         Returns measurement backlog and acquisition status. Use this method to
         determine how many measurements are available before calling
@@ -2588,7 +2588,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def read_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
-        '''read_waveform
+        r'''read_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
         and returns data as an array of values or as a waveform data type. The
@@ -2640,7 +2640,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def reset_with_defaults(self):
-        '''reset_with_defaults
+        r'''reset_with_defaults
 
         Resets the instrument to a known state and sends initialization commands
         to the DMM. The initialization commands set the DMM settings to the
@@ -2654,7 +2654,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def self_cal(self):
-        '''self_cal
+        r'''self_cal
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the
         self-calibration routine to maintain measurement accuracy.
@@ -2671,7 +2671,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def send_software_trigger(self):
-        '''send_software_trigger
+        r'''send_software_trigger
 
         Sends a command to trigger the DMM. Call this method if you have
         configured either the trigger_source or
@@ -2690,7 +2690,7 @@ class Session(_SessionBase):
         return
 
     def _close(self):
-        '''_close
+        r'''_close
 
         Closes the specified session and deallocates resources that it reserved.
         '''
@@ -2726,7 +2726,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def reset(self):
-        '''reset
+        r'''reset
 
         Resets the instrument to a known state and sends initialization commands
         to the instrument. The initialization commands set instrument settings
@@ -2739,7 +2739,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _self_test(self):
-        '''_self_test
+        r'''_self_test
 
         Performs a self-test on the DMM to ensure that the DMM is functioning
         properly. Self-test does not calibrate the DMM.

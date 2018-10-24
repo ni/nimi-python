@@ -93,7 +93,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     def _get_error(self, error_description_size=[1024]):
-        '''_get_error
+        r'''_get_error
 
         Get error information of the first error that occurred. If a valid
         pointer is passed to errorDescription or errorNumber, GetError will
@@ -242,7 +242,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close_session()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._vi = 0
             raise
         self._vi = 0
@@ -250,7 +250,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     def _close_session(self):
-        '''_close_session
+        r'''_close_session
 
         Reduces the reference count of open sessions by one. If the reference
         count goes to 0, the method deallocates any memory resources the
@@ -264,7 +264,7 @@ class Session(_SessionBase):
         return
 
     def connect(self, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
-        '''connect
+        r'''connect
 
         Connects the routes specified by the connection specification. When
         connecting, it may allow for multiconnection based on the
@@ -324,7 +324,7 @@ class Session(_SessionBase):
         return
 
     def connect_and_disconnect(self, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):
-        '''connect_and_disconnect
+        r'''connect_and_disconnect
 
         Connects routes and disconnects routes in a similar fashion to
         connect and disconnect except that the operations happen in
@@ -422,7 +422,7 @@ class Session(_SessionBase):
         return
 
     def disconnect(self, disconnect_spec):
-        '''disconnect
+        r'''disconnect
 
         Disconnects the routes specified in the Disconnection Specification. If
         any of the specified routes were originally connected in a
@@ -451,7 +451,7 @@ class Session(_SessionBase):
         return
 
     def disconnect_all(self):
-        '''disconnect_all
+        r'''disconnect_all
 
         Disconnects all connections on every IVI switch device managed by the
         NISE session reference passed to this method. disconnect_all
@@ -464,7 +464,7 @@ class Session(_SessionBase):
         return
 
     def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES, expanded_route_spec_size=[1024]):
-        '''expand_route_spec
+        r'''expand_route_spec
 
         Expands a route spec string to yield more information about the routes
         and route groups within the spec. The route specification string
@@ -533,7 +533,7 @@ class Session(_SessionBase):
         return expanded_route_spec_ctype.value.decode(self._encoding)
 
     def find_route(self, channel1, channel2, route_spec_size=[1024]):
-        '''find_route
+        r'''find_route
 
         Finds an existing or potential route between channel 1 and channel 2.
         The returned route specification contains the route specification and
@@ -614,7 +614,7 @@ class Session(_SessionBase):
         return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
 
     def get_all_connections(self, route_spec_size=[1024]):
-        '''get_all_connections
+        r'''get_all_connections
 
         Returns the top-level connected routes and route groups. The route
         specification string returned from get_all_connections can be passed
@@ -661,7 +661,7 @@ class Session(_SessionBase):
         return route_spec_ctype.value.decode(self._encoding)
 
     def is_connected(self, route_spec):
-        '''is_connected
+        r'''is_connected
 
         Checks whether the specified routes and routes groups are connected. It
         returns true if connected.
@@ -690,7 +690,7 @@ class Session(_SessionBase):
         return bool(is_connected_ctype.value)
 
     def is_debounced(self):
-        '''is_debounced
+        r'''is_debounced
 
         Checks to see if the switching system is debounced or not. This method
         does not wait for debouncing to occur. It returns true if the system is
@@ -709,7 +709,7 @@ class Session(_SessionBase):
         return bool(is_debounced_ctype.value)
 
     def _open_session(self, virtual_device_name, option_string=""):
-        '''_open_session
+        r'''_open_session
 
         Opens a session to a specified NI Switch Executive virtual device. Opens
         communications with all of the IVI switches associated with the
@@ -747,7 +747,7 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=-1)):
-        '''wait_for_debounce
+        r'''wait_for_debounce
 
         Waits for all of the switches in the NI Switch Executive virtual device
         to debounce. This method does not return until either the switching
