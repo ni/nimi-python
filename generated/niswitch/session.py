@@ -599,7 +599,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
-        '''_get_attribute_vi_boolean
+        r'''_get_attribute_vi_boolean
 
         This method queries the value of a ViBoolean property. You can use
         this method to get the values of instrument specific properties and
@@ -655,7 +655,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
-        '''_get_attribute_vi_int32
+        r'''_get_attribute_vi_int32
 
         This method queries the value of a ViInt32 property. You can use this
         method to get the values of instrument specific properties and
@@ -711,7 +711,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
-        '''_get_attribute_vi_real64
+        r'''_get_attribute_vi_real64
 
         This method queries the value of a ViReal64 property. You can use
         this method to get the values of instrument specific properties and
@@ -767,7 +767,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
-        '''_get_attribute_vi_string
+        r'''_get_attribute_vi_string
 
         This method queries the value of a ViString property. You can use
         this method to get the values of instrument specific properties and
@@ -830,7 +830,7 @@ class _SessionBase(object):
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _get_error(self):
-        '''_get_error
+        r'''_get_error
 
         This method retrieves and then clears the IVI error information for
         the session or the current execution thread. One exception exists: If
@@ -914,7 +914,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_boolean
+        r'''_set_attribute_vi_boolean
 
         This method sets the value of a ViBoolean property. This is a
         low-level method that you can use to set the values of
@@ -982,7 +982,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_int32
+        r'''_set_attribute_vi_int32
 
         This method sets the value of a ViInt32 property. This is a low-level
         method that you can use to set the values of instrument-specific
@@ -1050,7 +1050,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_real64
+        r'''_set_attribute_vi_real64
 
         This method sets the value of a ViReal64 property. This is a
         low-level method that you can use to set the values of
@@ -1118,7 +1118,7 @@ class _SessionBase(object):
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
-        '''_set_attribute_vi_string
+        r'''_set_attribute_vi_string
 
         This method sets the value of a ViString property. This is a
         low-level method that you can use to set the values of
@@ -1197,7 +1197,7 @@ class _SessionBase(object):
         return
 
     def _error_message(self, error_code):
-        '''_error_message
+        r'''_error_message
 
         Converts an error code returned by NI-SWITCH into a user-readable
         string. Generally this information is supplied in error out of any
@@ -1226,7 +1226,7 @@ class Session(_SessionBase):
     '''An NI-SWITCH session to a National Instruments Switch Module'''
 
     def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
-        '''An NI-SWITCH session to a National Instruments Switch Module
+        r'''An NI-SWITCH session to a National Instruments Switch Module
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
@@ -1493,7 +1493,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._close()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._vi = 0
             raise
         self._vi = 0
@@ -1502,7 +1502,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def abort(self):
-        '''abort
+        r'''abort
 
         Aborts the scan in progress. Initiate a scan with
         initiate. If the switch module is not scanning,
@@ -1515,7 +1515,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def can_connect(self, channel1, channel2):
-        '''can_connect
+        r'''can_connect
 
         Verifies that a path between channel 1 and channel 2 can be created. If
         a path is possible in the switch module, the availability of that path
@@ -1570,7 +1570,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def commit(self):
-        '''commit
+        r'''commit
 
         Downloads the configured scan list and trigger settings to hardware.
         Calling commit optional as it is implicitly called during
@@ -1584,7 +1584,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def connect(self, channel1, channel2):
-        '''connect
+        r'''connect
 
         Creates a path between channel 1 and channel 2. The driver calculates
         and uses the shortest path between the two channels. Refer to Immediate
@@ -1626,7 +1626,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def connect_multiple(self, connection_list):
-        '''connect_multiple
+        r'''connect_multiple
 
         Creates the connections between channels specified in Connection List.
         Specify connections with two endpoints only or the explicit path between
@@ -1667,7 +1667,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def disable(self):
-        '''disable
+        r'''disable
 
         Places the switch module in a quiescent state where it has minimal or no
         impact on the system to which it is connected. All channels are
@@ -1680,7 +1680,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def disconnect(self, channel1, channel2):
-        '''disconnect
+        r'''disconnect
 
         This method destroys the path between two channels that you create
         with the connect or set_path method. If a path is
@@ -1708,7 +1708,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def disconnect_all(self):
-        '''disconnect_all
+        r'''disconnect_all
 
         Breaks all existing paths. If the switch module cannot break all paths,
         NISWITCH_WARN_PATH_REMAINS warning is returned.
@@ -1720,7 +1720,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def disconnect_multiple(self, disconnection_list):
-        '''disconnect_multiple
+        r'''disconnect_multiple
 
         Breaks the connections between channels specified in Disconnection List.
         If no connections exist between channels, NI-SWITCH returns an error. In
@@ -1746,7 +1746,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_channel_name(self, index):
-        '''get_channel_name
+        r'''get_channel_name
 
         Returns the channel string that is in the channel table at the specified
         index. Use get_channel_name in a For Loop to get a complete list
@@ -1772,7 +1772,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_path(self, channel1, channel2):
-        '''get_path
+        r'''get_path
 
         Returns a string that identifies the explicit path created with
         connect. Pass this string to set_path to establish
@@ -1813,7 +1813,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_relay_count(self, relay_name):
-        '''get_relay_count
+        r'''get_relay_count
 
         Returns the number of times the relay has changed from Closed to Open.
         Relay count is useful for tracking relay lifetime and usage. Call
@@ -1840,7 +1840,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_relay_name(self, index):
-        '''get_relay_name
+        r'''get_relay_name
 
         Returns the relay name string that is in the relay list at the specified
         index. Use get_relay_name in a For Loop to get a complete list
@@ -1866,7 +1866,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def get_relay_position(self, relay_name):
-        '''get_relay_position
+        r'''get_relay_position
 
         Returns the relay position for the relay specified in the Relay Name
         parameter.
@@ -1893,7 +1893,7 @@ class Session(_SessionBase):
         return enums.RelayPosition(relay_position_ctype.value)
 
     def _init_with_topology(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
-        '''_init_with_topology
+        r'''_init_with_topology
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
@@ -2143,7 +2143,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _initiate_scan(self):
-        '''_initiate_scan
+        r'''_initiate_scan
 
         Commits the configured scan list and trigger settings to hardware and
         initiates the scan. If niSwitch Commit was called earlier, niSwitch
@@ -2161,7 +2161,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def relay_control(self, relay_name, relay_action):
-        '''relay_control
+        r'''relay_control
 
         Controls individual relays of the switch. When controlling individual
         relays, the protection offered by setting the usage of source channels
@@ -2194,7 +2194,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def reset_with_defaults(self):
-        '''reset_with_defaults
+        r'''reset_with_defaults
 
         Resets the switch module and applies initial user specified settings
         from the logical name used to initialize the session. If the session was
@@ -2208,7 +2208,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
-        '''route_scan_advanced_output
+        r'''route_scan_advanced_output
 
         Routes the scan advanced output trigger from a trigger bus line (TTLx)
         to the front or rear connector.
@@ -2249,7 +2249,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
-        '''route_trigger_input
+        r'''route_trigger_input
 
         Routes the input trigger from the front or rear connector to a trigger
         bus line (TTLx). To disconnect the route, call this method again and
@@ -2291,7 +2291,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def send_software_trigger(self):
-        '''send_software_trigger
+        r'''send_software_trigger
 
         Sends a software trigger to the switch module specified in the NI-SWITCH
         session. When the trigger input is set to TriggerInput.SOFTWARE_TRIG
@@ -2310,7 +2310,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def set_path(self, path_list):
-        '''set_path
+        r'''set_path
 
         Connects two channels by specifying an explicit path in the path list
         parameter. set_path is particularly useful where path
@@ -2334,7 +2334,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
-        '''wait_for_debounce
+        r'''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
         with the Maximum Time (ms) parameter elapsed before the switch paths
@@ -2356,7 +2356,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
-        '''wait_for_scan_complete
+        r'''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
         elapsed and returns a timeout error. If the time you specify with the
@@ -2378,7 +2378,7 @@ class Session(_SessionBase):
         return
 
     def _close(self):
-        '''_close
+        r'''_close
 
         Terminates the NI-SWITCH session and all of its properties and
         deallocates any memory resources the driver uses. Notes: (1) You must
@@ -2420,7 +2420,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def reset(self):
-        '''reset
+        r'''reset
 
         Disconnects all created paths and returns the switch module to the state
         at initialization. Configuration channel and source channel settings
@@ -2433,7 +2433,7 @@ class Session(_SessionBase):
 
     @ivi_synchronized
     def _self_test(self):
-        '''_self_test
+        r'''_self_test
 
         Verifies that the driver can communicate with the switch module.
 

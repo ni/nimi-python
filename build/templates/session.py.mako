@@ -235,7 +235,7 @@ class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
-        '''${config['session_class_description']}
+        r'''${config['session_class_description']}
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
@@ -278,7 +278,7 @@ class Session(_SessionBase):
     def close(self):
         try:
             self._${close_function_name}()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0

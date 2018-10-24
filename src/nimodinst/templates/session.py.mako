@@ -190,7 +190,7 @@ class Session(object):
     def close(self):
         try:
             self._${close_function_name}()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0
