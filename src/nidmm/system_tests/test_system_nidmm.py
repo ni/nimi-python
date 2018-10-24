@@ -60,7 +60,7 @@ def test_enum_attribute(session):
     try:
         session.function = nidmm.LCCalculationModel.SERIES
         assert False
-    except TypeError as e:
+    except TypeError:
         pass
 
 
@@ -77,7 +77,7 @@ def test_method_configure_trigger(session):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     try:
         session.configure_trigger(nidmm.TriggerSource.IMMEDIATE)
-    except nidmm.Error as e:
+    except nidmm.Error:
         assert True
 
 
@@ -176,7 +176,7 @@ def test_trigger_max_time_exceeded_errror(session):
 def test_self_cal(session):
     try:
         session.self_cal()
-    except nidmm.Error as e:
+    except nidmm.Error:
         assert False
 
 

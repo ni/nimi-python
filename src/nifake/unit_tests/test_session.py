@@ -611,12 +611,12 @@ class TestSession(object):
             try:
                 session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, 123, float_val, float_enum_val, string_val)
                 assert False
-            except TypeError as e:
+            except TypeError:
                 pass
             try:
                 session.parameters_are_multiple_types(boolean_val, int32_val, int64_val, enum_val, float_val, 0.123, string_val)
                 assert False
-            except TypeError as e:
+            except TypeError:
                 pass
 
     def test_method_with_error(self):
@@ -656,7 +656,7 @@ class TestSession(object):
             try:
                 session.multiple_array_types(10)
                 assert False
-            except TypeError as e:
+            except TypeError:
                 pass
 
     def test_invalid_method_call_wrong_type_error(self):
@@ -664,7 +664,7 @@ class TestSession(object):
             try:
                 session.multiple_array_types('potato', [0.0, 0.1, 0.2])
                 assert False
-            except TypeError as e:
+            except TypeError:
                 pass
 
     def test_enum_input_function_with_defaults_bad_type_error(self):
@@ -674,7 +674,7 @@ class TestSession(object):
             try:
                 session.enum_input_function_with_defaults(test_turtle)
                 assert False
-            except TypeError as e:
+            except TypeError:
                 pass
 
     def test_method_with_warning(self):
