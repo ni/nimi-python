@@ -16,7 +16,7 @@
     assert ivi_dance_size_parameter is None or len_size_parameter is None
 %>\
     def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
-        '''${f['python_name']}
+        r'''${f['python_name']}
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''

@@ -210,14 +210,14 @@ class Session(object):
     def close(self):
         try:
             self._close_installed_devices_session()
-        except errors.DriverError as e:
+        except errors.DriverError:
             self._handle = 0
             raise
         self._handle = 0
 
     ''' These are code-generated '''
     def _close_installed_devices_session(self):
-        '''_close_installed_devices_session
+        r'''_close_installed_devices_session
 
         Cleans up the NI-ModInst session created by a call to
         _open_installed_devices_session. Call this method when you are
@@ -229,7 +229,7 @@ class Session(object):
         return
 
     def _get_extended_error_info(self):
-        '''_get_extended_error_info
+        r'''_get_extended_error_info
 
         Returns detailed information about the last error that occurred in the
         current thread during a call to one of the NI-ModInst methods. When
@@ -257,7 +257,7 @@ class Session(object):
         return error_info_ctype.value.decode(self._encoding)
 
     def _get_installed_device_attribute_vi_int32(self, index, attribute_id):
-        '''_get_installed_device_attribute_vi_int32
+        r'''_get_installed_device_attribute_vi_int32
 
         Returns an integer property specified by the attributeID parameter for
         a device specified by the handle and index parameters. The handle
@@ -300,7 +300,7 @@ class Session(object):
         return int(attribute_value_ctype.value)
 
     def _get_installed_device_attribute_vi_string(self, index, attribute_id):
-        '''_get_installed_device_attribute_vi_string
+        r'''_get_installed_device_attribute_vi_string
 
         Returns a string property specified by the attributeID parameter for a
         device specified by the handle and index parameters. The handle
@@ -343,7 +343,7 @@ class Session(object):
         return attribute_value_ctype.value.decode(self._encoding)
 
     def _open_installed_devices_session(self, driver):
-        '''_open_installed_devices_session
+        r'''_open_installed_devices_session
 
         Creates a handle to a list of installed devices supported by the
         specified driver. Call this method and pass in the name of a National
