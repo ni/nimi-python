@@ -30,7 +30,7 @@ matrix:
 
 install:
   - travis_retry pip install --upgrade pip
-  - travis_retry pip install --upgrade tox tox-travis coveralls
+  - travis_retry pip install --upgrade tox tox-travis coveralls codecov
 
 script:
   - tox -e clean,build_test,codegen PRINT=1 PYTHON_CMD=python
@@ -38,4 +38,5 @@ script:
 
 after_success:
   - travis_retry coveralls --rcfile=tools/coverage_unit_tests.rc
+  - travis_retry codecov
 
