@@ -10,8 +10,8 @@ def merge_helper(metadata, metadata_type, config, use_re):
     metadata_module = 'metadata.{0}_addon'.format(metadata_type)
     if 'modules' in config and metadata_module in config['modules']:
         for m in dir(config['modules'][metadata_module]):
-            if m.startswith('{0}_'.format(metadata_type)):
-                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re)
+            if m.startswith('{0}_'.format(metadata_type)) and m != '{0}_additional_{0}'.format(metadata_type):
+                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re, m)
             # We need to explicitly copy new entries
             if m == '{0}_additional_{0}'.format(metadata_type):
                 outof = config['modules'][metadata_module].__getattribute__(m)
@@ -30,7 +30,7 @@ def merge_helper(metadata, metadata_type, config, use_re):
     return metadata
 
 
-def merge_dicts(into, outof, use_re):
+def merge_dicts(into, outof, use_re, dict_name):
     '''merge_dicts
 
     Recursively merges the contents of dictionary 'outof' into dictionary 'into'.
@@ -84,31 +84,17 @@ def test_merge_dict_second_is_empty():
     _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
-def test_merge_dict_simple():
-    a = {'a': 1, 'b': 2}
-    b = {'c': 3}
-    expected = {'a': 1, 'b': 2, 'c': 3}
-    _do_the_test_merge_dicts(a, b, expected, use_re=True)
-
-
-def test_merge_dict_first_is_empty():
-    a = {}
-    b = {'a': 1, 'b': 2}
-    expected = {'a': 1, 'b': 2}
-    _do_the_test_merge_dicts(a, b, expected, use_re=True)
-
-
 def test_merge_dict_key_exists():
     a = {'a': 1, 'b': 2}
-    b = {'b': 3, 'c': 4}
-    expected = {'a': 1, 'b': 3, 'c': 4}
+    b = {'b': 3}
+    expected = {'a': 1, 'b': 3}
     _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_recurse():
     a = {'a': 1, 'b': {'b1': 5, 'b2': 6}}
-    b = {'b': {'b3': 7}, 'c': 4}
-    expected = {'a': 1, 'b': {'b1': 5, 'b2': 6, 'b3': 7}, 'c': 4}
+    b = {'b': {'b3': 7}}
+    expected = {'a': 1, 'b': {'b1': 5, 'b2': 6, 'b3': 7}}
     _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
@@ -140,4 +126,13 @@ def test_merge_dict_with_regex_off():
     _do_the_test_merge_dicts(a, b, expected, use_re=False)
 
 
+def test_merge_dict_top_level_key_missing():
+    a = {'a': 1, 'b': 2}
+    b = {'b': 3, 'c': 4}
+    expected = {'a': 1, 'b': 3, 'c': 4}
+    try:
+        _do_the_test_merge_dicts(a, b, expected, use_re=True)
+        assert False
+    except KeyError:
+        pass
 
