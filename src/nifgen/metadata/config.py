@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '1.0',
     'module_name': 'nifgen',
-    'module_version': '1.1.0.dev0',
+    'module_version': '1.1.0',
     'c_function_prefix': 'niFgen_',
     'driver_name': 'NI-FGEN',
     'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
