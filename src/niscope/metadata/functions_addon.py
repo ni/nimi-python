@@ -14,9 +14,6 @@ functions_codegen_method = {
     'error_message':                    { 'codegen_method': 'private',  },
     'GetError':                         { 'codegen_method': 'private',  },
     'ClearError':                       { 'codegen_method': 'no',       },
-    # '.+ExtCal':                         { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    # 'CalAdjust.+':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    # '.+UserDefined.+':                  { 'codegen_method': 'no',       },
     'SetAttributeViSession':            { 'codegen_method': 'no',       },
     'GetAttributeViSession':            { 'codegen_method': 'no',       },
     'GetNextInterchangeWarning':        { 'codegen_method': 'no',       },  # Not applicable to Python API
