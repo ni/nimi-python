@@ -39,9 +39,21 @@ def merge_dicts(into, outof, use_re):
     merged with all key matches in into.
     '''
     for item in sorted(outof):
+        # If we're not using regex's then this is an easy check
+        if not use_re and item not in into and dict_name is not None:
+            raise KeyError('Key {0} from {1} is not in the destination'.format(item, dict_name))
+        # If we are using regex's we need to seach all keys to see if any match
+        if use_re and dict_name is not None:
+            key_exists = False
+            for item2 in into:
+                if re.search(item, item2):
+                    key_exists = True
+            if not key_exists:
+                raise KeyError('Key {0} from {1} is not in the destination'.format(item, dict_name))
+
         if type(outof[item]) is dict:
             if item in into:
-                merge_dicts(into[item], outof[item], use_re)
+                merge_dicts(into[item], outof[item], use_re, None)
             elif type(into) is list:
                 for item2 in outof[item]:
                     into[item][item2] = outof[item][item2]
@@ -53,7 +65,7 @@ def merge_dicts(into, outof, use_re):
                     for item2 in into:
                         if use_re is True and re.search(item, item2):
                             assert type(into[item2]) is dict
-                            merge_dicts(into[item2], outof[item], use_re)
+                            merge_dicts(into[item2], outof[item], use_re, None)
         else:
             into[item] = outof[item]
 
@@ -61,7 +73,7 @@ def merge_dicts(into, outof, use_re):
 # Unit Tests
 def _do_the_test_merge_dicts(a, b, expected, use_re):
     actual = a.copy()
-    merge_dicts(actual, b, use_re)
+    merge_dicts(actual, b, use_re, 'test')
     assert expected == actual, "\na = {0}\nb = {1}\nexpected = {2}\nactual = {3}".format(a, b, expected, actual)
 
 
