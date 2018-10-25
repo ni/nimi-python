@@ -57,19 +57,7 @@ attributes_converters = {
 # Python API bindings release
 # We also do not need to codegen attributes that apply to P2P since it is not supported in Python
 attributes_codegen_method = {
-    1150010: { "codegen_method": "no" },  # TRIGGER_OUTPUT_EVENT
-    1150011: { "codegen_method": "no" },  # TRIGGER_OUTPUT_SOURCE
     1150091: { "codegen_method": "no" },  # EXPORT_SAMP_CLK_OUTPUT_TERM
-    1150054: { "codegen_method": "no" },  # RTSI0_TRIGGER_OUTPUT_EVENT
-    1150055: { "codegen_method": "no" },  # RTSI1_TRIGGER_OUTPUT_EVENT
-    1150056: { "codegen_method": "no" },  # RTSI2_TRIGGER_OUTPUT_EVENT
-    1150057: { "codegen_method": "no" },  # RTSI3_TRIGGER_OUTPUT_EVENT
-    1150058: { "codegen_method": "no" },  # RTSI4_TRIGGER_OUTPUT_EVENT
-    1150059: { "codegen_method": "no" },  # RTSI5_TRIGGER_OUTPUT_EVENT
-    1150060: { "codegen_method": "no" },  # RTSI6_TRIGGER_OUTPUT_EVENT
-    1150061: { "codegen_method": "no" },  # PFI1_TRIGGER_OUTPUT_EVENT
-    1150062: { "codegen_method": "no" },  # PFI2_TRIGGER_OUTPUT_EVENT
-    1150063: { "codegen_method": "no" },  # STAR_TRIGGER_OUTPUT_EVENT
     1151000: { "codegen_method": "no" },  # DDC_NCO_FREQUENCY
     1151001: { "codegen_method": "no" },  # DDC_NCO_PHASE
     1151003: { "codegen_method": "no" },  # DDC_ENABLE
@@ -181,15 +169,6 @@ attributes_codegen_method = {
     1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute - #824
     1050003: { "codegen_method": "no" },  # QUERY_INSTR_STATUS - IVI Attribute - #824
     1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX - IVI Attribute - #824
-    1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION - IVI Attribute - #824
-    1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION - IVI Attribute - #824
-    1050553: { "codegen_method": "no" },  # ENGINE_REVISION - IVI Attribute - #824
-    1050322: { "codegen_method": "no" },  # IO_SESSION - IVI Attribute - #824
-    1050051: { "codegen_method": "no" },  # DEFER_UPDATE - IVI Attribute - #824
-    1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES - IVI Attribute - #824
-    1050101: { "codegen_method": "no" },  # PRIMARY_ERROR - IVI Attribute - #824
-    1050102: { "codegen_method": "no" },  # SECONDARY_ERROR - IVI Attribute - #824
-    1050103: { "codegen_method": "no" },  # ERROR_ELABORATION - IVI Attribute - #824
     1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
     1150077: { "codegen_method": "private" },  # FETCH_RELATIVE_TO - Fetch attribute
     1150078: { "codegen_method": "private" },  # FETCH_OFFSET - Fetch attribute

@@ -38,13 +38,7 @@ attributes_codegen_method = {
     1050515: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION - IVI Attribute - #824
     1050516: { "codegen_method": "no" },  # SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION - IVI Attribute - #824
     1050302: { "codegen_method": "no" },  # SPECIFIC_PREFIX - IVI Attribute - #824
-    1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION - IVI Attribute - #824
-    1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION - IVI Attribute - #824
-    1050553: { "codegen_method": "no" },  # ENGINE_REVISION - IVI Attribute - #824
-    1050321: { "codegen_method": "no" },  # VISA_RM_SESSION - IVI Attribute - #824
     1050322: { "codegen_method": "no" },  # IO_SESSION - IVI Attribute - #824
-    1050051: { "codegen_method": "no" },  # DEFER_UPDATE - IVI Attribute - #824
-    1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES - IVI Attribute - #824
     1050101: { "codegen_method": "no" },  # PRIMARY_ERROR - IVI Attribute - #824
     1050102: { "codegen_method": "no" },  # SECONDARY_ERROR - IVI Attribute - #824
     1050103: { "codegen_method": "no" },  # ERROR_ELABORATION - IVI Attribute - #824

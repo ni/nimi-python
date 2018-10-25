@@ -4,15 +4,7 @@
 # We are not code genning attributes that have been marked as obsolete prior to the initial
 # Python API bindings release
 attributes_codegen_method = {
-    1150008: { "codegen_method": "no" },  # START_TRIGGER
-    1150009: { "codegen_method": "no" },  # START_TRIG_SLOPE
-    1150011: { "codegen_method": "no" },  # SAMPLE_TRIGGER_DELAY
-    1150012: { "codegen_method": "no" },  # OLD_TRIGGER_MODEL
-    1150004: { "codegen_method": "no" },  # CHAN_NAMES
     1150001: { "codegen_method": "no" },  # ID_QUERY_RESPONSE
-    1150005: { "codegen_method": "no" },  # AI_NUM_CHANNELS
-    1150006: { "codegen_method": "no" },  # FILTER_NOTCH
-    1150007: { "codegen_method": "no" },  # CONVER_PER_SAMPLE
     1150031: { "codegen_method": "no" },  # SAMPLE_DELAY_MODE
     1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute - #824
     1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute - #824
@@ -28,9 +20,6 @@ attributes_codegen_method = {
     1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION - IVI Attribute - #824
     1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION - IVI Attribute - #824
     1050553: { "codegen_method": "no" },  # ENGINE_REVISION - IVI Attribute - #824
-    1050321: { "codegen_method": "no" },  # VISA_RM_SESSION - IVI Attribute - #824
-    1050051: { "codegen_method": "no" },  # DEFER_UPDATE - IVI Attribute - #824
-    1050052: { "codegen_method": "no" },  # RETURN_DEFERRED_VALUES - IVI Attribute - #824
     1050004: { "codegen_method": "no" },  # CACHE - IVI Attribute - #824
     1150034: { "codegen_method": "no" },  # LATENCY - EOL hardware only - #875
     1150003: { "codegen_method": "no" },  # SHUNT_VALUE - EOL hardware only - #875
