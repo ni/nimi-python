@@ -1,7 +1,7 @@
 config = {
     'metadata_version': '0.1',
     'module_name': 'nise',
-    'module_version': '0.1.1.dev0',
+    'module_version': '0.2.0.dev0',
     'c_function_prefix': 'niSE_',
     'driver_name': 'NI Switch Executive',
     'driver_registry': 'Switch Executive',
