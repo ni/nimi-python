@@ -61,7 +61,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI Switch Executive"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nise'
-    info['module']['version'] = "0.2.0"
+    info['module']['version'] = "0.2.1.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
