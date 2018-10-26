@@ -25,7 +25,6 @@ functions_codegen_method = {
     'ResetInterchangeCheck':                      { 'codegen_method': 'no',       },  # Not applicable to Python API
     'ClearInterchangeWarnings':                   { 'codegen_method': 'no',       },  # Not applicable to Python API
     'GetNextCoercionRecord':                      { 'codegen_method': 'no',       },  # Not applicable to Python API
-    'error_query':                                { 'codegen_method': 'no',       },
     'ConfigureAutoZero':                          { 'codegen_method': 'no',       },
     'ConfigureCurrent.+':                         { 'codegen_method': 'no',       },
     'ConfigureOutput.+':                          { 'codegen_method': 'no',       },

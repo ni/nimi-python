@@ -14,9 +14,6 @@ functions_codegen_method = {
     'error_message':                    { 'codegen_method': 'private',  },
     'GetError':                         { 'codegen_method': 'private',  },
     'ClearError':                       { 'codegen_method': 'no',       },
-    '.+ExtCal':                         { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    'CalAdjust.+':                      { 'codegen_method': 'no',       },  # External Calibration is not supported by the Python API
-    '.+UserDefined.+':                  { 'codegen_method': 'no',       },
     'SetAttributeViSession':            { 'codegen_method': 'no',       },
     'GetAttributeViSession':            { 'codegen_method': 'no',       },
     'GetNextInterchangeWarning':        { 'codegen_method': 'no',       },  # Not applicable to Python API
@@ -121,7 +118,7 @@ functions_buffer_info = {
     'GetError':                                 { 'parameters': { 3: { 'size': {'mechanism':'ivi-dance', 'value':'bufferSize'}, }, }, },
     'self_test':                                { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'GetAttributeViString':                     { 'parameters': { 4: { 'size': {'mechanism':'ivi-dance', 'value':'bufSize'}, }, }, },
-    'GetCalUserDefinedInfo':                    { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
+    # 'GetCalUserDefinedInfo':                    { 'parameters': { 1: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From LabVIEW VI, even though niDMM_GetCalUserDefinedInfoMaxSize() exists.
     'error_message':                            { 'parameters': { 2: { 'size': {'mechanism':'fixed', 'value':256}, }, }, }, # From documentation
     'ConfigureEqualizationFilterCoefficients':  { 'parameters': { 3: { 'size': {'mechanism':'len', 'value':'numberOfCoefficients'}, }, }, },
     'GetEqualizationFilterCoefficients':        { 'parameters': { 3: { 'size': {'mechanism':'passed-in', 'value':'numberOfCoefficients'}, }, }, },

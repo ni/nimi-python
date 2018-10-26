@@ -5,14 +5,6 @@
 # Python API bindings release
 attributes_codegen_method = {
     1150001: { "codegen_method": "no" },  # SERIAL_NUMBER_I32
-    1050501: { "codegen_method": "no" },  # ENGINE_MAJOR_VERSION - IVI Attribute - #824
-    1050502: { "codegen_method": "no" },  # ENGINE_MINOR_VERSION - IVI Attribute - #824
-    1050553: { "codegen_method": "no" },  # ENGINE_REVISION - IVI Attribute - #824
-    1050101: { "codegen_method": "no" },  # PRIMARY_ERROR - IVI Attribute - #824
-    1050102: { "codegen_method": "no" },  # SECONDARY_ERROR - IVI Attribute - #824
-    1050103: { "codegen_method": "no" },  # ERROR_ELABORATION - IVI Attribute - #824
-    1050324: { "codegen_method": "no" },  # IO_SESSION_TYPE - IVI Attribute - #824
-    1050322: { "codegen_method": "no" },  # IO_SESSION - IVI Attribute - #824
     1050401: { "codegen_method": "no" },  # GROUP_CAPABILITIES - IVI Attribute - #824
     1050021: { "codegen_method": "no" },  # INTERCHANGE_CHECK - IVI Attribute - #824
     1050002: { "codegen_method": "no" },  # RANGE_CHECK - IVI Attribute - #824
