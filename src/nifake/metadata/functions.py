@@ -923,6 +923,43 @@ functions = {
         },
     },
 
+    'GetAStringWithSpecifiedMaximumSize': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'aString',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': 'An string with passed in size.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'bufferSize',
+                'type': 'ViInt32',
+                'documentation': {
+                    'description': 'Number of bytes allocated for aString',
+                },
+            },
+        ],
+        'documentation': {
+            'description': 'Returns multiple types.',
+        },
+    },
+
     'GetANumber': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
