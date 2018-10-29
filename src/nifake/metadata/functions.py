@@ -937,21 +937,21 @@ functions = {
                 },
             },
             {
-                'direction': 'out',
-                'enum': None,
-                'name': 'aString',
-                'type': 'ViChar[]',
-                'documentation': {
-                    'description': 'An string with passed in size.',
-                },
-            },
-            {
                 'direction': 'in',
                 'enum': None,
                 'name': 'bufferSize',
                 'type': 'ViInt32',
                 'documentation': {
                     'description': 'Number of bytes allocated for aString',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'aString',
+                'type': 'ViChar[]',
+                'documentation': {
+                    'description': 'An string with passed in size.',
                 },
             },
         ],
