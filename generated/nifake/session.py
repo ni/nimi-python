@@ -956,6 +956,27 @@ class Session(_SessionBase):
         return a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
+    def get_a_string_with_specified_maximum_size(self, buffer_size):
+        r'''get_a_string_with_specified_maximum_size
+
+        Returns multiple types.
+
+        Args:
+            buffer_size (int): Number of bytes allocated for aString
+
+
+        Returns:
+            a_string (str): An string with passed in size.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        buffer_size_ctype = _visatype.ViInt32(buffer_size)  # case S190
+        a_string_ctype = (_visatype.ViChar * buffer_size)()  # case C090
+        error_code = self._library.niFake_GetAStringWithSpecifiedMaximumSize(vi_ctype, buffer_size_ctype, a_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return a_string_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def get_an_ivi_dance_string(self):
         r'''get_an_ivi_dance_string
 

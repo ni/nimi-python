@@ -740,6 +740,18 @@ class TestSession(object):
             assert returned_string == expected_string
             self.patched_library.niFake_GetAStringUsingPythonCode.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt16Matcher(test_size), _matchers.ViCharBufferMatcher(test_size))
 
+    def test_get_a_string_of_specified_maximum_size(self):
+        test_size = 4
+        expected_string_size = test_size - 1
+        test_string = "A string that is larger than test_size."
+        expected_string = test_string[:expected_string_size]
+        self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.side_effect = self.side_effects_helper.niFake_GetAStringWithSpecifiedMaximumSize
+        self.side_effects_helper['GetAStringWithSpecifiedMaximumSize']['aString'] = expected_string
+        with nifake.Session('dev1') as session:
+            returned_string = session.get_a_string_with_specified_maximum_size(test_size)
+            assert returned_string == expected_string
+            self.patched_library.niFake_GetAStringWithSpecifiedMaximumSize.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(test_size), _matchers.ViCharBufferMatcher(test_size))
+
     def test_return_a_number_and_a_string(self):
         test_string = "this string"
         test_number = 13

@@ -29,6 +29,7 @@ class Library(object):
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
         self.niFake_GetAStringUsingPythonCode_cfunc = None
+        self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc = None
         self.niFake_GetAnIviDanceString_cfunc = None
         self.niFake_GetArrayForPythonCodeCustomType_cfunc = None
         self.niFake_GetArrayForPythonCodeDouble_cfunc = None
@@ -143,6 +144,14 @@ class Library(object):
                 self.niFake_GetAStringUsingPythonCode_cfunc.argtypes = [ViSession, ViInt16, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAStringUsingPythonCode_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAStringUsingPythonCode_cfunc(vi, a_number, a_string)
+
+    def niFake_GetAStringWithSpecifiedMaximumSize(self, vi, buffer_size, a_string):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc is None:
+                self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc = self._library.niFake_GetAStringWithSpecifiedMaximumSize
+                self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetAStringWithSpecifiedMaximumSize_cfunc(vi, buffer_size, a_string)
 
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         with self._func_lock:
