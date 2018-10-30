@@ -956,7 +956,7 @@ functions = {
             },
         ],
         'documentation': {
-            'description': 'Returns multiple types.',
+            'description': 'Function to test getting a string with the size passed in as a parameter.',
         },
     },
 
