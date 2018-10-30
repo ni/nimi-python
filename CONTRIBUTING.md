@@ -28,12 +28,11 @@ following installed:
     - Install at least one Python 3.x x64 - 3.4, 3.5 or 3.6 will all work
     - Optional - 32 bit versions
     - Ensure pip support is installed for all versions
-    - Install paths can either be in the appropriate Program Files for the bitness, or c:\pythonX.Y for 64 bit and c:\pythonX.Y-32 for 32 bit
+    - Install paths can either be in the appropriate Program Files for the bitness, or c:\pythonXY for 64 bit and c:\pythonXY-32 for 32 bit
 
 * [GNU Make](https://www.gnu.org/software/make/)
     - If you're on Windows 10 (using Windows Subsystem for Linux)
-        - Install and enable [Windows Subsystem for Linux]
-        (https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
+        - Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
         - Install make
 
                 sudo apt-get install make
@@ -60,6 +59,7 @@ following installed:
         - This can be any supported version of python 3
     - cd to GitHub repo location
     - <path to python 2>\python -m tox --scan <path 1>\python.exe <path 2>\python3.exe
+        - You must use Python 2 for this step
         - path 1 
             - Can not use spaces, instead you can use wildcards
             - Ex: c:\Program*\Python*\python.exe
@@ -74,6 +74,16 @@ following installed:
                 python3.6 c:\Program Files\Python36\python.exe
                 python3.6 c:\Program Files (x86)\Python36\python.exe
                 python3 c:\Program Files\Python36\python3.exe
+
+        - Ex: `"c:\Python27\python" -m tox --scan c:/Python*/python.exe c:/Python*/python3.exe`
+        - This should list out each version of python installed plus one more for python3
+
+                interpreters:
+                python2.7 c:\Python27\python.exe
+                python2.7 c:\Python27-32\python.exe
+                python3.6 c:\Python36\python.exe
+                python3.6 c:\Python36-32\python.exe
+                python3 c:\Python36\python3.exe
 
 In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Tests:
 
