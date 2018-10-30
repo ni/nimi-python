@@ -884,6 +884,50 @@ parameters_for_testing = [
         'numpy': False,
         'use_in_python_api': True,
     },
+    {  # 19
+        'ctypes_type': 'ViString',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'ctypes_variable_name': 'a_string_2_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'An fixed size string.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_string': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'a_string_2_ctype',
+        'name': 'aString2',
+        'numpy': False,
+        'python_name': 'a_string_2',
+        'python_name_with_default': 'a_string_2',
+        'python_name_with_doc_default': 'a_string_2',
+        'python_type': 'str',
+        'size': {'mechanism': 'fixed', 'value': 256},
+        'type': 'ViString',
+        'use_in_python_api': True,
+    },
+    {  # 20
+        'ctypes_type': 'ViString',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'ctypes_variable_name': 'a_string_3_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'An python-code size string.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_string': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'a_string_3_ctype',
+        'name': 'aStrin3g',
+        'numpy': False,
+        'python_name': 'a_string_3',
+        'python_name_with_default': 'a_string_3',
+        'python_name_with_doc_default': 'a_string_3',
+        'python_type': 'str',
+        'size': {'mechanism': 'python-code', 'value': 'string_size'},
+        'type': 'ViString',
+        'use_in_python_api': True,
+    },
 ]
 
 
@@ -940,6 +984,16 @@ def test_get_ctype_variable_declaration_snippet_case_c050():
 def test_get_ctype_variable_declaration_snippet_case_c060():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_ctype = (_visatype.ViChar * string_size_ctype.value)()  # case C060"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_c070():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[19], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_2_ctype = (_visatype.ViChar * 256)()  # case C070"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_c080():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[20], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_3_ctype = (_visatype.ViChar * string_size)()  # case C080"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s110():
