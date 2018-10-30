@@ -959,7 +959,7 @@ class Session(_SessionBase):
     def get_a_string_with_specified_maximum_size(self, buffer_size):
         r'''get_a_string_with_specified_maximum_size
 
-        Returns multiple types.
+        Method to test getting a string with the size passed in as a parameter.
 
         Args:
             buffer_size (int): Number of bytes allocated for aString
