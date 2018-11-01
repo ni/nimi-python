@@ -597,6 +597,9 @@ def add_all_metadata(functions, attributes, enums, config):
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w", "utf-8") as text_file:
         text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
 
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_config.py'), "w", "utf-8") as text_file:
+        text_file.write("enums =\n{0}".format(pp_persist.pformat(config)))
+
 
 # Unit Tests
 def _compare_values(actual, expected, k):
