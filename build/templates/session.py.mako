@@ -106,8 +106,7 @@ class _Lock(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self._session._use_locking:
-            self._session.unlock()
+        self._session.unlock()
 
 
 % endif
@@ -177,9 +176,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = library
         self._encoding = encoding
-% if config['use_locking']:
-        self._use_locking = True
-% endif
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -211,18 +207,6 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 % endif
         raise TypeError("'Session' object does not support indexing." + rep_cap_help_text)
 
-% if config['use_locking']:
-    def _set_use_locking(self, use_locking):
-        '''Allow runtime disabling of session locking
-
-        This must be called immediately after creating the Session object and before any
-        properties are accessed or methods are called
-
-        Warning: Do not change this setting during a function call.
-        '''
-        self._use_locking = use_locking
-
-% endif
     def _get_error_description(self, error_code):
         '''_get_error_description
 
