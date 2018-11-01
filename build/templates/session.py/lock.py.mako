@@ -43,7 +43,7 @@
     def _lock_session(self):
         '''_lock_session
 
-        Actuall call to driver
+        Actual call to driver
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.${c_function_prefix}LockSession(vi_ctype, None)
