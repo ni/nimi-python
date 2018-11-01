@@ -213,7 +213,13 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % if config['use_locking']:
     def _set_use_locking(self, use_locking):
-        '''Allow runtime disabling of session locking'''
+        '''Allow runtime disabling of session locking
+
+        This must be called immediately after creating the Session object and before any
+        properties are accessed or methods are called
+
+        Warning: Do not change this setting during a function call.
+        '''
         self._use_locking = use_locking
 
 % endif
