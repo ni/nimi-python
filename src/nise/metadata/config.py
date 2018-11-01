@@ -26,6 +26,7 @@ config = {
     'custom_types': [],
     'last_tested_version': '18.0.0',
     'repeated_capabilities': [],
+    'use_locking': False,
 }
 
 
