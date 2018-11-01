@@ -106,10 +106,12 @@ class _Lock(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock()
+        if self._session._use_locking:
+            self._session.unlock()
 
 
 % endif
+% if len(config['repeated_capabilities']) > 0:
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -137,6 +139,7 @@ class _NoChannel(object):
         self._session._repeated_capability = self._repeated_capability_cache
 
 
+% endif
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
@@ -208,6 +211,12 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 % endif
         raise TypeError("'Session' object does not support indexing." + rep_cap_help_text)
 
+% if config['use_locking']:
+    def _set_use_locking(self, use_locking):
+        '''Allow runtime disabling of session locking'''
+        self._use_locking = use_locking
+
+% endif
     def _get_error_description(self, error_code):
         '''_get_error_description
 
