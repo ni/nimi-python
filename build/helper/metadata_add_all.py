@@ -548,6 +548,17 @@ def add_all_enum_metadata(enums, config):
     return enums
 
 
+def add_all_config_metadata(config):
+    '''add_all_config_metadata
+
+    Ensure all defaults added to config
+    '''
+    if 'use_locking' not in config:
+        config['use_locking'] = True
+
+    return config
+
+
 def add_all_metadata(functions, attributes, enums, config):
     '''merge and add all additional metadata_dir
 
@@ -555,6 +566,8 @@ def add_all_metadata(functions, attributes, enums, config):
         functions, attributes, enums - addon data merged, additional metadata
         config - functions, attributes, enums added
     '''
+    config = add_all_config_metadata(config)
+
     functions = add_all_function_metadata(functions, config)
     config['functions'] = functions
 
