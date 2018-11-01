@@ -79,7 +79,8 @@ class _Lock(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock()
+        if self._session._use_locking:
+            self._session.unlock()
 
 
 class _RepeatedCapabilities(object):
@@ -167,6 +168,7 @@ class _SessionBase(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+        self._use_locking = True
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -189,7 +191,12 @@ class _SessionBase(object):
     def __getitem__(self, key):
         rep_caps = []
         rep_caps.append("channels")
-        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+        rep_cap_help_text = " You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps))
+        raise TypeError("'Session' object does not support indexing." + rep_cap_help_text)
+
+    def _set_use_locking(self, use_locking):
+        '''Allow runtime disabling of session locking'''
+        self._use_locking = use_locking
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -417,15 +424,16 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nifake.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
-        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
-        # that will handle the unlock for them
+        if self._use_locking:
+            self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+            # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+            # that will handle the unlock for them
         return _Lock(self)
 
     def _lock_session(self):
         '''_lock_session
 
-        Actuall call to driver
+        Actual call to driver
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_LockSession(vi_ctype, None)

@@ -77,34 +77,8 @@ class _Lock(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.unlock()
-
-
-class _RepeatedCapabilities(object):
-    def __init__(self, session, prefix):
-        self._session = session
-        self._prefix = prefix
-
-    def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
-
-        return _SessionBase(vi=self._session._vi, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
-
-
-# This is a very simple context manager we can use when we need to set/get attributes
-# or call functions from _SessionBase that require no channels. It is tied to the specific
-# implementation of _SessionBase and how repeated capabilities are handled.
-class _NoChannel(object):
-    def __init__(self, session):
-        self._session = session
-
-    def __enter__(self):
-        self._repeated_capability_cache = self._session._repeated_capability
-        self._session._repeated_capability = ''
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self._session._repeated_capability = self._repeated_capability_cache
+        if self._session._use_locking:
+            self._session.unlock()
 
 
 class _SessionBase(object):
@@ -542,6 +516,7 @@ class _SessionBase(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
+        self._use_locking = True
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -562,8 +537,12 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
-        rep_caps = []
-        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+        rep_cap_help_text = ''
+        raise TypeError("'Session' object does not support indexing." + rep_cap_help_text)
+
+    def _set_use_locking(self, use_locking):
+        '''Allow runtime disabling of session locking'''
+        self._use_locking = use_locking
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -809,15 +788,16 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nidmm.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
-        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
-        # that will handle the unlock for them
+        if self._use_locking:
+            self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+            # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+            # that will handle the unlock for them
         return _Lock(self)
 
     def _lock_session(self):
         '''_lock_session
 
-        Actuall call to driver
+        Actual call to driver
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDMM_LockSession(vi_ctype, None)

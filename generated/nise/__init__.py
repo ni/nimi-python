@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 
+
+__version__ = '0.2.1.dev0'
+
 from nise.enums import *          # noqa: F403,F401,H303
 from nise.errors import DriverWarning   # noqa: F401
 from nise.errors import Error     # noqa: F401
