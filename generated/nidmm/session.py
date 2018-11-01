@@ -77,8 +77,7 @@ class _Lock(object):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self._session._use_locking:
-            self._session.unlock()
+        self._session.unlock()
 
 
 class _SessionBase(object):
@@ -516,7 +515,6 @@ class _SessionBase(object):
         self._vi = vi
         self._library = library
         self._encoding = encoding
-        self._use_locking = True
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -539,16 +537,6 @@ class _SessionBase(object):
     def __getitem__(self, key):
         rep_cap_help_text = ''
         raise TypeError("'Session' object does not support indexing." + rep_cap_help_text)
-
-    def _set_use_locking(self, use_locking):
-        '''Allow runtime disabling of session locking
-
-        This must be called immediately after creating the Session object and before any
-        properties are accessed or methods are called
-
-        Warning: Do not change this setting during a function call.
-        '''
-        self._use_locking = use_locking
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -794,10 +782,9 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, nidmm.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        if self._use_locking:
-            self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
-            # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
-            # that will handle the unlock for them
+        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
         return _Lock(self)
 
     def _lock_session(self):
