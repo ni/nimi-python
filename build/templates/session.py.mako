@@ -197,15 +197,16 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
     def __getitem__(self, key):
 % if len(config['repeated_capabilities']) > 0:
+<%
         rep_caps = []
-% for rep_cap in config['repeated_capabilities']:
-        rep_caps.append("${rep_cap['python_name']}")
-% endfor
-        rep_cap_help_text = " You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps))
+        for rep_cap in config['repeated_capabilities']:
+            rep_caps.append(rep_cap['python_name'])
+        r = ', '.join(rep_caps)
+%>\
+        raise TypeError("'Session' object is not subscriptable. Did you mean to use a repeated capabilities container: ${r}")
 % else:
-        rep_cap_help_text = ''
+        raise TypeError("'Session' object is not subscriptable")
 % endif
-        raise TypeError("'Session' object does not support indexing." + rep_cap_help_text)
 
     def _get_error_description(self, error_code):
         '''_get_error_description
