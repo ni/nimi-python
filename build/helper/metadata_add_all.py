@@ -602,8 +602,19 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w", "utf-8") as text_file:
         text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
 
+    # We need to delete modules before we deepcopy, otherwise we get an error
+    # These were needed only for merging, which has already happened
+    del config['modules']
+
+    # We need to make a copy so we can delete functions, attributes and enums since
+    # they are already in individual files
+    config_copy = copy.deepcopy(config)
+    del config_copy['functions']
+    del config_copy['attributes']
+    del config_copy['enums']
+
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_config.py'), "w", "utf-8") as text_file:
-        text_file.write("enums =\n{0}".format(pp_persist.pformat(config)))
+        text_file.write("enums =\n{0}".format(pp_persist.pformat(config_copy)))
 
     return config
 
