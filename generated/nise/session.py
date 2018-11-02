@@ -78,8 +78,7 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
-        rep_cap_help_text = ''
-        raise TypeError("'Session' object does not support indexing." + rep_cap_help_text)
+        raise TypeError("'Session' object is not subscriptable")
 
     def _get_error_description(self, error_code):
         '''_get_error_description
