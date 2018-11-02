@@ -1248,7 +1248,8 @@ class TestSession(object):
             assert session.lock.__name__ == 'lock'
             assert session._error_message.__name__ == '_error_message'
             assert session.initiate.__name__ == 'initiate'
-            # Cannot use session.<property>.__name__ since that invokes the get attribute value
+            # Cannot use session.<property>.__name__ since that invokes the get attribute value and the returned value
+            # (string, int, float) don't have __name__ properties
 
 
 # not session tests per se

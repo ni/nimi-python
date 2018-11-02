@@ -3,6 +3,7 @@
 import array  # noqa: F401
 import ctypes
 import datetime
+# Used by @ivi_synchronized
 from functools import wraps
 
 import nidmm._attributes as _attributes
