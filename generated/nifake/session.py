@@ -190,7 +190,7 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
-        raise TypeError("'Session' object is not subscriptable. Did you mean to use a repeated capabilities container: channels")
+        raise TypeError("'Session' object is not subscriptable. Did you mean to use a repeated capabilities container? channels")
 
     def _get_error_description(self, error_code):
         '''_get_error_description
