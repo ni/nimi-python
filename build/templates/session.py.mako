@@ -23,7 +23,10 @@ ${template_parameters['encoding_tag']}
 import array  # noqa: F401
 import ctypes
 import datetime
+% if config['use_locking']:
+# Used by @ivi_synchronized
 from functools import wraps
+% endif
 
 % if attributes:
 import ${module_name}._attributes as _attributes
