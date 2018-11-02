@@ -23,6 +23,7 @@ ${template_parameters['encoding_tag']}
 import array  # noqa: F401
 import ctypes
 import datetime
+from functools import wraps
 
 % if attributes:
 import ${module_name}._attributes as _attributes
@@ -89,6 +90,7 @@ class ${session_context_manager}(object):
 % endif
 # From https://stackoverflow.com/questions/5929107/decorators-with-parameters
 def ivi_synchronized(f):
+    @wraps(f)
     def aux(*xs, **kws):
         session = xs[0]  # parameter 0 is 'self' which is the session object
         with session.lock():

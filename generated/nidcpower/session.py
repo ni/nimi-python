@@ -3,6 +3,7 @@
 import array  # noqa: F401
 import ctypes
 import datetime
+from functools import wraps
 
 import nidcpower._attributes as _attributes
 import nidcpower._converters as _converters
@@ -61,6 +62,7 @@ class _Acquisition(object):
 
 # From https://stackoverflow.com/questions/5929107/decorators-with-parameters
 def ivi_synchronized(f):
+    @wraps(f)
     def aux(*xs, **kws):
         session = xs[0]  # parameter 0 is 'self' which is the session object
         with session.lock():
