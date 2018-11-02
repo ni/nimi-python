@@ -1238,6 +1238,16 @@ class TestSession(object):
             except TypeError:
                 pass
 
+    def test_function_name(self):
+        with nifake.Session('dev1') as session:
+            # Pick a function that uses @ivi_synchronized
+            assert session.bool_array_output_function.__name__ == 'bool_array_output_function'
+            # Pick several functions that do not use @ivi_synchronized to make sure they don't break in the future
+            assert session.lock.__name__ == 'lock'
+            assert session._error_message.__name__ == '_error_message'
+            assert session.initiate.__name__ == 'initiate'
+            # Cannot use session.<property>.__name__ since that invokes the get attribute value
+
 
 # not session tests per se
 def test_diagnostic_information():
