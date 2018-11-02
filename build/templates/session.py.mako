@@ -208,7 +208,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
             rep_caps.append(rep_cap['python_name'])
         r = ', '.join(rep_caps)
 %>\
-        raise TypeError("'Session' object is not subscriptable. Did you mean to use a repeated capabilities container? ${r}")
+        raise TypeError("'Session' object is not subscriptable. Did you mean to use a repeated capabilities container: (${r})?")
 % else:
         raise TypeError("'Session' object is not subscriptable")
 % endif
