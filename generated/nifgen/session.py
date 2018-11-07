@@ -3,6 +3,7 @@
 import array  # noqa: F401
 import ctypes
 import datetime
+# Used by @ivi_synchronized
 from functools import wraps
 
 import nifgen._attributes as _attributes
@@ -954,11 +955,7 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
-        rep_caps = []
-        rep_caps.append("channels")
-        rep_caps.append("script_triggers")
-        rep_caps.append("markers")
-        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+        raise TypeError("'Session' object is not subscriptable. Did you mean to use a repeated capabilities container: (channels, script_triggers, markers)?")
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -2183,7 +2180,7 @@ class _SessionBase(object):
     def _lock_session(self):
         '''_lock_session
 
-        Actuall call to driver
+        Actual call to driver
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFgen_LockSession(vi_ctype, None)

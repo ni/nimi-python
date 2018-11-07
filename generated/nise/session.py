@@ -49,15 +49,19 @@ def get_ctypes_and_array(value, array_type):
 class _SessionBase(object):
     '''Base class for all NI Switch Executive sessions.'''
 
+    # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    def __init__(self, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
+        self._repeated_capability_list = repeated_capability_list
+        self._repeated_capability = ','.join(repeated_capability_list)
         self._vi = vi
         self._library = library
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
+        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("vi=" + pp.pformat(vi))
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
@@ -67,6 +71,14 @@ class _SessionBase(object):
 
     def __repr__(self):
         return '{0}.{1}({2})'.format('nise', self.__class__.__name__, self._param_list)
+
+    def __setattr__(self, key, value):
+        if self._is_frozen and key not in dir(self):
+            raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
+        object.__setattr__(self, key, value)
+
+    def __getitem__(self, key):
+        raise TypeError("'Session' object is not subscriptable")
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -163,7 +175,7 @@ class Session(_SessionBase):
     '''An NI Switch Executive session'''
 
     def __init__(self, virtual_device_name, options={}):
-        '''An NI Switch Executive session
+        r'''An NI Switch Executive session
 
         Opens a session to a specified NI Switch Executive virtual device. Opens
         communications with all of the IVI switches associated with the
@@ -216,7 +228,7 @@ class Session(_SessionBase):
             session (nise.Session): A session object representing the device.
 
         '''
-        super(Session, self).__init__(vi=None, library=None, encoding=None, freeze_it=False)
+        super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
         options = _converters.convert_init_with_options_dictionary(options, self._encoding)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
@@ -224,6 +236,8 @@ class Session(_SessionBase):
         # Call specified init function
         self._vi = 0  # This must be set before calling _open_session().
         self._vi = self._open_session(virtual_device_name, options)
+
+        # Instantiate any repeated capability objects
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -238,6 +252,9 @@ class Session(_SessionBase):
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
+
+    def initiate(self):
+        return None(self)
 
     def close(self):
         try:

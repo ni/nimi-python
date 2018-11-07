@@ -23,7 +23,10 @@ ${template_parameters['encoding_tag']}
 import array  # noqa: F401
 import ctypes
 import datetime
+% if config['use_locking']:
+# Used by @ivi_synchronized
 from functools import wraps
+% endif
 
 % if attributes:
 import ${module_name}._attributes as _attributes
@@ -88,6 +91,7 @@ class ${session_context_manager}(object):
 
 
 % endif
+% if config['use_locking']:
 # From https://stackoverflow.com/questions/5929107/decorators-with-parameters
 def ivi_synchronized(f):
     @wraps(f)
@@ -110,6 +114,8 @@ class _Lock(object):
         self._session.unlock()
 
 
+% endif
+% if len(config['repeated_capabilities']) > 0:
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -137,6 +143,7 @@ class _NoChannel(object):
         self._session._repeated_capability = self._repeated_capability_cache
 
 
+% endif
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
@@ -194,11 +201,17 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         object.__setattr__(self, key, value)
 
     def __getitem__(self, key):
+% if len(config['repeated_capabilities']) > 0:
+<%
         rep_caps = []
-% for rep_cap in config['repeated_capabilities']:
-        rep_caps.append("${rep_cap['python_name']}")
-% endfor
-        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
+        for rep_cap in config['repeated_capabilities']:
+            rep_caps.append(rep_cap['python_name'])
+        r = ', '.join(rep_caps)
+%>\
+        raise TypeError("'Session' object is not subscriptable. Did you mean to use a repeated capabilities container: (${r})?")
+% else:
+        raise TypeError("'Session' object is not subscriptable")
+% endif
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -226,7 +239,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-% if functions[func_name]['use_session_lock']:
+% if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
@@ -289,7 +302,7 @@ class Session(_SessionBase):
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-% if functions[func_name]['use_session_lock']:
+% if functions[func_name]['use_session_lock'] and config['use_locking']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\

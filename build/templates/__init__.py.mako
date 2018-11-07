@@ -4,6 +4,7 @@ ${template_parameters['encoding_tag']}
 enums = template_parameters['metadata'].enums
 config = template_parameters['metadata'].config
 module_name = config['module_name']
+registry_name = config['driver_registry'] if 'driver_registry' in config else config['driver_name']
 %>
 
 __version__ = '${config['module_version']}'
@@ -61,7 +62,7 @@ def get_diagnostic_information():
 
         os_name = 'Windows'
         try:
-            driver_version_key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\National Instruments\${config['driver_name']}\CurrentVersion")
+            driver_version_key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\National Instruments\${registry_name}\CurrentVersion")
             driver_version = winreg.QueryValueEx(driver_version_key, "Version")[0]
         except WindowsError:
             driver_version = 'Unknown'

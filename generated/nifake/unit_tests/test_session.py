@@ -40,8 +40,10 @@ class TestSession(object):
         self.get_ctypes_pointer_for_buffer_side_effect_items = []
 
         # Mock lock/unlock
+        self.LockSession_side_effect_cache = self.patched_library.niFake_LockSession.side_effect
         self.patched_library.niFake_LockSession.side_effect = self.side_effects_helper.niFake_LockSession
         self.side_effects_helper['LockSession']['callerHasLock'] = True
+        self.UnlockSession_side_effect_cache = self.patched_library.niFake_UnlockSession.side_effect
         self.patched_library.niFake_UnlockSession.side_effect = self.side_effects_helper.niFake_UnlockSession
         self.side_effects_helper['UnlockSession']['callerHasLock'] = False
 
@@ -1246,7 +1248,8 @@ class TestSession(object):
             assert session.lock.__name__ == 'lock'
             assert session._error_message.__name__ == '_error_message'
             assert session.initiate.__name__ == 'initiate'
-            # Cannot use session.<property>.__name__ since that invokes the get attribute value
+            # Cannot use session.<property>.__name__ since that invokes the get attribute value and the returned value
+            # (string, int, float) don't have __name__ properties
 
 
 # not session tests per se
