@@ -418,6 +418,52 @@ Fields in Measurement:
             'note': 'This function is not supported on all devices.',
         },
     },
+    'FancyCreateAdvancedSequence': {
+        'codegen_method': 'python-only',
+        'returns': 'ViStatus',
+        'python_name': 'create_advanced_sequence',
+        'method_templates': [
+            { 'session_filename': 'fancy_advanced_sequence', 'documentation_filename': 'default_method', 'method_python_name_suffix': '', },
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. **vi** is obtained from the niDCPower_InitExtCal or niDCPower_InitializeWithChannels function.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'SequenceName',
+                'type': 'ViString',
+                'documentation': {
+                    'description': 'Name of sequence.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'Sequence',
+                'type': 'ViInt32[]',  # Doesn't matter here
+                'documentation': {
+                    'description': 'Sequence.',
+                },
+            },
+            {
+                'direction': 'in',
+                'name': 'setAsActiveSequence',
+                'type': 'ViBoolean',
+                'default_value': True,
+                'documentation': { 'description': 'Specifies that this current sequence is active.', },
+            },
+        ],
+        'documentation':
+        {
+            'description': 'Test.',
+            'note': 'Test.',
+        },
+    },
 }
 
 # Converted parameters
