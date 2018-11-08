@@ -42,8 +42,8 @@ functions_codegen_method = {
     'FetchMultiple':                              { 'codegen_method': 'private', 'method_name_for_documentation': 'fetch_multiple',                  },  # 'FancyFetchMultiple' Public wrapper
     'MeasureMultiple':                            { 'codegen_method': 'private', 'method_name_for_documentation': 'measure_multiple',                },  # 'FancyMeasureMultiple' Public wrapper
     'self_test':                                  { 'codegen_method': 'private', 'method_name_for_documentation': 'self_test',                       },  # 'fancy_self_test' Public wrapper that raises
-    'CreateAdvancedSequence':                     { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
-    'CreateAdvancedSequenceStep':                 { 'codegen_method': 'private',  },  # Advanced sequence private until #504 has a fix
+    'CreateAdvancedSequence':                     { 'codegen_method': 'private',  },  # Advanced sequence private
+    'CreateAdvancedSequenceStep':                 { 'codegen_method': 'private',  },  # Advanced sequence private
     'ConfigureDigitalEdgeMeasureTrigger':         { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_measure_trigger_edge & session.digital_edge_measure_trigger_input_terminal #860
     'ConfigureDigitalEdgePulseTrigger':           { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_pulse_trigger_edge & session.digital_edge_pulse_trigger_input_terminal #860
     'ConfigureDigitalEdgeSequenceAdvanceTrigger': { 'codegen_method': 'no',       },  # Removed - use attributes session.digital_edge_sequence_advance_trigger_edge & session.digital_edge_sequence_advance_trigger_input_terminal #860
