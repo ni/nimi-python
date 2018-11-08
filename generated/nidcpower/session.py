@@ -3979,8 +3979,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _delete_advanced_sequence(self, sequence_name):
-        r'''_delete_advanced_sequence
+    def delete_advanced_sequence(self, sequence_name):
+        r'''delete_advanced_sequence
 
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
@@ -4150,6 +4150,599 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def create_advanced_sequence(self, sequence_name, sequence, set_as_active_sequence=True):
+        '''create_advanced_sequence
+
+        Test.
+
+        Note: Test.
+
+        Args:
+            sequence_name (str): Name of sequence.
+
+            sequence (list of int): Sequence.
+
+            set_as_active_sequence (bool): Specifies that this current sequence is active.
+
+        '''
+        attribute_lookup = {
+            "range_check": {
+                'id': 1050002,
+                'property': self.range_check,
+            },
+            "query_instrument_status": {
+                'id': 1050003,
+                'property': self.query_instrument_status,
+            },
+            "cache": {
+                'id': 1050004,
+                'property': self.cache,
+            },
+            "simulate": {
+                'id': 1050005,
+                'property': self.simulate,
+            },
+            "record_coercions": {
+                'id': 1050006,
+                'property': self.record_coercions,
+            },
+            "driver_setup": {
+                'id': 1050007,
+                'property': self.driver_setup,
+            },
+            "interchange_check": {
+                'id': 1050021,
+                'property': self.interchange_check,
+            },
+            "channel_count": {
+                'id': 1050203,
+                'property': self.channel_count,
+            },
+            "specific_driver_prefix": {
+                'id': 1050302,
+                'property': self.specific_driver_prefix,
+            },
+            "io_resource_descriptor": {
+                'id': 1050304,
+                'property': self.io_resource_descriptor,
+            },
+            "logical_name": {
+                'id': 1050305,
+                'property': self.logical_name,
+            },
+            "supported_instrument_models": {
+                'id': 1050327,
+                'property': self.supported_instrument_models,
+            },
+            "group_capabilities": {
+                'id': 1050401,
+                'property': self.group_capabilities,
+            },
+            "instrument_firmware_revision": {
+                'id': 1050510,
+                'property': self.instrument_firmware_revision,
+            },
+            "instrument_manufacturer": {
+                'id': 1050511,
+                'property': self.instrument_manufacturer,
+            },
+            "instrument_model": {
+                'id': 1050512,
+                'property': self.instrument_model,
+            },
+            "specific_driver_vendor": {
+                'id': 1050513,
+                'property': self.specific_driver_vendor,
+            },
+            "specific_driver_description": {
+                'id': 1050514,
+                'property': self.specific_driver_description,
+            },
+            "specific_driver_class_spec_major_version": {
+                'id': 1050515,
+                'property': self.specific_driver_class_spec_major_version,
+            },
+            "specific_driver_class_spec_minor_version": {
+                'id': 1050516,
+                'property': self.specific_driver_class_spec_minor_version,
+            },
+            "specific_driver_revision": {
+                'id': 1050551,
+                'property': self.specific_driver_revision,
+            },
+            "power_source": {
+                'id': 1150000,
+                'property': self.power_source,
+            },
+            "power_source_in_use": {
+                'id': 1150001,
+                'property': self.power_source_in_use,
+            },
+            "auxiliary_power_source_available": {
+                'id': 1150002,
+                'property': self.auxiliary_power_source_available,
+            },
+            "samples_to_average": {
+                'id': 1150003,
+                'property': self.samples_to_average,
+            },
+            "current_limit_range": {
+                'id': 1150004,
+                'property': self.current_limit_range,
+            },
+            "voltage_level_range": {
+                'id': 1150005,
+                'property': self.voltage_level_range,
+            },
+            "reset_average_before_measurement": {
+                'id': 1150006,
+                'property': self.reset_average_before_measurement,
+            },
+            "overranging_enabled": {
+                'id': 1150007,
+                'property': self.overranging_enabled,
+            },
+            "output_function": {
+                'id': 1150008,
+                'property': self.output_function,
+            },
+            "current_level": {
+                'id': 1150009,
+                'property': self.current_level,
+            },
+            "voltage_limit": {
+                'id': 1150010,
+                'property': self.voltage_limit,
+            },
+            "current_level_range": {
+                'id': 1150011,
+                'property': self.current_level_range,
+            },
+            "voltage_limit_range": {
+                'id': 1150012,
+                'property': self.voltage_limit_range,
+            },
+            "sense": {
+                'id': 1150013,
+                'property': self.sense,
+            },
+            "output_capacitance": {
+                'id': 1150014,
+                'property': self.output_capacitance,
+            },
+            "voltage_level_autorange": {
+                'id': 1150015,
+                'property': self.voltage_level_autorange,
+            },
+            "current_limit_autorange": {
+                'id': 1150016,
+                'property': self.current_limit_autorange,
+            },
+            "current_level_autorange": {
+                'id': 1150017,
+                'property': self.current_level_autorange,
+            },
+            "voltage_limit_autorange": {
+                'id': 1150018,
+                'property': self.voltage_limit_autorange,
+            },
+            "power_line_frequency": {
+                'id': 1150020,
+                'property': self.power_line_frequency,
+            },
+            "start_trigger_type": {
+                'id': 1150021,
+                'property': self.start_trigger_type,
+            },
+            "digital_edge_start_trigger_edge": {
+                'id': 1150022,
+                'property': self.digital_edge_start_trigger_edge,
+            },
+            "digital_edge_start_trigger_input_terminal": {
+                'id': 1150023,
+                'property': self.digital_edge_start_trigger_input_terminal,
+            },
+            "exported_start_trigger_output_terminal": {
+                'id': 1150024,
+                'property': self.exported_start_trigger_output_terminal,
+            },
+            "sequence_loop_count": {
+                'id': 1150025,
+                'property': self.sequence_loop_count,
+            },
+            "sequence_advance_trigger_type": {
+                'id': 1150026,
+                'property': self.sequence_advance_trigger_type,
+            },
+            "digital_edge_sequence_advance_trigger_edge": {
+                'id': 1150027,
+                'property': self.digital_edge_sequence_advance_trigger_edge,
+            },
+            "digital_edge_sequence_advance_trigger_input_terminal": {
+                'id': 1150028,
+                'property': self.digital_edge_sequence_advance_trigger_input_terminal,
+            },
+            "exported_sequence_advance_trigger_output_terminal": {
+                'id': 1150029,
+                'property': self.exported_sequence_advance_trigger_output_terminal,
+            },
+            "source_trigger_type": {
+                'id': 1150030,
+                'property': self.source_trigger_type,
+            },
+            "digital_edge_source_trigger_edge": {
+                'id': 1150031,
+                'property': self.digital_edge_source_trigger_edge,
+            },
+            "digital_edge_source_trigger_input_terminal": {
+                'id': 1150032,
+                'property': self.digital_edge_source_trigger_input_terminal,
+            },
+            "exported_source_trigger_output_terminal": {
+                'id': 1150033,
+                'property': self.exported_source_trigger_output_terminal,
+            },
+            "measure_trigger_type": {
+                'id': 1150034,
+                'property': self.measure_trigger_type,
+            },
+            "digital_edge_measure_trigger_edge": {
+                'id': 1150035,
+                'property': self.digital_edge_measure_trigger_edge,
+            },
+            "digital_edge_measure_trigger_input_terminal": {
+                'id': 1150036,
+                'property': self.digital_edge_measure_trigger_input_terminal,
+            },
+            "exported_measure_trigger_output_terminal": {
+                'id': 1150037,
+                'property': self.exported_measure_trigger_output_terminal,
+            },
+            "sequence_iteration_complete_event_pulse_polarity": {
+                'id': 1150038,
+                'property': self.sequence_iteration_complete_event_pulse_polarity,
+            },
+            "sequence_iteration_complete_event_pulse_width": {
+                'id': 1150039,
+                'property': self.sequence_iteration_complete_event_pulse_width,
+            },
+            "sequence_iteration_complete_event_output_terminal": {
+                'id': 1150040,
+                'property': self.sequence_iteration_complete_event_output_terminal,
+            },
+            "source_complete_event_pulse_polarity": {
+                'id': 1150041,
+                'property': self.source_complete_event_pulse_polarity,
+            },
+            "source_complete_event_pulse_width": {
+                'id': 1150042,
+                'property': self.source_complete_event_pulse_width,
+            },
+            "source_complete_event_output_terminal": {
+                'id': 1150043,
+                'property': self.source_complete_event_output_terminal,
+            },
+            "measure_complete_event_pulse_polarity": {
+                'id': 1150044,
+                'property': self.measure_complete_event_pulse_polarity,
+            },
+            "measure_complete_event_pulse_width": {
+                'id': 1150045,
+                'property': self.measure_complete_event_pulse_width,
+            },
+            "measure_complete_event_delay": {
+                'id': 1150046,
+                'property': self.measure_complete_event_delay,
+            },
+            "measure_complete_event_output_terminal": {
+                'id': 1150047,
+                'property': self.measure_complete_event_output_terminal,
+            },
+            "sequence_engine_done_event_pulse_polarity": {
+                'id': 1150048,
+                'property': self.sequence_engine_done_event_pulse_polarity,
+            },
+            "sequence_engine_done_event_pulse_width": {
+                'id': 1150049,
+                'property': self.sequence_engine_done_event_pulse_width,
+            },
+            "sequence_engine_done_event_output_terminal": {
+                'id': 1150050,
+                'property': self.sequence_engine_done_event_output_terminal,
+            },
+            "source_delay": {
+                'id': 1150051,
+                'property': self.source_delay,
+            },
+            "source_mode": {
+                'id': 1150054,
+                'property': self.source_mode,
+            },
+            "auto_zero": {
+                'id': 1150055,
+                'property': self.auto_zero,
+            },
+            "fetch_backlog": {
+                'id': 1150056,
+                'property': self.fetch_backlog,
+            },
+            "measure_when": {
+                'id': 1150057,
+                'property': self.measure_when,
+            },
+            "aperture_time": {
+                'id': 1150058,
+                'property': self.aperture_time,
+            },
+            "aperture_time_units": {
+                'id': 1150059,
+                'property': self.aperture_time_units,
+            },
+            "output_connected": {
+                'id': 1150060,
+                'property': self.output_connected,
+            },
+            "output_resistance": {
+                'id': 1150061,
+                'property': self.output_resistance,
+            },
+            "transient_response": {
+                'id': 1150062,
+                'property': self.transient_response,
+            },
+            "measure_record_length": {
+                'id': 1150063,
+                'property': self.measure_record_length,
+            },
+            "measure_record_length_is_finite": {
+                'id': 1150064,
+                'property': self.measure_record_length_is_finite,
+            },
+            "measure_record_delta_time": {
+                'id': 1150065,
+                'property': self.measure_record_delta_time,
+            },
+            "dc_noise_rejection": {
+                'id': 1150066,
+                'property': self.dc_noise_rejection,
+            },
+            "voltage_gain_bandwidth": {
+                'id': 1150067,
+                'property': self.voltage_gain_bandwidth,
+            },
+            "voltage_compensation_frequency": {
+                'id': 1150068,
+                'property': self.voltage_compensation_frequency,
+            },
+            "voltage_pole_zero_ratio": {
+                'id': 1150069,
+                'property': self.voltage_pole_zero_ratio,
+            },
+            "current_gain_bandwidth": {
+                'id': 1150070,
+                'property': self.current_gain_bandwidth,
+            },
+            "current_compensation_frequency": {
+                'id': 1150071,
+                'property': self.current_compensation_frequency,
+            },
+            "current_pole_zero_ratio": {
+                'id': 1150072,
+                'property': self.current_pole_zero_ratio,
+            },
+            "self_calibration_persistence": {
+                'id': 1150073,
+                'property': self.self_calibration_persistence,
+            },
+            "_active_advanced_sequence": {
+                'id': 1150074,
+                'property': self._active_advanced_sequence,
+            },
+            "_active_advanced_sequence_step": {
+                'id': 1150075,
+                'property': self._active_advanced_sequence_step,
+            },
+            "measure_buffer_size": {
+                'id': 1150077,
+                'property': self.measure_buffer_size,
+            },
+            "sequence_loop_count_is_finite": {
+                'id': 1150078,
+                'property': self.sequence_loop_count_is_finite,
+            },
+            "pulse_voltage_level": {
+                'id': 1150080,
+                'property': self.pulse_voltage_level,
+            },
+            "pulse_current_limit": {
+                'id': 1150081,
+                'property': self.pulse_current_limit,
+            },
+            "pulse_bias_voltage_level": {
+                'id': 1150082,
+                'property': self.pulse_bias_voltage_level,
+            },
+            "pulse_bias_current_limit": {
+                'id': 1150083,
+                'property': self.pulse_bias_current_limit,
+            },
+            "pulse_voltage_level_range": {
+                'id': 1150084,
+                'property': self.pulse_voltage_level_range,
+            },
+            "pulse_current_limit_range": {
+                'id': 1150085,
+                'property': self.pulse_current_limit_range,
+            },
+            "pulse_current_level": {
+                'id': 1150086,
+                'property': self.pulse_current_level,
+            },
+            "pulse_voltage_limit": {
+                'id': 1150087,
+                'property': self.pulse_voltage_limit,
+            },
+            "pulse_bias_current_level": {
+                'id': 1150088,
+                'property': self.pulse_bias_current_level,
+            },
+            "pulse_bias_voltage_limit": {
+                'id': 1150089,
+                'property': self.pulse_bias_voltage_limit,
+            },
+            "pulse_current_level_range": {
+                'id': 1150090,
+                'property': self.pulse_current_level_range,
+            },
+            "pulse_voltage_limit_range": {
+                'id': 1150091,
+                'property': self.pulse_voltage_limit_range,
+            },
+            "pulse_bias_delay": {
+                'id': 1150092,
+                'property': self.pulse_bias_delay,
+            },
+            "pulse_on_time": {
+                'id': 1150093,
+                'property': self.pulse_on_time,
+            },
+            "pulse_off_time": {
+                'id': 1150094,
+                'property': self.pulse_off_time,
+            },
+            "pulse_trigger_type": {
+                'id': 1150095,
+                'property': self.pulse_trigger_type,
+            },
+            "digital_edge_pulse_trigger_edge": {
+                'id': 1150096,
+                'property': self.digital_edge_pulse_trigger_edge,
+            },
+            "digital_edge_pulse_trigger_input_terminal": {
+                'id': 1150097,
+                'property': self.digital_edge_pulse_trigger_input_terminal,
+            },
+            "exported_pulse_trigger_output_terminal": {
+                'id': 1150098,
+                'property': self.exported_pulse_trigger_output_terminal,
+            },
+            "pulse_complete_event_output_terminal": {
+                'id': 1150099,
+                'property': self.pulse_complete_event_output_terminal,
+            },
+            "pulse_complete_event_pulse_polarity": {
+                'id': 1150100,
+                'property': self.pulse_complete_event_pulse_polarity,
+            },
+            "pulse_complete_event_pulse_width": {
+                'id': 1150101,
+                'property': self.pulse_complete_event_pulse_width,
+            },
+            "ready_for_pulse_trigger_event_output_terminal": {
+                'id': 1150102,
+                'property': self.ready_for_pulse_trigger_event_output_terminal,
+            },
+            "ready_for_pulse_trigger_event_pulse_polarity": {
+                'id': 1150103,
+                'property': self.ready_for_pulse_trigger_event_pulse_polarity,
+            },
+            "ready_for_pulse_trigger_event_pulse_width": {
+                'id': 1150104,
+                'property': self.ready_for_pulse_trigger_event_pulse_width,
+            },
+            "interlock_input_open": {
+                'id': 1150105,
+                'property': self.interlock_input_open,
+            },
+            "compliance_limit_symmetry": {
+                'id': 1150184,
+                'property': self.compliance_limit_symmetry,
+            },
+            "voltage_limit_high": {
+                'id': 1150185,
+                'property': self.voltage_limit_high,
+            },
+            "voltage_limit_low": {
+                'id': 1150186,
+                'property': self.voltage_limit_low,
+            },
+            "current_limit_high": {
+                'id': 1150187,
+                'property': self.current_limit_high,
+            },
+            "current_limit_low": {
+                'id': 1150188,
+                'property': self.current_limit_low,
+            },
+            "pulse_voltage_limit_high": {
+                'id': 1150189,
+                'property': self.pulse_voltage_limit_high,
+            },
+            "pulse_voltage_limit_low": {
+                'id': 1150190,
+                'property': self.pulse_voltage_limit_low,
+            },
+            "pulse_bias_voltage_limit_high": {
+                'id': 1150191,
+                'property': self.pulse_bias_voltage_limit_high,
+            },
+            "pulse_bias_voltage_limit_low": {
+                'id': 1150192,
+                'property': self.pulse_bias_voltage_limit_low,
+            },
+            "pulse_current_limit_high": {
+                'id': 1150193,
+                'property': self.pulse_current_limit_high,
+            },
+            "pulse_current_limit_low": {
+                'id': 1150194,
+                'property': self.pulse_current_limit_low,
+            },
+            "pulse_bias_current_limit_high": {
+                'id': 1150195,
+                'property': self.pulse_bias_current_limit_high,
+            },
+            "pulse_bias_current_limit_low": {
+                'id': 1150196,
+                'property': self.pulse_bias_current_limit_low,
+            },
+            "voltage_level": {
+                'id': 1250001,
+                'property': self.voltage_level,
+            },
+            "ovp_enabled": {
+                'id': 1250002,
+                'property': self.ovp_enabled,
+            },
+            "ovp_limit": {
+                'id': 1250003,
+                'property': self.ovp_limit,
+            },
+            "current_limit": {
+                'id': 1250005,
+                'property': self.current_limit,
+            },
+            "output_enabled": {
+                'id': 1250006,
+                'property': self.output_enabled,
+            },
+        }
+
+        # First we need to get all possible properties we might be setting
+        attribute_ids_used = set()
+        for s in sequence:
+            for key in s:
+                attribute_ids_used.add(attribute_lookup[key]['id'])
+
+        # Create the step with the list of attr ids we have
+        self._create_advanced_sequence(sequence_name, list(attribute_ids_used), set_as_active_sequence)
+
+        for s in sequence:
+            self._create_advanced_sequence_step()
+            for key in s:
+                attribute_lookup[key]['property'] = s[key]
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):

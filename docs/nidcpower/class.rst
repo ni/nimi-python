@@ -387,6 +387,10 @@ nidcpower.Session
     +--------------------------------------------------+
     | :py:func:`configure_aperture_time`               |
     +--------------------------------------------------+
+    | :py:func:`create_advanced_sequence`              |
+    +--------------------------------------------------+
+    | :py:func:`delete_advanced_sequence`              |
+    +--------------------------------------------------+
     | :py:func:`disable`                               |
     +--------------------------------------------------+
     | :py:func:`export_attribute_configuration_buffer` |
@@ -5945,6 +5949,93 @@ configure_aperture_time
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
+create_advanced_sequence
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: create_advanced_sequence(sequence_name, sequence, set_as_active_sequence=True)
+
+            Test.
+
+            
+
+            .. note:: Test.
+
+
+
+            :param sequence_name:
+
+
+                Name of sequence.
+
+                
+
+
+            :type sequence_name: str
+            :param sequence:
+
+
+                Sequence.
+
+                
+
+
+            :type sequence: list of int
+            :param set_as_active_sequence:
+
+
+                Specifies that this current sequence is active.
+
+                
+
+
+            :type set_as_active_sequence: bool
+
+delete_advanced_sequence
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: delete_advanced_sequence(sequence_name)
+
+            Deletes a previously created advanced sequence and all the advanced
+            sequence steps in the advanced sequence.
+
+            **Support for this Method**
+
+            You must set the source mode to Sequence to use this method.
+
+            Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+            methods is unsupported.
+
+            **Related Topics**:
+
+            `Advanced Sequence
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            
+
+            .. note:: This method is not supported on all devices. Refer to `Supported
+                Methods by
+                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+                for more information about supported devices.
+
+
+
+            :param sequence_name:
+
+
+                specifies the name of the sequence to delete.
+
+                
+
+
+            :type sequence_name: str
+
 disable
 ~~~~~~~
 
@@ -7464,6 +7555,10 @@ Methods
 | :py:func:`nidcpower.Session.commit`                                |
 +--------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.configure_aperture_time`               |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.create_advanced_sequence`              |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.delete_advanced_sequence`              |
 +--------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.disable`                               |
 +--------------------------------------------------------------------+
