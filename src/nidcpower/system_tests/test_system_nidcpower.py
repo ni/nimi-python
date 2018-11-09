@@ -269,11 +269,12 @@ def test_import_export_file(single_channel_session):
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):
-    ids = [1250001]  # work around #507
+    my_advanced_sequence = [
+        {"output_function": nidcpower.OutputFunction.DC_VOLTAGE, "voltage_level": 5.0},
+        {"output_function": nidcpower.OutputFunction.DC_CURRENT, "current_level": 0.1}
+    ]
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
-    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
-    single_channel_session._create_advanced_sequence_step(set_as_active_step=True)
-    single_channel_session.voltage_level = 1
+    single_channel_session.create_advanced_sequence(sequence_name='my_sequence', sequence=my_advanced_sequence, set_as_active_sequence=True)
     single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
 
 
