@@ -274,7 +274,7 @@ def test_create_and_delete_advanced_sequence_step(single_channel_session):
     single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
     single_channel_session._create_advanced_sequence_step(set_as_active_step=True)
     single_channel_session.voltage_level = 1
-    single_channel_session._delete_advanced_sequence(sequence_name='my_sequence')
+    single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
 
 
 def test_send_software_edge_trigger_error(session):
