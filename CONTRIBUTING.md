@@ -23,12 +23,13 @@ To contribute to this project, it is recommended that you follow these steps:
 In order to build **[nimi-python](https://github.com/ni/nimi-python)**, you must have the
 following installed:
 
-* [Python](https://www.python.org/downloads/) - Windows (Not Windows Subsystem for Linux)
-    - Install Python 2.7 x64
-    - Install at least one Python 3.x x64 - 3.4, 3.5 or 3.6 will all work
-    - Optional - 32 bit versions
-    - Ensure pip support is installed for all versions
-    - Install paths can either be in the appropriate Program Files for the bitness, or c:\pythonXY for 64 bit and c:\pythonXY-32 for 32 bit
+* [Python](https://www.python.org/downloads/)
+    - If you're on Windows (Not Windows Subsystem for Linux)
+        - Install Python 2.7 x64
+        - Install at least one Python 3.x x64 - 3.4, 3.5 or 3.6 will all work
+        - Optional - 32 bit versions
+        - Ensure pip support is installed for all versions
+        - Install paths can either be in the appropriate Program Files for the bitness, or c:\pythonXY for 64 bit and c:\pythonXY-32 for 32 bit
 
 * [GNU Make](https://www.gnu.org/software/make/)
     - If you're on Windows 10 (using Windows Subsystem for Linux)
