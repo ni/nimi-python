@@ -257,8 +257,8 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
     Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
 
-    assert parameter['is_buffer'] is False
-    assert parameter['numpy'] is False
+    assert parameter['is_buffer'] is False, 'Parameter {}'.format(parameter)
+    assert parameter['numpy'] is False, 'Parameter {}'.format(parameter)
     corresponding_buffer_parameters = _get_buffer_parameters_for_size_parameter(parameter, parameters)
 
     definitions = []

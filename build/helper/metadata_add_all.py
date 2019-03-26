@@ -441,7 +441,7 @@ def _add_enum_codegen_method(enums, config):
         if a_codegen_method != 'no':
             e = config['attributes'][a]['enum']
             if e is not None and e not in enums:
-                print('Missing enum {0} referenced by attribute {1}'.format(e, a['name']))
+                print('Missing enum {0} referenced by attribute {1}'.format(e, a))
             elif e is not None:
                 if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
                     enums[e]['codegen_method'] = a_codegen_method
