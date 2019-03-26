@@ -865,11 +865,11 @@ functions_expected = {
 attributes_input = {
     1000000: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': False,
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
-        'resettable': 'No',
+        'resettable': False,
         'type': 'ViBoolean',
         'documentation': {
             'description': 'An attribute of type bool with read/write access.',
@@ -881,14 +881,14 @@ attributes_input = {
 attributes_expected = {
     1000000: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': False,
         'codegen_method': 'public',
         'documentation': {'description': 'An attribute of type bool with read/write access.'},
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
         'python_name': 'read_write_bool',
-        'resettable': 'No',
+        'resettable': False,
         'type': 'ViBoolean',
         'python_type': 'bool',
         'type_in_documentation': 'bool',
