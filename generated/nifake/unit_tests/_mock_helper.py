@@ -54,9 +54,9 @@ class SideEffectsHelper(object):
         self._defaults['GetArraySizeForPythonCode'] = {}
         self._defaults['GetArraySizeForPythonCode']['return'] = 0
         self._defaults['GetArraySizeForPythonCode']['sizeOut'] = None
-        self._defaults['GetArrayUsingIVIDance'] = {}
-        self._defaults['GetArrayUsingIVIDance']['return'] = 0
-        self._defaults['GetArrayUsingIVIDance']['arrayOut'] = None
+        self._defaults['GetArrayUsingIviDance'] = {}
+        self._defaults['GetArrayUsingIviDance']['return'] = 0
+        self._defaults['GetArrayUsingIviDance']['arrayOut'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['attributeValue'] = None
@@ -74,14 +74,14 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString']['attributeValue'] = None
         self._defaults['GetCalDateAndTime'] = {}
         self._defaults['GetCalDateAndTime']['return'] = 0
-        self._defaults['GetCalDateAndTime']['Month'] = None
-        self._defaults['GetCalDateAndTime']['Day'] = None
-        self._defaults['GetCalDateAndTime']['Year'] = None
-        self._defaults['GetCalDateAndTime']['Hour'] = None
-        self._defaults['GetCalDateAndTime']['Minute'] = None
+        self._defaults['GetCalDateAndTime']['month'] = None
+        self._defaults['GetCalDateAndTime']['day'] = None
+        self._defaults['GetCalDateAndTime']['year'] = None
+        self._defaults['GetCalDateAndTime']['hour'] = None
+        self._defaults['GetCalDateAndTime']['minute'] = None
         self._defaults['GetCalInterval'] = {}
         self._defaults['GetCalInterval']['return'] = 0
-        self._defaults['GetCalInterval']['Months'] = None
+        self._defaults['GetCalInterval']['months'] = None
         self._defaults['GetCustomType'] = {}
         self._defaults['GetCustomType']['return'] = 0
         self._defaults['GetCustomType']['cs'] = None
@@ -339,20 +339,20 @@ class SideEffectsHelper(object):
             size_out.contents.value = self._defaults['GetArraySizeForPythonCode']['sizeOut']
         return self._defaults['GetArraySizeForPythonCode']['return']
 
-    def niFake_GetArrayUsingIVIDance(self, vi, array_size, array_out):  # noqa: N802
-        if self._defaults['GetArrayUsingIVIDance']['return'] != 0:
-            return self._defaults['GetArrayUsingIVIDance']['return']
-        if self._defaults['GetArrayUsingIVIDance']['arrayOut'] is None:
-            raise MockFunctionCallError("niFake_GetArrayUsingIVIDance", param='arrayOut')
+    def niFake_GetArrayUsingIviDance(self, vi, array_size, array_out):  # noqa: N802
+        if self._defaults['GetArrayUsingIviDance']['return'] != 0:
+            return self._defaults['GetArrayUsingIviDance']['return']
+        if self._defaults['GetArrayUsingIviDance']['arrayOut'] is None:
+            raise MockFunctionCallError("niFake_GetArrayUsingIviDance", param='arrayOut')
         if array_size.value == 0:
-            return len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])
+            return len(self._defaults['GetArrayUsingIviDance']['arrayOut'])
         try:
             array_out_ref = array_out.contents
         except AttributeError:
             array_out_ref = array_out
-        for i in range(len(self._defaults['GetArrayUsingIVIDance']['arrayOut'])):
-            array_out_ref[i] = self._defaults['GetArrayUsingIVIDance']['arrayOut'][i]
-        return self._defaults['GetArrayUsingIVIDance']['return']
+        for i in range(len(self._defaults['GetArrayUsingIviDance']['arrayOut'])):
+            array_out_ref[i] = self._defaults['GetArrayUsingIviDance']['arrayOut'][i]
+        return self._defaults['GetArrayUsingIviDance']['return']
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
@@ -408,40 +408,40 @@ class SideEffectsHelper(object):
         if self._defaults['GetCalDateAndTime']['return'] != 0:
             return self._defaults['GetCalDateAndTime']['return']
         # month
-        if self._defaults['GetCalDateAndTime']['Month'] is None:
-            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Month')
+        if self._defaults['GetCalDateAndTime']['month'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='month')
         if month is not None:
-            month.contents.value = self._defaults['GetCalDateAndTime']['Month']
+            month.contents.value = self._defaults['GetCalDateAndTime']['month']
         # day
-        if self._defaults['GetCalDateAndTime']['Day'] is None:
-            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Day')
+        if self._defaults['GetCalDateAndTime']['day'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='day')
         if day is not None:
-            day.contents.value = self._defaults['GetCalDateAndTime']['Day']
+            day.contents.value = self._defaults['GetCalDateAndTime']['day']
         # year
-        if self._defaults['GetCalDateAndTime']['Year'] is None:
-            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Year')
+        if self._defaults['GetCalDateAndTime']['year'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='year')
         if year is not None:
-            year.contents.value = self._defaults['GetCalDateAndTime']['Year']
+            year.contents.value = self._defaults['GetCalDateAndTime']['year']
         # hour
-        if self._defaults['GetCalDateAndTime']['Hour'] is None:
-            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Hour')
+        if self._defaults['GetCalDateAndTime']['hour'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='hour')
         if hour is not None:
-            hour.contents.value = self._defaults['GetCalDateAndTime']['Hour']
+            hour.contents.value = self._defaults['GetCalDateAndTime']['hour']
         # minute
-        if self._defaults['GetCalDateAndTime']['Minute'] is None:
-            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='Minute')
+        if self._defaults['GetCalDateAndTime']['minute'] is None:
+            raise MockFunctionCallError("niFake_GetCalDateAndTime", param='minute')
         if minute is not None:
-            minute.contents.value = self._defaults['GetCalDateAndTime']['Minute']
+            minute.contents.value = self._defaults['GetCalDateAndTime']['minute']
         return self._defaults['GetCalDateAndTime']['return']
 
     def niFake_GetCalInterval(self, vi, months):  # noqa: N802
         if self._defaults['GetCalInterval']['return'] != 0:
             return self._defaults['GetCalInterval']['return']
         # months
-        if self._defaults['GetCalInterval']['Months'] is None:
-            raise MockFunctionCallError("niFake_GetCalInterval", param='Months')
+        if self._defaults['GetCalInterval']['months'] is None:
+            raise MockFunctionCallError("niFake_GetCalInterval", param='months')
         if months is not None:
-            months.contents.value = self._defaults['GetCalInterval']['Months']
+            months.contents.value = self._defaults['GetCalInterval']['months']
         return self._defaults['GetCalInterval']['return']
 
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
@@ -794,8 +794,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetArrayForPythonCodeDouble.return_value = 0
         mock_library.niFake_GetArraySizeForPythonCode.side_effect = MockFunctionCallError("niFake_GetArraySizeForPythonCode")
         mock_library.niFake_GetArraySizeForPythonCode.return_value = 0
-        mock_library.niFake_GetArrayUsingIVIDance.side_effect = MockFunctionCallError("niFake_GetArrayUsingIVIDance")
-        mock_library.niFake_GetArrayUsingIVIDance.return_value = 0
+        mock_library.niFake_GetArrayUsingIviDance.side_effect = MockFunctionCallError("niFake_GetArrayUsingIviDance")
+        mock_library.niFake_GetArrayUsingIviDance.return_value = 0
         mock_library.niFake_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_GetAttributeViBoolean")
         mock_library.niFake_GetAttributeViBoolean.return_value = 0
         mock_library.niFake_GetAttributeViInt32.side_effect = MockFunctionCallError("niFake_GetAttributeViInt32")

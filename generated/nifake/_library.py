@@ -33,7 +33,7 @@ class Library(object):
         self.niFake_GetArrayForPythonCodeCustomType_cfunc = None
         self.niFake_GetArrayForPythonCodeDouble_cfunc = None
         self.niFake_GetArraySizeForPythonCode_cfunc = None
-        self.niFake_GetArrayUsingIVIDance_cfunc = None
+        self.niFake_GetArrayUsingIviDance_cfunc = None
         self.niFake_GetAttributeViBoolean_cfunc = None
         self.niFake_GetAttributeViInt32_cfunc = None
         self.niFake_GetAttributeViInt64_cfunc = None
@@ -176,13 +176,13 @@ class Library(object):
                 self.niFake_GetArraySizeForPythonCode_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetArraySizeForPythonCode_cfunc(vi, size_out)
 
-    def niFake_GetArrayUsingIVIDance(self, vi, array_size, array_out):  # noqa: N802
+    def niFake_GetArrayUsingIviDance(self, vi, array_size, array_out):  # noqa: N802
         with self._func_lock:
-            if self.niFake_GetArrayUsingIVIDance_cfunc is None:
-                self.niFake_GetArrayUsingIVIDance_cfunc = self._library.niFake_GetArrayUsingIVIDance
-                self.niFake_GetArrayUsingIVIDance_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niFake_GetArrayUsingIVIDance_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_GetArrayUsingIVIDance_cfunc(vi, array_size, array_out)
+            if self.niFake_GetArrayUsingIviDance_cfunc is None:
+                self.niFake_GetArrayUsingIviDance_cfunc = self._library.niFake_GetArrayUsingIviDance
+                self.niFake_GetArrayUsingIviDance_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_GetArrayUsingIviDance_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetArrayUsingIviDance_cfunc(vi, array_size, array_out)
 
     def niFake_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:

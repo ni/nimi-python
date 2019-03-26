@@ -784,8 +784,8 @@ class TestSession(object):
                 assert e.description == test_error_desc
 
     def test_get_array_using_ivi_dance(self):
-        self.patched_library.niFake_GetArrayUsingIVIDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIVIDance
-        self.side_effects_helper['GetArrayUsingIVIDance']['arrayOut'] = [1.1, 2.2]
+        self.patched_library.niFake_GetArrayUsingIviDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIviDance
+        self.side_effects_helper['GetArrayUsingIviDance']['arrayOut'] = [1.1, 2.2]
         with nifake.Session('dev1') as session:
             result_array = session.get_array_using_ivi_dance()
             assert result_array == [1.1, 2.2]
@@ -1201,11 +1201,11 @@ class TestSession(object):
         hour = 10
         minute = 15
         self.side_effects_helper['GetCalDateAndTime']['return'] = 0
-        self.side_effects_helper['GetCalDateAndTime']['Month'] = month
-        self.side_effects_helper['GetCalDateAndTime']['Day'] = day
-        self.side_effects_helper['GetCalDateAndTime']['Year'] = year
-        self.side_effects_helper['GetCalDateAndTime']['Hour'] = hour
-        self.side_effects_helper['GetCalDateAndTime']['Minute'] = minute
+        self.side_effects_helper['GetCalDateAndTime']['month'] = month
+        self.side_effects_helper['GetCalDateAndTime']['day'] = day
+        self.side_effects_helper['GetCalDateAndTime']['year'] = year
+        self.side_effects_helper['GetCalDateAndTime']['hour'] = hour
+        self.side_effects_helper['GetCalDateAndTime']['minute'] = minute
         with nifake.Session('dev1') as session:
             last_cal = session.get_cal_date_and_time(0)
             assert isinstance(last_cal, datetime.datetime)
@@ -1213,7 +1213,7 @@ class TestSession(object):
 
     def test_get_cal_interval(self):
         self.patched_library.niFake_GetCalInterval = self.side_effects_helper.niFake_GetCalInterval
-        self.side_effects_helper['GetCalInterval']['Months'] = 24
+        self.side_effects_helper['GetCalInterval']['months'] = 24
         with nifake.Session('dev1') as session:
             last_cal = session.get_cal_interval()
             assert isinstance(last_cal, datetime.timedelta)

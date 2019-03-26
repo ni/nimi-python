@@ -13,11 +13,11 @@ class Color(Enum):
     r'''
     Like the sky.
     '''
-    YELLOW = 2
+    YELLOW = 5
     r'''
     Like a banana.
     '''
-    BLACK = 2
+    BLACK = 42
     r'''
     Like this developer's conscience.
     '''
