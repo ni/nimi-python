@@ -553,6 +553,8 @@ def add_all_config_metadata(config):
 
     Ensure all defaults added to config
     '''
+    config = merge_helper(config, 'config', config, use_re=False)
+
     if 'use_locking' not in config:
         config['use_locking'] = True
 
