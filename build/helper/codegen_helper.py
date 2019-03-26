@@ -8,7 +8,7 @@ import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=200)
 
-_parameterUsageOptionsSnippet = {}
+_parameterUsageOptionsSnippet = {}  # noqa: N816
 
 _parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_self': False,
@@ -77,7 +77,7 @@ def get_params_snippet(function, parameter_usage_options):
 
     # Render based on options
     for p in parameters_to_use:
-            snippets.append(p[options_to_use['name_to_use']])
+        snippets.append(p[options_to_use['name_to_use']])
     return ', '.join(snippets)
 
 

@@ -5,7 +5,7 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 # Filters
 
-_parameterUsageOptionsFiltering = {}
+_parameterUsageOptionsFiltering = {}  # noqa: N816
 
 _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_session_handle': True,

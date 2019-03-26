@@ -393,7 +393,7 @@ def _add_default_attribute_class(a, attributes):
 
 def _add_repeated_capability_type(a, attributes):
     '''Add 'repeated_capability_type' if not already there.'''
-    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based'] == 'True':
+    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based']:
         attributes[a]['repeated_capability_type'] = 'channels'
 
 
