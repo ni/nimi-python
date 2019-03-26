@@ -7,10 +7,6 @@ attributes_codegen_method = {
 }
 
 attributes_converters = {
-    1000007: { 'attribute_class': 'AttributeViReal64TimeDeltaSeconds', 
-               'type_in_documentation': 'float in seconds or datetime.timedelta', },
-    1000008: { 'attribute_class': 'AttributeViInt32TimeDeltaMilliseconds', 
-               'type_in_documentation': 'float in seconds or datetime.timedelta', },
 }
 
 

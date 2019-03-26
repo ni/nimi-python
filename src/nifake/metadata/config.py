@@ -1,34 +1,51 @@
+# -*- coding: utf-8 -*-
+# This file is generated
 config = {
-    'metadata_version': '1.0',
-    'module_name': 'nifake',
-    'module_version': '1.1.1.dev0',
     'c_function_prefix': 'niFake_',
-    'driver_name': 'NI-FAKE',
-    'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
-    'session_handle_parameter_name': 'vi',
-    'library_info':
-    {
-        'Windows': {
-            '32bit': {'name': 'nifake_32.dll', 'type': 'windll'},
-            '64bit': {'name': 'nifake_64.dll', 'type': 'cdll'},
-        },
-        'Linux': {
-            '64bit': {'name': 'libnifake.so', 'type': 'cdll'},
-        },
-    },
+    'close_function': 'Close',
     'context_manager_name': {
-        'task': 'acquisition',
-        'initiate_function': 'Initiate',
         'abort_function': 'Abort',
+        'initiate_function': 'Initiate',
+        'task': 'acquisition'
     },
-    'init_function': 'InitWithOptions',
-    'close_function': 'close',
     'custom_types': [
-        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+        {
+            'ctypes_type': 'custom_struct',
+            'file_name': 'custom_struct',
+            'python_name': 'CustomStruct'
+        }
     ],
-    'enum_whitelist_suffix': ['_POINT_FIVE'],
+    'driver_name': 'NI-FAKE',
+    'enum_whitelist_suffix': [
+        '_POINT_FIVE'
+    ],
+    'init_function': 'InitWithOptions',
+    'library_info': {
+        'Linux': {
+            '64bit': {
+                'name': 'libnifake.so',
+                'type': 'cdll'
+            }
+        },
+        'Windows': {
+            '32bit': {
+                'name': 'nifake_32.dll',
+                'type': 'windll'
+            },
+            '64bit': {
+                'name': 'nifake_64.dll',
+                'type': 'cdll'
+            }
+        }
+    },
+    'metadata_version': '2.0',
+    'module_name': 'nifake',
     'repeated_capabilities': [
-        {'python_name': 'channels', 'prefix': '', },
+        {
+            'prefix': '',
+            'python_name': 'channels'
+        }
     ],
+    'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
+    'session_handle_parameter_name': 'vi'
 }
-
