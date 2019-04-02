@@ -10,27 +10,27 @@ import time
 numberOfPoints = 256
 
 def calculate_sinewave():
-    time = np.linspace(start=0, stop=10, num=numberOfPoints)    # np.arange([start,]stop, [step,]dtype=None)
+    time = np.linspace(start=0, stop=10, num=numberOfPoints)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
     amplitude = np.sin(time)
     sinewave = amplitude.tolist()                               # List of Float
     return sinewave
 
 
 def calculate_rampup():
-    ramp = np.linspace(start=0, stop=0.5, num=numberOfPoints)   # numpy.arange([start,]stop, [step,]dtype=None)
+    ramp = np.linspace(start=0, stop=0.5, num=numberOfPoints)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
     ramp_up = ramp.tolist()                                     # List of Float
     return ramp_up
 
 
 def calculate_rampdown():
-    ramp = np.linspace(start=0, stop=0.5, num=numberOfPoints)   # numpy.arange([start,]stop, [step,]dtype=None)
+    ramp = np.linspace(start=0, stop=0.5, num=numberOfPoints)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
     ramp_down = ramp.tolist()                                   # List of Float
     ramp_down.reverse()                                         # Reverse list to get a ramp down
     return ramp_down
 
 
 def calculate_square():
-    time = np.linspace(start=0, stop=10, num=numberOfPoints)    # np.arange([start,]stop, [step,]dtype=None)
+    time = np.linspace(start=0, stop=10, num=numberOfPoints)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
     square_build = signal.square(t=time, duty=0.5)              # signal.square(t, duty=0.5)
     square = square_build.tolist()                              # List of Float
     return square
