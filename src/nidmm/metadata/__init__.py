@@ -5,6 +5,7 @@ from metadata.enums import enums
 import metadata.functions_addon
 import metadata.attributes_addon
 import metadata.enums_addon
+import metadata.config_addon
 
 import build.helper as helper
 import sys
