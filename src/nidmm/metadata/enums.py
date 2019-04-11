@@ -2,7 +2,6 @@
 # This file is generated from API metadata for NI-DMM version 19.1.0d11
 enums = {
     'ADCCalibration': {
-        'python_name': 'ADCCalibration',
         'values': [
             {
                 'documentation': {
@@ -150,7 +149,6 @@ enums = {
         ]
     },
     'DCNoiseRejection': {
-        'python_name': 'DCNoiseRejection',
         'values': [
             {
                 'documentation': {
@@ -294,7 +292,6 @@ enums = {
         ]
     },
     'LCCalculationModel': {
-        'python_name': 'LCCalculationModel',
         'values': [
             {
                 'documentation': {
@@ -437,7 +434,6 @@ enums = {
         ]
     },
     'RTDType': {
-        'python_name': 'RTDType',
         'values': [
             {
                 'documentation': {

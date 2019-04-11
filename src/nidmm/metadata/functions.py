@@ -3268,6 +3268,7 @@ functions = {
             'description': 'Returns the date and time of the last calibration performed.',
             'note': 'The NI 4050 and NI 4060 are not supported.'
         },
+        'method_name_for_documentation': 'get_cal_date_and_time',
         'parameters': [
             {
                 'direction': 'in',
@@ -4056,6 +4057,7 @@ functions = {
         'documentation': {
             'description': '\nThis function completes the following tasks:\n\n-  Creates a new IVI instrument driver session and, optionally, sets the\n   initial state of the following session attributes:\n   NIDMM_ATTR_RANGE_CHECK, NIDMM_ATTR_QUERY_INSTR_STATUS,\n   NIDMM_ATTR_CACHE, NIDMM_ATTR_SIMULATE,\n   NIDMM_ATTR_RECORD_COERCIONS.\n-  Opens a session to the device you specify for the **Resource_Name**\n   parameter. If the **ID_Query** parameter is set to VI_TRUE, this\n   function queries the instrument ID and checks that it is valid for\n   this instrument driver.\n-  If the **Reset_Device** parameter is set to VI_TRUE, this function\n   resets the instrument to a known state. Sends initialization commands\n   to set the instrument to the state necessary for the operation of the\n   instrument driver.\n-  Returns a ViSession handle that you use to identify the instrument in\n   all subsequent instrument driver function calls.\n'
         },
+        'method_name_for_documentation': '__init__',
         'parameters': [
             {
                 'direction': 'in',
@@ -5793,6 +5795,7 @@ functions = {
             'description': '\nPerforms a self-test on the DMM to ensure that the DMM is functioning\nproperly. Self-test does not calibrate the DMM.\n',
             'note': '\nThis function calls niDMM_reset, and any configurations previous to\nthe call will be lost. All attributes will be set to their default\nvalues after the call returns.\n'
         },
+        'method_name_for_documentation': 'self_test',
         'parameters': [
             {
                 'direction': 'in',
