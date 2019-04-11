@@ -361,7 +361,7 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver methods perform range checking and  call IVI Get and Set methods, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver methods return calculated values.
-    The default value is False (0). Use the _init_with_options method to  override this setting.
+    The default value is False (0). Use the __init__ method to  override this setting.
     Simulate can only be set within the InitWithOptions method.  The property value cannot be changed outside of the method.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
