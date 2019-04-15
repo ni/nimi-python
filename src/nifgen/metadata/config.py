@@ -1,34 +1,52 @@
+# -*- coding: utf-8 -*-
+# This file is generated from API metadata for NI-FGEN version 19.1.0d0
 config = {
-    'metadata_version': '1.0',
-    'module_name': 'nifgen',
-    'module_version': '1.1.1.dev0',
     'c_function_prefix': 'niFgen_',
-    'driver_name': 'NI-FGEN',
-    'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
-    'session_handle_parameter_name': 'vi',
-    'library_info':
-    {
-        'Windows': {
-            '32bit': {'name': 'nifgen_32.dll', 'type': 'windll'},
-            '64bit': {'name': 'nifgen_64.dll', 'type': 'cdll'},
-        },
-        'Linux': {
-            '64bit': {'name': 'libfgen.so', 'type': 'cdll'},
-        },
-    },
+    'close_function': 'Close',
     'context_manager_name': {
-        'task': 'generation',
-        'initiate_function': 'InitiateGeneration',
         'abort_function': 'AbortGeneration',
+        'initiate_function': 'InitiateGeneration',
+        'task': 'generation'
     },
-    'init_function': 'InitializeWithChannels',
-    'close_function': 'close',
-    'custom_types': [],
-    'last_tested_version': '18.1.0',
-    'repeated_capabilities': [
-        {'python_name': 'channels', 'prefix': '', },
-        {'python_name': 'script_triggers', 'prefix': 'ScriptTrigger', },
-        {'python_name': 'markers', 'prefix': 'Marker', },
+    'custom_types': [
     ],
+    'driver_name': 'NI-FGEN',
+    'init_function': 'InitializeWithChannels',
+    'last_tested_version': '19.1.0d0',
+    'library_info': {
+        'Linux': {
+            '64bit': {
+                'name': 'libfgen.so',
+                'type': 'cdll'
+            }
+        },
+        'Windows': {
+            '32bit': {
+                'name': 'nifgen_32.dll',
+                'type': 'windll'
+            },
+            '64bit': {
+                'name': 'nifgen_64.dll',
+                'type': 'cdll'
+            }
+        }
+    },
+    'metadata_version': '2.0',
+    'module_name': 'nifgen',
+    'repeated_capabilities': [
+        {
+            'prefix': '',
+            'python_name': 'channels'
+        },
+        {
+            'prefix': 'ScriptTrigger',
+            'python_name': 'script_triggers'
+        },
+        {
+            'prefix': 'Marker',
+            'python_name': 'markers'
+        }
+    ],
+    'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
+    'session_handle_parameter_name': 'vi'
 }
-
