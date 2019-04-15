@@ -87,10 +87,10 @@ class DataMarkerEventLevelPolarity(Enum):
 
 class HardwareState(Enum):
     IDLE = 0
-    WAITING_FOR_START_TRIGGER = 1
-    RUNNING = 2
-    DONE = 3
-    HARDWARE_ERROR = 4
+    WAITING_FOR_START_TRIGGER = 100
+    RUNNING = 200
+    DONE = 600
+    HARDWARE_ERROR = 1000
 
 
 class IdleBehavior(Enum):
@@ -134,11 +134,11 @@ class ReferenceClockSource(Enum):
     Specifies that the CLK IN input signal from the front panel connector is
     used as the Reference Clock source.
     '''
-    NONE = 'None'
+    NONE = 1000
     r'''
     Specifies that a Reference Clock is not used.
     '''
-    ONBOARD_REFERENCE_CLOCK = 'OnboardRefClk'
+    ONBOARD_REFERENCE_CLOCK = 1019
     r'''
     Specifies that the onboard Reference Clock is used as the Reference
     Clock source.
@@ -147,7 +147,7 @@ class ReferenceClockSource(Enum):
     r'''
     Specifies the PXI Clock is used as the Reference Clock source.
     '''
-    RTSI_7 = 'RTSI7'
+    RTSI_7 = 1010
     r'''
     Specifies that the RTSI line 7 is used as the Reference Clock source.
     '''
@@ -178,42 +178,42 @@ class SampleClockSource(Enum):
     Specifies that the PXI\_STAR trigger line is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_0RTSI_0 = 'PXI_Trig0'
+    PXI_TRIGGER_LINE_0_RTSI_0 = 'PXI_Trig0'
     r'''
     Specifies that the PXI or RTSI line 0 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_1RTSI_1 = 'PXI_Trig1'
+    PXI_TRIGGER_LINE_1_RTSI_1 = 'PXI_Trig1'
     r'''
     Specifies that the PXI or RTSI line 1 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_2RTSI_2 = 'PXI_Trig2'
+    PXI_TRIGGER_LINE_2_RTSI_2 = 'PXI_Trig2'
     r'''
     Specifies that the PXI or RTSI line 2 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_3RTSI_3 = 'PXI_Trig3'
+    PXI_TRIGGER_LINE_3_RTSI_3 = 'PXI_Trig3'
     r'''
     Specifies that the PXI or RTSI line 3 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_4RTSI_4 = 'PXI_Trig4'
+    PXI_TRIGGER_LINE_4_RTSI_4 = 'PXI_Trig4'
     r'''
     Specifies that the PXI or RTSI line 4 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_5RTSI_5 = 'PXI_Trig5'
+    PXI_TRIGGER_LINE_5_RTSI_5 = 'PXI_Trig5'
     r'''
     Specifies that the PXI or RTSI line 5 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_6RTSI_6 = 'PXI_Trig6'
+    PXI_TRIGGER_LINE_6_RTSI_6 = 'PXI_Trig6'
     r'''
     Specifies that the PXI or RTSI line 6 is used as the Sample Clock
     source.
     '''
-    PXI_TRIGGER_LINE_7RTSI_7 = 'PXI_Trig7'
+    PXI_TRIGGER_LINE_7_RTSI_7 = 'PXI_Trig7'
     r'''
     Specifies that the PXI or RTSI line 7 is used as the Sample Clock
     source.
