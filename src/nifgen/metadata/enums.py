@@ -555,36 +555,41 @@ enums = {
                 'documentation': {
                     'description': '\nSpecifies that the CLK IN input signal from the front panel connector is\nused as the Reference Clock source.\n'
                 },
-                'name': 'NIFGEN_VAL_CLOCK_IN',
+                'name': 'NIFGEN_VAL_CLOCK_IN_COLLISION_AVOIDANCE',
+                'python_name': 'CLOCK_IN',
                 'value': 'ClkIn'
             },
             {
                 'documentation': {
                     'description': 'Specifies that a Reference Clock is not used.'
                 },
-                'name': 'NIFGEN_VAL_NONE',
-                'value': 1000
+                'name': 'NIFGEN_VAL_NONE_COLLISION_AVOIDANCE',
+                'python_name': 'NONE',
+                'value': 'None'
             },
             {
                 'documentation': {
                     'description': '\nSpecifies that the onboard Reference Clock is used as the Reference\nClock source.\n'
                 },
-                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK',
-                'value': 1019
+                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK_COLLISION_AVOIDANCE',
+                'python_name': 'ONBOARD_REFERENCE_CLOCK',
+                'value': 'OnboardRefClk'
             },
             {
                 'documentation': {
                     'description': 'Specifies the PXI Clock is used as the Reference Clock source.'
                 },
-                'name': 'NIFGEN_VAL_PXI_CLOCK',
+                'name': 'NIFGEN_VAL_PXI_CLOCK_COLLISION_AVOIDANCE',
+                'python_name': 'PXI_CLOCK',
                 'value': 'PXI_Clk'
             },
             {
                 'documentation': {
                     'description': 'Specifies that the RTSI line 7 is used as the Reference Clock source.'
                 },
-                'name': 'NIFGEN_VAL_RTSI_7',
-                'value': 1010
+                'name': 'NIFGEN_VAL_RTSI_7_COLLISION_AVOIDANCE',
+                'python_name': 'RTSI_7',
+                'value': 'RTSI7'
             }
         ]
     },
