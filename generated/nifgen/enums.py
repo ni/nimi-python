@@ -134,11 +134,11 @@ class ReferenceClockSource(Enum):
     Specifies that the CLK IN input signal from the front panel connector is
     used as the Reference Clock source.
     '''
-    NONE = 1000
+    NONE = 'None'
     r'''
     Specifies that a Reference Clock is not used.
     '''
-    ONBOARD_REFERENCE_CLOCK = 1019
+    ONBOARD_REFERENCE_CLOCK = 'OnboardRefClk'
     r'''
     Specifies that the onboard Reference Clock is used as the Reference
     Clock source.
@@ -147,7 +147,7 @@ class ReferenceClockSource(Enum):
     r'''
     Specifies the PXI Clock is used as the Reference Clock source.
     '''
-    RTSI_7 = 1010
+    RTSI_7 = 'RTSI7'
     r'''
     Specifies that the RTSI line 7 is used as the Reference Clock source.
     '''
