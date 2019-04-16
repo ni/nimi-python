@@ -110,19 +110,19 @@ enums_additional_enums = {
             },
             {
                 'name': 'NIFGEN_VAL_WAITING_FOR_START_TRIGGER',
-                'value': 1,
+                'value': 100,
             },
             {
                 'name': 'NIFGEN_VAL_RUNNING',
-                'value': 2,
+                'value': 200,
             },
             {
                 'name': 'NIFGEN_VAL_DONE',
-                'value': 3,
+                'value': 600,
             },
             {
                 'name': 'NIFGEN_VAL_HARDWARE_ERROR',
-                'value': 4,
+                'value': 1000,
             },
         ],
     },
