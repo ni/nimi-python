@@ -5,9 +5,9 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 # Filters
 
-_parameterUsageOptionsFiltering = {}
+_ParameterUsageOptionsFiltering = {}
 
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
@@ -21,10 +21,10 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION
     'python_api_list': True,
 }
 # Only difference is we want to skip parameters not in api
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION] = _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION].copy()
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION]['python_api_list'] = False
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION]['python_api_list'] = False
 
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
@@ -37,7 +37,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_
     'mechanism': 'fixed, passed-in',
     'python_api_list': False,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
@@ -51,9 +51,9 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'python_api_list': True,
 }
 # Only difference is we want to skip parameters not in api
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL].copy()
 
-_parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
@@ -66,7 +66,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METH
     'mechanism': 'any',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
@@ -79,7 +79,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
     'mechanism': 'any',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
@@ -92,7 +92,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'mechanism': 'any',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
@@ -105,7 +105,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'mechanism': 'any',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_session_handle': False,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
@@ -118,7 +118,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION
     'mechanism': 'any',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
@@ -131,7 +131,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
     'mechanism': 'any',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': True,
     'skip_output_parameters': False,
@@ -144,7 +144,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
     'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': False,
@@ -157,7 +157,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
     'mechanism': 'any',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_session_handle': True,
     'skip_input_parameters': True,
     'skip_output_parameters': False,
@@ -170,7 +170,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'mechanism': 'ivi-dance',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
@@ -183,7 +183,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
     'mechanism': 'len',
     'python_api_list': True,
 }
-_parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
     'skip_session_handle': True,
     'skip_input_parameters': False,
     'skip_output_parameters': True,
@@ -206,7 +206,7 @@ def filter_parameters(function, parameter_usage_options):
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
 
-    options_to_use = _parameterUsageOptionsFiltering[parameter_usage_options]
+    options_to_use = _ParameterUsageOptionsFiltering[parameter_usage_options]
 
     parameters_to_use = []
 

@@ -8,45 +8,45 @@ import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=200)
 
-_parameterUsageOptionsSnippet = {}
+_ParameterUsageOptionsSnippet = {}
 
-_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
     'skip_self': False,
     'name_to_use': 'python_name_with_default',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_DECLARATION] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_DECLARATION] = {
     'skip_self': False,
     'name_to_use': 'python_name_with_default',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
     'skip_self': False,
     'name_to_use': 'python_name_with_default',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
     'skip_self': True,
     'name_to_use': 'python_name',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_CALL] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_CALL] = {
     'skip_self': True,
     'name_to_use': 'python_name_or_default_for_init',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
     'skip_self': True,
     'name_to_use': 'python_name_with_doc_default',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_CALL] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_CALL] = {
     'skip_self': True,
     'name_to_use': 'python_name',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
     'skip_self': True,
     'name_to_use': 'library_method_call_snippet',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_ARGTYPES] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_ARGTYPES] = {
     'skip_self': True,
     'name_to_use': 'ctypes_type_library_call',
 }
-_parameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
+_ParameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
     'skip_self': False,
     'name_to_use': 'python_name',
 }
@@ -67,7 +67,7 @@ def get_params_snippet(function, parameter_usage_options):
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
 
-    options_to_use = _parameterUsageOptionsSnippet[parameter_usage_options]
+    options_to_use = _ParameterUsageOptionsSnippet[parameter_usage_options]
 
     parameters_to_use = filter_parameters(function, parameter_usage_options)
 
@@ -77,7 +77,7 @@ def get_params_snippet(function, parameter_usage_options):
 
     # Render based on options
     for p in parameters_to_use:
-            snippets.append(p[options_to_use['name_to_use']])
+        snippets.append(p[options_to_use['name_to_use']])
     return ', '.join(snippets)
 
 
