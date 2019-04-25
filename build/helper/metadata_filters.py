@@ -167,7 +167,7 @@ _parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
     'skip_repeated_capability_parameter': False,
     'skip_non_enum_parameter': False,
     'skip_all_except_numpy_parameters': False,
-    'mechanism': 'ivi-dance',
+    'mechanism': 'ivi-dance, ivi-dance-with-a-twist',
     'python_api_list': True,
 }
 _parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
