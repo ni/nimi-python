@@ -44,7 +44,7 @@ nidmm.Session
         | Contains the **resource_name** of the device to initialize. The
           **resource_name** is assigned in Measurement & Automation Explorer
           (MAX). Refer to `Related
-          Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+          Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
           for the *NI Digital Multimeters Getting Started Guide* for more
           information about configuring and testing the DMM in MAX.
         | Valid Syntax:
@@ -154,7 +154,7 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`current_source`                | float                                        |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`dc_bias`                       | bool                                         |
+    | :py:attr:`dc_bias`                       | int                                          |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`dc_noise_rejection`            | :py:data:`DCNoiseRejection`                  |
     +------------------------------------------+----------------------------------------------+
@@ -188,7 +188,7 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`number_of_averages`            | int                                          |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`offset_comp_ohms`              | bool                                         |
+    | :py:attr:`offset_comp_ohms`              | int                                          |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`open_cable_comp_conductance`   | float                                        |
     +------------------------------------------+----------------------------------------------+
@@ -374,7 +374,7 @@ ac_max_freq
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -382,7 +382,6 @@ ac_max_freq
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Max Frequency**
                 - C Attribute: **NIDMM_ATTR_AC_MAX_FREQ**
 
 ac_min_freq
@@ -404,7 +403,7 @@ ac_min_freq
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -412,7 +411,6 @@ ac_min_freq
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Min Frequency**
                 - C Attribute: **NIDMM_ATTR_AC_MIN_FREQ**
 
 adc_calibration
@@ -433,7 +431,7 @@ adc_calibration
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | False                |
+            | Channel Based  | No                   |
             +----------------+----------------------+
             | Resettable     | No                   |
             +----------------+----------------------+
@@ -441,7 +439,6 @@ adc_calibration
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:ADC Calibration**
                 - C Attribute: **NIDMM_ATTR_ADC_CALIBRATION**
 
 aperture_time
@@ -471,7 +468,7 @@ aperture_time
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -479,7 +476,6 @@ aperture_time
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Advanced:Aperture Time**
                 - C Attribute: **NIDMM_ATTR_APERTURE_TIME**
 
 aperture_time_units
@@ -501,7 +497,7 @@ aperture_time_units
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -509,7 +505,6 @@ aperture_time_units
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Advanced:Aperture Time Units**
                 - C Attribute: **NIDMM_ATTR_APERTURE_TIME_UNITS**
 
 auto_range_value
@@ -530,7 +525,7 @@ auto_range_value
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -538,7 +533,6 @@ auto_range_value
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Auto Range Value**
                 - C Attribute: **NIDMM_ATTR_AUTO_RANGE_VALUE**
 
 auto_zero
@@ -560,7 +554,7 @@ auto_zero
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -568,7 +562,6 @@ auto_zero
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Auto Zero**
                 - C Attribute: **NIDMM_ATTR_AUTO_ZERO**
 
 buffer_size
@@ -593,7 +586,7 @@ buffer_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -601,7 +594,6 @@ buffer_size
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Multi Point Acquisition:Advanced:Buffer Size**
                 - C Attribute: **NIDMM_ATTR_BUFFER_SIZE**
 
 cable_comp_type
@@ -623,7 +615,7 @@ cable_comp_type
             +----------------+-----------------------------+
             | Permissions    | read-write                  |
             +----------------+-----------------------------+
-            | Channel Based  | False                       |
+            | Channel Based  | No                          |
             +----------------+-----------------------------+
             | Resettable     | No                          |
             +----------------+-----------------------------+
@@ -631,7 +623,6 @@ cable_comp_type
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Cable Compensation Type**
                 - C Attribute: **NIDMM_ATTR_CABLE_COMP_TYPE**
 
 channel_count
@@ -652,7 +643,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -660,7 +651,6 @@ channel_count
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Capabilities:Channel Count**
                 - C Attribute: **NIDMM_ATTR_CHANNEL_COUNT**
 
 current_source
@@ -682,7 +672,7 @@ current_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -690,7 +680,6 @@ current_source
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Current Source**
                 - C Attribute: **NIDMM_ATTR_CURRENT_SOURCE**
 
 dc_bias
@@ -707,11 +696,11 @@ dc_bias
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | bool       |
+            | Datatype       | int        |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -719,7 +708,6 @@ dc_bias
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:DC Bias**
                 - C Attribute: **NIDMM_ATTR_DC_BIAS**
 
 dc_noise_rejection
@@ -741,7 +729,7 @@ dc_noise_rejection
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -749,7 +737,6 @@ dc_noise_rejection
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:DC Noise Rejection**
                 - C Attribute: **NIDMM_ATTR_DC_NOISE_REJECTION**
 
 driver_setup
@@ -772,7 +759,7 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -780,7 +767,6 @@ driver_setup
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
                 - C Attribute: **NIDMM_ATTR_DRIVER_SETUP**
 
 freq_voltage_auto_range
@@ -801,7 +787,7 @@ freq_voltage_auto_range
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -809,7 +795,6 @@ freq_voltage_auto_range
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Auto Range Value**
                 - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_AUTO_RANGE**
 
 freq_voltage_range
@@ -830,7 +815,7 @@ freq_voltage_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -838,7 +823,6 @@ freq_voltage_range
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Frequency Voltage Range**
                 - C Attribute: **NIDMM_ATTR_FREQ_VOLTAGE_RANGE**
 
 function
@@ -861,7 +845,7 @@ function
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -869,7 +853,6 @@ function
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Function**
                 - C Attribute: **NIDMM_ATTR_FUNCTION**
 
 input_resistance
@@ -891,7 +874,7 @@ input_resistance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -899,7 +882,6 @@ input_resistance
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Input Resistance**
                 - C Attribute: **NIDMM_ATTR_INPUT_RESISTANCE**
 
 instrument_firmware_revision
@@ -920,7 +902,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -928,7 +910,6 @@ instrument_firmware_revision
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Firmware Revision**
                 - C Attribute: **NIDMM_ATTR_INSTRUMENT_FIRMWARE_REVISION**
 
 instrument_manufacturer
@@ -949,7 +930,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -957,7 +938,6 @@ instrument_manufacturer
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Manufacturer**
                 - C Attribute: **NIDMM_ATTR_INSTRUMENT_MANUFACTURER**
 
 instrument_model
@@ -978,7 +958,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -986,7 +966,6 @@ instrument_model
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Model**
                 - C Attribute: **NIDMM_ATTR_INSTRUMENT_MODEL**
 
 instrument_product_id
@@ -1007,7 +986,7 @@ instrument_product_id
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1015,7 +994,6 @@ instrument_product_id
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Product ID**
                 - C Attribute: **NIDMM_ATTR_INSTRUMENT_PRODUCT_ID**
 
 io_resource_descriptor
@@ -1036,7 +1014,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1044,7 +1022,6 @@ io_resource_descriptor
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:I/O Resource Descriptor**
                 - C Attribute: **NIDMM_ATTR_IO_RESOURCE_DESCRIPTOR**
 
 lc_calculation_model
@@ -1065,7 +1042,7 @@ lc_calculation_model
             +----------------+--------------------------+
             | Permissions    | read-write               |
             +----------------+--------------------------+
-            | Channel Based  | False                    |
+            | Channel Based  | No                       |
             +----------------+--------------------------+
             | Resettable     | No                       |
             +----------------+--------------------------+
@@ -1073,7 +1050,6 @@ lc_calculation_model
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Advanced:Calculation Model**
                 - C Attribute: **NIDMM_ATTR_LC_CALCULATION_MODEL**
 
 lc_number_meas_to_average
@@ -1094,7 +1070,7 @@ lc_number_meas_to_average
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1102,7 +1078,6 @@ lc_number_meas_to_average
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Number of LC Measurements To Average**
                 - C Attribute: **NIDMM_ATTR_LC_NUMBER_MEAS_TO_AVERAGE**
 
 logical_name
@@ -1123,7 +1098,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1131,7 +1106,6 @@ logical_name
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
                 - C Attribute: **NIDMM_ATTR_LOGICAL_NAME**
 
 meas_complete_dest
@@ -1154,7 +1128,7 @@ meas_complete_dest
             +----------------+-------------------------------+
             | Permissions    | read-write                    |
             +----------------+-------------------------------+
-            | Channel Based  | False                         |
+            | Channel Based  | No                            |
             +----------------+-------------------------------+
             | Resettable     | No                            |
             +----------------+-------------------------------+
@@ -1162,7 +1136,6 @@ meas_complete_dest
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Trigger:Measurement Complete Dest**
                 - C Attribute: **NIDMM_ATTR_MEAS_COMPLETE_DEST**
 
 number_of_averages
@@ -1184,7 +1157,7 @@ number_of_averages
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1192,7 +1165,6 @@ number_of_averages
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Advanced:Number Of Averages**
                 - C Attribute: **NIDMM_ATTR_NUMBER_OF_AVERAGES**
 
 offset_comp_ohms
@@ -1209,11 +1181,11 @@ offset_comp_ohms
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | bool       |
+            | Datatype       | int        |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1221,7 +1193,6 @@ offset_comp_ohms
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Offset Compensated Ohms**
                 - C Attribute: **NIDMM_ATTR_OFFSET_COMP_OHMS**
 
 open_cable_comp_conductance
@@ -1243,7 +1214,7 @@ open_cable_comp_conductance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1251,7 +1222,6 @@ open_cable_comp_conductance
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Conductance**
                 - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_CONDUCTANCE**
 
 open_cable_comp_susceptance
@@ -1273,7 +1243,7 @@ open_cable_comp_susceptance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1281,7 +1251,6 @@ open_cable_comp_susceptance
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Open Cable Compensation Values:Susceptance**
                 - C Attribute: **NIDMM_ATTR_OPEN_CABLE_COMP_SUSCEPTANCE**
 
 operation_mode
@@ -1302,7 +1271,7 @@ operation_mode
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | No                  |
             +----------------+---------------------+
@@ -1310,7 +1279,6 @@ operation_mode
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Advanced:Operation Mode**
                 - C Attribute: **NIDMM_ATTR_OPERATION_MODE**
 
 powerline_freq
@@ -1332,7 +1300,7 @@ powerline_freq
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1340,7 +1308,6 @@ powerline_freq
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Powerline Frequency**
                 - C Attribute: **NIDMM_ATTR_POWERLINE_FREQ**
 
 range
@@ -1372,7 +1339,7 @@ range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1380,7 +1347,6 @@ range
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Range**
                 - C Attribute: **NIDMM_ATTR_RANGE**
 
 resolution_absolute
@@ -1402,7 +1368,7 @@ resolution_absolute
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1410,7 +1376,6 @@ resolution_absolute
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Absolute Resolution**
                 - C Attribute: **NIDMM_ATTR_RESOLUTION_ABSOLUTE**
 
 resolution_digits
@@ -1432,7 +1397,7 @@ resolution_digits
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1440,7 +1405,6 @@ resolution_digits
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Digits Resolution**
                 - C Attribute: **NIDMM_ATTR_RESOLUTION_DIGITS**
 
 sample_count
@@ -1461,7 +1425,7 @@ sample_count
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1469,7 +1433,6 @@ sample_count
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Multi Point Acquisition:Sample Count**
                 - C Attribute: **NIDMM_ATTR_SAMPLE_COUNT**
 
 sample_interval
@@ -1494,7 +1457,7 @@ sample_interval
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1502,7 +1465,6 @@ sample_interval
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Multi Point Acquisition:Sample Interval**
                 - C Attribute: **NIDMM_ATTR_SAMPLE_INTERVAL**
 
 sample_trigger
@@ -1524,7 +1486,7 @@ sample_trigger
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | No                  |
             +----------------+---------------------+
@@ -1532,7 +1494,6 @@ sample_trigger
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Multi Point Acquisition:Sample Trigger**
                 - C Attribute: **NIDMM_ATTR_SAMPLE_TRIGGER**
 
 serial_number
@@ -1553,7 +1514,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1561,7 +1522,6 @@ serial_number
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Instrument Serial Number**
                 - C Attribute: **NIDMM_ATTR_SERIAL_NUMBER**
 
 settle_time
@@ -1587,7 +1547,7 @@ settle_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1595,7 +1555,6 @@ settle_time
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Advanced:Settle Time**
                 - C Attribute: **NIDMM_ATTR_SETTLE_TIME**
 
 short_cable_comp_reactance
@@ -1617,7 +1576,7 @@ short_cable_comp_reactance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1625,7 +1584,6 @@ short_cable_comp_reactance
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Reactance**
                 - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_REACTANCE**
 
 short_cable_comp_resistance
@@ -1647,7 +1605,7 @@ short_cable_comp_resistance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1655,7 +1613,6 @@ short_cable_comp_resistance
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Capacitance and Inductance:Short Cable Compensation Values:Resistance**
                 - C Attribute: **NIDMM_ATTR_SHORT_CABLE_COMP_RESISTANCE**
 
 simulate
@@ -1678,7 +1635,7 @@ simulate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1686,7 +1643,6 @@ simulate
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
                 - C Attribute: **NIDMM_ATTR_SIMULATE**
 
 specific_driver_description
@@ -1707,7 +1663,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1715,7 +1671,6 @@ specific_driver_description
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Description**
                 - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
 
 specific_driver_major_version
@@ -1736,7 +1691,7 @@ specific_driver_major_version
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1744,7 +1699,6 @@ specific_driver_major_version
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Major Version**
                 - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MAJOR_VERSION**
 
 specific_driver_minor_version
@@ -1765,7 +1719,7 @@ specific_driver_minor_version
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1773,7 +1727,6 @@ specific_driver_minor_version
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Minor Version**
                 - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_MINOR_VERSION**
 
 specific_driver_revision
@@ -1794,7 +1747,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1802,7 +1755,6 @@ specific_driver_revision
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Version Info:Specific Driver Revision**
                 - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_REVISION**
 
 specific_driver_vendor
@@ -1823,7 +1775,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1831,7 +1783,6 @@ specific_driver_vendor
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Identification:Specific Driver Vendor**
                 - C Attribute: **NIDMM_ATTR_SPECIFIC_DRIVER_VENDOR**
 
 supported_instrument_models
@@ -1852,7 +1803,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1860,7 +1811,6 @@ supported_instrument_models
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Specific Driver Capabilities:Supported Instrument Models**
                 - C Attribute: **NIDMM_ATTR_SUPPORTED_INSTRUMENT_MODELS**
 
 temp_rtd_a
@@ -1881,7 +1831,7 @@ temp_rtd_a
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1889,7 +1839,6 @@ temp_rtd_a
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD A**
                 - C Attribute: **NIDMM_ATTR_TEMP_RTD_A**
 
 temp_rtd_b
@@ -1910,7 +1859,7 @@ temp_rtd_b
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1918,7 +1867,6 @@ temp_rtd_b
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD B**
                 - C Attribute: **NIDMM_ATTR_TEMP_RTD_B**
 
 temp_rtd_c
@@ -1939,7 +1887,7 @@ temp_rtd_c
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1947,7 +1895,6 @@ temp_rtd_c
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD C**
                 - C Attribute: **NIDMM_ATTR_TEMP_RTD_C**
 
 temp_rtd_res
@@ -1968,7 +1915,7 @@ temp_rtd_res
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1976,7 +1923,6 @@ temp_rtd_res
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Resistance**
                 - C Attribute: **NIDMM_ATTR_TEMP_RTD_RES**
 
 temp_rtd_type
@@ -1998,7 +1944,7 @@ temp_rtd_type
             +----------------+---------------+
             | Permissions    | read-write    |
             +----------------+---------------+
-            | Channel Based  | False         |
+            | Channel Based  | No            |
             +----------------+---------------+
             | Resettable     | No            |
             +----------------+---------------+
@@ -2006,7 +1952,6 @@ temp_rtd_type
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Resistance Temperature Detector:RTD Type**
                 - C Attribute: **NIDMM_ATTR_TEMP_RTD_TYPE**
 
 temp_tc_fixed_ref_junc
@@ -2027,7 +1972,7 @@ temp_tc_fixed_ref_junc
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2035,7 +1980,6 @@ temp_tc_fixed_ref_junc
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Fixed Reference Junction**
                 - C Attribute: **NIDMM_ATTR_TEMP_TC_FIXED_REF_JUNC**
 
 temp_tc_ref_junc_type
@@ -2060,7 +2004,7 @@ temp_tc_ref_junc_type
             +----------------+-----------------------------------------+
             | Permissions    | read-write                              |
             +----------------+-----------------------------------------+
-            | Channel Based  | False                                   |
+            | Channel Based  | No                                      |
             +----------------+-----------------------------------------+
             | Resettable     | No                                      |
             +----------------+-----------------------------------------+
@@ -2068,7 +2012,6 @@ temp_tc_ref_junc_type
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Reference Junction Type**
                 - C Attribute: **NIDMM_ATTR_TEMP_TC_REF_JUNC_TYPE**
 
 temp_tc_type
@@ -2089,7 +2032,7 @@ temp_tc_type
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -2097,7 +2040,6 @@ temp_tc_type
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermocouple:Thermocouple Type**
                 - C Attribute: **NIDMM_ATTR_TEMP_TC_TYPE**
 
 temp_thermistor_a
@@ -2118,7 +2060,7 @@ temp_thermistor_a
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2126,7 +2068,6 @@ temp_thermistor_a
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor A**
                 - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_A**
 
 temp_thermistor_b
@@ -2147,7 +2088,7 @@ temp_thermistor_b
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2155,7 +2096,6 @@ temp_thermistor_b
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor B**
                 - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_B**
 
 temp_thermistor_c
@@ -2176,7 +2116,7 @@ temp_thermistor_c
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2184,7 +2124,6 @@ temp_thermistor_c
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor C**
                 - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_C**
 
 temp_thermistor_type
@@ -2206,7 +2145,7 @@ temp_thermistor_type
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | False                |
+            | Channel Based  | No                   |
             +----------------+----------------------+
             | Resettable     | No                   |
             +----------------+----------------------+
@@ -2214,7 +2153,6 @@ temp_thermistor_type
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Thermistor:Thermistor Type**
                 - C Attribute: **NIDMM_ATTR_TEMP_THERMISTOR_TYPE**
 
 temp_transducer_type
@@ -2239,7 +2177,7 @@ temp_transducer_type
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | False                |
+            | Channel Based  | No                   |
             +----------------+----------------------+
             | Resettable     | No                   |
             +----------------+----------------------+
@@ -2247,7 +2185,6 @@ temp_transducer_type
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Configuration:Measurement Options:Temperature:Transducer Type**
                 - C Attribute: **NIDMM_ATTR_TEMP_TRANSDUCER_TYPE**
 
 trigger_count
@@ -2271,7 +2208,7 @@ trigger_count
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2279,7 +2216,6 @@ trigger_count
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Multi Point Acquisition:Trigger Count**
                 - C Attribute: **NIDMM_ATTR_TRIGGER_COUNT**
 
 trigger_delay
@@ -2310,7 +2246,7 @@ trigger_delay
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -2318,7 +2254,6 @@ trigger_delay
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Trigger:Trigger Delay**
                 - C Attribute: **NIDMM_ATTR_TRIGGER_DELAY**
 
 trigger_source
@@ -2341,7 +2276,7 @@ trigger_source
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | No                  |
             +----------------+---------------------+
@@ -2349,7 +2284,6 @@ trigger_source
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Trigger:Trigger Source**
                 - C Attribute: **NIDMM_ATTR_TRIGGER_SOURCE**
 
 waveform_coupling
@@ -2370,7 +2304,7 @@ waveform_coupling
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -2378,7 +2312,6 @@ waveform_coupling
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Waveform Acquisition:Waveform Coupling**
                 - C Attribute: **NIDMM_ATTR_WAVEFORM_COUPLING**
 
 waveform_points
@@ -2399,7 +2332,7 @@ waveform_points
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2407,7 +2340,6 @@ waveform_points
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Waveform Acquisition:Waveform Points**
                 - C Attribute: **NIDMM_ATTR_WAVEFORM_POINTS**
 
 waveform_rate
@@ -2428,7 +2360,7 @@ waveform_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2436,7 +2368,6 @@ waveform_rate
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Waveform Acquisition:Waveform Rate**
                 - C Attribute: **NIDMM_ATTR_WAVEFORM_RATE**
 
 
@@ -2495,7 +2426,7 @@ configure_measurement_absolute
                 value that you are measuring. For example, you must type in 10 V if you
                 are measuring 9 V. **range** values are coerced up to the closest input
                 **range**. Refer to the `Devices
-                Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a list of valid
+                Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
                 ranges. The driver sets :py:data:`nidmm.Session.range` to this value. The default is
                 0.02 V.
 
@@ -2573,7 +2504,7 @@ configure_measurement_digits
                 that you are measuring. For example, you must type in 10 V if you are
                 measuring 9 V. range values are coerced up to the closest input range.
                 Refer to the `Devices
-                Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a list of valid
+                Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
                 ranges. The driver sets :py:data:`nidmm.Session.range` to this value. The default is
                 0.02 V.
 
@@ -2596,7 +2527,7 @@ configure_measurement_digits
 
 
                 Specifies the resolution of the measurement in digits. The driver sets
-                the `Devices Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a
+                the `Devices Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a
                 list of valid ranges. The driver sets :py:data:`nidmm.Session.resolution_digits`
                 property to this value. The PXIe-4080/4081/4082 uses the resolution you
                 specify. The NI 4065 and NI 4070/4071/4072 ignore this parameter when
@@ -2629,9 +2560,9 @@ configure_multi_point
             For continuous acquisitions, set :py:data:`nidmm.Session.trigger_count` or
             :py:data:`nidmm.Session.sample_count` to zero. For more information, refer to
             `Multiple Point
-            Acquisitions <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/multi_point/>`__,
-            `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__, and `Using
-            Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
+            Acquisitions <REPLACE_DRIVER_SPECIFIC_URL_1(multi_point)>`__,
+            `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__, and `Using
+            Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__.
 
             
 
@@ -2670,7 +2601,7 @@ configure_multi_point
 
                 .. note:: To determine which values are supported by each device, refer to the
                     `LabWindows/CVI Trigger
-                    Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__ section.
+                    Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
 
             :type sample_trigger: :py:data:`nidmm.SampleTrigger`
@@ -2914,8 +2845,8 @@ configure_trigger
     .. py:method:: configure_trigger(trigger_source, trigger_delay=datetime.timedelta(seconds=-1))
 
             Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
-            `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__ and `Using
-            Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__ for more
+            `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ and `Using
+            Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__ for more
             information.
 
             
@@ -2934,7 +2865,7 @@ configure_trigger
 
                 .. note:: To determine which values are supported by each device, refer to the
                     `LabWindows/CVI Trigger
-                    Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__ section.
+                    Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
 
             :type trigger_source: :py:data:`nidmm.TriggerSource`
@@ -2997,7 +2928,7 @@ configure_waveform_acquisition
                 closest input **range**. The default is 10.0.
 
                 For valid ranges refer to the topics in
-                `Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
+                `Devices <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__.
 
                 Auto-ranging is not supported during waveform acquisitions.
 
@@ -3028,7 +2959,7 @@ configure_waveform_acquisition
 
                 To calculate the maximum and minimum number of waveform points that you
                 can acquire in one acquisition, refer to the `Waveform Acquisition
-                Measurement Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
+                Measurement Cycle <REPLACE_DRIVER_SPECIFIC_URL_1(waveform_cycle)>`__.
 
                 The default value is 500.
 
@@ -3088,10 +3019,10 @@ export_attribute_configuration_buffer
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
-            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
             
 
@@ -3135,10 +3066,10 @@ export_attribute_configuration_file
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
-            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
             
 
@@ -3629,10 +3560,10 @@ import_attribute_configuration_buffer
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
-            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
             
 
@@ -3683,7 +3614,7 @@ import_attribute_configuration_file
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
             Properties <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__
@@ -4238,7 +4169,7 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.current_source`                | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.dc_bias`                       | bool                                         |
+| :py:attr:`nidmm.Session.dc_bias`                       | int                                          |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.dc_noise_rejection`            | :py:data:`DCNoiseRejection`                  |
 +--------------------------------------------------------+----------------------------------------------+
@@ -4272,7 +4203,7 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.number_of_averages`            | int                                          |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.offset_comp_ohms`              | bool                                         |
+| :py:attr:`nidmm.Session.offset_comp_ohms`              | int                                          |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.open_cable_comp_conductance`   | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
