@@ -1,6 +1,5 @@
 group: travis_latest
 language: python
-cache: pip
 jobs:
     include:
       # We put 3.6 first since this is where flake8 and docs are tested
