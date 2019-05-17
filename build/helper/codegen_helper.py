@@ -8,47 +8,47 @@ import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=200)
 
-_parameterUsageOptionsSnippet = {}  # noqa: N816
-
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
-    'skip_self': False,
-    'name_to_use': 'python_name_with_default',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_DECLARATION] = {
-    'skip_self': False,
-    'name_to_use': 'python_name_with_default',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
-    'skip_self': False,
-    'name_to_use': 'python_name_with_default',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_METHOD_CALL] = {
-    'skip_self': True,
-    'name_to_use': 'python_name',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.SESSION_INIT_CALL] = {
-    'skip_self': True,
-    'name_to_use': 'python_name_or_default_for_init',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
-    'skip_self': True,
-    'name_to_use': 'python_name_with_doc_default',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_CALL] = {
-    'skip_self': True,
-    'name_to_use': 'python_name',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
-    'skip_self': True,
-    'name_to_use': 'library_method_call_snippet',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.CTYPES_ARGTYPES] = {
-    'skip_self': True,
-    'name_to_use': 'ctypes_type_library_call',
-}
-_ParameterUsageOptionsSnippet[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
-    'skip_self': False,
-    'name_to_use': 'python_name',
+_ParameterUsageOptionsSnippet = {
+    ParameterUsageOptions.SESSION_METHOD_DECLARATION: {
+        'skip_self': False,
+        'name_to_use': 'python_name_with_default',
+    },
+    ParameterUsageOptions.SESSION_INIT_DECLARATION: {
+        'skip_self': False,
+        'name_to_use': 'python_name_with_default',
+    },
+    ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
+        'skip_self': False,
+        'name_to_use': 'python_name_with_default',
+    },
+    ParameterUsageOptions.SESSION_METHOD_CALL: {
+        'skip_self': True,
+        'name_to_use': 'python_name',
+    },
+    ParameterUsageOptions.SESSION_INIT_CALL: {
+        'skip_self': True,
+        'name_to_use': 'python_name_or_default_for_init',
+    },
+    ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD: {
+        'skip_self': True,
+        'name_to_use': 'python_name_with_doc_default',
+    },
+    ParameterUsageOptions.CTYPES_CALL: {
+        'skip_self': True,
+        'name_to_use': 'python_name',
+    },
+    ParameterUsageOptions.LIBRARY_METHOD_CALL: {
+        'skip_self': True,
+        'name_to_use': 'library_method_call_snippet',
+    },
+    ParameterUsageOptions.CTYPES_ARGTYPES: {
+        'skip_self': True,
+        'name_to_use': 'ctypes_type_library_call',
+    },
+    ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
+        'skip_self': False,
+        'name_to_use': 'python_name',
+    },
 }
 # Only used for filtering
 #   ParameterUsageOptions.INPUT_PARAMETERS
