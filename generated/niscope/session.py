@@ -133,46 +133,6 @@ class _SessionBase(object):
     periods, .5 sample clock periods]. The default absolute sample clock
     offset is 0s.
     '''
-    accessory_gain = _attributes.AttributeViReal64(1150279)
-    '''Type: float
-
-    Returns the calibration gain for the current device configuration.
-    **Related topics:**
-    `NI 5122/5124/5142
-    Calibration <digitizers.chm::/5122_Calibration.html>`__
-
-    Note:
-    This property is only supported by the NI PXI-5900 differential
-    amplifier.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].accessory_gain
-    '''
-    accessory_offset = _attributes.AttributeViReal64(1150280)
-    '''Type: float
-
-    Returns the calibration offset for the current device configuration.
-    **Related topics:**
-    `NI 5122/5124/5142
-    Calibration <digitizers.chm::/5122_Calibration.html>`__
-
-    Note:
-    This property is supported only by the NI PXI-5900 differential
-    amplifier.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].accessory_offset
-    '''
     acquisition_start_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250109)
     '''Type: float in seconds or datetime.timedelta
 
@@ -309,6 +269,14 @@ class _SessionBase(object):
     This property indicates the Driver Setup string that the user  specified when initializing the driver.
     Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  __init__, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this property returns an empty string.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].driver_setup
     '''
     enable_dc_restore = _attributes.AttributeViBoolean(1150093)
     '''Type: bool
@@ -777,17 +745,14 @@ class _SessionBase(object):
     '''Type: enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
-    NISCOPE_VAL_NONE
+    _FIRFilterWindow.NONE
     _ArrayMeasurement.HANNING_WINDOW
     _ArrayMeasurement.HAMMING_WINDOW
     _ArrayMeasurement.TRIANGLE_WINDOW
     _ArrayMeasurement.FLAT_TOP_WINDOW
     _ArrayMeasurement.BLACKMAN_WINDOW
     The symmetric windows are applied to the FIR filter coefficients to limit passband ripple in FIR filters.
-    Default: NISCOPE_VAL_NONE
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default: _FIRFilterWindow.NONE
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -1017,6 +982,15 @@ class _SessionBase(object):
     '''Type: int
 
     Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].poll_interval = var
+        var = session.channels[0,1].poll_interval
     '''
     probe_attenuation = _attributes.AttributeViReal64(1250004)
     '''Type: float
@@ -1105,27 +1079,6 @@ class _SessionBase(object):
 
     The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
     '''
-    sample_clock_timebase_multiplier = _attributes.AttributeViInt32(1150367)
-    '''Type: int
-
-    If `Sample Clock Timebase
-    Source <pSampleClockTimebaseSource.html>`__ is an external
-    source, this property specifies the ratio between the `Sample Clock
-    Timebase Rate <pSampleClockTimebaseRate.html>`__ and the actual
-    sample rate, which can be higher. This property can be used in
-    conjunction with the `Sample Clock Timebase Divisor
-    Property <pSampleClockTimebaseDivisor.html>`__.
-    Some devices use multiple ADCs to sample the same channel at an
-    effective sample rate that is greater than the specified clock rate.
-    When providing an external sample clock use this property to indicate
-    when you want a higher sample rate. Valid values for this property vary
-    by device and current configuration.
-    **Related topics:**
-    `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
-    '''
     sample_mode = _attributes.AttributeViInt32(1250106)
     '''Type: int
 
@@ -1135,6 +1088,15 @@ class _SessionBase(object):
     '''Type: int
 
     If samp_clk_timebase_src is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
+    '''
+    sample_clock_timebase_multiplier = _attributes.AttributeViInt32(1150367)
+    '''Type: int
+
+    If samp_clk_timebase_src is an external source, this property specifies the ratio between the samp_clk_timebase_rate and the actual sample rate, which can be higher. This property can be used in conjunction with samp_clk_timebase_div.
+    Some devices use multiple ADCs to sample the same channel at an effective sample rate that is greater than the specified clock rate. When providing an external sample clock use this property to indicate when you want a higher sample rate. Valid values for this property vary by device and current configuration.
+
+    **Related topics:**
+    `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
     '''
     samp_clk_timebase_rate = _attributes.AttributeViReal64(1150088)
     '''Type: float
@@ -1150,6 +1112,44 @@ class _SessionBase(object):
     '''Type: str
 
     Returns the serial number of the device.
+    '''
+    accessory_gain = _attributes.AttributeViReal64(1150279)
+    '''Type: float
+
+    Returns the calibration gain for the current device configuration.
+
+    **Related topics:**
+    `NI 5122/5124/5142 Calibration <digitizers.chm::/5122_Calibration.html>`__
+
+    Note:
+    This property is supported only by the NI PXI-5900 differential amplifier.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].signal_cond_gain
+    '''
+    accessory_offset = _attributes.AttributeViReal64(1150280)
+    '''Type: float
+
+    Returns the calibration offset for the current device configuration.
+
+    **Related topics:**
+    `NI 5122/5124/5142 Calibration <digitizers.chm::/5122_Calibration.html>`__
+
+    Note:
+    This property is supported only by the NI PXI-5900 differential amplifier.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].signal_cond_offset
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -1566,7 +1566,7 @@ class _SessionBase(object):
 
         Clears the waveform stats on the channel and measurement you specify. If
         you want to clear all of the measurements, use
-        NISCOPE_VAL_ALL_MEASUREMENTS in the **clearableMeasurementFunction**
+        _ClearableMeasurement.ALL_MEASUREMENTS in the **clearableMeasurementFunction**
         parameter.
 
         Every time a measurement is called, the statistics information is
@@ -1574,9 +1574,6 @@ class _SessionBase(object):
         updates. This information is fetched with
         _fetch_measurement_stats. The multi-acquisition array measurements
         are also cleared with this method.
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Tip:
         This method requires repeated capabilities (channels). If called directly on the
@@ -1775,7 +1772,7 @@ class _SessionBase(object):
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
-            timeout (float or datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
+            timeout (float in seconds or datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
 
         Returns:
@@ -1896,7 +1893,7 @@ class _SessionBase(object):
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
-            timeout (float or datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
+            timeout (float in seconds or datetime.timedelta): The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 seconds for this parameter implies infinite timeout.
 
 
         Returns:
@@ -2718,11 +2715,11 @@ class _SessionBase(object):
 
             num_records (int): Number of records to fetch. Use -1 to fetch all configured records.
 
-            timeout (float): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
+            timeout (float in seconds or datetime.timedelta): The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available. Using -1 for this parameter implies infinite timeout.
 
 
         Returns:
-            wfm_info (list of WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
+            wfm_info (WaveformInfo): Returns an array of classed with the following timing and scaling information about each waveform:
 
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
