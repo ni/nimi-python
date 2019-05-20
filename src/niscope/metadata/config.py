@@ -17,7 +17,7 @@ config = {
     ],
     'driver_name': 'NI-SCOPE',
     'init_function': 'InitWithOptions',
-    'last_tested_version': '19.1.0d28',
+    'api_version': '19.1.0d28',
     'library_info': {
         'Linux': {
             '64bit': {
