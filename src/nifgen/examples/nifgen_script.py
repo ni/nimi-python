@@ -7,44 +7,45 @@ from scipy import signal
 import sys
 import time
 
+numberOfPoints = 256
 
 def calculate_sinewave():
-    time = np.arange(start=0, stop=10, step=0.01)    # np.arange([start,]stop, [step,]dtype=None)
+    time = np.linspace(start=0, stop=10, num=numberOfPoints)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
     amplitude = np.sin(time)
-    sinewave = amplitude.tolist()                    # List of Float
+    sinewave = amplitude.tolist()                               # List of Float
     return sinewave
 
 
 def calculate_rampup():
-    ramp = np.arange(start=0, stop=0.5, step=0.01)   # numpy.arange([start,]stop, [step,]dtype=None)
-    ramp_up = ramp.tolist()                          # List of Float
+    ramp = np.linspace(start=0, stop=0.5, num=numberOfPoints)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+    ramp_up = ramp.tolist()                                     # List of Float
     return ramp_up
 
 
 def calculate_rampdown():
-    ramp = np.arange(start=0, stop=0.5, step=0.01)   # numpy.arange([start,]stop, [step,]dtype=None)
-    ramp_down = ramp.tolist()                        # List of Float
-    ramp_down.reverse()                              # Reverse list to get a ramp down
+    ramp = np.linspace(start=0, stop=0.5, num=numberOfPoints)   # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+    ramp_down = ramp.tolist()                                   # List of Float
+    ramp_down.reverse()                                         # Reverse list to get a ramp down
     return ramp_down
 
 
 def calculate_square():
-    time = np.arange(start=0, stop=10, step=0.01)    # np.arange([start,]stop, [step,]dtype=None)
-    square_build = signal.square(t=time, duty=0.5)   # signal.square(t, duty=0.5)
-    square = square_build.tolist()                   # List of Float
+    time = np.linspace(start=0, stop=10, num=numberOfPoints)    # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+    square_build = signal.square(t=time, duty=0.5)              # signal.square(t, duty=0.5)
+    square = square_build.tolist()                              # List of Float
     return square
 
 
 def calculate_triangle():
-    time = np.linspace(start=0, stop=1, num=200)     # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
-    triangle_build = signal.sawtooth(t=time)         # signal.sawtooth(t, width=1)
-    triangle = triangle_build.tolist()               # List of Float
+    time = np.linspace(start=0, stop=1, num=numberOfPoints)     # np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+    triangle_build = signal.sawtooth(t=time)                    # signal.sawtooth(t, width=1)
+    triangle = triangle_build.tolist()                          # List of Float
     return triangle
 
 
 def calculate_gaussian_noise():
-    random_noise = np.random.normal(loc=0, scale=0.1, size=300)  # random.normal(loc=0.0, scale=1.0, size=None)
-    noise = random_noise.tolist()                    # List of Float
+    random_noise = np.random.normal(loc=0, scale=0.1, size=numberOfPoints)  # random.normal(loc=0.0, scale=1.0, size=None)
+    noise = random_noise.tolist()                                           # List of Float
     return noise
 
 

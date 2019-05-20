@@ -1,5 +1,5 @@
 
-ALL_DRIVERS := nifake nimodinst nifgen
+ALL_DRIVERS := nifake nidmm nifgen niscope nimodinst
 DRIVERS ?= $(ALL_DRIVERS)
 
 ROOT_DIR := $(abspath .)

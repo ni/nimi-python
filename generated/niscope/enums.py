@@ -427,8 +427,8 @@ class _ScalarMeasurement(Enum):
     TIME_HISTOGRAM_MAX = 3005
     TIME_HISTOGRAM_MIN = 3006
     TIME_HISTOGRAM_PEAK_TO_PEAK = 3002
-    TIME_HISTOGRAM_MEAN_PLUS_STDEV = 3008
-    TIME_HISTOGRAM_MEAN_PLUS_2_STDEV = 3009
+    TIME_HISTOGRAM_MEAN_PLUS_STDEV = 3007
+    TIME_HISTOGRAM_MEAN_PLUS_2_STDEV = 3008
     TIME_HISTOGRAM_HITS = 3004
     TIME_HISTOGRAM_NEW_HITS = 3011
 
@@ -457,11 +457,11 @@ class TriggerCoupling(Enum):
     r'''
     DC coupling
     '''
-    HF_REJECT = 2
+    HF_REJECT = 3
     r'''
     Highpass filter coupling
     '''
-    LF_REJECT = 3
+    LF_REJECT = 4
     r'''
     Lowpass filter coupling
     '''
