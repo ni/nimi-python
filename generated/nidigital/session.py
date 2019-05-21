@@ -2,6 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 

@@ -2,6 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
+import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -1173,8 +1174,6 @@ class Session(_SessionBase):
             month (datetime.datetime): Indicates date and time of the last calibration.
 
         '''
-        import datetime
-
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
 
