@@ -67,12 +67,12 @@ class SideEffectsHelper(object):
         self._defaults['Disable']['return'] = 0
         self._defaults['ExportAttributeConfigurationBuffer'] = {}
         self._defaults['ExportAttributeConfigurationBuffer']['return'] = 0
-        self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] = None
+        self._defaults['ExportAttributeConfigurationBuffer']['configuration'] = None
         self._defaults['ExportAttributeConfigurationFile'] = {}
         self._defaults['ExportAttributeConfigurationFile']['return'] = 0
         self._defaults['Fetch'] = {}
         self._defaults['Fetch']['return'] = 0
-        self._defaults['Fetch']['Waveform'] = None
+        self._defaults['Fetch']['waveform'] = None
         self._defaults['Fetch']['wfmInfo'] = None
         self._defaults['FetchArrayMeasurement'] = {}
         self._defaults['FetchArrayMeasurement']['return'] = 0
@@ -80,49 +80,49 @@ class SideEffectsHelper(object):
         self._defaults['FetchArrayMeasurement']['wfmInfo'] = None
         self._defaults['FetchBinary16'] = {}
         self._defaults['FetchBinary16']['return'] = 0
-        self._defaults['FetchBinary16']['Waveform'] = None
+        self._defaults['FetchBinary16']['waveform'] = None
         self._defaults['FetchBinary16']['wfmInfo'] = None
         self._defaults['FetchBinary32'] = {}
         self._defaults['FetchBinary32']['return'] = 0
-        self._defaults['FetchBinary32']['Waveform'] = None
+        self._defaults['FetchBinary32']['waveform'] = None
         self._defaults['FetchBinary32']['wfmInfo'] = None
         self._defaults['FetchBinary8'] = {}
         self._defaults['FetchBinary8']['return'] = 0
-        self._defaults['FetchBinary8']['Waveform'] = None
+        self._defaults['FetchBinary8']['waveform'] = None
         self._defaults['FetchBinary8']['wfmInfo'] = None
         self._defaults['FetchMeasurement'] = {}
         self._defaults['FetchMeasurement']['return'] = 0
-        self._defaults['FetchMeasurement']['Result'] = None
+        self._defaults['FetchMeasurement']['result'] = None
         self._defaults['FetchMeasurementStats'] = {}
         self._defaults['FetchMeasurementStats']['return'] = 0
-        self._defaults['FetchMeasurementStats']['Result'] = None
-        self._defaults['FetchMeasurementStats']['Mean'] = None
-        self._defaults['FetchMeasurementStats']['Stdev'] = None
-        self._defaults['FetchMeasurementStats']['Min'] = None
-        self._defaults['FetchMeasurementStats']['Max'] = None
+        self._defaults['FetchMeasurementStats']['result'] = None
+        self._defaults['FetchMeasurementStats']['mean'] = None
+        self._defaults['FetchMeasurementStats']['stdev'] = None
+        self._defaults['FetchMeasurementStats']['min'] = None
+        self._defaults['FetchMeasurementStats']['max'] = None
         self._defaults['FetchMeasurementStats']['numInStats'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
-        self._defaults['GetAttributeViBoolean']['Value'] = None
+        self._defaults['GetAttributeViBoolean']['value'] = None
         self._defaults['GetAttributeViInt32'] = {}
         self._defaults['GetAttributeViInt32']['return'] = 0
-        self._defaults['GetAttributeViInt32']['Value'] = None
+        self._defaults['GetAttributeViInt32']['value'] = None
         self._defaults['GetAttributeViInt64'] = {}
         self._defaults['GetAttributeViInt64']['return'] = 0
-        self._defaults['GetAttributeViInt64']['Value'] = None
+        self._defaults['GetAttributeViInt64']['value'] = None
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
-        self._defaults['GetAttributeViReal64']['Value'] = None
+        self._defaults['GetAttributeViReal64']['value'] = None
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
-        self._defaults['GetAttributeViString']['Value'] = None
+        self._defaults['GetAttributeViString']['value'] = None
         self._defaults['GetEqualizationFilterCoefficients'] = {}
         self._defaults['GetEqualizationFilterCoefficients']['return'] = 0
-        self._defaults['GetEqualizationFilterCoefficients']['Coefficients'] = None
+        self._defaults['GetEqualizationFilterCoefficients']['coefficients'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
-        self._defaults['GetError']['Description'] = None
+        self._defaults['GetError']['description'] = None
         self._defaults['ImportAttributeConfigurationBuffer'] = {}
         self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
         self._defaults['ImportAttributeConfigurationFile'] = {}
@@ -141,11 +141,11 @@ class SideEffectsHelper(object):
         self._defaults['ProbeCompensationSignalStop']['return'] = 0
         self._defaults['Read'] = {}
         self._defaults['Read']['return'] = 0
-        self._defaults['Read']['Waveform'] = None
+        self._defaults['Read']['waveform'] = None
         self._defaults['Read']['wfmInfo'] = None
         self._defaults['ReadMeasurement'] = {}
         self._defaults['ReadMeasurement']['return'] = 0
-        self._defaults['ReadMeasurement']['Result'] = None
+        self._defaults['ReadMeasurement']['result'] = None
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -316,16 +316,16 @@ class SideEffectsHelper(object):
     def niScope_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
-        if self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] is None:
-            raise MockFunctionCallError("niScope_ExportAttributeConfigurationBuffer", param='Configuration')
+        if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
+            raise MockFunctionCallError("niScope_ExportAttributeConfigurationBuffer", param='configuration')
         if size_in_bytes.value == 0:
-            return len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])
+            return len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])
         try:
             configuration_ref = configuration.contents
         except AttributeError:
             configuration_ref = configuration
-        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])):
-            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['Configuration'][i]
+        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])):
+            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['configuration'][i]
         return self._defaults['ExportAttributeConfigurationBuffer']['return']
 
     def niScope_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
@@ -337,9 +337,9 @@ class SideEffectsHelper(object):
         if self._defaults['Fetch']['return'] != 0:
             return self._defaults['Fetch']['return']
         # waveform
-        if self._defaults['Fetch']['Waveform'] is None:
-            raise MockFunctionCallError("niScope_Fetch", param='Waveform')
-        test_value = self._defaults['Fetch']['Waveform']
+        if self._defaults['Fetch']['waveform'] is None:
+            raise MockFunctionCallError("niScope_Fetch", param='waveform')
+        test_value = self._defaults['Fetch']['waveform']
         try:
             waveform_ref = waveform.contents
         except AttributeError:
@@ -391,9 +391,9 @@ class SideEffectsHelper(object):
         if self._defaults['FetchBinary16']['return'] != 0:
             return self._defaults['FetchBinary16']['return']
         # waveform
-        if self._defaults['FetchBinary16']['Waveform'] is None:
-            raise MockFunctionCallError("niScope_FetchBinary16", param='Waveform')
-        test_value = self._defaults['FetchBinary16']['Waveform']
+        if self._defaults['FetchBinary16']['waveform'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary16", param='waveform')
+        test_value = self._defaults['FetchBinary16']['waveform']
         try:
             waveform_ref = waveform.contents
         except AttributeError:
@@ -418,9 +418,9 @@ class SideEffectsHelper(object):
         if self._defaults['FetchBinary32']['return'] != 0:
             return self._defaults['FetchBinary32']['return']
         # waveform
-        if self._defaults['FetchBinary32']['Waveform'] is None:
-            raise MockFunctionCallError("niScope_FetchBinary32", param='Waveform')
-        test_value = self._defaults['FetchBinary32']['Waveform']
+        if self._defaults['FetchBinary32']['waveform'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary32", param='waveform')
+        test_value = self._defaults['FetchBinary32']['waveform']
         try:
             waveform_ref = waveform.contents
         except AttributeError:
@@ -445,9 +445,9 @@ class SideEffectsHelper(object):
         if self._defaults['FetchBinary8']['return'] != 0:
             return self._defaults['FetchBinary8']['return']
         # waveform
-        if self._defaults['FetchBinary8']['Waveform'] is None:
-            raise MockFunctionCallError("niScope_FetchBinary8", param='Waveform')
-        test_value = self._defaults['FetchBinary8']['Waveform']
+        if self._defaults['FetchBinary8']['waveform'] is None:
+            raise MockFunctionCallError("niScope_FetchBinary8", param='waveform')
+        test_value = self._defaults['FetchBinary8']['waveform']
         try:
             waveform_ref = waveform.contents
         except AttributeError:
@@ -472,9 +472,9 @@ class SideEffectsHelper(object):
         if self._defaults['FetchMeasurement']['return'] != 0:
             return self._defaults['FetchMeasurement']['return']
         # result
-        if self._defaults['FetchMeasurement']['Result'] is None:
-            raise MockFunctionCallError("niScope_FetchMeasurement", param='Result')
-        test_value = self._defaults['FetchMeasurement']['Result']
+        if self._defaults['FetchMeasurement']['result'] is None:
+            raise MockFunctionCallError("niScope_FetchMeasurement", param='result')
+        test_value = self._defaults['FetchMeasurement']['result']
         try:
             result_ref = result.contents
         except AttributeError:
@@ -488,9 +488,9 @@ class SideEffectsHelper(object):
         if self._defaults['FetchMeasurementStats']['return'] != 0:
             return self._defaults['FetchMeasurementStats']['return']
         # result
-        if self._defaults['FetchMeasurementStats']['Result'] is None:
-            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Result')
-        test_value = self._defaults['FetchMeasurementStats']['Result']
+        if self._defaults['FetchMeasurementStats']['result'] is None:
+            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='result')
+        test_value = self._defaults['FetchMeasurementStats']['result']
         try:
             result_ref = result.contents
         except AttributeError:
@@ -499,9 +499,9 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             result_ref[i] = test_value[i]
         # mean
-        if self._defaults['FetchMeasurementStats']['Mean'] is None:
-            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Mean')
-        test_value = self._defaults['FetchMeasurementStats']['Mean']
+        if self._defaults['FetchMeasurementStats']['mean'] is None:
+            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='mean')
+        test_value = self._defaults['FetchMeasurementStats']['mean']
         try:
             mean_ref = mean.contents
         except AttributeError:
@@ -510,9 +510,9 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             mean_ref[i] = test_value[i]
         # stdev
-        if self._defaults['FetchMeasurementStats']['Stdev'] is None:
-            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Stdev')
-        test_value = self._defaults['FetchMeasurementStats']['Stdev']
+        if self._defaults['FetchMeasurementStats']['stdev'] is None:
+            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='stdev')
+        test_value = self._defaults['FetchMeasurementStats']['stdev']
         try:
             stdev_ref = stdev.contents
         except AttributeError:
@@ -521,9 +521,9 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             stdev_ref[i] = test_value[i]
         # min
-        if self._defaults['FetchMeasurementStats']['Min'] is None:
-            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Min')
-        test_value = self._defaults['FetchMeasurementStats']['Min']
+        if self._defaults['FetchMeasurementStats']['min'] is None:
+            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='min')
+        test_value = self._defaults['FetchMeasurementStats']['min']
         try:
             min_ref = min.contents
         except AttributeError:
@@ -532,9 +532,9 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             min_ref[i] = test_value[i]
         # max
-        if self._defaults['FetchMeasurementStats']['Max'] is None:
-            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='Max')
-        test_value = self._defaults['FetchMeasurementStats']['Max']
+        if self._defaults['FetchMeasurementStats']['max'] is None:
+            raise MockFunctionCallError("niScope_FetchMeasurementStats", param='max')
+        test_value = self._defaults['FetchMeasurementStats']['max']
         try:
             max_ref = max.contents
         except AttributeError:
@@ -559,59 +559,59 @@ class SideEffectsHelper(object):
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
         # value
-        if self._defaults['GetAttributeViBoolean']['Value'] is None:
-            raise MockFunctionCallError("niScope_GetAttributeViBoolean", param='Value')
+        if self._defaults['GetAttributeViBoolean']['value'] is None:
+            raise MockFunctionCallError("niScope_GetAttributeViBoolean", param='value')
         if value is not None:
-            value.contents.value = self._defaults['GetAttributeViBoolean']['Value']
+            value.contents.value = self._defaults['GetAttributeViBoolean']['value']
         return self._defaults['GetAttributeViBoolean']['return']
 
     def niScope_GetAttributeViInt32(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViInt32']['return'] != 0:
             return self._defaults['GetAttributeViInt32']['return']
         # value
-        if self._defaults['GetAttributeViInt32']['Value'] is None:
-            raise MockFunctionCallError("niScope_GetAttributeViInt32", param='Value')
+        if self._defaults['GetAttributeViInt32']['value'] is None:
+            raise MockFunctionCallError("niScope_GetAttributeViInt32", param='value')
         if value is not None:
-            value.contents.value = self._defaults['GetAttributeViInt32']['Value']
+            value.contents.value = self._defaults['GetAttributeViInt32']['value']
         return self._defaults['GetAttributeViInt32']['return']
 
     def niScope_GetAttributeViInt64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViInt64']['return'] != 0:
             return self._defaults['GetAttributeViInt64']['return']
         # value
-        if self._defaults['GetAttributeViInt64']['Value'] is None:
-            raise MockFunctionCallError("niScope_GetAttributeViInt64", param='Value')
+        if self._defaults['GetAttributeViInt64']['value'] is None:
+            raise MockFunctionCallError("niScope_GetAttributeViInt64", param='value')
         if value is not None:
-            value.contents.value = self._defaults['GetAttributeViInt64']['Value']
+            value.contents.value = self._defaults['GetAttributeViInt64']['value']
         return self._defaults['GetAttributeViInt64']['return']
 
     def niScope_GetAttributeViReal64(self, vi, channel_list, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
             return self._defaults['GetAttributeViReal64']['return']
         # value
-        if self._defaults['GetAttributeViReal64']['Value'] is None:
-            raise MockFunctionCallError("niScope_GetAttributeViReal64", param='Value')
+        if self._defaults['GetAttributeViReal64']['value'] is None:
+            raise MockFunctionCallError("niScope_GetAttributeViReal64", param='value')
         if value is not None:
-            value.contents.value = self._defaults['GetAttributeViReal64']['Value']
+            value.contents.value = self._defaults['GetAttributeViReal64']['value']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niScope_GetAttributeViString(self, vi, channel_list, attribute_id, buf_size, value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
-        if self._defaults['GetAttributeViString']['Value'] is None:
-            raise MockFunctionCallError("niScope_GetAttributeViString", param='Value')
+        if self._defaults['GetAttributeViString']['value'] is None:
+            raise MockFunctionCallError("niScope_GetAttributeViString", param='value')
         if buf_size.value == 0:
-            return len(self._defaults['GetAttributeViString']['Value'])
-        value.value = self._defaults['GetAttributeViString']['Value'].encode('ascii')
+            return len(self._defaults['GetAttributeViString']['value'])
+        value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
         if self._defaults['GetEqualizationFilterCoefficients']['return'] != 0:
             return self._defaults['GetEqualizationFilterCoefficients']['return']
         # coefficients
-        if self._defaults['GetEqualizationFilterCoefficients']['Coefficients'] is None:
-            raise MockFunctionCallError("niScope_GetEqualizationFilterCoefficients", param='Coefficients')
-        test_value = self._defaults['GetEqualizationFilterCoefficients']['Coefficients']
+        if self._defaults['GetEqualizationFilterCoefficients']['coefficients'] is None:
+            raise MockFunctionCallError("niScope_GetEqualizationFilterCoefficients", param='coefficients')
+        test_value = self._defaults['GetEqualizationFilterCoefficients']['coefficients']
         try:
             coefficients_ref = coefficients.contents
         except AttributeError:
@@ -629,11 +629,11 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetError", param='errorCode')
         if error_code is not None:
             error_code.contents.value = self._defaults['GetError']['errorCode']
-        if self._defaults['GetError']['Description'] is None:
-            raise MockFunctionCallError("niScope_GetError", param='Description')
+        if self._defaults['GetError']['description'] is None:
+            raise MockFunctionCallError("niScope_GetError", param='description')
         if buffer_size.value == 0:
-            return len(self._defaults['GetError']['Description'])
-        description.value = self._defaults['GetError']['Description'].encode('ascii')
+            return len(self._defaults['GetError']['description'])
+        description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niScope_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
@@ -685,9 +685,9 @@ class SideEffectsHelper(object):
         if self._defaults['Read']['return'] != 0:
             return self._defaults['Read']['return']
         # waveform
-        if self._defaults['Read']['Waveform'] is None:
-            raise MockFunctionCallError("niScope_Read", param='Waveform')
-        test_value = self._defaults['Read']['Waveform']
+        if self._defaults['Read']['waveform'] is None:
+            raise MockFunctionCallError("niScope_Read", param='waveform')
+        test_value = self._defaults['Read']['waveform']
         try:
             waveform_ref = waveform.contents
         except AttributeError:
@@ -712,9 +712,9 @@ class SideEffectsHelper(object):
         if self._defaults['ReadMeasurement']['return'] != 0:
             return self._defaults['ReadMeasurement']['return']
         # result
-        if self._defaults['ReadMeasurement']['Result'] is None:
-            raise MockFunctionCallError("niScope_ReadMeasurement", param='Result')
-        test_value = self._defaults['ReadMeasurement']['Result']
+        if self._defaults['ReadMeasurement']['result'] is None:
+            raise MockFunctionCallError("niScope_ReadMeasurement", param='result')
+        test_value = self._defaults['ReadMeasurement']['result']
         try:
             result_ref = result.contents
         except AttributeError:
