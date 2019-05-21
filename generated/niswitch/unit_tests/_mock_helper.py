@@ -52,11 +52,11 @@ class SideEffectsHelper(object):
         self._defaults['GetChannelName']['channelNameBuffer'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
-        self._defaults['GetError']['Code'] = None
-        self._defaults['GetError']['Description'] = None
+        self._defaults['GetError']['code'] = None
+        self._defaults['GetError']['description'] = None
         self._defaults['GetPath'] = {}
         self._defaults['GetPath']['return'] = 0
-        self._defaults['GetPath']['Path'] = None
+        self._defaults['GetPath']['path'] = None
         self._defaults['GetRelayCount'] = {}
         self._defaults['GetRelayCount']['return'] = 0
         self._defaults['GetRelayCount']['relayCount'] = None
@@ -223,25 +223,25 @@ class SideEffectsHelper(object):
         if self._defaults['GetError']['return'] != 0:
             return self._defaults['GetError']['return']
         # code
-        if self._defaults['GetError']['Code'] is None:
-            raise MockFunctionCallError("niSwitch_GetError", param='Code')
+        if self._defaults['GetError']['code'] is None:
+            raise MockFunctionCallError("niSwitch_GetError", param='code')
         if code is not None:
-            code.contents.value = self._defaults['GetError']['Code']
-        if self._defaults['GetError']['Description'] is None:
-            raise MockFunctionCallError("niSwitch_GetError", param='Description')
+            code.contents.value = self._defaults['GetError']['code']
+        if self._defaults['GetError']['description'] is None:
+            raise MockFunctionCallError("niSwitch_GetError", param='description')
         if buffer_size.value == 0:
-            return len(self._defaults['GetError']['Description'])
-        description.value = self._defaults['GetError']['Description'].encode('ascii')
+            return len(self._defaults['GetError']['description'])
+        description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         if self._defaults['GetPath']['return'] != 0:
             return self._defaults['GetPath']['return']
-        if self._defaults['GetPath']['Path'] is None:
-            raise MockFunctionCallError("niSwitch_GetPath", param='Path')
+        if self._defaults['GetPath']['path'] is None:
+            raise MockFunctionCallError("niSwitch_GetPath", param='path')
         if buffer_size.value == 0:
-            return len(self._defaults['GetPath']['Path'])
-        path.value = self._defaults['GetPath']['Path'].encode('ascii')
+            return len(self._defaults['GetPath']['path'])
+        path.value = self._defaults['GetPath']['path'].encode('ascii')
         return self._defaults['GetPath']['return']
 
     def niSwitch_GetRelayCount(self, vi, relay_name, relay_count):  # noqa: N802
