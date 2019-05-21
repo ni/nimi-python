@@ -50,6 +50,12 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI DIGITAL
+    * #### Added
+        * Initial support
+        * Very basic at this point
+    * #### Changed
+    * #### Removed
 
 
 ## 1.1.0 - 2018-10-25
@@ -734,6 +740,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 * ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI DIGITAL
     * #### Added
     * #### Changed
     * #### Removed
