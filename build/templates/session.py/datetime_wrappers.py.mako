@@ -18,8 +18,6 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        import datetime
-
         ${output_params} = self.${called_function['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_CALL)})
         return datetime.datetime(year, month, day, hour, minute)
 
