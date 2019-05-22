@@ -393,7 +393,7 @@ def _add_default_attribute_class(a, attributes):
 
 def _add_repeated_capability_type(a, attributes):
     '''Add 'repeated_capability_type' if not already there.'''
-    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based'] == 'True':
+    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based']:
         attributes[a]['repeated_capability_type'] = 'channels'
 
 
@@ -441,7 +441,7 @@ def _add_enum_codegen_method(enums, config):
         if a_codegen_method != 'no':
             e = config['attributes'][a]['enum']
             if e is not None and e not in enums:
-                print('Missing enum {0} referenced by attribute {1}'.format(e, a['name']))
+                print('Missing enum {0} referenced by attribute {1}'.format(e, a))
             elif e is not None:
                 if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
                     enums[e]['codegen_method'] = a_codegen_method
@@ -553,6 +553,8 @@ def add_all_config_metadata(config):
 
     Ensure all defaults added to config
     '''
+    config = merge_helper(config, 'config', config, use_re=False)
+
     if 'use_locking' not in config:
         config['use_locking'] = True
 
@@ -863,11 +865,11 @@ functions_expected = {
 attributes_input = {
     1000000: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': False,
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
-        'resettable': 'No',
+        'resettable': False,
         'type': 'ViBoolean',
         'documentation': {
             'description': 'An attribute of type bool with read/write access.',
@@ -879,14 +881,14 @@ attributes_input = {
 attributes_expected = {
     1000000: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': False,
         'codegen_method': 'public',
         'documentation': {'description': 'An attribute of type bool with read/write access.'},
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
         'python_name': 'read_write_bool',
-        'resettable': 'No',
+        'resettable': False,
         'type': 'ViBoolean',
         'python_type': 'bool',
         'type_in_documentation': 'bool',

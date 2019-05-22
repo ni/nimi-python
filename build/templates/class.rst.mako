@@ -89,8 +89,8 @@ table_contents = [
          ('Characteristic', 'Value'),
          ('Datatype', a['type_in_documentation']),
          ('Permissions', a['access']),
-         ('Channel Based', a['channel_based']),
-         ('Resettable', a['resettable']),
+         ('Channel Based', 'Yes' if a['channel_based'] else 'No'),
+         ('Resettable', 'Yes' if a['resettable'] else 'No'),
          ]
 table = helper.as_rest_table(table_contents)
 
