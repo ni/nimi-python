@@ -642,11 +642,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
-    major_version = _attributes.AttributeViInt32(1050503)
-    '''Type: int
-
-    Returns the major version number of NI-FGEN.
-    '''
     marker_events_count = _attributes.AttributeViInt32(1150271)
     '''Type: int
 
@@ -710,11 +705,6 @@ class _SessionBase(object):
     '''Type: int
 
     The total amount of memory, in bytes, on the signal generator.
-    '''
-    minor_version = _attributes.AttributeViInt32(1050504)
-    '''Type: int
-
-    Returns the minor version number of NI-FGEN.
     '''
     min_freq_list_duration = _attributes.AttributeViReal64(1150212)
     '''Type: float
@@ -852,6 +842,16 @@ class _SessionBase(object):
     '''Type: str
 
     Returns a brief description of NI-FGEN.
+    '''
+    major_version = _attributes.AttributeViInt32(1050503)
+    '''Type: int
+
+    Returns the major version number of NI-FGEN.
+    '''
+    minor_version = _attributes.AttributeViInt32(1050504)
+    '''Type: int
+
+    Returns the minor version number of NI-FGEN.
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
     '''Type: str
@@ -1482,7 +1482,7 @@ class _SessionBase(object):
             session.channels[0,1].create_waveform(waveform_data_array)
 
         Args:
-            waveform_data_array (list of float): Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+            waveform_data_array (iterable of float or int16): Array of data for the new arbitrary waveform. This may be an iterable of float or int16, or for best performance a numpy.ndarray of dtype int16 or float64.
 
 
         Returns:
@@ -3532,6 +3532,8 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         sequence_length_ctype = _visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
+        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
         waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=_visatype.ViInt32)  # case B550
         loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=_visatype.ViInt32)  # case B550
         sequence_handle_ctype = _visatype.ViInt32()  # case S200
@@ -3619,6 +3621,8 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         waveform_ctype = _visatype.ViInt32(waveform.value)  # case S130
         frequency_list_length_ctype = _visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case S160
+        if duration_array is not None and len(duration_array) != len(frequency_array):  # case S160
+            raise ValueError("Length of duration_array and frequency_array parameters do not match.")  # case S160
         frequency_array_ctype = get_ctypes_pointer_for_buffer(value=frequency_array, library_type=_visatype.ViReal64)  # case B550
         duration_array_ctype = get_ctypes_pointer_for_buffer(value=duration_array, library_type=_visatype.ViReal64)  # case B550
         frequency_list_handle_ctype = _visatype.ViInt32()  # case S200
