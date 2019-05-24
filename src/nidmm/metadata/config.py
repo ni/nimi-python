@@ -12,7 +12,7 @@ config = {
     ],
     'driver_name': 'NI-DMM',
     'init_function': 'InitWithOptions',
-    'last_tested_version': '19.1.0d11',
+    'api_version': '19.1.0d11',
     'library_info': {
         'Linux': {
             '64bit': {
