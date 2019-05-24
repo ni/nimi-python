@@ -15,22 +15,12 @@ functions_enums = {
 
 # This is the additional metadata needed by the code generator in order create code that can properly handle buffer allocation.
 functions_buffer_info = {
-    'GetExtendedErrorInfo':                 { 'parameters': { 0: { 'size': { 'mechanism': 'ivi-dance', 'value': 'errorStringSize'}, }, }, },
-    'ConfigureForHomogeneousTriggers':      { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
-    'FinishSyncPulseSenderSynchronize':     { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
-    'Initiate':                             { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
-    'IsDone':                               { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
-    'SetupForSyncPulseSenderSynchronize':   { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
-    'Synchronize':                          { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
-    'SyncronizeToSyncPulseSender':          { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
-    'WaitUntilDone':                        { 'parameters': { 1: { 'size': { 'mechanism': 'len', 'value': 'sessionCount' }, }, }, },
 }
 
 # These are functions we mark as "error_handling":True. The generator uses this information to
 # change how error handling is done within those functions themselves - basically, if an error occurs,
 # dont try to handle it, since the functions are only used within the context of error handling.
 functions_is_error_handling = {
-    'GetExtendedErrorInfo':         { 'is_error_handling': True },
 }
 
 # There are some parameters that are needed in the C function call we use under the hood, but that we do not want in the Python API
@@ -51,24 +41,6 @@ functions_name = {
 
 # Functions not in original metadata.
 functions_additional_functions = {
-    'InitForDocumentation': {
-        'returns': 'ViStatus',
-        'codegen_method': 'python-only',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'SessionList',
-                'type': 'ViSession[]',
-                'default_value': None,
-                'documentation': {
-                    'description': 'Array of driver session object or sessions',
-                },
-            },
-        ],
-        'documentation': {
-            'description': 'TBD',
-        },
-    },
 }
 
 # Converted parameters
