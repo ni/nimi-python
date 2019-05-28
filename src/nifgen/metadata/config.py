@@ -12,7 +12,7 @@ config = {
     ],
     'driver_name': 'NI-FGEN',
     'init_function': 'InitializeWithChannels',
-    'last_tested_version': '19.1.0d0',
+    'api_version': '19.1.0d0',
     'library_info': {
         'Linux': {
             '64bit': {

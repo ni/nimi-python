@@ -12,7 +12,7 @@ config = {
     ],
     'driver_name': 'NI-DCPower',
     'init_function': 'InitializeWithChannels',
-    'last_tested_version': '19.1.0d33',
+    'api_version': '19.1.0d33',
     'library_info': {
         'Linux': {
             '64bit': {
