@@ -53,7 +53,8 @@ All notable changes to this project will be documented in this file.
 * ### NI DIGITAL
     * #### Added
         * Initial support
-        * Very basic at this point
+        * Very basic at this point and subject to change
+        * Looking for any testing and/or feedback
     * #### Changed
     * #### Removed
 
