@@ -6,7 +6,10 @@ def find_parameter(name, parameters):
 
 
 def find_size_parameter(parameter_list, parameters, key='value'):
-    '''Returns the parameter that is used to specify the size other parameters. Applies to 'ivi-dance' and 'passed-in'.'''
+    '''Returns the parameter that is used to specify the size other parameters. Applies to 'ivi-dance', 'ivi-dance-with-a-twist' and 'passed-in'.
+
+    Most behaviors will use 'value', but 'ivi-dance-with-a-twist' uses 'value' and 'value_twist'
+    '''
     if len(parameter_list) == 0:
         return None
     # Assumption: all parameters have the same size parameter, so we only need to use the first one
