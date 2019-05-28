@@ -338,7 +338,7 @@ def add_all_function_metadata(functions, config):
 
     for f in functions:
         _add_codegen_method(functions[f])
-        # NI-Digital doesn't have any documentation yet, so make sure the
+        # Some drivers do not have any documentation, so make sure the
         # documentation key exists
         if 'documentation' not in functions[f]:
             functions[f]['documentation'] = {}
