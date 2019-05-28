@@ -253,6 +253,8 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         S160. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list))
         S170. Input is size of output buffer with mechanism ivi-dance, QUERY_SIZE: visatype.ViInt32()
         S180. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
+        S190. Input is size of output buffer with mechanism ivi-dance-with-a-twist, QUERY_SIZE: visatype.ViInt32()
+        S200. Input is size of output buffer with mechanism ivi-dance-with-a-twist, GET_DATA:   visatype.ViInt32(error_code)
         S210. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
         S220. Output scalar or enum:                                               visatype.ViInt32()
 
@@ -296,7 +298,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
                 else:
                     assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
             elif corresponding_buffer_parameters[0]['size']['mechanism'] == 'ivi-dance-with-a-twist':  # We are only looking at the first one. Assumes all are the same here, assert below if not
-                # Verify all corresponding_buffer_parameters are 'out' and 'ivi-dance'
+                # Verify all corresponding_buffer_parameters are 'out' and 'ivi-dance-with-a-twist'
                 for p in corresponding_buffer_parameters:
                     assert p['direction'] == 'out'
                     assert p['size']['mechanism'] == 'ivi-dance-with-a-twist'
