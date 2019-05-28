@@ -152,6 +152,8 @@ def _get_buffer_parameters_for_size_parameter(parameter, parameters):
     for p in parameters:
         if (p['is_buffer'] or p['is_string']) and p['size']['value'] == parameter['name']:
             buffer_params.append(p)
+        elif (p['is_buffer'] or p['is_string']) and 'value_twist' in p['size'] and p['size']['value_twist'] == parameter['name']:
+            buffer_params.append(p)
     return buffer_params
 
 
@@ -251,8 +253,10 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         S160. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list))
         S170. Input is size of output buffer with mechanism ivi-dance, QUERY_SIZE: visatype.ViInt32()
         S180. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
-        S190. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
-        S200. Output scalar or enum:                                               visatype.ViInt32()
+        S190. Input is size of output buffer with mechanism ivi-dance-with-a-twist, QUERY_SIZE: visatype.ViInt32()
+        S200. Input is size of output buffer with mechanism ivi-dance-with-a-twist, GET_DATA:   visatype.ViInt32(error_code)
+        S210. Input is size of output buffer with mechanism passed-in:             visatype.ViInt32(buffer_size)
+        S220. Output scalar or enum:                                               visatype.ViInt32()
 
     Return Value (list): each item in the list will be one line needed for the declaration of that parameter
     '''
@@ -293,15 +297,27 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
                     definition = '{0}.{1}(error_code)  # case S180'.format(module_name, parameter['ctypes_type'])
                 else:
                     assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
+            elif corresponding_buffer_parameters[0]['size']['mechanism'] == 'ivi-dance-with-a-twist':  # We are only looking at the first one. Assumes all are the same here, assert below if not
+                # Verify all corresponding_buffer_parameters are 'out' and 'ivi-dance-with-a-twist'
+                for p in corresponding_buffer_parameters:
+                    assert p['direction'] == 'out'
+                    assert p['size']['mechanism'] == 'ivi-dance-with-a-twist'
+                if ivi_dance_step == IviDanceStep.QUERY_SIZE:
+                    definition = '{0}.{1}(0)  # case S190'.format(module_name, parameter['ctypes_type'])
+                elif ivi_dance_step == IviDanceStep.GET_DATA:
+                    size_parameter_twist = find_size_parameter(corresponding_buffer_parameters[0], parameters, key='value_twist')
+                    definition = '{0}.{1}({2}.value)  # case S200'.format(module_name, parameter['ctypes_type'], size_parameter_twist['ctypes_variable_name'])
+                else:
+                    assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance-with-a-twist'".format(ivi_dance_step, parameter['name'])
             else:
                 # Verify all corresponding_buffer_parameters are 'out' and not 'fixed-size'
                 for p in corresponding_buffer_parameters:
                     assert p['direction'] == 'out'
                     assert p['size']['mechanism'] != 'fixed-size'
-                definition = '{0}.{1}({2})  # case S190'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                definition = '{0}.{1}({2})  # case S210'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'
-        definition = '{0}.{1}()  # case S200'.format(module_name, parameter['ctypes_type'])
+        definition = '{0}.{1}()  # case S220'.format(module_name, parameter['ctypes_type'])
 
     if definition is not None:
         definitions.append(parameter['ctypes_variable_name'] + ' = ' + definition)
@@ -319,6 +335,8 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         B580. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
         B590. Output buffer with mechanism ivi-dance, GET_DATA:                    get_ctypes_pointer_for_buffer(value=array.array('d', [0] * buffer_size_ctype.value, library_type=ViInt32)
         B600. Output buffer with mechanism passed-in:                              get_ctypes_pointer_for_buffer(value-array.array('d', [0] * buffer_size, library_type=ViInt32)
+        B610. Output buffer with mechanism ivi-dance-with-a-twist, QUERY_SIZE:     None
+        B620. Output buffer with mechanism ivi-dance-with-a-twist, GET_DATA:       get_ctypes_pointer_for_buffer(value=array.array('d', [0] * buffer_size_ctype.value, library_type=ViInt32)
 
     Return Value (list): each item in the list will be one line needed for the declaration of that parameter
 
@@ -387,6 +405,23 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                     assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
             else:
                 assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
+        elif parameter['size']['mechanism'] == 'ivi-dance-with-a-twist':
+            if ivi_dance_step == IviDanceStep.QUERY_SIZE:
+                definition = 'None  # case B600'
+            elif ivi_dance_step == IviDanceStep.GET_DATA:
+                size_parameter_twist = find_size_parameter(parameter, parameters, key='value_twist')
+                line1 = '{0}_size = {1}.value  # case B610'.format(parameter['python_name'], size_parameter_twist['ctypes_variable_name'])
+                definitions.append(line1)
+                if parameter['use_array']:
+                    line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B610'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                    definitions.append(line2)
+                    definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B610'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                elif parameter['use_list']:
+                    definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B610'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                else:
+                    assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
+            else:
+                assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance-with-a-twist'".format(ivi_dance_step, parameter['name'])
         elif parameter['size']['mechanism'] == 'passed-in':
             size_parameter = find_size_parameter(parameter, parameters)
             line1 = '{0}_size = {1}  # case B600'.format(parameter['python_name'], size_parameter['python_name'])
@@ -1036,14 +1071,14 @@ def test_get_ctype_variable_declaration_snippet_case_s180():
     assert snippet == ["string_size_ctype = _visatype.ViInt32(error_code)  # case S180"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_s190():
+def test_get_ctype_variable_declaration_snippet_case_s210():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[4], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S190"]
+    assert snippet == ["number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_s200():
+def test_get_ctype_variable_declaration_snippet_case_s220():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[1], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["output_ctype = _visatype.ViInt64()  # case S200"]
+    assert snippet == ["output_ctype = _visatype.ViInt64()  # case S220"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b510():
