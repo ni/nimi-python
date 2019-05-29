@@ -372,7 +372,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAnIviDanceWithATwistString': {
-        'codegen_method': 'no',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'TBD'
         },
