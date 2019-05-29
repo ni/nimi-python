@@ -364,6 +364,106 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
+    def get_attribute_with_options_vi_int32(self, attribute_id, retrievalmode):
+        r'''get_attribute_with_options_vi_int32
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].get_attribute_with_options_vi_int32(attribute_id, retrievalmode)
+
+        Args:
+            attribute_id (int):
+
+            retrievalmode (int):
+
+
+        Returns:
+            attribute_value (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        retrievalmode_ctype = _visatype.ViInt32(retrievalmode)  # case S150
+        attribute_value_ctype = _visatype.ViInt32()  # case S200
+        error_code = self._library.niFake_GetAttributeWithOptionsViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, retrievalmode_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(attribute_value_ctype.value)
+
+    @ivi_synchronized
+    def get_attribute_with_options_vi_real64(self, attribute_id, retrievalmode):
+        r'''get_attribute_with_options_vi_real64
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].get_attribute_with_options_vi_real64(attribute_id, retrievalmode)
+
+        Args:
+            attribute_id (int):
+
+            retrievalmode (int):
+
+
+        Returns:
+            attribute_value (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        retrievalmode_ctype = _visatype.ViInt32(retrievalmode)  # case S150
+        attribute_value_ctype = _visatype.ViReal64()  # case S200
+        error_code = self._library.niFake_GetAttributeWithOptionsViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, retrievalmode_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(attribute_value_ctype.value)
+
+    @ivi_synchronized
+    def get_attribute_with_options_vi_string(self, attribute_id, retrievalmode):
+        r'''get_attribute_with_options_vi_string
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].get_attribute_with_options_vi_string(attribute_id, retrievalmode)
+
+        Args:
+            attribute_id (int):
+
+            retrievalmode (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        retrievalmode_ctype = _visatype.ViInt32(retrievalmode)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        attribute_value_ctype = None  # case C050
+        error_code = self._library.niFake_GetAttributeWithOptionsViString(vi_ctype, channel_name_ctype, attribute_id_ctype, retrievalmode_ctype, buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        attribute_value_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niFake_GetAttributeWithOptionsViString(vi_ctype, channel_name_ctype, attribute_id_ctype, retrievalmode_ctype, buffer_size_ctype, attribute_value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return attribute_value_ctype.value.decode(self._encoding)
+
     def _get_error(self):
         r'''_get_error
 
@@ -459,6 +559,31 @@ class _SessionBase(object):
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
+
+    @ivi_synchronized
+    def reset_attribute(self, attribute_id):
+        r'''reset_attribute
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nifake.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nifake.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].reset_attribute(attribute_id)
+
+        Args:
+            attribute_id (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        error_code = self._library.niFake_ResetAttribute(vi_ctype, channel_name_ctype, attribute_id_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -983,7 +1108,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(self.get_array_size_for_python_code())  # case S120
         array_out_size = self.get_array_size_for_python_code()  # case B560
-        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=array_out_size)  # case B560
+        array_out_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.struct_CustomStruct, size=array_out_size)  # case B560
         error_code = self._library.niFake_GetArrayForPythonCodeCustomType(vi_ctype, number_of_elements_ctype, array_out_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(array_out_ctype[i]) for i in range(self.get_array_size_for_python_code())]
@@ -1100,7 +1225,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cs_ctype = custom_struct.custom_struct()  # case S220
+        cs_ctype = custom_struct.struct_CustomStruct()  # case S200
         error_code = self._library.niFake_GetCustomType(vi_ctype, None if cs_ctype is None else (ctypes.pointer(cs_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return custom_struct.CustomStruct(cs_ctype)
@@ -1122,7 +1247,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
         cs_size = number_of_elements  # case B600
-        cs_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=cs_size)  # case B600
+        cs_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.struct_CustomStruct, size=cs_size)  # case B600
         error_code = self._library.niFake_GetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [custom_struct.CustomStruct(cs_ctype[i]) for i in range(number_of_elements_ctype.value)]
@@ -1220,6 +1345,35 @@ class Session(_SessionBase):
         return int(vi_ctype.value)
 
     @ivi_synchronized
+    def initialize_with_channels(self, resource_name, channels, reset, option_string):
+        r'''initialize_with_channels
+
+        TBD
+
+        Args:
+            resource_name (str):
+
+            channels (str):
+
+            reset (bool):
+
+            option_string (str):
+
+
+        Returns:
+            new_vi (int):
+
+        '''
+        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
+        channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
+        reset_ctype = _visatype.ViBoolean(reset)  # case S150
+        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        new_vi_ctype = _visatype.ViSession()  # case S200
+        error_code = self._library.niFake_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, None if new_vi_ctype is None else (ctypes.pointer(new_vi_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(new_vi_ctype.value)
+
+    @ivi_synchronized
     def _initiate(self):
         r'''_initiate
 
@@ -1314,6 +1468,22 @@ class Session(_SessionBase):
         error_code = self._library.niFake_OneInputFunction(vi_ctype, a_number_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def one_output_function(self):
+        r'''one_output_function
+
+        TBD
+
+        Returns:
+            a_number (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_number_ctype = _visatype.ViInt16()  # case S200
+        error_code = self._library.niFake_OneOutputFunction(vi_ctype, None if a_number_ctype is None else (ctypes.pointer(a_number_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(a_number_ctype.value)
 
     @ivi_synchronized
     def parameters_are_multiple_types(self, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):
@@ -1486,7 +1656,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cs_ctype = custom_struct.custom_struct(cs)  # case S150
+        cs_ctype = custom_struct.struct_CustomStruct(cs)  # case S150
         error_code = self._library.niFake_SetCustomType(vi_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1503,7 +1673,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
-        cs_ctype = get_ctypes_pointer_for_buffer([custom_struct.custom_struct(c) for c in cs], library_type=custom_struct.custom_struct)  # case B540
+        cs_ctype = get_ctypes_pointer_for_buffer([custom_struct.struct_CustomStruct(c) for c in cs], library_type=custom_struct.struct_CustomStruct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
