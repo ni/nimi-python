@@ -783,6 +783,19 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
+    def test_get_an_ivi_dance_with_a_twist_string(self):
+        self.patched_library.niFake_GetAnIviDanceWithATwistString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceWithATwistString
+        string_val = 'Testing is fun?'
+        self.side_effects_helper['GetAnIviDanceWithATwistString']['aString'] = string_val
+        self.side_effects_helper['GetAnIviDanceWithATwistString']['actualSize'] = len(string_val)
+        with nifake.Session('dev1') as session:
+            result_string = session.get_an_ivi_dance_with_a_twist_string()
+            assert result_string == string_val
+            from mock import call
+            calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)))]
+            self.patched_library.niFake_GetAnIviDanceWithATwistString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAnIviDanceWithATwistString.call_count == 2
+
     def test_get_array_using_ivi_dance(self):
         self.patched_library.niFake_GetArrayUsingIviDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIviDance
         self.side_effects_helper['GetArrayUsingIviDance']['arrayOut'] = [1.1, 2.2]
