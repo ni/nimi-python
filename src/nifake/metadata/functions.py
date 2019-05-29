@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated
+# This file is generated from NI-FAKE API metadata version 0.2.0d23
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -371,6 +371,40 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetAnIviDanceWithATwistString': {
+        'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'aString',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'bufferSize',
+                    'value_twist': 'actualSize'
+                },
+                'type': 'ViChar[]'
+            },
+            {
+                'direction': 'out',
+                'name': 'actualSize',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetArrayForPythonCodeCustomType': {
         'codegen_method': 'public',
         'documentation': {
@@ -407,7 +441,7 @@ functions = {
                     'mechanism': 'python-code',
                     'value': 'self.get_array_size_for_python_code()'
                 },
-                'type': 'custom_struct[]'
+                'type': 'struct CustomStruct[]'
             }
         ],
         'returns': 'ViStatus'
@@ -773,6 +807,114 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetAttributeWithOptionsViInt32': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'attributeId',
+                'type': 'ViAttr'
+            },
+            {
+                'direction': 'in',
+                'name': 'retrievalmode',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'attributeValue',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetAttributeWithOptionsViReal64': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'attributeId',
+                'type': 'ViAttr'
+            },
+            {
+                'direction': 'in',
+                'name': 'retrievalmode',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'attributeValue',
+                'type': 'ViReal64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetAttributeWithOptionsViString': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'attributeId',
+                'type': 'ViAttr'
+            },
+            {
+                'direction': 'in',
+                'name': 'retrievalmode',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'attributeValue',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
+                'type': 'ViChar[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetCalDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
@@ -864,6 +1006,39 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetChannelName': {
+        'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'index',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'nameSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'name',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'nameSize'
+                },
+                'type': 'ViChar[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetCustomType': {
         'codegen_method': 'public',
         'documentation': {
@@ -884,7 +1059,7 @@ functions = {
                     'description': 'Set using custom type'
                 },
                 'name': 'cs',
-                'type': 'custom_struct'
+                'type': 'struct CustomStruct'
             }
         ],
         'returns': 'ViStatus'
@@ -921,7 +1096,7 @@ functions = {
                     'mechanism': 'passed-in',
                     'value': 'numberOfElements'
                 },
-                'type': 'custom_struct[]'
+                'type': 'struct CustomStruct[]'
             }
         ],
         'returns': 'ViStatus'
@@ -1032,6 +1207,7 @@ functions = {
         'documentation': {
             'description': 'Returns the errorMessage as a user-readable string. Uses IVI-dance'
         },
+        'is_error_handling': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1063,10 +1239,15 @@ functions = {
                     'description': 'Error information formatted into a user-readable string.'
                 },
                 'name': 'errorMessage',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
+                },
                 'type': 'ViChar[]'
             }
         ],
-        'returns': 'ViStatus'
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'GetLastCalDateAndTime': {
         'codegen_method': 'python-only',
@@ -1175,7 +1356,7 @@ functions = {
                 },
                 'name': 'optionString',
                 'python_api_converter_name': 'convert_init_with_options_dictionary',
-                'type': 'ViString',
+                'type': 'ViConstString',
                 'type_in_documentation': 'dict'
             },
             {
@@ -1189,6 +1370,39 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': False
+    },
+    'InitializeWithChannels': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'resourceName',
+                'type': 'ViRsrc'
+            },
+            {
+                'direction': 'in',
+                'name': 'channels',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reset',
+                'type': 'ViBoolean'
+            },
+            {
+                'direction': 'in',
+                'name': 'optionString',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'name': 'newVi',
+                'type': 'ViSession'
+            }
+        ],
+        'returns': 'ViStatus'
     },
     'Initiate': {
         'codegen_method': 'private',
@@ -1421,6 +1635,24 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'OneOutputFunction': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'aNumber',
+                'type': 'ViInt16'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'ParametersAreMultipleTypes': {
         'codegen_method': 'public',
         'documentation': {
@@ -1521,7 +1753,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'stringSize'
                 },
-                'type': 'ViString'
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
@@ -1618,6 +1850,29 @@ functions = {
                 },
                 'name': 'reading',
                 'type': 'ViReal64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ResetAttribute': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'attributeId',
+                'type': 'ViAttr'
             }
         ],
         'returns': 'ViStatus'
@@ -2027,7 +2282,7 @@ functions = {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
                 'name': 'attributeValue',
-                'type': 'ViString'
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
@@ -2052,7 +2307,7 @@ functions = {
                     'description': 'Set using custom type'
                 },
                 'name': 'cs',
-                'type': 'custom_struct'
+                'type': 'struct CustomStruct'
             }
         ],
         'returns': 'ViStatus'
@@ -2089,7 +2344,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'numberOfElements'
                 },
-                'type': 'custom_struct[]'
+                'type': 'struct CustomStruct[]'
             }
         ],
         'returns': 'ViStatus'
