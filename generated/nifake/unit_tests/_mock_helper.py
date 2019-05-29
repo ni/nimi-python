@@ -72,15 +72,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
-        self._defaults['GetAttributeWithOptionsViInt32'] = {}
-        self._defaults['GetAttributeWithOptionsViInt32']['return'] = 0
-        self._defaults['GetAttributeWithOptionsViInt32']['attributeValue'] = None
-        self._defaults['GetAttributeWithOptionsViReal64'] = {}
-        self._defaults['GetAttributeWithOptionsViReal64']['return'] = 0
-        self._defaults['GetAttributeWithOptionsViReal64']['attributeValue'] = None
-        self._defaults['GetAttributeWithOptionsViString'] = {}
-        self._defaults['GetAttributeWithOptionsViString']['return'] = 0
-        self._defaults['GetAttributeWithOptionsViString']['attributeValue'] = None
         self._defaults['GetCalDateAndTime'] = {}
         self._defaults['GetCalDateAndTime']['return'] = 0
         self._defaults['GetCalDateAndTime']['month'] = None
@@ -108,9 +99,6 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
-        self._defaults['InitializeWithChannels'] = {}
-        self._defaults['InitializeWithChannels']['return'] = 0
-        self._defaults['InitializeWithChannels']['newVi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
         self._defaults['LockSession'] = {}
@@ -124,9 +112,6 @@ class SideEffectsHelper(object):
         self._defaults['MultipleArraysSameSize']['return'] = 0
         self._defaults['OneInputFunction'] = {}
         self._defaults['OneInputFunction']['return'] = 0
-        self._defaults['OneOutputFunction'] = {}
-        self._defaults['OneOutputFunction']['return'] = 0
-        self._defaults['OneOutputFunction']['aNumber'] = None
         self._defaults['ParametersAreMultipleTypes'] = {}
         self._defaults['ParametersAreMultipleTypes']['return'] = 0
         self._defaults['PoorlyNamedSimpleFunction'] = {}
@@ -137,8 +122,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadFromChannel'] = {}
         self._defaults['ReadFromChannel']['return'] = 0
         self._defaults['ReadFromChannel']['reading'] = None
-        self._defaults['ResetAttribute'] = {}
-        self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ReturnANumberAndAString'] = {}
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
@@ -421,36 +404,6 @@ class SideEffectsHelper(object):
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
-    def niFake_GetAttributeWithOptionsViInt32(self, vi, channel_name, attribute_id, retrievalmode, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeWithOptionsViInt32']['return'] != 0:
-            return self._defaults['GetAttributeWithOptionsViInt32']['return']
-        # attribute_value
-        if self._defaults['GetAttributeWithOptionsViInt32']['attributeValue'] is None:
-            raise MockFunctionCallError("niFake_GetAttributeWithOptionsViInt32", param='attributeValue')
-        if attribute_value is not None:
-            attribute_value.contents.value = self._defaults['GetAttributeWithOptionsViInt32']['attributeValue']
-        return self._defaults['GetAttributeWithOptionsViInt32']['return']
-
-    def niFake_GetAttributeWithOptionsViReal64(self, vi, channel_name, attribute_id, retrievalmode, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeWithOptionsViReal64']['return'] != 0:
-            return self._defaults['GetAttributeWithOptionsViReal64']['return']
-        # attribute_value
-        if self._defaults['GetAttributeWithOptionsViReal64']['attributeValue'] is None:
-            raise MockFunctionCallError("niFake_GetAttributeWithOptionsViReal64", param='attributeValue')
-        if attribute_value is not None:
-            attribute_value.contents.value = self._defaults['GetAttributeWithOptionsViReal64']['attributeValue']
-        return self._defaults['GetAttributeWithOptionsViReal64']['return']
-
-    def niFake_GetAttributeWithOptionsViString(self, vi, channel_name, attribute_id, retrievalmode, buffer_size, attribute_value):  # noqa: N802
-        if self._defaults['GetAttributeWithOptionsViString']['return'] != 0:
-            return self._defaults['GetAttributeWithOptionsViString']['return']
-        if self._defaults['GetAttributeWithOptionsViString']['attributeValue'] is None:
-            raise MockFunctionCallError("niFake_GetAttributeWithOptionsViString", param='attributeValue')
-        if buffer_size.value == 0:
-            return len(self._defaults['GetAttributeWithOptionsViString']['attributeValue'])
-        attribute_value.value = self._defaults['GetAttributeWithOptionsViString']['attributeValue'].encode('ascii')
-        return self._defaults['GetAttributeWithOptionsViString']['return']
-
     def niFake_GetCalDateAndTime(self, vi, cal_type, month, day, year, hour, minute):  # noqa: N802
         if self._defaults['GetCalDateAndTime']['return'] != 0:
             return self._defaults['GetCalDateAndTime']['return']
@@ -558,16 +511,6 @@ class SideEffectsHelper(object):
             vi.contents.value = self._defaults['InitWithOptions']['vi']
         return self._defaults['InitWithOptions']['return']
 
-    def niFake_InitializeWithChannels(self, resource_name, channels, reset, option_string, new_vi):  # noqa: N802
-        if self._defaults['InitializeWithChannels']['return'] != 0:
-            return self._defaults['InitializeWithChannels']['return']
-        # new_vi
-        if self._defaults['InitializeWithChannels']['newVi'] is None:
-            raise MockFunctionCallError("niFake_InitializeWithChannels", param='newVi')
-        if new_vi is not None:
-            new_vi.contents.value = self._defaults['InitializeWithChannels']['newVi']
-        return self._defaults['InitializeWithChannels']['return']
-
     def niFake_Initiate(self, vi):  # noqa: N802
         if self._defaults['Initiate']['return'] != 0:
             return self._defaults['Initiate']['return']
@@ -620,16 +563,6 @@ class SideEffectsHelper(object):
             return self._defaults['OneInputFunction']['return']
         return self._defaults['OneInputFunction']['return']
 
-    def niFake_OneOutputFunction(self, vi, a_number):  # noqa: N802
-        if self._defaults['OneOutputFunction']['return'] != 0:
-            return self._defaults['OneOutputFunction']['return']
-        # a_number
-        if self._defaults['OneOutputFunction']['aNumber'] is None:
-            raise MockFunctionCallError("niFake_OneOutputFunction", param='aNumber')
-        if a_number is not None:
-            a_number.contents.value = self._defaults['OneOutputFunction']['aNumber']
-        return self._defaults['OneOutputFunction']['return']
-
     def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
         if self._defaults['ParametersAreMultipleTypes']['return'] != 0:
             return self._defaults['ParametersAreMultipleTypes']['return']
@@ -659,11 +592,6 @@ class SideEffectsHelper(object):
         if reading is not None:
             reading.contents.value = self._defaults['ReadFromChannel']['reading']
         return self._defaults['ReadFromChannel']['return']
-
-    def niFake_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
-        if self._defaults['ResetAttribute']['return'] != 0:
-            return self._defaults['ResetAttribute']['return']
-        return self._defaults['ResetAttribute']['return']
 
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['ReturnANumberAndAString']['return'] != 0:
@@ -878,12 +806,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAttributeViReal64.return_value = 0
         mock_library.niFake_GetAttributeViString.side_effect = MockFunctionCallError("niFake_GetAttributeViString")
         mock_library.niFake_GetAttributeViString.return_value = 0
-        mock_library.niFake_GetAttributeWithOptionsViInt32.side_effect = MockFunctionCallError("niFake_GetAttributeWithOptionsViInt32")
-        mock_library.niFake_GetAttributeWithOptionsViInt32.return_value = 0
-        mock_library.niFake_GetAttributeWithOptionsViReal64.side_effect = MockFunctionCallError("niFake_GetAttributeWithOptionsViReal64")
-        mock_library.niFake_GetAttributeWithOptionsViReal64.return_value = 0
-        mock_library.niFake_GetAttributeWithOptionsViString.side_effect = MockFunctionCallError("niFake_GetAttributeWithOptionsViString")
-        mock_library.niFake_GetAttributeWithOptionsViString.return_value = 0
         mock_library.niFake_GetCalDateAndTime.side_effect = MockFunctionCallError("niFake_GetCalDateAndTime")
         mock_library.niFake_GetCalDateAndTime.return_value = 0
         mock_library.niFake_GetCalInterval.side_effect = MockFunctionCallError("niFake_GetCalInterval")
@@ -898,8 +820,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetError.return_value = 0
         mock_library.niFake_InitWithOptions.side_effect = MockFunctionCallError("niFake_InitWithOptions")
         mock_library.niFake_InitWithOptions.return_value = 0
-        mock_library.niFake_InitializeWithChannels.side_effect = MockFunctionCallError("niFake_InitializeWithChannels")
-        mock_library.niFake_InitializeWithChannels.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
         mock_library.niFake_Initiate.return_value = 0
         mock_library.niFake_LockSession.side_effect = MockFunctionCallError("niFake_LockSession")
@@ -910,8 +830,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_MultipleArraysSameSize.return_value = 0
         mock_library.niFake_OneInputFunction.side_effect = MockFunctionCallError("niFake_OneInputFunction")
         mock_library.niFake_OneInputFunction.return_value = 0
-        mock_library.niFake_OneOutputFunction.side_effect = MockFunctionCallError("niFake_OneOutputFunction")
-        mock_library.niFake_OneOutputFunction.return_value = 0
         mock_library.niFake_ParametersAreMultipleTypes.side_effect = MockFunctionCallError("niFake_ParametersAreMultipleTypes")
         mock_library.niFake_ParametersAreMultipleTypes.return_value = 0
         mock_library.niFake_PoorlyNamedSimpleFunction.side_effect = MockFunctionCallError("niFake_PoorlyNamedSimpleFunction")
@@ -920,8 +838,6 @@ class SideEffectsHelper(object):
         mock_library.niFake_Read.return_value = 0
         mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
         mock_library.niFake_ReadFromChannel.return_value = 0
-        mock_library.niFake_ResetAttribute.side_effect = MockFunctionCallError("niFake_ResetAttribute")
-        mock_library.niFake_ResetAttribute.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
         mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")
