@@ -807,114 +807,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'GetAttributeWithOptionsViInt32': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'attributeId',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'in',
-                'name': 'retrievalmode',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'attributeValue',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetAttributeWithOptionsViReal64': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'attributeId',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'in',
-                'name': 'retrievalmode',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'attributeValue',
-                'type': 'ViReal64'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetAttributeWithOptionsViString': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'attributeId',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'in',
-                'name': 'retrievalmode',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'bufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'attributeValue',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'GetCalDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
@@ -1372,6 +1264,7 @@ functions = {
         'use_session_lock': False
     },
     'InitializeWithChannels': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -1636,6 +1529,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'OneOutputFunction': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -1855,6 +1749,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ResetAttribute': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
