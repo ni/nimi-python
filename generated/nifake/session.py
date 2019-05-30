@@ -971,6 +971,28 @@ class Session(_SessionBase):
         return a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
+    def get_an_ivi_dance_with_a_twist_string(self):
+        r'''get_an_ivi_dance_with_a_twist_string
+
+        TBD
+
+        Returns:
+            actual_size (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        a_string_ctype = None  # case C050
+        actual_size_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niFake_GetAnIviDanceWithATwistString(vi_ctype, buffer_size_ctype, a_string_ctype, None if actual_size_ctype is None else (ctypes.pointer(actual_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(actual_size_ctype.value)  # case S200
+        a_string_ctype = (_visatype.ViChar * actual_size_ctype.value)()  # case C060
+        error_code = self._library.niFake_GetAnIviDanceWithATwistString(vi_ctype, buffer_size_ctype, a_string_ctype, None if actual_size_ctype is None else (ctypes.pointer(actual_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return a_string_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def get_array_for_python_code_custom_type(self):
         r'''get_array_for_python_code_custom_type
 
@@ -1100,7 +1122,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        cs_ctype = custom_struct.struct_CustomStruct()  # case S200
+        cs_ctype = custom_struct.struct_CustomStruct()  # case S220
         error_code = self._library.niFake_GetCustomType(vi_ctype, None if cs_ctype is None else (ctypes.pointer(cs_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return custom_struct.CustomStruct(cs_ctype)

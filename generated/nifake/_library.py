@@ -30,6 +30,7 @@ class Library(object):
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
         self.niFake_GetAStringUsingPythonCode_cfunc = None
         self.niFake_GetAnIviDanceString_cfunc = None
+        self.niFake_GetAnIviDanceWithATwistString_cfunc = None
         self.niFake_GetArrayForPythonCodeCustomType_cfunc = None
         self.niFake_GetArrayForPythonCodeDouble_cfunc = None
         self.niFake_GetArraySizeForPythonCode_cfunc = None
@@ -151,6 +152,14 @@ class Library(object):
                 self.niFake_GetAnIviDanceString_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetAnIviDanceString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAnIviDanceString_cfunc(vi, buffer_size, a_string)
+
+    def niFake_GetAnIviDanceWithATwistString(self, vi, buffer_size, a_string, actual_size):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetAnIviDanceWithATwistString_cfunc is None:
+                self.niFake_GetAnIviDanceWithATwistString_cfunc = self._library.niFake_GetAnIviDanceWithATwistString
+                self.niFake_GetAnIviDanceWithATwistString_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_GetAnIviDanceWithATwistString_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetAnIviDanceWithATwistString_cfunc(vi, buffer_size, a_string, actual_size)
 
     def niFake_GetArrayForPythonCodeCustomType(self, vi, number_of_elements, array_out):  # noqa: N802
         with self._func_lock:
