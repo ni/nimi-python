@@ -225,6 +225,15 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
             else:
                 assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
 
+        elif parameter['size']['mechanism'] == 'ivi-dance-with-a-twist':
+            if ivi_dance_step == IviDanceStep.QUERY_SIZE:
+                definition = 'None  # case C050'
+            elif ivi_dance_step == IviDanceStep.GET_DATA:
+                size_parameter = find_size_parameter(parameter, parameters, key='value_twist')
+                definition = '({0}.ViChar * {1}.value)()  # case C060'.format(module_name, size_parameter['ctypes_variable_name'])
+            else:
+                assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance-with-a-twist'".format(ivi_dance_step, parameter['name'])
+
         elif parameter['size']['mechanism'] == 'fixed':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
             definition = '({0}.ViChar * {2})()  # case C070'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])

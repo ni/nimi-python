@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated
+# This file is generated from NI-FAKE API metadata version 0.2.0d23
 enums = {
     'BeautifulColor': {
         'values': [

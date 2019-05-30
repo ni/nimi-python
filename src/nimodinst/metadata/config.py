@@ -7,7 +7,7 @@ config = {
     ],
     'driver_name': 'NI-ModInst',
     'init_function': 'OpenInstalledDevicesSession',
-    'last_tested_version': '255.0.0d4',
+    'api_version': '255.0.0d4',
     'library_info': {
         'Linux': {
             '64bit': {

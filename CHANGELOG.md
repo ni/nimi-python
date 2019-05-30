@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
     * #### Added
     * #### Changed
+        * Enum values for `HardwareState` were incorrect - fix to match niFgen.h
     * #### Removed
 * ### NI-SCOPE
     * #### Added
