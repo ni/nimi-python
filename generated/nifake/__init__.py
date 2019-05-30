@@ -11,7 +11,7 @@ from nifake.session import Session  # noqa: F401
 
 from nifake.custom_struct import CustomStruct  # noqa: F401
 
-from nifake.custom_struct import custom_struct  # noqa: F401
+from nifake.custom_struct import struct_CustomStruct  # noqa: F401
 
 
 def get_diagnostic_information():
