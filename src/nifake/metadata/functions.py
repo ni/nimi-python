@@ -372,7 +372,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAnIviDanceWithATwistString': {
-        'codegen_method': 'no',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'TBD'
         },
@@ -400,7 +400,8 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'actualSize',
-                'type': 'ViInt32'
+                'type': 'ViInt32',
+                'use_in_python_api': False
             }
         ],
         'returns': 'ViStatus'

@@ -45,6 +45,10 @@ class SideEffectsHelper(object):
         self._defaults['GetAnIviDanceString'] = {}
         self._defaults['GetAnIviDanceString']['return'] = 0
         self._defaults['GetAnIviDanceString']['aString'] = None
+        self._defaults['GetAnIviDanceWithATwistString'] = {}
+        self._defaults['GetAnIviDanceWithATwistString']['return'] = 0
+        self._defaults['GetAnIviDanceWithATwistString']['actualSize'] = None
+        self._defaults['GetAnIviDanceWithATwistString']['aString'] = None
         self._defaults['GetArrayForPythonCodeCustomType'] = {}
         self._defaults['GetArrayForPythonCodeCustomType']['return'] = 0
         self._defaults['GetArrayForPythonCodeCustomType']['arrayOut'] = None
@@ -296,6 +300,21 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAnIviDanceString']['aString'])
         a_string.value = self._defaults['GetAnIviDanceString']['aString'].encode('ascii')
         return self._defaults['GetAnIviDanceString']['return']
+
+    def niFake_GetAnIviDanceWithATwistString(self, vi, buffer_size, a_string, actual_size):  # noqa: N802
+        if self._defaults['GetAnIviDanceWithATwistString']['return'] != 0:
+            return self._defaults['GetAnIviDanceWithATwistString']['return']
+        # actual_size
+        if self._defaults['GetAnIviDanceWithATwistString']['actualSize'] is None:
+            raise MockFunctionCallError("niFake_GetAnIviDanceWithATwistString", param='actualSize')
+        if actual_size is not None:
+            actual_size.contents.value = self._defaults['GetAnIviDanceWithATwistString']['actualSize']
+        if self._defaults['GetAnIviDanceWithATwistString']['aString'] is None:
+            raise MockFunctionCallError("niFake_GetAnIviDanceWithATwistString", param='aString')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetAnIviDanceWithATwistString']['aString'])
+        a_string.value = self._defaults['GetAnIviDanceWithATwistString']['aString'].encode('ascii')
+        return self._defaults['GetAnIviDanceWithATwistString']['return']
 
     def niFake_GetArrayForPythonCodeCustomType(self, vi, number_of_elements, array_out):  # noqa: N802
         if self._defaults['GetArrayForPythonCodeCustomType']['return'] != 0:
@@ -788,6 +807,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAStringUsingPythonCode.return_value = 0
         mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
         mock_library.niFake_GetAnIviDanceString.return_value = 0
+        mock_library.niFake_GetAnIviDanceWithATwistString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceWithATwistString")
+        mock_library.niFake_GetAnIviDanceWithATwistString.return_value = 0
         mock_library.niFake_GetArrayForPythonCodeCustomType.side_effect = MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType")
         mock_library.niFake_GetArrayForPythonCodeCustomType.return_value = 0
         mock_library.niFake_GetArrayForPythonCodeDouble.side_effect = MockFunctionCallError("niFake_GetArrayForPythonCodeDouble")
