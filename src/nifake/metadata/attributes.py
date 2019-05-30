@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated
+# This file is generated from NI-FAKE API metadata version 0.2.0d23
 attributes = {
     1000000: {
         'access': 'read-write',
@@ -7,6 +7,7 @@ attributes = {
         'documentation': {
             'description': 'An attribute of type bool with read/write access.'
         },
+        'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
         'resettable': False,
         'type': 'ViBoolean'
@@ -17,6 +18,7 @@ attributes = {
         'documentation': {
             'description': 'An attribute of type float with read/write access.'
         },
+        'lv_property': 'Fake attributes:Read Write Float',
         'name': 'READ_WRITE_DOUBLE',
         'resettable': False,
         'type': 'ViReal64'
@@ -27,6 +29,7 @@ attributes = {
         'documentation': {
             'description': 'An attribute of type string with read/write access.'
         },
+        'lv_property': 'Fake attributes:Read Write String',
         'name': 'READ_WRITE_STRING',
         'resettable': False,
         'type': 'ViString'
@@ -38,6 +41,7 @@ attributes = {
             'description': 'An attribute of type Color with read/write access.'
         },
         'enum': 'Color',
+        'lv_property': 'Fake attributes:Read Write Color',
         'name': 'READ_WRITE_COLOR',
         'resettable': False,
         'type': 'ViInt32'
@@ -48,8 +52,9 @@ attributes = {
         'documentation': {
             'description': 'An attribute of type integer with read/write access.'
         },
+        'lv_property': 'Fake attributes:Read Write Int',
         'name': 'READ_WRITE_INTEGER',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1000005: {
@@ -59,6 +64,7 @@ attributes = {
             'description': 'An attribute with an enum that is also a float'
         },
         'enum': 'FloatEnum',
+        'lv_property': 'Fake attributes:Float enum',
         'name': 'FLOAT_ENUM',
         'resettable': False,
         'type': 'ViReal64'
@@ -69,6 +75,7 @@ attributes = {
         'documentation': {
             'description': 'An attribute of type 64-bit integer with read/write access.'
         },
+        'lv_property': 'Fake attributes:Read Write long long',
         'name': 'READ_WRITE_INT64',
         'resettable': False,
         'type': 'ViInt64'
@@ -80,6 +87,7 @@ attributes = {
         'documentation': {
             'description': 'Attribute in seconds'
         },
+        'lv_property': 'Fake attributes:Read Write Double with Converter',
         'name': 'READ_WRITE_DOUBLE_WITH_CONVERTER',
         'resettable': False,
         'type': 'ViReal64',
@@ -92,6 +100,7 @@ attributes = {
         'documentation': {
             'description': 'Attribute in milliseconds'
         },
+        'lv_property': 'Fake attributes:Read Write Int with Converter',
         'name': 'READ_WRITE_INTEGER_WITH_CONVERTER',
         'resettable': False,
         'type': 'ViInt32',
