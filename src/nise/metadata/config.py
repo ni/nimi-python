@@ -10,7 +10,7 @@ config = {
     'driver_name': 'NI Switch Executive',
     'driver_registry': 'Switch Executive',
     'init_function': 'OpenSession',
-    'last_tested_version': '19.1.0d0',
+    'api_version': '19.1.0d0',
     'library_info': {
         'Linux': {
             '64bit': {
