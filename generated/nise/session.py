@@ -160,7 +160,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_number_ctype = _visatype.ViInt32()  # case S200
+        error_number_ctype = _visatype.ViInt32()  # case S220
         error_description_ctype = (_visatype.ViChar * error_description_size[0])()  # case C080
         error_description_size_ctype = get_ctypes_pointer_for_buffer(value=error_description_size, library_type=_visatype.ViInt32)  # case B550
         error_code = self._library.niSE_GetError(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, error_description_size_ctype)
@@ -306,7 +306,7 @@ class Session(_SessionBase):
                 selected as the default for the route in the NI Switch Executive virtual
                 device configuration. If a mode has not been selected for the route in
                 the NI Switch Executive virtual device, this parameter defaults to
-                NISE_VAL_MULTICONNECT_ROUTES. NISE_VAL_NO_MULTICONNECT (0) -
+                NISE_VAL_MULTICONNECT_ROUTES. MulticonnectMode.NO_MULTICONNECT (0) -
                 routes specified in the connection specification must be disconnected
                 before they can be reconnected. Calling Connect on a route that was
                 connected using No Multiconnect mode results in an error condition.
@@ -383,7 +383,7 @@ class Session(_SessionBase):
                 selected as the default for the route in the NI Switch Executive virtual
                 device configuration. If a mode has not been selected for the route in
                 the NI Switch Executive virtual device, this parameter defaults to
-                NISE_VAL_MULTICONNECT_ROUTES. NISE_VAL_NO_MULTICONNECT (0) -
+                NISE_VAL_MULTICONNECT_ROUTES. MulticonnectMode.NO_MULTICONNECT (0) -
                 routes specified in the connection specification must be disconnected
                 before they can be reconnected. Calling Connect on a route that was
                 connected using No Multiconnect mode results in an error condition.
@@ -401,19 +401,16 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             operation_order (enums.OperationOrder): Sets the order of the operation for the method. Defined values are
-                Break Before Make and Break After Make. NISE_VAL_BREAK_BEFORE_MAKE
+                Break Before Make and Break After Make. OperationOrder.BEFORE
                 (1) - The method disconnects the routes specified in the disconnect
                 specification before connecting the routes specified in the connect
                 specification. This is the typical mode of operation.
-                NISE_VAL_BREAK_AFTER_MAKE (2) - The method connects the routes
+                OperationOrder.AFTER (2) - The method connects the routes
                 specified in the connection specification before connecting the routes
                 specified in the disconnection specification. This mode of operation is
                 normally used when you are switching current and want to ensure that a
                 load is always connected to your source. The order of operation is to
                 connect first or disconnect first.
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             wait_for_debounce (bool): Waits (if true) for switches to debounce between its connect and
                 disconnect operations. If false, it immediately begins the second
@@ -497,14 +494,11 @@ class Session(_SessionBase):
                 in the NI Switch Executive Help for more information.
 
             expand_action (enums.ExpandAction): This value sets the expand action for the method. The action might be
-                one of the following: NISE_VAL_EXPAND_TO_ROUTES (0) - expands the
+                one of the following: ExpandAction.ROUTES (0) - expands the
                 route spec to routes. Converts route groups to their constituent routes.
-                NISE_VAL_EXPAND_TO_PATHS (1) - expands the route spec to paths.
+                ExpandAction.PATHS (1) - expands the route spec to paths.
                 Converts routes and route groups to their constituent square bracket
                 route spec strings. Example: [Dev1/c0->Dev1/r0->Dev1/c1]
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             expanded_route_spec_size (list of int): The routeSpecSize is an ViInt32 that is passed by reference into the
                 method. As an input, it is the size of the route spec string buffer
@@ -622,7 +616,7 @@ class Session(_SessionBase):
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
         route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C080
         route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
-        path_capability_ctype = _visatype.ViInt32()  # case S200
+        path_capability_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niSE_FindRoute(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, route_spec_size_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
@@ -698,7 +692,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
-        is_connected_ctype = _visatype.ViBoolean()  # case S200
+        is_connected_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niSE_IsConnected(vi_ctype, route_spec_ctype, None if is_connected_ctype is None else (ctypes.pointer(is_connected_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_connected_ctype.value)
@@ -717,7 +711,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        is_debounced_ctype = _visatype.ViBoolean()  # case S200
+        is_debounced_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niSE_IsDebounced(vi_ctype, None if is_debounced_ctype is None else (ctypes.pointer(is_debounced_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(is_debounced_ctype.value)
@@ -755,7 +749,7 @@ class Session(_SessionBase):
         '''
         virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niSE_OpenSession(virtual_device_name_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
