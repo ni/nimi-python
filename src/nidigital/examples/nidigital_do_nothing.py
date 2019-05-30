@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# This is an empty example that doesn't really do anything. Just needed temporarily to make the build process happy until
+# we add real examples
 import argparse
 import nidigital
 import sys
@@ -7,13 +9,7 @@ import time
 
 
 def example(resource_name, options):
-    with nidigital.Session(resource_name=resource_name, options=options) as session:
-        print('Calling self_calibrate')
-        session.self_calibrate()
-        print('self_calibrate successful')
-        print('Calling self_test')
-        session.self_test()
-        print('self_test successful')
+    pass
 
 
 def _main(argsv):
