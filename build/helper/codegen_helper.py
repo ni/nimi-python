@@ -974,6 +974,75 @@ parameters_for_testing = [
         'type': 'ViString',
         'use_in_python_api': True,
     },
+    {  # 21
+        'ctypes_type': 'ViString',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+        'ctypes_variable_name': 'a_string_twist_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'An IVI dance with a twist string.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_string': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'a_string_twist_ctype',
+        'name': 'aStringTwist',
+        'numpy': False,
+        'python_name': 'a_string_twist',
+        'python_name_with_default': 'a_string_twist',
+        'python_name_with_doc_default': 'a_string_twist',
+        'python_type': 'str',
+        'size': {'mechanism': 'ivi-dance-with-a-twist', 'value': 'stringSizeTwist', 'value_twist': 'output_twist', },
+        'type': 'ViString',
+        'use_in_python_api': True,
+    },
+    {  # 22
+        'ctypes_type': 'ViInt64',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViInt64)',
+        'ctypes_variable_name': 'output_twist_ctype',
+        'direction': 'out',
+        'documentation': {'description': 'A big number on its way out.'},
+        'enum': None,
+        'is_buffer': False,
+        'is_string': False,
+        'use_array': False,
+        'use_list': False,
+        'is_string': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'ctypes.pointer(output_twist_ctype)',
+        'name': 'output_twist',
+        'python_name': 'output_twist',
+        'python_name_with_default': 'output_twist',
+        'python_name_with_doc_default': 'output_twist',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt64',
+        'numpy': False,
+        'use_in_python_api': True,
+    },
+    {  # 23
+        'ctypes_type': 'ViInt32',
+        'ctypes_type_library_call': 'ViInt32',
+        'ctypes_variable_name': 'string_size_twist_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'Number of bytes allocated for aStringTwist'},
+        'enum': None,
+        'is_buffer': False,
+        'is_string': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'string_size_twist_ctype',
+        'name': 'stringSizeTwist',
+        'numpy': False,
+        'python_name': 'string_size_twist',
+        'python_name_with_default': 'string_size_twist',
+        'python_name_with_doc_default': 'string_size_twist',
+        'python_type': 'int',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViInt32',
+        'use_in_python_api': True,
+    },
 ]
 
 
@@ -1040,6 +1109,16 @@ def test_get_ctype_variable_declaration_snippet_case_c070():
 def test_get_ctype_variable_declaration_snippet_case_c080():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[20], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_3_ctype = (_visatype.ViChar * string_size)()  # case C080"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_c090():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[21], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_twist_ctype = None  # case C090"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_c100():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[21], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_twist_ctype = (_visatype.ViChar * output_twist_ctype.value)()  # case C100"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s110():
