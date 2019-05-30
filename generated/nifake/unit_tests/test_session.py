@@ -792,7 +792,6 @@ class TestSession(object):
             result_string = session.get_an_ivi_dance_with_a_twist_string()
             assert result_string == string_val
             from mock import call
-            # (vi_ctype, buffer_size_ctype, a_string_ctype, None if actual_size_ctype is None else (ctypes.pointer(actual_size_ctype)))
             calls = [
                 call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None, _matchers.ViInt32PointerMatcher()),
                 call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)), _matchers.ViInt32PointerMatcher())
