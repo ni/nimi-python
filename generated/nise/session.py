@@ -2,7 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime
+import datetime  # noqa: F401
 
 import nise._converters as _converters
 import nise._library_singleton as _library_singleton
