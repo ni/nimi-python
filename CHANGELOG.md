@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI DIGITAL
+* ### NI-Digital Pattern Driver
     * #### Added
         * Initial support
         * Very basic at this point and subject to change
@@ -745,7 +745,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI DIGITAL
+* ### NI-Digital Pattern Driver
     * #### Added
     * #### Changed
     * #### Removed
