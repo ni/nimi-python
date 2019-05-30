@@ -400,7 +400,8 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'actualSize',
-                'type': 'ViInt32'
+                'type': 'ViInt32',
+                'use_in_python_api': False
             }
         ],
         'returns': 'ViStatus'
