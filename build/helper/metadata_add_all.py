@@ -328,6 +328,7 @@ def _setup_init_function(functions, config):
 
         functions['_init_function'] = init_function
     except KeyError:
+        print("Couldn't find {} init function".format(config['init_function']))
         pass
 
 
@@ -337,6 +338,10 @@ def add_all_function_metadata(functions, config):
 
     for f in functions:
         _add_codegen_method(functions[f])
+        # Some drivers do not have any documentation, so make sure the
+        # documentation key exists
+        if 'documentation' not in functions[f]:
+            functions[f]['documentation'] = {}
 
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
@@ -345,6 +350,8 @@ def add_all_function_metadata(functions, config):
         _add_method_templates(functions[f])
         _add_use_session_lock(functions[f])
         for p in functions[f]['parameters']:
+            if 'documentation' not in p:
+                p['documentation'] = {}
             _add_enum(p)
             _fix_type(p)
             _add_buffer_info(p, config)
@@ -498,7 +505,7 @@ def _add_enum_value_python_name(enum_info, config):
 
     # We need to check again to see if we have any values that start with a digit
     for v in enum_info['values']:
-        assert not v['python_name'][0].isdigit(), 'enum {0} value {1} begins with a digit'.format(enum_info, v['python_name'])
+        assert not v['python_name'][0].isdigit()
 
     return enum_info
 
