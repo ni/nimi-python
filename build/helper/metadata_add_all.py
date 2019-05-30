@@ -498,7 +498,7 @@ def _add_enum_value_python_name(enum_info, config):
 
     # We need to check again to see if we have any values that start with a digit
     for v in enum_info['values']:
-        assert not v['python_name'][0].isdigit()
+        assert not v['python_name'][0].isdigit(), 'enum {0} value {1} begins with a digit'.format(enum_info, v['python_name'])
 
     return enum_info
 

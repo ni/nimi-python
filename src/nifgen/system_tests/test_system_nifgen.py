@@ -54,7 +54,7 @@ def test_get_self_cal_last_date_and_time():
 
 
 def test_self_cal(session):
-        session.self_cal()
+    session.self_cal()
 
 
 def test_standard_waveform(session):

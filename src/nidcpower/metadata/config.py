@@ -1,32 +1,44 @@
+# -*- coding: utf-8 -*-
+# This file is generated from API metadata for NI-DCPower version 19.1.0d33
 config = {
-    'metadata_version': '1.0',
-    'module_name': 'nidcpower',
-    'module_version': '1.1.1.dev0',
     'c_function_prefix': 'niDCPower_',
-    'driver_name': 'NI-DCPower',
-    'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
-    'session_handle_parameter_name': 'vi',
-    'library_info':
-    {
-        'Windows': {
-            '32bit': {'name': 'nidcpower_32.dll', 'type': 'windll'},
-            '64bit': {'name': 'nidcpower_64.dll', 'type': 'cdll'},
-        },
-        'Linux': {
-            '64bit': {'name': 'libnidcpower.so', 'type': 'cdll'},
-        },
-    },
+    'close_function': 'Close',
     'context_manager_name': {
-        'task': 'acquisition',
-        'initiate_function': 'Initiate',
         'abort_function': 'Abort',
+        'initiate_function': 'Initiate',
+        'task': 'acquisition'
     },
-    'init_function': 'InitializeWithChannels',
-    'close_function': 'close',
-    'custom_types': [],
-    'last_tested_version': '18.1.1',
-    'repeated_capabilities': [
-        {'python_name': 'channels', 'prefix': '', },
+    'custom_types': [
     ],
+    'driver_name': 'NI-DCPower',
+    'init_function': 'InitializeWithChannels',
+    'api_version': '19.1.0d33',
+    'library_info': {
+        'Linux': {
+            '64bit': {
+                'name': 'libnidcpower.so',
+                'type': 'cdll'
+            }
+        },
+        'Windows': {
+            '32bit': {
+                'name': 'nidcpower_32.dll',
+                'type': 'windll'
+            },
+            '64bit': {
+                'name': 'nidcpower_64.dll',
+                'type': 'cdll'
+            }
+        }
+    },
+    'metadata_version': '2.0',
+    'module_name': 'nidcpower',
+    'repeated_capabilities': [
+        {
+            'prefix': '',
+            'python_name': 'channels'
+        }
+    ],
+    'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
+    'session_handle_parameter_name': 'vi'
 }
-

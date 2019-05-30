@@ -166,10 +166,6 @@ niscope.Session
     +=====================================================+========================================+
     | :py:attr:`absolute_sample_clock_offset`             | float in seconds or datetime.timedelta |
     +-----------------------------------------------------+----------------------------------------+
-    | :py:attr:`accessory_gain`                           | float                                  |
-    +-----------------------------------------------------+----------------------------------------+
-    | :py:attr:`accessory_offset`                         | float                                  |
-    +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`acquisition_start_time`                   | float in seconds or datetime.timedelta |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`acquisition_type`                         | :py:data:`AcquisitionType`             |
@@ -308,17 +304,21 @@ niscope.Session
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`ris_num_averages`                         | int                                    |
     +-----------------------------------------------------+----------------------------------------+
-    | :py:attr:`sample_clock_timebase_multiplier`         | int                                    |
-    +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`sample_mode`                              | int                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`samp_clk_timebase_div`                    | int                                    |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`sample_clock_timebase_multiplier`         | int                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`samp_clk_timebase_rate`                   | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`samp_clk_timebase_src`                    | str                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`serial_number`                            | str                                    |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`accessory_gain`                           | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`accessory_offset`                         | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`simulate`                                 | bool                                   |
     +-----------------------------------------------------+----------------------------------------+
@@ -482,7 +482,7 @@ absolute_sample_clock_offset
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -492,100 +492,6 @@ absolute_sample_clock_offset
 
                 - LabVIEW Property: **Clocking:Advanced:Absolute Sample Clock Offset**
                 - C Attribute: **NISCOPE_ATTR_ABSOLUTE_SAMPLE_CLOCK_OFFSET**
-
-accessory_gain
-~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:attribute:: accessory_gain
-
-        Returns the calibration gain for the current device configuration.
-        **Related topics:**
-        `NI 5122/5124/5142
-        Calibration <digitizers.chm::/5122_Calibration.html>`__
-
-
-
-        .. note:: This property is only supported by the NI PXI-5900 differential
-            amplifier.
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].accessory_gain
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | True      |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device:Accessory:Gain**
-                - C Attribute: **NISCOPE_ATTR_ACCESSORY_GAIN**
-
-accessory_offset
-~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:attribute:: accessory_offset
-
-        Returns the calibration offset for the current device configuration.
-        **Related topics:**
-        `NI 5122/5124/5142
-        Calibration <digitizers.chm::/5122_Calibration.html>`__
-
-
-
-        .. note:: This property is supported only by the NI PXI-5900 differential
-            amplifier.
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].accessory_offset
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | True      |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device:Accessory:Offset**
-                - C Attribute: **NISCOPE_ATTR_ACCESSORY_OFFSET**
 
 acquisition_start_time
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -605,7 +511,7 @@ acquisition_start_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -634,7 +540,7 @@ acquisition_type
             +----------------+-----------------------+
             | Permissions    | read-write            |
             +----------------+-----------------------+
-            | Channel Based  | False                 |
+            | Channel Based  | No                    |
             +----------------+-----------------------+
             | Resettable     | No                    |
             +----------------+-----------------------+
@@ -680,7 +586,7 @@ acq_arm_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -709,7 +615,7 @@ adv_trig_src
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -738,7 +644,7 @@ allow_more_records_than_memory
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -767,7 +673,7 @@ arm_ref_trig_src
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -796,7 +702,7 @@ backlog
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -838,7 +744,7 @@ bandpass_filter_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -870,7 +776,7 @@ binary_sample_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -900,7 +806,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -945,7 +851,7 @@ channel_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -987,7 +893,7 @@ channel_terminal_configuration
             +----------------+-----------------------------+
             | Permissions    | read-write                  |
             +----------------+-----------------------------+
-            | Channel Based  | True                        |
+            | Channel Based  | Yes                         |
             +----------------+-----------------------------+
             | Resettable     | No                          |
             +----------------+-----------------------------+
@@ -1016,7 +922,7 @@ data_transfer_block_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1045,7 +951,7 @@ data_transfer_maximum_bandwidth
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1074,7 +980,7 @@ data_transfer_preferred_packet_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1103,7 +1009,7 @@ device_temperature
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1125,6 +1031,18 @@ driver_setup
         Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  :py:meth:`niscope.Session.__init__`, or through the IVI Configuration Utility.
         If the user does not specify a Driver Setup string, this property returns an empty string.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].driver_setup
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -1134,9 +1052,9 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  |         0 |
+            | Channel Based  | Yes       |
             +----------------+-----------+
-            | Resettable     |         0 |
+            | Resettable     | Yes       |
             +----------------+-----------+
 
         .. tip::
@@ -1165,7 +1083,7 @@ enable_dc_restore
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1210,7 +1128,7 @@ enable_time_interleaved_sampling
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1240,7 +1158,7 @@ end_of_acquisition_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1270,7 +1188,7 @@ end_of_record_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1305,7 +1223,7 @@ end_of_record_to_advance_trigger_holdoff
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1347,7 +1265,7 @@ equalization_filter_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1388,7 +1306,7 @@ equalization_num_coefficients
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1418,7 +1336,7 @@ exported_advance_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1448,7 +1366,7 @@ exported_ref_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1478,7 +1396,7 @@ exported_start_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1521,7 +1439,7 @@ flex_fir_antialias_filter_type
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | True                             |
+            | Channel Based  | Yes                              |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -1554,7 +1472,7 @@ fpga_bitfile_path
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1589,7 +1507,7 @@ high_pass_filter_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1618,7 +1536,7 @@ horz_enforce_realtime
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1648,7 +1566,7 @@ horz_min_num_pts
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1677,7 +1595,7 @@ horz_num_records
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1707,7 +1625,7 @@ horz_record_length
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1737,7 +1655,7 @@ horz_record_ref_position
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1767,7 +1685,7 @@ horz_sample_rate
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1797,7 +1715,7 @@ horz_time_per_record
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1826,7 +1744,7 @@ input_clock_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1868,7 +1786,7 @@ input_impedance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1897,7 +1815,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1926,7 +1844,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1955,7 +1873,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1992,7 +1910,7 @@ interleaving_offset_correction_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2026,7 +1944,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2059,7 +1977,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2088,7 +2006,7 @@ master_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2139,7 +2057,7 @@ max_input_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2168,7 +2086,7 @@ max_real_time_sampling_rate
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2197,7 +2115,7 @@ max_ris_rate
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2232,7 +2150,7 @@ min_sample_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2261,7 +2179,7 @@ onboard_memory_size
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2290,7 +2208,7 @@ output_clock_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2319,7 +2237,7 @@ pll_lock_status
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2348,7 +2266,7 @@ points_done
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2368,6 +2286,19 @@ poll_interval
 
         Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].poll_interval = var
+                var = session.channels[0,1].poll_interval
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2377,9 +2308,9 @@ poll_interval
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  |          0 |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     |          0 |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2420,7 +2351,7 @@ probe_attenuation
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2450,7 +2381,7 @@ ready_for_advance_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2480,7 +2411,7 @@ ready_for_ref_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2510,7 +2441,7 @@ ready_for_start_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2539,7 +2470,7 @@ records_done
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2568,7 +2499,7 @@ record_arm_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2597,7 +2528,7 @@ ref_clk_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2626,7 +2557,7 @@ ref_trigger_detector_location
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | False                            |
+            | Channel Based  | No                               |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -2655,7 +2586,7 @@ ref_trigger_minimum_quiet_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -2684,7 +2615,7 @@ ref_trig_tdc_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2713,7 +2644,7 @@ resolution
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2745,7 +2676,7 @@ ris_in_auto_setup_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2774,7 +2705,7 @@ ris_method
             +----------------+-----------------+
             | Permissions    | read-write      |
             +----------------+-----------------+
-            | Channel Based  | False           |
+            | Channel Based  | No              |
             +----------------+-----------------+
             | Resettable     | No              |
             +----------------+-----------------+
@@ -2803,7 +2734,7 @@ ris_num_averages
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2813,52 +2744,6 @@ ris_num_averages
 
                 - LabVIEW Property: **Horizontal:RIS Num Avg**
                 - C Attribute: **NISCOPE_ATTR_RIS_NUM_AVERAGES**
-
-sample_clock_timebase_multiplier
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:attribute:: sample_clock_timebase_multiplier
-
-        If `Sample Clock Timebase
-        Source <p:py:meth:`niscope.Session.SampleClockTimebaseSource`.html>`__ is an external
-        source, this property specifies the ratio between the `Sample Clock
-        Timebase Rate <p:py:meth:`niscope.Session.SampleClockTimebaseRate`.html>`__ and the actual
-        sample rate, which can be higher. This property can be used in
-        conjunction with the `Sample Clock Timebase Divisor
-        Property <p:py:meth:`niscope.Session.SampleClockTimebaseDivisor`.html>`__.
-        Some devices use multiple ADCs to sample the same channel at an
-        effective sample rate that is greater than the specified clock rate.
-        When providing an external sample clock use this property to indicate
-        when you want a higher sample rate. Valid values for this property vary
-        by device and current configuration.
-        **Related topics:**
-        `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
-
-
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Clocking:Sample Clock Timebase Multiplier**
-                - C Attribute: **NISCOPE_ATTR_SAMPLE_CLOCK_TIMEBASE_MULTIPLIER**
 
 sample_mode
 ~~~~~~~~~~~
@@ -2878,7 +2763,7 @@ sample_mode
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2907,7 +2792,7 @@ samp_clk_timebase_div
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2917,6 +2802,38 @@ samp_clk_timebase_div
 
                 - LabVIEW Property: **Clocking:Sample Clock Timebase Divisor**
                 - C Attribute: **NISCOPE_ATTR_SAMP_CLK_TIMEBASE_DIV**
+
+sample_clock_timebase_multiplier
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: sample_clock_timebase_multiplier
+
+        If :py:data:`niscope.Session.samp_clk_timebase_src` is an external source, this property specifies the ratio between the :py:data:`niscope.Session.samp_clk_timebase_rate` and the actual sample rate, which can be higher. This property can be used in conjunction with :py:data:`niscope.Session.samp_clk_timebase_div`.
+        Some devices use multiple ADCs to sample the same channel at an effective sample rate that is greater than the specified clock rate. When providing an external sample clock use this property to indicate when you want a higher sample rate. Valid values for this property vary by device and current configuration.
+
+        **Related topics:**
+        `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_SAMP_CLK_TIMEBASE_MULT**
 
 samp_clk_timebase_rate
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2936,7 +2853,7 @@ samp_clk_timebase_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2965,7 +2882,7 @@ samp_clk_timebase_src
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2994,7 +2911,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3004,6 +2921,96 @@ serial_number
 
                 - LabVIEW Property: **Device:Serial Number**
                 - C Attribute: **NISCOPE_ATTR_SERIAL_NUMBER**
+
+accessory_gain
+~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: accessory_gain
+
+        Returns the calibration gain for the current device configuration.
+
+        **Related topics:**
+        `NI 5122/5124/5142 Calibration <digitizers.chm::/5122_Calibration.html>`__
+
+
+
+        .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].signal_cond_gain
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_SIGNAL_COND_GAIN**
+
+accessory_offset
+~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: accessory_offset
+
+        Returns the calibration offset for the current device configuration.
+
+        **Related topics:**
+        `NI 5122/5124/5142 Calibration <digitizers.chm::/5122_Calibration.html>`__
+
+
+
+        .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].signal_cond_offset
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_SIGNAL_COND_OFFSET**
 
 simulate
 ~~~~~~~~
@@ -3024,7 +3031,7 @@ simulate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3053,7 +3060,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3082,7 +3089,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3111,7 +3118,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3155,7 +3162,7 @@ start_to_ref_trigger_holdoff
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | True                                   |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -3184,7 +3191,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3213,7 +3220,7 @@ trigger_auto_triggered
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3242,7 +3249,7 @@ trigger_coupling
             +----------------+-----------------------+
             | Permissions    | read-write            |
             +----------------+-----------------------+
-            | Channel Based  | False                 |
+            | Channel Based  | No                    |
             +----------------+-----------------------+
             | Resettable     | No                    |
             +----------------+-----------------------+
@@ -3272,7 +3279,7 @@ trigger_delay_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -3302,7 +3309,7 @@ trigger_holdoff
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -3331,7 +3338,7 @@ trigger_hysteresis
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3363,7 +3370,7 @@ trigger_impedance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3394,7 +3401,7 @@ trigger_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3426,7 +3433,7 @@ trigger_modifier
             +----------------+-----------------------+
             | Permissions    | read-write            |
             +----------------+-----------------------+
-            | Channel Based  | False                 |
+            | Channel Based  | No                    |
             +----------------+-----------------------+
             | Resettable     | No                    |
             +----------------+-----------------------+
@@ -3455,7 +3462,7 @@ trigger_slope
             +----------------+--------------------+
             | Permissions    | read-write         |
             +----------------+--------------------+
-            | Channel Based  | False              |
+            | Channel Based  | No                 |
             +----------------+--------------------+
             | Resettable     | No                 |
             +----------------+--------------------+
@@ -3484,7 +3491,7 @@ trigger_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3513,7 +3520,7 @@ trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -3552,7 +3559,7 @@ trigger_window_high_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3592,7 +3599,7 @@ trigger_window_low_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3621,7 +3628,7 @@ trigger_window_mode
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -3650,7 +3657,7 @@ tv_trigger_event
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -3679,7 +3686,7 @@ tv_trigger_line_number
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3708,7 +3715,7 @@ tv_trigger_polarity
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | No                  |
             +----------------+---------------------+
@@ -3750,7 +3757,7 @@ tv_trigger_signal_format
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | True                    |
+            | Channel Based  | Yes                     |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -3792,7 +3799,7 @@ vertical_coupling
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | True                   |
+            | Channel Based  | Yes                    |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -3836,7 +3843,7 @@ vertical_offset
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3879,7 +3886,7 @@ vertical_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5046,7 +5053,7 @@ fetch
                 
 
 
-            :type timeout: float or datetime.timedelta
+            :type timeout: float in seconds or datetime.timedelta
 
             :rtype: list of WaveformInfo
             :return:
@@ -5173,9 +5180,9 @@ fetch_into
                 
 
 
-            :type timeout: float
+            :type timeout: float in seconds or datetime.timedelta
 
-            :rtype: list of WaveformInfo
+            :rtype: WaveformInfo
             :return:
 
 
@@ -5468,7 +5475,7 @@ read
                 
 
 
-            :type timeout: float or datetime.timedelta
+            :type timeout: float in seconds or datetime.timedelta
 
             :rtype: list of WaveformInfo
             :return:
@@ -5683,10 +5690,6 @@ Properties
 +=====================================================================+========================================+
 | :py:attr:`niscope.Session.absolute_sample_clock_offset`             | float in seconds or datetime.timedelta |
 +---------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niscope.Session.accessory_gain`                           | float                                  |
-+---------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niscope.Session.accessory_offset`                         | float                                  |
-+---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.acquisition_start_time`                   | float in seconds or datetime.timedelta |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.acquisition_type`                         | :py:data:`AcquisitionType`             |
@@ -5825,17 +5828,21 @@ Properties
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.ris_num_averages`                         | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niscope.Session.sample_clock_timebase_multiplier`         | int                                    |
-+---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.sample_mode`                              | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.samp_clk_timebase_div`                    | int                                    |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.sample_clock_timebase_multiplier`         | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.samp_clk_timebase_rate`                   | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.samp_clk_timebase_src`                    | str                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.serial_number`                            | str                                    |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.accessory_gain`                           | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.accessory_offset`                         | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.simulate`                                 | bool                                   |
 +---------------------------------------------------------------------+----------------------------------------+
