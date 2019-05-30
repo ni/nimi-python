@@ -205,6 +205,8 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
     C080. Output buffer with mechanism python-code:                            visatype.ViChar * <python_code>
+    C090. Output buffer with mechanism ivi-dance-with-a-twist, QUERY_SIZE:     None
+    C100. Output buffer with mechanism ivi-dance-with-a-twist, GET_DATA:       (visatype.ViChar * buffer_size_ctype.value)()
     '''
     definitions = []
     definition = None
@@ -227,10 +229,10 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 
         elif parameter['size']['mechanism'] == 'ivi-dance-with-a-twist':
             if ivi_dance_step == IviDanceStep.QUERY_SIZE:
-                definition = 'None  # case C050'
+                definition = 'None  # case C090'
             elif ivi_dance_step == IviDanceStep.GET_DATA:
                 size_parameter = find_size_parameter(parameter, parameters, key='value_twist')
-                definition = '({0}.ViChar * {1}.value)()  # case C060'.format(module_name, size_parameter['ctypes_variable_name'])
+                definition = '({0}.ViChar * {1}.value)()  # case C100'.format(module_name, size_parameter['ctypes_variable_name'])
             else:
                 assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance-with-a-twist'".format(ivi_dance_step, parameter['name'])
 
