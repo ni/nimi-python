@@ -792,7 +792,10 @@ class TestSession(object):
             result_string = session.get_an_ivi_dance_with_a_twist_string()
             assert result_string == string_val
             from mock import call
-            calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)))]
+            calls = [
+                call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None, _matchers.ViInt32PointerMatcher()),
+                call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)), _matchers.ViInt32PointerMatcher())
+            ]
             self.patched_library.niFake_GetAnIviDanceWithATwistString.assert_has_calls(calls)
             assert self.patched_library.niFake_GetAnIviDanceWithATwistString.call_count == 2
 
