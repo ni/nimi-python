@@ -418,17 +418,17 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 assert False, "ivi_dance_step {0} not valid for parameter {1} with ['size']['mechanism'] == 'ivi-dance'".format(ivi_dance_step, parameter['name'])
         elif parameter['size']['mechanism'] == 'ivi-dance-with-a-twist':
             if ivi_dance_step == IviDanceStep.QUERY_SIZE:
-                definition = 'None  # case B600'
+                definition = 'None  # case B610'
             elif ivi_dance_step == IviDanceStep.GET_DATA:
                 size_parameter_twist = find_size_parameter(parameter, parameters, key='value_twist')
-                line1 = '{0}_size = {1}.value  # case B610'.format(parameter['python_name'], size_parameter_twist['ctypes_variable_name'])
+                line1 = '{0}_size = {1}.value  # case B620'.format(parameter['python_name'], size_parameter_twist['ctypes_variable_name'])
                 definitions.append(line1)
                 if parameter['use_array']:
-                    line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B610'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
+                    line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B620'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                     definitions.append(line2)
-                    definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B610'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                    definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B620'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
                 elif parameter['use_list']:
-                    definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B610'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+                    definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B620'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
                 else:
                     assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
             else:
