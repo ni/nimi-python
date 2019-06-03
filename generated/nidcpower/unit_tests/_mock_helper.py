@@ -34,7 +34,7 @@ class SideEffectsHelper(object):
         self._defaults['Disable']['return'] = 0
         self._defaults['ExportAttributeConfigurationBuffer'] = {}
         self._defaults['ExportAttributeConfigurationBuffer']['return'] = 0
-        self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] = None
+        self._defaults['ExportAttributeConfigurationBuffer']['configuration'] = None
         self._defaults['ExportAttributeConfigurationFile'] = {}
         self._defaults['ExportAttributeConfigurationFile']['return'] = 0
         self._defaults['FetchMultiple'] = {}
@@ -63,31 +63,31 @@ class SideEffectsHelper(object):
         self._defaults['GetChannelName']['channelName'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
-        self._defaults['GetError']['Code'] = None
-        self._defaults['GetError']['Description'] = None
+        self._defaults['GetError']['code'] = None
+        self._defaults['GetError']['description'] = None
         self._defaults['GetExtCalLastDateAndTime'] = {}
         self._defaults['GetExtCalLastDateAndTime']['return'] = 0
-        self._defaults['GetExtCalLastDateAndTime']['Year'] = None
-        self._defaults['GetExtCalLastDateAndTime']['Month'] = None
-        self._defaults['GetExtCalLastDateAndTime']['Day'] = None
-        self._defaults['GetExtCalLastDateAndTime']['Hour'] = None
-        self._defaults['GetExtCalLastDateAndTime']['Minute'] = None
+        self._defaults['GetExtCalLastDateAndTime']['year'] = None
+        self._defaults['GetExtCalLastDateAndTime']['month'] = None
+        self._defaults['GetExtCalLastDateAndTime']['day'] = None
+        self._defaults['GetExtCalLastDateAndTime']['hour'] = None
+        self._defaults['GetExtCalLastDateAndTime']['minute'] = None
         self._defaults['GetExtCalLastTemp'] = {}
         self._defaults['GetExtCalLastTemp']['return'] = 0
-        self._defaults['GetExtCalLastTemp']['Temperature'] = None
+        self._defaults['GetExtCalLastTemp']['temperature'] = None
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
-        self._defaults['GetExtCalRecommendedInterval']['Months'] = None
+        self._defaults['GetExtCalRecommendedInterval']['months'] = None
         self._defaults['GetSelfCalLastDateAndTime'] = {}
         self._defaults['GetSelfCalLastDateAndTime']['return'] = 0
-        self._defaults['GetSelfCalLastDateAndTime']['Year'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['Month'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['Day'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['Hour'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['Minute'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['year'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['month'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['day'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['hour'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['minute'] = None
         self._defaults['GetSelfCalLastTemp'] = {}
         self._defaults['GetSelfCalLastTemp']['return'] = 0
-        self._defaults['GetSelfCalLastTemp']['Temperature'] = None
+        self._defaults['GetSelfCalLastTemp']['temperature'] = None
         self._defaults['ImportAttributeConfigurationBuffer'] = {}
         self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
         self._defaults['ImportAttributeConfigurationFile'] = {}
@@ -102,7 +102,7 @@ class SideEffectsHelper(object):
         self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['Measure'] = {}
         self._defaults['Measure']['return'] = 0
-        self._defaults['Measure']['Measurement'] = None
+        self._defaults['Measure']['measurement'] = None
         self._defaults['MeasureMultiple'] = {}
         self._defaults['MeasureMultiple']['return'] = 0
         self._defaults['MeasureMultiple']['voltageMeasurements'] = None
@@ -127,7 +127,7 @@ class SideEffectsHelper(object):
         self._defaults['QueryOutputState']['inState'] = None
         self._defaults['ReadCurrentTemperature'] = {}
         self._defaults['ReadCurrentTemperature']['return'] = 0
-        self._defaults['ReadCurrentTemperature']['Temperature'] = None
+        self._defaults['ReadCurrentTemperature']['temperature'] = None
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -212,16 +212,16 @@ class SideEffectsHelper(object):
     def niDCPower_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
-        if self._defaults['ExportAttributeConfigurationBuffer']['Configuration'] is None:
-            raise MockFunctionCallError("niDCPower_ExportAttributeConfigurationBuffer", param='Configuration')
+        if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
+            raise MockFunctionCallError("niDCPower_ExportAttributeConfigurationBuffer", param='configuration')
         if size.value == 0:
-            return len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])
+            return len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])
         try:
             configuration_ref = configuration.contents
         except AttributeError:
             configuration_ref = configuration
-        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['Configuration'])):
-            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['Configuration'][i]
+        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])):
+            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['configuration'][i]
         return self._defaults['ExportAttributeConfigurationBuffer']['return']
 
     def niDCPower_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
@@ -336,105 +336,105 @@ class SideEffectsHelper(object):
         if self._defaults['GetError']['return'] != 0:
             return self._defaults['GetError']['return']
         # code
-        if self._defaults['GetError']['Code'] is None:
-            raise MockFunctionCallError("niDCPower_GetError", param='Code')
+        if self._defaults['GetError']['code'] is None:
+            raise MockFunctionCallError("niDCPower_GetError", param='code')
         if code is not None:
-            code.contents.value = self._defaults['GetError']['Code']
-        if self._defaults['GetError']['Description'] is None:
-            raise MockFunctionCallError("niDCPower_GetError", param='Description')
+            code.contents.value = self._defaults['GetError']['code']
+        if self._defaults['GetError']['description'] is None:
+            raise MockFunctionCallError("niDCPower_GetError", param='description')
         if buffer_size.value == 0:
-            return len(self._defaults['GetError']['Description'])
-        description.value = self._defaults['GetError']['Description'].encode('ascii')
+            return len(self._defaults['GetError']['description'])
+        description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
     def niDCPower_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         if self._defaults['GetExtCalLastDateAndTime']['return'] != 0:
             return self._defaults['GetExtCalLastDateAndTime']['return']
         # year
-        if self._defaults['GetExtCalLastDateAndTime']['Year'] is None:
-            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Year')
+        if self._defaults['GetExtCalLastDateAndTime']['year'] is None:
+            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='year')
         if year is not None:
-            year.contents.value = self._defaults['GetExtCalLastDateAndTime']['Year']
+            year.contents.value = self._defaults['GetExtCalLastDateAndTime']['year']
         # month
-        if self._defaults['GetExtCalLastDateAndTime']['Month'] is None:
-            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Month')
+        if self._defaults['GetExtCalLastDateAndTime']['month'] is None:
+            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='month')
         if month is not None:
-            month.contents.value = self._defaults['GetExtCalLastDateAndTime']['Month']
+            month.contents.value = self._defaults['GetExtCalLastDateAndTime']['month']
         # day
-        if self._defaults['GetExtCalLastDateAndTime']['Day'] is None:
-            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Day')
+        if self._defaults['GetExtCalLastDateAndTime']['day'] is None:
+            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='day')
         if day is not None:
-            day.contents.value = self._defaults['GetExtCalLastDateAndTime']['Day']
+            day.contents.value = self._defaults['GetExtCalLastDateAndTime']['day']
         # hour
-        if self._defaults['GetExtCalLastDateAndTime']['Hour'] is None:
-            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Hour')
+        if self._defaults['GetExtCalLastDateAndTime']['hour'] is None:
+            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='hour')
         if hour is not None:
-            hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['Hour']
+            hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['hour']
         # minute
-        if self._defaults['GetExtCalLastDateAndTime']['Minute'] is None:
-            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='Minute')
+        if self._defaults['GetExtCalLastDateAndTime']['minute'] is None:
+            raise MockFunctionCallError("niDCPower_GetExtCalLastDateAndTime", param='minute')
         if minute is not None:
-            minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['Minute']
+            minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['minute']
         return self._defaults['GetExtCalLastDateAndTime']['return']
 
     def niDCPower_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
         if self._defaults['GetExtCalLastTemp']['return'] != 0:
             return self._defaults['GetExtCalLastTemp']['return']
         # temperature
-        if self._defaults['GetExtCalLastTemp']['Temperature'] is None:
-            raise MockFunctionCallError("niDCPower_GetExtCalLastTemp", param='Temperature')
+        if self._defaults['GetExtCalLastTemp']['temperature'] is None:
+            raise MockFunctionCallError("niDCPower_GetExtCalLastTemp", param='temperature')
         if temperature is not None:
-            temperature.contents.value = self._defaults['GetExtCalLastTemp']['Temperature']
+            temperature.contents.value = self._defaults['GetExtCalLastTemp']['temperature']
         return self._defaults['GetExtCalLastTemp']['return']
 
     def niDCPower_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         if self._defaults['GetExtCalRecommendedInterval']['return'] != 0:
             return self._defaults['GetExtCalRecommendedInterval']['return']
         # months
-        if self._defaults['GetExtCalRecommendedInterval']['Months'] is None:
-            raise MockFunctionCallError("niDCPower_GetExtCalRecommendedInterval", param='Months')
+        if self._defaults['GetExtCalRecommendedInterval']['months'] is None:
+            raise MockFunctionCallError("niDCPower_GetExtCalRecommendedInterval", param='months')
         if months is not None:
-            months.contents.value = self._defaults['GetExtCalRecommendedInterval']['Months']
+            months.contents.value = self._defaults['GetExtCalRecommendedInterval']['months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
 
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         if self._defaults['GetSelfCalLastDateAndTime']['return'] != 0:
             return self._defaults['GetSelfCalLastDateAndTime']['return']
         # year
-        if self._defaults['GetSelfCalLastDateAndTime']['Year'] is None:
-            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Year')
+        if self._defaults['GetSelfCalLastDateAndTime']['year'] is None:
+            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='year')
         if year is not None:
-            year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Year']
+            year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['year']
         # month
-        if self._defaults['GetSelfCalLastDateAndTime']['Month'] is None:
-            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Month')
+        if self._defaults['GetSelfCalLastDateAndTime']['month'] is None:
+            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='month')
         if month is not None:
-            month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Month']
+            month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['month']
         # day
-        if self._defaults['GetSelfCalLastDateAndTime']['Day'] is None:
-            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Day')
+        if self._defaults['GetSelfCalLastDateAndTime']['day'] is None:
+            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='day')
         if day is not None:
-            day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Day']
+            day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['day']
         # hour
-        if self._defaults['GetSelfCalLastDateAndTime']['Hour'] is None:
-            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Hour')
+        if self._defaults['GetSelfCalLastDateAndTime']['hour'] is None:
+            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='hour')
         if hour is not None:
-            hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Hour']
+            hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['hour']
         # minute
-        if self._defaults['GetSelfCalLastDateAndTime']['Minute'] is None:
-            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='Minute')
+        if self._defaults['GetSelfCalLastDateAndTime']['minute'] is None:
+            raise MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime", param='minute')
         if minute is not None:
-            minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['Minute']
+            minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['minute']
         return self._defaults['GetSelfCalLastDateAndTime']['return']
 
     def niDCPower_GetSelfCalLastTemp(self, vi, temperature):  # noqa: N802
         if self._defaults['GetSelfCalLastTemp']['return'] != 0:
             return self._defaults['GetSelfCalLastTemp']['return']
         # temperature
-        if self._defaults['GetSelfCalLastTemp']['Temperature'] is None:
-            raise MockFunctionCallError("niDCPower_GetSelfCalLastTemp", param='Temperature')
+        if self._defaults['GetSelfCalLastTemp']['temperature'] is None:
+            raise MockFunctionCallError("niDCPower_GetSelfCalLastTemp", param='temperature')
         if temperature is not None:
-            temperature.contents.value = self._defaults['GetSelfCalLastTemp']['Temperature']
+            temperature.contents.value = self._defaults['GetSelfCalLastTemp']['temperature']
         return self._defaults['GetSelfCalLastTemp']['return']
 
     def niDCPower_ImportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
@@ -476,10 +476,10 @@ class SideEffectsHelper(object):
         if self._defaults['Measure']['return'] != 0:
             return self._defaults['Measure']['return']
         # measurement
-        if self._defaults['Measure']['Measurement'] is None:
-            raise MockFunctionCallError("niDCPower_Measure", param='Measurement')
+        if self._defaults['Measure']['measurement'] is None:
+            raise MockFunctionCallError("niDCPower_Measure", param='measurement')
         if measurement is not None:
-            measurement.contents.value = self._defaults['Measure']['Measurement']
+            measurement.contents.value = self._defaults['Measure']['measurement']
         return self._defaults['Measure']['return']
 
     def niDCPower_MeasureMultiple(self, vi, channel_name, voltage_measurements, current_measurements):  # noqa: N802
@@ -573,10 +573,10 @@ class SideEffectsHelper(object):
         if self._defaults['ReadCurrentTemperature']['return'] != 0:
             return self._defaults['ReadCurrentTemperature']['return']
         # temperature
-        if self._defaults['ReadCurrentTemperature']['Temperature'] is None:
-            raise MockFunctionCallError("niDCPower_ReadCurrentTemperature", param='Temperature')
+        if self._defaults['ReadCurrentTemperature']['temperature'] is None:
+            raise MockFunctionCallError("niDCPower_ReadCurrentTemperature", param='temperature')
         if temperature is not None:
-            temperature.contents.value = self._defaults['ReadCurrentTemperature']['Temperature']
+            temperature.contents.value = self._defaults['ReadCurrentTemperature']['temperature']
         return self._defaults['ReadCurrentTemperature']['return']
 
     def niDCPower_ResetDevice(self, vi):  # noqa: N802

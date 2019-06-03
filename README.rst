@@ -72,6 +72,8 @@ NI-DCPower Python API Status
 +===============================+==========================+
 | Driver Version Tested Against | 18.1.1                   |
 +-------------------------------+--------------------------+
+| Driver API Version            | 19.1.0d33                |
++-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nidcpowerPythonVersion| |
@@ -110,6 +112,8 @@ NI-DMM Python API Status
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
 | Driver Version Tested Against | 18.1.0               |
++-------------------------------+----------------------+
+| Driver API Version            | 19.1.0d11            |
 +-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
@@ -150,6 +154,8 @@ NI-FGEN Python API Status
 +===============================+=======================+
 | Driver Version Tested Against | 18.1.0                |
 +-------------------------------+-----------------------+
+| Driver API Version            | 19.1.0d0              |
++-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nifgenPythonVersion| |
@@ -188,6 +194,8 @@ NI-ModInst Python API Status
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
 | Driver Version Tested Against | 18.0.0                   |
++-------------------------------+--------------------------+
+| Driver API Version            | 255.0.0d4                |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
@@ -228,6 +236,8 @@ NI-SCOPE Python API Status
 +===============================+========================+
 | Driver Version Tested Against | 18.1.0                 |
 +-------------------------------+------------------------+
+| Driver API Version            | 19.1.0d28              |
++-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
 | Supported Python Version      | |niscopePythonVersion| |
@@ -267,6 +277,8 @@ NI Switch Executive Python API Status
 +===============================+=====================+
 | Driver Version Tested Against | 18.0.0              |
 +-------------------------------+---------------------+
+| Driver API Version            | 19.1.0d0            |
++-------------------------------+---------------------+
 | PyPI Version                  | |niseLatestVersion| |
 +-------------------------------+---------------------+
 | Supported Python Version      | |nisePythonVersion| |
@@ -305,6 +317,8 @@ NI-SWITCH Python API Status
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
 | Driver Version Tested Against | 18.0.0                  |
++-------------------------------+-------------------------+
+| Driver API Version            | 19.1.0d0                |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+

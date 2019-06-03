@@ -1,5 +1,7 @@
-
-ALL_DRIVERS := nifake nidcpower nidmm nifgen niscope niswitch nimodinst nise
+# In alphabetical order except put nifake first and nimodinst last
+# - nifake first to get the most code generator coverage
+# - nimodinst last so that the version from nimodinst is used for any global versions (docs/conf.py)
+ALL_DRIVERS := nifake nidcpower nidmm nifgen niscope niswitch nise nimodinst
 DRIVERS ?= $(ALL_DRIVERS)
 
 ROOT_DIR := $(abspath .)

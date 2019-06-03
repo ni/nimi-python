@@ -282,8 +282,6 @@ nifgen.Session
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`logical_name`                                     | str                                     |
     +-------------------------------------------------------------+-----------------------------------------+
-    | :py:attr:`major_version`                                    | int                                     |
-    +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`marker_events_count`                              | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`marker_event_output_terminal`                     | str                                     |
@@ -305,8 +303,6 @@ nifgen.Session
     | :py:attr:`max_waveform_size`                                | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`memory_size`                                      | int                                     |
-    +-------------------------------------------------------------+-----------------------------------------+
-    | :py:attr:`minor_version`                                    | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`min_freq_list_duration`                           | float                                   |
     +-------------------------------------------------------------+-----------------------------------------+
@@ -349,6 +345,10 @@ nifgen.Session
     | :py:attr:`simulate`                                         | bool                                    |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`specific_driver_description`                      | str                                     |
+    +-------------------------------------------------------------+-----------------------------------------+
+    | :py:attr:`major_version`                                    | int                                     |
+    +-------------------------------------------------------------+-----------------------------------------+
+    | :py:attr:`minor_version`                                    | int                                     |
     +-------------------------------------------------------------+-----------------------------------------+
     | :py:attr:`specific_driver_revision`                         | str                                     |
     +-------------------------------------------------------------+-----------------------------------------+
@@ -516,7 +516,7 @@ absolute_delay
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -545,7 +545,7 @@ all_marker_events_latched_status
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -574,7 +574,7 @@ all_marker_events_live_status
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -603,7 +603,7 @@ analog_data_mask
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -632,7 +632,7 @@ analog_filter_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -662,7 +662,7 @@ analog_path
             +----------------+------------------+
             | Permissions    | read-write       |
             +----------------+------------------+
-            | Channel Based  | False            |
+            | Channel Based  | No               |
             +----------------+------------------+
             | Resettable     | Yes              |
             +----------------+------------------+
@@ -691,7 +691,7 @@ analog_static_value
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -722,7 +722,7 @@ arb_gain
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -767,7 +767,7 @@ arb_marker_position
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -799,7 +799,7 @@ arb_offset
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -829,7 +829,7 @@ arb_repeat_count
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -859,7 +859,7 @@ arb_sample_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -889,7 +889,7 @@ arb_sequence_handle
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -929,7 +929,7 @@ arb_waveform_handle
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -958,7 +958,7 @@ aux_power_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -987,7 +987,7 @@ bus_type
             +----------------+---------------+
             | Permissions    | read only     |
             +----------------+---------------+
-            | Channel Based  | False         |
+            | Channel Based  | No            |
             +----------------+---------------+
             | Resettable     | No            |
             +----------------+---------------+
@@ -1016,7 +1016,7 @@ channel_delay
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1046,7 +1046,7 @@ clock_mode
             +----------------+-----------------+
             | Permissions    | read-write      |
             +----------------+-----------------+
-            | Channel Based  | False           |
+            | Channel Based  | No              |
             +----------------+-----------------+
             | Resettable     | Yes             |
             +----------------+-----------------+
@@ -1075,7 +1075,7 @@ common_mode_offset
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1104,7 +1104,7 @@ data_marker_events_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1146,7 +1146,7 @@ data_marker_event_data_bit_number
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1188,7 +1188,7 @@ data_marker_event_level_polarity
             +----------------+------------------------------------+
             | Permissions    | read-write                         |
             +----------------+------------------------------------+
-            | Channel Based  | False                              |
+            | Channel Based  | No                                 |
             +----------------+------------------------------------+
             | Resettable     | Yes                                |
             +----------------+------------------------------------+
@@ -1230,7 +1230,7 @@ data_marker_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1259,7 +1259,7 @@ data_transfer_block_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1288,7 +1288,7 @@ data_transfer_maximum_bandwidth
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1319,7 +1319,7 @@ data_transfer_maximum_in_flight_reads
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1355,7 +1355,7 @@ data_transfer_preferred_packet_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1384,7 +1384,7 @@ digital_data_mask
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1426,7 +1426,7 @@ digital_edge_script_trigger_edge
             +----------------+------------------------------------+
             | Permissions    | read-write                         |
             +----------------+------------------------------------+
-            | Channel Based  | False                              |
+            | Channel Based  | No                                 |
             +----------------+------------------------------------+
             | Resettable     | Yes                                |
             +----------------+------------------------------------+
@@ -1468,7 +1468,7 @@ digital_edge_script_trigger_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1497,7 +1497,7 @@ digital_edge_start_trigger_edge
             +----------------+-----------------------------------+
             | Permissions    | read-write                        |
             +----------------+-----------------------------------+
-            | Channel Based  | False                             |
+            | Channel Based  | No                                |
             +----------------+-----------------------------------+
             | Resettable     | Yes                               |
             +----------------+-----------------------------------+
@@ -1526,7 +1526,7 @@ digital_edge_start_trigger_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1555,7 +1555,7 @@ digital_filter_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1584,7 +1584,7 @@ digital_filter_interpolation_factor
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1614,7 +1614,7 @@ digital_gain
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1643,7 +1643,7 @@ digital_pattern_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1672,7 +1672,7 @@ digital_static_value
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1701,7 +1701,7 @@ done_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1734,9 +1734,9 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  |         0 |
+            | Channel Based  | No        |
             +----------------+-----------+
-            | Resettable     |         0 |
+            | Resettable     | Yes       |
             +----------------+-----------+
 
         .. tip::
@@ -1762,7 +1762,7 @@ exported_onboard_reference_clock_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1791,7 +1791,7 @@ exported_reference_clock_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1824,7 +1824,7 @@ exported_sample_clock_divisor
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1853,7 +1853,7 @@ exported_sample_clock_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1886,7 +1886,7 @@ exported_sample_clock_timebase_divisor
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1920,7 +1920,7 @@ exported_sample_clock_timebase_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1963,7 +1963,7 @@ exported_script_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -1992,7 +1992,7 @@ exported_start_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2021,7 +2021,7 @@ external_clock_delay_binary_value
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2050,7 +2050,7 @@ external_sample_clock_multiplier
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2079,7 +2079,7 @@ file_transfer_block_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2108,7 +2108,7 @@ filter_correction_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2138,7 +2138,7 @@ flatness_correction_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2167,7 +2167,7 @@ fpga_bitfile_path
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2196,7 +2196,7 @@ freq_list_duration_quantum
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2225,7 +2225,7 @@ freq_list_handle
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2261,7 +2261,7 @@ func_amplitude
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2295,7 +2295,7 @@ func_buffer_size
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2326,7 +2326,7 @@ func_dc_offset
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2361,7 +2361,7 @@ func_duty_cycle_high
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2397,7 +2397,7 @@ func_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2431,7 +2431,7 @@ func_max_buffer_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2467,7 +2467,7 @@ func_start_phase
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2506,7 +2506,7 @@ func_waveform
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -2535,7 +2535,7 @@ idle_behavior
             +----------------+--------------------+
             | Permissions    | read-write         |
             +----------------+--------------------+
-            | Channel Based  | False              |
+            | Channel Based  | No                 |
             +----------------+--------------------+
             | Resettable     | Yes                |
             +----------------+--------------------+
@@ -2564,7 +2564,7 @@ idle_value
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2593,7 +2593,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2622,7 +2622,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2651,7 +2651,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2682,7 +2682,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2715,7 +2715,7 @@ load_impedance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2749,7 +2749,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2759,35 +2759,6 @@ logical_name
 
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Advanced Session Information:Logical Name**
                 - C Attribute: **NIFGEN_ATTR_LOGICAL_NAME**
-
-major_version
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: major_version
-
-        Returns the major version number of NI-FGEN.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | False     |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Obsolete:Major Version**
-                - C Attribute: **NIFGEN_ATTR_MAJOR_VERSION**
 
 marker_events_count
 ~~~~~~~~~~~~~~~~~~~
@@ -2807,7 +2778,7 @@ marker_events_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2849,7 +2820,7 @@ marker_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2878,7 +2849,7 @@ max_freq_list_duration
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2907,7 +2878,7 @@ max_freq_list_length
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2936,7 +2907,7 @@ max_loop_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2965,7 +2936,7 @@ max_num_freq_lists
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2994,7 +2965,7 @@ max_num_sequences
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3023,7 +2994,7 @@ max_num_waveforms
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3052,7 +3023,7 @@ max_sequence_length
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3081,7 +3052,7 @@ max_waveform_size
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3110,7 +3081,7 @@ memory_size
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3120,35 +3091,6 @@ memory_size
 
                 - LabVIEW Property: **Instrument:Memory Size**
                 - C Attribute: **NIFGEN_ATTR_MEMORY_SIZE**
-
-minor_version
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:attribute:: minor_version
-
-        Returns the minor version number of NI-FGEN.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | False     |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Instrument:Obsolete:Minor Version**
-                - C Attribute: **NIFGEN_ATTR_MINOR_VERSION**
 
 min_freq_list_duration
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -3168,7 +3110,7 @@ min_freq_list_duration
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3197,7 +3139,7 @@ min_freq_list_length
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3226,7 +3168,7 @@ min_sequence_length
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3255,7 +3197,7 @@ min_waveform_size
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3284,7 +3226,7 @@ module_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3314,7 +3256,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3343,7 +3285,7 @@ output_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3372,7 +3314,7 @@ output_impedance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3405,7 +3347,7 @@ output_mode
             +----------------+------------------+
             | Permissions    | read-write       |
             +----------------+------------------+
-            | Channel Based  | False            |
+            | Channel Based  | No               |
             +----------------+------------------+
             | Resettable     | No               |
             +----------------+------------------+
@@ -3434,7 +3376,7 @@ ready_for_start_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3469,7 +3411,7 @@ reference_clock_source
             +----------------+----------------------------+
             | Permissions    | read-write                 |
             +----------------+----------------------------+
-            | Channel Based  | False                      |
+            | Channel Based  | No                         |
             +----------------+----------------------------+
             | Resettable     | Yes                        |
             +----------------+----------------------------+
@@ -3498,7 +3440,7 @@ ref_clock_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3532,7 +3474,7 @@ sample_clock_source
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
             | Resettable     | Yes                     |
             +----------------+-------------------------+
@@ -3566,7 +3508,7 @@ sample_clock_timebase_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3600,7 +3542,7 @@ sample_clock_timebase_source
             +----------------+---------------------------------+
             | Permissions    | read-write                      |
             +----------------+---------------------------------+
-            | Channel Based  | False                           |
+            | Channel Based  | No                              |
             +----------------+---------------------------------+
             | Resettable     | Yes                             |
             +----------------+---------------------------------+
@@ -3633,7 +3575,7 @@ script_to_generate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3662,7 +3604,7 @@ script_triggers_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3704,7 +3646,7 @@ script_trigger_type
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
             | Resettable     | Yes                     |
             +----------------+-------------------------+
@@ -3733,7 +3675,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3768,7 +3710,7 @@ simulate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3797,7 +3739,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3807,6 +3749,64 @@ specific_driver_description
 
                 - LabVIEW Property: **Instrument:Inherent IVI Attributes:Driver Identification:Description**
                 - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
+
+major_version
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: major_version
+
+        Returns the major version number of NI-FGEN.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Instrument:Obsolete:Major Version**
+                - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_MAJOR_VERSION**
+
+minor_version
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:attribute:: minor_version
+
+        Returns the minor version number of NI-FGEN.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Instrument:Obsolete:Minor Version**
+                - C Attribute: **NIFGEN_ATTR_SPECIFIC_DRIVER_MINOR_VERSION**
 
 specific_driver_revision
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3826,7 +3826,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3855,7 +3855,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3884,7 +3884,7 @@ started_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3913,7 +3913,7 @@ start_trigger_type
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | Yes                    |
             +----------------+------------------------+
@@ -3944,7 +3944,7 @@ streaming_space_available_in_waveform
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3974,7 +3974,7 @@ streaming_waveform_handle
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4004,7 +4004,7 @@ streaming_waveform_name
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -4033,7 +4033,7 @@ streaming_write_timeout
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
@@ -4062,7 +4062,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4091,7 +4091,7 @@ terminal_configuration
             +----------------+-----------------------------+
             | Permissions    | read-write                  |
             +----------------+-----------------------------+
-            | Channel Based  | False                       |
+            | Channel Based  | No                          |
             +----------------+-----------------------------+
             | Resettable     | Yes                         |
             +----------------+-----------------------------+
@@ -4120,7 +4120,7 @@ trigger_mode
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -4149,7 +4149,7 @@ wait_behavior
             +----------------+--------------------+
             | Permissions    | read-write         |
             +----------------+--------------------+
-            | Channel Based  | False              |
+            | Channel Based  | No                 |
             +----------------+--------------------+
             | Resettable     | Yes                |
             +----------------+--------------------+
@@ -4178,7 +4178,7 @@ wait_value
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -4208,7 +4208,7 @@ waveform_quantum
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -5478,12 +5478,12 @@ create_waveform_numpy
             :param waveform_data_array:
 
 
-                Array of data for the new arbitrary waveform. This may be an iterable of float, or for best performance a numpy.ndarray of dtype int16 or float64.
+                Array of data for the new arbitrary waveform. This may be an iterable of float or int16, or for best performance a numpy.ndarray of dtype int16 or float64.
 
                 
 
 
-            :type waveform_data_array: list of float
+            :type waveform_data_array: iterable of float or int16
 
             :rtype: int
             :return:
@@ -6598,8 +6598,6 @@ Properties
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.logical_name`                                     | str                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
-| :py:attr:`nifgen.Session.major_version`                                    | int                                     |
-+----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.marker_events_count`                              | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.marker_event_output_terminal`                     | str                                     |
@@ -6621,8 +6619,6 @@ Properties
 | :py:attr:`nifgen.Session.max_waveform_size`                                | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.memory_size`                                      | int                                     |
-+----------------------------------------------------------------------------+-----------------------------------------+
-| :py:attr:`nifgen.Session.minor_version`                                    | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.min_freq_list_duration`                           | float                                   |
 +----------------------------------------------------------------------------+-----------------------------------------+
@@ -6665,6 +6661,10 @@ Properties
 | :py:attr:`nifgen.Session.simulate`                                         | bool                                    |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.specific_driver_description`                      | str                                     |
++----------------------------------------------------------------------------+-----------------------------------------+
+| :py:attr:`nifgen.Session.major_version`                                    | int                                     |
++----------------------------------------------------------------------------+-----------------------------------------+
+| :py:attr:`nifgen.Session.minor_version`                                    | int                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+
 | :py:attr:`nifgen.Session.specific_driver_revision`                         | str                                     |
 +----------------------------------------------------------------------------+-----------------------------------------+

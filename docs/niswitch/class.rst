@@ -466,7 +466,7 @@ analog_bus_sharing_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -474,7 +474,6 @@ analog_bus_sharing_enable
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Channel Configuration:Analog Bus Sharing Enable**
                 - C Attribute: **NISWITCH_ATTR_ANALOG_BUS_SHARING_ENABLE**
 
 bandwidth
@@ -508,7 +507,7 @@ bandwidth
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -516,7 +515,6 @@ bandwidth
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Bandwidth**
                 - C Attribute: **NISWITCH_ATTR_BANDWIDTH**
 
 channel_count
@@ -537,7 +535,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -545,7 +543,6 @@ channel_count
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
                 - C Attribute: **NISWITCH_ATTR_CHANNEL_COUNT**
 
 characteristic_impedance
@@ -579,7 +576,7 @@ characteristic_impedance
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -587,7 +584,6 @@ characteristic_impedance
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Characteristic Impedance**
                 - C Attribute: **NISWITCH_ATTR_CHARACTERISTIC_IMPEDANCE**
 
 continuous_scan
@@ -609,7 +605,7 @@ continuous_scan
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -617,7 +613,6 @@ continuous_scan
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Continuous Scan**
                 - C Attribute: **NISWITCH_ATTR_CONTINUOUS_SCAN**
 
 digital_filter_enable
@@ -639,7 +634,7 @@ digital_filter_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -647,7 +642,6 @@ digital_filter_enable
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Digital Filter Enable**
                 - C Attribute: **NISWITCH_ATTR_DIGITAL_FILTER_ENABLE**
 
 driver_setup
@@ -674,7 +668,7 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -682,7 +676,6 @@ driver_setup
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Driver Setup**
                 - C Attribute: **NISWITCH_ATTR_DRIVER_SETUP**
 
 handshaking_initiation
@@ -703,7 +696,7 @@ handshaking_initiation
             +----------------+-----------------------------+
             | Permissions    | read-write                  |
             +----------------+-----------------------------+
-            | Channel Based  | False                       |
+            | Channel Based  | No                          |
             +----------------+-----------------------------+
             | Resettable     | No                          |
             +----------------+-----------------------------+
@@ -711,7 +704,6 @@ handshaking_initiation
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Handshaking Initiation**
                 - C Attribute: **NISWITCH_ATTR_HANDSHAKING_INITIATION**
 
 instrument_firmware_revision
@@ -732,7 +724,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -740,7 +732,6 @@ instrument_firmware_revision
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Firmware Revision**
                 - C Attribute: **NISWITCH_ATTR_INSTRUMENT_FIRMWARE_REVISION**
 
 instrument_manufacturer
@@ -761,7 +752,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -769,7 +760,6 @@ instrument_manufacturer
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Manufacturer**
                 - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MANUFACTURER**
 
 instrument_model
@@ -790,7 +780,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -798,7 +788,6 @@ instrument_model
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
                 - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MODEL**
 
 io_resource_descriptor
@@ -821,7 +810,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -829,7 +818,6 @@ io_resource_descriptor
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor**
                 - C Attribute: **NISWITCH_ATTR_IO_RESOURCE_DESCRIPTOR**
 
 is_configuration_channel
@@ -865,7 +853,7 @@ is_configuration_channel
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -873,7 +861,6 @@ is_configuration_channel
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Channel Configuration:Is Configuration Channel**
                 - C Attribute: **NISWITCH_ATTR_IS_CONFIGURATION_CHANNEL**
 
 is_debounced
@@ -894,7 +881,7 @@ is_debounced
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -902,7 +889,6 @@ is_debounced
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Is Debounced**
                 - C Attribute: **NISWITCH_ATTR_IS_DEBOUNCED**
 
 is_scanning
@@ -923,7 +909,7 @@ is_scanning
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -931,7 +917,6 @@ is_scanning
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Is Scanning**
                 - C Attribute: **NISWITCH_ATTR_IS_SCANNING**
 
 is_source_channel
@@ -965,7 +950,7 @@ is_source_channel
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -973,7 +958,6 @@ is_source_channel
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Channel Configuration:Is Source Channel**
                 - C Attribute: **NISWITCH_ATTR_IS_SOURCE_CHANNEL**
 
 is_waiting_for_trig
@@ -994,7 +978,7 @@ is_waiting_for_trig
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1002,7 +986,6 @@ is_waiting_for_trig
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Is Waiting for Trigger?**
                 - C Attribute: **NISWITCH_ATTR_IS_WAITING_FOR_TRIG**
 
 logical_name
@@ -1028,7 +1011,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1036,7 +1019,6 @@ logical_name
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
                 - C Attribute: **NISWITCH_ATTR_LOGICAL_NAME**
 
 max_ac_voltage
@@ -1070,7 +1052,7 @@ max_ac_voltage
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1078,7 +1060,6 @@ max_ac_voltage
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum AC Voltage**
                 - C Attribute: **NISWITCH_ATTR_MAX_AC_VOLTAGE**
 
 max_carry_ac_current
@@ -1112,7 +1093,7 @@ max_carry_ac_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1120,7 +1101,6 @@ max_carry_ac_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_CURRENT**
 
 max_carry_ac_power
@@ -1154,7 +1134,7 @@ max_carry_ac_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1162,7 +1142,6 @@ max_carry_ac_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_POWER**
 
 max_carry_dc_current
@@ -1196,7 +1175,7 @@ max_carry_dc_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1204,7 +1183,6 @@ max_carry_dc_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_CURRENT**
 
 max_carry_dc_power
@@ -1238,7 +1216,7 @@ max_carry_dc_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1246,7 +1224,6 @@ max_carry_dc_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_POWER**
 
 max_dc_voltage
@@ -1280,7 +1257,7 @@ max_dc_voltage
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1288,7 +1265,6 @@ max_dc_voltage
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum DC Voltage**
                 - C Attribute: **NISWITCH_ATTR_MAX_DC_VOLTAGE**
 
 max_switching_ac_current
@@ -1322,7 +1298,7 @@ max_switching_ac_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1330,7 +1306,6 @@ max_switching_ac_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_CURRENT**
 
 max_switching_ac_power
@@ -1364,7 +1339,7 @@ max_switching_ac_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1372,7 +1347,6 @@ max_switching_ac_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_POWER**
 
 max_switching_dc_current
@@ -1406,7 +1380,7 @@ max_switching_dc_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1414,7 +1388,6 @@ max_switching_dc_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_CURRENT**
 
 max_switching_dc_power
@@ -1448,7 +1421,7 @@ max_switching_dc_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1456,7 +1429,6 @@ max_switching_dc_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_POWER**
 
 number_of_relays
@@ -1477,7 +1449,7 @@ number_of_relays
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1485,7 +1457,6 @@ number_of_relays
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Number of Relays**
                 - C Attribute: **NISWITCH_ATTR_NUMBER_OF_RELAYS**
 
 num_of_columns
@@ -1507,7 +1478,7 @@ num_of_columns
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1515,7 +1486,6 @@ num_of_columns
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Matrix Configuration:Number of Columns**
                 - C Attribute: **NISWITCH_ATTR_NUM_OF_COLUMNS**
 
 num_of_rows
@@ -1537,7 +1507,7 @@ num_of_rows
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1545,7 +1515,6 @@ num_of_rows
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Matrix Configuration:Number of Rows**
                 - C Attribute: **NISWITCH_ATTR_NUM_OF_ROWS**
 
 power_down_latching_relays_after_debounce
@@ -1567,7 +1536,7 @@ power_down_latching_relays_after_debounce
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1575,7 +1544,6 @@ power_down_latching_relays_after_debounce
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
                 - C Attribute: **NISWITCH_ATTR_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE**
 
 scan_advanced_output
@@ -1596,7 +1564,7 @@ scan_advanced_output
             +----------------+--------------------------+
             | Permissions    | read-write               |
             +----------------+--------------------------+
-            | Channel Based  | False                    |
+            | Channel Based  | No                       |
             +----------------+--------------------------+
             | Resettable     | No                       |
             +----------------+--------------------------+
@@ -1604,7 +1572,6 @@ scan_advanced_output
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Scan Advanced Output**
                 - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_OUTPUT**
 
 scan_advanced_polarity
@@ -1625,7 +1592,7 @@ scan_advanced_polarity
             +----------------+----------------------------+
             | Permissions    | read-write                 |
             +----------------+----------------------------+
-            | Channel Based  | False                      |
+            | Channel Based  | No                         |
             +----------------+----------------------------+
             | Resettable     | No                         |
             +----------------+----------------------------+
@@ -1633,7 +1600,6 @@ scan_advanced_polarity
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Scan Advanced Polarity**
                 - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_POLARITY**
 
 scan_delay
@@ -1659,7 +1625,7 @@ scan_delay
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1667,7 +1633,6 @@ scan_delay
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Scan Delay**
                 - C Attribute: **NISWITCH_ATTR_SCAN_DELAY**
 
 scan_list
@@ -1698,7 +1663,7 @@ scan_list
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1706,7 +1671,6 @@ scan_list
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Scan List**
                 - C Attribute: **NISWITCH_ATTR_SCAN_LIST**
 
 scan_mode
@@ -1733,7 +1697,7 @@ scan_mode
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -1741,7 +1705,6 @@ scan_mode
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Scan Mode**
                 - C Attribute: **NISWITCH_ATTR_SCAN_MODE**
 
 serial_number
@@ -1762,7 +1725,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1770,7 +1733,6 @@ serial_number
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Serial Number**
                 - C Attribute: **NISWITCH_ATTR_SERIAL_NUMBER**
 
 settling_time
@@ -1807,7 +1769,7 @@ settling_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | True                                   |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1815,7 +1777,6 @@ settling_time
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Settling Time**
                 - C Attribute: **NISWITCH_ATTR_SETTLING_TIME**
 
 simulate
@@ -1841,7 +1802,7 @@ simulate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1849,7 +1810,6 @@ simulate
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
                 - C Attribute: **NISWITCH_ATTR_SIMULATE**
 
 specific_driver_description
@@ -1870,7 +1830,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1878,7 +1838,6 @@ specific_driver_description
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
                 - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
 
 specific_driver_revision
@@ -1899,7 +1858,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1907,7 +1866,6 @@ specific_driver_revision
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
                 - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_REVISION**
 
 specific_driver_vendor
@@ -1928,7 +1886,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1936,7 +1894,6 @@ specific_driver_vendor
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Vendor**
                 - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_VENDOR**
 
 supported_instrument_models
@@ -1957,7 +1914,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1965,7 +1922,6 @@ supported_instrument_models
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models**
                 - C Attribute: **NISWITCH_ATTR_SUPPORTED_INSTRUMENT_MODELS**
 
 temperature
@@ -1986,7 +1942,7 @@ temperature
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1994,7 +1950,6 @@ temperature
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Temperature**
                 - C Attribute: **NISWITCH_ATTR_TEMPERATURE**
 
 trigger_input
@@ -2015,7 +1970,7 @@ trigger_input
             +----------------+--------------------+
             | Permissions    | read-write         |
             +----------------+--------------------+
-            | Channel Based  | False              |
+            | Channel Based  | No                 |
             +----------------+--------------------+
             | Resettable     | No                 |
             +----------------+--------------------+
@@ -2023,7 +1978,6 @@ trigger_input
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Trigger Input**
                 - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT**
 
 trigger_input_polarity
@@ -2044,7 +1998,7 @@ trigger_input_polarity
             +----------------+----------------------------+
             | Permissions    | read-write                 |
             +----------------+----------------------------+
-            | Channel Based  | False                      |
+            | Channel Based  | No                         |
             +----------------+----------------------------+
             | Resettable     | No                         |
             +----------------+----------------------------+
@@ -2052,7 +2006,6 @@ trigger_input_polarity
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Scanning Configuration:Trigger Input Polarity**
                 - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT_POLARITY**
 
 wire_mode
@@ -2086,7 +2039,7 @@ wire_mode
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2094,7 +2047,6 @@ wire_mode
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Module Characteristics:Wire mode**
                 - C Attribute: **NISWITCH_ATTR_WIRE_MODE**
 
 
@@ -2164,22 +2116,22 @@ can_connect
 
 
                     Indicates whether a path is valid. Possible values include:
-                    ------------------------------------ :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` 1
-                    :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` 2 :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` 3
-                    :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` 5
-                    :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
-                    :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` indicates that the driver can create the
-                    path at this time. (2) :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` indicates that the
-                    path already exists. (3) :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` indicates that
+                    ------------------------------------ :py:data:`~niswitch.PathCapability.PATH_AVAILABLE` 1
+                    :py:data:`~niswitch.PathCapability.PATH_EXISTS` 2 :py:data:`~niswitch.PathCapability.PATH_UNSUPPORTED` 3
+                    :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.PathCapability.SOURCE_CONFLICT` 5
+                    :py:data:`~niswitch.PathCapability.CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
+                    :py:data:`~niswitch.PathCapability.PATH_AVAILABLE` indicates that the driver can create the
+                    path at this time. (2) :py:data:`~niswitch.PathCapability.PATH_EXISTS` indicates that the
+                    path already exists. (3) :py:data:`~niswitch.PathCapability.PATH_UNSUPPORTED` indicates that
                     the instrument is not capable of creating a path between the channels
                     you specify. (4) :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` indicates that although
                     the path is valid, the driver cannot create the path at this moment
                     because the switch device is currently using one or more of the required
                     channels to create another path. You must destroy the other path before
-                    creating this one. (5) :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` indicates that
+                    creating this one. (5) :py:data:`~niswitch.PathCapability.SOURCE_CONFLICT` indicates that
                     the instrument cannot create a path because both channels are connected
                     to a different source channel. (6)
-                    :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` indicates that the driver cannot
+                    :py:data:`~niswitch.PathCapability.CHANNEL_NOT_AVAILABLE` indicates that the driver cannot
                     create a path between the two channels because one of the channels is a
                     configuration channel and thus unavailable for external connections.
 
@@ -2582,12 +2534,10 @@ get_relay_position
             :return:
 
 
-                    Indicates whether the relay is open or closed. :py:data:`~niswitch.NISWITCH_VAL_OPEN` 10
+                    Indicates whether the relay is open or closed. :py:data:`~niswitch.RelayPosition.OPEN` 10
                     NIWITCH_VAL_CLOSED 11
 
                     
-
-                    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
@@ -2673,12 +2623,10 @@ relay_control
 
 
                 Specifies whether to open or close a given relay. Default value: Relay
-                Close Defined values: :py:data:`~niswitch.NISWITCH_VAL_OPEN_RELAY`
-                :py:data:`~niswitch.NISWITCH_VAL_CLOSE_RELAY` (Default Value)
+                Close Defined values: :py:data:`~niswitch.RelayAction.OPEN`
+                :py:data:`~niswitch.RelayAction.CLOSE` (Default Value)
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type relay_action: :py:data:`niswitch.RelayAction`
