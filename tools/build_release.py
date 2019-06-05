@@ -32,15 +32,17 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 """
     parser = argparse.ArgumentParser(description=usage)
 
+    build_group = parser.add_argument_group("Build configuration")
+    build_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. build, then update with .dev0")
+    build_group.add_argument("--upload", action="store_true", default=False, help="Upload build distributions to PyPI")
+    build_group.add_argument("--update", action="store_true", default=False, help="Update verion in config.py files")
+    build_group.add_argument("--build", action="store_true", default=False, help="Clean and build")
+    build_group.add_argument("--python-cmd", action="store", default=None, help="Command to use for invoking python. Default: {}".format(default_python_cmd))
+
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
-    verbosity_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. build, then update with .dev0")
-    verbosity_group.add_argument("--upload", action="store_true", default=False, help="Upload build distributions to PyPI")
-    verbosity_group.add_argument("--update", action="store_true", default=False, help="Update verion in config.py files")
-    verbosity_group.add_argument("--build", action="store_true", default=False, help="Clean and build")
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
-    verbosity_group.add_argument("--test", action="store_true", default=False, help="Run doctests and quit")
+    verbosity_group.add_argument("--preview", action="store_true", default=False, help="Show what would happen when running with given parameters")
     verbosity_group.add_argument("--log-file", action="store", default=None, help="Send logging to listed file instead of stdout")
-    verbosity_group.add_argument("--python-cmd", action="store", default=None, help="Command to use for invoking python. Default: py -2")
     args = parser.parse_args()
 
     if args.verbose > 1:
