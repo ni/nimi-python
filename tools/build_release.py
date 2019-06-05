@@ -8,7 +8,7 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
-default_python_cmd = ['python']
+default_python_cmd = ['c://Python27//python.exe']
 
 
 def configure_logging(lvl=logging.WARNING, logfile=None):
