@@ -69,10 +69,6 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     if args.update:
         logging.info('Updating versions')
-
-        logging.info('Rebuild to update generated files')
-        logging.info(pp.pformat(tox_cmd))
-        call(tox_cmd)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifake/metadata/config_addon.py', ] + passthrough_params))
         call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifake/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config_addon.py', ] + passthrough_params))
