@@ -60,8 +60,8 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     twine_cmd = python_cmd + ['-m', 'twine']
 
     passthrough_params = ['-v' for i in range(args.verbose)]
-    if args.test:
-        passthrough_params.append('--test')
+    if args.preview:
+        passthrough_params.append('--preview')
     if args.log_file:
         passthrough_params.append('--log-file').append(args.log_file)
     if args.release:
@@ -90,7 +90,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         logging.info('Clean and build')
         logging.info(pp.pformat(tox_cmd + ['-e', 'clean']))
         logging.info(pp.pformat(tox_cmd))
-        if not args.test:
+        if not args.preview:
             call(tox_cmd + ['-e', 'clean'])
             call(tox_cmd)
 
@@ -98,7 +98,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         logging.info('Uploading to PyPI')
         complete_twine_cmd = twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*', 'bin/nise/dist/*']
         logging.info(pp.pformat(complete_twine_cmd))
-        if not args.test:
+        if not args.preview:
             call(complete_twine_cmd)
 
 
