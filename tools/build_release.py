@@ -27,8 +27,28 @@ def configure_logging(lvl=logging.WARNING, logfile=None):
 
 def main():
     # Setup the required arguments for this script
-    usage = """
-Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
+    usage = """Release script
+Prereqs
+    * Be able to build locally
+    * `pip install --upgrade twine` into whichever Python 2.7 you use to build
+
+Steps
+    * Make sure master is ready for release
+        * Update the changelog to show the version of the release
+        * Change unreleased in TOC to new version
+        * Commit to master
+    * `c:\Python36\python.exe tools\build_release.py --build --update --upload --release`
+        * This will update all the versions to remove any '.devN'
+        * Clean and build to update generated files with new version
+        * Upload to PyPI - you will need to type in your credentials
+    * Push all changes to GitHub
+    * Create a release on GitHub using the portion from the changelog for this release for the description
+    * `c:\Python36\python.exe tools\build_release.py --build --update`
+        * This will update the version to X.X.(N+1).dev0
+        * Clean and Build to update generated files
+    * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
+    * Push to GitHub
+
 """
     parser = argparse.ArgumentParser(description=usage)
 
