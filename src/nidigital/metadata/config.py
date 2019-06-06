@@ -14,7 +14,7 @@ config = {
     'enum_whitelist_suffix': [
     ],
     'init_function': 'InitWithOptions',
-    'last_tested_version': '19.0.0d32',
+    'api_version': '19.0.0d32',
     'library_info': {
         'Linux': {
             '64bit': {

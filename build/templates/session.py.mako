@@ -22,7 +22,7 @@ ${template_parameters['encoding_tag']}
 %>\
 import array  # noqa: F401
 import ctypes
-import datetime
+import datetime  # noqa: F401
 % if config['use_locking']:
 # Used by @ivi_synchronized
 from functools import wraps
