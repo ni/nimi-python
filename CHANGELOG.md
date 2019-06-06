@@ -50,7 +50,14 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-    
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * Initial support
+        * Very basic at this point and subject to change
+        * Looking for any testing and/or feedback
+    * #### Changed
+    * #### Removed
+
 
 ## 1.1.2 - 2019-06-06
 * ### ALL
@@ -747,6 +754,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 * ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Digital Pattern Driver
     * #### Added
     * #### Changed
     * #### Removed
