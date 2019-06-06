@@ -3,7 +3,7 @@
 import argparse
 import logging
 import pprint
-from subprocess import call
+from subprocess import check_call
 import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
@@ -70,36 +70,37 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     if args.update:
         logging.info('Updating versions')
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifake/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifake/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifake/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidmm/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidmm/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidmm/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niswitch/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niswitch/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niswitch/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config_addon.py', ] + passthrough_params))
-        call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config_addon.py', ] + passthrough_params)
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config_addon.py', ] + passthrough_params)
 
     if args.build:
         logging.info('Clean and build')
         logging.info(pp.pformat(tox_cmd + ['-e', 'clean']))
         logging.info(pp.pformat(tox_cmd))
+        logging.info(pp.pformat(tox_cmd + ['-e', 'pkg']))
         if not args.preview:
-            call(tox_cmd + ['-e', 'clean'])
-            call(tox_cmd)
+            check_call(tox_cmd + ['-e', 'clean'])
+            check_call(tox_cmd)
 
     if args.upload:
         logging.info('Uploading to PyPI')
         complete_twine_cmd = twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*', 'bin/nise/dist/*']
         logging.info(pp.pformat(complete_twine_cmd))
         if not args.preview:
-            call(complete_twine_cmd)
+            check_call(complete_twine_cmd)
 
 
 if __name__ == '__main__':
