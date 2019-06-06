@@ -29,7 +29,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.1.2',
+    version='1.1.3.dev0',
     description='NI-FGEN Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
