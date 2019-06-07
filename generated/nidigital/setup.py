@@ -29,9 +29,10 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='0.1.0.dev0',
+    version='0.1.0',
     description='NI-Digital Pattern Driver Python API',
     long_description=read_contents('README.rst'),
+    long_description_content_type='text/x-rst',
     author='National Instruments',
     author_email="opensource@ni.com",
     url="https://github.com/ni/nimi-python",
