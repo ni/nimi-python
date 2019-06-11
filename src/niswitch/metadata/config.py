@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-SWITCH version 19.1.0d0
+# This file is generated from NI-SWITCH API metadata version 19.1.0d2
 config = {
+    'api_version': '19.1.0d2',
     'c_function_prefix': 'niSwitch_',
     'close_function': 'Close',
     'context_manager_name': {
@@ -12,7 +13,6 @@ config = {
     ],
     'driver_name': 'NI-SWITCH',
     'init_function': 'InitWithTopology',
-    'api_version': '19.1.0d0',
     'library_info': {
         'Linux': {
             '64bit': {
