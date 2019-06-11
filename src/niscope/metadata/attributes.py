@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-SCOPE version 19.1.0d28
+# This file is generated from NI-SCOPE API metadata version 19.1.0d50
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -10,7 +10,7 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
         'name': 'RANGE_CHECK',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050003: {
@@ -22,7 +22,7 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050004: {
@@ -34,11 +34,11 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Cache',
         'name': 'CACHE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050005: {
-        'access': 'read-write',
+        'access': 'read only',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver functions perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute functions, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver functions return calculated values.\nThe default value is VI_FALSE.   Use the niScope_InitWithOptions  function to override this value.\n'
@@ -57,7 +57,7 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
         'name': 'RECORD_COERCIONS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -68,7 +68,7 @@ attributes = {
         },
         'lv_property': '',
         'name': 'DRIVER_SETUP',
-        'resettable': True,
+        'resettable': False,
         'type': 'ViString'
     },
     1050021: {
@@ -80,7 +80,7 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
         'name': 'INTERCHANGE_CHECK',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050203: {
@@ -241,6 +241,13 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
+    1100105: {
+        'access': 'read only',
+        'channel_based': False,
+        'name': 'PRODUCT_CODE',
+        'resettable': False,
+        'type': 'ViInt32'
+    },
     1150001: {
         'access': 'read-write',
         'channel_based': False,
@@ -249,7 +256,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Number of Records',
         'name': 'HORZ_NUM_RECORDS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150002: {
@@ -260,7 +267,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Reference (Input) Clock Source',
         'name': 'INPUT_CLOCK_SOURCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150003: {
@@ -271,7 +278,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Output Clock Source',
         'name': 'OUTPUT_CLOCK_SOURCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150004: {
@@ -282,7 +289,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Enforce Realtime',
         'name': 'HORZ_ENFORCE_REALTIME',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150005: {
@@ -293,7 +300,7 @@ attributes = {
         },
         'lv_property': 'Acquisition:Binary Sample Width',
         'name': 'BINARY_SAMPLE_WIDTH',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150006: {
@@ -304,7 +311,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Hysteresis',
         'name': 'TRIGGER_HYSTERESIS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150007: {
@@ -316,7 +323,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Clock Sync Pulse Source',
         'name': 'CLOCK_SYNC_PULSE_SOURCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150008: {
@@ -327,7 +334,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Master Enable',
         'name': 'MASTER_ENABLE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150009: {
@@ -350,7 +357,7 @@ attributes = {
         'enum': 'TriggerWindowMode',
         'lv_property': 'Triggering:Trigger Window:Window Mode',
         'name': 'TRIGGER_WINDOW_MODE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150013: {
@@ -361,7 +368,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Window:Low Level',
         'name': 'TRIGGER_WINDOW_LOW_LEVEL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150014: {
@@ -372,7 +379,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Window:High Level',
         'name': 'TRIGGER_WINDOW_HIGH_LEVEL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150016: {
@@ -385,7 +392,7 @@ attributes = {
         'enum': 'RefLevelUnits',
         'lv_property': 'Waveform Measurement:Reference Levels:Units',
         'name': 'MEAS_REF_LEVEL_UNITS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150018: {
@@ -397,7 +404,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Other Channel',
         'name': 'MEAS_OTHER_CHANNEL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150019: {
@@ -409,7 +416,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Hysteresis Percent',
         'name': 'MEAS_HYSTERESIS_PERCENT',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150020: {
@@ -421,7 +428,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Last Acq. Histogram Size',
         'name': 'MEAS_LAST_ACQ_HISTOGRAM_SIZE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150021: {
@@ -433,7 +440,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Voltage Histogram:Size',
         'name': 'MEAS_VOLTAGE_HISTOGRAM_SIZE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150022: {
@@ -445,7 +452,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Voltage Histogram:Low Volts',
         'name': 'MEAS_VOLTAGE_HISTOGRAM_LOW_VOLTS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150023: {
@@ -457,7 +464,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Voltage Histogram:High Volts',
         'name': 'MEAS_VOLTAGE_HISTOGRAM_HIGH_VOLTS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150024: {
@@ -469,7 +476,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Time Histogram:Size',
         'name': 'MEAS_TIME_HISTOGRAM_SIZE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150025: {
@@ -481,7 +488,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Time Histogram:Low Volts',
         'name': 'MEAS_TIME_HISTOGRAM_LOW_VOLTS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150026: {
@@ -493,7 +500,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Time Histogram:High Volts',
         'name': 'MEAS_TIME_HISTOGRAM_HIGH_VOLTS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150027: {
@@ -505,7 +512,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Time Histogram:Low Time',
         'name': 'MEAS_TIME_HISTOGRAM_LOW_TIME',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150028: {
@@ -517,7 +524,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Time Histogram:High Time',
         'name': 'MEAS_TIME_HISTOGRAM_HIGH_TIME',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150029: {
@@ -529,7 +536,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Interpolation:Polynomial Interpolation Order',
         'name': 'MEAS_POLYNOMIAL_INTERPOLATION_ORDER',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150030: {
@@ -541,7 +548,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Interpolation:Sampling Factor',
         'name': 'MEAS_INTERPOLATION_SAMPLING_FACTOR',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150031: {
@@ -553,7 +560,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Filter:Cutoff Frequency',
         'name': 'MEAS_FILTER_CUTOFF_FREQ',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150032: {
@@ -565,7 +572,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Filter:Center Frequency',
         'name': 'MEAS_FILTER_CENTER_FREQ',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150033: {
@@ -577,7 +584,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Filter:Ripple',
         'name': 'MEAS_FILTER_RIPPLE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150034: {
@@ -589,7 +596,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Filter:Percent Waveform Transient',
         'name': 'MEAS_FILTER_TRANSIENT_WAVEFORM_PERCENT',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150035: {
@@ -602,7 +609,7 @@ attributes = {
         'enum': 'FilterType',
         'lv_property': 'Waveform Measurement:Filter:Type',
         'name': 'MEAS_FILTER_TYPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150036: {
@@ -614,7 +621,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Filter:IIR Order',
         'name': 'MEAS_FILTER_ORDER',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150037: {
@@ -626,7 +633,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Filter:FIR Taps',
         'name': 'MEAS_FILTER_TAPS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150038: {
@@ -638,7 +645,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based Low Ref Level',
         'name': 'MEAS_CHAN_LOW_REF_LEVEL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150039: {
@@ -650,7 +657,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based Mid Ref Level',
         'name': 'MEAS_CHAN_MID_REF_LEVEL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150040: {
@@ -662,7 +669,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Reference Levels:Channel Based High Ref Level',
         'name': 'MEAS_CHAN_HIGH_REF_LEVEL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150041: {
@@ -674,7 +681,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Filter:Width',
         'name': 'MEAS_FILTER_WIDTH',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150042: {
@@ -687,7 +694,7 @@ attributes = {
         'enum': 'FIRFilterWindow',
         'lv_property': 'Waveform Measurement:Filter:FIR Window',
         'name': 'MEAS_FIR_FILTER_WINDOW',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150043: {
@@ -699,7 +706,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Array Gain',
         'name': 'MEAS_ARRAY_GAIN',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150044: {
@@ -711,7 +718,7 @@ attributes = {
         },
         'lv_property': 'Waveform Measurement:Array Offset',
         'name': 'MEAS_ARRAY_OFFSET',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150045: {
@@ -724,7 +731,7 @@ attributes = {
         'enum': 'PercentageMethod',
         'lv_property': 'Waveform Measurement:Reference Levels:Percentage Units Method',
         'name': 'MEAS_PERCENTAGE_METHOD',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150046: {
@@ -833,7 +840,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Start Trigger (Acq. Arm):Source',
         'name': 'ACQ_ARM_SOURCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150065: {
@@ -855,7 +862,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Enable Records > Memory',
         'name': 'ALLOW_MORE_RECORDS_THAN_MEMORY',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150069: {
@@ -877,7 +884,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:RIS Num Avg',
         'name': 'RIS_NUM_AVERAGES',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150071: {
@@ -889,7 +896,7 @@ attributes = {
         'enum': 'RISMethod',
         'lv_property': 'Horizontal:RIS Method',
         'name': 'RIS_METHOD',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150072: {
@@ -901,7 +908,7 @@ attributes = {
         },
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Fetch Interleaved Data',
         'name': 'FETCH_INTERLEAVED_DATA',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150073: {
@@ -934,7 +941,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Impedance',
         'name': 'TRIGGER_IMPEDANCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150076: {
@@ -959,7 +966,7 @@ attributes = {
         'enum': 'FetchRelativeTo',
         'lv_property': 'Fetch:Fetch Relative To',
         'name': 'FETCH_RELATIVE_TO',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150078: {
@@ -971,7 +978,7 @@ attributes = {
         },
         'lv_property': 'Fetch:Fetch Offset',
         'name': 'FETCH_OFFSET',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150079: {
@@ -983,7 +990,7 @@ attributes = {
         },
         'lv_property': 'Fetch:Fetch Record Number',
         'name': 'FETCH_RECORD_NUMBER',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150080: {
@@ -995,7 +1002,7 @@ attributes = {
         },
         'lv_property': 'Fetch:Fetch Number of Records',
         'name': 'FETCH_NUM_RECORDS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150081: {
@@ -1007,7 +1014,7 @@ attributes = {
         },
         'lv_property': 'Fetch:Fetch Meas Num Samples',
         'name': 'FETCH_MEAS_NUM_SAMPLES',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150082: {
@@ -1075,7 +1082,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Sample Clock Timebase Source',
         'name': 'SAMP_CLK_TIMEBASE_SRC',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150088: {
@@ -1086,7 +1093,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Sample Clock Timebase Rate',
         'name': 'SAMP_CLK_TIMEBASE_RATE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150089: {
@@ -1097,7 +1104,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Sample Clock Timebase Divisor',
         'name': 'SAMP_CLK_TIMEBASE_DIV',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150090: {
@@ -1108,7 +1115,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Reference Clock Rate',
         'name': 'REF_CLK_RATE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150091: {
@@ -1120,7 +1127,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Exported Sample Clock Output Terminal',
         'name': 'EXPORTED_SAMPLE_CLOCK_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150093: {
@@ -1131,7 +1138,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Video:Enable DC Restore',
         'name': 'ENABLE_DC_RESTORE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150094: {
@@ -1142,7 +1149,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Advance Trigger:Source',
         'name': 'ADV_TRIG_SRC',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150095: {
@@ -1153,7 +1160,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Arm Reference Trigger:Source',
         'name': 'ARM_REF_TRIG_SRC',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150096: {
@@ -1164,7 +1171,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Advanced:Enable TDC',
         'name': 'REF_TRIG_TDC_ENABLE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150097: {
@@ -1175,7 +1182,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Start Trigger (Acq. Arm):Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150098: {
@@ -1186,7 +1193,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Output Terminal',
         'name': 'EXPORTED_REF_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150099: {
@@ -1197,7 +1204,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:End of Record:Output Terminal',
         'name': 'END_OF_RECORD_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150100: {
@@ -1219,7 +1226,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:End of Acquisition:Output Terminal',
         'name': 'END_OF_ACQUISITION_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150102: {
@@ -1242,7 +1249,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Start To Ref Trigger Holdoff',
         'name': 'START_TO_REF_TRIGGER_HOLDOFF',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -1267,7 +1274,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Advanced:Oscillator Phase DAC Value',
         'name': 'OSCILLATOR_PHASE_DAC_VALUE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150106: {
@@ -1278,7 +1285,7 @@ attributes = {
         },
         'lv_property': 'Acquisition:Advanced:Enable RIS in Auto Setup',
         'name': 'RIS_IN_AUTO_SETUP_ENABLE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150107: {
@@ -1290,7 +1297,7 @@ attributes = {
         'enum': 'TerminalConfiguration',
         'lv_property': 'Vertical:Channel Terminal Configuration',
         'name': 'CHANNEL_TERMINAL_CONFIGURATION',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150109: {
@@ -1301,7 +1308,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Advance Trigger:Output Terminal',
         'name': 'EXPORTED_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150110: {
@@ -1312,7 +1319,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Ready for Start:Output Terminal',
         'name': 'READY_FOR_START_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150111: {
@@ -1323,7 +1330,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Ready for Reference:Output Terminal',
         'name': 'READY_FOR_REF_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150112: {
@@ -1334,7 +1341,7 @@ attributes = {
         },
         'lv_property': 'Synchronization:Ready for Advance:Output Terminal',
         'name': 'READY_FOR_ADVANCE_EVENT_OUTPUT_TERMINAL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150128: {
@@ -1345,7 +1352,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Enable Time Interleaved Sampling',
         'name': 'ENABLE_TIME_INTERLEAVED_SAMPLING',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150129: {
@@ -1358,7 +1365,120 @@ attributes = {
         'lv_property': 'Synchronization:5 Volt Power:Output Terminal',
         'name': '5V_OUT_OUTPUT_TERMINAL',
         'python_name': 'five_v_out_output_terminal',
-        'resettable': False,
+        'resettable': True,
+        'type': 'ViString'
+    },
+    1150132: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nSpecifies whether runt triggers are time qualified, and if so, how the oscilloscope triggers in relation to the duration range bounded by the NISCOPE_ATTR_RUNT_TIME_LOW_LIMIT and NISCOPE_ATTR_RUNT_TIME_HIGH_LIMIT attributes.\n'
+        },
+        'enum': 'RuntTimeCondition',
+        'name': 'RUNT_TIME_CONDITION',
+        'resettable': True,
+        'type': 'ViInt32'
+    },
+    1150133: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nSpecifies, in seconds, the low runt threshold time.\n\nThis attribute sets the lower bound on the duration of runt pulses that may trigger the oscilloscope. The NISCOPE_ATTR_RUNT_TIME_CONDITION attribute determines how the oscilloscope triggers in relation to the runt time limits.\n'
+        },
+        'name': 'RUNT_TIME_LOW_LIMIT',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1150134: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nSpecifies, in seconds, the high runt threshold time.\n\nThis attribute sets the upper bound on the duration of runt pulses that may trigger the oscilloscope. The NISCOPE_ATTR_RUNT_TIME_CONDITION attribute determines how the oscilloscope triggers in relation to the runt time limits.\n'
+        },
+        'name': 'RUNT_TIME_HIGH_LIMIT',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1150137: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nReturns the voltage of the CableSense signal that is written to the EEPROM of the oscilloscope during factory calibration.\n',
+            'table_body': [
+                [
+                    '**Supported Devices**'
+                ],
+                [
+                    'PXIe-5110'
+                ],
+                [
+                    'PXIe-5111'
+                ],
+                [
+                    'PXIe-5113'
+                ],
+                [
+                    'PXIe-5160'
+                ],
+                [
+                    'PXIe-5162'
+                ]
+            ]
+        },
+        'name': 'CABLE_SENSE_VOLTAGE',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1150138: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nSpecifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the niScope_CableSenseSignalStart function is called.\n\nDevice-Specific Behavior:\n    PXIe-5160/5162\n        - The value of this attribute must be identical across all channels whose input impedance is set to 50 ohms.\n        - If this attribute is set to a value other than NISCOPE_VAL_CABLE_SENSE_MODE_DISABLED for any channel(s), the input impedance of all channels for which this attribute is set to NISCOPE_VAL_CABLE_SENSE_MODE_DISABLED must be set to 1 M Ohm.',
+            'note': 'the input impedance of the channel(s) to convey the CableSense signal must be set to 50 ohms.',
+            'table_body': [
+                [
+                    '**Supported Devices**'
+                ],
+                [
+                    'PXIe-5110'
+                ],
+                [
+                    'PXIe-5111'
+                ],
+                [
+                    'PXIe-5113'
+                ],
+                [
+                    'PXIe-5160'
+                ],
+                [
+                    'PXIe-5162'
+                ]
+            ]
+        },
+        'enum': 'CableSenseMode',
+        'name': 'CABLE_SENSE_MODE',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1150139: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nTBD\n'
+        },
+        'name': 'CABLE_SENSE_SIGNAL_ENABLE',
+        'resettable': True,
+        'type': 'ViBoolean'
+    },
+    1150140: {
+        'access': 'read only',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nReturns a comma-separated list of the channels enabled for the session in ascending order.\n\nIf no channels are enabled, this attribute returns an empty string, "".\nIf all channels are enabled, this attribute enumerates all of the channels.\n\nBecause this attribute returns channels in ascending order, but the order in which you specify channels for the input is important, the value of this attribute may not necessarily reflect the order in which NI-SCOPE performs certain actions.\n\nRefer to Channel String Syntax in the NI High-Speed Digitizers Help for more information on the effects of channel order in NI-SCOPE.\n'
+        },
+        'name': 'ENABLED_CHANNELS',
+        'resettable': True,
         'type': 'ViString'
     },
     1150271: {
@@ -1370,7 +1490,7 @@ attributes = {
         'enum': 'FlexFIRAntialiasFilterType',
         'lv_property': 'Vertical:Advanced:Flex FIR Antialias Filter Type',
         'name': 'FLEX_FIR_ANTIALIAS_FILTER_TYPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150278: {
@@ -1417,7 +1537,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:DDC:DDC Enabled',
         'name': 'DDC_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150302: {
@@ -1429,7 +1549,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:DDC:Frequency Translation Enabled',
         'name': 'DDC_FREQUENCY_TRANSLATION_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150303: {
@@ -1441,7 +1561,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:DDC:Center Frequency',
         'name': 'DDC_CENTER_FREQUENCY',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150304: {
@@ -1454,7 +1574,7 @@ attributes = {
         'enum': 'DataProcessingMode',
         'lv_property': 'Onboard Signal Processing:DDC:Data Processing Mode',
         'name': 'DDC_DATA_PROCESSING_MODE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150305: {
@@ -1466,7 +1586,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase I',
         'name': 'DDC_FREQUENCY_TRANSLATION_PHASE_I',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150306: {
@@ -1478,7 +1598,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:DDC:Signal Adjustments:Frequency Translation:Frequency Translation Phase Q',
         'name': 'DDC_FREQUENCY_TRANSLATION_PHASE_Q',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150307: {
@@ -1490,7 +1610,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:Digital Gain',
         'name': 'DIGITAL_GAIN',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150308: {
@@ -1502,7 +1622,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:Digital Offset',
         'name': 'DIGITAL_OFFSET',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150309: {
@@ -1515,7 +1635,7 @@ attributes = {
         'enum': 'OverflowErrorReporting',
         'lv_property': 'Onboard Signal Processing:OSP Overflow Error Reporting',
         'name': 'OVERFLOW_ERROR_REPORTING',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150310: {
@@ -1527,7 +1647,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:DDC:Q Source',
         'name': 'DDC_Q_SOURCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150311: {
@@ -1537,10 +1657,9 @@ attributes = {
         'documentation': {
             'description': '\nEnables/disables interleaving of the I and Q data.  When disabled, the traditional  niScope_Fetch() functions will return the I waveform for each acquisition followed by  the Q waveform.  When enabled, the I and Q  data are interleaved into a single waveform.  In the interleaving case, you must  allocate twice as many elements in the array as number of samples being fetched (since each  sample contains an I and a Q component).\nDefault Value: VI_TRUE\n'
         },
-        'enum': 'BoolEnableDisableIq',
         'lv_property': 'Onboard Signal Processing:DDC:Fetch Interleaved IQ Data',
         'name': 'FETCH_INTERLEAVED_IQ_DATA',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150312: {
@@ -1562,7 +1681,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:Equalization:Equalization Filter Enabled',
         'name': 'EQUALIZATION_FILTER_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150314: {
@@ -1574,7 +1693,7 @@ attributes = {
         'enum': 'RefTriggerDetectorLocation',
         'lv_property': 'Triggering:Onboard Signal Processing:Ref Trigger Detection Location',
         'name': 'REF_TRIGGER_DETECTOR_LOCATION',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150315: {
@@ -1586,7 +1705,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Onboard Signal Processing:Ref Trigger Min Quiet Time',
         'name': 'REF_TRIGGER_MINIMUM_QUIET_TIME',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -1598,7 +1717,7 @@ attributes = {
         },
         'lv_property': 'Fetch:Data Transfer Block Size',
         'name': 'DATA_TRANSFER_BLOCK_SIZE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150318: {
@@ -1609,7 +1728,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:Bandpass Filter Enabled',
         'name': 'BANDPASS_FILTER_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150319: {
@@ -1621,7 +1740,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:Dither Enabled',
         'name': 'DITHER_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150320: {
@@ -1633,7 +1752,7 @@ attributes = {
         },
         'lv_property': 'Onboard Signal Processing:Fractional Resample:Fractional Resample Enabled',
         'name': 'FRACTIONAL_RESAMPLE_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150321: {
@@ -1644,7 +1763,7 @@ attributes = {
         },
         'lv_property': 'Fetch:Advanced:Maximum Bandwidth',
         'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1150322: {
@@ -1655,7 +1774,7 @@ attributes = {
         },
         'lv_property': 'Fetch:Advanced:Preferred Packet Size',
         'name': 'DATA_TRANSFER_PREFERRED_PACKET_SIZE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150328: {
@@ -1695,7 +1814,7 @@ attributes = {
         'enum': 'AddressType',
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type',
         'name': 'P2P_DATA_TRANS_PERMISSION_ADDR_TYPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150331: {
@@ -1708,7 +1827,7 @@ attributes = {
         },
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Address',
         'name': 'P2P_DESTINATION_WINDOW_ADDR',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt64'
     },
     1150332: {
@@ -1722,7 +1841,7 @@ attributes = {
         'enum': 'AddressType',
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Address Type',
         'name': 'P2P_DESTINATION_WINDOW_ADDR_TYPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150333: {
@@ -1735,7 +1854,7 @@ attributes = {
         },
         'lv_property': 'Peer-to-Peer:Manual:Configuration:Destination Window Size',
         'name': 'P2P_DESTINATION_WINDOW_SIZE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt64'
     },
     1150334: {
@@ -1749,7 +1868,7 @@ attributes = {
         'enum': 'NotificationType',
         'lv_property': 'Peer-to-Peer:Manual:Notification:Push Message On',
         'name': 'P2P_NOTIFY_PUSH_MESSAGE_ON',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150335: {
@@ -1762,7 +1881,7 @@ attributes = {
         },
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Address',
         'name': 'P2P_NOTIFY_MESSAGE_PUSH_ADDR',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt64'
     },
     1150336: {
@@ -1776,7 +1895,7 @@ attributes = {
         'enum': 'AddressType',
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Address Type',
         'name': 'P2P_NOTIFY_MESSAGE_PUSH_ADDR_TYPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150337: {
@@ -1789,7 +1908,7 @@ attributes = {
         },
         'lv_property': 'Peer-to-Peer:Manual:Notification:Message Push Value',
         'name': 'P2P_NOTIFY_MESSAGE_PUSH_VALUE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt64'
     },
     1150338: {
@@ -1800,10 +1919,9 @@ attributes = {
             'description': '\nSpecifies whether the digitizer writes data to the peer-to-peer endpoint.\nDefault Value: VI_FALSE\n',
             'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.'
         },
-        'enum': 'BoolEnableDisable',
         'lv_property': 'Peer-to-Peer:P2P Enabled',
         'name': 'P2P_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150339: {
@@ -1816,7 +1934,7 @@ attributes = {
         },
         'lv_property': 'Peer-to-Peer:Channels to Stream',
         'name': 'P2P_CHANNELS_TO_STREAM',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1150340: {
@@ -1866,7 +1984,6 @@ attributes = {
             'description': '\nEnables/disables the advanced attributes for a peer-to-peer endpoint. These attributes cannot be used if  an endpoint is being configured by NI-P2P, or a resource reservation error will occur.\nDefault Value: VI_FALSE\n',
             'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.'
         },
-        'enum': 'BoolEnableDisable',
         'lv_property': 'Peer-to-Peer:Manual:Manual Configuration Enabled',
         'name': 'P2P_ADVANCED_ATTRIBUTES_ENABLED',
         'resettable': False,
@@ -1906,10 +2023,9 @@ attributes = {
             'description': '\nSpecifies whether the digitizer writes data to onboard memory when a peer-to-peer endpoint is enabled.\nDefault Value: VI_FALSE\n',
             'note': 'This attribute can be used only with high-speed digitizers that support peer-to-peer streaming.'
         },
-        'enum': 'BoolEnableDisable',
         'lv_property': 'Peer-to-Peer:Onboard Memory Enabled',
         'name': 'P2P_ONBOARD_MEMORY_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150366: {
@@ -1921,7 +2037,7 @@ attributes = {
         },
         'lv_property': 'Triggering:End of Record to Advance Trigger Holdoff',
         'name': 'END_OF_RECORD_TO_ADVANCE_TRIGGER_HOLDOFF',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -1933,7 +2049,7 @@ attributes = {
         },
         'name': 'SAMP_CLK_TIMEBASE_MULT',
         'python_name': 'sample_clock_timebase_multiplier',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1150374: {
@@ -1946,7 +2062,7 @@ attributes = {
         },
         'lv_property': 'Clocking:Advanced:Absolute Sample Clock Offset',
         'name': 'ABSOLUTE_SAMPLE_CLOCK_OFFSET',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -1971,7 +2087,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:Interleaving Offset Correction Enabled',
         'name': 'INTERLEAVING_OFFSET_CORRECTION_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1150377: {
@@ -1982,7 +2098,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:High Pass Filter Frequency',
         'name': 'HIGH_PASS_FILTER_FREQUENCY',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1151000: {
@@ -2076,7 +2192,6 @@ attributes = {
         'documentation': {
             'description': '\nSets the discriminator FIR symmetry to symmetric or asymmetric.\nDefault Value: Symmetric\n'
         },
-        'enum': 'DiscriminatorFIRSymmetry',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Symmetry',
         'name': 'DDC_DISCRIMINATOR_FIR_SYMMETRY',
         'resettable': False,
@@ -2089,7 +2204,6 @@ attributes = {
         'documentation': {
             'description': '\nSets the discriminator FIR symmetry type to even or odd.\nDefault Value: Even\n'
         },
-        'enum': 'DiscriminatorFIRSymmetryType',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Symmetry Type',
         'name': 'DDC_DISCRIMINATOR_FIR_SYMMETRY_TYPE',
         'resettable': False,
@@ -2126,7 +2240,6 @@ attributes = {
         'documentation': {
             'description': '\nSets the discriminator FIR input source to phase, magnitude, or resampler.\nDefault Value: Phase\n'
         },
-        'enum': 'DiscriminatorFIRInputSource',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Frequency Discriminator:FIR Input Source',
         'name': 'DDC_DISCRIMINATOR_FIR_INPUT_SOURCE',
         'resettable': False,
@@ -2163,7 +2276,6 @@ attributes = {
         'documentation': {
             'description': '\nSets either a symmetric or asymmetric filter.\nValid Values:\nNISCOPE_VAL_SYMMETRIC (0)\nNISCOPE_VAL_ASYMMETRIC (1)\nDefault Value: Symmetric\n'
         },
-        'enum': 'ProgFIRFilterSymmetry',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry',
         'name': 'DDC_PFIR_SYMMETRY',
         'resettable': False,
@@ -2176,7 +2288,6 @@ attributes = {
         'documentation': {
             'description': '\nSets either even or odd symmetry.\nValid Values:\nNISCOPE_VAL_EVEN (0)\nNISCOPE_VAL_ODD (1)\nDefault Value: Even\n'
         },
-        'enum': 'ProgFIRFilterSymmetryType',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Symmetry Type',
         'name': 'DDC_PFIR_SYMMETRY_TYPE',
         'resettable': False,
@@ -2201,7 +2312,6 @@ attributes = {
         'documentation': {
             'description': '\nSets either a complex filter or a dual real filter.\nValid Values:\nNISCOPE_VAL_REAL (0)\nNISCOPE_VAL_COMPLEX (1)\nDefault Value: Real\n'
         },
-        'enum': 'ProgFIRFilterRealComplex',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Programmable FIR Filter:Real/Complex',
         'name': 'DDC_PFIR_REAL_OR_COMPLEX',
         'resettable': False,
@@ -2298,7 +2408,6 @@ attributes = {
         'documentation': {
             'description': '\nAverages the AGC values.\nValid Values:\n0 - Mean\n1 - Median\nDefault Value: 0\n'
         },
-        'enum': 'AgcAverageControl',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):AGC:Average Control',
         'name': 'DDC_AGC_AVERAGE_CONTROL',
         'resettable': False,
@@ -2396,7 +2505,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the source for the BOUT parallel output from the DDC.\nValid Values:\nNISCOPE_VAL_MAGNITUDE_DATA (1)\nNISCOPE_VAL_Q_DATA (3)\nNISCOPE_VAL_PHASE_DATA (4)\nDefault Value: Q Data\n'
         },
-        'enum': 'BoutParallelOutputSource',
+        'enum': 'AoutParallelOutputSource',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Output Configuration:Parallel:BOUT Source',
         'name': 'DDC_BOUT_PARALLEL_OUTPUT_SOURCE',
         'resettable': False,
@@ -2421,7 +2530,6 @@ attributes = {
         'documentation': {
             'description': '\nSelects the source for the input to the coordinate converter, either the HB filter or the programmable FIR.\nValid Values:\n0 - Resampler HB 1 - Programmable FIR Default Value: 1\n'
         },
-        'enum': 'CoordinateConverterInput',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Coordinate Converter Input',
         'name': 'DDC_COORDINATE_CONVERTER_INPUT',
         'resettable': False,
@@ -2434,7 +2542,6 @@ attributes = {
         'documentation': {
             'description': '\nEither enables or zeros out the Q input to coordinate converter.\nDefault Value: I and Q\n'
         },
-        'enum': 'QInputToCoordConverter',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Q Input to Coord. Converter',
         'name': 'DDC_Q_INPUT_TO_COORD_CONVERTER_INPUT',
         'resettable': False,
@@ -2447,7 +2554,6 @@ attributes = {
         'documentation': {
             'description': '\nSource for Syncout CLK.\nValid Values:\n0 - CLKIN\n1 - PROCCLK\nDefault Value: CLKIN\n'
         },
-        'enum': 'SyncoutClkSelect',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Syncout CLK Select',
         'name': 'DDC_SYNCOUT_CLK_SELECT',
         'resettable': False,
@@ -2496,7 +2602,6 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies the number of offset bits in the timing NCO.\nValid Values:\n0 - 8 bits\n1 - 16 bits\n2 - 24 bits\n3 - 32 bits\nDefault Value: 8 bits\n'
         },
-        'enum': 'TimingNcoFreqOffsetBits',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Timing NCO:Frequency Offset Bits',
         'name': 'DDC_TIMING_NCO_NUM_OFFSET_FREQ_BITS',
         'resettable': False,
@@ -2533,7 +2638,6 @@ attributes = {
         'documentation': {
             'description': '\nSelects the resampling filter mode.\nValid Values:\n1 - Resampler Enabled 2 - HB 1 Enabled 3 - Resampler and HB 1 6 - Both HB Filters 7 - Resampler and Both HB Filters Default Value: 1\n'
         },
-        'enum': 'ResamplerFilterMode',
         'lv_property': 'Device Specific:IF Digitizer (5620 and 5621):Advanced:Resampler:Filter Mode',
         'name': 'DDC_RESAMPLER_FILTER_MODE_SELECT',
         'resettable': False,
@@ -2680,7 +2784,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Vertical Range',
         'name': 'VERTICAL_RANGE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1250002: {
@@ -2692,7 +2796,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Vertical Offset',
         'name': 'VERTICAL_OFFSET',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1250003: {
@@ -2704,7 +2808,7 @@ attributes = {
         'enum': 'VerticalCoupling',
         'lv_property': 'Vertical:Vertical Coupling',
         'name': 'VERTICAL_COUPLING',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250004: {
@@ -2715,7 +2819,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Probe Attenuation',
         'name': 'PROBE_ATTENUATION',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1250005: {
@@ -2726,7 +2830,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Channel Enabled',
         'name': 'CHANNEL_ENABLED',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1250006: {
@@ -2737,7 +2841,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Maximum Input Frequency',
         'name': 'MAX_INPUT_FREQUENCY',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1250007: {
@@ -2749,7 +2853,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Advanced:Time Per Record',
         'name': 'HORZ_TIME_PER_RECORD',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -2772,7 +2876,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Min Number of Points',
         'name': 'HORZ_MIN_NUM_PTS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250010: {
@@ -2794,7 +2898,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Reference Position',
         'name': 'HORZ_RECORD_REF_POSITION',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1250012: {
@@ -2806,7 +2910,7 @@ attributes = {
         'enum': 'TriggerType',
         'lv_property': 'Triggering:Trigger Type',
         'name': 'TRIGGER_TYPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250013: {
@@ -2817,7 +2921,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Source',
         'name': 'TRIGGER_SOURCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViString'
     },
     1250014: {
@@ -2829,7 +2933,7 @@ attributes = {
         'enum': 'TriggerCoupling',
         'lv_property': 'Triggering:Trigger Coupling',
         'name': 'TRIGGER_COUPLING',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250015: {
@@ -2841,7 +2945,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Delay',
         'name': 'TRIGGER_DELAY_TIME',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -2854,7 +2958,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Holdoff',
         'name': 'TRIGGER_HOLDOFF',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -2866,7 +2970,7 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Level',
         'name': 'TRIGGER_LEVEL',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1250018: {
@@ -2878,7 +2982,7 @@ attributes = {
         'enum': 'TriggerSlope',
         'lv_property': 'Triggering:Trigger Slope',
         'name': 'TRIGGER_SLOPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250101: {
@@ -2890,7 +2994,7 @@ attributes = {
         'enum': 'AcquisitionType',
         'lv_property': 'Acquisition:Acquisition Type',
         'name': 'ACQUISITION_TYPE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250102: {
@@ -2902,7 +3006,7 @@ attributes = {
         'enum': 'TriggerModifier',
         'lv_property': 'Triggering:Trigger Modifier',
         'name': 'TRIGGER_MODIFIER',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250103: {
@@ -2913,7 +3017,7 @@ attributes = {
         },
         'lv_property': 'Vertical:Input Impedance',
         'name': 'INPUT_IMPEDANCE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64'
     },
     1250106: {
@@ -2936,7 +3040,7 @@ attributes = {
         },
         'lv_property': 'Horizontal:Advanced:Acquisition Start Time',
         'name': 'ACQUISITION_START_TIME',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
@@ -2949,7 +3053,7 @@ attributes = {
         'enum': 'VideoSignalFormat',
         'lv_property': 'Triggering:Trigger Video:Signal Format',
         'name': 'TV_TRIGGER_SIGNAL_FORMAT',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250204: {
@@ -2961,7 +3065,7 @@ attributes = {
         'enum': 'VideoPolarity',
         'lv_property': 'Triggering:Trigger Video:Polarity',
         'name': 'TV_TRIGGER_POLARITY',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250205: {
@@ -2973,7 +3077,7 @@ attributes = {
         'enum': 'VideoTriggerEvent',
         'lv_property': 'Triggering:Trigger Video:Event',
         'name': 'TV_TRIGGER_EVENT',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViInt32'
     },
     1250206: {
@@ -2984,7 +3088,112 @@ attributes = {
         },
         'lv_property': 'Triggering:Trigger Video:Line Number',
         'name': 'TV_TRIGGER_LINE_NUMBER',
-        'resettable': False,
+        'resettable': True,
+        'type': 'ViInt32'
+    },
+    1250301: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nSpecifies the higher of two thresholds, in volts, that bound the vertical range to examine for runt pulses.\n\nThe runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the NISCOPE_ATTR_RUNT_POLARITY attribute for more information.\n'
+        },
+        'name': 'RUNT_HIGH_THRESHOLD',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1250302: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nSpecifies the lower of two thresholds, in volts, that bound the vertical range to examine for runt pulses.\n\nThe runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the NISCOPE_ATTR_RUNT_POLARITY attribute for more information.\n'
+        },
+        'name': 'RUNT_LOW_THRESHOLD',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1250303: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': '\nSpecifies the polarity of pulses that trigger the oscilloscope for runt triggering.\n\nWhen set to NISCOPE_VAL_RUNT_POSITIVE, the oscilloscope triggers when the following conditions are met:\n    * The leading edge of a pulse crosses the NISCOPE_ATTR_RUNT_LOW_THRESHOLD in a positive direction;\n    * The trailing edge of the pulse crosses the NISCOPE_ATTR_RUNT_LOW_THRESHOLD in a negative direction; and\n    * No portion of the pulse crosses the NISCOPE_ATTR_RUNT_HIGH_THRESHOLD.\n\nWhen set to NISCOPE_VAL_RUNT_NEGATIVE, the oscilloscope triggers when the following conditions are met:\n    * The leading edge of a pulse crosses the NISCOPE_ATTR_RUNT_HIGH_THRESHOLD in a negative direction;\n    * The trailing edge of the pulse crosses the NISCOPE_ATTR_RUNT_HIGH_THRESHOLD in a positive direction; and\n    * No portion of the pulse crosses the NISCOPE_ATTR_RUNT_LOW_THRESHOLD.\n\nWhen set to NISCOPE_VAL_RUNT_EITHER, the oscilloscope triggers in either case.'
+        },
+        'enum': 'RuntPolarity',
+        'name': 'RUNT_POLARITY',
+        'resettable': True,
+        'type': 'ViInt32'
+    },
+    1250401: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': 'Specifies the glitch duration, in seconds.\n\nThe oscilloscope triggers when it detects of pulse of duration either less than or greater than this value depending on the value of the NISCOPE_ATTR_GLITCH_CONDITION attribute.'
+        },
+        'name': 'GLITCH_WIDTH',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1250402: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': 'Specifies the polarity of pulses that trigger the oscilloscope for glitch triggering.'
+        },
+        'enum': 'GlitchPolarity',
+        'name': 'GLITCH_POLARITY',
+        'resettable': True,
+        'type': 'ViInt32'
+    },
+    1250403: {
+        'access': 'read-write',
+        'channel_based': False,
+        'documentation': {
+            'description': 'Specifies whether the oscilloscope triggers on pulses of duration less than or greater than the value specified by the NISCOPE_ATTR_GLITCH_WIDTH attribute.'
+        },
+        'enum': 'GlitchCondition',
+        'name': 'GLITCH_CONDITION',
+        'resettable': True,
+        'type': 'ViInt32'
+    },
+    1250501: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the low width threshold, in seconds.\n\nThis attribute sets the lower bound on the duration range that triggers the oscilloscope. The NISCOPE_ATTR_WIDTH_CONDITION attribute determines how the oscilloscope triggers in relation to the width thresholds.\n'
+        },
+        'name': 'WIDTH_LOW_THRESHOLD',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1250502: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the high width threshold, in seconds.\n\nThis attributes sets the upper bound on the duration range that triggers the oscilloscope. The NISCOPE_ATTR_WIDTH_CONDITION attribute determines how the oscilloscope triggers in relation to the width thresholds.\n'
+        },
+        'name': 'WIDTH_HIGH_THRESHOLD',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1250503: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies the polarity of pulses that trigger the oscilloscope for width triggering.\n'
+        },
+        'enum': 'WidthPolarity',
+        'name': 'WIDTH_POLARITY',
+        'resettable': True,
+        'type': 'ViReal64'
+    },
+    1250504: {
+        'access': 'read-write',
+        'channel_based': True,
+        'documentation': {
+            'description': '\nSpecifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the NISCOPE_ATTR_WIDTH_LOW_THRESHOLD and NISCOPE_ATTR_WIDTH_HIGH_THRESHOLD attributes.\n'
+        },
+        'enum': 'WidthCondition',
+        'name': 'WIDTH_CONDITION',
+        'resettable': True,
         'type': 'ViInt32'
     }
 }
