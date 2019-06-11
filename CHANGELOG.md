@@ -1,7 +1,8 @@
 # Changelog
 
 * [Unreleased](#unreleased)
-* [1.1.0](#101---2018-10-25)
+* [1.1.2](#112---2018-10-25)
+* [1.1.0](#110---2018-10-25)
 * [1.0.1](#101---2018-10-17)
 * [1.0.0](#100---2018-06-08)
 * [0.9.0](#090---2018-05-22)
@@ -40,7 +41,6 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
     * #### Added
     * #### Changed
-        * Enum values for `HardwareState` were incorrect - fix to match niFgen.h
     * #### Removed
 * ### NI-SCOPE
     * #### Added
@@ -51,6 +51,26 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * Initial support
+        * Very basic at this point and subject to change
+        * Looking for any testing and/or feedback
+    * #### Changed
+    * #### Removed
+
+
+## 1.1.2 - 2019-06-06
+* ### ALL
+    * #### Changed
+        * Switched to slightly different metadata format - Actual `True`/`False` instead of strings
+        * New internal process for generating metadata
+* ### NI-FGEN
+    * #### Changed
+        * Enum values for `HardwareState` were incorrect - fix to match niFgen.h
+* ### NI-SCOPE
+    * #### Changed
+        * Fixed enum values for `TIME_HISTOGRAM_MEAN_PLUS_STDEV`, `TIME_HISTOGRAM_MEAN_PLUS_2_STDEV`, `HF_REJECT` and `LF_REJECT`
 
 
 ## 1.1.0 - 2018-10-25
@@ -735,6 +755,10 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 * ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Digital Pattern Driver
     * #### Added
     * #### Changed
     * #### Removed
