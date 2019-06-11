@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-DMM version 19.1.0d11
+# This file is generated from NI-DMM API metadata version 19.6.0d0
 enums = {
     'ADCCalibration': {
         'values': [
