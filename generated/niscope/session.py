@@ -206,6 +206,59 @@ class _SessionBase(object):
     This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
     Valid Values: 8, 16, 32
     '''
+    cable_sense_mode = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.CableSenseMode, 1150138)
+    '''Type: enums.CableSenseMode
+
+    Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the CableSenseSignalStart method is called.
+
+    Device-Specific Behavior:
+        PXIe-5160/5162
+            - The value of this property must be identical across all channels whose input impedance is set to 50 ohms.
+            - If this property is set to a value other than CableSenseMode.DISABLED for any channel(s), the input impedance of all channels for which this property is set to CableSenseMode.DISABLED must be set to 1 M Ohm.
+
+    +-----------------------+
+    | **Supported Devices** |
+    +-----------------------+
+    | PXIe-5110             |
+    +-----------------------+
+    | PXIe-5111             |
+    +-----------------------+
+    | PXIe-5113             |
+    +-----------------------+
+    | PXIe-5160             |
+    +-----------------------+
+    | PXIe-5162             |
+    +-----------------------+
+
+    Note: the input impedance of the channel(s) to convey the CableSense signal must be set to 50 ohms.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
+    '''
+    cable_sense_signal_enable = _attributes.AttributeViBoolean(1150139)
+    '''Type: bool
+
+    TBD
+    '''
+    cable_sense_voltage = _attributes.AttributeViReal64(1150137)
+    '''Type: float
+
+    Returns the voltage of the CableSense signal that is written to the EEPROM of the oscilloscope during factory calibration.
+
+    +-----------------------+
+    | **Supported Devices** |
+    +-----------------------+
+    | PXIe-5110             |
+    +-----------------------+
+    | PXIe-5111             |
+    +-----------------------+
+    | PXIe-5113             |
+    +-----------------------+
+    | PXIe-5160             |
+    +-----------------------+
+    | PXIe-5162             |
+    +-----------------------+
+    '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
@@ -277,6 +330,26 @@ class _SessionBase(object):
     niscope.Session repeated capabilities container, and calling set/get value on the result.:
 
         var = session.channels[0,1].driver_setup
+    '''
+    enabled_channels = _attributes.AttributeViString(1150140)
+    '''Type: str
+
+    Returns a comma-separated list of the channels enabled for the session in ascending order.
+
+    If no channels are enabled, this property returns an empty string, "".
+    If all channels are enabled, this property enumerates all of the channels.
+
+    Because this property returns channels in ascending order, but the order in which you specify channels for the input is important, the value of this property may not necessarily reflect the order in which NI-SCOPE performs certain actions.
+
+    Refer to Channel String Syntax in the NI High-Speed Digitizers Help for more information on the effects of channel order in NI-SCOPE.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].enabled_channels
     '''
     enable_dc_restore = _attributes.AttributeViBoolean(1150093)
     '''Type: bool
@@ -422,6 +495,23 @@ class _SessionBase(object):
     Gets the absolute file path to the bitfile loaded on the FPGA.
 
     Note: Gets the absolute file path to the bitfile loaded on the FPGA.
+    '''
+    glitch_condition = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.GlitchCondition, 1250403)
+    '''Type: enums.GlitchCondition
+
+    Specifies whether the oscilloscope triggers on pulses of duration less than or greater than the value specified by the glitch_width property.
+    '''
+    glitch_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.GlitchPolarity, 1250402)
+    '''Type: enums.GlitchPolarity
+
+    Specifies the polarity of pulses that trigger the oscilloscope for glitch triggering.
+    '''
+    glitch_width = _attributes.AttributeViReal64(1250401)
+    '''Type: float
+
+    Specifies the glitch duration, in seconds.
+
+    The oscilloscope triggers when it detects of pulse of duration either less than or greater than this value depending on the value of the glitch_condition property.
     '''
     high_pass_filter_frequency = _attributes.AttributeViReal64(1150377)
     '''Type: float
@@ -1008,6 +1098,7 @@ class _SessionBase(object):
         session.channels[0,1].probe_attenuation = var
         var = session.channels[0,1].probe_attenuation
     '''
+    product_code = _attributes.AttributeViInt32(1100105)
     ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
     '''Type: str
 
@@ -1078,6 +1169,56 @@ class _SessionBase(object):
     '''Type: int
 
     The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
+    '''
+    runt_high_threshold = _attributes.AttributeViReal64(1250301)
+    '''Type: float
+
+    Specifies the higher of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
+
+    The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the runt_polarity property for more information.
+    '''
+    runt_low_threshold = _attributes.AttributeViReal64(1250302)
+    '''Type: float
+
+    Specifies the lower of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
+
+    The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the runt_polarity property for more information.
+    '''
+    runt_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RuntPolarity, 1250303)
+    '''Type: enums.RuntPolarity
+
+    Specifies the polarity of pulses that trigger the oscilloscope for runt triggering.
+
+    When set to RuntPolarity.POSITIVE, the oscilloscope triggers when the following conditions are met:
+        * The leading edge of a pulse crosses the runt_low_threshold in a positive direction;
+        * The trailing edge of the pulse crosses the runt_low_threshold in a negative direction; and
+        * No portion of the pulse crosses the runt_high_threshold.
+
+    When set to RuntPolarity.NEGATIVE, the oscilloscope triggers when the following conditions are met:
+        * The leading edge of a pulse crosses the runt_high_threshold in a negative direction;
+        * The trailing edge of the pulse crosses the runt_high_threshold in a positive direction; and
+        * No portion of the pulse crosses the runt_low_threshold.
+
+    When set to RuntPolarity.EITHER, the oscilloscope triggers in either case.
+    '''
+    runt_time_condition = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RuntTimeCondition, 1150132)
+    '''Type: enums.RuntTimeCondition
+
+    Specifies whether runt triggers are time qualified, and if so, how the oscilloscope triggers in relation to the duration range bounded by the runt_time_low_limit and runt_time_high_limit properties.
+    '''
+    runt_time_high_limit = _attributes.AttributeViReal64(1150134)
+    '''Type: float
+
+    Specifies, in seconds, the high runt threshold time.
+
+    This property sets the upper bound on the duration of runt pulses that may trigger the oscilloscope. The runt_time_condition property determines how the oscilloscope triggers in relation to the runt time limits.
+    '''
+    runt_time_low_limit = _attributes.AttributeViReal64(1150133)
+    '''Type: float
+
+    Specifies, in seconds, the low runt threshold time.
+
+    This property sets the lower bound on the duration of runt pulses that may trigger the oscilloscope. The runt_time_condition property determines how the oscilloscope triggers in relation to the runt time limits.
     '''
     sample_mode = _attributes.AttributeViInt32(1250106)
     '''Type: int
@@ -1365,6 +1506,66 @@ class _SessionBase(object):
 
         session.channels[0,1].vertical_range = var
         var = session.channels[0,1].vertical_range
+    '''
+    width_condition = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WidthCondition, 1250504)
+    '''Type: enums.WidthCondition
+
+    Specifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the width_low_threshold and width_high_threshold properties.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].width_condition = var
+        var = session.channels[0,1].width_condition
+    '''
+    width_high_threshold = _attributes.AttributeViReal64(1250502)
+    '''Type: float
+
+    Specifies the high width threshold, in seconds.
+
+    This properties sets the upper bound on the duration range that triggers the oscilloscope. The width_condition property determines how the oscilloscope triggers in relation to the width thresholds.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].width_high_threshold = var
+        var = session.channels[0,1].width_high_threshold
+    '''
+    width_low_threshold = _attributes.AttributeViReal64(1250501)
+    '''Type: float
+
+    Specifies the low width threshold, in seconds.
+
+    This property sets the lower bound on the duration range that triggers the oscilloscope. The width_condition property determines how the oscilloscope triggers in relation to the width thresholds.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].width_low_threshold = var
+        var = session.channels[0,1].width_low_threshold
+    '''
+    width_polarity = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.WidthPolarity, 1250503)
+    '''Type: enums.WidthPolarity
+
+    Specifies the polarity of pulses that trigger the oscilloscope for width triggering.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].width_polarity = var
+        var = session.channels[0,1].width_polarity
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -4466,11 +4667,7 @@ class Session(_SessionBase):
 
         To trigger the acquisition, use send_software_trigger_edge.
 
-        Note:
-        Some features are not supported by all digitizers. Refer to `Features
-        Supported by
-        Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-        more information.
+        Note: Some features are not supported by all digitizers.
 
         Args:
             trigger_source (str): Specifies the trigger source. Refer to trigger_source
