@@ -60,7 +60,7 @@ All notable changes to this project will be documented in this file.
         *  New enums:
 
            | Enum name                  | Where used                                                                       |
-           +----------------------------+----------------------------------------------------------------------------------+
+           |----------------------------|----------------------------------------------------------------------------------|
            | `DigitalEdge`              | `digital_edge_conditional_jump_trigger_edge`, `digital_edge_start_trigger_edge`  |
            | `ApertureTimeUnits`        | `ppmu_aperture_time_units`, `ppmu_configure_aperture_time(units)`                |
            | `PpmuOutputFunction`       | `ppmu_output_function`                                                           |
