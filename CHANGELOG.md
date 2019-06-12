@@ -58,6 +58,7 @@ All notable changes to this project will be documented in this file.
         * `get_channel_name_from_string()`
     * #### Changed
         *  New enums:
+
            +----------------------------+----------------------------------------------------------------------------------+
            | Enum name                  | Where used                                                                       |
            +============================+==================================================================================+
@@ -73,6 +74,7 @@ All notable changes to this project will be documented in this file.
            +----------------------------+----------------------------------------------------------------------------------+
            | `Signal`                   | `export_signal(signal)`                                                          |
            +----------------------------+----------------------------------------------------------------------------------+
+
     * #### Removed
         * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`, 
             `get_number_of_vectors()`, `get_pattern_file_path()`, `get_pin_type()`, `get_time_set_compare_edges()`, `get_time_set_drive_edges()`,
