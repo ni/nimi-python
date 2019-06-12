@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-DCPower version 19.1.0d33
+# This file is generated from NI-DCPower API metadata version 19.1.0d48
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -37,7 +37,7 @@ attributes = {
         'type': 'ViBoolean'
     },
     1050005: {
-        'access': 'read-write',
+        'access': 'read only',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies whether to simulate NI-DCPower I/O operations. VI_TRUE specifies that operation is simulated.\nDefault Value: VI_FALSE\n'
@@ -425,6 +425,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).\nIf you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as  the voltage level range.\nQuery the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.\nThe NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.\nDefault Value: NIDCPOWER_VAL_OFF\n'
         },
+        'enum': 'VoltageLevelAutorange',
         'lv_property': 'Source:DC Voltage:Voltage Level Autorange',
         'name': 'VOLTAGE_LEVEL_AUTORANGE',
         'python_type': 'bool',
@@ -437,6 +438,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).\nIf you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute. If you change this attribute from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute was set to  (or the default value if the attribute was never set) and uses that value as the current limit range.\nQuery the NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.\nThe NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_VOLTAGE.\nDefault Value: NIDCPOWER_VAL_OFF\n'
         },
+        'enum': 'CurrentLimitAutorange',
         'lv_property': 'Source:DC Voltage:Current Limit Autorange',
         'name': 'CURRENT_LIMIT_AUTORANGE',
         'python_type': 'bool',
@@ -449,6 +451,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.\nIf you set this attribute to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute. If you change the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the  current level range.\nQuery the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute by using the niDCPower_GetAttributeViInt32 function for  information about which range NI-DCPower automatically selects.\nThe NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_CURRENT.\nDefault Value: NIDCPOWER_VAL_OFF\n'
         },
+        'enum': 'CurrentLevelAutorange',
         'lv_property': 'Source:DC Current:Current Level Autorange',
         'name': 'CURRENT_LEVEL_AUTORANGE',
         'python_type': 'bool',
@@ -461,6 +464,7 @@ attributes = {
         'documentation': {
             'description': '\nSpecifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).\nIf this attribute is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute. If you change the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE  attribute was set to (or the default value if the attribute was never set) and uses that value as the voltage limit  range.\nQuery the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute by using the niDCPower_GetAttributeViInt32 function to find out  which range NI-DCPower automatically selects.\nThe NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute  is set to NIDCPOWER_VAL_DC_CURRENT.\nDefault Value: NIDCPOWER_VAL_OFF\n'
         },
+        'enum': 'VoltageLimitAutorange',
         'lv_property': 'Source:DC Current:Voltage Limit Autorange',
         'name': 'VOLTAGE_LIMIT_AUTORANGE',
         'python_type': 'bool',
