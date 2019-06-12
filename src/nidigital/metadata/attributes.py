@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-Digital Pattern Driver version 19.0.0d32
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.0.0a0
 attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': False,
         'name': 'RANGE_CHECK',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050003: {
         'access': 'read-write',
         'channel_based': False,
         'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050004: {
         'access': 'read-write',
         'channel_based': False,
         'name': 'CACHE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050005: {
-        'access': 'read-write',
+        'access': 'read only',
         'channel_based': False,
         'name': 'SIMULATE',
         'resettable': False,
@@ -33,7 +33,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'RECORD_COERCIONS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -47,7 +47,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'INTERCHANGE_CHECK',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050203: {
@@ -158,6 +158,7 @@ attributes = {
     1150004: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'SelectedFunction',
         'name': 'SELECTED_FUNCTION',
         'resettable': True,
         'type': 'ViInt32'
@@ -229,6 +230,7 @@ attributes = {
     1150015: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'PpmuOutputFunction',
         'name': 'PPMU_OUTPUT_FUNCTION',
         'resettable': True,
         'type': 'ViInt32'
@@ -306,6 +308,7 @@ attributes = {
     1150031: {
         'access': 'read-write',
         'channel_based': False,
+        'enum': 'DigitalEdge',
         'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
         'resettable': True,
         'type': 'ViInt32'
@@ -334,6 +337,7 @@ attributes = {
     1150035: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'DigitalEdge',
         'name': 'DIGITAL_EDGE_CONDITIONAL_JUMP_TRIGGER_EDGE',
         'resettable': True,
         'type': 'ViInt32'
@@ -355,6 +359,7 @@ attributes = {
     1150038: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'ApertureTimeUnits',
         'name': 'PPMU_APERTURE_TIME_UNITS',
         'resettable': True,
         'type': 'ViInt32'
@@ -600,6 +605,7 @@ attributes = {
     1150081: {
         'access': 'read-write',
         'channel_based': False,
+        'enum': 'TdrEndpointTermination',
         'name': 'TDR_ENDPOINT_TERMINATION',
         'resettable': True,
         'type': 'ViInt32'
