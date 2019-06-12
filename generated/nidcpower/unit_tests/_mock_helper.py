@@ -107,9 +107,6 @@ class SideEffectsHelper(object):
         self._defaults['MeasureMultiple']['return'] = 0
         self._defaults['MeasureMultiple']['voltageMeasurements'] = None
         self._defaults['MeasureMultiple']['currentMeasurements'] = None
-        self._defaults['ParseChannelCount'] = {}
-        self._defaults['ParseChannelCount']['return'] = 0
-        self._defaults['ParseChannelCount']['numberOfChannels'] = None
         self._defaults['QueryInCompliance'] = {}
         self._defaults['QueryInCompliance']['return'] = 0
         self._defaults['QueryInCompliance']['inCompliance'] = None
@@ -509,16 +506,6 @@ class SideEffectsHelper(object):
             current_measurements_ref[i] = test_value[i]
         return self._defaults['MeasureMultiple']['return']
 
-    def niDCPower_ParseChannelCount(self, vi, channels_string, number_of_channels):  # noqa: N802
-        if self._defaults['ParseChannelCount']['return'] != 0:
-            return self._defaults['ParseChannelCount']['return']
-        # number_of_channels
-        if self._defaults['ParseChannelCount']['numberOfChannels'] is None:
-            raise MockFunctionCallError("niDCPower_ParseChannelCount", param='numberOfChannels')
-        if number_of_channels is not None:
-            number_of_channels.contents.value = self._defaults['ParseChannelCount']['numberOfChannels']
-        return self._defaults['ParseChannelCount']['return']
-
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         if self._defaults['QueryInCompliance']['return'] != 0:
             return self._defaults['QueryInCompliance']['return']
@@ -744,8 +731,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_Measure.return_value = 0
         mock_library.niDCPower_MeasureMultiple.side_effect = MockFunctionCallError("niDCPower_MeasureMultiple")
         mock_library.niDCPower_MeasureMultiple.return_value = 0
-        mock_library.niDCPower_ParseChannelCount.side_effect = MockFunctionCallError("niDCPower_ParseChannelCount")
-        mock_library.niDCPower_ParseChannelCount.return_value = 0
         mock_library.niDCPower_QueryInCompliance.side_effect = MockFunctionCallError("niDCPower_QueryInCompliance")
         mock_library.niDCPower_QueryInCompliance.return_value = 0
         mock_library.niDCPower_QueryMaxCurrentLimit.side_effect = MockFunctionCallError("niDCPower_QueryMaxCurrentLimit")

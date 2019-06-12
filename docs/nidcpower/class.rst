@@ -141,13 +141,13 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`current_level`                                        | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`current_level_autorange`                              | bool                                   |
+    | :py:attr:`current_level_autorange`                              | :py:data:`CurrentLevelAutorange`       |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`current_level_range`                                  | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`current_limit`                                        | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`current_limit_autorange`                              | bool                                   |
+    | :py:attr:`current_limit_autorange`                              | :py:data:`CurrentLimitAutorange`       |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`current_limit_behavior`                               | int                                    |
     +-----------------------------------------------------------------+----------------------------------------+
@@ -365,13 +365,13 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`voltage_level`                                        | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`voltage_level_autorange`                              | bool                                   |
+    | :py:attr:`voltage_level_autorange`                              | :py:data:`VoltageLevelAutorange`       |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`voltage_level_range`                                  | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`voltage_limit`                                        | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`voltage_limit_autorange`                              | bool                                   |
+    | :py:attr:`voltage_limit_autorange`                              | :py:data:`VoltageLimitAutorange`       |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`voltage_limit_high`                                   | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
@@ -564,6 +564,8 @@ auto_zero
         Default Value: The default value for the NI PXI-4132 is :py:data:`~nidcpower.AutoZero.ON`. The default value for  all other devices is :py:data:`~nidcpower.AutoZero.OFF`, which is the only supported value for these devices.
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -869,12 +871,14 @@ current_level_autorange
     .. py:attribute:: current_level_autorange
 
         Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-        If you set this property to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.current_level_range` property. If you change the :py:data:`nidcpower.Session.current_level_autorange` property from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.current_level_range`  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
+        If you set this property to :py:data:`~nidcpower.CurrentLevelAutorange.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.current_level_range` property. If you change the :py:data:`nidcpower.Session.current_level_autorange` property from  :py:data:`~nidcpower.CurrentLevelAutorange.ON` to :py:data:`~nidcpower.CurrentLevelAutorange.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.current_level_range`  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
         Query the :py:data:`nidcpower.Session.current_level_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method for  information about which range NI-DCPower automatically selects.
         The :py:data:`nidcpower.Session.current_level_autorange` property is applicable only if the :py:data:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.CurrentLevelAutorange.OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -1010,12 +1014,14 @@ current_limit_autorange
     .. py:attribute:: current_limit_autorange
 
         Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-        If you set this property to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.current_limit_range` property. If you change this property from :py:data:`~nidcpower.AutoZero.ON` to  :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.current_limit_range` property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
+        If you set this property to :py:data:`~nidcpower.CurrentLimitAutorange.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.current_limit_range` property. If you change this property from :py:data:`~nidcpower.CurrentLimitAutorange.ON` to  :py:data:`~nidcpower.CurrentLimitAutorange.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.current_limit_range` property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
         Query the :py:data:`nidcpower.Session.current_limit_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method for  information about which range NI-DCPower automatically selects.
         The :py:data:`nidcpower.Session.current_limit_autorange` property is applicable only if the :py:data:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.CurrentLimitAutorange.OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -4898,17 +4904,17 @@ simulate
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | bool      |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5509,12 +5515,14 @@ voltage_level_autorange
     .. py:attribute:: voltage_level_autorange
 
         Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-        If you set this property to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.voltage_level_range` property. If you change the :py:data:`nidcpower.Session.voltage_level_autorange` property from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.voltage_level_range`  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
+        If you set this property to :py:data:`~nidcpower.VoltageLevelAutorange.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.voltage_level_range` property. If you change the :py:data:`nidcpower.Session.voltage_level_autorange` property from  :py:data:`~nidcpower.VoltageLevelAutorange.ON` to :py:data:`~nidcpower.VoltageLevelAutorange.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.voltage_level_range`  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
         Query the :py:data:`nidcpower.Session.voltage_level_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method for  information about which range NI-DCPower automatically selects.
         The :py:data:`nidcpower.Session.voltage_level_autorange` property is applicable only if the :py:data:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.VoltageLevelAutorange.OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -5650,12 +5658,14 @@ voltage_limit_autorange
     .. py:attribute:: voltage_limit_autorange
 
         Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-        If this property is set to :py:data:`~nidcpower.AutoZero.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.voltage_limit_range` property. If you change the :py:data:`nidcpower.Session.voltage_limit_autorange` property from  :py:data:`~nidcpower.AutoZero.ON` to :py:data:`~nidcpower.AutoZero.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.voltage_limit_range`  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
+        If this property is set to :py:data:`~nidcpower.VoltageLimitAutorange.ON`, NI-DCPower ignores any changes you make to the  :py:data:`nidcpower.Session.voltage_limit_range` property. If you change the :py:data:`nidcpower.Session.voltage_limit_autorange` property from  :py:data:`~nidcpower.VoltageLimitAutorange.ON` to :py:data:`~nidcpower.VoltageLimitAutorange.OFF`, NI-DCPower retains the last value the :py:data:`nidcpower.Session.voltage_limit_range`  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
         Query the :py:data:`nidcpower.Session.voltage_limit_range` property by using the :py:meth:`nidcpower.Session._get_attribute_vi_int32` method to find out  which range NI-DCPower automatically selects.
         The :py:data:`nidcpower.Session.voltage_limit_autorange` property is applicable only if the :py:data:`nidcpower.Session.output_function` property  is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
-        Default Value: :py:data:`~nidcpower.AutoZero.OFF`
+        Default Value: :py:data:`~nidcpower.VoltageLimitAutorange.OFF`
 
 
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -7324,13 +7334,13 @@ Properties
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.current_level`                                        | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.current_level_autorange`                              | bool                                   |
+| :py:attr:`nidcpower.Session.current_level_autorange`                              | :py:data:`CurrentLevelAutorange`       |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.current_level_range`                                  | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.current_limit`                                        | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.current_limit_autorange`                              | bool                                   |
+| :py:attr:`nidcpower.Session.current_limit_autorange`                              | :py:data:`CurrentLimitAutorange`       |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.current_limit_behavior`                               | int                                    |
 +-----------------------------------------------------------------------------------+----------------------------------------+
@@ -7548,13 +7558,13 @@ Properties
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.voltage_level`                                        | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.voltage_level_autorange`                              | bool                                   |
+| :py:attr:`nidcpower.Session.voltage_level_autorange`                              | :py:data:`VoltageLevelAutorange`       |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.voltage_level_range`                                  | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.voltage_limit`                                        | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.voltage_limit_autorange`                              | bool                                   |
+| :py:attr:`nidcpower.Session.voltage_limit_autorange`                              | :py:data:`VoltageLimitAutorange`       |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.voltage_limit_high`                                   | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
