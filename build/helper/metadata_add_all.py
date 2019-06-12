@@ -505,9 +505,9 @@ def _add_enum_value_python_name(enum_info, config):
 
     # We need to check again to see if we have any values that start with a digit
     # If we are not going to code generate this enum, we don't care about this
-    if enum_info['codegen_method'] != 'no':
-        for v in enum_info['values']:
-            assert not v['python_name'][0].isdigit(), 'Invalid name: {}'.format(v['python_name'])
+    for v in enum_info['values']:
+        if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
+            raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
 
     return enum_info
 
