@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI Switch Executive version 19.1.0d0
+# This file is generated from NI Switch Executive API metadata version 19.1.0d1
 config = {
+    'api_version': '19.1.0d1',
     'c_function_prefix': 'niSE_',
     'close_function': 'CloseSession',
     'context_manager_name': {
@@ -10,7 +11,6 @@ config = {
     'driver_name': 'NI Switch Executive',
     'driver_registry': 'Switch Executive',
     'init_function': 'OpenSession',
-    'api_version': '19.1.0d0',
     'library_info': {
         'Linux': {
             '64bit': {
