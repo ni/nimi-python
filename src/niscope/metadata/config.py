@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-SCOPE version 19.1.0d28
+# This file is generated from NI-SCOPE API metadata version 19.1.0d50
 config = {
+    'api_version': '19.1.0d50',
     'c_function_prefix': 'niScope_',
     'close_function': 'Close',
     'context_manager_name': {
@@ -17,7 +18,6 @@ config = {
     ],
     'driver_name': 'NI-SCOPE',
     'init_function': 'InitWithOptions',
-    'api_version': '19.1.0d28',
     'library_info': {
         'Linux': {
             '64bit': {

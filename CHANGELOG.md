@@ -44,6 +44,11 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * `cable_sense_signal_enable`, `cable_sense_voltage`, `cable_sense_mode` properties and associated enum
+        * `enabled_channels`, `product_code` properties
+        * `glitch_condition`, `glitch_polarity`, `glitch_width` properties and associated enums
+        * `runt_high_threshold`, `runt_low_threshold`, `runt_polarity`, `runt_condition`, `runt_time_high_limit`, `runt_time_low_limit` properties and associated enums
+        * `width_condition`, `width_high_threshold`, `width_low_threshold`, `width_polarity` properties and associated enums
     * #### Changed
     * #### Removed
 * ### NI Switch Executive
