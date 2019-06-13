@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-SWITCH version 19.1.0d0
+# This file is generated from NI-SWITCH API metadata version 19.1.0d2
 functions = {
     'AbortScan': {
         'documentation': {
@@ -20,6 +20,9 @@ functions = {
     },
     'CalibrationDataRead': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
@@ -61,6 +64,9 @@ functions = {
     },
     'CalibrationDataWrite': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
@@ -350,6 +356,9 @@ functions = {
     },
     'ClearErrorInfo': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
@@ -518,17 +527,6 @@ functions = {
                 },
                 'name': 'connectionList',
                 'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ContinueFromBreakpoint': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
             }
         ],
         'returns': 'ViStatus'
@@ -931,6 +929,9 @@ functions = {
     },
     'GetErrorInfo': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
@@ -954,32 +955,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type': 'ViString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetInitiallyConnectedChannelStateForNise': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'bufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'initiallyConnectedChannelState',
-                'size': {
-                    'mechanism': 'TBD',
-                    'value': 'TBD'
-                },
-                'type': 'ViString'
+                'type': 'ViString[]'
             }
         ],
         'returns': 'ViStatus'
@@ -1260,37 +1236,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'InitWithOptionsForNise': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViRsrc'
-            },
-            {
-                'direction': 'in',
-                'name': 'idQuery',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'resetDevice',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'optionString',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'newVi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'InitWithTopology': {
         'codegen_method': 'private',
         'documentation': {
@@ -1366,6 +1311,9 @@ functions = {
     },
     'InvalidateAllAttributes': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
@@ -1425,43 +1373,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'IviClose': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'IviInit': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViRsrc'
-            },
-            {
-                'direction': 'in',
-                'name': 'idQuery',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'resetDevice',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'LockSession': {
         'documentation': {
             'description': "\nThis function obtains a multithread lock on the instrument session.\nBefore it does so, it waits until all other execution threads have\nreleased their locks on the instrument session. Other threads might have\nobtained a lock on this session in the following ways: - The user's\napplication called niSwitch_LockSession. - A call to the instrument\ndriver locked the session. - A call to the IVI engine locked the\nsession. After your call to niSwitch_LockSession returns successfully,\nno other threads can access the instrument session until you call\nniSwitch_UnlockSession. Use niSwitch_LockSession and\nniSwitch_UnlockSession around a sequence of calls to instrument driver\nfunctions if you require that the instrument retain its settings through\nthe end of the sequence. You can safely make nested calls to\nniSwitch_LockSession within the same thread. To completely unlock the\nsession, you must balance each call to niSwitch_LockSession with a call\nto niSwitch_UnlockSession. If, however, you use the Caller Has Lock\nparameter in all calls to niSwitch_LockSession and\nniSwitch_UnlockSession within a function, the IVI Library locks the\nsession only once within the function regardless of the number of calls\nyou make to niSwitch_LockSession. This allows you to call\nniSwitch_UnlockSession just once at the end of the function.\n"
@@ -1496,145 +1407,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'LvClose': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'errorBufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'errorBuffer',
-                'type': 'ViChar[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'LvInit': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViRsrc'
-            },
-            {
-                'direction': 'in',
-                'name': 'idQuery',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'resetDevice',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'out',
-                'name': 'newVi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'errorBufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'errorBuffer',
-                'type': 'ViChar[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'LvInitWithOptions': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViRsrc'
-            },
-            {
-                'direction': 'in',
-                'name': 'idQuery',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'resetDevice',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'optionsString',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'newVi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'errorBufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'errorBuffer',
-                'type': 'ViChar[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'LvInitWithTopology': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViRsrc'
-            },
-            {
-                'direction': 'in',
-                'name': 'topology',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'simulate',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'resetDevice',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'out',
-                'name': 'newVi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'errorBufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'errorBuffer',
-                'type': 'ViChar[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'RelayControl': {
         'documentation': {
             'description': '\nControls individual relays of the switch. When controlling individual\nrelays, the protection offered by setting the usage of source channels\nand configuration channels, and by enabling or disabling analog bus\nsharing on the NI SwitchBlock, does not apply. Refer to the device book\nfor your switch in the NI Switches Help to determine if the switch\nsupports individual relay control.\n'
@@ -1664,161 +1436,6 @@ functions = {
                 'enum': 'RelayAction',
                 'name': 'relayAction',
                 'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'RelayTestConfigureTestPorts': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'testPortConfiguration',
-                'type': 'ViUInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'RelayTestInitializeForRelayTest': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'RelayTestIsPathDetected': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'out',
-                'name': 'pathDetected',
-                'type': 'ViBoolean'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'RelayTestMeasureResistance': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'out',
-                'name': 'resistance',
-                'type': 'ViReal64'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'RelayTestReadResistanceBaselines': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'relayNames',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'relayContacts',
-                'size': {
-                    'mechanism': 'TBD',
-                    'value': 'TBD'
-                },
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'temperatureInDegreesCelsius',
-                'type': 'ViReal32'
-            },
-            {
-                'direction': 'in',
-                'name': 'relayCounts',
-                'size': {
-                    'mechanism': 'TBD',
-                    'value': 'TBD'
-                },
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'resistancesInOhms',
-                'size': {
-                    'mechanism': 'TBD',
-                    'value': 'TBD'
-                },
-                'type': 'ViReal64'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'RelayTestWriteResistanceBaselines': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'relayNames',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'relayContacts',
-                'size': {
-                    'mechanism': 'TBD',
-                    'value': 'TBD'
-                },
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'temperatureInDegreesCelsius',
-                'type': 'ViReal32'
-            },
-            {
-                'direction': 'in',
-                'name': 'relayCounts',
-                'size': {
-                    'mechanism': 'TBD',
-                    'value': 'TBD'
-                },
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'resistancesInOhms',
-                'size': {
-                    'mechanism': 'TBD',
-                    'value': 'TBD'
-                },
-                'type': 'ViReal64'
             }
         ],
         'returns': 'ViStatus'
@@ -1993,42 +1610,14 @@ functions = {
     },
     'SendSwTrigger': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'SessionlessGetAttributeString': {
-        'codegen_method': 'no',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViRsrc'
-            },
-            {
-                'direction': 'in',
-                'name': 'attribute',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'in',
-                'name': 'context',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'valueBufferSize',
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'valueBuffer',
-                'type': 'ViChar[]'
             }
         ],
         'returns': 'ViStatus'
@@ -2289,6 +1878,9 @@ functions = {
     },
     'SingleSwitchControl': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
@@ -2310,6 +1902,9 @@ functions = {
     },
     'SingleSwitchQuery': {
         'codegen_method': 'no',
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
