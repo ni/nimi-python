@@ -2,7 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime
+import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -981,13 +981,13 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        a_string_ctype = None  # case C050
+        buffer_size_ctype = _visatype.ViInt32(0)  # case S210
+        a_string_ctype = None  # case C090
         actual_size_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFake_GetAnIviDanceWithATwistString(vi_ctype, buffer_size_ctype, a_string_ctype, None if actual_size_ctype is None else (ctypes.pointer(actual_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(actual_size_ctype.value)  # case S200
-        a_string_ctype = (_visatype.ViChar * actual_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(actual_size_ctype.value)  # case S220
+        a_string_ctype = (_visatype.ViChar * actual_size_ctype.value)()  # case C100
         error_code = self._library.niFake_GetAnIviDanceWithATwistString(vi_ctype, buffer_size_ctype, a_string_ctype, None if actual_size_ctype is None else (ctypes.pointer(actual_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)

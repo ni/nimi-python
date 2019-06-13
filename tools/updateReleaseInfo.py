@@ -35,7 +35,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
-    verbosity_group.add_argument("--test", action="store_true", default=False, help="Run doctests and quit")
+    verbosity_group.add_argument("--preview", action="store_true", default=False, help="Show what would happen when running with given parameters")
     verbosity_group.add_argument("--log-file", action="store", default=None, help="Send logging to listed file instead of stdout")
     args = parser.parse_args()
 
@@ -67,8 +67,9 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
         contents = module_version_re.sub("'module_version': '{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
 
-    with open(args.src_file, 'w') as content_file:
-        content_file.write(contents)
+    if not args.preview:
+        with open(args.src_file, 'w') as content_file:
+            content_file.write(contents)
 
 
 if __name__ == '__main__':

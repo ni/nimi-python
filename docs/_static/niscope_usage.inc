@@ -32,13 +32,9 @@ The waveform returned from `fetch <http://nimi-python.readthedocs.io/en/master/n
         -  **record** (int) record number of this waveform
         -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-            .. math::
-
                 voltage = binary data * gain factor + offset
 
         -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-            .. math::
 
                 voltage = binary data * gain factor + offset
 
@@ -85,13 +81,9 @@ The waveform_infos returned from `fetch_into <http://nimi-python.readthedocs.io/
         -  **record** (int) record number of this waveform
         -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-            .. math::
-
                 voltage = binary data * gain factor + offset
 
         -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-            .. math::
 
                 voltage = binary data * gain factor + offset
 
