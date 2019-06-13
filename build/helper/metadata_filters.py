@@ -220,7 +220,6 @@ def filter_parameters(function, parameter_usage_options):
             size_parameter = find_size_parameter(filter_len_parameters(function), function['parameters'])
     for x in function['parameters']:
         skip = False
-        print('x={}'.format(x))
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
             print('1')
             skip = True
@@ -302,7 +301,6 @@ def filter_len_parameters(function):
     if len(params) > 0:
         size_param = params[0]['size']['value']
         assert all(x['size']['value'] == size_param for x in params)
-    print('len params={}'.format(params))
     return params
 
 

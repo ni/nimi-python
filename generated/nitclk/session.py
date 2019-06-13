@@ -233,7 +233,7 @@ class Session(object):
 
     ''' These are code-generated '''
 
-    def configure_for_homogeneous_triggers(self, session_count):
+    def configure_for_homogeneous_triggers(self, sessions):
         r'''configure_for_homogeneous_triggers
 
         Configures the properties commonly required for the TClk synchronization
@@ -359,22 +359,22 @@ class Session(object):
         sessions.
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
         error_code = self._library.niTClk_ConfigureForHomogeneousTriggers(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def finish_sync_pulse_sender_synchronize(self, session_count, min_time):
+    def finish_sync_pulse_sender_synchronize(self, sessions, min_time):
         r'''finish_sync_pulse_sender_synchronize
 
-        
+        TBD
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -385,7 +385,7 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -396,12 +396,12 @@ class Session(object):
 
         TBD
         '''
-        session_list_ctype = get_ctypes_pointer_for_buffer(value=session_list, library_type=_visatype.ViSession)  # case B550
+        session_list_ctype = _visatype.ViSession(self._session_list)  # case S110
         error_code = self._library.niTClk_InitForDocumentation(session_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def initiate(self, session_count):
+    def initiate(self, sessions):
         r'''initiate
 
         Initiates the acquisition or generation sessions specified, taking into
@@ -411,23 +411,23 @@ class Session(object):
         that import the TClk-synchronized start trigger.
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
         error_code = self._library.niTClk_Initiate(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def is_done(self, session_count):
+    def is_done(self, sessions):
         r'''is_done
 
         Monitors the progress of the acquisitions and/or generations
         corresponding to sessions.
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
 
         Returns:
@@ -437,19 +437,19 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
-        done_ctype = _visatype.ViBoolean()  # case S200
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        done_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niTClk_IsDone(session_count_ctype, sessions_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
-    def setup_for_sync_pulse_sender_synchronize(self, session_count, min_time):
+    def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time):
         r'''setup_for_sync_pulse_sender_synchronize
 
-        
+        TBD
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -460,13 +460,13 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def synchronize(self, session_count, min_time):
+    def synchronize(self, sessions, min_time):
         r'''synchronize
 
         Synchronizes the TClk signals on the given sessions. After
@@ -477,7 +477,7 @@ class Session(object):
         help file at Start>>Programs>>National Instruments>>NI-TClk.
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -488,19 +488,19 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def syncronize_to_sync_pulse_sender(self, session_count, min_time):
+    def syncronize_to_sync_pulse_sender(self, sessions, min_time):
         r'''syncronize_to_sync_pulse_sender
 
-        
+        TBD
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -511,13 +511,13 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SyncronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_until_done(self, session_count, timeout):
+    def wait_until_done(self, sessions, timeout):
         r'''wait_until_done
 
         Call this method to pause execution of your program until the
@@ -530,7 +530,7 @@ class Session(object):
         complete within a certain time.
 
         Args:
-            session_count (int): Number of elements in the sessions array
+            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
 
             timeout (float): The amount of time in seconds that wait_until_done waits for the
                 sessions to complete. If timeout is exceeded, wait_until_done
@@ -538,7 +538,7 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         error_code = self._library.niTClk_WaitUntilDone(session_count_ctype, sessions_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

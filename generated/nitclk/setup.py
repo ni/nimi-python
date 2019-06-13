@@ -32,6 +32,7 @@ setup(
     version='0.1.0.dev0',
     description='NI-TClk Python API',
     long_description=read_contents('README.rst'),
+    long_description_content_type='text/x-rst',
     author='National Instruments',
     author_email="opensource@ni.com",
     url="https://github.com/ni/nimi-python",

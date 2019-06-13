@@ -113,7 +113,7 @@ exported_sync_pulse_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -151,7 +151,7 @@ exported_tclk_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -181,7 +181,7 @@ pause_trigger_master_session
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -211,7 +211,7 @@ ref_trigger_master_session
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -249,7 +249,7 @@ sample_clock_delay
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -279,7 +279,7 @@ script_trigger_master_session
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -311,7 +311,7 @@ sequencer_flag_master_session
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -341,7 +341,7 @@ start_trigger_master_session
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -374,7 +374,7 @@ sync_pulse_clock_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -412,7 +412,7 @@ sync_pulse_sender_sync_pulse_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -450,7 +450,7 @@ sync_pulse_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -479,7 +479,7 @@ tclk_actual_period
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -500,7 +500,7 @@ configure_for_homogeneous_triggers
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: configure_for_homogeneous_triggers(session_count)
+    .. py:method:: configure_for_homogeneous_triggers(sessions)
 
             Configures the properties commonly required for the TClk synchronization
             of device sessions with homogeneous triggers in a single PXI chassis or
@@ -628,32 +628,38 @@ configure_for_homogeneous_triggers
 
 
 
-            :param session_count:
+            :param sessions:
 
 
-                Number of elements in the sessions array
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
 
 finish_sync_pulse_sender_synchronize
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: finish_sync_pulse_sender_synchronize(session_count, min_time)
+    .. py:method:: finish_sync_pulse_sender_synchronize(sessions, min_time)
 
-            :param session_count:
+            TBD
+
+            
 
 
-                Number of elements in the sessions array
+
+            :param sessions:
+
+
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
             :param min_time:
 
 
@@ -820,7 +826,7 @@ get_attribute_vi_string
                 
 
 
-            :type value: str
+            :type value: vi_char
 
 get_extended_error_info
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -857,7 +863,7 @@ initiate
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: initiate(session_count)
+    .. py:method:: initiate(sessions)
 
             Initiates the acquisition or generation sessions specified, taking into
             consideration any special requirements needed for synchronization. For
@@ -869,22 +875,22 @@ initiate
 
 
 
-            :param session_count:
+            :param sessions:
 
 
-                Number of elements in the sessions array
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
 
 is_done
 ~~~~~~~
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: is_done(session_count)
+    .. py:method:: is_done(sessions)
 
             Monitors the progress of the acquisitions and/or generations
             corresponding to sessions.
@@ -893,15 +899,15 @@ is_done
 
 
 
-            :param session_count:
+            :param sessions:
 
 
-                Number of elements in the sessions array
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
 
             :rtype: bool
             :return:
@@ -1054,17 +1060,23 @@ setup_for_sync_pulse_sender_synchronize
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: setup_for_sync_pulse_sender_synchronize(session_count, min_time)
+    .. py:method:: setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
-            :param session_count:
+            TBD
+
+            
 
 
-                Number of elements in the sessions array
+
+            :param sessions:
+
+
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
             :param min_time:
 
 
@@ -1085,7 +1097,7 @@ synchronize
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: synchronize(session_count, min_time)
+    .. py:method:: synchronize(sessions, min_time)
 
             Synchronizes the TClk signals on the given sessions. After
             :py:meth:`nitclk.Session.synchronize` executes, TClk signals from all sessions are
@@ -1098,15 +1110,15 @@ synchronize
 
 
 
-            :param session_count:
+            :param sessions:
 
 
-                Number of elements in the sessions array
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
             :param min_time:
 
 
@@ -1127,17 +1139,23 @@ syncronize_to_sync_pulse_sender
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: syncronize_to_sync_pulse_sender(session_count, min_time)
+    .. py:method:: syncronize_to_sync_pulse_sender(sessions, min_time)
 
-            :param session_count:
+            TBD
+
+            
 
 
-                Number of elements in the sessions array
+
+            :param sessions:
+
+
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
             :param min_time:
 
 
@@ -1158,7 +1176,7 @@ wait_until_done
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: wait_until_done(session_count, timeout)
+    .. py:method:: wait_until_done(sessions, timeout)
 
             Call this method to pause execution of your program until the
             acquisitions and/or generations corresponding to sessions are done or
@@ -1173,15 +1191,15 @@ wait_until_done
 
 
 
-            :param session_count:
+            :param sessions:
 
 
-                Number of elements in the sessions array
+                sessions is an array of sessions that are being synchronized.
 
                 
 
 
-            :type session_count: int
+            :type sessions: list of vi_session
             :param timeout:
 
 

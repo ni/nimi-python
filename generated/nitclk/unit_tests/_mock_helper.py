@@ -22,10 +22,10 @@ class SideEffectsHelper(object):
         self._defaults['FinishSyncPulseSenderSynchronize']['return'] = 0
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
-        self._defaults['GetAttributeViReal64']['Value'] = None
+        self._defaults['GetAttributeViReal64']['value'] = None
         self._defaults['GetAttributeViSession'] = {}
         self._defaults['GetAttributeViSession']['return'] = 0
-        self._defaults['GetAttributeViSession']['Value'] = None
+        self._defaults['GetAttributeViSession']['value'] = None
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetExtendedErrorInfo'] = {}
@@ -35,7 +35,7 @@ class SideEffectsHelper(object):
         self._defaults['Initiate']['return'] = 0
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
-        self._defaults['IsDone']['Done'] = None
+        self._defaults['IsDone']['done'] = None
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViSession'] = {}
@@ -71,20 +71,20 @@ class SideEffectsHelper(object):
         if self._defaults['GetAttributeViReal64']['return'] != 0:
             return self._defaults['GetAttributeViReal64']['return']
         # value
-        if self._defaults['GetAttributeViReal64']['Value'] is None:
-            raise MockFunctionCallError("niTClk_GetAttributeViReal64", param='Value')
+        if self._defaults['GetAttributeViReal64']['value'] is None:
+            raise MockFunctionCallError("niTClk_GetAttributeViReal64", param='value')
         if value is not None:
-            value.contents.value = self._defaults['GetAttributeViReal64']['Value']
+            value.contents.value = self._defaults['GetAttributeViReal64']['value']
         return self._defaults['GetAttributeViReal64']['return']
 
     def niTClk_GetAttributeViSession(self, session, channel_name, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViSession']['return'] != 0:
             return self._defaults['GetAttributeViSession']['return']
         # value
-        if self._defaults['GetAttributeViSession']['Value'] is None:
-            raise MockFunctionCallError("niTClk_GetAttributeViSession", param='Value')
+        if self._defaults['GetAttributeViSession']['value'] is None:
+            raise MockFunctionCallError("niTClk_GetAttributeViSession", param='value')
         if value is not None:
-            value.contents.value = self._defaults['GetAttributeViSession']['Value']
+            value.contents.value = self._defaults['GetAttributeViSession']['value']
         return self._defaults['GetAttributeViSession']['return']
 
     def niTClk_GetAttributeViString(self, session, channel_name, attribute_id, buf_size, value):  # noqa: N802
@@ -99,7 +99,12 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niTClk_GetExtendedErrorInfo", param='errorString')
         if error_string_size.value == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorString'])
-        error_string.value = self._defaults['GetExtendedErrorInfo']['errorString'].encode('ascii')
+        try:
+            error_string_ref = error_string.contents
+        except AttributeError:
+            error_string_ref = error_string
+        for i in range(len(self._defaults['GetExtendedErrorInfo']['errorString'])):
+            error_string_ref[i] = self._defaults['GetExtendedErrorInfo']['errorString'][i]
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niTClk_Initiate(self, session_count, sessions):  # noqa: N802
@@ -111,10 +116,10 @@ class SideEffectsHelper(object):
         if self._defaults['IsDone']['return'] != 0:
             return self._defaults['IsDone']['return']
         # done
-        if self._defaults['IsDone']['Done'] is None:
-            raise MockFunctionCallError("niTClk_IsDone", param='Done')
+        if self._defaults['IsDone']['done'] is None:
+            raise MockFunctionCallError("niTClk_IsDone", param='done')
         if done is not None:
-            done.contents.value = self._defaults['IsDone']['Done']
+            done.contents.value = self._defaults['IsDone']['done']
         return self._defaults['IsDone']['return']
 
     def niTClk_SetAttributeViReal64(self, session, channel_name, attribute_id, value):  # noqa: N802
