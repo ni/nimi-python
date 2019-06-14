@@ -28,16 +28,16 @@ DigitalEdge
 
 
 
-PpmuOutputFunction
+PPMUOutputFunction
 ------------------
 
-.. py:class:: PpmuOutputFunction
+.. py:class:: PPMUOutputFunction
 
-    .. py:attribute:: PpmuOutputFunction.VOLTAGE
+    .. py:attribute:: PPMUOutputFunction.VOLTAGE
 
 
 
-    .. py:attribute:: PpmuOutputFunction.CURRENT
+    .. py:attribute:: PPMUOutputFunction.CURRENT
 
 
 
@@ -83,16 +83,16 @@ Signal
 
 
 
-TdrEndpointTermination
+TDREndpointTermination
 ----------------------
 
-.. py:class:: TdrEndpointTermination
+.. py:class:: TDREndpointTermination
 
-    .. py:attribute:: TdrEndpointTermination.OPEN
+    .. py:attribute:: TDREndpointTermination.OPEN
 
 
 
-    .. py:attribute:: TdrEndpointTermination.SHORT_TO_GROUND
+    .. py:attribute:: TDREndpointTermination.SHORT_TO_GROUND
 
 
 

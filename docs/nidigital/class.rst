@@ -189,7 +189,7 @@ nidigital.Session
     +--------------------------------------------------------------+-----------------------------------+
     | :py:attr:`ppmu_current_limit_supported`                      | bool                              |
     +--------------------------------------------------------------+-----------------------------------+
-    | :py:attr:`ppmu_output_function`                              | :py:data:`PpmuOutputFunction`     |
+    | :py:attr:`ppmu_output_function`                              | :py:data:`PPMUOutputFunction`     |
     +--------------------------------------------------------------+-----------------------------------+
     | :py:attr:`ppmu_voltage_level`                                | float                             |
     +--------------------------------------------------------------+-----------------------------------+
@@ -239,7 +239,7 @@ nidigital.Session
     +--------------------------------------------------------------+-----------------------------------+
     | :py:attr:`supported_instrument_models`                       | str                               |
     +--------------------------------------------------------------+-----------------------------------+
-    | :py:attr:`tdr_endpoint_termination`                          | :py:data:`TdrEndpointTermination` |
+    | :py:attr:`tdr_endpoint_termination`                          | :py:data:`TDREndpointTermination` |
     +--------------------------------------------------------------+-----------------------------------+
     | :py:attr:`tdr_offset`                                        | float                             |
     +--------------------------------------------------------------+-----------------------------------+
@@ -2282,7 +2282,7 @@ ppmu_output_function
             +----------------+--------------------------+
             | Characteristic | Value                    |
             +================+==========================+
-            | Datatype       | enums.PpmuOutputFunction |
+            | Datatype       | enums.PPMUOutputFunction |
             +----------------+--------------------------+
             | Permissions    | read-write               |
             +----------------+--------------------------+
@@ -3022,7 +3022,7 @@ tdr_endpoint_termination
             +----------------+------------------------------+
             | Characteristic | Value                        |
             +================+==============================+
-            | Datatype       | enums.TdrEndpointTermination |
+            | Datatype       | enums.TDREndpointTermination |
             +----------------+------------------------------+
             | Permissions    | read-write                   |
             +----------------+------------------------------+
@@ -7114,7 +7114,7 @@ Properties
 +--------------------------------------------------------------------------------+-----------------------------------+
 | :py:attr:`nidigital.Session.ppmu_current_limit_supported`                      | bool                              |
 +--------------------------------------------------------------------------------+-----------------------------------+
-| :py:attr:`nidigital.Session.ppmu_output_function`                              | :py:data:`PpmuOutputFunction`     |
+| :py:attr:`nidigital.Session.ppmu_output_function`                              | :py:data:`PPMUOutputFunction`     |
 +--------------------------------------------------------------------------------+-----------------------------------+
 | :py:attr:`nidigital.Session.ppmu_voltage_level`                                | float                             |
 +--------------------------------------------------------------------------------+-----------------------------------+
@@ -7164,7 +7164,7 @@ Properties
 +--------------------------------------------------------------------------------+-----------------------------------+
 | :py:attr:`nidigital.Session.supported_instrument_models`                       | str                               |
 +--------------------------------------------------------------------------------+-----------------------------------+
-| :py:attr:`nidigital.Session.tdr_endpoint_termination`                          | :py:data:`TdrEndpointTermination` |
+| :py:attr:`nidigital.Session.tdr_endpoint_termination`                          | :py:data:`TDREndpointTermination` |
 +--------------------------------------------------------------------------------+-----------------------------------+
 | :py:attr:`nidigital.Session.tdr_offset`                                        | float                             |
 +--------------------------------------------------------------------------------+-----------------------------------+

@@ -421,8 +421,8 @@ class _SessionBase(object):
 
         var = session.channels[0,1].ppmu_current_limit_supported
     '''
-    ppmu_output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PpmuOutputFunction, 1150015)
-    '''Type: enums.PpmuOutputFunction
+    ppmu_output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUOutputFunction, 1150015)
+    '''Type: enums.PPMUOutputFunction
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -512,7 +512,7 @@ class _SessionBase(object):
     start_trigger_terminal_name = _attributes.AttributeViString(1150039)
     start_trigger_type = _attributes.AttributeViInt32(1150029)
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TdrEndpointTermination, 1150081)
+    tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
     tdr_offset = _attributes.AttributeViReal64(1150051)
     '''Type: float
 

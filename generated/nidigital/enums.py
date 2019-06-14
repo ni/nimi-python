@@ -13,7 +13,7 @@ class DigitalEdge(Enum):
     FALLING = 1801
 
 
-class PpmuOutputFunction(Enum):
+class PPMUOutputFunction(Enum):
     VOLTAGE = 1300
     CURRENT = 1301
 
@@ -32,7 +32,7 @@ class Signal(Enum):
     REF_CLOCK = 2003
 
 
-class TdrEndpointTermination(Enum):
+class TDREndpointTermination(Enum):
     OPEN = 3600
     SHORT_TO_GROUND = 3601
 
