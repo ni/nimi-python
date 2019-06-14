@@ -76,6 +76,7 @@ functions = {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
                 'name': 'sessions',
+                'is_session_handle': False,
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -117,6 +118,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
+                'is_session_handle': False,
                 'name': 'sessions',
                 'size': {
                     'mechanism': 'len',
@@ -489,6 +491,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
+                'is_session_handle': False,
                 'name': 'sessions',
                 'size': {
                     'mechanism': 'len',
@@ -776,6 +779,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
+                'is_session_handle': False,
                 'name': 'sessions',
                 'size': {
                     'mechanism': 'len',
@@ -961,6 +965,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
+                'is_session_handle': False,
                 'name': 'sessions',
                 'size': {
                     'mechanism': 'len',
@@ -997,6 +1002,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
+                'is_session_handle': False,
                 'name': 'sessions',
                 'size': {
                     'mechanism': 'len',
@@ -1094,6 +1100,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
+                'is_session_handle': False,
                 'name': 'sessions',
                 'size': {
                     'mechanism': 'len',
@@ -1130,6 +1137,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
+                'is_session_handle': False,
                 'name': 'sessions',
                 'size': {
                     'mechanism': 'len',
