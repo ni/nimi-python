@@ -1,7 +1,10 @@
 ${template_parameters['encoding_tag']}
 # This file was generated
 <%
+import build.helper as helper
+
 enums = template_parameters['metadata'].enums
+functions = helper.filter_codegen_functions(template_parameters['metadata'].functions)
 config = template_parameters['metadata'].config
 module_name = config['module_name']
 registry_name = config['driver_registry'] if 'driver_registry' in config else config['driver_name']
@@ -14,7 +17,22 @@ from ${module_name}.enums import *          # noqa: F403,F401,H303
 % endif
 from ${module_name}.errors import DriverWarning   # noqa: F401
 from ${module_name}.errors import Error     # noqa: F401
+<%
+# nitclk is different. It does not have a session class that we open a session on
+# Instead it is a bunch of stateless function calls. So if we are NOT building for
+# nitclk, we import the Session class like before. If it is nitclk then we will
+# import each function and the Properties class
+%>\
+% if config['module_name'] != 'nitclk':
 from ${module_name}.session import Session  # noqa: F401
+% else:
+from ${module_name}.session import Properties  # noqa: F401
+
+# Function imports
+%   for func_name in sorted([functions[k]['python_name'] for k in functions if not functions[k]['render_in_session_base']]):
+from ${module_name}.session import ${func_name}  # noqa: F401
+%   endfor
+% endif
 <%
  # Blank lines are to make each import separate so that they do not need to be sorted
  # Otherwise flake8 test fails
