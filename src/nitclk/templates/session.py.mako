@@ -12,7 +12,9 @@
     functions = helper.filter_codegen_functions(functions)
 %>\
 
+import array
 import ctypes
+import threading
 
 % if attributes:
 import ${module_name}._attributes as _attributes
@@ -24,6 +26,9 @@ import ${module_name}.errors as errors
 # Used for __repr__ and __str__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
+
+_session_instance = None
+_session_instance_lock = threading.Lock()
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
@@ -79,7 +84,6 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
-        param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -99,48 +103,30 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         Returns the error description.
         '''
         try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._error_message(error_code)
+            error_string = self._get_extended_error_info()
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
 
+% for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
+% for method_template in functions[func_name]['method_templates']:
+<%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
+% endfor
+% endfor
 
 <%
-init_function = config['functions']['_init_function']
-init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
-constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
+# The main reason for having this class is to allow reusing the default method template.
 %>\
-class Session(object):
+class _Session(object):
     '''${config['session_class_description']}'''
 
-    def __init__(${init_method_params}):
-        r'''${config['session_class_description']}
-
-        ${helper.get_function_docstring(init_function, False, config, indent=8)}
-        '''
-        if sessions is None or len(sessions) == 0:
-            raise ValueError('sessions can not be omitted or an empty list')
-
-        self._sessions = []
-        for session in sessions:
-            if hasattr(session, 'get_session_reference'):
-                s = session.get_session_reference()
-            else:
-                s = session
-            self._sessions.append(s)
-
+    def __init__(self):
+        r'''${config['session_class_description']}'''
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -151,10 +137,46 @@ class Session(object):
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("sessions=" + pp.pformat(sessions))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True
+
+    def _get_error_description(self, error_code):
+        '''_get_error_description
+
+        Returns the error description.
+        '''
+        try:
+            '''
+            It is expected for _get_error to raise when the session is invalid
+            (IVI spec requires GetError to fail).
+            Use _error_message instead. It doesn't require a session.
+            '''
+            error_string = self._get_extended_error_info()
+            return error_string
+        except errors.Error:
+            return "Failed to retrieve error description."
+
+    # This is a copy of the generated _get_extended_error_info() function from Properties
+    # Because Session does no inherit from Properties, we need to redefine it in this class too
+    def _get_extended_error_info(self):
+        r'''_get_extended_error_info
+
+        Reports extended error information for the most recent NI-TClk method
+        that returned an error. To establish the method that returned an
+        error, use the return values of the individual methods because once
+        _get_extended_error_info reports an errorString, it does not report
+        an empty string again.
+        '''
+        error_string_ctype = None  # case C050
+        error_string_size_ctype = _visatype.ViUInt32()  # case S170
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
+        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_string_ctype.value.decode(self._encoding)
 
     ''' These are code-generated '''
 
@@ -164,4 +186,33 @@ class Session(object):
 % endfor
 % endfor
 
+def _get_session_class():
+    '''Internal function to return session singleton'''
+    global _session_instance
+    global _session_instance_lock
+
+    with _session_instance_lock:
+        if _session_instance is None:
+            _session_instance = _Session()
+
+        return _session_instance
+
+
+% for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
+<%
+f = functions[func_name]
+name = f['python_name']
+parameter_list = helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
+# We remove 'self, ' since we are not part of a class here
+parameter_list = parameter_list.replace('self, ', '')
+%>\
+def ${name}(${parameter_list}):
+    '''${name}
+
+    ${helper.get_function_docstring(f, False, config, indent=4)}
+    '''
+    return _get_session_class().${name}(${parameter_list})
+
+
+% endfor
 
