@@ -6,7 +6,18 @@ __version__ = '0.1.0.dev0'
 
 from nitclk.errors import DriverWarning   # noqa: F401
 from nitclk.errors import Error     # noqa: F401
-from nitclk.session import Session  # noqa: F401
+from nitclk.session import Properties  # noqa: F401
+
+# Function imports
+from nitclk.session import configure_for_homogeneous_triggers  # noqa: F401
+from nitclk.session import finish_sync_pulse_sender_synchronize  # noqa: F401
+from nitclk.session import init_for_documentation  # noqa: F401
+from nitclk.session import initiate  # noqa: F401
+from nitclk.session import is_done  # noqa: F401
+from nitclk.session import setup_for_sync_pulse_sender_synchronize  # noqa: F401
+from nitclk.session import synchronize  # noqa: F401
+from nitclk.session import syncronize_to_sync_pulse_sender  # noqa: F401
+from nitclk.session import wait_until_done  # noqa: F401
 
 
 def get_diagnostic_information():

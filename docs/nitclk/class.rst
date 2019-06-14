@@ -53,25 +53,11 @@ nitclk.Session
     +----------------------------------------------------+
     | :py:func:`finish_sync_pulse_sender_synchronize`    |
     +----------------------------------------------------+
-    | :py:func:`get_attribute_vi_real64`                 |
-    +----------------------------------------------------+
-    | :py:func:`get_attribute_vi_session`                |
-    +----------------------------------------------------+
-    | :py:func:`get_attribute_vi_string`                 |
-    +----------------------------------------------------+
-    | :py:func:`get_extended_error_info`                 |
-    +----------------------------------------------------+
     | :py:func:`init_for_documentation`                  |
     +----------------------------------------------------+
     | :py:func:`initiate`                                |
     +----------------------------------------------------+
     | :py:func:`is_done`                                 |
-    +----------------------------------------------------+
-    | :py:func:`set_attribute_vi_real64`                 |
-    +----------------------------------------------------+
-    | :py:func:`set_attribute_vi_session`                |
-    +----------------------------------------------------+
-    | :py:func:`set_attribute_vi_string`                 |
     +----------------------------------------------------+
     | :py:func:`setup_for_sync_pulse_sender_synchronize` |
     +----------------------------------------------------+
@@ -636,7 +622,7 @@ configure_for_homogeneous_triggers
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
 
 finish_sync_pulse_sender_synchronize
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -659,7 +645,7 @@ finish_sync_pulse_sender_synchronize
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
             :param min_time:
 
 
@@ -674,176 +660,6 @@ finish_sync_pulse_sender_synchronize
 
 
             :type min_time: float
-
-get_attribute_vi_real64
-~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:method:: get_attribute_vi_real64(attribute_id)
-
-            Gets the value of an NI-TClk ViReal64 property.
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nitclk.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_attribute_vi_real64(attribute_id)
-
-
-            :param attribute_id:
-
-
-                The ID of the property that you want to get Supported Property
-                :py:data:`nitclk.Session.sample_clock_delay`
-
-                
-
-
-            :type attribute_id: int
-
-            :rtype: float
-            :return:
-
-
-                    The value that you are getting
-
-                    
-
-
-
-get_attribute_vi_session
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:method:: get_attribute_vi_session(attribute_id)
-
-            Gets the value of an NI-TClk ViSession property.
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nitclk.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_attribute_vi_session(attribute_id)
-
-
-            :param attribute_id:
-
-
-                The ID of the property that you want to set Supported Properties
-                :py:data:`nitclk.Session.start_trigger_master_session`
-                :py:data:`nitclk.Session.ref_trigger_master_session`
-                :py:data:`nitclk.Session.script_trigger_master_session`
-                :py:data:`nitclk.Session.pause_trigger_master_session`
-
-                
-
-
-            :type attribute_id: int
-
-            :rtype: int
-            :return:
-
-
-                    The value that you are getting
-
-                    
-
-
-
-get_attribute_vi_string
-~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:method:: get_attribute_vi_string(attribute_id, buf_size, value)
-
-            This method queries the value of an NI-TClk ViString property. You
-            must provide a ViChar array to serve as a buffer for the value. You pass
-            the number of bytes in the buffer as bufSize. If the current value of
-            the property, including the terminating NULL byte, is larger than the
-            size you indicate in bufSize, the method copies bufSize minus 1 bytes
-            into the buffer, places an ASCII NULL byte at the end of the buffer, and
-            returns the array size that you must pass to get the entire value. For
-            example, if the value is "123456" and bufSize is 4, the method places
-            "123" into the buffer and returns 7. If you want to call
-            :py:meth:`nitclk.Session.get_attribute_vi_string` just to get the required array size, pass 0
-            for bufSize and VI_NULL for the value.
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nitclk.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_attribute_vi_string(attribute_id, buf_size, value)
-
-
-            :param attribute_id:
-
-
-                The ID of the property that you want to get Supported Properties
-                :py:data:`nitclk.Session.sync_pulse_source`
-                :py:data:`nitclk.Session.sync_pulse_clock_source`
-                :py:data:`nitclk.Session.exported_sync_pulse_output_terminal`
-
-                
-
-
-            :type attribute_id: int
-            :param buf_size:
-
-
-                The number of bytes in the ViChar array that you specify for the value
-                parameter
-
-                
-
-
-            :type buf_size: int
-            :param value:
-
-
-                The value that you are getting
-
-                
-
-
-            :type value: vi_char
-
-get_extended_error_info
-~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:method:: get_extended_error_info()
-
-            Reports extended error information for the most recent NI-TClk method
-            that returned an error. To establish the method that returned an
-            error, use the return values of the individual methods because once
-            :py:meth:`nitclk.Session.get_extended_error_info` reports an errorString, it does not report
-            an empty string again.
-
-            
-
-
 
 init_for_documentation
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -883,7 +699,7 @@ initiate
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
 
 is_done
 ~~~~~~~
@@ -907,7 +723,7 @@ is_done
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
 
             :rtype: bool
             :return:
@@ -920,140 +736,6 @@ is_done
                     
 
 
-
-set_attribute_vi_real64
-~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:method:: set_attribute_vi_real64(attribute_id, value)
-
-            Sets the value of an NI-TClk VIReal64 property.
-            :py:meth:`nitclk.Session.set_attribute_vi_real64` is a low-level method that you can use to
-            set the values NI-TClk properties. NI-TClk contains high-level methods
-            that set most of the properties. It is best to use the high-level
-            methods as much as possible.
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nitclk.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].set_attribute_vi_real64(attribute_id, value)
-
-
-            :param attribute_id:
-
-
-                The ID of the property that you want to set Supported Property
-                :py:data:`nitclk.Session.sample_clock_delay`
-
-                
-
-
-            :type attribute_id: int
-            :param value:
-
-
-                The value for the property
-
-                
-
-
-            :type value: float
-
-set_attribute_vi_session
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:method:: set_attribute_vi_session(attribute_id)
-
-            Sets the value of an NI-TClk ViSession property.
-            :py:meth:`nitclk.Session.set_attribute_vi_session` is a low-level method that you can use
-            to set the values NI-TClk properties. NI-TClk contains high-level
-            methods that set most of the properties. It is best to use the
-            high-level methods as much as possible.
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nitclk.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].set_attribute_vi_session(attribute_id)
-
-
-            :param attribute_id:
-
-
-                The ID of the property that you want to set Supported Properties
-                :py:data:`nitclk.Session.start_trigger_master_session`
-                :py:data:`nitclk.Session.ref_trigger_master_session`
-                :py:data:`nitclk.Session.script_trigger_master_session`
-                :py:data:`nitclk.Session.pause_trigger_master_session`
-
-                
-
-
-            :type attribute_id: int
-
-set_attribute_vi_string
-~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:method:: set_attribute_vi_string(attribute_id, value)
-
-            Sets the value of an NI-TClk VIString property.
-            :py:meth:`nitclk.Session.set_attribute_vi_string` is a low-level method that you can use to
-            set the values of NI-TClk properties. NI-TClk contain high-level
-            methods that set most of the properties. It is best to use the
-            high-level methods as much as possible.
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nitclk.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].set_attribute_vi_string(attribute_id, value)
-
-
-            :param attribute_id:
-
-
-                Pass the ID of the property that you want to set Supported Properties
-                :py:data:`nitclk.Session.sync_pulse_source`
-                :py:data:`nitclk.Session.sync_pulse_clock_source`
-                :py:data:`nitclk.Session.exported_sync_pulse_output_terminal`
-
-                
-
-
-            :type attribute_id: int
-            :param value:
-
-
-                Pass the value for the property
-
-                
-
-
-            :type value: str
 
 setup_for_sync_pulse_sender_synchronize
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1076,7 +758,7 @@ setup_for_sync_pulse_sender_synchronize
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
             :param min_time:
 
 
@@ -1118,7 +800,7 @@ synchronize
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
             :param min_time:
 
 
@@ -1155,7 +837,7 @@ syncronize_to_sync_pulse_sender
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
             :param min_time:
 
 
@@ -1199,7 +881,7 @@ wait_until_done
                 
 
 
-            :type sessions: list of vi_session
+            :type sessions: list of int
             :param timeout:
 
 
@@ -1255,25 +937,11 @@ Methods
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.finish_sync_pulse_sender_synchronize`    |
 +-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.get_attribute_vi_real64`                 |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.get_attribute_vi_session`                |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.get_attribute_vi_string`                 |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.get_extended_error_info`                 |
-+-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.init_for_documentation`                  |
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.initiate`                                |
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.is_done`                                 |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.set_attribute_vi_real64`                 |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.set_attribute_vi_session`                |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.set_attribute_vi_string`                 |
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.setup_for_sync_pulse_sender_synchronize` |
 +-------------------------------------------------------------------+

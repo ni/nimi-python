@@ -20,6 +20,9 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureForHomogeneousTriggers']['return'] = 0
         self._defaults['FinishSyncPulseSenderSynchronize'] = {}
         self._defaults['FinishSyncPulseSenderSynchronize']['return'] = 0
+        self._defaults['GetAttributeViBoolean'] = {}
+        self._defaults['GetAttributeViBoolean']['return'] = 0
+        self._defaults['GetAttributeViBoolean']['value'] = None
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['value'] = None
@@ -36,6 +39,8 @@ class SideEffectsHelper(object):
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['done'] = None
+        self._defaults['SetAttributeViBoolean'] = {}
+        self._defaults['SetAttributeViBoolean']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViSession'] = {}
@@ -66,6 +71,16 @@ class SideEffectsHelper(object):
         if self._defaults['FinishSyncPulseSenderSynchronize']['return'] != 0:
             return self._defaults['FinishSyncPulseSenderSynchronize']['return']
         return self._defaults['FinishSyncPulseSenderSynchronize']['return']
+
+    def niTClk_GetAttributeViBoolean(self, session, channel_name, attribute_id, value):  # noqa: N802
+        if self._defaults['GetAttributeViBoolean']['return'] != 0:
+            return self._defaults['GetAttributeViBoolean']['return']
+        # value
+        if self._defaults['GetAttributeViBoolean']['value'] is None:
+            raise MockFunctionCallError("niTClk_GetAttributeViBoolean", param='value')
+        if value is not None:
+            value.contents.value = self._defaults['GetAttributeViBoolean']['value']
+        return self._defaults['GetAttributeViBoolean']['return']
 
     def niTClk_GetAttributeViReal64(self, session, channel_name, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViReal64']['return'] != 0:
@@ -99,12 +114,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niTClk_GetExtendedErrorInfo", param='errorString')
         if error_string_size.value == 0:
             return len(self._defaults['GetExtendedErrorInfo']['errorString'])
-        try:
-            error_string_ref = error_string.contents
-        except AttributeError:
-            error_string_ref = error_string
-        for i in range(len(self._defaults['GetExtendedErrorInfo']['errorString'])):
-            error_string_ref[i] = self._defaults['GetExtendedErrorInfo']['errorString'][i]
+        error_string.value = self._defaults['GetExtendedErrorInfo']['errorString'].encode('ascii')
         return self._defaults['GetExtendedErrorInfo']['return']
 
     def niTClk_Initiate(self, session_count, sessions):  # noqa: N802
@@ -121,6 +131,11 @@ class SideEffectsHelper(object):
         if done is not None:
             done.contents.value = self._defaults['IsDone']['done']
         return self._defaults['IsDone']['return']
+
+    def niTClk_SetAttributeViBoolean(self, session, channel_name, attribute_id, value):  # noqa: N802
+        if self._defaults['SetAttributeViBoolean']['return'] != 0:
+            return self._defaults['SetAttributeViBoolean']['return']
+        return self._defaults['SetAttributeViBoolean']['return']
 
     def niTClk_SetAttributeViReal64(self, session, channel_name, attribute_id, value):  # noqa: N802
         if self._defaults['SetAttributeViReal64']['return'] != 0:
@@ -163,6 +178,8 @@ class SideEffectsHelper(object):
         mock_library.niTClk_ConfigureForHomogeneousTriggers.return_value = 0
         mock_library.niTClk_FinishSyncPulseSenderSynchronize.side_effect = MockFunctionCallError("niTClk_FinishSyncPulseSenderSynchronize")
         mock_library.niTClk_FinishSyncPulseSenderSynchronize.return_value = 0
+        mock_library.niTClk_GetAttributeViBoolean.side_effect = MockFunctionCallError("niTClk_GetAttributeViBoolean")
+        mock_library.niTClk_GetAttributeViBoolean.return_value = 0
         mock_library.niTClk_GetAttributeViReal64.side_effect = MockFunctionCallError("niTClk_GetAttributeViReal64")
         mock_library.niTClk_GetAttributeViReal64.return_value = 0
         mock_library.niTClk_GetAttributeViSession.side_effect = MockFunctionCallError("niTClk_GetAttributeViSession")
@@ -175,6 +192,8 @@ class SideEffectsHelper(object):
         mock_library.niTClk_Initiate.return_value = 0
         mock_library.niTClk_IsDone.side_effect = MockFunctionCallError("niTClk_IsDone")
         mock_library.niTClk_IsDone.return_value = 0
+        mock_library.niTClk_SetAttributeViBoolean.side_effect = MockFunctionCallError("niTClk_SetAttributeViBoolean")
+        mock_library.niTClk_SetAttributeViBoolean.return_value = 0
         mock_library.niTClk_SetAttributeViReal64.side_effect = MockFunctionCallError("niTClk_SetAttributeViReal64")
         mock_library.niTClk_SetAttributeViReal64.return_value = 0
         mock_library.niTClk_SetAttributeViSession.side_effect = MockFunctionCallError("niTClk_SetAttributeViSession")

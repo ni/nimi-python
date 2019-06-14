@@ -1,6 +1,8 @@
 # This file was generated
 
+import array
 import ctypes
+import threading
 
 import nitclk._attributes as _attributes
 import nitclk._library_singleton as _library_singleton
@@ -10,6 +12,9 @@ import nitclk.errors as errors
 # Used for __repr__ and __str__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
+
+_session_instance = None
+_session_instance_lock = threading.Lock()
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
@@ -152,18 +157,17 @@ class Properties(object):
     Indicates the computed TClk period that will be used during the acquisition.
     '''
 
-    def __init__(self, repeated_capability_list, sessions, encoding):
+    def __init__(self, repeated_capability_list, session, encoding):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
-        self._sessions = sessions
+        self._session = session
         self._library = _library_singleton.get()
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("sessions=" + pp.pformat(sessions))
-        param_list.append("library=" + pp.pformat(library))
+        param_list.append("session=" + pp.pformat(session))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -183,42 +187,303 @@ class Properties(object):
         Returns the error description.
         '''
         try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
             '''
             It is expected for _get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
             Use _error_message instead. It doesn't require a session.
             '''
-            error_string = self._error_message(error_code)
+            error_string = self._get_extended_error_info()
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
 
+    def _get_attribute_vi_boolean(self, attribute_id):
+        r'''_get_attribute_vi_boolean
 
-class Session(object):
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
+
+        Args:
+            attribute_id (int):
+
+
+        Returns:
+            value (bool):
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViBoolean()  # case S220
+        error_code = self._library.niTClk_GetAttributeViBoolean(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(value_ctype.value)
+
+    def _get_attribute_vi_real64(self, attribute_id):
+        r'''_get_attribute_vi_real64
+
+        Gets the value of an NI-TClk ViReal64 property.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
+
+        Args:
+            attribute_id (int): The ID of the property that you want to get Supported Property
+                sample_clock_delay
+
+
+        Returns:
+            value (float): The value that you are getting
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niTClk_GetAttributeViReal64(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(value_ctype.value)
+
+    def _get_attribute_vi_session(self, attribute_id):
+        r'''_get_attribute_vi_session
+
+        Gets the value of an NI-TClk ViSession property.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._get_attribute_vi_session(attribute_id)
+
+        Args:
+            attribute_id (int): The ID of the property that you want to set Supported Properties
+                start_trigger_master_session
+                ref_trigger_master_session
+                script_trigger_master_session
+                pause_trigger_master_session
+
+
+        Returns:
+            value (int): The value that you are getting
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViSession()  # case S220
+        error_code = self._library.niTClk_GetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(value_ctype.value)
+
+    def _get_attribute_vi_string(self, attribute_id, buf_size, value):
+        r'''_get_attribute_vi_string
+
+        This method queries the value of an NI-TClk ViString property. You
+        must provide a ViChar array to serve as a buffer for the value. You pass
+        the number of bytes in the buffer as bufSize. If the current value of
+        the property, including the terminating NULL byte, is larger than the
+        size you indicate in bufSize, the method copies bufSize minus 1 bytes
+        into the buffer, places an ASCII NULL byte at the end of the buffer, and
+        returns the array size that you must pass to get the entire value. For
+        example, if the value is "123456" and bufSize is 4, the method places
+        "123" into the buffer and returns 7. If you want to call
+        _get_attribute_vi_string just to get the required array size, pass 0
+        for bufSize and VI_NULL for the value.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._get_attribute_vi_string(attribute_id, buf_size, value)
+
+        Args:
+            attribute_id (int): The ID of the property that you want to get Supported Properties
+                sync_pulse_source
+                sync_pulse_clock_source
+                exported_sync_pulse_output_terminal
+
+            buf_size (int): The number of bytes in the ViChar array that you specify for the value
+                parameter
+
+            value (str): The value that you are getting
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        buf_size_ctype = _visatype.ViInt32(buf_size)  # case S150
+        value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
+        error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _get_extended_error_info(self):
+        r'''_get_extended_error_info
+
+        Reports extended error information for the most recent NI-TClk method
+        that returned an error. To establish the method that returned an
+        error, use the return values of the individual methods because once
+        _get_extended_error_info reports an errorString, it does not report
+        an empty string again.
+        '''
+        error_string_ctype = None  # case C050
+        error_string_size_ctype = _visatype.ViUInt32()  # case S170
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
+        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_string_ctype.value.decode(self._encoding)
+
+    def _set_attribute_vi_boolean(self, attribute_id, value):
+        r'''_set_attribute_vi_boolean
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, value)
+
+        Args:
+            attribute_id (int):
+
+            value (bool):
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViBoolean(value)  # case S150
+        error_code = self._library.niTClk_SetAttributeViBoolean(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_real64(self, attribute_id, value):
+        r'''_set_attribute_vi_real64
+
+        Sets the value of an NI-TClk VIReal64 property.
+        _set_attribute_vi_real64 is a low-level method that you can use to
+        set the values NI-TClk properties. NI-TClk contains high-level methods
+        that set most of the properties. It is best to use the high-level
+        methods as much as possible.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._set_attribute_vi_real64(attribute_id, value)
+
+        Args:
+            attribute_id (int): The ID of the property that you want to set Supported Property
+                sample_clock_delay
+
+            value (float): The value for the property
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViReal64(value)  # case S150
+        error_code = self._library.niTClk_SetAttributeViReal64(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_session(self, attribute_id):
+        r'''_set_attribute_vi_session
+
+        Sets the value of an NI-TClk ViSession property.
+        _set_attribute_vi_session is a low-level method that you can use
+        to set the values NI-TClk properties. NI-TClk contains high-level
+        methods that set most of the properties. It is best to use the
+        high-level methods as much as possible.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._set_attribute_vi_session(attribute_id)
+
+        Args:
+            attribute_id (int): The ID of the property that you want to set Supported Properties
+                start_trigger_master_session
+                ref_trigger_master_session
+                script_trigger_master_session
+                pause_trigger_master_session
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = _visatype.ViSession(self._value)  # case S110
+        error_code = self._library.niTClk_SetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def _set_attribute_vi_string(self, attribute_id, value):
+        r'''_set_attribute_vi_string
+
+        Sets the value of an NI-TClk VIString property.
+        _set_attribute_vi_string is a low-level method that you can use to
+        set the values of NI-TClk properties. NI-TClk contain high-level
+        methods that set most of the properties. It is best to use the
+        high-level methods as much as possible.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nitclk.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nitclk.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._set_attribute_vi_string(attribute_id, value)
+
+        Args:
+            attribute_id (int): Pass the ID of the property that you want to set Supported Properties
+                sync_pulse_source
+                sync_pulse_clock_source
+                exported_sync_pulse_output_terminal
+
+            value (str): Pass the value for the property
+
+        '''
+        session_ctype = _visatype.ViSession(self._session)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
+        value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
+        error_code = self._library.niTClk_SetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+
+class _Session(object):
     '''An NI-TClk session.'''
 
     def __init__(self):
-        r'''An NI-TClk session.
-
-        TBD
-        '''
-        if sessions is None or len(sessions) == 0:
-            raise ValueError('sessions can not be omitted or an empty list')
-
-        self._sessions = []
-        for session in sessions:
-            if hasattr(session, 'get_session_reference'):
-                s = session.get_session_reference()
-            else:
-                s = session
-            self._sessions.append(s)
-
+        r'''An NI-TClk session.'''
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -226,10 +491,46 @@ class Session(object):
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("sessions=" + pp.pformat(sessions))
         self._param_list = ', '.join(param_list)
 
         self._is_frozen = True
+
+    def _get_error_description(self, error_code):
+        '''_get_error_description
+
+        Returns the error description.
+        '''
+        try:
+            '''
+            It is expected for _get_error to raise when the session is invalid
+            (IVI spec requires GetError to fail).
+            Use _error_message instead. It doesn't require a session.
+            '''
+            error_string = self._get_extended_error_info()
+            return error_string
+        except errors.Error:
+            return "Failed to retrieve error description."
+
+    # This is a copy of the generated _get_extended_error_info() function from Properties
+    # Because Session does no inherit from Properties, we need to redefine it in this class too
+    def _get_extended_error_info(self):
+        r'''_get_extended_error_info
+
+        Reports extended error information for the most recent NI-TClk method
+        that returned an error. To establish the method that returned an
+        error, use the return values of the individual methods because once
+        _get_extended_error_info reports an errorString, it does not report
+        an empty string again.
+        '''
+        error_string_ctype = None  # case C050
+        error_string_size_ctype = _visatype.ViUInt32()  # case S170
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
+        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_string_ctype.value.decode(self._encoding)
 
     ''' These are code-generated '''
 
@@ -359,11 +660,11 @@ class Session(object):
         sessions.
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         error_code = self._library.niTClk_ConfigureForHomogeneousTriggers(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -374,7 +675,7 @@ class Session(object):
         TBD
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -385,7 +686,7 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -411,11 +712,11 @@ class Session(object):
         that import the TClk-synchronized start trigger.
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         error_code = self._library.niTClk_Initiate(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -427,7 +728,7 @@ class Session(object):
         corresponding to sessions.
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
 
         Returns:
@@ -437,7 +738,7 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         done_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niTClk_IsDone(session_count_ctype, sessions_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -449,7 +750,7 @@ class Session(object):
         TBD
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -460,7 +761,7 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -477,7 +778,7 @@ class Session(object):
         help file at Start>>Programs>>National Instruments>>NI-TClk.
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -488,7 +789,7 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -500,7 +801,7 @@ class Session(object):
         TBD
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -511,7 +812,7 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SyncronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -530,7 +831,7 @@ class Session(object):
         complete within a certain time.
 
         Args:
-            sessions (list of vi_session): sessions is an array of sessions that are being synchronized.
+            sessions (list of int): sessions is an array of sessions that are being synchronized.
 
             timeout (float): The amount of time in seconds that wait_until_done waits for the
                 sessions to complete. If timeout is exceeded, wait_until_done
@@ -538,11 +839,302 @@ class Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.vi_session)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         error_code = self._library.niTClk_WaitUntilDone(session_count_ctype, sessions_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+
+def _get_session_class():
+    '''Internal function to return session singleton'''
+    global _session_instance
+    global _session_instance_lock
+
+    with _session_instance_lock:
+        if _session_instance is None:
+            _session_instance = _Session()
+
+        return _session_instance
+
+
+def configure_for_homogeneous_triggers(sessions):
+    '''configure_for_homogeneous_triggers
+
+    Configures the properties commonly required for the TClk synchronization
+    of device sessions with homogeneous triggers in a single PXI chassis or
+    a single PC. Use configure_for_homogeneous_triggers to configure
+    the properties for the reference clocks, start triggers, reference
+    triggers, script triggers, and pause triggers. If
+    configure_for_homogeneous_triggers cannot perform all the steps
+    appropriate for the given sessions, it returns an error. If an error is
+    returned, use the instrument driver methods and properties for signal
+    routing, along with the following NI-TClk properties:
+    start_trigger_master_session
+    ref_trigger_master_session
+    script_trigger_master_session
+    pause_trigger_master_session
+    configure_for_homogeneous_triggers affects the following clocks and
+    triggers: - Reference clocks - Start triggers - Reference triggers -
+    Script triggers - Pause triggers Reference Clocks
+    configure_for_homogeneous_triggers configures the reference clocks
+    if they are needed. Specifically, if the internal sample clocks or
+    internal sample clock timebases are used, and the reference clock source
+    is not configured--or is set to None (no trigger
+    configured)--configure_for_homogeneous_triggers configures the
+    following: PXI--The reference clock source on all devices is set to be
+    the 10 MHz PXI backplane clock (PXI_CLK10). PCI--One of the devices
+    exports its 10 MHz onboard reference clock to RTSI 7. The reference
+    clock source on all devices is set to be RTSI 7. Note: If the reference
+    clock source is set to a value other than None,
+    configure_for_homogeneous_triggers cannot configure the reference
+    clock source. Start Triggers If the start trigger is set to None (no
+    trigger configured) for all sessions, the sessions are configured to
+    share the start trigger. The start trigger is shared by: - Implicitly
+    exporting the start trigger from one session - Configuring the other
+    sessions for digital edge start triggers with sources corresponding to
+    the exported start trigger - Setting
+    start_trigger_master_session to the session that is
+    exporting the trigger for all sessions If the start triggers are None
+    for all except one session, configure_for_homogeneous_triggers
+    configures the sessions to share the start trigger from the one excepted
+    session. The start trigger is shared by: - Implicitly exporting start
+    trigger from the session with the start trigger that is not None -
+    Configuring the other sessions for digital-edge start triggers with
+    sources corresponding to the exported start trigger - Setting
+    start_trigger_master_session to the session that is
+    exporting the trigger for all sessions If start triggers are configured
+    for all sessions, configure_for_homogeneous_triggers does not
+    affect the start triggers. Start triggers are considered to be
+    configured for all sessions if either of the following conditions is
+    true: - No session has a start trigger that is None - One session has a
+    start trigger that is None, and all other sessions have start triggers
+    other than None. The one session with the None trigger must have
+    start_trigger_master_session set to itself, indicating
+    that the session itself is the start trigger master Reference Triggers
+    configure_for_homogeneous_triggers configures sessions that support
+    reference triggers to share the reference triggers if the reference
+    triggers are None (no trigger configured) for all except one session.
+    The reference triggers are shared by: - Implicitly exporting the
+    reference trigger from the session whose reference trigger is not None -
+    Configuring the other sessions that support the reference trigger for
+    digital-edge reference triggers with sources corresponding to the
+    exported reference trigger - Setting
+    ref_trigger_master_session to the session that is
+    exporting the trigger for all sessions that support reference trigger If
+    the reference triggers are configured for all sessions that support
+    reference triggers, configure_for_homogeneous_triggers does not
+    affect the reference triggers. Reference triggers are considered to be
+    configured for all sessions if either one or the other of the following
+    conditions is true: - No session has a reference trigger that is None -
+    One session has a reference trigger that is None, and all other sessions
+    have reference triggers other than None. The one session with the None
+    trigger must have ref_trigger_master_session set to
+    itself, indicating that the session itself is the reference trigger
+    master Reference Trigger Holdoffs Acquisition sessions may be configured
+    with the reference trigger. For acquisition sessions, when the reference
+    trigger is shared, configure_for_homogeneous_triggers configures
+    the holdoff properties (which are instrument driver specific) on the
+    reference trigger master session so that the session does not recognize
+    the reference trigger before the other sessions are ready. This
+    condition is only relevant when the sample clock rates, sample clock
+    timebase rates, sample counts, holdoffs, and/or any delays for the
+    acquisitions are different. When the sample clock rates, sample clock
+    timebase rates, and/or the sample counts are different in acquisition
+    sessions sharing the reference trigger, you should also set the holdoff
+    properties for the reference trigger master using the instrument driver.
+    Script Triggers configure_for_homogeneous_triggers configures
+    sessions that support script triggers to share them, if the script
+    triggers are None (no trigger configured) for all except one session.
+    The script triggers are shared in the following ways: - Implicitly
+    exporting the script trigger from the session whose script trigger is
+    not None - Configuring the other sessions that support the script
+    trigger for digital-edge script triggers with sources corresponding to
+    the exported script trigger - Setting
+    script_trigger_master_session to the session that is
+    exporting the trigger for all sessions that support script triggers If
+    the script triggers are configured for all sessions that support script
+    triggers, configure_for_homogeneous_triggers does not affect script
+    triggers. Script triggers are considered to be configured for all
+    sessions if either one or the other of the following conditions are
+    true: - No session has a script trigger that is None - One session has a
+    script trigger that is None and all other sessions have script triggers
+    other than None. The one session with the None trigger must have
+    script_trigger_master_session set to itself, indicating
+    that the session itself is the script trigger master Pause Triggers
+    configure_for_homogeneous_triggers configures generation sessions
+    that support pause triggers to share them, if the pause triggers are
+    None (no trigger configured) for all except one session. The pause
+    triggers are shared by: - Implicitly exporting the pause trigger from
+    the session whose script trigger is not None - Configuring the other
+    sessions that support the pause trigger for digital-edge pause triggers
+    with sources corresponding to the exported pause trigger - Setting
+    pause_trigger_master_session to the session that is
+    exporting the trigger for all sessions that support script triggers If
+    the pause triggers are configured for all generation sessions that
+    support pause triggers, configure_for_homogeneous_triggers does not
+    affect pause triggers. Pause triggers are considered to be configured
+    for all sessions if either one or the other of the following conditions
+    is true: - No session has a pause trigger that is None - One session has
+    a pause trigger that is None and all other sessions have pause triggers
+    other than None. The one session with the None trigger must have
+    pause_trigger_master_session set to itself, indicating
+    that the session itself is the pause trigger master Note: TClk
+    synchronization is not supported for pause triggers on acquisition
+    sessions.
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+    '''
+    return _get_session_class().configure_for_homogeneous_triggers(sessions)
+
+
+def finish_sync_pulse_sender_synchronize(sessions, min_time):
+    '''finish_sync_pulse_sender_synchronize
+
+    TBD
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            between 0.0 s and 0.050 s (50 ms). Minimal period for a single
+            chassis/PC is 200 ns. If the specified value is less than 200 ns,
+            NI-TClk automatically coerces minTime to 200 ns. For multichassis
+            synchronization, adjust this value to account for propagation delays
+            through the various devices and cables.
+
+    '''
+    return _get_session_class().finish_sync_pulse_sender_synchronize(sessions, min_time)
+
+
+def init_for_documentation(self):
+    '''init_for_documentation
+
+    TBD
+    '''
+    return _get_session_class().init_for_documentation(self)
+
+
+def initiate(sessions):
+    '''initiate
+
+    Initiates the acquisition or generation sessions specified, taking into
+    consideration any special requirements needed for synchronization. For
+    example, the session exporting the TClk-synchronized start trigger is
+    not initiated until after initiate initiates all the sessions
+    that import the TClk-synchronized start trigger.
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+    '''
+    return _get_session_class().initiate(sessions)
+
+
+def is_done(sessions):
+    '''is_done
+
+    Monitors the progress of the acquisitions and/or generations
+    corresponding to sessions.
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+
+    Returns:
+        done (bool): Indicates that the operation is done. The operation is done when each
+            session has completed without any errors or when any one of the sessions
+            reports an error.
+
+    '''
+    return _get_session_class().is_done(sessions)
+
+
+def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
+    '''setup_for_sync_pulse_sender_synchronize
+
+    TBD
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            between 0.0 s and 0.050 s (50 ms). Minimal period for a single
+            chassis/PC is 200 ns. If the specified value is less than 200 ns,
+            NI-TClk automatically coerces minTime to 200 ns. For multichassis
+            synchronization, adjust this value to account for propagation delays
+            through the various devices and cables.
+
+    '''
+    return _get_session_class().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
+
+
+def synchronize(sessions, min_time):
+    '''synchronize
+
+    Synchronizes the TClk signals on the given sessions. After
+    synchronize executes, TClk signals from all sessions are
+    synchronized. Note: Before using this NI-TClk method, verify that your
+    system is configured as specified in the PXI Trigger Lines and RTSI
+    Lines topic of the NI-TClk Synchronization Help. You can locate this
+    help file at Start>>Programs>>National Instruments>>NI-TClk.
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            between 0.0 s and 0.050 s (50 ms). Minimal period for a single
+            chassis/PC is 200 ns. If the specified value is less than 200 ns,
+            NI-TClk automatically coerces minTime to 200 ns. For multichassis
+            synchronization, adjust this value to account for propagation delays
+            through the various devices and cables.
+
+    '''
+    return _get_session_class().synchronize(sessions, min_time)
+
+
+def syncronize_to_sync_pulse_sender(sessions, min_time):
+    '''syncronize_to_sync_pulse_sender
+
+    TBD
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            between 0.0 s and 0.050 s (50 ms). Minimal period for a single
+            chassis/PC is 200 ns. If the specified value is less than 200 ns,
+            NI-TClk automatically coerces minTime to 200 ns. For multichassis
+            synchronization, adjust this value to account for propagation delays
+            through the various devices and cables.
+
+    '''
+    return _get_session_class().syncronize_to_sync_pulse_sender(sessions, min_time)
+
+
+def wait_until_done(sessions, timeout):
+    '''wait_until_done
+
+    Call this method to pause execution of your program until the
+    acquisitions and/or generations corresponding to sessions are done or
+    until the method returns a timeout error. wait_until_done is a
+    blocking method that periodically checks the operation status. It
+    returns control to the calling program if the operation completes
+    successfully or an error occurs (including a timeout error). This
+    method is most useful for finite data operations that you expect to
+    complete within a certain time.
+
+    Args:
+        sessions (list of int): sessions is an array of sessions that are being synchronized.
+
+        timeout (float): The amount of time in seconds that wait_until_done waits for the
+            sessions to complete. If timeout is exceeded, wait_until_done
+            returns an error.
+
+    '''
+    return _get_session_class().wait_until_done(sessions, timeout)
 
 
 
