@@ -36,6 +36,7 @@ Refer to your driver documentation for device-specific information and detailed 
    niswitch
    nimodinst
    nise
+   nitclk
 
 Indices and tables
 ==================
