@@ -36,5 +36,5 @@ config = {
     'repeated_capabilities': [
     ],
     'session_class_description': 'An NI-TClk session.',
-    'session_handle_parameter_name': 'sessions'
+    'session_handle_parameter_name': 'session'
 }
