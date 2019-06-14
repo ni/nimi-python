@@ -171,7 +171,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'no',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -200,6 +200,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViReal64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Gets the value of an NI-TClk ViReal64 attribute.'
         },
@@ -240,6 +241,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViSession': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Gets the value of an NI-TClk ViSession attribute.'
         },
@@ -280,6 +282,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nThis function queries the value of an NI-TClk ViString attribute. You\nmust provide a ViChar array to serve as a buffer for the value. You pass\nthe number of bytes in the buffer as bufSize. If the current value of\nthe attribute, including the terminating NULL byte, is larger than the\nsize you indicate in bufSize, the function copies bufSize minus 1 bytes\ninto the buffer, places an ASCII NULL byte at the end of the buffer, and\nreturns the array size that you must pass to get the entire value. For\nexample, if the value is "123456" and bufSize is 4, the function places\n"123" into the buffer and returns 7. If you want to call\nniTClk_GetAttributeViString just to get the required array size, pass 0\nfor bufSize and VI_NULL for the value.\n'
         },
@@ -328,6 +331,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetExtendedErrorInfo': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nReports extended error information for the most recent NI-TClk function\nthat returned an error. To establish the function that returned an\nerror, use the return values of the individual functions because once\nniTClk_GetExtendedErrorInfo reports an errorString, it does not report\nan empty string again.\n'
         },
@@ -799,7 +803,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'no',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -828,6 +832,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViReal64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nSets the value of an NI-TClk VIReal64 attribute.\nniTClk_SetAttributeViReal64 is a low-level function that you can use to\nset the values NI-TClk attributes. NI-TClk contains high-level functions\nthat set most of the attributes. It is best to use the high-level\nfunctions as much as possible.\n'
         },
@@ -868,6 +873,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViSession': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nSets the value of an NI-TClk ViSession attribute.\nniTClk_SetAttributeViSession is a low-level function that you can use\nto set the values NI-TClk attributes. NI-TClk contains high-level\nfunctions that set most of the attributes. It is best to use the\nhigh-level functions as much as possible.\n'
         },
@@ -908,6 +914,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nSets the value of an NI-TClk VIString attribute.\nniTClk_SetAttributeViString is a low-level function that you can use to\nset the values of NI-TClk attributes. NI-TClk contain high-level\nfunctions that set most of the attributes. It is best to use the\nhigh-level functions as much as possible.\n'
         },
