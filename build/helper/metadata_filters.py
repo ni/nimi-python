@@ -221,37 +221,26 @@ def filter_parameters(function, parameter_usage_options):
     for x in function['parameters']:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
-            print('1')
             skip = True
         if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
-            print('2')
             skip = True
         if x == size_parameter and options_to_use['skip_size_parameter']:
-            print('3')
             skip = True
         if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
-            print('4')
             skip = True
         if x['is_repeated_capability'] is True and options_to_use['skip_repeated_capability_parameter']:
-            print('5')
             skip = True
         if x['enum'] is None and options_to_use['skip_non_enum_parameter']:
-            print('6')
             skip = True
         if options_to_use['mechanism'] != 'any' and x['size']['mechanism'] not in options_to_use['mechanism']:
-            print('7')
             skip = True
         if options_to_use['skip_all_except_numpy_parameters'] and not x['numpy']:
-            print('8')
             skip = True
         if options_to_use['but_keep_output_numpy_array_parameters'] is True and x['numpy'] is True:
-            print('9')
             skip = False
         if not options_to_use['python_api_list'] and not x['use_in_python_api']:
-            print('10')
             skip = True
         if not skip:
-            print('11')
             parameters_to_use.append(x)
 
     # Reorder based on options
