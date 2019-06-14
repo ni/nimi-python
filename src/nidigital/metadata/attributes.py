@@ -230,7 +230,7 @@ attributes = {
     1150015: {
         'access': 'read-write',
         'channel_based': True,
-        'enum': 'PpmuOutputFunction',
+        'enum': 'PPMUOutputFunction',
         'name': 'PPMU_OUTPUT_FUNCTION',
         'resettable': True,
         'type': 'ViInt32'
@@ -605,7 +605,7 @@ attributes = {
     1150081: {
         'access': 'read-write',
         'channel_based': False,
-        'enum': 'TdrEndpointTermination',
+        'enum': 'TDREndpointTermination',
         'name': 'TDR_ENDPOINT_TERMINATION',
         'resettable': True,
         'type': 'ViInt32'

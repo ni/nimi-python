@@ -175,7 +175,7 @@ enums = {
             }
         ]
     },
-    'PpmuCurrentLimitBehavior': {
+    'PPMUCurrentLimitBehavior': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_CURRENT_REGULATE',
@@ -183,7 +183,7 @@ enums = {
             }
         ]
     },
-    'PpmuMeasurementType': {
+    'PPMUMeasurementType': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_MEASURE_CURRENT',
@@ -195,7 +195,7 @@ enums = {
             }
         ]
     },
-    'PpmuOutputFunction': {
+    'PPMUOutputFunction': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_DC_VOLTAGE',
@@ -359,7 +359,7 @@ enums = {
             }
         ]
     },
-    'TdrEndpointTermination': {
+    'TDREndpointTermination': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_TDR_TO_OPEN',
