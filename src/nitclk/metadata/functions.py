@@ -81,7 +81,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             }
         ],
         'returns': 'ViStatus'
@@ -124,7 +124,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             },
             {
                 'direction': 'in',
@@ -325,7 +325,7 @@ functions = {
                     'description': 'The value that you are getting'
                 },
                 'name': 'value',
-                'type': 'vi char'
+                'type': 'ViChar[]'
             }
         ],
         'returns': 'ViStatus'
@@ -347,7 +347,7 @@ functions = {
                     'mechanism': 'ivi-dance',
                     'value': 'errorStringSize'
                 },
-                'type': 'vi char[]'
+                'type': 'ViChar[]'
             },
             {
                 'direction': 'in',
@@ -501,7 +501,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             }
         ],
         'returns': 'ViStatus'
@@ -789,7 +789,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             },
             {
                 'direction': 'out',
@@ -978,7 +978,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             },
             {
                 'direction': 'in',
@@ -1015,7 +1015,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             },
             {
                 'direction': 'in',
@@ -1113,7 +1113,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             },
             {
                 'direction': 'in',
@@ -1150,7 +1150,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type': 'vi session[]'
+                'type': 'ViSession[]'
             },
             {
                 'direction': 'in',
