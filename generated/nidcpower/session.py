@@ -193,9 +193,6 @@ class _SessionBase(object):
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
     Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
@@ -309,17 +306,14 @@ class _SessionBase(object):
         session.channels[0,1].current_level = var
         var = session.channels[0,1].current_level
     '''
-    current_level_autorange = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CurrentLevelAutorange, 1150017)
+    current_level_autorange = _attributes.AttributeViInt32(1150017)
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-    If you set this property to CurrentLevelAutorange.ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  CurrentLevelAutorange.ON to CurrentLevelAutorange.OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
     Query the current_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The current_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
-    Default Value: CurrentLevelAutorange.OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -369,17 +363,14 @@ class _SessionBase(object):
         session.channels[0,1].current_limit = var
         var = session.channels[0,1].current_limit
     '''
-    current_limit_autorange = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CurrentLimitAutorange, 1150016)
+    current_limit_autorange = _attributes.AttributeViInt32(1150016)
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-    If you set this property to CurrentLimitAutorange.ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from CurrentLimitAutorange.ON to  CurrentLimitAutorange.OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from AutoZero.ON to  AutoZero.OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
     Query the current_limit_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The current_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
-    Default Value: CurrentLimitAutorange.OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2019,17 +2010,14 @@ class _SessionBase(object):
         session.channels[0,1].voltage_level = var
         var = session.channels[0,1].voltage_level
     '''
-    voltage_level_autorange = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VoltageLevelAutorange, 1150015)
+    voltage_level_autorange = _attributes.AttributeViInt32(1150015)
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-    If you set this property to VoltageLevelAutorange.ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  VoltageLevelAutorange.ON to VoltageLevelAutorange.OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
     Query the voltage_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The voltage_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
-    Default Value: VoltageLevelAutorange.OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2079,17 +2067,14 @@ class _SessionBase(object):
         session.channels[0,1].voltage_limit = var
         var = session.channels[0,1].voltage_limit
     '''
-    voltage_limit_autorange = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VoltageLimitAutorange, 1150018)
+    voltage_limit_autorange = _attributes.AttributeViInt32(1150018)
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-    If this property is set to VoltageLimitAutorange.ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  VoltageLimitAutorange.ON to VoltageLimitAutorange.OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
+    If this property is set to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
     Query the voltage_limit_range property by using the _get_attribute_vi_int32 method to find out  which range NI-DCPower automatically selects.
     The voltage_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
-    Default Value: VoltageLimitAutorange.OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -3015,6 +3000,31 @@ class _SessionBase(object):
         error_code = self._library.niDCPower_MeasureMultiple(vi_ctype, channel_name_ctype, voltage_measurements_ctype, current_measurements_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array
+
+    @ivi_synchronized
+    def _parse_channel_count(self):
+        r'''_parse_channel_count
+
+        Returns the number of channels.
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nidcpower.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidcpower.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1]._parse_channel_count()
+
+        Returns:
+            number_of_channels (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        number_of_channels_ctype = _visatype.ViUInt32()  # case S200
+        error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(number_of_channels_ctype.value)
 
     @ivi_synchronized
     def query_in_compliance(self):

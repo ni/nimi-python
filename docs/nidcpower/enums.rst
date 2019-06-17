@@ -91,56 +91,6 @@ ComplianceLimitSymmetry
 
 
 
-CurrentLevelAutorange
----------------------
-
-.. py:class:: CurrentLevelAutorange
-
-    .. py:attribute:: CurrentLevelAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: CurrentLevelAutorange.ON
-
-
-
-        Autoranging is enabled.
-
-        
-
-
-
-CurrentLimitAutorange
----------------------
-
-.. py:class:: CurrentLimitAutorange
-
-    .. py:attribute:: CurrentLimitAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: CurrentLimitAutorange.ON
-
-
-
-        Autoranging is enabled.
-
-        
-
-
-
 DCNoiseRejection
 ----------------
 
@@ -610,56 +560,6 @@ TriggerType
 
 
         The data operation starts when a software trigger occurs.
-
-        
-
-
-
-VoltageLevelAutorange
----------------------
-
-.. py:class:: VoltageLevelAutorange
-
-    .. py:attribute:: VoltageLevelAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: VoltageLevelAutorange.ON
-
-
-
-        Autoranging is enabled.
-
-        
-
-
-
-VoltageLimitAutorange
----------------------
-
-.. py:class:: VoltageLimitAutorange
-
-    .. py:attribute:: VoltageLimitAutorange.OFF
-
-
-
-        Autoranging is disabled.
-
-        
-
-
-
-    .. py:attribute:: VoltageLimitAutorange.ON
-
-
-
-        Autoranging is enabled.
 
         
 
