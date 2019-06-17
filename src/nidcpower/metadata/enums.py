@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 19.1.0d48
+# This file is generated from NI-DCPower API metadata version 19.6.0d2
 enums = {
     'ApertureTimeUnits': {
         'values': [
@@ -58,42 +58,6 @@ enums = {
                     'description': 'Compliance limits can be specified asymmetrically with respect to 0.'
                 },
                 'name': 'NIDCPOWER_VAL_ASYMMETRIC',
-                'value': 1
-            }
-        ]
-    },
-    'CurrentLevelAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
-            }
-        ]
-    },
-    'CurrentLimitAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
                 'value': 1
             }
         ]
@@ -390,24 +354,6 @@ enums = {
             }
         ]
     },
-    'PowerLineFrequency': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies a power line frequency of 50 Hz.'
-                },
-                'name': 'NIDCPOWER_VAL_50_HERTZ',
-                'value': 50.0
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies a power line frequency of 60 Hz.'
-                },
-                'name': 'NIDCPOWER_VAL_60_HERTZ',
-                'value': 60.0
-            }
-        ]
-    },
     'PowerSource': {
         'values': [
             {
@@ -529,24 +475,6 @@ enums = {
             }
         ]
     },
-    'TBoolean': {
-        'values': [
-            {
-                'documentation': {
-                    'description': ''
-                },
-                'name': 'NIDCPOWER_VAL_FALSE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': ''
-                },
-                'name': 'NIDCPOWER_VAL_TRUE',
-                'value': 1
-            }
-        ]
-    },
     'TransientResponse': {
         'values': [
             {
@@ -601,42 +529,6 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_SOFTWARE_EDGE',
                 'value': 1015
-            }
-        ]
-    },
-    'VoltageLevelAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
-            }
-        ]
-    },
-    'VoltageLimitAutorange': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Autoranging is disabled.'
-                },
-                'name': 'NIDCPOWER_VAL_OFF',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Autoranging is enabled.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
             }
         ]
     }

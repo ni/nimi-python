@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 19.1.0d48
+# This file is generated from NI-DCPower API metadata version 19.6.0d2
 functions = {
     'Abort': {
         'documentation': {
@@ -81,7 +81,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values that were requested in the\nniDCPower_ConfigureCurrentLimit function.\n'
                 },
                 'name': 'requestedOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             },
             {
                 'direction': 'in',
@@ -89,7 +93,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values measured by an external\nprecision digital multimeter.\n'
                 },
                 'name': 'measuredOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
@@ -138,7 +146,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values that were returned by the\nniDCPower_Measure function.\n'
                 },
                 'name': 'reportedOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             },
             {
                 'direction': 'in',
@@ -146,7 +158,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values measured by an external\nprecision digital multimeter.\n'
                 },
                 'name': 'measuredOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
@@ -232,7 +248,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values that were requested in the\nniDCPower_ConfigureOutputResistance function.\n'
                 },
                 'name': 'requestedOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             },
             {
                 'direction': 'in',
@@ -240,7 +260,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values measured by an external\nprecision digital multimeter.\n'
                 },
                 'name': 'measuredOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
@@ -342,7 +366,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values requested in the\nniDCPower_ConfigureVoltageLevel function.\n'
                 },
                 'name': 'requestedOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             },
             {
                 'direction': 'in',
@@ -350,7 +378,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values measured by an external\nprecision digital multimeter.\n'
                 },
                 'name': 'measuredOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
@@ -399,7 +431,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values that were returned by the\nniDCPower_Measure function.\n'
                 },
                 'name': 'reportedOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             },
             {
                 'direction': 'in',
@@ -407,7 +443,11 @@ functions = {
                     'description': '\nSpecifies an array of the output values measured by an external\nprecision digital multimeter.\n'
                 },
                 'name': 'measuredOutputs',
-                'type': 'ViReal64'
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfMeasurements'
+                },
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
@@ -4923,6 +4963,30 @@ functions = {
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ParseChannelCount': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Returns the number of channels.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelsString',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'name': 'numberOfChannels',
+                'type': 'ViUInt32'
             }
         ],
         'returns': 'ViStatus'
