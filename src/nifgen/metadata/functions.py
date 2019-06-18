@@ -1344,7 +1344,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ConfigureCustomFIRFilterCoefficients': {
-        'codegen_method': 'public',
+        'codegen_method': 'no',
         'documentation': {
             'description': '\nSets the FIR filter coefficients used by the onboard signal processing\nblock. The values are coerced to the closest settings achievable by the\nsignal generator.\n\nRefer to the *FIR Filter* topic for your device in the *NI Signal\nGenerators Help* for more information about FIR filter coefficients.\nThis function is supported only for the NI 5441.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
