@@ -305,6 +305,9 @@ def _add_use_in_python_api(p, parameters):
         size_param['use_in_python_api'] = False
 
     if p['size']['mechanism'] == 'ivi-dance-with-a-twist':
+        # We have two parameters to remove from the API
+        size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
         size_param = find_size_parameter(p, parameters, key='value_twist')
         size_param['use_in_python_api'] = False
 
