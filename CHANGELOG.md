@@ -62,6 +62,7 @@ All notable changes to this project will be documented in this file.
         * Looking for any testing and/or feedback
     * #### Changed
     * #### Removed
+        * Removed size parameter return value from functions that use 'ivi-dance-with-a-twist'
 
 
 ## 1.1.2 - 2019-06-06
