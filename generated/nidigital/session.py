@@ -896,7 +896,7 @@ class _SessionBase(object):
         frequencies_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=frequencies_size)  # case B620
         error_code = self._library.niDigital_FrequencyCounter_MeasureFrequency(vi_ctype, channel_list_ctype, frequencies_buffer_size_ctype, frequencies_ctype, None if actual_num_frequencies_ctype is None else (ctypes.pointer(actual_num_frequencies_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(frequencies_ctype[i]) for i in range(frequencies_buffer_size_ctype.value)], int(actual_num_frequencies_ctype.value)
+        return [float(frequencies_ctype[i]) for i in range(frequencies_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_attribute_vi_boolean(self, attribute):
@@ -1281,7 +1281,7 @@ class _SessionBase(object):
         failure_count_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt64, size=failure_count_size)  # case B620
         error_code = self._library.niDigital_GetFailCount(vi_ctype, channel_list_ctype, buffer_size_ctype, failure_count_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)], int(actual_num_read_ctype.value)
+        return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_pin_results_pin_information(self):
@@ -1319,7 +1319,7 @@ class _SessionBase(object):
         channel_indexes_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=channel_indexes_size)  # case B620
         error_code = self._library.niDigital_GetPinResultsPinInformation(vi_ctype, channel_list_ctype, buffer_size_ctype, pin_indexes_ctype, site_numbers_ctype, channel_indexes_ctype, None if actual_num_values_ctype is None else (ctypes.pointer(actual_num_values_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], int(actual_num_values_ctype.value)
+        return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_session_state(self):
@@ -1663,7 +1663,7 @@ class _SessionBase(object):
         measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=measurements_size)  # case B620
         error_code = self._library.niDigital_PPMU_Measure(vi_ctype, channel_list_ctype, measurement_type_ctype, buffer_size_ctype, measurements_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(measurements_ctype[i]) for i in range(buffer_size_ctype.value)], int(actual_num_read_ctype.value)
+        return [float(measurements_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def ppmu_measure_cached(self, measurement_type):
@@ -1700,7 +1700,7 @@ class _SessionBase(object):
         measurements_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=measurements_size)  # case B620
         error_code = self._library.niDigital_PPMU_MeasureCached(vi_ctype, channel_list_ctype, measurement_type_ctype, buffer_size_ctype, measurements_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(measurements_ctype[i]) for i in range(buffer_size_ctype.value)], int(actual_num_read_ctype.value)
+        return [float(measurements_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def ppmu_source(self):
@@ -1752,7 +1752,7 @@ class _SessionBase(object):
         data_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=data_size)  # case B620
         error_code = self._library.niDigital_ReadStatic(vi_ctype, channel_list_ctype, buffer_size_ctype, data_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(data_ctype[i]) for i in range(buffer_size_ctype.value)], int(actual_num_read_ctype.value)
+        return [int(data_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def read_static_cached(self):
@@ -1784,7 +1784,7 @@ class _SessionBase(object):
         data_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=data_size)  # case B620
         error_code = self._library.niDigital_ReadStaticCached(vi_ctype, channel_list_ctype, buffer_size_ctype, data_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(data_ctype[i]) for i in range(buffer_size_ctype.value)], int(actual_num_read_ctype.value)
+        return [int(data_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def reset_attribute(self, attribute_id):
@@ -2037,7 +2037,7 @@ class _SessionBase(object):
         offsets_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=offsets_size)  # case B620
         error_code = self._library.niDigital_TDR(vi_ctype, channel_list_ctype, apply_offsets_ctype, offsets_buffer_size_ctype, offsets_ctype, None if actual_num_offsets_ctype is None else (ctypes.pointer(actual_num_offsets_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)], int(actual_num_offsets_ctype.value)
+        return [float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)]
 
     def unlock(self):
         '''unlock
@@ -3139,7 +3139,7 @@ class Session(_SessionBase):
         per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
         error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [int(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], int(actual_num_pin_data_ctype.value)
+        return [int(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [int(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def fetch_history_ram_scan_cycle_number(self, site, sample_index):
@@ -3229,7 +3229,7 @@ class Session(_SessionBase):
         pattern_index_buffer_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=pattern_index_buffer_size)  # case B620
         error_code = self._library.niDigital_GetKeepAlivePatternIndexes(vi_ctype, pattern_index_buffer_size_ctype, pattern_index_buffer_ctype, None if actual_num_indexes_ctype is None else (ctypes.pointer(actual_num_indexes_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(pattern_index_buffer_ctype[i]) for i in range(pattern_index_buffer_size_ctype.value)], int(actual_num_indexes_ctype.value)
+        return [int(pattern_index_buffer_ctype[i]) for i in range(pattern_index_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_next_capture_waveform(self):
@@ -3365,7 +3365,7 @@ class Session(_SessionBase):
         pin_indexes_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=pin_indexes_size)  # case B620
         error_code = self._library.niDigital_GetPatternPinIndexes(vi_ctype, start_label_ctype, pin_indexes_buffer_size_ctype, pin_indexes_ctype, None if actual_num_pins_ctype is None else (ctypes.pointer(actual_num_pins_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(pin_indexes_ctype[i]) for i in range(pin_indexes_buffer_size_ctype.value)], int(actual_num_pins_ctype.value)
+        return [int(pin_indexes_ctype[i]) for i in range(pin_indexes_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_pattern_pin_list(self, start_label):
@@ -3458,7 +3458,7 @@ class Session(_SessionBase):
         pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
         error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)], int(actual_num_sites_ctype.value)
+        return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_site_results_site_numbers(self, site_list, site_result_type):
@@ -3489,7 +3489,7 @@ class Session(_SessionBase):
         site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
         error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)], int(actual_num_site_numbers_ctype.value)
+        return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_time_set_compare_edges(self, pin_list, time_set):
