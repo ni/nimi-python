@@ -304,6 +304,10 @@ def _add_use_in_python_api(p, parameters):
         size_param = find_size_parameter(p, parameters)
         size_param['use_in_python_api'] = False
 
+    if p['size']['mechanism'] == 'ivi-dance-with-a-twist':
+        size_param = find_size_parameter(p, parameters, key='value_twist')
+        size_param['use_in_python_api'] = False
+
 
 def _setup_init_function(functions, config):
     '''Copy the selected init function to a known name and update information about it for documentation purposes'''
