@@ -96,5 +96,10 @@ Advanced Example:
 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 '''
 
+close_function_doc = '''
+Closes the driver session and cleans up.
+'''
 
-
+close_function_note = '''
+This function is not needed when using the session context manager
+'''
