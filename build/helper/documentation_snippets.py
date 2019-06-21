@@ -96,10 +96,45 @@ Advanced Example:
 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 '''
 
-close_function_doc = '''
+default_close_function_doc = '''
 Closes the driver session and cleans up.
 '''
 
 close_function_note = '''
 This function is not needed when using the session context manager
 '''
+
+def close_function_def_for_doc(functions):
+    # This is very specific to IVI. We look for a 'close' function and if we find it,
+    # We will copy that and modify it to be what we need for documentation
+    if 'close' in functions:
+        import copy
+        function_def = copy.deepcopy(functions['close'])
+        if 'documentation' not in function_def:
+            function_def['documentation'] = {}
+        if 'description' not in function_def['documentation']:
+            function_def['documentation']['description'] = default_close_function_doc
+        if 'note' not in function_def['documentation']:
+            function_def['documentation']['note'] = []
+        if type(function_def['documentation']['note']) is not list:
+            function_def['documentation']['note'] = [function_def['documentation']['note']]
+        function_def['documentation']['note'].append(close_function_note)
+        function_def['python_name'] = 'close'
+    else:
+        function_def = {
+            'documentation': {
+                'description': default_close_function_doc,
+                'note': [close_function_note],
+            },
+            'method_templates': [{
+                    'documentation_filename': '/default_method', 'method_python_name_suffix': '', 'session_filename': '/default_method',
+            },],
+            'name': 'close',
+            'parameters': [],
+            'has_repeated_capability': False,
+            'python_name': 'close',
+            'returns': 'ViStatus',
+        }
+
+    return function_def
+
