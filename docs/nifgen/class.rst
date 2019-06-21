@@ -398,6 +398,8 @@ nifgen.Session
     +-----------------------------------------------------+
     | :py:func:`clear_user_standard_waveform`             |
     +-----------------------------------------------------+
+    | :py:func:`close`                                    |
+    +-----------------------------------------------------+
     | :py:func:`commit`                                   |
     +-----------------------------------------------------+
     | :py:func:`configure_arb_sequence`                   |
@@ -4452,6 +4454,21 @@ clear_user_standard_waveform
                     session.channels[0,1].clear_user_standard_waveform()
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: close()
+
+            Closes the driver session and cleans up.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 commit
 ~~~~~~
 
@@ -6714,6 +6731,8 @@ Methods
 | :py:func:`nifgen.Session.clear_freq_list`                          |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.clear_user_standard_waveform`             |
++--------------------------------------------------------------------+
+| :py:func:`nifgen.Session.close`                                    |
 +--------------------------------------------------------------------+
 | :py:func:`nifgen.Session.commit`                                   |
 +--------------------------------------------------------------------+

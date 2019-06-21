@@ -381,6 +381,8 @@ niswitch.Session
     +---------------------------------------+
     | :py:func:`can_connect`                |
     +---------------------------------------+
+    | :py:func:`close`                      |
+    +---------------------------------------+
     | :py:func:`commit`                     |
     +---------------------------------------+
     | :py:func:`connect`                    |
@@ -2189,6 +2191,21 @@ can_connect
 
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: niswitch.Session
+
+    .. py:method:: close()
+
+            Closes the driver session and cleans up.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 commit
 ~~~~~~
 
@@ -3080,6 +3097,8 @@ Methods
 | :py:func:`niswitch.Session.abort`                      |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.can_connect`                |
++--------------------------------------------------------+
+| :py:func:`niswitch.Session.close`                      |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.commit`                     |
 +--------------------------------------------------------+

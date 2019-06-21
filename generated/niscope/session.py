@@ -4059,6 +4059,18 @@ class Session(_SessionBase):
         return _Acquisition(self)
 
     def close(self):
+        '''close
+
+        When you are finished using an instrument driver session, you must call
+        this method to perform the following actions:
+
+        -  Closes the instrument I/O session.
+        -  Destroys the IVI session and all of its properties.
+        -  Deallocates any memory resources used by the IVI session.
+
+        Note:
+        This method is not needed when using the session context manager
+        '''
         try:
             self._close()
         except errors.DriverError:

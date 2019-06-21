@@ -389,6 +389,8 @@ nidcpower.Session
     +==================================================+
     | :py:func:`abort`                                 |
     +--------------------------------------------------+
+    | :py:func:`close`                                 |
+    +--------------------------------------------------+
     | :py:func:`commit`                                |
     +--------------------------------------------------+
     | :py:func:`configure_aperture_time`               |
@@ -5959,6 +5961,21 @@ abort
 
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: close()
+
+            Closes the driver session and cleans up.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 commit
 ~~~~~~
 
@@ -7572,6 +7589,8 @@ Methods
 | Method name                                                        |
 +====================================================================+
 | :py:func:`nidcpower.Session.abort`                                 |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.close`                                 |
 +--------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.commit`                                |
 +--------------------------------------------------------------------+

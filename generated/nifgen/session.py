@@ -3172,6 +3172,34 @@ class Session(_SessionBase):
         return _Generation(self)
 
     def close(self):
+        '''close
+
+        Performs the following operations:
+
+        -  Closes the instrument I/O session.
+        -  Destroys the NI-FGEN session and all of its properties.
+        -  Deallocates any memory resources NI-FGEN uses.
+
+        Not all signal routes established by calling the ExportSignal
+        and RouteSignalOut methods are released when the NI-FGEN
+        session is closed. The following table shows what happens to a signal
+        route on your device when you call the _close method.
+
+        +--------------------+-------------------+------------------+
+        | Routes To          | NI 5401/5411/5431 | Other Devices    |
+        +====================+===================+==================+
+        | Front Panel        | Remain connected  | Remain connected |
+        +--------------------+-------------------+------------------+
+        | RTSI/PXI Backplane | Remain connected  | Disconnected     |
+        +--------------------+-------------------+------------------+
+
+        Note:
+        After calling _close, you cannot use NI-FGEN again until you
+        call the init or InitWithOptions methods.
+
+        Note:
+        This method is not needed when using the session context manager
+        '''
         try:
             self._close()
         except errors.DriverError:

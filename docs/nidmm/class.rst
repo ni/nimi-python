@@ -278,6 +278,8 @@ nidmm.Session
     +==================================================+
     | :py:func:`abort`                                 |
     +--------------------------------------------------+
+    | :py:func:`close`                                 |
+    +--------------------------------------------------+
     | :py:func:`configure_measurement_absolute`        |
     +--------------------------------------------------+
     | :py:func:`configure_measurement_digits`          |
@@ -2458,6 +2460,21 @@ abort
 
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: close()
+
+            Closes the driver session and cleans up.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 configure_measurement_absolute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -4362,6 +4379,8 @@ Methods
 | Method name                                                    |
 +================================================================+
 | :py:func:`nidmm.Session.abort`                                 |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.close`                                 |
 +----------------------------------------------------------------+
 | :py:func:`nidmm.Session.configure_measurement_absolute`        |
 +----------------------------------------------------------------+

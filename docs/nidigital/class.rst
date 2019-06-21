@@ -285,6 +285,8 @@ nidigital.Session
     +-------------------------------------------------------------+
     | :py:func:`clock_generator_initiate`                         |
     +-------------------------------------------------------------+
+    | :py:func:`close`                                            |
+    +-------------------------------------------------------------+
     | :py:func:`commit`                                           |
     +-------------------------------------------------------------+
     | :py:func:`configure_active_load_levels`                     |
@@ -3683,6 +3685,21 @@ clock_generator_initiate
                 .. code:: python
 
                     session.channels[0,1].clock_generator_initiate()
+
+
+close
+~~~~~
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: close()
+
+            Closes the driver session and cleans up.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
 
 
 commit
@@ -7984,6 +8001,8 @@ Methods
 | :py:func:`nidigital.Session.clock_generator_generate_clock`                   |
 +-------------------------------------------------------------------------------+
 | :py:func:`nidigital.Session.clock_generator_initiate`                         |
++-------------------------------------------------------------------------------+
+| :py:func:`nidigital.Session.close`                                            |
 +-------------------------------------------------------------------------------+
 | :py:func:`nidigital.Session.commit`                                           |
 +-------------------------------------------------------------------------------+

@@ -2176,6 +2176,13 @@ class Session(_SessionBase):
         return _Acquisition(self)
 
     def close(self):
+        '''close
+
+        TBD
+
+        Note:
+        This method is not needed when using the session context manager
+        '''
         try:
             self._close()
         except errors.DriverError:

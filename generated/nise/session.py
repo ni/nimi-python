@@ -254,6 +254,13 @@ class Session(_SessionBase):
         return None(self)
 
     def close(self):
+        '''close
+
+        Closes the driver session and cleans up.
+
+        Note:
+        This method is not needed when using the session context manager
+        '''
         try:
             self._close_session()
         except errors.DriverError:

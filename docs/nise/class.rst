@@ -84,6 +84,8 @@ nise.Session
     +-----------------------------------+
     | Method name                       |
     +===================================+
+    | :py:func:`close`                  |
+    +-----------------------------------+
     | :py:func:`connect`                |
     +-----------------------------------+
     | :py:func:`connect_and_disconnect` |
@@ -112,6 +114,21 @@ Properties
 
 Methods
 -------
+
+
+close
+~~~~~
+
+    .. py:currentmodule:: nise.Session
+
+    .. py:method:: close()
+
+            Closes the driver session and cleans up.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
 
 
 connect
@@ -749,6 +766,8 @@ Methods
 +------------------------------------------------+
 | Method name                                    |
 +================================================+
+| :py:func:`nise.Session.close`                  |
++------------------------------------------------+
 | :py:func:`nise.Session.connect`                |
 +------------------------------------------------+
 | :py:func:`nise.Session.connect_and_disconnect` |

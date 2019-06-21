@@ -67,11 +67,11 @@ nimodinst.Session
 
     **Public methods**
 
-    +-------------+
-    | Method name |
-    +=============+
-    | Method name |
-    +-------------+
+    +------------------+
+    | Method name      |
+    +==================+
+    | :py:func:`close` |
+    +------------------+
 
 
 Properties
@@ -334,6 +334,21 @@ Methods
 -------
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
+
+    .. py:method:: close()
+
+            Closes the driver session and cleans up.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 
 
 Properties
@@ -364,9 +379,9 @@ Properties
 Methods
 -------
 
-+-------------+
-| Method name |
-+=============+
-| Method name |
-+-------------+
++------------------------------------+
+| Method name                        |
++====================================+
+| :py:func:`nimodinst.Session.close` |
++------------------------------------+
 
