@@ -9,6 +9,9 @@
     functions = template_parameters['metadata'].functions
     functions = helper.filter_public_functions(functions)
 
+    # Add a CloseDoc entry - only used to add close() to the Session documentation
+    functions['CloseDoc'] = helper.close_function_def_for_doc(functions)
+
     doc_list = {}
     for fname in sorted(functions):
         for method_template in functions[fname]['method_templates']:

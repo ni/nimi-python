@@ -278,6 +278,10 @@ class Session(_SessionBase):
         return ${session_context_manager}(self)
 
     def close(self):
+        '''close
+
+        ${helper.get_function_docstring(helper.close_function_def_for_doc(functions), False, config, indent=8)}
+        '''
         try:
             self._${close_function_name}()
         except errors.DriverError:
