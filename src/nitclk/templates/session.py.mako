@@ -113,6 +113,11 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         except errors.Error:
             return "Failed to retrieve error description."
 
+<%
+# We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
+# Set then unset the 'render_in_session_base' flag to get it added to both
+functions['GetExtendedErrorInfo']['render_in_session_base'] = True
+%>\
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
@@ -157,29 +162,12 @@ class _Session(object):
         except errors.Error:
             return "Failed to retrieve error description."
 
-    # This is a copy of the generated _get_extended_error_info() function from Properties
-    # Because Session does no inherit from Properties, we need to redefine it in this class too
-    def _get_extended_error_info(self):
-        r'''_get_extended_error_info
-
-        Reports extended error information for the most recent NI-TClk method
-        that returned an error. To establish the method that returned an
-        error, use the return values of the individual methods because once
-        _get_extended_error_info reports an errorString, it does not report
-        an empty string again.
-        '''
-        error_string_ctype = None  # case C050
-        error_string_size_ctype = _visatype.ViUInt32()  # case S170
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
-        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_string_ctype.value.decode(self._encoding)
-
     ''' These are code-generated '''
-
+<%
+# We need _get_extended_error_info() to exist in both this class as well as the SessionReference class, so we will
+# Set then unset the 'render_in_session_base' flag to get it added to both
+functions['GetExtendedErrorInfo']['render_in_session_base'] = False
+%>\
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
@@ -198,6 +186,12 @@ def _get_session_class():
         return _session_instance
 
 
+<%
+# We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
+# Set then unset the 'render_in_session_base' flag to get it added to both. We do not want it in the standalone
+# functions so we set it back to True here to remove it from this list
+functions['GetExtendedErrorInfo']['render_in_session_base'] = True
+%>\
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 <%
 f = functions[func_name]
