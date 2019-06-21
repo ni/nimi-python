@@ -36,7 +36,7 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             return None
 
 
-class Properties(object):
+class SessionReference(object):
     '''Properties container for NI-TClk attributes.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
@@ -157,7 +157,7 @@ class Properties(object):
     Indicates the computed TClk period that will be used during the acquisition.
     '''
 
-    def __init__(self, repeated_capability_list, session, encoding):
+    def __init__(self, session, repeated_capability_list='', encoding='windows-1251'):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
         self._session = session
@@ -166,8 +166,8 @@ class Properties(object):
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("session=" + pp.pformat(session))
+        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -511,29 +511,7 @@ class _Session(object):
         except errors.Error:
             return "Failed to retrieve error description."
 
-    # This is a copy of the generated _get_extended_error_info() function from Properties
-    # Because Session does no inherit from Properties, we need to redefine it in this class too
-    def _get_extended_error_info(self):
-        r'''_get_extended_error_info
-
-        Reports extended error information for the most recent NI-TClk method
-        that returned an error. To establish the method that returned an
-        error, use the return values of the individual methods because once
-        _get_extended_error_info reports an errorString, it does not report
-        an empty string again.
-        '''
-        error_string_ctype = None  # case C050
-        error_string_size_ctype = _visatype.ViUInt32()  # case S170
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
-        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
-        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_string_ctype.value.decode(self._encoding)
-
     ''' These are code-generated '''
-
     def configure_for_homogeneous_triggers(self, sessions):
         r'''configure_for_homogeneous_triggers
 
@@ -691,6 +669,25 @@ class _Session(object):
         error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def _get_extended_error_info(self):
+        r'''_get_extended_error_info
+
+        Reports extended error information for the most recent NI-TClk method
+        that returned an error. To establish the method that returned an
+        error, use the return values of the individual methods because once
+        _get_extended_error_info reports an errorString, it does not report
+        an empty string again.
+        '''
+        error_string_ctype = None  # case C050
+        error_string_size_ctype = _visatype.ViUInt32()  # case S170
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
+        error_string_size_ctype = _visatype.ViUInt32(error_code)  # case S180
+        error_string_ctype = (_visatype.ViChar * error_string_size_ctype.value)()  # case C060
+        error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return error_string_ctype.value.decode(self._encoding)
 
     def init_for_documentation(self):
         r'''init_for_documentation

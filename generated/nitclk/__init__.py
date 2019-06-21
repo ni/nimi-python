@@ -6,7 +6,7 @@ __version__ = '0.1.0.dev0'
 
 from nitclk.errors import DriverWarning   # noqa: F401
 from nitclk.errors import Error     # noqa: F401
-from nitclk.session import Properties  # noqa: F401
+from nitclk.session import SessionReference  # noqa: F401
 
 # Function imports
 from nitclk.session import configure_for_homogeneous_triggers  # noqa: F401
