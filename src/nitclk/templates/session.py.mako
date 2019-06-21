@@ -50,7 +50,7 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             return None
 
 
-class Properties(object):
+class SessionReference(object):
     '''Properties container for NI-TClk attributes.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
