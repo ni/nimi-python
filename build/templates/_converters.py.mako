@@ -239,6 +239,11 @@ def convert_to_nitclk_session_num(item):
     return item
 
 
+def convert_to_nitclk_session_num_list(item_list):
+    '''Converts a list of items to nitclk session nums'''
+    return [convert_to_nitclk_session_num(i) for i in item_list]
+
+
 % endif
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
