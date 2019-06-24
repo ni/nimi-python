@@ -5,6 +5,7 @@ import ctypes
 import threading
 
 import nitclk._attributes as _attributes
+import nitclk._converters as _converters
 import nitclk._library_singleton as _library_singleton
 import nitclk._visatype as _visatype
 import nitclk.errors as errors
@@ -70,14 +71,14 @@ class SessionReference(object):
     - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
     Default Value is empty string
     '''
-    pause_trigger_master_session = _attributes.AttributeViInt32(6)
-    '''Type: int
+    pause_trigger_master_session = _attributes.AttributeViInt32SessionReference(6)
+    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the pause trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
-    ref_trigger_master_session = _attributes.AttributeViInt32(4)
-    '''Type: int
+    ref_trigger_master_session = _attributes.AttributeViInt32SessionReference(4)
+    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the reference trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
@@ -94,22 +95,22 @@ class SessionReference(object):
 
     Note: Sample clock delay is supported for generation sessions only; it is
     '''
-    script_trigger_master_session = _attributes.AttributeViInt32(5)
-    '''Type: int
+    script_trigger_master_session = _attributes.AttributeViInt32SessionReference(5)
+    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the script trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
-    sequencer_flag_master_session = _attributes.AttributeViInt32(16)
-    '''Type: int
+    sequencer_flag_master_session = _attributes.AttributeViInt32SessionReference(16)
+    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the sequencer flag master session.
     For external triggers, the session that originally receives the trigger.
     For None (no trigger configured) or software triggers, the session that
     originally generates the trigger.
     '''
-    start_trigger_master_session = _attributes.AttributeViInt32(3)
-    '''Type: int
+    start_trigger_master_session = _attributes.AttributeViInt32SessionReference(3)
+    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the start trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
@@ -196,6 +197,9 @@ class SessionReference(object):
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
+
+    def get_session_number(self):
+        return self._session
 
     def _get_attribute_vi_boolean(self, attribute_id):
         r'''_get_attribute_vi_boolean
@@ -642,7 +646,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         error_code = self._library.niTClk_ConfigureForHomogeneousTriggers(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -664,7 +668,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -713,7 +717,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         error_code = self._library.niTClk_Initiate(session_count_ctype, sessions_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -735,7 +739,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         done_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niTClk_IsDone(session_count_ctype, sessions_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -758,7 +762,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -786,7 +790,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -809,7 +813,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_SyncronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -836,7 +840,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         error_code = self._library.niTClk_WaitUntilDone(session_count_ctype, sessions_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
