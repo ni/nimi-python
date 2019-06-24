@@ -73,6 +73,16 @@ def _convert_to_nitclk_session_num(item):
     return item
 
 
+# nitclk specific attribute type
+class AttributeViInt32SessionReference(_attributes.Attribute):
+
+    def __get__(self, session, session_type):
+        return SessionReference(session._get_attribute_vi_int32(self._attribute_id))
+
+    def __set__(self, session, value):
+        session._set_attribute_vi_int32(self._attribute_id, _convert_to_nitclk_session_num(value))
+
+
 class SessionReference(object):
     '''Properties container for NI-TClk attributes.'''
 
@@ -82,11 +92,13 @@ class SessionReference(object):
 % for attribute in helper.sorted_attrs(attributes):
 <%
 helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
+# Because we have one attribute class defined in this file, we may need to adjust where to reference it
+location = '_attributes.' if attributes[attribute]['attribute_class'] != 'AttributeViInt32SessionReference' else ''
 %>\
     %if attributes[attribute]['enum']:
-    ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
+    ${attributes[attribute]['python_name']} = ${location}AttributeEnum(${location}Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
     %else:
-    ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
+    ${attributes[attribute]['python_name']} = ${location}${attributes[attribute]['attribute_class']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''Type: ${attributes[attribute]['type_in_documentation']}
@@ -135,6 +147,9 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
             return error_string
         except errors.Error:
             return "Failed to retrieve error description."
+
+    def get_session_number(self):
+        return self._${config['session_handle_parameter_name']}
 
 <%
 # We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
