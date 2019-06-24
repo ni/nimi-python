@@ -348,6 +348,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         B600. Output buffer with mechanism passed-in:                              get_ctypes_pointer_for_buffer(value-array.array('d', [0] * buffer_size, library_type=ViInt32)
         B610. Output buffer with mechanism ivi-dance-with-a-twist, QUERY_SIZE:     None
         B620. Output buffer with mechanism ivi-dance-with-a-twist, GET_DATA:       get_ctypes_pointer_for_buffer(value=array.array('d', [0] * buffer_size_ctype.value, library_type=ViInt32)
+        B630. Input buffer of simple types with converter:                         get_ctypes_pointer_for_buffer(value=convert(array.array('d', list)), library_type=visatype.ViReal64)
 
     Return Value (list): each item in the list will be one line needed for the declaration of that parameter
 
@@ -360,6 +361,19 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
 
     if parameter['numpy'] is True and use_numpy_array is True:
         definition = 'get_ctypes_pointer_for_buffer(value={0})  # case B510'.format(parameter['python_name'])
+    elif parameter['direction'] == 'in' and 'python_api_converter_name' in parameter:
+        if custom_type is not None:
+            assert False, 'Custom type {} is not supported with converters'.format(custom_type)
+        else:
+            if parameter['use_array']:
+                # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
+                array_declaration = '{0}_array = get_ctypes_and_array(value=_converters.{2}({0}), array_type="{1}")  # case B630'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type'], parameter['python_api_converter_name']))
+                definitions.append(array_declaration)
+                definition = 'get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B630'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
+            elif parameter['use_list']:
+                definition = 'get_ctypes_pointer_for_buffer(value=_converters.{3}({0}), library_type={1}.{2})  # case B630'.format(parameter['python_name'], module_name, parameter['ctypes_type'], parameter['python_api_converter_name'])
+            else:
+                assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
     elif parameter['direction'] == 'in':
         if custom_type is not None:
             definition = 'get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
