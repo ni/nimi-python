@@ -19,6 +19,7 @@ import threading
 % if attributes:
 import ${module_name}._attributes as _attributes
 % endif
+import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
 import ${module_name}.errors as errors
