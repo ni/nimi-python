@@ -50,29 +50,6 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             return None
 
 
-# nitclk specific converter
-def _convert_to_nitclk_session_num(item):
-    '''Convert from supported objects to NI-TClk Session Num
-
-    Supported objects are:
-    - class with .tclk object of type nitclk.SessionReference
-    - nitclk.SessionReference
-    - NI-TClk Session Num
-    '''
-    try:
-        return item.tclk.get_session_number()
-    except KeyError:
-        pass
-
-    try:
-        return item.get_session_number()
-    except KeyError:
-        pass
-
-    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
-    return item
-
-
 # nitclk specific attribute type
 class AttributeViInt32SessionReference(_attributes.Attribute):
 

@@ -215,6 +215,31 @@ def convert_init_with_options_dictionary(values, encoding):
     return init_with_options_string
 
 
+% if config['module_name'] == 'nitclk':
+# nitclk specific converters
+def convert_to_nitclk_session_num(item):
+    '''Convert from supported objects to NI-TClk Session Num
+
+    Supported objects are:
+    - class with .tclk object of type nitclk.SessionReference
+    - nitclk.SessionReference
+    - NI-TClk Session Num
+    '''
+    try:
+        return item.tclk.get_session_number()
+    except KeyError:
+        pass
+
+    try:
+        return item.get_session_number()
+    except KeyError:
+        pass
+
+    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
+    return item
+
+
+% endif
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
     assert convert_init_with_options_dictionary('', 'ascii') == ''
