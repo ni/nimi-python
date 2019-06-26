@@ -768,7 +768,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def synchronize(self, sessions, min_time):
+    def synchronize(self, sessions, min_tclk_period=datetime.timedelta(seconds=0.0)):
         r'''synchronize
 
         Synchronizes the TClk signals on the given sessions. After
@@ -781,7 +781,7 @@ class _Session(object):
         Args:
             sessions (list of int): sessions is an array of sessions that are being synchronized.
 
-            min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            min_tclk_period (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
                 chassis/PC is 200 ns. If the specified value is less than 200 ns,
                 NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -791,8 +791,8 @@ class _Session(object):
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
         sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
-        min_time_ctype = _visatype.ViReal64(min_time)  # case S150
-        error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_time_ctype)
+        min_tclk_period_ctype = _converters.convert_timedelta_to_seconds(min_tclk_period, _visatype.ViReal64)  # case S140
+        error_code = self._library.niTClk_Synchronize(session_count_ctype, sessions_ctype, min_tclk_period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1072,7 +1072,7 @@ def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
     return _get_session_class().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
 
-def synchronize(sessions, min_time):
+def synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0)):
     '''synchronize
 
     Synchronizes the TClk signals on the given sessions. After
@@ -1085,7 +1085,7 @@ def synchronize(sessions, min_time):
     Args:
         sessions (list of int): sessions is an array of sessions that are being synchronized.
 
-        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+        min_tclk_period (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
             chassis/PC is 200 ns. If the specified value is less than 200 ns,
             NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -1093,7 +1093,7 @@ def synchronize(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().synchronize(sessions, min_time)
+    return _get_session_class().synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0))
 
 
 def synchronize_to_sync_pulse_sender(sessions, min_time):

@@ -1028,7 +1028,10 @@ functions = {
                 'documentation': {
                     'description': '\nMinimal period of TClk, expressed in seconds. Supported values are\nbetween 0.0 s and 0.050 s (50 ms). Minimal period for a single\nchassis/PC is 200 ns. If the specified value is less than 200 ns,\nNI-TClk automatically coerces minTime to 200 ns. For multichassis\nsynchronization, adjust this value to account for propagation delays\nthrough the various devices and cables.\n'
                 },
-                'name': 'minTime',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
+                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'type_in_documentation': 'float in seconds or datetime.timedelta',
+                'name': 'minTclkPeriod',
                 'type': 'ViReal64'
             }
         ],

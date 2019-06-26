@@ -779,7 +779,7 @@ synchronize
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: synchronize(sessions, min_time)
+    .. py:method:: synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0))
 
             Synchronizes the TClk signals on the given sessions. After
             :py:meth:`nitclk.Session.synchronize` executes, TClk signals from all sessions are
@@ -801,7 +801,7 @@ synchronize
 
 
             :type sessions: list of int
-            :param min_time:
+            :param min_tclk_period:
 
 
                 Minimal period of TClk, expressed in seconds. Supported values are
@@ -814,7 +814,7 @@ synchronize
                 
 
 
-            :type min_time: float
+            :type min_tclk_period: float in seconds or datetime.timedelta
 
 synchronize_to_sync_pulse_sender
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

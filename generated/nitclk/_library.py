@@ -148,13 +148,13 @@ class Library(object):
                 self.niTClk_SetupForSyncPulseSenderSynchronize_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_SetupForSyncPulseSenderSynchronize_cfunc(session_count, sessions, min_time)
 
-    def niTClk_Synchronize(self, session_count, sessions, min_time):  # noqa: N802
+    def niTClk_Synchronize(self, session_count, sessions, min_tclk_period):  # noqa: N802
         with self._func_lock:
             if self.niTClk_Synchronize_cfunc is None:
                 self.niTClk_Synchronize_cfunc = self._library.niTClk_Synchronize
                 self.niTClk_Synchronize_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViReal64]  # noqa: F405
                 self.niTClk_Synchronize_cfunc.restype = ViStatus  # noqa: F405
-        return self.niTClk_Synchronize_cfunc(session_count, sessions, min_time)
+        return self.niTClk_Synchronize_cfunc(session_count, sessions, min_tclk_period)
 
     def niTClk_SynchronizeToSyncPulseSender(self, session_count, sessions, min_time):  # noqa: N802
         with self._func_lock:

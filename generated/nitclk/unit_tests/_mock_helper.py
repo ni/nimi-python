@@ -157,7 +157,7 @@ class SideEffectsHelper(object):
             return self._defaults['SetupForSyncPulseSenderSynchronize']['return']
         return self._defaults['SetupForSyncPulseSenderSynchronize']['return']
 
-    def niTClk_Synchronize(self, session_count, sessions, min_time):  # noqa: N802
+    def niTClk_Synchronize(self, session_count, sessions, min_tclk_period):  # noqa: N802
         if self._defaults['Synchronize']['return'] != 0:
             return self._defaults['Synchronize']['return']
         return self._defaults['Synchronize']['return']
