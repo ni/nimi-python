@@ -2,6 +2,7 @@
 
 import array
 import ctypes
+import datetime
 import threading
 
 import nitclk._attributes as _attributes

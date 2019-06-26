@@ -14,6 +14,7 @@
 
 import array
 import ctypes
+import datetime
 import threading
 
 % if attributes:
