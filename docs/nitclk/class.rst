@@ -63,7 +63,7 @@ nitclk.Session
     +----------------------------------------------------+
     | :py:func:`synchronize`                             |
     +----------------------------------------------------+
-    | :py:func:`syncronize_to_sync_pulse_sender`         |
+    | :py:func:`synchronize_to_sync_pulse_sender`        |
     +----------------------------------------------------+
     | :py:func:`wait_until_done`                         |
     +----------------------------------------------------+
@@ -816,12 +816,12 @@ synchronize
 
             :type min_time: float
 
-syncronize_to_sync_pulse_sender
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+synchronize_to_sync_pulse_sender
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: nitclk.Session
 
-    .. py:method:: syncronize_to_sync_pulse_sender(sessions, min_time)
+    .. py:method:: synchronize_to_sync_pulse_sender(sessions, min_time)
 
             TBD
 
@@ -947,7 +947,7 @@ Methods
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.synchronize`                             |
 +-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.syncronize_to_sync_pulse_sender`         |
+| :py:func:`nitclk.Session.synchronize_to_sync_pulse_sender`        |
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.wait_until_done`                         |
 +-------------------------------------------------------------------+

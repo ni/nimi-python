@@ -796,8 +796,8 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def syncronize_to_sync_pulse_sender(self, sessions, min_time):
-        r'''syncronize_to_sync_pulse_sender
+    def synchronize_to_sync_pulse_sender(self, sessions, min_time):
+        r'''synchronize_to_sync_pulse_sender
 
         TBD
 
@@ -815,7 +815,7 @@ class _Session(object):
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
         sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(sessions), library_type=_visatype.ViSession)  # case B630
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
-        error_code = self._library.niTClk_SyncronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
+        error_code = self._library.niTClk_SynchronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1096,8 +1096,8 @@ def synchronize(sessions, min_time):
     return _get_session_class().synchronize(sessions, min_time)
 
 
-def syncronize_to_sync_pulse_sender(sessions, min_time):
-    '''syncronize_to_sync_pulse_sender
+def synchronize_to_sync_pulse_sender(sessions, min_time):
+    '''synchronize_to_sync_pulse_sender
 
     TBD
 
@@ -1112,7 +1112,7 @@ def syncronize_to_sync_pulse_sender(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().syncronize_to_sync_pulse_sender(sessions, min_time)
+    return _get_session_class().synchronize_to_sync_pulse_sender(sessions, min_time)
 
 
 def wait_until_done(sessions, timeout):

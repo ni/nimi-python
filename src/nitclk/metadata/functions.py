@@ -1095,7 +1095,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SyncronizeToSyncPulseSender': {
+    'SynchronizeToSyncPulseSender': {
         'documentation': {
             'description': 'TBD'
         },

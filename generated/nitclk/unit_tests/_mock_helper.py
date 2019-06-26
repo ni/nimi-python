@@ -51,8 +51,8 @@ class SideEffectsHelper(object):
         self._defaults['SetupForSyncPulseSenderSynchronize']['return'] = 0
         self._defaults['Synchronize'] = {}
         self._defaults['Synchronize']['return'] = 0
-        self._defaults['SyncronizeToSyncPulseSender'] = {}
-        self._defaults['SyncronizeToSyncPulseSender']['return'] = 0
+        self._defaults['SynchronizeToSyncPulseSender'] = {}
+        self._defaults['SynchronizeToSyncPulseSender']['return'] = 0
         self._defaults['WaitUntilDone'] = {}
         self._defaults['WaitUntilDone']['return'] = 0
 
@@ -162,10 +162,10 @@ class SideEffectsHelper(object):
             return self._defaults['Synchronize']['return']
         return self._defaults['Synchronize']['return']
 
-    def niTClk_SyncronizeToSyncPulseSender(self, session_count, sessions, min_time):  # noqa: N802
-        if self._defaults['SyncronizeToSyncPulseSender']['return'] != 0:
-            return self._defaults['SyncronizeToSyncPulseSender']['return']
-        return self._defaults['SyncronizeToSyncPulseSender']['return']
+    def niTClk_SynchronizeToSyncPulseSender(self, session_count, sessions, min_time):  # noqa: N802
+        if self._defaults['SynchronizeToSyncPulseSender']['return'] != 0:
+            return self._defaults['SynchronizeToSyncPulseSender']['return']
+        return self._defaults['SynchronizeToSyncPulseSender']['return']
 
     def niTClk_WaitUntilDone(self, session_count, sessions, timeout):  # noqa: N802
         if self._defaults['WaitUntilDone']['return'] != 0:
@@ -204,7 +204,7 @@ class SideEffectsHelper(object):
         mock_library.niTClk_SetupForSyncPulseSenderSynchronize.return_value = 0
         mock_library.niTClk_Synchronize.side_effect = MockFunctionCallError("niTClk_Synchronize")
         mock_library.niTClk_Synchronize.return_value = 0
-        mock_library.niTClk_SyncronizeToSyncPulseSender.side_effect = MockFunctionCallError("niTClk_SyncronizeToSyncPulseSender")
-        mock_library.niTClk_SyncronizeToSyncPulseSender.return_value = 0
+        mock_library.niTClk_SynchronizeToSyncPulseSender.side_effect = MockFunctionCallError("niTClk_SynchronizeToSyncPulseSender")
+        mock_library.niTClk_SynchronizeToSyncPulseSender.return_value = 0
         mock_library.niTClk_WaitUntilDone.side_effect = MockFunctionCallError("niTClk_WaitUntilDone")
         mock_library.niTClk_WaitUntilDone.return_value = 0

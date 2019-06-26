@@ -16,7 +16,7 @@ from nitclk.session import initiate  # noqa: F401
 from nitclk.session import is_done  # noqa: F401
 from nitclk.session import setup_for_sync_pulse_sender_synchronize  # noqa: F401
 from nitclk.session import synchronize  # noqa: F401
-from nitclk.session import syncronize_to_sync_pulse_sender  # noqa: F401
+from nitclk.session import synchronize_to_sync_pulse_sender  # noqa: F401
 from nitclk.session import wait_until_done  # noqa: F401
 
 
