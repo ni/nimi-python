@@ -138,3 +138,55 @@ def close_function_def_for_doc(functions):
 
     return function_def
 
+
+def test_close_function_def_for_doc_no_exist():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {}
+    close_doc = close_function_def_for_doc(functions)
+    assert type(close_doc) is dict
+    return
+
+
+def test_close_function_def_for_doc_note_not_list():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'close': {
+            'documentation': {
+                'description': 'test',
+                'note': 'test',
+            },
+        },
+    }
+    close_doc = close_function_def_for_doc(functions)
+    assert type(close_doc) is dict
+    return
+
+
+def test_close_function_def_for_doc_note_list():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'close': {
+            'documentation': {
+                'description': 'test',
+                'note': ['test'],
+            },
+        },
+    }
+    close_doc = close_function_def_for_doc(functions)
+    assert type(close_doc) is dict
+    return
+
+
+def test_close_function_def_for_doc_no_note():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'close': {
+            'documentation': {
+                'description': 'test',
+            },
+        },
+    }
+    close_doc = close_function_def_for_doc(functions)
+    assert type(close_doc) is dict
+
+
