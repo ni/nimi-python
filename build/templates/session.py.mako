@@ -274,6 +274,7 @@ class Session(_SessionBase):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
+% if session_context_manager is not None:
     def initiate(self):
         '''initiate
 
@@ -281,6 +282,7 @@ class Session(_SessionBase):
         '''
         return ${session_context_manager}(self)
 
+% endif
     def close(self):
         try:
             self._${close_function_name}()
