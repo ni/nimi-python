@@ -275,6 +275,10 @@ class Session(_SessionBase):
         self.close()
 
     def initiate(self):
+        '''initiate
+
+        ${helper.get_function_docstring(helper.initiate_function_def_for_doc(functions, config), False, config, indent=8)}
+        '''
         return ${session_context_manager}(self)
 
     def close(self):
