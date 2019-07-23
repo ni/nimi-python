@@ -96,5 +96,56 @@ Advanced Example:
 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 '''
 
+default_initiate_function_doc = '''
+Calls initiate
+'''
+
+initiate_function_note = '''
+This function will return a Python context manager that will initiate on entering and abort on exit.
+'''
+
+def initiate_function_def_for_doc(functions, config):
+    # This is very specific to IVI. We look for a 'close' function and if we find it,
+    # We will copy that and modify it to be what we need for documentation
+    session_context_manager_initiate = None
+    if 'initiate_function' in config['context_manager_name']:
+        session_context_manager_initiate = config['context_manager_name']['initiate_function']
+
+    if session_context_manager_initiate is None:
+        # Don't have an initiate
+        return None
+
+    if session_context_manager_initiate in functions:
+        import copy
+        function_def = copy.deepcopy(functions[session_context_manager_initiate])
+        if 'documentation' not in function_def:
+            function_def['documentation'] = {}
+        if 'description' not in function_def['documentation']:
+            function_def['documentation']['description'] = default_initiate_function_doc
+        if 'note' not in function_def['documentation']:
+            function_def['documentation']['note'] = []
+        if type(function_def['documentation']['note']) is not list:
+            function_def['documentation']['note'] = [function_def['documentation']['note']]
+        function_def['documentation']['note'].append(initiate_function_note)
+        function_def['python_name'] = 'initiate'
+    else:
+        function_def = {
+            'documentation': {
+                'description': default_initiate_function_doc,
+                'note': [initiate_function_note],
+            },
+            'method_templates': [{
+                    'documentation_filename': '/default_method', 'method_python_name_suffix': '', 'session_filename': '/default_method',
+            },],
+            'name': 'initiate',
+            'parameters': [],
+            'has_repeated_capability': False,
+            'python_name': 'initiate',
+            'returns': 'ViStatus',
+        }
+
+    return function_def
+
+
 
 
