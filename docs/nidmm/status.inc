@@ -7,6 +7,8 @@ NI-DMM Python API Status
 +===============================+======================+
 | Driver Version Tested Against | 18.1.0               |
 +-------------------------------+----------------------+
+| Driver API Version            | 19.6.0d0             |
++-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
 | Supported Python Version      | |nidmmPythonVersion| |

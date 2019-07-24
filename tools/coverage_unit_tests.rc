@@ -1,6 +1,6 @@
 [run]
 omit =
-    */library*
+    */_library*
 include =
     */nifake/*
     */nimodinst/session.py

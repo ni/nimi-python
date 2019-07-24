@@ -149,6 +149,8 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`current_limit_autorange`                              | bool                                   |
     +-----------------------------------------------------------------+----------------------------------------+
+    | :py:attr:`current_limit_behavior`                               | int                                    |
+    +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`current_limit_high`                                   | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`current_limit_low`                                    | float                                  |
@@ -325,6 +327,10 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`sequence_loop_count_is_finite`                        | bool                                   |
     +-----------------------------------------------------------------+----------------------------------------+
+    | :py:attr:`sequence_step_delta_time`                             | float                                  |
+    +-----------------------------------------------------------------+----------------------------------------+
+    | :py:attr:`sequence_step_delta_time_enabled`                     | float                                  |
+    +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`simulate`                                             | bool                                   |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`source_complete_event_output_terminal`                | str                                    |
@@ -492,7 +498,7 @@ aperture_time
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -539,7 +545,7 @@ aperture_time_units
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | True                    |
+            | Channel Based  | Yes                     |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -583,7 +589,7 @@ auto_zero
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | True           |
+            | Channel Based  | Yes            |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -618,7 +624,7 @@ auxiliary_power_source_available
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -647,7 +653,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -709,7 +715,7 @@ compliance_limit_symmetry
             +----------------+-------------------------------+
             | Permissions    | read-write                    |
             +----------------+-------------------------------+
-            | Channel Based  | True                          |
+            | Channel Based  | Yes                           |
             +----------------+-------------------------------+
             | Resettable     | No                            |
             +----------------+-------------------------------+
@@ -755,7 +761,7 @@ current_compensation_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -801,7 +807,7 @@ current_gain_bandwidth
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -848,7 +854,7 @@ current_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -894,7 +900,7 @@ current_level_autorange
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -942,7 +948,7 @@ current_level_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -961,15 +967,13 @@ current_limit
     .. py:attribute:: current_limit
 
         Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to  :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` and the :py:data:`nidcpower.Session.compliance_limit_symmetry` property is set to  :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to  :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` and the :py:data:`nidcpower.Session.compliance_limit_symmetry` property is set to  :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         :py:data:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
         Valid Values: The valid values for this property are defined by the values to which  :py:data:`nidcpower.Session.current_limit_range` property is set.
 
 
 
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -991,7 +995,7 @@ current_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1037,7 +1041,7 @@ current_limit_autorange
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1047,6 +1051,42 @@ current_limit_autorange
 
                 - LabVIEW Property: **Source:DC Voltage:Current Limit Autorange**
                 - C Attribute: **NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE**
+
+current_limit_behavior
+~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:attribute:: current_limit_behavior
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].current_limit_behavior = var
+                var = session.channels[0,1].current_limit_behavior
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDCPOWER_ATTR_CURRENT_LIMIT_BEHAVIOR**
 
 current_limit_high
 ~~~~~~~~~~~~~~~~~~
@@ -1106,7 +1146,7 @@ current_limit_high
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1175,7 +1215,7 @@ current_limit_low
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1223,7 +1263,7 @@ current_limit_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1269,7 +1309,7 @@ current_pole_zero_ratio
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1304,7 +1344,7 @@ dc_noise_rejection
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -1340,7 +1380,7 @@ digital_edge_measure_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1375,7 +1415,7 @@ digital_edge_pulse_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1411,7 +1451,7 @@ digital_edge_sequence_advance_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1447,7 +1487,7 @@ digital_edge_source_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1483,7 +1523,7 @@ digital_edge_start_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1514,7 +1554,7 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1550,7 +1590,7 @@ exported_measure_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1585,7 +1625,7 @@ exported_pulse_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1621,7 +1661,7 @@ exported_sequence_advance_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1657,7 +1697,7 @@ exported_source_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1693,7 +1733,7 @@ exported_start_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1722,7 +1762,7 @@ fetch_backlog
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1751,7 +1791,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1780,7 +1820,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1809,7 +1849,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1844,7 +1884,7 @@ interlock_input_open
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1875,7 +1915,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1905,7 +1945,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1942,7 +1982,7 @@ measure_buffer_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1978,7 +2018,7 @@ measure_complete_event_delay
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -2013,7 +2053,7 @@ measure_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2048,7 +2088,7 @@ measure_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -2086,7 +2126,7 @@ measure_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2121,7 +2161,7 @@ measure_record_delta_time
             +----------------+----------------------------------------+
             | Permissions    | read only                              |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -2157,7 +2197,7 @@ measure_record_length
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2192,7 +2232,7 @@ measure_record_length_is_finite
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2227,7 +2267,7 @@ measure_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -2258,7 +2298,7 @@ measure_when
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -2304,7 +2344,7 @@ output_capacitance
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | True                    |
+            | Channel Based  | Yes                     |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -2352,7 +2392,7 @@ output_connected
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2399,7 +2439,7 @@ output_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2457,7 +2497,7 @@ output_function
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | True                 |
+            | Channel Based  | Yes                  |
             +----------------+----------------------+
             | Resettable     | No                   |
             +----------------+----------------------+
@@ -2503,7 +2543,7 @@ output_resistance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2534,7 +2574,7 @@ overranging_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2570,7 +2610,7 @@ ovp_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2606,7 +2646,7 @@ ovp_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2654,7 +2694,7 @@ power_line_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2689,7 +2729,7 @@ power_source
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -2718,7 +2758,7 @@ power_source_in_use
             +----------------+------------------------+
             | Permissions    | read only              |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -2764,7 +2804,7 @@ pulse_bias_current_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2810,7 +2850,7 @@ pulse_bias_current_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2882,7 +2922,7 @@ pulse_bias_current_limit_high
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2954,7 +2994,7 @@ pulse_bias_current_limit_low
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3000,7 +3040,7 @@ pulse_bias_delay
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3046,7 +3086,7 @@ pulse_bias_voltage_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3092,7 +3132,7 @@ pulse_bias_voltage_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3164,7 +3204,7 @@ pulse_bias_voltage_limit_high
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3236,7 +3276,7 @@ pulse_bias_voltage_limit_low
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3271,7 +3311,7 @@ pulse_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3305,7 +3345,7 @@ pulse_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -3341,7 +3381,7 @@ pulse_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3387,7 +3427,7 @@ pulse_current_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3434,7 +3474,7 @@ pulse_current_level_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3453,14 +3493,12 @@ pulse_current_limit
     .. py:attribute:: pulse_current_limit
 
         Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE` and the :py:data:`nidcpower.Session.compliance_limit_symmetry`  property is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE` and the :py:data:`nidcpower.Session.compliance_limit_symmetry`  property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         Valid Values: The valid values for this property are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_current_limit_range` property.
 
 
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -3482,7 +3520,7 @@ pulse_current_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3554,7 +3592,7 @@ pulse_current_limit_high
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3626,7 +3664,7 @@ pulse_current_limit_low
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3673,7 +3711,7 @@ pulse_current_limit_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3719,7 +3757,7 @@ pulse_off_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | True                                   |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -3765,7 +3803,7 @@ pulse_on_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | True                                   |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -3799,7 +3837,7 @@ pulse_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -3845,7 +3883,7 @@ pulse_voltage_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3892,7 +3930,7 @@ pulse_voltage_level_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3911,14 +3949,12 @@ pulse_voltage_limit
     .. py:attribute:: pulse_voltage_limit
 
         Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT` and the :py:data:`nidcpower.Session.compliance_limit_symmetry` property  is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT` and the :py:data:`nidcpower.Session.compliance_limit_symmetry` property  is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         Valid Values: The valid values for this property are defined by the values you specify for the :py:data:`nidcpower.Session.pulse_voltage_limit_range` property.
 
 
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -3940,7 +3976,7 @@ pulse_voltage_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4012,7 +4048,7 @@ pulse_voltage_limit_high
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4084,7 +4120,7 @@ pulse_voltage_limit_low
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4131,7 +4167,7 @@ pulse_voltage_limit_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4164,7 +4200,7 @@ query_instrument_status
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4198,7 +4234,7 @@ ready_for_pulse_trigger_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4232,7 +4268,7 @@ ready_for_pulse_trigger_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -4268,7 +4304,7 @@ ready_for_pulse_trigger_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4315,7 +4351,7 @@ reset_average_before_measurement
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4367,7 +4403,7 @@ samples_to_average
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4403,7 +4439,7 @@ self_calibration_persistence
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | False                            |
+            | Channel Based  | No                               |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -4447,7 +4483,7 @@ sense
             +----------------+-------------+
             | Permissions    | read-write  |
             +----------------+-------------+
-            | Channel Based  | True        |
+            | Channel Based  | Yes         |
             +----------------+-------------+
             | Resettable     | No          |
             +----------------+-------------+
@@ -4482,7 +4518,7 @@ sequence_advance_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -4517,7 +4553,7 @@ sequence_engine_done_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4552,7 +4588,7 @@ sequence_engine_done_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -4590,7 +4626,7 @@ sequence_engine_done_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4625,7 +4661,7 @@ sequence_iteration_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4660,7 +4696,7 @@ sequence_iteration_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -4698,7 +4734,7 @@ sequence_iteration_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4735,7 +4771,7 @@ sequence_loop_count
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4771,7 +4807,7 @@ sequence_loop_count_is_finite
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4781,6 +4817,78 @@ sequence_loop_count_is_finite
 
                 - LabVIEW Property: **Source:Advanced:Sequence Loop Count Is Finite**
                 - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE**
+
+sequence_step_delta_time
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:attribute:: sequence_step_delta_time
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_step_delta_time = var
+                var = session.channels[0,1].sequence_step_delta_time
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_STEP_DELTA_TIME**
+
+sequence_step_delta_time_enabled
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:attribute:: sequence_step_delta_time_enabled
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_step_delta_time_enabled = var
+                var = session.channels[0,1].sequence_step_delta_time_enabled
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_STEP_DELTA_TIME_ENABLED**
 
 simulate
 ~~~~~~~~
@@ -4801,7 +4909,7 @@ simulate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4836,7 +4944,7 @@ source_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4871,7 +4979,7 @@ source_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -4909,7 +5017,7 @@ source_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4956,7 +5064,7 @@ source_delay
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | True                                   |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -4986,7 +5094,7 @@ source_mode
             +----------------+------------------+
             | Permissions    | read-write       |
             +----------------+------------------+
-            | Channel Based  | False            |
+            | Channel Based  | No               |
             +----------------+------------------+
             | Resettable     | No               |
             +----------------+------------------+
@@ -5021,7 +5129,7 @@ source_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -5050,7 +5158,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -5079,7 +5187,7 @@ specific_driver_prefix
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -5108,7 +5216,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -5137,7 +5245,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -5172,7 +5280,7 @@ start_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -5201,7 +5309,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -5247,7 +5355,7 @@ transient_response
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | True                    |
+            | Channel Based  | Yes                     |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -5293,7 +5401,7 @@ voltage_compensation_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5339,7 +5447,7 @@ voltage_gain_bandwidth
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5386,7 +5494,7 @@ voltage_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5432,7 +5540,7 @@ voltage_level_autorange
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5480,7 +5588,7 @@ voltage_level_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5499,15 +5607,13 @@ voltage_limit
     .. py:attribute:: voltage_limit
 
         Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`  and the :py:data:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:data:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`  and the :py:data:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         :py:data:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
         Valid Values: The valid values for this property are defined by the values to which the  :py:data:`nidcpower.Session.voltage_limit_range` property is set.
 
 
 
         .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
@@ -5529,7 +5635,7 @@ voltage_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5575,7 +5681,7 @@ voltage_limit_autorange
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5644,7 +5750,7 @@ voltage_limit_high
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5713,7 +5819,7 @@ voltage_limit_low
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5761,7 +5867,7 @@ voltage_limit_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5807,7 +5913,7 @@ voltage_pole_zero_ratio
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -7317,6 +7423,8 @@ Properties
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.current_limit_autorange`                              | bool                                   |
 +-----------------------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`nidcpower.Session.current_limit_behavior`                               | int                                    |
++-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.current_limit_high`                                   | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.current_limit_low`                                    | float                                  |
@@ -7492,6 +7600,10 @@ Properties
 | :py:attr:`nidcpower.Session.sequence_loop_count`                                  | int                                    |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.sequence_loop_count_is_finite`                        | bool                                   |
++-----------------------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`nidcpower.Session.sequence_step_delta_time`                             | float                                  |
++-----------------------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`nidcpower.Session.sequence_step_delta_time_enabled`                     | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.simulate`                                             | bool                                   |
 +-----------------------------------------------------------------------------------+----------------------------------------+

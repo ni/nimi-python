@@ -160,7 +160,7 @@ connect
                 selected as the default for the route in the NI Switch Executive virtual
                 device configuration. If a mode has not been selected for the route in
                 the NI Switch Executive virtual device, this parameter defaults to
-                :py:data:`~nise.NISE_VAL_MULTICONNECT_ROUTES`. :py:data:`~nise.NISE_VAL_NO_MULTICONNECT` (0) -
+                :py:data:`~nise.NISE_VAL_MULTICONNECT_ROUTES`. :py:data:`~nise.MulticonnectMode.NO_MULTICONNECT` (0) -
                 routes specified in the connection specification must be disconnected
                 before they can be reconnected. Calling Connect on a route that was
                 connected using No Multiconnect mode results in an error condition.
@@ -261,7 +261,7 @@ connect_and_disconnect
                 selected as the default for the route in the NI Switch Executive virtual
                 device configuration. If a mode has not been selected for the route in
                 the NI Switch Executive virtual device, this parameter defaults to
-                :py:data:`~nise.NISE_VAL_MULTICONNECT_ROUTES`. :py:data:`~nise.NISE_VAL_NO_MULTICONNECT` (0) -
+                :py:data:`~nise.NISE_VAL_MULTICONNECT_ROUTES`. :py:data:`~nise.MulticonnectMode.NO_MULTICONNECT` (0) -
                 routes specified in the connection specification must be disconnected
                 before they can be reconnected. Calling Connect on a route that was
                 connected using No Multiconnect mode results in an error condition.
@@ -285,11 +285,11 @@ connect_and_disconnect
 
 
                 Sets the order of the operation for the method. Defined values are
-                Break Before Make and Break After Make. :py:data:`~nise.NISE_VAL_BREAK_BEFORE_MAKE`
+                Break Before Make and Break After Make. :py:data:`~nise.OperationOrder.BEFORE`
                 (1) - The method disconnects the routes specified in the disconnect
                 specification before connecting the routes specified in the connect
                 specification. This is the typical mode of operation.
-                :py:data:`~nise.NISE_VAL_BREAK_AFTER_MAKE` (2) - The method connects the routes
+                :py:data:`~nise.OperationOrder.AFTER` (2) - The method connects the routes
                 specified in the connection specification before connecting the routes
                 specified in the disconnection specification. This mode of operation is
                 normally used when you are switching current and want to ensure that a
@@ -297,8 +297,6 @@ connect_and_disconnect
                 connect first or disconnect first.
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type operation_order: :py:data:`nise.OperationOrder`
@@ -405,15 +403,13 @@ expand_route_spec
 
 
                 This value sets the expand action for the method. The action might be
-                one of the following: :py:data:`~nise.NISE_VAL_EXPAND_TO_ROUTES` (0) - expands the
+                one of the following: :py:data:`~nise.ExpandAction.ROUTES` (0) - expands the
                 route spec to routes. Converts route groups to their constituent routes.
-                :py:data:`~nise.NISE_VAL_EXPAND_TO_PATHS` (1) - expands the route spec to paths.
+                :py:data:`~nise.ExpandAction.PATHS` (1) - expands the route spec to paths.
                 Converts routes and route groups to their constituent square bracket
                 route spec strings. Example: [Dev1/c0->Dev1/r0->Dev1/c1]
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type expand_action: :py:data:`nise.ExpandAction`

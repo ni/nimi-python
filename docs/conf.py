@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI Modular Instruments Python API'
-copyright = '2017-2018, National Instruments'
+copyright = '2017-2019, National Instruments'
 author = 'National Instruments'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -63,7 +63,7 @@ author = 'National Instruments'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.1.1.dev0'
+release = '1.1.3.dev0'
 # The short X.Y version.
 version = release[:3]
 

@@ -1,1235 +1,991 @@
-
 # -*- coding: utf-8 -*-
-# This file is code generated, do not make changes here.
-#  If the generated information is not correct for python
-#  changes can be made in enums_addon.py and they will be
-#  applied at build time.
-
+# This file is generated from NI-SWITCH API metadata version 19.1.0d2
 enums = {
     'CabledModuleScanAdvancedBus': {
         'values': [
             {
-                'name': 'NONE',
-                'value': 0,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_NONE',
+                'value': 0
             },
             {
-                'name': 'PXI_TRIG0',
-                'value': 111,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig0
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig0\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'value': 111
             },
             {
-                'name': 'PXI_TRIG1',
-                'value': 112,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig1
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig1\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'value': 112
             },
             {
-                'name': 'PXI_TRIG2',
-                'value': 113,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig2
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig2\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'value': 113
             },
             {
-                'name': 'PXI_TRIG3',
-                'value': 114,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig3
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig3\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'value': 114
             },
             {
-                'name': 'PXI_TRIG4',
-                'value': 115,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig4
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig4\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'value': 115
             },
             {
-                'name': 'PXI_TRIG5',
-                'value': 116,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig5
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig5\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'value': 116
             },
             {
-                'name': 'PXI_TRIG6',
-                'value': 117,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig6
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig6\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'value': 117
             },
             {
-                'name': 'PXI_TRIG7',
-                'value': 118,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig7
-line before processing the next entry in the scan list.
-''',
-},
-            },
-        ],
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig7\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'value': 118
+            }
+        ]
     },
     'CabledModuleTriggerBus': {
         'values': [
             {
-                'name': 'NONE',
-                'value': 0,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_NONE',
+                'value': 0
             },
             {
-                'name': 'PXI_TRIG0',
-                'value': 111,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'value': 111
             },
             {
-                'name': 'PXI_TRIG1',
-                'value': 112,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'value': 112
             },
             {
-                'name': 'PXI_TRIG2',
-                'value': 113,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'value': 113
             },
             {
-                'name': 'PXI_TRIG3',
-                'value': 114,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'value': 114
             },
             {
-                'name': 'PXI_TRIG4',
-                'value': 115,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'value': 115
             },
             {
-                'name': 'PXI_TRIG5',
-                'value': 116,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'value': 116
             },
             {
-                'name': 'PXI_TRIG6',
-                'value': 117,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'value': 117
             },
             {
-                'name': 'PXI_TRIG7',
-                'value': 118,
-'documentation': {
-'description': '',
-},
-            },
-        ],
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'value': 118
+            }
+        ]
     },
     'HandshakingInitiation': {
         'values': [
             {
-                'name': 'MEASUREMENT_DEVICE_INITIATED',
-                'value': 0,
-'documentation': {
-'description': '''
-The `niSwitch Initiate
-Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI does not
-return until the switch hardware is waiting for a trigger input. This
-ensures that if you initiate the measurement device after calling the
-`niSwitch Initiate
-Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI , the switch
-is sure to receive the first measurement complete (MC) signal sent by
-the measurement device. The measurement device should be configured to
-first take a measurement, send MC, then wait for scanner advanced output
-signal. Thus, the first MC of the measurement device initiates
-handshaking.
-''',
-},
+                'documentation': {
+                    'description': '\nThe `niSwitch Initiate\nScan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI does not\nreturn until the switch hardware is waiting for a trigger input. This\nensures that if you initiate the measurement device after calling the\n`niSwitch Initiate\nScan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI , the switch\nis sure to receive the first measurement complete (MC) signal sent by\nthe measurement device. The measurement device should be configured to\nfirst take a measurement, send MC, then wait for scanner advanced output\nsignal. Thus, the first MC of the measurement device initiates\nhandshaking.\n'
+                },
+                'name': 'NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED',
+                'value': 0
             },
             {
-                'name': 'SWITCH_INITIATED',
-                'value': 1,
-'documentation': {
-'description': '''
-The `niSwitch Initiate
-Scan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI returns
-immediately after beginning scan list execution. It is assumed that the
-measurement device has already been configured and is waiting for the
-scanner advanced signal. The measurement should be configured to first
-wait for a trigger, then take a measurement. Thus, the first scanner
-advanced output signal of the switch module initiates handshaking.
-''',
-},
-            },
-        ],
+                'documentation': {
+                    'description': '\nThe `niSwitch Initiate\nScan <switchviref.chm::/niSwitch_Initiate_Scan.html>`__ VI returns\nimmediately after beginning scan list execution. It is assumed that the\nmeasurement device has already been configured and is waiting for the\nscanner advanced signal. The measurement should be configured to first\nwait for a trigger, then take a measurement. Thus, the first scanner\nadvanced output signal of the switch module initiates handshaking.\n'
+                },
+                'name': 'NISWITCH_VAL_SWITCH_INITIATED',
+                'value': 1
+            }
+        ]
     },
     'MasterSlaveScanAdvancedBus': {
         'values': [
             {
-                'name': 'NONE',
-                'value': 0,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_NONE',
+                'value': 0
             },
             {
-                'name': 'PXI_TRIG0',
-                'value': 111,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig0
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig0\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'value': 111
             },
             {
-                'name': 'PXI_TRIG1',
-                'value': 112,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig1
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig1\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'value': 112
             },
             {
-                'name': 'PXI_TRIG2',
-                'value': 113,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig2
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig2\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'value': 113
             },
             {
-                'name': 'PXI_TRIG3',
-                'value': 114,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig3
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig3\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'value': 114
             },
             {
-                'name': 'PXI_TRIG4',
-                'value': 115,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig4
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig4\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'value': 115
             },
             {
-                'name': 'PXI_TRIG5',
-                'value': 116,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig5
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig5\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'value': 116
             },
             {
-                'name': 'PXI_TRIG6',
-                'value': 117,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig6
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig6\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'value': 117
             },
             {
-                'name': 'PXI_TRIG7',
-                'value': 118,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig7
-line before processing the next entry in the scan list.
-''',
-},
-            },
-        ],
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig7\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'value': 118
+            }
+        ]
     },
     'MasterSlaveTriggerBus': {
         'values': [
             {
-                'name': 'NONE',
-                'value': 0,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_NONE',
+                'value': 0
             },
             {
-                'name': 'PXI_TRIG0',
-                'value': 111,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig0
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig0\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG0',
+                'value': 111
             },
             {
-                'name': 'PXI_TRIG1',
-                'value': 112,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig1
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig1\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG1',
+                'value': 112
             },
             {
-                'name': 'PXI_TRIG2',
-                'value': 113,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig2
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig2\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG2',
+                'value': 113
             },
             {
-                'name': 'PXI_TRIG3',
-                'value': 114,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig3
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig3\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG3',
+                'value': 114
             },
             {
-                'name': 'PXI_TRIG4',
-                'value': 115,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig4
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig4\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG4',
+                'value': 115
             },
             {
-                'name': 'PXI_TRIG5',
-                'value': 116,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig5
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig5\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG5',
+                'value': 116
             },
             {
-                'name': 'PXI_TRIG6',
-                'value': 117,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig6
-line before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig6\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG6',
+                'value': 117
             },
             {
-                'name': 'PXI_TRIG7',
-                'value': 118,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the PXI\_Trig7
-line before processing the next entry in the scan list.
-''',
-},
-            },
-        ],
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the PXI\\_Trig7\nline before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_TRIG7',
+                'value': 118
+            }
+        ]
     },
     'PathCapability': {
         'values': [
             {
-                'name': 'PATH_AVAILABLE',
-                'value': 1,
-'documentation': {
-'description': 'Path Available',
-},
+                'documentation': {
+                    'description': 'Path Available'
+                },
+                'name': 'NISWITCH_VAL_PATH_AVAILABLE',
+                'value': 1
             },
             {
-                'name': 'PATH_EXISTS',
-                'value': 2,
-'documentation': {
-'description': 'Path Exists',
-},
+                'documentation': {
+                    'description': 'Path Exists'
+                },
+                'name': 'NISWITCH_VAL_PATH_EXISTS',
+                'value': 2
             },
             {
-                'name': 'PATH_UNSUPPORTED',
-                'value': 3,
-'documentation': {
-'description': 'Path Unsupported',
-},
+                'documentation': {
+                    'description': 'Path Unsupported'
+                },
+                'name': 'NISWITCH_VAL_PATH_UNSUPPORTED',
+                'value': 3
             },
             {
-                'name': 'RESOURCE_IN_USE',
-                'value': 4,
-'documentation': {
-'description': 'Resource in use',
-},
+                'documentation': {
+                    'description': 'Resource in use'
+                },
+                'name': 'NISWITCH_VAL_RESOURCE_IN_USE',
+                'value': 4
             },
             {
-                'name': 'SOURCE_CONFLICT',
-                'value': 5,
-'documentation': {
-'description': 'Source conflict',
-},
+                'documentation': {
+                    'description': 'Source conflict'
+                },
+                'name': 'NISWITCH_VAL_SOURCE_CONFLICT',
+                'value': 5
             },
             {
-                'name': 'CHANNEL_NOT_AVAILABLE',
-                'value': 6,
-'documentation': {
-'description': 'Channel not available',
-},
-            },
-        ],
+                'documentation': {
+                    'description': 'Channel not available'
+                },
+                'name': 'NISWITCH_VAL_CHANNEL_NOT_AVAILABLE',
+                'value': 6
+            }
+        ]
     },
     'RelayAction': {
         'values': [
             {
-                'name': 'OPEN_RELAY',
-                'value': 20,
-'documentation': {
-'description': 'Open Relay',
-},
+                'documentation': {
+                    'description': 'Open Relay'
+                },
+                'name': 'NISWITCH_VAL_OPEN_RELAY',
+                'value': 20
             },
             {
-                'name': 'CLOSE_RELAY',
-                'value': 21,
-'documentation': {
-'description': 'Close Relay',
-},
-            },
-        ],
+                'documentation': {
+                    'description': 'Close Relay'
+                },
+                'name': 'NISWITCH_VAL_CLOSE_RELAY',
+                'value': 21
+            }
+        ]
     },
     'RelayPosition': {
         'values': [
             {
-                'name': 'OPEN',
-                'value': 10,
-'documentation': {
-'description': 'Open',
-},
+                'documentation': {
+                    'description': 'Open'
+                },
+                'name': 'NISWITCH_VAL_OPEN',
+                'value': 10
             },
             {
-                'name': 'CLOSED',
-                'value': 11,
-'documentation': {
-'description': 'Closed',
-},
-            },
-        ],
+                'documentation': {
+                    'description': 'Closed'
+                },
+                'name': 'NISWITCH_VAL_CLOSED',
+                'value': 11
+            }
+        ]
     },
     'ScanAdvancedOutput': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The switch device does not produce a Scan Advanced Output trigger.'
+                },
                 'name': 'NISWITCH_VAL_NONE',
-                'value': 0,
-'documentation': {
-'description': 'The switch device does not produce a Scan Advanced Output trigger.',
-},
+                'value': 0
             },
             {
+                'documentation': {
+                    'description': 'External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.'
+                },
                 'name': 'NISWITCH_VAL_EXTERNAL',
-                'value': 2,
-'documentation': {
-'description': 'External Trigger. The switch device produces the Scan Advanced Output  trigger on the external trigger output.',
-},
+                'value': 2
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG0 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL0',
-                'value': 111,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG0 line.',
-},
+                'value': 111
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG1 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL1',
-                'value': 112,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG1 line.',
-},
+                'value': 112
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG2 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL2',
-                'value': 113,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG2 line.',
-},
+                'value': 113
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG3 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL3',
-                'value': 114,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG3 line.',
-},
+                'value': 114
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG4 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL4',
-                'value': 115,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG4 line.',
-},
+                'value': 115
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG5 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL5',
-                'value': 116,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG5 line.',
-},
+                'value': 116
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG6 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL6',
-                'value': 117,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG6 line.',
-},
+                'value': 117
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG7 line.'
+                },
                 'name': 'NISWITCH_VAL_TTL7',
-                'value': 118,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output on the PXI TRIG7 line.',
-},
+                'value': 118
             },
             {
-                'name': 'PXI_STAR',
-                'value': 125,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the PXI
-Star trigger bus before processing the next entry in the scan list.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the PXI\nStar trigger bus before processing the next entry in the scan list.\n'
+                },
+                'name': 'NISWITCH_VAL_PXI_STAR',
+                'value': 125
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output  trigger on the rear connector.'
+                },
                 'name': 'NISWITCH_VAL_REARCONNECTOR',
-                'value': 1000,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output  trigger on the rear connector.',
-},
+                'value': 1000
             },
             {
+                'documentation': {
+                    'description': 'The switch device produces the Scan Advanced Output  trigger on the front connector.'
+                },
                 'name': 'NISWITCH_VAL_FRONTCONNECTOR',
-                'value': 1001,
-'documentation': {
-'description': 'The switch device produces the Scan Advanced Output  trigger on the front connector.',
-},
+                'value': 1001
             },
             {
-                'name': 'REARCONNECTOR_MODULE1',
-                'value': 1021,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 1.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 1.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE1',
+                'value': 1021
             },
             {
-                'name': 'REARCONNECTOR_MODULE2',
-                'value': 1022,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 2.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 2.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE2',
+                'value': 1022
             },
             {
-                'name': 'REARCONNECTOR_MODULE3',
-                'value': 1023,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 3.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 3.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE3',
+                'value': 1023
             },
             {
-                'name': 'REARCONNECTOR_MODULE4',
-                'value': 1024,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 4.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 4.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE4',
+                'value': 1024
             },
             {
-                'name': 'REARCONNECTOR_MODULE5',
-                'value': 1025,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 5.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 5.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE5',
+                'value': 1025
             },
             {
-                'name': 'REARCONNECTOR_MODULE6',
-                'value': 1026,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 6.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 6.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE6',
+                'value': 1026
             },
             {
-                'name': 'REARCONNECTOR_MODULE7',
-                'value': 1027,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 7.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 7.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE7',
+                'value': 1027
             },
             {
-                'name': 'REARCONNECTOR_MODULE8',
-                'value': 1028,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 8.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 8.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE8',
+                'value': 1028
             },
             {
-                'name': 'REARCONNECTOR_MODULE9',
-                'value': 1029,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Ouptut Trigger on the rear
-connector module 9.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Ouptut Trigger on the rear\nconnector module 9.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE9',
+                'value': 1029
             },
             {
-                'name': 'REARCONNECTOR_MODULE10',
-                'value': 1030,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 10.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 10.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE10',
+                'value': 1030
             },
             {
-                'name': 'REARCONNECTOR_MODULE11',
-                'value': 1031,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 11.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 11.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE11',
+                'value': 1031
             },
             {
-                'name': 'REARCONNECTOR_MODULE12',
-                'value': 1032,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the rear
-connector module 12.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the rear\nconnector module 12.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE12',
+                'value': 1032
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE1',
-                'value': 1041,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 1.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 1.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE1',
+                'value': 1041
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE2',
-                'value': 1042,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 2.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 2.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE2',
+                'value': 1042
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE3',
-                'value': 1043,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 3.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 3.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE3',
+                'value': 1043
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE4',
-                'value': 1044,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 4.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 4.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE4',
+                'value': 1044
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE5',
-                'value': 1045,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 5.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 5.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE5',
+                'value': 1045
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE6',
-                'value': 1046,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 6.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 6.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE6',
+                'value': 1046
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE7',
-                'value': 1047,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 7.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 7.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE7',
+                'value': 1047
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE8',
-                'value': 1048,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 8.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 8.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE8',
+                'value': 1048
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE9',
-                'value': 1049,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 9.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 9.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE9',
+                'value': 1049
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE10',
-                'value': 1050,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 10.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 10.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE10',
+                'value': 1050
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE11',
-                'value': 1051,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 11.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 11.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE11',
+                'value': 1051
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE12',
-                'value': 1052,
-'documentation': {
-'description': '''
-The switch module produces the Scan Advanced Output Trigger on the front
-connector module 12.
-''',
-},
-            },
-        ],
+                'documentation': {
+                    'description': '\nThe switch module produces the Scan Advanced Output Trigger on the front\nconnector module 12.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE12',
+                'value': 1052
+            }
+        ]
     },
     'ScanAdvancedPolarity': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The trigger occurs on the rising edge of the signal.'
+                },
                 'name': 'NISWITCH_VAL_RISING_EDGE',
-                'value': 0,
-'documentation': {
-'description': 'The trigger occurs on the rising edge of the signal.',
-},
+                'value': 0
             },
             {
+                'documentation': {
+                    'description': 'The trigger occurs on the falling edge of the signal.'
+                },
                 'name': 'NISWITCH_VAL_FALLING_EDGE',
-                'value': 1,
-'documentation': {
-'description': 'The trigger occurs on the falling edge of the signal.',
-},
-            },
-        ],
+                'value': 1
+            }
+        ]
     },
     'ScanMode': {
         'values': [
             {
+                'documentation': {
+                    'description': 'No implicit action on connections when scanning.'
+                },
                 'name': 'NISWITCH_VAL_NONE',
-                'value': 0,
-'documentation': {
-'description': 'No implicit action on connections when scanning.',
-},
+                'value': 0
             },
             {
+                'documentation': {
+                    'description': 'When scanning, the switch device breaks existing connections before  making new connections.'
+                },
                 'name': 'NISWITCH_VAL_BREAK_BEFORE_MAKE',
-                'value': 1,
-'documentation': {
-'description': 'When scanning, the switch device breaks existing connections before  making new connections.',
-},
+                'value': 1
             },
             {
+                'documentation': {
+                    'description': 'When scanning, the switch device breaks existing connections after making  new connections.'
+                },
                 'name': 'NISWITCH_VAL_BREAK_AFTER_MAKE',
-                'value': 2,
-'documentation': {
-'description': 'When scanning, the switch device breaks existing connections after making  new connections.',
-},
-            },
-        ],
+                'value': 2
+            }
+        ]
     },
     'TriggerInput': {
         'values': [
             {
+                'documentation': {
+                    'description': 'Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_IMMEDIATE',
-                'value': 1,
-'documentation': {
-'description': 'Immediate Trigger. The switch device does not wait for a trigger before  processing the next entry in the scan list.',
-},
+                'value': 1
             },
             {
+                'documentation': {
+                    'description': 'External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_EXTERNAL',
-                'value': 2,
-'documentation': {
-'description': 'External Trigger. The switch device waits until it receives a trigger  from an external source through the external trigger input before  processing the next entry in the scan list.',
-},
+                'value': 2
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_SOFTWARE_TRIG',
-                'value': 3,
-'documentation': {
-'description': 'The switch device waits until you call the niSwitch_SendSoftwareTrigger  function before processing the next entry in the scan list.',
-},
+                'value': 3
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL0',
-                'value': 111,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG0 line before processing the next entry in the scan list.',
-},
+                'value': 111
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL1',
-                'value': 112,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG1 line before processing the next entry in the scan list.',
-},
+                'value': 112
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL2',
-                'value': 113,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG2 line before processing the next entry in the scan list.',
-},
+                'value': 113
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL3',
-                'value': 114,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG3 line before processing the next entry in the scan list.',
-},
+                'value': 114
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL4',
-                'value': 115,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG4 line before processing the next entry in the scan list.',
-},
+                'value': 115
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL5',
-                'value': 116,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG5 line before processing the next entry in the scan list.',
-},
+                'value': 116
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL6',
-                'value': 117,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG6 line before processing the next entry in the scan list.',
-},
+                'value': 117
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_TTL7',
-                'value': 118,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI TRIG7 line before processing the next entry in the scan list.',
-},
+                'value': 118
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.'
+                },
                 'name': 'NISWITCH_VAL_PXI_STAR',
-                'value': 125,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the PXI STAR  trigger bus before processing the next entry in the scan list.',
-},
+                'value': 125
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the  rear connector.'
+                },
                 'name': 'NISWITCH_VAL_REARCONNECTOR',
-                'value': 1000,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the  rear connector.',
-},
+                'value': 1000
             },
             {
+                'documentation': {
+                    'description': 'The switch device waits until it receives a trigger on the  front connector.'
+                },
                 'name': 'NISWITCH_VAL_FRONTCONNECTOR',
-                'value': 1001,
-'documentation': {
-'description': 'The switch device waits until it receives a trigger on the  front connector.',
-},
+                'value': 1001
             },
             {
-                'name': 'REARCONNECTOR_MODULE1',
-                'value': 1021,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 1.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 1.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE1',
+                'value': 1021
             },
             {
-                'name': 'REARCONNECTOR_MODULE2',
-                'value': 1022,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 2.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 2.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE2',
+                'value': 1022
             },
             {
-                'name': 'REARCONNECTOR_MODULE3',
-                'value': 1023,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 3.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 3.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE3',
+                'value': 1023
             },
             {
-                'name': 'REARCONNECTOR_MODULE4',
-                'value': 1024,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 4.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 4.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE4',
+                'value': 1024
             },
             {
-                'name': 'REARCONNECTOR_MODULE5',
-                'value': 1025,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 5.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 5.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE5',
+                'value': 1025
             },
             {
-                'name': 'REARCONNECTOR_MODULE6',
-                'value': 1026,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 6.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 6.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE6',
+                'value': 1026
             },
             {
-                'name': 'REARCONNECTOR_MODULE7',
-                'value': 1027,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 7.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 7.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE7',
+                'value': 1027
             },
             {
-                'name': 'REARCONNECTOR_MODULE8',
-                'value': 1028,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 8.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 8.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE8',
+                'value': 1028
             },
             {
-                'name': 'REARCONNECTOR_MODULE9',
-                'value': 1029,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 9.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 9.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE9',
+                'value': 1029
             },
             {
-                'name': 'REARCONNECTOR_MODULE10',
-                'value': 1030,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 10.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 10.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE10',
+                'value': 1030
             },
             {
-                'name': 'REARCONNECTOR_MODULE11',
-                'value': 1031,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 11.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 11.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE11',
+                'value': 1031
             },
             {
-                'name': 'REARCONNECTOR_MODULE12',
-                'value': 1032,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the rear
-connector module 12.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the rear\nconnector module 12.\n'
+                },
+                'name': 'NISWITCH_VAL_REARCONNECTOR_MODULE12',
+                'value': 1032
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE1',
-                'value': 1041,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 1.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 1.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE1',
+                'value': 1041
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE2',
-                'value': 1042,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 2.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 2.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE2',
+                'value': 1042
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE3',
-                'value': 1043,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 3.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 3.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE3',
+                'value': 1043
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE4',
-                'value': 1044,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 4.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 4.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE4',
+                'value': 1044
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE5',
-                'value': 1045,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 5.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 5.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE5',
+                'value': 1045
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE6',
-                'value': 1046,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 6.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 6.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE6',
+                'value': 1046
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE7',
-                'value': 1047,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 7.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 7.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE7',
+                'value': 1047
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE8',
-                'value': 1048,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 8.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 8.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE8',
+                'value': 1048
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE9',
-                'value': 1049,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 9.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 9.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE9',
+                'value': 1049
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE10',
-                'value': 1050,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 10.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 10.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE10',
+                'value': 1050
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE11',
-                'value': 1051,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 11.
-''',
-},
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 11.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE11',
+                'value': 1051
             },
             {
-                'name': 'FRONTCONNECTOR_MODULE12',
-                'value': 1052,
-'documentation': {
-'description': '''
-The switch module waits until it receives a trigger on the front
-connector module 12.
-''',
-},
-            },
-        ],
+                'documentation': {
+                    'description': '\nThe switch module waits until it receives a trigger on the front\nconnector module 12.\n'
+                },
+                'name': 'NISWITCH_VAL_FRONTCONNECTOR_MODULE12',
+                'value': 1052
+            }
+        ]
     },
     'TriggerInputPolarity': {
         'values': [
             {
+                'documentation': {
+                    'description': 'The trigger occurs on the rising edge of the signal.'
+                },
                 'name': 'NISWITCH_VAL_RISING_EDGE',
-                'value': 0,
-'documentation': {
-'description': 'The trigger occurs on the rising edge of the signal.',
-},
+                'value': 0
             },
             {
+                'documentation': {
+                    'description': 'The trigger occurs on the falling edge of the signal.'
+                },
                 'name': 'NISWITCH_VAL_FALLING_EDGE',
-                'value': 1,
-'documentation': {
-'description': 'The trigger occurs on the falling edge of the signal.',
-},
-            },
-        ],
+                'value': 1
+            }
+        ]
     },
     'TriggerMode': {
         'values': [
             {
-                'name': 'SINGLE',
-                'value': 0,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_SINGLE',
+                'value': 0
             },
             {
-                'name': 'MASTER',
-                'value': 1,
-'documentation': {
-'description': '',
-},
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_MASTER',
+                'value': 1
             },
             {
-                'name': 'SLAVE',
-                'value': 2,
-'documentation': {
-'description': '',
-},
-            },
-        ],
-    },
+                'documentation': {
+                    'description': ''
+                },
+                'name': 'NISWITCH_VAL_SLAVE',
+                'value': 2
+            }
+        ]
+    }
 }

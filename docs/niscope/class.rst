@@ -166,10 +166,6 @@ niscope.Session
     +=====================================================+========================================+
     | :py:attr:`absolute_sample_clock_offset`             | float in seconds or datetime.timedelta |
     +-----------------------------------------------------+----------------------------------------+
-    | :py:attr:`accessory_gain`                           | float                                  |
-    +-----------------------------------------------------+----------------------------------------+
-    | :py:attr:`accessory_offset`                         | float                                  |
-    +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`acquisition_start_time`                   | float in seconds or datetime.timedelta |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`acquisition_type`                         | :py:data:`AcquisitionType`             |
@@ -188,6 +184,12 @@ niscope.Session
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`binary_sample_width`                      | int                                    |
     +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`cable_sense_mode`                         | :py:data:`CableSenseMode`              |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`cable_sense_signal_enable`                | bool                                   |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`cable_sense_voltage`                      | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`channel_count`                            | int                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`channel_enabled`                          | bool                                   |
@@ -203,6 +205,8 @@ niscope.Session
     | :py:attr:`device_temperature`                       | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`driver_setup`                             | str                                    |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`enabled_channels`                         | str                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`enable_dc_restore`                        | bool                                   |
     +-----------------------------------------------------+----------------------------------------+
@@ -227,6 +231,12 @@ niscope.Session
     | :py:attr:`flex_fir_antialias_filter_type`           | :py:data:`FlexFIRAntialiasFilterType`  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`fpga_bitfile_path`                        | str                                    |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`glitch_condition`                         | :py:data:`GlitchCondition`             |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`glitch_polarity`                          | :py:data:`GlitchPolarity`              |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`glitch_width`                             | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`high_pass_filter_frequency`               | float                                  |
     +-----------------------------------------------------+----------------------------------------+
@@ -282,6 +292,8 @@ niscope.Session
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`probe_attenuation`                        | float                                  |
     +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`product_code`                             | int                                    |
+    +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`ready_for_advance_event_output_terminal`  | str                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`ready_for_ref_event_output_terminal`      | str                                    |
@@ -308,17 +320,33 @@ niscope.Session
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`ris_num_averages`                         | int                                    |
     +-----------------------------------------------------+----------------------------------------+
-    | :py:attr:`sample_clock_timebase_multiplier`         | int                                    |
+    | :py:attr:`runt_high_threshold`                      | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`runt_low_threshold`                       | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`runt_polarity`                            | :py:data:`RuntPolarity`                |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`runt_time_condition`                      | :py:data:`RuntTimeCondition`           |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`runt_time_high_limit`                     | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`runt_time_low_limit`                      | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`sample_mode`                              | int                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`samp_clk_timebase_div`                    | int                                    |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`sample_clock_timebase_multiplier`         | int                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`samp_clk_timebase_rate`                   | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`samp_clk_timebase_src`                    | str                                    |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`serial_number`                            | str                                    |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`accessory_gain`                           | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`accessory_offset`                         | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`simulate`                                 | bool                                   |
     +-----------------------------------------------------+----------------------------------------+
@@ -373,6 +401,14 @@ niscope.Session
     | :py:attr:`vertical_offset`                          | float                                  |
     +-----------------------------------------------------+----------------------------------------+
     | :py:attr:`vertical_range`                           | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`width_condition`                          | :py:data:`WidthCondition`              |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`width_high_threshold`                     | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`width_low_threshold`                      | float                                  |
+    +-----------------------------------------------------+----------------------------------------+
+    | :py:attr:`width_polarity`                           | :py:data:`WidthPolarity`               |
     +-----------------------------------------------------+----------------------------------------+
 
     **Public methods**
@@ -482,9 +518,9 @@ absolute_sample_clock_offset
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -492,100 +528,6 @@ absolute_sample_clock_offset
 
                 - LabVIEW Property: **Clocking:Advanced:Absolute Sample Clock Offset**
                 - C Attribute: **NISCOPE_ATTR_ABSOLUTE_SAMPLE_CLOCK_OFFSET**
-
-accessory_gain
-~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:attribute:: accessory_gain
-
-        Returns the calibration gain for the current device configuration.
-        **Related topics:**
-        `NI 5122/5124/5142
-        Calibration <digitizers.chm::/5122_Calibration.html>`__
-
-
-
-        .. note:: This property is only supported by the NI PXI-5900 differential
-            amplifier.
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].accessory_gain
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | True      |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device:Accessory:Gain**
-                - C Attribute: **NISCOPE_ATTR_ACCESSORY_GAIN**
-
-accessory_offset
-~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niscope.Session
-
-    .. py:attribute:: accessory_offset
-
-        Returns the calibration offset for the current device configuration.
-        **Related topics:**
-        `NI 5122/5124/5142
-        Calibration <digitizers.chm::/5122_Calibration.html>`__
-
-
-
-        .. note:: This property is supported only by the NI PXI-5900 differential
-            amplifier.
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].accessory_offset
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | True      |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device:Accessory:Offset**
-                - C Attribute: **NISCOPE_ATTR_ACCESSORY_OFFSET**
 
 acquisition_start_time
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -605,9 +547,9 @@ acquisition_start_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -634,9 +576,9 @@ acquisition_type
             +----------------+-----------------------+
             | Permissions    | read-write            |
             +----------------+-----------------------+
-            | Channel Based  | False                 |
+            | Channel Based  | No                    |
             +----------------+-----------------------+
-            | Resettable     | No                    |
+            | Resettable     | Yes                   |
             +----------------+-----------------------+
 
         .. tip::
@@ -680,9 +622,9 @@ acq_arm_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -709,9 +651,9 @@ adv_trig_src
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -738,9 +680,9 @@ allow_more_records_than_memory
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -767,9 +709,9 @@ arm_ref_trig_src
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -796,7 +738,7 @@ backlog
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -838,9 +780,9 @@ bandpass_filter_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -870,9 +812,9 @@ binary_sample_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -880,6 +822,127 @@ binary_sample_width
 
                 - LabVIEW Property: **Acquisition:Binary Sample Width**
                 - C Attribute: **NISCOPE_ATTR_BINARY_SAMPLE_WIDTH**
+
+cable_sense_mode
+~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: cable_sense_mode
+
+        Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the :py:meth:`niscope.Session.CableSenseSignalStart` method is called.
+
+        Device-Specific Behavior:
+            PXIe-5160/5162
+                - The value of this property must be identical across all channels whose input impedance is set to 50 ohms.
+                - If this property is set to a value other than :py:data:`~niscope.CableSenseMode.DISABLED` for any channel(s), the input impedance of all channels for which this property is set to :py:data:`~niscope.CableSenseMode.DISABLED` must be set to 1 M Ohm.
+
+        +-----------------------+
+        | **Supported Devices** |
+        +-----------------------+
+        | PXIe-5110             |
+        +-----------------------+
+        | PXIe-5111             |
+        +-----------------------+
+        | PXIe-5113             |
+        +-----------------------+
+        | PXIe-5160             |
+        +-----------------------+
+        | PXIe-5162             |
+        +-----------------------+
+
+        .. note:: the input impedance of the channel(s) to convey the CableSense signal must be set to 50 ohms.
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------+
+            | Characteristic | Value                |
+            +================+======================+
+            | Datatype       | enums.CableSenseMode |
+            +----------------+----------------------+
+            | Permissions    | read-write           |
+            +----------------+----------------------+
+            | Channel Based  | No                   |
+            +----------------+----------------------+
+            | Resettable     | Yes                  |
+            +----------------+----------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_CABLE_SENSE_MODE**
+
+cable_sense_signal_enable
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: cable_sense_signal_enable
+
+        TBD
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_CABLE_SENSE_SIGNAL_ENABLE**
+
+cable_sense_voltage
+~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: cable_sense_voltage
+
+        Returns the voltage of the CableSense signal that is written to the EEPROM of the oscilloscope during factory calibration.
+
+        +-----------------------+
+        | **Supported Devices** |
+        +-----------------------+
+        | PXIe-5110             |
+        +-----------------------+
+        | PXIe-5111             |
+        +-----------------------+
+        | PXIe-5113             |
+        +-----------------------+
+        | PXIe-5160             |
+        +-----------------------+
+        | PXIe-5162             |
+        +-----------------------+
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_CABLE_SENSE_VOLTAGE**
 
 channel_count
 ~~~~~~~~~~~~~
@@ -900,7 +963,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -945,9 +1008,9 @@ channel_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -987,9 +1050,9 @@ channel_terminal_configuration
             +----------------+-----------------------------+
             | Permissions    | read-write                  |
             +----------------+-----------------------------+
-            | Channel Based  | True                        |
+            | Channel Based  | Yes                         |
             +----------------+-----------------------------+
-            | Resettable     | No                          |
+            | Resettable     | Yes                         |
             +----------------+-----------------------------+
 
         .. tip::
@@ -1016,9 +1079,9 @@ data_transfer_block_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1045,9 +1108,9 @@ data_transfer_maximum_bandwidth
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1074,9 +1137,9 @@ data_transfer_preferred_packet_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1103,7 +1166,7 @@ device_temperature
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1125,6 +1188,18 @@ driver_setup
         Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  :py:meth:`niscope.Session.__init__`, or through the IVI Configuration Utility.
         If the user does not specify a Driver Setup string, this property returns an empty string.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].driver_setup
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -1134,15 +1209,62 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  |         0 |
+            | Channel Based  | Yes       |
             +----------------+-----------+
-            | Resettable     |         0 |
+            | Resettable     | No        |
             +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NISCOPE_ATTR_DRIVER_SETUP**
+
+enabled_channels
+~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: enabled_channels
+
+        Returns a comma-separated list of the channels enabled for the session in ascending order.
+
+        If no channels are enabled, this property returns an empty string, "".
+        If all channels are enabled, this property enumerates all of the channels.
+
+        Because this property returns channels in ascending order, but the order in which you specify channels for the input is important, the value of this property may not necessarily reflect the order in which NI-SCOPE performs certain actions.
+
+        Refer to Channel String Syntax in the NI High-Speed Digitizers Help for more information on the effects of channel order in NI-SCOPE.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].enabled_channels
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | Yes       |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_ENABLED_CHANNELS**
 
 enable_dc_restore
 ~~~~~~~~~~~~~~~~~
@@ -1165,9 +1287,9 @@ enable_dc_restore
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1210,9 +1332,9 @@ enable_time_interleaved_sampling
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1240,9 +1362,9 @@ end_of_acquisition_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1270,9 +1392,9 @@ end_of_record_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1305,9 +1427,9 @@ end_of_record_to_advance_trigger_holdoff
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -1347,9 +1469,9 @@ equalization_filter_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1388,7 +1510,7 @@ equalization_num_coefficients
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1418,9 +1540,9 @@ exported_advance_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1448,9 +1570,9 @@ exported_ref_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1478,9 +1600,9 @@ exported_start_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1521,9 +1643,9 @@ flex_fir_antialias_filter_type
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | True                             |
+            | Channel Based  | Yes                              |
             +----------------+----------------------------------+
-            | Resettable     | No                               |
+            | Resettable     | Yes                              |
             +----------------+----------------------------------+
 
         .. tip::
@@ -1554,7 +1676,7 @@ fpga_bitfile_path
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1564,6 +1686,92 @@ fpga_bitfile_path
 
                 - LabVIEW Property: **Device:FPGA Bitfile Path**
                 - C Attribute: **NISCOPE_ATTR_FPGA_BITFILE_PATH**
+
+glitch_condition
+~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: glitch_condition
+
+        Specifies whether the oscilloscope triggers on pulses of duration less than or greater than the value specified by the :py:data:`niscope.Session.glitch_width` property.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------------------+
+            | Characteristic | Value                 |
+            +================+=======================+
+            | Datatype       | enums.GlitchCondition |
+            +----------------+-----------------------+
+            | Permissions    | read-write            |
+            +----------------+-----------------------+
+            | Channel Based  | No                    |
+            +----------------+-----------------------+
+            | Resettable     | Yes                   |
+            +----------------+-----------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_GLITCH_CONDITION**
+
+glitch_polarity
+~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: glitch_polarity
+
+        Specifies the polarity of pulses that trigger the oscilloscope for glitch triggering.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------+
+            | Characteristic | Value                |
+            +================+======================+
+            | Datatype       | enums.GlitchPolarity |
+            +----------------+----------------------+
+            | Permissions    | read-write           |
+            +----------------+----------------------+
+            | Channel Based  | No                   |
+            +----------------+----------------------+
+            | Resettable     | Yes                  |
+            +----------------+----------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_GLITCH_POLARITY**
+
+glitch_width
+~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: glitch_width
+
+        Specifies the glitch duration, in seconds.
+
+        The oscilloscope triggers when it detects of pulse of duration either less than or greater than this value depending on the value of the :py:data:`niscope.Session.glitch_condition` property.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_GLITCH_WIDTH**
 
 high_pass_filter_frequency
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1589,9 +1797,9 @@ high_pass_filter_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1618,9 +1826,9 @@ horz_enforce_realtime
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1648,9 +1856,9 @@ horz_min_num_pts
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1677,9 +1885,9 @@ horz_num_records
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1707,7 +1915,7 @@ horz_record_length
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1737,9 +1945,9 @@ horz_record_ref_position
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1767,7 +1975,7 @@ horz_sample_rate
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1797,9 +2005,9 @@ horz_time_per_record
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -1826,9 +2034,9 @@ input_clock_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1868,9 +2076,9 @@ input_impedance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -1897,7 +2105,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1926,7 +2134,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1955,7 +2163,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1992,9 +2200,9 @@ interleaving_offset_correction_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2026,7 +2234,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2059,7 +2267,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2088,9 +2296,9 @@ master_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2139,9 +2347,9 @@ max_input_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2168,7 +2376,7 @@ max_real_time_sampling_rate
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2197,7 +2405,7 @@ max_ris_rate
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2232,7 +2440,7 @@ min_sample_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -2261,7 +2469,7 @@ onboard_memory_size
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2290,9 +2498,9 @@ output_clock_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2319,7 +2527,7 @@ pll_lock_status
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2348,7 +2556,7 @@ points_done
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2368,6 +2576,19 @@ poll_interval
 
         Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].poll_interval = var
+                var = session.channels[0,1].poll_interval
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2377,9 +2598,9 @@ poll_interval
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  |          0 |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     |          0 |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2420,9 +2641,9 @@ probe_attenuation
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2430,6 +2651,34 @@ probe_attenuation
 
                 - LabVIEW Property: **Vertical:Probe Attenuation**
                 - C Attribute: **NISCOPE_ATTR_PROBE_ATTENUATION**
+
+product_code
+~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: product_code
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_PRODUCT_CODE**
 
 ready_for_advance_event_output_terminal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2450,9 +2699,9 @@ ready_for_advance_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2480,9 +2729,9 @@ ready_for_ref_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2510,9 +2759,9 @@ ready_for_start_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2539,7 +2788,7 @@ records_done
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2568,7 +2817,7 @@ record_arm_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2597,9 +2846,9 @@ ref_clk_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2626,9 +2875,9 @@ ref_trigger_detector_location
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | False                            |
+            | Channel Based  | No                               |
             +----------------+----------------------------------+
-            | Resettable     | No                               |
+            | Resettable     | Yes                              |
             +----------------+----------------------------------+
 
         .. tip::
@@ -2655,9 +2904,9 @@ ref_trigger_minimum_quiet_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -2684,9 +2933,9 @@ ref_trig_tdc_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2713,7 +2962,7 @@ resolution
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2745,9 +2994,9 @@ ris_in_auto_setup_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2774,9 +3023,9 @@ ris_method
             +----------------+-----------------+
             | Permissions    | read-write      |
             +----------------+-----------------+
-            | Channel Based  | False           |
+            | Channel Based  | No              |
             +----------------+-----------------+
-            | Resettable     | No              |
+            | Resettable     | Yes             |
             +----------------+-----------------+
 
         .. tip::
@@ -2803,9 +3052,9 @@ ris_num_averages
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2814,51 +3063,193 @@ ris_num_averages
                 - LabVIEW Property: **Horizontal:RIS Num Avg**
                 - C Attribute: **NISCOPE_ATTR_RIS_NUM_AVERAGES**
 
-sample_clock_timebase_multiplier
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+runt_high_threshold
+~~~~~~~~~~~~~~~~~~~
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:attribute:: sample_clock_timebase_multiplier
+    .. py:attribute:: runt_high_threshold
 
-        If `Sample Clock Timebase
-        Source <p:py:meth:`niscope.Session.SampleClockTimebaseSource`.html>`__ is an external
-        source, this property specifies the ratio between the `Sample Clock
-        Timebase Rate <p:py:meth:`niscope.Session.SampleClockTimebaseRate`.html>`__ and the actual
-        sample rate, which can be higher. This property can be used in
-        conjunction with the `Sample Clock Timebase Divisor
-        Property <p:py:meth:`niscope.Session.SampleClockTimebaseDivisor`.html>`__.
-        Some devices use multiple ADCs to sample the same channel at an
-        effective sample rate that is greater than the specified clock rate.
-        When providing an external sample clock use this property to indicate
-        when you want a higher sample rate. Valid values for this property vary
-        by device and current configuration.
-        **Related topics:**
-        `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+        Specifies the higher of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
 
-
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+        The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the :py:data:`niscope.Session.runt_polarity` property for more information.
 
         The following table lists the characteristics of this property.
 
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | int        |
+            | Datatype       | float      |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Clocking:Sample Clock Timebase Multiplier**
-                - C Attribute: **NISCOPE_ATTR_SAMPLE_CLOCK_TIMEBASE_MULTIPLIER**
+                - C Attribute: **NISCOPE_ATTR_RUNT_HIGH_THRESHOLD**
+
+runt_low_threshold
+~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: runt_low_threshold
+
+        Specifies the lower of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
+
+        The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the :py:data:`niscope.Session.runt_polarity` property for more information.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_RUNT_LOW_THRESHOLD**
+
+runt_polarity
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: runt_polarity
+
+        Specifies the polarity of pulses that trigger the oscilloscope for runt triggering.
+
+        When set to :py:data:`~niscope.RuntPolarity.POSITIVE`, the oscilloscope triggers when the following conditions are met:
+            * The leading edge of a pulse crosses the :py:data:`niscope.Session.runt_low_threshold` in a positive direction;
+            * The trailing edge of the pulse crosses the :py:data:`niscope.Session.runt_low_threshold` in a negative direction; and
+            * No portion of the pulse crosses the :py:data:`niscope.Session.runt_high_threshold`.
+
+        When set to :py:data:`~niscope.RuntPolarity.NEGATIVE`, the oscilloscope triggers when the following conditions are met:
+            * The leading edge of a pulse crosses the :py:data:`niscope.Session.runt_high_threshold` in a negative direction;
+            * The trailing edge of the pulse crosses the :py:data:`niscope.Session.runt_high_threshold` in a positive direction; and
+            * No portion of the pulse crosses the :py:data:`niscope.Session.runt_low_threshold`.
+
+        When set to :py:data:`~niscope.RuntPolarity.EITHER`, the oscilloscope triggers in either case.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+--------------------+
+            | Characteristic | Value              |
+            +================+====================+
+            | Datatype       | enums.RuntPolarity |
+            +----------------+--------------------+
+            | Permissions    | read-write         |
+            +----------------+--------------------+
+            | Channel Based  | No                 |
+            +----------------+--------------------+
+            | Resettable     | Yes                |
+            +----------------+--------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_RUNT_POLARITY**
+
+runt_time_condition
+~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: runt_time_condition
+
+        Specifies whether runt triggers are time qualified, and if so, how the oscilloscope triggers in relation to the duration range bounded by the :py:data:`niscope.Session.runt_time_low_limit` and :py:data:`niscope.Session.runt_time_high_limit` properties.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-------------------------+
+            | Characteristic | Value                   |
+            +================+=========================+
+            | Datatype       | enums.RuntTimeCondition |
+            +----------------+-------------------------+
+            | Permissions    | read-write              |
+            +----------------+-------------------------+
+            | Channel Based  | No                      |
+            +----------------+-------------------------+
+            | Resettable     | Yes                     |
+            +----------------+-------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_RUNT_TIME_CONDITION**
+
+runt_time_high_limit
+~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: runt_time_high_limit
+
+        Specifies, in seconds, the high runt threshold time.
+
+        This property sets the upper bound on the duration of runt pulses that may trigger the oscilloscope. The :py:data:`niscope.Session.runt_time_condition` property determines how the oscilloscope triggers in relation to the runt time limits.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_RUNT_TIME_HIGH_LIMIT**
+
+runt_time_low_limit
+~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: runt_time_low_limit
+
+        Specifies, in seconds, the low runt threshold time.
+
+        This property sets the lower bound on the duration of runt pulses that may trigger the oscilloscope. The :py:data:`niscope.Session.runt_time_condition` property determines how the oscilloscope triggers in relation to the runt time limits.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_RUNT_TIME_LOW_LIMIT**
 
 sample_mode
 ~~~~~~~~~~~
@@ -2878,7 +3269,7 @@ sample_mode
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2907,9 +3298,9 @@ samp_clk_timebase_div
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2917,6 +3308,38 @@ samp_clk_timebase_div
 
                 - LabVIEW Property: **Clocking:Sample Clock Timebase Divisor**
                 - C Attribute: **NISCOPE_ATTR_SAMP_CLK_TIMEBASE_DIV**
+
+sample_clock_timebase_multiplier
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: sample_clock_timebase_multiplier
+
+        If :py:data:`niscope.Session.samp_clk_timebase_src` is an external source, this property specifies the ratio between the :py:data:`niscope.Session.samp_clk_timebase_rate` and the actual sample rate, which can be higher. This property can be used in conjunction with :py:data:`niscope.Session.samp_clk_timebase_div`.
+        Some devices use multiple ADCs to sample the same channel at an effective sample rate that is greater than the specified clock rate. When providing an external sample clock use this property to indicate when you want a higher sample rate. Valid values for this property vary by device and current configuration.
+
+        **Related topics:**
+        `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_SAMP_CLK_TIMEBASE_MULT**
 
 samp_clk_timebase_rate
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2936,9 +3359,9 @@ samp_clk_timebase_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2965,9 +3388,9 @@ samp_clk_timebase_src
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -2994,7 +3417,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3004,6 +3427,96 @@ serial_number
 
                 - LabVIEW Property: **Device:Serial Number**
                 - C Attribute: **NISCOPE_ATTR_SERIAL_NUMBER**
+
+accessory_gain
+~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: accessory_gain
+
+        Returns the calibration gain for the current device configuration.
+
+        **Related topics:**
+        `NI 5122/5124/5142 Calibration <digitizers.chm::/5122_Calibration.html>`__
+
+
+
+        .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].signal_cond_gain
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_SIGNAL_COND_GAIN**
+
+accessory_offset
+~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: accessory_offset
+
+        Returns the calibration offset for the current device configuration.
+
+        **Related topics:**
+        `NI 5122/5124/5142 Calibration <digitizers.chm::/5122_Calibration.html>`__
+
+
+
+        .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].signal_cond_offset
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_SIGNAL_COND_OFFSET**
 
 simulate
 ~~~~~~~~
@@ -3017,17 +3530,17 @@ simulate
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | False      |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | bool      |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3053,7 +3566,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3082,7 +3595,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3111,7 +3624,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3155,9 +3668,9 @@ start_to_ref_trigger_holdoff
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | True                                   |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -3184,7 +3697,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3213,7 +3726,7 @@ trigger_auto_triggered
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3242,9 +3755,9 @@ trigger_coupling
             +----------------+-----------------------+
             | Permissions    | read-write            |
             +----------------+-----------------------+
-            | Channel Based  | False                 |
+            | Channel Based  | No                    |
             +----------------+-----------------------+
-            | Resettable     | No                    |
+            | Resettable     | Yes                   |
             +----------------+-----------------------+
 
         .. tip::
@@ -3272,9 +3785,9 @@ trigger_delay_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -3302,9 +3815,9 @@ trigger_holdoff
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
-            | Resettable     | No                                     |
+            | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
 
         .. tip::
@@ -3331,9 +3844,9 @@ trigger_hysteresis
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3363,9 +3876,9 @@ trigger_impedance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3394,9 +3907,9 @@ trigger_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3426,9 +3939,9 @@ trigger_modifier
             +----------------+-----------------------+
             | Permissions    | read-write            |
             +----------------+-----------------------+
-            | Channel Based  | False                 |
+            | Channel Based  | No                    |
             +----------------+-----------------------+
-            | Resettable     | No                    |
+            | Resettable     | Yes                   |
             +----------------+-----------------------+
 
         .. tip::
@@ -3455,9 +3968,9 @@ trigger_slope
             +----------------+--------------------+
             | Permissions    | read-write         |
             +----------------+--------------------+
-            | Channel Based  | False              |
+            | Channel Based  | No                 |
             +----------------+--------------------+
-            | Resettable     | No                 |
+            | Resettable     | Yes                |
             +----------------+--------------------+
 
         .. tip::
@@ -3484,9 +3997,9 @@ trigger_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3513,9 +4026,9 @@ trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | False             |
+            | Channel Based  | No                |
             +----------------+-------------------+
-            | Resettable     | No                |
+            | Resettable     | Yes               |
             +----------------+-------------------+
 
         .. tip::
@@ -3552,9 +4065,9 @@ trigger_window_high_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3592,9 +4105,9 @@ trigger_window_low_level
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3621,9 +4134,9 @@ trigger_window_mode
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
-            | Resettable     | No                      |
+            | Resettable     | Yes                     |
             +----------------+-------------------------+
 
         .. tip::
@@ -3650,9 +4163,9 @@ tv_trigger_event
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
-            | Resettable     | No                      |
+            | Resettable     | Yes                     |
             +----------------+-------------------------+
 
         .. tip::
@@ -3679,9 +4192,9 @@ tv_trigger_line_number
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3708,9 +4221,9 @@ tv_trigger_polarity
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
-            | Resettable     | No                  |
+            | Resettable     | Yes                 |
             +----------------+---------------------+
 
         .. tip::
@@ -3750,9 +4263,9 @@ tv_trigger_signal_format
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | True                    |
+            | Channel Based  | Yes                     |
             +----------------+-------------------------+
-            | Resettable     | No                      |
+            | Resettable     | Yes                     |
             +----------------+-------------------------+
 
         .. tip::
@@ -3792,9 +4305,9 @@ vertical_coupling
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | True                   |
+            | Channel Based  | Yes                    |
             +----------------+------------------------+
-            | Resettable     | No                     |
+            | Resettable     | Yes                    |
             +----------------+------------------------+
 
         .. tip::
@@ -3836,9 +4349,9 @@ vertical_offset
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3879,9 +4392,9 @@ vertical_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
-            | Resettable     | No         |
+            | Resettable     | Yes        |
             +----------------+------------+
 
         .. tip::
@@ -3889,6 +4402,174 @@ vertical_range
 
                 - LabVIEW Property: **Vertical:Vertical Range**
                 - C Attribute: **NISCOPE_ATTR_VERTICAL_RANGE**
+
+width_condition
+~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: width_condition
+
+        Specifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the :py:data:`niscope.Session.width_low_threshold` and :py:data:`niscope.Session.width_high_threshold` properties.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].width_condition = var
+                var = session.channels[0,1].width_condition
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------+
+            | Characteristic | Value                |
+            +================+======================+
+            | Datatype       | enums.WidthCondition |
+            +----------------+----------------------+
+            | Permissions    | read-write           |
+            +----------------+----------------------+
+            | Channel Based  | Yes                  |
+            +----------------+----------------------+
+            | Resettable     | Yes                  |
+            +----------------+----------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_WIDTH_CONDITION**
+
+width_high_threshold
+~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: width_high_threshold
+
+        Specifies the high width threshold, in seconds.
+
+        This properties sets the upper bound on the duration range that triggers the oscilloscope. The :py:data:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].width_high_threshold = var
+                var = session.channels[0,1].width_high_threshold
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_WIDTH_HIGH_THRESHOLD**
+
+width_low_threshold
+~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: width_low_threshold
+
+        Specifies the low width threshold, in seconds.
+
+        This property sets the lower bound on the duration range that triggers the oscilloscope. The :py:data:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].width_low_threshold = var
+                var = session.channels[0,1].width_low_threshold
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_WIDTH_LOW_THRESHOLD**
+
+width_polarity
+~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:attribute:: width_polarity
+
+        Specifies the polarity of pulses that trigger the oscilloscope for width triggering.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].width_polarity = var
+                var = session.channels[0,1].width_polarity
+
+        The following table lists the characteristics of this property.
+
+            +----------------+---------------------+
+            | Characteristic | Value               |
+            +================+=====================+
+            | Datatype       | enums.WidthPolarity |
+            +----------------+---------------------+
+            | Permissions    | read-write          |
+            +----------------+---------------------+
+            | Channel Based  | Yes                 |
+            +----------------+---------------------+
+            | Resettable     | Yes                 |
+            +----------------+---------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_WIDTH_POLARITY**
 
 
 Methods
@@ -4722,10 +5403,7 @@ configure_trigger_window
 
             
 
-            .. note:: Some features are not supported by all digitizers. Refer to `Features
-                Supported by
-                Device <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for
-                more information.
+            .. note:: Some features are not supported by all digitizers.
 
 
 
@@ -5046,7 +5724,7 @@ fetch
                 
 
 
-            :type timeout: float or datetime.timedelta
+            :type timeout: float in seconds or datetime.timedelta
 
             :rtype: list of WaveformInfo
             :return:
@@ -5173,9 +5851,9 @@ fetch_into
                 
 
 
-            :type timeout: float
+            :type timeout: float in seconds or datetime.timedelta
 
-            :rtype: list of WaveformInfo
+            :rtype: WaveformInfo
             :return:
 
 
@@ -5468,7 +6146,7 @@ read
                 
 
 
-            :type timeout: float or datetime.timedelta
+            :type timeout: float in seconds or datetime.timedelta
 
             :rtype: list of WaveformInfo
             :return:
@@ -5683,10 +6361,6 @@ Properties
 +=====================================================================+========================================+
 | :py:attr:`niscope.Session.absolute_sample_clock_offset`             | float in seconds or datetime.timedelta |
 +---------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niscope.Session.accessory_gain`                           | float                                  |
-+---------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niscope.Session.accessory_offset`                         | float                                  |
-+---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.acquisition_start_time`                   | float in seconds or datetime.timedelta |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.acquisition_type`                         | :py:data:`AcquisitionType`             |
@@ -5705,6 +6379,12 @@ Properties
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.binary_sample_width`                      | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.cable_sense_mode`                         | :py:data:`CableSenseMode`              |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.cable_sense_signal_enable`                | bool                                   |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.cable_sense_voltage`                      | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.channel_count`                            | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.channel_enabled`                          | bool                                   |
@@ -5720,6 +6400,8 @@ Properties
 | :py:attr:`niscope.Session.device_temperature`                       | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.driver_setup`                             | str                                    |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.enabled_channels`                         | str                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.enable_dc_restore`                        | bool                                   |
 +---------------------------------------------------------------------+----------------------------------------+
@@ -5744,6 +6426,12 @@ Properties
 | :py:attr:`niscope.Session.flex_fir_antialias_filter_type`           | :py:data:`FlexFIRAntialiasFilterType`  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.fpga_bitfile_path`                        | str                                    |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.glitch_condition`                         | :py:data:`GlitchCondition`             |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.glitch_polarity`                          | :py:data:`GlitchPolarity`              |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.glitch_width`                             | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.high_pass_filter_frequency`               | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
@@ -5799,6 +6487,8 @@ Properties
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.probe_attenuation`                        | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.product_code`                             | int                                    |
++---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.ready_for_advance_event_output_terminal`  | str                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.ready_for_ref_event_output_terminal`      | str                                    |
@@ -5825,17 +6515,33 @@ Properties
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.ris_num_averages`                         | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niscope.Session.sample_clock_timebase_multiplier`         | int                                    |
+| :py:attr:`niscope.Session.runt_high_threshold`                      | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.runt_low_threshold`                       | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.runt_polarity`                            | :py:data:`RuntPolarity`                |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.runt_time_condition`                      | :py:data:`RuntTimeCondition`           |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.runt_time_high_limit`                     | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.runt_time_low_limit`                      | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.sample_mode`                              | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.samp_clk_timebase_div`                    | int                                    |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.sample_clock_timebase_multiplier`         | int                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.samp_clk_timebase_rate`                   | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.samp_clk_timebase_src`                    | str                                    |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.serial_number`                            | str                                    |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.accessory_gain`                           | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.accessory_offset`                         | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.simulate`                                 | bool                                   |
 +---------------------------------------------------------------------+----------------------------------------+
@@ -5890,6 +6596,14 @@ Properties
 | :py:attr:`niscope.Session.vertical_offset`                          | float                                  |
 +---------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`niscope.Session.vertical_range`                           | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.width_condition`                          | :py:data:`WidthCondition`              |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.width_high_threshold`                     | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.width_low_threshold`                      | float                                  |
++---------------------------------------------------------------------+----------------------------------------+
+| :py:attr:`niscope.Session.width_polarity`                           | :py:data:`WidthPolarity`               |
 +---------------------------------------------------------------------+----------------------------------------+
 
 Methods

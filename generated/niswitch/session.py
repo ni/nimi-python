@@ -2,7 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime
+import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -164,7 +164,7 @@ class _SessionBase(object):
 
         var = session.channels[0,1].characteristic_impedance
     '''
-    continuous_scan = _attributes.AttributeViBoolean(1150002)
+    continuous_scan = _attributes.AttributeViBoolean(1250026)
     '''Type: bool
 
     When a switch device is scanning, the swich can either stop scanning when  the end of the scan (False) or continue scanning from the top of the  scan list again (True).
@@ -1535,22 +1535,22 @@ class Session(_SessionBase):
 
         Returns:
             path_capability (enums.PathCapability): Indicates whether a path is valid. Possible values include:
-                ------------------------------------ NISWITCH_VAL_PATH_AVAILABLE 1
-                NISWITCH_VAL_PATH_EXISTS 2 NISWITCH_VAL_PATH_UNSUPPORTED 3
-                NISWITCH_VAL_RSRC_IN_USE 4 NISWITCH_VAL_SOURCE_CONFLICT 5
-                NISWITCH_VAL_CHANNEL_NOT_AVAILABLE 6 Notes: (1)
-                NISWITCH_VAL_PATH_AVAILABLE indicates that the driver can create the
-                path at this time. (2) NISWITCH_VAL_PATH_EXISTS indicates that the
-                path already exists. (3) NISWITCH_VAL_PATH_UNSUPPORTED indicates that
+                ------------------------------------ PathCapability.PATH_AVAILABLE 1
+                PathCapability.PATH_EXISTS 2 PathCapability.PATH_UNSUPPORTED 3
+                NISWITCH_VAL_RSRC_IN_USE 4 PathCapability.SOURCE_CONFLICT 5
+                PathCapability.CHANNEL_NOT_AVAILABLE 6 Notes: (1)
+                PathCapability.PATH_AVAILABLE indicates that the driver can create the
+                path at this time. (2) PathCapability.PATH_EXISTS indicates that the
+                path already exists. (3) PathCapability.PATH_UNSUPPORTED indicates that
                 the instrument is not capable of creating a path between the channels
                 you specify. (4) NISWITCH_VAL_RSRC_IN_USE indicates that although
                 the path is valid, the driver cannot create the path at this moment
                 because the switch device is currently using one or more of the required
                 channels to create another path. You must destroy the other path before
-                creating this one. (5) NISWITCH_VAL_SOURCE_CONFLICT indicates that
+                creating this one. (5) PathCapability.SOURCE_CONFLICT indicates that
                 the instrument cannot create a path because both channels are connected
                 to a different source channel. (6)
-                NISWITCH_VAL_CHANNEL_NOT_AVAILABLE indicates that the driver cannot
+                PathCapability.CHANNEL_NOT_AVAILABLE indicates that the driver cannot
                 create a path between the two channels because one of the channels is a
                 configuration channel and thus unavailable for external connections.
 
@@ -1876,11 +1876,8 @@ class Session(_SessionBase):
 
 
         Returns:
-            relay_position (enums.RelayPosition): Indicates whether the relay is open or closed. NISWITCH_VAL_OPEN 10
+            relay_position (enums.RelayPosition): Indicates whether the relay is open or closed. RelayPosition.OPEN 10
                 NIWITCH_VAL_CLOSED 11
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2174,11 +2171,8 @@ class Session(_SessionBase):
                 relay names for the switch module.
 
             relay_action (enums.RelayAction): Specifies whether to open or close a given relay. Default value: Relay
-                Close Defined values: NISWITCH_VAL_OPEN_RELAY
-                NISWITCH_VAL_CLOSE_RELAY (Default Value)
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                Close Defined values: RelayAction.OPEN
+                RelayAction.CLOSE (Default Value)
 
         '''
         if type(relay_action) is not enums.RelayAction:

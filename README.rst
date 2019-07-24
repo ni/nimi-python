@@ -72,6 +72,8 @@ NI-DCPower Python API Status
 +===============================+==========================+
 | Driver Version Tested Against | 18.1.1                   |
 +-------------------------------+--------------------------+
+| Driver API Version            | 19.1.0d33                |
++-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nidcpowerPythonVersion| |
@@ -103,6 +105,47 @@ NI-DCPower Python API Status
 
 
 
+NI-Digital Pattern Driver Python API Status
+-------------------------------------------
+
++---------------------------------------+--------------------------+
+| NI-Digital Pattern Driver (nidigital) |                          |
++=======================================+==========================+
+| Driver Version Tested Against         | 19.1.0                   |
++---------------------------------------+--------------------------+
+| Driver API Version                    | 19.0.0d32                |
++---------------------------------------+--------------------------+
+| PyPI Version                          | |nidigitalLatestVersion| |
++---------------------------------------+--------------------------+
+| Supported Python Version              | |nidigitalPythonVersion| |
++---------------------------------------+--------------------------+
+| Open Issues                           | |nidigitalOpenIssues|    |
++---------------------------------------+--------------------------+
+| Open Pull Requests                    | |nidigitalOpenPRs|       |
++---------------------------------------+--------------------------+
+
+
+.. |nidigitalLatestVersion| image:: http://img.shields.io/pypi/v/nidigital.svg
+    :alt: Latest NI-Digital Pattern Driver Version
+    :target: http://pypi.python.org/pypi/nidigital
+
+
+.. |nidigitalPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidigital.svg
+    :alt: NI-Digital Pattern Driver supported Python versions
+    :target: http://pypi.python.org/pypi/nidigital
+
+
+.. |nidigitalOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidigital.svg
+    :alt: Open Issues + Pull Requests for NI-Digital Pattern Driver
+    :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anidigital
+
+
+.. |nidigitalOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nidigital.svg
+    :alt: Pull Requests for NI-Digital Pattern Driver
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anidigital
+
+
+
 NI-DMM Python API Status
 ------------------------
 
@@ -110,6 +153,8 @@ NI-DMM Python API Status
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
 | Driver Version Tested Against | 18.1.0               |
++-------------------------------+----------------------+
+| Driver API Version            | 19.6.0d0             |
 +-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
@@ -150,6 +195,8 @@ NI-FGEN Python API Status
 +===============================+=======================+
 | Driver Version Tested Against | 18.1.0                |
 +-------------------------------+-----------------------+
+| Driver API Version            | 19.6.0d0              |
++-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nifgenPythonVersion| |
@@ -188,6 +235,8 @@ NI-ModInst Python API Status
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
 | Driver Version Tested Against | 18.0.0                   |
++-------------------------------+--------------------------+
+| Driver API Version            | 255.0.0d4                |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
@@ -228,6 +277,8 @@ NI-SCOPE Python API Status
 +===============================+========================+
 | Driver Version Tested Against | 18.1.0                 |
 +-------------------------------+------------------------+
+| Driver API Version            | 19.1.0d50              |
++-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
 | Supported Python Version      | |niscopePythonVersion| |
@@ -267,6 +318,8 @@ NI Switch Executive Python API Status
 +===============================+=====================+
 | Driver Version Tested Against | 18.0.0              |
 +-------------------------------+---------------------+
+| Driver API Version            | 19.1.0d1            |
++-------------------------------+---------------------+
 | PyPI Version                  | |niseLatestVersion| |
 +-------------------------------+---------------------+
 | Supported Python Version      | |nisePythonVersion| |
@@ -305,6 +358,8 @@ NI-SWITCH Python API Status
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
 | Driver Version Tested Against | 18.0.0                  |
++-------------------------------+-------------------------+
+| Driver API Version            | 19.1.0d2                |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+

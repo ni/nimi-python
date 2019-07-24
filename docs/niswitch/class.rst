@@ -466,7 +466,7 @@ analog_bus_sharing_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -508,7 +508,7 @@ bandwidth
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -537,7 +537,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -579,7 +579,7 @@ characteristic_impedance
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -609,7 +609,7 @@ continuous_scan
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -639,7 +639,7 @@ digital_filter_enable
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -674,7 +674,7 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -703,7 +703,7 @@ handshaking_initiation
             +----------------+-----------------------------+
             | Permissions    | read-write                  |
             +----------------+-----------------------------+
-            | Channel Based  | False                       |
+            | Channel Based  | No                          |
             +----------------+-----------------------------+
             | Resettable     | No                          |
             +----------------+-----------------------------+
@@ -732,7 +732,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -761,7 +761,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -790,7 +790,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -821,7 +821,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -865,7 +865,7 @@ is_configuration_channel
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -894,7 +894,7 @@ is_debounced
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -923,7 +923,7 @@ is_scanning
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -965,7 +965,7 @@ is_source_channel
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | True       |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -994,7 +994,7 @@ is_waiting_for_trig
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1028,7 +1028,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1070,7 +1070,7 @@ max_ac_voltage
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1112,7 +1112,7 @@ max_carry_ac_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1154,7 +1154,7 @@ max_carry_ac_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1196,7 +1196,7 @@ max_carry_dc_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1238,7 +1238,7 @@ max_carry_dc_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1280,7 +1280,7 @@ max_dc_voltage
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1322,7 +1322,7 @@ max_switching_ac_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1364,7 +1364,7 @@ max_switching_ac_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1406,7 +1406,7 @@ max_switching_dc_current
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1448,7 +1448,7 @@ max_switching_dc_power
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1477,7 +1477,7 @@ number_of_relays
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1507,7 +1507,7 @@ num_of_columns
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1537,7 +1537,7 @@ num_of_rows
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1567,7 +1567,7 @@ power_down_latching_relays_after_debounce
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1596,7 +1596,7 @@ scan_advanced_output
             +----------------+--------------------------+
             | Permissions    | read-write               |
             +----------------+--------------------------+
-            | Channel Based  | False                    |
+            | Channel Based  | No                       |
             +----------------+--------------------------+
             | Resettable     | No                       |
             +----------------+--------------------------+
@@ -1625,7 +1625,7 @@ scan_advanced_polarity
             +----------------+----------------------------+
             | Permissions    | read-write                 |
             +----------------+----------------------------+
-            | Channel Based  | False                      |
+            | Channel Based  | No                         |
             +----------------+----------------------------+
             | Resettable     | No                         |
             +----------------+----------------------------+
@@ -1659,7 +1659,7 @@ scan_delay
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1698,7 +1698,7 @@ scan_list
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1733,7 +1733,7 @@ scan_mode
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -1762,7 +1762,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1807,7 +1807,7 @@ settling_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | True                                   |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1841,7 +1841,7 @@ simulate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1870,7 +1870,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1899,7 +1899,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1928,7 +1928,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1957,7 +1957,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1986,7 +1986,7 @@ temperature
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2015,7 +2015,7 @@ trigger_input
             +----------------+--------------------+
             | Permissions    | read-write         |
             +----------------+--------------------+
-            | Channel Based  | False              |
+            | Channel Based  | No                 |
             +----------------+--------------------+
             | Resettable     | No                 |
             +----------------+--------------------+
@@ -2044,7 +2044,7 @@ trigger_input_polarity
             +----------------+----------------------------+
             | Permissions    | read-write                 |
             +----------------+----------------------------+
-            | Channel Based  | False                      |
+            | Channel Based  | No                         |
             +----------------+----------------------------+
             | Resettable     | No                         |
             +----------------+----------------------------+
@@ -2086,7 +2086,7 @@ wire_mode
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | True      |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2164,22 +2164,22 @@ can_connect
 
 
                     Indicates whether a path is valid. Possible values include:
-                    ------------------------------------ :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` 1
-                    :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` 2 :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` 3
-                    :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` 5
-                    :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
-                    :py:data:`~niswitch.NISWITCH_VAL_PATH_AVAILABLE` indicates that the driver can create the
-                    path at this time. (2) :py:data:`~niswitch.NISWITCH_VAL_PATH_EXISTS` indicates that the
-                    path already exists. (3) :py:data:`~niswitch.NISWITCH_VAL_PATH_UNSUPPORTED` indicates that
+                    ------------------------------------ :py:data:`~niswitch.PathCapability.PATH_AVAILABLE` 1
+                    :py:data:`~niswitch.PathCapability.PATH_EXISTS` 2 :py:data:`~niswitch.PathCapability.PATH_UNSUPPORTED` 3
+                    :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.PathCapability.SOURCE_CONFLICT` 5
+                    :py:data:`~niswitch.PathCapability.CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
+                    :py:data:`~niswitch.PathCapability.PATH_AVAILABLE` indicates that the driver can create the
+                    path at this time. (2) :py:data:`~niswitch.PathCapability.PATH_EXISTS` indicates that the
+                    path already exists. (3) :py:data:`~niswitch.PathCapability.PATH_UNSUPPORTED` indicates that
                     the instrument is not capable of creating a path between the channels
                     you specify. (4) :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` indicates that although
                     the path is valid, the driver cannot create the path at this moment
                     because the switch device is currently using one or more of the required
                     channels to create another path. You must destroy the other path before
-                    creating this one. (5) :py:data:`~niswitch.NISWITCH_VAL_SOURCE_CONFLICT` indicates that
+                    creating this one. (5) :py:data:`~niswitch.PathCapability.SOURCE_CONFLICT` indicates that
                     the instrument cannot create a path because both channels are connected
                     to a different source channel. (6)
-                    :py:data:`~niswitch.NISWITCH_VAL_CHANNEL_NOT_AVAILABLE` indicates that the driver cannot
+                    :py:data:`~niswitch.PathCapability.CHANNEL_NOT_AVAILABLE` indicates that the driver cannot
                     create a path between the two channels because one of the channels is a
                     configuration channel and thus unavailable for external connections.
 
@@ -2582,12 +2582,10 @@ get_relay_position
             :return:
 
 
-                    Indicates whether the relay is open or closed. :py:data:`~niswitch.NISWITCH_VAL_OPEN` 10
+                    Indicates whether the relay is open or closed. :py:data:`~niswitch.RelayPosition.OPEN` 10
                     NIWITCH_VAL_CLOSED 11
 
                     
-
-                    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
@@ -2673,12 +2671,10 @@ relay_control
 
 
                 Specifies whether to open or close a given relay. Default value: Relay
-                Close Defined values: :py:data:`~niswitch.NISWITCH_VAL_OPEN_RELAY`
-                :py:data:`~niswitch.NISWITCH_VAL_CLOSE_RELAY` (Default Value)
+                Close Defined values: :py:data:`~niswitch.RelayAction.OPEN`
+                :py:data:`~niswitch.RelayAction.CLOSE` (Default Value)
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type relay_action: :py:data:`niswitch.RelayAction`

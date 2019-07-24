@@ -328,6 +328,7 @@ def _setup_init_function(functions, config):
 
         functions['_init_function'] = init_function
     except KeyError:
+        print("Couldn't find {} init function".format(config['init_function']))
         pass
 
 
@@ -337,6 +338,10 @@ def add_all_function_metadata(functions, config):
 
     for f in functions:
         _add_codegen_method(functions[f])
+        # Some drivers do not have any documentation, so make sure the
+        # documentation key exists
+        if 'documentation' not in functions[f]:
+            functions[f]['documentation'] = {}
 
     for f in filter_codegen_functions(functions):
         _add_name(functions[f], f)
@@ -345,6 +350,8 @@ def add_all_function_metadata(functions, config):
         _add_method_templates(functions[f])
         _add_use_session_lock(functions[f])
         for p in functions[f]['parameters']:
+            if 'documentation' not in p:
+                p['documentation'] = {}
             _add_enum(p)
             _fix_type(p)
             _add_buffer_info(p, config)
@@ -393,7 +400,7 @@ def _add_default_attribute_class(a, attributes):
 
 def _add_repeated_capability_type(a, attributes):
     '''Add 'repeated_capability_type' if not already there.'''
-    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based'] == 'True':
+    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based']:
         attributes[a]['repeated_capability_type'] = 'channels'
 
 
@@ -441,7 +448,7 @@ def _add_enum_codegen_method(enums, config):
         if a_codegen_method != 'no':
             e = config['attributes'][a]['enum']
             if e is not None and e not in enums:
-                print('Missing enum {0} referenced by attribute {1}'.format(e, a['name']))
+                print('Missing enum {0} referenced by attribute {1}'.format(e, a))
             elif e is not None:
                 if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
                     enums[e]['codegen_method'] = a_codegen_method
@@ -553,6 +560,8 @@ def add_all_config_metadata(config):
 
     Ensure all defaults added to config
     '''
+    config = merge_helper(config, 'config', config, use_re=False)
+
     if 'use_locking' not in config:
         config['use_locking'] = True
 
@@ -863,11 +872,11 @@ functions_expected = {
 attributes_input = {
     1000000: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': False,
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
-        'resettable': 'No',
+        'resettable': False,
         'type': 'ViBoolean',
         'documentation': {
             'description': 'An attribute of type bool with read/write access.',
@@ -879,14 +888,14 @@ attributes_input = {
 attributes_expected = {
     1000000: {
         'access': 'read-write',
-        'channel_based': 'False',
+        'channel_based': False,
         'codegen_method': 'public',
         'documentation': {'description': 'An attribute of type bool with read/write access.'},
         'enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
         'python_name': 'read_write_bool',
-        'resettable': 'No',
+        'resettable': False,
         'type': 'ViBoolean',
         'python_type': 'bool',
         'type_in_documentation': 'bool',

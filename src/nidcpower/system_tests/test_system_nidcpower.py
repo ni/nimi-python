@@ -189,10 +189,10 @@ def test_query_max_current_limit(single_channel_session):
 
 
 def test_query_max_voltage_level(single_channel_session):
-        max_voltage_level = single_channel_session.query_max_voltage_level(0.03)
-        expected_max_voltage_level = 24  # for a simulated 4162 max voltage level should be 24V for 30mA current limit
-        max_voltage_level_in_range = abs(max_voltage_level - expected_max_voltage_level) <= max(1e-09 * max(abs(max_voltage_level), abs(expected_max_voltage_level)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-        assert max_voltage_level_in_range is True
+    max_voltage_level = single_channel_session.query_max_voltage_level(0.03)
+    expected_max_voltage_level = 24  # for a simulated 4162 max voltage level should be 24V for 30mA current limit
+    max_voltage_level_in_range = abs(max_voltage_level - expected_max_voltage_level) <= max(1e-09 * max(abs(max_voltage_level), abs(expected_max_voltage_level)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert max_voltage_level_in_range is True
 
 
 def test_query_min_current_limit(single_channel_session):

@@ -783,9 +783,25 @@ class TestSession(object):
                 assert e.code == test_error_code
                 assert e.description == test_error_desc
 
+    def test_get_an_ivi_dance_with_a_twist_string(self):
+        self.patched_library.niFake_GetAnIviDanceWithATwistString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceWithATwistString
+        string_val = 'Testing is fun?'
+        self.side_effects_helper['GetAnIviDanceWithATwistString']['aString'] = string_val
+        self.side_effects_helper['GetAnIviDanceWithATwistString']['actualSize'] = len(string_val)
+        with nifake.Session('dev1') as session:
+            result_string = session.get_an_ivi_dance_with_a_twist_string()
+            assert result_string == string_val
+            from mock import call
+            calls = [
+                call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None, _matchers.ViInt32PointerMatcher()),
+                call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)), _matchers.ViInt32PointerMatcher())
+            ]
+            self.patched_library.niFake_GetAnIviDanceWithATwistString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAnIviDanceWithATwistString.call_count == 2
+
     def test_get_array_using_ivi_dance(self):
-        self.patched_library.niFake_GetArrayUsingIVIDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIVIDance
-        self.side_effects_helper['GetArrayUsingIVIDance']['arrayOut'] = [1.1, 2.2]
+        self.patched_library.niFake_GetArrayUsingIviDance.side_effect = self.side_effects_helper.niFake_GetArrayUsingIviDance
+        self.side_effects_helper['GetArrayUsingIviDance']['arrayOut'] = [1.1, 2.2]
         with nifake.Session('dev1') as session:
             result_array = session.get_array_using_ivi_dance()
             assert result_array == [1.1, 2.2]
@@ -1131,11 +1147,11 @@ class TestSession(object):
         cs = nifake.CustomStruct(struct_int=42, struct_double=4.2)
         with nifake.Session('dev1') as session:
             session.set_custom_type(cs)
-            self.patched_library.niFake_SetCustomType.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs)))
+            self.patched_library.niFake_SetCustomType.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.CustomTypeMatcher(nifake.struct_CustomStruct, nifake.struct_CustomStruct(cs)))
 
     def test_get_custom_type(self):
         self.patched_library.niFake_GetCustomType.side_effect = self.side_effects_helper.niFake_GetCustomType
-        cs_ctype = nifake.custom_struct(struct_int=42, struct_double=4.2)
+        cs_ctype = nifake.struct_CustomStruct(struct_int=42, struct_double=4.2)
         self.side_effects_helper['GetCustomType']['cs'] = cs_ctype
         with nifake.Session('dev1') as session:
             cs = session.get_custom_type()
@@ -1145,15 +1161,15 @@ class TestSession(object):
     def test_set_custom_type_array(self):
         self.patched_library.niFake_SetCustomTypeArray.side_effect = self.side_effects_helper.niFake_SetCustomTypeArray
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
-        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        cs_ctype = (nifake.struct_CustomStruct * len(cs))(*[nifake.struct_CustomStruct(c) for c in cs])
         with nifake.Session('dev1') as session:
             session.set_custom_type_array(cs)
-            self.patched_library.niFake_SetCustomTypeArray.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(cs)), _matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype))
+            self.patched_library.niFake_SetCustomTypeArray.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(cs)), _matchers.CustomTypeBufferMatcher(nifake.struct_CustomStruct, cs_ctype))
 
     def test_get_custom_type_array(self):
         self.patched_library.niFake_GetCustomTypeArray.side_effect = self.side_effects_helper.niFake_GetCustomTypeArray
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
-        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        cs_ctype = (nifake.struct_CustomStruct * len(cs))(*[nifake.struct_CustomStruct(c) for c in cs])
         self.side_effects_helper['GetCustomTypeArray']['cs'] = cs_ctype
         with nifake.Session('dev1') as session:
             cs_test = session.get_custom_type_array(len(cs_ctype))
@@ -1183,7 +1199,7 @@ class TestSession(object):
         self.patched_library.niFake_GetArraySizeForPythonCode.side_effect = self.side_effects_helper.niFake_GetArraySizeForPythonCode
         self.patched_library.niFake_GetArrayForPythonCodeCustomType.side_effect = self.side_effects_helper.niFake_GetArrayForPythonCodeCustomType
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
-        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
+        cs_ctype = (nifake.struct_CustomStruct * len(cs))(*[nifake.struct_CustomStruct(c) for c in cs])
         self.side_effects_helper['GetArraySizeForPythonCode']['sizeOut'] = len(cs)
         self.side_effects_helper['GetArrayForPythonCodeCustomType']['arrayOut'] = cs_ctype
         with nifake.Session('dev1') as session:
@@ -1201,11 +1217,11 @@ class TestSession(object):
         hour = 10
         minute = 15
         self.side_effects_helper['GetCalDateAndTime']['return'] = 0
-        self.side_effects_helper['GetCalDateAndTime']['Month'] = month
-        self.side_effects_helper['GetCalDateAndTime']['Day'] = day
-        self.side_effects_helper['GetCalDateAndTime']['Year'] = year
-        self.side_effects_helper['GetCalDateAndTime']['Hour'] = hour
-        self.side_effects_helper['GetCalDateAndTime']['Minute'] = minute
+        self.side_effects_helper['GetCalDateAndTime']['month'] = month
+        self.side_effects_helper['GetCalDateAndTime']['day'] = day
+        self.side_effects_helper['GetCalDateAndTime']['year'] = year
+        self.side_effects_helper['GetCalDateAndTime']['hour'] = hour
+        self.side_effects_helper['GetCalDateAndTime']['minute'] = minute
         with nifake.Session('dev1') as session:
             last_cal = session.get_cal_date_and_time(0)
             assert isinstance(last_cal, datetime.datetime)
@@ -1213,7 +1229,7 @@ class TestSession(object):
 
     def test_get_cal_interval(self):
         self.patched_library.niFake_GetCalInterval = self.side_effects_helper.niFake_GetCalInterval
-        self.side_effects_helper['GetCalInterval']['Months'] = 24
+        self.side_effects_helper['GetCalInterval']['months'] = 24
         with nifake.Session('dev1') as session:
             last_cal = session.get_cal_interval()
             assert isinstance(last_cal, datetime.timedelta)
@@ -1228,9 +1244,9 @@ class TestSession(object):
         assert _matchers.ViReal64PointerMatcher().__repr__() == "ViReal64PointerMatcher(" + str(nifake._visatype.ViReal64) + ")"
         assert _matchers.ViInt32PointerMatcher().__repr__() == "ViInt32PointerMatcher(" + str(nifake._visatype.ViInt32) + ")"
         cs = [nifake.CustomStruct(struct_int=42, struct_double=4.2), nifake.CustomStruct(struct_int=43, struct_double=4.3), nifake.CustomStruct(struct_int=42, struct_double=4.3)]
-        cs_ctype = (nifake.custom_struct * len(cs))(*[nifake.custom_struct(c) for c in cs])
-        assert _matchers.CustomTypeMatcher(nifake.custom_struct, nifake.custom_struct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.custom_struct'>, custom_struct(data=None, struct_int=42, struct_double=4.2))"
-        assert _matchers.CustomTypeBufferMatcher(nifake.custom_struct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.custom_struct'>, [custom_struct(data=None, struct_int=42, struct_double=4.2), custom_struct(data=None, struct_int=43, struct_double=4.3), custom_struct(data=None, struct_int=42, struct_double=4.3)])"
+        cs_ctype = (nifake.struct_CustomStruct * len(cs))(*[nifake.struct_CustomStruct(c) for c in cs])
+        assert _matchers.CustomTypeMatcher(nifake.struct_CustomStruct, nifake.struct_CustomStruct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.struct_CustomStruct'>, struct_CustomStruct(data=None, struct_int=42, struct_double=4.2))"
+        assert _matchers.CustomTypeBufferMatcher(nifake.struct_CustomStruct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.struct_CustomStruct'>, [struct_CustomStruct(data=None, struct_int=42, struct_double=4.2), struct_CustomStruct(data=None, struct_int=43, struct_double=4.3), struct_CustomStruct(data=None, struct_int=42, struct_double=4.3)])"
 
     def test_channel_on_session(self):
         with nifake.Session('dev1') as session:

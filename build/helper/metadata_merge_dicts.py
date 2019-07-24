@@ -22,7 +22,7 @@ def merge_helper(metadata, metadata_type, config, use_re):
     # Have to do this in two steps. Otherwise the dictionary changes size and errors
     to_delete = []
     for m in metadata:
-        if len(metadata[m]) == 0:
+        if type(m) is dict and len(metadata[m]) == 0:
             to_delete.append(m)
     for m in to_delete:
         metadata.pop(m, None)

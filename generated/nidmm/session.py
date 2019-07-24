@@ -2,7 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime
+import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -163,7 +163,7 @@ class _SessionBase(object):
     The NI 4050 and NI 4060 are not supported.
     '''
     dc_bias = _attributes.AttributeViInt32(1150053)
-    '''Type: bool
+    '''Type: int
 
     For the NI 4072 only, controls the available DC bias for capacitance measurements.
     '''
@@ -257,7 +257,7 @@ class _SessionBase(object):
     The NI 4050 and NI 4060 are not supported.
     '''
     offset_comp_ohms = _attributes.AttributeViInt32(1150023)
-    '''Type: bool
+    '''Type: int
 
     For the NI 4070/4071/4072 only, enables or disables offset compensated ohms.
     '''
@@ -1078,7 +1078,7 @@ class Session(_SessionBase):
                 | Contains the **resource_name** of the device to initialize. The
                   **resource_name** is assigned in Measurement & Automation Explorer
                   (MAX). Refer to `Related
-                  Documentation <related_documentation>`__
+                  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
                   for the *NI Digital Multimeters Getting Started Guide* for more
                   information about configuring and testing the DMM in MAX.
                 | Valid Syntax:
@@ -1214,7 +1214,7 @@ class Session(_SessionBase):
                 value that you are measuring. For example, you must type in 10 V if you
                 are measuring 9 V. **range** values are coerced up to the closest input
                 **range**. Refer to the `Devices
-                Overview <devices>`__ for a list of valid
+                Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
                 ranges. The driver sets range to this value. The default is
                 0.02 V.
 
@@ -1281,7 +1281,7 @@ class Session(_SessionBase):
                 that you are measuring. For example, you must type in 10 V if you are
                 measuring 9 V. range values are coerced up to the closest input range.
                 Refer to the `Devices
-                Overview <devices>`__ for a list of valid
+                Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
                 ranges. The driver sets range to this value. The default is
                 0.02 V.
 
@@ -1301,7 +1301,7 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             resolution_digits (float): Specifies the resolution of the measurement in digits. The driver sets
-                the `Devices Overview <devices>`__ for a
+                the `Devices Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a
                 list of valid ranges. The driver sets resolution_digits
                 property to this value. The PXIe-4080/4081/4082 uses the resolution you
                 specify. The NI 4065 and NI 4070/4071/4072 ignore this parameter when
@@ -1339,9 +1339,9 @@ class Session(_SessionBase):
         For continuous acquisitions, set trigger_count or
         sample_count to zero. For more information, refer to
         `Multiple Point
-        Acquisitions <multi_point>`__,
-        `Triggering <trigger>`__, and `Using
-        Switches <switch_selection>`__.
+        Acquisitions <REPLACE_DRIVER_SPECIFIC_URL_1(multi_point)>`__,
+        `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__, and `Using
+        Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__.
 
         Args:
             trigger_count (int): Sets the number of triggers you want the DMM to receive before returning
@@ -1359,7 +1359,7 @@ class Session(_SessionBase):
                 Note:
                 To determine which values are supported by each device, refer to the
                 `LabWindows/CVI Trigger
-                Routing <cvitrigger_routing>`__ section.
+                Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
             sample_interval (float in seconds or datetime.timedelta): Sets the amount of time in seconds the DMM waits between measurement
                 cycles. The driver sets sample_interval to this value.
@@ -1552,8 +1552,8 @@ class Session(_SessionBase):
         r'''configure_trigger
 
         Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
-        `Triggering <trigger>`__ and `Using
-        Switches <switch_selection>`__ for more
+        `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ and `Using
+        Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__ for more
         information.
 
         Args:
@@ -1565,7 +1565,7 @@ class Session(_SessionBase):
                 Note:
                 To determine which values are supported by each device, refer to the
                 `LabWindows/CVI Trigger
-                Routing <cvitrigger_routing>`__ section.
+                Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
             trigger_delay (float in seconds or datetime.timedelta): Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
@@ -1616,7 +1616,7 @@ class Session(_SessionBase):
                 closest input **range**. The default is 10.0.
 
                 For valid ranges refer to the topics in
-                `Devices <devices>`__.
+                `Devices <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__.
 
                 Auto-ranging is not supported during waveform acquisitions.
 
@@ -1633,7 +1633,7 @@ class Session(_SessionBase):
 
                 To calculate the maximum and minimum number of waveform points that you
                 can acquire in one acquisition, refer to the `Waveform Acquisition
-                Measurement Cycle <waveform_cycle>`__.
+                Measurement Cycle <REPLACE_DRIVER_SPECIFIC_URL_1(waveform_cycle)>`__.
 
                 The default value is 500.
 
@@ -1695,10 +1695,10 @@ class Session(_SessionBase):
         **Related Topics:**
 
         `Using Properties and Properties with
-        NI‑DMM <properties>`__
+        NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
         `Setting Properties Before Reading
-        Properties <setting_before_reading_attributes>`__
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
         Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
         '''
@@ -1747,10 +1747,10 @@ class Session(_SessionBase):
         **Related Topics:**
 
         `Using Properties and Properties with
-        NI‑DMM <properties>`__
+        NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
         `Setting Properties Before Reading
-        Properties <setting_before_reading_attributes>`__
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
         Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
 
@@ -2164,10 +2164,10 @@ class Session(_SessionBase):
         **Related Topics:**
 
         `Using Properties and Properties with
-        NI‑DMM <properties>`__
+        NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
         `Setting Properties Before Reading
-        Properties <setting_before_reading_attributes>`__
+        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
         Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
 
@@ -2212,7 +2212,7 @@ class Session(_SessionBase):
         **Related Topics:**
 
         `Using Properties and Properties with
-        NI‑DMM <properties>`__
+        NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
         `Setting Properties Before Reading
         Properties <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__
@@ -2268,7 +2268,7 @@ class Session(_SessionBase):
                 | Contains the **resource_name** of the device to initialize. The
                   **resource_name** is assigned in Measurement & Automation Explorer
                   (MAX). Refer to `Related
-                  Documentation <related_documentation>`__
+                  Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
                   for the *NI Digital Multimeters Getting Started Guide* for more
                   information about configuring and testing the DMM in MAX.
                 | Valid Syntax:
@@ -2313,7 +2313,7 @@ class Session(_SessionBase):
                 leave any of them out (those left out use the default value).
 
                 Refer to `Simulating NI Digital
-                Multimeters <simulation>`__ for more
+                Multimeters <REPLACE_DRIVER_SPECIFIC_URL_1(simulation)>`__ for more
                 information.
 
                 +------------------+--------------------+-------------------+----+

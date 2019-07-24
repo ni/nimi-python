@@ -44,7 +44,7 @@ nidmm.Session
         | Contains the **resource_name** of the device to initialize. The
           **resource_name** is assigned in Measurement & Automation Explorer
           (MAX). Refer to `Related
-          Documentation <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/related_documentation/>`__
+          Documentation <REPLACE_DRIVER_SPECIFIC_URL_1(related_documentation)>`__
           for the *NI Digital Multimeters Getting Started Guide* for more
           information about configuring and testing the DMM in MAX.
         | Valid Syntax:
@@ -154,7 +154,7 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`current_source`                | float                                        |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`dc_bias`                       | bool                                         |
+    | :py:attr:`dc_bias`                       | int                                          |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`dc_noise_rejection`            | :py:data:`DCNoiseRejection`                  |
     +------------------------------------------+----------------------------------------------+
@@ -188,7 +188,7 @@ nidmm.Session
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`number_of_averages`            | int                                          |
     +------------------------------------------+----------------------------------------------+
-    | :py:attr:`offset_comp_ohms`              | bool                                         |
+    | :py:attr:`offset_comp_ohms`              | int                                          |
     +------------------------------------------+----------------------------------------------+
     | :py:attr:`open_cable_comp_conductance`   | float                                        |
     +------------------------------------------+----------------------------------------------+
@@ -374,7 +374,7 @@ ac_max_freq
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -404,7 +404,7 @@ ac_min_freq
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -433,7 +433,7 @@ adc_calibration
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | False                |
+            | Channel Based  | No                   |
             +----------------+----------------------+
             | Resettable     | No                   |
             +----------------+----------------------+
@@ -471,7 +471,7 @@ aperture_time
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -501,7 +501,7 @@ aperture_time_units
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | False                   |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
             | Resettable     | No                      |
             +----------------+-------------------------+
@@ -530,7 +530,7 @@ auto_range_value
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -560,7 +560,7 @@ auto_zero
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -593,7 +593,7 @@ buffer_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -623,7 +623,7 @@ cable_comp_type
             +----------------+-----------------------------+
             | Permissions    | read-write                  |
             +----------------+-----------------------------+
-            | Channel Based  | False                       |
+            | Channel Based  | No                          |
             +----------------+-----------------------------+
             | Resettable     | No                          |
             +----------------+-----------------------------+
@@ -652,7 +652,7 @@ channel_count
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -682,7 +682,7 @@ current_source
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -707,11 +707,11 @@ dc_bias
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | bool       |
+            | Datatype       | int        |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -741,7 +741,7 @@ dc_noise_rejection
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -772,7 +772,7 @@ driver_setup
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -801,7 +801,7 @@ freq_voltage_auto_range
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -830,7 +830,7 @@ freq_voltage_range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -861,7 +861,7 @@ function
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | False          |
+            | Channel Based  | No             |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -891,7 +891,7 @@ input_resistance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -920,7 +920,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -949,7 +949,7 @@ instrument_manufacturer
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -978,7 +978,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1007,7 +1007,7 @@ instrument_product_id
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1036,7 +1036,7 @@ io_resource_descriptor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1065,7 +1065,7 @@ lc_calculation_model
             +----------------+--------------------------+
             | Permissions    | read-write               |
             +----------------+--------------------------+
-            | Channel Based  | False                    |
+            | Channel Based  | No                       |
             +----------------+--------------------------+
             | Resettable     | No                       |
             +----------------+--------------------------+
@@ -1094,7 +1094,7 @@ lc_number_meas_to_average
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1123,7 +1123,7 @@ logical_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1154,7 +1154,7 @@ meas_complete_dest
             +----------------+-------------------------------+
             | Permissions    | read-write                    |
             +----------------+-------------------------------+
-            | Channel Based  | False                         |
+            | Channel Based  | No                            |
             +----------------+-------------------------------+
             | Resettable     | No                            |
             +----------------+-------------------------------+
@@ -1184,7 +1184,7 @@ number_of_averages
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1209,11 +1209,11 @@ offset_comp_ohms
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | bool       |
+            | Datatype       | int        |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1243,7 +1243,7 @@ open_cable_comp_conductance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1273,7 +1273,7 @@ open_cable_comp_susceptance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1302,7 +1302,7 @@ operation_mode
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | No                  |
             +----------------+---------------------+
@@ -1332,7 +1332,7 @@ powerline_freq
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1372,7 +1372,7 @@ range
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1402,7 +1402,7 @@ resolution_absolute
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1432,7 +1432,7 @@ resolution_digits
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1461,7 +1461,7 @@ sample_count
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1494,7 +1494,7 @@ sample_interval
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1524,7 +1524,7 @@ sample_trigger
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | No                  |
             +----------------+---------------------+
@@ -1553,7 +1553,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1587,7 +1587,7 @@ settle_time
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -1617,7 +1617,7 @@ short_cable_comp_reactance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1647,7 +1647,7 @@ short_cable_comp_resistance
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1678,7 +1678,7 @@ simulate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1707,7 +1707,7 @@ specific_driver_description
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1736,7 +1736,7 @@ specific_driver_major_version
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1765,7 +1765,7 @@ specific_driver_minor_version
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1794,7 +1794,7 @@ specific_driver_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1823,7 +1823,7 @@ specific_driver_vendor
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1852,7 +1852,7 @@ supported_instrument_models
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | False     |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -1881,7 +1881,7 @@ temp_rtd_a
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1910,7 +1910,7 @@ temp_rtd_b
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1939,7 +1939,7 @@ temp_rtd_c
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1968,7 +1968,7 @@ temp_rtd_res
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -1998,7 +1998,7 @@ temp_rtd_type
             +----------------+---------------+
             | Permissions    | read-write    |
             +----------------+---------------+
-            | Channel Based  | False         |
+            | Channel Based  | No            |
             +----------------+---------------+
             | Resettable     | No            |
             +----------------+---------------+
@@ -2027,7 +2027,7 @@ temp_tc_fixed_ref_junc
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2060,7 +2060,7 @@ temp_tc_ref_junc_type
             +----------------+-----------------------------------------+
             | Permissions    | read-write                              |
             +----------------+-----------------------------------------+
-            | Channel Based  | False                                   |
+            | Channel Based  | No                                      |
             +----------------+-----------------------------------------+
             | Resettable     | No                                      |
             +----------------+-----------------------------------------+
@@ -2089,7 +2089,7 @@ temp_tc_type
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -2118,7 +2118,7 @@ temp_thermistor_a
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2147,7 +2147,7 @@ temp_thermistor_b
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2176,7 +2176,7 @@ temp_thermistor_c
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2206,7 +2206,7 @@ temp_thermistor_type
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | False                |
+            | Channel Based  | No                   |
             +----------------+----------------------+
             | Resettable     | No                   |
             +----------------+----------------------+
@@ -2239,7 +2239,7 @@ temp_transducer_type
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | False                |
+            | Channel Based  | No                   |
             +----------------+----------------------+
             | Resettable     | No                   |
             +----------------+----------------------+
@@ -2271,7 +2271,7 @@ trigger_count
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2310,7 +2310,7 @@ trigger_delay
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | False                                  |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -2341,7 +2341,7 @@ trigger_source
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | False               |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | No                  |
             +----------------+---------------------+
@@ -2370,7 +2370,7 @@ waveform_coupling
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | False                  |
+            | Channel Based  | No                     |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -2399,7 +2399,7 @@ waveform_points
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2428,7 +2428,7 @@ waveform_rate
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | False      |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2495,7 +2495,7 @@ configure_measurement_absolute
                 value that you are measuring. For example, you must type in 10 V if you
                 are measuring 9 V. **range** values are coerced up to the closest input
                 **range**. Refer to the `Devices
-                Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a list of valid
+                Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
                 ranges. The driver sets :py:data:`nidmm.Session.range` to this value. The default is
                 0.02 V.
 
@@ -2573,7 +2573,7 @@ configure_measurement_digits
                 that you are measuring. For example, you must type in 10 V if you are
                 measuring 9 V. range values are coerced up to the closest input range.
                 Refer to the `Devices
-                Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a list of valid
+                Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a list of valid
                 ranges. The driver sets :py:data:`nidmm.Session.range` to this value. The default is
                 0.02 V.
 
@@ -2596,7 +2596,7 @@ configure_measurement_digits
 
 
                 Specifies the resolution of the measurement in digits. The driver sets
-                the `Devices Overview <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__ for a
+                the `Devices Overview <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__ for a
                 list of valid ranges. The driver sets :py:data:`nidmm.Session.resolution_digits`
                 property to this value. The PXIe-4080/4081/4082 uses the resolution you
                 specify. The NI 4065 and NI 4070/4071/4072 ignore this parameter when
@@ -2629,9 +2629,9 @@ configure_multi_point
             For continuous acquisitions, set :py:data:`nidmm.Session.trigger_count` or
             :py:data:`nidmm.Session.sample_count` to zero. For more information, refer to
             `Multiple Point
-            Acquisitions <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/multi_point/>`__,
-            `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__, and `Using
-            Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__.
+            Acquisitions <REPLACE_DRIVER_SPECIFIC_URL_1(multi_point)>`__,
+            `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__, and `Using
+            Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__.
 
             
 
@@ -2670,7 +2670,7 @@ configure_multi_point
 
                 .. note:: To determine which values are supported by each device, refer to the
                     `LabWindows/CVI Trigger
-                    Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__ section.
+                    Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
 
             :type sample_trigger: :py:data:`nidmm.SampleTrigger`
@@ -2914,8 +2914,8 @@ configure_trigger
     .. py:method:: configure_trigger(trigger_source, trigger_delay=datetime.timedelta(seconds=-1))
 
             Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
-            `Triggering <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/trigger/>`__ and `Using
-            Switches <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/switch_selection/>`__ for more
+            `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ and `Using
+            Switches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__ for more
             information.
 
             
@@ -2934,7 +2934,7 @@ configure_trigger
 
                 .. note:: To determine which values are supported by each device, refer to the
                     `LabWindows/CVI Trigger
-                    Routing <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/cvitrigger_routing/>`__ section.
+                    Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
 
             :type trigger_source: :py:data:`nidmm.TriggerSource`
@@ -2997,7 +2997,7 @@ configure_waveform_acquisition
                 closest input **range**. The default is 10.0.
 
                 For valid ranges refer to the topics in
-                `Devices <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/devices/>`__.
+                `Devices <REPLACE_DRIVER_SPECIFIC_URL_1(devices)>`__.
 
                 Auto-ranging is not supported during waveform acquisitions.
 
@@ -3028,7 +3028,7 @@ configure_waveform_acquisition
 
                 To calculate the maximum and minimum number of waveform points that you
                 can acquire in one acquisition, refer to the `Waveform Acquisition
-                Measurement Cycle <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/waveform_cycle/>`__.
+                Measurement Cycle <REPLACE_DRIVER_SPECIFIC_URL_1(waveform_cycle)>`__.
 
                 The default value is 500.
 
@@ -3088,10 +3088,10 @@ export_attribute_configuration_buffer
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
-            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
             
 
@@ -3135,10 +3135,10 @@ export_attribute_configuration_file
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
-            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
             
 
@@ -3629,10 +3629,10 @@ import_attribute_configuration_buffer
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
-            Properties <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/setting_before_reading_attributes/>`__
+            Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
             
 
@@ -3683,7 +3683,7 @@ import_attribute_configuration_file
             **Related Topics:**
 
             `Using Properties and Properties with
-            NI‑DMM <http://zone.ni.com/reference/en-XX/help/370384T-01/dmm/properties/>`__
+            NI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(properties)>`__
 
             `Setting Properties Before Reading
             Properties <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__
@@ -4238,7 +4238,7 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.current_source`                | float                                        |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.dc_bias`                       | bool                                         |
+| :py:attr:`nidmm.Session.dc_bias`                       | int                                          |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.dc_noise_rejection`            | :py:data:`DCNoiseRejection`                  |
 +--------------------------------------------------------+----------------------------------------------+
@@ -4272,7 +4272,7 @@ Properties
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.number_of_averages`            | int                                          |
 +--------------------------------------------------------+----------------------------------------------+
-| :py:attr:`nidmm.Session.offset_comp_ohms`              | bool                                         |
+| :py:attr:`nidmm.Session.offset_comp_ohms`              | int                                          |
 +--------------------------------------------------------+----------------------------------------------+
 | :py:attr:`nidmm.Session.open_cable_comp_conductance`   | float                                        |
 +--------------------------------------------------------+----------------------------------------------+

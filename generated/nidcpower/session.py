@@ -2,7 +2,7 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime
+import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -348,14 +348,11 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
-    This property is applicable only if the output_function property is set to  OutputFunction.DC_VOLTAGE and the compliance_limit_symmetry property is set to  NIDCPOWER_VAL_SYMMETRIC.
+    This property is applicable only if the output_function property is set to  OutputFunction.DC_VOLTAGE and the compliance_limit_symmetry property is set to  ComplianceLimitSymmetry.SYMMETRIC.
     output_enabled property for more information about enabling the output channel.
     Valid Values: The valid values for this property are defined by the values to which  current_limit_range property is set.
 
     Note: The channel must be enabled for the specified current limit to take effect. Refer to the
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -383,6 +380,18 @@ class _SessionBase(object):
 
         session.channels[0,1].current_limit_autorange = var
         var = session.channels[0,1].current_limit_autorange
+    '''
+    current_limit_behavior = _attributes.AttributeViInt32(1250004)
+    '''Type: int
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].current_limit_behavior = var
+        var = session.channels[0,1].current_limit_behavior
     '''
     current_limit_high = _attributes.AttributeViReal64(1150187)
     '''Type: float
@@ -1270,13 +1279,10 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry  property is set to NIDCPOWER_VAL_SYMMETRIC.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry  property is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_current_limit_range property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -1483,13 +1489,10 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property  is set to NIDCPOWER_VAL_SYMMETRIC.
+    This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property  is set to ComplianceLimitSymmetry.SYMMETRIC.
     Valid Values: The valid values for this property are defined by the values you specify for the pulse_voltage_limit_range property.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -1805,6 +1808,30 @@ class _SessionBase(object):
 
     Note: This property is not supported by all devices. When the
     '''
+    sequence_step_delta_time = _attributes.AttributeViReal64(1150198)
+    '''Type: float
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_step_delta_time = var
+        var = session.channels[0,1].sequence_step_delta_time
+    '''
+    sequence_step_delta_time_enabled = _attributes.AttributeViReal64(1150199)
+    '''Type: float
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_step_delta_time_enabled = var
+        var = session.channels[0,1].sequence_step_delta_time_enabled
+    '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
@@ -2025,14 +2052,11 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
-    This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT  and the compliance_limit_symmetry property is set to NIDCPOWER_VAL_SYMMETRIC.
+    This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT  and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
     output_enabled property for more information about enabling the output channel.
     Valid Values: The valid values for this property are defined by the values to which the  voltage_limit_range property is set.
 
     Note: The channel must be enabled for the specified current level to take effect. Refer to the
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the

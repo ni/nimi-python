@@ -136,6 +136,17 @@ class _ArrayMeasurement(Enum):
     '''
 
 
+class CableSenseMode(Enum):
+    DISABLED = 0
+    r'''
+    The oscilloscope is not configured to emit a CableSense signal.
+    '''
+    ON_DEMAND = 1
+    r'''
+    The oscilloscope is configured to emit a single CableSense pulse.
+    '''
+
+
 class _ClearableMeasurement(Enum):
     ALL_MEASUREMENTS = 10000
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
@@ -294,6 +305,32 @@ class FlexFIRAntialiasFilterType(Enum):
     '''
 
 
+class GlitchCondition(Enum):
+    GREATER = 2
+    r'''
+    Trigger on pulses with a duration greater than the specified glitch width.
+    '''
+    LESS = 1
+    r'''
+    Trigger on pulses with a duration shorter than the specified glitch width.
+    '''
+
+
+class GlitchPolarity(Enum):
+    POSITIVE = 1
+    r'''
+    Trigger on pulses of positive polarity relative to the trigger threshold.
+    '''
+    NEGATIVE = 2
+    r'''
+    Trigger on pulses of negative polarity relative to the trigger threshold.
+    '''
+    EITHER = 3
+    r'''
+    Trigger on pulses of either positive or negative polarity.
+    '''
+
+
 class Option(Enum):
     SELF_CALIBRATE_ALL_CHANNELS = 0
     r'''
@@ -364,6 +401,36 @@ class RefTriggerDetectorLocation(Enum):
     '''
 
 
+class RuntPolarity(Enum):
+    POSITIVE = 1
+    r'''
+    Trigger on pulses of positive polarity relative to runt_low_threshold that do not cross runt_high_threshold.
+    '''
+    NEGATIVE = 2
+    r'''
+    Trigger on pulses of negative polarity relative to runt_high_threshold that do not cross runt_low_threshold.
+    '''
+    EITHER = 3
+    r'''
+    Trigger on pulses of either positive or negative polarity.
+    '''
+
+
+class RuntTimeCondition(Enum):
+    NONE = 0
+    r'''
+    Time qualification is disabled. Trigger on runt pulses based solely on the voltage level of the pulses.
+    '''
+    WITHIN = 1
+    r'''
+    Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration within the range bounded by runt_time_low_limit and runt_time_high_limit.
+    '''
+    OUTSIDE = 2
+    r'''
+    Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration not within the range bounded by runt_time_low_limit and runt_time_high_limit.
+    '''
+
+
 class _ScalarMeasurement(Enum):
     NO_MEASUREMENT = 4000
     r'''
@@ -427,8 +494,8 @@ class _ScalarMeasurement(Enum):
     TIME_HISTOGRAM_MAX = 3005
     TIME_HISTOGRAM_MIN = 3006
     TIME_HISTOGRAM_PEAK_TO_PEAK = 3002
-    TIME_HISTOGRAM_MEAN_PLUS_STDEV = 3008
-    TIME_HISTOGRAM_MEAN_PLUS_2_STDEV = 3009
+    TIME_HISTOGRAM_MEAN_PLUS_STDEV = 3007
+    TIME_HISTOGRAM_MEAN_PLUS_2_STDEV = 3008
     TIME_HISTOGRAM_HITS = 3004
     TIME_HISTOGRAM_NEW_HITS = 3011
 
@@ -457,11 +524,11 @@ class TriggerCoupling(Enum):
     r'''
     DC coupling
     '''
-    HF_REJECT = 2
+    HF_REJECT = 3
     r'''
     Highpass filter coupling
     '''
-    LF_REJECT = 3
+    LF_REJECT = 4
     r'''
     Lowpass filter coupling
     '''
@@ -492,20 +559,16 @@ class TriggerSlope(Enum):
     r'''
     Rising edge
     '''
+    SLOPE_EITHER = 3
+    r'''
+    Either edge
+    '''
 
 
 class TriggerType(Enum):
     EDGE = 1
     r'''
     Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with configure_trigger_edge.
-    '''
-    TV = 5
-    r'''
-    Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with configure_trigger_video.
-    '''
-    IMMEDIATE = 6
-    r'''
-    Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.
     '''
     HYSTERESIS = 1001
     r'''
@@ -522,6 +585,17 @@ class TriggerType(Enum):
     SOFTWARE = 1004
     r'''
     Configures the digitizer for software triggering.  A software trigger occurs when SendSoftwareTrigger is called.
+    '''
+    TV = 5
+    r'''
+    Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with configure_trigger_video.
+    '''
+    GLITCH = 4
+    WIDTH = 2
+    RUNT = 3
+    IMMEDIATE = 6
+    r'''
+    Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.
     '''
 
 
@@ -661,3 +735,29 @@ class WhichTrigger(Enum):
     ARM_REFERENCE = 1
     REFERENCE = 2
     ADVANCE = 3
+
+
+class WidthCondition(Enum):
+    WITHIN = 1
+    r'''
+    Trigger on pulses with a duration within the range bounded by width_low_threshold and width_high_threshold.
+    '''
+    OUTSIDE = 2
+    r'''
+    Trigger on pulses with a duration not within the range bounded by width_low_threshold and width_high_threshold.
+    '''
+
+
+class WidthPolarity(Enum):
+    POSITIVE = 1
+    r'''
+    Trigger on pulses of positive polarity relative to the trigger threshold.
+    '''
+    NEGATIVE = 2
+    r'''
+    Trigger on pulses of negative polarity relative to the trigger threshold.
+    '''
+    EITHER = 3
+    r'''
+    Trigger on pulses of either positive or negative polarity.
+    '''
