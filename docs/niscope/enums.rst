@@ -58,6 +58,31 @@ AcquisitionType
 
 
 
+CableSenseMode
+--------------
+
+.. py:class:: CableSenseMode
+
+    .. py:attribute:: CableSenseMode.DISABLED
+
+
+
+        The oscilloscope is not configured to emit a CableSense signal.
+
+        
+
+
+
+    .. py:attribute:: CableSenseMode.ON_DEMAND
+
+
+
+        The oscilloscope is configured to emit a single CableSense pulse.
+
+        
+
+
+
 FetchRelativeTo
 ---------------
 
@@ -158,6 +183,66 @@ FlexFIRAntialiasFilterType
 
 
 
+GlitchCondition
+---------------
+
+.. py:class:: GlitchCondition
+
+    .. py:attribute:: GlitchCondition.GREATER
+
+
+
+        Trigger on pulses with a duration greater than the specified glitch width.
+
+        
+
+
+
+    .. py:attribute:: GlitchCondition.LESS
+
+
+
+        Trigger on pulses with a duration shorter than the specified glitch width.
+
+        
+
+
+
+GlitchPolarity
+--------------
+
+.. py:class:: GlitchPolarity
+
+    .. py:attribute:: GlitchPolarity.POSITIVE
+
+
+
+        Trigger on pulses of positive polarity relative to the trigger threshold.
+
+        
+
+
+
+    .. py:attribute:: GlitchPolarity.NEGATIVE
+
+
+
+        Trigger on pulses of negative polarity relative to the trigger threshold.
+
+        
+
+
+
+    .. py:attribute:: GlitchPolarity.EITHER
+
+
+
+        Trigger on pulses of either positive or negative polarity.
+
+        
+
+
+
 Option
 ------
 
@@ -249,6 +334,76 @@ RefTriggerDetectorLocation
 
 
         use the onboard signal processing logic to implement the reference trigger.  This option will trigger based on the onboard signal processed data.
+
+        
+
+
+
+RuntPolarity
+------------
+
+.. py:class:: RuntPolarity
+
+    .. py:attribute:: RuntPolarity.POSITIVE
+
+
+
+        Trigger on pulses of positive polarity relative to :py:data:`niscope.Session.runt_low_threshold` that do not cross :py:data:`niscope.Session.runt_high_threshold`.
+
+        
+
+
+
+    .. py:attribute:: RuntPolarity.NEGATIVE
+
+
+
+        Trigger on pulses of negative polarity relative to :py:data:`niscope.Session.runt_high_threshold` that do not cross :py:data:`niscope.Session.runt_low_threshold`.
+
+        
+
+
+
+    .. py:attribute:: RuntPolarity.EITHER
+
+
+
+        Trigger on pulses of either positive or negative polarity.
+
+        
+
+
+
+RuntTimeCondition
+-----------------
+
+.. py:class:: RuntTimeCondition
+
+    .. py:attribute:: RuntTimeCondition.NONE
+
+
+
+        Time qualification is disabled. Trigger on runt pulses based solely on the voltage level of the pulses.
+
+        
+
+
+
+    .. py:attribute:: RuntTimeCondition.WITHIN
+
+
+
+        Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration within the range bounded by :py:data:`niscope.Session.runt_time_low_limit` and :py:data:`niscope.Session.runt_time_high_limit`.
+
+        
+
+
+
+    .. py:attribute:: RuntTimeCondition.OUTSIDE
+
+
+
+        Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration not within the range bounded by :py:data:`niscope.Session.runt_time_low_limit` and :py:data:`niscope.Session.runt_time_high_limit`.
 
         
 
@@ -395,6 +550,16 @@ TriggerSlope
 
 
 
+    .. py:attribute:: TriggerSlope.SLOPE_EITHER
+
+
+
+        Either edge
+
+        
+
+
+
 TriggerType
 -----------
 
@@ -405,26 +570,6 @@ TriggerType
 
 
         Configures the digitizer for edge triggering.  An edge trigger occurs when the trigger signal crosses the trigger level specified with the set trigger slope.  You configure the trigger level and slope with :py:meth:`niscope.Session.configure_trigger_edge`.
-
-        
-
-
-
-    .. py:attribute:: TriggerType.TV
-
-
-
-        Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with :py:meth:`niscope.Session.configure_trigger_video`.
-
-        
-
-
-
-    .. py:attribute:: TriggerType.IMMEDIATE
-
-
-
-        Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.
 
         
 
@@ -465,6 +610,38 @@ TriggerType
 
 
         Configures the digitizer for software triggering.  A software trigger occurs when :py:meth:`niscope.Session.SendSoftwareTrigger` is called.
+
+        
+
+
+
+    .. py:attribute:: TriggerType.TV
+
+
+
+        Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with :py:meth:`niscope.Session.configure_trigger_video`.
+
+        
+
+
+
+    .. py:attribute:: TriggerType.GLITCH
+
+
+
+    .. py:attribute:: TriggerType.WIDTH
+
+
+
+    .. py:attribute:: TriggerType.RUNT
+
+
+
+    .. py:attribute:: TriggerType.IMMEDIATE
+
+
+
+        Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.
 
         
 
@@ -803,6 +980,66 @@ WhichTrigger
 
 
     .. py:attribute:: WhichTrigger.ADVANCE
+
+
+
+WidthCondition
+--------------
+
+.. py:class:: WidthCondition
+
+    .. py:attribute:: WidthCondition.WITHIN
+
+
+
+        Trigger on pulses with a duration within the range bounded by :py:data:`niscope.Session.width_low_threshold` and :py:data:`niscope.Session.width_high_threshold`.
+
+        
+
+
+
+    .. py:attribute:: WidthCondition.OUTSIDE
+
+
+
+        Trigger on pulses with a duration not within the range bounded by :py:data:`niscope.Session.width_low_threshold` and :py:data:`niscope.Session.width_high_threshold`.
+
+        
+
+
+
+WidthPolarity
+-------------
+
+.. py:class:: WidthPolarity
+
+    .. py:attribute:: WidthPolarity.POSITIVE
+
+
+
+        Trigger on pulses of positive polarity relative to the trigger threshold.
+
+        
+
+
+
+    .. py:attribute:: WidthPolarity.NEGATIVE
+
+
+
+        Trigger on pulses of negative polarity relative to the trigger threshold.
+
+        
+
+
+
+    .. py:attribute:: WidthPolarity.EITHER
+
+
+
+        Trigger on pulses of either positive or negative polarity.
+
+        
 
 
 

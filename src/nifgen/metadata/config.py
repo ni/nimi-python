@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-FGEN version 19.1.0d0
+# This file is generated from NI-FGEN API metadata version 19.6.0d0
 config = {
+    'api_version': '19.6.0d0',
     'c_function_prefix': 'niFgen_',
     'close_function': 'Close',
     'context_manager_name': {
@@ -12,7 +13,6 @@ config = {
     ],
     'driver_name': 'NI-FGEN',
     'init_function': 'InitializeWithChannels',
-    'api_version': '19.1.0d0',
     'library_info': {
         'Linux': {
             '64bit': {

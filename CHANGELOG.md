@@ -44,6 +44,11 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * `cable_sense_signal_enable`, `cable_sense_voltage`, `cable_sense_mode` properties and associated enum
+        * `enabled_channels`, `product_code` properties
+        * `glitch_condition`, `glitch_polarity`, `glitch_width` properties and associated enums
+        * `runt_high_threshold`, `runt_low_threshold`, `runt_polarity`, `runt_condition`, `runt_time_high_limit`, `runt_time_low_limit` properties and associated enums
+        * `width_condition`, `width_high_threshold`, `width_low_threshold`, `width_polarity` properties and associated enums
     * #### Changed
         * Fixed enum values for `TIME_HISTOGRAM_MEAN_PLUS_STDEV`, `TIME_HISTOGRAM_MEAN_PLUS_2_STDEV`, `HF_REJECT` and `LF_REJECT`
     * #### Removed
@@ -56,8 +61,24 @@ All notable changes to this project will be documented in this file.
         * Initial support
         * Very basic at this point and subject to change
         * Looking for any testing and/or feedback
+        * `get_channel_name_from_string()`
     * #### Changed
+        *  New enums:
+
+           | Enum name                  | Where used                                                                       |
+           |----------------------------|----------------------------------------------------------------------------------|
+           | `DigitalEdge`              | `digital_edge_conditional_jump_trigger_edge`, `digital_edge_start_trigger_edge`  |
+           | `ApertureTimeUnits`        | `ppmu_aperture_time_units`, `ppmu_configure_aperture_time(units)`                |
+           | `PPMUOutputFunction`       | `ppmu_output_function`                                                           |
+           | `SelectedFunction`         | `selected_function`                                                              |
+           | `TDREndpointTermination`   | `tdr_endpoint_termination`                                                       |
+           | `Signal`                   | `export_signal(signal)`                                                          |
+
     * #### Removed
+        * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`, 
+            `get_number_of_vectors()`, `get_pattern_file_path()`, `get_pin_type()`, `get_time_set_compare_edges()`, `get_time_set_drive_edges()`,
+            `is_pattern_file_modified_since_load()`, `load_levels_internal()`, `load_pattern_internal()`, `load_timing_internal()`, `uncommit()`
+        * Need to determine how to generate this function - `fetch_capture_waveform_u32()`
 
 
 ## 1.1.2 - 2019-06-06

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-SCOPE version 19.1.0d28
+# This file is generated from NI-SCOPE API metadata version 19.1.0d50
 enums = {
     'AcquisitionStatus': {
         'values': [
@@ -56,24 +56,6 @@ enums = {
                     'description': 'Virtual address.'
                 },
                 'name': 'NISCOPE_VAL_ADDR_VIRTUAL',
-                'value': 1
-            }
-        ]
-    },
-    'AgcAverageControl': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Mean average.'
-                },
-                'name': 'NISCOPE_VAL_MEAN',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Median average.'
-                },
-                'name': 'NISCOPE_VAL_MEDIAN',
                 'value': 1
             }
         ]
@@ -296,96 +278,6 @@ enums = {
             }
         ]
     },
-    'BoolEnableDisable': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Disabled'
-                },
-                'name': 'NISCOPE_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Enabled'
-                },
-                'name': 'NISCOPE_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'BoolEnableDisableChan': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Does not acquire a waveform for the channel.'
-                },
-                'name': 'NISCOPE_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Acquires a waveform for the channel.'
-                },
-                'name': 'NISCOPE_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'BoolEnableDisableIq': {
-        'values': [
-            {
-                'documentation': {
-                    'description': '\nA scalar fetch returns an array of waveforms in the following format:\nIII...QQQ...\n'
-                },
-                'name': 'NISCOPE_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': '\n(Default) A scalar fetch returns an array of waveforms in the following\nformat: IQIQIQ...\n'
-                },
-                'name': 'NISCOPE_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'BoolEnableDisableRealtime': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Allow both real-time and equivalent-time measurements.'
-                },
-                'name': 'NISCOPE_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Allow only real-time measurements.'
-                },
-                'name': 'NISCOPE_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'BoolEnableDisableTis': {
-        'values': [
-            {
-                'documentation': {
-                    'description': "\n(Default) Use only this channel's ADC to acquire data for this channel.\n"
-                },
-                'name': 'NISCOPE_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Use multiple interleaved ADCs to acquire data for this channel.'
-                },
-                'name': 'NISCOPE_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
     'BoutParallelOutputSource': {
         'values': [
             {
@@ -408,6 +300,24 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_PHASE_DATA',
                 'value': 4
+            }
+        ]
+    },
+    'CableSenseMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The oscilloscope is not configured to emit a CableSense signal.'
+                },
+                'name': 'NISCOPE_VAL_CABLE_SENSE_MODE_DISABLED',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'The oscilloscope is configured to emit a single CableSense pulse.'
+                },
+                'name': 'NISCOPE_VAL_CABLE_SENSE_MODE_ON_DEMAND',
+                'value': 1
             }
         ]
     },
@@ -683,24 +593,6 @@ enums = {
             }
         ]
     },
-    'CoordinateConverterInput': {
-        'values': [
-            {
-                'documentation': {
-                    'description': '\nSelects the HB filter as the source for the input to the coordinate\nconverter.\n'
-                },
-                'name': 'NISCOPE_VAL_RESAMPLER_HB',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': '\nSelects the programmable FIR filter as the source for the input to the\ncoordinate converter.\n'
-                },
-                'name': 'NISCOPE_VAL_PROGRAMMABLE_FIR',
-                'value': 1
-            }
-        ]
-    },
     'DataJustificationMode': {
         'values': [
             {
@@ -733,67 +625,6 @@ enums = {
                     'description': 'The waveform data points are complex numbers (IQ data).'
                 },
                 'name': 'NISCOPE_VAL_COMPLEX',
-                'value': 1
-            }
-        ]
-    },
-    'DiscriminatorFIRInputSource': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR input source to phase.'
-                },
-                'name': 'NISCOPE_VAL_PHASE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR input source to magnitude.'
-                },
-                'name': 'NISCOPE_VAL_MAGNITUDE',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR input source to resampler.'
-                },
-                'name': 'NISCOPE_VAL_RESAMPLER',
-                'value': 2
-            }
-        ]
-    },
-    'DiscriminatorFIRSymmetry': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR symmetry to symmetric.'
-                },
-                'name': 'NISCOPE_VAL_SYMMETRIC',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR symmetry to asymmetric.'
-                },
-                'name': 'NISCOPE_VAL_ASYMMETRIC',
-                'value': 1
-            }
-        ]
-    },
-    'DiscriminatorFIRSymmetryType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR symmetry type to even.'
-                },
-                'name': 'NISCOPE_VAL_EVEN',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR symmetry type to odd.'
-                },
-                'name': 'NISCOPE_VAL_ODD',
                 'value': 1
             }
         ]
@@ -1000,6 +831,49 @@ enums = {
             }
         ]
     },
+    'GlitchCondition': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses with a duration greater than the specified glitch width.'
+                },
+                'name': 'NISCOPE_VAL_GLITCH_GREATER_THAN',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses with a duration shorter than the specified glitch width.'
+                },
+                'name': 'NISCOPE_VAL_GLITCH_LESS_THAN',
+                'value': 1
+            }
+        ]
+    },
+    'GlitchPolarity': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses of positive polarity relative to the trigger threshold.'
+                },
+                'name': 'NISCOPE_VAL_GLITCH_POSITIVE',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses of negative polarity relative to the trigger threshold.'
+                },
+                'name': 'NISCOPE_VAL_GLITCH_NEGATIVE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses of either positive or negative polarity.'
+                },
+                'name': 'NISCOPE_VAL_GLITCH_EITHER',
+                'value': 3
+            }
+        ]
+    },
     'NotificationType': {
         'values': [
             {
@@ -1086,24 +960,6 @@ enums = {
             }
         ]
     },
-    'ProgFIRFilterRealComplex': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Sets a dual real filter.'
-                },
-                'name': 'NISCOPE_VAL_REAL',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Sets a complex filter.'
-                },
-                'name': 'NISCOPE_VAL_COMPLEX',
-                'value': 1
-            }
-        ]
-    },
     'ProgFIRFilterSymmetry': {
         'values': [
             {
@@ -1118,42 +974,6 @@ enums = {
                     'description': 'Sets an asymmetric filter.'
                 },
                 'name': 'NISCOPE_VAL_ASYMMETRIC',
-                'value': 1
-            }
-        ]
-    },
-    'ProgFIRFilterSymmetryType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR symmetry type to even.'
-                },
-                'name': 'NISCOPE_VAL_EVEN',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Sets the discriminator FIR symmetry type to odd.'
-                },
-                'name': 'NISCOPE_VAL_ODD',
-                'value': 1
-            }
-        ]
-    },
-    'QInputToCoordConverter': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Enables the Q input to coordinate converter.'
-                },
-                'name': 'NISCOPE_VAL_I_AND_Q',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Zeroes out the Q input the to coordinate converter.'
-                },
-                'name': 'NISCOPE_VAL_Q_ZEROED',
                 'value': 1
             }
         ]
@@ -1226,42 +1046,53 @@ enums = {
             }
         ]
     },
-    'ResamplerFilterMode': {
+    'RuntPolarity': {
         'values': [
             {
                 'documentation': {
-                    'description': 'Resampler enabled.'
+                    'description': 'Trigger on pulses of positive polarity relative to NISCOPE_ATTR_RUNT_LOW_THRESHOLD that do not cross NISCOPE_ATTR_RUNT_HIGH_THRESHOLD.'
                 },
-                'name': 'NISCOPE_VAL_RESAMPLER_ENABLED',
+                'name': 'NISCOPE_VAL_RUNT_POSITIVE',
                 'value': 1
             },
             {
                 'documentation': {
-                    'description': 'HB 1 enabled.'
+                    'description': 'Trigger on pulses of negative polarity relative to NISCOPE_ATTR_RUNT_HIGH_THRESHOLD that do not cross NISCOPE_ATTR_RUNT_LOW_THRESHOLD.'
                 },
-                'name': 'NISCOPE_VAL_HB_1_ENABLED',
+                'name': 'NISCOPE_VAL_RUNT_NEGATIVE',
                 'value': 2
             },
             {
                 'documentation': {
-                    'description': 'Resampler and HB 1.'
+                    'description': 'Trigger on pulses of either positive or negative polarity.'
                 },
-                'name': 'NISCOPE_VAL_RESAMPLER_AND_HB_1',
+                'name': 'NISCOPE_VAL_RUNT_EITHER',
                 'value': 3
+            }
+        ]
+    },
+    'RuntTimeCondition': {
+        'values': [
+            {
+                'documentation': {
+                    'description': '\nTime qualification is disabled. Trigger on runt pulses based solely on the voltage level of the pulses.\n'
+                },
+                'name': 'NISCOPE_VAL_RUNT_TIME_CONDITION_NONE',
+                'value': 0
             },
             {
                 'documentation': {
-                    'description': 'Both HB Filters.'
+                    'description': '\nTrigger on pulses that, in addition to meeting runt voltage criteria, have a duration within the range bounded by NISCOPE_ATTR_RUNT_TIME_LOW_LIMIT and NISCOPE_ATTR_RUNT_TIME_HIGH_LIMIT.\n'
                 },
-                'name': 'NISCOPE_VAL_BOTH_HB_FILTERS',
-                'value': 6
+                'name': 'NISCOPE_VAL_RUNT_TIME_CONDITION_WITHIN',
+                'value': 1
             },
             {
                 'documentation': {
-                    'description': 'Resampler and Both HB Filters.'
+                    'description': '\nTrigger on pulses that, in addition to meeting runt voltage criteria, have a duration not within the range bounded by NISCOPE_ATTR_RUNT_TIME_LOW_LIMIT and NISCOPE_ATTR_RUNT_TIME_HIGH_LIMIT.\n'
                 },
-                'name': 'NISCOPE_VAL_RESAMPLER_AND_BOTH_HB_FILTERS',
-                'value': 7
+                'name': 'NISCOPE_VAL_RUNT_TIME_CONDITION_OUTSIDE',
+                'value': 2
             }
         ]
     },
@@ -1549,24 +1380,6 @@ enums = {
             }
         ]
     },
-    'SyncoutClkSelect': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies CLKIN as the source for Syncout CLK.'
-                },
-                'name': 'NISCOPE_VAL_CLKIN',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies PROCCLK as the source for Syncout CLK.'
-                },
-                'name': 'NISCOPE_VAL_PROCCLK',
-                'value': 1
-            }
-        ]
-    },
     'TerminalConfiguration': {
         'values': [
             {
@@ -1589,38 +1402,6 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_DIFFERENTIAL',
                 'value': 2
-            }
-        ]
-    },
-    'TimingNcoFreqOffsetBits': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies 8 offset bits in the timing NCO.'
-                },
-                'name': 'NISCOPE_VAL__8_BITS',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies 16 offset bits in the timing NCO.'
-                },
-                'name': 'NISCOPE_VAL__16_BITS',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies 24 offset bits in the timing NCO.'
-                },
-                'name': 'NISCOPE_VAL__24_BITS',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies 32 offset bits in the timing NCO.'
-                },
-                'name': 'NISCOPE_VAL__32_BITS',
-                'value': 3
             }
         ]
     },
@@ -1696,6 +1477,169 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_POSITIVE',
                 'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Either edge'
+                },
+                'name': 'NISCOPE_VAL_SLOPE_EITHER',
+                'value': 3
+            }
+        ]
+    },
+    'TriggerSource': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_IMMEDIATE',
+                'value': '"VAL_IMMEDIATE"'
+            },
+            {
+                'name': 'NISCOPE_VAL_EXTERNAL',
+                'value': '"VAL_EXTERNAL"'
+            },
+            {
+                'name': 'NISCOPE_VAL_SW_TRIG_FUNC',
+                'value': '"VAL_SW_TRIG_FUNC"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL0',
+                'value': '"VAL_TTL0"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL1',
+                'value': '"VAL_TTL1"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL2',
+                'value': '"VAL_TTL2"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL3',
+                'value': '"VAL_TTL3"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL4',
+                'value': '"VAL_TTL4"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL5',
+                'value': '"VAL_TTL5"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL6',
+                'value': '"VAL_TTL6"'
+            },
+            {
+                'name': 'NISCOPE_VAL_TTL7',
+                'value': '"VAL_TTL7"'
+            },
+            {
+                'name': 'NISCOPE_VAL_ECL0',
+                'value': '"VAL_ECL0"'
+            },
+            {
+                'name': 'NISCOPE_VAL_ECL1',
+                'value': '"VAL_ECL1"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PXI_STAR',
+                'value': '"VAL_PXI_STAR"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_0',
+                'value': '"VAL_RTSI_0"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_1',
+                'value': '"VAL_RTSI_1"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_2',
+                'value': '"VAL_RTSI_2"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_3',
+                'value': '"VAL_RTSI_3"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_4',
+                'value': '"VAL_RTSI_4"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_5',
+                'value': '"VAL_RTSI_5"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_6',
+                'value': '"VAL_RTSI_6"'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_7',
+                'value': '"VAL_RTSI_7"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_0',
+                'value': '"VAL_PFI_0"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_1',
+                'value': '"VAL_PFI_1"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_2',
+                'value': '"VAL_PFI_2"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_3',
+                'value': '"VAL_PFI_3"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_4',
+                'value': '"VAL_PFI_4"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_5',
+                'value': '"VAL_PFI_5"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_6',
+                'value': '"VAL_PFI_6"'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_7',
+                'value': '"VAL_PFI_7"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_0',
+                'value': '"VAL_AUX_0_PFI_0"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_1',
+                'value': '"VAL_AUX_0_PFI_1"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_3',
+                'value': '"VAL_AUX_0_PFI_3"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_4',
+                'value': '"VAL_AUX_0_PFI_4"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_5',
+                'value': '"VAL_AUX_0_PFI_5"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_6',
+                'value': '"VAL_AUX_0_PFI_6"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_7',
+                'value': '"VAL_AUX_0_PFI_7"'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_PFI_2',
+                'value': '"VAL_AUX_0_PFI_2"'
             }
         ]
     },
@@ -1707,20 +1651,6 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_EDGE_TRIGGER',
                 'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with niScope_ConfigureTriggerVideo.'
-                },
-                'name': 'NISCOPE_VAL_TV_TRIGGER',
-                'value': 5
-            },
-            {
-                'documentation': {
-                    'description': 'Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.'
-                },
-                'name': 'NISCOPE_VAL_IMMEDIATE_TRIGGER',
-                'value': 6
             },
             {
                 'documentation': {
@@ -1749,6 +1679,32 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_SOFTWARE_TRIGGER',
                 'value': 1004
+            },
+            {
+                'documentation': {
+                    'description': 'Configures the digitizer for video/TV triggering.   You configure the video trigger parameters like signal Format, Line to trigger off of, Polarity, and Enable DC Restore with niScope_ConfigureTriggerVideo.'
+                },
+                'name': 'NISCOPE_VAL_TV_TRIGGER',
+                'value': 5
+            },
+            {
+                'name': 'NISCOPE_VAL_GLITCH_TRIGGER',
+                'value': 4
+            },
+            {
+                'name': 'NISCOPE_VAL_WIDTH_TRIGGER',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_RUNT_TRIGGER',
+                'value': 3
+            },
+            {
+                'documentation': {
+                    'description': 'Configures the digitizer for immediate triggering.   An immediate trigger occurs as soon as the pretrigger samples are acquired.'
+                },
+                'name': 'NISCOPE_VAL_IMMEDIATE_TRIGGER',
+                'value': 6
             }
         ]
     },
@@ -1991,6 +1947,49 @@ enums = {
             },
             {
                 'name': 'NISCOPE_VAL_SOFTWARE_TRIGGER_ADVANCE',
+                'value': 3
+            }
+        ]
+    },
+    'WidthCondition': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses with a duration within the range bounded by NISCOPE_ATTR_WIDTH_LOW_THRESHOLD and NISCOPE_ATTR_WIDTH_HIGH_THRESHOLD.'
+                },
+                'name': 'NISCOPE_VAL_WIDTH_WITHIN',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses with a duration not within the range bounded by NISCOPE_ATTR_WIDTH_LOW_THRESHOLD and NISCOPE_ATTR_WIDTH_HIGH_THRESHOLD.'
+                },
+                'name': 'NISCOPE_VAL_WIDTH_OUTSIDE',
+                'value': 2
+            }
+        ]
+    },
+    'WidthPolarity': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses of positive polarity relative to the trigger threshold.'
+                },
+                'name': 'NISCOPE_VAL_WIDTH_POSITIVE',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses of negative polarity relative to the trigger threshold.'
+                },
+                'name': 'NISCOPE_VAL_WIDTH_NEGATIVE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Trigger on pulses of either positive or negative polarity.'
+                },
+                'name': 'NISCOPE_VAL_WIDTH_EITHER',
                 'value': 3
             }
         ]

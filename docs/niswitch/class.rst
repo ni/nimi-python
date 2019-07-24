@@ -474,6 +474,7 @@ analog_bus_sharing_enable
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Channel Configuration:Analog Bus Sharing Enable**
                 - C Attribute: **NISWITCH_ATTR_ANALOG_BUS_SHARING_ENABLE**
 
 bandwidth
@@ -515,6 +516,7 @@ bandwidth
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Bandwidth**
                 - C Attribute: **NISWITCH_ATTR_BANDWIDTH**
 
 channel_count
@@ -543,6 +545,7 @@ channel_count
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
                 - C Attribute: **NISWITCH_ATTR_CHANNEL_COUNT**
 
 characteristic_impedance
@@ -584,6 +587,7 @@ characteristic_impedance
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Characteristic Impedance**
                 - C Attribute: **NISWITCH_ATTR_CHARACTERISTIC_IMPEDANCE**
 
 continuous_scan
@@ -613,6 +617,7 @@ continuous_scan
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Continuous Scan**
                 - C Attribute: **NISWITCH_ATTR_CONTINUOUS_SCAN**
 
 digital_filter_enable
@@ -642,6 +647,7 @@ digital_filter_enable
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Digital Filter Enable**
                 - C Attribute: **NISWITCH_ATTR_DIGITAL_FILTER_ENABLE**
 
 driver_setup
@@ -676,6 +682,7 @@ driver_setup
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Driver Setup**
                 - C Attribute: **NISWITCH_ATTR_DRIVER_SETUP**
 
 handshaking_initiation
@@ -704,6 +711,7 @@ handshaking_initiation
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Handshaking Initiation**
                 - C Attribute: **NISWITCH_ATTR_HANDSHAKING_INITIATION**
 
 instrument_firmware_revision
@@ -732,6 +740,7 @@ instrument_firmware_revision
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Firmware Revision**
                 - C Attribute: **NISWITCH_ATTR_INSTRUMENT_FIRMWARE_REVISION**
 
 instrument_manufacturer
@@ -760,6 +769,7 @@ instrument_manufacturer
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Manufacturer**
                 - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MANUFACTURER**
 
 instrument_model
@@ -788,6 +798,7 @@ instrument_model
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
                 - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MODEL**
 
 io_resource_descriptor
@@ -818,6 +829,7 @@ io_resource_descriptor
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor**
                 - C Attribute: **NISWITCH_ATTR_IO_RESOURCE_DESCRIPTOR**
 
 is_configuration_channel
@@ -861,6 +873,7 @@ is_configuration_channel
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Channel Configuration:Is Configuration Channel**
                 - C Attribute: **NISWITCH_ATTR_IS_CONFIGURATION_CHANNEL**
 
 is_debounced
@@ -889,6 +902,7 @@ is_debounced
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Is Debounced**
                 - C Attribute: **NISWITCH_ATTR_IS_DEBOUNCED**
 
 is_scanning
@@ -917,6 +931,7 @@ is_scanning
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Is Scanning**
                 - C Attribute: **NISWITCH_ATTR_IS_SCANNING**
 
 is_source_channel
@@ -958,6 +973,7 @@ is_source_channel
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Channel Configuration:Is Source Channel**
                 - C Attribute: **NISWITCH_ATTR_IS_SOURCE_CHANNEL**
 
 is_waiting_for_trig
@@ -986,6 +1002,7 @@ is_waiting_for_trig
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Is Waiting for Trigger?**
                 - C Attribute: **NISWITCH_ATTR_IS_WAITING_FOR_TRIG**
 
 logical_name
@@ -1019,6 +1036,7 @@ logical_name
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
                 - C Attribute: **NISWITCH_ATTR_LOGICAL_NAME**
 
 max_ac_voltage
@@ -1060,6 +1078,7 @@ max_ac_voltage
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum AC Voltage**
                 - C Attribute: **NISWITCH_ATTR_MAX_AC_VOLTAGE**
 
 max_carry_ac_current
@@ -1101,6 +1120,7 @@ max_carry_ac_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_CURRENT**
 
 max_carry_ac_power
@@ -1142,6 +1162,7 @@ max_carry_ac_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_POWER**
 
 max_carry_dc_current
@@ -1183,6 +1204,7 @@ max_carry_dc_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_CURRENT**
 
 max_carry_dc_power
@@ -1224,6 +1246,7 @@ max_carry_dc_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_POWER**
 
 max_dc_voltage
@@ -1265,6 +1288,7 @@ max_dc_voltage
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum DC Voltage**
                 - C Attribute: **NISWITCH_ATTR_MAX_DC_VOLTAGE**
 
 max_switching_ac_current
@@ -1306,6 +1330,7 @@ max_switching_ac_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_CURRENT**
 
 max_switching_ac_power
@@ -1347,6 +1372,7 @@ max_switching_ac_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_POWER**
 
 max_switching_dc_current
@@ -1388,6 +1414,7 @@ max_switching_dc_current
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Current**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_CURRENT**
 
 max_switching_dc_power
@@ -1429,6 +1456,7 @@ max_switching_dc_power
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Power**
                 - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_POWER**
 
 number_of_relays
@@ -1457,6 +1485,7 @@ number_of_relays
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Number of Relays**
                 - C Attribute: **NISWITCH_ATTR_NUMBER_OF_RELAYS**
 
 num_of_columns
@@ -1486,6 +1515,7 @@ num_of_columns
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Matrix Configuration:Number of Columns**
                 - C Attribute: **NISWITCH_ATTR_NUM_OF_COLUMNS**
 
 num_of_rows
@@ -1515,6 +1545,7 @@ num_of_rows
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Matrix Configuration:Number of Rows**
                 - C Attribute: **NISWITCH_ATTR_NUM_OF_ROWS**
 
 power_down_latching_relays_after_debounce
@@ -1544,6 +1575,7 @@ power_down_latching_relays_after_debounce
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
                 - C Attribute: **NISWITCH_ATTR_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE**
 
 scan_advanced_output
@@ -1572,6 +1604,7 @@ scan_advanced_output
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Scan Advanced Output**
                 - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_OUTPUT**
 
 scan_advanced_polarity
@@ -1600,6 +1633,7 @@ scan_advanced_polarity
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Scan Advanced Polarity**
                 - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_POLARITY**
 
 scan_delay
@@ -1633,6 +1667,7 @@ scan_delay
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Scan Delay**
                 - C Attribute: **NISWITCH_ATTR_SCAN_DELAY**
 
 scan_list
@@ -1671,6 +1706,7 @@ scan_list
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Scan List**
                 - C Attribute: **NISWITCH_ATTR_SCAN_LIST**
 
 scan_mode
@@ -1705,6 +1741,7 @@ scan_mode
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Scan Mode**
                 - C Attribute: **NISWITCH_ATTR_SCAN_MODE**
 
 serial_number
@@ -1733,6 +1770,7 @@ serial_number
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Serial Number**
                 - C Attribute: **NISWITCH_ATTR_SERIAL_NUMBER**
 
 settling_time
@@ -1777,6 +1815,7 @@ settling_time
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Settling Time**
                 - C Attribute: **NISWITCH_ATTR_SETTLING_TIME**
 
 simulate
@@ -1810,6 +1849,7 @@ simulate
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
                 - C Attribute: **NISWITCH_ATTR_SIMULATE**
 
 specific_driver_description
@@ -1838,6 +1878,7 @@ specific_driver_description
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
                 - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
 
 specific_driver_revision
@@ -1866,6 +1907,7 @@ specific_driver_revision
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
                 - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_REVISION**
 
 specific_driver_vendor
@@ -1894,6 +1936,7 @@ specific_driver_vendor
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Vendor**
                 - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_VENDOR**
 
 supported_instrument_models
@@ -1922,6 +1965,7 @@ supported_instrument_models
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models**
                 - C Attribute: **NISWITCH_ATTR_SUPPORTED_INSTRUMENT_MODELS**
 
 temperature
@@ -1950,6 +1994,7 @@ temperature
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Temperature**
                 - C Attribute: **NISWITCH_ATTR_TEMPERATURE**
 
 trigger_input
@@ -1978,6 +2023,7 @@ trigger_input
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Trigger Input**
                 - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT**
 
 trigger_input_polarity
@@ -2006,6 +2052,7 @@ trigger_input_polarity
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Scanning Configuration:Trigger Input Polarity**
                 - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT_POLARITY**
 
 wire_mode
@@ -2047,6 +2094,7 @@ wire_mode
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
+                - LabVIEW Property: **Module Characteristics:Wire mode**
                 - C Attribute: **NISWITCH_ATTR_WIRE_MODE**
 
 

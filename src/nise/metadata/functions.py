@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI Switch Executive version 19.1.0d0
+# This file is generated from NI Switch Executive API metadata version 19.1.0d1
 functions = {
     'ClearError': {
         'codegen_method': 'no',
@@ -437,12 +437,6 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
-    },
-    'GetMaxStringSize': {
-        'codegen_method': 'no',
-        'parameters': [
-        ],
-        'returns': 'ViInt64'
     },
     'IsConnected': {
         'documentation': {
