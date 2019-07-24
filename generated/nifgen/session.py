@@ -1212,47 +1212,6 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_custom_fir_filter_coefficients(self, coefficients_array):
-        r'''configure_custom_fir_filter_coefficients
-
-        Sets the FIR filter coefficients used by the onboard signal processing
-        block. The values are coerced to the closest settings achievable by the
-        signal generator.
-
-        Refer to the *FIR Filter* topic for your device in the *NI Signal
-        Generators Help* for more information about FIR filter coefficients.
-        This method is supported only for the NI 5441.
-
-        Note:
-        The signal generator must not be in the Generating state when you call
-        this method.
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nifgen.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].configure_custom_fir_filter_coefficients(coefficients_array)
-
-        Args:
-            coefficients_array (list of float): Specifies the array of data the onboard signal processor uses for the
-                FIR filter coefficients. For the NI 5441, provide a symmetric array of
-                95 coefficients to this parameter. The array must have at least as many
-                elements as the value that you specify in the **numberOfCoefficients**
-                parameter in this method.
-                The coefficients should range between –1.00 and +1.00.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_coefficients_ctype = _visatype.ViInt32(0 if coefficients_array is None else len(coefficients_array))  # case S160
-        coefficients_array_ctype = get_ctypes_pointer_for_buffer(value=coefficients_array, library_type=_visatype.ViReal64)  # case B550
-        error_code = self._library.niFgen_ConfigureCustomFIRFilterCoefficients(vi_ctype, channel_name_ctype, number_of_coefficients_ctype, coefficients_array_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def configure_freq_list(self, frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0):
         r'''configure_freq_list
 
