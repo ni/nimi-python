@@ -79,8 +79,12 @@ All notable changes to this project will be documented in this file.
             `get_number_of_vectors()`, `get_pattern_file_path()`, `get_pin_type()`, `get_time_set_compare_edges()`, `get_time_set_drive_edges()`,
             `is_pattern_file_modified_since_load()`, `load_levels_internal()`, `load_pattern_internal()`, `load_timing_internal()`, `uncommit()`
         * Need to determine how to generate this function - `fetch_capture_waveform_u32()`
-
-
+* ### NI-TClk
+    * #### Added
+        * Initial support
+    * #### Changed
+    * #### Removed
+        
 ## 1.1.2 - 2019-06-06
 * ### ALL
     * #### Changed
