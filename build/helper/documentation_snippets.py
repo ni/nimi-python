@@ -105,8 +105,9 @@ This function will return a Python context manager that will initiate on enterin
 '''
 
 def initiate_function_def_for_doc(functions, config):
-    # This is very specific to IVI. We look for a 'close' function and if we find it,
-    # We will copy that and modify it to be what we need for documentation
+    # This is very specific to the IVI state model which not all drivers in nimi-python follow.
+    # We look for a 'close' function and if we find it, We will copy that and modify it to be
+    # what we need for documentation
     session_context_manager_initiate = None
     if 'initiate_function' in config['context_manager_name']:
         session_context_manager_initiate = config['context_manager_name']['initiate_function']
