@@ -31,7 +31,7 @@ install:
   - travis_retry pip install --upgrade tox tox-travis coveralls codecov
 
 script:
-  - tox -e clean,codegen PRINT=1
+  - tox -e clean,build_test,codegen PRINT=1
   - tox
 
 after_success:
