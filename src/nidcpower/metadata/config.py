@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-DCPower version 19.1.0d33
+# This file is generated from NI-DCPower API metadata version 19.6.0d2
 config = {
+    'api_version': '19.6.0d2',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'Close',
     'context_manager_name': {
@@ -12,7 +13,6 @@ config = {
     ],
     'driver_name': 'NI-DCPower',
     'init_function': 'InitializeWithChannels',
-    'api_version': '19.1.0d33',
     'library_info': {
         'Linux': {
             '64bit': {

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-Digital Pattern Driver version 19.0.0d32
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.0.0a0
 config = {
+    'api_version': '19.0.0a0',
     'c_function_prefix': 'niDigital_',
     'close_function': 'Close',
     'context_manager_name': {
         'abort_function': 'Abort',
         'initiate_function': 'Initiate',
-        'task': 'acquisition'
+        'task': 'burst'
     },
     'custom_types': [
     ],
@@ -14,7 +15,6 @@ config = {
     'enum_whitelist_suffix': [
     ],
     'init_function': 'InitWithOptions',
-    'api_version': '19.0.0d32',
     'library_info': {
         'Linux': {
             '64bit': {

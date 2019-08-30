@@ -1344,7 +1344,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ConfigureCustomFIRFilterCoefficients': {
-        'codegen_method': 'public',
+        'codegen_method': 'no',
         'documentation': {
             'description': '\nSets the FIR filter coefficients used by the onboard signal processing\nblock. The values are coerced to the closest settings achievable by the\nsignal generator.\n\nRefer to the *FIR Filter* topic for your device in the *NI Signal\nGenerators Help* for more information about FIR filter coefficients.\nThis function is supported only for the NI 5441.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
@@ -4821,7 +4821,20 @@ functions = {
     'GetFIRFilterCoefficients': {
         'codegen_method': 'no',
         'documentation': {
-            'description': '\n| Returns the FIR filter coefficients used by the onboard signal\n  processing block. These coefficients are determined by NI-FGEN and\n  based on the FIR filter type and corresponding attribute (Alpha,\n  Passband, BT) unless you are using the custom filter. If you are using\n  a custom filter, the coefficients returned are those set with the\n  nifgen_ConfigureCustomFIRFilterCoefficients function coerced to the\n  quantized values used by the device.\n| To use this function, first call an instance of the\n  niFgen_GetFIRFilterCoefficients function with the\n  **coefficientsArray** parameter set to VI_NULL. Calling the function\n  in this state returns the current size of the **coefficientsArray** as\n  the value of the **numberOfCoefficientsRead** parameter. Create an\n  array of this size, and call the niFgen_GetFIRFilterCoefficients\n  function a second time, passing the new array as the\n  **coefficientsArray** parameter and the size as the **arraySize**\n  parameter. This second function call populates the array with the FIR\n  filter coefficients.\n| Refer to the FIR Filter topic for your device in the *NI Signal\n  Generators Help* for more information about FIR filter coefficients.\n  This function is supported only for the NI 5441.\n| **Default Value**: None\n'
+            'description': '''
+Returns the FIR filter coefficients used by the onboard signal
+processing block. These coefficients are determined by NI-FGEN and
+based on the FIR filter type and corresponding attribute (Alpha,
+Passband, BT) unless you are using the custom filter. If you are using
+a custom filter, the coefficients returned are those set with the
+configure_custom_fir_filter_coefficients function coerced to the
+quantized values used by the device.
+
+Refer to the FIR Filter topic for your device in the *NI Signal Generators Help*
+for more information about FIR filter coefficients.
+
+This function is supported only for the NI 5441.
+'''
         },
         'parameters': [
             {
@@ -4849,15 +4862,20 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': '\nSpecifies the array of data the onboard signal processor uses for the\nFIR filter coefficients. For the NI 5441, provide a symmetric array of\n95 coefficients to this parameter. The array must have at least as many\nelements as the value that you specify in the **numberOfCoefficients**\nparameter in this function.\nThe coefficients should range between –1.00 and +1.00.\n'
                 },
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'arraySize',
+                    'value_twist': 'numberOfCoefficientsRead'
+                },
                 'name': 'coefficientsArray',
-                'type': 'ViReal64'
+                'type': 'ViReal64[]'
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': '\nSpecifies the array of data containing the number of coefficients you\nwant to read.\n'
                 },
