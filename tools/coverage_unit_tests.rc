@@ -1,7 +1,4 @@
 [run]
 omit =
     */_library*
-include =
-    */nifake/*
-    */nimodinst/session.py
-    build/*
+
