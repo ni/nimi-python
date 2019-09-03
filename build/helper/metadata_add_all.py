@@ -314,7 +314,7 @@ def _setup_init_function(functions, config):
         # Change the init_function information for generating the docstring
         # We are assuming the last parameter is vi out
         for p in init_function['parameters']:
-            if p['name'] == 'vi':
+            if p['name'] == config['session_handle_parameter_name']:
                 p['documentation']['description'] = session_return_text
                 p['type_in_documentation'] = config['module_name'] + '.Session'
                 p['python_name'] = 'session'
