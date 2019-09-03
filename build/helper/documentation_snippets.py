@@ -104,6 +104,7 @@ initiate_function_note = '''
 This function will return a Python context manager that will initiate on entering and abort on exit.
 '''
 
+
 def initiate_function_def_for_doc(functions, config):
     # This is very specific to the IVI state model which not all drivers in nimi-python follow.
     # We look for a 'close' function and if we find it, We will copy that and modify it to be
@@ -135,9 +136,13 @@ def initiate_function_def_for_doc(functions, config):
                 'description': default_initiate_function_doc,
                 'note': [initiate_function_note],
             },
-            'method_templates': [{
-                    'documentation_filename': '/default_method', 'method_python_name_suffix': '', 'session_filename': '/default_method',
-            },],
+            'method_templates': [
+                {
+                    'documentation_filename': '/default_method',
+                    'method_python_name_suffix': '',
+                    'session_filename': '/default_method',
+                },
+            ],
             'name': 'initiate',
             'parameters': [],
             'has_repeated_capability': False,
