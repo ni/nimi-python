@@ -39,8 +39,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureArbSequence']['return'] = 0
         self._defaults['ConfigureArbWaveform'] = {}
         self._defaults['ConfigureArbWaveform']['return'] = 0
-        self._defaults['ConfigureCustomFIRFilterCoefficients'] = {}
-        self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] = 0
         self._defaults['ConfigureFreqList'] = {}
         self._defaults['ConfigureFreqList']['return'] = 0
         self._defaults['ConfigureStandardWaveform'] = {}
@@ -272,11 +270,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureArbWaveform']['return'] != 0:
             return self._defaults['ConfigureArbWaveform']['return']
         return self._defaults['ConfigureArbWaveform']['return']
-
-    def niFgen_ConfigureCustomFIRFilterCoefficients(self, vi, channel_name, number_of_coefficients, coefficients_array):  # noqa: N802
-        if self._defaults['ConfigureCustomFIRFilterCoefficients']['return'] != 0:
-            return self._defaults['ConfigureCustomFIRFilterCoefficients']['return']
-        return self._defaults['ConfigureCustomFIRFilterCoefficients']['return']
 
     def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         if self._defaults['ConfigureFreqList']['return'] != 0:
@@ -861,8 +854,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_ConfigureArbSequence.return_value = 0
         mock_library.niFgen_ConfigureArbWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureArbWaveform")
         mock_library.niFgen_ConfigureArbWaveform.return_value = 0
-        mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.side_effect = MockFunctionCallError("niFgen_ConfigureCustomFIRFilterCoefficients")
-        mock_library.niFgen_ConfigureCustomFIRFilterCoefficients.return_value = 0
         mock_library.niFgen_ConfigureFreqList.side_effect = MockFunctionCallError("niFgen_ConfigureFreqList")
         mock_library.niFgen_ConfigureFreqList.return_value = 0
         mock_library.niFgen_ConfigureStandardWaveform.side_effect = MockFunctionCallError("niFgen_ConfigureStandardWaveform")

@@ -8,7 +8,7 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
-default_python_cmd = ['c://Python27//python.exe']
+default_python_cmd = ['c:/Python27/python.exe']
 
 
 def configure_logging(lvl=logging.WARNING, logfile=None):
@@ -37,13 +37,13 @@ Steps
         * Update the changelog to show the version of the release
         * Change unreleased in TOC to new version
         * Commit to master
-    * `c:\Python36\python.exe tools\build_release.py --build --update --upload --release`
+    * `c:\\Python36\\python.exe tools\\build_release.py --build --update --upload --release`
         * This will update all the versions to remove any '.devN'
         * Clean and build to update generated files with new version
         * Upload to PyPI - you will need to type in your credentials
     * Push all changes to GitHub
     * Create a release on GitHub using the portion from the changelog for this release for the description
-    * `c:\Python36\python.exe tools\build_release.py --build --update`
+    * `c:\\Python36\\python.exe tools\\build_release.py --build --update`
         * This will update the version to X.X.(N+1).dev0
         * Clean and Build to update generated files
     * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC

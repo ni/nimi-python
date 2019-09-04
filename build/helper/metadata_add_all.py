@@ -511,8 +511,10 @@ def _add_enum_value_python_name(enum_info, config):
             v['python_name'] = v['python_name'].replace(suffix, '')
 
     # We need to check again to see if we have any values that start with a digit
+    # If we are not going to code generate this enum, we don't care about this
     for v in enum_info['values']:
-        assert not v['python_name'][0].isdigit()
+        if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
+            raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
 
     return enum_info
 

@@ -405,6 +405,8 @@ niswitch.Session
     +---------------------------------------+
     | :py:func:`get_relay_position`         |
     +---------------------------------------+
+    | :py:func:`initiate`                   |
+    +---------------------------------------+
     | :py:func:`lock`                       |
     +---------------------------------------+
     | :py:func:`relay_control`              |
@@ -2589,6 +2591,28 @@ get_relay_position
 
 
 
+initiate
+~~~~~~~~
+
+    .. py:currentmodule:: niswitch.Session
+
+    .. py:method:: initiate()
+
+            Commits the configured scan list and trigger settings to hardware and
+            initiates the scan. If niSwitch Commit was called earlier, niSwitch
+            Initiate Scan only initiates the scan and returns immediately. Once the
+            scanning operation begins, you cannot perform any other operation other
+            than GetAttribute, AbortScan, or SendSoftwareTrigger. All other
+            methods return NISWITCH_ERROR_SCAN_IN_PROGRESS. To stop the
+            scanning operation, To stop the scanning operation, call
+            :py:meth:`niswitch.Session.abort`.
+
+            
+
+            .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
+
+
 lock
 ~~~~
 
@@ -3104,6 +3128,8 @@ Methods
 | :py:func:`niswitch.Session.get_relay_name`             |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.get_relay_position`         |
++--------------------------------------------------------+
+| :py:func:`niswitch.Session.initiate`                   |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.lock`                       |
 +--------------------------------------------------------+
