@@ -1335,6 +1335,11 @@ def test_get_ctype_variable_declaration_snippet_case_c010():
     assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010"]
 
 
+def test_get_ctype_variable_declaration_snippet_case_c020():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020"]
+
+
 def test_get_ctype_variable_declaration_snippet_case_c050():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_ctype = None  # case C050"]
@@ -1460,11 +1465,6 @@ def test_get_ctype_variable_declaration_snippet_case_b520_not_array_or_list():
         assert False
     except AssertionError:
         pass
-
-
-def test_get_ctype_variable_declaration_snippet_case_b530():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b540():
