@@ -324,6 +324,8 @@ nidmm.Session
     +--------------------------------------------------+
     | :py:func:`import_attribute_configuration_file`   |
     +--------------------------------------------------+
+    | :py:func:`initiate`                              |
+    +--------------------------------------------------+
     | :py:func:`lock`                                  |
     +--------------------------------------------------+
     | :py:func:`perform_open_cable_comp`               |
@@ -3707,6 +3709,25 @@ import_attribute_configuration_file
 
             :type file_path: str
 
+initiate
+~~~~~~~~
+
+    .. py:currentmodule:: nidmm.Session
+
+    .. py:method:: initiate()
+
+            Initiates an acquisition. After you call this method, the DMM leaves
+            the Idle state and enters the Wait-for-Trigger state. If trigger is set
+            to Immediate mode, the DMM begins acquiring measurement data. Use
+            :py:meth:`nidmm.Session.fetch`, :py:meth:`nidmm.Session.fetch_multi_point`, or :py:meth:`nidmm.Session.fetch_waveform` to
+            retrieve the measurement data.
+
+            
+
+            .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
+
+
 lock
 ~~~~
 
@@ -4408,6 +4429,8 @@ Methods
 | :py:func:`nidmm.Session.import_attribute_configuration_buffer` |
 +----------------------------------------------------------------+
 | :py:func:`nidmm.Session.import_attribute_configuration_file`   |
++----------------------------------------------------------------+
+| :py:func:`nidmm.Session.initiate`                              |
 +----------------------------------------------------------------+
 | :py:func:`nidmm.Session.lock`                                  |
 +----------------------------------------------------------------+
