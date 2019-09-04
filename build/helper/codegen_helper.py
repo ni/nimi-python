@@ -1178,6 +1178,110 @@ parameters_for_testing = [
         'type': 'ViReal64',
         'use_in_python_api': True,
     },
+    {  # 29
+        'ctypes_type': 'ViReal64',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
+        'ctypes_variable_name': 'input_array_2_ctype',
+        'default_value': None,
+        'direction': 'in',
+        'documentation': {'description': 'Input array of floats'},
+        'enum': None,
+        'is_buffer': True,
+        'is_string': False,
+        'use_array': False,
+        'use_list': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'input_array_2_ctype',
+        'name': 'inputArray2',
+        'numpy': False,
+        'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+        'python_name': 'input_array_2',
+        'python_name_with_default': 'input_array_2=None',
+        'python_name_with_doc_default': 'input_array_2=None',
+        'python_type': 'float',
+        'size': {'mechanism': 'len', 'value': 'inputArraySize2'},
+        'type': 'ViReal64',
+        'use_in_python_api': True,
+    },
+    {  # 30
+        'ctypes_type': 'ViReal64',
+        'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
+        'ctypes_variable_name': 'input_array_3_ctype',
+        'default_value': None,
+        'direction': 'in',
+        'documentation': {'description': 'Input array of floats'},
+        'enum': None,
+        'is_buffer': True,
+        'is_string': False,
+        'use_array': True,
+        'use_list': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'input_array_3_ctype',
+        'name': 'inputArray3',
+        'numpy': False,
+        'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+        'python_name': 'input_array_3',
+        'python_name_with_default': 'input_array_3=None',
+        'python_name_with_doc_default': 'input_array_3=None',
+        'python_type': 'float',
+        'size': {'mechanism': 'len', 'value': 'inputArraySize3'},
+        'type': 'ViReal64',
+        'use_in_python_api': True,
+    },
+    {  # 31
+        'ctypes_type': 'custom_struct',
+        'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
+        'ctypes_variable_name': 'input_array_4_ctype',
+        'default_value': None,
+        'direction': 'in',
+        'documentation': {'description': 'Input array of floats'},
+        'enum': None,
+        'is_buffer': True,
+        'is_string': False,
+        'use_array': False,
+        'use_list': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'input_array_3_ctype',
+        'name': 'inputArray4',
+        'numpy': False,
+        'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+        'python_name': 'input_array_4',
+        'python_name_with_default': 'input_array_4=None',
+        'python_name_with_doc_default': 'input_array_4=None',
+        'python_type': 'float',
+        'size': {'mechanism': 'len', 'value': 'inputArraySize4'},
+        'type': 'ViReal64',
+        'use_in_python_api': True,
+    },
+    {  # 32
+        'ctypes_type': 'custom_struct',
+        'ctypes_type_library_call': 'ctypes.POINTER(custom_struct)',
+        'ctypes_variable_name': 'input_array_4_ctype',
+        'default_value': None,
+        'direction': 'in',
+        'documentation': {'description': 'Input array of floats'},
+        'enum': None,
+        'is_buffer': True,
+        'is_string': False,
+        'use_array': False,
+        'use_list': False,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'input_array_3_ctype',
+        'name': 'inputArray4',
+        'numpy': False,
+        'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+        'python_name': 'input_array_4',
+        'python_name_with_default': 'input_array_4=None',
+        'python_name_with_doc_default': 'input_array_4=None',
+        'python_type': 'float',
+        'size': {'mechanism': 'len', 'value': 'inputArraySize4'},
+        'type': 'ViReal64',
+        'use_in_python_api': True,
+    },
 ]
 
 
@@ -1451,6 +1555,38 @@ def test_get_ctype_variable_declaration_snippet_case_b620_list():
     assert len(actual) == len(expected)
     for i in range(max(len(actual), len(expected))):
         assert actual[i] == expected[i]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b630_array():
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[30], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    expected = [
+        'input_array_3_array = get_ctypes_and_array(value=_converters.convert_to_nitclk_session_num_list(input_array_3), array_type="d")  # case B630',
+        'input_array_3_ctype = get_ctypes_pointer_for_buffer(value=input_array_3_array, library_type=_visatype.ViReal64)  # case B630',
+    ]
+    assert len(actual) == len(expected)
+    for i in range(max(len(actual), len(expected))):
+        assert actual[i] == expected[i]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b630_list():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[29], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["input_array_2_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(input_array_2), library_type=_visatype.ViReal64)  # case B630"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_b630_custom_type():
+    try:
+        get_ctype_variable_declaration_snippet(parameters_for_testing[31], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+        assert False
+    except AssertionError:
+        pass
+
+
+def test_get_ctype_variable_declaration_snippet_case_b630_not_array_or_list():
+    try:
+        get_ctype_variable_declaration_snippet(parameters_for_testing[32], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+        assert False
+    except AssertionError:
+        pass
 
 
 def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
