@@ -381,105 +381,103 @@ nifgen.Session
 
     **Public methods**
 
-    +-----------------------------------------------------+
-    | Method name                                         |
-    +=====================================================+
-    | :py:func:`abort`                                    |
-    +-----------------------------------------------------+
-    | :py:func:`allocate_named_waveform`                  |
-    +-----------------------------------------------------+
-    | :py:func:`allocate_waveform`                        |
-    +-----------------------------------------------------+
-    | :py:func:`clear_arb_memory`                         |
-    +-----------------------------------------------------+
-    | :py:func:`clear_arb_sequence`                       |
-    +-----------------------------------------------------+
-    | :py:func:`clear_freq_list`                          |
-    +-----------------------------------------------------+
-    | :py:func:`clear_user_standard_waveform`             |
-    +-----------------------------------------------------+
-    | :py:func:`commit`                                   |
-    +-----------------------------------------------------+
-    | :py:func:`configure_arb_sequence`                   |
-    +-----------------------------------------------------+
-    | :py:func:`configure_arb_waveform`                   |
-    +-----------------------------------------------------+
-    | :py:func:`configure_custom_fir_filter_coefficients` |
-    +-----------------------------------------------------+
-    | :py:func:`configure_freq_list`                      |
-    +-----------------------------------------------------+
-    | :py:func:`configure_standard_waveform`              |
-    +-----------------------------------------------------+
-    | :py:func:`create_advanced_arb_sequence`             |
-    +-----------------------------------------------------+
-    | :py:func:`create_arb_sequence`                      |
-    +-----------------------------------------------------+
-    | :py:func:`create_freq_list`                         |
-    +-----------------------------------------------------+
-    | :py:func:`create_waveform_from_file_f64`            |
-    +-----------------------------------------------------+
-    | :py:func:`create_waveform_from_file_i16`            |
-    +-----------------------------------------------------+
-    | :py:func:`create_waveform_numpy`                    |
-    +-----------------------------------------------------+
-    | :py:func:`define_user_standard_waveform`            |
-    +-----------------------------------------------------+
-    | :py:func:`delete_script`                            |
-    +-----------------------------------------------------+
-    | :py:func:`delete_waveform`                          |
-    +-----------------------------------------------------+
-    | :py:func:`disable`                                  |
-    +-----------------------------------------------------+
-    | :py:func:`get_ext_cal_last_date_and_time`           |
-    +-----------------------------------------------------+
-    | :py:func:`get_ext_cal_last_temp`                    |
-    +-----------------------------------------------------+
-    | :py:func:`get_ext_cal_recommended_interval`         |
-    +-----------------------------------------------------+
-    | :py:func:`get_hardware_state`                       |
-    +-----------------------------------------------------+
-    | :py:func:`get_self_cal_last_date_and_time`          |
-    +-----------------------------------------------------+
-    | :py:func:`get_self_cal_last_temp`                   |
-    +-----------------------------------------------------+
-    | :py:func:`get_self_cal_supported`                   |
-    +-----------------------------------------------------+
-    | :py:func:`initiate`                                 |
-    +-----------------------------------------------------+
-    | :py:func:`is_done`                                  |
-    +-----------------------------------------------------+
-    | :py:func:`lock`                                     |
-    +-----------------------------------------------------+
-    | :py:func:`query_arb_seq_capabilities`               |
-    +-----------------------------------------------------+
-    | :py:func:`query_arb_wfm_capabilities`               |
-    +-----------------------------------------------------+
-    | :py:func:`query_freq_list_capabilities`             |
-    +-----------------------------------------------------+
-    | :py:func:`read_current_temperature`                 |
-    +-----------------------------------------------------+
-    | :py:func:`reset`                                    |
-    +-----------------------------------------------------+
-    | :py:func:`reset_device`                             |
-    +-----------------------------------------------------+
-    | :py:func:`reset_with_defaults`                      |
-    +-----------------------------------------------------+
-    | :py:func:`self_cal`                                 |
-    +-----------------------------------------------------+
-    | :py:func:`self_test`                                |
-    +-----------------------------------------------------+
-    | :py:func:`send_software_edge_trigger`               |
-    +-----------------------------------------------------+
-    | :py:func:`set_next_write_position`                  |
-    +-----------------------------------------------------+
-    | :py:func:`unlock`                                   |
-    +-----------------------------------------------------+
-    | :py:func:`wait_until_done`                          |
-    +-----------------------------------------------------+
-    | :py:func:`write_script`                             |
-    +-----------------------------------------------------+
-    | :py:func:`write_waveform`                           |
-    +-----------------------------------------------------+
+    +---------------------------------------------+
+    | Method name                                 |
+    +=============================================+
+    | :py:func:`abort`                            |
+    +---------------------------------------------+
+    | :py:func:`allocate_named_waveform`          |
+    +---------------------------------------------+
+    | :py:func:`allocate_waveform`                |
+    +---------------------------------------------+
+    | :py:func:`clear_arb_memory`                 |
+    +---------------------------------------------+
+    | :py:func:`clear_arb_sequence`               |
+    +---------------------------------------------+
+    | :py:func:`clear_freq_list`                  |
+    +---------------------------------------------+
+    | :py:func:`clear_user_standard_waveform`     |
+    +---------------------------------------------+
+    | :py:func:`commit`                           |
+    +---------------------------------------------+
+    | :py:func:`configure_arb_sequence`           |
+    +---------------------------------------------+
+    | :py:func:`configure_arb_waveform`           |
+    +---------------------------------------------+
+    | :py:func:`configure_freq_list`              |
+    +---------------------------------------------+
+    | :py:func:`configure_standard_waveform`      |
+    +---------------------------------------------+
+    | :py:func:`create_advanced_arb_sequence`     |
+    +---------------------------------------------+
+    | :py:func:`create_arb_sequence`              |
+    +---------------------------------------------+
+    | :py:func:`create_freq_list`                 |
+    +---------------------------------------------+
+    | :py:func:`create_waveform_from_file_f64`    |
+    +---------------------------------------------+
+    | :py:func:`create_waveform_from_file_i16`    |
+    +---------------------------------------------+
+    | :py:func:`create_waveform_numpy`            |
+    +---------------------------------------------+
+    | :py:func:`define_user_standard_waveform`    |
+    +---------------------------------------------+
+    | :py:func:`delete_script`                    |
+    +---------------------------------------------+
+    | :py:func:`delete_waveform`                  |
+    +---------------------------------------------+
+    | :py:func:`disable`                          |
+    +---------------------------------------------+
+    | :py:func:`get_ext_cal_last_date_and_time`   |
+    +---------------------------------------------+
+    | :py:func:`get_ext_cal_last_temp`            |
+    +---------------------------------------------+
+    | :py:func:`get_ext_cal_recommended_interval` |
+    +---------------------------------------------+
+    | :py:func:`get_hardware_state`               |
+    +---------------------------------------------+
+    | :py:func:`get_self_cal_last_date_and_time`  |
+    +---------------------------------------------+
+    | :py:func:`get_self_cal_last_temp`           |
+    +---------------------------------------------+
+    | :py:func:`get_self_cal_supported`           |
+    +---------------------------------------------+
+    | :py:func:`initiate`                         |
+    +---------------------------------------------+
+    | :py:func:`is_done`                          |
+    +---------------------------------------------+
+    | :py:func:`lock`                             |
+    +---------------------------------------------+
+    | :py:func:`query_arb_seq_capabilities`       |
+    +---------------------------------------------+
+    | :py:func:`query_arb_wfm_capabilities`       |
+    +---------------------------------------------+
+    | :py:func:`query_freq_list_capabilities`     |
+    +---------------------------------------------+
+    | :py:func:`read_current_temperature`         |
+    +---------------------------------------------+
+    | :py:func:`reset`                            |
+    +---------------------------------------------+
+    | :py:func:`reset_device`                     |
+    +---------------------------------------------+
+    | :py:func:`reset_with_defaults`              |
+    +---------------------------------------------+
+    | :py:func:`self_cal`                         |
+    +---------------------------------------------+
+    | :py:func:`self_test`                        |
+    +---------------------------------------------+
+    | :py:func:`send_software_edge_trigger`       |
+    +---------------------------------------------+
+    | :py:func:`set_next_write_position`          |
+    +---------------------------------------------+
+    | :py:func:`unlock`                           |
+    +---------------------------------------------+
+    | :py:func:`wait_until_done`                  |
+    +---------------------------------------------+
+    | :py:func:`write_script`                     |
+    +---------------------------------------------+
+    | :py:func:`write_waveform`                   |
+    +---------------------------------------------+
 
 
 Properties
@@ -4663,52 +4661,6 @@ configure_arb_waveform
 
             :type offset: float
 
-configure_custom_fir_filter_coefficients
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:method:: configure_custom_fir_filter_coefficients(coefficients_array)
-
-            Sets the FIR filter coefficients used by the onboard signal processing
-            block. The values are coerced to the closest settings achievable by the
-            signal generator.
-
-            Refer to the *FIR Filter* topic for your device in the *NI Signal
-            Generators Help* for more information about FIR filter coefficients.
-            This method is supported only for the NI 5441.
-
-            
-
-            .. note:: The signal generator must not be in the Generating state when you call
-                this method.
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nifgen.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_custom_fir_filter_coefficients(coefficients_array)
-
-
-            :param coefficients_array:
-
-
-                Specifies the array of data the onboard signal processor uses for the
-                FIR filter coefficients. For the NI 5441, provide a symmetric array of
-                95 coefficients to this parameter. The array must have at least as many
-                elements as the value that you specify in the **numberOfCoefficients**
-                parameter in this method.
-                The coefficients should range between –1.00 and +1.00.
-
-                
-
-
-            :type coefficients_array: list of float
-
 configure_freq_list
 ~~~~~~~~~~~~~~~~~~~
 
@@ -5351,11 +5303,11 @@ create_waveform_from_file_f64
                 |
                 | ****Default Value**:** :py:data:`~nifgen.ByteOrder.LITTLE`
 
-                +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nifgen.ByteOrder.LITTLE` | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nifgen.ByteOrder.BIG`    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 .. note:: Data written by most applications in Windows (including
                     LabWindows™/CVI™) is in Little Endian format. Data written to a file
@@ -5427,11 +5379,11 @@ create_waveform_from_file_i16
                 |
                 | ****Default Value**:** :py:data:`~nifgen.ByteOrder.LITTLE`
 
-                +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nifgen.ByteOrder.LITTLE` | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nifgen.ByteOrder.BIG`    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 .. note:: Data written by most applications in Windows (including
                     LabWindows™/CVI™) is in Little Endian format. Data written to a file
@@ -5811,11 +5763,11 @@ get_self_cal_supported
 
                     ****Defined Values****
 
-                    +-------+------------------------------------+
+                    +-------+--------------------------------------+
                     | True  | Self–calibration is supported.     |
-                    +-------+------------------------------------+
+                    +-------+--------------------------------------+
                     | False | Self–calibration is not supported. |
-                    +-------+------------------------------------+
+                    +-------+--------------------------------------+
 
 
 
@@ -6718,103 +6670,101 @@ Properties
 Methods
 -------
 
-+--------------------------------------------------------------------+
-| Method name                                                        |
-+====================================================================+
-| :py:func:`nifgen.Session.abort`                                    |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.allocate_named_waveform`                  |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.allocate_waveform`                        |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.clear_arb_memory`                         |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.clear_arb_sequence`                       |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.clear_freq_list`                          |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.clear_user_standard_waveform`             |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.commit`                                   |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.configure_arb_sequence`                   |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.configure_arb_waveform`                   |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.configure_custom_fir_filter_coefficients` |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.configure_freq_list`                      |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.configure_standard_waveform`              |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.create_advanced_arb_sequence`             |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.create_arb_sequence`                      |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.create_freq_list`                         |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.create_waveform_from_file_f64`            |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.create_waveform_from_file_i16`            |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.create_waveform_numpy`                    |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.define_user_standard_waveform`            |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.delete_script`                            |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.delete_waveform`                          |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.disable`                                  |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_ext_cal_last_date_and_time`           |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_ext_cal_last_temp`                    |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_ext_cal_recommended_interval`         |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_hardware_state`                       |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_self_cal_last_date_and_time`          |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_self_cal_last_temp`                   |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.get_self_cal_supported`                   |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.initiate`                                 |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.is_done`                                  |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.lock`                                     |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.query_arb_seq_capabilities`               |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.query_arb_wfm_capabilities`               |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.query_freq_list_capabilities`             |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.read_current_temperature`                 |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.reset`                                    |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.reset_device`                             |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.reset_with_defaults`                      |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.self_cal`                                 |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.self_test`                                |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.send_software_edge_trigger`               |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.set_next_write_position`                  |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.unlock`                                   |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.wait_until_done`                          |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.write_script`                             |
-+--------------------------------------------------------------------+
-| :py:func:`nifgen.Session.write_waveform`                           |
-+--------------------------------------------------------------------+
++------------------------------------------------------------+
+| Method name                                                |
++============================================================+
+| :py:func:`nifgen.Session.abort`                            |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.allocate_named_waveform`          |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.allocate_waveform`                |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.clear_arb_memory`                 |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.clear_arb_sequence`               |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.clear_freq_list`                  |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.clear_user_standard_waveform`     |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.commit`                           |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.configure_arb_sequence`           |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.configure_arb_waveform`           |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.configure_freq_list`              |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.configure_standard_waveform`      |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.create_advanced_arb_sequence`     |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.create_arb_sequence`              |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.create_freq_list`                 |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.create_waveform_from_file_f64`    |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.create_waveform_from_file_i16`    |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.create_waveform_numpy`            |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.define_user_standard_waveform`    |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.delete_script`                    |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.delete_waveform`                  |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.disable`                          |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.get_ext_cal_last_date_and_time`   |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.get_ext_cal_last_temp`            |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.get_ext_cal_recommended_interval` |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.get_hardware_state`               |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.get_self_cal_last_date_and_time`  |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.get_self_cal_last_temp`           |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.get_self_cal_supported`           |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.initiate`                         |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.is_done`                          |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.lock`                             |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.query_arb_seq_capabilities`       |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.query_arb_wfm_capabilities`       |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.query_freq_list_capabilities`     |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.read_current_temperature`         |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.reset`                            |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.reset_device`                     |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.reset_with_defaults`              |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.self_cal`                         |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.self_test`                        |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.send_software_edge_trigger`       |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.set_next_write_position`          |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.unlock`                           |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.wait_until_done`                  |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.write_script`                     |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.write_waveform`                   |
++------------------------------------------------------------+
 
