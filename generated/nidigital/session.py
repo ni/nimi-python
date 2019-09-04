@@ -1937,7 +1937,7 @@ class Session(_SessionBase):
         Note:
         This method will return a Python context manager that will initiate on entering and abort on exit.
         '''
-        return _Acquisition(self)
+        return _Burst(self)
 
     def close(self):
         try:
