@@ -367,7 +367,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         else:
             if parameter['use_array']:
                 # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
-                array_declaration = '{0}_array = get_ctypes_and_array(value=_converters.{2}({0}), array_type="{1}")  # case B630'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type'], parameter['python_api_converter_name']))
+                array_declaration = '{0}_array = get_ctypes_and_array(value=_converters.{2}({0}), array_type="{1}")  # case B630'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']), parameter['python_api_converter_name'])
                 definitions.append(array_declaration)
                 definition = 'get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B630'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
             elif parameter['use_list']:
