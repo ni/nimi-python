@@ -417,6 +417,8 @@ nidcpower.Session
     +--------------------------------------------------+
     | :py:func:`import_attribute_configuration_file`   |
     +--------------------------------------------------+
+    | :py:func:`initiate`                              |
+    +--------------------------------------------------+
     | :py:func:`lock`                                  |
     +--------------------------------------------------+
     | :py:func:`measure`                               |
@@ -6555,6 +6557,32 @@ import_attribute_configuration_file
 
             :type file_path: str
 
+initiate
+~~~~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: initiate()
+
+            Starts generation or acquisition, causing the NI-DCPower session to
+            leave the Uncommitted state or Committed state and enter the Running
+            state. To return to the Committed state call the :py:meth:`nidcpower.Session.abort`
+            method. Refer to the `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+            the *NI DC Power Supplies and SMUs Help* for information about the
+            specific NI-DCPower software states.
+
+            **Related Topics:**
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            
+
+            .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
+
+
 lock
 ~~~~
 
@@ -7600,6 +7628,8 @@ Methods
 | :py:func:`nidcpower.Session.import_attribute_configuration_buffer` |
 +--------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.import_attribute_configuration_file`   |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.initiate`                              |
 +--------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.lock`                                  |
 +--------------------------------------------------------------------+

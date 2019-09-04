@@ -1169,6 +1169,17 @@ class Session(_SessionBase):
         self.close()
 
     def initiate(self):
+        '''initiate
+
+        Initiates an acquisition. After you call this method, the DMM leaves
+        the Idle state and enters the Wait-for-Trigger state. If trigger is set
+        to Immediate mode, the DMM begins acquiring measurement data. Use
+        fetch, fetch_multi_point, or fetch_waveform to
+        retrieve the measurement data.
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+        '''
         return _Acquisition(self)
 
     def close(self):

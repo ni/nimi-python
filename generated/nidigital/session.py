@@ -1930,7 +1930,14 @@ class Session(_SessionBase):
         self.close()
 
     def initiate(self):
-        return _Burst(self)
+        '''initiate
+
+        TBD
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+        '''
+        return _Acquisition(self)
 
     def close(self):
         try:
