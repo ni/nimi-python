@@ -3128,6 +3128,16 @@ class Session(_SessionBase):
         self.close()
 
     def initiate(self):
+        '''initiate
+
+        Initiates signal generation. If you want to abort signal generation,
+        call the abort method. After the signal generation
+        is aborted, you can call the initiate method to
+        cause the signal generator to produce a signal again.
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+        '''
         return _Generation(self)
 
     def close(self):
