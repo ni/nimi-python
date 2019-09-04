@@ -442,6 +442,8 @@ nifgen.Session
     +---------------------------------------------+
     | :py:func:`get_self_cal_supported`           |
     +---------------------------------------------+
+    | :py:func:`initiate`                         |
+    +---------------------------------------------+
     | :py:func:`is_done`                          |
     +---------------------------------------------+
     | :py:func:`lock`                             |
@@ -5769,6 +5771,24 @@ get_self_cal_supported
 
 
 
+initiate
+~~~~~~~~
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: initiate()
+
+            Initiates signal generation. If you want to abort signal generation,
+            call the :py:meth:`nifgen.Session.abort` method. After the signal generation
+            is aborted, you can call the :py:meth:`nifgen.Session.initiate` method to
+            cause the signal generator to produce a signal again.
+
+            
+
+            .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
+
+
 is_done
 ~~~~~~~
 
@@ -6710,6 +6730,8 @@ Methods
 | :py:func:`nifgen.Session.get_self_cal_last_temp`           |
 +------------------------------------------------------------+
 | :py:func:`nifgen.Session.get_self_cal_supported`           |
++------------------------------------------------------------+
+| :py:func:`nifgen.Session.initiate`                         |
 +------------------------------------------------------------+
 | :py:func:`nifgen.Session.is_done`                          |
 +------------------------------------------------------------+
