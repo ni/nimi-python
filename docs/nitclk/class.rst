@@ -57,6 +57,8 @@ nitclk.Session
     +----------------------------------------------------+
     | :py:func:`initiate`                                |
     +----------------------------------------------------+
+    | :py:func:`initiate`                                |
+    +----------------------------------------------------+
     | :py:func:`is_done`                                 |
     +----------------------------------------------------+
     | :py:func:`setup_for_sync_pulse_sender_synchronize` |
@@ -689,6 +691,8 @@ initiate
 
             
 
+            .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
 
 
             :param sessions:
@@ -938,6 +942,8 @@ Methods
 | :py:func:`nitclk.Session.finish_sync_pulse_sender_synchronize`    |
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.init_for_documentation`                  |
++-------------------------------------------------------------------+
+| :py:func:`nitclk.Session.initiate`                                |
 +-------------------------------------------------------------------+
 | :py:func:`nitclk.Session.initiate`                                |
 +-------------------------------------------------------------------+
