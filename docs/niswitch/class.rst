@@ -2440,6 +2440,17 @@ get_channel_name
 
             :type index: int
 
+            :rtype: str
+            :return:
+
+
+                    Returns the channel name that is in the channel table at the index you
+                    specify.
+
+                    
+
+
+
 get_path
 ~~~~~~~~
 
@@ -2487,6 +2498,19 @@ get_path
 
 
             :type channel2: str
+
+            :rtype: str
+            :return:
+
+
+                    A string composed of comma-separated paths between channel 1 and channel
+                    2. The first and last names in the path are the endpoints of the path.
+                    All other channels in the path are configuration channels. Examples of
+                    returned paths: ch0->com0, com0->ab0
+
+                    
+
+
 
 get_relay_count
 ~~~~~~~~~~~~~~~
@@ -2553,6 +2577,16 @@ get_relay_name
 
 
             :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns the relay name for the index you specify.
+
+                    
+
+
 
 get_relay_position
 ~~~~~~~~~~~~~~~~~~

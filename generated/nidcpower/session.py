@@ -2786,6 +2786,25 @@ class _SessionBase(object):
                    control has named constants as valid values, you can view the
                    constants by moving to the value control and pressing .
 
+
+        Returns:
+            attribute_value (str): The buffer in which the method returns the current value of the
+                property. The buffer must be of type ViChar and have at least as many
+                bytes as indicated in **bufSize**.
+                If the current value of the property, including the terminating NUL
+                byte, contains more bytes that you indicate in this property, the
+                method copies (buffer size -1) bytes into the buffer, places an ASCII
+                NUL byte at the end of the buffer, and returns the buffer size you must
+                pass to get the entire value. For example, if the value is 123456 and
+                the buffer size is 4, the method places 123 into the buffer and
+                returns 7.
+                If you specify 0 for **bufSize**, you can pass VI_NULL for this
+                property.
+                If the property currently showing in the property ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing .
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -2819,6 +2838,10 @@ class _SessionBase(object):
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
                 1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2856,6 +2879,19 @@ class _SessionBase(object):
 
         Returns:
             code (int): Returns the error code for the session or execution thread.
+
+            description (str): Returns the error description for the IVI session or execution thread.
+                If there is no description, the method returns an empty string.
+                The buffer must contain at least as many elements as the value you
+                specify with **bufferSize**. If the error description, including the
+                terminating NUL byte, contains more bytes than you indicate with
+                **bufferSize**, the method copies (buffer size - 1) bytes into the
+                buffer, places an ASCII NUL byte at the end of the buffer, and returns
+                the buffer size you must pass to get the entire value. For example, if
+                the value is 123456 and the buffer size is 4, the method places 123
+                into the buffer and returns 7.
+                If you pass 0 for **bufferSize**, you can pass VI_NULL for this
+                property.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4120,6 +4156,11 @@ class Session(_SessionBase):
         This method will return an error if the total number of channels
         initialized for the exporting session is not equal to the total number
         of channels initialized for the importing session.
+
+        Returns:
+            configuration (list of int): Specifies the byte array buffer to be populated with the exported
+                property configuration.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32()  # case S170

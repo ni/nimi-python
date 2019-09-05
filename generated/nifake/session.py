@@ -350,6 +350,10 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Pass the ID of a property.
 
+
+        Returns:
+            attribute_value (str): Returns the value of the property.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -371,6 +375,8 @@ class _SessionBase(object):
 
         Returns:
             error_code (int): Returns errorCode for the session. If you pass 0 for bufferSize, you can pass VI_NULL for this.
+
+            description (str): At least bufferSize big, string comes out here.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -965,6 +971,10 @@ class Session(_SessionBase):
         r'''get_an_ivi_dance_string
 
         Returns a string using the IVI dance.
+
+        Returns:
+            a_string (str): Returns the string.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         buffer_size_ctype = _visatype.ViInt32()  # case S170
@@ -984,7 +994,7 @@ class Session(_SessionBase):
         TBD
 
         Returns:
-            actual_size (int):
+            a_string (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1056,6 +1066,10 @@ class Session(_SessionBase):
         r'''get_array_using_ivi_dance
 
         This method returns an array of float whose size is determined with the IVI dance.
+
+        Returns:
+            array_out (list of float): The array returned by this method
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         array_size_ctype = _visatype.ViInt32()  # case S170
@@ -1482,6 +1496,8 @@ class Session(_SessionBase):
             an_array (list of float): An array of measurement values.
 
                 Note: The size must be at least arraySize.
+
+            a_string (str): An IVI dance string.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

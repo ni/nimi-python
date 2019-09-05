@@ -3315,6 +3315,12 @@ class _SessionBase(object):
         Args:
             attribute_id (int): The ID of a property.
 
+
+        Returns:
+            value (str): The buffer in which the method returns the current value of the
+                property; the buffer must be of type ViChar and have at least as many
+                bytes as indicated in the **bufSize**.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -3394,6 +3400,15 @@ class _SessionBase(object):
                 buffer regardless of the number of bytes in the value.
 
                 If you pass 0, you can pass VI_NULL for the **description** parameter.
+
+            description (str): Returns the error description for the IVI session or execution thread.
+
+                If there is no description, the method returns an empty string. The
+                buffer must contain at least as many elements as the value you specify
+                with the Buffer Size parameter.
+
+                If you pass 0 for the **bufferSize**, you can pass VI_NULL for this
+                parameter.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -4755,6 +4770,11 @@ class Session(_SessionBase):
 
         `Setting Properties Before Reading
         Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+
+        Returns:
+            configuration (list of int): Specifies the byte array buffer to be populated with the exported
+                property configuration.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32()  # case S170

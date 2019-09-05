@@ -881,7 +881,7 @@ class _SessionBase(object):
             session.channels[0,1].frequency_counter_measure_frequency()
 
         Returns:
-            actual_num_frequencies (int):
+            frequencies (list of float):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1065,6 +1065,10 @@ class _SessionBase(object):
         Args:
             attribute (int):
 
+
+        Returns:
+            value (str):
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1086,6 +1090,8 @@ class _SessionBase(object):
 
         Returns:
             error_code (int):
+
+            error_description (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1115,7 +1121,7 @@ class _SessionBase(object):
             session.channels[0,1].get_fail_count()
 
         Returns:
-            actual_num_read (int):
+            failure_count (list of int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1147,7 +1153,11 @@ class _SessionBase(object):
             session.channels[0,1].get_pin_results_pin_information()
 
         Returns:
-            actual_num_values (int):
+            pin_indexes (list of int):
+
+            site_numbers (list of int):
+
+            channel_indexes (list of int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1473,7 +1483,7 @@ class _SessionBase(object):
 
 
         Returns:
-            actual_num_read (int):
+            measurements (list of float):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1526,7 +1536,7 @@ class _SessionBase(object):
             session.channels[0,1].read_static()
 
         Returns:
-            actual_num_read (int):
+            data (list of int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1778,7 +1788,7 @@ class _SessionBase(object):
 
 
         Returns:
-            actual_num_offsets (int):
+            offsets (list of float):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2811,7 +2821,11 @@ class Session(_SessionBase):
 
 
         Returns:
-            actual_num_pin_data (int):
+            expected_pin_states (list of int):
+
+            actual_pin_states (list of int):
+
+            per_pin_pass_fail (list of bool):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2870,6 +2884,10 @@ class Session(_SessionBase):
         Args:
             index (int):
 
+
+        Returns:
+            name (str):
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
@@ -2891,6 +2909,10 @@ class Session(_SessionBase):
 
         Args:
             index (str):
+
+
+        Returns:
+            name (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2935,6 +2957,10 @@ class Session(_SessionBase):
         Args:
             pattern_index (int):
 
+
+        Returns:
+            name (str):
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pattern_index_ctype = _visatype.ViInt32(pattern_index)  # case S150
@@ -2959,7 +2985,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            actual_num_pins (int):
+            pin_indexes (list of int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2985,6 +3011,10 @@ class Session(_SessionBase):
         Args:
             start_label (str):
 
+
+        Returns:
+            pin_list (str):
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
@@ -3006,6 +3036,10 @@ class Session(_SessionBase):
 
         Args:
             pin_index (int):
+
+
+        Returns:
+            name (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3031,7 +3065,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            actual_num_sites (int):
+            pass_fail (list of bool):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3061,7 +3095,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            actual_num_site_numbers (int):
+            site_numbers (list of int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3162,6 +3196,10 @@ class Session(_SessionBase):
 
         Args:
             time_set_index (int):
+
+
+        Returns:
+            name (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

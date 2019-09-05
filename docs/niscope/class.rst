@@ -5601,6 +5601,17 @@ export_attribute_configuration_buffer
 
 
 
+            :rtype: list of int
+            :return:
+
+
+                    Specifies the byte array buffer to be populated with the exported
+                    property configuration.
+
+                    
+
+
+
 export_attribute_configuration_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
