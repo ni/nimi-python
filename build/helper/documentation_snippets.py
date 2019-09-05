@@ -132,24 +132,7 @@ def close_function_def_for_doc(functions, config):
         function_def['documentation']['note'].append(close_function_note)
         function_def['python_name'] = 'close'
     else:
-        function_def = {
-            'documentation': {
-                'description': default_close_function_doc,
-                'note': [close_function_note],
-            },
-            'method_templates': [
-                {
-                    'documentation_filename': '/default_method',
-                    'method_python_name_suffix': '',
-                    'session_filename': '/default_method',
-                },
-            ],
-            'name': 'close',
-            'parameters': [],
-            'has_repeated_capability': False,
-            'python_name': 'close',
-            'returns': 'ViStatus',
-        }
+        assert False, "No '{}' function defined".format(close_name)
 
     return function_def
 
@@ -180,24 +163,7 @@ def initiate_function_def_for_doc(functions, config):
         function_def['documentation']['note'].append(initiate_function_note)
         function_def['python_name'] = 'initiate'
     else:
-        function_def = {
-            'documentation': {
-                'description': default_initiate_function_doc,
-                'note': [initiate_function_note],
-            },
-            'method_templates': [
-                {
-                    'documentation_filename': '/default_method',
-                    'method_python_name_suffix': '',
-                    'session_filename': '/default_method',
-                },
-            ],
-            'name': 'initiate',
-            'parameters': [],
-            'has_repeated_capability': False,
-            'python_name': 'initiate',
-            'returns': 'ViStatus',
-        }
+        assert False, "No '{}' function defined".format(session_context_manager_initiate)
 
     return function_def
 
