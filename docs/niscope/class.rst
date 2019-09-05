@@ -4709,7 +4709,12 @@ close
 
     .. py:method:: close()
 
-            Closes the driver session and cleans up.
+            When you are finished using an instrument driver session, you must call
+            this method to perform the following actions:
+
+            -  Closes the instrument I/O session.
+            -  Destroys the IVI session and all of its properties.
+            -  Deallocates any memory resources used by the IVI session.
 
             
 

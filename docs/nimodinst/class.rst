@@ -341,7 +341,9 @@ close
 
     .. py:method:: close()
 
-            Closes the driver session and cleans up.
+            Cleans up the NI-ModInst session created by a call to
+            :py:meth:`nimodinst.Session._open_installed_devices_session`. Call this method when you are
+            finished using the session handle and do not use this handle again.
 
             
 

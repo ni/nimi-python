@@ -253,7 +253,11 @@ class Session(_SessionBase):
     def close(self):
         '''close
 
-        Closes the driver session and cleans up.
+        Reduces the reference count of open sessions by one. If the reference
+        count goes to 0, the method deallocates any memory resources the
+        driver uses and closes any open IVI switch sessions. After calling the
+        close method, you should not use the NI Switch Executive
+        virtual device again until you call __init__.
 
         Note:
         This method is not needed when using the session context manager

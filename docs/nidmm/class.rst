@@ -2469,7 +2469,7 @@ close
 
     .. py:method:: close()
 
-            Closes the driver session and cleans up.
+            Closes the specified session and deallocates resources that it reserved.
 
             
 

@@ -123,7 +123,11 @@ close
 
     .. py:method:: close()
 
-            Closes the driver session and cleans up.
+            Reduces the reference count of open sessions by one. If the reference
+            count goes to 0, the method deallocates any memory resources the
+            driver uses and closes any open IVI switch sessions. After calling the
+            :py:meth:`nise.Session.close` method, you should not use the NI Switch Executive
+            virtual device again until you call :py:meth:`nise.Session.__init__`.
 
             
 

@@ -3650,7 +3650,7 @@ close
 
     .. py:method:: close()
 
-            Closes the driver session and cleans up.
+            TBD
 
             
 

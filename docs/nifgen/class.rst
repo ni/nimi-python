@@ -4461,9 +4461,27 @@ close
 
     .. py:method:: close()
 
-            Closes the driver session and cleans up.
+            Performs the following operations:
 
-            
+            -  Closes the instrument I/O session.
+            -  Destroys the NI-FGEN session and all of its properties.
+            -  Deallocates any memory resources NI-FGEN uses.
+
+            Not all signal routes established by calling the :py:meth:`nifgen.Session.ExportSignal`
+            and :py:meth:`nifgen.Session.RouteSignalOut` methods are released when the NI-FGEN
+            session is closed. The following table shows what happens to a signal
+            route on your device when you call the :py:meth:`nifgen.Session._close` method.
+
+            +--------------------+-------------------+------------------+
+            | Routes To          | NI 5401/5411/5431 | Other Devices    |
+            +====================+===================+==================+
+            | Front Panel        | Remain connected  | Remain connected |
+            +--------------------+-------------------+------------------+
+            | RTSI/PXI Backplane | Remain connected  | Disconnected     |
+            +--------------------+-------------------+------------------+
+
+            .. note:: After calling :py:meth:`nifgen.Session._close`, you cannot use NI-FGEN again until you
+                call the :py:meth:`nifgen.Session.init` or :py:meth:`nifgen.Session.InitWithOptions` methods.
 
             .. note:: This method is not needed when using the session context manager
 

@@ -5970,9 +5970,21 @@ close
 
     .. py:method:: close()
 
-            Closes the driver session and cleans up.
+            Closes the session specified in **vi** and deallocates the resources
+            that NI-DCPower reserves. If power output is enabled when you call this
+            method, the output channels remain in their existing state and
+            continue providing power. Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled`
+            method to disable power output on a per channel basis. Use the
+            :py:meth:`nidcpower.Session.reset` method to disable power output on all channel(s).
+
+            **Related Topics:**
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
             .. note:: This method is not needed when using the session context manager
 
