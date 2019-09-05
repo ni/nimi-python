@@ -104,6 +104,15 @@ close_function_note = '''
 This function is not needed when using the session context manager
 '''
 
+default_initiate_function_doc = '''
+Calls initiate
+'''
+
+initiate_function_note = '''
+This function will return a Python context manager that will initiate on entering and abort on exit.
+'''
+
+
 def close_function_def_for_doc(functions):
     # This is very specific to session based APIs. We look for a 'close' function and if we find it,
     # We will copy that and modify it to be what we need for documentation
@@ -126,13 +135,65 @@ def close_function_def_for_doc(functions):
                 'description': default_close_function_doc,
                 'note': [close_function_note],
             },
-            'method_templates': [{
-                    'documentation_filename': '/default_method', 'method_python_name_suffix': '', 'session_filename': '/default_method',
-            },],
+            'method_templates': [
+                {
+                    'documentation_filename': '/default_method',
+                    'method_python_name_suffix': '',
+                    'session_filename': '/default_method',
+                },
+            ],
             'name': 'close',
             'parameters': [],
             'has_repeated_capability': False,
             'python_name': 'close',
+            'returns': 'ViStatus',
+        }
+
+    return function_def
+
+
+def initiate_function_def_for_doc(functions, config):
+    # This is very specific to the IVI state model which not all drivers in nimi-python follow.
+    # We look for a 'close' function and if we find it, We will copy that and modify it to be
+    # what we need for documentation
+    session_context_manager_initiate = None
+    if 'initiate_function' in config['context_manager_name']:
+        session_context_manager_initiate = config['context_manager_name']['initiate_function']
+
+    if session_context_manager_initiate is None:
+        # Don't have an initiate
+        return None
+
+    if session_context_manager_initiate in functions:
+        import copy
+        function_def = copy.deepcopy(functions[session_context_manager_initiate])
+        if 'documentation' not in function_def:
+            function_def['documentation'] = {}
+        if 'description' not in function_def['documentation']:
+            function_def['documentation']['description'] = default_initiate_function_doc
+        if 'note' not in function_def['documentation']:
+            function_def['documentation']['note'] = []
+        if type(function_def['documentation']['note']) is not list:
+            function_def['documentation']['note'] = [function_def['documentation']['note']]
+        function_def['documentation']['note'].append(initiate_function_note)
+        function_def['python_name'] = 'initiate'
+    else:
+        function_def = {
+            'documentation': {
+                'description': default_initiate_function_doc,
+                'note': [initiate_function_note],
+            },
+            'method_templates': [
+                {
+                    'documentation_filename': '/default_method',
+                    'method_python_name_suffix': '',
+                    'session_filename': '/default_method',
+                },
+            ],
+            'name': 'initiate',
+            'parameters': [],
+            'has_repeated_capability': False,
+            'python_name': 'initiate',
             'returns': 'ViStatus',
         }
 
@@ -188,5 +249,87 @@ def test_close_function_def_for_doc_no_note():
     }
     close_doc = close_function_def_for_doc(functions)
     assert type(close_doc) is dict
+
+
+def test_initiate_function_def_for_doc_no_exist():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {}
+    config = {
+        'context_manager_name': {
+            'task': 'acquisition',
+        },
+    }
+    initiate_doc = initiate_function_def_for_doc(functions, config)
+    assert initiate_doc is None
+    return
+
+
+def test_initiate_function_def_for_doc_note_not_list():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'Initiate': {
+            'documentation': {
+                'description': 'test',
+                'note': 'test',
+            },
+
+            'python_name': '_initiate',
+        },
+    }
+    config = {
+        'context_manager_name': {
+            'task': 'acquisition',
+            'initiate_function': 'Initiate',
+            'abort_function': 'Abort',
+        },
+    }
+    initiate_doc = initiate_function_def_for_doc(functions, config)
+    assert type(initiate_doc) is dict
+    return
+
+
+def test_initiate_function_def_for_doc_note_list():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'Initiate': {
+            'documentation': {
+                'description': 'test',
+                'note': ['test'],
+            },
+            'python_name': '_initiate',
+        },
+    }
+    config = {
+        'context_manager_name': {
+            'task': 'acquisition',
+            'initiate_function': 'Initiate',
+            'abort_function': 'Abort',
+        },
+    }
+    initiate_doc = initiate_function_def_for_doc(functions, config)
+    assert type(initiate_doc) is dict
+    return
+
+
+def test_initiate_function_def_for_doc_no_note():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'Initiate': {
+            'documentation': {
+                'description': 'test',
+            },
+            'python_name': '_initiate',
+        },
+    }
+    config = {
+        'context_manager_name': {
+            'task': 'acquisition',
+            'initiate_function': 'Initiate',
+            'abort_function': 'Abort',
+        },
+    }
+    initiate_doc = initiate_function_def_for_doc(functions, config)
+    assert type(initiate_doc) is dict
+
 
 

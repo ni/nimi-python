@@ -52,8 +52,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigurePatternBurstSites']['return'] = 0
         self._defaults['ConfigurePatternLabelHistoryRAMTrigger'] = {}
         self._defaults['ConfigurePatternLabelHistoryRAMTrigger']['return'] = 0
-        self._defaults['ConfigureRefClock'] = {}
-        self._defaults['ConfigureRefClock']['return'] = 0
         self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger'] = {}
         self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger']['return'] = 0
         self._defaults['ConfigureSoftwareEdgeStartTrigger'] = {}
@@ -102,8 +100,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateTimeSet']['return'] = 0
         self._defaults['DeleteAllTimeSets'] = {}
         self._defaults['DeleteAllTimeSets']['return'] = 0
-        self._defaults['Disable'] = {}
-        self._defaults['Disable']['return'] = 0
         self._defaults['DisableConditionalJumpTrigger'] = {}
         self._defaults['DisableConditionalJumpTrigger']['return'] = 0
         self._defaults['DisableSites'] = {}
@@ -116,11 +112,6 @@ class SideEffectsHelper(object):
         self._defaults['EndChannelMap']['return'] = 0
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
-        self._defaults['FetchCaptureWaveformU32'] = {}
-        self._defaults['FetchCaptureWaveformU32']['return'] = 0
-        self._defaults['FetchCaptureWaveformU32']['actualNumWaveforms'] = None
-        self._defaults['FetchCaptureWaveformU32']['actualSamplesPerWaveform'] = None
-        self._defaults['FetchCaptureWaveformU32']['data'] = None
         self._defaults['FetchHistoryRAMCycleInformation'] = {}
         self._defaults['FetchHistoryRAMCycleInformation']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation']['patternIndex'] = None
@@ -164,21 +155,9 @@ class SideEffectsHelper(object):
         self._defaults['GetChannelName'] = {}
         self._defaults['GetChannelName']['return'] = 0
         self._defaults['GetChannelName']['name'] = None
-        self._defaults['GetDesiredAttributeViBoolean'] = {}
-        self._defaults['GetDesiredAttributeViBoolean']['return'] = 0
-        self._defaults['GetDesiredAttributeViBoolean']['value'] = None
-        self._defaults['GetDesiredAttributeViInt32'] = {}
-        self._defaults['GetDesiredAttributeViInt32']['return'] = 0
-        self._defaults['GetDesiredAttributeViInt32']['value'] = None
-        self._defaults['GetDesiredAttributeViInt64'] = {}
-        self._defaults['GetDesiredAttributeViInt64']['return'] = 0
-        self._defaults['GetDesiredAttributeViInt64']['value'] = None
-        self._defaults['GetDesiredAttributeViReal64'] = {}
-        self._defaults['GetDesiredAttributeViReal64']['return'] = 0
-        self._defaults['GetDesiredAttributeViReal64']['value'] = None
-        self._defaults['GetDesiredAttributeViString'] = {}
-        self._defaults['GetDesiredAttributeViString']['return'] = 0
-        self._defaults['GetDesiredAttributeViString']['value'] = None
+        self._defaults['GetChannelNameFromString'] = {}
+        self._defaults['GetChannelNameFromString']['return'] = 0
+        self._defaults['GetChannelNameFromString']['name'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
@@ -190,23 +169,6 @@ class SideEffectsHelper(object):
         self._defaults['GetHistoryRAMSampleCount'] = {}
         self._defaults['GetHistoryRAMSampleCount']['return'] = 0
         self._defaults['GetHistoryRAMSampleCount']['sampleCount'] = None
-        self._defaults['GetKeepAlivePatternIndexes'] = {}
-        self._defaults['GetKeepAlivePatternIndexes']['return'] = 0
-        self._defaults['GetKeepAlivePatternIndexes']['actualNumIndexes'] = None
-        self._defaults['GetKeepAlivePatternIndexes']['patternIndexBuffer'] = None
-        self._defaults['GetNextCaptureWaveform'] = {}
-        self._defaults['GetNextCaptureWaveform']['return'] = 0
-        self._defaults['GetNextCaptureWaveform']['numberOfSamples'] = None
-        self._defaults['GetNextCaptureWaveform']['waveformName'] = None
-        self._defaults['GetNumberOfVectors'] = {}
-        self._defaults['GetNumberOfVectors']['return'] = 0
-        self._defaults['GetNumberOfVectors']['numberOfVectors'] = None
-        self._defaults['GetPatternBurstSiteEnable'] = {}
-        self._defaults['GetPatternBurstSiteEnable']['return'] = 0
-        self._defaults['GetPatternBurstSiteEnable']['enable'] = None
-        self._defaults['GetPatternFilePath'] = {}
-        self._defaults['GetPatternFilePath']['return'] = 0
-        self._defaults['GetPatternFilePath']['name'] = None
         self._defaults['GetPatternName'] = {}
         self._defaults['GetPatternName']['return'] = 0
         self._defaults['GetPatternName']['name'] = None
@@ -226,12 +188,6 @@ class SideEffectsHelper(object):
         self._defaults['GetPinResultsPinInformation']['pinIndexes'] = None
         self._defaults['GetPinResultsPinInformation']['siteNumbers'] = None
         self._defaults['GetPinResultsPinInformation']['channelIndexes'] = None
-        self._defaults['GetPinType'] = {}
-        self._defaults['GetPinType']['return'] = 0
-        self._defaults['GetPinType']['type'] = None
-        self._defaults['GetSessionState'] = {}
-        self._defaults['GetSessionState']['return'] = 0
-        self._defaults['GetSessionState']['sessionState'] = None
         self._defaults['GetSitePassFail'] = {}
         self._defaults['GetSitePassFail']['return'] = 0
         self._defaults['GetSitePassFail']['actualNumSites'] = None
@@ -240,18 +196,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSiteResultsSiteNumbers']['return'] = 0
         self._defaults['GetSiteResultsSiteNumbers']['actualNumSiteNumbers'] = None
         self._defaults['GetSiteResultsSiteNumbers']['siteNumbers'] = None
-        self._defaults['GetTimeSetCompareEdges'] = {}
-        self._defaults['GetTimeSetCompareEdges']['return'] = 0
-        self._defaults['GetTimeSetCompareEdges']['format'] = None
-        self._defaults['GetTimeSetCompareEdges']['compareOpenEdge'] = None
-        self._defaults['GetTimeSetCompareEdges']['reserved'] = None
-        self._defaults['GetTimeSetDriveEdges'] = {}
-        self._defaults['GetTimeSetDriveEdges']['return'] = 0
-        self._defaults['GetTimeSetDriveEdges']['format'] = None
-        self._defaults['GetTimeSetDriveEdges']['driveOnEdge'] = None
-        self._defaults['GetTimeSetDriveEdges']['driveDataEdge'] = None
-        self._defaults['GetTimeSetDriveEdges']['driveReturnEdge'] = None
-        self._defaults['GetTimeSetDriveEdges']['driveOffEdge'] = None
         self._defaults['GetTimeSetDriveFormat'] = {}
         self._defaults['GetTimeSetDriveFormat']['return'] = 0
         self._defaults['GetTimeSetDriveFormat']['format'] = None
@@ -275,28 +219,19 @@ class SideEffectsHelper(object):
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['done'] = None
-        self._defaults['IsPatternFileModifiedSinceLoad'] = {}
-        self._defaults['IsPatternFileModifiedSinceLoad']['return'] = 0
-        self._defaults['IsPatternFileModifiedSinceLoad']['fileModifiedSinceLoad'] = None
         self._defaults['IsSiteEnabled'] = {}
         self._defaults['IsSiteEnabled']['return'] = 0
         self._defaults['IsSiteEnabled']['enable'] = None
         self._defaults['LoadLevels'] = {}
         self._defaults['LoadLevels']['return'] = 0
-        self._defaults['LoadLevelsInternal'] = {}
-        self._defaults['LoadLevelsInternal']['return'] = 0
         self._defaults['LoadPattern'] = {}
         self._defaults['LoadPattern']['return'] = 0
-        self._defaults['LoadPatternInternal'] = {}
-        self._defaults['LoadPatternInternal']['return'] = 0
         self._defaults['LoadPinMap'] = {}
         self._defaults['LoadPinMap']['return'] = 0
         self._defaults['LoadSpecifications'] = {}
         self._defaults['LoadSpecifications']['return'] = 0
         self._defaults['LoadTiming'] = {}
         self._defaults['LoadTiming']['return'] = 0
-        self._defaults['LoadTimingInternal'] = {}
-        self._defaults['LoadTimingInternal']['return'] = 0
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
@@ -322,10 +257,6 @@ class SideEffectsHelper(object):
         self._defaults['PPMU_Measure']['return'] = 0
         self._defaults['PPMU_Measure']['actualNumRead'] = None
         self._defaults['PPMU_Measure']['measurements'] = None
-        self._defaults['PPMU_MeasureCached'] = {}
-        self._defaults['PPMU_MeasureCached']['return'] = 0
-        self._defaults['PPMU_MeasureCached']['actualNumRead'] = None
-        self._defaults['PPMU_MeasureCached']['measurements'] = None
         self._defaults['PPMU_Source'] = {}
         self._defaults['PPMU_Source']['return'] = 0
         self._defaults['ReadSequencerFlag'] = {}
@@ -338,10 +269,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadStatic']['return'] = 0
         self._defaults['ReadStatic']['actualNumRead'] = None
         self._defaults['ReadStatic']['data'] = None
-        self._defaults['ReadStaticCached'] = {}
-        self._defaults['ReadStaticCached']['return'] = 0
-        self._defaults['ReadStaticCached']['actualNumRead'] = None
-        self._defaults['ReadStaticCached']['data'] = None
         self._defaults['ResetAttribute'] = {}
         self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ResetDevice'] = {}
@@ -368,8 +295,6 @@ class SideEffectsHelper(object):
         self._defaults['TDR']['return'] = 0
         self._defaults['TDR']['actualNumOffsets'] = None
         self._defaults['TDR']['offsets'] = None
-        self._defaults['Uncommit'] = {}
-        self._defaults['Uncommit']['return'] = 0
         self._defaults['UnloadAllPatterns'] = {}
         self._defaults['UnloadAllPatterns']['return'] = 0
         self._defaults['UnloadSpecifications'] = {}
@@ -497,11 +422,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigurePatternLabelHistoryRAMTrigger']['return']
         return self._defaults['ConfigurePatternLabelHistoryRAMTrigger']['return']
 
-    def niDigital_ConfigureRefClock(self, vi, ref_clock_source, ref_clock_rate):  # noqa: N802
-        if self._defaults['ConfigureRefClock']['return'] != 0:
-            return self._defaults['ConfigureRefClock']['return']
-        return self._defaults['ConfigureRefClock']['return']
-
     def niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger(self, vi, trigger_identifier):  # noqa: N802
         if self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger']['return'] != 0:
             return self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger']['return']
@@ -622,11 +542,6 @@ class SideEffectsHelper(object):
             return self._defaults['DeleteAllTimeSets']['return']
         return self._defaults['DeleteAllTimeSets']['return']
 
-    def niDigital_Disable(self, vi):  # noqa: N802
-        if self._defaults['Disable']['return'] != 0:
-            return self._defaults['Disable']['return']
-        return self._defaults['Disable']['return']
-
     def niDigital_DisableConditionalJumpTrigger(self, vi, trigger_identifier):  # noqa: N802
         if self._defaults['DisableConditionalJumpTrigger']['return'] != 0:
             return self._defaults['DisableConditionalJumpTrigger']['return']
@@ -656,31 +571,6 @@ class SideEffectsHelper(object):
         if self._defaults['ExportSignal']['return'] != 0:
             return self._defaults['ExportSignal']['return']
         return self._defaults['ExportSignal']['return']
-
-    def niDigital_FetchCaptureWaveformU32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
-        if self._defaults['FetchCaptureWaveformU32']['return'] != 0:
-            return self._defaults['FetchCaptureWaveformU32']['return']
-        # actual_num_waveforms
-        if self._defaults['FetchCaptureWaveformU32']['actualNumWaveforms'] is None:
-            raise MockFunctionCallError("niDigital_FetchCaptureWaveformU32", param='actualNumWaveforms')
-        if actual_num_waveforms is not None:
-            actual_num_waveforms.contents.value = self._defaults['FetchCaptureWaveformU32']['actualNumWaveforms']
-        # actual_samples_per_waveform
-        if self._defaults['FetchCaptureWaveformU32']['actualSamplesPerWaveform'] is None:
-            raise MockFunctionCallError("niDigital_FetchCaptureWaveformU32", param='actualSamplesPerWaveform')
-        if actual_samples_per_waveform is not None:
-            actual_samples_per_waveform.contents.value = self._defaults['FetchCaptureWaveformU32']['actualSamplesPerWaveform']
-        if self._defaults['FetchCaptureWaveformU32']['data'] is None:
-            raise MockFunctionCallError("niDigital_FetchCaptureWaveformU32", param='data')
-        if data_buffer_size.value == 0:
-            return len(self._defaults['FetchCaptureWaveformU32']['data'])
-        try:
-            data_ref = data.contents
-        except AttributeError:
-            data_ref = data
-        for i in range(len(self._defaults['FetchCaptureWaveformU32']['data'])):
-            data_ref[i] = self._defaults['FetchCaptureWaveformU32']['data'][i]
-        return self._defaults['FetchCaptureWaveformU32']['return']
 
     def niDigital_FetchHistoryRAMCycleInformation(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         if self._defaults['FetchHistoryRAMCycleInformation']['return'] != 0:
@@ -857,55 +747,15 @@ class SideEffectsHelper(object):
         name.value = self._defaults['GetChannelName']['name'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
-    def niDigital_GetDesiredAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['GetDesiredAttributeViBoolean']['return'] != 0:
-            return self._defaults['GetDesiredAttributeViBoolean']['return']
-        # value
-        if self._defaults['GetDesiredAttributeViBoolean']['value'] is None:
-            raise MockFunctionCallError("niDigital_GetDesiredAttributeViBoolean", param='value')
-        if value is not None:
-            value.contents.value = self._defaults['GetDesiredAttributeViBoolean']['value']
-        return self._defaults['GetDesiredAttributeViBoolean']['return']
-
-    def niDigital_GetDesiredAttributeViInt32(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['GetDesiredAttributeViInt32']['return'] != 0:
-            return self._defaults['GetDesiredAttributeViInt32']['return']
-        # value
-        if self._defaults['GetDesiredAttributeViInt32']['value'] is None:
-            raise MockFunctionCallError("niDigital_GetDesiredAttributeViInt32", param='value')
-        if value is not None:
-            value.contents.value = self._defaults['GetDesiredAttributeViInt32']['value']
-        return self._defaults['GetDesiredAttributeViInt32']['return']
-
-    def niDigital_GetDesiredAttributeViInt64(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['GetDesiredAttributeViInt64']['return'] != 0:
-            return self._defaults['GetDesiredAttributeViInt64']['return']
-        # value
-        if self._defaults['GetDesiredAttributeViInt64']['value'] is None:
-            raise MockFunctionCallError("niDigital_GetDesiredAttributeViInt64", param='value')
-        if value is not None:
-            value.contents.value = self._defaults['GetDesiredAttributeViInt64']['value']
-        return self._defaults['GetDesiredAttributeViInt64']['return']
-
-    def niDigital_GetDesiredAttributeViReal64(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['GetDesiredAttributeViReal64']['return'] != 0:
-            return self._defaults['GetDesiredAttributeViReal64']['return']
-        # value
-        if self._defaults['GetDesiredAttributeViReal64']['value'] is None:
-            raise MockFunctionCallError("niDigital_GetDesiredAttributeViReal64", param='value')
-        if value is not None:
-            value.contents.value = self._defaults['GetDesiredAttributeViReal64']['value']
-        return self._defaults['GetDesiredAttributeViReal64']['return']
-
-    def niDigital_GetDesiredAttributeViString(self, vi, channel_name, attribute, buffer_size, value):  # noqa: N802
-        if self._defaults['GetDesiredAttributeViString']['return'] != 0:
-            return self._defaults['GetDesiredAttributeViString']['return']
-        if self._defaults['GetDesiredAttributeViString']['value'] is None:
-            raise MockFunctionCallError("niDigital_GetDesiredAttributeViString", param='value')
-        if buffer_size.value == 0:
-            return len(self._defaults['GetDesiredAttributeViString']['value'])
-        value.value = self._defaults['GetDesiredAttributeViString']['value'].encode('ascii')
-        return self._defaults['GetDesiredAttributeViString']['return']
+    def niDigital_GetChannelNameFromString(self, vi, index, name_buffer_size, name):  # noqa: N802
+        if self._defaults['GetChannelNameFromString']['return'] != 0:
+            return self._defaults['GetChannelNameFromString']['return']
+        if self._defaults['GetChannelNameFromString']['name'] is None:
+            raise MockFunctionCallError("niDigital_GetChannelNameFromString", param='name')
+        if name_buffer_size.value == 0:
+            return len(self._defaults['GetChannelNameFromString']['name'])
+        name.value = self._defaults['GetChannelNameFromString']['name'].encode('ascii')
+        return self._defaults['GetChannelNameFromString']['return']
 
     def niDigital_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -951,71 +801,6 @@ class SideEffectsHelper(object):
         if sample_count is not None:
             sample_count.contents.value = self._defaults['GetHistoryRAMSampleCount']['sampleCount']
         return self._defaults['GetHistoryRAMSampleCount']['return']
-
-    def niDigital_GetKeepAlivePatternIndexes(self, vi, pattern_index_buffer_size, pattern_index_buffer, actual_num_indexes):  # noqa: N802
-        if self._defaults['GetKeepAlivePatternIndexes']['return'] != 0:
-            return self._defaults['GetKeepAlivePatternIndexes']['return']
-        # actual_num_indexes
-        if self._defaults['GetKeepAlivePatternIndexes']['actualNumIndexes'] is None:
-            raise MockFunctionCallError("niDigital_GetKeepAlivePatternIndexes", param='actualNumIndexes')
-        if actual_num_indexes is not None:
-            actual_num_indexes.contents.value = self._defaults['GetKeepAlivePatternIndexes']['actualNumIndexes']
-        if self._defaults['GetKeepAlivePatternIndexes']['patternIndexBuffer'] is None:
-            raise MockFunctionCallError("niDigital_GetKeepAlivePatternIndexes", param='patternIndexBuffer')
-        if pattern_index_buffer_size.value == 0:
-            return len(self._defaults['GetKeepAlivePatternIndexes']['patternIndexBuffer'])
-        try:
-            pattern_index_buffer_ref = pattern_index_buffer.contents
-        except AttributeError:
-            pattern_index_buffer_ref = pattern_index_buffer
-        for i in range(len(self._defaults['GetKeepAlivePatternIndexes']['patternIndexBuffer'])):
-            pattern_index_buffer_ref[i] = self._defaults['GetKeepAlivePatternIndexes']['patternIndexBuffer'][i]
-        return self._defaults['GetKeepAlivePatternIndexes']['return']
-
-    def niDigital_GetNextCaptureWaveform(self, vi, waveform_name_buffer_size, waveform_name, number_of_samples):  # noqa: N802
-        if self._defaults['GetNextCaptureWaveform']['return'] != 0:
-            return self._defaults['GetNextCaptureWaveform']['return']
-        # number_of_samples
-        if self._defaults['GetNextCaptureWaveform']['numberOfSamples'] is None:
-            raise MockFunctionCallError("niDigital_GetNextCaptureWaveform", param='numberOfSamples')
-        if number_of_samples is not None:
-            number_of_samples.contents.value = self._defaults['GetNextCaptureWaveform']['numberOfSamples']
-        if self._defaults['GetNextCaptureWaveform']['waveformName'] is None:
-            raise MockFunctionCallError("niDigital_GetNextCaptureWaveform", param='waveformName')
-        if waveform_name_buffer_size.value == 0:
-            return len(self._defaults['GetNextCaptureWaveform']['waveformName'])
-        waveform_name.value = self._defaults['GetNextCaptureWaveform']['waveformName'].encode('ascii')
-        return self._defaults['GetNextCaptureWaveform']['return']
-
-    def niDigital_GetNumberOfVectors(self, vi, pattern_index, number_of_vectors):  # noqa: N802
-        if self._defaults['GetNumberOfVectors']['return'] != 0:
-            return self._defaults['GetNumberOfVectors']['return']
-        # number_of_vectors
-        if self._defaults['GetNumberOfVectors']['numberOfVectors'] is None:
-            raise MockFunctionCallError("niDigital_GetNumberOfVectors", param='numberOfVectors')
-        if number_of_vectors is not None:
-            number_of_vectors.contents.value = self._defaults['GetNumberOfVectors']['numberOfVectors']
-        return self._defaults['GetNumberOfVectors']['return']
-
-    def niDigital_GetPatternBurstSiteEnable(self, vi, site, enable):  # noqa: N802
-        if self._defaults['GetPatternBurstSiteEnable']['return'] != 0:
-            return self._defaults['GetPatternBurstSiteEnable']['return']
-        # enable
-        if self._defaults['GetPatternBurstSiteEnable']['enable'] is None:
-            raise MockFunctionCallError("niDigital_GetPatternBurstSiteEnable", param='enable')
-        if enable is not None:
-            enable.contents.value = self._defaults['GetPatternBurstSiteEnable']['enable']
-        return self._defaults['GetPatternBurstSiteEnable']['return']
-
-    def niDigital_GetPatternFilePath(self, vi, pattern_index, name_buf_size, name):  # noqa: N802
-        if self._defaults['GetPatternFilePath']['return'] != 0:
-            return self._defaults['GetPatternFilePath']['return']
-        if self._defaults['GetPatternFilePath']['name'] is None:
-            raise MockFunctionCallError("niDigital_GetPatternFilePath", param='name')
-        if name_buf_size.value == 0:
-            return len(self._defaults['GetPatternFilePath']['name'])
-        name.value = self._defaults['GetPatternFilePath']['name'].encode('ascii')
-        return self._defaults['GetPatternFilePath']['return']
 
     def niDigital_GetPatternName(self, vi, pattern_index, name_buffer_size, name):  # noqa: N802
         if self._defaults['GetPatternName']['return'] != 0:
@@ -1107,26 +892,6 @@ class SideEffectsHelper(object):
             channel_indexes_ref[i] = self._defaults['GetPinResultsPinInformation']['channelIndexes'][i]
         return self._defaults['GetPinResultsPinInformation']['return']
 
-    def niDigital_GetPinType(self, vi, pin, type):  # noqa: N802
-        if self._defaults['GetPinType']['return'] != 0:
-            return self._defaults['GetPinType']['return']
-        # type
-        if self._defaults['GetPinType']['type'] is None:
-            raise MockFunctionCallError("niDigital_GetPinType", param='type')
-        if type is not None:
-            type.contents.value = self._defaults['GetPinType']['type']
-        return self._defaults['GetPinType']['return']
-
-    def niDigital_GetSessionState(self, vi, channel_name, session_state):  # noqa: N802
-        if self._defaults['GetSessionState']['return'] != 0:
-            return self._defaults['GetSessionState']['return']
-        # session_state
-        if self._defaults['GetSessionState']['sessionState'] is None:
-            raise MockFunctionCallError("niDigital_GetSessionState", param='sessionState')
-        if session_state is not None:
-            session_state.contents.value = self._defaults['GetSessionState']['sessionState']
-        return self._defaults['GetSessionState']['return']
-
     def niDigital_GetSitePassFail(self, vi, site_list, pass_fail_buffer_size, pass_fail, actual_num_sites):  # noqa: N802
         if self._defaults['GetSitePassFail']['return'] != 0:
             return self._defaults['GetSitePassFail']['return']
@@ -1166,56 +931,6 @@ class SideEffectsHelper(object):
         for i in range(len(self._defaults['GetSiteResultsSiteNumbers']['siteNumbers'])):
             site_numbers_ref[i] = self._defaults['GetSiteResultsSiteNumbers']['siteNumbers'][i]
         return self._defaults['GetSiteResultsSiteNumbers']['return']
-
-    def niDigital_GetTimeSetCompareEdges(self, vi, pin_list, time_set, format, compare_open_edge, reserved):  # noqa: N802
-        if self._defaults['GetTimeSetCompareEdges']['return'] != 0:
-            return self._defaults['GetTimeSetCompareEdges']['return']
-        # format
-        if self._defaults['GetTimeSetCompareEdges']['format'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetCompareEdges", param='format')
-        if format is not None:
-            format.contents.value = self._defaults['GetTimeSetCompareEdges']['format']
-        # compare_open_edge
-        if self._defaults['GetTimeSetCompareEdges']['compareOpenEdge'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetCompareEdges", param='compareOpenEdge')
-        if compare_open_edge is not None:
-            compare_open_edge.contents.value = self._defaults['GetTimeSetCompareEdges']['compareOpenEdge']
-        # reserved
-        if self._defaults['GetTimeSetCompareEdges']['reserved'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetCompareEdges", param='reserved')
-        if reserved is not None:
-            reserved.contents.value = self._defaults['GetTimeSetCompareEdges']['reserved']
-        return self._defaults['GetTimeSetCompareEdges']['return']
-
-    def niDigital_GetTimeSetDriveEdges(self, vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
-        if self._defaults['GetTimeSetDriveEdges']['return'] != 0:
-            return self._defaults['GetTimeSetDriveEdges']['return']
-        # format
-        if self._defaults['GetTimeSetDriveEdges']['format'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetDriveEdges", param='format')
-        if format is not None:
-            format.contents.value = self._defaults['GetTimeSetDriveEdges']['format']
-        # drive_on_edge
-        if self._defaults['GetTimeSetDriveEdges']['driveOnEdge'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetDriveEdges", param='driveOnEdge')
-        if drive_on_edge is not None:
-            drive_on_edge.contents.value = self._defaults['GetTimeSetDriveEdges']['driveOnEdge']
-        # drive_data_edge
-        if self._defaults['GetTimeSetDriveEdges']['driveDataEdge'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetDriveEdges", param='driveDataEdge')
-        if drive_data_edge is not None:
-            drive_data_edge.contents.value = self._defaults['GetTimeSetDriveEdges']['driveDataEdge']
-        # drive_return_edge
-        if self._defaults['GetTimeSetDriveEdges']['driveReturnEdge'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetDriveEdges", param='driveReturnEdge')
-        if drive_return_edge is not None:
-            drive_return_edge.contents.value = self._defaults['GetTimeSetDriveEdges']['driveReturnEdge']
-        # drive_off_edge
-        if self._defaults['GetTimeSetDriveEdges']['driveOffEdge'] is None:
-            raise MockFunctionCallError("niDigital_GetTimeSetDriveEdges", param='driveOffEdge')
-        if drive_off_edge is not None:
-            drive_off_edge.contents.value = self._defaults['GetTimeSetDriveEdges']['driveOffEdge']
-        return self._defaults['GetTimeSetDriveEdges']['return']
 
     def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set, format):  # noqa: N802
         if self._defaults['GetTimeSetDriveFormat']['return'] != 0:
@@ -1292,16 +1007,6 @@ class SideEffectsHelper(object):
             done.contents.value = self._defaults['IsDone']['done']
         return self._defaults['IsDone']['return']
 
-    def niDigital_IsPatternFileModifiedSinceLoad(self, vi, pattern_index, file_modified_since_load):  # noqa: N802
-        if self._defaults['IsPatternFileModifiedSinceLoad']['return'] != 0:
-            return self._defaults['IsPatternFileModifiedSinceLoad']['return']
-        # file_modified_since_load
-        if self._defaults['IsPatternFileModifiedSinceLoad']['fileModifiedSinceLoad'] is None:
-            raise MockFunctionCallError("niDigital_IsPatternFileModifiedSinceLoad", param='fileModifiedSinceLoad')
-        if file_modified_since_load is not None:
-            file_modified_since_load.contents.value = self._defaults['IsPatternFileModifiedSinceLoad']['fileModifiedSinceLoad']
-        return self._defaults['IsPatternFileModifiedSinceLoad']['return']
-
     def niDigital_IsSiteEnabled(self, vi, site, enable):  # noqa: N802
         if self._defaults['IsSiteEnabled']['return'] != 0:
             return self._defaults['IsSiteEnabled']['return']
@@ -1317,20 +1022,10 @@ class SideEffectsHelper(object):
             return self._defaults['LoadLevels']['return']
         return self._defaults['LoadLevels']['return']
 
-    def niDigital_LoadLevelsInternal(self, vi, levels_sheet):  # noqa: N802
-        if self._defaults['LoadLevelsInternal']['return'] != 0:
-            return self._defaults['LoadLevelsInternal']['return']
-        return self._defaults['LoadLevelsInternal']['return']
-
     def niDigital_LoadPattern(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadPattern']['return'] != 0:
             return self._defaults['LoadPattern']['return']
         return self._defaults['LoadPattern']['return']
-
-    def niDigital_LoadPatternInternal(self, vi, pattern):  # noqa: N802
-        if self._defaults['LoadPatternInternal']['return'] != 0:
-            return self._defaults['LoadPatternInternal']['return']
-        return self._defaults['LoadPatternInternal']['return']
 
     def niDigital_LoadPinMap(self, vi, pin_map_file_path):  # noqa: N802
         if self._defaults['LoadPinMap']['return'] != 0:
@@ -1346,11 +1041,6 @@ class SideEffectsHelper(object):
         if self._defaults['LoadTiming']['return'] != 0:
             return self._defaults['LoadTiming']['return']
         return self._defaults['LoadTiming']['return']
-
-    def niDigital_LoadTimingInternal(self, vi, timing_sheet):  # noqa: N802
-        if self._defaults['LoadTimingInternal']['return'] != 0:
-            return self._defaults['LoadTimingInternal']['return']
-        return self._defaults['LoadTimingInternal']['return']
 
     def niDigital_LockSession(self, vi, caller_has_lock):  # noqa: N802
         if self._defaults['LockSession']['return'] != 0:
@@ -1427,26 +1117,6 @@ class SideEffectsHelper(object):
             measurements_ref[i] = self._defaults['PPMU_Measure']['measurements'][i]
         return self._defaults['PPMU_Measure']['return']
 
-    def niDigital_PPMU_MeasureCached(self, vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read):  # noqa: N802
-        if self._defaults['PPMU_MeasureCached']['return'] != 0:
-            return self._defaults['PPMU_MeasureCached']['return']
-        # actual_num_read
-        if self._defaults['PPMU_MeasureCached']['actualNumRead'] is None:
-            raise MockFunctionCallError("niDigital_PPMU_MeasureCached", param='actualNumRead')
-        if actual_num_read is not None:
-            actual_num_read.contents.value = self._defaults['PPMU_MeasureCached']['actualNumRead']
-        if self._defaults['PPMU_MeasureCached']['measurements'] is None:
-            raise MockFunctionCallError("niDigital_PPMU_MeasureCached", param='measurements')
-        if buffer_size.value == 0:
-            return len(self._defaults['PPMU_MeasureCached']['measurements'])
-        try:
-            measurements_ref = measurements.contents
-        except AttributeError:
-            measurements_ref = measurements
-        for i in range(len(self._defaults['PPMU_MeasureCached']['measurements'])):
-            measurements_ref[i] = self._defaults['PPMU_MeasureCached']['measurements'][i]
-        return self._defaults['PPMU_MeasureCached']['return']
-
     def niDigital_PPMU_Source(self, vi, channel_list):  # noqa: N802
         if self._defaults['PPMU_Source']['return'] != 0:
             return self._defaults['PPMU_Source']['return']
@@ -1491,26 +1161,6 @@ class SideEffectsHelper(object):
         for i in range(len(self._defaults['ReadStatic']['data'])):
             data_ref[i] = self._defaults['ReadStatic']['data'][i]
         return self._defaults['ReadStatic']['return']
-
-    def niDigital_ReadStaticCached(self, vi, channel_list, buffer_size, data, actual_num_read):  # noqa: N802
-        if self._defaults['ReadStaticCached']['return'] != 0:
-            return self._defaults['ReadStaticCached']['return']
-        # actual_num_read
-        if self._defaults['ReadStaticCached']['actualNumRead'] is None:
-            raise MockFunctionCallError("niDigital_ReadStaticCached", param='actualNumRead')
-        if actual_num_read is not None:
-            actual_num_read.contents.value = self._defaults['ReadStaticCached']['actualNumRead']
-        if self._defaults['ReadStaticCached']['data'] is None:
-            raise MockFunctionCallError("niDigital_ReadStaticCached", param='data')
-        if buffer_size.value == 0:
-            return len(self._defaults['ReadStaticCached']['data'])
-        try:
-            data_ref = data.contents
-        except AttributeError:
-            data_ref = data
-        for i in range(len(self._defaults['ReadStaticCached']['data'])):
-            data_ref[i] = self._defaults['ReadStaticCached']['data'][i]
-        return self._defaults['ReadStaticCached']['return']
 
     def niDigital_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
         if self._defaults['ResetAttribute']['return'] != 0:
@@ -1586,11 +1236,6 @@ class SideEffectsHelper(object):
         for i in range(len(self._defaults['TDR']['offsets'])):
             offsets_ref[i] = self._defaults['TDR']['offsets'][i]
         return self._defaults['TDR']['return']
-
-    def niDigital_Uncommit(self, vi):  # noqa: N802
-        if self._defaults['Uncommit']['return'] != 0:
-            return self._defaults['Uncommit']['return']
-        return self._defaults['Uncommit']['return']
 
     def niDigital_UnloadAllPatterns(self, vi, unload_keep_alive_pattern):  # noqa: N802
         if self._defaults['UnloadAllPatterns']['return'] != 0:
@@ -1723,8 +1368,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_ConfigurePatternBurstSites.return_value = 0
         mock_library.niDigital_ConfigurePatternLabelHistoryRAMTrigger.side_effect = MockFunctionCallError("niDigital_ConfigurePatternLabelHistoryRAMTrigger")
         mock_library.niDigital_ConfigurePatternLabelHistoryRAMTrigger.return_value = 0
-        mock_library.niDigital_ConfigureRefClock.side_effect = MockFunctionCallError("niDigital_ConfigureRefClock")
-        mock_library.niDigital_ConfigureRefClock.return_value = 0
         mock_library.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger")
         mock_library.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger.return_value = 0
         mock_library.niDigital_ConfigureSoftwareEdgeStartTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureSoftwareEdgeStartTrigger")
@@ -1773,8 +1416,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_CreateTimeSet.return_value = 0
         mock_library.niDigital_DeleteAllTimeSets.side_effect = MockFunctionCallError("niDigital_DeleteAllTimeSets")
         mock_library.niDigital_DeleteAllTimeSets.return_value = 0
-        mock_library.niDigital_Disable.side_effect = MockFunctionCallError("niDigital_Disable")
-        mock_library.niDigital_Disable.return_value = 0
         mock_library.niDigital_DisableConditionalJumpTrigger.side_effect = MockFunctionCallError("niDigital_DisableConditionalJumpTrigger")
         mock_library.niDigital_DisableConditionalJumpTrigger.return_value = 0
         mock_library.niDigital_DisableSites.side_effect = MockFunctionCallError("niDigital_DisableSites")
@@ -1787,8 +1428,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_EndChannelMap.return_value = 0
         mock_library.niDigital_ExportSignal.side_effect = MockFunctionCallError("niDigital_ExportSignal")
         mock_library.niDigital_ExportSignal.return_value = 0
-        mock_library.niDigital_FetchCaptureWaveformU32.side_effect = MockFunctionCallError("niDigital_FetchCaptureWaveformU32")
-        mock_library.niDigital_FetchCaptureWaveformU32.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCycleInformation")
         mock_library.niDigital_FetchHistoryRAMCycleInformation.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCyclePinData")
@@ -1813,32 +1452,14 @@ class SideEffectsHelper(object):
         mock_library.niDigital_GetAttributeViString.return_value = 0
         mock_library.niDigital_GetChannelName.side_effect = MockFunctionCallError("niDigital_GetChannelName")
         mock_library.niDigital_GetChannelName.return_value = 0
-        mock_library.niDigital_GetDesiredAttributeViBoolean.side_effect = MockFunctionCallError("niDigital_GetDesiredAttributeViBoolean")
-        mock_library.niDigital_GetDesiredAttributeViBoolean.return_value = 0
-        mock_library.niDigital_GetDesiredAttributeViInt32.side_effect = MockFunctionCallError("niDigital_GetDesiredAttributeViInt32")
-        mock_library.niDigital_GetDesiredAttributeViInt32.return_value = 0
-        mock_library.niDigital_GetDesiredAttributeViInt64.side_effect = MockFunctionCallError("niDigital_GetDesiredAttributeViInt64")
-        mock_library.niDigital_GetDesiredAttributeViInt64.return_value = 0
-        mock_library.niDigital_GetDesiredAttributeViReal64.side_effect = MockFunctionCallError("niDigital_GetDesiredAttributeViReal64")
-        mock_library.niDigital_GetDesiredAttributeViReal64.return_value = 0
-        mock_library.niDigital_GetDesiredAttributeViString.side_effect = MockFunctionCallError("niDigital_GetDesiredAttributeViString")
-        mock_library.niDigital_GetDesiredAttributeViString.return_value = 0
+        mock_library.niDigital_GetChannelNameFromString.side_effect = MockFunctionCallError("niDigital_GetChannelNameFromString")
+        mock_library.niDigital_GetChannelNameFromString.return_value = 0
         mock_library.niDigital_GetError.side_effect = MockFunctionCallError("niDigital_GetError")
         mock_library.niDigital_GetError.return_value = 0
         mock_library.niDigital_GetFailCount.side_effect = MockFunctionCallError("niDigital_GetFailCount")
         mock_library.niDigital_GetFailCount.return_value = 0
         mock_library.niDigital_GetHistoryRAMSampleCount.side_effect = MockFunctionCallError("niDigital_GetHistoryRAMSampleCount")
         mock_library.niDigital_GetHistoryRAMSampleCount.return_value = 0
-        mock_library.niDigital_GetKeepAlivePatternIndexes.side_effect = MockFunctionCallError("niDigital_GetKeepAlivePatternIndexes")
-        mock_library.niDigital_GetKeepAlivePatternIndexes.return_value = 0
-        mock_library.niDigital_GetNextCaptureWaveform.side_effect = MockFunctionCallError("niDigital_GetNextCaptureWaveform")
-        mock_library.niDigital_GetNextCaptureWaveform.return_value = 0
-        mock_library.niDigital_GetNumberOfVectors.side_effect = MockFunctionCallError("niDigital_GetNumberOfVectors")
-        mock_library.niDigital_GetNumberOfVectors.return_value = 0
-        mock_library.niDigital_GetPatternBurstSiteEnable.side_effect = MockFunctionCallError("niDigital_GetPatternBurstSiteEnable")
-        mock_library.niDigital_GetPatternBurstSiteEnable.return_value = 0
-        mock_library.niDigital_GetPatternFilePath.side_effect = MockFunctionCallError("niDigital_GetPatternFilePath")
-        mock_library.niDigital_GetPatternFilePath.return_value = 0
         mock_library.niDigital_GetPatternName.side_effect = MockFunctionCallError("niDigital_GetPatternName")
         mock_library.niDigital_GetPatternName.return_value = 0
         mock_library.niDigital_GetPatternPinIndexes.side_effect = MockFunctionCallError("niDigital_GetPatternPinIndexes")
@@ -1849,18 +1470,10 @@ class SideEffectsHelper(object):
         mock_library.niDigital_GetPinName.return_value = 0
         mock_library.niDigital_GetPinResultsPinInformation.side_effect = MockFunctionCallError("niDigital_GetPinResultsPinInformation")
         mock_library.niDigital_GetPinResultsPinInformation.return_value = 0
-        mock_library.niDigital_GetPinType.side_effect = MockFunctionCallError("niDigital_GetPinType")
-        mock_library.niDigital_GetPinType.return_value = 0
-        mock_library.niDigital_GetSessionState.side_effect = MockFunctionCallError("niDigital_GetSessionState")
-        mock_library.niDigital_GetSessionState.return_value = 0
         mock_library.niDigital_GetSitePassFail.side_effect = MockFunctionCallError("niDigital_GetSitePassFail")
         mock_library.niDigital_GetSitePassFail.return_value = 0
         mock_library.niDigital_GetSiteResultsSiteNumbers.side_effect = MockFunctionCallError("niDigital_GetSiteResultsSiteNumbers")
         mock_library.niDigital_GetSiteResultsSiteNumbers.return_value = 0
-        mock_library.niDigital_GetTimeSetCompareEdges.side_effect = MockFunctionCallError("niDigital_GetTimeSetCompareEdges")
-        mock_library.niDigital_GetTimeSetCompareEdges.return_value = 0
-        mock_library.niDigital_GetTimeSetDriveEdges.side_effect = MockFunctionCallError("niDigital_GetTimeSetDriveEdges")
-        mock_library.niDigital_GetTimeSetDriveEdges.return_value = 0
         mock_library.niDigital_GetTimeSetDriveFormat.side_effect = MockFunctionCallError("niDigital_GetTimeSetDriveFormat")
         mock_library.niDigital_GetTimeSetDriveFormat.return_value = 0
         mock_library.niDigital_GetTimeSetEdge.side_effect = MockFunctionCallError("niDigital_GetTimeSetEdge")
@@ -1877,26 +1490,18 @@ class SideEffectsHelper(object):
         mock_library.niDigital_Initiate.return_value = 0
         mock_library.niDigital_IsDone.side_effect = MockFunctionCallError("niDigital_IsDone")
         mock_library.niDigital_IsDone.return_value = 0
-        mock_library.niDigital_IsPatternFileModifiedSinceLoad.side_effect = MockFunctionCallError("niDigital_IsPatternFileModifiedSinceLoad")
-        mock_library.niDigital_IsPatternFileModifiedSinceLoad.return_value = 0
         mock_library.niDigital_IsSiteEnabled.side_effect = MockFunctionCallError("niDigital_IsSiteEnabled")
         mock_library.niDigital_IsSiteEnabled.return_value = 0
         mock_library.niDigital_LoadLevels.side_effect = MockFunctionCallError("niDigital_LoadLevels")
         mock_library.niDigital_LoadLevels.return_value = 0
-        mock_library.niDigital_LoadLevelsInternal.side_effect = MockFunctionCallError("niDigital_LoadLevelsInternal")
-        mock_library.niDigital_LoadLevelsInternal.return_value = 0
         mock_library.niDigital_LoadPattern.side_effect = MockFunctionCallError("niDigital_LoadPattern")
         mock_library.niDigital_LoadPattern.return_value = 0
-        mock_library.niDigital_LoadPatternInternal.side_effect = MockFunctionCallError("niDigital_LoadPatternInternal")
-        mock_library.niDigital_LoadPatternInternal.return_value = 0
         mock_library.niDigital_LoadPinMap.side_effect = MockFunctionCallError("niDigital_LoadPinMap")
         mock_library.niDigital_LoadPinMap.return_value = 0
         mock_library.niDigital_LoadSpecifications.side_effect = MockFunctionCallError("niDigital_LoadSpecifications")
         mock_library.niDigital_LoadSpecifications.return_value = 0
         mock_library.niDigital_LoadTiming.side_effect = MockFunctionCallError("niDigital_LoadTiming")
         mock_library.niDigital_LoadTiming.return_value = 0
-        mock_library.niDigital_LoadTimingInternal.side_effect = MockFunctionCallError("niDigital_LoadTimingInternal")
-        mock_library.niDigital_LoadTimingInternal.return_value = 0
         mock_library.niDigital_LockSession.side_effect = MockFunctionCallError("niDigital_LockSession")
         mock_library.niDigital_LockSession.return_value = 0
         mock_library.niDigital_MapPinToChannel.side_effect = MockFunctionCallError("niDigital_MapPinToChannel")
@@ -1919,8 +1524,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_PPMU_ConfigureVoltageLimits.return_value = 0
         mock_library.niDigital_PPMU_Measure.side_effect = MockFunctionCallError("niDigital_PPMU_Measure")
         mock_library.niDigital_PPMU_Measure.return_value = 0
-        mock_library.niDigital_PPMU_MeasureCached.side_effect = MockFunctionCallError("niDigital_PPMU_MeasureCached")
-        mock_library.niDigital_PPMU_MeasureCached.return_value = 0
         mock_library.niDigital_PPMU_Source.side_effect = MockFunctionCallError("niDigital_PPMU_Source")
         mock_library.niDigital_PPMU_Source.return_value = 0
         mock_library.niDigital_ReadSequencerFlag.side_effect = MockFunctionCallError("niDigital_ReadSequencerFlag")
@@ -1929,8 +1532,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_ReadSequencerRegister.return_value = 0
         mock_library.niDigital_ReadStatic.side_effect = MockFunctionCallError("niDigital_ReadStatic")
         mock_library.niDigital_ReadStatic.return_value = 0
-        mock_library.niDigital_ReadStaticCached.side_effect = MockFunctionCallError("niDigital_ReadStaticCached")
-        mock_library.niDigital_ReadStaticCached.return_value = 0
         mock_library.niDigital_ResetAttribute.side_effect = MockFunctionCallError("niDigital_ResetAttribute")
         mock_library.niDigital_ResetAttribute.return_value = 0
         mock_library.niDigital_ResetDevice.side_effect = MockFunctionCallError("niDigital_ResetDevice")
@@ -1955,8 +1556,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_SetAttributeViString.return_value = 0
         mock_library.niDigital_TDR.side_effect = MockFunctionCallError("niDigital_TDR")
         mock_library.niDigital_TDR.return_value = 0
-        mock_library.niDigital_Uncommit.side_effect = MockFunctionCallError("niDigital_Uncommit")
-        mock_library.niDigital_Uncommit.return_value = 0
         mock_library.niDigital_UnloadAllPatterns.side_effect = MockFunctionCallError("niDigital_UnloadAllPatterns")
         mock_library.niDigital_UnloadAllPatterns.return_value = 0
         mock_library.niDigital_UnloadSpecifications.side_effect = MockFunctionCallError("niDigital_UnloadSpecifications")

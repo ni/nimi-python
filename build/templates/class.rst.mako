@@ -6,8 +6,14 @@
     driver_name = config['driver_name']
     c_function_prefix = config['c_function_prefix']
 
-    functions = template_parameters['metadata'].functions
-    functions = helper.filter_public_functions(functions)
+    functions_all = template_parameters['metadata'].functions
+    functions = helper.filter_public_functions(functions_all)
+
+    if 'context_manager_name' in config:
+        # Add a InitiateDoc entry - only used to add initiate() to the Session documentation
+        functions['InitiateDoc'] = helper.initiate_function_def_for_doc(functions_all, config)
+        if functions['InitiateDoc'] is None:
+            functions.pop('InitiateDoc')
 
     # Add a CloseDoc entry - only used to add close() to the Session documentation
     functions['CloseDoc'] = helper.close_function_def_for_doc(functions)

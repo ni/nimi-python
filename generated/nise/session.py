@@ -250,9 +250,6 @@ class Session(_SessionBase):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-    def initiate(self):
-        return None(self)
-
     def close(self):
         '''close
 

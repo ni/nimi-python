@@ -29,7 +29,6 @@ class Library(object):
         self.niFgen_Commit_cfunc = None
         self.niFgen_ConfigureArbSequence_cfunc = None
         self.niFgen_ConfigureArbWaveform_cfunc = None
-        self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc = None
         self.niFgen_ConfigureFreqList_cfunc = None
         self.niFgen_ConfigureStandardWaveform_cfunc = None
         self.niFgen_CreateAdvancedArbSequence_cfunc = None
@@ -174,14 +173,6 @@ class Library(object):
                 self.niFgen_ConfigureArbWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64]  # noqa: F405
                 self.niFgen_ConfigureArbWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_ConfigureArbWaveform_cfunc(vi, channel_name, waveform_handle, gain, offset)
-
-    def niFgen_ConfigureCustomFIRFilterCoefficients(self, vi, channel_name, number_of_coefficients, coefficients_array):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc is None:
-                self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc = self._library.niFgen_ConfigureCustomFIRFilterCoefficients
-                self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_ConfigureCustomFIRFilterCoefficients_cfunc(vi, channel_name, number_of_coefficients, coefficients_array)
 
     def niFgen_ConfigureFreqList(self, vi, channel_name, frequency_list_handle, amplitude, dc_offset, start_phase):  # noqa: N802
         with self._func_lock:

@@ -464,6 +464,8 @@ niscope.Session
     +-------------------------------------------------------+
     | :py:func:`import_attribute_configuration_file`        |
     +-------------------------------------------------------+
+    | :py:func:`initiate`                                   |
+    +-------------------------------------------------------+
     | :py:func:`lock`                                       |
     +-------------------------------------------------------+
     | :py:func:`probe_compensation_signal_start`            |
@@ -6003,6 +6005,25 @@ import_attribute_configuration_file
 
             :type file_path: str
 
+initiate
+~~~~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: initiate()
+
+            Initiates a waveform acquisition.
+
+            After calling this method, the digitizer leaves the Idle state and
+            waits for a trigger. The digitizer acquires a waveform for each channel
+            you enable with :py:meth:`niscope.Session.configure_vertical`.
+
+            
+
+            .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
+
+
 lock
 ~~~~
 
@@ -6676,6 +6697,8 @@ Methods
 | :py:func:`niscope.Session.import_attribute_configuration_buffer`      |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.import_attribute_configuration_file`        |
++-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.initiate`                                   |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.lock`                                       |
 +-----------------------------------------------------------------------+
