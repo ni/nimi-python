@@ -136,6 +136,19 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
         'python_api_list': True,
     },
+    ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': True,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',  # any but ivi-dance
+        'python_api_list': True,
+    },
     ParameterUsageOptions.NUMPY_PARAMETERS: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
