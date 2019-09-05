@@ -873,8 +873,8 @@ functions_expected = {
                 'python_name_with_default': 'pin_data_buffer_size',
                 'python_name_with_doc_default': 'pin_data_buffer_size',
                 'size': {
-                   'mechanism': 'fixed',
-                   'value': 1
+                    'mechanism': 'fixed',
+                    'value': 1
                 },
                 'type': 'ViInt32',
                 'library_method_call_snippet': 'pin_data_buffer_size_ctype',
@@ -904,8 +904,8 @@ functions_expected = {
                 'python_name_with_default': 'actual_num_pin_data',
                 'python_name_with_doc_default': 'actual_num_pin_data',
                 'size': {
-                   'mechanism': 'fixed',
-                   'value': 1
+                    'mechanism': 'fixed',
+                    'value': 1
                 },
                 'type': 'ViInt32',
                 'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
@@ -1040,8 +1040,8 @@ functions_expected = {
                 'python_name_with_default': 'data_buffer_size',
                 'python_name_with_doc_default': 'data_buffer_size',
                 'size': {
-                   'mechanism': 'fixed',
-                   'value': 1
+                    'mechanism': 'fixed',
+                    'value': 1
                 },
                 'type': 'ViInt32',
                 'library_method_call_snippet': 'data_buffer_size_ctype',
@@ -1072,8 +1072,8 @@ functions_expected = {
                 'python_name_with_default': 'data',
                 'python_name_with_doc_default': 'data',
                 'size': {
-                   'mechanism': 'ivi-dance',
-                   'value': 'dataBufferSize',
+                    'mechanism': 'ivi-dance',
+                    'value': 'dataBufferSize',
                 },
                 'type': 'ViUInt32',
                 'library_method_call_snippet': 'data_ctype',
@@ -1091,7 +1091,6 @@ functions_expected = {
         'has_repeated_capability': False
     }
 }
-
 
 
 attributes_input = {
