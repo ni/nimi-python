@@ -114,12 +114,13 @@ This function will return a Python context manager that will initiate on enterin
 '''
 
 
-def close_function_def_for_doc(functions):
+def close_function_def_for_doc(functions, config):
     # This is very specific to session based APIs. We look for a 'close' function and if we find it,
     # We will copy that and modify it to be what we need for documentation
-    if 'close' in functions:
+    close_name = config['close_function']
+    if close_name in functions:
         import copy
-        function_def = copy.deepcopy(functions['close'])
+        function_def = copy.deepcopy(functions[close_name])
         if 'documentation' not in function_def:
             function_def['documentation'] = {}
         if 'description' not in function_def['documentation']:
