@@ -105,7 +105,7 @@ This function is not needed when using the session context manager
 '''
 
 def close_function_def_for_doc(functions):
-    # This is very specific to IVI. We look for a 'close' function and if we find it,
+    # This is very specific to session based APIs. We look for a 'close' function and if we find it,
     # We will copy that and modify it to be what we need for documentation
     if 'close' in functions:
         import copy
