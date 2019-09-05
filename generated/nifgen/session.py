@@ -1606,11 +1606,11 @@ class _SessionBase(object):
                 |
                 | ****Default Value**:** ByteOrder.LITTLE
 
-                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.LITTLE | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.BIG    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 Data written by most applications in Windows (including
@@ -1670,11 +1670,11 @@ class _SessionBase(object):
                 |
                 | ****Default Value**:** ByteOrder.LITTLE
 
-                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.LITTLE | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.BIG    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 Data written by most applications in Windows (including
@@ -3128,6 +3128,16 @@ class Session(_SessionBase):
         self.close()
 
     def initiate(self):
+        '''initiate
+
+        Initiates signal generation. If you want to abort signal generation,
+        call the abort method. After the signal generation
+        is aborted, you can call the initiate method to
+        cause the signal generator to produce a signal again.
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+        '''
         return _Generation(self)
 
     def close(self):
@@ -3795,11 +3805,11 @@ class Session(_SessionBase):
 
                 ****Defined Values****
 
-                +-------+------------------------------------+
+                +-------+--------------------------------------+
                 | True  | Self–calibration is supported.     |
-                +-------+------------------------------------+
+                +-------+--------------------------------------+
                 | False | Self–calibration is not supported. |
-                +-------+------------------------------------+
+                +-------+--------------------------------------+
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

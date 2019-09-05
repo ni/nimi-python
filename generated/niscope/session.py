@@ -4056,6 +4056,17 @@ class Session(_SessionBase):
         self.close()
 
     def initiate(self):
+        '''initiate
+
+        Initiates a waveform acquisition.
+
+        After calling this method, the digitizer leaves the Idle state and
+        waits for a trigger. The digitizer acquires a waveform for each channel
+        you enable with configure_vertical.
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+        '''
         return _Acquisition(self)
 
     def close(self):

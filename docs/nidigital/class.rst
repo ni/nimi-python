@@ -417,6 +417,8 @@ nidigital.Session
     +-------------------------------------------------------------+
     | :py:func:`get_time_set_period`                              |
     +-------------------------------------------------------------+
+    | :py:func:`initiate`                                         |
+    +-------------------------------------------------------------+
     | :py:func:`is_done`                                          |
     +-------------------------------------------------------------+
     | :py:func:`is_site_enabled`                                  |
@@ -5726,6 +5728,21 @@ get_time_set_period
 
 
 
+initiate
+~~~~~~~~
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: initiate()
+
+            TBD
+
+            
+
+            .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
+
+
 is_done
 ~~~~~~~
 
@@ -7342,6 +7359,8 @@ Methods
 | :py:func:`nidigital.Session.get_time_set_name`                                |
 +-------------------------------------------------------------------------------+
 | :py:func:`nidigital.Session.get_time_set_period`                              |
++-------------------------------------------------------------------------------+
+| :py:func:`nidigital.Session.initiate`                                         |
 +-------------------------------------------------------------------------------+
 | :py:func:`nidigital.Session.is_done`                                          |
 +-------------------------------------------------------------------------------+
