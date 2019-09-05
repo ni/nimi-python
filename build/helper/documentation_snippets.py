@@ -168,14 +168,6 @@ def initiate_function_def_for_doc(functions, config):
     return function_def
 
 
-def test_close_function_def_for_doc_no_exist():
-    '''Testing for lack of syntax error - not actual documentation'''
-    functions = {}
-    close_doc = close_function_def_for_doc(functions)
-    assert type(close_doc) is dict
-    return
-
-
 def test_close_function_def_for_doc_note_not_list():
     '''Testing for lack of syntax error - not actual documentation'''
     functions = {
@@ -186,7 +178,10 @@ def test_close_function_def_for_doc_note_not_list():
             },
         },
     }
-    close_doc = close_function_def_for_doc(functions)
+    config = {
+        'close_function': 'close'
+    }
+    close_doc = close_function_def_for_doc(functions, config)
     assert type(close_doc) is dict
     return
 
@@ -201,7 +196,10 @@ def test_close_function_def_for_doc_note_list():
             },
         },
     }
-    close_doc = close_function_def_for_doc(functions)
+    config = {
+        'close_function': 'close'
+    }
+    close_doc = close_function_def_for_doc(functions, config)
     assert type(close_doc) is dict
     return
 
@@ -215,21 +213,11 @@ def test_close_function_def_for_doc_no_note():
             },
         },
     }
-    close_doc = close_function_def_for_doc(functions)
-    assert type(close_doc) is dict
-
-
-def test_initiate_function_def_for_doc_no_exist():
-    '''Testing for lack of syntax error - not actual documentation'''
-    functions = {}
     config = {
-        'context_manager_name': {
-            'task': 'acquisition',
-        },
+        'close_function': 'close'
     }
-    initiate_doc = initiate_function_def_for_doc(functions, config)
-    assert initiate_doc is None
-    return
+    close_doc = close_function_def_for_doc(functions, config)
+    assert type(close_doc) is dict
 
 
 def test_initiate_function_def_for_doc_note_not_list():
@@ -240,7 +228,6 @@ def test_initiate_function_def_for_doc_note_not_list():
                 'description': 'test',
                 'note': 'test',
             },
-
             'python_name': '_initiate',
         },
     }
