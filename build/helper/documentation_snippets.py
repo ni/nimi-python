@@ -115,8 +115,10 @@ This function will return a Python context manager that will initiate on enterin
 
 
 def close_function_def_for_doc(functions, config):
-    # This is very specific to session based APIs. We look for a 'close' function and if we find it,
-    # We will copy that and modify it to be what we need for documentation
+    # This is very specific to session based APIs. We look for a 'close' function in
+    # the metadata which is to become a code-generated "private" method of Session
+    # for which we provide a public wrapper. Copy its documentation so we apply it to
+    # the said public wrapper.
     close_name = config['close_function']
     if close_name in functions:
         import copy
@@ -138,9 +140,10 @@ def close_function_def_for_doc(functions, config):
 
 
 def initiate_function_def_for_doc(functions, config):
-    # This is very specific to the IVI state model which not all drivers in nimi-python follow.
-    # We look for a 'close' function and if we find it, We will copy that and modify it to be
-    # what we need for documentation
+    # This is very specific to session based APIs. We look for a 'initiate' function in
+    # the metadata which is to become a code-generated "private" method of Session
+    # for which we then use in a context manager. Copy its documentation so we apply it to
+    # the said context manager.
     session_context_manager_initiate = None
     if 'initiate_function' in config['context_manager_name']:
         session_context_manager_initiate = config['context_manager_name']['initiate_function']
