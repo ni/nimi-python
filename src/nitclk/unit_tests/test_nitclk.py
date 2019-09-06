@@ -31,4 +31,26 @@ class TestSession(object):
         self.patched_library.niTClk_Initiate.assert_called_once_with(_matchers.ViUInt32Matcher(len(sessions)), _matchers.ViSessionBufferMatcher(sessions))
         return
 
+    def test_initialize_multiple_sessions(self):
+        sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST+1, SESSION_NUM_FOR_TEST+2]
+        self.patched_library.niTClk_Initiate.side_effect = self.side_effects_helper.niTClk_Initiate
+        nitclk.initiate(sessions)
+        self.patched_library.niTClk_Initiate.assert_called_once_with(_matchers.ViUInt32Matcher(len(sessions)), _matchers.ViSessionBufferMatcher(sessions))
+        return
+
+    def test_configure_for_homogeneous_triggers(self):
+        sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST+1, SESSION_NUM_FOR_TEST+2]
+        self.patched_library.niTClk_ConfigureForHomogeneousTriggers.side_effect = self.side_effects_helper.niTClk_ConfigureForHomogeneousTriggers
+        nitclk.configure_for_homogeneous_triggers(sessions)
+        self.patched_library.niTClk_ConfigureForHomogeneousTriggers.assert_called_once_with(_matchers.ViUInt32Matcher(len(sessions)), _matchers.ViSessionBufferMatcher(sessions))
+        return
+
+    def test_finish_sync_pulse_sender_synchronize(self):
+        sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST+1, SESSION_NUM_FOR_TEST+2]
+        min_time = 0.042
+        self.patched_library.niTClk_FinishSyncPulseSenderSynchronize.side_effect = self.side_effects_helper.niTClk_FinishSyncPulseSenderSynchronize
+        nitclk.finish_sync_pulse_sender_synchronize(sessions, min_time)
+        self.patched_library.niTClk_FinishSyncPulseSenderSynchronize.assert_called_once_with(_matchers.ViUInt32Matcher(len(sessions)), _matchers.ViSessionBufferMatcher(sessions), _matchers.ViReal64Matcher(min_time))
+        return
+
 
