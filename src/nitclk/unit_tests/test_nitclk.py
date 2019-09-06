@@ -24,7 +24,7 @@ class TestSession(object):
 
     # API Tests
 
-    def test_open_and_close(self):
+    def test_initialize_one_session(self):
         sessions = [SESSION_NUM_FOR_TEST]
         self.patched_library.niTClk_Initiate.side_effect = self.side_effects_helper.niTClk_Initiate
         nitclk.initiate(sessions)
