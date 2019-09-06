@@ -222,12 +222,12 @@ def convert_to_nitclk_session_num(item):
     '''
     try:
         return item.tclk.get_session_number()
-    except KeyError:
+    except AttributeError:
         pass
 
     try:
         return item.get_session_number()
-    except KeyError:
+    except AttributeError:
         pass
 
     # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
