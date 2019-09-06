@@ -3721,9 +3721,47 @@ class Session(_SessionBase):
         self.close()
 
     def initiate(self):
+        '''initiate
+
+        Starts generation or acquisition, causing the NI-DCPower session to
+        leave the Uncommitted state or Committed state and enter the Running
+        state. To return to the Committed state call the abort
+        method. Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for information about the
+        specific NI-DCPower software states.
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+        '''
         return _Acquisition(self)
 
     def close(self):
+        '''close
+
+        Closes the session specified in **vi** and deallocates the resources
+        that NI-DCPower reserves. If power output is enabled when you call this
+        method, the output channels remain in their existing state and
+        continue providing power. Use the ConfigureOutputEnabled
+        method to disable power output on a per channel basis. Use the
+        reset method to disable power output on all channel(s).
+
+        **Related Topics:**
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
+
+        Note:
+        This method is not needed when using the session context manager
+        '''
         try:
             self._close()
         except errors.DriverError:
