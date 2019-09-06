@@ -119,6 +119,10 @@ def close_function_def_for_doc(functions, config):
     # the metadata which is to become a code-generated "private" method of Session
     # for which we provide a public wrapper. Copy its documentation so we apply it to
     # the said public wrapper.
+    if 'close_function' not in config or config['close_function'] is None:
+        # There is no close function so we don't need to worry about documentation (nitclk only)
+        return None
+
     close_name = config['close_function']
     if close_name in functions:
         import copy

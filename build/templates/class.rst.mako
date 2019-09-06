@@ -16,7 +16,9 @@
             functions['InitiateDoc'] = initiate_doc
 
     # Add a CloseDoc entry - only used to add close() to the Session documentation
-    functions['CloseDoc'] = helper.close_function_def_for_doc(functions_all, config)
+    close_doc = helper.close_function_def_for_doc(functions_all, config)
+    if close_doc is not None:
+        functions['CloseDoc'] = close_doc
 
     doc_list = {}
     for fname in sorted(functions):

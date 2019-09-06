@@ -2515,5 +2515,42 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
-    }
+    },
+    'DoubleAllTheNums': {
+        'documentation': {
+            'description': 'Test for buffer with converter'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of elements in the number array'
+                },
+                'name': 'numberCount',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'numbers is an array of numbers we want to double.'
+                },
+                'python_api_converter_name': 'convert_double_each_element',
+                'name': 'numbers',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberCount'
+                },
+                'type': 'ViReal64[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
 }
