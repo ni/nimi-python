@@ -67,11 +67,11 @@ nimodinst.Session
 
     **Public methods**
 
-    +-------------+
-    | Method name |
-    +=============+
-    | Method name |
-    +-------------+
+    +------------------+
+    | Method name      |
+    +==================+
+    | :py:func:`close` |
+    +------------------+
 
 
 Properties
@@ -334,6 +334,23 @@ Methods
 -------
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
+
+    .. py:method:: close()
+
+            Cleans up the NI-ModInst session created by a call to
+            :py:meth:`nimodinst.Session._open_installed_devices_session`. Call this method when you are
+            finished using the session handle and do not use this handle again.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 
 
 Properties
@@ -364,9 +381,9 @@ Properties
 Methods
 -------
 
-+-------------+
-| Method name |
-+=============+
-| Method name |
-+-------------+
++------------------------------------+
+| Method name                        |
++====================================+
+| :py:func:`nimodinst.Session.close` |
++------------------------------------+
 

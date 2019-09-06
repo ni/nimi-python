@@ -3,7 +3,7 @@
 config = {
     'api_version': '19.1.0d2',
     'c_function_prefix': 'niSwitch_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'AbortScan',
         'initiate_function': 'InitiateScan',
