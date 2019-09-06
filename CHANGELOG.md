@@ -37,7 +37,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
     * #### Added
     * #### Changed
-        * Fix type of `sequence_step_delta_time_enabled ` attribute - [#1015](https://github.com/ni/nimi-python/issues/1015)
+        * Fix type of `sequence_step_delta_time_enabled ` property - [#1015](https://github.com/ni/nimi-python/issues/1015)
     * #### Removed
 * ### NI-FGEN
     * #### Added
