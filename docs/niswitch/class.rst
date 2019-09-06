@@ -381,6 +381,8 @@ niswitch.Session
     +---------------------------------------+
     | :py:func:`can_connect`                |
     +---------------------------------------+
+    | :py:func:`close`                      |
+    +---------------------------------------+
     | :py:func:`commit`                     |
     +---------------------------------------+
     | :py:func:`connect`                    |
@@ -2191,6 +2193,27 @@ can_connect
 
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: niswitch.Session
+
+    .. py:method:: close()
+
+            Terminates the NI-SWITCH session and all of its properties and
+            deallocates any memory resources the driver uses. Notes: (1) You must
+            unlock the session before calling :py:meth:`niswitch.Session._close`. (2) After calling
+            :py:meth:`niswitch.Session._close`, you cannot use the instrument driver again until you
+            call :py:meth:`niswitch.Session.init` or :py:meth:`niswitch.Session.InitWithOptions`.
+
+            
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 commit
 ~~~~~~
 
@@ -3104,6 +3127,8 @@ Methods
 | :py:func:`niswitch.Session.abort`                      |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.can_connect`                |
++--------------------------------------------------------+
+| :py:func:`niswitch.Session.close`                      |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.commit`                     |
 +--------------------------------------------------------+
