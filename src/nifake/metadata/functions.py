@@ -2524,6 +2524,14 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
                     'description': 'Number of elements in the number array'
                 },
                 'name': 'numberCount',
