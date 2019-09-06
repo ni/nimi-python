@@ -11,9 +11,12 @@
 
     if 'context_manager_name' in config:
         # Add a InitiateDoc entry - only used to add initiate() to the Session documentation
-        functions['InitiateDoc'] = helper.initiate_function_def_for_doc(functions_all, config)
-        if functions['InitiateDoc'] is None:
-            functions.pop('InitiateDoc')
+        initiate_doc = helper.initiate_function_def_for_doc(functions_all, config)
+        if initiate_doc is not None:
+            functions['InitiateDoc'] = initiate_doc
+
+    # Add a CloseDoc entry - only used to add close() to the Session documentation
+    functions['CloseDoc'] = helper.close_function_def_for_doc(functions_all, config)
 
     doc_list = {}
     for fname in sorted(functions):
