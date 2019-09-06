@@ -422,6 +422,8 @@ niscope.Session
     +-------------------------------------------------------+
     | :py:func:`auto_setup`                                 |
     +-------------------------------------------------------+
+    | :py:func:`close`                                      |
+    +-------------------------------------------------------+
     | :py:func:`commit`                                     |
     +-------------------------------------------------------+
     | :py:func:`configure_chan_characteristics`             |
@@ -4700,6 +4702,26 @@ auto_setup
 
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: niscope.Session
+
+    .. py:method:: close()
+
+            When you are finished using an instrument driver session, you must call
+            this method to perform the following actions:
+
+            -  Closes the instrument I/O session.
+            -  Destroys the IVI session and all of its properties.
+            -  Deallocates any memory resources used by the IVI session.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 commit
 ~~~~~~
 
@@ -6649,6 +6671,8 @@ Methods
 | :py:func:`niscope.Session.acquisition_status`                         |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.auto_setup`                                 |
++-----------------------------------------------------------------------+
+| :py:func:`niscope.Session.close`                                      |
 +-----------------------------------------------------------------------+
 | :py:func:`niscope.Session.commit`                                     |
 +-----------------------------------------------------------------------+

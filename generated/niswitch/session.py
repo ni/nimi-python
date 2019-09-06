@@ -1533,6 +1533,20 @@ class Session(_SessionBase):
         return _Scan(self)
 
     def close(self):
+        '''close
+
+        Terminates the NI-SWITCH session and all of its properties and
+        deallocates any memory resources the driver uses. Notes: (1) You must
+        unlock the session before calling _close. (2) After calling
+        _close, you cannot use the instrument driver again until you
+        call init or InitWithOptions.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
+
+        Note:
+        This method is not needed when using the session context manager
+        '''
         try:
             self._close()
         except errors.DriverError:
