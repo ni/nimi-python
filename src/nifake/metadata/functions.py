@@ -2515,5 +2515,34 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
-    }
+    },
+    'DoubleAllTheNums': {
+        'documentation': {
+            'description': 'Test for buffer with converter'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of elements in the number array'
+                },
+                'name': 'numberCount',
+                'type': 'ViUInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'numbers is an array of numbers we want to double.'
+                },
+                'python_api_converter_name': 'convert_double_each_element',
+                'name': 'numbers',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberCount'
+                },
+                'type': 'ViReal64[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
 }
