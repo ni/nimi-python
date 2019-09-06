@@ -29,5 +29,6 @@ class TestSession(object):
         self.patched_library.niTClk_Initiate.side_effect = self.side_effects_helper.niTClk_Initiate
         nitclk.initiate(sessions)
         self.patched_library.niTClk_Initiate.assert_called_once_with(_matchers.ViUInt32Matcher(len(sessions)), _matchers.ViSessionBufferMatcher(sessions))
+        return
 
 
