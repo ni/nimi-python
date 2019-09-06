@@ -2535,7 +2535,7 @@ functions = {
                     'description': 'Number of elements in the number array'
                 },
                 'name': 'numberCount',
-                'type': 'ViUInt32'
+                'type': 'ViInt32'
             },
             {
                 'direction': 'in',
