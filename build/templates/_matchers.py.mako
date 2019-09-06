@@ -304,4 +304,9 @@ class ViReal64BufferMatcher(_BufferMatcher):
         _BufferMatcher.__init__(self, _visatype.ViReal64, expected_size_or_value)
 
 
+class ViSessionBufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, _visatype.ViSession, expected_size_or_value)
+
+
 
