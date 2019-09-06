@@ -98,7 +98,7 @@ Advanced Example:
 
 default_close_function_doc = '''
 Closes the driver session and cleans up. After calling this the Session object
-is no lonber valid and cannot be used.
+is no longer valid and cannot be used.
 '''
 
 close_function_note = '''
