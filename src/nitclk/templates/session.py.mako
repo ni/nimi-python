@@ -179,18 +179,6 @@ functions['GetExtendedErrorInfo']['render_in_session_base'] = False
 % endfor
 % endfor
 
-def _get_session_class():
-    '''Internal function to return session singleton'''
-    global _session_instance
-    global _session_instance_lock
-
-    with _session_instance_lock:
-        if _session_instance is None:
-            _session_instance = _Session()
-
-        return _session_instance
-
-
 <%
 # We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
 # Set then unset the 'render_in_session_base' flag to get it added to both. We do not want it in the standalone
@@ -210,7 +198,7 @@ def ${name}(${parameter_list}):
 
     ${helper.get_function_docstring(f, False, config, indent=4)}
     '''
-    return _get_session_class().${name}(${parameter_list})
+    return _Session().${name}(${parameter_list})
 
 
 % endfor
