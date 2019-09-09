@@ -794,7 +794,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_count_ctype = _visatype.ViInt32(0 if numbers is None else len(numbers))  # case S160
-        numbers_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_double_each_element(numbers), library_type=_visatype.ViReal64)  # case B630
+        numbers_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_double_each_element(numbers), library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niFake_DoubleAllTheNums(vi_ctype, number_count_ctype, numbers_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
