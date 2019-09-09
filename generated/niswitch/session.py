@@ -813,6 +813,24 @@ class _SessionBase(object):
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Property Value control and pressing .
 
+
+        Returns:
+            attribute_value (str): The buffer in which the method returns the current value of the
+                property. The buffer must be of type ViChar and have at least as many
+                bytes as indicated in the Array Size parameter. If the current value of
+                the property, including the terminating NUL byte, contains more bytes
+                that you indicate in this parameter, the method copies Array Size-1
+                bytes into the buffer, places an ASCII NUL byte at the end of the
+                buffer, and returns the array size you must pass to get the entire
+                value. For example, if the value is "123456" and the Array Size is 4,
+                the method places "123" into the buffer and returns 7. If you specify
+                0 for the Array Size parameter, you can pass VI_NULL for this
+                parameter. From the method panel window, you can use this control as
+                follows. - If the property currently showing in the Property ID ring
+                control has constants as valid values, you can view a list of the
+                constants by pressing on this control. Select a value by double-clicking
+                on it or by selecting it and then pressing .
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -851,6 +869,18 @@ class _SessionBase(object):
         Returns:
             code (int): Returns the error code for the session or execution thread. If you pass
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
+
+            description (str): Returns the error description for the IVI session or execution thread.
+                If there is no description, the method returns an empty string. The
+                buffer must contain at least as many elements as the value you specify
+                with the Buffer Size parameter. If the error description, including the
+                terminating NUL byte, contains more bytes than you indicate with the
+                Buffer Size parameter, the method copies Buffer Size - 1 bytes into
+                the buffer, places an ASCII NUL byte at the end of the buffer, and
+                returns the buffer size you must pass to get the entire value. For
+                example, if the value is "123456" and the Buffer Size is 4, the method
+                places "123" into the buffer and returns 7. If you pass 0 for the Buffer
+                Size, you can pass VI_NULL for this parameter.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1783,6 +1813,11 @@ class Session(_SessionBase):
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count property.
 
+
+        Returns:
+            channel_name_buffer (str): Returns the channel name that is in the channel table at the index you
+                specify.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
@@ -1822,6 +1857,13 @@ class Session(_SessionBase):
                 channel name as the channel 1 parameter. Refer to Devices Overview for
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
+
+
+        Returns:
+            path (str): A string composed of comma-separated paths between channel 1 and channel
+                2. The first and last names in the path are the endpoints of the path.
+                All other channels in the path are configuration channels. Examples of
+                returned paths: ch0->com0, com0->ab0
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1876,6 +1918,10 @@ class Session(_SessionBase):
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count property.
+
+
+        Returns:
+            relay_name_buffer (str): Returns the relay name for the index you specify.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
