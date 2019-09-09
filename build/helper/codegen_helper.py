@@ -13,6 +13,10 @@ _ParameterUsageOptionsSnippet = {
         'skip_self': False,
         'name_to_use': 'python_name_with_default',
     },
+    ParameterUsageOptions.SESSION_METHOD_DECLARATION_NO_DEFAULT: {
+        'skip_self': True,
+        'name_to_use': 'python_name',
+    },
     ParameterUsageOptions.SESSION_INIT_DECLARATION: {
         'skip_self': False,
         'name_to_use': 'python_name_with_default',
