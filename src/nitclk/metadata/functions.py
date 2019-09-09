@@ -322,9 +322,13 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'The value that you are getting'
+                },
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufSize'
                 },
                 'name': 'value',
                 'type': 'ViChar[]'
