@@ -848,18 +848,6 @@ class _Session(object):
         return
 
 
-def _get_session_class():
-    '''Internal function to return session singleton'''
-    global _session_instance
-    global _session_instance_lock
-
-    with _session_instance_lock:
-        if _session_instance is None:
-            _session_instance = _Session()
-
-        return _session_instance
-
-
 def configure_for_homogeneous_triggers(sessions):
     '''configure_for_homogeneous_triggers
 
@@ -989,7 +977,7 @@ def configure_for_homogeneous_triggers(sessions):
         sessions (list of int): sessions is an array of sessions that are being synchronized.
 
     '''
-    return _get_session_class().configure_for_homogeneous_triggers(sessions)
+    return _Session().configure_for_homogeneous_triggers(sessions)
 
 
 def finish_sync_pulse_sender_synchronize(sessions, min_time):
@@ -1008,15 +996,15 @@ def finish_sync_pulse_sender_synchronize(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().finish_sync_pulse_sender_synchronize(sessions, min_time)
+    return _Session().finish_sync_pulse_sender_synchronize(sessions, min_time)
 
 
-def init_for_documentation(self):
+def init_for_documentation():
     '''init_for_documentation
 
     TBD
     '''
-    return _get_session_class().init_for_documentation(self)
+    return _Session().init_for_documentation()
 
 
 def initiate(sessions):
@@ -1032,7 +1020,7 @@ def initiate(sessions):
         sessions (list of int): sessions is an array of sessions that are being synchronized.
 
     '''
-    return _get_session_class().initiate(sessions)
+    return _Session().initiate(sessions)
 
 
 def is_done(sessions):
@@ -1051,7 +1039,7 @@ def is_done(sessions):
             reports an error.
 
     '''
-    return _get_session_class().is_done(sessions)
+    return _Session().is_done(sessions)
 
 
 def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
@@ -1070,10 +1058,10 @@ def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
+    return _Session().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
 
-def synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0)):
+def synchronize(sessions, min_tclk_period):
     '''synchronize
 
     Synchronizes the TClk signals on the given sessions. After
@@ -1094,7 +1082,7 @@ def synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0)):
             through the various devices and cables.
 
     '''
-    return _get_session_class().synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0))
+    return _Session().synchronize(sessions, min_tclk_period)
 
 
 def synchronize_to_sync_pulse_sender(sessions, min_time):
@@ -1113,7 +1101,7 @@ def synchronize_to_sync_pulse_sender(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().synchronize_to_sync_pulse_sender(sessions, min_time)
+    return _Session().synchronize_to_sync_pulse_sender(sessions, min_time)
 
 
 def wait_until_done(sessions, timeout):
@@ -1136,7 +1124,7 @@ def wait_until_done(sessions, timeout):
             returns an error.
 
     '''
-    return _get_session_class().wait_until_done(sessions, timeout)
+    return _Session().wait_until_done(sessions, timeout)
 
 
 
