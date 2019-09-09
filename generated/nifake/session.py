@@ -783,6 +783,23 @@ class Session(_SessionBase):
         return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
     @ivi_synchronized
+    def double_all_the_nums(self, numbers):
+        r'''double_all_the_nums
+
+        Test for buffer with converter
+
+        Args:
+            numbers (list of float): numbers is an array of numbers we want to double.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_count_ctype = _visatype.ViInt32(0 if numbers is None else len(numbers))  # case S160
+        numbers_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_double_each_element(numbers), library_type=_visatype.ViReal64)  # case B630
+        error_code = self._library.niFake_DoubleAllTheNums(vi_ctype, number_count_ctype, numbers_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def enum_array_output_function(self, number_of_elements):
         r'''enum_array_output_function
 

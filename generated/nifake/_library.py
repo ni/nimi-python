@@ -22,6 +22,7 @@ class Library(object):
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFake_Abort_cfunc = None
         self.niFake_BoolArrayOutputFunction_cfunc = None
+        self.niFake_DoubleAllTheNums_cfunc = None
         self.niFake_EnumArrayOutputFunction_cfunc = None
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
         self.niFake_FetchWaveform_cfunc = None
@@ -88,6 +89,14 @@ class Library(object):
                 self.niFake_BoolArrayOutputFunction_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFake_BoolArrayOutputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_BoolArrayOutputFunction_cfunc(vi, number_of_elements, an_array)
+
+    def niFake_DoubleAllTheNums(self, vi, number_count, numbers):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_DoubleAllTheNums_cfunc is None:
+                self.niFake_DoubleAllTheNums_cfunc = self._library.niFake_DoubleAllTheNums
+                self.niFake_DoubleAllTheNums_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_DoubleAllTheNums_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_DoubleAllTheNums_cfunc(vi, number_count, numbers)
 
     def niFake_EnumArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         with self._func_lock:
