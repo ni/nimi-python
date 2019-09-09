@@ -172,6 +172,11 @@ def convert_month_to_timedelta(months):
     return datetime.timedelta(days=(30.4167 * months))
 
 
+# nifake specific converter(s) - used only for testing
+def convert_double_each_element(numbers):
+    return [x * 2 for x in numbers]
+
+
 # This converter is not called from the normal codegen path for function. Instead it is
 # call from init and is a special case. Also, it just returns a string rather than a ctype object
 def convert_init_with_options_dictionary(values, encoding):
