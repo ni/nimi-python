@@ -710,6 +710,15 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Pass the ID of a property.
 
+
+        Returns:
+            attribute_value (str): The buffer in which the method returns the current value of the
+                property. The buffer must be of type ViChar and have at least as many
+                bytes as indicated in the **Buffer_Size** parameter.
+
+                If you specify 0 for the **Buffer_Size** parameter, you can pass
+                VI_NULL for this parameter.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -737,6 +746,12 @@ class _SessionBase(object):
             error_code (int): Returns the **error_code** for the session or execution thread. If you
                 pass 0 for the **Buffer_Size**, you can pass VI_NULL for this
                 parameter.
+
+            description (str): Returns the error **description** for the IVI session or execution
+                thread. If there is no **description**, the method returns an empty
+                string. The buffer must contain at least as many elements as the value
+                you specify with the **Buffer_Size** parameter. If you pass 0 for the
+                **Buffer_Size**, you can pass VI_NULL for this parameter.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1719,6 +1734,11 @@ class Session(_SessionBase):
         Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
 
         Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
+
+        Returns:
+            configuration (list of int): Specifies the byte array buffer to be populated with the exported
+                property configuration.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32()  # case S170
