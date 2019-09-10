@@ -3,7 +3,7 @@
 config = {
     'api_version': '19.1.0d50',
     'c_function_prefix': 'niScope_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'Abort',
         'initiate_function': 'InitiateAcquisition',

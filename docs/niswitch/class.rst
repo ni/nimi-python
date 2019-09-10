@@ -381,6 +381,8 @@ niswitch.Session
     +---------------------------------------+
     | :py:func:`can_connect`                |
     +---------------------------------------+
+    | :py:func:`close`                      |
+    +---------------------------------------+
     | :py:func:`commit`                     |
     +---------------------------------------+
     | :py:func:`connect`                    |
@@ -2191,6 +2193,27 @@ can_connect
 
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: niswitch.Session
+
+    .. py:method:: close()
+
+            Terminates the NI-SWITCH session and all of its properties and
+            deallocates any memory resources the driver uses. Notes: (1) You must
+            unlock the session before calling :py:meth:`niswitch.Session._close`. (2) After calling
+            :py:meth:`niswitch.Session._close`, you cannot use the instrument driver again until you
+            call :py:meth:`niswitch.Session.init` or :py:meth:`niswitch.Session.InitWithOptions`.
+
+            
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 commit
 ~~~~~~
 
@@ -2440,6 +2463,17 @@ get_channel_name
 
             :type index: int
 
+            :rtype: str
+            :return:
+
+
+                    Returns the channel name that is in the channel table at the index you
+                    specify.
+
+                    
+
+
+
 get_path
 ~~~~~~~~
 
@@ -2487,6 +2521,19 @@ get_path
 
 
             :type channel2: str
+
+            :rtype: str
+            :return:
+
+
+                    A string composed of comma-separated paths between channel 1 and channel
+                    2. The first and last names in the path are the endpoints of the path.
+                    All other channels in the path are configuration channels. Examples of
+                    returned paths: ch0->com0, com0->ab0
+
+                    
+
+
 
 get_relay_count
 ~~~~~~~~~~~~~~~
@@ -2553,6 +2600,16 @@ get_relay_name
 
 
             :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns the relay name for the index you specify.
+
+                    
+
+
 
 get_relay_position
 ~~~~~~~~~~~~~~~~~~
@@ -3104,6 +3161,8 @@ Methods
 | :py:func:`niswitch.Session.abort`                      |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.can_connect`                |
++--------------------------------------------------------+
+| :py:func:`niswitch.Session.close`                      |
 +--------------------------------------------------------+
 | :py:func:`niswitch.Session.commit`                     |
 +--------------------------------------------------------+

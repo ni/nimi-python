@@ -3,7 +3,7 @@
 config = {
     'api_version': '19.6.0d0',
     'c_function_prefix': 'niFgen_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'AbortGeneration',
         'initiate_function': 'InitiateGeneration',
