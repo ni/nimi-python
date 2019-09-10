@@ -13,10 +13,10 @@ registry_name = config['driver_registry'] if 'driver_registry' in config else co
 __version__ = '${config['module_version']}'
 
 % if len(enums) > 0:
-from ${module_name}.enums import *          # noqa: F403,F401,H303
+from ${module_name}.enums import *  # noqa: F403,F401,H303
 % endif
-from ${module_name}.errors import DriverWarning   # noqa: F401
-from ${module_name}.errors import Error     # noqa: F401
+from ${module_name}.errors import DriverWarning  # noqa: F401
+from ${module_name}.errors import Error  # noqa: F401
 <%
 # nitclk is different. It does not have a session class that we open a session on
 # Instead it is a bunch of stateless function calls. So if we are NOT building for
