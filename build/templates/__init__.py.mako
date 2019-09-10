@@ -23,15 +23,15 @@ from ${module_name}.errors import Error  # noqa: F401
 # nitclk, we import the Session class. If it is nitclk then we will
 # import each function and the SessionReference class
 %>\
-% if config['module_name'] != 'nitclk':
-from ${module_name}.session import Session  # noqa: F401
-% else:
+% if config['module_name'] == 'nitclk':
 from ${module_name}.session import SessionReference  # noqa: F401
 
 # Function imports
 %   for func_name in sorted([functions[k]['python_name'] for k in functions if not functions[k]['render_in_session_base']]):
 from ${module_name}.session import ${func_name}  # noqa: F401
 %   endfor
+% else:
+from ${module_name}.session import Session  # noqa: F401
 % endif
 <%
  # Blank lines are to make each import separate so that they do not need to be sorted
