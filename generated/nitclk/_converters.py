@@ -239,6 +239,11 @@ def convert_to_nitclk_session_num_list(item_list):
     return [convert_to_nitclk_session_num(i) for i in item_list]
 
 
+# nifake specific converter(s) - used only for testing
+def convert_double_each_element(numbers):
+    return [x * 2 for x in numbers]
+
+
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
     assert convert_init_with_options_dictionary('', 'ascii') == ''
