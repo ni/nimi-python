@@ -1638,7 +1638,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
-        meas_waveform_size_ctype = _visatype.ViInt32()  # case S200
+        meas_waveform_size_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niScope_ActualMeasWfmSize(vi_ctype, array_meas_function_ctype, None if meas_waveform_size_ctype is None else (ctypes.pointer(meas_waveform_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(meas_waveform_size_ctype.value)
@@ -1666,7 +1666,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        num_wfms_ctype = _visatype.ViInt32()  # case S200
+        num_wfms_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niScope_ActualNumWfms(vi_ctype, channel_list_ctype, None if num_wfms_ctype is None else (ctypes.pointer(num_wfms_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(num_wfms_ctype.value)
@@ -3163,7 +3163,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViBoolean()  # case S200
+        value_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niScope_GetAttributeViBoolean(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(value_ctype.value)
@@ -3200,7 +3200,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViInt32()  # case S200
+        value_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niScope_GetAttributeViInt32(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
@@ -3237,7 +3237,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViInt64()  # case S200
+        value_ctype = _visatype.ViInt64()  # case S220
         error_code = self._library.niScope_GetAttributeViInt64(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
@@ -3275,7 +3275,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViReal64()  # case S200
+        value_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niScope_GetAttributeViReal64(vi_ctype, channel_list_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
@@ -3367,7 +3367,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_coefficients_ctype = _visatype.ViInt32(number_of_coefficients)  # case S190
+        number_of_coefficients_ctype = _visatype.ViInt32(number_of_coefficients)  # case S210
         coefficients_size = number_of_coefficients  # case B600
         coefficients_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=coefficients_size)  # case B600
         error_code = self._library.niScope_GetEqualizationFilterCoefficients(vi_ctype, channel_ctype, number_of_coefficients_ctype, coefficients_ctype)
@@ -3412,7 +3412,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = _visatype.ViStatus()  # case S200
+        error_code_ctype = _visatype.ViStatus()  # case S220
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niScope_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), buffer_size_ctype, description_ctype)
@@ -4138,7 +4138,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        acquisition_status_ctype = _visatype.ViInt32()  # case S200
+        acquisition_status_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niScope_AcquisitionStatus(vi_ctype, None if acquisition_status_ctype is None else (ctypes.pointer(acquisition_status_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.AcquisitionStatus(acquisition_status_ctype.value)
@@ -5037,7 +5037,7 @@ class Session(_SessionBase):
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niScope_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -5214,7 +5214,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S200
+        self_test_result_ctype = _visatype.ViInt16()  # case S220
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niScope_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
