@@ -1043,7 +1043,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = _visatype.ViInt32(waveform_size)  # case S150
-        waveform_handle_ctype = _visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_AllocateWaveform(vi_ctype, channel_name_ctype, waveform_size_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
@@ -1511,7 +1511,7 @@ class _SessionBase(object):
         waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
         waveform_data_array_array = get_ctypes_and_array(value=waveform_data_array, array_type="d")  # case B550
         waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array_array, library_type=_visatype.ViReal64)  # case B550
-        waveform_handle_ctype = _visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
@@ -1567,7 +1567,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
         waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
-        waveform_handle_ctype = _visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateWaveformF64(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
@@ -1606,11 +1606,11 @@ class _SessionBase(object):
                 |
                 | ****Default Value**:** ByteOrder.LITTLE
 
-                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.LITTLE | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.BIG    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 Data written by most applications in Windows (including
@@ -1631,7 +1631,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case C020
         byte_order_ctype = _visatype.ViInt32(byte_order.value)  # case S130
-        waveform_handle_ctype = _visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateWaveformFromFileF64(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
@@ -1670,11 +1670,11 @@ class _SessionBase(object):
                 |
                 | ****Default Value**:** ByteOrder.LITTLE
 
-                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.LITTLE | Little Endian Data—The least significant bit is stored at the lowest address, followed by the other bits, in order of increasing significance. |
-                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
                 | ByteOrder.BIG    | Big Endian Data—The most significant bit is stored at the lowest address, followed by the other bits, in order of decreasing significance.     |
-                +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                +------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 Data written by most applications in Windows (including
@@ -1695,7 +1695,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case C020
         byte_order_ctype = _visatype.ViInt32(byte_order.value)  # case S130
-        waveform_handle_ctype = _visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateWaveformFromFileI16(vi_ctype, channel_name_ctype, file_name_ctype, byte_order_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
@@ -1749,7 +1749,7 @@ class _SessionBase(object):
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_size_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
         waveform_data_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array)  # case B510
-        waveform_handle_ctype = _visatype.ViInt32()  # case S200
+        waveform_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateWaveformI16(vi_ctype, channel_name_ctype, waveform_size_ctype, waveform_data_array_ctype, None if waveform_handle_ctype is None else (ctypes.pointer(waveform_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(waveform_handle_ctype.value)
@@ -1917,7 +1917,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean()  # case S200
+        attribute_value_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niFgen_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -1955,7 +1955,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S200
+        attribute_value_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -1995,7 +1995,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64()  # case S200
+        attribute_value_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFgen_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -2044,6 +2044,23 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of a property.
 
+
+        Returns:
+            attribute_value (str): The buffer in which the method returns the current value of the
+                property. The buffer must be a ViChar data type and have at least as
+                many bytes as indicated in the **arraySize** parameter.
+
+                If the current value of the property, including the terminating NUL
+                byte, contains more bytes than you indicate in this parameter, the
+                method copies **arraySize** – 1 bytes into the buffer, places an ASCII
+                NUL byte at the end of the buffer, and returns the array size you must
+                pass to get the entire value. For example, if the value is 123456 and
+                **arraySize** is 4, the method places 123 into the buffer and returns
+                7.
+
+                If you specify 0 for the **arraySize** parameter, you can pass VI_NULL
+                for this parameter.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -2085,9 +2102,17 @@ class _SessionBase(object):
 
                 If you are not interested in this value, you can pass VI_NULL.
 
+            error_description (str): The error description string for the session or execution thread. If the
+                error code is nonzero, the description string can further describe the
+                error or warning condition.
+
+                If you are not interested in this value, you can pass VI_NULL.
+                Otherwise, you must pass a ViChar array of a size specified with the
+                **errorDescriptionBufferSize** parameter.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = _visatype.ViStatus()  # case S200
+        error_code_ctype = _visatype.ViStatus()  # case S220
         error_description_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_description_ctype = None  # case C050
         error_code = self._library.niFgen_GetError(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), error_description_buffer_size_ctype, error_description_ctype)
@@ -3465,7 +3490,7 @@ class Session(_SessionBase):
         marker_location_array_ctype = get_ctypes_pointer_for_buffer(value=marker_location_array, library_type=_visatype.ViInt32)  # case B550
         coerced_markers_array_size = (0 if marker_location_array is None else len(marker_location_array))  # case B560
         coerced_markers_array_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=coerced_markers_array_size)  # case B560
-        sequence_handle_ctype = _visatype.ViInt32()  # case S200
+        sequence_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateAdvancedArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, sample_counts_array_ctype, marker_location_array_ctype, coerced_markers_array_ctype, None if sequence_handle_ctype is None else (ctypes.pointer(sequence_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(coerced_markers_array_ctype[i]) for i in range((0 if marker_location_array is None else len(marker_location_array)))], int(sequence_handle_ctype.value)
@@ -3533,7 +3558,7 @@ class Session(_SessionBase):
             raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
         waveform_handles_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=_visatype.ViInt32)  # case B550
         loop_counts_array_ctype = get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=_visatype.ViInt32)  # case B550
-        sequence_handle_ctype = _visatype.ViInt32()  # case S200
+        sequence_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateArbSequence(vi_ctype, sequence_length_ctype, waveform_handles_array_ctype, loop_counts_array_ctype, None if sequence_handle_ctype is None else (ctypes.pointer(sequence_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(sequence_handle_ctype.value)
@@ -3622,7 +3647,7 @@ class Session(_SessionBase):
             raise ValueError("Length of duration_array and frequency_array parameters do not match.")  # case S160
         frequency_array_ctype = get_ctypes_pointer_for_buffer(value=frequency_array, library_type=_visatype.ViReal64)  # case B550
         duration_array_ctype = get_ctypes_pointer_for_buffer(value=duration_array, library_type=_visatype.ViReal64)  # case B550
-        frequency_list_handle_ctype = _visatype.ViInt32()  # case S200
+        frequency_list_handle_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_CreateFreqList(vi_ctype, waveform_ctype, frequency_list_length_ctype, frequency_array_ctype, duration_array_ctype, None if frequency_list_handle_ctype is None else (ctypes.pointer(frequency_list_handle_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(frequency_list_handle_ctype.value)
@@ -3662,11 +3687,11 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S200
-        month_ctype = _visatype.ViInt32()  # case S200
-        day_ctype = _visatype.ViInt32()  # case S200
-        hour_ctype = _visatype.ViInt32()  # case S200
-        minute_ctype = _visatype.ViInt32()  # case S200
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        hour_ctype = _visatype.ViInt32()  # case S220
+        minute_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -3684,7 +3709,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
+        temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFgen_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -3702,7 +3727,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        months_ctype = _visatype.ViInt32()  # case S200
+        months_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
@@ -3735,7 +3760,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        state_ctype = _visatype.ViInt32()  # case S200
+        state_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_GetHardwareState(vi_ctype, None if state_ctype is None else (ctypes.pointer(state_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.HardwareState(state_ctype.value)
@@ -3795,11 +3820,11 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S200
-        month_ctype = _visatype.ViInt32()  # case S200
-        day_ctype = _visatype.ViInt32()  # case S200
-        hour_ctype = _visatype.ViInt32()  # case S200
-        minute_ctype = _visatype.ViInt32()  # case S200
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        hour_ctype = _visatype.ViInt32()  # case S220
+        minute_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -3817,7 +3842,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
+        temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFgen_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -3833,15 +3858,15 @@ class Session(_SessionBase):
 
                 ****Defined Values****
 
-                +-------+--------------------------------------+
+                +-------+------------------------------------+
                 | True  | Self–calibration is supported.     |
-                +-------+--------------------------------------+
+                +-------+------------------------------------+
                 | False | Self–calibration is not supported. |
-                +-------+--------------------------------------+
+                +-------+------------------------------------+
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_cal_supported_ctype = _visatype.ViBoolean()  # case S200
+        self_cal_supported_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niFgen_GetSelfCalSupported(vi_ctype, None if self_cal_supported_ctype is None else (ctypes.pointer(self_cal_supported_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
@@ -3978,7 +4003,7 @@ class Session(_SessionBase):
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C020
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niFgen_InitializeWithChannels(resource_name_ctype, channel_name_ctype, reset_device_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -4022,7 +4047,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        done_ctype = _visatype.ViBoolean()  # case S200
+        done_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niFgen_IsDone(vi_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
@@ -4056,10 +4081,10 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_number_of_sequences_ctype = _visatype.ViInt32()  # case S200
-        minimum_sequence_length_ctype = _visatype.ViInt32()  # case S200
-        maximum_sequence_length_ctype = _visatype.ViInt32()  # case S200
-        maximum_loop_count_ctype = _visatype.ViInt32()  # case S200
+        maximum_number_of_sequences_ctype = _visatype.ViInt32()  # case S220
+        minimum_sequence_length_ctype = _visatype.ViInt32()  # case S220
+        maximum_sequence_length_ctype = _visatype.ViInt32()  # case S220
+        maximum_loop_count_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_QueryArbSeqCapabilities(vi_ctype, None if maximum_number_of_sequences_ctype is None else (ctypes.pointer(maximum_number_of_sequences_ctype)), None if minimum_sequence_length_ctype is None else (ctypes.pointer(minimum_sequence_length_ctype)), None if maximum_sequence_length_ctype is None else (ctypes.pointer(maximum_sequence_length_ctype)), None if maximum_loop_count_ctype is None else (ctypes.pointer(maximum_loop_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_sequences_ctype.value), int(minimum_sequence_length_ctype.value), int(maximum_sequence_length_ctype.value), int(maximum_loop_count_ctype.value)
@@ -4100,10 +4125,10 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_number_of_waveforms_ctype = _visatype.ViInt32()  # case S200
-        waveform_quantum_ctype = _visatype.ViInt32()  # case S200
-        minimum_waveform_size_ctype = _visatype.ViInt32()  # case S200
-        maximum_waveform_size_ctype = _visatype.ViInt32()  # case S200
+        maximum_number_of_waveforms_ctype = _visatype.ViInt32()  # case S220
+        waveform_quantum_ctype = _visatype.ViInt32()  # case S220
+        minimum_waveform_size_ctype = _visatype.ViInt32()  # case S220
+        maximum_waveform_size_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFgen_QueryArbWfmCapabilities(vi_ctype, None if maximum_number_of_waveforms_ctype is None else (ctypes.pointer(maximum_number_of_waveforms_ctype)), None if waveform_quantum_ctype is None else (ctypes.pointer(waveform_quantum_ctype)), None if minimum_waveform_size_ctype is None else (ctypes.pointer(minimum_waveform_size_ctype)), None if maximum_waveform_size_ctype is None else (ctypes.pointer(maximum_waveform_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_waveforms_ctype.value), int(waveform_quantum_ctype.value), int(minimum_waveform_size_ctype.value), int(maximum_waveform_size_ctype.value)
@@ -4148,12 +4173,12 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_number_of_freq_lists_ctype = _visatype.ViInt32()  # case S200
-        minimum_frequency_list_length_ctype = _visatype.ViInt32()  # case S200
-        maximum_frequency_list_length_ctype = _visatype.ViInt32()  # case S200
-        minimum_frequency_list_duration_ctype = _visatype.ViReal64()  # case S200
-        maximum_frequency_list_duration_ctype = _visatype.ViReal64()  # case S200
-        frequency_list_duration_quantum_ctype = _visatype.ViReal64()  # case S200
+        maximum_number_of_freq_lists_ctype = _visatype.ViInt32()  # case S220
+        minimum_frequency_list_length_ctype = _visatype.ViInt32()  # case S220
+        maximum_frequency_list_length_ctype = _visatype.ViInt32()  # case S220
+        minimum_frequency_list_duration_ctype = _visatype.ViReal64()  # case S220
+        maximum_frequency_list_duration_ctype = _visatype.ViReal64()  # case S220
+        frequency_list_duration_quantum_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFgen_QueryFreqListCapabilities(vi_ctype, None if maximum_number_of_freq_lists_ctype is None else (ctypes.pointer(maximum_number_of_freq_lists_ctype)), None if minimum_frequency_list_length_ctype is None else (ctypes.pointer(minimum_frequency_list_length_ctype)), None if maximum_frequency_list_length_ctype is None else (ctypes.pointer(maximum_frequency_list_length_ctype)), None if minimum_frequency_list_duration_ctype is None else (ctypes.pointer(minimum_frequency_list_duration_ctype)), None if maximum_frequency_list_duration_ctype is None else (ctypes.pointer(maximum_frequency_list_duration_ctype)), None if frequency_list_duration_quantum_ctype is None else (ctypes.pointer(frequency_list_duration_quantum_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(maximum_number_of_freq_lists_ctype.value), int(minimum_frequency_list_length_ctype.value), int(maximum_frequency_list_length_ctype.value), float(minimum_frequency_list_duration_ctype.value), float(maximum_frequency_list_duration_ctype.value), float(frequency_list_duration_quantum_ctype.value)
@@ -4171,7 +4196,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
+        temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFgen_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -4343,7 +4368,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S200
+        self_test_result_ctype = _visatype.ViInt16()  # case S220
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niFgen_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

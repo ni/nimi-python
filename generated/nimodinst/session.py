@@ -245,6 +245,10 @@ class Session(object):
         required to hold the error information string as its return value. You
         can then allocate an appropriately sized string character buffer and
         call this method again.
+
+        Returns:
+            error_info (str): The character buffer into which the error information string is copied.
+
         '''
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
@@ -294,7 +298,7 @@ class Session(object):
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
         attribute_id_ctype = _visatype.ViInt32(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S200
+        attribute_value_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niModInst_GetInstalledDeviceAttributeViInt32(handle_ctype, index_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -327,6 +331,10 @@ class Session(object):
                 device_model--the model of the device (for example, NI
                 PXI-5122) serial_number--the serial number of the
                 device
+
+
+        Returns:
+            attribute_value (str): The character buffer into which the property value string is copied.
 
         '''
         handle_ctype = _visatype.ViSession(self._handle)  # case S110
@@ -379,8 +387,8 @@ class Session(object):
 
         '''
         driver_ctype = ctypes.create_string_buffer(driver.encode(self._encoding))  # case C020
-        handle_ctype = _visatype.ViSession()  # case S200
-        device_count_ctype = _visatype.ViInt32()  # case S200
+        handle_ctype = _visatype.ViSession()  # case S220
+        device_count_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niModInst_OpenInstalledDevicesSession(driver_ctype, None if handle_ctype is None else (ctypes.pointer(handle_ctype)), None if device_count_ctype is None else (ctypes.pointer(device_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(handle_ctype.value), int(device_count_ctype.value)

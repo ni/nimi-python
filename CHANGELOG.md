@@ -74,6 +74,7 @@ All notable changes to this project will be documented in this file.
            | `SelectedFunction`         | `selected_function`                                                              |
            | `TDREndpointTermination`   | `tdr_endpoint_termination`                                                       |
            | `Signal`                   | `export_signal(signal)`                                                          |
+        * **[Source Breaker]** No longer return the "actual size" from functions that use 'ivi-dance-with-a-twist'. This only affects `nidigital`.
 
     * #### Removed
         * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`, 

@@ -646,7 +646,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean()  # case S200
+        attribute_value_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niSwitch_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -702,7 +702,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S200
+        attribute_value_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niSwitch_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -758,7 +758,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64()  # case S200
+        attribute_value_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niSwitch_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -813,6 +813,24 @@ class _SessionBase(object):
                 this ring control has constants as valid values, you can view the
                 constants by moving to the Property Value control and pressing .
 
+
+        Returns:
+            attribute_value (str): The buffer in which the method returns the current value of the
+                property. The buffer must be of type ViChar and have at least as many
+                bytes as indicated in the Array Size parameter. If the current value of
+                the property, including the terminating NUL byte, contains more bytes
+                that you indicate in this parameter, the method copies Array Size-1
+                bytes into the buffer, places an ASCII NUL byte at the end of the
+                buffer, and returns the array size you must pass to get the entire
+                value. For example, if the value is "123456" and the Array Size is 4,
+                the method places "123" into the buffer and returns 7. If you specify
+                0 for the Array Size parameter, you can pass VI_NULL for this
+                parameter. From the method panel window, you can use this control as
+                follows. - If the property currently showing in the Property ID ring
+                control has constants as valid values, you can view a list of the
+                constants by pressing on this control. Select a value by double-clicking
+                on it or by selecting it and then pressing .
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -852,9 +870,21 @@ class _SessionBase(object):
             code (int): Returns the error code for the session or execution thread. If you pass
                 0 for the Buffer Size, you can pass VI_NULL for this parameter.
 
+            description (str): Returns the error description for the IVI session or execution thread.
+                If there is no description, the method returns an empty string. The
+                buffer must contain at least as many elements as the value you specify
+                with the Buffer Size parameter. If the error description, including the
+                terminating NUL byte, contains more bytes than you indicate with the
+                Buffer Size parameter, the method copies Buffer Size - 1 bytes into
+                the buffer, places an ASCII NUL byte at the end of the buffer, and
+                returns the buffer size you must pass to get the entire value. For
+                example, if the value is "123456" and the Buffer Size is 4, the method
+                places "123" into the buffer and returns 7. If you pass 0 for the Buffer
+                Size, you can pass VI_NULL for this parameter.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        code_ctype = _visatype.ViStatus()  # case S200
+        code_ctype = _visatype.ViStatus()  # case S220
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
@@ -1589,7 +1619,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
         channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        path_capability_ctype = _visatype.ViInt32()  # case S200
+        path_capability_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niSwitch_CanConnect(vi_ctype, channel1_ctype, channel2_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.PathCapability(path_capability_ctype.value)
@@ -1783,6 +1813,11 @@ class Session(_SessionBase):
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count property.
 
+
+        Returns:
+            channel_name_buffer (str): Returns the channel name that is in the channel table at the index you
+                specify.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         index_ctype = _visatype.ViInt32(index)  # case S150
@@ -1823,6 +1858,13 @@ class Session(_SessionBase):
                 valid channel names for the switch module. Examples of valid channel
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: ""
 
+
+        Returns:
+            path (str): A string composed of comma-separated paths between channel 1 and channel
+                2. The first and last names in the path are the endpoints of the path.
+                All other channels in the path are configuration channels. Examples of
+                returned paths: ch0->com0, com0->ab0
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
@@ -1859,7 +1901,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_count_ctype = _visatype.ViInt32()  # case S200
+        relay_count_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niSwitch_GetRelayCount(vi_ctype, relay_name_ctype, None if relay_count_ctype is None else (ctypes.pointer(relay_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(relay_count_ctype.value)
@@ -1876,6 +1918,10 @@ class Session(_SessionBase):
         Args:
             index (int): A 1-based index into the channel table. Default value: 1 Maximum value:
                 Value of Channel Count property.
+
+
+        Returns:
+            relay_name_buffer (str): Returns the relay name for the index you specify.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1910,7 +1956,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_position_ctype = _visatype.ViInt32()  # case S200
+        relay_position_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niSwitch_GetRelayPosition(vi_ctype, relay_name_ctype, None if relay_position_ctype is None else (ctypes.pointer(relay_position_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.RelayPosition(relay_position_ctype.value)
@@ -2159,7 +2205,7 @@ class Session(_SessionBase):
         topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case C020
         simulate_ctype = _visatype.ViBoolean(simulate)  # case S150
         reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        vi_ctype = _visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niSwitch_InitWithTopology(resource_name_ctype, topology_ctype, simulate_ctype, reset_device_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -2465,7 +2511,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S200
+        self_test_result_ctype = _visatype.ViInt16()  # case S220
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niSwitch_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

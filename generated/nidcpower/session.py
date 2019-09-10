@@ -2515,7 +2515,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
-        count_ctype = _visatype.ViInt32(count)  # case S190
+        count_ctype = _visatype.ViInt32(count)  # case S210
         voltage_measurements_size = count  # case B600
         voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
         voltage_measurements_ctype = get_ctypes_pointer_for_buffer(value=voltage_measurements_array, library_type=_visatype.ViReal64)  # case B600
@@ -2524,7 +2524,7 @@ class _SessionBase(object):
         current_measurements_ctype = get_ctypes_pointer_for_buffer(value=current_measurements_array, library_type=_visatype.ViReal64)  # case B600
         in_compliance_size = count  # case B600
         in_compliance_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=in_compliance_size)  # case B600
-        actual_count_ctype = _visatype.ViInt32()  # case S200
+        actual_count_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDCPower_FetchMultiple(vi_ctype, channel_name_ctype, timeout_ctype, count_ctype, voltage_measurements_ctype, current_measurements_ctype, in_compliance_ctype, None if actual_count_ctype is None else (ctypes.pointer(actual_count_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return voltage_measurements_array, current_measurements_array, [bool(in_compliance_ctype[i]) for i in range(count_ctype.value)]
@@ -2579,7 +2579,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean()  # case S200
+        attribute_value_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niDCPower_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(attribute_value_ctype.value)
@@ -2634,7 +2634,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S200
+        attribute_value_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDCPower_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -2689,7 +2689,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt64()  # case S200
+        attribute_value_ctype = _visatype.ViInt64()  # case S220
         error_code = self._library.niDCPower_GetAttributeViInt64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(attribute_value_ctype.value)
@@ -2744,7 +2744,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64()  # case S200
+        attribute_value_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(attribute_value_ctype.value)
@@ -2786,6 +2786,25 @@ class _SessionBase(object):
                    control has named constants as valid values, you can view the
                    constants by moving to the value control and pressing .
 
+
+        Returns:
+            attribute_value (str): The buffer in which the method returns the current value of the
+                property. The buffer must be of type ViChar and have at least as many
+                bytes as indicated in **bufSize**.
+                If the current value of the property, including the terminating NUL
+                byte, contains more bytes that you indicate in this property, the
+                method copies (buffer size -1) bytes into the buffer, places an ASCII
+                NUL byte at the end of the buffer, and returns the buffer size you must
+                pass to get the entire value. For example, if the value is 123456 and
+                the buffer size is 4, the method places 123 into the buffer and
+                returns 7.
+                If you specify 0 for **bufSize**, you can pass VI_NULL for this
+                property.
+                If the property currently showing in the property ring control has
+                constants as valid values, you can view a list of the constants by
+                pressing on this control. Select a value by double-clicking on it or by
+                selecting it and then pressing .
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -2819,6 +2838,10 @@ class _SessionBase(object):
         Args:
             index (int): Specifies which output channel name to return. The index values begin at
                 1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2857,9 +2880,22 @@ class _SessionBase(object):
         Returns:
             code (int): Returns the error code for the session or execution thread.
 
+            description (str): Returns the error description for the IVI session or execution thread.
+                If there is no description, the method returns an empty string.
+                The buffer must contain at least as many elements as the value you
+                specify with **bufferSize**. If the error description, including the
+                terminating NUL byte, contains more bytes than you indicate with
+                **bufferSize**, the method copies (buffer size - 1) bytes into the
+                buffer, places an ASCII NUL byte at the end of the buffer, and returns
+                the buffer size you must pass to get the entire value. For example, if
+                the value is 123456 and the buffer size is 4, the method places 123
+                into the buffer and returns 7.
+                If you pass 0 for **bufferSize**, you can pass VI_NULL for this
+                property.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        code_ctype = _visatype.ViStatus()  # case S200
+        code_ctype = _visatype.ViStatus()  # case S220
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         description_ctype = None  # case C050
         error_code = self._library.niDCPower_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
@@ -2954,7 +2990,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
-        measurement_ctype = _visatype.ViReal64()  # case S200
+        measurement_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_Measure(vi_ctype, channel_name_ctype, measurement_type_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(measurement_ctype.value)
@@ -3021,7 +3057,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channels_string_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        number_of_channels_ctype = _visatype.ViUInt32()  # case S200
+        number_of_channels_ctype = _visatype.ViUInt32()  # case S220
         error_code = self._library.niDCPower_ParseChannelCount(vi_ctype, channels_string_ctype, None if number_of_channels_ctype is None else (ctypes.pointer(number_of_channels_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_channels_ctype.value)
@@ -3068,7 +3104,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        in_compliance_ctype = _visatype.ViBoolean()  # case S200
+        in_compliance_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niDCPower_QueryInCompliance(vi_ctype, channel_name_ctype, None if in_compliance_ctype is None else (ctypes.pointer(in_compliance_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_compliance_ctype.value)
@@ -3101,7 +3137,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
-        max_current_limit_ctype = _visatype.ViReal64()  # case S200
+        max_current_limit_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_QueryMaxCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if max_current_limit_ctype is None else (ctypes.pointer(max_current_limit_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_current_limit_ctype.value)
@@ -3134,7 +3170,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         current_limit_ctype = _visatype.ViReal64(current_limit)  # case S150
-        max_voltage_level_ctype = _visatype.ViReal64()  # case S200
+        max_voltage_level_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_QueryMaxVoltageLevel(vi_ctype, channel_name_ctype, current_limit_ctype, None if max_voltage_level_ctype is None else (ctypes.pointer(max_voltage_level_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(max_voltage_level_ctype.value)
@@ -3167,7 +3203,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         voltage_level_ctype = _visatype.ViReal64(voltage_level)  # case S150
-        min_current_limit_ctype = _visatype.ViReal64()  # case S200
+        min_current_limit_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_QueryMinCurrentLimit(vi_ctype, channel_name_ctype, voltage_level_ctype, None if min_current_limit_ctype is None else (ctypes.pointer(min_current_limit_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(min_current_limit_ctype.value)
@@ -3212,7 +3248,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
-        in_state_ctype = _visatype.ViBoolean()  # case S200
+        in_state_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niDCPower_QueryOutputState(vi_ctype, channel_name_ctype, output_state_ctype, None if in_state_ctype is None else (ctypes.pointer(in_state_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(in_state_ctype.value)
@@ -3880,109 +3916,109 @@ class Session(_SessionBase):
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
                 | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
                 +================================+===========+===========+===========+===========+===========+=====================+=====================+================+
-                | dc_noise_rejection             | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✕                 | ✓            |
+                | dc_noise_rejection             | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✕                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | aperture_time                  | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | aperture_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | measure_record_length          | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | measure_record_length          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | sense                          | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | sense                          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | ovp_enabled                    | ✓       | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕            |
+                | ovp_enabled                    | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | ovp_limit                      | ✓       | ✓       | ✓       | ✕       | ✕       | ✕                 | ✕                 | ✕            |
+                | ovp_limit                      | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_delay               | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_delay               | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_off_time                 | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_off_time                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_on_time                  | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_on_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | source_delay                   | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | source_delay                   | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_compensation_frequency | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓            |
+                | current_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_gain_bandwidth         | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓            |
+                | current_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_pole_zero_ratio        | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓            |
+                | current_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_compensation_frequency | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓            |
+                | voltage_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_gain_bandwidth         | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓            |
+                | voltage_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_pole_zero_ratio        | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✓            |
+                | voltage_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_level                  | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | current_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_level_range            | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | current_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit                  | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | voltage_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_high             | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✕            |
+                | voltage_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_low              | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✕            |
+                | voltage_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_range            | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | voltage_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit                  | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | current_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_high             | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✕            |
+                | current_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_low              | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✕            |
+                | current_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_range            | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | current_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_level                  | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | voltage_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_level_range            | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | voltage_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_enabled                 | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | output_enabled                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_function                | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | output_function                | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_resistance              | ✓       | ✕       | ✓       | ✕       | ✓       | ✕                 | ✓                 | ✕            |
+                | output_resistance              | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_level       | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_current_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit       | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_voltage_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit_high  | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_voltage_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit_low   | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_voltage_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_level            | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_current_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_level_range      | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_current_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit            | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_voltage_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_high       | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_voltage_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_low        | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_voltage_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_range      | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_voltage_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit       | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_current_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit_high  | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_current_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit_low   | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_current_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_level       | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_bias_voltage_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit            | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_current_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_high       | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_current_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_low        | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_current_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_range      | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_current_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_level            | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_voltage_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_level_range      | ✓       | ✓       | ✓       | ✓       | ✓       | ✕                 | ✕                 | ✕            |
+                | pulse_voltage_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | transient_response             | ✓       | ✓       | ✓       | ✓       | ✓       | ✓                 | ✓                 | ✓            |
+                | transient_response             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
@@ -4140,6 +4176,11 @@ class Session(_SessionBase):
         This method will return an error if the total number of channels
         initialized for the exporting session is not equal to the total number
         of channels initialized for the importing session.
+
+        Returns:
+            configuration (list of int): Specifies the byte array buffer to be populated with the exported
+                property configuration.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32()  # case S170
@@ -4236,11 +4277,11 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S200
-        month_ctype = _visatype.ViInt32()  # case S200
-        day_ctype = _visatype.ViInt32()  # case S200
-        hour_ctype = _visatype.ViInt32()  # case S200
-        minute_ctype = _visatype.ViInt32()  # case S200
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        hour_ctype = _visatype.ViInt32()  # case S220
+        minute_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDCPower_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -4258,7 +4299,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
+        temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -4276,7 +4317,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        months_ctype = _visatype.ViInt32()  # case S200
+        months_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_month_to_timedelta(int(months_ctype.value))
@@ -4342,11 +4383,11 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S200
-        month_ctype = _visatype.ViInt32()  # case S200
-        day_ctype = _visatype.ViInt32()  # case S200
-        hour_ctype = _visatype.ViInt32()  # case S200
-        minute_ctype = _visatype.ViInt32()  # case S200
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        hour_ctype = _visatype.ViInt32()  # case S220
+        minute_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDCPower_GetSelfCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
@@ -4377,7 +4418,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
+        temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_GetSelfCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -4573,7 +4614,7 @@ class Session(_SessionBase):
         channels_ctype = ctypes.create_string_buffer(channels.encode(self._encoding))  # case C020
         reset_ctype = _visatype.ViBoolean(reset)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S200
+        vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niDCPower_InitializeWithChannels(resource_name_ctype, channels_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(vi_ctype.value)
@@ -4612,7 +4653,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S200
+        temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDCPower_ReadCurrentTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
@@ -4856,7 +4897,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S200
+        self_test_result_ctype = _visatype.ViInt16()  # case S220
         self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niDCPower_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

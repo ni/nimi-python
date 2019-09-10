@@ -6153,6 +6153,17 @@ export_attribute_configuration_buffer
 
 
 
+            :rtype: list of int
+            :return:
+
+
+                    Specifies the byte array buffer to be populated with the exported
+                    property configuration.
+
+                    
+
+
+
 export_attribute_configuration_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6322,6 +6333,16 @@ get_channel_name
 
 
             :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns the output channel name that corresponds to **index**.
+
+                    
+
+
 
 get_ext_cal_last_date_and_time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

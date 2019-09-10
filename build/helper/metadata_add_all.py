@@ -304,6 +304,13 @@ def _add_use_in_python_api(p, parameters):
         size_param = find_size_parameter(p, parameters)
         size_param['use_in_python_api'] = False
 
+    if p['size']['mechanism'] == 'ivi-dance-with-a-twist':
+        # We have two parameters to remove from the API
+        size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
+        size_param = find_size_parameter(p, parameters, key='value_twist')
+        size_param['use_in_python_api'] = False
+
 
 def _setup_init_function(functions, config):
     '''Copy the selected init function to a known name and update information about it for documentation purposes'''
@@ -680,6 +687,38 @@ functions_input = {
                     'description': 'The channel to call this on.',
                 },
             },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size input',
+                },
+                'enum': None,
+                'name': 'pinDataBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer size output',
+                },
+                'enum': None,
+                'name': 'actualNumPinData',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'enum': None,
+                'name': 'expectedPinStates',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'pinDataBufferSize',
+                    'value_twist': 'actualNumPinData'
+                },
+                'type': 'ViUInt8[]'
+            },
         ],
         'documentation': {
             'description': 'Performs a foo, and performs it well.',
@@ -706,7 +745,29 @@ functions_input = {
                 'documentation': {
                     'description': 'Return a device status',
                 },
-            }
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size',
+                },
+                'enum': None,
+                'name': 'dataBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'enum': None,
+                'name': 'data',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'dataBufferSize'
+                },
+                'type': 'ViUInt32[]'
+            },
         ],
         'documentation': {
             'description': 'Perform actions as method defined',
@@ -789,6 +850,101 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'channel_name',
             },
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'pin_data_buffer_size_ctype',
+                'ctypes_type_library_call': 'ViInt32',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size input',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'pinDataBufferSize',
+                'python_name': 'pin_data_buffer_size',
+                'python_name_with_default': 'pin_data_buffer_size',
+                'python_name_with_doc_default': 'pin_data_buffer_size',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'pin_data_buffer_size_ctype',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'pin_data_buffer_size',
+            },
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'actual_num_pin_data_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer size output',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'actualNumPinData',
+                'python_name': 'actual_num_pin_data',
+                'python_name_with_default': 'actual_num_pin_data',
+                'python_name_with_doc_default': 'actual_num_pin_data',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'actual_num_pin_data',
+            },
+            {
+                'ctypes_type': 'ViUInt8',
+                'ctypes_variable_name': 'expected_pin_states_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt8)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': True,
+                'use_list': True,
+                'is_string': False,
+                'name': 'expectedPinStates',
+                'original_type': 'ViUInt8[]',
+                'python_name': 'expected_pin_states',
+                'python_name_with_default': 'expected_pin_states',
+                'python_name_with_doc_default': 'expected_pin_states',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'pinDataBufferSize',
+                    'value_twist': 'actualNumPinData'
+                },
+                'type': 'ViUInt8',
+                'library_method_call_snippet': 'expected_pin_states_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'expected_pin_states',
+            },
         ],
         'python_name': 'make_a_foo',
         'returns': 'ViStatus',
@@ -798,67 +954,133 @@ functions_expected = {
         'returns': 'ViStatus',
         'use_session_lock': True,
         'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
-        'parameters': [{
-            'direction': 'in',
-            'enum': None,
-            'numpy': False,
-            'name': 'vi',
-            'type': 'ViSession',
-            'documentation': {
-                'description': 'Identifies a particular instrument session.'
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'numpy': False,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'python_name': 'vi',
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'ctypes_variable_name': 'vi_ctype',
+                'ctypes_type': 'ViSession',
+                'ctypes_type_library_call': 'ViSession',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'python_name_with_default': 'vi',
+                'python_name_with_doc_default': 'vi',
+                'is_repeated_capability': False,
+                'is_session_handle': True,
+                'library_method_call_snippet': 'vi_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'vi',
             },
-            'python_name': 'vi',
-            'python_type': 'int',
-            'type_in_documentation': 'int',
-            'ctypes_variable_name': 'vi_ctype',
-            'ctypes_type': 'ViSession',
-            'ctypes_type_library_call': 'ViSession',
-            'size': {
-                'mechanism': 'fixed',
-                'value': 1
+            {
+                'direction': 'out',
+                'enum': None,
+                'numpy': False,
+                'name': 'status',
+                'type': 'ViString',
+                'documentation': {
+                    'description': 'Return a device status'
+                },
+                'python_name': 'status',
+                'python_type': 'str',
+                'type_in_documentation': 'str',
+                'ctypes_variable_name': 'status_ctype',
+                'ctypes_type': 'ViString',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': True,
+                'python_name_with_default': 'status',
+                'python_name_with_doc_default': 'status',
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'library_method_call_snippet': 'status_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'status',
             },
-            'use_array': False,
-            'is_buffer': False,
-            'use_list': False,
-            'is_string': False,
-            'python_name_with_default': 'vi',
-            'python_name_with_doc_default': 'vi',
-            'is_repeated_capability': False,
-            'is_session_handle': True,
-            'library_method_call_snippet': 'vi_ctype',
-            'use_in_python_api': True,
-            'python_name_or_default_for_init': 'vi',
-        }, {
-            'direction': 'out',
-            'enum': None,
-            'numpy': False,
-            'name': 'status',
-            'type': 'ViString',
-            'documentation': {
-                'description': 'Return a device status'
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'data_buffer_size_ctype',
+                'ctypes_type_library_call': 'ViInt32',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'dataBufferSize',
+                'python_name': 'data_buffer_size',
+                'python_name_with_default': 'data_buffer_size',
+                'python_name_with_doc_default': 'data_buffer_size',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'data_buffer_size_ctype',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'data_buffer_size',
             },
-            'python_name': 'status',
-            'python_type': 'str',
-            'type_in_documentation': 'str',
-            'ctypes_variable_name': 'status_ctype',
-            'ctypes_type': 'ViString',
-            'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
-            'size': {
-                'mechanism': 'fixed',
-                'value': 1
+            {
+                'ctypes_type': 'ViUInt32',
+                'ctypes_variable_name': 'data_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt32)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': True,
+                'use_list': True,
+                'is_string': False,
+                'name': 'data',
+                'original_type': 'ViUInt32[]',
+                'python_name': 'data',
+                'python_name_with_default': 'data',
+                'python_name_with_doc_default': 'data',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'dataBufferSize',
+                },
+                'type': 'ViUInt32',
+                'library_method_call_snippet': 'data_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'data',
             },
-            'use_array': False,
-            'is_buffer': False,
-            'use_list': False,
-            'is_string': True,
-            'python_name_with_default': 'status',
-            'python_name_with_doc_default': 'status',
-            'is_repeated_capability': False,
-            'is_session_handle': False,
-            'library_method_call_snippet': 'status_ctype',
-            'use_in_python_api': True,
-            'python_name_or_default_for_init': 'status',
-        }],
+        ],
         'documentation': {
             'description': 'Perform actions as method defined'
         },
