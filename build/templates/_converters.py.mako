@@ -176,13 +176,11 @@ def convert_month_to_timedelta(months):
     return datetime.timedelta(days=(30.4167 * months))
 
 
-% if config['module_name'] == 'nifake':
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
 
 
-% endif
 # This converter is not called from the normal codegen path for function. Instead it is
 # call from init and is a special case. Also, it just returns a string rather than a ctype object
 def convert_init_with_options_dictionary(values, encoding):
@@ -222,7 +220,6 @@ def convert_init_with_options_dictionary(values, encoding):
     return init_with_options_string
 
 
-% if config['module_name'] == 'nitclk':
 # nitclk specific converters
 def convert_to_nitclk_session_num(item):
     '''Convert from supported objects to NI-TClk Session Num
@@ -251,7 +248,6 @@ def convert_to_nitclk_session_num_list(item_list):
     return [convert_to_nitclk_session_num(i) for i in item_list]
 
 
-% endif
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
     assert convert_init_with_options_dictionary('', 'ascii') == ''
