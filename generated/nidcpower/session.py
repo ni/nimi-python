@@ -1820,8 +1820,8 @@ class _SessionBase(object):
         session.channels[0,1].sequence_step_delta_time = var
         var = session.channels[0,1].sequence_step_delta_time
     '''
-    sequence_step_delta_time_enabled = _attributes.AttributeViReal64(1150199)
-    '''Type: float
+    sequence_step_delta_time_enabled = _attributes.AttributeViBoolean(1150199)
+    '''Type: bool
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
