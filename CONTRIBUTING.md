@@ -63,7 +63,7 @@ following installed:
         - You must use Python 2 for this step
         - path 1 
             - Can not use spaces, instead you can use wildcards
-            - Ex: c:\Program*\Python*\python.exe
+            - Ex: c:/Program\*/Python\*/python.exe
         - path 2
             - Should be the path to the 64 bit python 3 where python3.exe exists
         - Ex: `"c:\Program Files (x86)\Python27\python" -m tox --scan c:/Program*/Python*/python.exe c:/Program*/Python*/python3.exe`
@@ -100,17 +100,20 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 1. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
    directory. Then type:
 
+         tox -e build_test,codegen,flake8,docs,pkg
          tox
 
-   This will
+   The first line will
 
    * For each driver
       * Generate Python bindings
       * Generate [RST documentation](http://www.sphinx-doc.org/)
       * Create installer packages
-   * Run NI-FAKE unit tests
    * Run [flake8](http://flake8.pycqa.org/)
    * Generate [HTML documentation](http://www.sphinx-doc.org/)
+
+   The second line will iterate over all python versions and run the NI-FAKE unit tests
+   for each version that is installed and registered using `tox --scan`
 
 1. To clean everything and start fresh, type:
 
