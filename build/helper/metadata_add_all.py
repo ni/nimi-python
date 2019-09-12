@@ -292,7 +292,7 @@ def _add_is_session_handle(parameter):
 
 def _fix_type(parameter):
     '''Replace any spaces in the parameter type with an underscore.'''
-    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
+    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' ', '_')
 
 
 def _add_use_in_python_api(p, parameters):
@@ -321,7 +321,7 @@ def _setup_init_function(functions, config):
         # Change the init_function information for generating the docstring
         # We are assuming the last parameter is vi out
         for p in init_function['parameters']:
-            if p['name'] == config['session_handle_parameter_name']:
+            if p['name'] == 'vi':
                 p['documentation']['description'] = session_return_text
                 p['type_in_documentation'] = config['module_name'] + '.Session'
                 p['python_name'] = 'session'
@@ -337,6 +337,39 @@ def _setup_init_function(functions, config):
     except KeyError:
         print("Couldn't find {} init function".format(config['init_function']))
         pass
+
+
+def _add_param_usages(p, config):
+    '''We need to keep track of matchers and converters used by attributes
+
+    This will be used to minimize the amount of included code
+    '''
+    if 'python_api_converter_name' in p:
+        config['converters_used'].append(p['python_api_converter_name'])
+
+    if p['direction'] == 'in':
+        if not p['is_buffer']:
+            t = p['type']
+            if p['is_string']:
+                t = 'ViString'
+            m = t + 'Matcher'
+        else:
+            m = p['type'] + 'BufferMatcher'
+    else:
+        m = p['type'] + 'PointerMatcher'
+
+    if p['type'].startswith('struct_'):
+        if not p['is_buffer']:
+            m = 'CustomTypeMatcher'
+        else:
+            m = 'CustomTypeBufferMatcher'
+
+    if p['type'] == 'datetime.datetime':
+        # This means it is a python only function and does not need a converter
+        return
+
+    if m not in config['matchers_used']:
+        config['matchers_used'].append(m)
 
 
 def add_all_function_metadata(functions, config):
@@ -373,6 +406,7 @@ def add_all_function_metadata(functions, config):
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
+            _add_param_usages(p, config)
 
         # We can't do these until the parameters have been processed
         _add_has_repeated_capability(functions[f])
@@ -411,11 +445,35 @@ def _add_repeated_capability_type(a, attributes):
         attributes[a]['repeated_capability_type'] = 'channels'
 
 
+def _add_attribute_usages(a, config):
+    '''We need to keep track of types and converters used by attributes
+
+    This will be used to minimize the amount of included code
+    '''
+    if a['type'] not in config['attribute_types_used']:
+        config['attribute_types_used'].append(a['type'])
+
+    atribute_type_to_converter = {
+        'AttributeViInt32TimeDeltaSeconds': 'convert_timedelta_to_seconds',
+        'AttributeViInt32TimeDeltaMilliseconds': 'convert_timedelta_to_milliseconds',
+        'AttributeViReal64TimeDeltaSeconds': 'convert_timedelta_to_seconds',
+        'AttributeViReal64TimeDeltaMilliseconds': 'convert_timedelta_to_milliseconds',
+        'AttributeViInt32SessionReference': 'convert_to_nitclk_session_num',
+    }
+
+    if 'attribute_class' in a:
+        if a['attribute_class'] not in config['attribute_types_used']:
+            config['attribute_types_used'].append(a['attribute_class'])
+        if atribute_type_to_converter[a['attribute_class']] not in config['converters_used']:
+            config['converters_used'].append(atribute_type_to_converter[a['attribute_class']])
+
+
 def add_all_attribute_metadata(attributes, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
     attributes = merge_helper(attributes, 'attributes', config, use_re=False)
 
     for a in attributes:
+        _add_attribute_usages(attributes[a], config)
         _add_codegen_method(attributes[a])
         _add_enum(attributes[a])
         _add_python_name(a, attributes)
@@ -573,6 +631,15 @@ def add_all_config_metadata(config):
 
     if 'use_locking' not in config:
         config['use_locking'] = True
+
+    if 'attribute_types_used' not in config:
+        config['attribute_types_used'] = []
+
+    if 'converters_used' not in config:
+        config['converters_used'] = []
+
+    if 'matchers_used' not in config:
+        config['matchers_used'] = []
 
     return config
 
@@ -1216,6 +1283,9 @@ config_input = {
     'modules': {
         'metadata.enums_addon': {}
     },
+    'converters_used': [],
+    'attribute_types_used': [],
+    'matchers_used': [],
 }
 
 
@@ -1258,6 +1328,10 @@ config_expected = {
     'modules': {
         'metadata.enums_addon': {}
     },
+    'converters_used': [],
+    'attribute_types_used': ['ViBoolean'],
+    'matchers_used': ['ViInt32Matcher', 'ViInt32PointerMatcher', 'ViSessionMatcher', 'ViStringMatcher',
+                      'ViStringPointerMatcher', 'ViUInt32PointerMatcher', 'ViUInt8PointerMatcher'],
 }
 
 
@@ -1293,6 +1367,9 @@ def test_add_enums_metadata_simple():
 
 def _do_the_test_add_all_metadata(functions, attributes, enums, config, expected):
     actual = add_all_metadata(functions, attributes, enums, config, persist_output=False)
+    # We need to sort each list so the comparison will work
+    actual['matchers_used'].sort()
+    expected['matchers_used'].sort()
     _compare_dicts(actual, expected)
 
 
