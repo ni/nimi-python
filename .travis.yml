@@ -28,13 +28,13 @@ matrix:
 
 install:
   - travis_retry sudo apt-get -y install python3-pip
-  - travis_retry sudo pip3 install --upgrade pip
-  - travis_retry sudo pip3 install --upgrade tox tox-travis
+  - travis_retry sudo python3 -m pip install --upgrade pip
+  - travis_retry sudo python3 -m pip install --upgrade tox tox-travis coveralls codecov
   - travis_retry pip install --upgrade pip
   - travis_retry pip install --upgrade tox tox-travis coveralls codecov
 
 script:
-  - tox -e clean,build_test,codegen PRINT=1
+  - python3 -m tox -e clean,build_test,codegen PRINT=1
   - tox
 
 after_success:
