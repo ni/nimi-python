@@ -100,8 +100,8 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 1. On a terminal, CD to the **[nimi-python](https://github.com/ni/nimi-python)** root
    directory. Then type:
 
-         tox -e build_test,codegen,flake8,docs,pkg
-         tox
+         <path to python3>/python3 -m tox -e build_test,codegen,flake8,docs,pkg
+         <path to python2>/python tox
 
    The first line will
 
@@ -117,7 +117,7 @@ In order to run **[nimi-python](https://github.com/ni/nimi-python)** System Test
 
 1. To clean everything and start fresh, type:
 
-         tox -e clean
+         <path to python3>/python3 -m tox -e clean
 
 
 ### Running System Tests
