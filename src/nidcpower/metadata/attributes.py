@@ -1656,7 +1656,7 @@ attributes = {
         'channel_based': True,
         'name': 'SEQUENCE_STEP_DELTA_TIME_ENABLED',
         'resettable': False,
-        'type': 'ViReal64'
+        'type': 'ViBoolean'
     },
     1250001: {
         'access': 'read-write',
