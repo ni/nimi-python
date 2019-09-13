@@ -2,10 +2,8 @@ ${template_parameters['encoding_tag']}
 # This file was generated
 <%
     module_name = template_parameters['metadata'].config['module_name']
+    attribute_classes_used = template_parameters['metadata'].config['attribute_classes_used']
 %>\
-import ${module_name}._converters as _converters
-
-import datetime
 
 
 class Attribute(object):
@@ -15,6 +13,7 @@ class Attribute(object):
         self._attribute_id = attribute_id
 
 
+% if 'AttributeViInt32' in attribute_classes_used:
 class AttributeViInt32(Attribute):
 
     def __get__(self, session, session_type):
@@ -24,24 +23,34 @@ class AttributeViInt32(Attribute):
         session._set_attribute_vi_int32(self._attribute_id, value)
 
 
+% endif
+% if 'AttributeViInt32TimeDeltaSeconds' in attribute_classes_used:
 class AttributeViInt32TimeDeltaSeconds(Attribute):
 
     def __get__(self, session, session_type):
+        import datetime
         return datetime.timedelta(seconds=session._get_attribute_vi_int32(self._attribute_id))
 
     def __set__(self, session, value):
+        import ${module_name}._converters as _converters
         session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_seconds(value, int))
 
 
+% endif
+% if 'AttributeViInt32TimeDeltaMilliseconds' in attribute_classes_used:
 class AttributeViInt32TimeDeltaMilliseconds(Attribute):
 
     def __get__(self, session, session_type):
+        import datetime
         return datetime.timedelta(milliseconds=session._get_attribute_vi_int32(self._attribute_id))
 
     def __set__(self, session, value):
+        import ${module_name}._converters as _converters
         session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, int))
 
 
+% endif
+% if 'AttributeViInt64' in attribute_classes_used:
 class AttributeViInt64(Attribute):
 
     def __get__(self, session, session_type):
@@ -51,6 +60,8 @@ class AttributeViInt64(Attribute):
         session._set_attribute_vi_int64(self._attribute_id, value)
 
 
+% endif
+% if 'AttributeViReal64' in attribute_classes_used:
 class AttributeViReal64(Attribute):
 
     def __get__(self, session, session_type):
@@ -60,24 +71,34 @@ class AttributeViReal64(Attribute):
         session._set_attribute_vi_real64(self._attribute_id, value)
 
 
+% endif
+% if 'AttributeViReal64TimeDeltaSeconds' in attribute_classes_used:
 class AttributeViReal64TimeDeltaSeconds(Attribute):
 
     def __get__(self, session, session_type):
+        import datetime
         return datetime.timedelta(seconds=session._get_attribute_vi_real64(self._attribute_id))
 
     def __set__(self, session, value):
+        import ${module_name}._converters as _converters
         session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds(value, float))
 
 
+% endif
+% if 'AttributeViReal64TimeDeltaMilliseconds' in attribute_classes_used:
 class AttributeViReal64TimeDeltaMilliseconds(Attribute):
 
     def __get__(self, session, session_type):
+        import datetime
         return datetime.timedelta(milliseconds=session._get_attribute_vi_real64(self._attribute_id))
 
     def __set__(self, session, value):
+        import ${module_name}._converters as _converters
         session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, float))
 
 
+% endif
+% if 'AttributeViString' in attribute_classes_used:
 class AttributeViString(Attribute):
 
     def __get__(self, session, session_type):
@@ -87,6 +108,8 @@ class AttributeViString(Attribute):
         session._set_attribute_vi_string(self._attribute_id, value)
 
 
+% endif
+% if 'AttributeViBoolean' in attribute_classes_used:
 class AttributeViBoolean(Attribute):
 
     def __get__(self, session, session_type):
@@ -96,6 +119,8 @@ class AttributeViBoolean(Attribute):
         session._set_attribute_vi_boolean(self._attribute_id, value)
 
 
+% endif
+% if 'AttributeEnum' in attribute_classes_used:
 class AttributeEnum(object):
 
     def __init__(self, underlying_attribute_meta_class, enum_meta_class, attribute_id):
@@ -112,4 +137,5 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
+% endif
 
