@@ -13,3 +13,13 @@ coverage:
         target: 70%
         threshhold: 5
 
+ignore:
+  - */_library*
+  # We don't want anything from modinst except session.py
+  - */nimodinst/unit_tests/*
+  - */nimodinst/__init__.py
+  - */nimodinst/_converters.py
+  - */nimodinst/_visatype.py
+  - */nimodinst/errors.py
+  - */nimodinst/setup.py
+
