@@ -426,9 +426,6 @@ def _add_attribute_usages(a, config):
 
     This will be used to minimize the amount of included code
     '''
-    if a['type'] not in config['attribute_types_used']:
-        config['attribute_types_used'].append(a['type'])
-
     atribute_type_to_converter = {
         'AttributeViInt32TimeDeltaSeconds': 'convert_timedelta_to_seconds',
         'AttributeViInt32TimeDeltaMilliseconds': 'convert_timedelta_to_milliseconds',
@@ -437,11 +434,16 @@ def _add_attribute_usages(a, config):
         'AttributeViInt32SessionReference': 'convert_to_nitclk_session_num',
     }
 
-    if 'attribute_class' in a:
-        if a['attribute_class'] not in config['attribute_types_used']:
-            config['attribute_types_used'].append(a['attribute_class'])
+    if a['attribute_class'] not in config['attribute_classes_used']:
+        config['attribute_classes_used'].append(a['attribute_class'])
+    if a['attribute_class'] in atribute_type_to_converter:
         if atribute_type_to_converter[a['attribute_class']] not in config['converters_used']:
             config['converters_used'].append(atribute_type_to_converter[a['attribute_class']])
+    if a['enum']:
+        if 'AttributeEnum' not in config['attribute_classes_used']:
+            config['attribute_classes_used'].append('AttributeEnum')
+        if 'Attribute' + a['type'] not in config['attribute_classes_used']:
+            config['attribute_classes_used'].append('Attribute' + a['type'])
 
 
 def add_all_attribute_metadata(attributes, config):
@@ -449,13 +451,13 @@ def add_all_attribute_metadata(attributes, config):
     attributes = merge_helper(attributes, 'attributes', config, use_re=False)
 
     for a in attributes:
-        _add_attribute_usages(attributes[a], config)
         _add_codegen_method(attributes[a])
         _add_enum(attributes[a])
         _add_python_name(a, attributes)
         _add_python_type(attributes[a], config)
         _add_repeated_capability_type(a, attributes)
         _add_default_attribute_class(a, attributes)
+        _add_attribute_usages(attributes[a], config)
 
     return attributes
 
@@ -608,11 +610,15 @@ def add_all_config_metadata(config):
     if 'use_locking' not in config:
         config['use_locking'] = True
 
-    if 'attribute_types_used' not in config:
-        config['attribute_types_used'] = []
+    if 'attribute_classes_used' not in config:
+        config['attribute_classes_used'] = []
 
     if 'converters_used' not in config:
         config['converters_used'] = []
+    if len(config['repeated_capabilities']) > 0:
+        # Since we will have repeated capabilities objects we will need to add the
+        # applicable converter
+        config['converters_used'].append('convert_repeated_capabilities')
 
     return config
 
@@ -1257,7 +1263,7 @@ config_input = {
         'metadata.enums_addon': {}
     },
     'converters_used': [],
-    'attribute_types_used': [],
+    'attribute_classes_used': [],
 }
 
 
@@ -1300,8 +1306,8 @@ config_expected = {
     'modules': {
         'metadata.enums_addon': {}
     },
-    'converters_used': [],
-    'attribute_types_used': ['ViBoolean'],
+    'converters_used': ['convert_repeated_capabilities'],
+    'attribute_classes_used': ['AttributeViBoolean'],
 }
 
 
@@ -1338,7 +1344,6 @@ def test_add_enums_metadata_simple():
 def _do_the_test_add_all_metadata(functions, attributes, enums, config, expected):
     actual = add_all_metadata(functions, attributes, enums, config, persist_output=False)
     # We need to sort each list so the comparison will work
-    actual['matchers_used'].sort()
     _compare_dicts(actual, expected)
 
 
