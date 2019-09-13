@@ -347,30 +347,6 @@ def _add_param_usages(p, config):
     if 'python_api_converter_name' in p:
         config['converters_used'].append(p['python_api_converter_name'])
 
-    if p['direction'] == 'in':
-        if not p['is_buffer']:
-            t = p['type']
-            if p['is_string']:
-                t = 'ViString'
-            m = t + 'Matcher'
-        else:
-            m = p['type'] + 'BufferMatcher'
-    else:
-        m = p['type'] + 'PointerMatcher'
-
-    if p['type'].startswith('struct_'):
-        if not p['is_buffer']:
-            m = 'CustomTypeMatcher'
-        else:
-            m = 'CustomTypeBufferMatcher'
-
-    if p['type'] == 'datetime.datetime':
-        # This means it is a python only function and does not need a converter
-        return
-
-    if m not in config['matchers_used']:
-        config['matchers_used'].append(m)
-
 
 def add_all_function_metadata(functions, config):
     '''Merges and Adds all codegen-specific metada to the function metadata list'''
@@ -637,9 +613,6 @@ def add_all_config_metadata(config):
 
     if 'converters_used' not in config:
         config['converters_used'] = []
-
-    if 'matchers_used' not in config:
-        config['matchers_used'] = []
 
     return config
 
@@ -1285,7 +1258,6 @@ config_input = {
     },
     'converters_used': [],
     'attribute_types_used': [],
-    'matchers_used': [],
 }
 
 
@@ -1330,8 +1302,6 @@ config_expected = {
     },
     'converters_used': [],
     'attribute_types_used': ['ViBoolean'],
-    'matchers_used': ['ViInt32Matcher', 'ViInt32PointerMatcher', 'ViSessionMatcher', 'ViStringMatcher',
-                      'ViStringPointerMatcher', 'ViUInt32PointerMatcher', 'ViUInt8PointerMatcher'],
 }
 
 
@@ -1369,7 +1339,6 @@ def _do_the_test_add_all_metadata(functions, attributes, enums, config, expected
     actual = add_all_metadata(functions, attributes, enums, config, persist_output=False)
     # We need to sort each list so the comparison will work
     actual['matchers_used'].sort()
-    expected['matchers_used'].sort()
     _compare_dicts(actual, expected)
 
 
