@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import nidcpower._visatype as _visatype
-import nidcpower.errors as errors
 
-import datetime
-import numbers
-import six
 
 try:
     from functools import singledispatch  # Python 3.4+
 except ImportError:
     from singledispatch import singledispatch  # Python 2.7
+
+import numbers
+import six
 
 
 @singledispatch
@@ -43,6 +42,7 @@ def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
     - (slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17') -->
         ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
     '''
+    import nidcpower.errors as errors
     raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
 
 
@@ -72,6 +72,7 @@ def _(repeated_capability, prefix):
     rc = r.split('-')
     if len(rc) > 1:
         if len(rc) > 2:
+            import nidcpower.errors as errors
             raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
         start = int(rc[0])
         end = int(rc[1])
@@ -160,15 +161,8 @@ def convert_timedelta_to_seconds(value, library_type):
     return _convert_timedelta(value, library_type, 1)
 
 
-def convert_timedelta_to_milliseconds(value, library_type):
-    return _convert_timedelta(value, library_type, 1000)
-
-
-def convert_timedelta_to_microseconds(value, library_type):
-    return _convert_timedelta(value, library_type, 1000000)
-
-
 def convert_month_to_timedelta(months):
+    import datetime
     return datetime.timedelta(days=(30.4167 * months))
 
 
@@ -227,6 +221,8 @@ def test_convert_init_with_options_dictionary():
 
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
+    import datetime
+
     test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
     assert test_result.value == 10.0
     assert isinstance(test_result, _visatype.ViReal64)
@@ -242,6 +238,8 @@ def test_convert_timedelta_to_seconds_double():
 
 
 def test_convert_timedelta_to_seconds_int():
+    import datetime
+
     test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
     assert test_result.value == 10
     assert isinstance(test_result, _visatype.ViInt32)
@@ -253,66 +251,6 @@ def test_convert_timedelta_to_seconds_int():
     assert isinstance(test_result, _visatype.ViInt32)
     test_result = convert_timedelta_to_seconds(-1, _visatype.ViInt32)
     assert test_result.value == -1
-    assert isinstance(test_result, _visatype.ViInt32)
-
-
-def test_convert_timedelta_to_milliseconds_double():
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
-    assert test_result.value == 10000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
-    assert test_result.value == -1000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_milliseconds(10.5, _visatype.ViReal64)
-    assert test_result.value == 10500.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_milliseconds(-1, _visatype.ViReal64)
-    assert test_result.value == -1000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-
-
-def test_convert_timedelta_to_milliseconds_int():
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
-    assert test_result.value == 10000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
-    assert test_result.value == -1000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds(10.5, _visatype.ViInt32)
-    assert test_result.value == 10500
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds(-1, _visatype.ViInt32)
-    assert test_result.value == -1000
-    assert isinstance(test_result, _visatype.ViInt32)
-
-
-def test_convert_timedelta_to_microseconds_double():
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
-    assert test_result.value == 10000000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
-    assert test_result.value == -1000000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_microseconds(10.5, _visatype.ViReal64)
-    assert test_result.value == 10500000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_microseconds(-1, _visatype.ViReal64)
-    assert test_result.value == -1000000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-
-
-def test_convert_timedelta_to_microseconds_int():
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
-    assert test_result.value == 10000000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
-    assert test_result.value == -1000000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_microseconds(10.5, _visatype.ViInt32)
-    assert test_result.value == 10500000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_microseconds(-1, _visatype.ViInt32)
-    assert test_result.value == -1000000
     assert isinstance(test_result, _visatype.ViInt32)
 
 
@@ -427,6 +365,8 @@ def test_repeated_capabilies_mixed_prefix():
 
 
 def test_invalid_repeated_capabilies():
+    import nidcpower.errors as errors
+
     try:
         convert_repeated_capabilities('6-8-10')
         assert False
@@ -473,11 +413,6 @@ def test_repeated_capabilies_slice_prefix():
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 
-def test_repeated_capabilies_from_init():
-    test_result = convert_repeated_capabilities_from_init((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), '')
-    assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
-
-
 def test_string_to_list_channel():
     test_result = _convert_repeated_capabilities('r0', '')
     assert test_result == ['r0']
@@ -500,4 +435,10 @@ def test_string_to_list_prefix():
     assert test_result == ['2', '1', '0']
     test_result = _convert_repeated_capabilities(['ScriptTrigger2:ScriptTrigger0'], 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
+
+
+def test_repeated_capabilies_from_init():
+    test_result = convert_repeated_capabilities_from_init((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), '')
+    assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
+
 

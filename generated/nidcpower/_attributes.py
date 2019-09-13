@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 # This file was generated
-import nidcpower._converters as _converters
-
-import datetime
 
 
 class Attribute(object):
@@ -19,24 +16,6 @@ class AttributeViInt32(Attribute):
 
     def __set__(self, session, value):
         session._set_attribute_vi_int32(self._attribute_id, value)
-
-
-class AttributeViInt32TimeDeltaSeconds(Attribute):
-
-    def __get__(self, session, session_type):
-        return datetime.timedelta(seconds=session._get_attribute_vi_int32(self._attribute_id))
-
-    def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_seconds(value, int))
-
-
-class AttributeViInt32TimeDeltaMilliseconds(Attribute):
-
-    def __get__(self, session, session_type):
-        return datetime.timedelta(milliseconds=session._get_attribute_vi_int32(self._attribute_id))
-
-    def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, int))
 
 
 class AttributeViInt64(Attribute):
@@ -60,19 +39,12 @@ class AttributeViReal64(Attribute):
 class AttributeViReal64TimeDeltaSeconds(Attribute):
 
     def __get__(self, session, session_type):
+        import datetime
         return datetime.timedelta(seconds=session._get_attribute_vi_real64(self._attribute_id))
 
     def __set__(self, session, value):
+        import nidcpower._converters as _converters
         session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds(value, float))
-
-
-class AttributeViReal64TimeDeltaMilliseconds(Attribute):
-
-    def __get__(self, session, session_type):
-        return datetime.timedelta(milliseconds=session._get_attribute_vi_real64(self._attribute_id))
-
-    def __set__(self, session, value):
-        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, float))
 
 
 class AttributeViString(Attribute):
