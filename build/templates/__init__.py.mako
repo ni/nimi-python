@@ -28,11 +28,13 @@ from ${module_name}.session import SessionReference  # noqa: F401
 
 # Function imports
 <%
-# There are two types of functions in nitclk: functions that take a single sessions (get/set attribute) and 
-# functions that take a list of sessions. The functions that take a list of sessions are considered the main
-# API for this and these are the ones we need to explicitly import. We can tell which type of function each
-# one is based on 'render_in_session_base'. When this is True, it means it is one of the get/set attribute
-# funtions, so we skip it.
+# There two types of functions in `nitclk`:
+#
+# 1. Functions that take a single SessionReference (get/set attribute)
+# 2. Functions that take in a list of SessionReference
+#
+# The second type are the public functions that clients will call, so we need to import them explicitly into
+# the `nitclk` namespace. We are using the `render_in_session_base` metadata in order to distinguish them
 %>\
 %   for func_name in sorted([functions[k]['python_name'] for k in functions if not functions[k]['render_in_session_base']]):
 from ${module_name}.session import ${func_name}  # noqa: F401
