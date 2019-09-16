@@ -339,8 +339,8 @@ def _setup_init_function(functions, config):
         pass
 
 
-def _add_param_usages(p, config):
     '''We need to keep track of matchers and converters used by attributes
+def _add_param_converters_used(p, config):
 
     This will be used to minimize the amount of included code
     '''
@@ -382,7 +382,7 @@ def add_all_function_metadata(functions, config):
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
             _add_library_method_call_snippet(p)
-            _add_param_usages(p, config)
+            _add_param_converters_used(p, config)
 
         # We can't do these until the parameters have been processed
         _add_has_repeated_capability(functions[f])
@@ -421,7 +421,7 @@ def _add_repeated_capability_type(a, attributes):
         attributes[a]['repeated_capability_type'] = 'channels'
 
 
-def _add_attribute_usages(a, config):
+def _add_attribute_types_converters_used(a, config):
     '''We need to keep track of types and converters used by attributes
 
     This will be used to minimize the amount of included code
@@ -457,7 +457,7 @@ def add_all_attribute_metadata(attributes, config):
         _add_python_type(attributes[a], config)
         _add_repeated_capability_type(a, attributes)
         _add_default_attribute_class(a, attributes)
-        _add_attribute_usages(attributes[a], config)
+        _add_attribute_types_converters_used(attributes[a], config)
 
     return attributes
 
