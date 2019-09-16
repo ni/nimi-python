@@ -339,8 +339,8 @@ def _setup_init_function(functions, config):
         pass
 
 
-    '''We need to keep track of matchers and converters used by attributes
 def _add_param_converters_used(p, config):
+    '''We need to keep track of converters used by parameters
 
     This will be used to minimize the amount of included code
     '''
