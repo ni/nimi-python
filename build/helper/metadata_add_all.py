@@ -1152,6 +1152,31 @@ attributes_input = {
             'description': 'An attribute of type bool with read/write access.',
         },
     },
+    1000001: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViInt32TimeDeltaSeconds',
+        'channel_based': False,
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Bool',
+        'name': 'READ_WRITE_BOOL',
+        'resettable': False,
+        'type': 'ViBoolean',
+        'documentation': {
+            'description': 'An attribute of type bool with read/write access.',
+        },
+    },
+    1000002: {
+        'access': 'read-write',
+        'channel_based': False,
+        'enum': 'Color',
+        'lv_property': 'Fake attributes:Read Write Bool',
+        'name': 'READ_WRITE_BOOL',
+        'resettable': False,
+        'type': 'ViInt32',
+        'documentation': {
+            'description': 'An attribute of type bool with read/write access.',
+        },
+    },
 }
 
 
@@ -1170,6 +1195,36 @@ attributes_expected = {
         'python_type': 'bool',
         'type_in_documentation': 'bool',
         'attribute_class': 'AttributeViBoolean',
+    },
+    1000001: {
+        'access': 'read-write',
+        'channel_based': False,
+        'codegen_method': 'public',
+        'documentation': {'description': 'An attribute of type bool with read/write access.'},
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Bool',
+        'name': 'READ_WRITE_BOOL',
+        'python_name': 'read_write_bool',
+        'resettable': False,
+        'type': 'ViBoolean',
+        'python_type': 'bool',
+        'type_in_documentation': 'bool',
+        'attribute_class': 'AttributeViInt32TimeDeltaSeconds',
+    },
+    1000002: {
+        'access': 'read-write',
+        'channel_based': False,
+        'codegen_method': 'public',
+        'documentation': {'description': 'An attribute of type bool with read/write access.'},
+        'enum': 'Color',
+        'lv_property': 'Fake attributes:Read Write Bool',
+        'name': 'READ_WRITE_BOOL',
+        'python_name': 'read_write_bool',
+        'resettable': False,
+        'type': 'ViInt32',
+        'python_type': 'enums.Color',
+        'type_in_documentation': 'enums.Color',
+        'attribute_class': 'AttributeViInt32',
     },
 }
 
@@ -1306,8 +1361,8 @@ config_expected = {
     'modules': {
         'metadata.enums_addon': {}
     },
-    'converters_used': ['convert_repeated_capabilities'],
-    'attribute_classes_used': ['AttributeViBoolean'],
+    'converters_used': ['convert_timedelta_to_seconds', 'convert_repeated_capabilities'],
+    'attribute_classes_used': ['AttributeViBoolean', 'AttributeViInt32TimeDeltaSeconds', 'AttributeViInt32', 'AttributeEnum'],
 }
 
 
@@ -1352,12 +1407,17 @@ def test_add_all_metadata_defaults():
     actual_attributes = copy.deepcopy(attributes_input)
     actual_enums = copy.deepcopy(enums_input)
     actual_config = copy.deepcopy(config_input)
+    expected = copy.deepcopy(config_expected)
+    # Now that we merge everything, Color is now used and the 'codegen_method'
+    # will be public. Above, when only merging enum metadata, nothing is using
+    # it so it is 'codegen_method' == 'no'
+    expected['enums']['Color']['codegen_method'] = 'public'
     _do_the_test_add_all_metadata(
         functions=actual_functions,
         attributes=actual_attributes,
         enums=actual_enums,
         config=actual_config,
-        expected=config_expected)
+        expected=expected)
 
 
 def test_add_all_metadata():
@@ -1368,6 +1428,10 @@ def test_add_all_metadata():
     actual_config['use_locking'] = False
     expected = copy.deepcopy(config_expected)
     expected['use_locking'] = False
+    # Now that we merge everything, Color is now used and the 'codegen_method'
+    # will be public. Above, when only merging enum metadata, nothing is using
+    # it so it is 'codegen_method' == 'no'
+    expected['enums']['Color']['codegen_method'] = 'public'
     _do_the_test_add_all_metadata(
         functions=actual_functions,
         attributes=actual_attributes,
