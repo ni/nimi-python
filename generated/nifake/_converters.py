@@ -172,11 +172,6 @@ def convert_month_to_timedelta(months):
     return datetime.timedelta(days=(30.4167 * months))
 
 
-# nifake specific converter(s) - used only for testing
-def convert_double_each_element(numbers):
-    return [x * 2 for x in numbers]
-
-
 # This converter is not called from the normal codegen path for function. Instead it is
 # call from init and is a special case. Also, it just returns a string rather than a ctype object
 def convert_init_with_options_dictionary(values, encoding):
@@ -214,6 +209,39 @@ def convert_init_with_options_dictionary(values, encoding):
         init_with_options_string = ','.join(init_with_options)
 
     return init_with_options_string
+
+
+# nitclk specific converters
+def convert_to_nitclk_session_number(item):
+    '''Convert from supported objects to NI-TClk Session Num
+
+    Supported objects are:
+    - class with .tclk object of type nitclk.SessionReference
+    - nitclk.SessionReference
+    - NI-TClk Session Num
+    '''
+    try:
+        return item.tclk.get_session_number()
+    except KeyError:
+        pass
+
+    try:
+        return item.get_session_number()
+    except KeyError:
+        pass
+
+    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
+    return item
+
+
+def convert_to_nitclk_session_number_list(item_list):
+    '''Converts a list of items to nitclk session nums'''
+    return [convert_to_nitclk_session_number(i) for i in item_list]
+
+
+# nifake specific converter(s) - used only for testing
+def convert_double_each_element(numbers):
+    return [x * 2 for x in numbers]
 
 
 # Let's run some tests
