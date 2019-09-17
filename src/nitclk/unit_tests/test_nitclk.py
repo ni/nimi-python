@@ -12,6 +12,11 @@ multiple_sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST * 10, SESSION_NU
 
 
 class TestSession(object):
+    def __init__(self, session_number):
+        self.nitclk = nitclk.SessionReference(session_number)
+
+
+class NitclkSessionTest(object):
     def setup_method(self, method):
         self.patched_library_patcher = patch('nitclk._library.Library', autospec=True)
         self.patched_library = self.patched_library_patcher.start()
