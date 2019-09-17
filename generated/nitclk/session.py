@@ -294,7 +294,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
-    def _get_attribute_vi_string(self, attribute_id, buf_size, value):
+    def _get_attribute_vi_string(self, attribute_id):
         r'''_get_attribute_vi_string
 
         This method queries the value of an NI-TClk ViString property. You
@@ -315,7 +315,7 @@ class SessionReference(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nitclk.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1]._get_attribute_vi_string(attribute_id, buf_size, value)
+            session.channels[0,1]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): The ID of the property that you want to get Supported Properties
@@ -323,20 +323,19 @@ class SessionReference(object):
                 sync_pulse_clock_source
                 exported_sync_pulse_output_terminal
 
-            buf_size (int): The number of bytes in the ViChar array that you specify for the value
-                parameter
-
-            value (str): The value that you are getting
-
         '''
         session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        buf_size_ctype = _visatype.ViInt32(buf_size)  # case S150
-        value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
+        buf_size_ctype = _visatype.ViInt32()  # case S170
+        value_ctype = None  # case C050
+        error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buf_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        value_ctype = (_visatype.ViChar * buf_size_ctype.value)()  # case C060
         error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        return value_ctype.value.decode(self._encoding)
 
     def _get_extended_error_info(self):
         r'''_get_extended_error_info
@@ -416,7 +415,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_session(self, attribute_id):
+    def _set_attribute_vi_session(self, attribute_id, value):
         r'''_set_attribute_vi_session
 
         Sets the value of an NI-TClk ViSession property.
@@ -431,7 +430,7 @@ class SessionReference(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nitclk.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1]._set_attribute_vi_session(attribute_id)
+            session.channels[0,1]._set_attribute_vi_session(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of the property that you want to set Supported Properties
@@ -440,11 +439,13 @@ class SessionReference(object):
                 script_trigger_master_session
                 pause_trigger_master_session
 
+            value (int): The value for the property
+
         '''
         session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViSession(self._value)  # case S110
+        value_ctype = _visatype.ViSession(value)  # case S150
         error_code = self._library.niTClk_SetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

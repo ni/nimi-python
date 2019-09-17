@@ -31,6 +31,7 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViSession']['value'] = None
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
+        self._defaults['GetAttributeViString']['value'] = None
         self._defaults['GetExtendedErrorInfo'] = {}
         self._defaults['GetExtendedErrorInfo']['return'] = 0
         self._defaults['GetExtendedErrorInfo']['errorString'] = None
@@ -105,6 +106,11 @@ class SideEffectsHelper(object):
     def niTClk_GetAttributeViString(self, session, channel_name, attribute_id, buf_size, value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        if self._defaults['GetAttributeViString']['value'] is None:
+            raise MockFunctionCallError("niTClk_GetAttributeViString", param='value')
+        if buf_size.value == 0:
+            return len(self._defaults['GetAttributeViString']['value'])
+        value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
     def niTClk_GetExtendedErrorInfo(self, error_string, error_string_size):  # noqa: N802
