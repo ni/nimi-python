@@ -33,7 +33,7 @@ attributes = {
         'lv_property': 'Start Trigger Master Session',
         'name': 'START_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     4: {
@@ -46,7 +46,7 @@ attributes = {
         'lv_property': 'Reference Trigger Master Session',
         'name': 'REF_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     5: {
@@ -59,7 +59,7 @@ attributes = {
         'lv_property': 'Script Trigger Master Session',
         'name': 'SCRIPT_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     6: {
@@ -72,7 +72,7 @@ attributes = {
         'lv_property': 'Pause Trigger Master Session',
         'name': 'PAUSE_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     8: {
@@ -141,7 +141,7 @@ attributes = {
         'lv_property': 'Sequencer Flag Master Session',
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     }
 }
