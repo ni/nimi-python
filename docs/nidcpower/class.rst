@@ -329,7 +329,7 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`sequence_step_delta_time`                             | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`sequence_step_delta_time_enabled`                     | float                                  |
+    | :py:attr:`sequence_step_delta_time_enabled`                     | bool                                   |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`simulate`                                             | bool                                   |
     +-----------------------------------------------------------------+----------------------------------------+
@@ -4876,7 +4876,7 @@ sequence_step_delta_time_enabled
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | float      |
+            | Datatype       | bool       |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
@@ -6153,6 +6153,17 @@ export_attribute_configuration_buffer
 
 
 
+            :rtype: list of int
+            :return:
+
+
+                    Specifies the byte array buffer to be populated with the exported
+                    property configuration.
+
+                    
+
+
+
 export_attribute_configuration_file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -6322,6 +6333,16 @@ get_channel_name
 
 
             :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns the output channel name that corresponds to **index**.
+
+                    
+
+
 
 get_ext_cal_last_date_and_time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7569,7 +7590,7 @@ Properties
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.sequence_step_delta_time`                             | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.sequence_step_delta_time_enabled`                     | float                                  |
+| :py:attr:`nidcpower.Session.sequence_step_delta_time_enabled`                     | bool                                   |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.simulate`                                             | bool                                   |
 +-----------------------------------------------------------------------------------+----------------------------------------+

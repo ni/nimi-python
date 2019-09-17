@@ -4968,8 +4968,23 @@ fetch_history_ram_cycle_pin_data
 
             :type dut_cycle_index: int
 
-            :rtype: int
-            :return:
+            :rtype: tuple (expected_pin_states, actual_pin_states, per_pin_pass_fail)
+
+                WHERE
+
+                expected_pin_states (list of int): 
+
+
+                    
+
+
+                actual_pin_states (list of int): 
+
+
+                    
+
+
+                per_pin_pass_fail (list of bool): 
 
 
                     
@@ -5064,7 +5079,7 @@ frequency_counter_measure_frequency
                     session.channels[0,1].frequency_counter_measure_frequency()
 
 
-            :rtype: int
+            :rtype: list of float
             :return:
 
 
@@ -5292,6 +5307,14 @@ get_attribute_vi_string
 
             :type attribute: int
 
+            :rtype: str
+            :return:
+
+
+                    
+
+
+
 get_channel_name
 ~~~~~~~~~~~~~~~~
 
@@ -5313,6 +5336,14 @@ get_channel_name
 
             :type index: int
 
+            :rtype: str
+            :return:
+
+
+                    
+
+
+
 get_channel_name_from_string
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -5333,6 +5364,14 @@ get_channel_name_from_string
 
 
             :type index: str
+
+            :rtype: str
+            :return:
+
+
+                    
+
+
 
 get_fail_count
 ~~~~~~~~~~~~~~
@@ -5356,7 +5395,7 @@ get_fail_count
                     session.channels[0,1].get_fail_count()
 
 
-            :rtype: int
+            :rtype: list of int
             :return:
 
 
@@ -5414,6 +5453,14 @@ get_pattern_name
 
             :type pattern_index: int
 
+            :rtype: str
+            :return:
+
+
+                    
+
+
+
 get_pattern_pin_indexes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -5435,7 +5482,7 @@ get_pattern_pin_indexes
 
             :type start_label: str
 
-            :rtype: int
+            :rtype: list of int
             :return:
 
 
@@ -5464,6 +5511,14 @@ get_pattern_pin_list
 
             :type start_label: str
 
+            :rtype: str
+            :return:
+
+
+                    
+
+
+
 get_pin_name
 ~~~~~~~~~~~~
 
@@ -5484,6 +5539,14 @@ get_pin_name
 
 
             :type pin_index: int
+
+            :rtype: str
+            :return:
+
+
+                    
+
+
 
 get_pin_results_pin_information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5507,8 +5570,23 @@ get_pin_results_pin_information
                     session.channels[0,1].get_pin_results_pin_information()
 
 
-            :rtype: int
-            :return:
+            :rtype: tuple (pin_indexes, site_numbers, channel_indexes)
+
+                WHERE
+
+                pin_indexes (list of int): 
+
+
+                    
+
+
+                site_numbers (list of int): 
+
+
+                    
+
+
+                channel_indexes (list of int): 
 
 
                     
@@ -5536,7 +5614,7 @@ get_site_pass_fail
 
             :type site_list: str
 
-            :rtype: int
+            :rtype: list of bool
             :return:
 
 
@@ -5572,7 +5650,7 @@ get_site_results_site_numbers
 
             :type site_result_type: int
 
-            :rtype: int
+            :rtype: list of int
             :return:
 
 
@@ -5715,6 +5793,14 @@ get_time_set_name
 
 
             :type time_set_index: int
+
+            :rtype: str
+            :return:
+
+
+                    
+
+
 
 get_time_set_period
 ~~~~~~~~~~~~~~~~~~~
@@ -6292,7 +6378,7 @@ ppmu_measure
 
             :type measurement_type: int
 
-            :rtype: int
+            :rtype: list of float
             :return:
 
 
@@ -6402,7 +6488,7 @@ read_static
                     session.channels[0,1].read_static()
 
 
-            :rtype: int
+            :rtype: list of int
             :return:
 
 
@@ -6795,7 +6881,7 @@ tdr
 
             :type apply_offsets: bool
 
-            :rtype: int
+            :rtype: list of float
             :return:
 
 

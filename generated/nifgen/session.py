@@ -2044,6 +2044,23 @@ class _SessionBase(object):
         Args:
             attribute_id (int): Specifies the ID of a property.
 
+
+        Returns:
+            attribute_value (str): The buffer in which the method returns the current value of the
+                property. The buffer must be a ViChar data type and have at least as
+                many bytes as indicated in the **arraySize** parameter.
+
+                If the current value of the property, including the terminating NUL
+                byte, contains more bytes than you indicate in this parameter, the
+                method copies **arraySize** – 1 bytes into the buffer, places an ASCII
+                NUL byte at the end of the buffer, and returns the array size you must
+                pass to get the entire value. For example, if the value is 123456 and
+                **arraySize** is 4, the method places 123 into the buffer and returns
+                7.
+
+                If you specify 0 for the **arraySize** parameter, you can pass VI_NULL
+                for this parameter.
+
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -2084,6 +2101,14 @@ class _SessionBase(object):
                 value.
 
                 If you are not interested in this value, you can pass VI_NULL.
+
+            error_description (str): The error description string for the session or execution thread. If the
+                error code is nonzero, the description string can further describe the
+                error or warning condition.
+
+                If you are not interested in this value, you can pass VI_NULL.
+                Otherwise, you must pass a ViChar array of a size specified with the
+                **errorDescriptionBufferSize** parameter.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
