@@ -277,6 +277,7 @@ functions = {
                 'documentation': {
                     'description': 'The value that you are getting'
                 },
+                'is_session_handle': False,
                 'name': 'value',
                 'type': 'ViSession'
             }
@@ -915,6 +916,7 @@ functions = {
                 'documentation': {
                     'description': 'The value for the attribute'
                 },
+                'is_session_handle': False,
                 'name': 'value',
                 'type': 'ViSession'
             }
