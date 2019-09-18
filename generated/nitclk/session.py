@@ -159,17 +159,14 @@ class SessionReference(object):
     Indicates the computed TClk period that will be used during the acquisition.
     '''
 
-    def __init__(self, session, repeated_capability_list='', encoding='windows-1251'):
-        self._repeated_capability_list = repeated_capability_list
-        self._repeated_capability = ','.join(repeated_capability_list)
-        self._session = session
+    def __init__(self, session_number, encoding='windows-1251'):
+        self._session_number = session_number
         self._library = _library_singleton.get()
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("session=" + pp.pformat(session))
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
+        param_list.append("session_number=" + pp.pformat(session_number))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -199,8 +196,8 @@ class SessionReference(object):
         except errors.Error:
             return "Failed to retrieve error description."
 
-    def get_session_number(self):
-        return self._session
+    def _get_session_number(self):
+        return self._session_number
 
     def _get_attribute_vi_boolean(self, attribute_id):
         r'''_get_attribute_vi_boolean
