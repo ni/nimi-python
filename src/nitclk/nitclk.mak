@@ -19,5 +19,5 @@ $(MODULE_DIR)/session.py: $(DRIVER_DIR)/templates/session.py.mako $(BUILD_HELPER
 
 $(DRIVER_DOCS_DIR)/class.rst: $(DRIVER_DIR)/templates/class.rst.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
-	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(MODULE_DIR), $(METADATA_DIR))
+	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(DRIVER_DOCS_DIR), $(METADATA_DIR))
 
