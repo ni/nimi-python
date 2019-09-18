@@ -11,12 +11,12 @@ single_session = [SESSION_NUM_FOR_TEST]
 multiple_sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST * 10, SESSION_NUM_FOR_TEST * 100, SESSION_NUM_FOR_TEST + 1]
 
 
-class TestSession(object):
-    def __init__(self, session_number):
-        self.nitclk = nitclk.SessionReference(session_number)
-
-
 class NitclkSessionTest(object):
+    def __init__(self, session_number):
+        self.tclk = nitclk.SessionReference(session_number)
+
+
+class TestSession(object):
     def setup_method(self, method):
         self.patched_library_patcher = patch('nitclk._library.Library', autospec=True)
         self.patched_library = self.patched_library_patcher.start()
@@ -214,7 +214,7 @@ class NitclkSessionTest(object):
         self.patched_library.niTClk_SetAttributeViSession.side_effect = self.side_effects_helper.niTClk_SetAttributeViSession
         attribute_id = 3
         other_session_number = 43
-        other_session = TestSession(other_session_number)
+        other_session = NitclkSessionTest(other_session_number)
         session.start_trigger_master_session = other_session
         self.patched_library.niTClk_SetAttributeViSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViSessionMatcher(other_session_number))
 

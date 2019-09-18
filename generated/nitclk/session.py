@@ -202,35 +202,6 @@ class SessionReference(object):
     def get_session_number(self):
         return self._session
 
-    def _get_attribute_vi_boolean(self, attribute_id):
-        r'''_get_attribute_vi_boolean
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nitclk.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
-
-        Args:
-            attribute_id (int):
-
-
-        Returns:
-            value (bool):
-
-        '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niTClk_GetAttributeViBoolean(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(value_ctype.value)
-
     def _get_attribute_vi_real64(self, attribute_id):
         r'''_get_attribute_vi_real64
 
@@ -323,6 +294,10 @@ class SessionReference(object):
                 sync_pulse_clock_source
                 exported_sync_pulse_output_terminal
 
+
+        Returns:
+            value (str): The value that you are getting
+
         '''
         session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -345,6 +320,13 @@ class SessionReference(object):
         error, use the return values of the individual methods because once
         _get_extended_error_info reports an errorString, it does not report
         an empty string again.
+
+        Returns:
+            error_string (str): Extended error description. If errorString is NULL, then it is not large
+                enough to hold the entire error description. In this case, the return
+                value of _get_extended_error_info is the size that you should use
+                for _get_extended_error_info to return the full error string.
+
         '''
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
@@ -355,33 +337,6 @@ class SessionReference(object):
         error_code = self._library.niTClk_GetExtendedErrorInfo(error_string_ctype, error_string_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_string_ctype.value.decode(self._encoding)
-
-    def _set_attribute_vi_boolean(self, attribute_id, value):
-        r'''_set_attribute_vi_boolean
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nitclk.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, value)
-
-        Args:
-            attribute_id (int):
-
-            value (bool):
-
-        '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViBoolean(value)  # case S150
-        error_code = self._library.niTClk_SetAttributeViBoolean(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
 
     def _set_attribute_vi_real64(self, attribute_id, value):
         r'''_set_attribute_vi_real64
@@ -684,6 +639,13 @@ class _Session(object):
         error, use the return values of the individual methods because once
         _get_extended_error_info reports an errorString, it does not report
         an empty string again.
+
+        Returns:
+            error_string (str): Extended error description. If errorString is NULL, then it is not large
+                enough to hold the entire error description. In this case, the return
+                value of _get_extended_error_info is the size that you should use
+                for _get_extended_error_info to return the full error string.
+
         '''
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
