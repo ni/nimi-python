@@ -346,6 +346,13 @@ class SessionReference(object):
         error, use the return values of the individual methods because once
         _get_extended_error_info reports an errorString, it does not report
         an empty string again.
+
+        Returns:
+            error_string (str): Extended error description. If errorString is NULL, then it is not large
+                enough to hold the entire error description. In this case, the return
+                value of _get_extended_error_info is the size that you should use
+                for _get_extended_error_info to return the full error string.
+
         '''
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
@@ -683,6 +690,13 @@ class _Session(object):
         error, use the return values of the individual methods because once
         _get_extended_error_info reports an errorString, it does not report
         an empty string again.
+
+        Returns:
+            error_string (str): Extended error description. If errorString is NULL, then it is not large
+                enough to hold the entire error description. In this case, the return
+                value of _get_extended_error_info is the size that you should use
+                for _get_extended_error_info to return the full error string.
+
         '''
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
