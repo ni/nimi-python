@@ -13,7 +13,7 @@ multiple_sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST * 10, SESSION_NU
 
 class NitclkSessionTest(object):
     def __init__(self, session_number):
-        self.nitclk = nitclk.SessionReference(session_number)
+        self.tclk = nitclk.SessionReference(session_number)
 
 
 class TestSession(object):
