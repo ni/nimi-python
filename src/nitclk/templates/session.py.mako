@@ -115,7 +115,7 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         except errors.Error:
             return "Failed to retrieve error description."
 
-    def get_session_number(self):
+    def _get_session_number(self):
         return self._${config['session_handle_parameter_name']}
 
 <%
