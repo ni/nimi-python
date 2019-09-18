@@ -15,11 +15,6 @@
         if initiate_doc is not None:
             functions['InitiateDoc'] = initiate_doc
 
-    # Add a CloseDoc entry - only used to add close() to the Session documentation
-    close_doc = helper.close_function_def_for_doc(functions_all, config)
-    if close_doc is not None:
-        functions['CloseDoc'] = close_doc
-
     doc_list = {}
     for fname in sorted(functions):
         for method_template in functions[fname]['method_templates']:
@@ -27,27 +22,21 @@
             doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
 
     attributes = helper.filter_codegen_attributes_public_only(config['attributes'])
-
-    init_function = config['functions']['_init_function']
-    init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-    constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
-    input_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 %>\
 ${helper.get_rst_header_snippet(module_name + '.Session', '=')}
 
 .. py:module:: ${module_name}
 
-.. py:class:: Session(${init_method_params})
+.. py:class:: SessionReference(session_number)
 
-    ${helper.get_documentation_for_node_rst(init_function, config, indent=4)}
+    Helper class that contains all NI-TClk properties
 
-% for p in input_params:
-    :param ${p['python_name']}:
-        ${helper.get_documentation_for_node_rst(p, config, 8)}
-    :type ${p['python_name']}: ${helper.format_type_for_rst_documentation(p, numpy, config)}
+    :param session_number:
+        nitclk session
+    :type session_number: int, nimi-python Session class, SessionReference
 
-% endfor
 
+    list of int, list of nimi-python Session class, list of SessionReference
 <%
 table_contents = []
 table_contents.append(('Property', 'Datatype'))
@@ -90,9 +79,9 @@ ${helper.get_rst_header_snippet('Properties', '-')}
 % for attr in helper.sorted_attrs(attributes):
 ${helper.get_rst_header_snippet(attributes[attr]["python_name"], '~')}
 
-    .. py:currentmodule:: ${module_name}.Session
+    .. py:currentmodule:: ${module_name}
 
-    .. py:attribute:: ${attributes[attr]["python_name"]}
+    .. py:function:: ${attributes[attr]["python_name"]}
 
 <%
 a = attributes[attr]
