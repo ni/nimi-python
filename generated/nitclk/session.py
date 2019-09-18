@@ -489,10 +489,14 @@ class SessionReference(object):
 
 
 class _Session(object):
-    '''Hidden class for template reuse'''
+    '''Private class
+
+    This class allows reusing function templates that are used in all other drivers. If
+    we don't do this, we would need new template(s) that the only difference is in the
+    indentation.
+    '''
 
     def __init__(self):
-        '''Hidden class for template reuse'''
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
