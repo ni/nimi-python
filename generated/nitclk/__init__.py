@@ -4,8 +4,8 @@
 
 __version__ = '0.1.0.dev0'
 
-from nitclk.errors import DriverWarning   # noqa: F401
-from nitclk.errors import Error     # noqa: F401
+from nitclk.errors import DriverWarning  # noqa: F401
+from nitclk.errors import Error  # noqa: F401
 from nitclk.session import SessionReference  # noqa: F401
 
 # Function imports

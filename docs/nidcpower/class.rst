@@ -329,7 +329,7 @@ nidcpower.Session
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`sequence_step_delta_time`                             | float                                  |
     +-----------------------------------------------------------------+----------------------------------------+
-    | :py:attr:`sequence_step_delta_time_enabled`                     | float                                  |
+    | :py:attr:`sequence_step_delta_time_enabled`                     | bool                                   |
     +-----------------------------------------------------------------+----------------------------------------+
     | :py:attr:`simulate`                                             | bool                                   |
     +-----------------------------------------------------------------+----------------------------------------+
@@ -388,6 +388,8 @@ nidcpower.Session
     | Method name                                      |
     +==================================================+
     | :py:func:`abort`                                 |
+    +--------------------------------------------------+
+    | :py:func:`close`                                 |
     +--------------------------------------------------+
     | :py:func:`commit`                                |
     +--------------------------------------------------+
@@ -4874,7 +4876,7 @@ sequence_step_delta_time_enabled
             +----------------+------------+
             | Characteristic | Value      |
             +================+============+
-            | Datatype       | float      |
+            | Datatype       | bool       |
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
@@ -5961,6 +5963,33 @@ abort
 
 
 
+close
+~~~~~
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: close()
+
+            Closes the session specified in **vi** and deallocates the resources
+            that NI-DCPower reserves. If power output is enabled when you call this
+            method, the output channels remain in their existing state and
+            continue providing power. Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled`
+            method to disable power output on a per channel basis. Use the
+            :py:meth:`nidcpower.Session.reset` method to disable power output on all channel(s).
+
+            **Related Topics:**
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+            .. note:: This method is not needed when using the session context manager
+
+
+
 commit
 ~~~~~~
 
@@ -6121,6 +6150,17 @@ export_attribute_configuration_buffer
             .. note:: This method will return an error if the total number of channels
                 initialized for the exporting session is not equal to the total number
                 of channels initialized for the importing session.
+
+
+
+            :rtype: list of int
+            :return:
+
+
+                    Specifies the byte array buffer to be populated with the exported
+                    property configuration.
+
+                    
 
 
 
@@ -6293,6 +6333,16 @@ get_channel_name
 
 
             :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns the output channel name that corresponds to **index**.
+
+                    
+
+
 
 get_ext_cal_last_date_and_time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -7540,7 +7590,7 @@ Properties
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.sequence_step_delta_time`                             | float                                  |
 +-----------------------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`nidcpower.Session.sequence_step_delta_time_enabled`                     | float                                  |
+| :py:attr:`nidcpower.Session.sequence_step_delta_time_enabled`                     | bool                                   |
 +-----------------------------------------------------------------------------------+----------------------------------------+
 | :py:attr:`nidcpower.Session.simulate`                                             | bool                                   |
 +-----------------------------------------------------------------------------------+----------------------------------------+
@@ -7600,6 +7650,8 @@ Methods
 | Method name                                                        |
 +====================================================================+
 | :py:func:`nidcpower.Session.abort`                                 |
++--------------------------------------------------------------------+
+| :py:func:`nidcpower.Session.close`                                 |
 +--------------------------------------------------------------------+
 | :py:func:`nidcpower.Session.commit`                                |
 +--------------------------------------------------------------------+

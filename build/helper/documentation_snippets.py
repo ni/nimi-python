@@ -96,6 +96,15 @@ Advanced Example:
 { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
 '''
 
+default_close_function_doc = '''
+Closes the driver session and cleans up. After calling this the Session object
+is no longer valid and cannot be used.
+'''
+
+close_function_note = '''
+This function is not needed when using the session context manager
+'''
+
 default_initiate_function_doc = '''
 Calls initiate
 '''
@@ -105,10 +114,40 @@ This function will return a Python context manager that will initiate on enterin
 '''
 
 
+def close_function_def_for_doc(functions, config):
+    # This is very specific to session based APIs. We look for a 'close' function in
+    # the metadata which is to become a code-generated "private" method of Session
+    # for which we provide a public wrapper. Copy its documentation so we apply it to
+    # the said public wrapper.
+    if 'close_function' not in config or config['close_function'] is None:
+        # There is no close function so we don't need to worry about documentation (nitclk only)
+        return None
+
+    close_name = config['close_function']
+    if close_name in functions:
+        import copy
+        function_def = copy.deepcopy(functions[close_name])
+        if 'documentation' not in function_def:
+            function_def['documentation'] = {}
+        if 'description' not in function_def['documentation']:
+            function_def['documentation']['description'] = default_close_function_doc
+        if 'note' not in function_def['documentation']:
+            function_def['documentation']['note'] = []
+        if type(function_def['documentation']['note']) is not list:
+            function_def['documentation']['note'] = [function_def['documentation']['note']]
+        function_def['documentation']['note'].append(close_function_note)
+        function_def['python_name'] = 'close'
+    else:
+        assert False, "No '{}' function defined".format(close_name)
+
+    return function_def
+
+
 def initiate_function_def_for_doc(functions, config):
-    # This is very specific to the IVI state model which not all drivers in nimi-python follow.
-    # We look for a 'close' function and if we find it, We will copy that and modify it to be
-    # what we need for documentation
+    # This is very specific to session based APIs. We look for a 'initiate' function in
+    # the metadata which is to become a code-generated "private" method of Session
+    # for which we then use in a context manager. Copy its documentation so we apply it to
+    # the said context manager.
     session_context_manager_initiate = None
     if 'initiate_function' in config['context_manager_name']:
         session_context_manager_initiate = config['context_manager_name']['initiate_function']
@@ -131,39 +170,61 @@ def initiate_function_def_for_doc(functions, config):
         function_def['documentation']['note'].append(initiate_function_note)
         function_def['python_name'] = 'initiate'
     else:
-        function_def = {
-            'documentation': {
-                'description': default_initiate_function_doc,
-                'note': [initiate_function_note],
-            },
-            'method_templates': [
-                {
-                    'documentation_filename': '/default_method',
-                    'method_python_name_suffix': '',
-                    'session_filename': '/default_method',
-                },
-            ],
-            'name': 'initiate',
-            'parameters': [],
-            'has_repeated_capability': False,
-            'python_name': 'initiate',
-            'returns': 'ViStatus',
-        }
+        assert False, "No '{}' function defined".format(session_context_manager_initiate)
 
     return function_def
 
 
-def test_initiate_function_def_for_doc_no_exist():
+def test_close_function_def_for_doc_note_not_list():
     '''Testing for lack of syntax error - not actual documentation'''
-    functions = {}
-    config = {
-        'context_manager_name': {
-            'task': 'acquisition',
+    functions = {
+        'close': {
+            'documentation': {
+                'description': 'test',
+                'note': 'test',
+            },
         },
     }
-    initiate_doc = initiate_function_def_for_doc(functions, config)
-    assert initiate_doc is None
+    config = {
+        'close_function': 'close'
+    }
+    close_doc = close_function_def_for_doc(functions, config)
+    assert type(close_doc) is dict
     return
+
+
+def test_close_function_def_for_doc_note_list():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'close': {
+            'documentation': {
+                'description': 'test',
+                'note': ['test'],
+            },
+        },
+    }
+    config = {
+        'close_function': 'close'
+    }
+    close_doc = close_function_def_for_doc(functions, config)
+    assert type(close_doc) is dict
+    return
+
+
+def test_close_function_def_for_doc_no_note():
+    '''Testing for lack of syntax error - not actual documentation'''
+    functions = {
+        'close': {
+            'documentation': {
+                'description': 'test',
+            },
+        },
+    }
+    config = {
+        'close_function': 'close'
+    }
+    close_doc = close_function_def_for_doc(functions, config)
+    assert type(close_doc) is dict
 
 
 def test_initiate_function_def_for_doc_note_not_list():

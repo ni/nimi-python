@@ -245,6 +245,10 @@ class Session(object):
         required to hold the error information string as its return value. You
         can then allocate an appropriately sized string character buffer and
         call this method again.
+
+        Returns:
+            error_info (str): The character buffer into which the error information string is copied.
+
         '''
         error_info_buffer_size_ctype = _visatype.ViInt32()  # case S170
         error_info_ctype = None  # case C050
@@ -327,6 +331,10 @@ class Session(object):
                 device_model--the model of the device (for example, NI
                 PXI-5122) serial_number--the serial number of the
                 device
+
+
+        Returns:
+            attribute_value (str): The character buffer into which the property value string is copied.
 
         '''
         handle_ctype = _visatype.ViSession(self._handle)  # case S110

@@ -4,9 +4,9 @@
 
 __version__ = '0.1.1.dev0'
 
-from nidigital.enums import *          # noqa: F403,F401,H303
-from nidigital.errors import DriverWarning   # noqa: F401
-from nidigital.errors import Error     # noqa: F401
+from nidigital.enums import *  # noqa: F403,F401,H303
+from nidigital.errors import DriverWarning  # noqa: F401
+from nidigital.errors import Error  # noqa: F401
 from nidigital.session import Session  # noqa: F401
 
 

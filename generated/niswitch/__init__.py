@@ -4,9 +4,9 @@
 
 __version__ = '1.1.3.dev0'
 
-from niswitch.enums import *          # noqa: F403,F401,H303
-from niswitch.errors import DriverWarning   # noqa: F401
-from niswitch.errors import Error     # noqa: F401
+from niswitch.enums import *  # noqa: F403,F401,H303
+from niswitch.errors import DriverWarning  # noqa: F401
+from niswitch.errors import Error  # noqa: F401
 from niswitch.session import Session  # noqa: F401
 
 
