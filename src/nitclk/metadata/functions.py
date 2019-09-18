@@ -173,7 +173,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -812,7 +812,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
