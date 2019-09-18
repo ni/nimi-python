@@ -75,9 +75,7 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
 %   endif
 % endfor
 
-    def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability_list='', encoding='windows-1251'):
-        self._repeated_capability_list = repeated_capability_list
-        self._repeated_capability = ','.join(repeated_capability_list)
+    def __init__(self, ${config['session_handle_parameter_name']}, encoding='windows-1251'):
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = _library_singleton.get()
         self._encoding = encoding
@@ -85,7 +83,6 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
