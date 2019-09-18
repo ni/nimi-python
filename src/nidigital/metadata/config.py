@@ -3,7 +3,7 @@
 config = {
     'api_version': '19.0.0a0',
     'c_function_prefix': 'niDigital_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'Abort',
         'initiate_function': 'Initiate',
