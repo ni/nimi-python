@@ -2,6 +2,7 @@ ${template_parameters['encoding_tag']}
 # This file was generated
 <%
     module_name = template_parameters['metadata'].config['module_name']
+    config = template_parameters['metadata'].config
 %>\
 import ${module_name}._converters as _converters
 
@@ -110,6 +111,18 @@ class AttributeEnum(object):
         if type(value) is not self._attribute_type:
             raise TypeError('must be ' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
         return self._underlying_attribute.__set__(session, value.value)
+
+
+# nitclk specific attribute type
+class AttributeViInt32SessionReference(Attribute):
+
+    def __get__(self, session, session_type):
+        # Import here to avoid a circular dependency when initial import happens
+        from ${module_name}.session import SessionReference
+        return SessionReference(session._get_attribute_vi_int32(self._attribute_id))
+
+    def __set__(self, session, value):
+        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
 
 
 
