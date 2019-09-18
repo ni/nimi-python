@@ -19,6 +19,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -47,6 +48,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -82,6 +84,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             }
         ],
@@ -126,6 +129,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -157,6 +161,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -432,6 +437,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -491,6 +497,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             }
         ],
@@ -556,6 +563,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -780,6 +788,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -971,6 +980,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1009,6 +1019,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1043,6 +1054,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1071,6 +1083,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1111,6 +1124,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1149,6 +1163,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
