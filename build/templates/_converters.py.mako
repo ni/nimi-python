@@ -225,12 +225,12 @@ def convert_to_nitclk_session_number(item):
     - NI-TClk Session Num
     '''
     try:
-        return item.tclk.get_session_number()
+        return item.tclk._get_session_number()
     except AttributeError:
         pass
 
     try:
-        return item.get_session_number()
+        return item._get_session_number()
     except AttributeError:
         pass
 

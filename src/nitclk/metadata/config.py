@@ -29,5 +29,5 @@ config = {
     'module_name': 'nitclk',
     'repeated_capabilities': [
     ],
-    'session_handle_parameter_name': 'session'
+    'session_handle_parameter_name': 'session_number'
 }

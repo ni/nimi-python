@@ -110,7 +110,7 @@ class AttributeEnum(object):
 
 
 # nitclk specific attribute type
-class AttributeViInt32SessionReference(Attribute):
+class AttributeSessionReference(Attribute):
 
     def __get__(self, session, session_type):
         # Import here to avoid a circular dependency when initial import happens

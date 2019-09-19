@@ -191,16 +191,16 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
         module_name = '_visatype'
 
     if parameter['is_string'] is True:
-        definitions = _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name, config)
     elif parameter['is_buffer'] is True:
-        definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name, config)
     else:
-        definitions = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name, config)
 
     return definitions
 
 
-def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name):
+def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name, config):
     '''These are the different cases for initializing the ctype variables for strings
 
     C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
@@ -257,7 +257,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
     return definitions
 
 
-def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
+def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name, config):
     '''These are the different cases for initializing the ctype variable for scalars:
 
         S110. Input session handle:                                                visatype.ViSession(self._vi)
@@ -285,7 +285,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
-            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], config['session_handle_parameter_name'])
         elif parameter['size']['mechanism'] == 'python-code':
             definition = '{0}.{1}({2})  # case S120'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
@@ -339,7 +339,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
     return definitions
 
 
-def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
+def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name, config):
     '''These are the different cases for initializing the ctype variable for buffers:
 
         B510. Input/output numpy array:                                            get_ctypes_pointer_for_buffer(value=waveform)

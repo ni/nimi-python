@@ -226,7 +226,7 @@ class TestSession(object):
         self.side_effects_helper['GetAttributeViSession']['value'] = other_session_number
         attr_session_reference = session.start_trigger_master_session
         assert type(attr_session_reference) is nitclk.SessionReference
-        assert(attr_session_reference.get_session_number() == other_session_number)
+        assert(attr_session_reference._get_session_number() == other_session_number)
         self.patched_library.niTClk_GetAttributeViSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViSessionPointerMatcher())
 
 
