@@ -56,6 +56,7 @@ All notable changes to this project will be documented in this file.
 * ### NI Switch Executive
     * #### Added
     * #### Changed
+        * Update to 1.0 - now ready for production use
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
