@@ -352,7 +352,10 @@ def _replace_attribute_python_name(a_match):
             aname = attr['name'].lower()
 
     if config['make_link']:
-        return ':py:data:`{0}.Session.{1}`'.format(config['module_name'], aname)
+        if config['module_name'] == 'nitclk':
+            return ':py:attr:`{0}.SessionReference.{1}`'.format(config['module_name'], aname)
+        else:
+            return ':py:data:`{0}.Session.{1}`'.format(config['module_name'], aname)
     else:
         return '{0}'.format(aname)
 
@@ -381,7 +384,10 @@ def _replace_func_python_name(f_match):
         print(config['functions'])
 
     if config['make_link']:
-        return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
+        if config['module_name'] == 'nitclk':
+            return ':py:func:`{0}.{1}`'.format(config['module_name'], fname)
+        else:
+            return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
     else:
         return '{0}'.format(fname)
 
