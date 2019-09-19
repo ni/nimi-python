@@ -13,25 +13,34 @@ registry_name = config['driver_registry'] if 'driver_registry' in config else co
 __version__ = '${config['module_version']}'
 
 % if len(enums) > 0:
-from ${module_name}.enums import *          # noqa: F403,F401,H303
+from ${module_name}.enums import *  # noqa: F403,F401,H303
 % endif
-from ${module_name}.errors import DriverWarning   # noqa: F401
-from ${module_name}.errors import Error     # noqa: F401
+from ${module_name}.errors import DriverWarning  # noqa: F401
+from ${module_name}.errors import Error  # noqa: F401
 <%
-# nitclk is different. It does not have a session class that we open a session on
+# nitclk is different. It does not have a Session class that we open a session on
 # Instead it is a bunch of stateless function calls. So if we are NOT building for
-# nitclk, we import the Session class like before. If it is nitclk then we will
+# nitclk, we import the Session class. If it is nitclk then we will
 # import each function and the SessionReference class
 %>\
-% if config['module_name'] != 'nitclk':
-from ${module_name}.session import Session  # noqa: F401
-% else:
+% if config['module_name'] == 'nitclk':
 from ${module_name}.session import SessionReference  # noqa: F401
 
 # Function imports
+<%
+# There two types of functions in `nitclk`:
+#
+# 1. Functions that take a single SessionReference (get/set attribute)
+# 2. Functions that take in a list of SessionReference
+#
+# The second type are the public functions that clients will call, so we need to import them explicitly into
+# the `nitclk` namespace. We are using the `render_in_session_base` metadata in order to distinguish them
+%>\
 %   for func_name in sorted([functions[k]['python_name'] for k in functions if not functions[k]['render_in_session_base']]):
 from ${module_name}.session import ${func_name}  # noqa: F401
 %   endfor
+% else:
+from ${module_name}.session import Session  # noqa: F401
 % endif
 <%
  # Blank lines are to make each import separate so that they do not need to be sorted

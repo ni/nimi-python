@@ -72,13 +72,13 @@ class SessionReference(object):
     - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
     Default Value is empty string
     '''
-    pause_trigger_master_session = _attributes.AttributeViInt32SessionReference(6)
+    pause_trigger_master_session = _attributes.AttributeSessionReference(6)
     '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the pause trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
-    ref_trigger_master_session = _attributes.AttributeViInt32SessionReference(4)
+    ref_trigger_master_session = _attributes.AttributeSessionReference(4)
     '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the reference trigger master session.
@@ -96,13 +96,13 @@ class SessionReference(object):
 
     Note: Sample clock delay is supported for generation sessions only; it is
     '''
-    script_trigger_master_session = _attributes.AttributeViInt32SessionReference(5)
+    script_trigger_master_session = _attributes.AttributeSessionReference(5)
     '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the script trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
-    sequencer_flag_master_session = _attributes.AttributeViInt32SessionReference(16)
+    sequencer_flag_master_session = _attributes.AttributeSessionReference(16)
     '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the sequencer flag master session.
@@ -110,7 +110,7 @@ class SessionReference(object):
     For None (no trigger configured) or software triggers, the session that
     originally generates the trigger.
     '''
-    start_trigger_master_session = _attributes.AttributeViInt32SessionReference(3)
+    start_trigger_master_session = _attributes.AttributeSessionReference(3)
     '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
     Specifies the start trigger master session.
@@ -159,17 +159,14 @@ class SessionReference(object):
     Indicates the computed TClk period that will be used during the acquisition.
     '''
 
-    def __init__(self, session, repeated_capability_list='', encoding='windows-1251'):
-        self._repeated_capability_list = repeated_capability_list
-        self._repeated_capability = ','.join(repeated_capability_list)
-        self._session = session
+    def __init__(self, session_number, encoding='windows-1251'):
+        self._session_number = session_number
         self._library = _library_singleton.get()
         self._encoding = encoding
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("session=" + pp.pformat(session))
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
+        param_list.append("session_number=" + pp.pformat(session_number))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -199,8 +196,8 @@ class SessionReference(object):
         except errors.Error:
             return "Failed to retrieve error description."
 
-    def get_session_number(self):
-        return self._session
+    def _get_session_number(self):
+        return self._session_number
 
     def _get_attribute_vi_boolean(self, attribute_id):
         r'''_get_attribute_vi_boolean
@@ -346,6 +343,13 @@ class SessionReference(object):
         error, use the return values of the individual methods because once
         _get_extended_error_info reports an errorString, it does not report
         an empty string again.
+
+        Returns:
+            error_string (str): Extended error description. If errorString is NULL, then it is not large
+                enough to hold the entire error description. In this case, the return
+                value of _get_extended_error_info is the size that you should use
+                for _get_extended_error_info to return the full error string.
+
         '''
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170
@@ -485,10 +489,14 @@ class SessionReference(object):
 
 
 class _Session(object):
-    '''Hidden class for template reuse'''
+    '''Private class
+
+    This class allows reusing function templates that are used in all other drivers. If
+    we don't do this, we would need new template(s) that the only difference is in the
+    indentation.
+    '''
 
     def __init__(self):
-        '''Hidden class for template reuse'''
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -683,6 +691,13 @@ class _Session(object):
         error, use the return values of the individual methods because once
         _get_extended_error_info reports an errorString, it does not report
         an empty string again.
+
+        Returns:
+            error_string (str): Extended error description. If errorString is NULL, then it is not large
+                enough to hold the entire error description. In this case, the return
+                value of _get_extended_error_info is the size that you should use
+                for _get_extended_error_info to return the full error string.
+
         '''
         error_string_ctype = None  # case C050
         error_string_size_ctype = _visatype.ViUInt32()  # case S170

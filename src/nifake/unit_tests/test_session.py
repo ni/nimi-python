@@ -1267,6 +1267,14 @@ class TestSession(object):
             # Cannot use session.<property>.__name__ since that invokes the get attribute value and the returned value
             # (string, int, float) don't have __name__ properties
 
+    def test_buffer_converter(self):
+        self.patched_library.niFake_DoubleAllTheNums.side_effect = self.side_effects_helper.niFake_DoubleAllTheNums
+        nums = [1, 2, 3, 4.2]
+        nums_x2 = [x * 2 for x in nums]
+        with nifake.Session('dev1') as session:
+            session.double_all_the_nums(nums)
+            self.patched_library.niFake_DoubleAllTheNums.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(nums)), _matchers.ViReal64BufferMatcher(nums_x2))
+
 
 # not session tests per se
 def test_diagnostic_information():

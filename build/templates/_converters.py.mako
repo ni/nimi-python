@@ -215,9 +215,8 @@ def convert_init_with_options_dictionary(values, encoding):
     return init_with_options_string
 
 
-% if config['module_name'] == 'nitclk':
 # nitclk specific converters
-def convert_to_nitclk_session_num(item):
+def convert_to_nitclk_session_number(item):
     '''Convert from supported objects to NI-TClk Session Num
 
     Supported objects are:
@@ -226,12 +225,12 @@ def convert_to_nitclk_session_num(item):
     - NI-TClk Session Num
     '''
     try:
-        return item.tclk.get_session_number()
+        return item.tclk._get_session_number()
     except KeyError:
         pass
 
     try:
-        return item.get_session_number()
+        return item._get_session_number()
     except KeyError:
         pass
 
@@ -239,12 +238,16 @@ def convert_to_nitclk_session_num(item):
     return item
 
 
-def convert_to_nitclk_session_num_list(item_list):
+def convert_to_nitclk_session_number_list(item_list):
     '''Converts a list of items to nitclk session nums'''
-    return [convert_to_nitclk_session_num(i) for i in item_list]
+    return [convert_to_nitclk_session_number(i) for i in item_list]
 
 
-% endif
+# nifake specific converter(s) - used only for testing
+def convert_double_each_element(numbers):
+    return [x * 2 for x in numbers]
+
+
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
     assert convert_init_with_options_dictionary('', 'ascii') == ''
