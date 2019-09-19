@@ -1736,7 +1736,7 @@ class _SessionBase(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
-        value_ctype = _visatype.ViSession(self._value)  # case S110
+        value_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_SetAttributeViSession(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

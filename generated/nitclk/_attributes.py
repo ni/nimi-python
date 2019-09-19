@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file was generated
-import nifake._converters as _converters
+import nitclk._converters as _converters
 
 import datetime
 
@@ -114,7 +114,7 @@ class AttributeSessionReference(Attribute):
 
     def __get__(self, session, session_type):
         # Import here to avoid a circular dependency when initial import happens
-        from nifake.session import SessionReference
+        from nitclk.session import SessionReference
         return SessionReference(session._get_attribute_vi_session(self._attribute_id))
 
     def __set__(self, session, value):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
-import nidmm._visatype as _visatype
-import nidmm.errors as errors
+import nitclk._visatype as _visatype
+import nitclk.errors as errors
 
 import datetime
 import numbers
