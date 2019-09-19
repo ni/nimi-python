@@ -77,7 +77,7 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'name': 'sessions',
                 'is_session_handle': False,
                 'size': {
@@ -124,7 +124,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -492,7 +492,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -783,7 +783,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -975,7 +975,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -1014,7 +1014,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -1119,7 +1119,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -1158,7 +1158,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
