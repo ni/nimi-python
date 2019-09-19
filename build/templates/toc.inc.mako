@@ -9,7 +9,6 @@ API Reference
 --------------
 
 .. toctree::
-   :maxdepth: 6
 
    ${module_name}/class
 % if len(enums) > 0:

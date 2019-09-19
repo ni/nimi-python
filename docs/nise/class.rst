@@ -1,7 +1,7 @@
-nise.Session
-============
-
 .. py:module:: nise
+
+Session
+=======
 
 .. py:class:: Session(self, virtual_device_name, options={})
 
@@ -71,53 +71,11 @@ nise.Session
     :type options: str
 
 
-    **Properties**
-
-    +----------+----------+
-    | Property | Datatype |
-    +==========+==========+
-    | Property | Datatype |
-    +----------+----------+
-
-    **Public methods**
-
-    +-----------------------------------+
-    | Method name                       |
-    +===================================+
-    | :py:func:`close`                  |
-    +-----------------------------------+
-    | :py:func:`connect`                |
-    +-----------------------------------+
-    | :py:func:`connect_and_disconnect` |
-    +-----------------------------------+
-    | :py:func:`disconnect`             |
-    +-----------------------------------+
-    | :py:func:`disconnect_all`         |
-    +-----------------------------------+
-    | :py:func:`expand_route_spec`      |
-    +-----------------------------------+
-    | :py:func:`find_route`             |
-    +-----------------------------------+
-    | :py:func:`get_all_connections`    |
-    +-----------------------------------+
-    | :py:func:`is_connected`           |
-    +-----------------------------------+
-    | :py:func:`is_debounced`           |
-    +-----------------------------------+
-    | :py:func:`wait_for_debounce`      |
-    +-----------------------------------+
-
-
-Properties
-----------
-
-
 Methods
--------
-
+=======
 
 close
-~~~~~
+-----
 
     .. py:currentmodule:: nise.Session
 
@@ -136,7 +94,7 @@ close
 
 
 connect
-~~~~~~~
+-------
 
     .. py:currentmodule:: nise.Session
 
@@ -213,7 +171,7 @@ connect
             :type wait_for_debounce: bool
 
 connect_and_disconnect
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
     .. py:currentmodule:: nise.Session
 
@@ -335,7 +293,7 @@ connect_and_disconnect
             :type wait_for_debounce: bool
 
 disconnect
-~~~~~~~~~~
+----------
 
     .. py:currentmodule:: nise.Session
 
@@ -372,7 +330,7 @@ disconnect
             :type disconnect_spec: str
 
 disconnect_all
-~~~~~~~~~~~~~~
+--------------
 
     .. py:currentmodule:: nise.Session
 
@@ -388,7 +346,7 @@ disconnect_all
 
 
 expand_route_spec
-~~~~~~~~~~~~~~~~~
+-----------------
 
     .. py:currentmodule:: nise.Session
 
@@ -477,7 +435,7 @@ expand_route_spec
 
 
 find_route
-~~~~~~~~~~
+----------
 
     .. py:currentmodule:: nise.Session
 
@@ -591,7 +549,7 @@ find_route
 
 
 get_all_connections
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
     .. py:currentmodule:: nise.Session
 
@@ -651,7 +609,7 @@ get_all_connections
 
 
 is_connected
-~~~~~~~~~~~~
+------------
 
     .. py:currentmodule:: nise.Session
 
@@ -693,7 +651,7 @@ is_connected
 
 
 is_debounced
-~~~~~~~~~~~~
+------------
 
     .. py:currentmodule:: nise.Session
 
@@ -720,7 +678,7 @@ is_debounced
 
 
 wait_for_debounce
-~~~~~~~~~~~~~~~~~
+-----------------
 
     .. py:currentmodule:: nise.Session
 
@@ -754,42 +712,10 @@ wait_for_debounce
             :type maximum_time_ms: float in seconds or datetime.timedelta
 
 
-
 Properties
-----------
+==========
 
-+----------+----------+
-| Property | Datatype |
-+==========+==========+
-| Property | Datatype |
-+----------+----------+
 
-Methods
--------
+.. contents:: Session
 
-+------------------------------------------------+
-| Method name                                    |
-+================================================+
-| :py:func:`nise.Session.close`                  |
-+------------------------------------------------+
-| :py:func:`nise.Session.connect`                |
-+------------------------------------------------+
-| :py:func:`nise.Session.connect_and_disconnect` |
-+------------------------------------------------+
-| :py:func:`nise.Session.disconnect`             |
-+------------------------------------------------+
-| :py:func:`nise.Session.disconnect_all`         |
-+------------------------------------------------+
-| :py:func:`nise.Session.expand_route_spec`      |
-+------------------------------------------------+
-| :py:func:`nise.Session.find_route`             |
-+------------------------------------------------+
-| :py:func:`nise.Session.get_all_connections`    |
-+------------------------------------------------+
-| :py:func:`nise.Session.is_connected`           |
-+------------------------------------------------+
-| :py:func:`nise.Session.is_debounced`           |
-+------------------------------------------------+
-| :py:func:`nise.Session.wait_for_debounce`      |
-+------------------------------------------------+
 

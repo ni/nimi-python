@@ -10,8 +10,9 @@ Intro
 * NI-FGEN (Python module: nifgen)
 * NI-SCOPE (Python module: niscope)
 * NI-SWITCH (Python module: niswitch)
-* NI-ModInst (Python module: nimodinst)
 * NI Switch Executive (Python module: nise)
+* NI-ModInst (Python module: nimodinst)
+* NI-TClk (Python module: nitclk)
 
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 

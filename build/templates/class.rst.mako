@@ -33,9 +33,9 @@
     constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
     input_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 %>\
-${helper.get_rst_header_snippet(module_name + '.Session', '=')}
-
 .. py:module:: ${module_name}
+
+${helper.get_rst_header_snippet('Session', '=')}
 
 .. py:class:: Session(${init_method_params})
 
@@ -48,49 +48,26 @@ ${helper.get_rst_header_snippet(module_name + '.Session', '=')}
 
 % endfor
 
+${helper.get_rst_header_snippet('Methods', '=')}
+
+% for item in sorted(doc_list):
 <%
-table_contents = []
-table_contents.append(('Property', 'Datatype'))
-for attr in helper.sorted_attrs(helper.filter_codegen_attributes_public_only(attributes)):
-    if attributes[attr]['enum'] is not None:
-        t = ':py:data:`' + attributes[attr]["enum"] + '`'
-    else:
-        t = attributes[attr]["type_in_documentation"]
-
-    table_contents.append((':py:attr:`' + attributes[attr]["python_name"] + '`', t))
-
-attr_table = helper.as_rest_table(table_contents)
+function_item = doc_list[item]
 %>\
-    **Properties**
-
-    ${helper.get_indented_docstring_snippet(attr_table, indent=4)}
-
-<%
-function_names = []
-for f in sorted(functions):
-    name = functions[f]['python_name']
-    for method_template in functions[f]['method_templates']:
-        function_names.append('{0}{1}'.format(name, method_template['method_python_name_suffix']))
-
-table_contents = []
-table_contents.append(['Method name'])
-
-for f in sorted(function_names):
-    table_contents.append([':py:func:`{0}`'.format(f)])
-
-func_table = helper.as_rest_table(table_contents)
-%>\
-    **Public methods**
-
-    ${helper.get_indented_docstring_snippet(func_table, indent=4)}
-
-
-${helper.get_rst_header_snippet('Properties', '-')}
-
-% for attr in helper.sorted_attrs(attributes):
-${helper.get_rst_header_snippet(attributes[attr]["python_name"], '~')}
+${helper.get_rst_header_snippet(item, '-')}
 
     .. py:currentmodule:: ${module_name}.Session
+
+<%include file="${'/functions.rst' + function_item['filename'] + '.rst.mako'}" args="function=function_item['function'], config=config, method_template=function_item['method_template'], indent=8" />\
+
+% endfor
+
+${helper.get_rst_header_snippet('Properties', '=')}
+
+% for attr in helper.sorted_attrs(attributes):
+<% # ${helper.get_rst_header_snippet(attributes[attr]["python_name"], '~')}
+%>\
+${helper.get_rst_header_snippet(attributes[attr]['python_name'], '-')}
 
     .. py:attribute:: ${attributes[attr]["python_name"]}
 
@@ -125,55 +102,6 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 
 % endfor
 
-${helper.get_rst_header_snippet('Methods', '-')}
+.. contents:: Session
 
-
-% for item in sorted(doc_list):
-<%
-function_item = doc_list[item]
-%>\
-${helper.get_rst_header_snippet(item, '~')}
-
-    .. py:currentmodule:: ${module_name}.Session
-
-<%include file="${'/functions.rst' + function_item['filename'] + '.rst.mako'}" args="function=function_item['function'], config=config, method_template=function_item['method_template'], indent=8" />\
-
-% endfor
-
-
-${helper.get_rst_header_snippet('Properties', '-')}
-
-<%
-table_contents = []
-table_contents.append(('Property', 'Datatype'))
-for attr in helper.sorted_attrs(helper.filter_codegen_attributes_public_only(attributes)):
-    if attributes[attr]['enum'] is not None:
-        t = ':py:data:`' + attributes[attr]["enum"] + '`'
-    else:
-        t = attributes[attr]["type_in_documentation"]
-
-    table_contents.append((':py:attr:`' + module_name + '.Session.' + attributes[attr]["python_name"] + '`', t))
-
-attr_table = helper.as_rest_table(table_contents)
-%>\
-${helper.get_indented_docstring_snippet(attr_table, indent=0)}
-
-${helper.get_rst_header_snippet('Methods', '-')}
-
-<%
-function_names = []
-for f in sorted(functions):
-    name = functions[f]['python_name']
-    for method_template in functions[f]['method_templates']:
-        function_names.append('{0}{1}'.format(name, method_template['method_python_name_suffix']))
-
-table_contents = []
-table_contents.append(['Method name'])
-
-for f in sorted(function_names):
-    table_contents.append([':py:func:`{0}.Session.{1}`'.format(module_name, f)])
-
-func_table = helper.as_rest_table(table_contents)
-%>\
-${helper.get_indented_docstring_snippet(func_table, indent=0)}
 
