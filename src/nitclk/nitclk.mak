@@ -2,9 +2,7 @@
 
 include $(BUILD_HELPER_DIR)/defines.mak
 
-# Eventually we will get back to this as we add/update more templates
-# MODULE_FILES_TO_GENERATE := $(filter-out enums.py,$(DEFAULT_PY_FILES_TO_GENERATE))
-MODULE_FILES_TO_GENERATE := $(filter-out session.py enums.py,$(DEFAULT_PY_FILES_TO_GENERATE))
+MODULE_FILES_TO_GENERATE := $(filter-out enums.py,$(DEFAULT_PY_FILES_TO_GENERATE))
 
 MODULE_FILES_TO_COPY := $(DEFAULT_PY_FILES_TO_COPY)
 

@@ -25,7 +25,7 @@ attributes = {
     },
     3: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the start trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -38,7 +38,7 @@ attributes = {
     },
     4: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the reference trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -51,7 +51,7 @@ attributes = {
     },
     5: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the script trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -64,7 +64,7 @@ attributes = {
     },
     6: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the pause trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -133,7 +133,7 @@ attributes = {
     },
     16: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the sequencer flag master session.\nFor external triggers, the session that originally receives the trigger.\nFor None (no trigger configured) or software triggers, the session that\noriginally generates the trigger.\n'
