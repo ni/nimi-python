@@ -113,7 +113,6 @@ class AttributeEnum(object):
         return self._underlying_attribute.__set__(session, value.value)
 
 
-% if config['module_name'] == 'nitclk':
 # nitclk specific attribute type
 class AttributeViInt32SessionReference(Attribute):
 
@@ -123,8 +122,7 @@ class AttributeViInt32SessionReference(Attribute):
         return SessionReference(session._get_attribute_vi_session(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_num(value))
+        session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
 
 
-% endif
 

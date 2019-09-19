@@ -118,7 +118,7 @@ class AttributeViInt32SessionReference(Attribute):
         return SessionReference(session._get_attribute_vi_session(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_num(value))
+        session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
 
 
 
