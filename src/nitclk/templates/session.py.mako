@@ -17,9 +17,7 @@ import ctypes
 import datetime
 import threading
 
-% if attributes:
 import ${module_name}._attributes as _attributes
-% endif
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
@@ -75,9 +73,7 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
 %   endif
 % endfor
 
-    def __init__(self, ${config['session_handle_parameter_name']}, repeated_capability_list='', encoding='windows-1251'):
-        self._repeated_capability_list = repeated_capability_list
-        self._repeated_capability = ','.join(repeated_capability_list)
+    def __init__(self, ${config['session_handle_parameter_name']}, encoding='windows-1251'):
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = _library_singleton.get()
         self._encoding = encoding
@@ -85,7 +81,6 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("${config['session_handle_parameter_name']}=" + pp.pformat(${config['session_handle_parameter_name']}))
-        param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -115,7 +110,7 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         except errors.Error:
             return "Failed to retrieve error description."
 
-    def get_session_number(self):
+    def _get_session_number(self):
         return self._${config['session_handle_parameter_name']}
 
 <%
@@ -133,10 +128,14 @@ functions['GetExtendedErrorInfo']['render_in_session_base'] = True
 # The main reason for having this class is to allow reusing the default method template.
 %>\
 class _Session(object):
-    '''Hidden class for template reuse'''
+    '''Private class
+
+    This class allows reusing function templates that are used in all other drivers. If
+    we don't do this, we would need new template(s) that the only difference is in the
+    indentation.
+    '''
 
     def __init__(self):
-        '''Hidden class for template reuse'''
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
