@@ -34,8 +34,9 @@ Refer to your driver documentation for device-specific information and detailed 
    nifgen
    niscope
    niswitch
-   nimodinst
    nise
+   nimodinst
+   nitclk
 
 Indices and tables
 ==================
