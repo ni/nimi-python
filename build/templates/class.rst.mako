@@ -62,6 +62,7 @@ ${helper.get_rst_header_snippet(item, '-')}
 
 % endfor
 
+% if len(attributes) > 0:
 ${helper.get_rst_header_snippet('Properties', '=')}
 
 % for attr in helper.sorted_attrs(attributes):
@@ -99,6 +100,7 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
                 - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
 
 % endfor
+% endif
 
 .. contents:: Session
 
