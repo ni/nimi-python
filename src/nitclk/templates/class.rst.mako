@@ -23,9 +23,57 @@
 
     attributes = helper.filter_codegen_attributes_public_only(config['attributes'])
 %>\
-${helper.get_rst_header_snippet(module_name + '.Session', '=')}
+${helper.get_rst_header_snippet('{0} Module'.format(module_name), '=')}
 
 .. py:module:: ${module_name}
+
+${helper.get_rst_header_snippet('Public API', '-')}
+
+NI-TClk python module consists of several functions and properties. The functions are not sessions based
+like other nimi-python driver support and are called directly on the nitclk module. See :py:class:`SessionReference`
+for properties.
+
+.. code:: python
+
+    with niscope.Session('dev1') as scope1, niscope.Session('dev2') as scope2:
+        nitclk.initiate([scope1, scope2])
+        wfm1 = scope1.fetch()
+        wfm2 = scope2.fetch()
+
+<%
+function_names = []
+for f in sorted(functions):
+    name = functions[f]['python_name']
+    for method_template in functions[f]['method_templates']:
+        function_names.append('{0}{1}'.format(name, method_template['method_python_name_suffix']))
+
+table_contents = []
+table_contents.append(['Function name'])
+
+for f in sorted(function_names):
+    table_contents.append([':py:func:`{0}`'.format(f)])
+
+func_table = helper.as_rest_table(table_contents)
+%>\
+**Public functions**
+
+${helper.get_indented_docstring_snippet(func_table, indent=0)}
+
+
+% for item in sorted(doc_list):
+<%
+function_item = doc_list[item]
+%>\
+${helper.get_rst_header_snippet(item, '~')}
+
+    .. py:currentmodule:: ${module_name}
+
+    ${helper.get_function_rst(function_item['function'], method_template=function_item['method_template'], numpy=False, config=config, indent=4, method_or_function='function')}
+
+% endfor
+
+${helper.get_rst_header_snippet('SessionReference', '-')}
+.. py:currentmodule:: ${module_name}
 
 .. py:class:: SessionReference(session_number)
 
@@ -51,7 +99,7 @@ for attr in helper.sorted_attrs(helper.filter_codegen_attributes_public_only(att
     else:
         t = attributes[attr]["type_in_documentation"]
 
-    table_contents.append((':py:attr:`' + attributes[attr]["python_name"] + '`', t))
+    table_contents.append((':py:attr:`.{0}`'.format(attributes[attr]["python_name"]), t))
 
 attr_table = helper.as_rest_table(table_contents)
 %>\
@@ -59,34 +107,13 @@ attr_table = helper.as_rest_table(table_contents)
 
     ${helper.get_indented_docstring_snippet(attr_table, indent=4)}
 
-<%
-function_names = []
-for f in sorted(functions):
-    name = functions[f]['python_name']
-    for method_template in functions[f]['method_templates']:
-        function_names.append('{0}{1}'.format(name, method_template['method_python_name_suffix']))
-
-table_contents = []
-table_contents.append(['Method name'])
-
-for f in sorted(function_names):
-    table_contents.append([':py:func:`{0}`'.format(f)])
-
-func_table = helper.as_rest_table(table_contents)
-%>\
-    **Public functions**
-
-    ${helper.get_indented_docstring_snippet(func_table, indent=4)}
-
-
-${helper.get_rst_header_snippet('Properties', '-')}
 
 % for attr in helper.sorted_attrs(attributes):
 ${helper.get_rst_header_snippet(attributes[attr]["python_name"], '~')}
 
-    .. py:currentmodule:: ${module_name}
+    .. py:currentmodule:: ${module_name}.SessionReference
 
-    .. py:function:: ${attributes[attr]["python_name"]}
+    .. py:attribute:: ${attributes[attr]["python_name"]}
 
 <%
 a = attributes[attr]
@@ -119,40 +146,7 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 
 % endfor
 
-${helper.get_rst_header_snippet('Methods', '-')}
-
-
-% for item in sorted(doc_list):
-<%
-function_item = doc_list[item]
-%>\
-${helper.get_rst_header_snippet(item, '~')}
-
-    .. py:currentmodule:: ${module_name}.Session
-
-<%include file="${'/functions.rst' + function_item['filename'] + '.rst.mako'}" args="function=function_item['function'], config=config, method_template=function_item['method_template'], indent=8" />\
-
-% endfor
-
-
-${helper.get_rst_header_snippet('Properties', '-')}
-
-<%
-table_contents = []
-table_contents.append(('Property', 'Datatype'))
-for attr in helper.sorted_attrs(helper.filter_codegen_attributes_public_only(attributes)):
-    if attributes[attr]['enum'] is not None:
-        t = ':py:data:`' + attributes[attr]["enum"] + '`'
-    else:
-        t = attributes[attr]["type_in_documentation"]
-
-    table_contents.append((':py:attr:`' + module_name + '.Session.' + attributes[attr]["python_name"] + '`', t))
-
-attr_table = helper.as_rest_table(table_contents)
-%>\
-${helper.get_indented_docstring_snippet(attr_table, indent=0)}
-
-${helper.get_rst_header_snippet('Functions', '-')}
+${helper.get_rst_header_snippet('Function List', '-')}
 
 <%
 function_names = []
@@ -165,9 +159,27 @@ table_contents = []
 table_contents.append(['Method name'])
 
 for f in sorted(function_names):
-    table_contents.append([':py:func:`{0}.Session.{1}`'.format(module_name, f)])
+    table_contents.append([':py:func:`{0}.{1}`'.format(module_name, f)])
 
 func_table = helper.as_rest_table(table_contents)
 %>\
 ${helper.get_indented_docstring_snippet(func_table, indent=0)}
+
+${helper.get_rst_header_snippet('Property List', '-')}
+
+<%
+table_contents = []
+table_contents.append(('Property', 'Datatype'))
+for attr in helper.sorted_attrs(helper.filter_codegen_attributes_public_only(attributes)):
+    if attributes[attr]['enum'] is not None:
+        t = ':py:data:`' + attributes[attr]["enum"] + '`'
+    else:
+        t = attributes[attr]["type_in_documentation"]
+
+    table_contents.append((':py:attr:`.{0}`'.format(attributes[attr]["python_name"]), t))
+
+attr_table = helper.as_rest_table(table_contents)
+%>\
+${helper.get_indented_docstring_snippet(attr_table, indent=0)}
+
 
