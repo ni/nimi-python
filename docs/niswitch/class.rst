@@ -1,7 +1,7 @@
-niswitch.Session
-================
-
 .. py:module:: niswitch
+
+Session
+=======
 
 .. py:class:: Session(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False)
 
@@ -270,1844 +270,11 @@ niswitch.Session
     :type reset_device: bool
 
 
-    **Properties**
-
-    +------------------------------------------------------+----------------------------------------+
-    | Property                                             | Datatype                               |
-    +======================================================+========================================+
-    | :py:attr:`analog_bus_sharing_enable`                 | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`bandwidth`                                 | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`channel_count`                             | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`characteristic_impedance`                  | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`continuous_scan`                           | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`digital_filter_enable`                     | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`driver_setup`                              | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`handshaking_initiation`                    | :py:data:`HandshakingInitiation`       |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`instrument_firmware_revision`              | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`instrument_manufacturer`                   | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`instrument_model`                          | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`io_resource_descriptor`                    | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`is_configuration_channel`                  | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`is_debounced`                              | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`is_scanning`                               | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`is_source_channel`                         | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`is_waiting_for_trig`                       | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`logical_name`                              | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_ac_voltage`                            | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_carry_ac_current`                      | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_carry_ac_power`                        | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_carry_dc_current`                      | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_carry_dc_power`                        | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_dc_voltage`                            | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_switching_ac_current`                  | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_switching_ac_power`                    | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_switching_dc_current`                  | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`max_switching_dc_power`                    | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`number_of_relays`                          | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`num_of_columns`                            | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`num_of_rows`                               | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`power_down_latching_relays_after_debounce` | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`scan_advanced_output`                      | :py:data:`ScanAdvancedOutput`          |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`scan_advanced_polarity`                    | :py:data:`ScanAdvancedPolarity`        |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`scan_delay`                                | float in seconds or datetime.timedelta |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`scan_list`                                 | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`scan_mode`                                 | :py:data:`ScanMode`                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`serial_number`                             | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`settling_time`                             | float in seconds or datetime.timedelta |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`simulate`                                  | bool                                   |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`specific_driver_description`               | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`specific_driver_revision`                  | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`specific_driver_vendor`                    | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`supported_instrument_models`               | str                                    |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`temperature`                               | float                                  |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`trigger_input`                             | :py:data:`TriggerInput`                |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`trigger_input_polarity`                    | :py:data:`TriggerInputPolarity`        |
-    +------------------------------------------------------+----------------------------------------+
-    | :py:attr:`wire_mode`                                 | int                                    |
-    +------------------------------------------------------+----------------------------------------+
-
-    **Public methods**
-
-    +---------------------------------------+
-    | Method name                           |
-    +=======================================+
-    | :py:func:`abort`                      |
-    +---------------------------------------+
-    | :py:func:`can_connect`                |
-    +---------------------------------------+
-    | :py:func:`close`                      |
-    +---------------------------------------+
-    | :py:func:`commit`                     |
-    +---------------------------------------+
-    | :py:func:`connect`                    |
-    +---------------------------------------+
-    | :py:func:`connect_multiple`           |
-    +---------------------------------------+
-    | :py:func:`disable`                    |
-    +---------------------------------------+
-    | :py:func:`disconnect`                 |
-    +---------------------------------------+
-    | :py:func:`disconnect_all`             |
-    +---------------------------------------+
-    | :py:func:`disconnect_multiple`        |
-    +---------------------------------------+
-    | :py:func:`get_channel_name`           |
-    +---------------------------------------+
-    | :py:func:`get_path`                   |
-    +---------------------------------------+
-    | :py:func:`get_relay_count`            |
-    +---------------------------------------+
-    | :py:func:`get_relay_name`             |
-    +---------------------------------------+
-    | :py:func:`get_relay_position`         |
-    +---------------------------------------+
-    | :py:func:`initiate`                   |
-    +---------------------------------------+
-    | :py:func:`lock`                       |
-    +---------------------------------------+
-    | :py:func:`relay_control`              |
-    +---------------------------------------+
-    | :py:func:`reset`                      |
-    +---------------------------------------+
-    | :py:func:`reset_with_defaults`        |
-    +---------------------------------------+
-    | :py:func:`route_scan_advanced_output` |
-    +---------------------------------------+
-    | :py:func:`route_trigger_input`        |
-    +---------------------------------------+
-    | :py:func:`self_test`                  |
-    +---------------------------------------+
-    | :py:func:`send_software_trigger`      |
-    +---------------------------------------+
-    | :py:func:`set_path`                   |
-    +---------------------------------------+
-    | :py:func:`unlock`                     |
-    +---------------------------------------+
-    | :py:func:`wait_for_debounce`          |
-    +---------------------------------------+
-    | :py:func:`wait_for_scan_complete`     |
-    +---------------------------------------+
-
-
-Properties
-----------
-
-analog_bus_sharing_enable
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: analog_bus_sharing_enable
-
-        Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
-        Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].analog_bus_sharing_enable = var
-                var = session.channels[0,1].analog_bus_sharing_enable
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Channel Configuration:Analog Bus Sharing Enable**
-                - C Attribute: **NISWITCH_ATTR_ANALOG_BUS_SHARING_ENABLE**
-
-bandwidth
-~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: bandwidth
-
-        This channel-based property returns the bandwidth for the channel.
-        The units are hertz.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].bandwidth
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Bandwidth**
-                - C Attribute: **NISWITCH_ATTR_BANDWIDTH**
-
-channel_count
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: channel_count
-
-        Indicates the number of channels that the specific instrument  driver supports.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
-                - C Attribute: **NISWITCH_ATTR_CHANNEL_COUNT**
-
-characteristic_impedance
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: characteristic_impedance
-
-        This channel-based property returns the characteristic impedance for the  channel.
-        The units are ohms.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].characteristic_impedance
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Characteristic Impedance**
-                - C Attribute: **NISWITCH_ATTR_CHARACTERISTIC_IMPEDANCE**
-
-continuous_scan
-~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: continuous_scan
-
-        When a switch device is scanning, the swich can either stop scanning when  the end of the scan (False) or continue scanning from the top of the  scan list again (True).
-        Notice that if you set the scan to continuous (True), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Continuous Scan**
-                - C Attribute: **NISWITCH_ATTR_CONTINUOUS_SCAN**
-
-digital_filter_enable
-~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: digital_filter_enable
-
-        This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (True) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
-        When Digital Filter is disabled (False), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Digital Filter Enable**
-                - C Attribute: **NISWITCH_ATTR_DIGITAL_FILTER_ENABLE**
-
-driver_setup
-~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: driver_setup
-
-        This property indicates the Driver Setup string that the user  specified when initializing the driver.
-        Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  :py:meth:`niswitch.Session.InitWithOptions` method, or through the IVI Configuration Utility.
-        If the user does not specify a Driver Setup string, this property returns an empty string.
-
-
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Driver Setup**
-                - C Attribute: **NISWITCH_ATTR_DRIVER_SETUP**
-
-handshaking_initiation
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: handshaking_initiation
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------------------------+
-            | Characteristic | Value                       |
-            +================+=============================+
-            | Datatype       | enums.HandshakingInitiation |
-            +----------------+-----------------------------+
-            | Permissions    | read-write                  |
-            +----------------+-----------------------------+
-            | Channel Based  | No                          |
-            +----------------+-----------------------------+
-            | Resettable     | No                          |
-            +----------------+-----------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Handshaking Initiation**
-                - C Attribute: **NISWITCH_ATTR_HANDSHAKING_INITIATION**
-
-instrument_firmware_revision
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: instrument_firmware_revision
-
-        A string that contains the firmware revision information  for the instrument you are currently using.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Firmware Revision**
-                - C Attribute: **NISWITCH_ATTR_INSTRUMENT_FIRMWARE_REVISION**
-
-instrument_manufacturer
-~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: instrument_manufacturer
-
-        A string that contains the name of the instrument manufacturer you are currently  using.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Manufacturer**
-                - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MANUFACTURER**
-
-instrument_model
-~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: instrument_model
-
-        A string that contains the model number or name of the instrument that you  are currently using.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
-                - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MODEL**
-
-io_resource_descriptor
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: io_resource_descriptor
-
-        Indicates the resource descriptor the driver  uses to identify the physical device.
-        If you initialize the driver with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
-        If you initialize the instrument driver with the resource  descriptor, this property contains that value.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor**
-                - C Attribute: **NISWITCH_ATTR_IO_RESOURCE_DESCRIPTOR**
-
-is_configuration_channel
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: is_configuration_channel
-
-        This channel-based property specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the :py:meth:`niswitch.Session.connect` method.  Configuration channels are not available  for external connections.
-        Set this property to True to mark the channel as a configuration  channel.  Set this property to False to mark the channel as available  for external connections.
-        After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].is_configuration_channel = var
-                var = session.channels[0,1].is_configuration_channel
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Channel Configuration:Is Configuration Channel**
-                - C Attribute: **NISWITCH_ATTR_IS_CONFIGURATION_CHANNEL**
-
-is_debounced
-~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: is_debounced
-
-        This property indicates whether the entire switch device has settled  since the last switching command.  A value of True indicates that all  signals going through the switch device are valid.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Is Debounced**
-                - C Attribute: **NISWITCH_ATTR_IS_DEBOUNCED**
-
-is_scanning
-~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: is_scanning
-
-        If True, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If False, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Is Scanning**
-                - C Attribute: **NISWITCH_ATTR_IS_SCANNING**
-
-is_source_channel
-~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: is_source_channel
-
-        This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].is_source_channel = var
-                var = session.channels[0,1].is_source_channel
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Channel Configuration:Is Source Channel**
-                - C Attribute: **NISWITCH_ATTR_IS_SOURCE_CHANNEL**
-
-is_waiting_for_trig
-~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: is_waiting_for_trig
-
-        In a scan list, a semi-colon (;) is used to indicate that at that point in  the scan list, the scan engine should pause until a trigger is received  from the trigger input.  If that trigger is user generated through either  a hardware pulse or the Send SW Trigger operation, it is necessary for the  user to know  when the scan engine has reached such a state.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Is Waiting for Trigger?**
-                - C Attribute: **NISWITCH_ATTR_IS_WAITING_FOR_TRIG**
-
-logical_name
-~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: logical_name
-
-        A string containing the logical name you specified when opening the  current IVI session.
-        You may pass a logical name to the :py:meth:`niswitch.Session.init` or  :py:meth:`niswitch.Session.InitWithOptions` methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
-
-
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
-                - C Attribute: **NISWITCH_ATTR_LOGICAL_NAME**
-
-max_ac_voltage
-~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_ac_voltage
-
-        This channel-based property returns the maximum AC voltage the channel  can switch.
-        The units are volts RMS.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_ac_voltage
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum AC Voltage**
-                - C Attribute: **NISWITCH_ATTR_MAX_AC_VOLTAGE**
-
-max_carry_ac_current
-~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_carry_ac_current
-
-        This channel-based property returns the maximum AC current the channel  can carry.
-        The units are amperes RMS.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_ac_current
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Current**
-                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_CURRENT**
-
-max_carry_ac_power
-~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_carry_ac_power
-
-        This channel-based property returns the maximum AC power the channel can  carry.
-        The units are volt-amperes.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_ac_power
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Power**
-                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_POWER**
-
-max_carry_dc_current
-~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_carry_dc_current
-
-        This channel-based property returns the maximum DC current the channel  can carry.
-        The units are amperes.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_dc_current
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Current**
-                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_CURRENT**
-
-max_carry_dc_power
-~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_carry_dc_power
-
-        This channel-based property returns the maximum DC power the channel can  carry.
-        The units are watts.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_dc_power
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Power**
-                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_POWER**
-
-max_dc_voltage
-~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_dc_voltage
-
-        This channel-based property returns the maximum DC voltage the channel  can switch.
-        The units are volts.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_dc_voltage
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum DC Voltage**
-                - C Attribute: **NISWITCH_ATTR_MAX_DC_VOLTAGE**
-
-max_switching_ac_current
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_switching_ac_current
-
-        This channel-based property returns the maximum AC current the channel  can switch.
-        The units are amperes RMS.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_ac_current
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Current**
-                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_CURRENT**
-
-max_switching_ac_power
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_switching_ac_power
-
-        This channel-based property returns the maximum AC power the channel can  switch.
-        The units are volt-amperes.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_ac_power
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Power**
-                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_POWER**
-
-max_switching_dc_current
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_switching_dc_current
-
-        This channel-based property returns the maximum DC current the channel  can switch.
-        The units are amperes.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_dc_current
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Current**
-                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_CURRENT**
-
-max_switching_dc_power
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: max_switching_dc_power
-
-        This channel-based property returns the maximum DC power the channel can  switch.
-        The units are watts.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_dc_power
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Power**
-                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_POWER**
-
-number_of_relays
-~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: number_of_relays
-
-        This property returns the number of relays.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Number of Relays**
-                - C Attribute: **NISWITCH_ATTR_NUMBER_OF_RELAYS**
-
-num_of_columns
-~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: num_of_columns
-
-        This property returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
-        The :py:data:`niswitch.Session.wire_mode` property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Matrix Configuration:Number of Columns**
-                - C Attribute: **NISWITCH_ATTR_NUM_OF_COLUMNS**
-
-num_of_rows
-~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: num_of_rows
-
-        This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
-        The :py:data:`niswitch.Session.wire_mode` property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Matrix Configuration:Number of Rows**
-                - C Attribute: **NISWITCH_ATTR_NUM_OF_ROWS**
-
-power_down_latching_relays_after_debounce
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: power_down_latching_relays_after_debounce
-
-        This property specifies whether to power down latching relays after  calling Wait For Debounce.
-        When Power Down Latching Relays After Debounce is enabled (True),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
-                - C Attribute: **NISWITCH_ATTR_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE**
-
-scan_advanced_output
-~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: scan_advanced_output
-
-        This property specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+--------------------------+
-            | Characteristic | Value                    |
-            +================+==========================+
-            | Datatype       | enums.ScanAdvancedOutput |
-            +----------------+--------------------------+
-            | Permissions    | read-write               |
-            +----------------+--------------------------+
-            | Channel Based  | No                       |
-            +----------------+--------------------------+
-            | Resettable     | No                       |
-            +----------------+--------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Scan Advanced Output**
-                - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_OUTPUT**
-
-scan_advanced_polarity
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: scan_advanced_polarity
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------+
-            | Characteristic | Value                      |
-            +================+============================+
-            | Datatype       | enums.ScanAdvancedPolarity |
-            +----------------+----------------------------+
-            | Permissions    | read-write                 |
-            +----------------+----------------------------+
-            | Channel Based  | No                         |
-            +----------------+----------------------------+
-            | Resettable     | No                         |
-            +----------------+----------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Scan Advanced Polarity**
-                - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_POLARITY**
-
-scan_delay
-~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: scan_delay
-
-        This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
-        the greater value of the settling time and the value you specify as the  scan delay.
-
-
-
-        .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Scan Delay**
-                - C Attribute: **NISWITCH_ATTR_SCAN_DELAY**
-
-scan_list
-~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: scan_list
-
-        This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The :py:meth:`niswitch.Session.initiate`  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
-        The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
-        To create a path between two channels, use the following character between  the two channel names:
-        -> (a dash followed by a '>' sign)
-        Example:  'CH1->CH2' tells the switch to make a path from channel CH1 to channel  CH2.
-        To break or clear a path, use the following character as a prefix before  the path:
-        ~ (tilde)
-        Example:  '~CH1->CH2' tells the switch to break the path from channel CH1 to  channel CH2.
-        To tell the switch device to wait for a trigger event, use the following  character as a separator between paths:
-        ; (semi-colon)
-        Example:  'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Scan List**
-                - C Attribute: **NISWITCH_ATTR_SCAN_LIST**
-
-scan_mode
-~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: scan_mode
-
-        This property specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this property specifies what happens to the  connection between CH1 and CH2.
-        If the value of this property is :py:data:`~niswitch.ScanMode.NONE`, the switch device  takes no action on existing paths.  If the value is  :py:data:`~niswitch.ScanMode.BREAK_BEFORE_MAKE`, the switch device breaks conflicting paths  before making new ones.  If the value is :py:data:`~niswitch.ScanMode.BREAK_AFTER_MAKE`,  the switch device breaks conflicting paths after making new ones.
-        Most switch devices support only one of the possible values.  In such  cases, this property serves as an indicator of the device's behavior.
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------+
-            | Characteristic | Value          |
-            +================+================+
-            | Datatype       | enums.ScanMode |
-            +----------------+----------------+
-            | Permissions    | read-write     |
-            +----------------+----------------+
-            | Channel Based  | No             |
-            +----------------+----------------+
-            | Resettable     | No             |
-            +----------------+----------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Scan Mode**
-                - C Attribute: **NISWITCH_ATTR_SCAN_MODE**
-
-serial_number
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: serial_number
-
-        This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Serial Number**
-                - C Attribute: **NISWITCH_ATTR_SERIAL_NUMBER**
-
-settling_time
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: settling_time
-
-        This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
-        the greater value of the settling time and the value you specify as the  scan delay.
-
-
-
-        .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].settling_time = var
-                var = session.channels[0,1].settling_time
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Settling Time**
-                - C Attribute: **NISWITCH_ATTR_SETTLING_TIME**
-
-simulate
-~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: simulate
-
-        Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-        The default value is False.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
-
-
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
-                - C Attribute: **NISWITCH_ATTR_SIMULATE**
-
-specific_driver_description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: specific_driver_description
-
-        A string that contains a brief description of the specific  driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
-                - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
-
-specific_driver_revision
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: specific_driver_revision
-
-        A string that contains additional version information about this  instrument driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
-                - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_REVISION**
-
-specific_driver_vendor
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: specific_driver_vendor
-
-        A string that contains the name of the vendor that supplies this driver.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Vendor**
-                - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_VENDOR**
-
-supported_instrument_models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: supported_instrument_models
-
-        Contains a comma-separated list of supported instrument models.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models**
-                - C Attribute: **NISWITCH_ATTR_SUPPORTED_INSTRUMENT_MODELS**
-
-temperature
-~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: temperature
-
-        This property returns the temperature as read by the Switch module.     The units are degrees Celsius.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Temperature**
-                - C Attribute: **NISWITCH_ATTR_TEMPERATURE**
-
-trigger_input
-~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: trigger_input
-
-        This property specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+--------------------+
-            | Characteristic | Value              |
-            +================+====================+
-            | Datatype       | enums.TriggerInput |
-            +----------------+--------------------+
-            | Permissions    | read-write         |
-            +----------------+--------------------+
-            | Channel Based  | No                 |
-            +----------------+--------------------+
-            | Resettable     | No                 |
-            +----------------+--------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Trigger Input**
-                - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT**
-
-trigger_input_polarity
-~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: trigger_input_polarity
-
-        Determines the behavior of the trigger Input.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------+
-            | Characteristic | Value                      |
-            +================+============================+
-            | Datatype       | enums.TriggerInputPolarity |
-            +----------------+----------------------------+
-            | Permissions    | read-write                 |
-            +----------------+----------------------------+
-            | Channel Based  | No                         |
-            +----------------+----------------------------+
-            | Resettable     | No                         |
-            +----------------+----------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Scanning Configuration:Trigger Input Polarity**
-                - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT_POLARITY**
-
-wire_mode
-~~~~~~~~~
-
-    .. py:currentmodule:: niswitch.Session
-
-    .. py:attribute:: wire_mode
-
-        This property returns the wire mode of the switch device.
-        This property affects the values of the :py:data:`niswitch.Session.num_of_rows` and  :py:data:`niswitch.Session.num_of_columns` properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].wire_mode
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Module Characteristics:Wire mode**
-                - C Attribute: **NISWITCH_ATTR_WIRE_MODE**
-
-
 Methods
--------
-
+=======
 
 abort
-~~~~~
+-----
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2122,7 +289,7 @@ abort
 
 
 can_connect
-~~~~~~~~~~~
+-----------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2194,7 +361,7 @@ can_connect
 
 
 close
-~~~~~
+-----
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2215,7 +382,7 @@ close
 
 
 commit
-~~~~~~
+------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2231,7 +398,7 @@ commit
 
 
 connect
-~~~~~~~
+-------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2286,7 +453,7 @@ connect
             :type channel2: str
 
 connect_multiple
-~~~~~~~~~~~~~~~~
+----------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2334,7 +501,7 @@ connect_multiple
             :type connection_list: str
 
 disable
-~~~~~~~
+-------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2349,7 +516,7 @@ disable
 
 
 disconnect
-~~~~~~~~~~
+----------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2390,7 +557,7 @@ disconnect
             :type channel2: str
 
 disconnect_all
-~~~~~~~~~~~~~~
+--------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2404,7 +571,7 @@ disconnect_all
 
 
 disconnect_multiple
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2437,7 +604,7 @@ disconnect_multiple
             :type disconnection_list: str
 
 get_channel_name
-~~~~~~~~~~~~~~~~
+----------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2475,7 +642,7 @@ get_channel_name
 
 
 get_path
-~~~~~~~~
+--------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2536,7 +703,7 @@ get_path
 
 
 get_relay_count
-~~~~~~~~~~~~~~~
+---------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2575,7 +742,7 @@ get_relay_count
 
 
 get_relay_name
-~~~~~~~~~~~~~~
+--------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2612,7 +779,7 @@ get_relay_name
 
 
 get_relay_position
-~~~~~~~~~~~~~~~~~~
+------------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2649,7 +816,7 @@ get_relay_position
 
 
 initiate
-~~~~~~~~
+--------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2671,7 +838,7 @@ initiate
 
 
 lock
-~~~~
+----
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2720,7 +887,7 @@ lock
 
 
 relay_control
-~~~~~~~~~~~~~
+-------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2761,7 +928,7 @@ relay_control
             :type relay_action: :py:data:`niswitch.RelayAction`
 
 reset
-~~~~~
+-----
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2776,7 +943,7 @@ reset
 
 
 reset_with_defaults
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2792,7 +959,7 @@ reset_with_defaults
 
 
 route_scan_advanced_output
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2846,7 +1013,7 @@ route_scan_advanced_output
             :type invert: bool
 
 route_trigger_input
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2901,7 +1068,7 @@ route_trigger_input
             :type invert: bool
 
 self_test
-~~~~~~~~~
+---------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2925,7 +1092,7 @@ self_test
 
 
 send_software_trigger
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2945,7 +1112,7 @@ send_software_trigger
 
 
 set_path
-~~~~~~~~
+--------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2976,7 +1143,7 @@ set_path
             :type path_list: str
 
 unlock
-~~~~~~
+------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -2989,7 +1156,7 @@ unlock
 
 
 wait_for_debounce
-~~~~~~~~~~~~~~~~~
+-----------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -3018,7 +1185,7 @@ wait_for_debounce
             :type maximum_time_ms: float in seconds or datetime.timedelta
 
 wait_for_scan_complete
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
     .. py:currentmodule:: niswitch.Session
 
@@ -3048,170 +1215,1577 @@ wait_for_scan_complete
             :type maximum_time_ms: float in seconds or datetime.timedelta
 
 
-
 Properties
+==========
+
+analog_bus_sharing_enable
+-------------------------
+
+    .. py:attribute:: analog_bus_sharing_enable
+
+        Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
+        Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].analog_bus_sharing_enable = var
+                var = session.channels[0,1].analog_bus_sharing_enable
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Channel Configuration:Analog Bus Sharing Enable**
+                - C Attribute: **NISWITCH_ATTR_ANALOG_BUS_SHARING_ENABLE**
+
+bandwidth
+---------
+
+    .. py:attribute:: bandwidth
+
+        This channel-based property returns the bandwidth for the channel.
+        The units are hertz.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].bandwidth
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Bandwidth**
+                - C Attribute: **NISWITCH_ATTR_BANDWIDTH**
+
+channel_count
+-------------
+
+    .. py:attribute:: channel_count
+
+        Indicates the number of channels that the specific instrument  driver supports.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Channel Count**
+                - C Attribute: **NISWITCH_ATTR_CHANNEL_COUNT**
+
+characteristic_impedance
+------------------------
+
+    .. py:attribute:: characteristic_impedance
+
+        This channel-based property returns the characteristic impedance for the  channel.
+        The units are ohms.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].characteristic_impedance
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Characteristic Impedance**
+                - C Attribute: **NISWITCH_ATTR_CHARACTERISTIC_IMPEDANCE**
+
+continuous_scan
+---------------
+
+    .. py:attribute:: continuous_scan
+
+        When a switch device is scanning, the swich can either stop scanning when  the end of the scan (False) or continue scanning from the top of the  scan list again (True).
+        Notice that if you set the scan to continuous (True), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Continuous Scan**
+                - C Attribute: **NISWITCH_ATTR_CONTINUOUS_SCAN**
+
+digital_filter_enable
+---------------------
+
+    .. py:attribute:: digital_filter_enable
+
+        This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (True) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
+        When Digital Filter is disabled (False), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Digital Filter Enable**
+                - C Attribute: **NISWITCH_ATTR_DIGITAL_FILTER_ENABLE**
+
+driver_setup
+------------
+
+    .. py:attribute:: driver_setup
+
+        This property indicates the Driver Setup string that the user  specified when initializing the driver.
+        Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  :py:meth:`niswitch.Session.InitWithOptions` method, or through the IVI Configuration Utility.
+        If the user does not specify a Driver Setup string, this property returns an empty string.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Driver Setup**
+                - C Attribute: **NISWITCH_ATTR_DRIVER_SETUP**
+
+handshaking_initiation
+----------------------
+
+    .. py:attribute:: handshaking_initiation
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------------------------+
+            | Characteristic | Value                       |
+            +================+=============================+
+            | Datatype       | enums.HandshakingInitiation |
+            +----------------+-----------------------------+
+            | Permissions    | read-write                  |
+            +----------------+-----------------------------+
+            | Channel Based  | No                          |
+            +----------------+-----------------------------+
+            | Resettable     | No                          |
+            +----------------+-----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Handshaking Initiation**
+                - C Attribute: **NISWITCH_ATTR_HANDSHAKING_INITIATION**
+
+instrument_firmware_revision
+----------------------------
+
+    .. py:attribute:: instrument_firmware_revision
+
+        A string that contains the firmware revision information  for the instrument you are currently using.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Firmware Revision**
+                - C Attribute: **NISWITCH_ATTR_INSTRUMENT_FIRMWARE_REVISION**
+
+instrument_manufacturer
+-----------------------
+
+    .. py:attribute:: instrument_manufacturer
+
+        A string that contains the name of the instrument manufacturer you are currently  using.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Manufacturer**
+                - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MANUFACTURER**
+
+instrument_model
+----------------
+
+    .. py:attribute:: instrument_model
+
+        A string that contains the model number or name of the instrument that you  are currently using.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
+                - C Attribute: **NISWITCH_ATTR_INSTRUMENT_MODEL**
+
+io_resource_descriptor
+----------------------
+
+    .. py:attribute:: io_resource_descriptor
+
+        Indicates the resource descriptor the driver  uses to identify the physical device.
+        If you initialize the driver with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
+        If you initialize the instrument driver with the resource  descriptor, this property contains that value.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:IO Resource Descriptor**
+                - C Attribute: **NISWITCH_ATTR_IO_RESOURCE_DESCRIPTOR**
+
+is_configuration_channel
+------------------------
+
+    .. py:attribute:: is_configuration_channel
+
+        This channel-based property specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the :py:meth:`niswitch.Session.connect` method.  Configuration channels are not available  for external connections.
+        Set this property to True to mark the channel as a configuration  channel.  Set this property to False to mark the channel as available  for external connections.
+        After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].is_configuration_channel = var
+                var = session.channels[0,1].is_configuration_channel
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Channel Configuration:Is Configuration Channel**
+                - C Attribute: **NISWITCH_ATTR_IS_CONFIGURATION_CHANNEL**
+
+is_debounced
+------------
+
+    .. py:attribute:: is_debounced
+
+        This property indicates whether the entire switch device has settled  since the last switching command.  A value of True indicates that all  signals going through the switch device are valid.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | bool      |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Is Debounced**
+                - C Attribute: **NISWITCH_ATTR_IS_DEBOUNCED**
+
+is_scanning
+-----------
+
+    .. py:attribute:: is_scanning
+
+        If True, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If False, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | bool      |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Is Scanning**
+                - C Attribute: **NISWITCH_ATTR_IS_SCANNING**
+
+is_source_channel
+-----------------
+
+    .. py:attribute:: is_source_channel
+
+        This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The :py:meth:`niswitch.Session.connect` method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].is_source_channel = var
+                var = session.channels[0,1].is_source_channel
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Channel Configuration:Is Source Channel**
+                - C Attribute: **NISWITCH_ATTR_IS_SOURCE_CHANNEL**
+
+is_waiting_for_trig
+-------------------
+
+    .. py:attribute:: is_waiting_for_trig
+
+        In a scan list, a semi-colon (;) is used to indicate that at that point in  the scan list, the scan engine should pause until a trigger is received  from the trigger input.  If that trigger is user generated through either  a hardware pulse or the Send SW Trigger operation, it is necessary for the  user to know  when the scan engine has reached such a state.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | bool      |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Is Waiting for Trigger?**
+                - C Attribute: **NISWITCH_ATTR_IS_WAITING_FOR_TRIG**
+
+logical_name
+------------
+
+    .. py:attribute:: logical_name
+
+        A string containing the logical name you specified when opening the  current IVI session.
+        You may pass a logical name to the :py:meth:`niswitch.Session.init` or  :py:meth:`niswitch.Session.InitWithOptions` methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
+                - C Attribute: **NISWITCH_ATTR_LOGICAL_NAME**
+
+max_ac_voltage
+--------------
+
+    .. py:attribute:: max_ac_voltage
+
+        This channel-based property returns the maximum AC voltage the channel  can switch.
+        The units are volts RMS.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_ac_voltage
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum AC Voltage**
+                - C Attribute: **NISWITCH_ATTR_MAX_AC_VOLTAGE**
+
+max_carry_ac_current
+--------------------
+
+    .. py:attribute:: max_carry_ac_current
+
+        This channel-based property returns the maximum AC current the channel  can carry.
+        The units are amperes RMS.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_carry_ac_current
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Current**
+                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_CURRENT**
+
+max_carry_ac_power
+------------------
+
+    .. py:attribute:: max_carry_ac_power
+
+        This channel-based property returns the maximum AC power the channel can  carry.
+        The units are volt-amperes.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_carry_ac_power
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Carry AC Power**
+                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_AC_POWER**
+
+max_carry_dc_current
+--------------------
+
+    .. py:attribute:: max_carry_dc_current
+
+        This channel-based property returns the maximum DC current the channel  can carry.
+        The units are amperes.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_carry_dc_current
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Current**
+                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_CURRENT**
+
+max_carry_dc_power
+------------------
+
+    .. py:attribute:: max_carry_dc_power
+
+        This channel-based property returns the maximum DC power the channel can  carry.
+        The units are watts.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_carry_dc_power
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Carry DC Power**
+                - C Attribute: **NISWITCH_ATTR_MAX_CARRY_DC_POWER**
+
+max_dc_voltage
+--------------
+
+    .. py:attribute:: max_dc_voltage
+
+        This channel-based property returns the maximum DC voltage the channel  can switch.
+        The units are volts.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_dc_voltage
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum DC Voltage**
+                - C Attribute: **NISWITCH_ATTR_MAX_DC_VOLTAGE**
+
+max_switching_ac_current
+------------------------
+
+    .. py:attribute:: max_switching_ac_current
+
+        This channel-based property returns the maximum AC current the channel  can switch.
+        The units are amperes RMS.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_switching_ac_current
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Current**
+                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_CURRENT**
+
+max_switching_ac_power
+----------------------
+
+    .. py:attribute:: max_switching_ac_power
+
+        This channel-based property returns the maximum AC power the channel can  switch.
+        The units are volt-amperes.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_switching_ac_power
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Switching AC Power**
+                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_AC_POWER**
+
+max_switching_dc_current
+------------------------
+
+    .. py:attribute:: max_switching_dc_current
+
+        This channel-based property returns the maximum DC current the channel  can switch.
+        The units are amperes.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_switching_dc_current
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Current**
+                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_CURRENT**
+
+max_switching_dc_power
+----------------------
+
+    .. py:attribute:: max_switching_dc_power
+
+        This channel-based property returns the maximum DC power the channel can  switch.
+        The units are watts.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].max_switching_dc_power
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Maximum Switching DC Power**
+                - C Attribute: **NISWITCH_ATTR_MAX_SWITCHING_DC_POWER**
+
+number_of_relays
+----------------
+
+    .. py:attribute:: number_of_relays
+
+        This property returns the number of relays.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Number of Relays**
+                - C Attribute: **NISWITCH_ATTR_NUMBER_OF_RELAYS**
+
+num_of_columns
+--------------
+
+    .. py:attribute:: num_of_columns
+
+        This property returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
+        The :py:data:`niswitch.Session.wire_mode` property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Matrix Configuration:Number of Columns**
+                - C Attribute: **NISWITCH_ATTR_NUM_OF_COLUMNS**
+
+num_of_rows
+-----------
+
+    .. py:attribute:: num_of_rows
+
+        This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
+        The :py:data:`niswitch.Session.wire_mode` property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Matrix Configuration:Number of Rows**
+                - C Attribute: **NISWITCH_ATTR_NUM_OF_ROWS**
+
+power_down_latching_relays_after_debounce
+-----------------------------------------
+
+    .. py:attribute:: power_down_latching_relays_after_debounce
+
+        This property specifies whether to power down latching relays after  calling Wait For Debounce.
+        When Power Down Latching Relays After Debounce is enabled (True),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Power Down Latching Relays After Debounce**
+                - C Attribute: **NISWITCH_ATTR_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE**
+
+scan_advanced_output
+--------------------
+
+    .. py:attribute:: scan_advanced_output
+
+        This property specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+--------------------------+
+            | Characteristic | Value                    |
+            +================+==========================+
+            | Datatype       | enums.ScanAdvancedOutput |
+            +----------------+--------------------------+
+            | Permissions    | read-write               |
+            +----------------+--------------------------+
+            | Channel Based  | No                       |
+            +----------------+--------------------------+
+            | Resettable     | No                       |
+            +----------------+--------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Scan Advanced Output**
+                - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_OUTPUT**
+
+scan_advanced_polarity
+----------------------
+
+    .. py:attribute:: scan_advanced_polarity
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------+
+            | Characteristic | Value                      |
+            +================+============================+
+            | Datatype       | enums.ScanAdvancedPolarity |
+            +----------------+----------------------------+
+            | Permissions    | read-write                 |
+            +----------------+----------------------------+
+            | Channel Based  | No                         |
+            +----------------+----------------------------+
+            | Resettable     | No                         |
+            +----------------+----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Scan Advanced Polarity**
+                - C Attribute: **NISWITCH_ATTR_SCAN_ADVANCED_POLARITY**
+
+scan_delay
 ----------
 
-+-----------------------------------------------------------------------+----------------------------------------+
-| Property                                                              | Datatype                               |
-+=======================================================================+========================================+
-| :py:attr:`niswitch.Session.analog_bus_sharing_enable`                 | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.bandwidth`                                 | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.channel_count`                             | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.characteristic_impedance`                  | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.continuous_scan`                           | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.digital_filter_enable`                     | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.driver_setup`                              | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.handshaking_initiation`                    | :py:data:`HandshakingInitiation`       |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.instrument_firmware_revision`              | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.instrument_manufacturer`                   | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.instrument_model`                          | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.io_resource_descriptor`                    | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.is_configuration_channel`                  | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.is_debounced`                              | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.is_scanning`                               | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.is_source_channel`                         | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.is_waiting_for_trig`                       | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.logical_name`                              | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_ac_voltage`                            | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_carry_ac_current`                      | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_carry_ac_power`                        | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_carry_dc_current`                      | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_carry_dc_power`                        | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_dc_voltage`                            | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_switching_ac_current`                  | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_switching_ac_power`                    | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_switching_dc_current`                  | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.max_switching_dc_power`                    | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.number_of_relays`                          | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.num_of_columns`                            | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.num_of_rows`                               | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.power_down_latching_relays_after_debounce` | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.scan_advanced_output`                      | :py:data:`ScanAdvancedOutput`          |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.scan_advanced_polarity`                    | :py:data:`ScanAdvancedPolarity`        |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.scan_delay`                                | float in seconds or datetime.timedelta |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.scan_list`                                 | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.scan_mode`                                 | :py:data:`ScanMode`                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.serial_number`                             | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.settling_time`                             | float in seconds or datetime.timedelta |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.simulate`                                  | bool                                   |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.specific_driver_description`               | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.specific_driver_revision`                  | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.specific_driver_vendor`                    | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.supported_instrument_models`               | str                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.temperature`                               | float                                  |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.trigger_input`                             | :py:data:`TriggerInput`                |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.trigger_input_polarity`                    | :py:data:`TriggerInputPolarity`        |
-+-----------------------------------------------------------------------+----------------------------------------+
-| :py:attr:`niswitch.Session.wire_mode`                                 | int                                    |
-+-----------------------------------------------------------------------+----------------------------------------+
+    .. py:attribute:: scan_delay
 
-Methods
--------
+        This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
+        the greater value of the settling time and the value you specify as the  scan delay.
 
-+--------------------------------------------------------+
-| Method name                                            |
-+========================================================+
-| :py:func:`niswitch.Session.abort`                      |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.can_connect`                |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.close`                      |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.commit`                     |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.connect`                    |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.connect_multiple`           |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.disable`                    |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.disconnect`                 |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.disconnect_all`             |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.disconnect_multiple`        |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.get_channel_name`           |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.get_path`                   |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.get_relay_count`            |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.get_relay_name`             |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.get_relay_position`         |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.initiate`                   |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.lock`                       |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.relay_control`              |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.reset`                      |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.reset_with_defaults`        |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.route_scan_advanced_output` |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.route_trigger_input`        |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.self_test`                  |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.send_software_trigger`      |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.set_path`                   |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.unlock`                     |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.wait_for_debounce`          |
-+--------------------------------------------------------+
-| :py:func:`niswitch.Session.wait_for_scan_complete`     |
-+--------------------------------------------------------+
+
+
+        .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------------------+
+            | Characteristic | Value                                  |
+            +================+========================================+
+            | Datatype       | float in seconds or datetime.timedelta |
+            +----------------+----------------------------------------+
+            | Permissions    | read-write                             |
+            +----------------+----------------------------------------+
+            | Channel Based  | No                                     |
+            +----------------+----------------------------------------+
+            | Resettable     | No                                     |
+            +----------------+----------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Scan Delay**
+                - C Attribute: **NISWITCH_ATTR_SCAN_DELAY**
+
+scan_list
+---------
+
+    .. py:attribute:: scan_list
+
+        This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The :py:meth:`niswitch.Session.initiate`  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
+        The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
+        To create a path between two channels, use the following character between  the two channel names:
+        -> (a dash followed by a '>' sign)
+        Example:  'CH1->CH2' tells the switch to make a path from channel CH1 to channel  CH2.
+        To break or clear a path, use the following character as a prefix before  the path:
+        ~ (tilde)
+        Example:  '~CH1->CH2' tells the switch to break the path from channel CH1 to  channel CH2.
+        To tell the switch device to wait for a trigger event, use the following  character as a separator between paths:
+        ; (semi-colon)
+        Example:  'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Scan List**
+                - C Attribute: **NISWITCH_ATTR_SCAN_LIST**
+
+scan_mode
+---------
+
+    .. py:attribute:: scan_mode
+
+        This property specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this property specifies what happens to the  connection between CH1 and CH2.
+        If the value of this property is :py:data:`~niswitch.ScanMode.NONE`, the switch device  takes no action on existing paths.  If the value is  :py:data:`~niswitch.ScanMode.BREAK_BEFORE_MAKE`, the switch device breaks conflicting paths  before making new ones.  If the value is :py:data:`~niswitch.ScanMode.BREAK_AFTER_MAKE`,  the switch device breaks conflicting paths after making new ones.
+        Most switch devices support only one of the possible values.  In such  cases, this property serves as an indicator of the device's behavior.
+
+
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------+
+            | Characteristic | Value          |
+            +================+================+
+            | Datatype       | enums.ScanMode |
+            +----------------+----------------+
+            | Permissions    | read-write     |
+            +----------------+----------------+
+            | Channel Based  | No             |
+            +----------------+----------------+
+            | Resettable     | No             |
+            +----------------+----------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Scan Mode**
+                - C Attribute: **NISWITCH_ATTR_SCAN_MODE**
+
+serial_number
+-------------
+
+    .. py:attribute:: serial_number
+
+        This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Serial Number**
+                - C Attribute: **NISWITCH_ATTR_SERIAL_NUMBER**
+
+settling_time
+-------------
+
+    .. py:attribute:: settling_time
+
+        This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
+        the greater value of the settling time and the value you specify as the  scan delay.
+
+
+
+        .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].settling_time = var
+                var = session.channels[0,1].settling_time
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------------------+
+            | Characteristic | Value                                  |
+            +================+========================================+
+            | Datatype       | float in seconds or datetime.timedelta |
+            +----------------+----------------------------------------+
+            | Permissions    | read-write                             |
+            +----------------+----------------------------------------+
+            | Channel Based  | Yes                                    |
+            +----------------+----------------------------------------+
+            | Resettable     | No                                     |
+            +----------------+----------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Settling Time**
+                - C Attribute: **NISWITCH_ATTR_SETTLING_TIME**
+
+simulate
+--------
+
+    .. py:attribute:: simulate
+
+        Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
+        The default value is False.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
+                - C Attribute: **NISWITCH_ATTR_SIMULATE**
+
+specific_driver_description
+---------------------------
+
+    .. py:attribute:: specific_driver_description
+
+        A string that contains a brief description of the specific  driver.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
+                - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
+
+specific_driver_revision
+------------------------
+
+    .. py:attribute:: specific_driver_revision
+
+        A string that contains additional version information about this  instrument driver.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
+                - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_REVISION**
+
+specific_driver_vendor
+----------------------
+
+    .. py:attribute:: specific_driver_vendor
+
+        A string that contains the name of the vendor that supplies this driver.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Vendor**
+                - C Attribute: **NISWITCH_ATTR_SPECIFIC_DRIVER_VENDOR**
+
+supported_instrument_models
+---------------------------
+
+    .. py:attribute:: supported_instrument_models
+
+        Contains a comma-separated list of supported instrument models.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | str       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models**
+                - C Attribute: **NISWITCH_ATTR_SUPPORTED_INSTRUMENT_MODELS**
+
+temperature
+-----------
+
+    .. py:attribute:: temperature
+
+        This property returns the temperature as read by the Switch module.     The units are degrees Celsius.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Temperature**
+                - C Attribute: **NISWITCH_ATTR_TEMPERATURE**
+
+trigger_input
+-------------
+
+    .. py:attribute:: trigger_input
+
+        This property specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+--------------------+
+            | Characteristic | Value              |
+            +================+====================+
+            | Datatype       | enums.TriggerInput |
+            +----------------+--------------------+
+            | Permissions    | read-write         |
+            +----------------+--------------------+
+            | Channel Based  | No                 |
+            +----------------+--------------------+
+            | Resettable     | No                 |
+            +----------------+--------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Trigger Input**
+                - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT**
+
+trigger_input_polarity
+----------------------
+
+    .. py:attribute:: trigger_input_polarity
+
+        Determines the behavior of the trigger Input.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------+
+            | Characteristic | Value                      |
+            +================+============================+
+            | Datatype       | enums.TriggerInputPolarity |
+            +----------------+----------------------------+
+            | Permissions    | read-write                 |
+            +----------------+----------------------------+
+            | Channel Based  | No                         |
+            +----------------+----------------------------+
+            | Resettable     | No                         |
+            +----------------+----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Scanning Configuration:Trigger Input Polarity**
+                - C Attribute: **NISWITCH_ATTR_TRIGGER_INPUT_POLARITY**
+
+wire_mode
+---------
+
+    .. py:attribute:: wire_mode
+
+        This property returns the wire mode of the switch device.
+        This property affects the values of the :py:data:`niswitch.Session.num_of_rows` and  :py:data:`niswitch.Session.num_of_columns` properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niswitch.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].wire_mode
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | int       |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Module Characteristics:Wire mode**
+                - C Attribute: **NISWITCH_ATTR_WIRE_MODE**
+
+
+.. contents:: Session
+
 
