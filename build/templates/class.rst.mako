@@ -65,8 +65,6 @@ ${helper.get_rst_header_snippet(item, '-')}
 ${helper.get_rst_header_snippet('Properties', '=')}
 
 % for attr in helper.sorted_attrs(attributes):
-<% # ${helper.get_rst_header_snippet(attributes[attr]["python_name"], '~')}
-%>\
 ${helper.get_rst_header_snippet(attributes[attr]['python_name'], '-')}
 
     .. py:attribute:: ${attributes[attr]["python_name"]}
