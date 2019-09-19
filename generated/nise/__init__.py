@@ -2,11 +2,11 @@
 # This file was generated
 
 
-__version__ = '0.2.3.dev0'
+__version__ = '1.0.0.dev0'
 
-from nise.enums import *          # noqa: F403,F401,H303
-from nise.errors import DriverWarning   # noqa: F401
-from nise.errors import Error     # noqa: F401
+from nise.enums import *  # noqa: F403,F401,H303
+from nise.errors import DriverWarning  # noqa: F401
+from nise.errors import Error  # noqa: F401
 from nise.session import Session  # noqa: F401
 
 
@@ -64,7 +64,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI Switch Executive"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nise'
-    info['module']['version'] = "0.2.3.dev0"
+    info['module']['version'] = "1.0.0.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()

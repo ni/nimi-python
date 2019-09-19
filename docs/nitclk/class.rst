@@ -1,7 +1,7 @@
-nitclk.Session
-==============
-
 .. py:module:: nitclk
+
+Session
+=======
 
 .. py:class:: Session(self)
 
@@ -14,475 +14,11 @@ nitclk.Session
 
 
 
-    **Properties**
-
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | Property                                       | Datatype                                                                   |
-    +================================================+============================================================================+
-    | :py:attr:`exported_sync_pulse_output_terminal` | str                                                                        |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`exported_tclk_output_terminal`       | str                                                                        |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`pause_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`ref_trigger_master_session`          | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`sample_clock_delay`                  | float                                                                      |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`script_trigger_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`sequencer_flag_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`start_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`sync_pulse_clock_source`             | str                                                                        |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`sync_pulse_sender_sync_pulse_source` | str                                                                        |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`sync_pulse_source`                   | str                                                                        |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`tclk_actual_period`                  | float                                                                      |
-    +------------------------------------------------+----------------------------------------------------------------------------+
-
-    **Public methods**
-
-    +----------------------------------------------------+
-    | Method name                                        |
-    +====================================================+
-    | :py:func:`configure_for_homogeneous_triggers`      |
-    +----------------------------------------------------+
-    | :py:func:`finish_sync_pulse_sender_synchronize`    |
-    +----------------------------------------------------+
-    | :py:func:`init_for_documentation`                  |
-    +----------------------------------------------------+
-    | :py:func:`initiate`                                |
-    +----------------------------------------------------+
-    | :py:func:`is_done`                                 |
-    +----------------------------------------------------+
-    | :py:func:`setup_for_sync_pulse_sender_synchronize` |
-    +----------------------------------------------------+
-    | :py:func:`synchronize`                             |
-    +----------------------------------------------------+
-    | :py:func:`synchronize_to_sync_pulse_sender`        |
-    +----------------------------------------------------+
-    | :py:func:`wait_until_done`                         |
-    +----------------------------------------------------+
-
-
-Properties
-----------
-
-exported_sync_pulse_output_terminal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: exported_sync_pulse_output_terminal
-
-        Specifies the destination of the Sync Pulse. This property is most often  used when synchronizing a multichassis system.
-        Values
-        Empty string. Empty string is a valid value, indicating that the signal is  not exported.
-        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
-        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
-        Examples of Device-Specific Settings
-        - NI PXI-5122 supports  'PFI0' and  'PFI1'
-        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
-        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
-        Default Value is empty string
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Export Sync Pulse Output Terminal**
-                - C Attribute: **NITCLK_ATTR_EXPORTED_SYNC_PULSE_OUTPUT_TERMINAL**
-
-exported_tclk_output_terminal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: exported_tclk_output_terminal
-
-        Specifies the destination of the device's TClk signal.
-        Values
-        Empty string. Empty string is a valid value, indicating that the signal is  not exported.
-        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
-        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
-        Examples of Device-Specific Settings
-        - NI PXI-5122 supports  'PFI0' and  'PFI1'
-        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
-        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
-        Default Value is empty string
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Output Terminal**
-                - C Attribute: **NITCLK_ATTR_EXPORTED_TCLK_OUTPUT_TERMINAL**
-
-pause_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: pause_trigger_master_session
-
-        Specifies the pause trigger master session.
-        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Pause Trigger Master Session**
-                - C Attribute: **NITCLK_ATTR_PAUSE_TRIGGER_MASTER_SESSION**
-
-ref_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: ref_trigger_master_session
-
-        Specifies the reference trigger master session.
-        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Reference Trigger Master Session**
-                - C Attribute: **NITCLK_ATTR_REF_TRIGGER_MASTER_SESSION**
-
-sample_clock_delay
-~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: sample_clock_delay
-
-        Specifies the sample clock delay.
-        Specifies the delay, in seconds, to apply to the session sample clock  relative to the other synchronized sessions. During synchronization,  NI-TClk aligns the sample clocks on the synchronized devices. If you want  to delay the sample clocks, set this property before calling  :py:meth:`nitclk.Session.synchronize`.
-        not supported for acquisition sessions.
-        Values - Between minus one and plus one period of the sample clock.
-        One sample clock period is equal to (1/sample clock rate). For example,  for a session with sample rate of 100 MS/s, you can specify sample clock  delays between -10.0 ns and +10.0 ns.
-        Default Value is 0
-
-
-
-        .. note:: Sample clock delay is supported for generation sessions only; it is
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Sample Clock Delay**
-                - C Attribute: **NITCLK_ATTR_SAMPLE_CLOCK_DELAY**
-
-script_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: script_trigger_master_session
-
-        Specifies the script trigger master session.
-        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Script Trigger Master Session**
-                - C Attribute: **NITCLK_ATTR_SCRIPT_TRIGGER_MASTER_SESSION**
-
-sequencer_flag_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: sequencer_flag_master_session
-
-        Specifies the sequencer flag master session.
-        For external triggers, the session that originally receives the trigger.
-        For None (no trigger configured) or software triggers, the session that
-        originally generates the trigger.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Sequencer Flag Master Session**
-                - C Attribute: **NITCLK_ATTR_SEQUENCER_FLAG_MASTER_SESSION**
-
-start_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: start_trigger_master_session
-
-        Specifies the start trigger master session.
-        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Start Trigger Master Session**
-                - C Attribute: **NITCLK_ATTR_START_TRIGGER_MASTER_SESSION**
-
-sync_pulse_clock_source
-~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: sync_pulse_clock_source
-
-        Specifies the Sync Pulse Clock source. This property is typically used to  synchronize PCI devices when you want to control RTSI 7 yourself. Make  sure that a 10 MHz clock is driven onto RTSI 7.
-        Values
-        PCI Devices -  'RTSI_7' and  'None'
-        PXI Devices -  'PXI_CLK10' and  'None'
-        Default Value -  'None' directs :py:meth:`nitclk.Session.synchronize` to create the necessary routes. For  PCI, one of the synchronized devices drives a 10 MHz clock on RTSI 7  unless that line is already being driven.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Sync Pulse Clock Source**
-                - C Attribute: **NITCLK_ATTR_SYNC_PULSE_CLOCK_SOURCE**
-
-sync_pulse_sender_sync_pulse_source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: sync_pulse_sender_sync_pulse_source
-
-        Specifies the external sync pulse source for the Sync Pulse Sender.  You can use this source to synchronize  the Sync Pulse Sender with an external non-TClk source.
-        Values
-        Empty string. Empty string is a valid value, indicating that the signal is  not exported.
-        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
-        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
-        Examples of Device-Specific Settings
-        - NI PXI-5122 supports  'PFI0' and  'PFI1'
-        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
-        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
-        Default Value is empty string
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **External Pulse Source**
-                - C Attribute: **NITCLK_ATTR_SYNC_PULSE_SENDER_SYNC_PULSE_SOURCE**
-
-sync_pulse_source
-~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: sync_pulse_source
-
-        Specifies the Sync Pulse source. This property is most often used when  synchronizing a multichassis system.
-        Values
-        Empty string
-        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
-        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
-        Examples of Device-Specific Settings
-        - NI PXI-5122 supports  'PFI0' and  'PFI1'
-        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
-        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
-        Default Value - Empty string. This default value directs  :py:meth:`nitclk.Session.synchronize` to set this property when all the synchronized devices  are in one PXI chassis. To synchronize a multichassis system, you must set  this property before calling :py:meth:`nitclk.Session.synchronize`.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Sync Pulse Source**
-                - C Attribute: **NITCLK_ATTR_SYNC_PULSE_SOURCE**
-
-tclk_actual_period
-~~~~~~~~~~~~~~~~~~
-
-    .. py:currentmodule:: nitclk.Session
-
-    .. py:attribute:: tclk_actual_period
-
-        Indicates the computed TClk period that will be used during the acquisition.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Period**
-                - C Attribute: **NITCLK_ATTR_TCLK_ACTUAL_PERIOD**
-
-
 Methods
--------
-
+=======
 
 configure_for_homogeneous_triggers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -625,7 +161,7 @@ configure_for_homogeneous_triggers
             :type sessions: list of int
 
 finish_sync_pulse_sender_synchronize
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -662,7 +198,7 @@ finish_sync_pulse_sender_synchronize
             :type min_time: float
 
 init_for_documentation
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -675,7 +211,7 @@ init_for_documentation
 
 
 initiate
-~~~~~~~~
+--------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -702,7 +238,7 @@ initiate
             :type sessions: list of int
 
 is_done
-~~~~~~~
+-------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -738,7 +274,7 @@ is_done
 
 
 setup_for_sync_pulse_sender_synchronize
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -775,7 +311,7 @@ setup_for_sync_pulse_sender_synchronize
             :type min_time: float
 
 synchronize
-~~~~~~~~~~~
+-----------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -817,7 +353,7 @@ synchronize
             :type min_tclk_period: float in seconds or datetime.timedelta
 
 synchronize_to_sync_pulse_sender
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -854,7 +390,7 @@ synchronize_to_sync_pulse_sender
             :type min_time: float
 
 wait_until_done
-~~~~~~~~~~~~~~~
+---------------
 
     .. py:currentmodule:: nitclk.Session
 
@@ -895,60 +431,390 @@ wait_until_done
             :type timeout: float
 
 
-
 Properties
-----------
+==========
 
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| Property                                                      | Datatype                                                                   |
-+===============================================================+============================================================================+
-| :py:attr:`nitclk.Session.exported_sync_pulse_output_terminal` | str                                                                        |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.exported_tclk_output_terminal`       | str                                                                        |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.pause_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.ref_trigger_master_session`          | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.sample_clock_delay`                  | float                                                                      |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.script_trigger_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.sequencer_flag_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.start_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.sync_pulse_clock_source`             | str                                                                        |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.sync_pulse_sender_sync_pulse_source` | str                                                                        |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.sync_pulse_source`                   | str                                                                        |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`nitclk.Session.tclk_actual_period`                  | float                                                                      |
-+---------------------------------------------------------------+----------------------------------------------------------------------------+
+exported_sync_pulse_output_terminal
+-----------------------------------
 
-Methods
--------
+    .. py:attribute:: exported_sync_pulse_output_terminal
 
-+-------------------------------------------------------------------+
-| Method name                                                       |
-+===================================================================+
-| :py:func:`nitclk.Session.configure_for_homogeneous_triggers`      |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.finish_sync_pulse_sender_synchronize`    |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.init_for_documentation`                  |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.initiate`                                |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.is_done`                                 |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.setup_for_sync_pulse_sender_synchronize` |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.synchronize`                             |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.synchronize_to_sync_pulse_sender`        |
-+-------------------------------------------------------------------+
-| :py:func:`nitclk.Session.wait_until_done`                         |
-+-------------------------------------------------------------------+
+        Specifies the destination of the Sync Pulse. This property is most often  used when synchronizing a multichassis system.
+        Values
+        Empty string. Empty string is a valid value, indicating that the signal is  not exported.
+        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
+        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
+        Examples of Device-Specific Settings
+        - NI PXI-5122 supports  'PFI0' and  'PFI1'
+        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
+        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
+        Default Value is empty string
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Export Sync Pulse Output Terminal**
+                - C Attribute: **NITCLK_ATTR_EXPORTED_SYNC_PULSE_OUTPUT_TERMINAL**
+
+exported_tclk_output_terminal
+-----------------------------
+
+    .. py:attribute:: exported_tclk_output_terminal
+
+        Specifies the destination of the device's TClk signal.
+        Values
+        Empty string. Empty string is a valid value, indicating that the signal is  not exported.
+        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
+        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
+        Examples of Device-Specific Settings
+        - NI PXI-5122 supports  'PFI0' and  'PFI1'
+        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
+        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
+        Default Value is empty string
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Output Terminal**
+                - C Attribute: **NITCLK_ATTR_EXPORTED_TCLK_OUTPUT_TERMINAL**
+
+pause_trigger_master_session
+----------------------------
+
+    .. py:attribute:: pause_trigger_master_session
+
+        Specifies the pause trigger master session.
+        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------------------------------------------------------+
+            | Characteristic | Value                                                                      |
+            +================+============================================================================+
+            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
+            +----------------+----------------------------------------------------------------------------+
+            | Permissions    | read-write                                                                 |
+            +----------------+----------------------------------------------------------------------------+
+            | Channel Based  | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+            | Resettable     | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Pause Trigger Master Session**
+                - C Attribute: **NITCLK_ATTR_PAUSE_TRIGGER_MASTER_SESSION**
+
+ref_trigger_master_session
+--------------------------
+
+    .. py:attribute:: ref_trigger_master_session
+
+        Specifies the reference trigger master session.
+        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------------------------------------------------------+
+            | Characteristic | Value                                                                      |
+            +================+============================================================================+
+            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
+            +----------------+----------------------------------------------------------------------------+
+            | Permissions    | read-write                                                                 |
+            +----------------+----------------------------------------------------------------------------+
+            | Channel Based  | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+            | Resettable     | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Reference Trigger Master Session**
+                - C Attribute: **NITCLK_ATTR_REF_TRIGGER_MASTER_SESSION**
+
+sample_clock_delay
+------------------
+
+    .. py:attribute:: sample_clock_delay
+
+        Specifies the sample clock delay.
+        Specifies the delay, in seconds, to apply to the session sample clock  relative to the other synchronized sessions. During synchronization,  NI-TClk aligns the sample clocks on the synchronized devices. If you want  to delay the sample clocks, set this property before calling  :py:meth:`nitclk.Session.synchronize`.
+        not supported for acquisition sessions.
+        Values - Between minus one and plus one period of the sample clock.
+        One sample clock period is equal to (1/sample clock rate). For example,  for a session with sample rate of 100 MS/s, you can specify sample clock  delays between -10.0 ns and +10.0 ns.
+        Default Value is 0
+
+
+
+        .. note:: Sample clock delay is supported for generation sessions only; it is
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | float      |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Sample Clock Delay**
+                - C Attribute: **NITCLK_ATTR_SAMPLE_CLOCK_DELAY**
+
+script_trigger_master_session
+-----------------------------
+
+    .. py:attribute:: script_trigger_master_session
+
+        Specifies the script trigger master session.
+        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------------------------------------------------------+
+            | Characteristic | Value                                                                      |
+            +================+============================================================================+
+            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
+            +----------------+----------------------------------------------------------------------------+
+            | Permissions    | read-write                                                                 |
+            +----------------+----------------------------------------------------------------------------+
+            | Channel Based  | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+            | Resettable     | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Script Trigger Master Session**
+                - C Attribute: **NITCLK_ATTR_SCRIPT_TRIGGER_MASTER_SESSION**
+
+sequencer_flag_master_session
+-----------------------------
+
+    .. py:attribute:: sequencer_flag_master_session
+
+        Specifies the sequencer flag master session.
+        For external triggers, the session that originally receives the trigger.
+        For None (no trigger configured) or software triggers, the session that
+        originally generates the trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------------------------------------------------------+
+            | Characteristic | Value                                                                      |
+            +================+============================================================================+
+            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
+            +----------------+----------------------------------------------------------------------------+
+            | Permissions    | read-write                                                                 |
+            +----------------+----------------------------------------------------------------------------+
+            | Channel Based  | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+            | Resettable     | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Sequencer Flag Master Session**
+                - C Attribute: **NITCLK_ATTR_SEQUENCER_FLAG_MASTER_SESSION**
+
+start_trigger_master_session
+----------------------------
+
+    .. py:attribute:: start_trigger_master_session
+
+        Specifies the start trigger master session.
+        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+----------------------------------------------------------------------------+
+            | Characteristic | Value                                                                      |
+            +================+============================================================================+
+            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
+            +----------------+----------------------------------------------------------------------------+
+            | Permissions    | read-write                                                                 |
+            +----------------+----------------------------------------------------------------------------+
+            | Channel Based  | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+            | Resettable     | No                                                                         |
+            +----------------+----------------------------------------------------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Start Trigger Master Session**
+                - C Attribute: **NITCLK_ATTR_START_TRIGGER_MASTER_SESSION**
+
+sync_pulse_clock_source
+-----------------------
+
+    .. py:attribute:: sync_pulse_clock_source
+
+        Specifies the Sync Pulse Clock source. This property is typically used to  synchronize PCI devices when you want to control RTSI 7 yourself. Make  sure that a 10 MHz clock is driven onto RTSI 7.
+        Values
+        PCI Devices -  'RTSI_7' and  'None'
+        PXI Devices -  'PXI_CLK10' and  'None'
+        Default Value -  'None' directs :py:meth:`nitclk.Session.synchronize` to create the necessary routes. For  PCI, one of the synchronized devices drives a 10 MHz clock on RTSI 7  unless that line is already being driven.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Sync Pulse Clock Source**
+                - C Attribute: **NITCLK_ATTR_SYNC_PULSE_CLOCK_SOURCE**
+
+sync_pulse_sender_sync_pulse_source
+-----------------------------------
+
+    .. py:attribute:: sync_pulse_sender_sync_pulse_source
+
+        Specifies the external sync pulse source for the Sync Pulse Sender.  You can use this source to synchronize  the Sync Pulse Sender with an external non-TClk source.
+        Values
+        Empty string. Empty string is a valid value, indicating that the signal is  not exported.
+        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
+        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
+        Examples of Device-Specific Settings
+        - NI PXI-5122 supports  'PFI0' and  'PFI1'
+        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI4', and  'PFI5'
+        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
+        Default Value is empty string
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **External Pulse Source**
+                - C Attribute: **NITCLK_ATTR_SYNC_PULSE_SENDER_SYNC_PULSE_SOURCE**
+
+sync_pulse_source
+-----------------
+
+    .. py:attribute:: sync_pulse_source
+
+        Specifies the Sync Pulse source. This property is most often used when  synchronizing a multichassis system.
+        Values
+        Empty string
+        PXI Devices -  'PXI_Trig0' through  'PXI_Trig7' and device-specific settings
+        PCI Devices -  'RTSI_0' through  'RTSI_7' and device-specific settings
+        Examples of Device-Specific Settings
+        - NI PXI-5122 supports  'PFI0' and  'PFI1'
+        - NI PXI-5421 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
+        - NI PXI-6551/6552 supports  'PFI0',  'PFI1',  'PFI2', and  'PFI3'
+        Default Value - Empty string. This default value directs  :py:meth:`nitclk.Session.synchronize` to set this property when all the synchronized devices  are in one PXI chassis. To synchronize a multichassis system, you must set  this property before calling :py:meth:`nitclk.Session.synchronize`.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Sync Pulse Source**
+                - C Attribute: **NITCLK_ATTR_SYNC_PULSE_SOURCE**
+
+tclk_actual_period
+------------------
+
+    .. py:attribute:: tclk_actual_period
+
+        Indicates the computed TClk period that will be used during the acquisition.
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | float     |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | No        |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Period**
+                - C Attribute: **NITCLK_ATTR_TCLK_ACTUAL_PERIOD**
+
+
+.. contents:: Session
+
 
