@@ -2,7 +2,6 @@ API Reference
 --------------
 
 .. toctree::
-   :maxdepth: 6
 
    niscope/class
    niscope/enums
