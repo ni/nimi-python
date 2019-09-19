@@ -2,7 +2,20 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 <%
-config        = template_parameters['metadata'].config
+config         = template_parameters['metadata'].config
+module_version = config['module_version']
+version_parts = module_version.split('.')
+# We only care about major.minor
+# Arbitrary rules:
+# version < 0.5 - alpha
+# version >= 0.5 && version < 1.0 - beta
+# version >= 1.0 - stable
+if int(version_parts[0]) > 0:
+    dev_status = '5 - Production/Stable'
+elif int(version_parts[1]) > 4:
+    dev_status = '4 - Beta'
+else:
+    dev_status = '3 - Alpha'
 %>
 
 from setuptools.command.test import test as test_command
@@ -53,7 +66,7 @@ setup(
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: ${dev_status}",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",
