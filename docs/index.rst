@@ -27,7 +27,6 @@ Refer to your driver documentation for device-specific information and detailed 
 .. toctree::
    :maxdepth: 4
    :caption: Drivers
-   :hidden:
 
    nidcpower
    nidmm
