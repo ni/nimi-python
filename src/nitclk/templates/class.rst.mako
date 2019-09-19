@@ -29,14 +29,19 @@ ${helper.get_rst_header_snippet(module_name + '.Session', '=')}
 
 .. py:class:: SessionReference(session_number)
 
-    Helper class that contains all NI-TClk properties
+    Helper class that contains all NI-TClk properties. This class is what is returned by
+    any nimi-python Session class tclk attribute when the driver supports NI-TClk
+
+    .. code:: python
+
+        with niscope.Session('dev1') as session:
+            session.tclk.sample_clock_delay = .42
 
     :param session_number:
         nitclk session
     :type session_number: int, nimi-python Session class, SessionReference
 
 
-    list of int, list of nimi-python Session class, list of SessionReference
 <%
 table_contents = []
 table_contents.append(('Property', 'Datatype'))
@@ -69,7 +74,7 @@ for f in sorted(function_names):
 
 func_table = helper.as_rest_table(table_contents)
 %>\
-    **Public methods**
+    **Public functions**
 
     ${helper.get_indented_docstring_snippet(func_table, indent=4)}
 
@@ -147,7 +152,7 @@ attr_table = helper.as_rest_table(table_contents)
 %>\
 ${helper.get_indented_docstring_snippet(attr_table, indent=0)}
 
-${helper.get_rst_header_snippet('Methods', '-')}
+${helper.get_rst_header_snippet('Functions', '-')}
 
 <%
 function_names = []
