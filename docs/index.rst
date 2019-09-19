@@ -25,7 +25,7 @@ Refer to your driver documentation for device-specific information and detailed 
 .. include:: _static/license.inc
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
    :caption: Drivers
 
    nidcpower
