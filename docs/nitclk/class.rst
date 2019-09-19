@@ -1,10 +1,8 @@
-nitclk Module
-=============
 
 .. py:module:: nitclk
 
 Public API
-----------
+==========
 
 NI-TClk python module consists of several functions and properties. The functions are not sessions based
 like other nimi-python driver support and are called directly on the nitclk module. See :py:class:`SessionReference`
@@ -17,31 +15,8 @@ for properties.
         wfm1 = scope1.fetch()
         wfm2 = scope2.fetch()
 
-**Public functions**
-
-+----------------------------------------------------+
-| Function name                                      |
-+====================================================+
-| :py:func:`configure_for_homogeneous_triggers`      |
-+----------------------------------------------------+
-| :py:func:`finish_sync_pulse_sender_synchronize`    |
-+----------------------------------------------------+
-| :py:func:`initiate`                                |
-+----------------------------------------------------+
-| :py:func:`is_done`                                 |
-+----------------------------------------------------+
-| :py:func:`setup_for_sync_pulse_sender_synchronize` |
-+----------------------------------------------------+
-| :py:func:`synchronize`                             |
-+----------------------------------------------------+
-| :py:func:`synchronize_to_sync_pulse_sender`        |
-+----------------------------------------------------+
-| :py:func:`wait_until_done`                         |
-+----------------------------------------------------+
-
-
 configure_for_homogeneous_triggers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
     .. py:currentmodule:: nitclk
 
@@ -184,7 +159,7 @@ configure_for_homogeneous_triggers
         :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
 
 finish_sync_pulse_sender_synchronize
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
     .. py:currentmodule:: nitclk
 
@@ -221,7 +196,7 @@ finish_sync_pulse_sender_synchronize
         :type min_time: float
 
 initiate
-~~~~~~~~
+--------
 
     .. py:currentmodule:: nitclk
 
@@ -248,7 +223,7 @@ initiate
         :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
 
 is_done
-~~~~~~~
+-------
 
     .. py:currentmodule:: nitclk
 
@@ -284,7 +259,7 @@ is_done
 
 
 setup_for_sync_pulse_sender_synchronize
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
     .. py:currentmodule:: nitclk
 
@@ -321,7 +296,7 @@ setup_for_sync_pulse_sender_synchronize
         :type min_time: float
 
 synchronize
-~~~~~~~~~~~
+-----------
 
     .. py:currentmodule:: nitclk
 
@@ -363,7 +338,7 @@ synchronize
         :type min_tclk_period: float in seconds or datetime.timedelta
 
 synchronize_to_sync_pulse_sender
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
     .. py:currentmodule:: nitclk
 
@@ -400,7 +375,7 @@ synchronize_to_sync_pulse_sender
         :type min_time: float
 
 wait_until_done
-~~~~~~~~~~~~~~~
+---------------
 
     .. py:currentmodule:: nitclk
 
@@ -442,7 +417,7 @@ wait_until_done
 
 
 SessionReference
-----------------
+================
 .. py:currentmodule:: nitclk
 
 .. py:class:: SessionReference(session_number)
@@ -460,39 +435,8 @@ SessionReference
     :type session_number: int, nimi-python Session class, SessionReference
 
 
-    **Properties**
-
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | Property                                        | Datatype                                                                   |
-    +=================================================+============================================================================+
-    | :py:attr:`.exported_sync_pulse_output_terminal` | str                                                                        |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.exported_tclk_output_terminal`       | str                                                                        |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.pause_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.ref_trigger_master_session`          | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.sample_clock_delay`                  | float                                                                      |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.script_trigger_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.sequencer_flag_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.start_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.sync_pulse_clock_source`             | str                                                                        |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.sync_pulse_sender_sync_pulse_source` | str                                                                        |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.sync_pulse_source`                   | str                                                                        |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-    | :py:attr:`.tclk_actual_period`                  | float                                                                      |
-    +-------------------------------------------------+----------------------------------------------------------------------------+
-
-
 exported_sync_pulse_output_terminal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -530,7 +474,7 @@ exported_sync_pulse_output_terminal
                 - C Attribute: **NITCLK_ATTR_EXPORTED_SYNC_PULSE_OUTPUT_TERMINAL**
 
 exported_tclk_output_terminal
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -568,7 +512,7 @@ exported_tclk_output_terminal
                 - C Attribute: **NITCLK_ATTR_EXPORTED_TCLK_OUTPUT_TERMINAL**
 
 pause_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -598,7 +542,7 @@ pause_trigger_master_session
                 - C Attribute: **NITCLK_ATTR_PAUSE_TRIGGER_MASTER_SESSION**
 
 ref_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -628,7 +572,7 @@ ref_trigger_master_session
                 - C Attribute: **NITCLK_ATTR_REF_TRIGGER_MASTER_SESSION**
 
 sample_clock_delay
-~~~~~~~~~~~~~~~~~~
+------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -666,7 +610,7 @@ sample_clock_delay
                 - C Attribute: **NITCLK_ATTR_SAMPLE_CLOCK_DELAY**
 
 script_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -696,7 +640,7 @@ script_trigger_master_session
                 - C Attribute: **NITCLK_ATTR_SCRIPT_TRIGGER_MASTER_SESSION**
 
 sequencer_flag_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -728,7 +672,7 @@ sequencer_flag_master_session
                 - C Attribute: **NITCLK_ATTR_SEQUENCER_FLAG_MASTER_SESSION**
 
 start_trigger_master_session
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -758,7 +702,7 @@ start_trigger_master_session
                 - C Attribute: **NITCLK_ATTR_START_TRIGGER_MASTER_SESSION**
 
 sync_pulse_clock_source
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -791,7 +735,7 @@ sync_pulse_clock_source
                 - C Attribute: **NITCLK_ATTR_SYNC_PULSE_CLOCK_SOURCE**
 
 sync_pulse_sender_sync_pulse_source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -829,7 +773,7 @@ sync_pulse_sender_sync_pulse_source
                 - C Attribute: **NITCLK_ATTR_SYNC_PULSE_SENDER_SYNC_PULSE_SOURCE**
 
 sync_pulse_source
-~~~~~~~~~~~~~~~~~
+-----------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -867,7 +811,7 @@ sync_pulse_source
                 - C Attribute: **NITCLK_ATTR_SYNC_PULSE_SOURCE**
 
 tclk_actual_period
-~~~~~~~~~~~~~~~~~~
+------------------
 
     .. py:currentmodule:: nitclk.SessionReference
 
@@ -896,58 +840,6 @@ tclk_actual_period
                 - C Attribute: **NITCLK_ATTR_TCLK_ACTUAL_PERIOD**
 
 
-Function List
--------------
-
-+-----------------------------------------------------------+
-| Method name                                               |
-+===========================================================+
-| :py:func:`nitclk.configure_for_homogeneous_triggers`      |
-+-----------------------------------------------------------+
-| :py:func:`nitclk.finish_sync_pulse_sender_synchronize`    |
-+-----------------------------------------------------------+
-| :py:func:`nitclk.initiate`                                |
-+-----------------------------------------------------------+
-| :py:func:`nitclk.is_done`                                 |
-+-----------------------------------------------------------+
-| :py:func:`nitclk.setup_for_sync_pulse_sender_synchronize` |
-+-----------------------------------------------------------+
-| :py:func:`nitclk.synchronize`                             |
-+-----------------------------------------------------------+
-| :py:func:`nitclk.synchronize_to_sync_pulse_sender`        |
-+-----------------------------------------------------------+
-| :py:func:`nitclk.wait_until_done`                         |
-+-----------------------------------------------------------+
-
-Property List
--------------
-
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| Property                                        | Datatype                                                                   |
-+=================================================+============================================================================+
-| :py:attr:`.exported_sync_pulse_output_terminal` | str                                                                        |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.exported_tclk_output_terminal`       | str                                                                        |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.pause_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.ref_trigger_master_session`          | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.sample_clock_delay`                  | float                                                                      |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.script_trigger_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.sequencer_flag_master_session`       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.start_trigger_master_session`        | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.sync_pulse_clock_source`             | str                                                                        |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.sync_pulse_sender_sync_pulse_source` | str                                                                        |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.sync_pulse_source`                   | str                                                                        |
-+-------------------------------------------------+----------------------------------------------------------------------------+
-| :py:attr:`.tclk_actual_period`                  | float                                                                      |
-+-------------------------------------------------+----------------------------------------------------------------------------+
+.. contents:: nitclk
 
 
