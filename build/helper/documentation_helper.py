@@ -491,7 +491,7 @@ def format_type_for_rst_documentation(param, numpy, config):
     return p_type
 
 
-def get_function_rst(function, method_template, numpy, config, indent=0):
+def get_function_rst(function, method_template, numpy, config, indent=0, method_or_function='method'):
     '''Gets formatted documentation for given function that can be used in rst documentation
 
     Args:
@@ -515,7 +515,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['repeated_capability_type'], function['python_name'], get_params_snippet(function, session_method))
 
-    rst = '.. py:method:: ' + function['python_name'] + suffix + '('
+    rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['python_name'], suffix)
     rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
