@@ -21,6 +21,10 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * The development status in `setup.py` will be based on the module version:
+            * version >= 1.0 - Stable
+            * version < 1.0 and version >= 0.5 - Beta
+            * version < 0.5 - Alpha
     * #### Removed
 * ### NI-DMM
     * #### Added
