@@ -24,6 +24,7 @@ $(warning $(MAKECMDGOALS))
 ifeq (,$(MAKECMDGOALS))
 ROOT_FILES := \
 	$(ROOT_DIR)/README.rst \
+	$(ROOT_DIR)/VERSION \
 
 endif
 
@@ -122,6 +123,10 @@ global_files_start: $(DRIVERS)
 $(ROOT_DIR)/README.rst: global_files_start
 	$(call trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+
+$(ROOT_DIR)/VERSION: global_files_start
+	$(call trace_to_console, "Creating Root",$(notdir $@))
+	$(_hide_cmds)$(call log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file bin/$(d)/$(d)/VERSION ))
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.
