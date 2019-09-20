@@ -9,6 +9,12 @@ export GENERATED_DIR
 COMMAND_LOG := $(ROOT_DIR)/commands.log
 export COMMAND_LOG
 
+DOCS_DIR := $(ROOT_DIR)/docs
+export DOCS_DIR
+
+STATIC_DOCS_DIR := $(DOCS_DIR)/_static
+export STATIC_DOCS_DIR
+
 ifeq (,$(PRINT))
 _hide_cmds := @
 endif
