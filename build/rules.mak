@@ -33,6 +33,10 @@ $(MODULE_DIR)/unit_tests/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILE
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
+$(MODULE_DIR)/%: %.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
+	$(call trace_to_console, "Generating",$@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
 $(MODULE_DIR)/%.py: %.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@

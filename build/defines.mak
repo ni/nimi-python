@@ -61,6 +61,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     unit_tests/_matchers.py \
     __init__.py \
     _converters.py \
+    VERSION \
 
 DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
