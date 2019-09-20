@@ -48,6 +48,9 @@ setup(
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
         'six',
+        % if config['supports_nitclk']:
+        'nitclk',
+        % endif
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
