@@ -126,7 +126,7 @@ $(ROOT_DIR)/README.rst: global_files_start
 	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
 
 $(ROOT_DIR)/VERSION: global_files_start
-	$(call trace_to_console, "Creating Root",$(notdir $@))
+	$(call trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py
 	$(_hide_cmds)$(call log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file bin/$(d)/$(d)/VERSION ))
 
 $(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simple_mako.py
