@@ -1,5 +1,6 @@
 <%
     import build.helper as helper
+    from packaging.version import Version
 
     config        = template_parameters['metadata'].config
     attributes    = helper.filter_codegen_attributes(config['attributes'])
@@ -7,6 +8,8 @@
     module_name   = config['module_name']
     driver_name   = config['driver_name']
     c_function_prefix = config['c_function_prefix']
+
+    v = Version(config['module_version'])
 %>\
 
 .. _${module_name}_installation-section:
