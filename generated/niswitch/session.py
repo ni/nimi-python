@@ -13,6 +13,7 @@ import niswitch._visatype as _visatype
 import niswitch.enums as enums
 import niswitch.errors as errors
 
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)

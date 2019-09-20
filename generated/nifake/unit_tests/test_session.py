@@ -28,6 +28,11 @@ class TestSession(object):
         self.patched_library_singleton_get = patch('nifake.session._library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
+        self.tclk_patched_library_patcher = patch('nitclk._library.Library', autospec=True)
+        self.tclk_patched_library = self.tclk_patched_library_patcher.start()
+        self.tclk_patched_library_singleton_get = patch('nitclk.session._library_singleton.get', return_value=self.patched_library)
+        self.tclk_patched_library_singleton_get.start()
+
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
         self.patched_library.niFake_InitWithOptions.side_effect = self.side_effects_helper.niFake_InitWithOptions
@@ -50,6 +55,8 @@ class TestSession(object):
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
+        self.tclk_patched_library_singleton_get.stop()
+        self.tclk_patched_library_patcher.stop()
 
     def niFake_read_warning(self, vi, maximum_time, reading):  # noqa: N802
         reading.contents.value = self.reading
@@ -1274,6 +1281,10 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             session.double_all_the_nums(nums)
             self.patched_library.niFake_DoubleAllTheNums.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(nums)), _matchers.ViReal64BufferMatcher(nums_x2))
+
+    def test_nitclk_integration(self):
+        with nifake.Session('dev1') as session:
+            assert str(type(session.tclk)) == "<class 'nitclk.session.SessionReference'>"
 
 
 # not session tests per se
