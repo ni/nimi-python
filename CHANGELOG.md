@@ -22,7 +22,10 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * The development status in `setup.py` will be based on the module version:
-            * version >= 1.0 - Stable
+            * version >= 1.0
+                * .devN or .aN - Alpha
+                * .bN, .cN or .rcN - Beta
+                * \<nothing\> or .postN - Stable
             * version < 1.0 and version >= 0.5 - Beta
             * version < 0.5 - Alpha
     * #### Removed
