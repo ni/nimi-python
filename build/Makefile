@@ -115,6 +115,9 @@ PYTHON_CMD ?= python3
 
 .PHONY: help Makefile
 
+global_files_start: $(DRIVERS)
+	@echo
+	@echo "Making Global Files"
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.
