@@ -1,8 +1,10 @@
 <%
 from datetime import datetime
-
-config = template_parameters['metadata'].config
 current_year = datetime.today().year
+
+with open('./VERSION') as vf:
+    global_version = vf.read().strip()
+
 %>\
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -69,7 +71,7 @@ author = 'National Instruments'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '${config['module_version']}'
+release = '${global_version}'
 # The short X.Y version.
 version = release[:3]
 
