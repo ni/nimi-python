@@ -19,7 +19,15 @@ ifeq (,$(PRINT))
 _hide_cmds := @
 endif
 
-all: $(DRIVERS)
+# We only add root files if we are building the 'all' target (nothing on the command line)
+$(warning $(MAKECMDGOALS))
+ifeq (,$(MAKECMDGOALS))
+ROOT_FILES := \
+	$(ROOT_DIR)/README.rst \
+
+endif
+
+all: $(DRIVERS) $(ROOT_FILES)
 
 define per_driver_per_target
 $1_$2: start
