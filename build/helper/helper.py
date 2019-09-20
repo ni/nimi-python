@@ -1,3 +1,4 @@
+from packaging.version import Version
 import pprint
 import re
 
@@ -98,4 +99,37 @@ def get_array_type_for_api_type(api_type):
         return _type_map[api_type]['array_type']
     else:
         raise TypeError('Only simple types allowed for arrays: {0}'.format(api_type))
+
+
+def get_development_status(config):
+    '''Get the PyPI Development Status, based on module version
+
+    module_version must be PEP 440 conformant
+    See https://packaging.pypa.io/en/latest/version/ and https://www.python.org/dev/peps/pep-0440/
+    Arbitrary rules:
+    version < 0.5 - alpha
+    version >= 0.5 && version < 1.0 - beta
+    version >= 1.0
+       .devN or .aN - Alpha
+       .bN, cN, rcN - Beta
+       <nothing> or postN - Stable
+    '''
+    v = Version(config['module_version'])
+    if v.release[0] == 0 and v.release[1] < 5:
+        dev_status = '3 - Alpha'
+    elif v.release[0] == 0:
+        dev_status = '4 - Beta'
+    else:
+        if v.dev is not None or (v.pre is not None and v.pre[0] == 'a'):
+            # .devN or .aN
+            dev_status = '3 - Alpha'
+        elif v.pre is not None:
+            # .bN, .cN, .rcN
+            dev_status = '4 - Beta'
+        else:
+            # <nothing> or .postN
+            dev_status = '5 - Production/Stable'
+
+    return dev_status
+
 

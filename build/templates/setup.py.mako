@@ -2,34 +2,10 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 <%
+import build.helper as helper
+
 config         = template_parameters['metadata'].config
 module_version = config['module_version']
-
-from packaging.version import Version
-v = Version(module_version)  
-# module_version must be PEP 440 conformant
-# See https://packaging.pypa.io/en/latest/version/ and https://www.python.org/dev/peps/pep-0440/
-# Arbitrary rules:
-# version < 0.5 - alpha
-# version >= 0.5 && version < 1.0 - beta
-# version >= 1.0
-#    .devN or .aN - Alpha
-#    .bN, cN, rcN - Beta
-#    <nothing> or postN - Stable
-if v.release[0] == 0 and v.release[1] < 5:
-    dev_status = '3 - Alpha'
-elif v.release[0] == 0:
-    dev_status = '4 - Beta'
-else:
-    if v.dev is not None or (v.pre is not None and v.pre[0] == 'a'):
-        # .devN or .aN
-        dev_status = '3 - Alpha'
-    elif v.pre is not None:
-        # .bN, .cN, .rcN
-        dev_status = '4 - Beta'
-    else:
-        # <nothing> or .postN
-        dev_status = '5 - Production/Stable'
 %>
 
 from setuptools.command.test import test as test_command
@@ -80,7 +56,7 @@ setup(
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: ${dev_status}",
+        "Development Status :: ${helper.get_development_status(config)}",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",
