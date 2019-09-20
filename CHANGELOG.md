@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
                 * \<nothing\> or .postN - Stable
             * version < 1.0 and version >= 0.5 - Beta
             * version < 0.5 - Alpha
+        * Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
     * #### Removed
 * ### NI-DMM
     * #### Added

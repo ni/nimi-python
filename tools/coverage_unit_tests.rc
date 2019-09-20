@@ -4,4 +4,5 @@ omit =
 include =
     */nifake/*
     */nimodinst/session.py
+    */nitclk/*
     build/*
