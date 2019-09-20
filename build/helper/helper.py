@@ -133,3 +133,104 @@ def get_development_status(config):
     return dev_status
 
 
+# Tests
+def test_get_development_status():
+    config = {}
+
+    config['module_version'] = '0.0.0.dev0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '0.0.0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '0.4.9.dev0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '0.4.9'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '0.5.0.dev0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '0.5.0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '0.9.9.dev0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '0.9.9'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '1.0.0.dev0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '1.0.0.a0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '1.0.0.b0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '1.0.0.c0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '1.0.0.rc0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '1.0.0'
+    assert get_development_status(config) == '5 - Production/Stable'
+
+    config['module_version'] = '1.9.9.dev0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '1.9.9.a0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '1.9.9.b0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '1.9.9.c0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '1.9.9.rc0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '1.9.9'
+    assert get_development_status(config) == '5 - Production/Stable'
+
+    config['module_version'] = '9.9.9.dev0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '9.9.9.a0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '9.9.9.b0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '9.9.9.c0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '9.9.9.rc0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '9.9.9'
+    assert get_development_status(config) == '5 - Production/Stable'
+
+    config['module_version'] = '19.9.9.dev0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '19.9.9.a0'
+    assert get_development_status(config) == '3 - Alpha'
+
+    config['module_version'] = '19.9.9.b0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '19.9.9.c0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '19.9.9.rc0'
+    assert get_development_status(config) == '4 - Beta'
+
+    config['module_version'] = '19.9.9'
+    assert get_development_status(config) == '5 - Production/Stable'
+
+
