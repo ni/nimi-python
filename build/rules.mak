@@ -73,9 +73,6 @@ module: $(MODULE_FILES)
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
 README := $(OUTPUT_DIR)/README.rst
-ifneq (nifake,$(DRIVER))
-  ROOT_README := $(ROOT_DIR)/README.rst
-endif
 
 $(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
@@ -104,10 +101,6 @@ else
 $(README): $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
 	$(call trace_to_console, "Creating",$@)
 	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/status.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
-
-$(ROOT_README): $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*) $(wildcard $(DOCS_DIR)/*/status.inc)
-	$(call trace_to_console, "Creating",$@)
-	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
 
 endif
 
