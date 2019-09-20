@@ -4,18 +4,32 @@
 <%
 config         = template_parameters['metadata'].config
 module_version = config['module_version']
-version_parts = module_version.split('.')
-# We only care about major.minor
+
+from packaging.version import Version
+v = Version(module_version)  
+# module_version must be PEP 440 conformant
+# See https://packaging.pypa.io/en/latest/version/ and https://www.python.org/dev/peps/pep-0440/
 # Arbitrary rules:
 # version < 0.5 - alpha
 # version >= 0.5 && version < 1.0 - beta
-# version >= 1.0 - stable
-if int(version_parts[0]) > 0:
-    dev_status = '5 - Production/Stable'
-elif int(version_parts[1]) > 4:
+# version >= 1.0
+#    .devN or .aN - Alpha
+#    .bN, cN, rcN - Beta
+#    <nothing> or postN - Stable
+if v.release[0] == 0 and v.release[1] < 5:
+    dev_status = '3 - Alpha'
+elif v.release[0] == 0:
     dev_status = '4 - Beta'
 else:
-    dev_status = '3 - Alpha'
+    if v.dev is not None or (v.pre is not None and v.pre[0] == 'a'):
+        # .devN or .aN
+        dev_status = '3 - Alpha'
+    elif v.pre is not None:
+        # .bN, .cN, .rcN
+        dev_status = '4 - Beta'
+    else:
+        # <nothing> or .postN
+        dev_status = '5 - Production/Stable'
 %>
 
 from setuptools.command.test import test as test_command
