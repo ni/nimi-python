@@ -3483,7 +3483,7 @@ set_attribute_vi_session
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: set_attribute_vi_session(attribute)
+    .. py:method:: set_attribute_vi_session(attribute, value)
 
             TBD
 
@@ -3497,7 +3497,7 @@ set_attribute_vi_session
 
                 .. code:: python
 
-                    session.channels[0,1].set_attribute_vi_session(property)
+                    session.channels[0,1].set_attribute_vi_session(property, value)
 
 
             :param attribute:
@@ -3507,6 +3507,13 @@ set_attribute_vi_session
 
 
             :type attribute: int
+            :param value:
+
+
+                
+
+
+            :type value: int
 
 set_attribute_vi_string
 -----------------------
