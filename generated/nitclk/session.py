@@ -163,8 +163,7 @@ class SessionReference(object):
         self._session_number = session_number
         self._library = _library_singleton.get()
         self._encoding = encoding
-        # We need a repeated capability for get/set attributes, but we
-        # do not support anything other than an empty string
+        # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
         self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__

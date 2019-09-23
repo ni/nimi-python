@@ -1716,7 +1716,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_attribute_vi_session(self, attribute):
+    def set_attribute_vi_session(self, attribute, value):
         r'''set_attribute_vi_session
 
         TBD
@@ -1727,16 +1727,18 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].set_attribute_vi_session(property)
+            session.channels[0,1].set_attribute_vi_session(property, value)
 
         Args:
             attribute (int):
+
+            value (int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
-        value_ctype = _visatype.ViSession(self._vi)  # case S110
+        value_ctype = _visatype.ViSession(value)  # case S150
         error_code = self._library.niDigital_SetAttributeViSession(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
