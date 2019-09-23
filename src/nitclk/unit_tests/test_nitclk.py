@@ -213,6 +213,15 @@ class TestNitclkApi(object):
         session.start_trigger_master_session = other_session_number
         self.patched_library.niTClk_SetAttributeViSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViSessionMatcher(other_session_number))
 
+    def test_set_vi_session_with_session_reference(self):
+        session = nitclk.SessionReference(SESSION_NUM_FOR_TEST)
+        self.patched_library.niTClk_SetAttributeViSession.side_effect = self.side_effects_helper.niTClk_SetAttributeViSession
+        attribute_id = 3
+        other_session_number = 43
+        other_session_reference = nitclk.SessionReference(other_session_number)
+        session.start_trigger_master_session = other_session_reference
+        self.patched_library.niTClk_SetAttributeViSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViSessionMatcher(other_session_number))
+
     def test_set_vi_session_with_session(self):
         session = nitclk.SessionReference(SESSION_NUM_FOR_TEST)
         self.patched_library.niTClk_SetAttributeViSession.side_effect = self.side_effects_helper.niTClk_SetAttributeViSession
