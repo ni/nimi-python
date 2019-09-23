@@ -1019,8 +1019,8 @@ class _SessionBase(object):
         return float(value_ctype.value)
 
     @ivi_synchronized
-    def get_attribute_vi_session(self, attribute):
-        r'''get_attribute_vi_session
+    def _get_attribute_vi_session(self, attribute):
+        r'''_get_attribute_vi_session
 
         TBD
 
@@ -1030,7 +1030,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_attribute_vi_session(property)
+            session.channels[0,1]._get_attribute_vi_session(property)
 
         Args:
             attribute (int):
@@ -1716,8 +1716,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_attribute_vi_session(self, attribute, value):
-        r'''set_attribute_vi_session
+    def _set_attribute_vi_session(self, attribute, value):
+        r'''_set_attribute_vi_session
 
         TBD
 
@@ -1727,7 +1727,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].set_attribute_vi_session(property, value)
+            session.channels[0,1]._set_attribute_vi_session(property, value)
 
         Args:
             attribute (int):
