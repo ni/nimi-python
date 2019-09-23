@@ -11,8 +11,11 @@ single_session = [SESSION_NUM_FOR_TEST]
 multiple_sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST * 10, SESSION_NUM_FOR_TEST * 100, SESSION_NUM_FOR_TEST + 1]
 
 
-    '''Fake Session objects for drivers that support NI-TClk are expected to have a property of tyep nitclk.SessionReference called tclk.'''
 class NitclkSupportingDriverSession(object):
+    '''Session objects for drivers that support NI-TClk are expected to have a property of type nitclk.SessionReference called tclk
+
+    This is why we're creating this fake driver class and adding the tclk property.
+    '''
     def __init__(self, session_number):
         self.tclk = nitclk.SessionReference(session_number)
 
