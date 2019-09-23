@@ -191,16 +191,16 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
         module_name = '_visatype'
 
     if parameter['is_string'] is True:
-        definitions = _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name, config)
+        definitions = _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name)
     elif parameter['is_buffer'] is True:
-        definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name, config)
+        definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
     else:
         definitions = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name, config)
 
     return definitions
 
 
-def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name, config):
+def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name):
     '''These are the different cases for initializing the ctype variables for strings
 
     C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
@@ -339,7 +339,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
     return definitions
 
 
-def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name, config):
+def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name):
     '''These are the different cases for initializing the ctype variable for buffers:
 
         B510. Input/output numpy array:                                            get_ctypes_pointer_for_buffer(value=waveform)
