@@ -17,7 +17,7 @@ class NitclkSessionTest(object):
         self.tclk = nitclk.SessionReference(session_number)
 
 
-class TestSession(object):
+class TestNitclkApi(object):
     def setup_method(self, method):
         self.patched_library_patcher = patch('nitclk._library.Library', autospec=True)
         self.patched_library = self.patched_library_patcher.start()
