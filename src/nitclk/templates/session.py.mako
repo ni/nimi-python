@@ -77,8 +77,7 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = _library_singleton.get()
         self._encoding = encoding
-        # We need a repeated capability for get/set attributes, but we
-        # do not support anything other than an empty string
+        # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
         self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__
