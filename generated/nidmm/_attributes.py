@@ -115,10 +115,10 @@ class AttributeSessionReference(Attribute):
     def __get__(self, session, session_type):
         # Import here to avoid a circular dependency when initial import happens
         from nidmm.session import SessionReference
-        return SessionReference(session._get_attribute_vi_int32(self._attribute_id))
+        return SessionReference(session._get_attribute_vi_session(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
+        session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
 
 
 
