@@ -218,6 +218,11 @@ class ViInt32Matcher(_ScalarMatcher):
         _ScalarMatcher.__init__(self, _visatype.ViInt32, expected_value)
 
 
+class ViUInt32Matcher(_ScalarMatcher):
+    def __init__(self, expected_value):
+        _ScalarMatcher.__init__(self, _visatype.ViUInt32, expected_value)
+
+
 class ViAttrMatcher(_ScalarMatcher):
     def __init__(self, expected_value):
         _ScalarMatcher.__init__(self, _visatype.ViAttr, expected_value)
@@ -297,6 +302,11 @@ class ViInt64BufferMatcher(_BufferMatcher):
 class ViReal64BufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, _visatype.ViReal64, expected_size_or_value)
+
+
+class ViSessionBufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, _visatype.ViSession, expected_size_or_value)
 
 
 
