@@ -218,7 +218,7 @@ class TestNitclkApi(object):
         self.patched_library.niTClk_SetAttributeViSession.side_effect = self.side_effects_helper.niTClk_SetAttributeViSession
         attribute_id = 3
         other_session_number = 43
-        other_session = NitclkSessionTest(other_session_number)
+        other_session = NitclkSupportingDriverSession(other_session_number)
         session.start_trigger_master_session = other_session
         self.patched_library.niTClk_SetAttributeViSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViSessionMatcher(other_session_number))
 
