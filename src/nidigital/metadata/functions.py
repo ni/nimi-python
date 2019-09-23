@@ -3150,6 +3150,7 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'value',
+                'is_session_handle': False,
                 'type': 'ViSession'
             }
         ],
