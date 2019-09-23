@@ -19,7 +19,7 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
     },
-    ParameterUsageOptions.SESSION_METHOD_DECLARATION_NO_DEFAULT: {
+    ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
         'skip_output_parameters': True,

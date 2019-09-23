@@ -190,7 +190,7 @@ functions['GetExtendedErrorInfo']['render_in_session_base'] = True
 <%
 f = functions[func_name]
 name = f['python_name']
-parameter_list = helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION_NO_DEFAULT)
+parameter_list = helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL)
 %>\
 def ${name}(${parameter_list}):
     '''${name}

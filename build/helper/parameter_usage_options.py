@@ -14,8 +14,8 @@ class ParameterUsageOptions(AutoNumber):
 
     SESSION_METHOD_DECLARATION = ()
     '''For declaring a regular method in Session'''
-    SESSION_METHOD_DECLARATION_NO_DEFAULT = ()
     '''Same as SESSION_METHOD_DECLARATION but without default values - used for passing through parameters to the same function, just generated elsewhere'''
+    SESSION_METHOD_PASSTHROUGH_CALL = ()
     SESSION_INIT_DECLARATION = ()
     '''For declaring an init method in Session'''
     SESSION_NUMPY_INTO_METHOD_DECLARATION = ()
