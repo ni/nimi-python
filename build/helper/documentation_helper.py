@@ -498,7 +498,7 @@ def format_type_for_rst_documentation(param, numpy, config):
 
 
 def get_function_rst(function, method_template, numpy, config, indent=0, method_or_function='method'):
-    '''Gets formatted documentation for given function that can be used in rst documentation
+    '''Gets formatted documentation for given function or method that can be used in rst documentation
 
     Args:
         function (dict): function dictionary
