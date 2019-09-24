@@ -27,7 +27,7 @@ def configure_logging(lvl=logging.WARNING, logfile=None):
 def main():
     # Setup the required arguments for this script
     usage = """
-Install the wheel found in bin/<driver>/dist
+Find the max version in any referenced VERSION file and then write that max version to the output VERSION file
 """
     parser = argparse.ArgumentParser(description=usage)
     file_group = parser.add_argument_group("Input and Output files")
