@@ -15,9 +15,7 @@ BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/helper/*)
 
 DRIVER_GENERATED_DIR := $(GENERATED_DIR)/$(DRIVER)
 
-DOCS_DIR := $(ROOT_DIR)/docs
 DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
-STATIC_DOCS_DIR := $(DOCS_DIR)/_static
 
 VERSION ?= 0.1
 WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
@@ -61,6 +59,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     unit_tests/_matchers.py \
     __init__.py \
     _converters.py \
+    VERSION \
 
 DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
