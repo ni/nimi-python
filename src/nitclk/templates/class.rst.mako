@@ -35,6 +35,7 @@ for properties.
 .. code:: python
 
     with niscope.Session('dev1') as scope1, niscope.Session('dev2') as scope2:
+        nitclk.configure_for_homogeneous_triggers([scope1, scope2])
         nitclk.initiate([scope1, scope2])
         wfm1 = scope1.fetch()
         wfm2 = scope2.fetch()
