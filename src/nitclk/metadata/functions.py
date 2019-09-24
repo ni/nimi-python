@@ -173,7 +173,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -277,6 +277,7 @@ functions = {
                 'documentation': {
                     'description': 'The value that you are getting'
                 },
+                'is_session_handle': False,
                 'name': 'value',
                 'type': 'ViSession'
             }
@@ -322,9 +323,13 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'The value that you are getting'
+                },
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufSize'
                 },
                 'name': 'value',
                 'type': 'ViChar[]'
@@ -807,7 +812,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -911,6 +916,7 @@ functions = {
                 'documentation': {
                     'description': 'The value for the attribute'
                 },
+                'is_session_handle': False,
                 'name': 'value',
                 'type': 'ViSession'
             }

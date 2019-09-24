@@ -163,6 +163,8 @@ class SessionReference(object):
         self._session_number = session_number
         self._library = _library_singleton.get()
         self._encoding = encoding
+        # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
+        self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -199,35 +201,6 @@ class SessionReference(object):
     def _get_session_number(self):
         return self._session_number
 
-    def _get_attribute_vi_boolean(self, attribute_id):
-        r'''_get_attribute_vi_boolean
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nitclk.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
-
-        Args:
-            attribute_id (int):
-
-
-        Returns:
-            value (bool):
-
-        '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niTClk_GetAttributeViBoolean(session_ctype, channel_name_ctype, attribute_id_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(value_ctype.value)
-
     def _get_attribute_vi_real64(self, attribute_id):
         r'''_get_attribute_vi_real64
 
@@ -250,7 +223,7 @@ class SessionReference(object):
             value (float): The value that you are getting
 
         '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
+        session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64()  # case S220
@@ -283,7 +256,7 @@ class SessionReference(object):
             value (int): The value that you are getting
 
         '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
+        session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViSession()  # case S220
@@ -291,7 +264,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(value_ctype.value)
 
-    def _get_attribute_vi_string(self, attribute_id, buf_size, value):
+    def _get_attribute_vi_string(self, attribute_id):
         r'''_get_attribute_vi_string
 
         This method queries the value of an NI-TClk ViString property. You
@@ -312,7 +285,7 @@ class SessionReference(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nitclk.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1]._get_attribute_vi_string(attribute_id, buf_size, value)
+            session.channels[0,1]._get_attribute_vi_string(attribute_id)
 
         Args:
             attribute_id (int): The ID of the property that you want to get Supported Properties
@@ -320,20 +293,23 @@ class SessionReference(object):
                 sync_pulse_clock_source
                 exported_sync_pulse_output_terminal
 
-            buf_size (int): The number of bytes in the ViChar array that you specify for the value
-                parameter
 
+        Returns:
             value (str): The value that you are getting
 
         '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
+        session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        buf_size_ctype = _visatype.ViInt32(buf_size)  # case S150
-        value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
+        buf_size_ctype = _visatype.ViInt32()  # case S170
+        value_ctype = None  # case C050
+        error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buf_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        value_ctype = (_visatype.ViChar * buf_size_ctype.value)()  # case C060
         error_code = self._library.niTClk_GetAttributeViString(session_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        return value_ctype.value.decode(self._encoding)
 
     def _get_extended_error_info(self):
         r'''_get_extended_error_info
@@ -361,33 +337,6 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_string_ctype.value.decode(self._encoding)
 
-    def _set_attribute_vi_boolean(self, attribute_id, value):
-        r'''_set_attribute_vi_boolean
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nitclk.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, value)
-
-        Args:
-            attribute_id (int):
-
-            value (bool):
-
-        '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViBoolean(value)  # case S150
-        error_code = self._library.niTClk_SetAttributeViBoolean(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def _set_attribute_vi_real64(self, attribute_id, value):
         r'''_set_attribute_vi_real64
 
@@ -412,7 +361,7 @@ class SessionReference(object):
             value (float): The value for the property
 
         '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
+        session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64(value)  # case S150
@@ -420,7 +369,7 @@ class SessionReference(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def _set_attribute_vi_session(self, attribute_id):
+    def _set_attribute_vi_session(self, attribute_id, value):
         r'''_set_attribute_vi_session
 
         Sets the value of an NI-TClk ViSession property.
@@ -435,7 +384,7 @@ class SessionReference(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nitclk.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1]._set_attribute_vi_session(attribute_id)
+            session.channels[0,1]._set_attribute_vi_session(attribute_id, value)
 
         Args:
             attribute_id (int): The ID of the property that you want to set Supported Properties
@@ -444,11 +393,13 @@ class SessionReference(object):
                 script_trigger_master_session
                 pause_trigger_master_session
 
+            value (int): The value for the property
+
         '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
+        session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        value_ctype = _visatype.ViSession(self._value)  # case S110
+        value_ctype = _visatype.ViSession(value)  # case S150
         error_code = self._library.niTClk_SetAttributeViSession(session_ctype, channel_name_ctype, attribute_id_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -479,7 +430,7 @@ class SessionReference(object):
             value (str): Pass the value for the property
 
         '''
-        session_ctype = _visatype.ViSession(self._session)  # case S110
+        session_ctype = _visatype.ViSession(self._session_number)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
@@ -714,7 +665,7 @@ class _Session(object):
 
         TBD
         '''
-        session_list_ctype = _visatype.ViSession(self._session_list)  # case S110
+        session_list_ctype = _visatype.ViSession(self._session_number)  # case S110
         error_code = self._library.niTClk_InitForDocumentation(session_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -863,18 +814,6 @@ class _Session(object):
         return
 
 
-def _get_session_class():
-    '''Internal function to return session singleton'''
-    global _session_instance
-    global _session_instance_lock
-
-    with _session_instance_lock:
-        if _session_instance is None:
-            _session_instance = _Session()
-
-        return _session_instance
-
-
 def configure_for_homogeneous_triggers(sessions):
     '''configure_for_homogeneous_triggers
 
@@ -1004,7 +943,7 @@ def configure_for_homogeneous_triggers(sessions):
         sessions (list of int): sessions is an array of sessions that are being synchronized.
 
     '''
-    return _get_session_class().configure_for_homogeneous_triggers(sessions)
+    return _Session().configure_for_homogeneous_triggers(sessions)
 
 
 def finish_sync_pulse_sender_synchronize(sessions, min_time):
@@ -1023,15 +962,15 @@ def finish_sync_pulse_sender_synchronize(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().finish_sync_pulse_sender_synchronize(sessions, min_time)
+    return _Session().finish_sync_pulse_sender_synchronize(sessions, min_time)
 
 
-def init_for_documentation(self):
+def init_for_documentation():
     '''init_for_documentation
 
     TBD
     '''
-    return _get_session_class().init_for_documentation(self)
+    return _Session().init_for_documentation()
 
 
 def initiate(sessions):
@@ -1047,7 +986,7 @@ def initiate(sessions):
         sessions (list of int): sessions is an array of sessions that are being synchronized.
 
     '''
-    return _get_session_class().initiate(sessions)
+    return _Session().initiate(sessions)
 
 
 def is_done(sessions):
@@ -1066,7 +1005,7 @@ def is_done(sessions):
             reports an error.
 
     '''
-    return _get_session_class().is_done(sessions)
+    return _Session().is_done(sessions)
 
 
 def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
@@ -1085,10 +1024,10 @@ def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
+    return _Session().setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
 
-def synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0)):
+def synchronize(sessions, min_tclk_period):
     '''synchronize
 
     Synchronizes the TClk signals on the given sessions. After
@@ -1109,7 +1048,7 @@ def synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0)):
             through the various devices and cables.
 
     '''
-    return _get_session_class().synchronize(sessions, min_tclk_period=datetime.timedelta(seconds=0.0))
+    return _Session().synchronize(sessions, min_tclk_period)
 
 
 def synchronize_to_sync_pulse_sender(sessions, min_time):
@@ -1128,7 +1067,7 @@ def synchronize_to_sync_pulse_sender(sessions, min_time):
             through the various devices and cables.
 
     '''
-    return _get_session_class().synchronize_to_sync_pulse_sender(sessions, min_time)
+    return _Session().synchronize_to_sync_pulse_sender(sessions, min_time)
 
 
 def wait_until_done(sessions, timeout):
@@ -1151,7 +1090,7 @@ def wait_until_done(sessions, timeout):
             returns an error.
 
     '''
-    return _get_session_class().wait_until_done(sessions, timeout)
+    return _Session().wait_until_done(sessions, timeout)
 
 
 

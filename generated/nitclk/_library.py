@@ -20,14 +20,12 @@ class Library(object):
         # We cache the cfunc object from the ctypes.CDLL object
         self.niTClk_ConfigureForHomogeneousTriggers_cfunc = None
         self.niTClk_FinishSyncPulseSenderSynchronize_cfunc = None
-        self.niTClk_GetAttributeViBoolean_cfunc = None
         self.niTClk_GetAttributeViReal64_cfunc = None
         self.niTClk_GetAttributeViSession_cfunc = None
         self.niTClk_GetAttributeViString_cfunc = None
         self.niTClk_GetExtendedErrorInfo_cfunc = None
         self.niTClk_Initiate_cfunc = None
         self.niTClk_IsDone_cfunc = None
-        self.niTClk_SetAttributeViBoolean_cfunc = None
         self.niTClk_SetAttributeViReal64_cfunc = None
         self.niTClk_SetAttributeViSession_cfunc = None
         self.niTClk_SetAttributeViString_cfunc = None
@@ -51,14 +49,6 @@ class Library(object):
                 self.niTClk_FinishSyncPulseSenderSynchronize_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViReal64]  # noqa: F405
                 self.niTClk_FinishSyncPulseSenderSynchronize_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_FinishSyncPulseSenderSynchronize_cfunc(session_count, sessions, min_time)
-
-    def niTClk_GetAttributeViBoolean(self, session, channel_name, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niTClk_GetAttributeViBoolean_cfunc is None:
-                self.niTClk_GetAttributeViBoolean_cfunc = self._library.niTClk_GetAttributeViBoolean
-                self.niTClk_GetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViBoolean)]  # noqa: F405
-                self.niTClk_GetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
-        return self.niTClk_GetAttributeViBoolean_cfunc(session, channel_name, attribute_id, value)
 
     def niTClk_GetAttributeViReal64(self, session, channel_name, attribute_id, value):  # noqa: N802
         with self._func_lock:
@@ -107,14 +97,6 @@ class Library(object):
                 self.niTClk_IsDone_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niTClk_IsDone_cfunc.restype = ViStatus  # noqa: F405
         return self.niTClk_IsDone_cfunc(session_count, sessions, done)
-
-    def niTClk_SetAttributeViBoolean(self, session, channel_name, attribute_id, value):  # noqa: N802
-        with self._func_lock:
-            if self.niTClk_SetAttributeViBoolean_cfunc is None:
-                self.niTClk_SetAttributeViBoolean_cfunc = self._library.niTClk_SetAttributeViBoolean
-                self.niTClk_SetAttributeViBoolean_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViBoolean]  # noqa: F405
-                self.niTClk_SetAttributeViBoolean_cfunc.restype = ViStatus  # noqa: F405
-        return self.niTClk_SetAttributeViBoolean_cfunc(session, channel_name, attribute_id, value)
 
     def niTClk_SetAttributeViReal64(self, session, channel_name, attribute_id, value):  # noqa: N802
         with self._func_lock:
