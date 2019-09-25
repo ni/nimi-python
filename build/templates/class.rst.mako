@@ -62,6 +62,18 @@ ${helper.get_rst_header_snippet(item, '-')}
 
 % endfor
 
+% if len(config['repeated_capabilities']) > 0:
+${helper.get_rst_header_snippet('Repeated Capabilities', '=')}
+
+% for rep_cap in config['repeated_capabilities']:
+${helper.get_rst_header_snippet(rep_cap['python_name'], '-')}
+
+    .. py:attribute:: ${rep_cap["python_name"]}
+
+
+% endfor
+% endif
+
 ${helper.get_rst_header_snippet('Properties', '=')}
 
 % for attr in helper.sorted_attrs(attributes):
