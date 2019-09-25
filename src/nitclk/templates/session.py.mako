@@ -77,6 +77,8 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         self._${config['session_handle_parameter_name']} = ${config['session_handle_parameter_name']}
         self._library = _library_singleton.get()
         self._encoding = encoding
+        # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
+        self._repeated_capability = ''
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -178,18 +180,6 @@ functions['GetExtendedErrorInfo']['render_in_session_base'] = False
 % endfor
 % endfor
 
-def _get_session_class():
-    '''Internal function to return session singleton'''
-    global _session_instance
-    global _session_instance_lock
-
-    with _session_instance_lock:
-        if _session_instance is None:
-            _session_instance = _Session()
-
-        return _session_instance
-
-
 <%
 # We need _get_extended_error_info() to exist in both this class as well as the _Session class, so we will
 # Set then unset the 'render_in_session_base' flag to get it added to both. We do not want it in the standalone
@@ -200,16 +190,14 @@ functions['GetExtendedErrorInfo']['render_in_session_base'] = True
 <%
 f = functions[func_name]
 name = f['python_name']
-parameter_list = helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-# We remove 'self, ' since we are not part of a class here
-parameter_list = parameter_list.replace('self, ', '')
+parameter_list = helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL)
 %>\
 def ${name}(${parameter_list}):
     '''${name}
 
     ${helper.get_function_docstring(f, False, config, indent=4)}
     '''
-    return _get_session_class().${name}(${parameter_list})
+    return _Session().${name}(${parameter_list})
 
 
 % endfor
