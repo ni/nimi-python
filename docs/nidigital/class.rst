@@ -1933,44 +1933,6 @@ get_attribute_vi_real64
 
 
 
-get_attribute_vi_session
-------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: get_attribute_vi_session(attribute)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_attribute_vi_session(property)
-
-
-            :param attribute:
-
-
-                
-
-
-            :type attribute: int
-
-            :rtype: int
-            :return:
-
-
-                    
-
-
-
 get_attribute_vi_string
 -----------------------
 
@@ -3477,43 +3439,6 @@ set_attribute_vi_real64
 
 
             :type value: float
-
-set_attribute_vi_session
-------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: set_attribute_vi_session(attribute, value)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].set_attribute_vi_session(property, value)
-
-
-            :param attribute:
-
-
-                
-
-
-            :type attribute: int
-            :param value:
-
-
-                
-
-
-            :type value: int
 
 set_attribute_vi_string
 -----------------------

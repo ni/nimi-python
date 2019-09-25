@@ -355,7 +355,7 @@ def _replace_attribute_python_name(a_match):
         if config['module_name'] == 'nitclk':
             return ':py:attr:`{0}.SessionReference.{1}`'.format(config['module_name'], aname)
         else:
-            return ':py:data:`{0}.Session.{1}`'.format(config['module_name'], aname)
+            return ':py:attr:`{0}.Session.{1}`'.format(config['module_name'], aname)
     else:
         return '{0}'.format(aname)
 
@@ -498,7 +498,7 @@ def format_type_for_rst_documentation(param, numpy, config):
 
 
 def get_function_rst(function, method_template, numpy, config, indent=0, method_or_function='method'):
-    '''Gets formatted documentation for given function that can be used in rst documentation
+    '''Gets formatted documentation for given function or method that can be used in rst documentation
 
     Args:
         function (dict): function dictionary
@@ -1246,7 +1246,7 @@ def test_get_function_rst_default():
 
     .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this method.
 
-    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
+    .. note:: :py:attr:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
 
     :param turtle_type:
 

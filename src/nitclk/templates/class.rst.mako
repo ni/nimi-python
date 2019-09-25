@@ -28,13 +28,17 @@
 
 ${helper.get_rst_header_snippet('Public API', '=')}
 
-NI-TClk python module consists of several functions and properties. The functions are not sessions based
-like other nimi-python driver support and are called directly on the nitclk module. See :py:class:`SessionReference`
-for properties.
+The `nitclk` module provides synchronization facilites to allow multiple instruments to simultaneously
+respond to triggers, to align Sample Clocks on multiple instruments, and/or to simultaneously start multiple
+instruments.
+
+It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or nimi-python `Session`
+objects for drivers that support NI-TClk. :py:class:`SessionReference` also has a set of properties for configuration.
 
 .. code:: python
 
     with niscope.Session('dev1') as scope1, niscope.Session('dev2') as scope2:
+        nitclk.configure_for_homogeneous_triggers([scope1, scope2])
         nitclk.initiate([scope1, scope2])
         wfm1 = scope1.fetch()
         wfm2 = scope2.fetch()
