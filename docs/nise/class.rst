@@ -712,9 +712,6 @@ wait_for_debounce
             :type maximum_time_ms: float in seconds or datetime.timedelta
 
 
-Properties
-==========
-
 
 .. contents:: Session
 
