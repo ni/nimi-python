@@ -63,7 +63,7 @@ author = 'National Instruments'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '0.1.0.dev0'
+release = '1.1.3.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -181,9 +181,6 @@ texinfo_documents = [
      author, 'NIModularInstrumentsPythonAPI', 'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}

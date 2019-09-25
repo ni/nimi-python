@@ -5,7 +5,6 @@ MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY)) \
                 $(addprefix $(MODULE_DIR)/,$(CUSTOM_TYPES_TO_COPY)) \
-                $(DOCS_DIR)/conf.py \
 
 
 RST_FILES := \
@@ -44,10 +43,6 @@ $(MODULE_DIR)/%.py: %.py
 $(MODULE_DIR)/%.py: $(DRIVER_DIR)/custom_types/%.py
 	$(call trace_to_console, "Copying",$@)
 	$(_hide_cmds)cp $< $@
-
-$(DOCS_DIR)/conf.py: $(TEMPLATE_DIR)/conf.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
-	$(call trace_to_console, "Generating",$@)
-	$(_hide_cmds)$(call GENERATE_SCRIPT, $<, $(DOCS_DIR), $(METADATA_DIR))
 
 $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)

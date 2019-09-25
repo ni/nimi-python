@@ -713,9 +713,6 @@ wait_for_debounce
 
 
 
-Properties
-==========
-
 
 .. contents:: Session
 

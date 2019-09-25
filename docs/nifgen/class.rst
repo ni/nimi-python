@@ -439,8 +439,8 @@ configure_arb_sequence
     .. py:method:: configure_arb_sequence(sequence_handle, gain, offset)
 
             Configures the signal generator properties that affect arbitrary
-            sequence generation. Sets the :py:data:`nifgen.Session.arb_sequence_handle`,
-            :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` properties.
+            sequence generation. Sets the :py:attr:`nifgen.Session.arb_sequence_handle`,
+            :py:attr:`nifgen.Session.arb_gain`, and :py:attr:`nifgen.Session.arb_offset` properties.
 
             
 
@@ -463,7 +463,7 @@ configure_arb_sequence
 
                 Specifies the handle of the arbitrary sequence that you want the signal
                 generator to produce. NI-FGEN sets the
-                :py:data:`nifgen.Session.arb_sequence_handle` property to this value. You can
+                :py:attr:`nifgen.Session.arb_sequence_handle` property to this value. You can
                 create an arbitrary sequence using the :py:meth:`nifgen.Session.create_arb_sequence` or
                 :py:meth:`nifgen.Session.create_advanced_arb_sequence` method. These methods return a
                 handle that you use to identify the sequence.
@@ -501,7 +501,7 @@ configure_arb_sequence
                 data. When you create arbitrary waveforms, you must first normalize the
                 data points to a range of –1.00 to +1.00 V. You can use this parameter
                 to shift the range of the arbitrary waveform. NI-FGEN sets the
-                :py:data:`nifgen.Session.arb_offset` property to this value.
+                :py:attr:`nifgen.Session.arb_offset` property to this value.
 
                 For example, to configure the output signal to range from 0.00 to 2.00 V
                 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -523,8 +523,8 @@ configure_arb_waveform
     .. py:method:: configure_arb_waveform(waveform_handle, gain, offset)
 
             Configures the properties of the signal generator that affect arbitrary
-            waveform generation. Sets the :py:data:`nifgen.Session.arb_waveform_handle`,
-            :py:data:`nifgen.Session.arb_gain`, and :py:data:`nifgen.Session.arb_offset` properties.
+            waveform generation. Sets the :py:attr:`nifgen.Session.arb_waveform_handle`,
+            :py:attr:`nifgen.Session.arb_gain`, and :py:attr:`nifgen.Session.arb_offset` properties.
 
             
 
@@ -547,7 +547,7 @@ configure_arb_waveform
 
                 Specifies the handle of the arbitrary waveform you want the signal
                 generator to produce. NI-FGEN sets the
-                :py:data:`nifgen.Session.arb_waveform_handle` property to this value. You can
+                :py:attr:`nifgen.Session.arb_waveform_handle` property to this value. You can
                 create an arbitrary waveform using one of the following niFgen Create
                 Waveform methods:
 
@@ -594,7 +594,7 @@ configure_arb_waveform
                 data. When you create arbitrary waveforms, you must first normalize the
                 data points to a range of –1.00 to +1.00 V. You can use this parameter
                 to shift the range of the arbitrary waveform. NI-FGEN sets the
-                :py:data:`nifgen.Session.arb_offset` property to this value.
+                :py:attr:`nifgen.Session.arb_offset` property to this value.
 
                 For example, to configure the output signal to range from 0.00 to 2.00 V
                 instead of –1.00 to 1.00 V, set the offset to 1.00.
@@ -616,9 +616,9 @@ configure_freq_list
     .. py:method:: configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
 
             Configures the properties of the signal generator that affect frequency
-            list generation (the :py:data:`nifgen.Session.freq_list_handle`,
-            :py:data:`nifgen.Session.func_amplitude`, :py:data:`nifgen.Session.func_dc_offset`, and
-            :py:data:`nifgen.Session.func_start_phase` properties).
+            list generation (the :py:attr:`nifgen.Session.freq_list_handle`,
+            :py:attr:`nifgen.Session.func_amplitude`, :py:attr:`nifgen.Session.func_dc_offset`, and
+            :py:attr:`nifgen.Session.func_start_phase` properties).
 
             
 
@@ -640,7 +640,7 @@ configure_freq_list
 
 
                 Specifies the handle of the frequency list that you want the signal
-                generator to produce. NI-FGEN sets the :py:data:`nifgen.Session.freq_list_handle`
+                generator to produce. NI-FGEN sets the :py:attr:`nifgen.Session.freq_list_handle`
                 property to this value. You can create a frequency list using the
                 :py:meth:`nifgen.Session.create_freq_list` method, which returns a handle that you use to
                 identify the list.
@@ -655,7 +655,7 @@ configure_freq_list
 
                 Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
-                terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` property to
+                terminal. NI-FGEN sets the :py:attr:`nifgen.Session.func_amplitude` property to
                 this value.
 
                 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -681,7 +681,7 @@ configure_freq_list
                 center of the waveform you specify with the **waveform** parameter,
                 observed at the output terminal. For example, to configure a waveform
                 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-                **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.Session.func_dc_offset`
+                **dcOffset** to 5.00 V. NI-FGEN sets the :py:attr:`nifgen.Session.func_dc_offset`
                 property to this value.
 
                 **Units**: volts
@@ -697,7 +697,7 @@ configure_freq_list
 
                 Specifies the horizontal offset of the standard waveform you want the
                 signal generator to produce. Specify this property in degrees of one
-                waveform cycle. NI-FGEN sets the :py:data:`nifgen.Session.func_start_phase`
+                waveform cycle. NI-FGEN sets the :py:attr:`nifgen.Session.func_start_phase`
                 property to this value. A start phase of 180 degrees means output
                 generation begins halfway through the waveform. A start phase of 360
                 degrees offsets the output by an entire waveform cycle, which is
@@ -725,11 +725,11 @@ configure_standard_waveform
             Configures the following properties of the signal generator that affect
             standard waveform generation:
 
-            -  :py:data:`nifgen.Session.func_waveform`
-            -  :py:data:`nifgen.Session.func_amplitude`
-            -  :py:data:`nifgen.Session.func_dc_offset`
-            -  :py:data:`nifgen.Session.func_frequency`
-            -  :py:data:`nifgen.Session.func_start_phase`
+            -  :py:attr:`nifgen.Session.func_waveform`
+            -  :py:attr:`nifgen.Session.func_amplitude`
+            -  :py:attr:`nifgen.Session.func_dc_offset`
+            -  :py:attr:`nifgen.Session.func_frequency`
+            -  :py:attr:`nifgen.Session.func_start_phase`
 
             
 
@@ -754,7 +754,7 @@ configure_standard_waveform
 
 
                 Specifies the standard waveform that you want the signal generator to
-                produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` property to this
+                produce. NI-FGEN sets the :py:attr:`nifgen.Session.func_waveform` property to this
                 value.
 
                 ****Defined Values****
@@ -786,7 +786,7 @@ configure_standard_waveform
 
                 Specifies the amplitude of the standard waveform that you want the
                 signal generator to produce. This value is the amplitude at the output
-                terminal. NI-FGEN sets the :py:data:`nifgen.Session.func_amplitude` property to
+                terminal. NI-FGEN sets the :py:attr:`nifgen.Session.func_amplitude` property to
                 this value.
 
                 For example, to produce a waveform ranging from –5.00 V to +5.00 V, set
@@ -809,7 +809,7 @@ configure_standard_waveform
 
                 | Specifies the frequency of the standard waveform that you want the
                   signal generator to produce. NI-FGEN sets the
-                  :py:data:`nifgen.Session.func_frequency` property to this value.
+                  :py:attr:`nifgen.Session.func_frequency` property to this value.
 
                 **Units**: hertz
 
@@ -831,7 +831,7 @@ configure_standard_waveform
                 center of the waveform you specify with the **waveform** parameter,
                 observed at the output terminal. For example, to configure a waveform
                 with an amplitude of 10.00 V to range from 0.00 V to +10.00 V, set the
-                **dcOffset** to 5.00 V. NI-FGEN sets the :py:data:`nifgen.Session.func_dc_offset`
+                **dcOffset** to 5.00 V. NI-FGEN sets the :py:attr:`nifgen.Session.func_dc_offset`
                 property to this value.
 
                 **Units**: volts
@@ -847,7 +847,7 @@ configure_standard_waveform
 
                 Specifies the horizontal offset of the standard waveform that you want
                 the signal generator to produce. Specify this parameter in degrees of
-                one waveform cycle. NI-FGEN sets the :py:data:`nifgen.Session.func_start_phase`
+                one waveform cycle. NI-FGEN sets the :py:attr:`nifgen.Session.func_start_phase`
                 property to this value. A start phase of 180 degrees means output
                 generation begins halfway through the waveform. A start phase of 360
                 degrees offsets the output by an entire waveform cycle, which is
@@ -1126,7 +1126,7 @@ create_freq_list
 
 
                 Specifies the standard waveform that you want the signal generator to
-                produce. NI-FGEN sets the :py:data:`nifgen.Session.func_waveform` property to this
+                produce. NI-FGEN sets the :py:attr:`nifgen.Session.func_waveform` property to this
                 value.
 
                 ****Defined Values****
@@ -1217,7 +1217,7 @@ create_waveform_from_file_f64
             
 
             .. note:: The F64 data must be between –1.0 and +1.0 V. Use the
-                :py:data:`nifgen.Session.digital_gain` property to generate different voltage
+                :py:attr:`nifgen.Session.digital_gain` property to generate different voltage
                 outputs.
 
 
@@ -1293,7 +1293,7 @@ create_waveform_from_file_i16
             
 
             .. note:: The I16 data (values between –32768 and +32767) is assumed to
-                represent –1 to +1 V. Use the :py:data:`nifgen.Session.digital_gain` property to
+                represent –1 to +1 V. Use the :py:attr:`nifgen.Session.digital_gain` property to
                 generate different voltage outputs.
 
 
@@ -1363,7 +1363,7 @@ create_waveform_numpy
 
             
 
-            .. note:: You must set :py:data:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ` before calling this method.
+            .. note:: You must set :py:attr:`nifgen.Session.output_mode` to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ` before calling this method.
 
 
             .. tip:: This method requires repeated capabilities (channels). If called directly on the
@@ -1827,9 +1827,9 @@ query_arb_seq_capabilities
     .. py:method:: query_arb_seq_capabilities()
 
             Returns the properties of the signal generator that are related to
-            creating arbitrary sequences (the :py:data:`nifgen.Session.max_num_sequences`,
-            :py:data:`nifgen.Session.min_sequence_length`,
-            :py:data:`nifgen.Session.max_sequence_length`, and :py:data:`nifgen.Session.max_loop_count`
+            creating arbitrary sequences (the :py:attr:`nifgen.Session.max_num_sequences`,
+            :py:attr:`nifgen.Session.min_sequence_length`,
+            :py:attr:`nifgen.Session.max_sequence_length`, and :py:attr:`nifgen.Session.max_loop_count`
             properties).
 
             
@@ -1845,7 +1845,7 @@ query_arb_seq_capabilities
 
                     Returns the maximum number of arbitrary waveform sequences that the
                     signal generator allows. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_num_sequences` property.
+                    :py:attr:`nifgen.Session.max_num_sequences` property.
 
                     
 
@@ -1855,7 +1855,7 @@ query_arb_seq_capabilities
 
                     Returns the minimum number of arbitrary waveforms the signal generator
                     allows in a sequence. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.min_sequence_length` property.
+                    :py:attr:`nifgen.Session.min_sequence_length` property.
 
                     
 
@@ -1865,7 +1865,7 @@ query_arb_seq_capabilities
 
                     Returns the maximum number of arbitrary waveforms the signal generator
                     allows in a sequence. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_sequence_length` property.
+                    :py:attr:`nifgen.Session.max_sequence_length` property.
 
                     
 
@@ -1875,7 +1875,7 @@ query_arb_seq_capabilities
 
                     Returns the maximum number of times the signal generator can repeat an
                     arbitrary waveform in a sequence. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_loop_count` property.
+                    :py:attr:`nifgen.Session.max_loop_count` property.
 
                     
 
@@ -1909,7 +1909,7 @@ query_arb_wfm_capabilities
 
                     Returns the maximum number of arbitrary waveforms that the signal
                     generator allows. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_num_waveforms` property.
+                    :py:attr:`nifgen.Session.max_num_waveforms` property.
 
                     
 
@@ -1920,7 +1920,7 @@ query_arb_wfm_capabilities
                     The size (number of points) of each waveform must be a multiple of a
                     constant quantum value. This parameter obtains the quantum value that
                     the signal generator uses. NI-FGEN returns this value from the
-                    :py:data:`nifgen.Session.waveform_quantum` property.
+                    :py:attr:`nifgen.Session.waveform_quantum` property.
 
                     For example, when this property returns a value of 8, all waveform
                     sizes must be a multiple of 8.
@@ -1933,7 +1933,7 @@ query_arb_wfm_capabilities
 
                     Returns the minimum number of points that the signal generator allows in
                     a waveform. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.min_waveform_size` property.
+                    :py:attr:`nifgen.Session.min_waveform_size` property.
 
                     
 
@@ -1943,7 +1943,7 @@ query_arb_wfm_capabilities
 
                     Returns the maximum number of points that the signal generator allows in
                     a waveform. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_waveform_size` property.
+                    :py:attr:`nifgen.Session.max_waveform_size` property.
 
                     
 
@@ -1958,12 +1958,12 @@ query_freq_list_capabilities
 
             Returns the properties of the signal generator that are related to
             creating frequency lists. These properties are
-            :py:data:`nifgen.Session.max_num_freq_lists`,
-            :py:data:`nifgen.Session.min_freq_list_length`,
-            :py:data:`nifgen.Session.max_freq_list_length`,
-            :py:data:`nifgen.Session.min_freq_list_duration`,
-            :py:data:`nifgen.Session.max_freq_list_duration`, and
-            :py:data:`nifgen.Session.freq_list_duration_quantum`.
+            :py:attr:`nifgen.Session.max_num_freq_lists`,
+            :py:attr:`nifgen.Session.min_freq_list_length`,
+            :py:attr:`nifgen.Session.max_freq_list_length`,
+            :py:attr:`nifgen.Session.min_freq_list_duration`,
+            :py:attr:`nifgen.Session.max_freq_list_duration`, and
+            :py:attr:`nifgen.Session.freq_list_duration_quantum`.
 
             
 
@@ -1978,7 +1978,7 @@ query_freq_list_capabilities
 
                     Returns the maximum number of frequency lists that the signal generator
                     allows. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_num_freq_lists` property.
+                    :py:attr:`nifgen.Session.max_num_freq_lists` property.
 
                     
 
@@ -1988,7 +1988,7 @@ query_freq_list_capabilities
 
                     Returns the minimum number of steps that the signal generator allows in
                     a frequency list. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.min_freq_list_length` property.
+                    :py:attr:`nifgen.Session.min_freq_list_length` property.
 
                     
 
@@ -1998,7 +1998,7 @@ query_freq_list_capabilities
 
                     Returns the maximum number of steps that the signal generator allows in
                     a frequency list. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_freq_list_length` property.
+                    :py:attr:`nifgen.Session.max_freq_list_length` property.
 
                     
 
@@ -2008,7 +2008,7 @@ query_freq_list_capabilities
 
                     Returns the minimum duration that the signal generator allows in a step
                     of a frequency list. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.min_freq_list_duration` property.
+                    :py:attr:`nifgen.Session.min_freq_list_duration` property.
 
                     
 
@@ -2018,7 +2018,7 @@ query_freq_list_capabilities
 
                     Returns the maximum duration that the signal generator allows in a step
                     of a frequency list. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.max_freq_list_duration` property.
+                    :py:attr:`nifgen.Session.max_freq_list_duration` property.
 
                     
 
@@ -2028,7 +2028,7 @@ query_freq_list_capabilities
 
                     Returns the quantum of which all durations must be a multiple in a
                     frequency list. NI-FGEN obtains this value from the
-                    :py:data:`nifgen.Session.freq_list_duration_quantum` property.
+                    :py:attr:`nifgen.Session.freq_list_duration_quantum` property.
 
                     
 
@@ -2557,7 +2557,7 @@ analog_data_mask
 
     .. py:attribute:: analog_data_mask
 
-        Specifies the mask to apply to the analog output. The masked data is replaced with the data in :py:data:`nifgen.Session.analog_static_value`.
+        Specifies the mask to apply to the analog output. The masked data is replaced with the data in :py:attr:`nifgen.Session.analog_static_value`.
 
         The following table lists the characteristics of this property.
 
@@ -2639,7 +2639,7 @@ analog_static_value
 
     .. py:attribute:: analog_static_value
 
-        Specifies the static value that replaces data masked by :py:data:`nifgen.Session.analog_data_mask`.
+        Specifies the static value that replaces data masked by :py:attr:`nifgen.Session.analog_data_mask`.
 
         The following table lists the characteristics of this property.
 
@@ -2668,7 +2668,7 @@ arb_gain
 
         Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to scale the arbitrary waveform to other ranges.
         For example, when you set this property to 2.0, the output signal ranges from -2.0 V to +2.0 V.
-        Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
+        Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
 
         The following table lists the characteristics of this property.
 
@@ -2695,7 +2695,7 @@ arb_marker_position
 
     .. py:attribute:: arb_marker_position
 
-        Specifies the position for a marker to be asserted in the arbitrary waveform. This property defaults to -1 when no marker position is specified. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
+        Specifies the position for a marker to be asserted in the arbitrary waveform. This property defaults to -1 when no marker position is specified. Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
         Use :py:meth:`nifgen.Session.ExportSignal` to export the marker signal.
 
 
@@ -2740,7 +2740,7 @@ arb_offset
 
         Specifies the value that the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to shift the arbitrary waveform range.
         For example, when you set this property to 1.0, the output signal ranges from 2.0 V to 0.0 V.
-        Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
+        Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
         Units: Volts
 
         The following table lists the characteristics of this property.
@@ -2768,7 +2768,7 @@ arb_repeat_count
 
     .. py:attribute:: arb_repeat_count
 
-        Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of :py:meth:`nifgen.Session.ConfigureTriggerMode` is set to :py:data:`~nifgen.TriggerMode.SINGLE` or :py:data:`~nifgen.TriggerMode.STEPPED`. This property is ignored if the triggerMode parameter is set to :py:data:`~nifgen.TriggerMode.CONTINUOUS` or :py:data:`~nifgen.TriggerMode.BURST`. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
+        Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of :py:meth:`nifgen.Session.ConfigureTriggerMode` is set to :py:data:`~nifgen.TriggerMode.SINGLE` or :py:data:`~nifgen.TriggerMode.STEPPED`. This property is ignored if the triggerMode parameter is set to :py:data:`~nifgen.TriggerMode.CONTINUOUS` or :py:data:`~nifgen.TriggerMode.BURST`. Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
         When used during streaming, this property specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
 
         The following table lists the characteristics of this property.
@@ -2796,7 +2796,7 @@ arb_sample_rate
 
     .. py:attribute:: arb_sample_rate
 
-        Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this property when :py:data:`nifgen.Session.output_mode` is set  to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
+        Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this property when :py:attr:`nifgen.Session.output_mode` is set  to :py:data:`~nifgen.OutputMode.ARB` or :py:data:`~nifgen.OutputMode.SEQ`.
         Units: Samples/s
 
         The following table lists the characteristics of this property.
@@ -2825,7 +2825,7 @@ arb_sequence_handle
     .. py:attribute:: arb_sequence_handle
 
         This channel-based property identifies which sequence the signal generator produces. You can create multiple sequences using :py:meth:`nifgen.Session.create_arb_sequence`. :py:meth:`nifgen.Session.create_arb_sequence` returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this property to the sequence handle.
-        Use this property only when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SEQ`.
+        Use this property only when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SEQ`.
 
         The following table lists the characteristics of this property.
 
@@ -2859,7 +2859,7 @@ arb_waveform_handle
         :py:meth:`nifgen.Session.create_waveform_from_file_f64`
         :py:meth:`nifgen.Session.CreateWaveformFromFileHWS`
         These methods return a handle that you can use to identify the particular waveform. To configure the signal generator to produce a particular waveform, set this property to the waveform handle.
-        Use this property only when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
+        Use this property only when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.ARB`.
 
 
 
@@ -2999,7 +2999,7 @@ common_mode_offset
 
     .. py:attribute:: common_mode_offset
 
-        Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when you set the :py:data:`nifgen.Session.terminal_configuration` property to :py:data:`~nifgen.TerminalConfiguration.DIFFERENTIAL`. Common mode offset is applied to the signals generated at each differential output terminal.
+        Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when you set the :py:attr:`nifgen.Session.terminal_configuration` property to :py:data:`~nifgen.TerminalConfiguration.DIFFERENTIAL`. Common mode offset is applied to the signals generated at each differential output terminal.
 
         The following table lists the characteristics of this property.
 
@@ -3290,7 +3290,7 @@ digital_data_mask
 
     .. py:attribute:: digital_data_mask
 
-        Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in :py:data:`nifgen.Session.digital_static_value`.
+        Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in :py:attr:`nifgen.Session.digital_static_value`.
 
         The following table lists the characteristics of this property.
 
@@ -3317,7 +3317,7 @@ digital_edge_script_trigger_edge
 
     .. py:attribute:: digital_edge_script_trigger_edge
 
-        Specifies the active edge for the Script trigger. This property is used when :py:data:`nifgen.Session.script_trigger_type` is set to Digital Edge.
+        Specifies the active edge for the Script trigger. This property is used when :py:attr:`nifgen.Session.script_trigger_type` is set to Digital Edge.
 
 
 
@@ -3357,7 +3357,7 @@ digital_edge_script_trigger_source
 
     .. py:attribute:: digital_edge_script_trigger_source
 
-        Specifies the source terminal for the Script trigger. This property is used when :py:data:`nifgen.Session.script_trigger_type` is set to Digital Edge.
+        Specifies the source terminal for the Script trigger. This property is used when :py:attr:`nifgen.Session.script_trigger_type` is set to Digital Edge.
 
 
 
@@ -3397,7 +3397,7 @@ digital_edge_start_trigger_edge
 
     .. py:attribute:: digital_edge_start_trigger_edge
 
-        Specifies the active edge for the Start trigger. This property is used only when :py:data:`nifgen.Session.start_trigger_type` is set to Digital Edge.
+        Specifies the active edge for the Start trigger. This property is used only when :py:attr:`nifgen.Session.start_trigger_type` is set to Digital Edge.
 
         The following table lists the characteristics of this property.
 
@@ -3424,7 +3424,7 @@ digital_edge_start_trigger_source
 
     .. py:attribute:: digital_edge_start_trigger_source
 
-        Specifies the source terminal for the Start trigger. This property is used only when :py:data:`nifgen.Session.start_trigger_type` is set to Digital Edge.
+        Specifies the source terminal for the Start trigger. This property is used only when :py:attr:`nifgen.Session.start_trigger_type` is set to Digital Edge.
 
         The following table lists the characteristics of this property.
 
@@ -3478,7 +3478,7 @@ digital_filter_interpolation_factor
 
     .. py:attribute:: digital_filter_interpolation_factor
 
-        This property only affects the device when :py:data:`nifgen.Session.digital_filter_enabled` is set to True. If you do not set this property directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
+        This property only affects the device when :py:attr:`nifgen.Session.digital_filter_enabled` is set to True. If you do not set this property directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
 
         The following table lists the characteristics of this property.
 
@@ -3506,7 +3506,7 @@ digital_gain
     .. py:attribute:: digital_gain
 
         Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range plus or minus 1.0 (assuming floating point data).  If the product exceeds these limits, the signal generator clips the output signal, and an error results.
-        Some signal generators support both digital gain and an analog gain (analog gain is specified with the :py:data:`nifgen.Session.func_amplitude` property or the :py:data:`nifgen.Session.arb_gain` property). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a method of analog gain, so only analog gain makes full use of the resolution of the DAC.
+        Some signal generators support both digital gain and an analog gain (analog gain is specified with the :py:attr:`nifgen.Session.func_amplitude` property or the :py:attr:`nifgen.Session.arb_gain` property). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a method of analog gain, so only analog gain makes full use of the resolution of the DAC.
 
         The following table lists the characteristics of this property.
 
@@ -3560,7 +3560,7 @@ digital_static_value
 
     .. py:attribute:: digital_static_value
 
-        Specifies the static value that replaces data masked by :py:data:`nifgen.Session.digital_data_mask`.
+        Specifies the static value that replaces data masked by :py:attr:`nifgen.Session.digital_data_mask`.
 
         The following table lists the characteristics of this property.
 
@@ -3698,7 +3698,7 @@ exported_sample_clock_divisor
 
     .. py:attribute:: exported_sample_clock_divisor
 
-        Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the :py:meth:`nifgen.Session.ExportSignal` method or the  :py:data:`nifgen.Session.exported_sample_clock_output_terminal` property.
+        Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the :py:meth:`nifgen.Session.ExportSignal` method or the  :py:attr:`nifgen.Session.exported_sample_clock_output_terminal` property.
 
 
 
@@ -3756,7 +3756,7 @@ exported_sample_clock_timebase_divisor
 
     .. py:attribute:: exported_sample_clock_timebase_divisor
 
-        Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the :py:meth:`nifgen.Session.ExportSignal` method or the  :py:data:`nifgen.Session.exported_sample_clock_timebase_output_terminal` property.
+        Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the :py:meth:`nifgen.Session.ExportSignal` method or the  :py:attr:`nifgen.Session.exported_sample_clock_timebase_output_terminal` property.
 
 
 
@@ -3787,7 +3787,7 @@ exported_sample_clock_timebase_output_terminal
 
     .. py:attribute:: exported_sample_clock_timebase_output_terminal
 
-        Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the :py:data:`nifgen.Session.exported_sample_clock_timebase_divisor` property,   the Sample clock exported with the :py:data:`nifgen.Session.exported_sample_clock_timebase_output_terminal`  property is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
+        Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the :py:attr:`nifgen.Session.exported_sample_clock_timebase_divisor` property,   the Sample clock exported with the :py:attr:`nifgen.Session.exported_sample_clock_timebase_output_terminal`  property is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
         To change the device configuration, call :py:meth:`nifgen.Session.abort` or wait for the generation to complete.
 
 
@@ -4333,7 +4333,7 @@ func_waveform
     .. py:attribute:: func_waveform
 
         This channel-based property specifies which standard waveform the signal generator produces.
-        Use this property only when :py:data:`nifgen.Session.output_mode` is set to  :py:data:`~nifgen.OutputMode.FUNC`.
+        Use this property only when :py:attr:`nifgen.Session.output_mode` is set to  :py:data:`~nifgen.OutputMode.FUNC`.
         :py:data:`~nifgen.Waveform.SINE`      - Sinusoid waveform
         :py:data:`~nifgen.Waveform.SQUARE`    - Square waveform
         :py:data:`~nifgen.Waveform.TRIANGLE`  - Triangle waveform
@@ -4596,7 +4596,7 @@ marker_events_count
 
     .. py:attribute:: marker_events_count
 
-        Returns the number of markers supported by the device. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SCRIPT`.
+        Returns the number of markers supported by the device. Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SCRIPT`.
 
         The following table lists the characteristics of this property.
 
@@ -5241,7 +5241,7 @@ sample_clock_source
 
     .. py:attribute:: sample_clock_source
 
-        Specifies the Sample clock source. If you specify a divisor with the :py:data:`nifgen.Session.exported_sample_clock_divisor`  property, the Sample clock exported with the :py:data:`nifgen.Session.exported_sample_clock_output_terminal` property is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
+        Specifies the Sample clock source. If you specify a divisor with the :py:attr:`nifgen.Session.exported_sample_clock_divisor`  property, the Sample clock exported with the :py:attr:`nifgen.Session.exported_sample_clock_output_terminal` property is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
         To change the device configuration, call :py:meth:`nifgen.Session.abort` or wait for the generation to complete.
 
 
@@ -5337,7 +5337,7 @@ script_to_generate
 
     .. py:attribute:: script_to_generate
 
-        Specifies which script the generator produces. To configure the generator to run a particular script, set this property to the name of the script. Use :py:meth:`nifgen.Session.write_script` to create multiple scripts. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SCRIPT`.
+        Specifies which script the generator produces. To configure the generator to run a particular script, set this property to the name of the script. Use :py:meth:`nifgen.Session.write_script` to create multiple scripts. Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SCRIPT`.
 
 
 
@@ -5368,7 +5368,7 @@ script_triggers_count
 
     .. py:attribute:: script_triggers_count
 
-        Specifies the number of Script triggers supported by the device. Use this property when :py:data:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SCRIPT`.
+        Specifies the number of Script triggers supported by the device. Use this property when :py:attr:`nifgen.Session.output_mode` is set to :py:data:`~nifgen.OutputMode.SCRIPT`.
 
         The following table lists the characteristics of this property.
 
@@ -5686,7 +5686,7 @@ streaming_space_available_in_waveform
 
         Indicates the space available (in samples) in the streaming waveform for writing new data. During generation, this available space may be in multiple locations with, for example, part of the available space at the end of the streaming waveform and the rest at the beginning. In this situation, writing a block of waveform data the size of the  total space available in the streaming waveform causes NI-FGEN to return an error, as  NI-FGEN will not wrap the data from the end of the waveform to the beginning and cannot write data past the end of the waveform buffer.
         To avoid writing data past the end of the waveform, write new data to the waveform in a fixed size that is an integer divisor of the total size of the streaming waveform.
-        Used in conjunction with the :py:data:`nifgen.Session.streaming_waveform_handle` or :py:data:`nifgen.Session.streaming_waveform_name` properties.
+        Used in conjunction with the :py:attr:`nifgen.Session.streaming_waveform_handle` or :py:attr:`nifgen.Session.streaming_waveform_name` properties.
 
         The following table lists the characteristics of this property.
 
@@ -5714,7 +5714,7 @@ streaming_waveform_handle
     .. py:attribute:: streaming_waveform_handle
 
         Specifies the waveform handle of the waveform used to continuously stream data during generation. This property defaults to -1 when no streaming waveform is specified.
-        Used in conjunction with :py:data:`nifgen.Session.streaming_space_available_in_waveform`.
+        Used in conjunction with :py:attr:`nifgen.Session.streaming_space_available_in_waveform`.
 
         The following table lists the characteristics of this property.
 
@@ -5742,7 +5742,7 @@ streaming_waveform_name
     .. py:attribute:: streaming_waveform_name
 
         Specifies the name of the waveform used to continuously stream data during generation. This property defaults to // when no streaming waveform is specified.
-        Use in conjunction with :py:data:`nifgen.Session.streaming_space_available_in_waveform`.
+        Use in conjunction with :py:attr:`nifgen.Session.streaming_space_available_in_waveform`.
 
         The following table lists the characteristics of this property.
 

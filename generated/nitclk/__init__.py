@@ -11,7 +11,6 @@ from nitclk.session import SessionReference  # noqa: F401
 # Function imports
 from nitclk.session import configure_for_homogeneous_triggers  # noqa: F401
 from nitclk.session import finish_sync_pulse_sender_synchronize  # noqa: F401
-from nitclk.session import init_for_documentation  # noqa: F401
 from nitclk.session import initiate  # noqa: F401
 from nitclk.session import is_done  # noqa: F401
 from nitclk.session import setup_for_sync_pulse_sender_synchronize  # noqa: F401
