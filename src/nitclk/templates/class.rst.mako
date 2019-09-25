@@ -15,11 +15,6 @@
         if initiate_doc is not None:
             functions['InitiateDoc'] = initiate_doc
 
-    # Add a CloseDoc entry - only used to add close() to the Session documentation
-    close_doc = helper.close_function_def_for_doc(functions_all, config)
-    if close_doc is not None:
-        functions['CloseDoc'] = close_doc
-
     doc_list = {}
     for fname in sorted(functions):
         for method_template in functions[fname]['method_templates']:
@@ -27,28 +22,26 @@
             doc_list[name] = { 'filename': method_template['documentation_filename'], 'method_template': method_template, 'function': functions[fname], }
 
     attributes = helper.filter_codegen_attributes_public_only(config['attributes'])
-
-    init_function = config['functions']['_init_function']
-    init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-    constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
-    input_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 %>\
+
 .. py:module:: ${module_name}
 
-${helper.get_rst_header_snippet('Session', '=')}
+${helper.get_rst_header_snippet('Public API', '=')}
 
-.. py:class:: Session(${init_method_params})
+The `nitclk` module provides synchronization facilites to allow multiple instruments to simultaneously
+respond to triggers, to align Sample Clocks on multiple instruments, and/or to simultaneously start multiple
+instruments.
 
-    ${helper.get_documentation_for_node_rst(init_function, config, indent=4)}
+It consists of a set of functions that act on a list of :py:class:`SessionReference` objects or nimi-python `Session`
+objects for drivers that support NI-TClk. :py:class:`SessionReference` also has a set of properties for configuration.
 
-% for p in input_params:
-    :param ${p['python_name']}:
-        ${helper.get_documentation_for_node_rst(p, config, 8)}
-    :type ${p['python_name']}: ${helper.format_type_for_rst_documentation(p, numpy, config)}
+.. code:: python
 
-% endfor
-
-${helper.get_rst_header_snippet('Methods', '=')}
+    with niscope.Session('dev1') as scope1, niscope.Session('dev2') as scope2:
+        nitclk.configure_for_homogeneous_triggers([scope1, scope2])
+        nitclk.initiate([scope1, scope2])
+        wfm1 = scope1.fetch()
+        wfm2 = scope2.fetch()
 
 % for item in sorted(doc_list):
 <%
@@ -56,17 +49,34 @@ function_item = doc_list[item]
 %>\
 ${helper.get_rst_header_snippet(item, '-')}
 
-    .. py:currentmodule:: ${module_name}.Session
+    .. py:currentmodule:: ${module_name}
 
-<%include file="${'/functions.rst' + function_item['filename'] + '.rst.mako'}" args="function=function_item['function'], config=config, method_template=function_item['method_template'], indent=8" />\
+    ${helper.get_function_rst(function_item['function'], method_template=function_item['method_template'], numpy=False, config=config, indent=4, method_or_function='function')}
 
 % endfor
 
-% if len(attributes) > 0:
-${helper.get_rst_header_snippet('Properties', '=')}
+${helper.get_rst_header_snippet('SessionReference', '=')}
+.. py:currentmodule:: ${module_name}
+
+.. py:class:: SessionReference(session_number)
+
+    Helper class that contains all NI-TClk properties. This class is what is returned by
+    any nimi-python Session class tclk attribute when the driver supports NI-TClk
+
+    .. code:: python
+
+        with niscope.Session('dev1') as session:
+            session.tclk.sample_clock_delay = .42
+
+    :param session_number:
+        nitclk session
+    :type session_number: int, nimi-python Session class, SessionReference
+
 
 % for attr in helper.sorted_attrs(attributes):
-${helper.get_rst_header_snippet(attributes[attr]['python_name'], '-')}
+${helper.get_rst_header_snippet(attributes[attr]["python_name"], '-')}
+
+    .. py:currentmodule:: ${module_name}.SessionReference
 
     .. py:attribute:: ${attributes[attr]["python_name"]}
 
@@ -100,8 +110,7 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
                 - C Attribute: **${c_function_prefix.upper()}ATTR_${attributes[attr]["name"].upper()}**
 
 % endfor
-% endif
 
-.. contents:: Session
+.. contents:: nitclk
 
 

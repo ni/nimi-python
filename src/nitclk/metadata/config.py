@@ -7,7 +7,6 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-TClk',
-    'init_function': 'InitForDocumentation',
     'library_info': {
         'Linux': {
             '64bit': {

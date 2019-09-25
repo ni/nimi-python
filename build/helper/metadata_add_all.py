@@ -335,8 +335,12 @@ def _setup_init_function(functions, config):
 
         functions['_init_function'] = init_function
     except KeyError:
-        print("Couldn't find {} init function".format(config['init_function']))
-        pass
+        if 'init_function' not in config or config['init_function'] is None:
+            # We don't have an init function or it is set to None (same thing) so we can't
+            # do anything here
+            pass
+        else:
+            print("Couldn't find {} init function".format(config['init_function']))
 
 
 def add_all_function_metadata(functions, config):
