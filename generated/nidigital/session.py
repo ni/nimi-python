@@ -15,7 +15,6 @@ import nidigital.errors as errors
 
 import nitclk
 
-
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)

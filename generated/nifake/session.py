@@ -17,7 +17,6 @@ import nifake.custom_struct as custom_struct  # noqa: F401
 
 import nitclk
 
-
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
