@@ -43,7 +43,6 @@ import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 
 % if config['supports_nitclk']:
 import nitclk
-
 % endif
 
 # Used for __repr__
