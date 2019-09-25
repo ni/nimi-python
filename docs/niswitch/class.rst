@@ -1101,7 +1101,7 @@ send_software_trigger
             Sends a software trigger to the switch module specified in the NI-SWITCH
             session. When the trigger input is set to :py:data:`~niswitch.TriggerInput.SOFTWARE_TRIG`
             through either the :py:meth:`niswitch.Session.ConfigureScanTrigger` or the
-            :py:data:`niswitch.Session.trigger_input` property, the scan does not proceed from
+            :py:attr:`niswitch.Session.trigger_input` property, the scan does not proceed from
             a semi-colon (wait for trigger) until :py:meth:`niswitch.Session.send_software_trigger` is
             called.
 
@@ -2220,7 +2220,7 @@ num_of_columns
     .. py:attribute:: num_of_columns
 
         This property returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
-        The :py:data:`niswitch.Session.wire_mode` property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
+        The :py:attr:`niswitch.Session.wire_mode` property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
 
         The following table lists the characteristics of this property.
 
@@ -2248,7 +2248,7 @@ num_of_rows
     .. py:attribute:: num_of_rows
 
         This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
-        The :py:data:`niswitch.Session.wire_mode` property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
+        The :py:attr:`niswitch.Session.wire_mode` property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
 
         The following table lists the characteristics of this property.
 
@@ -2751,7 +2751,7 @@ wire_mode
     .. py:attribute:: wire_mode
 
         This property returns the wire mode of the switch device.
-        This property affects the values of the :py:data:`niswitch.Session.num_of_rows` and  :py:data:`niswitch.Session.num_of_columns` properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
+        This property affects the values of the :py:attr:`niswitch.Session.num_of_rows` and  :py:attr:`niswitch.Session.num_of_columns` properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
 
 

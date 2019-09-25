@@ -347,7 +347,7 @@ configure_chan_characteristics
 
 
                 The input impedance for the channel; NI-SCOPE sets
-                :py:data:`niscope.Session.input_impedance` to this value.
+                :py:attr:`niscope.Session.input_impedance` to this value.
 
                 
 
@@ -357,7 +357,7 @@ configure_chan_characteristics
 
 
                 The bandwidth for the channel; NI-SCOPE sets
-                :py:data:`niscope.Session.max_input_frequency` to this value. Pass 0 for this
+                :py:attr:`niscope.Session.max_input_frequency` to this value. Pass 0 for this
                 value to use the hardware default bandwidth. Pass –1 for this value to
                 achieve full bandwidth.
 
@@ -398,9 +398,9 @@ configure_equalization_filter_coefficients
                 The custom coefficients for the equalization FIR filter on the device.
                 These coefficients should be between +1 and –1. You can obtain the
                 number of coefficients from the
-                `:py:data:`niscope.Session.equalization_num_coefficients` <cvi:py:data:`niscope.Session.equalization_num_coefficients`.html>`__
+                `:py:attr:`niscope.Session.equalization_num_coefficients` <cvi:py:attr:`niscope.Session.equalization_num_coefficients`.html>`__
                 property. The
-                `:py:data:`niscope.Session.equalization_filter_enabled` <cvi:py:data:`niscope.Session.equalization_filter_enabled`.html>`__
+                `:py:attr:`niscope.Session.equalization_filter_enabled` <cvi:py:attr:`niscope.Session.equalization_filter_enabled`.html>`__
                 property must be set to TRUE to enable the filter.
 
                 
@@ -426,7 +426,7 @@ configure_horizontal_timing
 
 
                 The sampling rate for the acquisition. Refer to
-                :py:data:`niscope.Session.min_sample_rate` for more information.
+                :py:attr:`niscope.Session.min_sample_rate` for more information.
 
                 
 
@@ -498,7 +498,7 @@ configure_trigger_digital
             Configures the common properties of a digital trigger.
 
             When you initiate an acquisition, the digitizer waits for the start
-            trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
+            trigger, which is configured through the :py:attr:`niscope.Session.acq_arm_source`
             (Start Trigger Source) property. The default is immediate. Upon
             receiving the start trigger the digitizer begins sampling pretrigger
             points. After the digitizer finishes sampling pretrigger points, the
@@ -531,7 +531,7 @@ configure_trigger_digital
             :param trigger_source:
 
 
-                Specifies the trigger source. Refer to :py:data:`niscope.Session.trigger_source`
+                Specifies the trigger source. Refer to :py:attr:`niscope.Session.trigger_source`
                 for defined values.
 
                 
@@ -542,7 +542,7 @@ configure_trigger_digital
 
 
                 Specifies whether you want a rising edge or a falling edge to trigger
-                the digitizer. Refer to :py:data:`niscope.Session.trigger_slope` for more
+                the digitizer. Refer to :py:attr:`niscope.Session.trigger_slope` for more
                 information.
 
                 
@@ -554,7 +554,7 @@ configure_trigger_digital
 
                 The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                :py:data:`niscope.Session.trigger_holdoff` for more information.
+                :py:attr:`niscope.Session.trigger_holdoff` for more information.
 
                 
 
@@ -564,7 +564,7 @@ configure_trigger_digital
 
 
                 How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to :py:data:`niscope.Session.trigger_delay_time` for more
+                acquiring data. Refer to :py:attr:`niscope.Session.trigger_delay_time` for more
                 information.
 
                 
@@ -582,7 +582,7 @@ configure_trigger_edge
             Configures common properties for analog edge triggering.
 
             When you initiate an acquisition, the digitizer waits for the start
-            trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
+            trigger, which is configured through the :py:attr:`niscope.Session.acq_arm_source`
             (Start Trigger Source) property. The default is immediate. Upon
             receiving the start trigger the digitizer begins sampling pretrigger
             points. After the digitizer finishes sampling pretrigger points, the
@@ -605,7 +605,7 @@ configure_trigger_edge
             :param trigger_source:
 
 
-                Specifies the trigger source. Refer to :py:data:`niscope.Session.trigger_source`
+                Specifies the trigger source. Refer to :py:attr:`niscope.Session.trigger_source`
                 for defined values.
 
                 
@@ -616,7 +616,7 @@ configure_trigger_edge
 
 
                 The voltage threshold for the trigger. Refer to
-                :py:data:`niscope.Session.trigger_level` for more information.
+                :py:attr:`niscope.Session.trigger_level` for more information.
 
                 
 
@@ -626,7 +626,7 @@ configure_trigger_edge
 
 
                 Applies coupling and filtering options to the trigger signal. Refer to
-                :py:data:`niscope.Session.trigger_coupling` for more information.
+                :py:attr:`niscope.Session.trigger_coupling` for more information.
 
                 
 
@@ -636,7 +636,7 @@ configure_trigger_edge
 
 
                 Specifies whether you want a rising edge or a falling edge to trigger
-                the digitizer. Refer to :py:data:`niscope.Session.trigger_slope` for more
+                the digitizer. Refer to :py:attr:`niscope.Session.trigger_slope` for more
                 information.
 
                 
@@ -648,7 +648,7 @@ configure_trigger_edge
 
                 The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                :py:data:`niscope.Session.trigger_holdoff` for more information.
+                :py:attr:`niscope.Session.trigger_holdoff` for more information.
 
                 
 
@@ -658,7 +658,7 @@ configure_trigger_edge
 
 
                 How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to :py:data:`niscope.Session.trigger_delay_time` for more
+                acquiring data. Refer to :py:attr:`niscope.Session.trigger_delay_time` for more
                 information.
 
                 
@@ -681,7 +681,7 @@ configure_trigger_hysteresis
 
             When you initiate an acquisition, the digitizer waits for the start
             trigger, which is configured through the
-            :py:data:`niscope.Session.acq_arm_source`. The default is immediate. Upon
+            :py:attr:`niscope.Session.acq_arm_source`. The default is immediate. Upon
             receiving the start trigger the digitizer begins sampling pretrigger
             points. After the digitizer finishes sampling pretrigger points, the
             digitizer waits for a reference (stop) trigger that you specify with a
@@ -703,7 +703,7 @@ configure_trigger_hysteresis
             :param trigger_source:
 
 
-                Specifies the trigger source. Refer to :py:data:`niscope.Session.trigger_source`
+                Specifies the trigger source. Refer to :py:attr:`niscope.Session.trigger_source`
                 for defined values.
 
                 
@@ -714,7 +714,7 @@ configure_trigger_hysteresis
 
 
                 The voltage threshold for the trigger. Refer to
-                :py:data:`niscope.Session.trigger_level` for more information.
+                :py:attr:`niscope.Session.trigger_level` for more information.
 
                 
 
@@ -727,7 +727,7 @@ configure_trigger_hysteresis
                 volts; the digitizer triggers when the trigger signal passes through the
                 hysteresis value you specify with this parameter, has the slope you
                 specify with **slope**, and passes through the **level**. Refer to
-                :py:data:`niscope.Session.trigger_hysteresis` for defined values.
+                :py:attr:`niscope.Session.trigger_hysteresis` for defined values.
 
                 
 
@@ -737,7 +737,7 @@ configure_trigger_hysteresis
 
 
                 Applies coupling and filtering options to the trigger signal. Refer to
-                :py:data:`niscope.Session.trigger_coupling` for more information.
+                :py:attr:`niscope.Session.trigger_coupling` for more information.
 
                 
 
@@ -747,7 +747,7 @@ configure_trigger_hysteresis
 
 
                 Specifies whether you want a rising edge or a falling edge to trigger
-                the digitizer. Refer to :py:data:`niscope.Session.trigger_slope` for more
+                the digitizer. Refer to :py:attr:`niscope.Session.trigger_slope` for more
                 information.
 
                 
@@ -759,7 +759,7 @@ configure_trigger_hysteresis
 
                 The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                :py:data:`niscope.Session.trigger_holdoff` for more information.
+                :py:attr:`niscope.Session.trigger_holdoff` for more information.
 
                 
 
@@ -769,7 +769,7 @@ configure_trigger_hysteresis
 
 
                 How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to :py:data:`niscope.Session.trigger_delay_time` for more
+                acquiring data. Refer to :py:attr:`niscope.Session.trigger_delay_time` for more
                 information.
 
                 
@@ -805,7 +805,7 @@ configure_trigger_software
             Configures common properties for software triggering.
 
             When you initiate an acquisition, the digitizer waits for the start
-            trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
+            trigger, which is configured through the :py:attr:`niscope.Session.acq_arm_source`
             (Start Trigger Source) property. The default is immediate. Upon
             receiving the start trigger the digitizer begins sampling pretrigger
             points. After the digitizer finishes sampling pretrigger points, the
@@ -832,7 +832,7 @@ configure_trigger_software
 
                 The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                :py:data:`niscope.Session.trigger_holdoff` for more information.
+                :py:attr:`niscope.Session.trigger_holdoff` for more information.
 
                 
 
@@ -842,7 +842,7 @@ configure_trigger_software
 
 
                 How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to :py:data:`niscope.Session.trigger_delay_time` for more
+                acquiring data. Refer to :py:attr:`niscope.Session.trigger_delay_time` for more
                 information.
 
                 
@@ -862,7 +862,7 @@ configure_trigger_video
             video trigger occurs when the digitizer finds a valid video signal sync.
 
             When you initiate an acquisition, the digitizer waits for the start
-            trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
+            trigger, which is configured through the :py:attr:`niscope.Session.acq_arm_source`
             (Start Trigger Source) property. The default is immediate. Upon
             receiving the start trigger the digitizer begins sampling pretrigger
             points. After the digitizer finishes sampling pretrigger points, the
@@ -885,7 +885,7 @@ configure_trigger_video
             :param trigger_source:
 
 
-                Specifies the trigger source. Refer to :py:data:`niscope.Session.trigger_source`
+                Specifies the trigger source. Refer to :py:attr:`niscope.Session.trigger_source`
                 for defined values.
 
                 
@@ -896,7 +896,7 @@ configure_trigger_video
 
 
                 Specifies the type of video signal sync the digitizer should look for.
-                Refer to :py:data:`niscope.Session.tv_trigger_signal_format` for more
+                Refer to :py:attr:`niscope.Session.tv_trigger_signal_format` for more
                 information.
 
                 
@@ -926,7 +926,7 @@ configure_trigger_video
 
 
                 Applies coupling and filtering options to the trigger signal. Refer to
-                :py:data:`niscope.Session.trigger_coupling` for more information.
+                :py:attr:`niscope.Session.trigger_coupling` for more information.
 
                 
 
@@ -938,7 +938,7 @@ configure_trigger_video
                 Offsets each video line so the clamping level (the portion of the video
                 line between the end of the color burst and the beginning of the active
                 image) is moved to zero volt. Refer to
-                :py:data:`niscope.Session.enable_dc_restore` for defined values.
+                :py:attr:`niscope.Session.enable_dc_restore` for defined values.
 
                 
 
@@ -951,7 +951,7 @@ configure_trigger_video
                 entire frame and is referenced as shown on `Vertical Blanking and
                 Synchronization
                 Signal <REPLACE_DRIVER_SPECIFIC_URL_1(gray_scale_image)>`__. Refer to
-                :py:data:`niscope.Session.tv_trigger_line_number` for more information.
+                :py:attr:`niscope.Session.tv_trigger_line_number` for more information.
 
                 Default value: 1
 
@@ -964,7 +964,7 @@ configure_trigger_video
 
                 The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                :py:data:`niscope.Session.trigger_holdoff` for more information.
+                :py:attr:`niscope.Session.trigger_holdoff` for more information.
 
                 
 
@@ -974,7 +974,7 @@ configure_trigger_video
 
 
                 How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to :py:data:`niscope.Session.trigger_delay_time` for more
+                acquiring data. Refer to :py:attr:`niscope.Session.trigger_delay_time` for more
                 information.
 
                 
@@ -994,7 +994,7 @@ configure_trigger_window
             the **high level** or **low level** parameters.
 
             When you initiate an acquisition, the digitizer waits for the start
-            trigger, which is configured through the :py:data:`niscope.Session.acq_arm_source`
+            trigger, which is configured through the :py:attr:`niscope.Session.acq_arm_source`
             (Start Trigger Source) property. The default is immediate. Upon
             receiving the start trigger the digitizer begins sampling pretrigger
             points. After the digitizer finishes sampling pretrigger points, the
@@ -1016,7 +1016,7 @@ configure_trigger_window
             :param trigger_source:
 
 
-                Specifies the trigger source. Refer to :py:data:`niscope.Session.trigger_source`
+                Specifies the trigger source. Refer to :py:attr:`niscope.Session.trigger_source`
                 for defined values.
 
                 
@@ -1057,7 +1057,7 @@ configure_trigger_window
 
 
                 Applies coupling and filtering options to the trigger signal. Refer to
-                :py:data:`niscope.Session.trigger_coupling` for more information.
+                :py:attr:`niscope.Session.trigger_coupling` for more information.
 
                 
 
@@ -1068,7 +1068,7 @@ configure_trigger_window
 
                 The length of time the digitizer waits after detecting a trigger before
                 enabling NI-SCOPE to detect another trigger. Refer to
-                :py:data:`niscope.Session.trigger_holdoff` for more information.
+                :py:attr:`niscope.Session.trigger_holdoff` for more information.
 
                 
 
@@ -1078,7 +1078,7 @@ configure_trigger_window
 
 
                 How long the digitizer waits after receiving the trigger to start
-                acquiring data. Refer to :py:data:`niscope.Session.trigger_delay_time` for more
+                acquiring data. Refer to :py:attr:`niscope.Session.trigger_delay_time` for more
                 information.
 
                 
@@ -1113,7 +1113,7 @@ configure_vertical
             :param range:
 
 
-                Specifies the vertical range Refer to :py:data:`niscope.Session.vertical_range` for
+                Specifies the vertical range Refer to :py:attr:`niscope.Session.vertical_range` for
                 more information.
 
                 
@@ -1124,7 +1124,7 @@ configure_vertical
 
 
                 Specifies how to couple the input signal. Refer to
-                :py:data:`niscope.Session.vertical_coupling` for more information.
+                :py:attr:`niscope.Session.vertical_coupling` for more information.
 
                 
 
@@ -1133,7 +1133,7 @@ configure_vertical
             :param offset:
 
 
-                Specifies the vertical offset. Refer to :py:data:`niscope.Session.vertical_offset`
+                Specifies the vertical offset. Refer to :py:attr:`niscope.Session.vertical_offset`
                 for more information.
 
                 
@@ -1144,7 +1144,7 @@ configure_vertical
 
 
                 Specifies the probe attenuation. Refer to
-                :py:data:`niscope.Session.probe_attenuation` for valid values.
+                :py:attr:`niscope.Session.probe_attenuation` for valid values.
 
                 
 
@@ -1154,7 +1154,7 @@ configure_vertical
 
 
                 Specifies whether the channel is enabled for acquisition. Refer to
-                :py:data:`niscope.Session.channel_enabled` for more information.
+                :py:attr:`niscope.Session.channel_enabled` for more information.
 
                 
 
@@ -1949,8 +1949,8 @@ send_software_trigger_edge
             called :py:meth:`niscope.Session.configure_trigger_software` when you want the Reference
             trigger to occur. You can also call this method to override a misused
             edge, digital, or hysteresis trigger. If you have configured
-            :py:data:`niscope.Session.acq_arm_source`, :py:data:`niscope.Session.arm_ref_trig_src`, or
-            :py:data:`niscope.Session.adv_trig_src`, call this method when you want to send
+            :py:attr:`niscope.Session.acq_arm_source`, :py:attr:`niscope.Session.arm_ref_trig_src`, or
+            :py:attr:`niscope.Session.adv_trig_src`, call this method when you want to send
             the corresponding trigger to the digitizer.
 
             
@@ -2034,7 +2034,7 @@ acquisition_start_time
 
     .. py:attribute:: acquisition_start_time
 
-        Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  :py:data:`niscope.Session.trigger_delay_time`).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  :py:data:`niscope.Session.horz_record_ref_position`).
+        Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  :py:attr:`niscope.Session.trigger_delay_time`).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  :py:attr:`niscope.Session.horz_record_ref_position`).
 
         The following table lists the characteristics of this property.
 
@@ -2213,7 +2213,7 @@ backlog
 
     .. py:attribute:: backlog
 
-        Returns the number of samples (:py:data:`niscope.Session.points_done`) that have been acquired but not fetched  for the record specified by :py:data:`niscope.Session.fetch_record_number`.
+        Returns the number of samples (:py:attr:`niscope.Session.points_done`) that have been acquired but not fetched  for the record specified by :py:attr:`niscope.Session.fetch_record_number`.
 
         The following table lists the characteristics of this property.
 
@@ -2280,7 +2280,7 @@ binary_sample_width
 
     .. py:attribute:: binary_sample_width
 
-        Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch method to use. Compare to :py:data:`niscope.Session.resolution`.
+        Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch method to use. Compare to :py:attr:`niscope.Session.resolution`.
         To configure the device to store samples with a lower resolution that the native, set this property to the desired binary width.
         This can be useful for streaming at faster speeds at the cost of resolution. The least significant bits will be lost with this configuration.
         Valid Values: 8, 16, 32
@@ -3126,7 +3126,7 @@ glitch_condition
 
     .. py:attribute:: glitch_condition
 
-        Specifies whether the oscilloscope triggers on pulses of duration less than or greater than the value specified by the :py:data:`niscope.Session.glitch_width` property.
+        Specifies whether the oscilloscope triggers on pulses of duration less than or greater than the value specified by the :py:attr:`niscope.Session.glitch_width` property.
 
         The following table lists the characteristics of this property.
 
@@ -3180,7 +3180,7 @@ glitch_width
 
         Specifies the glitch duration, in seconds.
 
-        The oscilloscope triggers when it detects of pulse of duration either less than or greater than this value depending on the value of the :py:data:`niscope.Session.glitch_condition` property.
+        The oscilloscope triggers when it detects of pulse of duration either less than or greater than this value depending on the value of the :py:attr:`niscope.Session.glitch_condition` property.
 
         The following table lists the characteristics of this property.
 
@@ -3266,7 +3266,7 @@ horz_min_num_pts
 
     .. py:attribute:: horz_min_num_pts
 
-        Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. :py:data:`niscope.Session.horz_record_length` returns the actual record length.
+        Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. :py:attr:`niscope.Session.horz_record_length` returns the actual record length.
         Valid Values: 1 - available onboard memory
 
         The following table lists the characteristics of this property.
@@ -3321,7 +3321,7 @@ horz_record_length
 
     .. py:attribute:: horz_record_length
 
-        Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  :py:data:`niscope.Session.horz_min_num_pts`.
+        Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  :py:attr:`niscope.Session.horz_min_num_pts`.
         Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch methods. This property is only valid after a call to the one of the  Configure Horizontal methods.
 
         The following table lists the characteristics of this property.
@@ -3349,7 +3349,7 @@ horz_record_ref_position
 
     .. py:attribute:: horz_record_ref_position
 
-        Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  :py:data:`niscope.Session.trigger_delay_time` property specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
+        Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  :py:attr:`niscope.Session.trigger_delay_time` property specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
         Valid Values: 0.0 - 100.0
 
         The following table lists the characteristics of this property.
@@ -3923,7 +3923,7 @@ points_done
 
     .. py:attribute:: points_done
 
-        Actual number of samples acquired in the record specified by :py:data:`niscope.Session.fetch_record_number` from the :py:data:`niscope.Session.fetch_relative_to` and :py:data:`niscope.Session.fetch_offset` properties.
+        Actual number of samples acquired in the record specified by :py:attr:`niscope.Session.fetch_record_number` from the :py:attr:`niscope.Session.fetch_relative_to` and :py:attr:`niscope.Session.fetch_offset` properties.
 
         The following table lists the characteristics of this property.
 
@@ -4195,7 +4195,7 @@ ref_clk_rate
 
     .. py:attribute:: ref_clk_rate
 
-        If :py:data:`niscope.Session.input_clock_source` is an external source, this property specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
+        If :py:attr:`niscope.Session.input_clock_source` is an external source, this property specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
 
         The following table lists the characteristics of this property.
 
@@ -4303,7 +4303,7 @@ resolution
 
     .. py:attribute:: resolution
 
-        Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to :py:data:`niscope.Session.binary_sample_width`.
+        Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to :py:attr:`niscope.Session.binary_sample_width`.
 
         The following table lists the characteristics of this property.
 
@@ -4360,7 +4360,7 @@ ris_method
 
     .. py:attribute:: ris_method
 
-        Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of :py:data:`niscope.Session.max_real_time_sampling_rate`.
+        Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of :py:attr:`niscope.Session.max_real_time_sampling_rate`.
 
         The following table lists the characteristics of this property.
 
@@ -4416,7 +4416,7 @@ runt_high_threshold
 
         Specifies the higher of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
 
-        The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the :py:data:`niscope.Session.runt_polarity` property for more information.
+        The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the :py:attr:`niscope.Session.runt_polarity` property for more information.
 
         The following table lists the characteristics of this property.
 
@@ -4444,7 +4444,7 @@ runt_low_threshold
 
         Specifies the lower of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
 
-        The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the :py:data:`niscope.Session.runt_polarity` property for more information.
+        The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the :py:attr:`niscope.Session.runt_polarity` property for more information.
 
         The following table lists the characteristics of this property.
 
@@ -4473,14 +4473,14 @@ runt_polarity
         Specifies the polarity of pulses that trigger the oscilloscope for runt triggering.
 
         When set to :py:data:`~niscope.RuntPolarity.POSITIVE`, the oscilloscope triggers when the following conditions are met:
-            * The leading edge of a pulse crosses the :py:data:`niscope.Session.runt_low_threshold` in a positive direction;
-            * The trailing edge of the pulse crosses the :py:data:`niscope.Session.runt_low_threshold` in a negative direction; and
-            * No portion of the pulse crosses the :py:data:`niscope.Session.runt_high_threshold`.
+            * The leading edge of a pulse crosses the :py:attr:`niscope.Session.runt_low_threshold` in a positive direction;
+            * The trailing edge of the pulse crosses the :py:attr:`niscope.Session.runt_low_threshold` in a negative direction; and
+            * No portion of the pulse crosses the :py:attr:`niscope.Session.runt_high_threshold`.
 
         When set to :py:data:`~niscope.RuntPolarity.NEGATIVE`, the oscilloscope triggers when the following conditions are met:
-            * The leading edge of a pulse crosses the :py:data:`niscope.Session.runt_high_threshold` in a negative direction;
-            * The trailing edge of the pulse crosses the :py:data:`niscope.Session.runt_high_threshold` in a positive direction; and
-            * No portion of the pulse crosses the :py:data:`niscope.Session.runt_low_threshold`.
+            * The leading edge of a pulse crosses the :py:attr:`niscope.Session.runt_high_threshold` in a negative direction;
+            * The trailing edge of the pulse crosses the :py:attr:`niscope.Session.runt_high_threshold` in a positive direction; and
+            * No portion of the pulse crosses the :py:attr:`niscope.Session.runt_low_threshold`.
 
         When set to :py:data:`~niscope.RuntPolarity.EITHER`, the oscilloscope triggers in either case.
 
@@ -4508,7 +4508,7 @@ runt_time_condition
 
     .. py:attribute:: runt_time_condition
 
-        Specifies whether runt triggers are time qualified, and if so, how the oscilloscope triggers in relation to the duration range bounded by the :py:data:`niscope.Session.runt_time_low_limit` and :py:data:`niscope.Session.runt_time_high_limit` properties.
+        Specifies whether runt triggers are time qualified, and if so, how the oscilloscope triggers in relation to the duration range bounded by the :py:attr:`niscope.Session.runt_time_low_limit` and :py:attr:`niscope.Session.runt_time_high_limit` properties.
 
         The following table lists the characteristics of this property.
 
@@ -4536,7 +4536,7 @@ runt_time_high_limit
 
         Specifies, in seconds, the high runt threshold time.
 
-        This property sets the upper bound on the duration of runt pulses that may trigger the oscilloscope. The :py:data:`niscope.Session.runt_time_condition` property determines how the oscilloscope triggers in relation to the runt time limits.
+        This property sets the upper bound on the duration of runt pulses that may trigger the oscilloscope. The :py:attr:`niscope.Session.runt_time_condition` property determines how the oscilloscope triggers in relation to the runt time limits.
 
         The following table lists the characteristics of this property.
 
@@ -4564,7 +4564,7 @@ runt_time_low_limit
 
         Specifies, in seconds, the low runt threshold time.
 
-        This property sets the lower bound on the duration of runt pulses that may trigger the oscilloscope. The :py:data:`niscope.Session.runt_time_condition` property determines how the oscilloscope triggers in relation to the runt time limits.
+        This property sets the lower bound on the duration of runt pulses that may trigger the oscilloscope. The :py:attr:`niscope.Session.runt_time_condition` property determines how the oscilloscope triggers in relation to the runt time limits.
 
         The following table lists the characteristics of this property.
 
@@ -4617,7 +4617,7 @@ samp_clk_timebase_div
 
     .. py:attribute:: samp_clk_timebase_div
 
-        If :py:data:`niscope.Session.samp_clk_timebase_src` is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
+        If :py:attr:`niscope.Session.samp_clk_timebase_src` is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
 
         The following table lists the characteristics of this property.
 
@@ -4644,7 +4644,7 @@ sample_clock_timebase_multiplier
 
     .. py:attribute:: sample_clock_timebase_multiplier
 
-        If :py:data:`niscope.Session.samp_clk_timebase_src` is an external source, this property specifies the ratio between the :py:data:`niscope.Session.samp_clk_timebase_rate` and the actual sample rate, which can be higher. This property can be used in conjunction with :py:data:`niscope.Session.samp_clk_timebase_div`.
+        If :py:attr:`niscope.Session.samp_clk_timebase_src` is an external source, this property specifies the ratio between the :py:attr:`niscope.Session.samp_clk_timebase_rate` and the actual sample rate, which can be higher. This property can be used in conjunction with :py:attr:`niscope.Session.samp_clk_timebase_div`.
         Some devices use multiple ADCs to sample the same channel at an effective sample rate that is greater than the specified clock rate. When providing an external sample clock use this property to indicate when you want a higher sample rate. Valid values for this property vary by device and current configuration.
 
         **Related topics:**
@@ -4674,7 +4674,7 @@ samp_clk_timebase_rate
 
     .. py:attribute:: samp_clk_timebase_rate
 
-        If :py:data:`niscope.Session.samp_clk_timebase_src` is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
+        If :py:attr:`niscope.Session.samp_clk_timebase_src` is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
 
         The following table lists the characteristics of this property.
 
@@ -4701,7 +4701,7 @@ samp_clk_timebase_src
 
     .. py:attribute:: samp_clk_timebase_src
 
-        Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  :py:data:`niscope.Session.min_sample_rate` (for internal sources) or the :py:data:`niscope.Session.samp_clk_timebase_div` (for external sources).
+        Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  :py:attr:`niscope.Session.min_sample_rate` (for internal sources) or the :py:attr:`niscope.Session.samp_clk_timebase_div` (for external sources).
 
         The following table lists the characteristics of this property.
 
@@ -5046,7 +5046,7 @@ trigger_coupling
 
     .. py:attribute:: trigger_coupling
 
-        Specifies how the digitizer couples the trigger source. This property affects instrument operation only when  :py:data:`niscope.Session.trigger_type` is set to :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
+        Specifies how the digitizer couples the trigger source. This property affects instrument operation only when  :py:attr:`niscope.Session.trigger_type` is set to :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
 
         The following table lists the characteristics of this property.
 
@@ -5186,7 +5186,7 @@ trigger_level
 
     .. py:attribute:: trigger_level
 
-        Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the :py:data:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
+        Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the :py:attr:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
         Valid Values:
         The values of the range and offset parameters in :py:meth:`niscope.Session.configure_vertical` determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
 
@@ -5245,7 +5245,7 @@ trigger_slope
 
     .. py:attribute:: trigger_slope
 
-        Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when :py:data:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
+        Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when :py:attr:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
 
         The following table lists the characteristics of this property.
 
@@ -5327,7 +5327,7 @@ trigger_window_high_level
     .. py:attribute:: trigger_window_high_level
 
         Pass the upper voltage threshold you want the digitizer to use for  window triggering.
-        The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:data:`niscope.Session.trigger_window_low_level` and :py:data:`niscope.Session.trigger_window_high_level`
+        The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:attr:`niscope.Session.trigger_window_low_level` and :py:attr:`niscope.Session.trigger_window_high_level`
         Valid Values:
         The values of the Vertical Range and Vertical Offset parameters in  :py:meth:`niscope.Session.configure_vertical` determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter  must meet the following conditions.
         High Trigger Level <= Vertical Range/2 + Vertical Offset
@@ -5364,7 +5364,7 @@ trigger_window_low_level
     .. py:attribute:: trigger_window_low_level
 
         Pass the lower voltage threshold you want the digitizer to use for  window triggering.
-        The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:data:`niscope.Session.trigger_window_low_level` and :py:data:`niscope.Session.trigger_window_high_level`.
+        The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:attr:`niscope.Session.trigger_window_low_level` and :py:attr:`niscope.Session.trigger_window_high_level`.
         Units: Volts
         Valid Values:
         The values of the Vertical Range and Vertical Offset parameters in  :py:meth:`niscope.Session.configure_vertical` determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter  must meet the following conditions.
@@ -5401,7 +5401,7 @@ trigger_window_mode
 
     .. py:attribute:: trigger_window_mode
 
-        Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  :py:data:`niscope.Session.trigger_window_low_level`, or :py:data:`niscope.Session.trigger_window_high_level`.
+        Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  :py:attr:`niscope.Session.trigger_window_low_level`, or :py:attr:`niscope.Session.trigger_window_high_level`.
 
         The following table lists the characteristics of this property.
 
@@ -5455,7 +5455,7 @@ tv_trigger_line_number
 
     .. py:attribute:: tv_trigger_line_number
 
-        Specifies the line on which to trigger, if :py:data:`niscope.Session.tv_trigger_event` is set to line number. The  valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
+        Specifies the line on which to trigger, if :py:attr:`niscope.Session.tv_trigger_event` is set to line number. The  valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
 
         The following table lists the characteristics of this property.
 
@@ -5672,7 +5672,7 @@ width_condition
 
     .. py:attribute:: width_condition
 
-        Specifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the :py:data:`niscope.Session.width_low_threshold` and :py:data:`niscope.Session.width_high_threshold` properties.
+        Specifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the :py:attr:`niscope.Session.width_low_threshold` and :py:attr:`niscope.Session.width_high_threshold` properties.
 
 
 
@@ -5713,7 +5713,7 @@ width_high_threshold
 
         Specifies the high width threshold, in seconds.
 
-        This properties sets the upper bound on the duration range that triggers the oscilloscope. The :py:data:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
+        This properties sets the upper bound on the duration range that triggers the oscilloscope. The :py:attr:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
 
 
 
@@ -5754,7 +5754,7 @@ width_low_threshold
 
         Specifies the low width threshold, in seconds.
 
-        This property sets the lower bound on the duration range that triggers the oscilloscope. The :py:data:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
+        This property sets the lower bound on the duration range that triggers the oscilloscope. The :py:attr:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
 
 
 

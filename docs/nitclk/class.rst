@@ -33,10 +33,10 @@ configure_for_homogeneous_triggers
             appropriate for the given sessions, it returns an error. If an error is
             returned, use the instrument driver methods and properties for signal
             routing, along with the following NI-TClk properties:
-            :py:data:`nitclk.Session.start_trigger_master_session`
-            :py:data:`nitclk.Session.ref_trigger_master_session`
-            :py:data:`nitclk.Session.script_trigger_master_session`
-            :py:data:`nitclk.Session.pause_trigger_master_session`
+            :py:attr:`nitclk.Session.start_trigger_master_session`
+            :py:attr:`nitclk.Session.ref_trigger_master_session`
+            :py:attr:`nitclk.Session.script_trigger_master_session`
+            :py:attr:`nitclk.Session.pause_trigger_master_session`
             :py:meth:`nitclk.Session.configure_for_homogeneous_triggers` affects the following clocks and
             triggers: - Reference clocks - Start triggers - Reference triggers -
             Script triggers - Pause triggers Reference Clocks
@@ -57,7 +57,7 @@ configure_for_homogeneous_triggers
             exporting the start trigger from one session - Configuring the other
             sessions for digital edge start triggers with sources corresponding to
             the exported start trigger - Setting
-            :py:data:`nitclk.Session.start_trigger_master_session` to the session that is
+            :py:attr:`nitclk.Session.start_trigger_master_session` to the session that is
             exporting the trigger for all sessions If the start triggers are None
             for all except one session, :py:meth:`nitclk.Session.configure_for_homogeneous_triggers`
             configures the sessions to share the start trigger from the one excepted
@@ -65,7 +65,7 @@ configure_for_homogeneous_triggers
             trigger from the session with the start trigger that is not None -
             Configuring the other sessions for digital-edge start triggers with
             sources corresponding to the exported start trigger - Setting
-            :py:data:`nitclk.Session.start_trigger_master_session` to the session that is
+            :py:attr:`nitclk.Session.start_trigger_master_session` to the session that is
             exporting the trigger for all sessions If start triggers are configured
             for all sessions, :py:meth:`nitclk.Session.configure_for_homogeneous_triggers` does not
             affect the start triggers. Start triggers are considered to be
@@ -73,7 +73,7 @@ configure_for_homogeneous_triggers
             true: - No session has a start trigger that is None - One session has a
             start trigger that is None, and all other sessions have start triggers
             other than None. The one session with the None trigger must have
-            :py:data:`nitclk.Session.start_trigger_master_session` set to itself, indicating
+            :py:attr:`nitclk.Session.start_trigger_master_session` set to itself, indicating
             that the session itself is the start trigger master Reference Triggers
             :py:meth:`nitclk.Session.configure_for_homogeneous_triggers` configures sessions that support
             reference triggers to share the reference triggers if the reference
@@ -83,7 +83,7 @@ configure_for_homogeneous_triggers
             Configuring the other sessions that support the reference trigger for
             digital-edge reference triggers with sources corresponding to the
             exported reference trigger - Setting
-            :py:data:`nitclk.Session.ref_trigger_master_session` to the session that is
+            :py:attr:`nitclk.Session.ref_trigger_master_session` to the session that is
             exporting the trigger for all sessions that support reference trigger If
             the reference triggers are configured for all sessions that support
             reference triggers, :py:meth:`nitclk.Session.configure_for_homogeneous_triggers` does not
@@ -92,7 +92,7 @@ configure_for_homogeneous_triggers
             conditions is true: - No session has a reference trigger that is None -
             One session has a reference trigger that is None, and all other sessions
             have reference triggers other than None. The one session with the None
-            trigger must have :py:data:`nitclk.Session.ref_trigger_master_session` set to
+            trigger must have :py:attr:`nitclk.Session.ref_trigger_master_session` set to
             itself, indicating that the session itself is the reference trigger
             master Reference Trigger Holdoffs Acquisition sessions may be configured
             with the reference trigger. For acquisition sessions, when the reference
@@ -114,7 +114,7 @@ configure_for_homogeneous_triggers
             not None - Configuring the other sessions that support the script
             trigger for digital-edge script triggers with sources corresponding to
             the exported script trigger - Setting
-            :py:data:`nitclk.Session.script_trigger_master_session` to the session that is
+            :py:attr:`nitclk.Session.script_trigger_master_session` to the session that is
             exporting the trigger for all sessions that support script triggers If
             the script triggers are configured for all sessions that support script
             triggers, :py:meth:`nitclk.Session.configure_for_homogeneous_triggers` does not affect script
@@ -123,7 +123,7 @@ configure_for_homogeneous_triggers
             true: - No session has a script trigger that is None - One session has a
             script trigger that is None and all other sessions have script triggers
             other than None. The one session with the None trigger must have
-            :py:data:`nitclk.Session.script_trigger_master_session` set to itself, indicating
+            :py:attr:`nitclk.Session.script_trigger_master_session` set to itself, indicating
             that the session itself is the script trigger master Pause Triggers
             :py:meth:`nitclk.Session.configure_for_homogeneous_triggers` configures generation sessions
             that support pause triggers to share them, if the pause triggers are
@@ -132,7 +132,7 @@ configure_for_homogeneous_triggers
             the session whose script trigger is not None - Configuring the other
             sessions that support the pause trigger for digital-edge pause triggers
             with sources corresponding to the exported pause trigger - Setting
-            :py:data:`nitclk.Session.pause_trigger_master_session` to the session that is
+            :py:attr:`nitclk.Session.pause_trigger_master_session` to the session that is
             exporting the trigger for all sessions that support script triggers If
             the pause triggers are configured for all generation sessions that
             support pause triggers, :py:meth:`nitclk.Session.configure_for_homogeneous_triggers` does not
@@ -141,7 +141,7 @@ configure_for_homogeneous_triggers
             is true: - No session has a pause trigger that is None - One session has
             a pause trigger that is None and all other sessions have pause triggers
             other than None. The one session with the None trigger must have
-            :py:data:`nitclk.Session.pause_trigger_master_session` set to itself, indicating
+            :py:attr:`nitclk.Session.pause_trigger_master_session` set to itself, indicating
             that the session itself is the pause trigger master Note: TClk
             synchronization is not supported for pause triggers on acquisition
             sessions.
