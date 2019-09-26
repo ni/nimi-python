@@ -35,5 +35,6 @@ config = {
     ],
     'session_class_description': 'An NI Switch Executive session',
     'session_handle_parameter_name': 'vi',
-    'use_locking': False
+    'use_locking': False,
+    'supports_nitclk': False,
 }
