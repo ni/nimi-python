@@ -32,5 +32,4 @@ config = {
     ],
     'session_class_description': 'A NI-ModInst session to get device information',
     'session_handle_parameter_name': 'handle',
-    'supports_nitclk': False,
 }

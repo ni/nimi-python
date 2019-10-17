@@ -30,5 +30,4 @@ config = {
     'repeated_capabilities': [
     ],
     'session_handle_parameter_name': 'session_number',
-    'supports_nitclk': False,
 }
