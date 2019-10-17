@@ -28,9 +28,8 @@ class TestSession(object):
         self.patched_library_singleton_get = patch('nifake.session._library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
-        self.tclk_patched_library_patcher = patch('nitclk._library.Library', autospec=True)
-        self.tclk_patched_library = self.tclk_patched_library_patcher.start()
-        self.tclk_patched_library_singleton_get = patch('nitclk.session._library_singleton.get', return_value=self.patched_library)
+        # We don't actually call into the nitclk DLL, but we do need to mock the function since it is called
+        self.tclk_patched_library_singleton_get = patch('nitclk.session._library_singleton.get', return_value=None)
         self.tclk_patched_library_singleton_get.start()
 
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
@@ -56,7 +55,6 @@ class TestSession(object):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
         self.tclk_patched_library_singleton_get.stop()
-        self.tclk_patched_library_patcher.stop()
 
     def niFake_read_warning(self, vi, maximum_time, reading):  # noqa: N802
         reading.contents.value = self.reading
