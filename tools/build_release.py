@@ -25,6 +25,15 @@ def configure_logging(lvl=logging.WARNING, logfile=None):
     root.addHandler(hndlr)
 
 
+class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
+    '''We want the description to use the raw formatting but have the parameters be formatted as before
+
+    from stackoverflow:
+    https://stackoverflow.com/questions/18462610/argumentparser-epilog-and-description-formatting-in-conjunction-with-argumentdef
+    '''
+    pass
+
+
 def main():
     # Setup the required arguments for this script
     usage = """Release script
@@ -57,7 +66,7 @@ Steps
     * Push to GitHub
 
 """
-    parser = argparse.ArgumentParser(description=usage)
+    parser = argparse.ArgumentParser(description=usage, formatter_class=CustomFormatter)
 
     build_group = parser.add_argument_group("Build configuration")
     build_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. build, then update with .dev0")
