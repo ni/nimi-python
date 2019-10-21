@@ -121,6 +121,8 @@ Steps
         check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config_addon.py', ] + passthrough_params)
         logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config_addon.py', ] + passthrough_params))
         check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config_addon.py', ] + passthrough_params)
+        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nitclk/metadata/config_addon.py', ] + passthrough_params))
+        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nitclk/metadata/config_addon.py', ] + passthrough_params)
 
     if args.build:
         logging.info('Clean and build')
@@ -133,7 +135,7 @@ Steps
 
     if args.upload:
         logging.info('Uploading to PyPI')
-        complete_twine_cmd = twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidigital/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*', 'bin/nise/dist/*']
+        complete_twine_cmd = twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidigital/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*', 'bin/nise/dist/*', 'bin/nitclk/dist/*']
         logging.info(pp.pformat(complete_twine_cmd))
         if not args.preview:
             check_call(complete_twine_cmd)
