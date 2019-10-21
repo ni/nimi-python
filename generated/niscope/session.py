@@ -15,6 +15,8 @@ import niscope.errors as errors
 
 import niscope.waveform_info as waveform_info  # noqa: F401
 
+import nitclk
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -4053,6 +4055,8 @@ class Session(_SessionBase):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
+
+        self.tclk = nitclk.SessionReference(self._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []

@@ -13,6 +13,8 @@ import nifgen._visatype as _visatype
 import nifgen.enums as enums
 import nifgen.errors as errors
 
+import nitclk
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -3135,6 +3137,8 @@ class Session(_SessionBase):
         self.channels = _RepeatedCapabilities(self, '')
         self.script_triggers = _RepeatedCapabilities(self, 'ScriptTrigger')
         self.markers = _RepeatedCapabilities(self, 'Marker')
+
+        self.tclk = nitclk.SessionReference(self._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []

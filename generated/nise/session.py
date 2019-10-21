@@ -10,6 +10,7 @@ import nise._visatype as _visatype
 import nise.enums as enums
 import nise.errors as errors
 
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)

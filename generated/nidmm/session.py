@@ -13,6 +13,7 @@ import nidmm._visatype as _visatype
 import nidmm.enums as enums
 import nidmm.errors as errors
 
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)

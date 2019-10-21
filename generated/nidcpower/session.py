@@ -13,6 +13,7 @@ import nidcpower._visatype as _visatype
 import nidcpower.enums as enums
 import nidcpower.errors as errors
 
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)

@@ -6454,6 +6454,16 @@ vterm
                 - C Attribute: **NIDIGITAL_ATTR_VTERM**
 
 
+NI-TClk Support
+===============
+
+    .. py:attribute:: tclk
+
+        This is used to get and set NI-TClk attributes on the session.
+
+        .. seealso:: See :py:attr:`nitclk.SessionReference` for a complete list of attributes.
+
+
 .. contents:: Session
 
 

@@ -157,6 +157,17 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 % endfor
 % endif
 
+% if config['supports_nitclk']:
+${helper.get_rst_header_snippet('NI-TClk Support', '=')}
+
+    .. py:attribute:: tclk
+
+        This is used to get and set NI-TClk attributes on the session.
+
+        .. seealso:: See :py:attr:`nitclk.SessionReference` for a complete list of attributes.
+
+
+% endif
 .. contents:: Session
 
 
