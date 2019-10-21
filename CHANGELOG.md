@@ -1,7 +1,7 @@
 # Changelog
 
-* [Unreleased](#unreleased)
-* [1.1.2](#112---2018-10-25)
+* [1.1.3](#113---2019-10-21)
+* [1.1.2](#112---2019-06-06)
 * [1.1.0](#110---2018-10-25)
 * [1.0.1](#101---2018-10-17)
 * [1.0.0](#100---2018-06-08)
@@ -17,9 +17,8 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## 1.1.3 - 2019-10-21
 * ### ALL
-    * #### Added
     * #### Changed
         * The development status in `setup.py` will be based on the module version:
             * version >= 1.0
@@ -29,27 +28,10 @@ All notable changes to this project will be documented in this file.
             * version < 1.0 and version >= 0.5 - Beta
             * version < 0.5 - Alpha
         * Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
-    * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-DCPower
-    * #### Added
     * #### Changed
         * Fix type of `sequence_step_delta_time_enabled ` property - [#1015](https://github.com/ni/nimi-python/issues/1015)
-    * #### Removed
 * ### NI-FGEN
-    * #### Added
-    * #### Changed
     * #### Removed
         * `configure_custom_fir_filter_coefficients()` - [#996](https://github.com/ni/nimi-python/issues/996) - Should have been removed as part of - [#891](https://github.com/ni/nimi-python/issues/891)
 * ### NI-SCOPE
@@ -59,13 +41,9 @@ All notable changes to this project will be documented in this file.
         * `glitch_condition`, `glitch_polarity`, `glitch_width` properties and associated enums
         * `runt_high_threshold`, `runt_low_threshold`, `runt_polarity`, `runt_condition`, `runt_time_high_limit`, `runt_time_low_limit` properties and associated enums
         * `width_condition`, `width_high_threshold`, `width_low_threshold`, `width_polarity` properties and associated enums
-    * #### Changed
-    * #### Removed
 * ### NI Switch Executive
-    * #### Added
     * #### Changed
         * Update to 1.0 - now ready for production use
-    * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
         * Initial support
@@ -93,8 +71,6 @@ All notable changes to this project will be documented in this file.
 * ### NI-TClk
     * #### Added
         * Initial support
-    * #### Changed
-    * #### Removed
 
 
 ## 1.1.2 - 2019-06-06
