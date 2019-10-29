@@ -1,9 +1,5 @@
 .. _about-section:
 
-.. image:: https://raw.githubusercontent.com/ni/nimi-python/master/docs/_static/python-dmm-small.jpg
-   :alt: NI Digital Multimeter with Python logo
-   :align: center
-
 About
 =====
 
