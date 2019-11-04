@@ -1336,6 +1336,7 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'data',
+                'use_array': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'dataBufferSize',
@@ -1344,7 +1345,7 @@ functions = {
                     # depend on this value)
                     'value_twist': 'actualNumWaveforms',
                 },
-                'type': 'ViUInt32[]'
+                'type': 'ViUInt32[]',
             },
             {
                 'direction': 'out',
