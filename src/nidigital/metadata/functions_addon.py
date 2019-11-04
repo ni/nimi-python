@@ -18,6 +18,9 @@ functions_additional_fetch_capture_waveform = {
                 'session_filename': 'fancy_fetch_capture_waveform',
             }
         ],
+        'documentation': {
+            'description': 'TBD'
+        },
         'parameters': [
             {
                 'direction': 'in',
