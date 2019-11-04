@@ -1339,7 +1339,10 @@ functions = {
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'dataBufferSize',
-                    'value_twist': 'actualNumWaveforms*ActualSamplesPerWaveform'
+                    # Should be 'actualNumWaveforms*ActualSamplesPerWaveform' but codegen doesn't handle that properly
+                    # The actual call is in a "fancy" function so change so the library call can be generated (doesn't
+                    # depend on this value)
+                    'value_twist': 'actualNumWaveforms',
                 },
                 'type': 'ViUInt32[]'
             },
