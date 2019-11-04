@@ -2,6 +2,9 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    'FetchCaptureWaveformU32': {
+        'codegen_method': 'library-only',  # We have a "fancy" wrapper for this so and we cannot use the generated python method, so only generate into the library
+    },
 }
 
 functions_additional_fetch_capture_waveform = {
