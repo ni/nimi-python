@@ -1569,6 +1569,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViBoolean': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1597,6 +1598,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViInt32': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1625,6 +1627,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViInt64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1653,6 +1656,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViReal64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1710,6 +1714,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3017,6 +3022,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViBoolean': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3045,6 +3051,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViInt32': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3073,6 +3080,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViInt64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3101,6 +3109,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViReal64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3159,6 +3168,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
