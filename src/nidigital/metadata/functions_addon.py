@@ -24,9 +24,6 @@ functions_additional_fetch_capture_waveform = {
         'parameters': [
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'The instrument handle you obtain from niScope_init that identifies a particular instrument session.'
-                },
                 'name': 'vi',
                 'type': 'ViSession'
             },
