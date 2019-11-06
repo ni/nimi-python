@@ -83,6 +83,19 @@ Signal
 
 
 
+SiteResult
+----------
+
+.. py:class:: SiteResult
+
+    .. py:attribute:: SiteResult.PASS_FAIL
+
+
+
+    .. py:attribute:: SiteResult.CAPTURE_WAVEFORM
+
+
+
 TDREndpointTermination
 ----------------------
 

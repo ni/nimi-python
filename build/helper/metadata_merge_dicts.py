@@ -10,13 +10,13 @@ def merge_helper(metadata, metadata_type, config, use_re):
     metadata_module = 'metadata.{0}_addon'.format(metadata_type)
     if 'modules' in config and metadata_module in config['modules']:
         for m in dir(config['modules'][metadata_module]):
-            if m.startswith('{0}_'.format(metadata_type)) and m != '{0}_additional_{0}'.format(metadata_type):
-                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re, m)
-            # We need to explicitly copy new entries
-            if m == '{0}_additional_{0}'.format(metadata_type):
+            if m.startswith('{0}_additional_'.format(metadata_type)):
+                # We need to explicitly copy new entries
                 outof = config['modules'][metadata_module].__getattribute__(m)
                 for a in outof:
                     metadata[a] = outof[a]
+            elif m.startswith('{0}_'.format(metadata_type)):
+                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re, m)
 
     # Delete any entries that are empty
     # Have to do this in two steps. Otherwise the dictionary changes size and errors

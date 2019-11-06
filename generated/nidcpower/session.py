@@ -2873,10 +2873,7 @@ class _SessionBase(object):
           **vi** is an invalid session, the method does nothing and returns an
           error. Normally, the error information describes the first error that
           occurred since the user last called _get_error or
-          ClearError.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
+          clear_error.
 
         Returns:
             code (int): Returns the error code for the session or execution thread.
@@ -3073,23 +3070,20 @@ class _SessionBase(object):
         The compliance limit is the current limit when the output method is
         set to OutputFunction.DC_VOLTAGE. If the output is operating at the
         compliance limit, the output reaches the current limit before the
-        desired voltage level. Refer to the ConfigureOutputFunction
-        method and the ConfigureCurrentLimit method for more
+        desired voltage level. Refer to the configure_output_function
+        method and the configure_current_limit method for more
         information about output method and current limit, respectively.
 
         The compliance limit is the voltage limit when the output method is
         set to OutputFunction.DC_CURRENT. If the output is operating at the
         compliance limit, the output reaches the voltage limit before the
-        desired current level. Refer to the ConfigureOutputFunction
-        method and the ConfigureVoltageLimit method for more
+        desired current level. Refer to the configure_output_function
+        method and the configure_voltage_limit method for more
         information about output method and voltage limit, respectively.
 
         **Related Topics:**
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities (channels). If called directly on the
@@ -3784,7 +3778,7 @@ class Session(_SessionBase):
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         method, the output channels remain in their existing state and
-        continue providing power. Use the ConfigureOutputEnabled
+        continue providing power. Use the configure_output_enabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).
 
@@ -3792,9 +3786,6 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Note:
         This method is not needed when using the session context manager
@@ -3819,7 +3810,7 @@ class Session(_SessionBase):
         when you call the abort method, the output channels remain
         in their current state and continue providing power.
 
-        Use the ConfigureOutputEnabled method to disable power
+        Use the configure_output_enabled method to disable power
         output on a per channel basis. Use the reset method to
         disable output on all channels.
 
@@ -3832,9 +3823,6 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Abort(vi_ctype)
@@ -4807,7 +4795,7 @@ class Session(_SessionBase):
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         method, the output channels remain in their existing state and
-        continue providing power. Use the ConfigureOutputEnabled
+        continue providing power. Use the configure_output_enabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).
 
@@ -4815,9 +4803,6 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)

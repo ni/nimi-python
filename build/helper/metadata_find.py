@@ -1,7 +1,7 @@
 # Find utilities
 def find_parameter(name, parameters):
     parameter = [x for x in parameters if x['name'] == name]
-    assert len(parameter) == 1, 'Parameter {0} not found. Check your metadata.'.format(name)
+    assert len(parameter) == 1, 'Parameter {0} not found in {1}. Check your metadata.'.format(name, parameters)
     return parameter[0]
 
 

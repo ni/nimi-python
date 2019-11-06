@@ -354,7 +354,7 @@ def add_all_function_metadata(functions, config):
         if 'documentation' not in functions[f]:
             functions[f]['documentation'] = {}
 
-    for f in filter_codegen_functions(functions):
+    for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
