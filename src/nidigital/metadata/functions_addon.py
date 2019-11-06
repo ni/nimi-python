@@ -55,6 +55,11 @@ functions_additional_fetch_capture_waveform = {
                     'description': '\nList of named tuples with fields:\n\n- **site** (int)\n- **data** (array.array of int)\n'
                 },
                 'name': 'waveform',
+                'python_type': 'Waveform',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
                 'type': 'ViUInt32[]'
             },
         ],
