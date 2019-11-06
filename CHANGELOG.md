@@ -56,6 +56,7 @@ All notable changes to this project will be documented in this file.
         * `fetch_capture_waveform()` - returns named tuple `Measurement(data, site)`
     * #### Changed
         * Fix get/set properties - [#1062](https://github.com/ni/nimi-python/issues/1062)
+        * `get_pin_restuls_pin_information()` - returns named tuple `PinInfo(pin_indexes, site_numbers, channel_indexes)`
     * #### Removed
 * ### NI-TClk
     * #### Added
