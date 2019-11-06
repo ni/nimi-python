@@ -4,6 +4,7 @@
 import platform
 
 import ctypes
+import ctypes.util
 import nidmm._library as _library
 import nidmm.errors as errors
 import threading
@@ -18,7 +19,7 @@ _library_info = {'Linux': {'64bit': {'name': 'libnidmm.so', 'type': 'cdll'}},
 
 def _get_library_name():
     try:
-        return _library_info[platform.system()][platform.architecture()[0]]['name']
+        return ctypes.util.find_library(_library_info[platform.system()][platform.architecture()[0]]['name'])  # We find and return full path to the DLL
     except KeyError:
         raise errors.UnsupportedConfigurationError
 
