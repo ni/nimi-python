@@ -41,9 +41,9 @@
         site_list = self.get_site_results_site_numbers(site_list, enums.SiteType.CAPTURE_WAVEFORM)
         assert len(site_list) == actual_num_waveforms
 
-        Measurement = collections.namedtuple('Measurement', ['data', 'site'])
+        Waveform = collections.namedtuple('Waveform', ['site', 'data'])
 
-        measurements = []
+        waveforms = []
 
         if sys.version_info.major >= 3:
             # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
@@ -53,11 +53,11 @@
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
             if sys.version_info.major >= 3:
-                measurements.append(Measurement(data=mv[start:end], site=site_list[i]))
+                waveforms.append(Waveform(site=site_list[i], data=mv[start:end]))
             else:
                 # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
                 # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                measurements.append(Measurement(data=array.array('d', data[start:end]), site=site_list[i]))
+                waveforms.append(Waveform(site=site_list[i], data=array.array('L', data[start:end])))
 
-        return measurements
+        return waveforms
 
