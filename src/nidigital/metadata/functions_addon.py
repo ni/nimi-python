@@ -18,8 +18,8 @@ functions_additional_fetch_capture_waveform = {
                 'session_filename': 'fancy_fetch_capture_waveform',
             }
         ],
-        'documentation': {
-            'description': 'TBD'
+       'documentation': {
+            'description': '\nReturns a list of named tuples (Waveform) that <FILL IN THE BLANK HERE>\n\nFields in Waveform:\n\n- **site** (int)\n- **data** (array.array of int)\n\n',
         },
         'parameters': [
             {
@@ -54,7 +54,10 @@ functions_additional_fetch_capture_waveform = {
             },
             {
                 'direction': 'out',
-                'name': 'data',
+                'documentation': {
+                    'description': '\nList of named tuples with fields:\n\n- **site** (int)\n- **data** (array.array of int)\n'
+                },
+                'name': 'waveform',
                 'type': 'ViUInt32[]'
             },
         ],
