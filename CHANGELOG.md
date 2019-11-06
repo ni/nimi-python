@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * `ViUInt8` is now a valid type in APIs
     * #### Changed
     * #### Removed
 * ### NI-DMM
