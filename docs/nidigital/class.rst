@@ -2071,7 +2071,13 @@ get_pin_results_pin_information
 
     .. py:method:: get_pin_results_pin_information()
 
-            TBD
+            Returns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>
+
+            Fields in PinInfo:
+
+            - **pin_indexes** (int)
+            - **site_numbers** (int)
+            - **channel_indexes** (int)
 
             
 
@@ -2086,24 +2092,15 @@ get_pin_results_pin_information
                     session.channels[0,1].get_pin_results_pin_information()
 
 
-            :rtype: tuple (pin_indexes, site_numbers, channel_indexes)
-
-                WHERE
-
-                pin_indexes (list of int): 
+            :rtype: list of PinInfo
+            :return:
 
 
-                    
+                    List of named tuples with fields:
 
-
-                site_numbers (list of int): 
-
-
-                    
-
-
-                channel_indexes (list of int): 
-
+                    - **pin_indexes** (int)
+                    - **site_numbers** (int)
+                    - **channel_indexes** (int)
 
                     
 
