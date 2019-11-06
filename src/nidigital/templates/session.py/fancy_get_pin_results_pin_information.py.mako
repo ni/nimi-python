@@ -12,7 +12,7 @@
         import collections
         PinInfo = collections.namedtuple('PinInformation', ['pin_indexes', 'site_numbers', 'channel_indexes'])
 
-        pin_indexes, site_number, channel_indexes = self._${f['python_name']}(${param_list})
+        pin_indexes, site_number, channel_indexes = self._${f['python_name']}()
 
         return [PinInfo(pin_indexes=pin_indexes[i], site_numbers=site_numbers[i], channel_indexes=channel_indexes) for i in range(len(pin_indexes))]
 
