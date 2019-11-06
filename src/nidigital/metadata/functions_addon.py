@@ -2,6 +2,10 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    'GetPinResultsPinInformation': {
+        'codegen_method': 'private',
+    },
+}
 }
 
 
