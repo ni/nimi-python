@@ -53,6 +53,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
+        * `fetch_capture_waveform()` - returns named tuple `Measurement(data, site)`
     * #### Changed
     * #### Removed
 * ### NI-TClk
