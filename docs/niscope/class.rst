@@ -436,14 +436,12 @@ configure_horizontal_timing
 
 
                 The minimum number of points you need in the record for each channel;
-                call :py:meth:`niscope.Session.ActualRecordLength` to obtain the actual record length
+                call :py:meth:`niscope.Session.actual_record_length` to obtain the actual record length
                 used.
 
                 Valid Values: Greater than 1; limited by available memory
 
                 
-
-                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type min_num_pts: int
@@ -2343,7 +2341,7 @@ cable_sense_mode
 
     .. py:attribute:: cable_sense_mode
 
-        Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the :py:meth:`niscope.Session.CableSenseSignalStart` method is called.
+        Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the :py:meth:`niscope.Session.cable_sense_signal_start` method is called.
 
         Device-Specific Behavior:
             PXIe-5160/5162
@@ -2365,8 +2363,6 @@ cable_sense_mode
         +-----------------------+
 
         .. note:: the input impedance of the channel(s) to convey the CableSense signal must be set to 50 ohms.
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -3844,11 +3840,7 @@ min_sample_rate
 
         Specify the sampling rate for the acquisition in Samples per second.
         Valid Values:
-        The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in :py:meth:`niscope.Session.ConfigureAcquisition` and not require more memory than the  onboard memory module allows.
-
-
-
-        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+        The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in :py:meth:`niscope.Session.configure_acquisition` and not require more memory than the  onboard memory module allows.
 
         The following table lists the characteristics of this property.
 
