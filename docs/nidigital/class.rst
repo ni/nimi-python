@@ -3530,32 +3530,6 @@ cache
 
                 - C Attribute: **NIDIGITAL_ATTR_CACHE**
 
-calibration_report
-------------------
-
-    .. py:attribute:: calibration_report
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_CALIBRATION_REPORT**
-
 channel_count
 -------------
 
@@ -3741,39 +3715,6 @@ cycle_number_history_ram_trigger_cycle_number
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDIGITAL_ATTR_CYCLE_NUMBER_HISTORY_RAM_TRIGGER_CYCLE_NUMBER**
-
-digital_driver_state
---------------------
-
-    .. py:attribute:: digital_driver_state
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].digital_driver_state
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | Yes       |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_DIGITAL_DRIVER_STATE**
 
 digital_edge_conditional_jump_trigger_edge
 ------------------------------------------
@@ -3988,58 +3929,6 @@ exported_pattern_opcode_event_output_terminal
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDIGITAL_ATTR_EXPORTED_PATTERN_OPCODE_EVENT_OUTPUT_TERMINAL**
-
-exported_ref_clock_output_terminal
-----------------------------------
-
-    .. py:attribute:: exported_ref_clock_output_terminal
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_EXPORTED_REF_CLOCK_OUTPUT_TERMINAL**
-
-exported_sequencer_flag_output_terminal
----------------------------------------
-
-    .. py:attribute:: exported_sequencer_flag_output_terminal
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_EXPORTED_SEQUENCER_FLAG_OUTPUT_TERMINAL**
 
 exported_start_trigger_output_terminal
 --------------------------------------
@@ -4283,32 +4172,6 @@ history_ram_pretrigger_samples
 
                 - C Attribute: **NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES**
 
-history_ram_suppress_buffer_overflow
-------------------------------------
-
-    .. py:attribute:: history_ram_suppress_buffer_overflow
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | bool       |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_HISTORY_RAM_SUPPRESS_BUFFER_OVERFLOW**
-
 history_ram_trigger_type
 ------------------------
 
@@ -4491,32 +4354,6 @@ is_keep_alive_active
 
                 - C Attribute: **NIDIGITAL_ATTR_IS_KEEP_ALIVE_ACTIVE**
 
-is_start_trigger_master
------------------------
-
-    .. py:attribute:: is_start_trigger_master
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_IS_START_TRIGGER_MASTER**
-
 logical_name
 ------------
 
@@ -4576,58 +4413,6 @@ mask_compare
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDIGITAL_ATTR_MASK_COMPARE**
-
-number_of_loaded_patterns
--------------------------
-
-    .. py:attribute:: number_of_loaded_patterns
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_NUMBER_OF_LOADED_PATTERNS**
-
-number_of_time_sets
--------------------
-
-    .. py:attribute:: number_of_time_sets
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_NUMBER_OF_TIME_SETS**
 
 pattern_label_history_ram_trigger_cycle_offset
 ----------------------------------------------
@@ -5174,40 +4959,6 @@ ppmu_voltage_limit_low
 
                 - C Attribute: **NIDIGITAL_ATTR_PPMU_VOLTAGE_LIMIT_LOW**
 
-pxi_trig_immediate_route_source
--------------------------------
-
-    .. py:attribute:: pxi_trig_immediate_route_source
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pxi_trig_immediate_route_source = var
-                var = session.channels[0,1].pxi_trig_immediate_route_source
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_PXI_TRIG_IMMEDIATE_ROUTE_SOURCE**
-
 query_instrument_status
 -----------------------
 
@@ -5320,58 +5071,6 @@ selected_function
 
                 - C Attribute: **NIDIGITAL_ATTR_SELECTED_FUNCTION**
 
-self_test_report
-----------------
-
-    .. py:attribute:: self_test_report
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_SELF_TEST_REPORT**
-
-sequencer_flag_source
----------------------
-
-    .. py:attribute:: sequencer_flag_source
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | str        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_SEQUENCER_FLAG_SOURCE**
-
 sequencer_flag_terminal_name
 ----------------------------
 
@@ -5397,32 +5096,6 @@ sequencer_flag_terminal_name
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDIGITAL_ATTR_SEQUENCER_FLAG_TERMINAL_NAME**
-
-sequencer_flag_trigger_type
----------------------------
-
-    .. py:attribute:: sequencer_flag_trigger_type
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_SEQUENCER_FLAG_TRIGGER_TYPE**
 
 serial_number
 -------------
@@ -5795,32 +5468,6 @@ tdr_offset
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIDIGITAL_ATTR_TDR_OFFSET**
-
-temperature_local
------------------
-
-    .. py:attribute:: temperature_local
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NIDIGITAL_ATTR_TEMPERATURE_LOCAL**
 
 termination_mode
 ----------------

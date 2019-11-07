@@ -155,7 +155,6 @@ class _SessionBase(object):
         var = session.channels[0,1].active_load_vcom
     '''
     cache = _attributes.AttributeViBoolean(1050004)
-    calibration_report = _attributes.AttributeViString(1150049)
     channel_count = _attributes.AttributeViInt32(1050203)
     clock_generator_frequency = _attributes.AttributeViReal64(1150073)
     '''Type: float
@@ -204,17 +203,6 @@ class _SessionBase(object):
         var = session.channels[0,1].conditional_jump_trigger_type
     '''
     cycle_number_history_ram_trigger_cycle_number = _attributes.AttributeViInt64(1150044)
-    digital_driver_state = _attributes.AttributeViInt32(1200003)
-    '''Type: int
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].digital_driver_state
-    '''
     digital_edge_conditional_jump_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
     '''Type: enums.DigitalEdge
 
@@ -266,8 +254,6 @@ class _SessionBase(object):
         session.channels[0,1].exported_pattern_opcode_event_output_terminal = var
         var = session.channels[0,1].exported_pattern_opcode_event_output_terminal
     '''
-    exported_ref_clock_output_terminal = _attributes.AttributeViString(1150028)
-    exported_sequencer_flag_output_terminal = _attributes.AttributeViString(1150058)
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     frequency_counter_measurement_time = _attributes.AttributeViReal64(1150069)
     '''Type: float
@@ -288,7 +274,6 @@ class _SessionBase(object):
     history_ram_max_samples_to_acquire_per_site = _attributes.AttributeViInt32(1150077)
     history_ram_number_of_samples_is_finite = _attributes.AttributeViBoolean(1150078)
     history_ram_pretrigger_samples = _attributes.AttributeViInt32(1150048)
-    history_ram_suppress_buffer_overflow = _attributes.AttributeViBoolean(1150080)
     history_ram_trigger_type = _attributes.AttributeViInt32(1150043)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     instrument_manufacturer = _attributes.AttributeViString(1050511)
@@ -296,7 +281,6 @@ class _SessionBase(object):
     interchange_check = _attributes.AttributeViBoolean(1050021)
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     is_keep_alive_active = _attributes.AttributeViBoolean(1150063)
-    is_start_trigger_master = _attributes.AttributeViBoolean(1200078)
     logical_name = _attributes.AttributeViString(1050305)
     mask_compare = _attributes.AttributeViBoolean(1150060)
     '''Type: bool
@@ -310,8 +294,6 @@ class _SessionBase(object):
         session.channels[0,1].mask_compare = var
         var = session.channels[0,1].mask_compare
     '''
-    number_of_loaded_patterns = _attributes.AttributeViInt32(1200007)
-    number_of_time_sets = _attributes.AttributeViInt32(1200005)
     pattern_label_history_ram_trigger_cycle_offset = _attributes.AttributeViInt64(1150045)
     pattern_label_history_ram_trigger_label = _attributes.AttributeViString(1150046)
     pattern_label_history_ram_trigger_vector_offset = _attributes.AttributeViInt64(1150052)
@@ -471,18 +453,6 @@ class _SessionBase(object):
         session.channels[0,1].ppmu_voltage_limit_low = var
         var = session.channels[0,1].ppmu_voltage_limit_low
     '''
-    pxi_trig_immediate_route_source = _attributes.AttributeViString(1200009)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].pxi_trig_immediate_route_source = var
-        var = session.channels[0,1].pxi_trig_immediate_route_source
-    '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
     range_check = _attributes.AttributeViBoolean(1050002)
     record_coercions = _attributes.AttributeViBoolean(1050006)
@@ -498,10 +468,7 @@ class _SessionBase(object):
         session.channels[0,1].selected_function = var
         var = session.channels[0,1].selected_function
     '''
-    self_test_report = _attributes.AttributeViString(1150050)
-    sequencer_flag_source = _attributes.AttributeViString(1150057)
     sequencer_flag_terminal_name = _attributes.AttributeViString(1150059)
-    sequencer_flag_trigger_type = _attributes.AttributeViInt32(1150056)
     serial_number = _attributes.AttributeViString(1150001)
     simulate = _attributes.AttributeViBoolean(1050005)
     specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
@@ -527,7 +494,6 @@ class _SessionBase(object):
         session.channels[0,1].tdr_offset = var
         var = session.channels[0,1].tdr_offset
     '''
-    temperature_local = _attributes.AttributeViReal64(1200010)
     termination_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminationMode, 1150006)
     '''Type: enums.TerminationMode
 
