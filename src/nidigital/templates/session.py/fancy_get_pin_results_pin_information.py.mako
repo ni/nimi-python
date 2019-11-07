@@ -14,5 +14,5 @@
 
         pin_indexes, site_numbers, channel_indexes = self._${f['python_name']}()
 
-        return [PinInfo(pin_indexes=pin_indexes[i], site_numbers=site_numbers[i], channel_indexes=channel_indexes) for i in range(len(pin_indexes))]
+        return [PinInfo(pin_indexes=pin_indexes[i], site_numbers=site_numbers[i], channel_indexes=channel_indexes[i]) for i in range(len(pin_indexes))]
 
