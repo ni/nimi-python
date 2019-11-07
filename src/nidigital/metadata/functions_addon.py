@@ -46,7 +46,7 @@ functions_additional_get_pin_results_pin_information = {
                     'mechanism': 'python-code',
                     'value': None
                 },
-                'type': 'ViReal64[]'
+                'type': 'ViInt32[]'
             }
         ],
     },
