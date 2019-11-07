@@ -75,7 +75,6 @@ class Library(object):
         self.niDigital_GetAttributeViInt32_cfunc = None
         self.niDigital_GetAttributeViInt64_cfunc = None
         self.niDigital_GetAttributeViReal64_cfunc = None
-        self.niDigital_GetAttributeViSession_cfunc = None
         self.niDigital_GetAttributeViString_cfunc = None
         self.niDigital_GetChannelName_cfunc = None
         self.niDigital_GetChannelNameFromString_cfunc = None
@@ -127,7 +126,6 @@ class Library(object):
         self.niDigital_SetAttributeViInt32_cfunc = None
         self.niDigital_SetAttributeViInt64_cfunc = None
         self.niDigital_SetAttributeViReal64_cfunc = None
-        self.niDigital_SetAttributeViSession_cfunc = None
         self.niDigital_SetAttributeViString_cfunc = None
         self.niDigital_TDR_cfunc = None
         self.niDigital_UnloadAllPatterns_cfunc = None
@@ -600,14 +598,6 @@ class Library(object):
                 self.niDigital_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViReal64_cfunc(vi, channel_name, attribute, value)
 
-    def niDigital_GetAttributeViSession(self, vi, channel_name, attribute, value):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_GetAttributeViSession_cfunc is None:
-                self.niDigital_GetAttributeViSession_cfunc = self._library.niDigital_GetAttributeViSession
-                self.niDigital_GetAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViSession)]  # noqa: F405
-                self.niDigital_GetAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetAttributeViSession_cfunc(vi, channel_name, attribute, value)
-
     def niDigital_GetAttributeViString(self, vi, channel_name, attribute, buffer_size, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetAttributeViString_cfunc is None:
@@ -1015,14 +1005,6 @@ class Library(object):
                 self.niDigital_SetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViReal64]  # noqa: F405
                 self.niDigital_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViReal64_cfunc(vi, channel_name, attribute, value)
-
-    def niDigital_SetAttributeViSession(self, vi, channel_name, attribute, value):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_SetAttributeViSession_cfunc is None:
-                self.niDigital_SetAttributeViSession_cfunc = self._library.niDigital_SetAttributeViSession
-                self.niDigital_SetAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViSession]  # noqa: F405
-                self.niDigital_SetAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_SetAttributeViSession_cfunc(vi, channel_name, attribute, value)
 
     def niDigital_SetAttributeViString(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:

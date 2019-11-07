@@ -1685,7 +1685,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViSession': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -3138,7 +3138,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViSession': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
