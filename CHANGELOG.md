@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * `ViUInt8` is now a valid type in APIs
     * #### Changed
     * #### Removed
 * ### NI-DMM
@@ -54,6 +55,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-Digital Pattern Driver
     * #### Added
     * #### Changed
+        * Fix get/set properties - [#1062](https://github.com/ni/nimi-python/issues/1062)
     * #### Removed
 * ### NI-TClk
     * #### Added

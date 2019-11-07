@@ -9,6 +9,7 @@ These are aliased directly to ctypes types so can be used directly to call into 
 
 ViChar = ctypes.c_char
 ViInt8 = ctypes.c_int8
+ViUInt8 = ctypes.c_uint8
 ViInt16 = ctypes.c_int16
 ViUInt16 = ctypes.c_uint16
 ViInt32 = ctypes.c_int32
