@@ -344,7 +344,7 @@ def filter_len_parameters(function):
 
 def filter_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
-    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
+    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no' and v['codegen_method'] != 'library-only'}
 
 
 def filter_library_functions(functions):
