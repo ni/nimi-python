@@ -94,7 +94,7 @@ functions = {
                 'direction': 'in',
                 'name': 'offsets',
                 'size': {
-                    'mechanism': 'passed-in',
+                    'mechanism': 'len',
                     'value': 'numOffsets'
                 },
                 'type': 'ViReal64[]'
@@ -3672,7 +3672,7 @@ functions = {
                 'direction': 'in',
                 'name': 'waveformData',
                 'size': {
-                    'mechanism': 'passed-in',
+                    'mechanism': 'len',
                     'value': 'waveformSize'
                 },
                 'type': 'ViUInt32[]'

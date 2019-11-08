@@ -162,7 +162,7 @@ apply_tdr_offsets
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: apply_tdr_offsets(num_offsets, offsets)
+    .. py:method:: apply_tdr_offsets(offsets)
 
             TBD
 
@@ -176,16 +176,9 @@ apply_tdr_offsets
 
                 .. code:: python
 
-                    session.channels[0,1].apply_tdr_offsets(num_offsets, offsets)
+                    session.channels[0,1].apply_tdr_offsets(offsets)
 
 
-            :param num_offsets:
-
-
-                
-
-
-            :type num_offsets: int
             :param offsets:
 
 
@@ -3277,7 +3270,7 @@ write_source_waveform_broadcast_u32
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: write_source_waveform_broadcast_u32(waveform_name, waveform_size, waveform_data)
+    .. py:method:: write_source_waveform_broadcast_u32(waveform_name, waveform_data)
 
             TBD
 
@@ -3292,13 +3285,6 @@ write_source_waveform_broadcast_u32
 
 
             :type waveform_name: str
-            :param waveform_size:
-
-
-                
-
-
-            :type waveform_size: int
             :param waveform_data:
 
 
