@@ -353,7 +353,7 @@ def test_set_waveform_next_write_position(session):
 
 
 def test_write_waveform_from_filei64(session):
-    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'src', 'nifgen', 'system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
 
 
 def test_named_waveform_operations(session):
@@ -371,7 +371,7 @@ def test_named_waveform_operations(session):
 
 def test_write_waveform_from_file_f64(session):
     try:
-        session.create_waveform_from_file_f64(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+        session.create_waveform_from_file_f64(os.path.join(os.getcwd(), 'src', 'nifgen', 'system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
     except nifgen.Error as e:
         assert e.code == -1074135024  # Expecting error since loading an I16 file when f64 is expected.
 
