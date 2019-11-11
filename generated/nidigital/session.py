@@ -987,36 +987,6 @@ class _SessionBase(object):
         return float(value_ctype.value)
 
     @ivi_synchronized
-    def _get_attribute_vi_session(self, attribute):
-        r'''_get_attribute_vi_session
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_session(property)
-
-        Args:
-            attribute (int):
-
-
-        Returns:
-            value (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_ctype = _visatype.ViAttr(attribute)  # case S150
-        value_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niDigital_GetAttributeViSession(vi_ctype, channel_name_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(value_ctype.value)
-
-    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute):
         r'''_get_attribute_vi_string
 
@@ -1680,34 +1650,6 @@ class _SessionBase(object):
         attribute_ctype = _visatype.ViAttr(attribute)  # case S150
         value_ctype = _visatype.ViReal64(value)  # case S150
         error_code = self._library.niDigital_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def _set_attribute_vi_session(self, attribute, value):
-        r'''_set_attribute_vi_session
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_session(property, value)
-
-        Args:
-            attribute (int):
-
-            value (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_ctype = _visatype.ViAttr(attribute)  # case S150
-        value_ctype = _visatype.ViSession(value)  # case S150
-        error_code = self._library.niDigital_SetAttributeViSession(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
