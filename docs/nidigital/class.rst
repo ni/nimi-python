@@ -1564,7 +1564,12 @@ fetch_capture_waveform
 
     .. py:method:: fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
 
-            TBD
+            Returns a list of named tuples (Waveform) that <FILL IN THE BLANK HERE>
+
+            Fields in Waveform:
+
+            - **site** (int)
+            - **data** (array.array of int)
 
             
 
@@ -1599,9 +1604,14 @@ fetch_capture_waveform
 
             :type timeout: float or datetime.timedelta
 
-            :rtype: list of int
+            :rtype: list of Waveform
             :return:
 
+
+                    List of named tuples with fields:
+
+                    - **site** (int)
+                    - **data** (array.array of int)
 
                     
 

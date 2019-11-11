@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * `ViUInt8` is now a valid type in APIs
     * #### Changed
     * #### Removed
 * ### NI-DMM
@@ -53,7 +54,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
-        * `fetch_capture_waveform()` - returns named tuple `Measurement(data, site)`
+        * `fetch_capture_waveform()` - returns namedtuple `Waveform(site, data)`
     * #### Changed
         * Fix get/set properties - [#1062](https://github.com/ni/nimi-python/issues/1062)
         * `get_pin_restuls_pin_information()` - returns named tuple `PinInfo(pin_indexes, site_numbers, channel_indexes)`
