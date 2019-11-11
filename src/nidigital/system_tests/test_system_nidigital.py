@@ -82,7 +82,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
 
 
 def configure_session(session):
-    test_files_dir = os.path.join(os.getcwd(), 'src\\nidigital\\system_tests\\test_files')
+    test_files_dir = os.path.join(os.getcwd(), 'src', 'nidigital', 'system_tests', 'test_files')
 
     session.load_pin_map(os.path.join(test_files_dir, 'pin_map.pinmap'))
 
