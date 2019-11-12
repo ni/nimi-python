@@ -1550,6 +1550,66 @@ export_signal
 
             :type output_terminal: str
 
+fetch_capture_waveform
+----------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
+
+            Returns a list of named tuples (Waveform) that <FILL IN THE BLANK HERE>
+
+            Fields in Waveform:
+
+            - **site** (int)
+            - **data** (array.array of int)
+
+            
+
+
+
+            :param site_list:
+
+
+                
+
+
+            :type site_list: str
+            :param waveform_name:
+
+
+                
+
+
+            :type waveform_name: str
+            :param samples_to_read:
+
+
+                
+
+
+            :type samples_to_read: int
+            :param timeout:
+
+
+                
+
+
+            :type timeout: float or datetime.timedelta
+
+            :rtype: list of Waveform
+            :return:
+
+
+                    List of named tuples with fields:
+
+                    - **site** (int)
+                    - **data** (array.array of int)
+
+                    
+
+
+
 fetch_history_ram_cycle_information
 -----------------------------------
 
