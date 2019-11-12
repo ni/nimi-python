@@ -619,7 +619,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def apply_tdr_offsets(self, num_offsets, offsets):
+    def apply_tdr_offsets(self, offsets):
         r'''apply_tdr_offsets
 
         TBD
@@ -630,11 +630,9 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].apply_tdr_offsets(num_offsets, offsets)
+            session.channels[0,1].apply_tdr_offsets(offsets)
 
         Args:
-            num_offsets (int):
-
             offsets (list of float):
 
         '''
@@ -3482,15 +3480,13 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_source_waveform_broadcast_u32(self, waveform_name, waveform_size, waveform_data):
+    def write_source_waveform_broadcast_u32(self, waveform_name, waveform_data):
         r'''write_source_waveform_broadcast_u32
 
         TBD
 
         Args:
             waveform_name (str):
-
-            waveform_size (int):
 
             waveform_data (list of int):
 
