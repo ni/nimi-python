@@ -60,6 +60,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-TClk
     * #### Added
+        * `conditional_jump_trigger_master_session` property
     * #### Changed
     * #### Removed
 
