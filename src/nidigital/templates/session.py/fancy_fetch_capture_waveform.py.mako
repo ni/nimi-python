@@ -13,7 +13,7 @@
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
         data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         data_ctype = None  # case B610
         actual_num_waveforms_ctype = _visatype.ViInt32()  # case S220
@@ -36,8 +36,7 @@
         import collections
         import sys
 
-        timeout_secs = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)
-        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout_secs)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self.get_site_results_site_numbers(site_list, enums.SiteType.CAPTURE_WAVEFORM)
