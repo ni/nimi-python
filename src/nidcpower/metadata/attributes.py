@@ -1,18 +1,6 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 19.6.0d2
+# This file is generated from NI-DCPower API metadata version 19.6.0d43
 attributes = {
-    1050002: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to validate attribute values and function parameters.\nIf this attribute is enabled, NI-DCPower validates the parameter values that you pass to NI-DCPower functions.  Range checking parameters is useful for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable range checking and maximize performance.\nUse the niDCPower_InitializeWithChannels function to override this value.\nDefault Value: VI_TRUE\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
-        'name': 'RANGE_CHECK',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
     1050003: {
         'access': 'read-write',
         'channel_based': False,
@@ -21,18 +9,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
         'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050004: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to cache the value of attributes.\nWhen caching is enabled, NI-DCPower records the current power supply settings and avoids sending  redundant commands to the device. Enabling caching can significantly increase execution speed.\nNI-DCPower might always cache or never cache particular attributes regardless of the setting of this attribute.\nUse the niDCPower_InitializeWithChannels function to override this value.\nDefault Value: VI_TRUE\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Cache',
-        'name': 'CACHE',
         'resettable': False,
         'type': 'ViBoolean'
     },
@@ -47,18 +23,6 @@ attributes = {
         'resettable': False,
         'type': 'ViBoolean'
     },
-    1050006: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether the IVI engine records the value coercions it makes for ViInt32 and ViReal64 attributes.  Call the niDCPower_GetNextCoercionRecord function to read and delete the earliest coercion record from the list.\nDefault Value: The default value is VI_FALSE. Use the niDCPower_InitializeWithChannels function to override this value.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
-        'name': 'RECORD_COERCIONS',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
     1050007: {
         'access': 'read only',
         'channel_based': False,
@@ -69,18 +33,6 @@ attributes = {
         'name': 'DRIVER_SETUP',
         'resettable': False,
         'type': 'ViString'
-    },
-    1050021: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to perform interchangeability checking and log interchangeability warnings when you  call NI-DCPower functions. VI_TRUE specifies that interchangeability checking is enabled.\nInterchangeability warnings indicate that using your application with a different power supply might  cause different behavior. Call the niDCPower_GetNextInterchangeWarning function to retrieve  interchange warnings.\nCall the niDCPower_GetNextInterchangeWarning function to clear the list of interchangeability warnings  without reading them.\nInterchangeability checking examines the attributes in a capability group only if you specify a value  for at least one attribute within that group. Interchangeability warnings can occur when an attribute  affects the behavior of the device and you have not set that attribute or when the attribute has been  invalidated since you set it.\nDefault Value: VI_FALSE\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
-        'name': 'INTERCHANGE_CHECK',
-        'resettable': False,
-        'type': 'ViBoolean'
     },
     1050203: {
         'access': 'read only',
@@ -137,21 +89,9 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1050401: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Contains a comma-separated list of class-extension groups that NI-DCPower implements.'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
-        'name': 'GROUP_CAPABILITIES',
-        'resettable': False,
-        'type': 'ViString'
-    },
     1050510: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the firmware revision information for the device you are currently using.'
         },
@@ -173,7 +113,7 @@ attributes = {
     },
     1050512: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Contains the model number or name of the device that you are currently using.'
         },
@@ -204,30 +144,6 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1050515: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Contains the major version number of the class specification with which NI-DCPower is compliant.'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1050516: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Contains the minor version number of the class specification with which NI-DCPower is compliant.'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1050551: {
         'access': 'read only',
         'channel_based': False,
@@ -254,7 +170,7 @@ attributes = {
     },
     1150001: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Indicates whether the device is using the internal or auxiliary power source to generate power.'
         },
@@ -266,7 +182,7 @@ attributes = {
     },
     1150002: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nIndicates whether an auxiliary power source is connected to the device.\nA value of VI_FALSE may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.\npower source to generate power. Use the NIDCPOWER_ATTR_POWER_SOURCE_IN_USE attribute to retrieve this information.\n',
             'note': 'This attribute does not necessarily indicate if the device is using the auxiliary'
@@ -325,7 +241,7 @@ attributes = {
     },
     1150007: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the  device specification limits. VI_TRUE means that overranging is enabled.\nRefer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.\nDefault Value: VI_FALSE\n'
         },
@@ -481,7 +397,7 @@ attributes = {
     },
     1150021: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Start trigger.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_NONE\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -492,23 +408,9 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150022: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to configure the Start trigger to assert on the rising or falling edge.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_RISING\n',
-            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
-        },
-        'enum': 'DigitalEdge',
-        'lv_property': 'Triggers:Start Trigger:Digital Edge:Edge',
-        'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150023: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the input terminal for the Start trigger. Use this attribute only when the NIDCPOWER_ATTR_START_TRIGGER_TYPE  attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.\nfor information about supported devices.\nYou can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation  Explorer under the Device Routes tab.\nInput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal  on Dev1 to be /Dev2/SourceCompleteEvent.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -520,7 +422,7 @@ attributes = {
     },
     1150024: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Start trigger.\nRefer to the Device Routes tab in Measurement & Automation Explorer (MAX) for a list of the terminals available  on your device.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0.\nfor information about supported devices.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -532,7 +434,7 @@ attributes = {
     },
     1150025: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the number of times a sequence is run after initiation.\nRefer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence  loop count.\nfor information about supported devices. When the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute  is set to VI_FALSE, the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.\nValid Range: 1 to 134217727\nDefault Value: 1\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -544,7 +446,7 @@ attributes = {
     },
     1150026: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Sequence Advance trigger.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_NONE\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -555,23 +457,9 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150027: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to configure the Sequence Advance trigger to assert on the rising or falling edge.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_RISING\n',
-            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
-        },
-        'enum': 'DigitalEdge',
-        'lv_property': 'Triggers:Sequence Advance Trigger:Digital Edge:Edge',
-        'name': 'DIGITAL_EDGE_SEQUENCE_ADVANCE_TRIGGER_EDGE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150028: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the input terminal for the Sequence Advance trigger. Use this attribute only when the  NIDCPOWER_ATTR_SEQUENCE_ADVANCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.\nthe NI DC Power Supplies and SMUs Help for information about supported devices.\nYou can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.\nInput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the  input terminal on Dev1 to be /Dev2/SourceCompleteEvent.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic in'
@@ -583,7 +471,7 @@ attributes = {
     },
     1150029: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Sequence Advance trigger.\nRefer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.\nfor information about supported devices.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -595,7 +483,7 @@ attributes = {
     },
     1150030: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Source trigger.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_NONE\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -606,23 +494,9 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150031: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to configure the Source trigger to assert on the rising or falling edge.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_RISING\n',
-            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
-        },
-        'enum': 'DigitalEdge',
-        'lv_property': 'Triggers:Source Trigger:Digital Edge:Edge',
-        'name': 'DIGITAL_EDGE_SOURCE_TRIGGER_EDGE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150032: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the input terminal for the Source trigger. Use this attribute only when the  NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.\nfor information about supported devices.\nYou can specify any valid input terminal for this attribute. Valid terminals are listed  in Measurement & Automation Explorer under the Device Routes tab.\nInput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -634,7 +508,7 @@ attributes = {
     },
     1150033: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Source trigger.\nRefer to the Device Routes tab in MAX for a list of the terminals available on your device.\nfor information about supported devices.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -646,7 +520,7 @@ attributes = {
     },
     1150034: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Measure trigger.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_DIGITAL_EDGE\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -657,23 +531,9 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150035: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to configure the Measure trigger to assert on the rising or falling edge.\nNIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_RISING\n',
-            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
-        },
-        'enum': 'DigitalEdge',
-        'lv_property': 'Triggers:Measure Trigger:Digital Edge:Edge',
-        'name': 'DIGITAL_EDGE_MEASURE_TRIGGER_EDGE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150036: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the input terminal for the Measure trigger. This attribute is used only when the  NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.\nfor this attribute.\nYou can specify any valid input terminal for this attribute. Valid terminals are listed in  Measurement & Automation Explorer under the Device Routes tab.\nInput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -685,7 +545,7 @@ attributes = {
     },
     1150037: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Measure trigger.\nRefer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.\nfor information about supported devices.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -697,7 +557,7 @@ attributes = {
     },
     1150038: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Sequence Iteration Complete event.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_ACTIVE_HIGH\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -710,7 +570,7 @@ attributes = {
     },
     1150039: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the width of the Sequence Iteration Complete event, in seconds.\nThe minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width  value for PXI Express devices is 250 ns.\nThe maximum event pulse width value for all devices is 1.6 microseconds.\nthe NI DC Power Supplies and SMUs Help for information about supported devices.\nValid Values: 1.5e-7 to 1.6e-6 seconds\nDefault Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic in'
@@ -722,7 +582,7 @@ attributes = {
     },
     1150040: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Sequence Iteration Complete event.\nfor information about supported devices.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -734,7 +594,7 @@ attributes = {
     },
     1150041: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Source Complete event.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_ACTIVE_HIGH\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -747,7 +607,7 @@ attributes = {
     },
     1150042: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the width of the Source Complete event, in seconds.\nfor information about supported devices.\nThe minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value  for PXI Express devices is 250 ns.\nThe maximum event pulse width value for all devices is 1.6 microseconds\nValid Values: 1.5e-7 to 1.6e-6 seconds\nDefault Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -759,7 +619,7 @@ attributes = {
     },
     1150043: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Source Complete event.\nfor information about supported devices.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -771,7 +631,7 @@ attributes = {
     },
     1150044: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Measure Complete event.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_ACTIVE_HIGH\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -784,7 +644,7 @@ attributes = {
     },
     1150045: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the width of the Measure Complete event, in seconds.\nThe minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse  width value for PXI Express devices is 250 ns.\nThe maximum event pulse width value for all devices is 1.6 microseconds.\nfor information about supported devices.\nValid Values: 1.5e-7 to 1.6e-6\nDefault Value: The default value for PXI devices is 150 ns. The default value  for PXI Express devices is 250 ns.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -797,7 +657,7 @@ attributes = {
     1150046: {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the amount of time to delay the generation of the Measure Complete event, in seconds.\nfor information about supported devices.\nValid Values: 0 to 167 seconds\nDefault Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -810,7 +670,7 @@ attributes = {
     },
     1150047: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Measure Complete event.\nfor information about supported devices.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -822,7 +682,7 @@ attributes = {
     },
     1150048: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Sequence Engine Done event.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_ACTIVE_HIGH\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -835,7 +695,7 @@ attributes = {
     },
     1150049: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the width of the Sequence Engine Done event, in seconds.\nThe minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value  for PXI Express devices is 250 ns.\nThe maximum event pulse width value for all devices is 1.6 microseconds.\nfor information about supported devices.\nValid Values: 1.5e-7 to 1.6e-6 seconds\nDefault Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -847,7 +707,7 @@ attributes = {
     },
     1150050: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Sequence Engine Done Complete event.\nfor information about supported devices.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -873,7 +733,7 @@ attributes = {
     },
     1150054: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.\nDefault value: NIDCPOWER_VAL_SINGLE_POINT\n'
         },
@@ -897,7 +757,7 @@ attributes = {
     },
     1150056: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': 'Returns the number of measurements acquired that have not been fetched yet.'
         },
@@ -908,7 +768,7 @@ attributes = {
     },
     1150057: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies when the measure unit should acquire measurements. Unless this attribute is configured to  NIDCPOWER_VAL_ON_MEASURE_TRIGGER, the NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is ignored.\nRefer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.\nDefault Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT, the default value is  NIDCPOWER_VAL_ON_DEMAND. This value supports only the niDCPower_Measure function and niDCPower_MeasureMultiple  function. If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the default value is  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the niDCPower_FetchMultiple function.\n'
         },
@@ -982,7 +842,7 @@ attributes = {
     },
     1150063: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies how many measurements compose a measure record. When this attribute is set to a value greater than 1, the  NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or  NIDCPOWER_VAL_ON_MEASURE_TRIGGER.\nfor information about supported devices.\nValid Values: 1 to 16,777,216\nDefault Value: 1\n',
             'note': '\nThis attribute is not available in a session involving multiple channels.\n'
@@ -994,7 +854,7 @@ attributes = {
     },
     1150064: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether to take continuous measurements. Call the niDCPower_Abort function to stop continuous measurements.  When this attribute is set to VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to  NIDCPOWER_VAL_SINGLE_POINT, the NIDCPOWER_ATTR_MEASURE_WHEN attribute must be set to  NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE or NIDCPOWER_VAL_ON_MEASURE_TRIGGER. When this attribute is set to  VI_FALSE and the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the NIDCPOWER_ATTR_MEASURE_WHEN  attribute must be set to NIDCPOWER_VAL_ON_MEASURE_TRIGGER.\nfor information about supported devices.\nDefault Value: VI_TRUE\n',
             'note': '\nThis attribute is not available in a session involving multiple channels.\n'
@@ -1007,7 +867,7 @@ attributes = {
     1150065: {
         'access': 'read only',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nQueries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this attribute after the desired measurement settings are committed.\nfor information about supported devices.\ntwo measurements and the rest would differ.\n',
             'note': 'This attribute is not available when Auto Zero is configured to Once because the amount of time between the first'
@@ -1020,7 +880,7 @@ attributes = {
     },
     1150066: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nDetermines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.\nfor information about supported devices.\nDefault Value: NIDCPOWER_VAL_NORMAL\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -1105,7 +965,7 @@ attributes = {
     },
     1150073: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the niDCPower_ResetDevice function is called or the machine  is powered down.\nThis attribute affects the behavior of the niDCPower_CalSelfCalibrate function. When set to  NIDCPOWER_VAL_KEEP_IN_MEMORY, the values calculated by the niDCPower_CalSelfCalibrate function are used in  the existing session, as well as in all further sessions until you call the niDCPower_ResetDevice function  or restart the machine. When you set this property to NIDCPOWER_VAL_WRITE_TO_EEPROM, the values calculated  by the niDCPower_CalSelfCalibrate function are written to hardware and used in the existing session and  in all subsequent sessions until another call to the niDCPower_CalSelfCalibrate function is made.\nabout supported devices.\nDefault Value: NIDCPOWER_VAL_KEEP_IN_MEMORY\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information'
@@ -1144,7 +1004,7 @@ attributes = {
     },
     1150077: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the number of samples that the active channel measurement buffer can hold.\nThe default value is the maximum number of samples that a device is capable of recording in one second.\nfor information about supported devices.\nValid Values: 1000 to 2147483647\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in  the NI DC Power Supplies and SMUs Help for more information about default values.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -1156,7 +1016,7 @@ attributes = {
     },
     1150078: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies whether a sequence should repeat indefinitely.\nRefer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about  infinite sequencing.\nNIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute is set to VI_FALSE,  the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.\nDefault Value: VI_TRUE\n',
             'note': 'This attribute is not supported by all devices. When the'
@@ -1352,7 +1212,7 @@ attributes = {
     },
     1150095: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Pulse trigger.\nDefault Value: NIDCPOWER_VAL_NONE\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1363,23 +1223,9 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150096: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to configure the Pulse trigger to assert on the rising or falling edge.\nDefault Value: NIDCPOWER_VAL_RISING\n',
-            'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
-        },
-        'enum': 'DigitalEdge',
-        'lv_property': 'Triggers:Pulse Trigger:Digital Edge:Edge',
-        'name': 'DIGITAL_EDGE_PULSE_TRIGGER_EDGE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150097: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the input terminal for the Pulse trigger. This attribute is used only when the NIDCPOWER_ATTR_PULSE_TRIGGER_TYPE attribute is set to digital edge.\nYou can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.\nInput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1391,7 +1237,7 @@ attributes = {
     },
     1150098: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Pulse trigger.\nRefer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1403,7 +1249,7 @@ attributes = {
     },
     1150099: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Pulse Complete event.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.\nDefault Value:The default value for PXI Express devices is 250 ns.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1415,7 +1261,7 @@ attributes = {
     },
     1150100: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Pulse Complete event.\nDefault Value: NIDCPOWER_VAL_ACTIVE_HIGH\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1428,7 +1274,7 @@ attributes = {
     },
     1150101: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the width of the Pulse Complete event, in seconds.\nThe minimum event pulse width value for PXI Express devices is 250 ns.\nThe maximum event pulse width value for PXI Express devices is 1.6 microseconds.\nDefault Value: The default value for PXI Express devices is 250 ns.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1440,7 +1286,7 @@ attributes = {
     },
     1150102: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the output terminal for exporting the Ready For Pulse Trigger event.\nOutput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1452,7 +1298,7 @@ attributes = {
     },
     1150103: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the behavior of the Ready For Pulse Trigger event.\nDefault Value: NIDCPOWER_VAL_ACTIVE_HIGH\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1465,7 +1311,7 @@ attributes = {
     },
     1150104: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nSpecifies the width of the Ready For Pulse Trigger event, in seconds.\nThe minimum event pulse width value for PXI Express devices is 250 ns.\nThe maximum event pulse width value for all devices is 1.6 microseconds.\nDefault Value: The default value for PXI Express devices is 250 ns\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information about supported devices.'
@@ -1477,7 +1323,7 @@ attributes = {
     },
     1150105: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nIndicates whether the safety interlock circuit is open.\nRefer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about  the safety interlock circuit.\nabout supported devices.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device for information'
@@ -1672,7 +1518,7 @@ attributes = {
     },
     1250002: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nEnables (VI_TRUE) or disables (VI_FALSE) overvoltage protection (OVP).\nRefer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about  overvoltage protection.\nfor information about supported devices.\nDefault Value: VI_FALSE\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
@@ -1684,7 +1530,7 @@ attributes = {
     },
     1250003: {
         'access': 'read-write',
-        'channel_based': False,
+        'channel_based': True,
         'documentation': {
             'description': '\nDetermines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.\nfor information about supported devices.\nValid Values: 2 V to 210 V\nDefault Value: 210 V\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic'
