@@ -44,6 +44,7 @@ class SessionReference(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    conditional_jump_trigger_master_session = _attributes.AttributeSessionReference(17)
     exported_sync_pulse_output_terminal = _attributes.AttributeViString(2)
     '''Type: str
 
@@ -159,8 +160,8 @@ class SessionReference(object):
     Indicates the computed TClk period that will be used during the acquisition.
     '''
 
-    def __init__(self, session_number, encoding='windows-1251'):
-        self._session_number = session_number
+    def __init__(self, session, encoding='windows-1251'):
+        self._session = session
         self._library = _library_singleton.get()
         self._encoding = encoding
         # We need a self._repeated_capability string for passing down to function calls on _Library class. We just need to set it to empty string.
@@ -168,7 +169,7 @@ class SessionReference(object):
 
         # Store the parameter list for later printing in __repr__
         param_list = []
-        param_list.append("session_number=" + pp.pformat(session_number))
+        param_list.append("session=" + pp.pformat(session))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
@@ -199,7 +200,7 @@ class SessionReference(object):
             return "Failed to retrieve error description."
 
     def _get_session_number(self):
-        return self._session_number
+        return self._session
 
     def _get_attribute_vi_real64(self, attribute_id):
         r'''_get_attribute_vi_real64
@@ -223,7 +224,7 @@ class SessionReference(object):
             value (float): The value that you are getting
 
         '''
-        session_ctype = _visatype.ViSession(self._session_number)  # case S110
+        session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64()  # case S220
@@ -256,7 +257,7 @@ class SessionReference(object):
             value (int): The value that you are getting
 
         '''
-        session_ctype = _visatype.ViSession(self._session_number)  # case S110
+        session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViSession()  # case S220
@@ -298,7 +299,7 @@ class SessionReference(object):
             value (str): The value that you are getting
 
         '''
-        session_ctype = _visatype.ViSession(self._session_number)  # case S110
+        session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         buf_size_ctype = _visatype.ViInt32()  # case S170
@@ -361,7 +362,7 @@ class SessionReference(object):
             value (float): The value for the property
 
         '''
-        session_ctype = _visatype.ViSession(self._session_number)  # case S110
+        session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViReal64(value)  # case S150
@@ -396,7 +397,7 @@ class SessionReference(object):
             value (int): The value for the property
 
         '''
-        session_ctype = _visatype.ViSession(self._session_number)  # case S110
+        session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = _visatype.ViSession(value)  # case S150
@@ -430,7 +431,7 @@ class SessionReference(object):
             value (str): Pass the value for the property
 
         '''
-        session_ctype = _visatype.ViSession(self._session_number)  # case S110
+        session_ctype = _visatype.ViSession(self._session)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
         value_ctype = ctypes.create_string_buffer(value.encode(self._encoding))  # case C020
