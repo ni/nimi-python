@@ -2694,7 +2694,7 @@ class Session(_SessionBase):
         actual_samples_per_waveform_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        data_buffer_size_ctype = _visatype.ViInt32(actual_num_waveforms_ctype.value)  # case S200
+        data_buffer_size_ctype = _visatype.ViInt32(actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value)  # case S200 (modified)
         data_size = actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value  # case B620 (modified)
         data_array = array.array("L", [0] * data_size)  # case B620
         data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViUInt32)  # case B620
@@ -3092,16 +3092,18 @@ class Session(_SessionBase):
         Args:
             site_list (str):
 
-            site_result_type (int):
+            site_result_type (enums.SiteResult):
 
 
         Returns:
             site_numbers (list of int):
 
         '''
+        if type(site_result_type) is not enums.SiteResult:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SiteResult))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        site_result_type_ctype = _visatype.ViInt32(site_result_type)  # case S150
+        site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
         site_numbers_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         site_numbers_ctype = None  # case B610
         actual_num_site_numbers_ctype = _visatype.ViInt32()  # case S220

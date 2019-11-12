@@ -2167,7 +2167,7 @@ get_site_results_site_numbers
                 
 
 
-            :type site_result_type: int
+            :type site_result_type: :py:data:`nidigital.SiteResult`
 
             :rtype: list of int
             :return:
