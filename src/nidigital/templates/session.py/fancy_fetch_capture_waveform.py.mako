@@ -1,6 +1,5 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Dispatches to the appropriate "fetch waveform into" method based on the waveform type.'''
     import build.helper as helper
     suffix = method_template['method_python_name_suffix']
 %>\
