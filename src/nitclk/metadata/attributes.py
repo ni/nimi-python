@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-TClk API metadata version 255.0.0d0
+# This file is generated from NI-TClk API metadata version 255.0.0d5
 attributes = {
     1: {
         'access': 'read-write',
@@ -84,7 +84,7 @@ attributes = {
         'lv_property': 'Period',
         'name': 'TCLK_ACTUAL_PERIOD',
         'resettable': False,
-        'type': 'ViReal64',
+        'type': 'ViReal64'
     },
     9: {
         'access': 'read-write',
@@ -95,7 +95,7 @@ attributes = {
         'lv_property': 'Output Terminal',
         'name': 'EXPORTED_TCLK_OUTPUT_TERMINAL',
         'resettable': False,
-        'type': 'ViString',
+        'type': 'ViString'
     },
     10: {
         'access': 'read-write',
@@ -140,6 +140,15 @@ attributes = {
         },
         'lv_property': 'Sequencer Flag Master Session',
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
+        'resettable': False,
+        'type': 'ViSession',
+        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+    },
+    17: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeSessionReference',
+        'channel_based': False,
+        'name': 'CONDITIONAL_JUMP_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
