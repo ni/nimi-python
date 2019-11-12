@@ -129,7 +129,7 @@ abort
     .. py:method:: abort()
 
             Transitions the NI-DCPower session from the Running state to the
-            Committed state. If a sequence is running, it is stopped. Any
+            Uncommitted state. If a sequence is running, it is stopped. Any
             configuration methods called after this method are not applied until
             the :py:meth:`nidcpower.Session.initiate` method is called. If power output is enabled
             when you call the :py:meth:`nidcpower.Session.abort` method, the output channels remain
@@ -808,7 +808,7 @@ initiate
 
             Starts generation or acquisition, causing the NI-DCPower session to
             leave the Uncommitted state or Committed state and enter the Running
-            state. To return to the Committed state call the :py:meth:`nidcpower.Session.abort`
+            state. To return to the Uncommitted state call the :py:meth:`nidcpower.Session.abort`
             method. Refer to the `Programming
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
             the *NI DC Power Supplies and SMUs Help* for information about the
@@ -1750,6 +1750,16 @@ auxiliary_power_source_available
 
         .. note:: This property does not necessarily indicate if the device is using the auxiliary
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].auxiliary_power_source_available
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -1759,7 +1769,7 @@ auxiliary_power_source_available
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2440,6 +2450,17 @@ dc_noise_rejection
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].dc_noise_rejection = var
+                var = session.channels[0,1].dc_noise_rejection
+
         The following table lists the characteristics of this property.
 
             +----------------+------------------------+
@@ -2449,7 +2470,7 @@ dc_noise_rejection
             +----------------+------------------------+
             | Permissions    | read-write             |
             +----------------+------------------------+
-            | Channel Based  | No                     |
+            | Channel Based  | Yes                    |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -2474,6 +2495,17 @@ digital_edge_measure_trigger_input_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].digital_edge_measure_trigger_input_terminal = var
+                var = session.channels[0,1].digital_edge_measure_trigger_input_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2483,7 +2515,7 @@ digital_edge_measure_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2507,6 +2539,17 @@ digital_edge_pulse_trigger_input_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].digital_edge_pulse_trigger_input_terminal = var
+                var = session.channels[0,1].digital_edge_pulse_trigger_input_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2516,7 +2559,7 @@ digital_edge_pulse_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2541,6 +2584,17 @@ digital_edge_sequence_advance_trigger_input_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].digital_edge_sequence_advance_trigger_input_terminal = var
+                var = session.channels[0,1].digital_edge_sequence_advance_trigger_input_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2550,7 +2604,7 @@ digital_edge_sequence_advance_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2575,6 +2629,17 @@ digital_edge_source_trigger_input_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].digital_edge_source_trigger_input_terminal = var
+                var = session.channels[0,1].digital_edge_source_trigger_input_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2584,7 +2649,7 @@ digital_edge_source_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2609,6 +2674,17 @@ digital_edge_start_trigger_input_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].digital_edge_start_trigger_input_terminal = var
+                var = session.channels[0,1].digital_edge_start_trigger_input_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2618,7 +2694,7 @@ digital_edge_start_trigger_input_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2672,6 +2748,17 @@ exported_measure_trigger_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].exported_measure_trigger_output_terminal = var
+                var = session.channels[0,1].exported_measure_trigger_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2681,7 +2768,7 @@ exported_measure_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2705,6 +2792,17 @@ exported_pulse_trigger_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].exported_pulse_trigger_output_terminal = var
+                var = session.channels[0,1].exported_pulse_trigger_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2714,7 +2812,7 @@ exported_pulse_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2739,6 +2837,17 @@ exported_sequence_advance_trigger_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].exported_sequence_advance_trigger_output_terminal = var
+                var = session.channels[0,1].exported_sequence_advance_trigger_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2748,7 +2857,7 @@ exported_sequence_advance_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2773,6 +2882,17 @@ exported_source_trigger_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].exported_source_trigger_output_terminal = var
+                var = session.channels[0,1].exported_source_trigger_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2782,7 +2902,7 @@ exported_source_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2807,6 +2927,17 @@ exported_start_trigger_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].exported_start_trigger_output_terminal = var
+                var = session.channels[0,1].exported_start_trigger_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -2816,7 +2947,7 @@ exported_start_trigger_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -2834,6 +2965,18 @@ fetch_backlog
 
         Returns the number of measurements acquired that have not been fetched yet.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].fetch_backlog
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2843,7 +2986,7 @@ fetch_backlog
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2861,6 +3004,18 @@ instrument_firmware_revision
 
         Contains the firmware revision information for the device you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].instrument_firmware_revision
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2870,7 +3025,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2915,6 +3070,18 @@ instrument_model
 
         Contains the model number or name of the device that you are currently using.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].instrument_model
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2924,7 +3091,7 @@ instrument_model
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -2948,6 +3115,16 @@ interlock_input_open
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].interlock_input_open
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2957,7 +3134,7 @@ interlock_input_open
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3040,6 +3217,17 @@ measure_buffer_size
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_buffer_size = var
+                var = session.channels[0,1].measure_buffer_size
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3049,7 +3237,7 @@ measure_buffer_size
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3074,6 +3262,17 @@ measure_complete_event_delay
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_complete_event_delay = var
+                var = session.channels[0,1].measure_complete_event_delay
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------------+
@@ -3083,7 +3282,7 @@ measure_complete_event_delay
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -3107,6 +3306,17 @@ measure_complete_event_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_complete_event_output_terminal = var
+                var = session.channels[0,1].measure_complete_event_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3116,7 +3326,7 @@ measure_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3140,6 +3350,17 @@ measure_complete_event_pulse_polarity
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_complete_event_pulse_polarity = var
+                var = session.channels[0,1].measure_complete_event_pulse_polarity
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------+
@@ -3149,7 +3370,7 @@ measure_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | No             |
+            | Channel Based  | Yes            |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -3176,6 +3397,17 @@ measure_complete_event_pulse_width
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_complete_event_pulse_width = var
+                var = session.channels[0,1].measure_complete_event_pulse_width
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3185,7 +3417,7 @@ measure_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3209,6 +3441,16 @@ measure_record_delta_time
 
         .. note:: This property is not available when Auto Zero is configured to Once because the amount of time between the first
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].measure_record_delta_time
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------------+
@@ -3218,7 +3460,7 @@ measure_record_delta_time
             +----------------+----------------------------------------+
             | Permissions    | read only                              |
             +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
+            | Channel Based  | Yes                                    |
             +----------------+----------------------------------------+
             | Resettable     | No                                     |
             +----------------+----------------------------------------+
@@ -3243,6 +3485,17 @@ measure_record_length
 
         .. note:: This property is not available in a session involving multiple channels.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_record_length = var
+                var = session.channels[0,1].measure_record_length
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3252,7 +3505,7 @@ measure_record_length
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3276,6 +3529,17 @@ measure_record_length_is_finite
 
         .. note:: This property is not available in a session involving multiple channels.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_record_length_is_finite = var
+                var = session.channels[0,1].measure_record_length_is_finite
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3285,7 +3549,7 @@ measure_record_length_is_finite
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3309,6 +3573,17 @@ measure_trigger_type
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_trigger_type = var
+                var = session.channels[0,1].measure_trigger_type
+
         The following table lists the characteristics of this property.
 
             +----------------+-------------------+
@@ -3318,7 +3593,7 @@ measure_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | No                |
+            | Channel Based  | Yes               |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -3338,6 +3613,19 @@ measure_when
         Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
         Default Value: If the :py:attr:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SINGLE_POINT`, the default value is  :py:data:`~nidcpower.MeasureWhen.ON_DEMAND`. This value supports only the :py:meth:`nidcpower.Session.measure` method and :py:meth:`nidcpower.Session.measure_multiple`  method. If the :py:attr:`nidcpower.Session.source_mode` property is set to :py:data:`~nidcpower.SourceMode.SEQUENCE`, the default value is  :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE`. This value supports only the :py:meth:`nidcpower.Session.fetch_multiple` method.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].measure_when = var
+                var = session.channels[0,1].measure_when
+
         The following table lists the characteristics of this property.
 
             +----------------+-------------------+
@@ -3347,7 +3635,7 @@ measure_when
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | No                |
+            | Channel Based  | Yes               |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -3602,6 +3890,19 @@ overranging_enabled
         Refer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.
         Default Value: False
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].overranging_enabled = var
+                var = session.channels[0,1].overranging_enabled
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3611,7 +3912,7 @@ overranging_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3636,6 +3937,17 @@ ovp_enabled
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].ovp_enabled = var
+                var = session.channels[0,1].ovp_enabled
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3645,7 +3957,7 @@ ovp_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3670,6 +3982,17 @@ ovp_limit
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].ovp_limit = var
+                var = session.channels[0,1].ovp_limit
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3679,7 +4002,7 @@ ovp_limit
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -3776,6 +4099,18 @@ power_source_in_use
 
         Indicates whether the device is using the internal or auxiliary power source to generate power.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].power_source_in_use
+
         The following table lists the characteristics of this property.
 
             +----------------+------------------------+
@@ -3785,7 +4120,7 @@ power_source_in_use
             +----------------+------------------------+
             | Permissions    | read only              |
             +----------------+------------------------+
-            | Channel Based  | No                     |
+            | Channel Based  | Yes                    |
             +----------------+------------------------+
             | Resettable     | No                     |
             +----------------+------------------------+
@@ -4309,6 +4644,17 @@ pulse_complete_event_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].pulse_complete_event_output_terminal = var
+                var = session.channels[0,1].pulse_complete_event_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -4318,7 +4664,7 @@ pulse_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4341,6 +4687,17 @@ pulse_complete_event_pulse_polarity
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].pulse_complete_event_pulse_polarity = var
+                var = session.channels[0,1].pulse_complete_event_pulse_polarity
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------+
@@ -4350,7 +4707,7 @@ pulse_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | No             |
+            | Channel Based  | Yes            |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -4375,6 +4732,17 @@ pulse_complete_event_pulse_width
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].pulse_complete_event_pulse_width = var
+                var = session.channels[0,1].pulse_complete_event_pulse_width
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -4384,7 +4752,7 @@ pulse_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -4813,6 +5181,17 @@ pulse_trigger_type
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].pulse_trigger_type = var
+                var = session.channels[0,1].pulse_trigger_type
+
         The following table lists the characteristics of this property.
 
             +----------------+-------------------+
@@ -4822,7 +5201,7 @@ pulse_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | No                |
+            | Channel Based  | Yes               |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -5194,6 +5573,17 @@ ready_for_pulse_trigger_event_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].ready_for_pulse_trigger_event_output_terminal = var
+                var = session.channels[0,1].ready_for_pulse_trigger_event_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5203,7 +5593,7 @@ ready_for_pulse_trigger_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5226,6 +5616,17 @@ ready_for_pulse_trigger_event_pulse_polarity
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].ready_for_pulse_trigger_event_pulse_polarity = var
+                var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_polarity
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------+
@@ -5235,7 +5636,7 @@ ready_for_pulse_trigger_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | No             |
+            | Channel Based  | Yes            |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -5260,6 +5661,17 @@ ready_for_pulse_trigger_event_pulse_width
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].ready_for_pulse_trigger_event_pulse_width = var
+                var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_width
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5269,7 +5681,7 @@ ready_for_pulse_trigger_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5389,6 +5801,17 @@ self_calibration_persistence
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].self_calibration_persistence = var
+                var = session.channels[0,1].self_calibration_persistence
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------------------------+
@@ -5398,7 +5821,7 @@ self_calibration_persistence
             +----------------+----------------------------------+
             | Permissions    | read-write                       |
             +----------------+----------------------------------+
-            | Channel Based  | No                               |
+            | Channel Based  | Yes                              |
             +----------------+----------------------------------+
             | Resettable     | No                               |
             +----------------+----------------------------------+
@@ -5464,6 +5887,17 @@ sequence_advance_trigger_type
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_advance_trigger_type = var
+                var = session.channels[0,1].sequence_advance_trigger_type
+
         The following table lists the characteristics of this property.
 
             +----------------+-------------------+
@@ -5473,7 +5907,7 @@ sequence_advance_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | No                |
+            | Channel Based  | Yes               |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -5497,6 +5931,17 @@ sequence_engine_done_event_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_engine_done_event_output_terminal = var
+                var = session.channels[0,1].sequence_engine_done_event_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5506,7 +5951,7 @@ sequence_engine_done_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5530,6 +5975,17 @@ sequence_engine_done_event_pulse_polarity
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_engine_done_event_pulse_polarity = var
+                var = session.channels[0,1].sequence_engine_done_event_pulse_polarity
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------+
@@ -5539,7 +5995,7 @@ sequence_engine_done_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | No             |
+            | Channel Based  | Yes            |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -5566,6 +6022,17 @@ sequence_engine_done_event_pulse_width
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_engine_done_event_pulse_width = var
+                var = session.channels[0,1].sequence_engine_done_event_pulse_width
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5575,7 +6042,7 @@ sequence_engine_done_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5599,6 +6066,17 @@ sequence_iteration_complete_event_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_iteration_complete_event_output_terminal = var
+                var = session.channels[0,1].sequence_iteration_complete_event_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5608,7 +6086,7 @@ sequence_iteration_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5632,6 +6110,17 @@ sequence_iteration_complete_event_pulse_polarity
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_iteration_complete_event_pulse_polarity = var
+                var = session.channels[0,1].sequence_iteration_complete_event_pulse_polarity
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------+
@@ -5641,7 +6130,7 @@ sequence_iteration_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | No             |
+            | Channel Based  | Yes            |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -5668,6 +6157,17 @@ sequence_iteration_complete_event_pulse_width
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_iteration_complete_event_pulse_width = var
+                var = session.channels[0,1].sequence_iteration_complete_event_pulse_width
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5677,7 +6177,7 @@ sequence_iteration_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5703,6 +6203,17 @@ sequence_loop_count
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_loop_count = var
+                var = session.channels[0,1].sequence_loop_count
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5712,7 +6223,7 @@ sequence_loop_count
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5737,6 +6248,17 @@ sequence_loop_count_is_finite
 
         .. note:: This property is not supported by all devices. When the
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].sequence_loop_count_is_finite = var
+                var = session.channels[0,1].sequence_loop_count_is_finite
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5746,7 +6268,7 @@ sequence_loop_count_is_finite
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5866,6 +6388,17 @@ source_complete_event_output_terminal
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].source_complete_event_output_terminal = var
+                var = session.channels[0,1].source_complete_event_output_terminal
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5875,7 +6408,7 @@ source_complete_event_output_terminal
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -5899,6 +6432,17 @@ source_complete_event_pulse_polarity
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].source_complete_event_pulse_polarity = var
+                var = session.channels[0,1].source_complete_event_pulse_polarity
+
         The following table lists the characteristics of this property.
 
             +----------------+----------------+
@@ -5908,7 +6452,7 @@ source_complete_event_pulse_polarity
             +----------------+----------------+
             | Permissions    | read-write     |
             +----------------+----------------+
-            | Channel Based  | No             |
+            | Channel Based  | Yes            |
             +----------------+----------------+
             | Resettable     | No             |
             +----------------+----------------+
@@ -5935,6 +6479,17 @@ source_complete_event_pulse_width
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].source_complete_event_pulse_width = var
+                var = session.channels[0,1].source_complete_event_pulse_width
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5944,7 +6499,7 @@ source_complete_event_pulse_width
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | No         |
             +----------------+------------+
@@ -6008,6 +6563,19 @@ source_mode
         Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
         Default value: :py:data:`~nidcpower.SourceMode.SINGLE_POINT`
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].source_mode = var
+                var = session.channels[0,1].source_mode
+
         The following table lists the characteristics of this property.
 
             +----------------+------------------+
@@ -6017,7 +6585,7 @@ source_mode
             +----------------+------------------+
             | Permissions    | read-write       |
             +----------------+------------------+
-            | Channel Based  | No               |
+            | Channel Based  | Yes              |
             +----------------+------------------+
             | Resettable     | No               |
             +----------------+------------------+
@@ -6041,6 +6609,17 @@ source_trigger_type
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].source_trigger_type = var
+                var = session.channels[0,1].source_trigger_type
+
         The following table lists the characteristics of this property.
 
             +----------------+-------------------+
@@ -6050,7 +6629,7 @@ source_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | No                |
+            | Channel Based  | Yes               |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
@@ -6182,6 +6761,17 @@ start_trigger_type
 
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].start_trigger_type = var
+                var = session.channels[0,1].start_trigger_type
+
         The following table lists the characteristics of this property.
 
             +----------------+-------------------+
@@ -6191,7 +6781,7 @@ start_trigger_type
             +----------------+-------------------+
             | Permissions    | read-write        |
             +----------------+-------------------+
-            | Channel Based  | No                |
+            | Channel Based  | Yes               |
             +----------------+-------------------+
             | Resettable     | No                |
             +----------------+-------------------+
