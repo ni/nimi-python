@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-DCPower
     * #### Added
     * #### Changed
+        * Updated metadata - properties are now properly marked as channel based - only affects documentation
     * #### Removed
 * ### NI-FGEN
     * #### Added
