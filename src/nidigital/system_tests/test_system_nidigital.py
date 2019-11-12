@@ -11,13 +11,15 @@ def multi_instrument_session():
 
 
 def test_property_boolean(multi_instrument_session):
-    multi_instrument_session.channels[instr[0] + '/0'].ppmu_allow_extended_voltage_range = True
-    assert multi_instrument_session.channels[instr[0] + '/0'].ppmu_allow_extended_voltage_range == True
+    channel = multi_instrument_session.get_channel_name(index=42)
+    multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range = True
+    assert multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range == True
 
 
 def test_property_int32(multi_instrument_session):
-    multi_instrument_session.channels[instr[0] + '/0'].termination_mode = nidigital.TerminationMode.HIGH_Z
-    assert multi_instrument_session.channels[instr[0] + '/0'].termination_mode == nidigital.TerminationMode.HIGH_Z
+    channel = multi_instrument_session.get_channel_name(index=42)
+    multi_instrument_session.channels[channel].termination_mode = nidigital.TerminationMode.HIGH_Z
+    assert multi_instrument_session.channels[channel].termination_mode == nidigital.TerminationMode.HIGH_Z
 
 
 def test_property_int64(multi_instrument_session):
@@ -26,8 +28,9 @@ def test_property_int64(multi_instrument_session):
 
 
 def test_property_real64(multi_instrument_session):
-    multi_instrument_session.channels[instr[0] + '/0'].ppmu_voltage_level = 4
-    assert multi_instrument_session.channels[instr[0] + '/0'].ppmu_voltage_level == pytest.approx(4, rel=1e-3)
+    channel = multi_instrument_session.get_channel_name(index=42)
+    multi_instrument_session.channels[channel].ppmu_voltage_level = 4
+    assert multi_instrument_session.channels[channel].ppmu_voltage_level == pytest.approx(4, rel=1e-3)
 
 
 def test_property_string(multi_instrument_session):
