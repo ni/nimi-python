@@ -16,7 +16,7 @@ functions_additional_fetch_capture_waveform = {
             }
         ],
        'documentation': {
-            'description': '\nReturns a list of named tuples (Waveform) that <FILL IN THE BLANK HERE>\n\nFields in Waveform:\n\n- **site** (int)\n- **data** (array.array of int)\n\n',
+            'description': '\nReturns dictionary where each key is the site number and the value is array.array of unsigned int\n\n',
         },
         'parameters': [
             {
@@ -49,15 +49,15 @@ functions_additional_fetch_capture_waveform = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **site** (int)\n- **data** (array.array of int)\n'
+                    'description': '\nDictionary where each key is the site number and the value is array.array of unsigned int\n'
                 },
                 'name': 'waveform',
-                'python_type': 'Waveform',
                 'size': {
                     'mechanism': 'python-code',
                     'value': None
                 },
-                'type': 'ViUInt32[]'
+                'type': 'ViUInt32',
+                'type_in_documentation': '{ site: data, site: data, ... }',
             },
         ],
     },
