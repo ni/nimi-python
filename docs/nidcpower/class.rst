@@ -135,7 +135,7 @@ abort
             when you call the :py:meth:`nidcpower.Session.abort` method, the output channels remain
             in their current state and continue providing power.
 
-            Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled` method to disable power
+            Use the :py:meth:`nidcpower.Session.configure_output_enabled` method to disable power
             output on a per channel basis. Use the :py:meth:`nidcpower.Session.reset` method to
             disable output on all channels.
 
@@ -151,8 +151,6 @@ abort
 
             
 
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
-
 
 
 close
@@ -165,7 +163,7 @@ close
             Closes the session specified in **vi** and deallocates the resources
             that NI-DCPower reserves. If power output is enabled when you call this
             method, the output channels remain in their existing state and
-            continue providing power. Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled`
+            continue providing power. Use the :py:meth:`nidcpower.Session.configure_output_enabled`
             method to disable power output on a per channel basis. Use the
             :py:meth:`nidcpower.Session.reset` method to disable power output on all channel(s).
 
@@ -175,8 +173,6 @@ close
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
             
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
             .. note:: This method is not needed when using the session context manager
 
@@ -987,15 +983,15 @@ query_in_compliance
             The compliance limit is the current limit when the output method is
             set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`. If the output is operating at the
             compliance limit, the output reaches the current limit before the
-            desired voltage level. Refer to the :py:meth:`nidcpower.Session.ConfigureOutputFunction`
-            method and the :py:meth:`nidcpower.Session.ConfigureCurrentLimit` method for more
+            desired voltage level. Refer to the :py:meth:`nidcpower.Session.configure_output_function`
+            method and the :py:meth:`nidcpower.Session.configure_current_limit` method for more
             information about output method and current limit, respectively.
 
             The compliance limit is the voltage limit when the output method is
             set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`. If the output is operating at the
             compliance limit, the output reaches the voltage limit before the
-            desired current level. Refer to the :py:meth:`nidcpower.Session.ConfigureOutputFunction`
-            method and the :py:meth:`nidcpower.Session.ConfigureVoltageLimit` method for more
+            desired current level. Refer to the :py:meth:`nidcpower.Session.configure_output_function`
+            method and the :py:meth:`nidcpower.Session.configure_voltage_limit` method for more
             information about output method and voltage limit, respectively.
 
             **Related Topics:**
@@ -1003,8 +999,6 @@ query_in_compliance
             `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
             
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             .. tip:: This method requires repeated capabilities (channels). If called directly on the
