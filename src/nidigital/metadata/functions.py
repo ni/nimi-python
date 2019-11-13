@@ -2050,6 +2050,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinResultsPinInformation': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
