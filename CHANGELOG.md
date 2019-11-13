@@ -54,7 +54,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
-        * `fetch_capture_waveform()` - returns namedtuple `Waveform(site, data)`
+        * `fetch_capture_waveform()` - returns dictionary { site: data, site: data, ... }
     * #### Changed
         * Fix get/set properties - [#1062](https://github.com/ni/nimi-python/issues/1062)
         * Removed array-size parameter from apply_tdr_offsets() and write_source_waveform_broadcast_u32() methods - [#1070](https://github.com/ni/nimi-python/issues/1070)
