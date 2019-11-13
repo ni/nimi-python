@@ -808,6 +808,41 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def get_pin_results_pin_information(self):
+        '''get_pin_results_pin_information
+
+        Returns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>
+
+        Fields in PinInfo:
+
+        - **pin_indexes** (int)
+        - **site_numbers** (int)
+        - **channel_indexes** (int)
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].get_pin_results_pin_information()
+
+        Returns:
+            pin_info (list of PinInfo): List of named tuples with fields:
+
+                - **pin_indexes** (int)
+                - **site_numbers** (int)
+                - **channel_indexes** (int)
+
+        '''
+        import collections
+        PinInfo = collections.namedtuple('PinInformation', ['pin_indexes', 'site_numbers', 'channel_indexes'])
+
+        pin_indexes, site_numbers, channel_indexes = self._get_pin_results_pin_information()
+
+        return [PinInfo(pin_indexes=pin_indexes[i], site_numbers=site_numbers[i], channel_indexes=channel_indexes[i]) for i in range(len(pin_indexes))]
+
+    @ivi_synchronized
     def frequency_counter_configure_measurement_time(self, measurement_time):
         r'''frequency_counter_configure_measurement_time
 
@@ -1075,8 +1110,8 @@ class _SessionBase(object):
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_pin_results_pin_information(self):
-        r'''get_pin_results_pin_information
+    def _get_pin_results_pin_information(self):
+        r'''_get_pin_results_pin_information
 
         TBD
 
@@ -1086,7 +1121,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_pin_results_pin_information()
+            session.channels[0,1]._get_pin_results_pin_information()
 
         Returns:
             pin_indexes (list of int):
