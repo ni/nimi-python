@@ -3373,6 +3373,36 @@ write_source_waveform_data_from_file_tdms
 
             :type waveform_file_path: str
 
+write_source_waveform_site_unique
+---------------------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: write_source_waveform_site_unique(waveform_name, waveform_data)
+
+            TBD
+
+            
+
+
+
+            :param waveform_name:
+
+
+                
+
+
+            :type waveform_name: str
+            :param waveform_data:
+
+
+                Dictionary where each key is the site number and the value is array.array of unsigned int
+
+                
+
+
+            :type waveform_data: { site: data, site: data, ... }
+
 write_static
 ------------
 
