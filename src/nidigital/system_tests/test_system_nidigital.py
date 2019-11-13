@@ -65,3 +65,8 @@ def test_fetch_capture_waveform(multi_instrument_session):
     if sys.version_info.major >= 3:
         pass
 
+def test_write_source_waveform_site_unique(multi_instrument_session):
+    if sys.version_info.major >= 3:
+        pass
+
+
