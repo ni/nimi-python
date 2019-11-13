@@ -515,12 +515,10 @@ configure_thermistor_custom
 
 
                 Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.ConfigureThermistorType`
+                Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.configure_thermistor_type`
                 method. The default is 1.0295e-3 (44006).
 
                 
-
-                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type thermistor_a: float
@@ -528,12 +526,10 @@ configure_thermistor_custom
 
 
                 Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.ConfigureThermistorType`
+                Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.configure_thermistor_type`
                 method. The default is 2.391e-4 (44006).
 
                 
-
-                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type thermistor_b: float
@@ -541,12 +537,10 @@ configure_thermistor_custom
 
 
                 Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.ConfigureThermistorType`
+                Thermistor Type is set to Custom in the :py:meth:`nidmm.Session.configure_thermistor_type`
                 method. The default is 1.568e-7 (44006).
 
                 
-
-                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type thermistor_c: float
@@ -1498,15 +1492,13 @@ perform_open_cable_comp
             measurements for the current capacitance/inductance range, and returns
             open cable compensation **Conductance** and **Susceptance** values. You
             can use the return values of this method as inputs to
-            :py:meth:`nidmm.Session.ConfigureOpenCableCompValues`.
+            :py:meth:`nidmm.Session.configure_open_cable_comp_values`.
 
             This method returns an error if the value of the :py:attr:`nidmm.Session.method`
             property is not set to :py:data:`~nidmm.Method.CAPACITANCE` (1005) or
             :py:data:`~nidmm.Method.INDUCTANCE` (1006).
 
             
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -1543,15 +1535,13 @@ perform_short_cable_comp
             Performs the short cable compensation measurements for the current
             capacitance/inductance range, and returns short cable compensation
             **Resistance** and **Reactance** values. You can use the return values
-            of this method as inputs to :py:meth:`nidmm.Session.ConfigureShortCableCompValues`.
+            of this method as inputs to :py:meth:`nidmm.Session.configure_short_cable_comp_values`.
 
             This method returns an error if the value of the :py:attr:`nidmm.Session.method`
             property is not set to :py:data:`~nidmm.Method.CAPACITANCE` (1005) or
             :py:data:`~nidmm.Method.INDUCTANCE` (1006).
 
             
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 

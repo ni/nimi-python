@@ -11,13 +11,15 @@ def multi_instrument_session():
 
 
 def test_property_boolean(multi_instrument_session):
-    multi_instrument_session.channels[instr[0] + '/0'].ppmu_allow_extended_voltage_range = True
-    assert multi_instrument_session.channels[instr[0] + '/0'].ppmu_allow_extended_voltage_range == True
+    channel = multi_instrument_session.get_channel_name(index=42)
+    multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range = True
+    assert multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range == True
 
 
 def test_property_int32(multi_instrument_session):
-    multi_instrument_session.channels[instr[0] + '/0'].termination_mode = nidigital.TerminationMode.HIGH_Z
-    assert multi_instrument_session.channels[instr[0] + '/0'].termination_mode == nidigital.TerminationMode.HIGH_Z
+    channel = multi_instrument_session.get_channel_name(index=42)
+    multi_instrument_session.channels[channel].termination_mode = nidigital.TerminationMode.HIGH_Z
+    assert multi_instrument_session.channels[channel].termination_mode == nidigital.TerminationMode.HIGH_Z
 
 
 def test_property_int64(multi_instrument_session):
@@ -26,10 +28,34 @@ def test_property_int64(multi_instrument_session):
 
 
 def test_property_real64(multi_instrument_session):
-    multi_instrument_session.channels[instr[0] + '/0'].ppmu_voltage_level = 4
-    assert multi_instrument_session.channels[instr[0] + '/0'].ppmu_voltage_level == pytest.approx(4, rel=1e-3)
+    channel = multi_instrument_session.get_channel_name(index=42)
+    multi_instrument_session.channels[channel].ppmu_voltage_level = 4
+    assert multi_instrument_session.channels[channel].ppmu_voltage_level == pytest.approx(4, rel=1e-3)
 
 
 def test_property_string(multi_instrument_session):
     multi_instrument_session.start_label = 'foo'
     assert multi_instrument_session.start_label == 'foo'
+
+
+def test_tdr_all_channels(multi_instrument_session):
+    applied_offsets = multi_instrument_session.tdr(apply_offsets=False)
+    assert len(applied_offsets) == multi_instrument_session.channel_count
+
+    multi_instrument_session.apply_tdr_offsets(applied_offsets)
+
+    channels = [multi_instrument_session.get_channel_name(i) for i in
+                range(1, multi_instrument_session.channel_count + 1)]
+    fetched_offsets = [multi_instrument_session.channels[i].tdr_offset for i in channels]
+    assert fetched_offsets == applied_offsets
+
+
+def test_tdr_some_channels(multi_instrument_session):
+    channels = [multi_instrument_session.get_channel_name(i) for i in [64, 1, 50, 25]]
+    applied_offsets = multi_instrument_session.channels[channels].tdr(apply_offsets=False)
+    assert len(applied_offsets) == len(channels)
+
+    multi_instrument_session.channels[channels].apply_tdr_offsets(applied_offsets)
+
+    fetched_offsets = [multi_instrument_session.channels[i].tdr_offset for i in channels]
+    assert fetched_offsets == applied_offsets
