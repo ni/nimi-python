@@ -33,23 +33,20 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        import collections
-
         data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
 
         # Get the site list
         site_list = self.get_site_results_site_numbers(site_list, enums.SiteType.CAPTURE_WAVEFORM)
         assert len(site_list) == actual_num_waveforms
 
-        Waveform = collections.namedtuple('Waveform', ['site', 'data'])
-
-        waveforms = []
+        waveforms = {}
 
         mv = memoryview(data)
 
         for i in range(actual_num_waveforms):
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
+            waveforms[site_list[i]] = mv[start:end]
 
         return waveforms
 
