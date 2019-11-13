@@ -4,6 +4,44 @@
 functions_override_metadata = {
 }
 
+functions_additional_write_source_waveform_site_unique = {
+    'FancyWriteSourceWaveformSiteUnique': {
+        'python_name': 'write_source_waveform_site_unique',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_write_source_waveform_site_unique',
+            }
+        ],
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nDictionary where each key is the site number and the value is array.array of unsigned int\n'
+                },
+                'name': 'waveform_data',
+                'type': 'ViUInt32',
+                'type_in_documentation': '{ site: data, site: data, ... }',
+            },
+        ],
+    },
+}
+
 functions_additional_fetch_capture_waveform = {
     'FancyFetchCaptureWaveform': {
         'python_name': 'fetch_capture_waveform',
