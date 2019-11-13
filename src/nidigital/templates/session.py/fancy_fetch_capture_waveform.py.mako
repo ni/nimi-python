@@ -34,7 +34,6 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import collections
-        import sys
 
         data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
 
@@ -46,19 +45,11 @@
 
         waveforms = []
 
-        if sys.version_info.major >= 3:
-            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
-            mv = memoryview(data)
+        mv = memoryview(data)
 
         for i in range(actual_num_waveforms):
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
-            if sys.version_info.major >= 3:
-                waveforms.append(Waveform(site=site_list[i], data=mv[start:end]))
-            else:
-                # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
-                # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                waveforms.append(Waveform(site=site_list[i], data=array.array('L', data[start:end])))
 
         return waveforms
 
