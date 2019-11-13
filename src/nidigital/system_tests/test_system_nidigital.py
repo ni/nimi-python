@@ -61,7 +61,11 @@ def test_tdr_some_channels(multi_instrument_session):
     fetched_offsets = [multi_instrument_session.channels[i].tdr_offset for i in channels]
     assert fetched_offsets == applied_offsets
 
+
 def test_fetch_capture_waveform(multi_instrument_session):
     if sys.version_info.major >= 3:
         pass
 
+
+def test_get_pin_results_pin_information(multi_instrument_session):
+    pass
