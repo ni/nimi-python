@@ -1,5 +1,6 @@
 import nidigital
 import pytest
+import sys
 
 instr = ['PXI1Slot2', 'PXI1Slot5']
 
@@ -59,3 +60,8 @@ def test_tdr_some_channels(multi_instrument_session):
 
     fetched_offsets = [multi_instrument_session.channels[i].tdr_offset for i in channels]
     assert fetched_offsets == applied_offsets
+
+def test_fetch_capture_waveform(multi_instrument_session):
+    if sys.version_info.major >= 3:
+        pass
+
