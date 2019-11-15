@@ -9,7 +9,7 @@ config = template_parameters['metadata'].config
 module_name = config['module_name']
 registry_name = config['driver_registry'] if 'driver_registry' in config else config['driver_name']
 
-error_list = ['DriverWarning', 'Error', 'UnsupportedConfigurationError', 'DriverNotInstalledError', 'InvalidRepeatedCapabilityError', 'SelfTestError']
+error_list = sorted(['DriverWarning', 'Error', 'UnsupportedConfigurationError', 'DriverNotInstalledError', 'InvalidRepeatedCapabilityError', 'SelfTestError'])
 %>
 
 __version__ = '${config['module_version']}'
@@ -17,7 +17,7 @@ __version__ = '${config['module_version']}'
 % if len(enums) > 0:
 from ${module_name}.enums import *  # noqa: F403,F401,H303
 % endif
-% for e in error_list.sort():
+% for e in error_list:
 from ${module_name}.errors import ${e}  # noqa: F401
 %endfor
 <%
