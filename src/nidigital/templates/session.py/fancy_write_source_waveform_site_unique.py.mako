@@ -26,7 +26,7 @@
             if waveform_data[site].typecode != 'L':
                 raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
 
-            site_list.append(str(site))
+            site_list.append('site' + str(site))
 
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
