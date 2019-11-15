@@ -1833,6 +1833,7 @@ class Session(_SessionBase):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
+        self.pins = _RepeatedCapabilities(self, '')
 
         self.tclk = nitclk.SessionReference(self._vi)
 

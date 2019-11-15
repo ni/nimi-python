@@ -3384,6 +3384,18 @@ channels
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
+pins
+----
+
+    .. py:attribute:: nidigital.Session.pins[]
+
+        .. code:: python
+
+            session.pins['0-2'].channel_enabled = True
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
 
 Properties
 ==========
