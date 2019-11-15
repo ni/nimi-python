@@ -58,6 +58,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * Fix get/set properties - [#1062](https://github.com/ni/nimi-python/issues/1062)
         * Removed array-size parameter from apply_tdr_offsets() and write_source_waveform_broadcast_u32() methods - [#1070](https://github.com/ni/nimi-python/issues/1070)
+        * Renamed `write_source_waveform_broadcast_u32()` to `write_source_waveform_broadcast()`
     * #### Removed
 * ### NI-TClk
     * #### Added
