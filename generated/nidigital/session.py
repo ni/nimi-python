@@ -3481,8 +3481,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_source_waveform_broadcast_u32(self, waveform_name, waveform_data):
-        r'''write_source_waveform_broadcast_u32
+    def write_source_waveform_broadcast(self, waveform_name, waveform_data):
+        r'''write_source_waveform_broadcast
 
         TBD
 
