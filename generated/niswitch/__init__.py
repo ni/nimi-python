@@ -5,8 +5,12 @@
 __version__ = '1.1.4.dev0'
 
 from niswitch.enums import *  # noqa: F403,F401,H303
+from niswitch.errors import DriverNotInstalledError  # noqa: F401
 from niswitch.errors import DriverWarning  # noqa: F401
 from niswitch.errors import Error  # noqa: F401
+from niswitch.errors import InvalidRepeatedCapabilityError  # noqa: F401
+from niswitch.errors import SelfTestError  # noqa: F401
+from niswitch.errors import UnsupportedConfigurationError  # noqa: F401
 from niswitch.session import Session  # noqa: F401
 
 

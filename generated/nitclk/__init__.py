@@ -4,8 +4,12 @@
 
 __version__ = '0.1.1.dev0'
 
+from nitclk.errors import DriverNotInstalledError  # noqa: F401
 from nitclk.errors import DriverWarning  # noqa: F401
 from nitclk.errors import Error  # noqa: F401
+from nitclk.errors import InvalidRepeatedCapabilityError  # noqa: F401
+from nitclk.errors import SelfTestError  # noqa: F401
+from nitclk.errors import UnsupportedConfigurationError  # noqa: F401
 from nitclk.session import SessionReference  # noqa: F401
 
 # Function imports

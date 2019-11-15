@@ -5,8 +5,12 @@
 __version__ = '1.0.1.dev0'
 
 from nise.enums import *  # noqa: F403,F401,H303
+from nise.errors import DriverNotInstalledError  # noqa: F401
 from nise.errors import DriverWarning  # noqa: F401
 from nise.errors import Error  # noqa: F401
+from nise.errors import InvalidRepeatedCapabilityError  # noqa: F401
+from nise.errors import SelfTestError  # noqa: F401
+from nise.errors import UnsupportedConfigurationError  # noqa: F401
 from nise.session import Session  # noqa: F401
 
 

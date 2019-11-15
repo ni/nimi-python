@@ -4,8 +4,12 @@
 
 __version__ = '1.1.4.dev0'
 
+from nimodinst.errors import DriverNotInstalledError  # noqa: F401
 from nimodinst.errors import DriverWarning  # noqa: F401
 from nimodinst.errors import Error  # noqa: F401
+from nimodinst.errors import InvalidRepeatedCapabilityError  # noqa: F401
+from nimodinst.errors import SelfTestError  # noqa: F401
+from nimodinst.errors import UnsupportedConfigurationError  # noqa: F401
 from nimodinst.session import Session  # noqa: F401
 
 
