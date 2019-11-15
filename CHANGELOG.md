@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * `ViUInt8` is now a valid type in APIs
     * #### Changed
+        * All drivers import all exception classes into the driver namespace. I.e. `nifgen.DriverError` now works without having to explicitly import it yourself
     * #### Removed
 * ### NI-DMM
     * #### Added
