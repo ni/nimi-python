@@ -24,7 +24,7 @@
             if len(waveform_data[site]) != actual_samples_per_waveform:
                 raise ValueError('Mismatched length of waveforms. All must be the same length.')
             if waveform_data[site].typecode != 'L':
-                raise ValueError('Wrong array element type. Must be unsigned 32 bit int "l", was {}'.format(waveform_data[site].typecode))
+                raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
 
             site_list.append(str(site))
 
