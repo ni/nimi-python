@@ -3265,12 +3265,12 @@ write_sequencer_register
 
             :type value: int
 
-write_source_waveform_broadcast_u32
------------------------------------
+write_source_waveform_broadcast
+-------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: write_source_waveform_broadcast_u32(waveform_name, waveform_data)
+    .. py:method:: write_source_waveform_broadcast(waveform_name, waveform_data)
 
             TBD
 
