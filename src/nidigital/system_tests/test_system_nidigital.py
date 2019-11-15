@@ -158,8 +158,21 @@ def test_fetch_capture_waveform(multi_instrument_session):
         assert sorted(waveforms.keys()) == sorted([0, 1])
         assert all(len(waveforms[site]) == num_samples for site in waveforms)
 
+        # Burst on subset of sites and verify fetch_capture_waveform()
+        multi_instrument_session.burst_pattern(
+            site_list='site1',
+            start_label='new_pattern',
+            select_digital_function=False,
+            wait_until_done=False,
+            timeout=5)
+        fetched_waveform = multi_instrument_session.fetch_capture_waveform(
+            site_list='',
+            waveform_name='capt_wfm',
+            samples_to_read=num_samples,
+            timeout=10.0)
 
-def test_fetch_capture_waveform_disabled_site(multi_instrument_session):
-    if sys.version_info.major >= 3:
-        pass
+        assert len(fetched_waveform) == 1
+        fetched_site = next(iter(fetched_waveform))
+        assert fetched_site == 1
+        assert len(fetched_waveform[fetched_site]) == num_samples
 
