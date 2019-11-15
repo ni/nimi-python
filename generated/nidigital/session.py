@@ -1833,6 +1833,7 @@ class Session(_SessionBase):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
+        self.pins = _RepeatedCapabilities(self, '')
 
         self.tclk = nitclk.SessionReference(self._vi)
 
@@ -3544,8 +3545,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_source_waveform_broadcast_u32(self, waveform_name, waveform_data):
-        r'''write_source_waveform_broadcast_u32
+    def write_source_waveform_broadcast(self, waveform_name, waveform_data):
+        r'''write_source_waveform_broadcast
 
         TBD
 
