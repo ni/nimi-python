@@ -114,6 +114,7 @@ def get_test_file_path(test_name, file_name):
 
 
 def test_fetch_capture_waveform(multi_instrument_session):
+    # Implementation of fetch_capture_waveform() uses memoryview of array.array, which is not supported in Python 2.x
     if sys.version_info.major >= 3:
         test_name = test_fetch_capture_waveform.__name__
         configure_session(multi_instrument_session, test_name)
