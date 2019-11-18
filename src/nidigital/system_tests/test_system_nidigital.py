@@ -1,5 +1,6 @@
 import nidigital
 import pytest
+import sys
 import os
 
 instr = ['PXI1Slot2', 'PXI1Slot5']
@@ -62,6 +63,11 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
+def test_fetch_capture_waveform(multi_instrument_session):
+    if sys.version_info.major >= 3:
+        pass
+
+
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
     configure_session(multi_instrument_session)
 
@@ -102,3 +108,4 @@ def configure_session(session):
         initial_state_tristate_pins='')
 
     session.load_pattern(os.path.join(test_files_dir, 'pattern.digipat'))
+
