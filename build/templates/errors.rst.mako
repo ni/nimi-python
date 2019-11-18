@@ -8,6 +8,15 @@
 %>\
 ${helper.get_rst_header_snippet('Exceptions and Warnings', '=')}
 
+${helper.get_rst_header_snippet('Error', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: Error
+
+        Base exception type that all ${driver_name} exceptions derive from
+
+
 ${helper.get_rst_header_snippet('DriverError', '-')}
 
     .. py:currentmodule:: ${module_name}
