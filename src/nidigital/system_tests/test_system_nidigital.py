@@ -1,9 +1,14 @@
-import nidigital
-import pytest
-import sys
+import collections
 import os
+import sys
+
+import pytest
+
+import nidigital
+
 
 instr = ['PXI1Slot2', 'PXI1Slot5']
+test_files_base_dir = os.path.join(os.getcwd(), 'src', 'nidigital', 'system_tests', 'test_files')
 
 
 @pytest.fixture(scope='function')
@@ -63,26 +68,24 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
-def test_fetch_capture_waveform(multi_instrument_session):
-    if sys.version_info.major >= 3:
-        pass
-
-
 def test_write_source_waveform_site_unique(multi_instrument_session):
     if sys.version_info.major >= 3:
         pass
 
 
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
-    configure_session(multi_instrument_session)
+    test_name = test_source_waveform_parallel_broadcast.__name__
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
     multi_instrument_session.create_source_waveform_parallel(
         pin_list='LowPins',
-        waveform_name='new_waveform',
+        waveform_name='src_wfm',
         data_mapping=2600)
 
     multi_instrument_session.write_source_waveform_broadcast(
-        waveform_name='new_waveform',
+        waveform_name='src_wfm',
         waveform_data=[i for i in range(4)])
 
     multi_instrument_session.burst_pattern(
@@ -96,14 +99,12 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
     assert pass_fail == [True, True]
 
 
-def configure_session(session):
-    test_files_dir = os.path.join(os.getcwd(), 'src', 'nidigital', 'system_tests', 'test_files')
+def configure_session(session, test_name):
+    session.load_pin_map(get_test_file_path(test_name, 'pin_map.pinmap'))
 
-    session.load_pin_map(os.path.join(test_files_dir, 'pin_map.pinmap'))
-
-    session.load_specifications(os.path.join(test_files_dir, 'specifications.specs'))
-    session.load_levels(os.path.join(test_files_dir, 'pin_levels.digilevels'))
-    session.load_timing(os.path.join(test_files_dir, 'timing.digitiming'))
+    session.load_specifications(get_test_file_path(test_name, 'specifications.specs'))
+    session.load_levels(get_test_file_path(test_name, 'pin_levels.digilevels'))
+    session.load_timing(get_test_file_path(test_name, 'timing.digitiming'))
     session.apply_levels_and_timing(
         site_list='',
         levels_sheet='pin_levels',
@@ -112,5 +113,70 @@ def configure_session(session):
         initial_state_low_pins='',
         initial_state_tristate_pins='')
 
-    session.load_pattern(os.path.join(test_files_dir, 'pattern.digipat'))
+
+def get_test_file_path(test_name, file_name):
+    return os.path.join(test_files_base_dir, test_name, file_name)
+
+
+def test_fetch_capture_waveform(multi_instrument_session):
+    # Implementation of fetch_capture_waveform() uses memoryview of array.array, which is not supported in Python 2.x
+    if sys.version_info.major >= 3:
+        test_name = test_fetch_capture_waveform.__name__
+        configure_session(multi_instrument_session, test_name)
+
+        multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+
+        num_samples = 256
+        multi_instrument_session.write_sequencer_register(reg='reg0', value=num_samples)
+
+        multi_instrument_session.create_source_waveform_parallel(
+            pin_list='LowPins',
+            waveform_name='src_wfm',
+            data_mapping=2600)
+        source_waveform = [i for i in range(num_samples)]
+        multi_instrument_session.write_source_waveform_broadcast(
+            waveform_name='src_wfm',
+            waveform_data=source_waveform)
+
+        multi_instrument_session.create_capture_waveform_parallel(pin_list='HighPins', waveform_name='capt_wfm')
+
+        multi_instrument_session.burst_pattern(
+            site_list='',
+            start_label='new_pattern',
+            select_digital_function=False,
+            wait_until_done=False,
+            timeout=5)
+
+        # Pattern burst is configured to fetch num_samples samples
+        samples_per_fetch = 8
+        waveforms = collections.defaultdict(list)
+        for i in range(num_samples // samples_per_fetch):
+            fetched_waveform = multi_instrument_session.fetch_capture_waveform(
+                site_list='',
+                waveform_name='capt_wfm',
+                samples_to_read=samples_per_fetch,
+                timeout=10.0)
+            for site in fetched_waveform:
+                waveforms[site] += fetched_waveform[site]
+
+        assert sorted(waveforms.keys()) == sorted([0, 1])
+        assert all(len(waveforms[site]) == num_samples for site in waveforms)
+
+        # Burst on subset of sites and verify fetch_capture_waveform()
+        multi_instrument_session.burst_pattern(
+            site_list='site1',
+            start_label='new_pattern',
+            select_digital_function=False,
+            wait_until_done=False,
+            timeout=5)
+        fetched_waveform = multi_instrument_session.fetch_capture_waveform(
+            site_list='',
+            waveform_name='capt_wfm',
+            samples_to_read=num_samples,
+            timeout=10.0)
+
+        assert len(fetched_waveform) == 1
+        fetched_site = next(iter(fetched_waveform))
+        assert fetched_site == 1
+        assert len(fetched_waveform[fetched_site]) == num_samples
 

@@ -1,10 +1,20 @@
 Exceptions and Warnings
 =======================
 
+Error
+-----
+
+    .. py:currentmodule:: nise.errors
+
+    .. exception:: Error
+
+        Base exception type that all NI Switch Executive exceptions derive from
+
+
 DriverError
 -----------
 
-    .. py:currentmodule:: nise
+    .. py:currentmodule:: nise.errors
 
     .. exception:: DriverError
 
@@ -14,7 +24,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: nise
+    .. py:currentmodule:: nise.errors
 
     .. exception:: UnsupportedConfigurationError
 
@@ -23,7 +33,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: nise
+    .. py:currentmodule:: nise.errors
 
     .. exception:: DriverNotInstalledError
 
@@ -32,7 +42,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: nise
+    .. py:currentmodule:: nise.errors
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -42,7 +52,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: nise
+    .. py:currentmodule:: nise.errors
 
     .. exception:: SelfTestError
 
@@ -52,7 +62,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: nise
+    .. py:currentmodule:: nise.errors
 
     .. exception:: DriverWarning
 
