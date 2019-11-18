@@ -3408,7 +3408,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'SiteResult',
                 'name': 'siteResultType',
                 'type': 'ViInt32'
             },
