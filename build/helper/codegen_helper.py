@@ -327,8 +327,8 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             else:
                 # Verify all corresponding_buffer_parameters are 'out' and not 'fixed-size'
                 for p in corresponding_buffer_parameters:
-                    assert p['direction'] == 'out'
-                    assert p['size']['mechanism'] != 'fixed-size'
+                    assert p['direction'] == 'out', 'Parameter direction not "out", Parameter: {}'.format(p['name'])
+                    assert p['size']['mechanism'] != 'fixed-size' and p['size']['mechanism'] != 'fixed-size', 'Parameter: {0}, Actual mechanism: {1}'.format(p['name'], p['size']['mechanism'])
                 definition = '{0}.{1}({2})  # case S210'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'

@@ -1297,6 +1297,69 @@ functions = {
         'python_name': 'self_test',
         'returns': 'ViStatus'
     },
+    'FetchCaptureWaveformU32': {
+        'codegen_method': 'library-only',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'siteList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'samplesToRead',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'timeout',
+                'type': 'ViReal64'
+            },
+            {
+                'direction': 'in',
+                'name': 'dataBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'data',
+                'use_array': True,
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'dataBufferSize',
+                    # Should be 'actualNumWaveforms*ActualSamplesPerWaveform' but codegen doesn't handle that properly
+                    # The actual call is in a "fancy" function so change so the library call can be generated (doesn't
+                    # depend on this value)
+                    'value_twist': 'actualNumWaveforms',
+                },
+                'type': 'ViUInt32[]',
+            },
+            {
+                'direction': 'out',
+                'name': 'actualNumWaveforms',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'actualSamplesPerWaveform',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'FetchHistoryRAMCycleInformation': {
         'documentation': {
             'description': 'TBD'
@@ -2099,6 +2162,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SiteResult',
                 'name': 'siteResultType',
                 'type': 'ViInt32'
             },
@@ -3652,6 +3716,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'python_name': 'write_source_waveform_broadcast',
         'parameters': [
             {
                 'direction': 'in',

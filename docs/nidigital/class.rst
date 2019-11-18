@@ -1550,6 +1550,58 @@ export_signal
 
             :type output_terminal: str
 
+fetch_capture_waveform
+----------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
+
+            Returns dictionary where each key is the site number and the value is array.array of unsigned int
+
+            
+
+
+
+            :param site_list:
+
+
+                
+
+
+            :type site_list: str
+            :param waveform_name:
+
+
+                
+
+
+            :type waveform_name: str
+            :param samples_to_read:
+
+
+                
+
+
+            :type samples_to_read: int
+            :param timeout:
+
+
+                
+
+
+            :type timeout: float or datetime.timedelta
+
+            :rtype: { site: data, site: data, ... }
+            :return:
+
+
+                    Dictionary where each key is the site number and the value is array.array of unsigned int
+
+                    
+
+
+
 fetch_history_ram_cycle_information
 -----------------------------------
 
@@ -2107,7 +2159,7 @@ get_site_results_site_numbers
                 
 
 
-            :type site_result_type: int
+            :type site_result_type: :py:data:`nidigital.SiteResult`
 
             :rtype: list of int
             :return:
@@ -3265,12 +3317,12 @@ write_sequencer_register
 
             :type value: int
 
-write_source_waveform_broadcast_u32
------------------------------------
+write_source_waveform_broadcast
+-------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: write_source_waveform_broadcast_u32(waveform_name, waveform_data)
+    .. py:method:: write_source_waveform_broadcast(waveform_name, waveform_data)
 
             TBD
 
@@ -3380,6 +3432,18 @@ channels
         .. code:: python
 
             session.channels['0-2'].channel_enabled = True
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
+pins
+----
+
+    .. py:attribute:: nidigital.Session.pins[]
+
+        .. code:: python
+
+            session.pins['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 

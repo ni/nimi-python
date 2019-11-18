@@ -2820,43 +2820,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    @ivi_synchronized
-    def get_channel_name(self, index):
-        r'''get_channel_name
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count property to
-        determine the upper bound of valid values for **index**.
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].get_channel_name(index)
-
-        Args:
-            index (int): Specifies which output channel name to return. The index values begin at
-                1.
-
-
-        Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_ctype.value.decode(self._encoding)
-
     def _get_error(self):
         r'''_get_error
 
@@ -4242,6 +4205,35 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def get_channel_name(self, index):
+        r'''get_channel_name
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the channel_count property to
+        determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int): Specifies which output channel name to return. The index values begin at
+                1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        channel_name_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return channel_name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
