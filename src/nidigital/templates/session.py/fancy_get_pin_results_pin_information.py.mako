@@ -15,5 +15,11 @@
         assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
         assert len(pin_indexes) == len(channel_indexes), "length of returned arrays don't match"
 
-        return [PinInfo(pin_name=self.get_pin_name(pin_indexes[i]), site_number=site_numbers[i], channel_name=self.get_channel_name(channel_indexes[i])) for i in range(len(pin_indexes))]
+        pin_infos = []
+        for i in range(len(pin_indexes)):
+            pin_name = "" if pin_indexes[i] == -1 else self.get_pin_name(pin_indexes[i])
+            channel_name = self.get_channel_name(channel_indexes[i])
+            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
+
+        return pin_infos
 
