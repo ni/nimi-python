@@ -8,14 +8,13 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        if len(waveform_data) == 0:
-            # Nothing to do
-            return
-
         site_list = []
         # We assume all the entries are the same length (we'll check later) to make the array the correct size
         # Get an entry from the dictionary from https://stackoverflow.com/questions/30362391/how-do-you-find-the-first-key-in-a-dictionary
-        actual_samples_per_waveform = len(waveform_data[next(iter(waveform_data))])
+        if len(waveform_data) == 0:
+            actual_samples_per_waveform = 0
+        else:
+            actual_samples_per_waveform = len(waveform_data[next(iter(waveform_data))])
         data = array.array('L', [0] * (len(waveform_data) * actual_samples_per_waveform))
         mv = memoryview(data)
 
