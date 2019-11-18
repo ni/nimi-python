@@ -12,6 +12,8 @@
         PinInfo = collections.namedtuple('PinInformation', ['pin_name', 'site_number', 'channel_name'])
 
         pin_indexes, site_numbers, channel_indexes = self._${f['python_name']}()
+        assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
+        assert len(pin_indexes) == len(channel_indexes), "length of returned arrays don't match"
 
         return [PinInfo(pin_name=self.get_pin_name(pin_indexes[i]), site_number=site_numbers[i], channel_name=self.get_channel_name(channel_indexes[i])) for i in range(len(pin_indexes))]
 
