@@ -1,10 +1,20 @@
 Exceptions and Warnings
 =======================
 
+Error
+-----
+
+    .. py:currentmodule:: nidigital.errors
+
+    .. exception:: Error
+
+        Base exception type that all NI-Digital Pattern Driver exceptions derive from
+
+
 DriverError
 -----------
 
-    .. py:currentmodule:: nidigital
+    .. py:currentmodule:: nidigital.errors
 
     .. exception:: DriverError
 
@@ -14,7 +24,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: nidigital
+    .. py:currentmodule:: nidigital.errors
 
     .. exception:: UnsupportedConfigurationError
 
@@ -23,7 +33,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: nidigital
+    .. py:currentmodule:: nidigital.errors
 
     .. exception:: DriverNotInstalledError
 
@@ -32,7 +42,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: nidigital
+    .. py:currentmodule:: nidigital.errors
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -42,7 +52,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: nidigital
+    .. py:currentmodule:: nidigital.errors
 
     .. exception:: SelfTestError
 
@@ -52,7 +62,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: nidigital
+    .. py:currentmodule:: nidigital.errors
 
     .. exception:: DriverWarning
 
