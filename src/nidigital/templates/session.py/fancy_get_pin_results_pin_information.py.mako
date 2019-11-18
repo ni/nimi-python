@@ -9,9 +9,9 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import collections
-        PinInfo = collections.namedtuple('PinInformation', ['pin_indexes', 'site_numbers', 'channel_indexes'])
+        PinInfo = collections.namedtuple('PinInformation', ['pin_name', 'site_number', 'channel_name'])
 
         pin_indexes, site_numbers, channel_indexes = self._${f['python_name']}()
 
-        return [PinInfo(pin_indexes=pin_indexes[i], site_numbers=site_numbers[i], channel_indexes=channel_indexes[i]) for i in range(len(pin_indexes))]
+        return [PinInfo(pin_name=self.get_pin_name(pin_indexes[i]), site_number=site_numbers[i], channel_name=self.get_channel_name(channel_indexes[i])) for i in range(len(pin_indexes))]
 
