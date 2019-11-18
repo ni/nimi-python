@@ -1833,6 +1833,7 @@ class Session(_SessionBase):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
+        self.pins = _RepeatedCapabilities(self, '')
 
         self.tclk = nitclk.SessionReference(self._vi)
 
@@ -2724,7 +2725,7 @@ class Session(_SessionBase):
         data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
 
         # Get the site list
-        site_list = self.get_site_results_site_numbers(site_list, enums.SiteType.CAPTURE_WAVEFORM)
+        site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.CAPTURE_WAVEFORM)
         assert len(site_list) == actual_num_waveforms
 
         waveforms = {}
@@ -2777,7 +2778,7 @@ class Session(_SessionBase):
             if len(waveform_data[site]) != actual_samples_per_waveform:
                 raise ValueError('Mismatched length of waveforms. All must be the same length.')
             if waveform_data[site].typecode != 'L':
-                raise ValueError('Wrong array element type. Must be unsigned 32 bit int "L", was {}'.format(waveform_data[site].typecode))
+                raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
 
             site_list.append('site' + str(site))
 
@@ -3586,8 +3587,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_source_waveform_broadcast_u32(self, waveform_name, waveform_data):
-        r'''write_source_waveform_broadcast_u32
+    def write_source_waveform_broadcast(self, waveform_name, waveform_data):
+        r'''write_source_waveform_broadcast
 
         TBD
 
