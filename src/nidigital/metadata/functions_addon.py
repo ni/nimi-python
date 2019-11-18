@@ -16,7 +16,7 @@ functions_additional_get_pin_results_pin_information = {
             }
         ],
         'documentation': {
-            'description': '\nReturns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>\n\nFields in PinInfo:\n\n- **pin_indexes** (int)\n- **site_numbers** (int)\n- **channel_indexes** (int)\n\n',
+            'description': '\nReturns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>\n\nFields in PinInfo:\n\n- **pin_name** (str)\n- **site_number** (int)\n- **channel_name** (str)\n\n',
         },
         'parameters': [
             {
@@ -32,7 +32,7 @@ functions_additional_get_pin_results_pin_information = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of named tuples with fields:\n\n- **pin_indexes** (int)\n- **site_numbers** (int)\n- **channel_indexes** (int)\n'
+                    'description': '\nList of named tuples with fields:\n\n- **pin_name** (str)\n- **site_number** (int)\n- **channel_name** (str)\n'
                 },
                 'name': 'pin_info',
                 'python_type': 'PinInfo',
