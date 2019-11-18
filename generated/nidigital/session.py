@@ -815,9 +815,9 @@ class _SessionBase(object):
 
         Fields in PinInfo:
 
-        - **pin_indexes** (int)
-        - **site_numbers** (int)
-        - **channel_indexes** (int)
+        - **pin_name** (str)
+        - **site_number** (int)
+        - **channel_name** (str)
 
         Tip:
         This method requires repeated capabilities (channels). If called directly on the
@@ -830,9 +830,9 @@ class _SessionBase(object):
         Returns:
             pin_info (list of PinInfo): List of named tuples with fields:
 
-                - **pin_indexes** (int)
-                - **site_numbers** (int)
-                - **channel_indexes** (int)
+                - **pin_name** (str)
+                - **site_number** (int)
+                - **channel_name** (str)
 
         '''
         import collections
@@ -842,7 +842,13 @@ class _SessionBase(object):
         assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
         assert len(pin_indexes) == len(channel_indexes), "length of returned arrays don't match"
 
-        return [PinInfo(pin_name=self.get_pin_name(pin_indexes[i]), site_number=site_numbers[i], channel_name=self.get_channel_name(channel_indexes[i])) for i in range(len(pin_indexes))]
+        pin_infos = []
+        for i in range(len(pin_indexes)):
+            pin_name = "" if pin_indexes[i] == -1 else self.get_pin_name(pin_indexes[i])
+            channel_name = self.get_channel_name(channel_indexes[i])
+            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
+
+        return pin_infos
 
     @ivi_synchronized
     def frequency_counter_configure_measurement_time(self, measurement_time):

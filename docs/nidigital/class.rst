@@ -2070,9 +2070,9 @@ get_pin_results_pin_information
 
             Fields in PinInfo:
 
-            - **pin_indexes** (int)
-            - **site_numbers** (int)
-            - **channel_indexes** (int)
+            - **pin_name** (str)
+            - **site_number** (int)
+            - **channel_name** (str)
 
             
 
@@ -2093,9 +2093,9 @@ get_pin_results_pin_information
 
                     List of named tuples with fields:
 
-                    - **pin_indexes** (int)
-                    - **site_numbers** (int)
-                    - **channel_indexes** (int)
+                    - **pin_name** (str)
+                    - **site_number** (int)
+                    - **channel_name** (str)
 
                     
 
