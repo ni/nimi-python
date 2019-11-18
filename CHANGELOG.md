@@ -54,6 +54,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
+        * `fetch_capture_waveform()` - returns dictionary { site: data, site: data, ... }
         * `pins` is now a valid repeated capability
         * `fetch_capture_waveform()` - returns namedtuple `Waveform(site, data)`
     * #### Changed
