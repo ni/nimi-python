@@ -8,9 +8,18 @@
 %>\
 ${helper.get_rst_header_snippet('Exceptions and Warnings', '=')}
 
+${helper.get_rst_header_snippet('Error', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: Error
+
+        Base exception type that all ${driver_name} exceptions derive from
+
+
 ${helper.get_rst_header_snippet('DriverError', '-')}
 
-    .. py:currentmodule:: ${module_name}
+    .. py:currentmodule:: ${module_name}.errors
 
     .. exception:: DriverError
 
@@ -19,7 +28,7 @@ ${helper.get_rst_header_snippet('DriverError', '-')}
 
 ${helper.get_rst_header_snippet('UnsupportedConfigurationError', '-')}
 
-    .. py:currentmodule:: ${module_name}
+    .. py:currentmodule:: ${module_name}.errors
 
     .. exception:: UnsupportedConfigurationError
 
@@ -27,7 +36,7 @@ ${helper.get_rst_header_snippet('UnsupportedConfigurationError', '-')}
 
 ${helper.get_rst_header_snippet('DriverNotInstalledError', '-')}
 
-    .. py:currentmodule:: ${module_name}
+    .. py:currentmodule:: ${module_name}.errors
 
     .. exception:: DriverNotInstalledError
 
@@ -35,7 +44,7 @@ ${helper.get_rst_header_snippet('DriverNotInstalledError', '-')}
 
 ${helper.get_rst_header_snippet('InvalidRepeatedCapabilityError', '-')}
 
-    .. py:currentmodule:: ${module_name}
+    .. py:currentmodule:: ${module_name}.errors
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -44,7 +53,7 @@ ${helper.get_rst_header_snippet('InvalidRepeatedCapabilityError', '-')}
 
 ${helper.get_rst_header_snippet('SelfTestError', '-')}
 
-    .. py:currentmodule:: ${module_name}
+    .. py:currentmodule:: ${module_name}.errors
 
     .. exception:: SelfTestError
 
@@ -53,7 +62,7 @@ ${helper.get_rst_header_snippet('SelfTestError', '-')}
 
 ${helper.get_rst_header_snippet('DriverWarning', '-')}
 
-    .. py:currentmodule:: ${module_name}
+    .. py:currentmodule:: ${module_name}.errors
 
     .. exception:: DriverWarning
 
