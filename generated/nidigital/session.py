@@ -836,11 +836,13 @@ class _SessionBase(object):
 
         '''
         import collections
-        PinInfo = collections.namedtuple('PinInformation', ['pin_indexes', 'site_numbers', 'channel_indexes'])
+        PinInfo = collections.namedtuple('PinInformation', ['pin_name', 'site_number', 'channel_name'])
 
         pin_indexes, site_numbers, channel_indexes = self._get_pin_results_pin_information()
+        assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
+        assert len(pin_indexes) == len(channel_indexes), "length of returned arrays don't match"
 
-        return [PinInfo(pin_indexes=pin_indexes[i], site_numbers=site_numbers[i], channel_indexes=channel_indexes[i]) for i in range(len(pin_indexes))]
+        return [PinInfo(pin_name=self.get_pin_name(pin_indexes[i]), site_number=site_numbers[i], channel_name=self.get_channel_name(channel_indexes[i])) for i in range(len(pin_indexes))]
 
     @ivi_synchronized
     def frequency_counter_configure_measurement_time(self, measurement_time):
