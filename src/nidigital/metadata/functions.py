@@ -1756,6 +1756,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
+        'render_in_session_base': True,
         'documentation': {
             'description': 'TBD'
         },
@@ -2018,6 +2019,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinName': {
+        'render_in_session_base': True,
         'documentation': {
             'description': 'TBD'
         },
@@ -2050,6 +2052,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinResultsPinInformation': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },

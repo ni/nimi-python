@@ -808,6 +808,49 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def get_pin_results_pin_information(self):
+        '''get_pin_results_pin_information
+
+        Returns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>
+
+        Fields in PinInfo:
+
+        - **pin_name** (str)
+        - **site_number** (int)
+        - **channel_name** (str)
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].get_pin_results_pin_information()
+
+        Returns:
+            pin_info (list of PinInfo): List of named tuples with fields:
+
+                - **pin_name** (str)
+                - **site_number** (int)
+                - **channel_name** (str)
+
+        '''
+        import collections
+        PinInfo = collections.namedtuple('PinInformation', ['pin_name', 'site_number', 'channel_name'])
+
+        pin_indexes, site_numbers, channel_indexes = self._get_pin_results_pin_information()
+        assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
+        assert len(pin_indexes) == len(channel_indexes), "length of returned arrays don't match"
+
+        pin_infos = []
+        for i in range(len(pin_indexes)):
+            pin_name = "" if pin_indexes[i] == -1 else self.get_pin_name(pin_indexes[i])
+            channel_name = self.get_channel_name(channel_indexes[i])
+            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
+
+        return pin_infos
+
+    @ivi_synchronized
     def frequency_counter_configure_measurement_time(self, measurement_time):
         r'''frequency_counter_configure_measurement_time
 
@@ -1019,6 +1062,32 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
+    @ivi_synchronized
+    def get_channel_name(self, index):
+        r'''get_channel_name
+
+        TBD
+
+        Args:
+            index (int):
+
+
+        Returns:
+            name (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
+
     def _get_error(self):
         r'''_get_error
 
@@ -1075,8 +1144,34 @@ class _SessionBase(object):
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_pin_results_pin_information(self):
-        r'''get_pin_results_pin_information
+    def get_pin_name(self, pin_index):
+        r'''get_pin_name
+
+        TBD
+
+        Args:
+            pin_index (int):
+
+
+        Returns:
+            name (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_index_ctype = _visatype.ViInt32(pin_index)  # case S150
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def _get_pin_results_pin_information(self):
+        r'''_get_pin_results_pin_information
 
         TBD
 
@@ -1086,7 +1181,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_pin_results_pin_information()
+            session.channels[0,1]._get_pin_results_pin_information()
 
         Returns:
             pin_indexes (list of int):
@@ -2858,32 +2953,6 @@ class Session(_SessionBase):
         return int(scan_cycle_number_ctype.value)
 
     @ivi_synchronized
-    def get_channel_name(self, index):
-        r'''get_channel_name
-
-        TBD
-
-        Args:
-            index (int):
-
-
-        Returns:
-            name (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        name_ctype = None  # case C050
-        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
     def get_channel_name_from_string(self, index):
         r'''get_channel_name_from_string
 
@@ -3009,32 +3078,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_GetPatternPinList(vi_ctype, start_label_ctype, pin_list_buffer_size_ctype, pin_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return pin_list_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
-    def get_pin_name(self, pin_index):
-        r'''get_pin_name
-
-        TBD
-
-        Args:
-            pin_index (int):
-
-
-        Returns:
-            name (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_index_ctype = _visatype.ViInt32(pin_index)  # case S150
-        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        name_ctype = None  # case C050
-        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def get_site_pass_fail(self, site_list):
