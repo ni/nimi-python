@@ -79,10 +79,8 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         waveform_name='src_wfm',
         data_mapping=2600)
 
-    multi_instrument_session.write_source_waveform_broadcast_u32(
-        waveform_name='src_wfm',
     multi_instrument_session.write_source_waveform_broadcast(
-        waveform_name='new_waveform',
+        waveform_name='src_wfm',
         waveform_data=[i for i in range(4)])
 
     multi_instrument_session.burst_pattern(
@@ -130,7 +128,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
             waveform_name='src_wfm',
             data_mapping=2600)
         source_waveform = [i for i in range(num_samples)]
-        multi_instrument_session.write_source_waveform_broadcast_u32(
+        multi_instrument_session.write_source_waveform_broadcast(
             waveform_name='src_wfm',
             waveform_data=source_waveform)
 
