@@ -4122,6 +4122,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the output channel name that corresponds to **index**.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelName',
                 'size': {
                     'mechanism': 'ivi-dance',

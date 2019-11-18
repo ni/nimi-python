@@ -3717,6 +3717,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'python_name': 'write_source_waveform_broadcast',
         'parameters': [
             {
                 'direction': 'in',

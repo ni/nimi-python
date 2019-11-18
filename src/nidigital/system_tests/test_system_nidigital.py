@@ -80,7 +80,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         waveform_name='new_waveform',
         data_mapping=2600)
 
-    multi_instrument_session.write_source_waveform_broadcast_u32(
+    multi_instrument_session.write_source_waveform_broadcast(
         waveform_name='new_waveform',
         waveform_data=[i for i in range(4)])
 

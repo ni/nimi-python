@@ -3314,12 +3314,12 @@ write_sequencer_register
 
             :type value: int
 
-write_source_waveform_broadcast_u32
------------------------------------
+write_source_waveform_broadcast
+-------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: write_source_waveform_broadcast_u32(waveform_name, waveform_data)
+    .. py:method:: write_source_waveform_broadcast(waveform_name, waveform_data)
 
             TBD
 
@@ -3429,6 +3429,18 @@ channels
         .. code:: python
 
             session.channels['0-2'].channel_enabled = True
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
+pins
+----
+
+    .. py:attribute:: nidigital.Session.pins[]
+
+        .. code:: python
+
+            session.pins['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
