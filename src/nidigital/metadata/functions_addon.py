@@ -35,7 +35,7 @@ functions_additional_write_source_waveform_site_unique = {
                     'description': '\nDictionary where each key is the site number and the value is array.array of unsigned int\n'
                 },
                 'name': 'waveform_data',
-                'type': 'ViUInt32',
+                'type': 'ViUInt32',  # This type is ignored since this function isn't code generated
                 'type_in_documentation': '{ site: data, site: data, ... }',
             },
         ],
