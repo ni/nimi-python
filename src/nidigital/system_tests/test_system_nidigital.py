@@ -69,8 +69,13 @@ def test_tdr_some_channels(multi_instrument_session):
 
 
 def test_write_source_waveform_site_unique(multi_instrument_session):
+    # Implementation of write_source_waveform_site_unique() uses memoryview of array.array, which is not supported in Python 2.x
     if sys.version_info.major >= 3:
         pass
+
+
+def test_get_pin_results_pin_information(multi_instrument_session):
+    pass
 
 
 def test_source_waveform_parallel_broadcast(multi_instrument_session):

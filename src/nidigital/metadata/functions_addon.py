@@ -42,6 +42,48 @@ functions_additional_write_source_waveform_site_unique = {
     },
 }
 
+functions_additional_get_pin_results_pin_information = {
+    'FancyGetPinResultsPinInformation': {
+        'python_name': 'get_pin_results_pin_information',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_pin_results_pin_information',
+            }
+        ],
+        'documentation': {
+            'description': '\nReturns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>\n\nFields in PinInfo:\n\n- **pin_name** (str)\n- **site_number** (int)\n- **channel_name** (str)\n\n',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nList of named tuples with fields:\n\n- **pin_name** (str)\n- **site_number** (int)\n- **channel_name** (str)\n'
+                },
+                'name': 'pin_info',
+                'python_type': 'PinInfo',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'ViInt32[]'
+            }
+        ],
+    },
+}
+
 functions_additional_fetch_capture_waveform = {
     'FancyFetchCaptureWaveform': {
         'python_name': 'fetch_capture_waveform',
