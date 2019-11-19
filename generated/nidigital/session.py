@@ -2846,6 +2846,47 @@ class Session(_SessionBase):
         return None
 
     @ivi_synchronized
+    def write_source_waveform_site_unique(self, waveform_name, waveform_data):
+        '''write_source_waveform_site_unique
+
+        TBD
+
+        Args:
+            waveform_name (str):
+
+            waveform_data ({ site: data, site: data, ... }): Dictionary where each key is the site number and the value is array.array of unsigned int
+
+        '''
+        site_list = []
+        # We assume all the entries are the same length (we'll check later) to make the array the correct size
+        # Get an entry from the dictionary from https://stackoverflow.com/questions/30362391/how-do-you-find-the-first-key-in-a-dictionary
+        if len(waveform_data) == 0:
+            actual_samples_per_waveform = 0
+        else:
+            actual_samples_per_waveform = len(waveform_data[next(iter(waveform_data))])
+        data = array.array('L', [0] * (len(waveform_data) * actual_samples_per_waveform))
+        mv = memoryview(data)
+
+        i = 0
+        for site in waveform_data:
+            if len(waveform_data[site]) != actual_samples_per_waveform:
+                raise ValueError('Mismatched length of waveforms. All must be the same length.')
+            if waveform_data[site].typecode != 'L':
+                raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
+
+            site_list.append('site' + str(site))
+
+            start = i * actual_samples_per_waveform
+            end = start + actual_samples_per_waveform
+            mv[start:end] = waveform_data[site]
+
+            i += 1
+
+        site_list_str = ','.join(site_list)
+
+        self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
+
+    @ivi_synchronized
     def fetch_history_ram_cycle_information(self, site, sample_index):
         r'''fetch_history_ram_cycle_information
 
@@ -3623,6 +3664,35 @@ class Session(_SessionBase):
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         waveform_file_path_ctype = ctypes.create_string_buffer(waveform_file_path.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_WriteSourceWaveformDataFromFileTDMS(vi_ctype, waveform_name_ctype, waveform_file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def _write_source_waveform_site_unique_u32(self, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
+        r'''_write_source_waveform_site_unique_u32
+
+        TBD
+
+        Args:
+            site_list (str):
+
+            waveform_name (str):
+
+            num_waveforms (int):
+
+            samples_per_waveform (int):
+
+            waveform_data (array.array("L")):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
+        samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
+        waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
+        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
+        error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

@@ -3772,7 +3772,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'WriteSourceWaveformSiteUniqueU32': {
-        'codegen_method': 'no',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3805,10 +3805,7 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'waveformData',
-                'size': {
-                    'mechanism': 'custom',
-                    'value': None
-                },
+                'use_array': True,
                 'type': 'ViUInt32[]'
             }
         ],
@@ -3954,3 +3951,4 @@ functions = {
         'returns': 'ViStatus'
     }
 }
+

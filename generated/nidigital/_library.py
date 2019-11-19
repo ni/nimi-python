@@ -137,6 +137,7 @@ class Library(object):
         self.niDigital_WriteSequencerRegister_cfunc = None
         self.niDigital_WriteSourceWaveformBroadcastU32_cfunc = None
         self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc = None
+        self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc = None
         self.niDigital_WriteStatic_cfunc = None
         self.niDigital_close_cfunc = None
         self.niDigital_error_message_cfunc = None
@@ -1094,6 +1095,14 @@ class Library(object):
                 self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc(vi, waveform_name, waveform_file_path)
+
+    def niDigital_WriteSourceWaveformSiteUniqueU32(self, vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc is None:
+                self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc = self._library.niDigital_WriteSourceWaveformSiteUniqueU32
+                self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViUInt32)]  # noqa: F405
+                self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc(vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data)
 
     def niDigital_WriteStatic(self, vi, channel_list, state):  # noqa: N802
         with self._func_lock:

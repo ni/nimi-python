@@ -307,6 +307,8 @@ class SideEffectsHelper(object):
         self._defaults['WriteSourceWaveformBroadcastU32']['return'] = 0
         self._defaults['WriteSourceWaveformDataFromFileTDMS'] = {}
         self._defaults['WriteSourceWaveformDataFromFileTDMS']['return'] = 0
+        self._defaults['WriteSourceWaveformSiteUniqueU32'] = {}
+        self._defaults['WriteSourceWaveformSiteUniqueU32']['return'] = 0
         self._defaults['WriteStatic'] = {}
         self._defaults['WriteStatic']['return'] = 0
         self._defaults['close'] = {}
@@ -1262,6 +1264,11 @@ class SideEffectsHelper(object):
             return self._defaults['WriteSourceWaveformDataFromFileTDMS']['return']
         return self._defaults['WriteSourceWaveformDataFromFileTDMS']['return']
 
+    def niDigital_WriteSourceWaveformSiteUniqueU32(self, vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):  # noqa: N802
+        if self._defaults['WriteSourceWaveformSiteUniqueU32']['return'] != 0:
+            return self._defaults['WriteSourceWaveformSiteUniqueU32']['return']
+        return self._defaults['WriteSourceWaveformSiteUniqueU32']['return']
+
     def niDigital_WriteStatic(self, vi, channel_list, state):  # noqa: N802
         if self._defaults['WriteStatic']['return'] != 0:
             return self._defaults['WriteStatic']['return']
@@ -1548,6 +1555,8 @@ class SideEffectsHelper(object):
         mock_library.niDigital_WriteSourceWaveformBroadcastU32.return_value = 0
         mock_library.niDigital_WriteSourceWaveformDataFromFileTDMS.side_effect = MockFunctionCallError("niDigital_WriteSourceWaveformDataFromFileTDMS")
         mock_library.niDigital_WriteSourceWaveformDataFromFileTDMS.return_value = 0
+        mock_library.niDigital_WriteSourceWaveformSiteUniqueU32.side_effect = MockFunctionCallError("niDigital_WriteSourceWaveformSiteUniqueU32")
+        mock_library.niDigital_WriteSourceWaveformSiteUniqueU32.return_value = 0
         mock_library.niDigital_WriteStatic.side_effect = MockFunctionCallError("niDigital_WriteStatic")
         mock_library.niDigital_WriteStatic.return_value = 0
         mock_library.niDigital_close.side_effect = MockFunctionCallError("niDigital_close")
