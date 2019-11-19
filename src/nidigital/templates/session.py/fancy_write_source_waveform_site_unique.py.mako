@@ -35,5 +35,5 @@
 
         site_list_str = ','.join(site_list)
 
-        self._write_source_waveform_site_unique(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
+        self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
