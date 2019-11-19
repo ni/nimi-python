@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.1.4](#114---2019-11-19)
 * [1.1.3](#113---2019-10-21)
 * [1.1.2](#112---2019-06-06)
 * [1.1.0](#110---2018-10-25)
@@ -18,40 +18,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## 1.1.4 - 2019-11-19
 * ### ALL
     * #### Added
         * `ViUInt8` is now a valid type in APIs
-    * #### Changed
-    * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-DCPower
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-FGEN
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-SCOPE
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI Switch Executive
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
         * `fetch_capture_waveform()` - returns dictionary { site: data, site: data, ... }
@@ -62,11 +32,6 @@ All notable changes to this project will be documented in this file.
         * Removed array-size parameter from apply_tdr_offsets() and write_source_waveform_broadcast_u32() methods - [#1070](https://github.com/ni/nimi-python/issues/1070)
         * Renamed `write_source_waveform_broadcast_u32()` to `write_source_waveform_broadcast()`
         * `get_pin_results_pin_information()` - returns namedtuple `PinInfo(pin_indexes, site_numbers, channel_indexes)`
-    * #### Removed
-* ### NI-TClk
-    * #### Added
-    * #### Changed
-    * #### Removed
 
 
 ## 1.1.3 - 2019-10-21
