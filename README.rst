@@ -45,12 +45,14 @@ About
 The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. Currently, the following drivers are supported:
 
 * NI-DCPower (Python module: nidcpower)
+* NI-Digital Pattern Driver (Python module: nidigital)
 * NI-DMM (Python module: nidmm)
 * NI-FGEN (Python module: nifgen)
-* NI-SCOPE (Python module: niscope)
-* NI-SWITCH (Python module: niswitch)
 * NI-ModInst (Python module: nimodinst)
+* NI-SCOPE (Python module: niscope)
 * NI Switch Executive (Python module: nise)
+* NI-SWITCH (Python module: niswitch)
+* NI-TClk (Python module: nitclk)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -438,10 +440,10 @@ Driver specific installation instructions can be found on Read The Docs:
 * `nidcpower <http://nimi-python.readthedocs.io/en/master/nidcpower.html#installation>`_
 * `nidmm <http://nimi-python.readthedocs.io/en/master/nidmm.html#installation>`_
 * `nifgen <http://nimi-python.readthedocs.io/en/master/nifgen.html#installation>`_
-* `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
-* `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
-* `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
 * `nimodinst <http://nimi-python.readthedocs.io/en/master/nimodinst.html#installation>`_
+* `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
+* `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
+* `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
 * `nitclk <http://nimi-python.readthedocs.io/en/master/nitclk.html#installation>`_
 
 
@@ -483,14 +485,14 @@ To report a bug or submit a feature request specific to NI Modular Instruments P
 Fill in the issue template as completely as possible and we will respond as soon
 as we can.
 
-For hardware support or any other questions not specific to this GitHub project, please visit [NI Community Forums](https://forums.ni.com/).
+For hardware support or any other questions not specific to this GitHub project, please visit `NI Community Forums <https://forums.ni.com/>`_.
+
 .. _documentation-section:
 
 Documentation
 =============
 
 Documentation is available `here <http://nimi-python.readthedocs.io>`_.
-
 
 .. _license-section:
 
@@ -501,5 +503,3 @@ License
 LICENSE <https://github.com/ni/nimi-python/blob/master/LICENSE>`_).
 Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
-
-
