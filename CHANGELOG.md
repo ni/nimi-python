@@ -65,6 +65,7 @@ All notable changes to this project will be documented in this file.
 ## 1.1.4 - 2019-11-19
 * ### ALL
     * #### Added
+        * Support for Python 3.8
         * `ViUInt8` is now a valid type in APIs
 * ### NI-Digital Pattern Driver
     * #### Added
@@ -76,6 +77,9 @@ All notable changes to this project will be documented in this file.
         * Removed array-size parameter from apply_tdr_offsets() and write_source_waveform_broadcast_u32() methods - [#1070](https://github.com/ni/nimi-python/issues/1070)
         * Renamed `write_source_waveform_broadcast_u32()` to `write_source_waveform_broadcast()`
         * `get_pin_results_pin_information()` - returns namedtuple `PinInfo(pin_indexes, site_numbers, channel_indexes)`
+* ### NI Switch Executive
+    * #### Changed
+        * Version updated to 1.1.4 to match other released nimi-python modules
 
 
 ## 1.1.3 - 2019-10-21
