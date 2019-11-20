@@ -79,7 +79,7 @@ All notable changes to this project will be documented in this file.
         * `get_pin_results_pin_information()` - returns namedtuple `PinInfo(pin_indexes, site_numbers, channel_indexes)`
 * ### NI Switch Executive
     * #### Changed
-        * Version updated to 1.1.4 to match other drivers
+        * Version updated to 1.1.4 to match other released nimi-python modules
 
 
 ## 1.1.3 - 2019-10-21
