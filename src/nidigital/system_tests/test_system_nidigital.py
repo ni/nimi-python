@@ -70,10 +70,6 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
-def test_get_pin_results_pin_information(multi_instrument_session):
-    pass
-
-
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
@@ -244,3 +240,83 @@ def test_fetch_capture_waveform(multi_instrument_session):
         assert fetched_site == 1
         assert len(fetched_waveform[fetched_site]) == num_samples
 
+
+def test_get_pin_results_pin_information_with_channel_list(multi_instrument_session):
+    create_pin_map(multi_instrument_session)
+
+    fully_qualified_channels = [instr[1] + '/0', instr[0] + '/1']
+    pin_info = multi_instrument_session.channels[fully_qualified_channels].get_pin_results_pin_information()
+
+    pins = [i.pin_name for i in pin_info]
+    sites = [i.site_number for i in pin_info]
+    channels = [i.channel_name for i in pin_info]
+
+    assert pins == ['PinA', 'PinB']
+    assert sites == [1, 0]
+    assert channels == fully_qualified_channels
+
+
+def test_get_pin_results_pin_information_with_pin_list(multi_instrument_session):
+    create_pin_map(multi_instrument_session)
+
+    pin_info = multi_instrument_session.pins['SysPins, site0/DutPins'].get_pin_results_pin_information()
+
+    pins = [i.pin_name for i in pin_info]
+    sites = [i.site_number for i in pin_info]
+    channels = [i.channel_name for i in pin_info]
+
+    assert pins == ['SysPin', 'PinA', 'PinB', 'PinC']
+    assert sites[1:] == [0, 0, 0]
+    assert channels == [instr[0] + '/3', instr[0] + '/0', instr[0] + '/1', instr[0] + '/2']
+
+
+def test_get_pin_results_pin_information_on_unmapped_channels(multi_instrument_session):
+    create_pin_map(multi_instrument_session)
+
+    fully_qualified_channels = [instr[1] + '/11', instr[0] + '/10']
+    pin_info = multi_instrument_session.channels[fully_qualified_channels].get_pin_results_pin_information()
+
+    pins = [i.pin_name for i in pin_info]
+    sites = [i.site_number for i in pin_info]
+    channels = [i.channel_name for i in pin_info]
+
+    assert pins == ['', '']
+    assert sites == [-1, -1]
+    assert channels == fully_qualified_channels
+
+
+def test_get_pin_results_pin_information_on_all_channels(multi_instrument_session):
+    create_pin_map(multi_instrument_session)
+
+    pin_info = multi_instrument_session.get_pin_results_pin_information()
+    assert len(pin_info) == len(instr) * 32
+
+
+def create_pin_map(session):
+    DutPinMapping = collections.namedtuple('DutPinMapping', ['pin', 'site', 'fully_qualified_channel'])
+    dut_pin_mappings = [
+        DutPinMapping('PinA', 0, instr[0] + '/0'),
+        DutPinMapping('PinB', 0, instr[0] + '/1'),
+        DutPinMapping('PinC', 0, instr[0] + '/2'),
+        DutPinMapping('PinA', 1, instr[1] + '/0'),
+        DutPinMapping('PinB', 1, instr[1] + '/1'),
+        DutPinMapping('PinC', 1, instr[1] + '/2'),
+    ]
+
+    SystemPinMapping = collections.namedtuple('SystemPinMapping', ['pin', 'fully_qualified_channel'])
+    system_pin_mappings = [
+        SystemPinMapping('SysPin', instr[0] + '/3'),
+    ]
+
+    dut_pins = ','.join(sorted(set(i[0] for i in dut_pin_mappings)))
+    system_pins = ','.join(sorted(set(i[0] for i in system_pin_mappings)))
+    session.create_pin_map(dut_pin_list=dut_pins, system_pin_list=system_pins)
+    session.create_pin_group('DutPins', dut_pins)
+    session.create_pin_group('SysPins', system_pins)
+
+    session.create_channel_map(num_sites=2)
+    for mapping in dut_pin_mappings:
+        session.channels[mapping.fully_qualified_channel].map_pin_to_channel(mapping.pin, mapping.site)
+    for mapping in system_pin_mappings:
+        session.channels[mapping.fully_qualified_channel].map_pin_to_channel(mapping.pin, -1)
+    session.end_channel_map()
