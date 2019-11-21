@@ -12,7 +12,7 @@ import threading
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libnidigital.so', 'type': 'cdll'}},
+_library_info = {'Linux': {'64bit': {'name': 'nidigital', 'type': 'cdll'}},
                  'Windows': {'32bit': {'name': 'nidigital_32.dll', 'type': 'windll'},
                              '64bit': {'name': 'nidigital_64.dll', 'type': 'cdll'}}}
 

@@ -10,7 +10,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnitclk.so',
+                'name': 'nitclk',
                 'type': 'cdll'
             }
         },

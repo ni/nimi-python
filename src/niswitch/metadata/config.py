@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libniswitch.so',
+                'name': 'niswitch',
                 'type': 'cdll'
             }
         },

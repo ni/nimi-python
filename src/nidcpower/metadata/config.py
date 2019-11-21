@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnidcpower.so',
+                'name': 'nidcpower',
                 'type': 'cdll'
             }
         },
