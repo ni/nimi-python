@@ -156,7 +156,7 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
                 1: [i for i in range(num_samples)],
                 0: [i for i in reversed(range(num_samples))]}
         else:
-            assert False
+            assert False, "Invalid source waveform data type: {}".format(source_waveform_type)
 
         multi_instrument_session.write_source_waveform_site_unique(
             waveform_name='src_wfm',
