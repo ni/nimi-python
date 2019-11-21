@@ -487,12 +487,14 @@ as we can.
 
 For hardware support or any other questions not specific to this GitHub project, please visit `NI Community Forums <https://forums.ni.com/>`_.
 
+
 .. _documentation-section:
 
 Documentation
 =============
 
 Documentation is available `here <http://nimi-python.readthedocs.io>`_.
+
 
 .. _license-section:
 
@@ -503,3 +505,5 @@ License
 LICENSE <https://github.com/ni/nimi-python/blob/master/LICENSE>`_).
 Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
+
+
