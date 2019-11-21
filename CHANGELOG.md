@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Fixed linux DLL names to not pass lib/.so to ctypes find_library.
     * #### Removed
 * ### NI-DMM
     * #### Added
