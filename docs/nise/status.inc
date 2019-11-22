@@ -5,7 +5,7 @@ NI Switch Executive Python API Status
 +-------------------------------+---------------------+
 | NI Switch Executive (nise)    |                     |
 +===============================+=====================+
-| Driver Version Tested Against | 18.0.0              |
+| Driver Version Tested Against | 19.0.0              |
 +-------------------------------+---------------------+
 | Driver API Version            | 19.1.0d1            |
 +-------------------------------+---------------------+
