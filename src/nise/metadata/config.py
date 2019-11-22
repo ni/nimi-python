@@ -14,7 +14,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnise.so',
+                'name': 'nise',
                 'type': 'cdll'
             }
         },

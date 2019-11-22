@@ -12,7 +12,7 @@ import threading
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libnifake.so', 'type': 'cdll'}},
+_library_info = {'Linux': {'64bit': {'name': 'nifake', 'type': 'cdll'}},
                  'Windows': {'32bit': {'name': 'nifake_32.dll', 'type': 'windll'},
                              '64bit': {'name': 'nifake_64.dll', 'type': 'cdll'}}}
 

@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnidmm.so',
+                'name': 'nidmm',
                 'type': 'cdll'
             }
         },

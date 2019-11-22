@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Fix #1140: Linux support was accidentally broken.
     * #### Removed
 * ### NI-DMM
     * #### Added

@@ -18,7 +18,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnidigital.so',
+                'name': 'nidigital',
                 'type': 'cdll'
             }
         },
