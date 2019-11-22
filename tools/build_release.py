@@ -9,7 +9,8 @@ import sys
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
 default_python_cmd = ['python.exe']
-drivers_to_release = ['nifake', 'nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+drivers_to_upload = ['nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+drivers_to_update = ['nifake'] + drivers_to_upload
 
 
 def configure_logging(lvl=logging.WARNING, logfile=None):
@@ -116,7 +117,7 @@ Steps
     if args.update:
         logging.info('Updating versions')
 
-        for d in drivers_to_release:
+        for d in drivers_to_update:
             logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/{}/metadata/config_addon.py'.format(d), ] + passthrough_params))
             check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/{}/metadata/config_addon.py'.format(d), ] + passthrough_params)
 
@@ -132,7 +133,7 @@ Steps
     if args.upload:
         logging.info('Uploading to PyPI')
         complete_twine_cmd = twine_cmd + ['upload']
-        for d in drivers_to_release:
+        for d in drivers_to_upload:
             complete_twine_cmd += ['bin/{}/dist/*'.format(d)]
 
         logging.info(pp.pformat(complete_twine_cmd))
