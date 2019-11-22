@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.1.5](#115---2019-11-22)
 * [1.1.4](#114---2019-11-19)
 * [1.1.3](#113---2019-10-21)
 * [1.1.2](#112---2019-06-06)
@@ -19,48 +19,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## 1.1.5 - 2019-11-22
 * ### ALL
-    * #### Added
     * #### Changed
         * Fix #1140: Linux support was accidentally broken.
-    * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-DCPower
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-FGEN
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-SCOPE
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI Switch Executive
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Digital Pattern Driver
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-TClk
-    * #### Added
-    * #### Changed
-    * #### Removed
 
 
 ## 1.1.4 - 2019-11-19
