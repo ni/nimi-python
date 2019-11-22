@@ -9,8 +9,8 @@ import sys
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
 default_python_cmd = ['python.exe']
-drivers_to_update = ['nifake', 'nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
 drivers_to_upload = ['nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+drivers_to_update = ['nifake'] + drivers_to_upload
 
 
 def configure_logging(lvl=logging.WARNING, logfile=None):
