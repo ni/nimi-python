@@ -24,7 +24,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnifake.so',
+                'name': 'nifake',
                 'type': 'cdll'
             }
         },

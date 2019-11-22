@@ -11,7 +11,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnimodinst.so',
+                'name': 'nimodinst',
                 'type': 'cdll'
             }
         },

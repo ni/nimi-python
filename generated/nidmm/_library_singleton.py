@@ -12,7 +12,7 @@ import threading
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libnidmm.so', 'type': 'cdll'}},
+_library_info = {'Linux': {'64bit': {'name': 'nidmm', 'type': 'cdll'}},
                  'Windows': {'32bit': {'name': 'nidmm_32.dll', 'type': 'windll'},
                              '64bit': {'name': 'nidmm_64.dll', 'type': 'cdll'}}}
 

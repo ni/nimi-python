@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libfgen.so',
+                'name': 'nifgen',
                 'type': 'cdll'
             }
         },

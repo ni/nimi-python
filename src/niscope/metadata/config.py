@@ -21,7 +21,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libniscope.so',
+                'name': 'niscope',
                 'type': 'cdll'
             }
         },
