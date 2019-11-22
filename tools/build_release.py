@@ -43,28 +43,37 @@ Prereqs
     * `pip install --upgrade twine tox` into whichever Python 2.7 you use to build
 
 Steps
-    * Make sure master is ready for release
+    * Build master to ensure it is in a good state and ready for release
+    * Ensure no commits are made on master until the release is complete
+    * Create and checkout a branch for release-related changes
+    * Update changelog
         * Update the changelog to show the version of the release
         * Change unreleased in TOC to new version
-        * Commit to master
+        * Commit to branch
     * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
-        * Commit to master
+        * Commit to branch
     * `python3 tools/build_release.py --build`
         * Clean and build to update generated files with new version
-        * Commit to master
+        * Commit to branch
+    * Create a pull request
+        * It should contain all the changes made so far
+        * Get the pull request reviewed but DO NOT merge to master yet
     * `python3 tools/build_release.py --upload`
         * Upload to PyPI - you will need to type in your credentials
-    * Push all changes to GitHub
+    * Merge the pull request to origin/master
     * Create a release on GitHub using the portion from the changelog for this release for the description
+    * Create and checkout another branch for post-release changes
     * `python3 tools/build_release.py --update`
         * This will update the version to X.X.(N+1).dev0
-        * Commit to master
+        * Commit to branch
     * `python3 tools/build_release.py --build`
         * Clean and Build to update generated files
-        * Commit to master
-    * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
-    * Push to GitHub
+        * Commit to branch
+    * Update changelog
+        * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
+        * Commit to branch
+    * Create a pull request containing post-release changes and get it merged
 
 """
     parser = argparse.ArgumentParser(description=usage, formatter_class=CustomFormatter)
