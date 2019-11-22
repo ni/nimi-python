@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Changed
         * Fix #1140: Linux support was accidentally broken.
+        * Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
 
 
 ## 1.1.4 - 2019-11-19
