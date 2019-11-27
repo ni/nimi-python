@@ -1530,6 +1530,112 @@ disable
 
 
 
+export_attribute_configuration_buffer
+-------------------------------------
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: export_attribute_configuration_buffer()
+
+            Exports the property configuration of the session to a configuration
+            buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑FGEN returns an
+            error.
+
+            
+
+
+
+            :rtype: list of int
+            :return:
+
+
+                    Specifies the byte array buffer to be populated with the exported
+                    property configuration.
+
+                    
+
+
+
+export_attribute_configuration_file
+-----------------------------------
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: export_attribute_configuration_file(file_path)
+
+            Exports the property configuration of the session to the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            This method verifies that the properties you have configured for the
+            session are valid. If the configuration is invalid, NI‑FGEN returns an
+            error.
+
+            
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .nifgenconfig
+
+                
+
+
+            :type file_path: str
+
+get_channel_name
+----------------
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: get_channel_name(index)
+
+            Returns the channel string that is in the channel table at an index you
+            specify.
+
+            
+
+            .. note:: This method is included for compliance with the IviFgen Class
+                Specification.
+
+
+
+            :param index:
+
+
+                A 1-based index into the channel table.
+
+                
+
+
+            :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns the channel string that is in the channel table at the index you
+                    specify. Do not modify the contents of the channel string.
+
+                    
+
+
+
 get_ext_cal_last_date_and_time
 ------------------------------
 
@@ -1718,6 +1824,72 @@ get_self_cal_supported
 
 
 
+import_attribute_configuration_buffer
+-------------------------------------
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: import_attribute_configuration_buffer(configuration)
+
+            Imports a property configuration to the session from the specified
+            configuration buffer.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            
+
+            .. note:: You cannot call this method while the session is in a running state,
+                such as while generating a signal.
+
+
+
+            :param configuration:
+
+
+                Specifies the byte array buffer that contains the property
+                configuration to import.
+
+                
+
+
+            :type configuration: list of int
+
+import_attribute_configuration_file
+-----------------------------------
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: import_attribute_configuration_file(file_path)
+
+            Imports a property configuration to the session from the specified
+            file.
+
+            You can export and import session property configurations only between
+            devices with identical model numbers, channel counts, and onboard memory
+            sizes.
+
+            
+
+            .. note:: You cannot call this method while the session is in a running state,
+                such as while generating a signal.
+
+
+
+            :param file_path:
+
+
+                Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .nifgenconfig
+
+                
+
+
+            :type file_path: str
+
 initiate
 --------
 
@@ -1733,6 +1905,19 @@ initiate
             
 
             .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
+
+
+
+invalidate_all_attributes
+-------------------------
+
+    .. py:currentmodule:: nifgen.Session
+
+    .. py:method:: invalidate_all_attributes()
+
+            TBD
+
+            
 
 
 

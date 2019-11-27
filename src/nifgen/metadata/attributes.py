@@ -1,42 +1,6 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 19.6.0d0
+# This file is generated from NI-FGEN API metadata version 19.6.0d4
 attributes = {
-    1050002: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to validate attribute values and function parameters.  If enabled, NI-FGEN validates the parameter values that  you pass to the functions. Range-checking  parameters is very useful for debugging. After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.\nDefault Value: VI_TRUE\nUse niFgen_InitWithOptions to override the default value.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Range Check',
-        'name': 'RANGE_CHECK',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050003: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether NI-FGEN queries the device status  after each operation. Querying the device status is very useful  for debugging. After you validate your program, you can set this  attribute to VI_FALSE to disable status checking and maximize  performance.\nNI-FGEN can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.\nUse niFgen_InitWithOptions to override the default value.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Query Instrument Status',
-        'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050004: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to cache the value of attributes.   When caching is enabled, NI-FGEN keeps track of  the current device settings and avoids sending redundant commands to  the device. Thus, you can significantly increase execution speed.\nNI-FGEN can choose to always cache or to never cache  particular attributes regardless of the setting of this attribute.  Use niFgen_InitWithOptions to override the default value.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Cache',
-        'name': 'CACHE',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
     1050005: {
         'access': 'read-write',
         'channel_based': False,
@@ -45,18 +9,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050006: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether the IVI Engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   Call niFgen_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.\nDefault Value: VI_FALSE\nUse niFgen_InitWithOptions to override default value.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Record Value Coercions',
-        'name': 'RECORD_COERCIONS',
         'resettable': False,
         'type': 'ViBoolean'
     },
@@ -71,54 +23,6 @@ attributes = {
         'resettable': True,
         'type': 'ViString'
     },
-    1050021: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niFgen_InitiateGeneration.\nInterchangeability warnings indicate that using your application with a  different device might cause different behavior.   Call niFgen_GetNextInterchangeWarning to extract interchange warnings.   Call niFgen_ClearInterchangeWarnings to clear the list  of interchangeability warnings without reading them.\nInterchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group. Interchangeability warnings can  occur when an attribute affects the behavior of the device and you  have not set that attribute, or the attribute has been invalidated since you set it.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:User Options:Interchange Check',
-        'name': 'INTERCHANGE_CHECK',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050101: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies a code that describes the first error that occurred since the last  call to niFgen_GetErrorInfo on the session. The value follows the  VXI plug&play completion code conventions. A negative value describes  an error condition. A positive value describes a warning condition  and indicates that no error occurred. A zero indicates that no error  or warning occurred. The error and warning values can be status codes  defined by IVI, VISA, class drivers, or specific drivers.\n'
-        },
-        'lv_property': 'Instrument:Obsolete:Primary Error',
-        'name': 'PRIMARY_ERROR',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1050102: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies an optional code that provides additional information concerning the  primary error condition. The error and warning values can be status codes  defined by IVI, VISA, class drivers, or specific drivers.  A value of zero indicates  no additional information.\n'
-        },
-        'lv_property': 'Instrument:Obsolete:Secondary Error',
-        'name': 'SECONDARY_ERROR',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1050103: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies an optional string that contains additional information concerning the  primary error condition.\n'
-        },
-        'lv_property': 'Instrument:Obsolete:Error Elaboration',
-        'name': 'ERROR_ELABORATION',
-        'resettable': False,
-        'type': 'ViString'
-    },
     1050203: {
         'access': 'read only',
         'channel_based': False,
@@ -130,18 +34,6 @@ attributes = {
         'python_name': 'channel_count',
         'resettable': False,
         'type': 'ViInt32'
-    },
-    1050302: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nA string that contains the prefix for NI-FGEN. The name of each  user-callable function in NI-FGEN starts with this prefix.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Driver Prefix',
-        'name': 'SPECIFIC_DRIVER_PREFIX',
-        'resettable': False,
-        'type': 'ViString'
     },
     1050304: {
         'access': 'read only',
@@ -165,18 +57,6 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1050322: {
-        'access': 'read only',
-        'channel_based': True,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the I/O session that NI-FGEN uses  to communicate with the instrument.\n'
-        },
-        'lv_property': '',
-        'name': 'IO_SESSION',
-        'resettable': True,
-        'type': 'ViSession'
-    },
     1050327: {
         'access': 'read only',
         'channel_based': False,
@@ -185,18 +65,6 @@ attributes = {
         },
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'resettable': False,
-        'type': 'ViString'
-    },
-    1050401: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns a string that contains a comma-separated list of class-extention groups that  NI-FGEN implements.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
-        'name': 'GROUP_CAPABILITIES',
         'resettable': False,
         'type': 'ViString'
     },
@@ -279,30 +147,6 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1050515: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns the major version number of the class specification with which NI-FGEN is compliant.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1050516: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns the minor version number of the class specification with which NI-FGEN is compliant.\n'
-        },
-        'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1050551: {
         'access': 'read only',
         'channel_based': False,
@@ -312,15 +156,6 @@ attributes = {
         'lv_property': 'Instrument:Inherent IVI Attributes:Driver Identification:Revision',
         'name': 'SPECIFIC_DRIVER_REVISION',
         'resettable': False,
-        'type': 'ViString'
-    },
-    1150001: {
-        'access': 'read only',
-        'channel_based': True,
-        'codegen_method': 'no',
-        'lv_property': '',
-        'name': 'ID_QUERY_RESPONSE',
-        'resettable': True,
         'type': 'ViString'
     },
     1150101: {
@@ -367,31 +202,6 @@ attributes = {
         'resettable': False,
         'type': 'ViReal64'
     },
-    1150105: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nControls the duty cycle of the square wave the signal generator  produces on the SYNC out line.  Specify this attribute as a  percentage of the time the square wave is high in each cycle.\nUnits: Percentage of time the waveform is high\n'
-        },
-        'lv_property': 'Standard Function:Sync Duty Cycle High',
-        'name': 'SYNC_DUTY_CYCLE_HIGH',
-        'resettable': False,
-        'type': 'ViReal64'
-    },
-    1150106: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nControls the update clock source.\n'
-        },
-        'enum': 'UpdateClockSource',
-        'lv_property': 'Instrument:Obsolete:Update Clock Source',
-        'name': 'UPDATE_CLOCK_SOURCE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
     1150107: {
         'access': 'read-write',
         'channel_based': False,
@@ -415,18 +225,6 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150109: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'The actual sample rate value of the signal generator.'
-        },
-        'lv_property': 'Instrument:Obsolete:Actual Arb Sample Rate',
-        'name': 'ACTUAL_ARB_SAMPLE_RATE',
-        'resettable': False,
-        'type': 'ViReal64'
-    },
     1150110: {
         'access': 'read-write',
         'channel_based': False,
@@ -437,19 +235,6 @@ attributes = {
         'lv_property': 'Clocks:Sample Clock:Mode',
         'name': 'CLOCK_MODE',
         'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150111: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecify the source of the synchronization signal that you want to use.\n'
-        },
-        'enum': 'SynchronizationSource',
-        'lv_property': 'Instrument:5401/5411/5431:Synchronization Source',
-        'name': 'SYNCHRONIZATION',
-        'resettable': False,
         'type': 'ViInt32'
     },
     1150112: {
@@ -567,19 +352,6 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150216: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Selects which waveform type that the NI 5431 generates. Setting this attribute ensures that the crystal is set to the proper frequency.'
-        },
-        'enum': 'VideoWaveformType',
-        'lv_property': 'Instrument:5401/5411/5431:Video Waveform Type',
-        'name': 'VIDEO_WAVEFORM_TYPE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150218: {
         'access': 'read-write',
         'channel_based': False,
@@ -613,18 +385,6 @@ attributes = {
         'resettable': True,
         'type': 'ViReal64'
     },
-    1150221: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'The NI-DAQmx task that NI-FGEN uses for the NI 5421.  For internal use only.'
-        },
-        'lv_property': 'Instrument:Obsolete:DAQmx Task',
-        'name': 'DAQMX_TASK',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150222: {
         'access': 'read-write',
         'channel_based': False,
@@ -637,78 +397,6 @@ attributes = {
         'resettable': True,
         'type': 'ViInt32'
     },
-    1150223: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the value programmed to the gain DAC. The value should be treated as an unsigned, right-justified number.'
-        },
-        'lv_property': 'Instrument:Calibration:Gain DAC Value',
-        'name': 'GAIN_DAC_VALUE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150224: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the value programmed to the offset DAC. The value should be treated as an unsigned, right-justified number.'
-        },
-        'lv_property': 'Instrument:Calibration:Offset DAC Value',
-        'name': 'OFFSET_DAC_VALUE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150225: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the value programmed to the oscillator frequency DAC. The value should be treated as an unsigned, right-justified number.'
-        },
-        'lv_property': 'Instrument:Calibration:Oscillator Freq DAC Value',
-        'name': 'OSCILLATOR_FREQ_DAC_VALUE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150227: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the input of the calibration ADC. The ADC can take a reading from several inputs: the analog output, a 2.5 V reference, and ground.'
-        },
-        'lv_property': 'Instrument:Calibration:Cal ADC Input',
-        'name': 'CAL_ADC_INPUT',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150228: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the amount of pre-amplifier attenuation that should be applied to the signal (in dB).'
-        },
-        'lv_property': 'Instrument:Calibration:Pre-Amplifier Attenuation',
-        'name': 'PRE_AMPLIFIER_ATTENUATION',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150229: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the amount of post-amplifier attenuation that should be applied to the signal (in dB).'
-        },
-        'lv_property': 'Instrument:Calibration:Post-Amplifier Attenuation',
-        'name': 'POST_AMPLIFIER_ATTENUATION',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
     1150230: {
         'access': 'read-write',
         'channel_based': False,
@@ -717,31 +405,6 @@ attributes = {
         },
         'lv_property': 'Clocks:Sample Clock Timebase:Exported Sample Clock Timebase Divisor',
         'name': 'EXPORTED_SAMPLE_CLOCK_TIMEBASE_DIVISOR',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150231: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the absolute delay adjustment of the sample clock. The  sample clock delay adjustment is expressed in seconds.\ncan only be applied when an external sample clock is used.\n',
-            'note': 'For the NI 5421, absolute delay'
-        },
-        'lv_property': 'Clocks:Advanced:Sample Clock Absolute Delay',
-        'name': 'SAMPLE_CLOCK_ABSOLUTE_DELAY',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150232: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'The value of the oscillator phase DAC.'
-        },
-        'lv_property': 'Clocks:Advanced:Oscillator Phase DAC Value',
-        'name': 'OSCILLATOR_PHASE_DAC_VALUE',
         'resettable': True,
         'type': 'ViInt32'
     },
@@ -868,128 +531,6 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1150244: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': "\nEnable the device for Direct DMA writes. When enabled, all Create Waveform and Write Waveform function calls that are given a data address in the Direct DMA Window will download data residing on the Direct DMA device to the instrument's onboard memory.\n"
-        },
-        'lv_property': 'Arbitrary Waveform:Data Transfer:Direct DMA:Direct DMA Enabled',
-        'name': 'DIRECT_DMA_ENABLED',
-        'resettable': True,
-        'type': 'ViBoolean'
-    },
-    1150245: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the size of the memory window in bytes (not samples) provided by your Direct DMA-compatible data source.'
-        },
-        'lv_property': 'Arbitrary Waveform:Data Transfer:Direct DMA:Window Size in Bytes',
-        'name': 'DIRECT_DMA_WINDOW_SIZE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150246: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Enables or disables the OSP block of the signal generator. When the OSP block is disabled, all OSP-related attributes are disabled and have no effect on the generated signal.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:OSP Enabled',
-        'name': 'OSP_ENABLED',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1150247: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'The way in which data is processed by the OSP block.'
-        },
-        'enum': 'DataProcessingMode',
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Data Processing Mode',
-        'name': 'OSP_DATA_PROCESSING_MODE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150248: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThe rate at which the user-provided waveform data is generated when the NIFGEN_ATTR_OSP_ENABLED attribute is set to VI_TRUE.\nNI-FGEN sets the NIFGEN_ATTR_ARB_SAMPLE_RATE attribute of the signal generator to the product of the values of the NIFGEN_ATTR_OSP_IQ_RATE, NIFGEN_ATTR_OSP_FIR_FILTER_INTERPOLATION, and NIFGEN_ATTR_OSP_CIC_FILTER_INTERPOLATION attributes. When the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute is set to NIFGEN_VAL_OSP_REAL, the NIFGEN_ATTR_OSP_IQ_RATE attribute is the rate at which the signal generator processes real (I) data. When the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute is set to NIFGEN_VAL_OSP_COMPLEX, the NIFGEN_ATTR_OSP_IQ_RATE is the rate at which the signal generator processes complex (IQ) data.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Rate',
-        'name': 'OSP_IQ_RATE',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150249: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Enables or disables generation of the carrier.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Carrier Enabled',
-        'name': 'OSP_CARRIER_ENABLED',
-        'resettable': True,
-        'type': 'ViBoolean'
-    },
-    1150250: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'The frequency of the generated carrier.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Carrier Frequency',
-        'name': 'OSP_CARRIER_FREQUENCY',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150251: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'I Carrier Phase in degrees at the first point of the generation.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase I',
-        'name': 'OSP_CARRIER_PHASE_I',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150252: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Q Carrier Phase in degrees at the first point of the generation.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE  attribute is set to NIFGEN_VAL_OSP_COMPLEX.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Carrier Phase:Carrier Phase Q',
-        'name': 'OSP_CARRIER_PHASE_Q',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150253: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Pulse-shaping filter type for the FIR filter.'
-        },
-        'enum': 'FilterType',
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Filter Type',
-        'name': 'OSP_FIR_FILTER_TYPE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
     1150254: {
         'access': 'read-write',
         'channel_based': False,
@@ -1000,187 +541,6 @@ attributes = {
         'name': 'DIGITAL_GAIN',
         'resettable': True,
         'type': 'ViReal64'
-    },
-    1150255: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nEnables or disables the FIR filter.\nThe NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Filter Enabled',
-        'name': 'OSP_FIR_FILTER_ENABLED',
-        'resettable': True,
-        'type': 'ViBoolean'
-    },
-    1150256: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Interpolation factor for the FIR filter. If you do not set this value,  NI-FGEN calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:FIR Interpolation Factor',
-        'name': 'OSP_FIR_FILTER_INTERPOLATION',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150257: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nEnables or disables the CIC filter.\nThe NIFGEN_ATTR_OSP_CIC_FILTER_ENABLED and NIFGEN_ATTR_OSP_FIR_FILTER_ENABLED  attributes must have the same enable/disable setting.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Enabled',
-        'name': 'OSP_CIC_FILTER_ENABLED',
-        'resettable': True,
-        'type': 'ViBoolean'
-    },
-    1150258: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Interpolation factor for the CIC filter. If you do not set this value, NI-FGEN  calculates the appropriate value based on the value of the NIFGEN_ATTR_OSP_IQ_RATE attribute.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Interpolation Factor',
-        'name': 'OSP_CIC_FILTER_INTERPOLATION',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150259: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Alpha value to use when calculating the pulse-shaping FIR filter  coefficients. This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_ROOT_RAISED_COSINE.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Root Raised Cosine:Alpha',
-        'name': 'OSP_FIR_FILTER_ROOT_RAISED_COSINE_ALPHA',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150260: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Alpha value to use when calculating the pulse shaping FIR filter  coefficients. Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_RAISED_COSINE.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Raised Cosine:Alpha',
-        'name': 'OSP_FIR_FILTER_RAISED_COSINE_ALPHA',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150261: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Passband value to use when calculating the FIR filter coefficients.  The FIR filter is designed to be flat to passband × IQ rate.  This attribute is used only when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE  attribute is set to NIFGEN_VAL_OSP_FLAT.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Flat:Passband',
-        'name': 'OSP_FIR_FILTER_FLAT_PASSBAND',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150262: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'BT value to use when calculating the pulse-shaping FIR filter coefficients.  Only used when the NIFGEN_ATTR_OSP_FIR_FILTER_TYPE attribute is set to  NIFGEN_VAL_OSP_GAUSSIAN.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:FIR Filter:Gaussian:BT',
-        'name': 'OSP_FIR_FILTER_GAUSSIAN_BT',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150263: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Gain applied at the final stage of the CIC filter. Commonly used to compensate  for attenuation in the FIR filter. For FIR filter types other than Custom,  NI-FGEN calculates the CIC gain in order to achieve unity gain between the FIR  and CIC filters. Setting this attribute overrides the value set by NI-FGEN.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:CIC Filter Gain',
-        'name': 'OSP_CIC_FILTER_GAIN',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150264: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Digital gain to apply to the I data stream before any filtering by the OSP block.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain I',
-        'name': 'OSP_PRE_FILTER_GAIN_I',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150265: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Digital gain to apply to the Q data stream before any filtering by the OSP block.  This attribute is only used when the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute  is set to NIFGEN_VAL_OSP_COMPLEX.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Gain:Pre-filter Gain Q',
-        'name': 'OSP_PRE_FILTER_GAIN_Q',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150266: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Digital offset to apply to the I data stream. This offset is applied after  the Pre-Filter Gain and before any filtering.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset I',
-        'name': 'OSP_PRE_FILTER_OFFSET_I',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150267: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Digital offset to apply to the Q data stream. This offset is applied after  the Pre-Filter Gain and before any filtering. This attribute is used only when  the NIFGEN_ATTR_OSP_DATA_PROCESSING_MODE attribute is set to NIFGEN_VAL_OSP_COMPLEX.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:IQ Signal Adjustments:Offset:Pre-filter Offset Q',
-        'name': 'OSP_PRE_FILTER_OFFSET_Q',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150268: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nConfigures error reporting when the OSP block detects an overflow in any of its stages.  Overflows lead to clipping of the waveform.\nYou can use the NIFGEN_ATTR_OSP_OVERFLOW_STATUS attribute to query for overflow  conditions whether or not the NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is  enabled. The device will continue to generate after an overflow whether or not the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute is enabled.\n'
-        },
-        'enum': 'OspOverflowErrorReporting',
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:OSP Overflow Error Reporting',
-        'name': 'OSP_OVERFLOW_ERROR_REPORTING',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150269: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns a bit field of the overflow status in any stage of the OSP block.  This attribute is functional regardless of the value for the  NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING attribute.\nWrite 0 to this attribute to clear the current NIFGEN_ATTR_OSP_OVERFLOW_ERROR_REPORTING value.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:OSP Overflow Status',
-        'name': 'OSP_OVERFLOW_STATUS',
-        'resettable': True,
-        'type': 'ViInt32'
     },
     1150270: {
         'access': 'read-write',
@@ -1225,18 +585,6 @@ attributes = {
         'lv_property': 'Instrument:Data Marker Events Count',
         'name': 'DATA_MARKER_EVENTS_COUNT',
         'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150274: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the window address (beginning of window) of the waveform data source. This window address is specified by your Direct DMA-compatible data source.'
-        },
-        'lv_property': 'Arbitrary Waveform:Data Transfer:Direct DMA:Window Address',
-        'name': 'DIRECT_DMA_WINDOW_ADDRESS',
-        'resettable': True,
         'type': 'ViInt32'
     },
     1150280: {
@@ -1323,33 +671,6 @@ attributes = {
         'resettable': True,
         'type': 'ViInt32'
     },
-    1150293: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the source terminal for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.'
-        },
-        'lv_property': 'Triggers:Script:Digital Level:Source',
-        'name': 'DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE',
-        'repeated_capability_type': 'script_triggers',
-        'resettable': True,
-        'type': 'ViString'
-    },
-    1150294: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the active level for the Script trigger. This attribute is used when NIFGEN_ATTR_SCRIPT_TRIGGER_TYPE is set to Digital Level.'
-        },
-        'enum': 'ScriptTriggerDigitalLevelActiveLevel',
-        'lv_property': 'Triggers:Script:Digital Level:Active Level',
-        'name': 'DIGITAL_LEVEL_SCRIPT_TRIGGER_ACTIVE_LEVEL',
-        'repeated_capability_type': 'script_triggers',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
     1150295: {
         'access': 'read-write',
         'channel_based': False,
@@ -1373,19 +694,6 @@ attributes = {
         'resettable': True,
         'type': 'ViString'
     },
-    1150311: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output polarity of the Ready for Start Event.'
-        },
-        'enum': 'ReadyForStartEventActiveLevel',
-        'lv_property': 'Events:Ready For Start:Level:Active Level',
-        'name': 'READY_FOR_START_EVENT_LEVEL_ACTIVE_LEVEL',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
     1150312: {
         'access': 'read-write',
         'channel_based': False,
@@ -1397,20 +705,6 @@ attributes = {
         'repeated_capability_type': 'markers',
         'resettable': True,
         'type': 'ViString'
-    },
-    1150313: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output polarity of the Marker Event.'
-        },
-        'enum': 'MarkerEventPulsePolarity',
-        'lv_property': 'Events:Marker:Pulse:Polarity',
-        'name': 'MARKER_EVENT_PULSE_POLARITY',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViInt32'
     },
     1150314: {
         'access': 'read-write',
@@ -1433,58 +727,6 @@ attributes = {
         'name': 'DONE_EVENT_OUTPUT_TERMINAL',
         'resettable': True,
         'type': 'ViString'
-    },
-    1150316: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output polarity of the Started Event.'
-        },
-        'enum': 'StartedEventActiveLevel',
-        'lv_property': 'Events:Started:Level:Active Level',
-        'name': 'STARTED_EVENT_LEVEL_ACTIVE_LEVEL',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150317: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output polarity of the Done Event.'
-        },
-        'enum': 'DoneEventActiveLevel',
-        'lv_property': 'Events:Done:Level:Active Level',
-        'name': 'DONE_EVENT_LEVEL_ACTIVE_LEVEL',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150318: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output polarity of the Started Event.'
-        },
-        'enum': 'StartedEventPulsePolarity',
-        'lv_property': 'Events:Started:Pulse:Polarity',
-        'name': 'STARTED_EVENT_PULSE_POLARITY',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150319: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output polarity of the Done Event.'
-        },
-        'enum': 'DoneEventPulsePolarity',
-        'lv_property': 'Events:Done:Pulse:Polarity',
-        'name': 'DONE_EVENT_PULSE_POLARITY',
-        'resettable': True,
-        'type': 'ViInt32'
     },
     1150320: {
         'access': 'read-write',
@@ -1598,94 +840,6 @@ attributes = {
         'resettable': True,
         'type': 'ViString'
     },
-    1150330: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the terminal to which to export the SYNC OUT signal. This attribute is not supported for all devices.'
-        },
-        'lv_property': 'Standard Function:Sync Out Output Terminal',
-        'name': 'SYNC_OUT_OUTPUT_TERMINAL',
-        'resettable': True,
-        'type': 'ViString'
-    },
-    1150331: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output behavior for the Started Event.'
-        },
-        'enum': 'StartedEventOutputBehavior',
-        'lv_property': 'Events:Started:Output Behavior',
-        'name': 'STARTED_EVENT_OUTPUT_BEHAVIOR',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150332: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output behavior for the Done Event.'
-        },
-        'enum': 'DoneEventOutputBehavior',
-        'lv_property': 'Events:Done:Output Behavior',
-        'name': 'DONE_EVENT_OUTPUT_BEHAVIOR',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150333: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the pulse width units for the Started Event.'
-        },
-        'enum': 'StartedEventPulseWidthUnits',
-        'lv_property': 'Events:Started:Pulse:Width Units',
-        'name': 'STARTED_EVENT_PULSE_WIDTH_UNITS',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150334: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the pulse width units for the Done Event.'
-        },
-        'enum': 'DoneEventPulseWidthUnits',
-        'lv_property': 'Events:Done:Pulse:Width Units',
-        'name': 'DONE_EVENT_PULSE_WIDTH_UNITS',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150335: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the pulse width for the Started Event.'
-        },
-        'lv_property': 'Events:Started:Pulse:Width Value',
-        'name': 'STARTED_EVENT_PULSE_WIDTH',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150336: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the pulse width for the Done Event.'
-        },
-        'lv_property': 'Events:Done:Pulse:Width Value',
-        'name': 'DONE_EVENT_PULSE_WIDTH',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
     1150337: {
         'access': 'read-write',
         'channel_based': False,
@@ -1723,61 +877,6 @@ attributes = {
         'resettable': True,
         'type': 'ViString'
     },
-    1150340: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the pulse width for the Marker Event.'
-        },
-        'lv_property': 'Events:Marker:Pulse:Width Value',
-        'name': 'MARKER_EVENT_PULSE_WIDTH',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150341: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the pulse width units for the Marker Event.'
-        },
-        'enum': 'MarkerEventPulseWidthUnits',
-        'lv_property': 'Events:Marker:Pulse:Width Units',
-        'name': 'MARKER_EVENT_PULSE_WIDTH_UNITS',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150342: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output behavior for the Marker Event.'
-        },
-        'enum': 'MarkerEventOutputBehavior',
-        'lv_property': 'Events:Marker:Output Behavior',
-        'name': 'MARKER_EVENT_OUTPUT_BEHAVIOR',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150343: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the output polarity of the Marker Event.'
-        },
-        'enum': 'MarkerEventToggleInitialState',
-        'lv_property': 'Events:Marker:Toggle:Initial State',
-        'name': 'MARKER_EVENT_TOGGLE_INITIAL_STATE',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
     1150344: {
         'access': 'read only',
         'channel_based': False,
@@ -1789,31 +888,6 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1150345: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Returns the live status of the specified Marker Event.'
-        },
-        'lv_property': 'Events:Marker:Advanced:Live Status',
-        'name': 'MARKER_EVENT_LIVE_STATUS',
-        'repeated_capability_type': 'markers',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1150348: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Returns the live status of the specified Ready For Start Event.'
-        },
-        'lv_property': 'Events:Ready For Start:Advanced:Live Status',
-        'name': 'READY_FOR_START_EVENT_LIVE_STATUS',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
     1150349: {
         'access': 'read-write',
         'channel_based': False,
@@ -1824,132 +898,6 @@ attributes = {
         'name': 'ALL_MARKER_EVENTS_LATCHED_STATUS',
         'resettable': True,
         'type': 'ViInt32'
-    },
-    1150350: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the latched status of the specified Marker Event.\nWrite VI_TRUE to this attribute to clear the latched status of the Marker Event.\n'
-        },
-        'lv_property': 'Events:Marker:Advanced:Latched Status',
-        'name': 'MARKER_EVENT_LATCHED_STATUS',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViBoolean'
-    },
-    1150351: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Returns the latched status of the specified Done Event.'
-        },
-        'lv_property': 'Events:Done:Advanced:Latched Status',
-        'name': 'DONE_EVENT_LATCHED_STATUS',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1150352: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the latched status of the Started Event.'
-        },
-        'lv_property': 'Events:Started:Advanced:Latched Status',
-        'name': 'STARTED_EVENT_LATCHED_STATUS',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1150354: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the amount of delay applied to a Marker Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Marker Event will come out after the analog data, while a negative delay  value indicates that the Marker Event will come out before the analog data.  The default value is zero, which will align the Marker Event with the  analog output. You can specify the units of the delay value by setting the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.'
-        },
-        'lv_property': 'Events:Marker:Advanced:Delay Value',
-        'name': 'MARKER_EVENT_DELAY',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150355: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the units applied to the value of the NIFGEN_ATTR_MARKER_EVENT_DELAY attribute.  Valid units are seconds and sample clock periods.'
-        },
-        'enum': 'MarkerEventDelayUnits',
-        'lv_property': 'Events:Marker:Advanced:Delay Units',
-        'name': 'MARKER_EVENT_DELAY_UNITS',
-        'repeated_capability_type': 'markers',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150356: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the amount of delay applied to a Started Event with respect to the  analog output of the signal generator. A positive delay value specifies that  the Started Event occurs after the analog data, and a negative delay  value specifies that the Started Event occurs before the analog data.  The default value is zero, which will align the Started event with the analog output.\nYou can specify the units of the delay value by setting the NIFGEN_ATTR_STARTED_EVENT_DELAY attribute.\n'
-        },
-        'lv_property': 'Events:Started:Advanced:Delay Value',
-        'name': 'STARTED_EVENT_DELAY',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150357: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the units applied to the value of the NIFGEN_ATTR_STARTED_EVENT_DELAY\nattribute.  Valid units are seconds and sample clock periods.\n'
-        },
-        'enum': 'StartedEventDelayUnits',
-        'lv_property': 'Events:Started:Advanced:Delay Units',
-        'name': 'STARTED_EVENT_DELAY_UNITS',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150358: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the amount of delay applied to a Done Event with respect to the  analog output of the signal generator. A positive delay value indicates that  the Done Event will come out after the analog data, while a negative delay  value indicates that the Done Event will come out before the analog data.  The default value is zero, which will align the Done Event with the analog output.  You can specify the units of the delay value by setting the  NIFGEN_ATTR_DONE_EVENT_DELAY attribute.'
-        },
-        'lv_property': 'Events:Done:Advanced:Delay Value',
-        'name': 'DONE_EVENT_DELAY',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150359: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the units applied to the value of the NIFGEN_ATTR_DONE_EVENT_DELAY attribute. Valid units are seconds and sample clock periods.'
-        },
-        'enum': 'DoneEventDelayUnits',
-        'lv_property': 'Events:Done:Advanced:Delay Units',
-        'name': 'DONE_EVENT_DELAY_UNITS',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150362: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nControls whether or not NI-FGEN allows performance optimizations for DMA transfers.\nThis attribute is only valid for PCI and PXI SMC-based devices.\nThis attribute is enabled (VI_TRUE) by default, and NI recommends leaving it enabled.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Data Transfer:Advanced:PCI DMA Optimizations Enabled',
-        'name': 'PCI_DMA_OPTIMIZATIONS_ENABLED',
-        'resettable': True,
-        'type': 'ViBoolean'
     },
     1150365: {
         'access': 'read-write',
@@ -2007,31 +955,6 @@ attributes = {
         },
         'lv_property': 'Output:Channel Delay',
         'name': 'CHANNEL_DELAY',
-        'resettable': True,
-        'type': 'ViReal64'
-    },
-    1150370: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the generation mode of the OSP, which determines the type of data contained in the output signal.'
-        },
-        'enum': 'OspMode',
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:OSP Mode',
-        'name': 'OSP_MODE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150371: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the amount of frequency shift applied to the baseband signal.'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Frequency Shift',
-        'name': 'OSP_FREQUENCY_SHIFT',
         'resettable': True,
         'type': 'ViReal64'
     },
@@ -2126,18 +1049,6 @@ attributes = {
         'resettable': True,
         'type': 'ViInt32'
     },
-    1150389: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Compensate for OSP Filter Group Delay. If this is enabled, the Event Outputs will be aligned  with the Analog Output. The Analog output will also be aligned between synchronized devices  (using NI-TClk).'
-        },
-        'lv_property': 'Arbitrary Waveform:Onboard Signal Processing:Advanced:Compensate for Filter Group Delay',
-        'name': 'OSP_COMPENSATE_FOR_FILTER_GROUP_DELAY',
-        'resettable': True,
-        'type': 'ViBoolean'
-    },
     1150390: {
         'access': 'read only',
         'channel_based': False,
@@ -2148,221 +1059,6 @@ attributes = {
         'name': 'MODULE_REVISION',
         'resettable': False,
         'type': 'ViString'
-    },
-    1150391: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether the signal generator reads data from the peer-to-peer endpoint, as opposed to  the typical method of reading it from the onboard memory. This attribute is endpoint based.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:P2P Enabled',
-        'name': 'P2P_ENABLED',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1150392: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies which channels will be written to by a peer-to-peer endpoint. If multiple channels are specified,  data is deinterleaved to each channel. The default value is an empty string, which means all configured channels.  Channels are configured using the niFgen_ConfigureChannels function. This attribute is endpoint based.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Destination Channels',
-        'name': 'P2P_DESTINATION_CHANNELS',
-        'resettable': False,
-        'type': 'ViString'
-    },
-    1150393: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns the size, in samples per channel, of the peer-to-peer endpoint. This attribute is endpoint based.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Endpoint Size',
-        'name': 'P2P_ENDPOINT_SIZE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150394: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns the current space available in the endpoint in samples per channel. You can use this attribute when  priming the endpoint with initial data through the niFgen_WriteP2PEndpointI16 function to determine how many  samples you can write. You can also use this attribute to characterize the performance and measure the latency  of the peer-to-peer stream as data moves across the bus. This attribute is endpoint based.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Space Available In Endpoint',
-        'name': 'P2P_SPACE_AVAILABLE_IN_ENDPOINT',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150395: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns the largest number of samples per channel available in the endpoint since this attribute was last read.  Use this attribute to determine how much endpoint space to use as a buffer against PCI Express bus traffic  latencies by reading the attribute and keeping track of the largest value returned. This attribute is endpoint based.\nIf you wish to minimize the latency for data to move through the endpoint and be generated by the signal generator,  use the NIFGEN_ATTR_P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS attribute to grant fewer initial credits than the  default of the entire endpoint size.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Most Space Available In Endpoint',
-        'name': 'P2P_MOST_SPACE_AVAILABLE_IN_ENDPOINT',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150396: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nReturns the number of peer-to-peer FIFO endpoints supported by the device.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Endpoint Count',
-        'name': 'P2P_ENDPOINT_COUNT',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150397: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nEnables/disables manual configuration for a peer-to-peer endpoint. Enabling this attribute disables  automatic NI-P2P stream manager flow control and Done Notifications.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Manual Configuration Enabled',
-        'name': 'P2P_MANUAL_CONFIGURATION_ENABLED',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1150398: {
-        'access': 'write only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nIndicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.\n',
-            'note': '\nYou can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address',
-        'name': 'P2P_DATA_TRANSFER_PERMISSION_ADDRESS',
-        'resettable': False,
-        'type': 'ViInt64'
-    },
-    1150399: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nIndicates the address in the writer peer to which the signal generator should send data transfer permission credits.  This attribute is endpoint based.\n',
-            'note': '\nYou can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'enum': 'P2PAddressType',
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Data Transfer Permission Address Type',
-        'name': 'P2P_DATA_TRANSFER_PERMISSION_ADDRESS_TYPE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150400: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the interval, in samples per channel, at which the signal generator issues credits to allow the writer  peer to transfer data over the bus into the configured endpoint. Refer to the Flow Control topic in the NI Signal  Generators Help for more information. This attribute is coerced up by NI-FGEN to the nearest 128 byte boundary.  This attribute is endpoint based.\nDefault Value: 1,024 samples per channel\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Interval',
-        'name': 'P2P_DATA_TRANSFER_PERMISSION_INTERVAL',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150401: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the signal generator address where endpoint data is sent by the writer peer. The type of this address is specified  by the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS_TYPE attribute. This attribute is endpoint based.\n',
-            'note': '\nYou can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address',
-        'name': 'P2P_ENDPOINT_WINDOW_ADDRESS',
-        'resettable': False,
-        'type': 'ViInt64'
-    },
-    1150402: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.\n',
-            'note': '\nYou can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'enum': 'P2PAddressType',
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Address Type',
-        'name': 'P2P_ENDPOINT_WINDOW_ADDRESS_TYPE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150403: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the type of the NIFGEN_ATTR_P2P_ENDPOINT_WINDOW_ADDRESS attribute. This attribute is endpoint based.\n',
-            'note': '\nYou can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Configuration:Endpoint Window Size',
-        'name': 'P2P_ENDPOINT_WINDOW_SIZE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150405: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the signal generator address to which the writer peer sends the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_VALUE.  This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.\n',
-            'note': '\nYou can use this attribute only when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address',
-        'name': 'P2P_DONE_NOTIFICATION_ADDRESS',
-        'resettable': False,
-        'type': 'ViInt64'
-    },
-    1150406: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the address type of the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS attribute. This attribute is endpoint based.  Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help for more information.\n',
-            'note': '\nYou can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'enum': 'P2PAddressType',
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Address Type',
-        'name': 'P2P_DONE_NOTIFICATION_ADDRESS_TYPE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150407: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the value the writer peer should write to the address specified by the NIFGEN_ATTR_P2P_DONE_NOTIFICATION_ADDRESS  attribute. This attribute is endpoint based. Refer to the Stopping a Peer-to-Peer Generation topic in the NI Signal Generators Help  for more information.\n',
-            'note': '\nYou can only use this attribute when the NIFGEN_ATTR_P2P_MANUAL_CONFIGURATION_ENABLED attribute is set to VI_TRUE.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Manual:Notification:Done Notification Value',
-        'name': 'P2P_DONE_NOTIFICATION_VALUE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150408: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies the initial amount of data, in samples per channel, that the writer peer is allowed to transfer over the bus  into the configured endpoint when the peer-to-peer data stream is enabled. If you do not set this property and the endpoint  is empty, credits equal to the full size of the endpoint are issued to the writer peer. If data has been written to the  endpoint using the niFgen_WriteP2PEndpointI16 function prior to enabling the stream, credits equal to the remaining space  available in the endpoint are issued to the writer peer. This attribute is coerced up by NI-FGEN to 8-byte boundaries.\n'
-        },
-        'lv_property': 'Arbitrary Waveform:Peer-to-Peer:Data Transfer Permission Initial Credits',
-        'name': 'P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS',
-        'resettable': False,
-        'type': 'ViInt32'
     },
     1150409: {
         'access': 'read-write',
@@ -2376,18 +1072,6 @@ attributes = {
         'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
-    },
-    1150410: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the Endpoint threshold for the Start trigger. This attribute is used only when NIFGEN_ATTR_START_TRIGGER_TYPE is set to P2P Endpoint Fullness.'
-        },
-        'lv_property': 'Triggers:Start:P2P Endpoint Fullness:Level',
-        'name': 'P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL',
-        'resettable': False,
-        'type': 'ViInt32'
     },
     1150411: {
         'access': 'read-write',
@@ -2436,19 +1120,6 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32'
     },
-    1250002: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nControls the reference clock source that the signal generator uses.\nThe signal generator derives the frequencies and sample rates that it  uses to generate waveforms from the source you specify. For example, when you set this parameter to NIFGEN_VAL_EXTERNAL, the signal generator uses the signal it receives at its external clock connector as its reference  clock.\nspecify.\n',
-            'note': 'All of the signal generator channels use the clock source that you'
-        },
-        'lv_property': 'Instrument:Obsolete:Ref Clock Source',
-        'name': 'REF_CLOCK_SOURCE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
     1250003: {
         'access': 'read-write',
         'channel_based': False,
@@ -2470,19 +1141,6 @@ attributes = {
         'name': 'OUTPUT_IMPEDANCE',
         'resettable': True,
         'type': 'ViReal64'
-    },
-    1250005: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies how the signal generator produces waveforms.  Currently only continuous mode is valid for NI signal generators.  To control trigger mode, use NIFGEN_ATTR_TRIGGER_MODE instead.\n'
-        },
-        'enum': 'OperationMode',
-        'lv_property': 'Instrument:Obsolete:Operation Mode',
-        'name': 'OPERATION_MODE',
-        'resettable': False,
-        'type': 'ViInt32'
     },
     1250101: {
         'access': 'read-write',
@@ -2696,32 +1354,6 @@ attributes = {
         'lv_property': 'Arbitrary Waveform:Arbitrary Sequence Mode:Max Loop Count',
         'name': 'MAX_LOOP_COUNT',
         'resettable': False,
-        'type': 'ViInt32'
-    },
-    1250302: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nControls which trigger source the signal generator uses.\nAfter you call the niFgen_InitiateGeneration function, the signal generator waits for the trigger that you specify in the triggerSource parameter. After the signal generator receives a trigger, it produces the number of cycles that you specify in the NIFGEN_ATTR_CYCLE_COUNT attribute.\nThis attribute is also the source for the trigger in the other trigger modes as specified by the NIFGEN_ATTR_TRIGGER_MODE attribute.\n'
-        },
-        'enum': 'TriggerSource',
-        'lv_property': 'Instrument:5401/5411/5431:Trigger Source',
-        'name': 'TRIGGER_SOURCE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1250350: {
-        'access': 'read-write',
-        'channel_based': True,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Specifies the number of cycles that you want the signal generator to produce after it receives a trigger./n For standard and arbitrary waveforms, a cycle is one period of the waveform./n An arbitrary sequence consists of multiple arbitrary waveforms in a sequence. Each waveform can be repeated a discrete number of times before the next waveform is produced. For arbitrary sequences, a cycle is one complete progression through the generation of all iterations of all waveforms in the sequence./n/n',
-            'note': 'The NI 5411/5421 arbitrary waveform generators support only continuous generation./n'
-        },
-        'lv_property': '',
-        'name': 'CYCLE_COUNT',
-        'resettable': True,
         'type': 'ViInt32'
     }
 }

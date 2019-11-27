@@ -42,10 +42,13 @@ class Library(object):
         self.niFgen_DeleteNamedWaveform_cfunc = None
         self.niFgen_DeleteScript_cfunc = None
         self.niFgen_Disable_cfunc = None
+        self.niFgen_ExportAttributeConfigurationBuffer_cfunc = None
+        self.niFgen_ExportAttributeConfigurationFile_cfunc = None
         self.niFgen_GetAttributeViBoolean_cfunc = None
         self.niFgen_GetAttributeViInt32_cfunc = None
         self.niFgen_GetAttributeViReal64_cfunc = None
         self.niFgen_GetAttributeViString_cfunc = None
+        self.niFgen_GetChannelName_cfunc = None
         self.niFgen_GetError_cfunc = None
         self.niFgen_GetExtCalLastDateAndTime_cfunc = None
         self.niFgen_GetExtCalLastTemp_cfunc = None
@@ -56,8 +59,11 @@ class Library(object):
         self.niFgen_GetSelfCalLastDateAndTime_cfunc = None
         self.niFgen_GetSelfCalLastTemp_cfunc = None
         self.niFgen_GetSelfCalSupported_cfunc = None
+        self.niFgen_ImportAttributeConfigurationBuffer_cfunc = None
+        self.niFgen_ImportAttributeConfigurationFile_cfunc = None
         self.niFgen_InitializeWithChannels_cfunc = None
         self.niFgen_InitiateGeneration_cfunc = None
+        self.niFgen_InvalidateAllAttributes_cfunc = None
         self.niFgen_IsDone_cfunc = None
         self.niFgen_LockSession_cfunc = None
         self.niFgen_QueryArbSeqCapabilities_cfunc = None
@@ -278,6 +284,22 @@ class Library(object):
                 self.niFgen_Disable_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_Disable_cfunc(vi)
 
+    def niFgen_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_ExportAttributeConfigurationBuffer_cfunc is None:
+                self.niFgen_ExportAttributeConfigurationBuffer_cfunc = self._library.niFgen_ExportAttributeConfigurationBuffer
+                self.niFgen_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niFgen_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
+
+    def niFgen_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_ExportAttributeConfigurationFile_cfunc is None:
+                self.niFgen_ExportAttributeConfigurationFile_cfunc = self._library.niFgen_ExportAttributeConfigurationFile
+                self.niFgen_ExportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_ExportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_ExportAttributeConfigurationFile_cfunc(vi, file_path)
+
     def niFgen_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         with self._func_lock:
             if self.niFgen_GetAttributeViBoolean_cfunc is None:
@@ -309,6 +331,14 @@ class Library(object):
                 self.niFgen_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFgen_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetAttributeViString_cfunc(vi, channel_name, attribute_id, array_size, attribute_value)
+
+    def niFgen_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_GetChannelName_cfunc is None:
+                self.niFgen_GetChannelName_cfunc = self._library.niFgen_GetChannelName
+                self.niFgen_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_GetChannelName_cfunc(vi, index, buffer_size, channel_string)
 
     def niFgen_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:
@@ -390,6 +420,22 @@ class Library(object):
                 self.niFgen_GetSelfCalSupported_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_GetSelfCalSupported_cfunc(vi, self_cal_supported)
 
+    def niFgen_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_ImportAttributeConfigurationBuffer_cfunc is None:
+                self.niFgen_ImportAttributeConfigurationBuffer_cfunc = self._library.niFgen_ImportAttributeConfigurationBuffer
+                self.niFgen_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niFgen_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
+
+    def niFgen_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_ImportAttributeConfigurationFile_cfunc is None:
+                self.niFgen_ImportAttributeConfigurationFile_cfunc = self._library.niFgen_ImportAttributeConfigurationFile
+                self.niFgen_ImportAttributeConfigurationFile_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_ImportAttributeConfigurationFile_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_ImportAttributeConfigurationFile_cfunc(vi, file_path)
+
     def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
             if self.niFgen_InitializeWithChannels_cfunc is None:
@@ -405,6 +451,14 @@ class Library(object):
                 self.niFgen_InitiateGeneration_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_InitiateGeneration_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_InitiateGeneration_cfunc(vi)
+
+    def niFgen_InvalidateAllAttributes(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_InvalidateAllAttributes_cfunc is None:
+                self.niFgen_InvalidateAllAttributes_cfunc = self._library.niFgen_InvalidateAllAttributes
+                self.niFgen_InvalidateAllAttributes_cfunc.argtypes = [ViSession]  # noqa: F405
+                self.niFgen_InvalidateAllAttributes_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_InvalidateAllAttributes_cfunc(vi)
 
     def niFgen_IsDone(self, vi, done):  # noqa: N802
         with self._func_lock:

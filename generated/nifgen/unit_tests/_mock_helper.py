@@ -73,6 +73,11 @@ class SideEffectsHelper(object):
         self._defaults['DeleteScript']['return'] = 0
         self._defaults['Disable'] = {}
         self._defaults['Disable']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer'] = {}
+        self._defaults['ExportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer']['configuration'] = None
+        self._defaults['ExportAttributeConfigurationFile'] = {}
+        self._defaults['ExportAttributeConfigurationFile']['return'] = 0
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['attributeValue'] = None
@@ -85,6 +90,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['attributeValue'] = None
+        self._defaults['GetChannelName'] = {}
+        self._defaults['GetChannelName']['return'] = 0
+        self._defaults['GetChannelName']['channelString'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
@@ -124,11 +132,17 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalSupported'] = {}
         self._defaults['GetSelfCalSupported']['return'] = 0
         self._defaults['GetSelfCalSupported']['selfCalSupported'] = None
+        self._defaults['ImportAttributeConfigurationBuffer'] = {}
+        self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ImportAttributeConfigurationFile'] = {}
+        self._defaults['ImportAttributeConfigurationFile']['return'] = 0
         self._defaults['InitializeWithChannels'] = {}
         self._defaults['InitializeWithChannels']['return'] = 0
         self._defaults['InitializeWithChannels']['vi'] = None
         self._defaults['InitiateGeneration'] = {}
         self._defaults['InitiateGeneration']['return'] = 0
+        self._defaults['InvalidateAllAttributes'] = {}
+        self._defaults['InvalidateAllAttributes']['return'] = 0
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['done'] = None
@@ -382,6 +396,26 @@ class SideEffectsHelper(object):
             return self._defaults['Disable']['return']
         return self._defaults['Disable']['return']
 
+    def niFgen_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
+            raise MockFunctionCallError("niFgen_ExportAttributeConfigurationBuffer", param='configuration')
+        if size_in_bytes.value == 0:
+            return len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])
+        try:
+            configuration_ref = configuration.contents
+        except AttributeError:
+            configuration_ref = configuration
+        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])):
+            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['configuration'][i]
+        return self._defaults['ExportAttributeConfigurationBuffer']['return']
+
+    def niFgen_ExportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationFile']['return']
+        return self._defaults['ExportAttributeConfigurationFile']['return']
+
     def niFgen_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
@@ -421,6 +455,16 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAttributeViString']['attributeValue'])
         attribute_value.value = self._defaults['GetAttributeViString']['attributeValue'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
+
+    def niFgen_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
+        if self._defaults['GetChannelName']['return'] != 0:
+            return self._defaults['GetChannelName']['return']
+        if self._defaults['GetChannelName']['channelString'] is None:
+            raise MockFunctionCallError("niFgen_GetChannelName", param='channelString')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetChannelName']['channelString'])
+        channel_string.value = self._defaults['GetChannelName']['channelString'].encode('ascii')
+        return self._defaults['GetChannelName']['return']
 
     def niFgen_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -567,6 +611,16 @@ class SideEffectsHelper(object):
             self_cal_supported.contents.value = self._defaults['GetSelfCalSupported']['selfCalSupported']
         return self._defaults['GetSelfCalSupported']['return']
 
+    def niFgen_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationBuffer']['return']
+        return self._defaults['ImportAttributeConfigurationBuffer']['return']
+
+    def niFgen_ImportAttributeConfigurationFile(self, vi, file_path):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationFile']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationFile']['return']
+        return self._defaults['ImportAttributeConfigurationFile']['return']
+
     def niFgen_InitializeWithChannels(self, resource_name, channel_name, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitializeWithChannels']['return'] != 0:
             return self._defaults['InitializeWithChannels']['return']
@@ -581,6 +635,11 @@ class SideEffectsHelper(object):
         if self._defaults['InitiateGeneration']['return'] != 0:
             return self._defaults['InitiateGeneration']['return']
         return self._defaults['InitiateGeneration']['return']
+
+    def niFgen_InvalidateAllAttributes(self, vi):  # noqa: N802
+        if self._defaults['InvalidateAllAttributes']['return'] != 0:
+            return self._defaults['InvalidateAllAttributes']['return']
+        return self._defaults['InvalidateAllAttributes']['return']
 
     def niFgen_IsDone(self, vi, done):  # noqa: N802
         if self._defaults['IsDone']['return'] != 0:
@@ -880,6 +939,10 @@ class SideEffectsHelper(object):
         mock_library.niFgen_DeleteScript.return_value = 0
         mock_library.niFgen_Disable.side_effect = MockFunctionCallError("niFgen_Disable")
         mock_library.niFgen_Disable.return_value = 0
+        mock_library.niFgen_ExportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niFgen_ExportAttributeConfigurationBuffer")
+        mock_library.niFgen_ExportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niFgen_ExportAttributeConfigurationFile.side_effect = MockFunctionCallError("niFgen_ExportAttributeConfigurationFile")
+        mock_library.niFgen_ExportAttributeConfigurationFile.return_value = 0
         mock_library.niFgen_GetAttributeViBoolean.side_effect = MockFunctionCallError("niFgen_GetAttributeViBoolean")
         mock_library.niFgen_GetAttributeViBoolean.return_value = 0
         mock_library.niFgen_GetAttributeViInt32.side_effect = MockFunctionCallError("niFgen_GetAttributeViInt32")
@@ -888,6 +951,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetAttributeViReal64.return_value = 0
         mock_library.niFgen_GetAttributeViString.side_effect = MockFunctionCallError("niFgen_GetAttributeViString")
         mock_library.niFgen_GetAttributeViString.return_value = 0
+        mock_library.niFgen_GetChannelName.side_effect = MockFunctionCallError("niFgen_GetChannelName")
+        mock_library.niFgen_GetChannelName.return_value = 0
         mock_library.niFgen_GetError.side_effect = MockFunctionCallError("niFgen_GetError")
         mock_library.niFgen_GetError.return_value = 0
         mock_library.niFgen_GetExtCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetExtCalLastDateAndTime")
@@ -908,10 +973,16 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetSelfCalLastTemp.return_value = 0
         mock_library.niFgen_GetSelfCalSupported.side_effect = MockFunctionCallError("niFgen_GetSelfCalSupported")
         mock_library.niFgen_GetSelfCalSupported.return_value = 0
+        mock_library.niFgen_ImportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niFgen_ImportAttributeConfigurationBuffer")
+        mock_library.niFgen_ImportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niFgen_ImportAttributeConfigurationFile.side_effect = MockFunctionCallError("niFgen_ImportAttributeConfigurationFile")
+        mock_library.niFgen_ImportAttributeConfigurationFile.return_value = 0
         mock_library.niFgen_InitializeWithChannels.side_effect = MockFunctionCallError("niFgen_InitializeWithChannels")
         mock_library.niFgen_InitializeWithChannels.return_value = 0
         mock_library.niFgen_InitiateGeneration.side_effect = MockFunctionCallError("niFgen_InitiateGeneration")
         mock_library.niFgen_InitiateGeneration.return_value = 0
+        mock_library.niFgen_InvalidateAllAttributes.side_effect = MockFunctionCallError("niFgen_InvalidateAllAttributes")
+        mock_library.niFgen_InvalidateAllAttributes.return_value = 0
         mock_library.niFgen_IsDone.side_effect = MockFunctionCallError("niFgen_IsDone")
         mock_library.niFgen_IsDone.return_value = 0
         mock_library.niFgen_LockSession.side_effect = MockFunctionCallError("niFgen_LockSession")

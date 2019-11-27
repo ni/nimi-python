@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 19.6.0d0
+# This file is generated from NI-FGEN API metadata version 19.6.0d4
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1221,6 +1221,66 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ExportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': '\nExports the attribute configuration of the session to a configuration\nbuffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑FGEN returns an\nerror.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niFgen_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the size, in bytes, of the byte array to export. If you enter\n0, this function returns the needed size.\n'
+                },
+                'name': 'sizeInBytes',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nSpecifies the byte array buffer to be populated with the exported\nattribute configuration.\n'
+                },
+                'name': 'configuration',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'sizeInBytes'
+                },
+                'type': 'ViInt8[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ExportAttributeConfigurationFile': {
+        'documentation': {
+            'description': '\nExports the attribute configuration of the session to the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑FGEN returns an\nerror.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niFgen_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the absolute path to the file to contain the exported\nattribute configuration. If you specify an empty or relative path, this\nfunction returns an error.\n**Default file extension:** .nifgenconfig\n'
+                },
+                'name': 'filePath',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetAttributeViBoolean': {
         'codegen_method': 'private',
         'documentation': {
@@ -1391,6 +1451,51 @@ functions = {
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'arraySize'
+                },
+                'type': 'ViChar[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetChannelName': {
+        'documentation': {
+            'description': '\nReturns the channel string that is in the channel table at an index you\nspecify.\n',
+            'note': '\nThis function is included for compliance with the IviFgen Class\nSpecification.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niFgen_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A 1-based index into the channel table.'
+                },
+                'name': 'index',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nPasses the number of bytes in the ViChar array you specify for the\n**description** parameter.\n\nIf the error description, including the terminating NULL byte, contains\nmore bytes than you indicate in this parameter, the function copies\nBufferSize - 1 bytes into the buffer, places an ASCII NULL byte at the\nend of the buffer, and returns the buffer size you must pass to get the\nentire value. For example, if the value is "123456" and the Buffer Size\nis 4, the function places "123" into the buffer and returns 7.\n\nIf you pass a negative number, the function copies the value to the\nbuffer regardless of the number of bytes in the value.\n'
+                },
+                'name': 'bufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nReturns the channel string that is in the channel table at the index you\nspecify. Do not modify the contents of the channel string.\n'
+                },
+                'name': 'channelString',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufferSize'
                 },
                 'type': 'ViChar[]'
             }
@@ -1784,6 +1889,68 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ImportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': '\nImports an attribute configuration to the session from the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\n\n',
+            'note': '\nYou cannot call this function while the session is in a running state,\nsuch as while generating a signal.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niFgen_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the size, in bytes, of the byte array to import. If you enter\n0, this function returns the needed size.\n'
+                },
+                'name': 'sizeInBytes',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the byte array buffer that contains the attribute\nconfiguration to import.\n'
+                },
+                'name': 'configuration',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'sizeInBytes'
+                },
+                'type': 'ViInt8[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ImportAttributeConfigurationFile': {
+        'documentation': {
+            'description': '\nImports an attribute configuration to the session from the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n',
+            'note': '\nYou cannot call this function while the session is in a running state,\nsuch as while generating a signal.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niFgen_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the absolute path to the file containing the attribute\nconfiguration to import. If you specify an empty or relative path, this\nfunction returns an error.\n**Default File Extension:** .nifgenconfig\n'
+                },
+                'name': 'filePath',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'InitializeWithChannels': {
         'codegen_method': 'private',
         'documentation': {
@@ -1931,6 +2098,19 @@ functions = {
                 'documentation': {
                     'description': '\nIdentifies your instrument session. **vi** is obtained from the\nniFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels\nfunctions and identifies a particular instrument session.\n'
                 },
+                'name': 'vi',
+                'type': 'ViSession'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'InvalidateAllAttributes': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
             }
@@ -3082,6 +3262,7 @@ functions = {
                 'type': 'ViSession'
             }
         ],
+        'python_name': '_close',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
