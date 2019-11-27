@@ -3,6 +3,7 @@ import nifgen
 import numpy
 import os
 import pytest
+import tempfile
 
 
 @pytest.fixture(scope='function')
@@ -435,24 +436,24 @@ def test_channel_format_types():
 def test_import_export_buffer(session):
     test_value_1 = 1.0
     test_value_2 = 2.0
-    session.gain = test_value_1
-    assert session.gain == test_value_1
+    session.arb_gain = test_value_1
+    assert session.arb_gain == test_value_1
     buffer = session.export_attribute_configuration_buffer()
-    session.gain = test_value_2
-    assert session.gain == test_value_2
+    session.arb_gain = test_value_2
+    assert session.arb_gain == test_value_2
     session.import_attribute_configuration_buffer(buffer)
-    assert session.gain == test_value_1
+    assert session.arb_gain == test_value_1
 
 
 def test_import_export_file(session):
     test_value_1 = 2.0
     test_value_2 = 3.0
     path = tempfile.gettempdir() + 'test.txt'
-    session.gain = test_value_1
-    assert session.gain == test_value_1
+    session.arb_gain = test_value_1
+    assert session.arb_gain == test_value_1
     session.export_attribute_configuration_file(path)
-    session.gain = test_value_2
-    assert session.gain == test_value_2
+    session.arb_gain = test_value_2
+    assert session.arb_gain == test_value_2
     session.import_attribute_configuration_file(path)
-    assert session.gain == test_value_1
+    assert session.arb_gain == test_value_1
 
