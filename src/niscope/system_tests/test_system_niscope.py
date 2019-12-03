@@ -264,8 +264,6 @@ def test_configure_chan_characteristics(session):
     assert 50.0 == session.input_impedance
 
 
-'''
-# TODO(frank): re-add after issue #650 is fixed.
 def test_filter_coefficients():
     with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
         assert [1.0, 0.0, 0.0] == session.get_equalization_filter_coefficients(3)
@@ -274,7 +272,6 @@ def test_filter_coefficients():
             session.configure_equalization_filter_coefficients(filter_coefficients)
         except niscope.Error as e:
             assert e.code == -1074135024  # coefficients list should have 35 items
-'''
 
 
 def test_send_software_trigger_edge(session):
@@ -342,8 +339,6 @@ def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
 
-'''
-# TODO(frank): re-add after issue #650 is fixed.
 def test_configure_trigger_video():
     with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
         session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
@@ -351,7 +346,6 @@ def test_configure_trigger_video():
         assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
         assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
         assert niscope.TriggerCoupling.DC == session.trigger_coupling
-'''
 
 
 def test_configure_trigger_window(session):
