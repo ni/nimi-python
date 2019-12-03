@@ -266,13 +266,15 @@ def test_configure_chan_characteristics(session):
 
 def test_filter_coefficients():
     with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
-        assert [1.0] + [0.0] * 31 == session.get_equalization_filter_coefficients()
+        assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
         try:
             filter_coefficients = [1.0, 0.0, 0.0]
             session.configure_equalization_filter_coefficients(filter_coefficients)
         except niscope.Error as e:
-            assert e.code == -1074135024  # coefficients list should have 35 items
-
+            assert e.code == -1074135024
+        filter_coefficients = [0.01] * 35
+        session.configure_equalization_filter_coefficients(filter_coefficients)
+        assert filter_coefficients == session.get_equalization_filter_coefficients()
 
 def test_send_software_trigger_edge(session):
     session.send_software_trigger_edge(niscope.WhichTrigger.ARM_REFERENCE)
