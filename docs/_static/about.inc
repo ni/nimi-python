@@ -20,5 +20,5 @@ It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and p
 
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
-**nimi-python** supports Python 2.7, 3.4 and later using CPython or PyPy.
+**nimi-python** supports Python 3.5 and later using CPython or PyPy.
 
