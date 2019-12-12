@@ -23,8 +23,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * Support for Python 3.8
     * #### Changed
     * #### Removed
+        * Support for Python 2.7 and 3.4
 * ### NI-DMM
     * #### Added
     * #### Changed
