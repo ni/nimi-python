@@ -14,6 +14,7 @@ endef
 define log_command
 	$1
 	@echo '$1' >> $(COMMAND_LOG)
+	@touch $(DRIVER_FILE_BUILT)
 endef
 
 # Helper function for running a command with a tracking file

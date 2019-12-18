@@ -20,7 +20,6 @@ _hide_cmds := @
 endif
 
 # We only add root files if we are building the 'all' target (nothing on the command line)
-$(warning $(MAKECMDGOALS))
 ifeq (,$(MAKECMDGOALS))
 ROOT_FILES := \
 	$(ROOT_DIR)/README.rst \
@@ -117,21 +116,35 @@ PYTHON_CMD ?= python3
 
 .PHONY: help Makefile
 
-global_files_start: $(DRIVERS)
+# For the global files, instead of trying to keep track of which files from the driver builds matter for any target,
+# we just say that if anything from any driver built, we will rebuld the global files
+export DRIVER_FILE_BUILT = bin/driver_file_built
+
+GLOBAL_FILES_STARTED_FILE = bin/printed_global_files
+$(GLOBAL_FILES_STARTED_FILE): $(DRIVER_FILE_BUILT)
 	@echo
 	@echo "Making Global Files"
+	@touch $(GLOBAL_FILES_STARTED_FILE)
 
-$(ROOT_DIR)/README.rst: global_files_start
+# Executes a command, then logs it to $(COMMAND_LOG).
+# $1 is the command.
+# We need our own copy that does not touch DRIVER_FILE_BUILT
+define global_log_command
+	$1
+	@echo '$1' >> $(COMMAND_LOG)
+endef
+
+$(ROOT_DIR)/README.rst: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@))
-	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+	$(_hide_cmds)$(call global_log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
 
-$(ROOT_DIR)/VERSION: global_files_start
+$(ROOT_DIR)/VERSION: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py
-	$(_hide_cmds)$(call log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file bin/$(d)/$(d)/VERSION ))
+	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file bin/$(d)/$(d)/VERSION ))
 
-$(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simple_mako.py
+$(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simple_mako.py $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@))
-	$(_hide_cmds)$(call log_command,$(PYTHON_CMD) tools/simple_mako.py --output-file $@ --template $<)
+	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/simple_mako.py --output-file $@ --template $<)
 
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
