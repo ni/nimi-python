@@ -20,7 +20,6 @@ _hide_cmds := @
 endif
 
 # We only add root files if we are building the 'all' target (nothing on the command line)
-$(warning $(MAKECMDGOALS))
 ifeq (,$(MAKECMDGOALS))
 ROOT_FILES := \
 	$(ROOT_DIR)/README.rst \
