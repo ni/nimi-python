@@ -23,6 +23,8 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * examples.zip file that includes all examples and any helper files
+        * Link on examples documentation page to zip file
     * #### Changed
     * #### Removed
 * ### NI-DMM
