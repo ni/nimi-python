@@ -6,9 +6,19 @@ MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY)) \
                 $(addprefix $(MODULE_DIR)/,$(CUSTOM_TYPES_TO_COPY)) \
 
-
 RST_FILES := \
                 $(addprefix $(DRIVER_DOCS_DIR)/,$(RST_FILES_TO_GENERATE)) \
+
+EXAMPLE_FILES := $(if $(wildcard src/$(DRIVER)/examples/*),$(shell find src/$(DRIVER)/examples/* -type f -print),)
+
+# If there are any examples, we will need to build the examples zip file for this driver
+ifneq (,$(EXAMPLE_FILES))
+MKDIRECTORIES := $(ROOT_DIR)/examples
+
+DRIVER_EXAMPLES_ZIP_FILE := $(ROOT_DIR)/examples/$(DRIVER)_examples.zip
+MODULE_FILES += $(DRIVER_EXAMPLES_ZIP_FILE)
+
+endif # ifneq (,$(EXAMPLE_FILES))
 
 MKDIR: $(MKDIRECTORIES)
 
@@ -25,7 +35,7 @@ $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 # examples.rst needs to use find since there may be folders of files and it needs to be recursive. wildcard is not
 $(MODULE_DIR)/session.py: $(wildcard $(TEMPLATE_DIR)/session.py/*.mako) $(wildcard $(DRIVER_DIR)/templates/session.py/*.mako)
 $(DRIVER_DOCS_DIR)/class.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mako) $(wildcard $(DRIVER_DIR)/templates/functions.rst/*.mako)
-$(DRIVER_DOCS_DIR)/examples.rst: $(if $(wildcard src/$(DRIVER)/examples/*),$(shell find src/$(DRIVER)/examples/* -type f -print),)
+$(DRIVER_DOCS_DIR)/examples.rst: $(EXAMPLE_FILES)
 
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
@@ -54,6 +64,10 @@ $(DRIVER_DOCS_DIR)/%.rst: %.rst.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 $(DRIVER_DOCS_DIR)/%.inc: %.inc.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
+$(DRIVER_EXAMPLES_ZIP_FILE): $(EXAMPLE_FILES)
+	$(call trace_to_console, "Zipping",$@)
+	$(_hide_cmds)$(call log_command,cd src/$(DRIVER)/examples && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/unit_tests/*.py)
 UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
