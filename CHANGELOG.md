@@ -23,6 +23,8 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * Zip file per driver for all examples and any helper files
+        * Link to zip file on examples documentation
     * #### Changed
     * #### Removed
 * ### NI-DMM
