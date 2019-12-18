@@ -61,6 +61,8 @@ endef
 $(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
+
+# We need to ensure bin exists for Travis CI builds
 clean: start
 	@echo 'Cleaning...'
 	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
@@ -72,6 +74,7 @@ clean: start
 	-@rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@mkdir $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
 	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If" > $(COMMAND_LOG)
