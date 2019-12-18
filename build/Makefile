@@ -154,6 +154,7 @@ $(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simp
 ifeq (,$(MAKECMDGOALS))
 
 EXAMPLE_WORK_DIR := bin/examples
+GLOBAL_MKDIRECTORIES += $(EXAMPLE_WORK_DIR)
 
 # Set up a copy rule and add each file found to the example files list
 define copyExample
