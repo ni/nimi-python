@@ -21,8 +21,11 @@ $1:
 endef
 $(foreach d,$(MKDIRECTORIES),$(eval $(call mkdir_rule,$(d))))
 
+# We set up some additional dependencies for specific files
+# examples.rst needs to use find since there may be folders of files and it needs to be recursive. wildcard is not
 $(MODULE_DIR)/session.py: $(wildcard $(TEMPLATE_DIR)/session.py/*.mako) $(wildcard $(DRIVER_DIR)/templates/session.py/*.mako)
-$(DRIVER_DOCS_DIR)/functions.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mako) $(wildcard $(DRIVER_DIR)/templates/functions.rst/*.mako)
+$(DRIVER_DOCS_DIR)/class.rst: $(wildcard $(TEMPLATE_DIR)/functions.rst/*.mako) $(wildcard $(DRIVER_DIR)/templates/functions.rst/*.mako)
+$(DRIVER_DOCS_DIR)/examples.rst: $(if $(wildcard src/$(DRIVER)/examples/*),$(shell find src/$(DRIVER)/examples/* -type f -print),)
 
 $(MODULE_DIR)/%.py: %.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
