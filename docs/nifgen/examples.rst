@@ -1,6 +1,8 @@
 Examples
 ========
 
+Download examples for nifgen and any required helper files at `nifgen_examples.zip <https://github.com/ni/nimi-python/blob/master/examples/nifgen_examples.zip>`_
+
 nifgen_arb_waveform.py
 ----------------------
 

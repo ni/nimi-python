@@ -1,6 +1,8 @@
 Examples
 ========
 
+Download examples for nitclk and any required helper files at `nitclk_examples.zip <https://github.com/ni/nimi-python/blob/master/examples/nitclk_examples.zip>`_
+
 nitclk_configure.py
 -------------------
 

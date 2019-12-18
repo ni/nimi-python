@@ -1,6 +1,8 @@
 Examples
 ========
 
+Download examples for nise and any required helper files at `nise_examples.zip <https://github.com/ni/nimi-python/blob/master/examples/nise_examples.zip>`_
+
 nise_basic_example.py
 ---------------------
 
