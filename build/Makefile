@@ -62,6 +62,8 @@ endef
 $(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
+
+# We need to ensure bin exists for Travis CI builds
 clean: start
 	@echo 'Cleaning...'
 	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
@@ -73,6 +75,7 @@ clean: start
 	-@rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
+	-@mkdir $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
 	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If" > $(COMMAND_LOG)
@@ -117,14 +120,19 @@ PYTHON_CMD ?= python3
 
 .PHONY: help Makefile
 
+# For the global files, instead of trying to keep track of which files from the driver builds matter for any target,
+# we just say that if anything from any driver built, we will rebuld the global files
+export DRIVER_FILE_BUILT = bin/driver_file_built
+
 GLOBAL_FILES_STARTED_FILE = bin/printed_global_files
-$(GLOBAL_FILES_STARTED_FILE): $(TOX_RUN_DONE)
+$(GLOBAL_FILES_STARTED_FILE): $(DRIVER_FILE_BUILT)
 	@echo
 	@echo "Making Global Files"
 	@touch $(GLOBAL_FILES_STARTED_FILE)
 
 # Executes a command, then logs it to $(COMMAND_LOG).
 # $1 is the command.
+# We need our own copy that does not touch DRIVER_FILE_BUILT
 define global_log_command
 	$1
 	@echo '$1' >> $(COMMAND_LOG)
@@ -142,6 +150,9 @@ $(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simp
 	$(call trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/simple_mako.py --output-file $@ --template $<)
 
+# We only need to handle all the example files searching if we are building 'all' - I.e. command line is blank
+ifeq (,$(MAKECMDGOALS))
+
 EXAMPLE_WORK_DIR := bin/examples
 
 # Set up a copy rule and add each file found to the example files list
@@ -157,7 +168,6 @@ endef  # copyExample
 # Go get all the files of any sort in the each of the driver specific examples directories
 # We only look for files if the examples directory exists
 $(foreach d,$(DRIVERS),$(eval $(if $(wildcard src/$(d)/examples/*),$(foreach f,$(shell find src/$(d)/examples/* -type f -print),$(eval $(call copyExample,$(d),$(f)))),)))
-
 
 # Removes duplicates in a list of words without changing order.
 # $(1) = list of words
@@ -182,6 +192,8 @@ $(ROOT_DIR)/examples.zip: $(EXAMPLE_FILES) $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,cd $(EXAMPLE_WORK_DIR) && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
 	@touch $@
+
+endif # ifeq (,$(MAKECMDGOALS))
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.
