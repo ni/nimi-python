@@ -25,6 +25,7 @@ ROOT_FILES := \
 	$(ROOT_DIR)/README.rst \
 	$(ROOT_DIR)/VERSION \
 	$(DOCS_DIR)/conf.py \
+	$(ROOT_DIR)/examples.zip \
 
 endif
 
@@ -141,6 +142,46 @@ $(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simp
 	$(call trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/simple_mako.py --output-file $@ --template $<)
 
+EXAMPLE_WORK_DIR := bin/examples
+
+# Set up a copy rule and add each file found to the example files list
+define copyExample
+EXAMPLE_FILES += $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2)
+GLOBAL_MKDIRECTORIES += $(dir $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2))
+
+$(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2): $(dir $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2)) $2
+	$(call trace_to_console, "Copying",$(notdir $2))
+	$(_hide_cmds)$(call global_log_command,cp $2 $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2))
+endef  # copyExample
+
+# Go get all the files of any sort in the each of the driver specific examples directories
+# We only look for files if the examples directory exists
+$(foreach d,$(DRIVERS),$(eval $(if $(wildcard src/$(d)/examples/*),$(foreach f,$(shell find src/$(d)/examples/* -type f -print),$(eval $(call copyExample,$(d),$(f)))),)))
+
+
+# Removes duplicates in a list of words without changing order.
+# $(1) = list of words
+# (put everything below into one line!)
+# From https://lists.gnu.org/archive/html/help-make/2004-05/msg00083.html
+devRemoveDuplicates = $(if $(1),$(strip $(word 1,$(1)) $(call devRemoveDuplicates,$(filter-out $(word 1,$(1)),$(1)))))
+
+# We need a copy of the mkdir rule so we can use them here and not in the driver specific rules
+# We cannot define them until after the last time we add to GLOBAL_MKDIRECTORIES otherwise the
+#   eval step is executed on an incomplete list
+GLOBAL_MKDIR: $(GLOBAL_MKDIRECTORIES)
+
+define global_mkdir_rule
+$1:
+	$(call trace_to_console, "Making dir",$1)
+	$(_hide_cmds)$(call global_log_command,mkdir -p $1)
+endef
+$(foreach d,$(call devRemoveDuplicates,$(GLOBAL_MKDIRECTORIES)),$(eval $(call global_mkdir_rule,$(d))))
+
+# We ignore errors from zip because if nothing changed (needs updating) then the error code is 12
+$(ROOT_DIR)/examples.zip: $(EXAMPLE_FILES) $(GLOBAL_FILES_STARTED_FILE)
+	$(call trace_to_console, "Creating Root",$(notdir $@))
+	$(_hide_cmds)$(call global_log_command,cd $(EXAMPLE_WORK_DIR) && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
+	@touch $@
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.
