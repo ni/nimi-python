@@ -14,6 +14,7 @@ endef
 define log_command
 	$1
 	@echo '$1' >> $(COMMAND_LOG)
+	@touch $(TOX_RUN_DONE)
 endef
 
 # Helper function for running a command with a tracking file
