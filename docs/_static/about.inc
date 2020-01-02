@@ -22,3 +22,5 @@ It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and p
 
 **nimi-python** follows Python Organization's life cycle plan. Current versions supported: Python 3.5 and later using CPython or PyPy.
 
+**note** Beginning in 2020 nimi-python will begin following the Python organization's support life cycle. This will mean that the next release will drop support for Python 2.7 and Python 3.4
+
