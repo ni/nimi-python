@@ -189,7 +189,7 @@ endef
 $(foreach d,$(call devRemoveDuplicates,$(GLOBAL_MKDIRECTORIES)),$(eval $(call global_mkdir_rule,$(d))))
 
 # We ignore errors from zip because if nothing changed (needs updating) then the error code is 12
-$(ROOT_DIR)/examples.zip: $(EXAMPLE_FILES) $(GLOBAL_FILES_STARTED_FILE)
+$(ROOT_DIR)/examples.zip: $(EXAMPLE_WORK_DIR) $(EXAMPLE_FILES) $(GLOBAL_FILES_STARTED_FILE)
 	$(call global_trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,cd $(EXAMPLE_WORK_DIR) && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
 	@touch $@
