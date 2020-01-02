@@ -90,7 +90,7 @@ class SideEffectsHelper(object):
         if self._defaults['ExpandRouteSpec']['expandedRouteSpec'] is None:
             raise MockFunctionCallError("niSE_ExpandRouteSpec", param='expandedRouteSpec')
         test_value = self._defaults['ExpandRouteSpec']['expandedRouteSpec']
-        if sys.version_info.major > 2 and type(test_value) is str:
+        if type(test_value) is str:
             test_value = test_value.encode('ascii')
         assert len(expanded_route_spec) >= len(test_value)
         for i in range(len(test_value)):
@@ -104,7 +104,7 @@ class SideEffectsHelper(object):
         if self._defaults['FindRoute']['routeSpec'] is None:
             raise MockFunctionCallError("niSE_FindRoute", param='routeSpec')
         test_value = self._defaults['FindRoute']['routeSpec']
-        if sys.version_info.major > 2 and type(test_value) is str:
+        if type(test_value) is str:
             test_value = test_value.encode('ascii')
         assert len(route_spec) >= len(test_value)
         for i in range(len(test_value)):
@@ -123,7 +123,7 @@ class SideEffectsHelper(object):
         if self._defaults['GetAllConnections']['routeSpec'] is None:
             raise MockFunctionCallError("niSE_GetAllConnections", param='routeSpec')
         test_value = self._defaults['GetAllConnections']['routeSpec']
-        if sys.version_info.major > 2 and type(test_value) is str:
+        if type(test_value) is str:
             test_value = test_value.encode('ascii')
         assert len(route_spec) >= len(test_value)
         for i in range(len(test_value)):
@@ -142,7 +142,7 @@ class SideEffectsHelper(object):
         if self._defaults['GetError']['errorDescription'] is None:
             raise MockFunctionCallError("niSE_GetError", param='errorDescription')
         test_value = self._defaults['GetError']['errorDescription']
-        if sys.version_info.major > 2 and type(test_value) is str:
+        if type(test_value) is str:
             test_value = test_value.encode('ascii')
         assert len(error_description) >= len(test_value)
         for i in range(len(test_value)):
