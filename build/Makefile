@@ -106,16 +106,6 @@ help:
 	@$(DRIVER_TARGETS_HELP)
 	@echo ''
 
-# From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
-print-%: ; $(info $* is $(flavor $*) variable set to [$($*)]) @true
-
-# Per driver variable printing
-per_driver_variable_print = make --no-print-directory -f src/$1/$1.mak DRIVER=$1 print-$2
-.PHONY:
-printvar:
-	$(_hide_cmds)$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
-
-
 PYTHON_CMD ?= python3
 
 .PHONY: help Makefile
@@ -207,3 +197,16 @@ $(TOX_RUN_DONE):
 	@echo
 	$(call trace_to_console, "Running tox",$@)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,tox)
+
+# Print rules need to be at the bottom of the file so everything has had a chance to be set
+# From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
+print-%: ; $(info $* is $(flavor $*) variable set to [$($*)]) @true
+
+# Per driver variable printing
+per_driver_variable_print = make --no-print-directory -f src/$1/$1.mak DRIVER=$1 print-$2
+.PHONY:
+printvar:
+	$(_hide_cmds)$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
+
+
+
