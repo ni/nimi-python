@@ -4,6 +4,7 @@
 import platform
 
 import ctypes
+import ctypes.util
 import nimodinst._library as _library
 import nimodinst.errors as errors
 import threading
@@ -11,14 +12,14 @@ import threading
 
 _instance = None
 _instance_lock = threading.Lock()
-_library_info = {'Linux': {'64bit': {'name': 'libnimodinst.so', 'type': 'cdll'}},
+_library_info = {'Linux': {'64bit': {'name': 'nimodinst', 'type': 'cdll'}},
                  'Windows': {'32bit': {'name': 'nimodinst.dll', 'type': 'windll'},
                              '64bit': {'name': 'nimodinst_64.dll', 'type': 'cdll'}}}
 
 
 def _get_library_name():
     try:
-        return _library_info[platform.system()][platform.architecture()[0]]['name']
+        return ctypes.util.find_library(_library_info[platform.system()][platform.architecture()[0]]['name'])  # We find and return full path to the DLL
     except KeyError:
         raise errors.UnsupportedConfigurationError
 

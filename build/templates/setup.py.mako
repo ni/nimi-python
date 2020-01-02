@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 <%
-config        = template_parameters['metadata'].config
+import build.helper as helper
+
+config         = template_parameters['metadata'].config
+module_version = config['module_version']
 %>
 
 from setuptools.command.test import test as test_command
@@ -48,12 +51,15 @@ setup(
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
         'six',
+        % if config['supports_nitclk']:
+        'nitclk',
+        % endif
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: ${helper.get_development_status(config)}",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",

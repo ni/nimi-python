@@ -13,6 +13,8 @@ import nidigital._visatype as _visatype
 import nidigital.enums as enums
 import nidigital.errors as errors
 
+import nitclk
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -153,7 +155,6 @@ class _SessionBase(object):
         var = session.channels[0,1].active_load_vcom
     '''
     cache = _attributes.AttributeViBoolean(1050004)
-    calibration_report = _attributes.AttributeViString(1150049)
     channel_count = _attributes.AttributeViInt32(1050203)
     clock_generator_frequency = _attributes.AttributeViReal64(1150073)
     '''Type: float
@@ -202,17 +203,6 @@ class _SessionBase(object):
         var = session.channels[0,1].conditional_jump_trigger_type
     '''
     cycle_number_history_ram_trigger_cycle_number = _attributes.AttributeViInt64(1150044)
-    digital_driver_state = _attributes.AttributeViInt32(1200003)
-    '''Type: int
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].digital_driver_state
-    '''
     digital_edge_conditional_jump_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
     '''Type: enums.DigitalEdge
 
@@ -264,8 +254,6 @@ class _SessionBase(object):
         session.channels[0,1].exported_pattern_opcode_event_output_terminal = var
         var = session.channels[0,1].exported_pattern_opcode_event_output_terminal
     '''
-    exported_ref_clock_output_terminal = _attributes.AttributeViString(1150028)
-    exported_sequencer_flag_output_terminal = _attributes.AttributeViString(1150058)
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     frequency_counter_measurement_time = _attributes.AttributeViReal64(1150069)
     '''Type: float
@@ -286,7 +274,6 @@ class _SessionBase(object):
     history_ram_max_samples_to_acquire_per_site = _attributes.AttributeViInt32(1150077)
     history_ram_number_of_samples_is_finite = _attributes.AttributeViBoolean(1150078)
     history_ram_pretrigger_samples = _attributes.AttributeViInt32(1150048)
-    history_ram_suppress_buffer_overflow = _attributes.AttributeViBoolean(1150080)
     history_ram_trigger_type = _attributes.AttributeViInt32(1150043)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     instrument_manufacturer = _attributes.AttributeViString(1050511)
@@ -294,7 +281,6 @@ class _SessionBase(object):
     interchange_check = _attributes.AttributeViBoolean(1050021)
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     is_keep_alive_active = _attributes.AttributeViBoolean(1150063)
-    is_start_trigger_master = _attributes.AttributeViBoolean(1200078)
     logical_name = _attributes.AttributeViString(1050305)
     mask_compare = _attributes.AttributeViBoolean(1150060)
     '''Type: bool
@@ -308,8 +294,6 @@ class _SessionBase(object):
         session.channels[0,1].mask_compare = var
         var = session.channels[0,1].mask_compare
     '''
-    number_of_loaded_patterns = _attributes.AttributeViInt32(1200007)
-    number_of_time_sets = _attributes.AttributeViInt32(1200005)
     pattern_label_history_ram_trigger_cycle_offset = _attributes.AttributeViInt64(1150045)
     pattern_label_history_ram_trigger_label = _attributes.AttributeViString(1150046)
     pattern_label_history_ram_trigger_vector_offset = _attributes.AttributeViInt64(1150052)
@@ -469,18 +453,6 @@ class _SessionBase(object):
         session.channels[0,1].ppmu_voltage_limit_low = var
         var = session.channels[0,1].ppmu_voltage_limit_low
     '''
-    pxi_trig_immediate_route_source = _attributes.AttributeViString(1200009)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].pxi_trig_immediate_route_source = var
-        var = session.channels[0,1].pxi_trig_immediate_route_source
-    '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
     range_check = _attributes.AttributeViBoolean(1050002)
     record_coercions = _attributes.AttributeViBoolean(1050006)
@@ -496,10 +468,7 @@ class _SessionBase(object):
         session.channels[0,1].selected_function = var
         var = session.channels[0,1].selected_function
     '''
-    self_test_report = _attributes.AttributeViString(1150050)
-    sequencer_flag_source = _attributes.AttributeViString(1150057)
     sequencer_flag_terminal_name = _attributes.AttributeViString(1150059)
-    sequencer_flag_trigger_type = _attributes.AttributeViInt32(1150056)
     serial_number = _attributes.AttributeViString(1150001)
     simulate = _attributes.AttributeViBoolean(1050005)
     specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
@@ -525,7 +494,6 @@ class _SessionBase(object):
         session.channels[0,1].tdr_offset = var
         var = session.channels[0,1].tdr_offset
     '''
-    temperature_local = _attributes.AttributeViReal64(1200010)
     termination_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminationMode, 1150006)
     '''Type: enums.TerminationMode
 
@@ -651,7 +619,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def apply_tdr_offsets(self, num_offsets, offsets):
+    def apply_tdr_offsets(self, offsets):
         r'''apply_tdr_offsets
 
         TBD
@@ -662,11 +630,9 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].apply_tdr_offsets(num_offsets, offsets)
+            session.channels[0,1].apply_tdr_offsets(offsets)
 
         Args:
-            num_offsets (int):
-
             offsets (list of float):
 
         '''
@@ -842,6 +808,49 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def get_pin_results_pin_information(self):
+        '''get_pin_results_pin_information
+
+        Returns a list of named tuples (PinInfo) that <FILL IN THE BLANK HERE>
+
+        Fields in PinInfo:
+
+        - **pin_name** (str)
+        - **site_number** (int)
+        - **channel_name** (str)
+
+        Tip:
+        This method requires repeated capabilities (channels). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.channels[0,1].get_pin_results_pin_information()
+
+        Returns:
+            pin_info (list of PinInfo): List of named tuples with fields:
+
+                - **pin_name** (str)
+                - **site_number** (int)
+                - **channel_name** (str)
+
+        '''
+        import collections
+        PinInfo = collections.namedtuple('PinInformation', ['pin_name', 'site_number', 'channel_name'])
+
+        pin_indexes, site_numbers, channel_indexes = self._get_pin_results_pin_information()
+        assert len(pin_indexes) == len(site_numbers), "length of returned arrays don't match"
+        assert len(pin_indexes) == len(channel_indexes), "length of returned arrays don't match"
+
+        pin_infos = []
+        for i in range(len(pin_indexes)):
+            pin_name = "" if pin_indexes[i] == -1 else self.get_pin_name(pin_indexes[i])
+            channel_name = self.get_channel_name(channel_indexes[i])
+            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
+
+        return pin_infos
+
+    @ivi_synchronized
     def frequency_counter_configure_measurement_time(self, measurement_time):
         r'''frequency_counter_configure_measurement_time
 
@@ -899,8 +908,8 @@ class _SessionBase(object):
         return [float(frequencies_ctype[i]) for i in range(frequencies_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_attribute_vi_boolean(self, attribute):
-        r'''get_attribute_vi_boolean
+    def _get_attribute_vi_boolean(self, attribute):
+        r'''_get_attribute_vi_boolean
 
         TBD
 
@@ -910,7 +919,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_attribute_vi_boolean(property)
+            session.channels[0,1]._get_attribute_vi_boolean(property)
 
         Args:
             attribute (int):
@@ -929,8 +938,8 @@ class _SessionBase(object):
         return bool(value_ctype.value)
 
     @ivi_synchronized
-    def get_attribute_vi_int32(self, attribute):
-        r'''get_attribute_vi_int32
+    def _get_attribute_vi_int32(self, attribute):
+        r'''_get_attribute_vi_int32
 
         TBD
 
@@ -940,7 +949,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_attribute_vi_int32(property)
+            session.channels[0,1]._get_attribute_vi_int32(property)
 
         Args:
             attribute (int):
@@ -959,8 +968,8 @@ class _SessionBase(object):
         return int(value_ctype.value)
 
     @ivi_synchronized
-    def get_attribute_vi_int64(self, attribute):
-        r'''get_attribute_vi_int64
+    def _get_attribute_vi_int64(self, attribute):
+        r'''_get_attribute_vi_int64
 
         TBD
 
@@ -970,7 +979,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_attribute_vi_int64(property)
+            session.channels[0,1]._get_attribute_vi_int64(property)
 
         Args:
             attribute (int):
@@ -989,8 +998,8 @@ class _SessionBase(object):
         return int(value_ctype.value)
 
     @ivi_synchronized
-    def get_attribute_vi_real64(self, attribute):
-        r'''get_attribute_vi_real64
+    def _get_attribute_vi_real64(self, attribute):
+        r'''_get_attribute_vi_real64
 
         TBD
 
@@ -1000,7 +1009,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_attribute_vi_real64(property)
+            session.channels[0,1]._get_attribute_vi_real64(property)
 
         Args:
             attribute (int):
@@ -1019,8 +1028,8 @@ class _SessionBase(object):
         return float(value_ctype.value)
 
     @ivi_synchronized
-    def get_attribute_vi_session(self, attribute):
-        r'''get_attribute_vi_session
+    def _get_attribute_vi_string(self, attribute):
+        r'''_get_attribute_vi_string
 
         TBD
 
@@ -1030,37 +1039,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_attribute_vi_session(property)
-
-        Args:
-            attribute (int):
-
-
-        Returns:
-            value (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_ctype = _visatype.ViAttr(attribute)  # case S150
-        value_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niDigital_GetAttributeViSession(vi_ctype, channel_name_ctype, attribute_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(value_ctype.value)
-
-    @ivi_synchronized
-    def get_attribute_vi_string(self, attribute):
-        r'''get_attribute_vi_string
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].get_attribute_vi_string(property)
+            session.channels[0,1]._get_attribute_vi_string(property)
 
         Args:
             attribute (int):
@@ -1082,6 +1061,32 @@ class _SessionBase(object):
         error_code = self._library.niDigital_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_ctype, buffer_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def get_channel_name(self, index):
+        r'''get_channel_name
+
+        TBD
+
+        Args:
+            index (int):
+
+
+        Returns:
+            name (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
 
     def _get_error(self):
         r'''_get_error
@@ -1139,8 +1144,34 @@ class _SessionBase(object):
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_pin_results_pin_information(self):
-        r'''get_pin_results_pin_information
+    def get_pin_name(self, pin_index):
+        r'''get_pin_name
+
+        TBD
+
+        Args:
+            pin_index (int):
+
+
+        Returns:
+            name (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_index_ctype = _visatype.ViInt32(pin_index)  # case S150
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def _get_pin_results_pin_information(self):
+        r'''_get_pin_results_pin_information
 
         TBD
 
@@ -1150,7 +1181,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].get_pin_results_pin_information()
+            session.channels[0,1]._get_pin_results_pin_information()
 
         Returns:
             pin_indexes (list of int):
@@ -1604,8 +1635,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_attribute_vi_boolean(self, attribute, value):
-        r'''set_attribute_vi_boolean
+    def _set_attribute_vi_boolean(self, attribute, value):
+        r'''_set_attribute_vi_boolean
 
         TBD
 
@@ -1615,7 +1646,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].set_attribute_vi_boolean(property, value)
+            session.channels[0,1]._set_attribute_vi_boolean(property, value)
 
         Args:
             attribute (int):
@@ -1632,8 +1663,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_attribute_vi_int32(self, attribute, value):
-        r'''set_attribute_vi_int32
+    def _set_attribute_vi_int32(self, attribute, value):
+        r'''_set_attribute_vi_int32
 
         TBD
 
@@ -1643,7 +1674,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].set_attribute_vi_int32(property, value)
+            session.channels[0,1]._set_attribute_vi_int32(property, value)
 
         Args:
             attribute (int):
@@ -1660,8 +1691,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_attribute_vi_int64(self, attribute, value):
-        r'''set_attribute_vi_int64
+    def _set_attribute_vi_int64(self, attribute, value):
+        r'''_set_attribute_vi_int64
 
         TBD
 
@@ -1671,7 +1702,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].set_attribute_vi_int64(property, value)
+            session.channels[0,1]._set_attribute_vi_int64(property, value)
 
         Args:
             attribute (int):
@@ -1688,8 +1719,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_attribute_vi_real64(self, attribute, value):
-        r'''set_attribute_vi_real64
+    def _set_attribute_vi_real64(self, attribute, value):
+        r'''_set_attribute_vi_real64
 
         TBD
 
@@ -1699,7 +1730,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].set_attribute_vi_real64(property, value)
+            session.channels[0,1]._set_attribute_vi_real64(property, value)
 
         Args:
             attribute (int):
@@ -1716,8 +1747,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def set_attribute_vi_session(self, attribute):
-        r'''set_attribute_vi_session
+    def _set_attribute_vi_string(self, attribute, value):
+        r'''_set_attribute_vi_string
 
         TBD
 
@@ -1727,33 +1758,7 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.channels[0,1].set_attribute_vi_session(property)
-
-        Args:
-            attribute (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_ctype = _visatype.ViAttr(attribute)  # case S150
-        value_ctype = _visatype.ViSession(self._value)  # case S110
-        error_code = self._library.niDigital_SetAttributeViSession(vi_ctype, channel_name_ctype, attribute_ctype, value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def set_attribute_vi_string(self, attribute, value):
-        r'''set_attribute_vi_string
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].set_attribute_vi_string(property, value)
+            session.channels[0,1]._set_attribute_vi_string(property, value)
 
         Args:
             attribute (int):
@@ -1923,6 +1928,9 @@ class Session(_SessionBase):
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
+        self.pins = _RepeatedCapabilities(self, '')
+
+        self.tclk = nitclk.SessionReference(self._vi)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -2765,6 +2773,68 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def _fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout):
+        # This is slightly modified codegen from the function
+        # We cannot use codegen without major modifications to the code generator
+        # This function uses two 'ivi-dance' parameters and then multiplies them together - see
+        # the (modified) line below
+        # Also, we want to return the two sized that normally wouldn't be returned
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        data_ctype = None  # case B610
+        actual_num_waveforms_ctype = _visatype.ViInt32()  # case S220
+        actual_samples_per_waveform_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        data_buffer_size_ctype = _visatype.ViInt32(actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value)  # case S200 (modified)
+        data_size = actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value  # case B620 (modified)
+        data_array = array.array("L", [0] * data_size)  # case B620
+        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViUInt32)  # case B620
+        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
+
+    def fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout):
+        '''fetch_capture_waveform
+
+        Returns dictionary where each key is the site number and the value is array.array of unsigned int
+
+        Args:
+            site_list (str):
+
+            waveform_name (str):
+
+            samples_to_read (int):
+
+            timeout (float or datetime.timedelta):
+
+
+        Returns:
+            waveform ({ site: data, site: data, ... }): Dictionary where each key is the site number and the value is array.array of unsigned int
+
+        '''
+        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
+
+        # Get the site list
+        site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.CAPTURE_WAVEFORM)
+        assert len(site_list) == actual_num_waveforms
+
+        waveforms = {}
+
+        mv = memoryview(data)
+
+        for i in range(actual_num_waveforms):
+            start = i * actual_samples_per_waveform
+            end = start + actual_samples_per_waveform
+            waveforms[site_list[i]] = mv[start:end]
+
+        return waveforms
+
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2774,6 +2844,47 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
+
+    @ivi_synchronized
+    def write_source_waveform_site_unique(self, waveform_name, waveform_data):
+        '''write_source_waveform_site_unique
+
+        TBD
+
+        Args:
+            waveform_name (str):
+
+            waveform_data ({ site: data, site: data, ... }): Dictionary where each key is the site number and the value is array.array of unsigned int
+
+        '''
+        site_list = []
+        # We assume all the entries are the same length (we'll check later) to make the array the correct size
+        # Get an entry from the dictionary from https://stackoverflow.com/questions/30362391/how-do-you-find-the-first-key-in-a-dictionary
+        if len(waveform_data) == 0:
+            actual_samples_per_waveform = 0
+        else:
+            actual_samples_per_waveform = len(waveform_data[next(iter(waveform_data))])
+        data = array.array('L', [0] * (len(waveform_data) * actual_samples_per_waveform))
+        mv = memoryview(data)
+
+        i = 0
+        for site in waveform_data:
+            if len(waveform_data[site]) != actual_samples_per_waveform:
+                raise ValueError('Mismatched length of waveforms. All must be the same length.')
+            if waveform_data[site].typecode != 'L':
+                raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
+
+            site_list.append('site' + str(site))
+
+            start = i * actual_samples_per_waveform
+            end = start + actual_samples_per_waveform
+            mv[start:end] = waveform_data[site]
+
+            i += 1
+
+        site_list_str = ','.join(site_list)
+
+        self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
     def fetch_history_ram_cycle_information(self, site, sample_index):
@@ -2881,32 +2992,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_FetchHistoryRAMScanCycleNumber(vi_ctype, site_ctype, sample_index_ctype, None if scan_cycle_number_ctype is None else (ctypes.pointer(scan_cycle_number_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(scan_cycle_number_ctype.value)
-
-    @ivi_synchronized
-    def get_channel_name(self, index):
-        r'''get_channel_name
-
-        TBD
-
-        Args:
-            index (int):
-
-
-        Returns:
-            name (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        name_ctype = None  # case C050
-        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def get_channel_name_from_string(self, index):
@@ -3036,32 +3121,6 @@ class Session(_SessionBase):
         return pin_list_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_pin_name(self, pin_index):
-        r'''get_pin_name
-
-        TBD
-
-        Args:
-            pin_index (int):
-
-
-        Returns:
-            name (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_index_ctype = _visatype.ViInt32(pin_index)  # case S150
-        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        name_ctype = None  # case C050
-        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetPinName(vi_ctype, pin_index_ctype, name_buffer_size_ctype, name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
     def get_site_pass_fail(self, site_list):
         r'''get_site_pass_fail
 
@@ -3098,16 +3157,18 @@ class Session(_SessionBase):
         Args:
             site_list (str):
 
-            site_result_type (int):
+            site_result_type (enums.SiteResult):
 
 
         Returns:
             site_numbers (list of int):
 
         '''
+        if type(site_result_type) is not enums.SiteResult:
+            raise TypeError('Parameter mode must be of type ' + str(enums.SiteResult))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        site_result_type_ctype = _visatype.ViInt32(site_result_type)  # case S150
+        site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
         site_numbers_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         site_numbers_ctype = None  # case B610
         actual_num_site_numbers_ctype = _visatype.ViInt32()  # case S220
@@ -3568,15 +3629,13 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def write_source_waveform_broadcast_u32(self, waveform_name, waveform_size, waveform_data):
-        r'''write_source_waveform_broadcast_u32
+    def write_source_waveform_broadcast(self, waveform_name, waveform_data):
+        r'''write_source_waveform_broadcast
 
         TBD
 
         Args:
             waveform_name (str):
-
-            waveform_size (int):
 
             waveform_data (list of int):
 
@@ -3605,6 +3664,35 @@ class Session(_SessionBase):
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         waveform_file_path_ctype = ctypes.create_string_buffer(waveform_file_path.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_WriteSourceWaveformDataFromFileTDMS(vi_ctype, waveform_name_ctype, waveform_file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def _write_source_waveform_site_unique_u32(self, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
+        r'''_write_source_waveform_site_unique_u32
+
+        TBD
+
+        Args:
+            site_list (str):
+
+            waveform_name (str):
+
+            num_waveforms (int):
+
+            samples_per_waveform (int):
+
+            waveform_data (array.array("L")):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
+        samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
+        waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
+        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
+        error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

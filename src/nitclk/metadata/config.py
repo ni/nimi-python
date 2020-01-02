@@ -7,11 +7,10 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-TClk',
-    'init_function': 'InitForDocumentation',
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnitclk.so',
+                'name': 'nitclk',
                 'type': 'cdll'
             }
         },
@@ -30,5 +29,5 @@ config = {
     'module_name': 'nitclk',
     'repeated_capabilities': [
     ],
-    'session_handle_parameter_name': 'session'
+    'session_handle_parameter_name': 'session_number',
 }

@@ -32,6 +32,11 @@ class Signal(Enum):
     REF_CLOCK = 2003
 
 
+class SiteResult(Enum):
+    PASS_FAIL = 3300
+    CAPTURE_WAVEFORM = 3301
+
+
 class TDREndpointTermination(Enum):
     OPEN = 3600
     SHORT_TO_GROUND = 3601

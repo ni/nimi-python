@@ -348,7 +348,7 @@ RuntPolarity
 
 
 
-        Trigger on pulses of positive polarity relative to :py:data:`niscope.Session.runt_low_threshold` that do not cross :py:data:`niscope.Session.runt_high_threshold`.
+        Trigger on pulses of positive polarity relative to :py:attr:`niscope.Session.runt_low_threshold` that do not cross :py:attr:`niscope.Session.runt_high_threshold`.
 
         
 
@@ -358,7 +358,7 @@ RuntPolarity
 
 
 
-        Trigger on pulses of negative polarity relative to :py:data:`niscope.Session.runt_high_threshold` that do not cross :py:data:`niscope.Session.runt_low_threshold`.
+        Trigger on pulses of negative polarity relative to :py:attr:`niscope.Session.runt_high_threshold` that do not cross :py:attr:`niscope.Session.runt_low_threshold`.
 
         
 
@@ -393,7 +393,7 @@ RuntTimeCondition
 
 
 
-        Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration within the range bounded by :py:data:`niscope.Session.runt_time_low_limit` and :py:data:`niscope.Session.runt_time_high_limit`.
+        Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration within the range bounded by :py:attr:`niscope.Session.runt_time_low_limit` and :py:attr:`niscope.Session.runt_time_high_limit`.
 
         
 
@@ -403,7 +403,7 @@ RuntTimeCondition
 
 
 
-        Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration not within the range bounded by :py:data:`niscope.Session.runt_time_low_limit` and :py:data:`niscope.Session.runt_time_high_limit`.
+        Trigger on pulses that, in addition to meeting runt voltage criteria, have a duration not within the range bounded by :py:attr:`niscope.Session.runt_time_low_limit` and :py:attr:`niscope.Session.runt_time_high_limit`.
 
         
 
@@ -992,7 +992,7 @@ WidthCondition
 
 
 
-        Trigger on pulses with a duration within the range bounded by :py:data:`niscope.Session.width_low_threshold` and :py:data:`niscope.Session.width_high_threshold`.
+        Trigger on pulses with a duration within the range bounded by :py:attr:`niscope.Session.width_low_threshold` and :py:attr:`niscope.Session.width_high_threshold`.
 
         
 
@@ -1002,7 +1002,7 @@ WidthCondition
 
 
 
-        Trigger on pulses with a duration not within the range bounded by :py:data:`niscope.Session.width_low_threshold` and :py:data:`niscope.Session.width_high_threshold`.
+        Trigger on pulses with a duration not within the range bounded by :py:attr:`niscope.Session.width_low_threshold` and :py:attr:`niscope.Session.width_high_threshold`.
 
         
 

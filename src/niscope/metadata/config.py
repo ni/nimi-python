@@ -21,7 +21,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libniscope.so',
+                'name': 'niscope',
                 'type': 'cdll'
             }
         },
@@ -45,5 +45,6 @@ config = {
         }
     ],
     'session_class_description': 'An NI-SCOPE session to a National Instruments Digitizer.',
-    'session_handle_parameter_name': 'vi'
+    'session_handle_parameter_name': 'vi',
+    'supports_nitclk': True,
 }

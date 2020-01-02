@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnidcpower.so',
+                'name': 'nidcpower',
                 'type': 'cdll'
             }
         },
@@ -40,5 +40,5 @@ config = {
         }
     ],
     'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
-    'session_handle_parameter_name': 'vi'
+    'session_handle_parameter_name': 'vi',
 }

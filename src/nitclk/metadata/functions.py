@@ -19,6 +19,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -47,6 +48,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -75,13 +77,14 @@ functions = {
                 'documentation': {
                     'description': 'sessions is an array of sessions that are being synchronized.'
                 },
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'name': 'sessions',
                 'is_session_handle': False,
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             }
         ],
@@ -121,11 +124,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -157,6 +161,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -173,7 +178,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViBoolean': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -277,6 +282,7 @@ functions = {
                 'documentation': {
                     'description': 'The value that you are getting'
                 },
+                'is_session_handle': False,
                 'name': 'value',
                 'type': 'ViSession'
             }
@@ -322,9 +328,13 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'The value that you are getting'
+                },
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'bufSize'
                 },
                 'name': 'value',
                 'type': 'ViChar[]'
@@ -427,6 +437,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -461,24 +472,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'InitForDocumentation': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'default_value': None,
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Array of driver session object or sessions'
-                },
-                'name': 'sessionList',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'Initiate': {
         'documentation': {
             'description': '\nInitiates the acquisition or generation sessions specified, taking into\nconsideration any special requirements needed for synchronization. For\nexample, the session exporting the TClk-synchronized start trigger is\nnot initiated until after niTClk_Initiate initiates all the sessions\nthat import the TClk-synchronized start trigger.\n'
@@ -499,11 +492,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             }
         ],
@@ -569,6 +563,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -788,11 +783,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -807,7 +803,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'private',
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -911,6 +907,7 @@ functions = {
                 'documentation': {
                     'description': 'The value for the attribute'
                 },
+                'is_session_handle': False,
                 'name': 'value',
                 'type': 'ViSession'
             }
@@ -978,11 +975,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1016,11 +1014,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1055,6 +1054,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1083,6 +1083,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1118,11 +1119,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {
@@ -1156,11 +1158,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_num_list',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
+                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
                 'type': 'ViSession[]'
             },
             {

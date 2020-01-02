@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libfgen.so',
+                'name': 'nifgen',
                 'type': 'cdll'
             }
         },
@@ -48,5 +48,6 @@ config = {
         }
     ],
     'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
-    'session_handle_parameter_name': 'vi'
+    'session_handle_parameter_name': 'vi',
+    'supports_nitclk': True,
 }

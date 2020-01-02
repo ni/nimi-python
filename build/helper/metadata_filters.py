@@ -19,6 +19,19 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
     },
+    ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': True,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'fixed, passed-in, len',
+        'python_api_list': True,
+    },
     ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_session_handle': True,
         'skip_input_parameters': False,
@@ -331,7 +344,7 @@ def filter_len_parameters(function):
 
 def filter_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
-    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
+    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no' and v['codegen_method'] != 'library-only'}
 
 
 def filter_library_functions(functions):

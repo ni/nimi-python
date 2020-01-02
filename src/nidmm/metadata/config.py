@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnidmm.so',
+                'name': 'nidmm',
                 'type': 'cdll'
             }
         },
@@ -36,5 +36,5 @@ config = {
     'repeated_capabilities': [
     ],
     'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
-    'session_handle_parameter_name': 'vi'
+    'session_handle_parameter_name': 'vi',
 }

@@ -11,7 +11,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnimodinst.so',
+                'name': 'nimodinst',
                 'type': 'cdll'
             }
         },
@@ -31,5 +31,5 @@ config = {
     'repeated_capabilities': [
     ],
     'session_class_description': 'A NI-ModInst session to get device information',
-    'session_handle_parameter_name': 'handle'
+    'session_handle_parameter_name': 'handle',
 }

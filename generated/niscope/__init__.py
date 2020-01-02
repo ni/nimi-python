@@ -2,11 +2,11 @@
 # This file was generated
 
 
-__version__ = '1.1.3.dev0'
+__version__ = '1.1.6.dev0'
 
-from niscope.enums import *          # noqa: F403,F401,H303
-from niscope.errors import DriverWarning   # noqa: F401
-from niscope.errors import Error     # noqa: F401
+from niscope.enums import *  # noqa: F403,F401,H303
+from niscope.errors import DriverWarning  # noqa: F401
+from niscope.errors import Error  # noqa: F401
 from niscope.session import Session  # noqa: F401
 
 from niscope.waveform_info import WaveformInfo  # noqa: F401
@@ -68,7 +68,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-SCOPE"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'niscope'
-    info['module']['version'] = "1.1.3.dev0"
+    info['module']['version'] = "1.1.6.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()

@@ -25,7 +25,7 @@ attributes = {
     },
     3: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the start trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -33,12 +33,12 @@ attributes = {
         'lv_property': 'Start Trigger Master Session',
         'name': 'START_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     4: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the reference trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -46,12 +46,12 @@ attributes = {
         'lv_property': 'Reference Trigger Master Session',
         'name': 'REF_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     5: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the script trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -59,12 +59,12 @@ attributes = {
         'lv_property': 'Script Trigger Master Session',
         'name': 'SCRIPT_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     6: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the pause trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
@@ -72,7 +72,7 @@ attributes = {
         'lv_property': 'Pause Trigger Master Session',
         'name': 'PAUSE_TRIGGER_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     },
     8: {
@@ -133,7 +133,7 @@ attributes = {
     },
     16: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViInt32SessionReference',
+        'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the sequencer flag master session.\nFor external triggers, the session that originally receives the trigger.\nFor None (no trigger configured) or software triggers, the session that\noriginally generates the trigger.\n'
@@ -141,7 +141,7 @@ attributes = {
         'lv_property': 'Sequencer Flag Master Session',
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
         'resettable': False,
-        'type': 'ViInt32',
+        'type': 'ViSession',
         'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
     }
 }

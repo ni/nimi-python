@@ -2,11 +2,21 @@
 # This file was generated
 
 
-__version__ = '0.1.0.dev0'
+__version__ = '0.3.2.dev0'
 
-from nitclk.errors import DriverWarning   # noqa: F401
-from nitclk.errors import Error     # noqa: F401
-from nitclk.session import Session  # noqa: F401
+from nitclk.errors import DriverWarning  # noqa: F401
+from nitclk.errors import Error  # noqa: F401
+from nitclk.session import SessionReference  # noqa: F401
+
+# Function imports
+from nitclk.session import configure_for_homogeneous_triggers  # noqa: F401
+from nitclk.session import finish_sync_pulse_sender_synchronize  # noqa: F401
+from nitclk.session import initiate  # noqa: F401
+from nitclk.session import is_done  # noqa: F401
+from nitclk.session import setup_for_sync_pulse_sender_synchronize  # noqa: F401
+from nitclk.session import synchronize  # noqa: F401
+from nitclk.session import synchronize_to_sync_pulse_sender  # noqa: F401
+from nitclk.session import wait_until_done  # noqa: F401
 
 
 def get_diagnostic_information():
@@ -63,7 +73,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-TClk"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nitclk'
-    info['module']['version'] = "0.1.0.dev0"
+    info['module']['version'] = "0.3.2.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()

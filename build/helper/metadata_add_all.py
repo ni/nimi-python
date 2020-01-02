@@ -335,8 +335,12 @@ def _setup_init_function(functions, config):
 
         functions['_init_function'] = init_function
     except KeyError:
-        print("Couldn't find {} init function".format(config['init_function']))
-        pass
+        if 'init_function' not in config or config['init_function'] is None:
+            # We don't have an init function or it is set to None (same thing) so we can't
+            # do anything here
+            pass
+        else:
+            print("Couldn't find {} init function".format(config['init_function']))
 
 
 def add_all_function_metadata(functions, config):
@@ -350,7 +354,7 @@ def add_all_function_metadata(functions, config):
         if 'documentation' not in functions[f]:
             functions[f]['documentation'] = {}
 
-    for f in filter_codegen_functions(functions):
+    for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
@@ -573,6 +577,9 @@ def add_all_config_metadata(config):
 
     if 'use_locking' not in config:
         config['use_locking'] = True
+
+    if 'supports_nitclk' not in config:
+        config['supports_nitclk'] = False
 
     return config
 
@@ -1258,6 +1265,7 @@ config_expected = {
     'modules': {
         'metadata.enums_addon': {}
     },
+    'supports_nitclk': False
 }
 
 

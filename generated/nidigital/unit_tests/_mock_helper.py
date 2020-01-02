@@ -146,9 +146,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViReal64'] = {}
         self._defaults['GetAttributeViReal64']['return'] = 0
         self._defaults['GetAttributeViReal64']['value'] = None
-        self._defaults['GetAttributeViSession'] = {}
-        self._defaults['GetAttributeViSession']['return'] = 0
-        self._defaults['GetAttributeViSession']['value'] = None
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['value'] = None
@@ -287,8 +284,6 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViInt64']['return'] = 0
         self._defaults['SetAttributeViReal64'] = {}
         self._defaults['SetAttributeViReal64']['return'] = 0
-        self._defaults['SetAttributeViSession'] = {}
-        self._defaults['SetAttributeViSession']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['TDR'] = {}
@@ -312,6 +307,8 @@ class SideEffectsHelper(object):
         self._defaults['WriteSourceWaveformBroadcastU32']['return'] = 0
         self._defaults['WriteSourceWaveformDataFromFileTDMS'] = {}
         self._defaults['WriteSourceWaveformDataFromFileTDMS']['return'] = 0
+        self._defaults['WriteSourceWaveformSiteUniqueU32'] = {}
+        self._defaults['WriteSourceWaveformSiteUniqueU32']['return'] = 0
         self._defaults['WriteStatic'] = {}
         self._defaults['WriteStatic']['return'] = 0
         self._defaults['close'] = {}
@@ -716,16 +713,6 @@ class SideEffectsHelper(object):
         if value is not None:
             value.contents.value = self._defaults['GetAttributeViReal64']['value']
         return self._defaults['GetAttributeViReal64']['return']
-
-    def niDigital_GetAttributeViSession(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['GetAttributeViSession']['return'] != 0:
-            return self._defaults['GetAttributeViSession']['return']
-        # value
-        if self._defaults['GetAttributeViSession']['value'] is None:
-            raise MockFunctionCallError("niDigital_GetAttributeViSession", param='value')
-        if value is not None:
-            value.contents.value = self._defaults['GetAttributeViSession']['value']
-        return self._defaults['GetAttributeViSession']['return']
 
     def niDigital_GetAttributeViString(self, vi, channel_name, attribute, buffer_size, value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
@@ -1207,11 +1194,6 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViReal64']['return']
         return self._defaults['SetAttributeViReal64']['return']
 
-    def niDigital_SetAttributeViSession(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['SetAttributeViSession']['return'] != 0:
-            return self._defaults['SetAttributeViSession']['return']
-        return self._defaults['SetAttributeViSession']['return']
-
     def niDigital_SetAttributeViString(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['SetAttributeViString']['return'] != 0:
             return self._defaults['SetAttributeViString']['return']
@@ -1281,6 +1263,11 @@ class SideEffectsHelper(object):
         if self._defaults['WriteSourceWaveformDataFromFileTDMS']['return'] != 0:
             return self._defaults['WriteSourceWaveformDataFromFileTDMS']['return']
         return self._defaults['WriteSourceWaveformDataFromFileTDMS']['return']
+
+    def niDigital_WriteSourceWaveformSiteUniqueU32(self, vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):  # noqa: N802
+        if self._defaults['WriteSourceWaveformSiteUniqueU32']['return'] != 0:
+            return self._defaults['WriteSourceWaveformSiteUniqueU32']['return']
+        return self._defaults['WriteSourceWaveformSiteUniqueU32']['return']
 
     def niDigital_WriteStatic(self, vi, channel_list, state):  # noqa: N802
         if self._defaults['WriteStatic']['return'] != 0:
@@ -1446,8 +1433,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_GetAttributeViInt64.return_value = 0
         mock_library.niDigital_GetAttributeViReal64.side_effect = MockFunctionCallError("niDigital_GetAttributeViReal64")
         mock_library.niDigital_GetAttributeViReal64.return_value = 0
-        mock_library.niDigital_GetAttributeViSession.side_effect = MockFunctionCallError("niDigital_GetAttributeViSession")
-        mock_library.niDigital_GetAttributeViSession.return_value = 0
         mock_library.niDigital_GetAttributeViString.side_effect = MockFunctionCallError("niDigital_GetAttributeViString")
         mock_library.niDigital_GetAttributeViString.return_value = 0
         mock_library.niDigital_GetChannelName.side_effect = MockFunctionCallError("niDigital_GetChannelName")
@@ -1550,8 +1535,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_SetAttributeViInt64.return_value = 0
         mock_library.niDigital_SetAttributeViReal64.side_effect = MockFunctionCallError("niDigital_SetAttributeViReal64")
         mock_library.niDigital_SetAttributeViReal64.return_value = 0
-        mock_library.niDigital_SetAttributeViSession.side_effect = MockFunctionCallError("niDigital_SetAttributeViSession")
-        mock_library.niDigital_SetAttributeViSession.return_value = 0
         mock_library.niDigital_SetAttributeViString.side_effect = MockFunctionCallError("niDigital_SetAttributeViString")
         mock_library.niDigital_SetAttributeViString.return_value = 0
         mock_library.niDigital_TDR.side_effect = MockFunctionCallError("niDigital_TDR")
@@ -1572,6 +1555,8 @@ class SideEffectsHelper(object):
         mock_library.niDigital_WriteSourceWaveformBroadcastU32.return_value = 0
         mock_library.niDigital_WriteSourceWaveformDataFromFileTDMS.side_effect = MockFunctionCallError("niDigital_WriteSourceWaveformDataFromFileTDMS")
         mock_library.niDigital_WriteSourceWaveformDataFromFileTDMS.return_value = 0
+        mock_library.niDigital_WriteSourceWaveformSiteUniqueU32.side_effect = MockFunctionCallError("niDigital_WriteSourceWaveformSiteUniqueU32")
+        mock_library.niDigital_WriteSourceWaveformSiteUniqueU32.return_value = 0
         mock_library.niDigital_WriteStatic.side_effect = MockFunctionCallError("niDigital_WriteStatic")
         mock_library.niDigital_WriteStatic.return_value = 0
         mock_library.niDigital_close.side_effect = MockFunctionCallError("niDigital_close")

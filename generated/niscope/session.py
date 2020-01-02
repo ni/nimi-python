@@ -15,6 +15,8 @@ import niscope.errors as errors
 
 import niscope.waveform_info as waveform_info  # noqa: F401
 
+import nitclk
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -209,7 +211,7 @@ class _SessionBase(object):
     cable_sense_mode = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.CableSenseMode, 1150138)
     '''Type: enums.CableSenseMode
 
-    Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the CableSenseSignalStart method is called.
+    Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the cable_sense_signal_start method is called.
 
     Device-Specific Behavior:
         PXIe-5160/5162
@@ -231,9 +233,6 @@ class _SessionBase(object):
     +-----------------------+
 
     Note: the input impedance of the channel(s) to convey the CableSense signal must be set to 50 ohms.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
     '''
     cable_sense_signal_enable = _attributes.AttributeViBoolean(1150139)
     '''Type: bool
@@ -1043,10 +1042,7 @@ class _SessionBase(object):
 
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
-    The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in ConfigureAcquisition and not require more memory than the  onboard memory module allows.
-
-    Note:
-    One or more of the referenced methods are not in the Python API for this driver.
+    The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in configure_acquisition and not require more memory than the  onboard memory module allows.
     '''
     onboard_memory_size = _attributes.AttributeViInt32(1150069)
     '''Type: int
@@ -4054,6 +4050,8 @@ class Session(_SessionBase):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
 
+        self.tclk = nitclk.SessionReference(self._vi)
+
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
@@ -4245,13 +4243,10 @@ class Session(_SessionBase):
                 min_sample_rate for more information.
 
             min_num_pts (int): The minimum number of points you need in the record for each channel;
-                call ActualRecordLength to obtain the actual record length
+                call actual_record_length to obtain the actual record length
                 used.
 
                 Valid Values: Greater than 1; limited by available memory
-
-                Note:
-                One or more of the referenced methods are not in the Python API for this driver.
 
             ref_position (float): The position of the Reference Event in the waveform record specified as
                 a percentage.

@@ -66,6 +66,7 @@ class Library(object):
         self.niDigital_EnableSites_cfunc = None
         self.niDigital_EndChannelMap_cfunc = None
         self.niDigital_ExportSignal_cfunc = None
+        self.niDigital_FetchCaptureWaveformU32_cfunc = None
         self.niDigital_FetchHistoryRAMCycleInformation_cfunc = None
         self.niDigital_FetchHistoryRAMCyclePinData_cfunc = None
         self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc = None
@@ -75,7 +76,6 @@ class Library(object):
         self.niDigital_GetAttributeViInt32_cfunc = None
         self.niDigital_GetAttributeViInt64_cfunc = None
         self.niDigital_GetAttributeViReal64_cfunc = None
-        self.niDigital_GetAttributeViSession_cfunc = None
         self.niDigital_GetAttributeViString_cfunc = None
         self.niDigital_GetChannelName_cfunc = None
         self.niDigital_GetChannelNameFromString_cfunc = None
@@ -127,7 +127,6 @@ class Library(object):
         self.niDigital_SetAttributeViInt32_cfunc = None
         self.niDigital_SetAttributeViInt64_cfunc = None
         self.niDigital_SetAttributeViReal64_cfunc = None
-        self.niDigital_SetAttributeViSession_cfunc = None
         self.niDigital_SetAttributeViString_cfunc = None
         self.niDigital_TDR_cfunc = None
         self.niDigital_UnloadAllPatterns_cfunc = None
@@ -138,6 +137,7 @@ class Library(object):
         self.niDigital_WriteSequencerRegister_cfunc = None
         self.niDigital_WriteSourceWaveformBroadcastU32_cfunc = None
         self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc = None
+        self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc = None
         self.niDigital_WriteStatic_cfunc = None
         self.niDigital_close_cfunc = None
         self.niDigital_error_message_cfunc = None
@@ -528,6 +528,14 @@ class Library(object):
                 self.niDigital_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
+    def niDigital_FetchCaptureWaveformU32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_FetchCaptureWaveformU32_cfunc is None:
+                self.niDigital_FetchCaptureWaveformU32_cfunc = self._library.niDigital_FetchCaptureWaveformU32
+                self.niDigital_FetchCaptureWaveformU32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViReal64, ViInt32, ctypes.POINTER(ViUInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niDigital_FetchCaptureWaveformU32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_FetchCaptureWaveformU32_cfunc(vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform)
+
     def niDigital_FetchHistoryRAMCycleInformation(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         with self._func_lock:
             if self.niDigital_FetchHistoryRAMCycleInformation_cfunc is None:
@@ -599,14 +607,6 @@ class Library(object):
                 self.niDigital_GetAttributeViReal64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDigital_GetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViReal64_cfunc(vi, channel_name, attribute, value)
-
-    def niDigital_GetAttributeViSession(self, vi, channel_name, attribute, value):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_GetAttributeViSession_cfunc is None:
-                self.niDigital_GetAttributeViSession_cfunc = self._library.niDigital_GetAttributeViSession
-                self.niDigital_GetAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViSession)]  # noqa: F405
-                self.niDigital_GetAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetAttributeViSession_cfunc(vi, channel_name, attribute, value)
 
     def niDigital_GetAttributeViString(self, vi, channel_name, attribute, buffer_size, value):  # noqa: N802
         with self._func_lock:
@@ -1016,14 +1016,6 @@ class Library(object):
                 self.niDigital_SetAttributeViReal64_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViReal64_cfunc(vi, channel_name, attribute, value)
 
-    def niDigital_SetAttributeViSession(self, vi, channel_name, attribute, value):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_SetAttributeViSession_cfunc is None:
-                self.niDigital_SetAttributeViSession_cfunc = self._library.niDigital_SetAttributeViSession
-                self.niDigital_SetAttributeViSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViSession]  # noqa: F405
-                self.niDigital_SetAttributeViSession_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_SetAttributeViSession_cfunc(vi, channel_name, attribute, value)
-
     def niDigital_SetAttributeViString(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niDigital_SetAttributeViString_cfunc is None:
@@ -1103,6 +1095,14 @@ class Library(object):
                 self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_WriteSourceWaveformDataFromFileTDMS_cfunc(vi, waveform_name, waveform_file_path)
+
+    def niDigital_WriteSourceWaveformSiteUniqueU32(self, vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc is None:
+                self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc = self._library.niDigital_WriteSourceWaveformSiteUniqueU32
+                self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViInt32, ctypes.POINTER(ViUInt32)]  # noqa: F405
+                self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_WriteSourceWaveformSiteUniqueU32_cfunc(vi, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data)
 
     def niDigital_WriteStatic(self, vi, channel_list, state):  # noqa: N802
         with self._func_lock:

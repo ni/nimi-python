@@ -94,7 +94,7 @@ functions = {
                 'direction': 'in',
                 'name': 'offsets',
                 'size': {
-                    'mechanism': 'passed-in',
+                    'mechanism': 'len',
                     'value': 'numOffsets'
                 },
                 'type': 'ViReal64[]'
@@ -1298,7 +1298,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchCaptureWaveformU32': {
-        'codegen_method': 'no',
+        'codegen_method': 'library-only',
         'documentation': {
             'description': 'TBD'
         },
@@ -1336,12 +1336,16 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'data',
+                'use_array': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'dataBufferSize',
-                    'value_twist': 'actualNumWaveforms*ActualSamplesPerWaveform'
+                    # Should be 'actualNumWaveforms*ActualSamplesPerWaveform' but codegen doesn't handle that properly
+                    # The actual call is in a "fancy" function so change so the library call can be generated (doesn't
+                    # depend on this value)
+                    'value_twist': 'actualNumWaveforms',
                 },
-                'type': 'ViUInt32[]'
+                'type': 'ViUInt32[]',
             },
             {
                 'direction': 'out',
@@ -1569,6 +1573,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViBoolean': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1597,6 +1602,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViInt32': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1625,6 +1631,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViInt64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1653,6 +1660,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViReal64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1681,6 +1689,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViSession': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -1709,6 +1718,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetAttributeViString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1746,6 +1756,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
+        'render_in_session_base': True,
         'documentation': {
             'description': 'TBD'
         },
@@ -2008,6 +2019,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinName': {
+        'render_in_session_base': True,
         'documentation': {
             'description': 'TBD'
         },
@@ -2040,6 +2052,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinResultsPinInformation': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -2152,6 +2165,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SiteResult',
                 'name': 'siteResultType',
                 'type': 'ViInt32'
             },
@@ -3016,6 +3030,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViBoolean': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3044,6 +3059,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViInt32': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3072,6 +3088,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViInt64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3100,6 +3117,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViReal64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3128,6 +3146,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetAttributeViSession': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -3150,12 +3169,14 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'value',
+                'is_session_handle': False,
                 'type': 'ViSession'
             }
         ],
         'returns': 'ViStatus'
     },
     'SetAttributeViString': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3698,6 +3719,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'python_name': 'write_source_waveform_broadcast',
         'parameters': [
             {
                 'direction': 'in',
@@ -3718,7 +3740,7 @@ functions = {
                 'direction': 'in',
                 'name': 'waveformData',
                 'size': {
-                    'mechanism': 'passed-in',
+                    'mechanism': 'len',
                     'value': 'waveformSize'
                 },
                 'type': 'ViUInt32[]'
@@ -3750,7 +3772,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'WriteSourceWaveformSiteUniqueU32': {
-        'codegen_method': 'no',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -3783,10 +3805,7 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'waveformData',
-                'size': {
-                    'mechanism': 'custom',
-                    'value': None
-                },
+                'use_array': True,
                 'type': 'ViUInt32[]'
             }
         ],
@@ -3932,3 +3951,4 @@ functions = {
         'returns': 'ViStatus'
     }
 }
+

@@ -13,6 +13,10 @@ _ParameterUsageOptionsSnippet = {
         'skip_self': False,
         'name_to_use': 'python_name_with_default',
     },
+    ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
+        'skip_self': True,
+        'name_to_use': 'python_name',
+    },
     ParameterUsageOptions.SESSION_INIT_DECLARATION: {
         'skip_self': False,
         'name_to_use': 'python_name_with_default',
@@ -191,7 +195,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
     elif parameter['is_buffer'] is True:
         definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
     else:
-        definitions = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name, config)
 
     return definitions
 
@@ -253,7 +257,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
     return definitions
 
 
-def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name):
+def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi_dance_step, module_name, config):
     '''These are the different cases for initializing the ctype variable for scalars:
 
         S110. Input session handle:                                                visatype.ViSession(self._vi)
@@ -281,7 +285,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
 
     if parameter['direction'] == 'in':
         if parameter['is_session_handle'] is True:
-            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
+            definition = '{0}.{1}(self._{2})  # case S110'.format(module_name, parameter['ctypes_type'], config['session_handle_parameter_name'])
         elif parameter['size']['mechanism'] == 'python-code':
             definition = '{0}.{1}({2})  # case S120'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
         elif parameter['enum'] is not None:
@@ -323,8 +327,8 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             else:
                 # Verify all corresponding_buffer_parameters are 'out' and not 'fixed-size'
                 for p in corresponding_buffer_parameters:
-                    assert p['direction'] == 'out'
-                    assert p['size']['mechanism'] != 'fixed-size'
+                    assert p['direction'] == 'out', 'Parameter direction not "out", Parameter: {}'.format(p['name'])
+                    assert p['size']['mechanism'] != 'fixed-size' and p['size']['mechanism'] != 'fixed-size', 'Parameter: {0}, Actual mechanism: {1}'.format(p['name'], p['size']['mechanism'])
                 definition = '{0}.{1}({2})  # case S210'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
     else:
         assert parameter['direction'] == 'out'

@@ -13,6 +13,7 @@ import nidcpower._visatype as _visatype
 import nidcpower.enums as enums
 import nidcpower.errors as errors
 
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -2819,43 +2820,6 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return attribute_value_ctype.value.decode(self._encoding)
 
-    @ivi_synchronized
-    def get_channel_name(self, index):
-        r'''get_channel_name
-
-        Retrieves the output **channelName** that corresponds to the requested
-        **index**. Use the channel_count property to
-        determine the upper bound of valid values for **index**.
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidcpower.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].get_channel_name(index)
-
-        Args:
-            index (int): Specifies which output channel name to return. The index values begin at
-                1.
-
-
-        Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_ctype = None  # case C050
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_ctype.value.decode(self._encoding)
-
     def _get_error(self):
         r'''_get_error
 
@@ -2872,10 +2836,7 @@ class _SessionBase(object):
           **vi** is an invalid session, the method does nothing and returns an
           error. Normally, the error information describes the first error that
           occurred since the user last called _get_error or
-          ClearError.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
+          clear_error.
 
         Returns:
             code (int): Returns the error code for the session or execution thread.
@@ -3072,23 +3033,20 @@ class _SessionBase(object):
         The compliance limit is the current limit when the output method is
         set to OutputFunction.DC_VOLTAGE. If the output is operating at the
         compliance limit, the output reaches the current limit before the
-        desired voltage level. Refer to the ConfigureOutputFunction
-        method and the ConfigureCurrentLimit method for more
+        desired voltage level. Refer to the configure_output_function
+        method and the configure_current_limit method for more
         information about output method and current limit, respectively.
 
         The compliance limit is the voltage limit when the output method is
         set to OutputFunction.DC_CURRENT. If the output is operating at the
         compliance limit, the output reaches the voltage limit before the
-        desired current level. Refer to the ConfigureOutputFunction
-        method and the ConfigureVoltageLimit method for more
+        desired current level. Refer to the configure_output_function
+        method and the configure_voltage_limit method for more
         information about output method and voltage limit, respectively.
 
         **Related Topics:**
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities (channels). If called directly on the
@@ -3783,7 +3741,7 @@ class Session(_SessionBase):
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         method, the output channels remain in their existing state and
-        continue providing power. Use the ConfigureOutputEnabled
+        continue providing power. Use the configure_output_enabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).
 
@@ -3791,9 +3749,6 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Note:
         This method is not needed when using the session context manager
@@ -3818,7 +3773,7 @@ class Session(_SessionBase):
         when you call the abort method, the output channels remain
         in their current state and continue providing power.
 
-        Use the ConfigureOutputEnabled method to disable power
+        Use the configure_output_enabled method to disable power
         output on a per channel basis. Use the reset method to
         disable output on all channels.
 
@@ -3831,9 +3786,6 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Abort(vi_ctype)
@@ -4253,6 +4205,35 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def get_channel_name(self, index):
+        r'''get_channel_name
+
+        Retrieves the output **channelName** that corresponds to the requested
+        **index**. Use the channel_count property to
+        determine the upper bound of valid values for **index**.
+
+        Args:
+            index (int): Specifies which output channel name to return. The index values begin at
+                1.
+
+
+        Returns:
+            channel_name (str): Returns the output channel name that corresponds to **index**.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        channel_name_ctype = None  # case C050
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDCPower_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return channel_name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
@@ -4806,7 +4787,7 @@ class Session(_SessionBase):
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         method, the output channels remain in their existing state and
-        continue providing power. Use the ConfigureOutputEnabled
+        continue providing power. Use the configure_output_enabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).
 
@@ -4814,9 +4795,6 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)

@@ -1,10 +1,20 @@
 Exceptions and Warnings
 =======================
 
+Error
+-----
+
+    .. py:currentmodule:: nimodinst.errors
+
+    .. exception:: Error
+
+        Base exception type that all NI-ModInst exceptions derive from
+
+
 DriverError
 -----------
 
-    .. py:currentmodule:: nimodinst
+    .. py:currentmodule:: nimodinst.errors
 
     .. exception:: DriverError
 
@@ -14,7 +24,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: nimodinst
+    .. py:currentmodule:: nimodinst.errors
 
     .. exception:: UnsupportedConfigurationError
 
@@ -23,7 +33,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: nimodinst
+    .. py:currentmodule:: nimodinst.errors
 
     .. exception:: DriverNotInstalledError
 
@@ -32,7 +42,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: nimodinst
+    .. py:currentmodule:: nimodinst.errors
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -42,7 +52,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: nimodinst
+    .. py:currentmodule:: nimodinst.errors
 
     .. exception:: SelfTestError
 
@@ -52,7 +62,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: nimodinst
+    .. py:currentmodule:: nimodinst.errors
 
     .. exception:: DriverWarning
 
