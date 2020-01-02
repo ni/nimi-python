@@ -381,7 +381,7 @@ class SideEffectsHelper(object):
         if self._defaults['error_message']['errorMessage'] is None:
             raise MockFunctionCallError("niSwitch_error_message", param='errorMessage')
         test_value = self._defaults['error_message']['errorMessage']
-        if sys.version_info.major > 2 and type(test_value) is str:
+        if type(test_value) is str:
             test_value = test_value.encode('ascii')
         assert len(error_message) >= len(test_value)
         for i in range(len(test_value)):
@@ -405,7 +405,7 @@ class SideEffectsHelper(object):
         if self._defaults['self_test']['selfTestMessage'] is None:
             raise MockFunctionCallError("niSwitch_self_test", param='selfTestMessage')
         test_value = self._defaults['self_test']['selfTestMessage']
-        if sys.version_info.major > 2 and type(test_value) is str:
+        if type(test_value) is str:
             test_value = test_value.encode('ascii')
         assert len(self_test_message) >= len(test_value)
         for i in range(len(test_value)):

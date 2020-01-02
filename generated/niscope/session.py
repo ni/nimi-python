@@ -1995,8 +1995,6 @@ class _SessionBase(object):
                 - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
         '''
-        import sys
-
         # Set the fetch attributes
         with _NoChannel(session=self):
             self._fetch_relative_to = relative_to
@@ -2008,9 +2006,7 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._fetch(num_samples, timeout)
 
-        if sys.version_info.major >= 3:
-            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
-            mv = memoryview(wfm)
+        mv = memoryview(wfm)
 
         for i in range(len(wfm_info)):
             start = i * num_samples
@@ -2018,12 +2014,7 @@ class _SessionBase(object):
             # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
             # since the length of the wfm will tell us that information
             wfm_info[i]._actual_samples = None
-            if sys.version_info.major >= 3:
-                wfm_info[i].samples = mv[start:end]
-            else:
-                # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
-                # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                wfm_info[i].samples = array.array('d', wfm[start:end])
+            wfm_info[i].samples = mv[start:end]
 
         lwfm_i = len(wfm_info)
         lrcl = len(self._repeated_capability_list)
@@ -2116,8 +2107,6 @@ class _SessionBase(object):
                 - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
 
         '''
-        import sys
-
         # Set the fetch attributes
         with _NoChannel(session=self):
             self._fetch_relative_to = relative_to
@@ -2129,9 +2118,7 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._read(num_samples, timeout)
 
-        if sys.version_info.major >= 3:
-            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
-            mv = memoryview(wfm)
+        mv = memoryview(wfm)
 
         for i in range(len(wfm_info)):
             start = i * num_samples
@@ -2139,12 +2126,7 @@ class _SessionBase(object):
             # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
             # since the length of the wfm will tell us that information
             wfm_info[i]._actual_samples = None
-            if sys.version_info.major >= 3:
-                wfm_info[i].samples = mv[start:end]
-            else:
-                # memoryview in Python 2 doesn't support numeric types, so we copy into an array.array to put in the wfm. :( You should be using Python 3!
-                # Or use the _into version. memoryview in Python 2 only supports string and bytearray, not array.array or numpy.ndarray of arbitrary types.
-                wfm_info[i].samples = array.array('d', wfm[start:end])
+            wfm_info[i].samples = mv[start:end]
 
         lwfm_i = len(wfm_info)
         lrcl = len(self._repeated_capability_list)
@@ -2939,7 +2921,6 @@ class _SessionBase(object):
 
         '''
         import numpy
-        import sys
 
         # Set the fetch attributes
         with _NoChannel(session=self):
@@ -2961,9 +2942,7 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(waveform.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
-        if sys.version_info.major >= 3:
-            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
-            mv = memoryview(waveform)
+        mv = memoryview(waveform)
 
         i = 0
         lwfm_i = len(wfm_info)
@@ -2975,13 +2954,12 @@ class _SessionBase(object):
                 wfm_info[i].channel = chan
                 wfm_info[i].record = rec
 
-                if sys.version_info.major >= 3:
-                    start = i * num_samples
-                    end = start + wfm_info[i]._actual_samples
-                    # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
-                    # since the length of the wfm will tell us that information
-                    wfm_info[i]._actual_samples = None
-                    wfm_info[i].samples = mv[start:end]
+                start = i * num_samples
+                end = start + wfm_info[i]._actual_samples
+                # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
+                # since the length of the wfm will tell us that information
+                wfm_info[i]._actual_samples = None
+                wfm_info[i].samples = mv[start:end]
 
                 i += 1
 

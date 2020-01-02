@@ -6,7 +6,7 @@
 NI Modular Instruments Python Documentation
 ============================================================
 
-.. include:: _static/intro.inc
+.. include:: _static/about.inc
 
 .. include:: _static/installation.inc
 
