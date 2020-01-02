@@ -120,6 +120,16 @@ $(GLOBAL_FILES_STARTED_FILE): $(DRIVER_FILE_BUILT)
 	@echo "Making Global Files"
 	@touch $(GLOBAL_FILES_STARTED_FILE)
 
+# Traces to console, nicely formatted.
+# $1 is the Action, for example: "Generating"
+# $2 is a Path.
+# Action will be padded on the left so colons align, for readability.
+# Path will be turned from absolute to relative, for readability.
+# We need our own copy that doesn't subst $(CURRENT_DIR)
+define global_trace_to_console
+	@echo "$(shell printf '%15s' $1): $2"
+endef
+
 # Executes a command, then logs it to $(COMMAND_LOG).
 # $1 is the command.
 # We need our own copy that does not touch DRIVER_FILE_BUILT
@@ -129,15 +139,15 @@ define global_log_command
 endef
 
 $(ROOT_DIR)/README.rst: $(GLOBAL_FILES_STARTED_FILE)
-	$(call trace_to_console, "Creating Root",$(notdir $@))
+	$(call global_trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
 
 $(ROOT_DIR)/VERSION: $(GLOBAL_FILES_STARTED_FILE)
-	$(call trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py
+	$(call global_trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py
 	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file bin/$(d)/$(d)/VERSION ))
 
 $(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simple_mako.py $(GLOBAL_FILES_STARTED_FILE)
-	$(call trace_to_console, "Creating Root",$(notdir $@))
+	$(call global_trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/simple_mako.py --output-file $@ --template $<)
 
 # We only need to handle all the example files searching if we are building 'all' - I.e. command line is blank
@@ -152,7 +162,7 @@ EXAMPLE_FILES += $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2)
 GLOBAL_MKDIRECTORIES += $(dir $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2))
 
 $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2): $(dir $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2)) $2
-	$(call trace_to_console, "Copying",$(notdir $2))
+	$(call global_trace_to_console, "Copying",$(notdir $2))
 	$(_hide_cmds)$(call global_log_command,cp $2 $(EXAMPLE_WORK_DIR)/$1/$(subst src/$1/examples/,,$2))
 endef  # copyExample
 
@@ -173,14 +183,14 @@ GLOBAL_MKDIR: $(GLOBAL_MKDIRECTORIES)
 
 define global_mkdir_rule
 $1:
-	$(call trace_to_console, "Making dir",$1)
+	$(call global_trace_to_console, "Making dir",$1)
 	$(_hide_cmds)$(call global_log_command,mkdir -p $1)
 endef
 $(foreach d,$(call devRemoveDuplicates,$(GLOBAL_MKDIRECTORIES)),$(eval $(call global_mkdir_rule,$(d))))
 
 # We ignore errors from zip because if nothing changed (needs updating) then the error code is 12
 $(ROOT_DIR)/examples.zip: $(EXAMPLE_FILES) $(GLOBAL_FILES_STARTED_FILE)
-	$(call trace_to_console, "Creating Root",$(notdir $@))
+	$(call global_trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,cd $(EXAMPLE_WORK_DIR) && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
 	@touch $@
 
@@ -195,7 +205,7 @@ test: $(TOX_RUN_DONE)
 
 $(TOX_RUN_DONE):
 	@echo
-	$(call trace_to_console, "Running tox",$@)
+	$(call global_trace_to_console, "Running tox",$@)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,tox)
 
 # Print rules need to be at the bottom of the file so everything has had a chance to be set
