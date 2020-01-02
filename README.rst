@@ -42,8 +42,8 @@ Author       National Instruments
 About
 =====
 
-The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. Currently,
-the following drivers are supported:
+The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. The
+following drivers are supported:
 
 * NI-DCPower (Python module: nidcpower)
 * NI-Digital Pattern Driver (Python module: nidigital)
