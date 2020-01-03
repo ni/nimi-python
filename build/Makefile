@@ -1,6 +1,6 @@
 include $(BUILD_HELPER_DIR)/tools.mak
 
-DEFAULT_TARGETS := module update_generated_files wheel sdist
+DEFAULT_TARGETS := module wheel sdist
 export DEFAULT_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
