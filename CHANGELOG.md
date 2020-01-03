@@ -25,8 +25,11 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * examples.zip file that includes all examples and any helper files
         * Link on examples documentation page to zip file
+        * Support for Python 3.8
     * #### Changed
     * #### Removed
+        * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
+        * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
 * ### NI-DMM
     * #### Added
     * #### Changed
