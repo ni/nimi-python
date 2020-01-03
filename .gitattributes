@@ -1,5 +1,9 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+# * text=auto
+# We explicitly set eol to LF on checkin
+*.py text=set
+*.rst text=set
+*.inc text=set
 
 # Custom for Visual Studio
 *.cs     diff=csharp
