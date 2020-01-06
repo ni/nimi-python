@@ -81,13 +81,13 @@ $(SETUP): $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 
 sdist: $(SDIST_BUILD_DONE)
 
-$(SDIST_BUILD_DONE): $(SETUP) $(README) $(ROOT_README) $(MODULE_FILES)
+$(SDIST_BUILD_DONE): # codegen should have already run or just use what is is git
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
 
 wheel: $(WHEEL_BUILD_DONE)
 
-$(WHEEL_BUILD_DONE): $(SETUP) $(README) $(ROOT_README) $(MODULE_FILES)
+$(WHEEL_BUILD_DONE): # codegen should have already run or just use what is is git
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
 	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
 
