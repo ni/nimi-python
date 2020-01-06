@@ -1,6 +1,5 @@
 include $(BUILD_HELPER_DIR)/tools.mak
 
-DEFAULT_TARGETS := module wheel sdist
 export DEFAULT_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
@@ -58,7 +57,7 @@ endef
 
 # We add test when we create the $(DEFAULT_TARGETS). This is because it shouldn't be
 # run when all is used, but we want it to work
-$(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
+$(foreach t,$(DEFAULT_TARGETS) wheel sdist,$(eval $(call per_target,$(t))))
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 
