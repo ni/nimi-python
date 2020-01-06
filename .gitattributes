@@ -3,6 +3,15 @@
 *.py text=set eol=lf
 *.rst text=set eol=lf
 *.inc text=set eol=lf
+*.md text=set eol=lf
+*.ini text=set eol=lf
+*.txt text=set eol=lf
+*.yml text=set eol=lf
+VERSION text=set eol=lf
+*.mak text=set eol=lf
+Makefile text=set eol=lf
+License text=set eol=lf
+*.rc text=set eol=lf
 
 # Custom for Visual Studio
 *.cs     diff=csharp
