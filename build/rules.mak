@@ -1,10 +1,15 @@
 
 include $(BUILD_HELPER_DIR)/tools.mak
 
+README := $(OUTPUT_DIR)/README.rst
+SETUP := $(OUTPUT_DIR)/setup.py
+
 MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY)) \
                 $(addprefix $(MODULE_DIR)/,$(CUSTOM_TYPES_TO_COPY)) \
+                $(README) \
+                $(SETUP) \
 
 
 RST_FILES := \
@@ -71,9 +76,7 @@ doc_files: $(RST_FILES)
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
-README := $(OUTPUT_DIR)/README.rst
-
-$(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
+$(SETUP): $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
