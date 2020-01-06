@@ -2,13 +2,20 @@ group: travis_latest
 language: python
 matrix:
     include:
-      # We put 3.8 first since this is where additional tests are ran so we give it more time to run
+      # We put pypy at the beginning because for some reason the build takes much longer, this starts it earlier 
+      # so multiple others can be running while these continue to run.
+      - python: pypy3
+      # We put Python 3.8 based towards since this is where additional tests are ran so we give it more time to run
       - python: 3.8
         dist: xenial
         sudo: true
-      # We put pypy towards the beginning because for some reason the build takes much longer, this starts it earlier 
-      # so multiple others can be running while these continue to run.
-      - python: pypy3
+      - python: 3.8-dev
+        dist: xenial
+        sudo: true
+      - python: nightly
+        dist: xenial
+        sudo: true
+      # End Python 3.8 based tests
       - python: 3.5
       - python: 3.5-dev
       - python: 3.6
@@ -19,12 +26,6 @@ matrix:
         dist: xenial
         sudo: true
       - python: 3.7-dev
-        dist: xenial
-        sudo: true
-      - python: 3.8-dev
-        dist: xenial
-        sudo: true
-      - python: nightly
         dist: xenial
         sudo: true
     allow_failures:
