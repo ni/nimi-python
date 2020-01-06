@@ -62,7 +62,7 @@ $(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 
-# We need to ensure generated exists for Travis CI builds
+# We need to ensure generated/ exists for Travis CI builds
 clean: start
 	@echo 'Cleaning...'
 	-@rm -Rf $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
