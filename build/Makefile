@@ -56,12 +56,18 @@ $1:
 	$(foreach d,$(DRIVERS),make --no-print-directory -f src/$(d)/$(d).mak DRIVER=$(d) $1 &&)  echo
 endef
 
-# installers is just wheels and sdists right now
-installers: wheel sdist
+$(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
 
-# We add wheel and sdist when we create the $(DEFAULT_TARGETS). This is because it shouldn't be
-# run when all is used, but we want it to work
-$(foreach t,$(DEFAULT_TARGETS) wheel sdist,$(eval $(call per_target,$(t))))
+define per_driver_installers
+$1_installers: start
+	@echo
+	@echo "Making $1 installers"
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 installers
+endef
+
+$(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_installers,$(d))))
+installers: $(foreach d,$(ALL_DRIVERS), $(d)_installers)
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 
