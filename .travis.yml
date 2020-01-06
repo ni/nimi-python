@@ -6,10 +6,7 @@ matrix:
       - python: 3.6
       # We put pypy towards the beginning because for some reason the build takes much longer, this starts it earlier 
       # so multiple others can be running while these continue to run.
-      - python: pypy
       - python: pypy3
-      - python: 2.7
-      - python: 3.4
       - python: 3.5
       # Python 3.7+ needs OpenSSL 1.0.2+ which isn't supported on trusty - use xenial and sudo: true based on workarounds
       # in Travis issues (this is from multiple issues)
