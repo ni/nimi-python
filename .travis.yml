@@ -5,7 +5,7 @@ matrix:
       # We put pypy at the beginning because for some reason the build takes much longer, this starts it earlier 
       # so multiple others can be running while these continue to run.
       - python: pypy3
-      # We put Python 3.8 based towards since this is where additional tests are ran so we give it more time to run
+      # We put Python 3.8 based tests towards the start. This is where additional tests are ran so we give it more time to run
       - python: 3.8
         dist: xenial
         sudo: true
@@ -29,6 +29,7 @@ matrix:
         dist: xenial
         sudo: true
     allow_failures:
+      # Allow tests using under development builds of Python to fail without failing the PR/change
       - python: nightly
       - python: 3.8-dev
       - python: 3.7-dev
