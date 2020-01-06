@@ -115,7 +115,7 @@ printvar:
 	$(_hide_cmds)$(foreach d,$(DRIVERS),$(call per_driver_variable_print,$(d),$(VAR)) && ) echo
 
 
-PYTHON_CMD ?= python3
+PYTHON_CMD ?= python
 
 .PHONY: help Makefile
 
