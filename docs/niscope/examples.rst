@@ -1,7 +1,7 @@
 Examples
 ========
 
-Download examples for niscope and any required helper files at `niscope_examples.zip <https://github.com/ni/nimi-python/blob/master/examples/niscope_examples.zip>`_
+`You can download all niscope examples here <https://github.com/ni/nimi-python/blob/master/examples/niscope_examples.zip>`_
 
 niscope_fetch.py
 ----------------
