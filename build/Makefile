@@ -1,5 +1,6 @@
 include $(BUILD_HELPER_DIR)/tools.mak
 
+DEFAULT_TARGETS := module doc_files
 export DEFAULT_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
