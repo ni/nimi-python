@@ -13,8 +13,8 @@ EXAMPLE_FILES := $(if $(wildcard src/$(DRIVER)/examples/*),$(shell find src/$(DR
 
 # If there are any examples, we will need to build the examples zip file for this driver
 ifneq (,$(EXAMPLE_FILES))
-MKDIRECTORIES += $(ROOT_DIR)/examples
 
+MKDIRECTORIES += $(ROOT_DIR)/examples
 DRIVER_EXAMPLES_ZIP_FILE := $(ROOT_DIR)/examples/$(DRIVER)_examples.zip
 MODULE_FILES += $(DRIVER_EXAMPLES_ZIP_FILE)
 
