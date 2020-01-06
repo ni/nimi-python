@@ -2,18 +2,18 @@ group: travis_latest
 language: python
 matrix:
     include:
-      # We put 3.6 first since this is where flake8 and docs are tested
-      - python: 3.6
+      # We put 3.8 first since this is where additional tests are ran so we give it more time to run
+      - python: 3.8
+        dist: xenial
+        sudo: true
       # We put pypy towards the beginning because for some reason the build takes much longer, this starts it earlier 
       # so multiple others can be running while these continue to run.
       - python: pypy3
       - python: 3.5
+      - python: 3.6
       # Python 3.7+ needs OpenSSL 1.0.2+ which isn't supported on trusty - use xenial and sudo: true based on workarounds
       # in Travis issues (this is from multiple issues)
       - python: 3.7
-        dist: xenial
-        sudo: true
-      - python: 3.8
         dist: xenial
         sudo: true
       - python: nightly
