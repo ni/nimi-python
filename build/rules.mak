@@ -69,9 +69,10 @@ $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/unit_tests/%.py
 
 clean:
 
-.PHONY: module doc_files sdist wheel
+.PHONY: module doc_files sdist wheel installers
 module: $(MODULE_FILES) $(UNIT_TEST_FILES)
 doc_files: $(RST_FILES)
+installers: sdist wheel
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
