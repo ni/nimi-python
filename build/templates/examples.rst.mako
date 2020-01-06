@@ -27,7 +27,7 @@
 %>\
 ${helper.get_rst_header_snippet('Examples', '=')}
 
-Download examples for ${module_name} and any required helper files at `${module_name}_examples.zip <${url}>`_
+`You can download all ${module_name} examples here <${url}>`_
 
 % for e in examples:
 ${helper.get_rst_header_snippet(e, '-')}
