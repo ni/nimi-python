@@ -66,7 +66,6 @@ SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 clean: start
 	@echo 'Cleaning...'
 	-@rm -Rf $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
