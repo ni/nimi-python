@@ -56,7 +56,10 @@ $1:
 	$(foreach d,$(DRIVERS),make --no-print-directory -f src/$(d)/$(d).mak DRIVER=$(d) $1 &&)  echo
 endef
 
-# We add test when we create the $(DEFAULT_TARGETS). This is because it shouldn't be
+# installers is just wheels and sdists right now
+installers: wheel sdist
+
+# We add wheel and sdist when we create the $(DEFAULT_TARGETS). This is because it shouldn't be
 # run when all is used, but we want it to work
 $(foreach t,$(DEFAULT_TARGETS) wheel sdist,$(eval $(call per_target,$(t))))
 
