@@ -27,7 +27,7 @@ def configure_logging(lvl=logging.WARNING, logfile=None):
 def main():
     # Setup the required arguments for this script
     usage = """
-Install the wheel found in bin/<driver>/dist
+Install the wheel found in generated/<driver>/dist
 """
     parser = argparse.ArgumentParser(description=usage)
     file_group = parser.add_argument_group("Input and Output files")
@@ -48,7 +48,7 @@ Install the wheel found in bin/<driver>/dist
 
     logging.info(pp.pformat(args))
 
-    rel_path = os.path.join('bin', args.driver, 'dist')
+    rel_path = os.path.join('generated', args.driver, 'dist')
     wheel = None
     for file in os.listdir(rel_path):
         if file.endswith(".whl"):
