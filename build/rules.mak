@@ -84,13 +84,15 @@ sdist: $(SDIST_BUILD_DONE)
 
 $(SDIST_BUILD_DONE): # codegen should have already run or just use what is is git
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
+	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
+	$(_hide_cmds)$(call log_command_no_tracking,touch $@)
 
 wheel: $(WHEEL_BUILD_DONE)
 
 $(WHEEL_BUILD_DONE): # codegen should have already run or just use what is is git
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+	$(_hide_cmds)$(call log_command_no_tracking,touch $@)
 
 # If we are building nifake, we just need a placeholder file for inclusion into the wheel that will never be used. We can't build the actual readme since not all the files are created
 ifeq (nifake,$(DRIVER))
