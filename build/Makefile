@@ -1,6 +1,6 @@
 include $(BUILD_HELPER_DIR)/tools.mak
 
-DEFAULT_TARGETS := module update_generated_files wheel sdist
+DEFAULT_TARGETS := module wheel sdist
 export DEFAULT_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
@@ -62,19 +62,18 @@ $(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 
-# We need to ensure bin exists for Travis CI builds
+# We need to ensure generated/ exists for Travis CI builds
 clean: start
 	@echo 'Cleaning...'
-	-@rm -Rf $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@mkdir $(BIN_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(GENERATED_DIR)/ $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)find $(ROOT_DIR)/build -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)find $(ROOT_DIR)/build -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)find $(ROOT_DIR)/build -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)mkdir $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
 	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If" > $(COMMAND_LOG)
@@ -121,9 +120,9 @@ PYTHON_CMD ?= python
 
 # For the global files, instead of trying to keep track of which files from the driver builds matter for any target,
 # we just say that if anything from any driver built, we will rebuld the global files
-export DRIVER_FILE_BUILT = bin/driver_file_built
+export DRIVER_FILE_BUILT = $(GENERATED_DIR)/driver_file_built
 
-GLOBAL_FILES_STARTED_FILE = bin/printed_global_files
+GLOBAL_FILES_STARTED_FILE = $(GENERATED_DIR)/printed_global_files
 $(GLOBAL_FILES_STARTED_FILE): $(DRIVER_FILE_BUILT)
 	@echo
 	@echo "Making Global Files"
@@ -143,7 +142,7 @@ $(ROOT_DIR)/README.rst: $(GLOBAL_FILES_STARTED_FILE)
 
 $(ROOT_DIR)/VERSION: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py
-	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file bin/$(d)/$(d)/VERSION ))
+	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file $(GENERATED_DIR)/$(d)/$(d)/VERSION ))
 
 $(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simple_mako.py $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@))
@@ -152,7 +151,7 @@ $(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simp
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.
-TOX_RUN_DONE := bin/tox_run_done
+TOX_RUN_DONE := $(GENERATED_DIR)/tox_run_done
 export TOX_RUN_DONE
 
 test: $(TOX_RUN_DONE)
