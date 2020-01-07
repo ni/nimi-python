@@ -25,7 +25,7 @@
             # Check the type by using string comparison so that we don't import numpy unecessarilly.
             if str(type(waveform_data[site])).find("'numpy.ndarray'") != -1:
                 import numpy
-                if waveform_data[site].dtype == numpy.int32:
+                if waveform_data[site].dtype == numpy.uint32:
                     wfm = array.array('L', waveform_data[site])
                 else:
                     raise TypeError("Unsupported dtype. Is {0}, expected {1}".format(waveform_data[site].dtype, numpy.int32))
