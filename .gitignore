@@ -12,7 +12,6 @@ generated/docs/
 generated/htmlcov/
 generated/processed_metadata/
 generated/*/build/
-generated/*/dist/
 generated/*/log/
 generated/*/*.egg-info/
 generated/driver_file_built
