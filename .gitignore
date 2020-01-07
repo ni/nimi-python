@@ -7,7 +7,7 @@
 # But we actually do keep the latest copy of some of the generated code, specifically the Python modules, for two reasons:
 #   1. So that we can make changes to the generator and easily review what effect those changes have in the generated code.
 #   2. So that our system tests can create a wheel out of the files and quickly install them, instead of going through the full code-generation process.
-# These are the generated files we do NOT want it git
+# These are the generated files we do NOT want in git
 generated/docs/
 generated/htmlcov/
 generated/processed_metadata/
