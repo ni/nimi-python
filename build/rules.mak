@@ -105,14 +105,4 @@ endif
 # From https://stackoverflow.com/questions/16467718/how-to-print-out-a-variable-in-makefile
 print-%: ; $(info $(DRIVER): $* is $(flavor $*) variable set to [$($*)]) @true
 
-update_generated_files: $(GENERATED_FILES_COPY_DONE)
-
-$(GENERATED_FILES_COPY_DONE): $(MODULE_FILES) $(OUTPUT_DIR)/setup.py $(UNIT_TEST_FILES) $(RST_FILES)
-	$(call trace_to_console, "Updating",$(DRIVER_GENERATED_DIR)/)
-	$(_hide_cmds)$(call make_with_tracking_file, $@, \
-      rm -Rf $(DRIVER_GENERATED_DIR)/* && \
-      cp -Rf $(MODULE_DIR)/* $(DRIVER_GENERATED_DIR) && \
-      cp -Rf $(OUTPUT_DIR)/setup.py $(DRIVER_GENERATED_DIR) \
-   )
-
 
