@@ -609,7 +609,7 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
     fixup_enum_names(config)
 
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
-    metadata_dir = os.path.join('bin', 'processed_metadata')
+    metadata_dir = os.path.join('generated', 'processed_metadata')
 
     # If we are not persisting the output (I.e. during a test) we return early
     if not persist_output:
