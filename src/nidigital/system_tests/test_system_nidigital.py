@@ -121,8 +121,6 @@ def get_test_file_path(test_name, file_name):
 
 @pytest.fixture(params=[array.array, numpy.array, list])
 def source_waveform_type(request):
-    if request.param != array.array:
-        pytest.skip('Source waveform types other than array.array are not supported yet (#1132)')
     return request.param
 
 
