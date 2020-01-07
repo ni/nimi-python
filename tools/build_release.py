@@ -134,7 +134,7 @@ Steps
         logging.info('Uploading to PyPI')
         complete_twine_cmd = twine_cmd + ['upload']
         for d in drivers_to_upload:
-            complete_twine_cmd += ['bin/{}/dist/*'.format(d)]
+            complete_twine_cmd += ['generated/{}/dist/*'.format(d)]
 
         logging.info(pp.pformat(complete_twine_cmd))
         if not args.preview:

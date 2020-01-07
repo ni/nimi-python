@@ -75,7 +75,7 @@ def configure_logging(lvl=logging.WARNING, logfile=None):
 def main():
     # Setup the required arguments for this script
     usage = """
-Install the wheel found in bin/<driver>/dist
+Run generate_template on the requested mako template
 """
     parser = argparse.ArgumentParser(description=usage)
     file_group = parser.add_argument_group("Input and Output files")
