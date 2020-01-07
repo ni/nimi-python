@@ -4239,6 +4239,7 @@ class Session(_SessionBase):
             for key, value in step.items():
                 setattr(self, key, value)
 
+    @ivi_synchronized
     def get_channel_name(self, index):
         r'''get_channel_name
 
