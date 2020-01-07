@@ -1,10 +1,15 @@
 
 include $(BUILD_HELPER_DIR)/tools.mak
 
+README := $(OUTPUT_DIR)/README.rst
+SETUP := $(OUTPUT_DIR)/setup.py
+
 MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_COPY)) \
                 $(addprefix $(MODULE_DIR)/,$(CUSTOM_TYPES_TO_COPY)) \
+                $(README) \
+                $(SETUP) \
 
 
 RST_FILES := \
@@ -64,29 +69,30 @@ $(UNIT_TEST_DIR)/%.py: $(DRIVER_DIR)/unit_tests/%.py
 
 clean:
 
-.PHONY: module unit_tests sdist wheel
-$(UNIT_TEST_FILES): $(MODULE_FILES)
-module: $(MODULE_FILES)
+.PHONY: module doc_files sdist wheel installers
+module: $(MODULE_FILES) $(UNIT_TEST_FILES)
+doc_files: $(RST_FILES)
+installers: sdist wheel
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
-README := $(OUTPUT_DIR)/README.rst
-
-$(OUTPUT_DIR)/setup.py: $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
+$(SETUP): $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-sdist: $(SDIST_BUILD_DONE) $(UNIT_TEST_FILES)
+sdist: $(SDIST_BUILD_DONE)
 
-$(SDIST_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FILES)
+$(SDIST_BUILD_DONE): # codegen should have already run or just use what is is git
 	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
+	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
+	$(_hide_cmds)$(call log_command_no_tracking,touch $@)
 
-wheel: $(WHEEL_BUILD_DONE) $(UNIT_TEST_FILES)
+wheel: $(WHEEL_BUILD_DONE)
 
-$(WHEEL_BUILD_DONE): $(OUTPUT_DIR)/setup.py $(README) $(ROOT_README) $(MODULE_FILES)
+$(WHEEL_BUILD_DONE): # codegen should have already run or just use what is is git
 	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call make_with_tracking_file,$@,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel --universal $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+	$(_hide_cmds)$(call log_command_no_tracking,touch $@)
 
 # If we are building nifake, we just need a placeholder file for inclusion into the wheel that will never be used. We can't build the actual readme since not all the files are created
 ifeq (nifake,$(DRIVER))
@@ -96,7 +102,7 @@ $(README):
 
 else
 # We piece together the readme files instead of relying on the rst include directive because we need these files to be standalone and not require any additional files that are in specific locations.
-$(README): $(MODULE_FILES) $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
+$(README): $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
 	$(call trace_to_console, "Creating",$@)
 	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/status.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
 
