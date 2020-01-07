@@ -1,7 +1,7 @@
-nise.Session
-============
-
 .. py:module:: nise
+
+Session
+=======
 
 .. py:class:: Session(self, virtual_device_name, options={})
 
@@ -71,51 +71,30 @@ nise.Session
     :type options: str
 
 
-    **Properties**
-
-    +----------+----------+
-    | Property | Datatype |
-    +==========+==========+
-    | Property | Datatype |
-    +----------+----------+
-
-    **Public methods**
-
-    +-----------------------------------+
-    | Method name                       |
-    +===================================+
-    | :py:func:`connect`                |
-    +-----------------------------------+
-    | :py:func:`connect_and_disconnect` |
-    +-----------------------------------+
-    | :py:func:`disconnect`             |
-    +-----------------------------------+
-    | :py:func:`disconnect_all`         |
-    +-----------------------------------+
-    | :py:func:`expand_route_spec`      |
-    +-----------------------------------+
-    | :py:func:`find_route`             |
-    +-----------------------------------+
-    | :py:func:`get_all_connections`    |
-    +-----------------------------------+
-    | :py:func:`is_connected`           |
-    +-----------------------------------+
-    | :py:func:`is_debounced`           |
-    +-----------------------------------+
-    | :py:func:`wait_for_debounce`      |
-    +-----------------------------------+
-
-
-Properties
-----------
-
-
 Methods
--------
+=======
+
+close
+-----
+
+    .. py:currentmodule:: nise.Session
+
+    .. py:method:: close()
+
+            Reduces the reference count of open sessions by one. If the reference
+            count goes to 0, the method deallocates any memory resources the
+            driver uses and closes any open IVI switch sessions. After calling the
+            :py:meth:`nise.Session.close` method, you should not use the NI Switch Executive
+            virtual device again until you call :py:meth:`nise.Session.__init__`.
+
+            
+
+            .. note:: This method is not needed when using the session context manager
+
 
 
 connect
-~~~~~~~
+-------
 
     .. py:currentmodule:: nise.Session
 
@@ -192,7 +171,7 @@ connect
             :type wait_for_debounce: bool
 
 connect_and_disconnect
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
     .. py:currentmodule:: nise.Session
 
@@ -314,7 +293,7 @@ connect_and_disconnect
             :type wait_for_debounce: bool
 
 disconnect
-~~~~~~~~~~
+----------
 
     .. py:currentmodule:: nise.Session
 
@@ -351,7 +330,7 @@ disconnect
             :type disconnect_spec: str
 
 disconnect_all
-~~~~~~~~~~~~~~
+--------------
 
     .. py:currentmodule:: nise.Session
 
@@ -367,7 +346,7 @@ disconnect_all
 
 
 expand_route_spec
-~~~~~~~~~~~~~~~~~
+-----------------
 
     .. py:currentmodule:: nise.Session
 
@@ -456,7 +435,7 @@ expand_route_spec
 
 
 find_route
-~~~~~~~~~~
+----------
 
     .. py:currentmodule:: nise.Session
 
@@ -570,7 +549,7 @@ find_route
 
 
 get_all_connections
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
     .. py:currentmodule:: nise.Session
 
@@ -630,7 +609,7 @@ get_all_connections
 
 
 is_connected
-~~~~~~~~~~~~
+------------
 
     .. py:currentmodule:: nise.Session
 
@@ -672,7 +651,7 @@ is_connected
 
 
 is_debounced
-~~~~~~~~~~~~
+------------
 
     .. py:currentmodule:: nise.Session
 
@@ -699,7 +678,7 @@ is_debounced
 
 
 wait_for_debounce
-~~~~~~~~~~~~~~~~~
+-----------------
 
     .. py:currentmodule:: nise.Session
 
@@ -734,39 +713,7 @@ wait_for_debounce
 
 
 
-Properties
-----------
 
-+----------+----------+
-| Property | Datatype |
-+==========+==========+
-| Property | Datatype |
-+----------+----------+
+.. contents:: Session
 
-Methods
--------
-
-+------------------------------------------------+
-| Method name                                    |
-+================================================+
-| :py:func:`nise.Session.connect`                |
-+------------------------------------------------+
-| :py:func:`nise.Session.connect_and_disconnect` |
-+------------------------------------------------+
-| :py:func:`nise.Session.disconnect`             |
-+------------------------------------------------+
-| :py:func:`nise.Session.disconnect_all`         |
-+------------------------------------------------+
-| :py:func:`nise.Session.expand_route_spec`      |
-+------------------------------------------------+
-| :py:func:`nise.Session.find_route`             |
-+------------------------------------------------+
-| :py:func:`nise.Session.get_all_connections`    |
-+------------------------------------------------+
-| :py:func:`nise.Session.is_connected`           |
-+------------------------------------------------+
-| :py:func:`nise.Session.is_debounced`           |
-+------------------------------------------------+
-| :py:func:`nise.Session.wait_for_debounce`      |
-+------------------------------------------------+
 

@@ -3,7 +3,7 @@
 config = {
     'api_version': '0.2.0d23',
     'c_function_prefix': 'niFake_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'Abort',
         'initiate_function': 'Initiate',
@@ -24,7 +24,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libnifake.so',
+                'name': 'nifake',
                 'type': 'cdll'
             }
         },
@@ -48,5 +48,6 @@ config = {
         }
     ],
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
-    'session_handle_parameter_name': 'vi'
+    'session_handle_parameter_name': 'vi',
+    'supports_nitclk': True,
 }

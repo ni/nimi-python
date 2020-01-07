@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-Digital Pattern Driver version 19.0.0d32
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.0.0a0
 attributes = {
     1050002: {
         'access': 'read-write',
         'channel_based': False,
         'name': 'RANGE_CHECK',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050003: {
         'access': 'read-write',
         'channel_based': False,
         'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050004: {
         'access': 'read-write',
         'channel_based': False,
         'name': 'CACHE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050005: {
-        'access': 'read-write',
+        'access': 'read only',
         'channel_based': False,
         'name': 'SIMULATE',
         'resettable': False,
@@ -33,7 +33,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'RECORD_COERCIONS',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050007: {
@@ -47,7 +47,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'INTERCHANGE_CHECK',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050203: {
@@ -158,6 +158,7 @@ attributes = {
     1150004: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'SelectedFunction',
         'name': 'SELECTED_FUNCTION',
         'resettable': True,
         'type': 'ViInt32'
@@ -229,6 +230,7 @@ attributes = {
     1150015: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'PPMUOutputFunction',
         'name': 'PPMU_OUTPUT_FUNCTION',
         'resettable': True,
         'type': 'ViInt32'
@@ -282,13 +284,6 @@ attributes = {
         'resettable': True,
         'type': 'ViString'
     },
-    1150028: {
-        'access': 'read-write',
-        'channel_based': False,
-        'name': 'EXPORTED_REF_CLOCK_OUTPUT_TERMINAL',
-        'resettable': True,
-        'type': 'ViString'
-    },
     1150029: {
         'access': 'read-write',
         'channel_based': False,
@@ -306,6 +301,7 @@ attributes = {
     1150031: {
         'access': 'read-write',
         'channel_based': False,
+        'enum': 'DigitalEdge',
         'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
         'resettable': True,
         'type': 'ViInt32'
@@ -334,6 +330,7 @@ attributes = {
     1150035: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'DigitalEdge',
         'name': 'DIGITAL_EDGE_CONDITIONAL_JUMP_TRIGGER_EDGE',
         'resettable': True,
         'type': 'ViInt32'
@@ -355,6 +352,7 @@ attributes = {
     1150038: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'ApertureTimeUnits',
         'name': 'PPMU_APERTURE_TIME_UNITS',
         'resettable': True,
         'type': 'ViInt32'
@@ -429,20 +427,6 @@ attributes = {
         'resettable': True,
         'type': 'ViInt32'
     },
-    1150049: {
-        'access': 'read only',
-        'channel_based': False,
-        'name': 'CALIBRATION_REPORT',
-        'resettable': False,
-        'type': 'ViString'
-    },
-    1150050: {
-        'access': 'read only',
-        'channel_based': False,
-        'name': 'SELF_TEST_REPORT',
-        'resettable': False,
-        'type': 'ViString'
-    },
     1150051: {
         'access': 'read-write',
         'channel_based': True,
@@ -470,27 +454,6 @@ attributes = {
         'name': 'PPMU_CURRENT_LIMIT_SUPPORTED',
         'resettable': False,
         'type': 'ViBoolean'
-    },
-    1150056: {
-        'access': 'read-write',
-        'channel_based': False,
-        'name': 'SEQUENCER_FLAG_TRIGGER_TYPE',
-        'resettable': True,
-        'type': 'ViInt32'
-    },
-    1150057: {
-        'access': 'read-write',
-        'channel_based': False,
-        'name': 'SEQUENCER_FLAG_SOURCE',
-        'resettable': True,
-        'type': 'ViString'
-    },
-    1150058: {
-        'access': 'read-write',
-        'channel_based': False,
-        'name': 'EXPORTED_SEQUENCER_FLAG_OUTPUT_TERMINAL',
-        'resettable': True,
-        'type': 'ViString'
     },
     1150059: {
         'access': 'read only',
@@ -590,60 +553,12 @@ attributes = {
         'resettable': True,
         'type': 'ViInt64'
     },
-    1150080: {
-        'access': 'read-write',
-        'channel_based': False,
-        'name': 'HISTORY_RAM_SUPPRESS_BUFFER_OVERFLOW',
-        'resettable': True,
-        'type': 'ViBoolean'
-    },
     1150081: {
         'access': 'read-write',
         'channel_based': False,
+        'enum': 'TDREndpointTermination',
         'name': 'TDR_ENDPOINT_TERMINATION',
         'resettable': True,
         'type': 'ViInt32'
-    },
-    1200003: {
-        'access': 'read only',
-        'channel_based': True,
-        'name': 'DIGITAL_DRIVER_STATE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1200005: {
-        'access': 'read only',
-        'channel_based': False,
-        'name': 'NUMBER_OF_TIME_SETS',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1200007: {
-        'access': 'read only',
-        'channel_based': False,
-        'name': 'NUMBER_OF_LOADED_PATTERNS',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1200009: {
-        'access': 'read-write',
-        'channel_based': True,
-        'name': 'PXI_TRIG_IMMEDIATE_ROUTE_SOURCE',
-        'resettable': True,
-        'type': 'ViString'
-    },
-    1200010: {
-        'access': 'read only',
-        'channel_based': False,
-        'name': 'TEMPERATURE_LOCAL',
-        'resettable': False,
-        'type': 'ViReal64'
-    },
-    1200078: {
-        'access': 'read only',
-        'channel_based': False,
-        'name': 'IS_START_TRIGGER_MASTER',
-        'resettable': False,
-        'type': 'ViBoolean'
     }
 }

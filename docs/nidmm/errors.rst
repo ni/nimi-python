@@ -1,10 +1,20 @@
 Exceptions and Warnings
 =======================
 
+Error
+-----
+
+    .. py:currentmodule:: nidmm.errors
+
+    .. exception:: Error
+
+        Base exception type that all NI-DMM exceptions derive from
+
+
 DriverError
 -----------
 
-    .. py:currentmodule:: nidmm
+    .. py:currentmodule:: nidmm.errors
 
     .. exception:: DriverError
 
@@ -14,7 +24,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: nidmm
+    .. py:currentmodule:: nidmm.errors
 
     .. exception:: UnsupportedConfigurationError
 
@@ -23,7 +33,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: nidmm
+    .. py:currentmodule:: nidmm.errors
 
     .. exception:: DriverNotInstalledError
 
@@ -32,7 +42,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: nidmm
+    .. py:currentmodule:: nidmm.errors
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -42,7 +52,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: nidmm
+    .. py:currentmodule:: nidmm.errors
 
     .. exception:: SelfTestError
 
@@ -52,7 +62,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: nidmm
+    .. py:currentmodule:: nidmm.errors
 
     .. exception:: DriverWarning
 

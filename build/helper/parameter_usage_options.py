@@ -14,6 +14,8 @@ class ParameterUsageOptions(AutoNumber):
 
     SESSION_METHOD_DECLARATION = ()
     '''For declaring a regular method in Session'''
+    SESSION_METHOD_PASSTHROUGH_CALL = ()
+    '''Same as SESSION_METHOD_DECLARATION but without default values - For calling into Session using parameters of the same name and order that are simply passed through'''
     SESSION_INIT_DECLARATION = ()
     '''For declaring an init method in Session'''
     SESSION_NUMPY_INTO_METHOD_DECLARATION = ()
@@ -36,6 +38,8 @@ class ParameterUsageOptions(AutoNumber):
     '''Get all input parameters, other than self, rep caps, and size'''
     OUTPUT_PARAMETERS = ()
     '''Get all output parameters, other than ivi-dance'''
+    OUTPUT_PARAMETERS_FOR_DOCS = ()
+    '''We also want to skip size parameters'''
     IVI_DANCE_PARAMETER = ()
     '''Get the ivi-dance parameter'''
     NUMPY_PARAMETERS = ()

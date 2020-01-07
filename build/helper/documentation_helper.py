@@ -352,7 +352,10 @@ def _replace_attribute_python_name(a_match):
             aname = attr['name'].lower()
 
     if config['make_link']:
-        return ':py:data:`{0}.Session.{1}`'.format(config['module_name'], aname)
+        if config['module_name'] == 'nitclk':
+            return ':py:attr:`{0}.SessionReference.{1}`'.format(config['module_name'], aname)
+        else:
+            return ':py:attr:`{0}.Session.{1}`'.format(config['module_name'], aname)
     else:
         return '{0}'.format(aname)
 
@@ -381,7 +384,10 @@ def _replace_func_python_name(f_match):
         print(config['functions'])
 
     if config['make_link']:
-        return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
+        if config['module_name'] == 'nitclk':
+            return ':py:func:`{0}.{1}`'.format(config['module_name'], fname)
+        else:
+            return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
     else:
         return '{0}'.format(fname)
 
@@ -491,8 +497,8 @@ def format_type_for_rst_documentation(param, numpy, config):
     return p_type
 
 
-def get_function_rst(function, method_template, numpy, config, indent=0):
-    '''Gets formatted documentation for given function that can be used in rst documentation
+def get_function_rst(function, method_template, numpy, config, indent=0, method_or_function='method'):
+    '''Gets formatted documentation for given function or method that can be used in rst documentation
 
     Args:
         function (dict): function dictionary
@@ -508,14 +514,14 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
     suffix = method_template['method_python_name_suffix']
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
+    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['repeated_capability_type'], function['python_name'], get_params_snippet(function, session_method))
 
-    rst = '.. py:method:: ' + function['python_name'] + suffix + '('
+    rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['python_name'], suffix)
     rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
@@ -581,7 +587,7 @@ def get_function_docstring(function, numpy, config, indent=0):
     '''
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
+    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
@@ -1240,7 +1246,7 @@ def test_get_function_rst_default():
 
     .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this method.
 
-    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
+    .. note:: :py:attr:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
 
     :param turtle_type:
 

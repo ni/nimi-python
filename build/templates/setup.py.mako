@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 <%
-config        = template_parameters['metadata'].config
+import build.helper as helper
+
+config         = template_parameters['metadata'].config
+module_version = config['module_version']
 %>
 
 from setuptools.command.test import test as test_command
@@ -47,26 +50,26 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
-        'six',
+        % if config['supports_nitclk']:
+        'nitclk',
+        % endif
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: ${helper.get_development_status(config)}",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: System :: Hardware :: Hardware Drivers"

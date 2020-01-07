@@ -3,7 +3,7 @@
 config = {
     'api_version': '19.1.0d2',
     'c_function_prefix': 'niSwitch_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'AbortScan',
         'initiate_function': 'InitiateScan',
@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libniswitch.so',
+                'name': 'niswitch',
                 'type': 'cdll'
             }
         },
@@ -40,5 +40,5 @@ config = {
         }
     ],
     'session_class_description': 'An NI-SWITCH session to a National Instruments Switch Module',
-    'session_handle_parameter_name': 'vi'
+    'session_handle_parameter_name': 'vi',
 }

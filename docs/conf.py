@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI Modular Instruments Python API'
-copyright = '2017-2019, National Instruments'
+copyright = '2017-2020, National Instruments'
 author = 'National Instruments'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -63,7 +63,7 @@ author = 'National Instruments'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.1.3.dev0'
+release = '1.1.6.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -97,7 +97,9 @@ html_theme = 'sphinx_rtd_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    'navigation_depth': -1,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -179,9 +181,6 @@ texinfo_documents = [
      author, 'NIModularInstrumentsPythonAPI', 'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}

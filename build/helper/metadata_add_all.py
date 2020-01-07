@@ -292,7 +292,7 @@ def _add_is_session_handle(parameter):
 
 def _fix_type(parameter):
     '''Replace any spaces in the parameter type with an underscore.'''
-    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' ', '_')
+    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
 
 
 def _add_use_in_python_api(p, parameters):
@@ -302,6 +302,13 @@ def _add_use_in_python_api(p, parameters):
 
     if p['size']['mechanism'] == 'len' or p['size']['mechanism'] == 'ivi-dance':
         size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
+
+    if p['size']['mechanism'] == 'ivi-dance-with-a-twist':
+        # We have two parameters to remove from the API
+        size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
+        size_param = find_size_parameter(p, parameters, key='value_twist')
         size_param['use_in_python_api'] = False
 
 
@@ -314,7 +321,7 @@ def _setup_init_function(functions, config):
         # Change the init_function information for generating the docstring
         # We are assuming the last parameter is vi out
         for p in init_function['parameters']:
-            if p['name'] == 'vi':
+            if p['name'] == config['session_handle_parameter_name']:
                 p['documentation']['description'] = session_return_text
                 p['type_in_documentation'] = config['module_name'] + '.Session'
                 p['python_name'] = 'session'
@@ -328,8 +335,12 @@ def _setup_init_function(functions, config):
 
         functions['_init_function'] = init_function
     except KeyError:
-        print("Couldn't find {} init function".format(config['init_function']))
-        pass
+        if 'init_function' not in config or config['init_function'] is None:
+            # We don't have an init function or it is set to None (same thing) so we can't
+            # do anything here
+            pass
+        else:
+            print("Couldn't find {} init function".format(config['init_function']))
 
 
 def add_all_function_metadata(functions, config):
@@ -343,7 +354,7 @@ def add_all_function_metadata(functions, config):
         if 'documentation' not in functions[f]:
             functions[f]['documentation'] = {}
 
-    for f in filter_codegen_functions(functions):
+    for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
@@ -504,8 +515,10 @@ def _add_enum_value_python_name(enum_info, config):
             v['python_name'] = v['python_name'].replace(suffix, '')
 
     # We need to check again to see if we have any values that start with a digit
+    # If we are not going to code generate this enum, we don't care about this
     for v in enum_info['values']:
-        assert not v['python_name'][0].isdigit()
+        if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
+            raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
 
     return enum_info
 
@@ -565,6 +578,9 @@ def add_all_config_metadata(config):
     if 'use_locking' not in config:
         config['use_locking'] = True
 
+    if 'supports_nitclk' not in config:
+        config['supports_nitclk'] = False
+
     return config
 
 
@@ -593,7 +609,7 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
     fixup_enum_names(config)
 
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
-    metadata_dir = os.path.join('bin', 'processed_metadata')
+    metadata_dir = os.path.join('generated', 'processed_metadata')
 
     # If we are not persisting the output (I.e. during a test) we return early
     if not persist_output:
@@ -678,6 +694,38 @@ functions_input = {
                     'description': 'The channel to call this on.',
                 },
             },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size input',
+                },
+                'enum': None,
+                'name': 'pinDataBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer size output',
+                },
+                'enum': None,
+                'name': 'actualNumPinData',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'enum': None,
+                'name': 'expectedPinStates',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'pinDataBufferSize',
+                    'value_twist': 'actualNumPinData'
+                },
+                'type': 'ViUInt8[]'
+            },
         ],
         'documentation': {
             'description': 'Performs a foo, and performs it well.',
@@ -704,7 +752,29 @@ functions_input = {
                 'documentation': {
                     'description': 'Return a device status',
                 },
-            }
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size',
+                },
+                'enum': None,
+                'name': 'dataBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'enum': None,
+                'name': 'data',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'dataBufferSize'
+                },
+                'type': 'ViUInt32[]'
+            },
         ],
         'documentation': {
             'description': 'Perform actions as method defined',
@@ -787,6 +857,101 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'channel_name',
             },
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'pin_data_buffer_size_ctype',
+                'ctypes_type_library_call': 'ViInt32',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size input',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'pinDataBufferSize',
+                'python_name': 'pin_data_buffer_size',
+                'python_name_with_default': 'pin_data_buffer_size',
+                'python_name_with_doc_default': 'pin_data_buffer_size',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'pin_data_buffer_size_ctype',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'pin_data_buffer_size',
+            },
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'actual_num_pin_data_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer size output',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'actualNumPinData',
+                'python_name': 'actual_num_pin_data',
+                'python_name_with_default': 'actual_num_pin_data',
+                'python_name_with_doc_default': 'actual_num_pin_data',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'actual_num_pin_data',
+            },
+            {
+                'ctypes_type': 'ViUInt8',
+                'ctypes_variable_name': 'expected_pin_states_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt8)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': True,
+                'use_list': True,
+                'is_string': False,
+                'name': 'expectedPinStates',
+                'original_type': 'ViUInt8[]',
+                'python_name': 'expected_pin_states',
+                'python_name_with_default': 'expected_pin_states',
+                'python_name_with_doc_default': 'expected_pin_states',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'pinDataBufferSize',
+                    'value_twist': 'actualNumPinData'
+                },
+                'type': 'ViUInt8',
+                'library_method_call_snippet': 'expected_pin_states_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'expected_pin_states',
+            },
         ],
         'python_name': 'make_a_foo',
         'returns': 'ViStatus',
@@ -796,67 +961,133 @@ functions_expected = {
         'returns': 'ViStatus',
         'use_session_lock': True,
         'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
-        'parameters': [{
-            'direction': 'in',
-            'enum': None,
-            'numpy': False,
-            'name': 'vi',
-            'type': 'ViSession',
-            'documentation': {
-                'description': 'Identifies a particular instrument session.'
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'numpy': False,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'python_name': 'vi',
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'ctypes_variable_name': 'vi_ctype',
+                'ctypes_type': 'ViSession',
+                'ctypes_type_library_call': 'ViSession',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'python_name_with_default': 'vi',
+                'python_name_with_doc_default': 'vi',
+                'is_repeated_capability': False,
+                'is_session_handle': True,
+                'library_method_call_snippet': 'vi_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'vi',
             },
-            'python_name': 'vi',
-            'python_type': 'int',
-            'type_in_documentation': 'int',
-            'ctypes_variable_name': 'vi_ctype',
-            'ctypes_type': 'ViSession',
-            'ctypes_type_library_call': 'ViSession',
-            'size': {
-                'mechanism': 'fixed',
-                'value': 1
+            {
+                'direction': 'out',
+                'enum': None,
+                'numpy': False,
+                'name': 'status',
+                'type': 'ViString',
+                'documentation': {
+                    'description': 'Return a device status'
+                },
+                'python_name': 'status',
+                'python_type': 'str',
+                'type_in_documentation': 'str',
+                'ctypes_variable_name': 'status_ctype',
+                'ctypes_type': 'ViString',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': True,
+                'python_name_with_default': 'status',
+                'python_name_with_doc_default': 'status',
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'library_method_call_snippet': 'status_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'status',
             },
-            'use_array': False,
-            'is_buffer': False,
-            'use_list': False,
-            'is_string': False,
-            'python_name_with_default': 'vi',
-            'python_name_with_doc_default': 'vi',
-            'is_repeated_capability': False,
-            'is_session_handle': True,
-            'library_method_call_snippet': 'vi_ctype',
-            'use_in_python_api': True,
-            'python_name_or_default_for_init': 'vi',
-        }, {
-            'direction': 'out',
-            'enum': None,
-            'numpy': False,
-            'name': 'status',
-            'type': 'ViString',
-            'documentation': {
-                'description': 'Return a device status'
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'data_buffer_size_ctype',
+                'ctypes_type_library_call': 'ViInt32',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'dataBufferSize',
+                'python_name': 'data_buffer_size',
+                'python_name_with_default': 'data_buffer_size',
+                'python_name_with_doc_default': 'data_buffer_size',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'data_buffer_size_ctype',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'data_buffer_size',
             },
-            'python_name': 'status',
-            'python_type': 'str',
-            'type_in_documentation': 'str',
-            'ctypes_variable_name': 'status_ctype',
-            'ctypes_type': 'ViString',
-            'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
-            'size': {
-                'mechanism': 'fixed',
-                'value': 1
+            {
+                'ctypes_type': 'ViUInt32',
+                'ctypes_variable_name': 'data_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt32)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'use_array': False,
+                'is_buffer': True,
+                'use_list': True,
+                'is_string': False,
+                'name': 'data',
+                'original_type': 'ViUInt32[]',
+                'python_name': 'data',
+                'python_name_with_default': 'data',
+                'python_name_with_doc_default': 'data',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'dataBufferSize',
+                },
+                'type': 'ViUInt32',
+                'library_method_call_snippet': 'data_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'data',
             },
-            'use_array': False,
-            'is_buffer': False,
-            'use_list': False,
-            'is_string': True,
-            'python_name_with_default': 'status',
-            'python_name_with_doc_default': 'status',
-            'is_repeated_capability': False,
-            'is_session_handle': False,
-            'library_method_call_snippet': 'status_ctype',
-            'use_in_python_api': True,
-            'python_name_or_default_for_init': 'status',
-        }],
+        ],
         'documentation': {
             'description': 'Perform actions as method defined'
         },
@@ -1034,6 +1265,7 @@ config_expected = {
     'modules': {
         'metadata.enums_addon': {}
     },
+    'supports_nitclk': False
 }
 
 

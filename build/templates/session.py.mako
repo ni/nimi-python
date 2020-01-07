@@ -41,6 +41,10 @@ import ${module_name}.errors as errors
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
+% if config['supports_nitclk']:
+import nitclk
+% endif
+
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -259,6 +263,10 @@ class Session(_SessionBase):
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}')
 % endfor
 
+% if config['supports_nitclk']:
+        self.tclk = nitclk.SessionReference(self._${config['session_handle_parameter_name']})
+
+% endif
         # Store the parameter list for later printing in __repr__
         param_list = []
 %       for param in constructor_params:
@@ -274,10 +282,20 @@ class Session(_SessionBase):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
+% if session_context_manager is not None:
     def initiate(self):
+        '''initiate
+
+        ${helper.get_function_docstring(helper.initiate_function_def_for_doc(functions, config), False, config, indent=8)}
+        '''
         return ${session_context_manager}(self)
 
+% endif
     def close(self):
+        '''close
+
+        ${helper.get_function_docstring(helper.close_function_def_for_doc(functions, config), False, config, indent=8)}
+        '''
         try:
             self._${close_function_name}()
         except errors.DriverError:

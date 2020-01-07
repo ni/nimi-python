@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from API metadata for NI-DCPower version 19.1.0d33
+# This file is generated from NI-DCPower API metadata version 19.6.0d2
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -1656,7 +1656,7 @@ attributes = {
         'channel_based': True,
         'name': 'SEQUENCE_STEP_DELTA_TIME_ENABLED',
         'resettable': False,
-        'type': 'ViReal64'
+        'type': 'ViBoolean'
     },
     1250001: {
         'access': 'read-write',

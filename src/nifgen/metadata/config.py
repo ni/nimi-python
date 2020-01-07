@@ -3,7 +3,7 @@
 config = {
     'api_version': '19.6.0d0',
     'c_function_prefix': 'niFgen_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'AbortGeneration',
         'initiate_function': 'InitiateGeneration',
@@ -16,7 +16,7 @@ config = {
     'library_info': {
         'Linux': {
             '64bit': {
-                'name': 'libfgen.so',
+                'name': 'nifgen',
                 'type': 'cdll'
             }
         },
@@ -48,5 +48,6 @@ config = {
         }
     ],
     'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
-    'session_handle_parameter_name': 'vi'
+    'session_handle_parameter_name': 'vi',
+    'supports_nitclk': True,
 }

@@ -39,29 +39,29 @@ Author       National Instruments
 
 .. _about-section:
 
-.. image:: https://raw.githubusercontent.com/ni/nimi-python/master/docs/_static/python-dmm-small.jpg
-   :alt: NI Digital Multimeter with Python logo
-   :align: center
-
 About
 =====
 
-The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. Currently, the following drivers are supported:
+The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. The
+following drivers are supported:
 
 * NI-DCPower (Python module: nidcpower)
+* NI-Digital Pattern Driver (Python module: nidigital)
 * NI-DMM (Python module: nidmm)
 * NI-FGEN (Python module: nifgen)
-* NI-SCOPE (Python module: niscope)
-* NI-SWITCH (Python module: niswitch)
 * NI-ModInst (Python module: nimodinst)
+* NI-SCOPE (Python module: niscope)
 * NI Switch Executive (Python module: nise)
+* NI-SWITCH (Python module: niswitch)
+* NI-TClk (Python module: nitclk)
 
-It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
-`ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
+It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is
+called through its public C API using the `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
 
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
-**nimi-python** supports Python 2.7, 3.4 and later using CPython or PyPy.
+**nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions. At
+this time this includes Python 3.5 and above using CPython or PyPy.
 
 
 NI-DCPower Python API Status
@@ -70,9 +70,9 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 18.1.1                   |
+| Driver Version Tested Against | 19.1.0                   |
 +-------------------------------+--------------------------+
-| Driver API Version            | 19.1.0d33                |
+| Driver API Version            | 19.6.0d2                 |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -111,9 +111,9 @@ NI-Digital Pattern Driver Python API Status
 +---------------------------------------+--------------------------+
 | NI-Digital Pattern Driver (nidigital) |                          |
 +=======================================+==========================+
-| Driver Version Tested Against         | 19.1.0                   |
+| Driver Version Tested Against         | 19.0.1                   |
 +---------------------------------------+--------------------------+
-| Driver API Version                    | 19.0.0d32                |
+| Driver API Version                    | 19.0.0a0                 |
 +---------------------------------------+--------------------------+
 | PyPI Version                          | |nidigitalLatestVersion| |
 +---------------------------------------+--------------------------+
@@ -152,7 +152,7 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
-| Driver Version Tested Against | 18.1.0               |
+| Driver Version Tested Against | 19.1.0               |
 +-------------------------------+----------------------+
 | Driver API Version            | 19.6.0d0             |
 +-------------------------------+----------------------+
@@ -193,7 +193,7 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 18.1.0                |
+| Driver Version Tested Against | 19.1.0                |
 +-------------------------------+-----------------------+
 | Driver API Version            | 19.6.0d0              |
 +-------------------------------+-----------------------+
@@ -234,7 +234,7 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 18.0.0                   |
+| Driver Version Tested Against | 19.0.0                   |
 +-------------------------------+--------------------------+
 | Driver API Version            | 255.0.0d4                |
 +-------------------------------+--------------------------+
@@ -275,7 +275,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 18.1.0                 |
+| Driver Version Tested Against | 19.1.0                 |
 +-------------------------------+------------------------+
 | Driver API Version            | 19.1.0d50              |
 +-------------------------------+------------------------+
@@ -316,7 +316,7 @@ NI Switch Executive Python API Status
 +-------------------------------+---------------------+
 | NI Switch Executive (nise)    |                     |
 +===============================+=====================+
-| Driver Version Tested Against | 18.0.0              |
+| Driver Version Tested Against | 19.0.0              |
 +-------------------------------+---------------------+
 | Driver API Version            | 19.1.0d1            |
 +-------------------------------+---------------------+
@@ -357,7 +357,7 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
-| Driver Version Tested Against | 18.0.0                  |
+| Driver Version Tested Against | 19.1.0                  |
 +-------------------------------+-------------------------+
 | Driver API Version            | 19.1.0d2                |
 +-------------------------------+-------------------------+
@@ -391,6 +391,47 @@ NI-SWITCH Python API Status
     :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Aniswitch
 
 
+
+NI-TClk Python API Status
+-------------------------
+
++-------------------------------+-----------------------+
+| NI-TClk (nitclk)              |                       |
++===============================+=======================+
+| Driver Version Tested Against | 19.5.0                |
++-------------------------------+-----------------------+
+| Driver API Version            | 255.0.0d0             |
++-------------------------------+-----------------------+
+| PyPI Version                  | |nitclkLatestVersion| |
++-------------------------------+-----------------------+
+| Supported Python Version      | |nitclkPythonVersion| |
++-------------------------------+-----------------------+
+| Open Issues                   | |nitclkOpenIssues|    |
++-------------------------------+-----------------------+
+| Open Pull Requests            | |nitclkOpenPRs|       |
++-------------------------------+-----------------------+
+
+
+.. |nitclkLatestVersion| image:: http://img.shields.io/pypi/v/nitclk.svg
+    :alt: Latest NI-TClk Version
+    :target: http://pypi.python.org/pypi/nitclk
+
+
+.. |nitclkPythonVersion| image:: http://img.shields.io/pypi/pyversions/nitclk.svg
+    :alt: NI-TClk supported Python versions
+    :target: http://pypi.python.org/pypi/nitclk
+
+
+.. |nitclkOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nitclk.svg
+    :alt: Open Issues + Pull Requests for NI-TClk
+    :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anitclk
+
+
+.. |nitclkOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nitclk.svg
+    :alt: Pull Requests for NI-TClk
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anitclk
+
+
 .. _installation-section:
 
 Installation
@@ -401,10 +442,11 @@ Driver specific installation instructions can be found on Read The Docs:
 * `nidcpower <http://nimi-python.readthedocs.io/en/master/nidcpower.html#installation>`_
 * `nidmm <http://nimi-python.readthedocs.io/en/master/nidmm.html#installation>`_
 * `nifgen <http://nimi-python.readthedocs.io/en/master/nifgen.html#installation>`_
-* `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
-* `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
 * `nimodinst <http://nimi-python.readthedocs.io/en/master/nimodinst.html#installation>`_
+* `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
 * `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
+* `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
+* `nitclk <http://nimi-python.readthedocs.io/en/master/nitclk.html#installation>`_
 
 
 Contributing
@@ -445,7 +487,9 @@ To report a bug or submit a feature request specific to NI Modular Instruments P
 Fill in the issue template as completely as possible and we will respond as soon
 as we can.
 
-For hardware support or any other questions not specific to this GitHub project, please visit [NI Community Forums](https://forums.ni.com/).
+For hardware support or any other questions not specific to this GitHub project, please visit `NI Community Forums <https://forums.ni.com/>`_.
+
+
 .. _documentation-section:
 
 Documentation

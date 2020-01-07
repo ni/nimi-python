@@ -8,7 +8,9 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
-default_python_cmd = ['c://Python27//python.exe']
+default_python_cmd = ['python.exe']
+drivers_to_upload = ['nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+drivers_to_update = ['nifake'] + drivers_to_upload
 
 
 def configure_logging(lvl=logging.WARNING, logfile=None):
@@ -25,32 +27,57 @@ def configure_logging(lvl=logging.WARNING, logfile=None):
     root.addHandler(hndlr)
 
 
+class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
+    '''We want the description to use the raw formatting but have the parameters be formatted as before
+
+    from stackoverflow:
+    https://stackoverflow.com/questions/18462610/argumentparser-epilog-and-description-formatting-in-conjunction-with-argumentdef
+    '''
+    pass
+
+
 def main():
     # Setup the required arguments for this script
     usage = """Release script
 Prereqs
     * Be able to build locally
-    * `pip install --upgrade twine` into whichever Python 2.7 you use to build
+    * `pip install --upgrade twine tox` into whichever Python 2.7 you use to build
 
 Steps
-    * Make sure master is ready for release
+    * Build master to ensure it is in a good state and ready for release
+    * Ensure no commits are made on master until the release is complete
+    * Create and checkout a branch for release-related changes
+    * Update changelog
         * Update the changelog to show the version of the release
         * Change unreleased in TOC to new version
-        * Commit to master
-    * `c:\Python36\python.exe tools\build_release.py --build --update --upload --release`
+        * Commit to branch
+    * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
+        * Commit to branch
+    * `python3 tools/build_release.py --build`
         * Clean and build to update generated files with new version
+        * Commit to branch
+    * Create a pull request
+        * It should contain all the changes made so far
+        * Get the pull request reviewed but DO NOT merge to master yet
+    * `python3 tools/build_release.py --upload`
         * Upload to PyPI - you will need to type in your credentials
-    * Push all changes to GitHub
+    * Merge the pull request to origin/master
     * Create a release on GitHub using the portion from the changelog for this release for the description
-    * `c:\Python36\python.exe tools\build_release.py --build --update`
+    * Create and checkout another branch for post-release changes
+    * `python3 tools/build_release.py --update`
         * This will update the version to X.X.(N+1).dev0
+        * Commit to branch
+    * `python3 tools/build_release.py --build`
         * Clean and Build to update generated files
-    * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
-    * Push to GitHub
+        * Commit to branch
+    * Update changelog
+        * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
+        * Commit to branch
+    * Create a pull request containing post-release changes and get it merged
 
 """
-    parser = argparse.ArgumentParser(description=usage)
+    parser = argparse.ArgumentParser(description=usage, formatter_class=CustomFormatter)
 
     build_group = parser.add_argument_group("Build configuration")
     build_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. build, then update with .dev0")
@@ -89,22 +116,10 @@ Steps
 
     if args.update:
         logging.info('Updating versions')
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifake/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifake/metadata/config_addon.py', ] + passthrough_params)
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidcpower/metadata/config_addon.py', ] + passthrough_params)
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidmm/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nidmm/metadata/config_addon.py', ] + passthrough_params)
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niswitch/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niswitch/metadata/config_addon.py', ] + passthrough_params)
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nimodinst/metadata/config_addon.py', ] + passthrough_params)
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nifgen/metadata/config_addon.py', ] + passthrough_params)
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/niscope/metadata/config_addon.py', ] + passthrough_params)
-        logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config_addon.py', ] + passthrough_params))
-        check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/nise/metadata/config_addon.py', ] + passthrough_params)
+
+        for d in drivers_to_update:
+            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/{}/metadata/config_addon.py'.format(d), ] + passthrough_params))
+            check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/{}/metadata/config_addon.py'.format(d), ] + passthrough_params)
 
     if args.build:
         logging.info('Clean and build')
@@ -117,7 +132,10 @@ Steps
 
     if args.upload:
         logging.info('Uploading to PyPI')
-        complete_twine_cmd = twine_cmd + ['upload', 'bin/nidcpower/dist/*', 'bin/nidigital/dist/*', 'bin/nidmm/dist/*', 'bin/nimodinst/dist/*', 'bin/niswitch/dist/*', 'bin/nifgen/dist/*', 'bin/niscope/dist/*', 'bin/nise/dist/*']
+        complete_twine_cmd = twine_cmd + ['upload']
+        for d in drivers_to_upload:
+            complete_twine_cmd += ['generated/{}/dist/*'.format(d)]
+
         logging.info(pp.pformat(complete_twine_cmd))
         if not args.preview:
             check_call(complete_twine_cmd)

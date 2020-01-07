@@ -9,7 +9,6 @@ import ${module_name}.errors as errors
 
 import datetime
 import numbers
-import six
 
 try:
     from functools import singledispatch  # Python 3.4+
@@ -57,7 +56,6 @@ def _(repeated_capability, prefix):
 
 
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
-@_convert_repeated_capabilities.register(six.text_type)  # noqa: F811
 @_convert_repeated_capabilities.register(str)  # noqa: F811
 def _(repeated_capability, prefix):
     '''String version (this is the most complex)
@@ -213,6 +211,39 @@ def convert_init_with_options_dictionary(values, encoding):
         init_with_options_string = ','.join(init_with_options)
 
     return init_with_options_string
+
+
+# nitclk specific converters
+def convert_to_nitclk_session_number(item):
+    '''Convert from supported objects to NI-TClk Session Num
+
+    Supported objects are:
+    - class with .tclk object of type nitclk.SessionReference
+    - nitclk.SessionReference
+    - NI-TClk Session Num
+    '''
+    try:
+        return item.tclk._get_session_number()
+    except AttributeError:
+        pass
+
+    try:
+        return item._get_session_number()
+    except AttributeError:
+        pass
+
+    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
+    return item
+
+
+def convert_to_nitclk_session_number_list(item_list):
+    '''Converts a list of items to nitclk session nums'''
+    return [convert_to_nitclk_session_number(i) for i in item_list]
+
+
+# nifake specific converter(s) - used only for testing
+def convert_double_each_element(numbers):
+    return [x * 2 for x in numbers]
 
 
 # Let's run some tests
