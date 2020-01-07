@@ -22,14 +22,31 @@
         for site in waveform_data:
             if len(waveform_data[site]) != actual_samples_per_waveform:
                 raise ValueError('Mismatched length of waveforms. All must be the same length.')
-            if waveform_data[site].typecode != 'L':
-                raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
+            # Check the type by using string comparison so that we don't import numpy unecessarilly.
+            if str(type(waveform_data[site])).find("'numpy.ndarray'") != -1:
+                import numpy
+                if waveform_data[site].dtype == numpy.int32:
+                    wfm = array.array('L', waveform_data[site])
+                else:
+                    raise TypeError("Unsupported dtype. Is {0}, expected {1}".format(waveform_data[site].dtype, numpy.int32))
+
+            elif isinstance(waveform_data[site], array.array):
+                if waveform_data[site].typecode == 'L':
+                    wfm = waveform_data[site]
+                else:
+                    raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
+
+            elif isinstance(waveform_data[site], list):
+                wfm = array.array('L', waveform_data[site])
+
+            else:
+                raise ValueError('Unknown array type: {}'.format(type(waveform_data[site])))
 
             site_list.append('site' + str(site))
 
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
-            mv[start:end] = waveform_data[site]
+            mv[start:end] = wfm
 
             i += 1
 
