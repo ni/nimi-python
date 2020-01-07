@@ -15,10 +15,6 @@ BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/helper/*)
 
 DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
 
-VERSION ?= 0.1
-WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
-SDIST := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION).tar.gz
-
 MKDIRECTORIES += \
     $(DRIVER_DOCS_DIR) \
     $(OUTPUT_DIR) \

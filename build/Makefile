@@ -1,6 +1,6 @@
 include $(BUILD_HELPER_DIR)/tools.mak
 
-DEFAULT_TARGETS := module wheel sdist
+DEFAULT_TARGETS := module doc_files
 export DEFAULT_TARGETS
 
 GENERATED_DIR := $(ROOT_DIR)/generated
@@ -56,13 +56,22 @@ $1:
 	$(foreach d,$(DRIVERS),make --no-print-directory -f src/$(d)/$(d).mak DRIVER=$(d) $1 &&)  echo
 endef
 
-# We add test when we create the $(DEFAULT_TARGETS). This is because it shouldn't be
-# run when all is used, but we want it to work
 $(foreach t,$(DEFAULT_TARGETS),$(eval $(call per_target,$(t))))
+
+define per_driver_installers
+$1_installers: start
+	@echo
+	@echo "Making $1 installers"
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 MKDIR
+	$(_hide_cmds)make --no-print-directory -s -f src/$1/$1.mak DRIVER=$1 installers
+endef
+
+$(foreach d,$(ALL_DRIVERS),$(eval $(call per_driver_installers,$(d))))
+installers: $(foreach d,$(ALL_DRIVERS), $(d)_installers)
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 
-# We need to ensure generated/ exists for Travis CI builds
+# We need to ensure generated exists for Travis CI builds
 clean: start
 	@echo 'Cleaning...'
 	-$(_hide_cmds)rm -Rf $(GENERATED_DIR)/ $(SUPPRESS_ERROR_OUTPUT) ||:

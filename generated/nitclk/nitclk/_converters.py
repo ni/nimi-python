@@ -5,7 +5,6 @@ import nitclk.errors as errors
 
 import datetime
 import numbers
-import six
 
 try:
     from functools import singledispatch  # Python 3.4+
@@ -53,7 +52,6 @@ def _(repeated_capability, prefix):
 
 
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
-@_convert_repeated_capabilities.register(six.text_type)  # noqa: F811
 @_convert_repeated_capabilities.register(str)  # noqa: F811
 def _(repeated_capability, prefix):
     '''String version (this is the most complex)
