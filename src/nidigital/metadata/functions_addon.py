@@ -2,6 +2,11 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    'MapPinToChannel': {
+        'parameters': {
+            3: {'is_repeated_capability': False, },  # Can remove once updated from internal metadata
+        },
+    },
 }
 
 functions_additional_write_source_waveform_site_unique = {
