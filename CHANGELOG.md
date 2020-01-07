@@ -59,6 +59,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-Digital Pattern Driver
     * #### Added
     * #### Changed
+        * `write_source_waveform_site_unique()` now supports numpy.array and list as site waveform types
     * #### Removed
 * ### NI-TClk
     * #### Added
