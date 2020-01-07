@@ -59,6 +59,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-Digital Pattern Driver
     * #### Added
     * #### Changed
+        * `map_pin_to_channel()` channel parameter is not a repeated capability [#1129](https://github.com/ni/nimi-python/issues/1129)
     * #### Removed
 * ### NI-TClk
     * #### Added
