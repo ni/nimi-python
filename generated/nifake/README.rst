@@ -1,8 +1,8 @@
 This is the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-Copyright (c) 2017, National Instruments Corp.
-NI-DMM, NI-DCPower, NI-FGEN, NI-SCOPE, NI-SWITCH, NI Switch Executive are trademarks of National
-Instruments.
+Copyright (c) 2017-2020, National Instruments Corp.
+NI-Digital, NI-DMM, NI-DCPower, NI-FGEN, NI-SCOPE, NI-SWITCH, NI Switch Executive,
+NI-ModInst, NI-TClk are trademarks of National Instruments.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this
 software and associated documentation files (the "Software"), to deal in the Software
