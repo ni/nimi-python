@@ -10,12 +10,10 @@
 VERSION text=set eol=lf
 *.mak text=set eol=lf
 Makefile text=set eol=lf
-License text=set eol=lf
+LICENSE text=set eol=lf
 *.rc text=set eol=lf
-
 # Custom for Visual Studio
 *.cs     diff=csharp
-
 # Standard to msysgit
 *.doc	 diff=astextplain
 *.DOC	 diff=astextplain
@@ -27,3 +25,6 @@ License text=set eol=lf
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+*.whl filter=lfs diff=lfs merge=lfs -text
+*.gz filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
