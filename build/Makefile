@@ -65,16 +65,15 @@ SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 # We need to ensure generated/ exists for Travis CI builds
 clean: start
 	@echo 'Cleaning...'
-	-@rm -Rf $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@find $(ROOT_DIR) -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@find $(ROOT_DIR) -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@find $(ROOT_DIR) -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*) $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
-	-@mkdir $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(GENERATED_DIR)/ $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)find $(ROOT_DIR)/build -path '*/__pycache__/*' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)find $(ROOT_DIR)/build -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)find $(ROOT_DIR)/build -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)mkdir $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
 	-@echo "# This is the list of commands that make invoked in order to build nimi-python. If" > $(COMMAND_LOG)
