@@ -1257,34 +1257,6 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def map_pin_to_channel(self, pin, site):
-        r'''map_pin_to_channel
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].map_pin_to_channel(pin, site)
-
-        Args:
-            pin (str):
-
-            site (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
-        site_ctype = _visatype.ViInt32(site)  # case S150
-        channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDigital_MapPinToChannel(vi_ctype, pin_ctype, site_ctype, channel_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def ppmu_configure_aperture_time(self, aperture_time, units):
         r'''ppmu_configure_aperture_time
 
@@ -3456,6 +3428,28 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         timing_file_path_ctype = ctypes.create_string_buffer(timing_file_path.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_LoadTiming(vi_ctype, timing_file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def map_pin_to_channel(self, pin, site, channel):
+        r'''map_pin_to_channel
+
+        TBD
+
+        Args:
+            pin (str):
+
+            site (int):
+
+            channel (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
+        site_ctype = _visatype.ViInt32(site)  # case S150
+        channel_ctype = ctypes.create_string_buffer(channel.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_MapPinToChannel(vi_ctype, pin_ctype, site_ctype, channel_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

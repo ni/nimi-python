@@ -2563,21 +2563,12 @@ map_pin_to_channel
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: map_pin_to_channel(pin, site)
+    .. py:method:: map_pin_to_channel(pin, site, channel)
 
             TBD
 
             
 
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].map_pin_to_channel(pin, site)
 
 
             :param pin:
@@ -2594,6 +2585,13 @@ map_pin_to_channel
 
 
             :type site: int
+            :param channel:
+
+
+                
+
+
+            :type channel: str
 
 ppmu_configure_aperture_time
 ----------------------------
