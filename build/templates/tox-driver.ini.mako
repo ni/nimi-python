@@ -45,7 +45,7 @@ commands =
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    ${module_name}-system_tests: curl -s https://codecov.io/bash | bash -s -- -f ../../generated/junit/*.xml
+#     ${module_name}-system_tests: curl -s https://codecov.io/bash | bash -s -- -f ../../generated/junit/*.xml
 
 deps =
 % if config['supports_nitclk']:
