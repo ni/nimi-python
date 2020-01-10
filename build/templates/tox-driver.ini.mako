@@ -45,7 +45,8 @@ commands =
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    ${module_name}-system_tests: codecov --token={env:GIT_COMMIT}
+    # token is from codecov
+    ${module_name}-system_tests: codecov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags system-tests --name ${module_name} --root ../..
 
 deps =
 % if config['supports_nitclk']:
