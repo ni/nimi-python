@@ -2,6 +2,72 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    'ConfigureCycleNumberHistoryRAMTrigger': {
+        'codegen_method': 'no'
+    },
+    'ConfigureDigitalEdgeConditionalJumpTrigger': {
+        'codegen_method': 'no'
+    },
+    'ConfigureDigitalEdgeStartTrigger': {
+        'codegen_method': 'no'
+    },
+    'ConfigureFirstFailureHistoryRAMTrigger': {
+        'codegen_method': 'no'
+    },
+    'ConfigureHistoryRAMCyclesToAcquire': {
+        'codegen_method': 'no'
+    },
+    'ConfigurePatternLabelHistoryRAMTrigger': {
+        'codegen_method': 'no'
+    },
+    'ConfigureSoftwareEdgeConditionalJumpTrigger': {
+        'codegen_method': 'no'
+    },
+    'ConfigureSoftwareEdgeStartTrigger': {
+        'codegen_method': 'no'
+    },
+    'ConfigureStartLabel': {
+        'codegen_method': 'no'
+    },
+    'ConfigureTerminationMode': {
+        'codegen_method': 'no'
+    },
+    'DisableConditionalJumpTrigger': {
+        'codegen_method': 'no'
+    },
+    'DisableStartTrigger': {
+        'codegen_method': 'no'
+    },
+    'FrequencyCounter_ConfigureMeasurementTime': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureApertureTime': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureCurrentLevel': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureCurrentLevelRange': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureCurrentLimit': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureCurrentLimitRange': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureOutputFunction': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureVoltageLevel': {
+        'codegen_method': 'no'
+    },
+    'PPMU_ConfigureVoltageLimits': {
+        'codegen_method': 'no'
+    },
+    'SelectFunction': {
+        'codegen_method': 'no'
+    }
 }
 
 functions_additional_write_source_waveform_site_unique = {
