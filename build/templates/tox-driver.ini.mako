@@ -26,6 +26,9 @@ commands =
     ${module_name}-system_tests: python --version
     ${module_name}-system_tests: python -c "import platform; print(platform.architecture())"
     ${module_name}-system_tests: python -c "import ${module_name}; nidcpower.print_diagnostic_information()"
+% if config['supports_nitclk']:
+    ${module_name}-system_tests: python tools/install_local_wheel.py --driver nitclk
+% endif
     ${module_name}-system_tests: coverage run --rcfile=tools/coverage_system_tests.rc --source ${module_name} -m py.test src/${module_name}/examples --junitxml=generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=tools/coverage_system_tests.rc --source ${module_name} -m py.test src/${module_name}/system_tests --junitxml=generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage report --rcfile=tools/coverage_system_tests.rc
