@@ -35,5 +35,5 @@ script:
 
 after_success:
   - travis_retry coveralls --rcfile=tools/coverage_unit_tests.rc
-  - travis_retry codecov --flags unit-tests
+  - travis_retry codecov --flags unittests
 
