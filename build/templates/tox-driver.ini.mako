@@ -57,4 +57,7 @@ deps =
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
 
+whitelist_externals =
+    ${module_name}-system_tests: curl
+
 
