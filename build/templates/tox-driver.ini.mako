@@ -17,7 +17,7 @@ envlist = ${nitclk_env}py{35,36,37,38,py3}-${module_name}-system_tests
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
 # We put the .tox directory outside of the workspace so that it isn't wiped with the rest of the repo
-toxworkdir = ../.tox
+toxworkdir = ../../../.tox
 
 [testenv]
 description =
@@ -38,7 +38,7 @@ commands =
 % endif
     ${module_name}-system_tests: python --version
     ${module_name}-system_tests: python -c "import platform; print(platform.architecture())"
-    ${module_name}-system_tests: python -c "import ${module_name}; nidcpower.print_diagnostic_information()"
+    ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
 % if config['supports_nitclk']:
     ${module_name}-system_tests: python tools/install_local_wheel.py --driver nitclk
 % endif
