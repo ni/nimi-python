@@ -60,4 +60,9 @@ deps =
     ${module_name}-system_tests: codecov
 
 passenv = 
+    GIT_BRANCH
     GIT_COMMIT
+    BUILD_URL
+    BRANCH_NAME
+    JENKINS_URL
+    BUILD_NUMBER
