@@ -53,7 +53,6 @@ class Library(object):
         self.niDigital_DisableSites_cfunc = None
         self.niDigital_EnableSites_cfunc = None
         self.niDigital_EndChannelMap_cfunc = None
-        self.niDigital_ExportSignal_cfunc = None
         self.niDigital_FetchCaptureWaveformU32_cfunc = None
         self.niDigital_FetchHistoryRAMCycleInformation_cfunc = None
         self.niDigital_FetchHistoryRAMCyclePinData_cfunc = None
@@ -401,14 +400,6 @@ class Library(object):
                 self.niDigital_EndChannelMap_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDigital_EndChannelMap_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_EndChannelMap_cfunc(vi)
-
-    def niDigital_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ExportSignal_cfunc is None:
-                self.niDigital_ExportSignal_cfunc = self._library.niDigital_ExportSignal
-                self.niDigital_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
     def niDigital_FetchCaptureWaveformU32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
         with self._func_lock:

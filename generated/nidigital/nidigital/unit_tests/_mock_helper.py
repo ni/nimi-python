@@ -86,8 +86,6 @@ class SideEffectsHelper(object):
         self._defaults['EnableSites']['return'] = 0
         self._defaults['EndChannelMap'] = {}
         self._defaults['EndChannelMap']['return'] = 0
-        self._defaults['ExportSignal'] = {}
-        self._defaults['ExportSignal']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation'] = {}
         self._defaults['FetchHistoryRAMCycleInformation']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation']['patternIndex'] = None
@@ -459,11 +457,6 @@ class SideEffectsHelper(object):
         if self._defaults['EndChannelMap']['return'] != 0:
             return self._defaults['EndChannelMap']['return']
         return self._defaults['EndChannelMap']['return']
-
-    def niDigital_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        if self._defaults['ExportSignal']['return'] != 0:
-            return self._defaults['ExportSignal']['return']
-        return self._defaults['ExportSignal']['return']
 
     def niDigital_FetchHistoryRAMCycleInformation(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         if self._defaults['FetchHistoryRAMCycleInformation']['return'] != 0:
@@ -1235,8 +1228,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_EnableSites.return_value = 0
         mock_library.niDigital_EndChannelMap.side_effect = MockFunctionCallError("niDigital_EndChannelMap")
         mock_library.niDigital_EndChannelMap.return_value = 0
-        mock_library.niDigital_ExportSignal.side_effect = MockFunctionCallError("niDigital_ExportSignal")
-        mock_library.niDigital_ExportSignal.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCycleInformation")
         mock_library.niDigital_FetchHistoryRAMCycleInformation.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCyclePinData")

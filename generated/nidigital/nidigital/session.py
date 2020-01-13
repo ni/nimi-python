@@ -2274,30 +2274,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def export_signal(self, signal, signal_identifier, output_terminal):
-        r'''export_signal
-
-        TBD
-
-        Args:
-            signal (enums.Signal):
-
-            signal_identifier (str):
-
-            output_terminal (str):
-
-        '''
-        if type(signal) is not enums.Signal:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Signal))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
-        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
-        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def _fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout):
         # This is slightly modified codegen from the function
         # We cannot use codegen without major modifications to the code generator

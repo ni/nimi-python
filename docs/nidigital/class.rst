@@ -1221,41 +1221,6 @@ end_channel_map
 
 
 
-export_signal
--------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: export_signal(signal, signal_identifier, output_terminal)
-
-            TBD
-
-            
-
-
-
-            :param signal:
-
-
-                
-
-
-            :type signal: :py:data:`nidigital.Signal`
-            :param signal_identifier:
-
-
-                
-
-
-            :type signal_identifier: str
-            :param output_terminal:
-
-
-                
-
-
-            :type output_terminal: str
-
 fetch_capture_waveform
 ----------------------
 

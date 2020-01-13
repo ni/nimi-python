@@ -38,6 +38,9 @@ functions_override_metadata = {
     'DisableStartTrigger': {
         'codegen_method': 'no'
     },
+    'ExportSignal': {
+        'codegen_method': 'no'
+    },
     'FrequencyCounter_ConfigureMeasurementTime': {
         'codegen_method': 'no'
     },
