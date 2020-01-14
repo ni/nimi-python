@@ -78,17 +78,14 @@ def test_read_current_temperature(session):
     assert temperature == 25.0
 
 
-def test_reset_device():
-    # TODO(frank): reset_device does not work with simulated PXIe-4162 modules due to internal NI bug.
-    # Update to use the session created with 'session' function above after internal NI bug is fixed.
-    with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        channel = session.channels['0']
-        default_output_function = channel.output_function
-        assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
-        channel.output_function = nidcpower.OutputFunction.DC_CURRENT
-        session.reset_device()
-        function_after_reset = channel.output_function
-        assert function_after_reset == default_output_function
+def test_reset_device(session):
+    channel = session.channels['0']
+    default_output_function = channel.output_function
+    assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
+    channel.output_function = nidcpower.OutputFunction.DC_CURRENT
+    session.reset_device()
+    function_after_reset = channel.output_function
+    assert function_after_reset == default_output_function
 
 
 def test_reset_with_default(session):
