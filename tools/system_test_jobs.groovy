@@ -1,6 +1,5 @@
 // Driver list
-// DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", "nise", "nimodinst" ]
-DRIVERS = [ "nidcpower", "nidigital" ]
+DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", "nise", "nimodinst" ]
 // Platform list - also used as node label
 PLATFORMS = [ "win32", "win64" ]
 
