@@ -70,10 +70,6 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
-def test_get_pin_results_pin_information(multi_instrument_session):
-    pass
-
-
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
