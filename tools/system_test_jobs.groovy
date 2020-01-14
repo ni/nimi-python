@@ -51,10 +51,8 @@ tools\\system_tests.bat ${driver}
         }
 
         publishers {
-            archiveXUnit {
-                jUnit {
-                    pattern("generated/junit/*.xml")
-                }
+            archiveJunit("generated/junit/*.xml") {
+                retainLongStdout()
             }
         }
     }
