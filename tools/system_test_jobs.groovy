@@ -23,7 +23,7 @@ def genJob(driver, platform) {
                 }
                 remote {
                     github('ni/nimi-python')
-                    credentials('863d43e0-e019-4254-b55a-8ea9a7edf9a1')
+                    credentials('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
                 }
             }
         }
@@ -45,7 +45,7 @@ tools\\system_tests.bat ${driver}
                 }
                 gitHubContext("system_tests/jenkins/${platform}/${driver}")
                 description("System test for ${driver} on ${platform}")
-                credentialsId('863d43e0-e019-4254-b55a-8ea9a7edf9a1')
+                credentialsId('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
             }
 
         }
