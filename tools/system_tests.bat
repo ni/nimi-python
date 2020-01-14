@@ -1,13 +1,4 @@
-@echo off
-
-echo The current working directory
-echo %cd%
-
-echo Contents
-dir
-
-echo Contents of generated
-dir generated\
+rem @echo off
 
 echo Testing %1
 pushd generated\%1
