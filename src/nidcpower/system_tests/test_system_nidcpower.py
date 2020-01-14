@@ -22,10 +22,8 @@ def multiple_channel_session():
         yield simulated_session
 
 
-def test_self_test():
-    with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe') as session:
-        # We should not get an assert if self_test passes
-        session.self_test()
+def test_self_test(session):
+    session.self_test()
 
 
 def test_self_cal(session):
