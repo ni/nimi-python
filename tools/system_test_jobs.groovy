@@ -39,7 +39,7 @@ def genJob(driver, platform) {
                     batchFile {
                         command("""@echo off
 echo Running system tests for ${driver} on ${platform}
-tools\\system_tests.bat
+tools\\system_tests.bat ${driver}
 """)
                     }
                 }
