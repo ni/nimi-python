@@ -13,6 +13,8 @@ def genJob(driver, platform) {
     job("${jobName}") {
         description "Run system tests for ${driver} on ${platform}"
 
+        label(platform)
+
         scm {
             git {
                 branch('generate_jenkins_jobs')
