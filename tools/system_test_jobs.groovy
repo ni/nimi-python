@@ -9,6 +9,7 @@ ROOT_FOLDER = "nimi-bot"
 // returns generatd job name
 def genJob(driver, platform) {
     jobName = "${ROOT_FOLDER}/${platform}/${driver}"
+    println "Processing ${jobName}"
     job("${jobName}") {
         description "Run system tests for ${driver} on ${platform}"
 
