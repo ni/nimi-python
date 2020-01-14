@@ -1,7 +1,7 @@
 @echo off
 
 echo The current working directory
-pwd
+echo %cd%
 
 echo Testing %1
 pushd generated\%1
