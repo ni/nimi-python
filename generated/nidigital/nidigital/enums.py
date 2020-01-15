@@ -25,13 +25,6 @@ class SelectedFunction(Enum):
     DISCONNECT = 1103
 
 
-class Signal(Enum):
-    START_TRIGGER = 2000
-    CONDITIONAL_JUMP_TRIGGER = 2001
-    PATTERN_OPCODE_EVENT = 2002
-    REF_CLOCK = 2003
-
-
 class SiteResult(Enum):
     PASS_FAIL = 3300
     CAPTURE_WAVEFORM = 3301
