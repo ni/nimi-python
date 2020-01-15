@@ -17,7 +17,7 @@ def genJob(driver, platform) {
 
         scm {
             git {
-                branch('generate_jenkins_jobs')
+                branch('use_ghprb')
                 extensions {
                     wipeWorkspace()
                 }
@@ -29,10 +29,15 @@ def genJob(driver, platform) {
         }
 
         triggers {
-            scm('H/3 * * * *')
+            githubPullRequest {
+                admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
+                userWhitelist(['texasaggie97', 'marcoskirsch', 'sbethur'])
+                orgWhitelist('ni')
+                cron('H/3 * * * *')
+            }
         }
 
-        // Once we suppot Linux, we will need to generate the steps differently
+        // Once we suppot Linux, we will need to be able to generate the steps differently
         steps {
             gitStatusWrapperBuilder {
                 buildSteps {
