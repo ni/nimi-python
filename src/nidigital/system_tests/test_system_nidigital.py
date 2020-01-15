@@ -70,10 +70,6 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
-def test_get_pin_results_pin_information(multi_instrument_session):
-    pass
-
-
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
@@ -239,3 +235,17 @@ def test_fetch_capture_waveform(multi_instrument_session):
     assert fetched_site == 1
     assert len(fetched_waveform[fetched_site]) == num_samples
 
+
+def test_get_pin_results_pin_information(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    fully_qualified_channels = [instr[1] + '/0', instr[0] + '/1', instr[1] + '/11']
+    pin_info = multi_instrument_session.channels[fully_qualified_channels].get_pin_results_pin_information()
+
+    pins = [i.pin_name for i in pin_info]
+    sites = [i.site_number for i in pin_info]
+    channels = [i.channel_name for i in pin_info]
+
+    assert pins == ['PinA', 'PinB', '']
+    assert sites == [1, 0, -1]
+    assert channels == fully_qualified_channels
