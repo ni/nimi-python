@@ -62,27 +62,6 @@ SelectedFunction
 
 
 
-Signal
-------
-
-.. py:class:: Signal
-
-    .. py:attribute:: Signal.START_TRIGGER
-
-
-
-    .. py:attribute:: Signal.CONDITIONAL_JUMP_TRIGGER
-
-
-
-    .. py:attribute:: Signal.PATTERN_OPCODE_EVENT
-
-
-
-    .. py:attribute:: Signal.REF_CLOCK
-
-
-
 SiteResult
 ----------
 
