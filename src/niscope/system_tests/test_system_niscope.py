@@ -255,10 +255,16 @@ def test_filter_coefficients():
             filter_coefficients = [1.0, 0.0, 0.0]
             session.configure_equalization_filter_coefficients(filter_coefficients)
         except niscope.Error as e:
+            assert "Incorrect number of filter coefficients." in e.description
             assert e.code == -1074135024
         filter_coefficients = [0.01] * 35
-        session.configure_equalization_filter_coefficients(filter_coefficients)
+        # TODO(marcoskirsch): The following line should work. It doesn't due to internal NI-SCOPE driver bug 959625.
+        #                     The workaround is to explicitly pass channel "0" rather than the default "" to the driver runtime
+        #                     even though the two should be equivalent on a PXI-5142 (a 1 channel device).
+        #session.configure_equalization_filter_coefficients(filter_coefficients)
+        session.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
         assert filter_coefficients == session.get_equalization_filter_coefficients()
+
 
 def test_send_software_trigger_edge(session):
     session.send_software_trigger_edge(niscope.WhichTrigger.ARM_REFERENCE)
