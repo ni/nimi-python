@@ -11,7 +11,7 @@
 # Tox (http://tox.testrun.org/) is a tool for running tests
 # in multiple virtualenvs. This configuration file will run the
 # test suite on all supported python versions. To use it, "pip install tox"
-# and then run "tox" from this directory.
+# and then run "tox -c tox-driver.ini" from the driver directory.
 [tox]
 envlist = ${nitclk_env}py{35,36,37,38,py3}-${module_name}-system_tests
 skip_missing_interpreters=True
