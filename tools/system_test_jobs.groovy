@@ -15,25 +15,22 @@ def genJob(driver, platform) {
 
         label(platform)
 
+        parameters {
+            stringParam('sha1', 'master', 'SHA to build')
+        }
+
         scm {
             git {
                 branch('use_ghprb')
                 extensions {
                     wipeWorkspace()
                 }
+                branch('${sha1}')
                 remote {
                     github('ni/nimi-python')
                     credentials('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
+                    refspec('+refs/pull/*:refs/remotes/origin/pr/*')
                 }
-            }
-        }
-
-        triggers {
-            githubPullRequest {
-                admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
-                userWhitelist(['texasaggie97', 'marcoskirsch', 'sbethur'])
-                orgWhitelist('ni')
-                cron('H/3 * * * *')
             }
         }
 
@@ -82,4 +79,49 @@ for (driver in DRIVERS)
     }
 }
 
-println(jobList.join(','))
+// Generate the trigger job
+job("${ROOT_FOLDER}/Trigger Job") {
+    description "Run all driver system tests on all platforms"
+
+    parameters {
+        stringParam('sha1', 'master', 'SHA to build')
+    }
+
+    label('master')
+
+    scm {
+        git {
+            branch('use_ghprb')
+            extensions {
+                wipeWorkspace()
+            }
+            branch('${sha1}')
+            remote {
+                github('ni/nimi-python')
+                credentials('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
+                refspec('+refs/pull/*:refs/remotes/origin/pr/*')
+            }
+        }
+    }
+
+    triggers {
+        githubPullRequest {
+            admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
+            userWhitelist(['texasaggie97', 'marcoskirsch', 'sbethur'])
+            orgWhitelist('ni')
+            cron('H/3 * * * *')
+        }
+    }
+
+    publishers {
+        downstreamParameterized {
+            trigger(jobList) {
+                condition('UNSTABLE_OR_BETTER')
+                parameters {
+                    predefinedProp('sha1', '${sha1}')
+                }
+            }
+        }
+    }
+}
+
