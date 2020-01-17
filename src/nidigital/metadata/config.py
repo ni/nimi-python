@@ -45,7 +45,7 @@ config = {
             'python_name': 'pins',
         },
     ],
-    'session_class_description': 'An NI-Digital session',
+    'session_class_description': 'An NI-Digital Pattern Driver session',
     'session_handle_parameter_name': 'vi',
     'supports_nitclk': True,
 }
