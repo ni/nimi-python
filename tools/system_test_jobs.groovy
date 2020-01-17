@@ -36,7 +36,7 @@ def genJob(driver, platform) {
             scm('H/3 * * * *')
         }
 
-        // Once we suppot Linux, we will need to generate the steps differently
+        // Once we add automated system tests on Linux, we will need to generate the steps differently
         steps {
             gitStatusWrapperBuilder {
                 buildSteps {
