@@ -3,6 +3,7 @@
 
     config = template_parameters['metadata'].config
     module_name = config['module_name']
+    driver_name = config['driver_name']
     if config['supports_nitclk']:
         nitclk_env = 'py38-{}-nitclk_wheel,'.format(module_name)
     else:
@@ -24,7 +25,7 @@ description =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: Build the nitclk wheel
 % endif
-    ${module_name}-system_tests: Run ${module_name} system tests (requires driver runtime to be installed)
+    ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
 
 changedir =
 % if config['supports_nitclk']:
