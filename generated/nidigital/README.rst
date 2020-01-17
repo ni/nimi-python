@@ -140,7 +140,7 @@ The following is a basic example of using the **nidigital** module to open a ses
     with nidigital.Session(resource_name='PXI1Slot2', channels='0') as session:
         pass
 
-Additional examples for NI-Digital are located in src/nidigital/examples/ directory.
+Additional examples for NI-Digital Pattern Driver are located in src/nidigital/examples/ directory.
 
 .. _support-section:
 

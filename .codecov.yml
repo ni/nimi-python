@@ -6,7 +6,9 @@ coverage:
   status:
     project:
       default:
-        target: 84%
+        # TODO(texasaggie97) - target lowered when adding system test coverage. Raise as coverage rises.
+        # TODO(texasaggie97) - update target when files other than _library.py removed from coverage report
+        target: 70%
         threshhold: 5
     patch:
       default:

@@ -1582,10 +1582,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-Digital session'''
+    '''An NI-Digital Pattern Driver session'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
-        r'''An NI-Digital session
+        r'''An NI-Digital Pattern Driver session
 
         TBD
 
@@ -1641,6 +1641,8 @@ class Session(_SessionBase):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
         self.pins = _RepeatedCapabilities(self, '')
+        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
+        self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent')
 
         self.tclk = nitclk.SessionReference(self._vi)
 
@@ -2372,14 +2374,31 @@ class Session(_SessionBase):
         for site in waveform_data:
             if len(waveform_data[site]) != actual_samples_per_waveform:
                 raise ValueError('Mismatched length of waveforms. All must be the same length.')
-            if waveform_data[site].typecode != 'L':
-                raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
+            # Check the type by using string comparison so that we don't import numpy unecessarilly.
+            if str(type(waveform_data[site])).find("'numpy.ndarray'") != -1:
+                import numpy
+                if waveform_data[site].dtype == numpy.uint32:
+                    wfm = array.array('L', waveform_data[site])
+                else:
+                    raise TypeError("Unsupported dtype for waveform_data array element type. Is {0}, expected {1}".format(waveform_data[site].dtype, numpy.int32))
+
+            elif isinstance(waveform_data[site], array.array):
+                if waveform_data[site].typecode == 'L':
+                    wfm = waveform_data[site]
+                else:
+                    raise TypeError('Wrong waveform_data array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
+
+            elif isinstance(waveform_data[site], list):
+                wfm = array.array('L', waveform_data[site])
+
+            else:
+                raise TypeError('Unknown array type: {}'.format(type(waveform_data[site])))
 
             site_list.append('site' + str(site))
 
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
-            mv[start:end] = waveform_data[site]
+            mv[start:end] = wfm
 
             i += 1
 
