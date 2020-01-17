@@ -2825,6 +2825,58 @@ pins
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
+conditional_jump_trigger
+------------------------
+
+    .. py:attribute:: nidigital.Session.conditional_jump_trigger[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.conditional_jump_trigger['0-2'].channel_enabled = True
+
+        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.conditional_jump_trigger['conditionalJumpTrigger0-conditionalJumpTrigger2'].channel_enabled = True
+
+        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
+
+
+pattern_opcode_event
+--------------------
+
+    .. py:attribute:: nidigital.Session.pattern_opcode_event[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.pattern_opcode_event['0-2'].channel_enabled = True
+
+        passes a string of :python:`'patternOpcodeEvent0, patternOpcodeEvent1, patternOpcodeEvent2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.pattern_opcode_event['patternOpcodeEvent0-patternOpcodeEvent2'].channel_enabled = True
+
+        passes a string of :python:`'patternOpcodeEvent0, patternOpcodeEvent1, patternOpcodeEvent2'` to the set attribute function.
+
+
 
 Properties
 ==========
