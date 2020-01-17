@@ -48,11 +48,11 @@ config = {
         # here and something in config_addons.py doesn't work
         {
             'prefix': 'conditionalJumpTrigger',
-            'python_name': 'conditional_jump_trigger',
+            'python_name': 'conditional_jump_triggers',
         },
         {
             'prefix': 'patternOpcodeEvent',
-            'python_name': 'pattern_opcode_event',
+            'python_name': 'pattern_opcode_events',
         },
     ],
     'session_class_description': 'An NI-Digital session',
