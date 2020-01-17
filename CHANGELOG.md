@@ -63,6 +63,7 @@ All notable changes to this project will be documented in this file.
         * `conditional_jump_triggers` and `pattern_opcode_events` repeated capabilities - [#1191](https://github.com/ni/nimi-python/issues/1191), [#1192](https://github.com/ni/nimi-python/issues/1192)
     * #### Changed
         * `write_source_waveform_site_unique()` now supports `numpy.array` and `list` as site waveform types
+        * `send_software_edge_trigger()` no longer takes any parameters. To send a SW start trigger, use the session `session.send_software_edge_trigger()`. To send a Conditional Jump Trigger, use the repeated capability `session.conditional_jump_triggers[1].send_software_edge_trigger()` - [#1193](https://github.com/ni/nimi-python/issues/1193)
     * #### Removed
         * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
 * ### NI-TClk
