@@ -42,9 +42,6 @@ class Library(object):
         self.niDigital_CreateCaptureWaveformFromFileDigicapture_cfunc = None
         self.niDigital_CreateCaptureWaveformParallel_cfunc = None
         self.niDigital_CreateCaptureWaveformSerial_cfunc = None
-        self.niDigital_CreateChannelMap_cfunc = None
-        self.niDigital_CreatePinGroup_cfunc = None
-        self.niDigital_CreatePinMap_cfunc = None
         self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc = None
         self.niDigital_CreateSourceWaveformParallel_cfunc = None
         self.niDigital_CreateSourceWaveformSerial_cfunc = None
@@ -52,7 +49,6 @@ class Library(object):
         self.niDigital_DeleteAllTimeSets_cfunc = None
         self.niDigital_DisableSites_cfunc = None
         self.niDigital_EnableSites_cfunc = None
-        self.niDigital_EndChannelMap_cfunc = None
         self.niDigital_FetchCaptureWaveformU32_cfunc = None
         self.niDigital_FetchHistoryRAMCycleInformation_cfunc = None
         self.niDigital_FetchHistoryRAMCyclePinData_cfunc = None
@@ -90,7 +86,6 @@ class Library(object):
         self.niDigital_LoadSpecifications_cfunc = None
         self.niDigital_LoadTiming_cfunc = None
         self.niDigital_LockSession_cfunc = None
-        self.niDigital_MapPinToChannel_cfunc = None
         self.niDigital_PPMU_Measure_cfunc = None
         self.niDigital_PPMU_Source_cfunc = None
         self.niDigital_ReadSequencerFlag_cfunc = None
@@ -313,30 +308,6 @@ class Library(object):
                 self.niDigital_CreateCaptureWaveformSerial_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateCaptureWaveformSerial_cfunc(vi, pin_list, waveform_name, sample_width, bit_order)
 
-    def niDigital_CreateChannelMap(self, vi, num_sites):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_CreateChannelMap_cfunc is None:
-                self.niDigital_CreateChannelMap_cfunc = self._library.niDigital_CreateChannelMap
-                self.niDigital_CreateChannelMap_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niDigital_CreateChannelMap_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_CreateChannelMap_cfunc(vi, num_sites)
-
-    def niDigital_CreatePinGroup(self, vi, pin_group_name, pin_list):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_CreatePinGroup_cfunc is None:
-                self.niDigital_CreatePinGroup_cfunc = self._library.niDigital_CreatePinGroup
-                self.niDigital_CreatePinGroup_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_CreatePinGroup_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_CreatePinGroup_cfunc(vi, pin_group_name, pin_list)
-
-    def niDigital_CreatePinMap(self, vi, dut_pin_list, system_pin_list):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_CreatePinMap_cfunc is None:
-                self.niDigital_CreatePinMap_cfunc = self._library.niDigital_CreatePinMap
-                self.niDigital_CreatePinMap_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_CreatePinMap_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_CreatePinMap_cfunc(vi, dut_pin_list, system_pin_list)
-
     def niDigital_CreateSourceWaveformFromFileTDMS(self, vi, waveform_name, waveform_file_path, write_waveform_data):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc is None:
@@ -392,14 +363,6 @@ class Library(object):
                 self.niDigital_EnableSites_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_EnableSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_EnableSites_cfunc(vi, site_list)
-
-    def niDigital_EndChannelMap(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_EndChannelMap_cfunc is None:
-                self.niDigital_EndChannelMap_cfunc = self._library.niDigital_EndChannelMap
-                self.niDigital_EndChannelMap_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDigital_EndChannelMap_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_EndChannelMap_cfunc(vi)
 
     def niDigital_FetchCaptureWaveformU32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
         with self._func_lock:
@@ -696,14 +659,6 @@ class Library(object):
                 self.niDigital_LockSession_cfunc.argtypes = [ViSession, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niDigital_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LockSession_cfunc(vi, caller_has_lock)
-
-    def niDigital_MapPinToChannel(self, vi, pin, site, channel):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_MapPinToChannel_cfunc is None:
-                self.niDigital_MapPinToChannel_cfunc = self._library.niDigital_MapPinToChannel
-                self.niDigital_MapPinToChannel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_MapPinToChannel_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_MapPinToChannel_cfunc(vi, pin, site, channel)
 
     def niDigital_PPMU_Measure(self, vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read):  # noqa: N802
         with self._func_lock:
