@@ -113,7 +113,7 @@ functions = {
     'EnumInputFunctionWithDefaults': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.'
+            'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value.'
         },
         'parameters': [
             {
@@ -151,6 +151,47 @@ functions = {
                 'enum': 'Turtle',
                 'name': 'aTurtle',
                 'type': 'ViInt16'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'StringEnumInputFunctionWithDefaults': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'This function takes one parameter other than the session, which happens to be a string enum and has a default value.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'default_value': 'MobileOS.ANDROID',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Mobile OS',
+                    'table_body': [
+                        [
+                            'ANDROID',
+                            'Android'
+                        ],
+                        [
+                            'IOS',
+                            'iOS'
+                        ],
+                        [
+                            'NONE',
+                            'nothing else'
+                        ]
+                    ]
+                },
+                'enum': 'MobileOS',
+                'name': 'aMobileOS',
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'

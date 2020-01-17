@@ -46,6 +46,21 @@ class FloatEnum(Enum):
     '''
 
 
+class MobileOS(Enum):
+    ANDROID = 'Android'
+    r'''
+    most popular OS
+    '''
+    IOS = 'iOS'
+    r'''
+    most secure OS.
+    '''
+    NONE = 'nothing else'
+    r'''
+    Remember Symbian?
+    '''
+
+
 class Turtle(Enum):
     LEONARDO = 0
     r'''

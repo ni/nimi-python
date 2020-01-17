@@ -123,5 +123,30 @@ enums = {
                 'value': 3
             }
         ]
-    }
+    },
+    'MobileOS': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'most popular OS'
+                },
+                'name': 'NIFAKE_VAL_ANDROID',
+                'value': 'Android'
+            },
+            {
+                'documentation': {
+                    'description': 'most secure OS.'
+                },
+                'name': 'NIFAKE_VAL_IOS',
+                'value': 'iOS'
+            },
+            {
+                'documentation': {
+                    'description': 'Remember Symbian?'
+                },
+                'name': 'NIFAKE_VAL_NONE',
+                'value': 'nothing else'
+            }
+        ]
+    },
 }

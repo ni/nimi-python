@@ -835,7 +835,7 @@ class Session(_SessionBase):
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         r'''enum_input_function_with_defaults
 
-        This method takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.
+        This method takes one parameter other than the session, which happens to be an enum and has a default value.
 
         Args:
             a_turtle (enums.Turtle): Indicates a ninja turtle
@@ -1578,6 +1578,32 @@ class Session(_SessionBase):
         number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
         cs_ctype = get_ctypes_pointer_for_buffer([custom_struct.struct_CustomStruct(c) for c in cs], library_type=custom_struct.struct_CustomStruct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def string_enum_input_function_with_defaults(self, a_mobile_os=enums.MobileOS.ANDROID):
+        r'''string_enum_input_function_with_defaults
+
+        This method takes one parameter other than the session, which happens to be a string enum and has a default value.
+
+        Args:
+            a_mobile_os (str): Mobile OS
+
+                +---------+--------------+
+                | ANDROID | Android      |
+                +---------+--------------+
+                | IOS     | iOS          |
+                +---------+--------------+
+                | NONE    | nothing else |
+                +---------+--------------+
+
+        '''
+        if type(a_mobile_os) is not enums.MobileOS:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MobileOS))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_mobile_os_ctype = ctypes.create_string_buffer(a_mobile_os.value.encode(self._encoding))  # case C030
+        error_code = self._library.niFake_StringEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
