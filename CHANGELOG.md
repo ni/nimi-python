@@ -48,10 +48,11 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-FGEN
     * #### Added
-        * import_attribute_configuration_file function
-        * export_attribute_configuration_file function
-        * import_attribute_configuration_buffer function
-        * import_attribute_configuration_buffer function
+        * `nifgen.Session.import_attribute_configuration_file()`
+        * `nifgen.Session.export_attribute_configuration_file()`
+        * `nifgen.Session.import_attribute_configuration_buffer()`
+        * `nifgen.Session.import_attribute_configuration_buffer()`
+        * `nifgen.Session.get_channel_name()`
     * #### Changed
     * #### Removed
 * ### NI-SCOPE

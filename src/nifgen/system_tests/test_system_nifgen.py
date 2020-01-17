@@ -464,3 +464,8 @@ def test_import_export_file(session):
     session.import_attribute_configuration_file(path)
     assert session.arb_gain == test_value_1
 
+
+def test_get_channel_name(session):
+    name = session.get_channel_name(1)
+    assert name == '0'
+
