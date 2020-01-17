@@ -1641,6 +1641,8 @@ class Session(_SessionBase):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
         self.pins = _RepeatedCapabilities(self, '')
+        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
+        self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent')
 
         self.tclk = nitclk.SessionReference(self._vi)
 
