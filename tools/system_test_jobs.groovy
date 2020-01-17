@@ -48,7 +48,7 @@ tools\\system_tests.bat ${driver}
                     }
                 }
                 gitHubContext("system_tests/jenkins/${platform}/${driver}")
-                description("System test for ${driver} on ${platform}")
+                description("System tests for ${driver} on ${platform}")
                 credentialsId('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
             }
 
