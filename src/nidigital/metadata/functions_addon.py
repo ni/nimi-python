@@ -70,7 +70,16 @@ functions_override_metadata = {
     },
     'SelectFunction': {
         'codegen_method': 'no'
-    }
+    },
+    'SendSoftwareEdgeTrigger': {
+        'method_templates': [
+            {
+                'documentation_filename': 'send_software_edge_trigger',
+                'method_python_name_suffix': '',
+                'session_filename': 'send_software_edge_trigger'
+            }
+        ],
+    },
 }
 
 functions_additional_write_source_waveform_site_unique = {
