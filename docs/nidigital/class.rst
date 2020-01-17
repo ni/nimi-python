@@ -2471,28 +2471,25 @@ send_software_edge_trigger
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: send_software_edge_trigger(trigger, trigger_identifier)
+    .. py:method:: send_software_edge_trigger()
 
-            TBD
+        Sends a command to trigger the signal generator. This VI can act as an
+        override for an external edge trigger.
 
-            
+        If called directly on the session, this will send a software start trigger.
 
+        ..code:: python
 
+            session.send_software_edge_trigger()
 
-            :param trigger:
+        If called using the script trigger repeated capability container, this will
+        send a software trigger to the specified script trigger
 
+        ..code:: python
 
-                
-
-
-            :type trigger: int
-            :param trigger_identifier:
-
-
-                
+            session.conditional_jump_triggers[1].send_software_edge_trigger()
 
 
-            :type trigger_identifier: str
 
 tdr
 ---
