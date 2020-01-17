@@ -1,6 +1,8 @@
 Examples
 ========
 
+`You can download all nidcpower examples here <https://github.com/ni/nimi-python/blob/master/examples/nidcpower_examples.zip>`_
+
 nidcpower_measure_record.py
 ---------------------------
 

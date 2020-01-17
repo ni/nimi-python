@@ -42,7 +42,8 @@ Author       National Instruments
 About
 =====
 
-The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. Currently, the following drivers are supported:
+The **nimi-python** repository generates Python bindings (Application Programming Interface) for interacting with the Modular Instrument drivers. The
+following drivers are supported:
 
 * NI-DCPower (Python module: nidcpower)
 * NI-Digital Pattern Driver (Python module: nidigital)
@@ -54,12 +55,13 @@ The **nimi-python** repository generates Python bindings (Application Programmin
 * NI-SWITCH (Python module: niswitch)
 * NI-TClk (Python module: nitclk)
 
-It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is called through its public C API using the
-`ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
+It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is
+called through its public C API using the `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
 
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
-**nimi-python** supports Python 2.7, 3.4 and later using CPython or PyPy.
+**nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions. At
+this time this includes Python 3.5 and above using CPython or PyPy.
 
 
 NI-DCPower Python API Status
