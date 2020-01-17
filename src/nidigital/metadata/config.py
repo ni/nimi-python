@@ -44,8 +44,18 @@ config = {
             'prefix': '',
             'python_name': 'pins',
         },
+        # These need to be added here since merging 'repeated_capabilities' with something
+        # here and something in config_addons.py doesn't work
+        {
+            'prefix': 'conditionalJumpTrigger',
+            'python_name': 'conditional_jump_triggers',
+        },
+        {
+            'prefix': 'patternOpcodeEvent',
+            'python_name': 'pattern_opcode_events',
+        },
     ],
-    'session_class_description': 'An NI-Digital session',
+    'session_class_description': 'An NI-Digital Pattern Driver session',
     'session_handle_parameter_name': 'vi',
     'supports_nitclk': True,
 }

@@ -13,7 +13,7 @@ def example(resource_name, options):
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Performs a waveform acquisition using the NI-Digital API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Performs a waveform acquisition using the NI-Digital Pattern Driver API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a <>.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
