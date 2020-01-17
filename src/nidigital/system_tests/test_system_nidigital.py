@@ -117,8 +117,6 @@ def get_test_file_path(test_name, file_name):
 
 @pytest.fixture(params=[array.array, numpy.array, list])
 def source_waveform_type(request):
-    if request.param != array.array:
-        pytest.skip('Source waveform types other than array.array are not supported yet (#1132)')
     return request.param
 
 
@@ -142,8 +140,8 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
             0: array.array('L', [i for i in reversed(range(num_samples))])}
     elif source_waveform_type == numpy.array:
         source_waveform = {
-            1: numpy.array([i for i in range(num_samples)]),
-            0: numpy.array([i for i in reversed(range(num_samples))])}
+            1: numpy.array([i for i in range(num_samples)], dtype=numpy.uint32),
+            0: numpy.array([i for i in reversed(range(num_samples))], dtype=numpy.uint32)}
     elif source_waveform_type == list:
         source_waveform = {
             1: [i for i in range(num_samples)],
