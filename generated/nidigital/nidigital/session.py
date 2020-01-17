@@ -2877,19 +2877,19 @@ class Session(_SessionBase):
                 if waveform_data[site].dtype == numpy.uint32:
                     wfm = array.array('L', waveform_data[site])
                 else:
-                    raise TypeError("Unsupported dtype. Is {0}, expected {1}".format(waveform_data[site].dtype, numpy.int32))
+                    raise TypeError("Unsupported dtype for waveform_data array element type. Is {0}, expected {1}".format(waveform_data[site].dtype, numpy.int32))
 
             elif isinstance(waveform_data[site], array.array):
                 if waveform_data[site].typecode == 'L':
                     wfm = waveform_data[site]
                 else:
-                    raise ValueError('Wrong array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
+                    raise TypeError('Wrong waveform_data array element type. Must be unsigned 32 bit int ("L"), was {}'.format(waveform_data[site].typecode))
 
             elif isinstance(waveform_data[site], list):
                 wfm = array.array('L', waveform_data[site])
 
             else:
-                raise ValueError('Unknown array type: {}'.format(type(waveform_data[site])))
+                raise TypeError('Unknown array type: {}'.format(type(waveform_data[site])))
 
             site_list.append('site' + str(site))
 
