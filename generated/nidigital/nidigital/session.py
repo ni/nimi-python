@@ -1582,10 +1582,10 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-Digital session'''
+    '''An NI-Digital Pattern Driver session'''
 
     def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
-        r'''An NI-Digital session
+        r'''An NI-Digital Pattern Driver session
 
         TBD
 
