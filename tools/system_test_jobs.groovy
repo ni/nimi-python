@@ -1,3 +1,7 @@
+// This file is used to generate the system_tests jobs. There will be one job per driver per bitness.
+// See https://github.com/ni/nimi-python/wiki/nimi-bot-separate-server-and-agents (this location will change
+// once the documentation is finalized)
+
 // Driver list
 DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", "nise", "nimodinst" ]
 // Platform list - also used as node label
