@@ -3,6 +3,7 @@ include $(BUILD_HELPER_DIR)/tools.mak
 
 README := $(OUTPUT_DIR)/README.rst
 SETUP := $(OUTPUT_DIR)/setup.py
+TOX_INI := $(OUTPUT_DIR)/tox-system_tests.ini
 
 MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
@@ -10,6 +11,7 @@ MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(CUSTOM_TYPES_TO_COPY)) \
                 $(README) \
                 $(SETUP) \
+                $(TOX_INI) \
 
 RST_FILES := \
                 $(addprefix $(DRIVER_DOCS_DIR)/,$(RST_FILES_TO_GENERATE)) \
@@ -91,6 +93,10 @@ installers: sdist wheel
 $(UNIT_TEST_FILES): $(MODULE_FILES)
 
 $(SETUP): $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
+	$(call trace_to_console, "Generating",$@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
+$(TOX_INI): $(TEMPLATE_DIR)/tox-system_tests.ini.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 

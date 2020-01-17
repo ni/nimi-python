@@ -31,7 +31,8 @@ Install the wheel found in generated/<driver>/dist
 """
     parser = argparse.ArgumentParser(description=usage)
     file_group = parser.add_argument_group("Input and Output files")
-    file_group.add_argument("--driver", action="store", dest="driver", default=None, required=True, help="Source file")
+    file_group.add_argument("--driver", action="store", default=None, required=True, help="Source file")
+    file_group.add_argument("--start-path", action="store", default=None, help="Prepend to path to search")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument("-v", "--verbose", action="count", dest="verbose", default=0, help="Verbose output")
@@ -49,6 +50,8 @@ Install the wheel found in generated/<driver>/dist
     logging.info(pp.pformat(args))
 
     rel_path = os.path.join('generated', args.driver, 'dist')
+    if args.start_path is not None:
+        rel_path = os.path.join(args.start_path, rel_path)
     wheel = None
     for file in os.listdir(rel_path):
         if file.endswith(".whl"):

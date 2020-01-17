@@ -10,7 +10,7 @@ import nidigital
 
 
 instr = ['PXI1Slot2', 'PXI1Slot5']
-test_files_base_dir = os.path.join(os.getcwd(), 'src', 'nidigital', 'system_tests', 'test_files')
+test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
 @pytest.fixture(scope='function')
