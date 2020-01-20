@@ -155,6 +155,42 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ExportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': '\nExports the attribute configuration of the session to a configuration\nbuffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑SCOPE returns an\nerror.\n\n**Related Topics:**\n\n`Attributes and Attribute\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__\n\n`Setting Attributes Before Reading\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niScope_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the size, in bytes, of the byte array to export. If you enter\n0, this function returns the needed size.\n'
+                },
+                'name': 'sizeInBytes',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nSpecifies the byte array buffer to be populated with the exported\nattribute configuration.\n'
+                },
+                'name': 'configuration',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'sizeInBytes'
+                },
+                'type': 'ViInt8[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'FetchWaveform': {
         'codegen_method': 'public',
         'documentation': {
@@ -1182,6 +1218,43 @@ functions = {
         ],
         'python_name': 'get_cal_date_and_time',
         'real_datetime_call': 'GetCalDateAndTime',
+        'returns': 'ViStatus'
+    },
+    'ImportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': '\nImports an attribute configuration to the session from the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\n**Related Topics:**\n\n`Attributes and Attribute\nFunctions <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__\n\n`Setting Attributes Before Reading\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
+            'note': '\nYou cannot call this function while the session is in a running state,\nsuch as while acquiring a signal.\n'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nThe instrument handle you obtain from niScope_init that identifies a\nparticular instrument session.\n'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the size, in bytes, of the byte array to import. If you enter\n0, this function returns the needed size.\n'
+                },
+                'name': 'sizeInBytes',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nSpecifies the byte array buffer that contains the attribute\nconfiguration to import.\n'
+                },
+                'name': 'configuration',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'sizeInBytes'
+                },
+                'type': 'ViInt8[]'
+            }
+        ],
         'returns': 'ViStatus'
     },
     'InitWithOptions': {
