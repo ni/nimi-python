@@ -1240,6 +1240,85 @@ class TestSession(object):
             assert isinstance(last_cal, datetime.timedelta)
             assert 730 == last_cal.days
 
+    # Import/Export functions
+
+    def test_import_attribute_configuration_buffer_list_i8(self):
+        self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
+        expected_list = [ord('a'), ord('b'), ord('c'), ord('d')]
+        configuration = expected_list
+        with nifake.Session('dev1') as session:
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                session.import_attribute_configuration_buffer(configuration)
+            self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
+
+    def test_import_attribute_configuration_buffer_str(self):
+        self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
+        expected_list = [ord('a'), ord('b'), ord('c'), ord('d')]
+        configuration = 'abcd'
+        with nifake.Session('dev1') as session:
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                session.import_attribute_configuration_buffer(configuration)
+            self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
+
+    def test_import_attribute_configuration_buffer_bytes(self):
+        self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
+        expected_list = [ord('a'), ord('b'), ord('c'), ord('d')]
+        configuration = b'abcd'
+        with nifake.Session('dev1') as session:
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                session.import_attribute_configuration_buffer(configuration)
+            self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
+
+    def test_import_attribute_configuration_buffer_bytearray(self):
+        self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
+        expected_list = [ord('a'), ord('b'), ord('c'), ord('d')]
+        configuration = bytearray(b'abcd')
+        with nifake.Session('dev1') as session:
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                session.import_attribute_configuration_buffer(configuration)
+            self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
+
+    def test_import_attribute_configuration_buffer_array_bytes(self):
+        self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
+        expected_list = [ord('a'), ord('b'), ord('c'), ord('d')]
+        configuration = array.array('b', b'abcd')
+        with nifake.Session('dev1') as session:
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                session.import_attribute_configuration_buffer(configuration)
+            self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
+
+    def test_export_attribute_configuration_buffer(self):
+        self.patched_library.niFake_ExportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ExportAttributeConfigurationBuffer
+        expected_buffer_list = [ord('a'), ord('b'), ord('c'), ord('d'), ]
+
+        # Because we are mocking get_ctypes_pointer_for_buffer() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
+        # and have the mock return them. These are the ones that are actually filled in by the function.
+        expected_buffer = array.array('b', [0] * len(expected_buffer_list))
+        expected_buffer_ctypes = ctypes.cast(expected_buffer.buffer_info()[0], ctypes.POINTER(nifake._visatype.ViInt8 * len(expected_buffer_list)))
+
+        self.side_effects_helper['ExportAttributeConfigurationBuffer']['configuration'] = expected_buffer_list
+        with nifake.Session('dev1') as session:
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_buffer_ctypes]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                actual_configuration = session.export_attribute_configuration_buffer()
+            assert type(actual_configuration) is bytes
+            assert len(actual_configuration) == len(expected_buffer_list)
+            # Since we mocked get_ctypes_pointer_for_buffer, we didn't actually fill in actual_configuration. Instead we look for the expected values to
+            # be in the expected buffer that we returned from the mock
+            for i in range(len(expected_buffer)):
+                assert expected_buffer[i] == expected_buffer_list[i]
+
     def test_matcher_prints(self):
         assert _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(" + str(nifake._visatype.ViSession) + ", 42)"
         assert _matchers.ViAttrMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViAttrMatcher(" + str(nifake._visatype.ViAttr) + ", 42)"
