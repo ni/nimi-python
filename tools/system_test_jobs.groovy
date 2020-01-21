@@ -53,7 +53,7 @@ def genJob(driver, platform) {
                         addTestResults(true)
                         completedStatus('SUCCESS', 'Commits checked')
                         completedStatus('FAILURE', 'Failure checking commits')
-                        completedStatus('PENDING', 'Checking commits in progress, starting tests...')
+                        // completedStatus('PENDING', 'Checking commits in progress, starting tests...')
                         completedStatus('ERROR', 'Error checking commits')
                     }
                     buildStatus {
