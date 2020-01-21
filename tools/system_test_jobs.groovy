@@ -102,8 +102,8 @@ job("${ROOT_FOLDER}/Trigger") {
             branch('${sha1}')
             remote {
                 github('ni/nimi-python')
-                credentials('c07926b1-d626-4476-892a-e21bb6d28733')
-                refspec('+refs/heads/*:refs/remotes/origin/* +refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
+                credentials("${credentials_to_use}")
+                refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
                 name('origin')
             }
         }
