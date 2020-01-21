@@ -64,12 +64,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateCaptureWaveformParallel']['return'] = 0
         self._defaults['CreateCaptureWaveformSerial'] = {}
         self._defaults['CreateCaptureWaveformSerial']['return'] = 0
-        self._defaults['CreateChannelMap'] = {}
-        self._defaults['CreateChannelMap']['return'] = 0
-        self._defaults['CreatePinGroup'] = {}
-        self._defaults['CreatePinGroup']['return'] = 0
-        self._defaults['CreatePinMap'] = {}
-        self._defaults['CreatePinMap']['return'] = 0
         self._defaults['CreateSourceWaveformFromFileTDMS'] = {}
         self._defaults['CreateSourceWaveformFromFileTDMS']['return'] = 0
         self._defaults['CreateSourceWaveformParallel'] = {}
@@ -84,8 +78,6 @@ class SideEffectsHelper(object):
         self._defaults['DisableSites']['return'] = 0
         self._defaults['EnableSites'] = {}
         self._defaults['EnableSites']['return'] = 0
-        self._defaults['EndChannelMap'] = {}
-        self._defaults['EndChannelMap']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation'] = {}
         self._defaults['FetchHistoryRAMCycleInformation']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation']['patternIndex'] = None
@@ -204,8 +196,6 @@ class SideEffectsHelper(object):
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
-        self._defaults['MapPinToChannel'] = {}
-        self._defaults['MapPinToChannel']['return'] = 0
         self._defaults['PPMU_Measure'] = {}
         self._defaults['PPMU_Measure']['return'] = 0
         self._defaults['PPMU_Measure']['actualNumRead'] = None
@@ -403,21 +393,6 @@ class SideEffectsHelper(object):
             return self._defaults['CreateCaptureWaveformSerial']['return']
         return self._defaults['CreateCaptureWaveformSerial']['return']
 
-    def niDigital_CreateChannelMap(self, vi, num_sites):  # noqa: N802
-        if self._defaults['CreateChannelMap']['return'] != 0:
-            return self._defaults['CreateChannelMap']['return']
-        return self._defaults['CreateChannelMap']['return']
-
-    def niDigital_CreatePinGroup(self, vi, pin_group_name, pin_list):  # noqa: N802
-        if self._defaults['CreatePinGroup']['return'] != 0:
-            return self._defaults['CreatePinGroup']['return']
-        return self._defaults['CreatePinGroup']['return']
-
-    def niDigital_CreatePinMap(self, vi, dut_pin_list, system_pin_list):  # noqa: N802
-        if self._defaults['CreatePinMap']['return'] != 0:
-            return self._defaults['CreatePinMap']['return']
-        return self._defaults['CreatePinMap']['return']
-
     def niDigital_CreateSourceWaveformFromFileTDMS(self, vi, waveform_name, waveform_file_path, write_waveform_data):  # noqa: N802
         if self._defaults['CreateSourceWaveformFromFileTDMS']['return'] != 0:
             return self._defaults['CreateSourceWaveformFromFileTDMS']['return']
@@ -452,11 +427,6 @@ class SideEffectsHelper(object):
         if self._defaults['EnableSites']['return'] != 0:
             return self._defaults['EnableSites']['return']
         return self._defaults['EnableSites']['return']
-
-    def niDigital_EndChannelMap(self, vi):  # noqa: N802
-        if self._defaults['EndChannelMap']['return'] != 0:
-            return self._defaults['EndChannelMap']['return']
-        return self._defaults['EndChannelMap']['return']
 
     def niDigital_FetchHistoryRAMCycleInformation(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         if self._defaults['FetchHistoryRAMCycleInformation']['return'] != 0:
@@ -923,11 +893,6 @@ class SideEffectsHelper(object):
             caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
         return self._defaults['LockSession']['return']
 
-    def niDigital_MapPinToChannel(self, vi, pin, site, channel):  # noqa: N802
-        if self._defaults['MapPinToChannel']['return'] != 0:
-            return self._defaults['MapPinToChannel']['return']
-        return self._defaults['MapPinToChannel']['return']
-
     def niDigital_PPMU_Measure(self, vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read):  # noqa: N802
         if self._defaults['PPMU_Measure']['return'] != 0:
             return self._defaults['PPMU_Measure']['return']
@@ -1206,12 +1171,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_CreateCaptureWaveformParallel.return_value = 0
         mock_library.niDigital_CreateCaptureWaveformSerial.side_effect = MockFunctionCallError("niDigital_CreateCaptureWaveformSerial")
         mock_library.niDigital_CreateCaptureWaveformSerial.return_value = 0
-        mock_library.niDigital_CreateChannelMap.side_effect = MockFunctionCallError("niDigital_CreateChannelMap")
-        mock_library.niDigital_CreateChannelMap.return_value = 0
-        mock_library.niDigital_CreatePinGroup.side_effect = MockFunctionCallError("niDigital_CreatePinGroup")
-        mock_library.niDigital_CreatePinGroup.return_value = 0
-        mock_library.niDigital_CreatePinMap.side_effect = MockFunctionCallError("niDigital_CreatePinMap")
-        mock_library.niDigital_CreatePinMap.return_value = 0
         mock_library.niDigital_CreateSourceWaveformFromFileTDMS.side_effect = MockFunctionCallError("niDigital_CreateSourceWaveformFromFileTDMS")
         mock_library.niDigital_CreateSourceWaveformFromFileTDMS.return_value = 0
         mock_library.niDigital_CreateSourceWaveformParallel.side_effect = MockFunctionCallError("niDigital_CreateSourceWaveformParallel")
@@ -1226,8 +1185,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_DisableSites.return_value = 0
         mock_library.niDigital_EnableSites.side_effect = MockFunctionCallError("niDigital_EnableSites")
         mock_library.niDigital_EnableSites.return_value = 0
-        mock_library.niDigital_EndChannelMap.side_effect = MockFunctionCallError("niDigital_EndChannelMap")
-        mock_library.niDigital_EndChannelMap.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCycleInformation")
         mock_library.niDigital_FetchHistoryRAMCycleInformation.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCyclePinData")
@@ -1300,8 +1257,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_LoadTiming.return_value = 0
         mock_library.niDigital_LockSession.side_effect = MockFunctionCallError("niDigital_LockSession")
         mock_library.niDigital_LockSession.return_value = 0
-        mock_library.niDigital_MapPinToChannel.side_effect = MockFunctionCallError("niDigital_MapPinToChannel")
-        mock_library.niDigital_MapPinToChannel.return_value = 0
         mock_library.niDigital_PPMU_Measure.side_effect = MockFunctionCallError("niDigital_PPMU_Measure")
         mock_library.niDigital_PPMU_Measure.return_value = 0
         mock_library.niDigital_PPMU_Source.side_effect = MockFunctionCallError("niDigital_PPMU_Source")
