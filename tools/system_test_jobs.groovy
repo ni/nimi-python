@@ -1,3 +1,7 @@
+// This file is used to generate the system_tests jobs. There will be one job per driver per bitness.
+// See https://github.com/ni/nimi-python/wiki/nimi-bot-separate-server-and-agents (this location will change
+// once the documentation is finalized)
+
 // Driver list
 DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", "nise", "nimodinst" ]
 // Platform list - also used as node label
@@ -34,7 +38,7 @@ def genJob(driver, platform) {
             }
         }
 
-        // Once we suppot Linux, we will need to be able to generate the steps differently
+        // Once we add automated system tests on Linux, we will need to generate the steps differently
         steps {
             gitStatusWrapperBuilder {
                 buildSteps {
@@ -46,7 +50,7 @@ tools\\system_tests.bat ${driver}
                     }
                 }
                 gitHubContext("system_tests/jenkins/${platform}/${driver}")
-                description("System test for ${driver} on ${platform}")
+                description("System tests for ${driver} on ${platform}")
                 credentialsId('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
             }
 
