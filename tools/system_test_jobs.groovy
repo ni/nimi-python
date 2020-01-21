@@ -127,10 +127,10 @@ job("${ROOT_FOLDER}/Trigger") {
                     triggeredStatus('starting system tests')
                     startedStatus('start system tests')
                     addTestResults(true)
-                    completedStatus('SUCCESS', 'All system tests jobs started')
-                    completedStatus('FAILURE', 'Failure starting system tests')
-                    completedStatus('PENDING', 'still in progress...')
-                    completedStatus('ERROR', 'Error starting system tests')
+                    completedStatus('SUCCESS', 'Commits checked')
+                    completedStatus('FAILURE', 'Failure checking commits')
+                    completedStatus('PENDING', 'Checking commits in progress')
+                    completedStatus('ERROR', 'Error checking commits')
                 }
                 buildStatus {
                     completedStatus('SUCCESS', 'All system tests jobs started!')
