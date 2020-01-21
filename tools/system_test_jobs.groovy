@@ -25,14 +25,13 @@ def genJob(driver, platform) {
 
         scm {
             git {
-                branch('use_ghprb')
                 extensions {
                     wipeWorkspace()
                 }
                 branch('${sha1}')
                 remote {
                     github('ni/nimi-python')
-                    credentials('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
+                    credentials('c07926b1-d626-4476-892a-e21bb6d28733')
                     refspec('+refs/pull/*:refs/remotes/origin/pr/*')
                 }
             }
@@ -51,7 +50,7 @@ tools\\system_tests.bat ${driver}
                 }
                 gitHubContext("system_tests/jenkins/${platform}/${driver}")
                 description("System tests for ${driver} on ${platform}")
-                credentialsId('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
+                credentialsId('c07926b1-d626-4476-892a-e21bb6d28733')
             }
 
         }
@@ -102,7 +101,7 @@ job("${ROOT_FOLDER}/Trigger Job") {
             branch('${sha1}')
             remote {
                 github('ni/nimi-python')
-                credentials('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
+                credentials('c07926b1-d626-4476-892a-e21bb6d28733')
                 refspec('+refs/pull/*:refs/remotes/origin/pr/*')
             }
         }
