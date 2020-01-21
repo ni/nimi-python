@@ -101,7 +101,7 @@ job("${ROOT_FOLDER}/Trigger Job") {
             remote {
                 github('ni/nimi-python')
                 credentials('c07926b1-d626-4476-892a-e21bb6d28733')
-                refspec('+refs/pull/*:refs/remotes/origin/pr/*')
+                refspec('+refs/heads/*:refs/remotes/origin/* +refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
             }
         }
     }
@@ -111,7 +111,7 @@ job("${ROOT_FOLDER}/Trigger Job") {
             admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
             userWhitelist(['texasaggie97', 'marcoskirsch', 'sbethur'])
             orgWhitelist('ni')
-            cron('H/3 * * * *')
+            cron('H/5 * * * *')
         }
     }
 
