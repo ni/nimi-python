@@ -94,7 +94,6 @@ job("${ROOT_FOLDER}/Trigger Job") {
 
     scm {
         git {
-            branch('use_ghprb')
             extensions {
                 wipeWorkspace()
             }
