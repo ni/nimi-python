@@ -119,6 +119,23 @@ job("${ROOT_FOLDER}/Trigger Job") {
             userWhitelist(['texasaggie97', 'marcoskirsch', 'sbethur'])
             orgWhitelist('ni')
             cron('H/3 * * * *')
+            extensions {
+                commitStatus {
+                    context('system_tests/jenkins/start')
+                    triggeredStatus('starting system tests')
+                    startedStatus('start system tests')
+                    addTestResults(true)
+                    completedStatus('SUCCESS', 'All system tests jobs started')
+                    completedStatus('FAILURE', 'Failure starting system tests')
+                    completedStatus('PENDING', 'still in progress...')
+                    completedStatus('ERROR', 'Error starting system tests')
+                }
+                buildStatus {
+                    completedStatus('SUCCESS', 'All system tests jobs started!')
+                    completedStatus('FAILURE', 'Failure starting system tests!')
+                    completedStatus('ERROR', 'Error starting system tests!')
+                }
+            }
         }
     }
 
