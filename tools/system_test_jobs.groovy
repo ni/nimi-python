@@ -107,6 +107,12 @@ job("${ROOT_FOLDER}/Trigger Job") {
         }
     }
 
+    steps {
+        batchFile {
+            command("echo Starting system tests")
+        }
+    }
+
     triggers {
         githubPullRequest {
             admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
