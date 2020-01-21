@@ -85,7 +85,7 @@ for (driver in DRIVERS)
 }
 
 // Generate the trigger job
-job("${ROOT_FOLDER}/Trigger Job") {
+job("${ROOT_FOLDER}/Trigger") {
     description "Run all driver system tests on all platforms"
 
     parameters {
