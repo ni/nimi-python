@@ -863,7 +863,7 @@ class Session(_SessionBase):
     def export_attribute_configuration_buffer(self):
         r'''export_attribute_configuration_buffer
 
-        
+        Export configuration buffer.
 
         Returns:
             configuration (array.array("b")):
@@ -1275,7 +1275,7 @@ class Session(_SessionBase):
     def import_attribute_configuration_buffer(self, configuration):
         r'''import_attribute_configuration_buffer
 
-        
+        Import configuration buffer.
 
         Args:
             configuration (list of int):
