@@ -65,6 +65,7 @@ All notable changes to this project will be documented in this file.
         * `write_source_waveform_site_unique()` now supports `numpy.array` and `list` as site waveform types
     * #### Removed
         * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
+        * Removed programmatic pin map creation API - [#1124](https://github.com/ni/nimi-python/issues/1124)
 * ### NI-TClk
     * #### Added
     * #### Changed

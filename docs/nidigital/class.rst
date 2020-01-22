@@ -936,83 +936,6 @@ create_capture_waveform_serial
 
             :type bit_order: int
 
-create_channel_map
-------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_channel_map(num_sites)
-
-            TBD
-
-            
-
-
-
-            :param num_sites:
-
-
-                
-
-
-            :type num_sites: int
-
-create_pin_group
-----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_pin_group(pin_group_name, pin_list)
-
-            TBD
-
-            
-
-
-
-            :param pin_group_name:
-
-
-                
-
-
-            :type pin_group_name: str
-            :param pin_list:
-
-
-                
-
-
-            :type pin_list: str
-
-create_pin_map
---------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_pin_map(dut_pin_list, system_pin_list)
-
-            TBD
-
-            
-
-
-
-            :param dut_pin_list:
-
-
-                
-
-
-            :type dut_pin_list: str
-            :param system_pin_list:
-
-
-                
-
-
-            :type system_pin_list: str
-
 create_source_waveform_from_file_tdms
 -------------------------------------
 
@@ -1207,19 +1130,6 @@ enable_sites
 
 
             :type site_list: str
-
-end_channel_map
----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: end_channel_map()
-
-            TBD
-
-            
-
-
 
 fetch_capture_waveform
 ----------------------
@@ -2198,43 +2108,6 @@ lock
         When used in a `with` statement, :py:meth:`nidigital.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
 
-
-map_pin_to_channel
-------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: map_pin_to_channel(pin, site)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].map_pin_to_channel(pin, site)
-
-
-            :param pin:
-
-
-                
-
-
-            :type pin: str
-            :param site:
-
-
-                
-
-
-            :type site: int
 
 ppmu_measure
 ------------
