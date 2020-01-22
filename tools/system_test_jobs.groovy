@@ -49,13 +49,12 @@ def genJob(driver, platform) {
                 extensions {
                     commitStatus {
                         context("system_tests/jenkins/${platform}/${driver}")
-                        triggeredStatus('starting system tests')
-                        startedStatus('start system tests')
+                        triggeredStatus("System tests for ${platform}/${driver} triggered...")
+                        startedStatus("System tests for ${platform}/${driver} running...")
                         addTestResults(true)
-                        completedStatus('SUCCESS', 'All system test jobs queued')
-                        completedStatus('FAILURE', 'Failure starting system tests')
-                        completedStatus('PENDING', 'Starting trigger job')
-                        completedStatus('ERROR', 'Error starting system tests')
+                        completedStatus('SUCCESS', "System tests for ${platform}/${driver} Passed!")
+                        completedStatus('FAILURE', "System tests for ${platform}/${driver} Failure!")
+                        completedStatus('ERROR', "System tests for ${platform}/${driver} Error!")
                     }
                 }
             }
