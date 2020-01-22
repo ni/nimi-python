@@ -45,11 +45,11 @@ def genJob(driver, platform) {
                 orgWhitelist('ni')
                 extensions {
                     commitStatus {
-                        context("system_tests/jenkins/${platform}/${driver}")
-                        triggeredStatus("${platform}/${driver} triggered...")
-                        startedStatus("${platform}/${driver} running...")
+                        context("system-tests/${platform}/${driver}")
+                        triggeredStatus("triggered...")
+                        startedStatus("running...")
                         addTestResults(true)
-                        completedStatus('SUCCESS', "Passed!")
+                        completedStatus('SUCCESS', "")
                         completedStatus('FAILURE', "Failure!")
                         completedStatus('ERROR', "Error!")
                     }
@@ -132,7 +132,7 @@ job("${ROOT_FOLDER}/Trigger") {
             cron('H/5 * * * *')
             extensions {
                 commitStatus {
-                    context('system_tests/jenkins/start')
+                    context('system-tests/start')
                     triggeredStatus('starting system tests')
                     startedStatus('start system tests')
                     completedStatus('SUCCESS', 'All system test jobs queued')
