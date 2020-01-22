@@ -42,7 +42,6 @@ def genJob(driver, platform) {
         triggers {
             githubPullRequest {
                 admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
-                userWhitelist(['injaleea', 'bhaswath', 'AlexHearnNI'])
                 orgWhitelist('ni')
                 extensions {
                     commitStatus {
@@ -129,7 +128,6 @@ job("${ROOT_FOLDER}/Trigger") {
     triggers {
         githubPullRequest {
             admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
-            userWhitelist(['injaleea', 'bhaswath', 'AlexHearnNI'])
             orgWhitelist('ni')
             cron('H/5 * * * *')
             extensions {
