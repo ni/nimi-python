@@ -4,13 +4,13 @@
 functions_override_metadata = {
     'ImportAttributeConfigurationBuffer': {
         'parameters': {
-            2: {'python_api_converter_name': 'convert_import_buffer', }
+            2: {'python_api_converter_name': 'convert_import_buffer_to_array', }
         },
     },
     'ExportAttributeConfigurationBuffer': {
         'parameters': {
             2: {
-                'python_api_converter_name': 'convert_buffer_to_bytes',
+                'python_api_converter_name': 'convert_to_bytes',
                 'use_array': True,
             },
         },
