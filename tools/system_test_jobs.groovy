@@ -52,9 +52,9 @@ def genJob(driver, platform) {
                         triggeredStatus("System tests for ${platform}/${driver} triggered...")
                         startedStatus("System tests for ${platform}/${driver} running...")
                         addTestResults(true)
-                        completedStatus('SUCCESS', "System tests for ${platform}/${driver} Passed!")
-                        completedStatus('FAILURE', "System tests for ${platform}/${driver} Failure!")
-                        completedStatus('ERROR', "System tests for ${platform}/${driver} Error!")
+                        completedStatus('SUCCESS', "Passed!")
+                        completedStatus('FAILURE', "Failure!")
+                        completedStatus('ERROR', "Error!")
                     }
                 }
             }
@@ -69,21 +69,6 @@ tools\\system_tests.bat ${driver}
 """)
             }
         }
-        //steps {
-        //    gitStatusWrapperBuilder {
-        //        buildSteps {
-        //            batchFile {
-        //                command("""@echo off
-//echo Running system tests for ${driver} on ${platform}
-//tools\\system_tests.bat ${driver}
-//""")
-        //            }
-        //        }
-        //        gitHubContext("system_tests/jenkins/${platform}/${driver}")
-        //        description("System tests for ${driver} on ${platform}")
-        //        credentialsId("${credentials_to_use}")
-        //    }
-        //}
 
         publishers {
             archiveJunit("generated/junit/*.xml") {
@@ -154,10 +139,8 @@ job("${ROOT_FOLDER}/Trigger") {
                     context('system_tests/jenkins/start')
                     triggeredStatus('starting system tests')
                     startedStatus('start system tests')
-                    addTestResults(true)
                     completedStatus('SUCCESS', 'All system test jobs queued')
                     completedStatus('FAILURE', 'Failure starting system tests')
-                    completedStatus('PENDING', 'Starting trigger job')
                     completedStatus('ERROR', 'Error starting system tests')
                 }
             }
