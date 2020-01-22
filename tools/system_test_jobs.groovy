@@ -8,8 +8,8 @@ DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", 
 PLATFORMS = [ "win32", "win64" ]
 
 ROOT_FOLDER = "nimi-bot"
-credentials_to_use = '44e8e6ce-9dc2-486e-bf50-9c015febb7bf'  // texasaggie97
-// credentials_to_use = 'c07926b1-d626-4476-892a-e21bb6d28733'  // nimi-bit
+//credentials_to_use = '44e8e6ce-9dc2-486e-bf50-9c015febb7bf'  // texasaggie97
+credentials_to_use = 'c07926b1-d626-4476-892a-e21bb6d28733'  // nimi-bit
 
 // This function generates a job for the given driver and platform
 // returns generatd job name
