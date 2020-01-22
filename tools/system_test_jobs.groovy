@@ -34,9 +34,18 @@ def genJob(driver, platform) {
                 remote {
                     github('ni/nimi-python')
                     credentials("${credentials_to_use}")
-                    refspec('+refs/heads/*:refs/remotes/origin/*')
+                    // refspec('+refs/heads/*:refs/remotes/origin/*')
+                    refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
                     name('origin')
                 }
+            }
+        }
+
+        triggers {
+            githubPullRequest {
+                admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
+                userWhitelist(['injaleea', 'bhaswath', 'AlexHearnNI'])
+                orgWhitelist('ni')
             }
         }
 
