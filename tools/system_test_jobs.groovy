@@ -34,7 +34,7 @@ def genJob(driver, platform) {
                 remote {
                     github('ni/nimi-python')
                     credentials("${credentials_to_use}")
-                    refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
+                    refspec('+refs/heads/*:refs/remotes/origin/*')
                     name('origin')
                 }
             }
