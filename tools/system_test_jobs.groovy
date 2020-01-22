@@ -118,7 +118,7 @@ job("${ROOT_FOLDER}/Trigger") {
     triggers {
         githubPullRequest {
             admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
-            userWhitelist(['texasaggie97', 'marcoskirsch', 'sbethur'])
+            userWhitelist(['injaleea', 'bhaswath', 'AlexHearnNI'])
             orgWhitelist('ni')
             cron('H/3 * * * *')
             extensions {
