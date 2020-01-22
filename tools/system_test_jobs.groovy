@@ -132,12 +132,12 @@ job("${ROOT_FOLDER}/Trigger") {
             cron('H/5 * * * *')
             extensions {
                 commitStatus {
-                    context('system-tests/start')
-                    triggeredStatus('starting system tests')
-                    startedStatus('start system tests')
-                    completedStatus('SUCCESS', 'All system test jobs queued')
-                    completedStatus('FAILURE', 'Failure starting system tests')
-                    completedStatus('ERROR', 'Error starting system tests')
+                    context('system-tests')
+                    triggeredStatus('Waiting to trigger system test jobs')
+                    startedStatus('Triggering system test jobs')
+                    completedStatus('SUCCESS', 'All system test jobs triggered')
+                    completedStatus('FAILURE', 'Failure triggering system test jobs')
+                    completedStatus('ERROR', 'Error triggering system test jobs')
                 }
             }
         }
