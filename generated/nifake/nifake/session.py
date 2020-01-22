@@ -863,28 +863,10 @@ class Session(_SessionBase):
     def export_attribute_configuration_buffer(self):
         r'''export_attribute_configuration_buffer
 
-        Exports the property configuration of the session to a configuration
-        buffer.
-
-        You can export and import session property configurations only between
-        devices with identical model numbers, channel counts, and onboard memory
-        sizes.
-
-        This method verifies that the properties you have configured for the
-        session are valid. If the configuration is invalid, NI‑SCOPE returns an
-        error.
-
-        **Related Topics:**
-
-        `Properties and Property
-        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
-
-        `Setting Properties Before Reading
-        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
+        
 
         Returns:
-            configuration (array.array("b")): Specifies the byte array buffer to be populated with the exported
-                property configuration.
+            configuration (array.array("b")):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -898,7 +880,7 @@ class Session(_SessionBase):
         configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niFake_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_buffer_to_bytes(configuration_array)
+        return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
     def fetch_waveform(self, number_of_samples):
@@ -1293,33 +1275,15 @@ class Session(_SessionBase):
     def import_attribute_configuration_buffer(self, configuration):
         r'''import_attribute_configuration_buffer
 
-        Imports a property configuration to the session from the specified
-        configuration buffer.
-
-        You can export and import session property configurations only between
-        devices with identical model numbers, channel counts, and onboard memory
-        sizes.
-
-        **Related Topics:**
-
-        `Properties and Property
-        Methods <REPLACE_DRIVER_SPECIFIC_URL_1(attributes_and_attribute_functions)>`__
-
-        `Setting Properties Before Reading
-        Properties <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__
-
-        Note:
-        You cannot call this method while the session is in a running state,
-        such as while acquiring a signal.
+        
 
         Args:
-            configuration (list of int): Specifies the byte array buffer that contains the property
-                configuration to import.
+            configuration (list of int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_import_buffer(configuration), library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_import_buffer_to_array(configuration), library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niFake_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
