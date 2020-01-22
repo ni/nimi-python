@@ -8,6 +8,7 @@ DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", 
 PLATFORMS = [ "win32", "win64" ]
 
 ROOT_FOLDER = "nimi-bot"
+credentials_to_use = 'c07926b1-d626-4476-892a-e21bb6d28733'  // nimi-bot username/Personal Access Token
 
 // This function generates a job for the given driver and platform
 // returns generatd job name
@@ -19,39 +20,51 @@ def genJob(driver, platform) {
 
         label(platform)
 
+        parameters {
+            stringParam('sha1', 'master', 'SHA to build')
+        }
+
         scm {
             git {
-                branch('generate_jenkins_jobs')
                 extensions {
                     wipeWorkspace()
                 }
+                branch('${sha1}')
                 remote {
                     github('ni/nimi-python')
-                    credentials('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
+                    credentials("${credentials_to_use}")
+                    refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
+                    name('origin')
                 }
             }
         }
 
         triggers {
-            scm('H/3 * * * *')
+            githubPullRequest {
+                admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
+                orgWhitelist('ni')
+                extensions {
+                    commitStatus {
+                        context("system-tests/${platform}/${driver}")
+                        triggeredStatus("triggered...")
+                        startedStatus("running...")
+                        addTestResults(true)
+                        completedStatus('SUCCESS', "")
+                        completedStatus('FAILURE', "Failure!")
+                        completedStatus('ERROR', "Error!")
+                    }
+                }
+            }
         }
 
         // Once we add automated system tests on Linux, we will need to generate the steps differently
         steps {
-            gitStatusWrapperBuilder {
-                buildSteps {
-                    batchFile {
-                        command("""@echo off
+            batchFile {
+                command("""@echo off
 echo Running system tests for ${driver} on ${platform}
 tools\\system_tests.bat ${driver}
 """)
-                    }
-                }
-                gitHubContext("system_tests/jenkins/${platform}/${driver}")
-                description("System tests for ${driver} on ${platform}")
-                credentialsId('44e8e6ce-9dc2-486e-bf50-9c015febb7bf')
             }
-
         }
 
         publishers {
@@ -81,4 +94,64 @@ for (driver in DRIVERS)
     }
 }
 
-println(jobList.join(','))
+// Generate the trigger job
+job("${ROOT_FOLDER}/Trigger") {
+    description "Run all driver system tests on all platforms"
+
+    parameters {
+        stringParam('sha1', 'master', 'SHA to build')
+    }
+
+    label('master')
+
+    scm {
+        git {
+            extensions {
+                wipeWorkspace()
+            }
+            branch('${sha1}')
+            remote {
+                github('ni/nimi-python')
+                credentials("${credentials_to_use}")
+                refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
+                name('origin')
+            }
+        }
+    }
+
+    steps {
+        batchFile {
+            command("echo Starting system tests")
+        }
+    }
+
+    triggers {
+        githubPullRequest {
+            admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
+            orgWhitelist('ni')
+            cron('H/5 * * * *')
+            extensions {
+                commitStatus {
+                    context('system-tests')
+                    triggeredStatus('Waiting to trigger system test jobs')
+                    startedStatus('Triggering system test jobs')
+                    completedStatus('SUCCESS', 'All system test jobs triggered')
+                    completedStatus('FAILURE', 'Failure triggering system test jobs')
+                    completedStatus('ERROR', 'Error triggering system test jobs')
+                }
+            }
+        }
+    }
+
+    publishers {
+        downstreamParameterized {
+            trigger(jobList) {
+                condition('UNSTABLE_OR_BETTER')
+                parameters {
+                    predefinedProp('sha1', '${sha1}')
+                }
+            }
+        }
+    }
+}
+
