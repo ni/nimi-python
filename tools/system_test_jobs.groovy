@@ -120,7 +120,7 @@ job("${ROOT_FOLDER}/Trigger") {
             admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
             userWhitelist(['injaleea', 'bhaswath', 'AlexHearnNI'])
             orgWhitelist('ni')
-            cron('H/3 * * * *')
+            cron('H/5 * * * *')
             extensions {
                 commitStatus {
                     context('system_tests/jenkins/start')
