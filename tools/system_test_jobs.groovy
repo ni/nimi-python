@@ -34,26 +34,38 @@ def genJob(driver, platform) {
                 remote {
                     github('ni/nimi-python')
                     credentials("${credentials_to_use}")
-                    refspec('+refs/heads/*:refs/remotes/origin/* +refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
+                    refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
                     name('origin')
+                }
+            }
+        }
+
+        triggers {
+            githubPullRequest {
+                admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
+                userWhitelist(['injaleea', 'bhaswath', 'AlexHearnNI'])
+                orgWhitelist('ni')
+                extensions {
+                    commitStatus {
+                        context("system_tests/jenkins/${platform}/${driver}")
+                        triggeredStatus("${platform}/${driver} triggered...")
+                        startedStatus("${platform}/${driver} running...")
+                        addTestResults(true)
+                        completedStatus('SUCCESS', "Passed!")
+                        completedStatus('FAILURE', "Failure!")
+                        completedStatus('ERROR', "Error!")
+                    }
                 }
             }
         }
 
         // Once we add automated system tests on Linux, we will need to generate the steps differently
         steps {
-            gitStatusWrapperBuilder {
-                buildSteps {
-                    batchFile {
-                        command("""@echo off
+            batchFile {
+                command("""@echo off
 echo Running system tests for ${driver} on ${platform}
 tools\\system_tests.bat ${driver}
 """)
-                    }
-                }
-                gitHubContext("system_tests/jenkins/${platform}/${driver}")
-                description("System tests for ${driver} on ${platform}")
-                credentialsId("${credentials_to_use}")
             }
         }
 
@@ -103,7 +115,7 @@ job("${ROOT_FOLDER}/Trigger") {
             remote {
                 github('ni/nimi-python')
                 credentials("${credentials_to_use}")
-                refspec('+refs/heads/*:refs/remotes/origin/* +refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
+                refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
                 name('origin')
             }
         }
@@ -126,10 +138,8 @@ job("${ROOT_FOLDER}/Trigger") {
                     context('system_tests/jenkins/start')
                     triggeredStatus('starting system tests')
                     startedStatus('start system tests')
-                    addTestResults(true)
                     completedStatus('SUCCESS', 'All system test jobs queued')
                     completedStatus('FAILURE', 'Failure starting system tests')
-                    completedStatus('PENDING', 'Starting trigger job')
                     completedStatus('ERROR', 'Error starting system tests')
                 }
             }
