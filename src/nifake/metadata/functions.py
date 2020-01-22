@@ -156,6 +156,9 @@ functions = {
         'returns': 'ViStatus'
     },
     'ExportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': 'Export configuration buffer.'
+        },
         'parameters': [
             {
                 'direction': 'in',
@@ -1209,6 +1212,9 @@ functions = {
         'returns': 'ViStatus'
     },
     'ImportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': 'Import configuration buffer.'
+        },
         'parameters': [
             {
                 'direction': 'in',
