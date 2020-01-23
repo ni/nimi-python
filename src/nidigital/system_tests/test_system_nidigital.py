@@ -1,22 +1,29 @@
 import array
 import collections
 import os
-import sys
 
 import numpy
 import pytest
 
 import nidigital
 
-
 instr = ['PXI1Slot2', 'PXI1Slot5']
-test_files_base_dir = os.path.join(os.getcwd(), 'src', 'nidigital', 'system_tests', 'test_files')
+test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
     with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
         yield simulated_session
+
+
+def test_pins_rep_cap(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.vil = 1
+    multi_instrument_session.pins['PinA', 'PinB', 'PinC'].vil = 2
+    assert multi_instrument_session.pins['DutPins'].vil == pytest.approx(2, abs=1e-3)
+    assert multi_instrument_session.pins['SysPins'].vil == pytest.approx(1, abs=1e-3)
 
 
 def test_property_boolean(multi_instrument_session):

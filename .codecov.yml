@@ -6,6 +6,7 @@ coverage:
   status:
     project:
       default:
+        # TODO(texasaggie97) - target lowered when adding system test coverage. Raise as coverage rises.
         target: 85%
         threshhold: 5
     patch:

@@ -66,6 +66,7 @@ All notable changes to this project will be documented in this file.
         * `send_software_edge_trigger()` no longer takes any parameters. To send a SW start trigger, use the session `session.send_software_edge_trigger()`. To send a Conditional Jump Trigger, use the repeated capability `session.conditional_jump_triggers[1].send_software_edge_trigger()` - [#1193](https://github.com/ni/nimi-python/issues/1193)
     * #### Removed
         * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
+        * Removed programmatic pin map creation API - [#1124](https://github.com/ni/nimi-python/issues/1124)
 * ### NI-TClk
     * #### Added
     * #### Changed

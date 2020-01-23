@@ -32,16 +32,31 @@ functions_override_metadata = {
     'ConfigureTerminationMode': {
         'codegen_method': 'no'
     },
+    'CreateChannelMap': {
+        'codegen_method': 'no'
+    },
+    'CreatePinGroup': {
+        'codegen_method': 'no'
+    },
+    'CreatePinMap': {
+        'codegen_method': 'no'
+    },
     'DisableConditionalJumpTrigger': {
         'codegen_method': 'no'
     },
     'DisableStartTrigger': {
         'codegen_method': 'no'
     },
+    'EndChannelMap': {
+        'codegen_method': 'no'
+    },
     'ExportSignal': {
         'codegen_method': 'no'
     },
     'FrequencyCounter_ConfigureMeasurementTime': {
+        'codegen_method': 'no'
+    },
+    'MapPinToChannel': {
         'codegen_method': 'no'
     },
     'PPMU_ConfigureApertureTime': {
