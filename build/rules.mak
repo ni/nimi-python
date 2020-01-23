@@ -75,7 +75,7 @@ $(DRIVER_DOCS_DIR)/%.inc: %.inc.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 
 $(DRIVER_EXAMPLES_ZIP_FILE): $(EXAMPLE_FILES)
 	$(call trace_to_console, "Zipping",$@)
-	$(_hide_cmds)$(call log_command,cd src/$(DRIVER)/examples && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
+	$(_hide_cmds)$(call log_command,cd src/$(DRIVER)/examples && zip -u -r -9 -x __pycache__ -X $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
 
 UNIT_TEST_FILES_TO_COPY := $(wildcard $(DRIVER_DIR)/unit_tests/*.py)
 UNIT_TEST_FILES := $(addprefix $(UNIT_TEST_DIR)/,$(notdir $(UNIT_TEST_FILES_TO_COPY)))
