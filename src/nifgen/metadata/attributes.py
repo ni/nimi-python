@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 19.6.0d4
+# This file is generated from NI-FGEN API metadata version 20.0.0d1
 attributes = {
     1050005: {
         'access': 'read-write',

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 19.6.0d4
+# This file is generated from NI-FGEN API metadata version 20.0.0d1
 config = {
-    'api_version': '19.6.0d4',
+    'api_version': '20.0.0d1',
     'c_function_prefix': 'niFgen_',
     'close_function': 'close',
     'context_manager_name': {

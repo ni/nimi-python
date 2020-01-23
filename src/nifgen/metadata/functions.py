@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 19.6.0d4
+# This file is generated from NI-FGEN API metadata version 20.0.0d1
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -2098,19 +2098,6 @@ functions = {
                 'documentation': {
                     'description': '\nIdentifies your instrument session. **vi** is obtained from the\nniFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels\nfunctions and identifies a particular instrument session.\n'
                 },
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'InvalidateAllAttributes': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
             }
