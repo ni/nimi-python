@@ -49,9 +49,9 @@ All notable changes to this project will be documented in this file.
 * ### NI-FGEN
     * #### Added
         * `nifgen.Session.import_attribute_configuration_file()`
+        * `nifgen.Session.import_attribute_configuration_buffer()`
         * `nifgen.Session.export_attribute_configuration_file()`
-        * `nifgen.Session.import_attribute_configuration_buffer()`
-        * `nifgen.Session.import_attribute_configuration_buffer()`
+        * `nifgen.Session.export_attribute_configuration_buffer()`
         * `nifgen.Session.get_channel_name()`
     * #### Changed
     * #### Removed
