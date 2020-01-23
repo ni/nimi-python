@@ -63,7 +63,6 @@ class Library(object):
         self.niFgen_ImportAttributeConfigurationFile_cfunc = None
         self.niFgen_InitializeWithChannels_cfunc = None
         self.niFgen_InitiateGeneration_cfunc = None
-        self.niFgen_InvalidateAllAttributes_cfunc = None
         self.niFgen_IsDone_cfunc = None
         self.niFgen_LockSession_cfunc = None
         self.niFgen_QueryArbSeqCapabilities_cfunc = None
@@ -451,14 +450,6 @@ class Library(object):
                 self.niFgen_InitiateGeneration_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFgen_InitiateGeneration_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_InitiateGeneration_cfunc(vi)
-
-    def niFgen_InvalidateAllAttributes(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niFgen_InvalidateAllAttributes_cfunc is None:
-                self.niFgen_InvalidateAllAttributes_cfunc = self._library.niFgen_InvalidateAllAttributes
-                self.niFgen_InvalidateAllAttributes_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niFgen_InvalidateAllAttributes_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFgen_InvalidateAllAttributes_cfunc(vi)
 
     def niFgen_IsDone(self, vi, done):  # noqa: N802
         with self._func_lock:

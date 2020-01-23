@@ -141,8 +141,6 @@ class SideEffectsHelper(object):
         self._defaults['InitializeWithChannels']['vi'] = None
         self._defaults['InitiateGeneration'] = {}
         self._defaults['InitiateGeneration']['return'] = 0
-        self._defaults['InvalidateAllAttributes'] = {}
-        self._defaults['InvalidateAllAttributes']['return'] = 0
         self._defaults['IsDone'] = {}
         self._defaults['IsDone']['return'] = 0
         self._defaults['IsDone']['done'] = None
@@ -636,11 +634,6 @@ class SideEffectsHelper(object):
             return self._defaults['InitiateGeneration']['return']
         return self._defaults['InitiateGeneration']['return']
 
-    def niFgen_InvalidateAllAttributes(self, vi):  # noqa: N802
-        if self._defaults['InvalidateAllAttributes']['return'] != 0:
-            return self._defaults['InvalidateAllAttributes']['return']
-        return self._defaults['InvalidateAllAttributes']['return']
-
     def niFgen_IsDone(self, vi, done):  # noqa: N802
         if self._defaults['IsDone']['return'] != 0:
             return self._defaults['IsDone']['return']
@@ -981,8 +974,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_InitializeWithChannels.return_value = 0
         mock_library.niFgen_InitiateGeneration.side_effect = MockFunctionCallError("niFgen_InitiateGeneration")
         mock_library.niFgen_InitiateGeneration.return_value = 0
-        mock_library.niFgen_InvalidateAllAttributes.side_effect = MockFunctionCallError("niFgen_InvalidateAllAttributes")
-        mock_library.niFgen_InvalidateAllAttributes.return_value = 0
         mock_library.niFgen_IsDone.side_effect = MockFunctionCallError("niFgen_IsDone")
         mock_library.niFgen_IsDone.return_value = 0
         mock_library.niFgen_LockSession.side_effect = MockFunctionCallError("niFgen_LockSession")

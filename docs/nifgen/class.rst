@@ -1908,19 +1908,6 @@ initiate
 
 
 
-invalidate_all_attributes
--------------------------
-
-    .. py:currentmodule:: nifgen.Session
-
-    .. py:method:: invalidate_all_attributes()
-
-            TBD
-
-            
-
-
-
 is_done
 -------
 

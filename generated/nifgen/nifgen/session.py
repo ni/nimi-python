@@ -4177,17 +4177,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def invalidate_all_attributes(self):
-        r'''invalidate_all_attributes
-
-        TBD
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niFgen_InvalidateAllAttributes(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def is_done(self):
         r'''is_done
 
