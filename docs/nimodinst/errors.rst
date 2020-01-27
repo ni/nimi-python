@@ -39,26 +39,6 @@ DriverNotInstalledError
 
         An error due to using this module without the driver runtime installed.
 
-InvalidRepeatedCapabilityError
-------------------------------
-
-    .. py:currentmodule:: nimodinst.errors
-
-    .. exception:: InvalidRepeatedCapabilityError
-
-        An error due to an invalid character in a repeated capability
-
-
-SelfTestError
--------------
-
-    .. py:currentmodule:: nimodinst.errors
-
-    .. exception:: SelfTestError
-
-        An error due to a failed self-test
-
-
 DriverWarning
 -------------
 
