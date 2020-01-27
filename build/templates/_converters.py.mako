@@ -10,10 +10,7 @@ import ${module_name}.errors as errors
 import datetime
 import numbers
 
-try:
-    from functools import singledispatch  # Python 3.4+
-except ImportError:
-    from singledispatch import singledispatch  # Python 2.7
+from functools import singledispatch  # Python 3.4+
 
 
 @singledispatch
