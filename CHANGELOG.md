@@ -74,6 +74,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-TClk
     * #### Added
     * #### Changed
+        * Functions parameters and attributes that are time based now take or return a `datetime.timedelta` object
     * #### Removed
 
 
