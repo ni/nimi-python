@@ -110,6 +110,7 @@ attributes = {
     },
     11: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the sample clock delay.\nSpecifies the delay, in seconds, to apply to the session sample clock  relative to the other synchronized sessions. During synchronization,  NI-TClk aligns the sample clocks on the synchronized devices. If you want  to delay the sample clocks, set this attribute before calling  niTClk_Synchronize.\nnot supported for acquisition sessions.\nValues - Between minus one and plus one period of the sample clock.\nOne sample clock period is equal to (1/sample clock rate). For example,  for a session with sample rate of 100 MS/s, you can specify sample clock  delays between -10.0 ns and +10.0 ns.\nDefault Value is 0\n',
