@@ -220,15 +220,14 @@ def convert_to_nitclk_session_number(item):
     Supported objects are:
     - class with .tclk object of type nitclk.SessionReference
     - nitclk.SessionReference
-    - NI-TClk Session Num
     '''
     try:
-        return item.tclk._get_session_number()
+        return item.tclk._get_tclk_session_reference()
     except AttributeError:
         pass
 
     try:
-        return item._get_session_number()
+        return item._get_tclk_session_reference()
     except AttributeError:
         pass
 
