@@ -75,6 +75,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * Do not support raw session number for sessions
 
 
 ## 1.1.5 - 2019-11-22
