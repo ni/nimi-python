@@ -231,8 +231,7 @@ def convert_to_nitclk_session_number(item):
     except AttributeError:
         pass
 
-    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
-    return item
+    raise TypeError('Unsupported type for nitclk session: {}'.format(type(item)))
 
 
 def convert_to_nitclk_session_number_list(item_list):
