@@ -198,7 +198,7 @@ class SessionReference(object):
         except errors.Error:
             return "Failed to retrieve error description."
 
-    def _get_session_number(self):
+    def _get_tclk_session_reference(self):
         return self._session_number
 
     def _get_attribute_vi_real64(self, attribute_id):
