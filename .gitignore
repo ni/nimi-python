@@ -22,7 +22,7 @@ generated/*/coverage.xml
 
 .eggs/
 .tox/
-.coverage
+*.coverage
 commands.log
 .vscode/launch.json
 .vscode/settings.json
