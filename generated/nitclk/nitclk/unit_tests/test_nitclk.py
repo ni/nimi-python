@@ -178,8 +178,8 @@ class TestNitclkApi(object):
         attribute_id = 11
         test_number = 4.2
         self.side_effects_helper['GetAttributeViReal64']['value'] = test_number
-        attr_float = session.sample_clock_delay
-        assert(attr_float == test_number)
+        attr_timedelta = session.sample_clock_delay
+        assert(attr_timedelta.total_seconds() == test_number)
         self.patched_library.niTClk_GetAttributeViReal64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViReal64PointerMatcher())
 
     def test_set_vi_string(self):

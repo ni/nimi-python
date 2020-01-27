@@ -167,7 +167,7 @@ finish_sync_pulse_sender_synchronize
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: finish_sync_pulse_sender_synchronize(sessions, min_time)
+    .. py:function:: finish_sync_pulse_sender_synchronize(sessions, min_time=datetime.timedelta(seconds=0.0))
 
         TBD
 
@@ -197,7 +197,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type min_time: float
+        :type min_time: float in seconds or datetime.timedelta
 
 initiate
 --------
@@ -267,7 +267,7 @@ setup_for_sync_pulse_sender_synchronize
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: setup_for_sync_pulse_sender_synchronize(sessions, min_time)
+    .. py:function:: setup_for_sync_pulse_sender_synchronize(sessions, min_time=datetime.timedelta(seconds=0.0))
 
         TBD
 
@@ -297,7 +297,7 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type min_time: float
+        :type min_time: float in seconds or datetime.timedelta
 
 synchronize
 -----------
@@ -346,7 +346,7 @@ synchronize_to_sync_pulse_sender
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: synchronize_to_sync_pulse_sender(sessions, min_time)
+    .. py:function:: synchronize_to_sync_pulse_sender(sessions, min_time=datetime.timedelta(seconds=0.0))
 
         TBD
 
@@ -376,14 +376,14 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type min_time: float
+        :type min_time: float in seconds or datetime.timedelta
 
 wait_until_done
 ---------------
 
     .. py:currentmodule:: nitclk
 
-    .. py:function:: wait_until_done(sessions, timeout)
+    .. py:function:: wait_until_done(sessions, timeout=datetime.timedelta(seconds=0.0))
 
         Call this method to pause execution of your program until the
         acquisitions and/or generations corresponding to sessions are done or
@@ -417,7 +417,7 @@ wait_until_done
             
 
 
-        :type timeout: float
+        :type timeout: float in seconds or datetime.timedelta
 
 
 SessionReference
