@@ -34,6 +34,6 @@ script:
   - tox -c tox-travis.ini
 
 after_success:
-  - travis_retry codecov --flags codegen-unit-tests --file codegen.xml
-  - travis_retry codecov --flags unit-tests --file unittest.xml
+  - travis_retry codecov --flags codegenunittests --file codegen.xml
+  - travis_retry codecov --flags unittests --file unittest.xml
 

@@ -50,7 +50,7 @@ commands =
     # Display the coverage results
     ${module_name}-system_tests: coverage report --rcfile=../../tools/coverage_system_tests.rc
     # token is from codecov
-    ${module_name}-system_tests: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}-system-tests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
+    ${module_name}-system_tests: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
 
 deps =
 % if config['supports_nitclk']:
