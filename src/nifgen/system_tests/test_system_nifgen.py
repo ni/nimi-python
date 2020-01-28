@@ -142,13 +142,12 @@ def test_disable(session):
     assert channel.output_enabled is False
 
 
-def test_get_ext_cal_last_date_and_time():
-    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 throws out unrecoverable error on calling get_ext_cal_last_date_and_time()
-        try:
-            session.get_ext_cal_last_date_and_time()
-            assert False
-        except nifgen.Error as e:
-            assert e.code == -1074118632  # This operation is not supported for simulated device
+def test_get_ext_cal_last_date_and_time(session):
+    try:
+        session.get_ext_cal_last_date_and_time()
+        assert False
+    except nifgen.Error as e:
+        assert e.code == -1074118632  # This operation is not supported for simulated device
 
 
 def test_get_ext_cal_last_temp(session):
