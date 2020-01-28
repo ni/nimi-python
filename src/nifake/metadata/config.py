@@ -17,6 +17,7 @@ config = {
         }
     ],
     'driver_name': 'NI-FAKE',
+    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
     'enum_whitelist_suffix': [
         '_POINT_FIVE'
     ],

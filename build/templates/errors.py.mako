@@ -1,9 +1,10 @@
 ${template_parameters['encoding_tag']}
 # This file was generated
 <%
-config        = template_parameters['metadata'].config
-attributes    = config['attributes']
-functions     = config['functions']
+config            = template_parameters['metadata'].config
+attributes        = config['attributes']
+functions         = config['functions']
+extra_errors_used = config['extra_errors_used']
 
 module_name = config['module_name']
 c_function_prefix = config['c_function_prefix']
@@ -26,6 +27,9 @@ def _is_warning(code):
     return (code > 0)
 
 
+<%
+# All drivers need Error, DriverError, DriverWarning, UnsupportedConfigurationError and DriverNotInstalledError
+%>\
 class Error(Exception):
     '''Base error class for ${driver_name}'''
 
@@ -65,6 +69,7 @@ class DriverNotInstalledError(Error):
         super(DriverNotInstalledError, self).__init__('The ${driver_name} runtime could not be loaded. Make sure it is installed and its bitness matches that of your Python interpreter. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
+% if 'InvalidRepeatedCapabilityError' in extra_errors_used:
 class InvalidRepeatedCapabilityError(Error):
     '''An error due to an invalid character in a repeated capability'''
 
@@ -72,6 +77,8 @@ class InvalidRepeatedCapabilityError(Error):
         super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({0}) was found in repeated capability string ({1})'.format(invalid_character, invalid_string))
 
 
+% endif
+% if 'SelfTestError' in extra_errors_used:
 class SelfTestError(Error):
     '''An error due to a failed self-test'''
 
@@ -81,6 +88,7 @@ class SelfTestError(Error):
         super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
 
 
+% endif
 def handle_error(session, code, ignore_warnings, is_error_handling):
     '''handle_error
 

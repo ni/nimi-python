@@ -12,6 +12,7 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-SWITCH',
+    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
     'init_function': 'InitWithTopology',
     'library_info': {
         'Linux': {
