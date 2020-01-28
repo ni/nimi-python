@@ -35,5 +35,7 @@ script:
 
 after_success:
   - travis_retry codecov --flags codegenunittests --file codegen.xml
-  - travis_retry codecov --flags unittests --file unittest.xml
+  - travis_retry codecov --flags nifakeunittests --file nifakeunittest.xml
+  - travis_retry codecov --flags nimodinstunittests --file nimodinstunittest.xml
+  - travis_retry codecov --flags nitclkunittests --file nitclkunittest.xml
 
