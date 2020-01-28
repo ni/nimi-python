@@ -12,6 +12,7 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-DCPower',
+    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
     'init_function': 'InitializeWithChannels',
     'library_info': {
         'Linux': {

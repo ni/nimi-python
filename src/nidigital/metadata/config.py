@@ -12,6 +12,7 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-Digital Pattern Driver',
+    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
     'enum_whitelist_suffix': [
     ],
     'init_function': 'InitWithOptions',

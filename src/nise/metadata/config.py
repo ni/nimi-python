@@ -10,6 +10,7 @@ config = {
     ],
     'driver_name': 'NI Switch Executive',
     'driver_registry': 'Switch Executive',
+    'extra_errors_used': ['InvalidRepeatedCapabilityError', ],
     'init_function': 'OpenSession',
     'library_info': {
         'Linux': {
