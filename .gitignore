@@ -23,6 +23,10 @@ generated/*/coverage.xml
 .eggs/
 .tox/
 .coverage
+nifakeunittest.xml
+nimodinstunittest.xml
+nitclkunittest.xml
+codegen.xml
 commands.log
 .vscode/launch.json
 .vscode/settings.json
