@@ -614,7 +614,7 @@ class _Session(object):
     def finish_sync_pulse_sender_synchronize(self, sessions, min_time):
         r'''finish_sync_pulse_sender_synchronize
 
-        TBD
+        Finishes synchronizing the Sync Pulse Sender.
 
         Args:
             sessions (list of (nimi-python Session class or SessionReference)): sessions is an array of sessions that are being synchronized.
@@ -705,7 +705,7 @@ class _Session(object):
     def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time):
         r'''setup_for_sync_pulse_sender_synchronize
 
-        TBD
+        Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
         Args:
             sessions (list of (nimi-python Session class or SessionReference)): sessions is an array of sessions that are being synchronized.
@@ -756,7 +756,7 @@ class _Session(object):
     def synchronize_to_sync_pulse_sender(self, sessions, min_time):
         r'''synchronize_to_sync_pulse_sender
 
-        TBD
+        Synchronizes the other devices to the Sync Pulse Sender.
 
         Args:
             sessions (list of (nimi-python Session class or SessionReference)): sessions is an array of sessions that are being synchronized.
@@ -939,7 +939,7 @@ def configure_for_homogeneous_triggers(sessions):
 def finish_sync_pulse_sender_synchronize(sessions, min_time):
     '''finish_sync_pulse_sender_synchronize
 
-    TBD
+    Finishes synchronizing the Sync Pulse Sender.
 
     Args:
         sessions (list of (nimi-python Session class or SessionReference)): sessions is an array of sessions that are being synchronized.
@@ -993,7 +993,7 @@ def is_done(sessions):
 def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
     '''setup_for_sync_pulse_sender_synchronize
 
-    TBD
+    Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
     Args:
         sessions (list of (nimi-python Session class or SessionReference)): sessions is an array of sessions that are being synchronized.
@@ -1036,7 +1036,7 @@ def synchronize(sessions, min_tclk_period):
 def synchronize_to_sync_pulse_sender(sessions, min_time):
     '''synchronize_to_sync_pulse_sender
 
-    TBD
+    Synchronizes the other devices to the Sync Pulse Sender.
 
     Args:
         sessions (list of (nimi-python Session class or SessionReference)): sessions is an array of sessions that are being synchronized.

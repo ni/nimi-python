@@ -169,7 +169,7 @@ finish_sync_pulse_sender_synchronize
 
     .. py:function:: finish_sync_pulse_sender_synchronize(sessions, min_time)
 
-        TBD
+        Finishes synchronizing the Sync Pulse Sender.
 
         
 
@@ -269,7 +269,7 @@ setup_for_sync_pulse_sender_synchronize
 
     .. py:function:: setup_for_sync_pulse_sender_synchronize(sessions, min_time)
 
-        TBD
+        Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
         
 
@@ -348,7 +348,7 @@ synchronize_to_sync_pulse_sender
 
     .. py:function:: synchronize_to_sync_pulse_sender(sessions, min_time)
 
-        TBD
+        Synchronizes the other devices to the Sync Pulse Sender.
 
         
 
