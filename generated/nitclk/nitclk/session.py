@@ -96,12 +96,6 @@ class SessionReference(object):
 
     Note: Sample clock delay is supported for generation sessions only; it is
     '''
-    script_trigger_master_session = _attributes.AttributeSessionReference(5)
-    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
-
-    Specifies the script trigger master session.
-    For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-    '''
     sequencer_flag_master_session = _attributes.AttributeSessionReference(16)
     '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
 
