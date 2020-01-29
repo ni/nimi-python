@@ -106,7 +106,7 @@ functions = {
     },
     'FinishSyncPulseSenderSynchronize': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Finishes synchronizing the Sync Pulse Sender.'
         },
         'parameters': [
             {
@@ -957,7 +957,7 @@ functions = {
     },
     'SetupForSyncPulseSenderSynchronize': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization'
         },
         'parameters': [
             {
@@ -1101,7 +1101,7 @@ functions = {
     },
     'SynchronizeToSyncPulseSender': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Synchronizes the other devices to the Sync Pulse Sender.'
         },
         'parameters': [
             {
