@@ -160,7 +160,7 @@ configure_for_homogeneous_triggers
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
 
 finish_sync_pulse_sender_synchronize
 ------------------------------------
@@ -183,7 +183,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
         :param min_time:
 
 
@@ -224,7 +224,7 @@ initiate
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
 
 is_done
 -------
@@ -248,7 +248,7 @@ is_done
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
 
         :rtype: bool
         :return:
@@ -283,7 +283,7 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
         :param min_time:
 
 
@@ -325,7 +325,7 @@ synchronize
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
         :param min_tclk_period:
 
 
@@ -362,7 +362,7 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
         :param min_time:
 
 
@@ -406,7 +406,7 @@ wait_until_done
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or SessionReference)
         :param timeout:
 
 
