@@ -63,10 +63,7 @@ ${helper.get_rst_header_snippet('SessionReference', '=')}
     Helper class that contains all NI-TClk properties. This class is what is returned by
     any nimi-python Session class tclk attribute when the driver supports NI-TClk
 
-    .. code:: python
-
-        with niscope.Session('dev1') as session:
-            session.tclk.sample_clock_delay = .42
+    ..note:: Constructing this class is an advanced use case and should not be needed in most circumstances.
 
     :param session_number:
         nitclk session
