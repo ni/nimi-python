@@ -2,90 +2,30 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
-    'ConfigureCycleNumberHistoryRAMTrigger': {
-        'codegen_method': 'no'
+    'FetchCaptureWaveformU32': {
+        'parameters': {
+            6: {
+                'direction': 'out',
+                'name': 'data',
+                'use_array': True,
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'dataBufferSize',
+                    # Should be 'actualNumWaveforms*ActualSamplesPerWaveform' but codegen doesn't handle that properly
+                    # The actual call is in a "fancy" function so change so the library call can be generated (doesn't
+                    # depend on this value)
+                    'value_twist': 'actualNumWaveforms',
+                },
+                'type': 'ViUInt32[]',
+            },
+        }
     },
-    'ConfigureDigitalEdgeConditionalJumpTrigger': {
-        'codegen_method': 'no'
+    'GetChannelName': {
+        'render_in_session_base': True,
     },
-    'ConfigureDigitalEdgeStartTrigger': {
-        'codegen_method': 'no'
+    'GetPinName': {
+        'render_in_session_base': True,
     },
-    'ConfigureFirstFailureHistoryRAMTrigger': {
-        'codegen_method': 'no'
-    },
-    'ConfigureHistoryRAMCyclesToAcquire': {
-        'codegen_method': 'no'
-    },
-    'ConfigurePatternLabelHistoryRAMTrigger': {
-        'codegen_method': 'no'
-    },
-    'ConfigureSoftwareEdgeConditionalJumpTrigger': {
-        'codegen_method': 'no'
-    },
-    'ConfigureSoftwareEdgeStartTrigger': {
-        'codegen_method': 'no'
-    },
-    'ConfigureStartLabel': {
-        'codegen_method': 'no'
-    },
-    'ConfigureTerminationMode': {
-        'codegen_method': 'no'
-    },
-    'CreateChannelMap': {
-        'codegen_method': 'no'
-    },
-    'CreatePinGroup': {
-        'codegen_method': 'no'
-    },
-    'CreatePinMap': {
-        'codegen_method': 'no'
-    },
-    'DisableConditionalJumpTrigger': {
-        'codegen_method': 'no'
-    },
-    'DisableStartTrigger': {
-        'codegen_method': 'no'
-    },
-    'EndChannelMap': {
-        'codegen_method': 'no'
-    },
-    'ExportSignal': {
-        'codegen_method': 'no'
-    },
-    'FrequencyCounter_ConfigureMeasurementTime': {
-        'codegen_method': 'no'
-    },
-    'MapPinToChannel': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureApertureTime': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureCurrentLevel': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureCurrentLevelRange': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureCurrentLimit': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureCurrentLimitRange': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureOutputFunction': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureVoltageLevel': {
-        'codegen_method': 'no'
-    },
-    'PPMU_ConfigureVoltageLimits': {
-        'codegen_method': 'no'
-    },
-    'SelectFunction': {
-        'codegen_method': 'no'
-    }
 }
 
 functions_additional_write_source_waveform_site_unique = {

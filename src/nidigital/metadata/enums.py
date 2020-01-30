@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.0.0a0
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d6
 enums = {
     'ApertureTimeUnits': {
         'values': [
@@ -26,12 +26,12 @@ enums = {
             {
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER0',
                 'python_name': 'CONDITIONAL_JUMP_TRIGGER0',
-                'value': '"conditionalJumpTrigger0"'
+                'value': 'conditionalJumpTrigger0'
             },
             {
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER1',
                 'python_name': 'CONDITIONAL_JUMP_TRIGGER1',
-                'value': '"conditionalJumpTrigger1"'
+                'value': 'conditionalJumpTrigger1'
             },
             {
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER2',
@@ -155,23 +155,15 @@ enums = {
             }
         ]
     },
-    'PatternOpcodeEvent': {
+    'MeasurementMode': {
         'values': [
             {
-                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT0',
-                'value': '"patternOpcodeEvent0"'
+                'name': 'NIDIGITAL_VAL_BANKED',
+                'value': 3700
             },
             {
-                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT1',
-                'value': '"patternOpcodeEvent1"'
-            },
-            {
-                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT2',
-                'value': '"patternOpcodeEvent2"'
-            },
-            {
-                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT3',
-                'value': '"patternOpcodeEvent3"'
+                'name': 'NIDIGITAL_VAL_PARALLEL',
+                'value': 3701
             }
         ]
     },
@@ -207,6 +199,26 @@ enums = {
             }
         ]
     },
+    'PatternOpcodeEvent': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT0',
+                'value': 'patternOpcodeEvent0'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT1',
+                'value': 'patternOpcodeEvent1'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT2',
+                'value': 'patternOpcodeEvent2'
+            },
+            {
+                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT3',
+                'value': 'patternOpcodeEvent3'
+            }
+        ]
+    },
     'SelectedFunction': {
         'values': [
             {
@@ -231,19 +243,19 @@ enums = {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_FLAG0',
-                'value': '"seqflag0"'
+                'value': 'seqflag0'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_FLAG1',
-                'value': '"seqflag1"'
+                'value': 'seqflag1'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_FLAG2',
-                'value': '"seqflag2"'
+                'value': 'seqflag2'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_FLAG3',
-                'value': '"seqflag3"'
+                'value': 'seqflag3'
             }
         ]
     },
@@ -251,15 +263,15 @@ enums = {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER0',
-                'value': '"reg0"'
+                'value': 'reg0'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER1',
-                'value': '"reg1"'
+                'value': 'reg1'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER2',
-                'value': '"reg2"'
+                'value': 'reg2'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER3',
@@ -267,51 +279,71 @@ enums = {
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER4',
-                'value': '"reg4"'
+                'value': 'reg4'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER5',
-                'value': '"reg5"'
+                'value': 'reg5'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER6',
-                'value': '"reg6"'
+                'value': 'reg6'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER7',
-                'value': '"reg7"'
+                'value': 'reg7'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER8',
-                'value': '"reg8"'
+                'value': 'reg8'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER9',
-                'value': '"reg9"'
+                'value': 'reg9'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER10',
-                'value': '"reg10"'
+                'value': 'reg10'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER11',
-                'value': '"reg11"'
+                'value': 'reg11'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER12',
-                'value': '"reg12"'
+                'value': 'reg12'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER13',
-                'value': '"reg13"'
+                'value': 'reg13'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER14',
-                'value': '"reg14"'
+                'value': 'reg14'
             },
             {
                 'name': 'NIDIGITAL_VAL_SEQUENCER_REGISTER15',
-                'value': '"reg15"'
+                'value': 'reg15'
+            }
+        ]
+    },
+    'SessionState': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_IDLE',
+                'value': 1
+            },
+            {
+                'name': 'NIDIGITAL_VAL_VERIFIED',
+                'value': 2
+            },
+            {
+                'name': 'NIDIGITAL_VAL_COMMITTED',
+                'value': 4
+            },
+            {
+                'name': 'NIDIGITAL_VAL_RUNNING',
+                'value': 8
             }
         ]
     },
@@ -375,39 +407,39 @@ enums = {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_DO_NOT_EXPORT_STR',
-                'value': '""'
+                'value': ''
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG0_STR',
-                'value': '"PXI_Trig0"'
+                'value': 'PXI_Trig0'
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG1_STR',
-                'value': '"PXI_Trig1"'
+                'value': 'PXI_Trig1'
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG2_STR',
-                'value': '"PXI_Trig2"'
+                'value': 'PXI_Trig2'
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG3_STR',
-                'value': '"PXI_Trig3"'
+                'value': 'PXI_Trig3'
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG4_STR',
-                'value': '"PXI_Trig4"'
+                'value': 'PXI_Trig4'
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG5_STR',
-                'value': '"PXI_Trig5"'
+                'value': 'PXI_Trig5'
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG6_STR',
-                'value': '"PXI_Trig6"'
+                'value': 'PXI_Trig6'
             },
             {
                 'name': 'NIDIGITAL_VAL_PXI_TRIG7_STR',
-                'value': '"PXI_Trig7"'
+                'value': 'PXI_Trig7'
             }
         ]
     },

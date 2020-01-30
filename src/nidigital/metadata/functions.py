@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.0.0a0
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d6
 functions = {
     'Abort': {
         'documentation': {
@@ -111,54 +111,6 @@ functions = {
                 'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'startLabel',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'selectDigitalFunction',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'waitUntilDone',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'timeout',
-                'type': 'ViReal64'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'BurstPatternSynchronized': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
             },
             {
                 'direction': 'in',
@@ -314,116 +266,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'ConfigureCycleNumberHistoryRAMTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'cycleNumber',
-                'type': 'ViInt64'
-            },
-            {
-                'direction': 'in',
-                'name': 'pretriggerSamples',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureDigitalEdgeConditionalJumpTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'triggerIdentifier',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'source',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'edge',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureDigitalEdgeStartTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'source',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'edge',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureFirstFailureHistoryRAMTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'pretriggerSamples',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureHistoryRAMCyclesToAcquire': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'cyclesToAcquire',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'ConfigurePatternBurstSites': {
         'documentation': {
             'description': 'TBD'
@@ -438,112 +280,6 @@ functions = {
                 'direction': 'in',
                 'name': 'siteList',
                 'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigurePatternLabelHistoryRAMTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'label',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'vectorOffset',
-                'type': 'ViInt64'
-            },
-            {
-                'direction': 'in',
-                'name': 'cycleOffset',
-                'type': 'ViInt64'
-            },
-            {
-                'direction': 'in',
-                'name': 'pretriggerSamples',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureSoftwareEdgeConditionalJumpTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'triggerIdentifier',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureSoftwareEdgeStartTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureStartLabel': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'label',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigureTerminationMode': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'enum': 'TerminationMode',
-                'name': 'mode',
-                'type': 'ViInt32'
             }
         ],
         'returns': 'ViStatus'
@@ -949,70 +685,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'CreateChannelMap': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'numSites',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'CreatePinGroup': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'pinGroupName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'pinList',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'CreatePinMap': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'dutPinList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'systemPinList',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'CreateSourceWaveformFromFileTDMS': {
         'documentation': {
             'description': 'TBD'
@@ -1138,24 +810,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'DisableConditionalJumpTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'triggerIdentifier',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'DisableSites': {
         'documentation': {
             'description': 'TBD'
@@ -1174,47 +828,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'DisableStartTrigger': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'EnableMatchFailCombination': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'syncSession',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'EnableSites': {
         'documentation': {
             'description': 'TBD'
@@ -1228,48 +841,6 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'siteList',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'EndChannelMap': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ExportSignal': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'enum': 'Signal',
-                'name': 'signal',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'signalIdentifier',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'outputTerminal',
                 'type': 'ViConstString'
             }
         ],
@@ -1336,16 +907,13 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'data',
-                'use_array': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'dataBufferSize',
-                    # Should be 'actualNumWaveforms*ActualSamplesPerWaveform' but codegen doesn't handle that properly
-                    # The actual call is in a "fancy" function so change so the library call can be generated (doesn't
-                    # depend on this value)
-                    'value_twist': 'actualNumWaveforms',
+                    'value_twist': 'actualNumWaveforms*ActualSamplesPerWaveform'
                 },
                 'type': 'ViUInt32[]',
+                'use_array': True
             },
             {
                 'direction': 'out',
@@ -1509,30 +1077,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'FrequencyCounter_ConfigureMeasurementTime': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'measurementTime',
-                'type': 'ViReal64'
-            }
-        ],
-        'python_name': 'frequency_counter_configure_measurement_time',
-        'returns': 'ViStatus'
-    },
     'FrequencyCounter_MeasureFrequency': {
         'documentation': {
             'description': 'TBD'
@@ -1688,35 +1232,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'GetAttributeViSession': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'attribute',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'out',
-                'name': 'value',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'GetAttributeViString': {
         'codegen_method': 'private',
         'documentation': {
@@ -1756,7 +1271,6 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
-        'render_in_session_base': True,
         'documentation': {
             'description': 'TBD'
         },
@@ -2019,7 +1533,6 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinName': {
-        'render_in_session_base': True,
         'documentation': {
             'description': 'TBD'
         },
@@ -2551,242 +2064,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'MapPinToChannel': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'pin',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'site',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'channel',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureApertureTime': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'apertureTime',
-                'type': 'ViReal64'
-            },
-            {
-                'direction': 'in',
-                'enum': 'ApertureTimeUnits',
-                'name': 'units',
-                'type': 'ViInt32'
-            }
-        ],
-        'python_name': 'ppmu_configure_aperture_time',
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureCurrentLevel': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'currentLevel',
-                'type': 'ViReal64'
-            }
-        ],
-        'python_name': 'ppmu_configure_current_level',
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureCurrentLevelRange': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'range',
-                'type': 'ViReal64'
-            }
-        ],
-        'python_name': 'ppmu_configure_current_level_range',
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureCurrentLimit': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'behavior',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'limit',
-                'type': 'ViReal64'
-            }
-        ],
-        'python_name': 'ppmu_configure_current_limit',
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureCurrentLimitRange': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'range',
-                'type': 'ViReal64'
-            }
-        ],
-        'python_name': 'ppmu_configure_current_limit_range',
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureOutputFunction': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'outputFunction',
-                'type': 'ViInt32'
-            }
-        ],
-        'python_name': 'ppmu_configure_output_function',
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureVoltageLevel': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'voltageLevel',
-                'type': 'ViReal64'
-            }
-        ],
-        'python_name': 'ppmu_configure_voltage_level',
-        'returns': 'ViStatus'
-    },
-    'PPMU_ConfigureVoltageLimits': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'lowerVoltageLimit',
-                'type': 'ViReal64'
-            },
-            {
-                'direction': 'in',
-                'name': 'upperVoltageLimit',
-                'type': 'ViReal64'
-            }
-        ],
-        'python_name': 'ppmu_configure_voltage_limits',
-        'returns': 'ViStatus'
-    },
     'PPMU_Measure': {
         'documentation': {
             'description': 'TBD'
@@ -2970,29 +2247,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SelectFunction': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'function',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'SelfCalibrate': {
         'documentation': {
             'description': 'TBD'
@@ -3145,36 +2399,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SetAttributeViSession': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'attribute',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'in',
-                'name': 'value',
-                'is_session_handle': False,
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'SetAttributeViString': {
         'codegen_method': 'private',
         'documentation': {
@@ -3200,313 +2424,6 @@ functions = {
                 'direction': 'in',
                 'name': 'value',
                 'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'SortPinResultsBySiteViInt64': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'numResults',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'results',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numResults'
-                },
-                'type': 'ViInt64[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'pinIndexes',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'siteNumbers',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'SortPinResultsBySiteViReal64': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'numResults',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'results',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numResults'
-                },
-                'type': 'ViReal64[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'pinIndexes',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'siteNumbers',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'SortPinResultsBySiteViUInt8': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'numResults',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'results',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numResults'
-                },
-                'type': 'ViUInt8[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'pinIndexes',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'siteNumbers',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'SortSiteResultsViBoolean': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteResultType',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'numResults',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'results',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numResults'
-                },
-                'type': 'ViBoolean[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'siteNumbers',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'actualNumResults',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'SortSiteResultsViUInt32Waveform': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteList',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteResultType',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'numWaveforms',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'numSamplesPerWaveform',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'waveforms',
-                'size': {
-                    'mechanism': 'custom',
-                    'value': None
-                },
-                'type': 'ViUInt32[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'siteNumbers',
-                'size': {
-                    'mechanism': '',
-                    'value': ''
-                },
-                'type': 'ViInt32[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'actualNumWaveforms',
-                'type': 'ViInt32'
             }
         ],
         'returns': 'ViStatus'
@@ -3659,39 +2576,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'WriteSequencerFlagSynchronized': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'sessionCount',
-                'type': 'ViUInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'sessions',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'sessionCount'
-                },
-                'type': 'ViSession[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'flag',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'value',
-                'type': 'ViBoolean'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'WriteSequencerRegister': {
         'documentation': {
             'description': 'TBD'
@@ -3719,7 +2603,6 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
-        'python_name': 'write_source_waveform_broadcast',
         'parameters': [
             {
                 'direction': 'in',
@@ -3746,6 +2629,7 @@ functions = {
                 'type': 'ViUInt32[]'
             }
         ],
+        'python_name': 'write_source_waveform_broadcast',
         'returns': 'ViStatus'
     },
     'WriteSourceWaveformDataFromFileTDMS': {
@@ -3805,8 +2689,12 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'waveformData',
-                'use_array': True,
-                'type': 'ViUInt32[]'
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViUInt32[]',
+                'use_array': True
             }
         ],
         'returns': 'ViStatus'
@@ -3879,35 +2767,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'init': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViString'
-            },
-            {
-                'direction': 'in',
-                'name': 'idQuery',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'resetDevice',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'out',
-                'name': 'newVi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'reset': {
         'documentation': {
             'description': 'TBD'
@@ -3951,4 +2810,3 @@ functions = {
         'returns': 'ViStatus'
     }
 }
-
