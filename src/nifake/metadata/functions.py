@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d4
+# This file is generated from NI-FAKE API metadata version 1.2.0d5
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -2041,7 +2041,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
-                'default_value': 'MobileOS.ANDROID',
+                'default_value': 'MobileOSNames.ANDROID',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Indicates a Mobile OS',
@@ -2061,7 +2061,7 @@ functions = {
                     ]
                 },
                 'enum': 'MobileOSNames',
-                'name': 'aMobileOS',
+                'name': 'aMobileOSName',
                 'type': 'ViConstString'
             }
         ],

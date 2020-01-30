@@ -1594,13 +1594,13 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def string_valued_enum_input_function_with_defaults(self, a_mobile_os=enums.MobileOS.ANDROID):
+    def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name=enums.MobileOSNames.ANDROID):
         r'''string_valued_enum_input_function_with_defaults
 
         This method takes one parameter other than the session, which happens to be a string-valued enum and has a default value.
 
         Args:
-            a_mobile_os (str): Indicates a Mobile OS
+            a_mobile_os_name (str): Indicates a Mobile OS
 
                 +---------+---------+
                 | ANDROID | Android |
@@ -1611,11 +1611,11 @@ class Session(_SessionBase):
                 +---------+---------+
 
         '''
-        if type(a_mobile_os) is not enums.MobileOSNames:
+        if type(a_mobile_os_name) is not enums.MobileOSNames:
             raise TypeError('Parameter mode must be of type ' + str(enums.MobileOSNames))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        a_mobile_os_ctype = ctypes.create_string_buffer(a_mobile_os.encode(self._encoding))  # case C020
-        error_code = self._library.niFake_StringValuedEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_ctype)
+        a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.encode(self._encoding))  # case C020
+        error_code = self._library.niFake_StringValuedEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

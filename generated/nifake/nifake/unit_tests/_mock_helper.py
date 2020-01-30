@@ -726,7 +726,7 @@ class SideEffectsHelper(object):
             return self._defaults['SetCustomTypeArray']['return']
         return self._defaults['SetCustomTypeArray']['return']
 
-    def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os):  # noqa: N802
+    def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os_name):  # noqa: N802
         if self._defaults['StringValuedEnumInputFunctionWithDefaults']['return'] != 0:
             return self._defaults['StringValuedEnumInputFunctionWithDefaults']['return']
         return self._defaults['StringValuedEnumInputFunctionWithDefaults']['return']
