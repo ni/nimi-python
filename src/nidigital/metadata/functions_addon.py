@@ -2,30 +2,6 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
-    'FetchCaptureWaveformU32': {
-        'parameters': {
-            6: {
-                'direction': 'out',
-                'name': 'data',
-                'use_array': True,
-                'size': {
-                    'mechanism': 'ivi-dance-with-a-twist',
-                    'value': 'dataBufferSize',
-                    # Should be 'actualNumWaveforms*ActualSamplesPerWaveform' but codegen doesn't handle that properly
-                    # The actual call is in a "fancy" function so change so the library call can be generated (doesn't
-                    # depend on this value)
-                    'value_twist': 'actualNumWaveforms',
-                },
-                'type': 'ViUInt32[]',
-            },
-        }
-    },
-    'GetChannelName': {
-        'render_in_session_base': True,
-    },
-    'GetPinName': {
-        'render_in_session_base': True,
-    },
 }
 
 functions_additional_write_source_waveform_site_unique = {

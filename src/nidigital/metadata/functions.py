@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d6
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d7
 functions = {
     'Abort': {
         'documentation': {
@@ -910,10 +910,9 @@ functions = {
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'dataBufferSize',
-                    'value_twist': 'actualNumWaveforms*ActualSamplesPerWaveform'
+                    'value_twist': 'actualNumWaveforms'
                 },
-                'type': 'ViUInt32[]',
-                'use_array': True
+                'type': 'ViUInt32[]'
             },
             {
                 'direction': 'out',
@@ -1300,6 +1299,7 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetChannelNameFromString': {
@@ -1562,6 +1562,7 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetPinResultsPinInformation': {
@@ -2734,6 +2735,7 @@ functions = {
                 'type': 'ViSession'
             }
         ],
+        'python_name': '_close',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
