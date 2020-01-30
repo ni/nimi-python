@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 0.2.0d23
+# This file is generated from NI-FAKE API metadata version 1.2.0d4
 attributes = {
     1000000: {
         'access': 'read-write',
@@ -105,5 +105,12 @@ attributes = {
         'resettable': False,
         'type': 'ViInt32',
         'type_in_documentation': 'float in seconds or datetime.timedelta'
+    },
+    1000009: {
+        'access': 'read-write',
+        'channel_based': True,
+        'name': 'READ_WRITE_DOUBLE_WITH_REPEATED_CAPABILITY',
+        'resettable': False,
+        'type': 'ViReal64'
     }
 }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 0.2.0d23
+# This file is generated from NI-FAKE API metadata version 1.2.0d4
 config = {
-    'api_version': '0.2.0d23',
+    'api_version': '1.2.0d4',
     'c_function_prefix': 'niFake_',
     'close_function': 'close',
     'context_manager_name': {
@@ -17,9 +17,12 @@ config = {
         }
     ],
     'driver_name': 'NI-FAKE',
-    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
     'enum_whitelist_suffix': [
         '_POINT_FIVE'
+    ],
+    'extra_errors_used': [
+        'InvalidRepeatedCapabilityError',
+        'SelfTestError'
     ],
     'init_function': 'InitWithOptions',
     'library_info': {
@@ -50,5 +53,5 @@ config = {
     ],
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
     'session_handle_parameter_name': 'vi',
-    'supports_nitclk': True,
+    'supports_nitclk': True
 }

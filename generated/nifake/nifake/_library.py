@@ -66,6 +66,7 @@ class Library(object):
         self.niFake_SetAttributeViString_cfunc = None
         self.niFake_SetCustomType_cfunc = None
         self.niFake_SetCustomTypeArray_cfunc = None
+        self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
         self.niFake_UnlockSession_cfunc = None
         self.niFake_Use64BitNumber_cfunc = None
@@ -441,6 +442,14 @@ class Library(object):
                 self.niFake_SetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct.struct_CustomStruct)]  # noqa: F405
                 self.niFake_SetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomTypeArray_cfunc(vi, number_of_elements, cs)
+
+    def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc is None:
+                self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc = self._library.niFake_StringValuedEnumInputFunctionWithDefaults
+                self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc(vi, a_mobile_os)
 
     def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:
