@@ -43,6 +43,7 @@ def genJob(driver, platform) {
             githubPullRequest {
                 admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
                 orgWhitelist('ni')
+                cron('')
                 extensions {
                     commitStatus {
                         context("system-tests/${platform}/${driver}")
