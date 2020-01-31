@@ -149,7 +149,7 @@ job("${ROOT_FOLDER}/Trigger") {
             trigger(jobList) {
                 condition('UNSTABLE_OR_BETTER')
                 parameters {
-                    predefinedProp('sha1', '${sha1}')
+                    predefinedProp('sha1', '${GIT_COMMIT}')
                 }
             }
         }
