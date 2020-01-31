@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.0.0a0
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d7
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -23,10 +23,10 @@ attributes = {
         'type': 'ViBoolean'
     },
     1050005: {
-        'access': 'read only',
+        'access': 'read-write',
         'channel_based': False,
         'name': 'SIMULATE',
-        'resettable': False,
+        'resettable': True,
         'type': 'ViBoolean'
     },
     1050006: {
@@ -94,7 +94,7 @@ attributes = {
     },
     1050510: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
         'resettable': False,
         'type': 'ViString'
@@ -380,7 +380,7 @@ attributes = {
     },
     1150042: {
         'access': 'read only',
-        'channel_based': False,
+        'channel_based': True,
         'name': 'PATTERN_OPCODE_EVENT_TERMINAL_NAME',
         'resettable': False,
         'type': 'ViString'
@@ -560,5 +560,19 @@ attributes = {
         'name': 'TDR_ENDPOINT_TERMINATION',
         'resettable': True,
         'type': 'ViInt32'
+    },
+    1150084: {
+        'access': 'read-write',
+        'channel_based': False,
+        'name': 'FREQUENCY_COUNTER_MEASUREMENT_MODE',
+        'resettable': True,
+        'type': 'ViInt32'
+    },
+    1150085: {
+        'access': 'read-write',
+        'channel_based': False,
+        'name': 'FREQUENCY_COUNTER_HYSTERESIS_ENABLED',
+        'resettable': True,
+        'type': 'ViBoolean'
     }
 }

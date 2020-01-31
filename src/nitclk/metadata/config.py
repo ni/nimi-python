@@ -7,6 +7,7 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-TClk',
+    'extra_errors_used': [],
     'library_info': {
         'Linux': {
             '64bit': {

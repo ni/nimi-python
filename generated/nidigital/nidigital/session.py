@@ -276,6 +276,16 @@ class _SessionBase(object):
     history_ram_pretrigger_samples = _attributes.AttributeViInt32(1150048)
     history_ram_trigger_type = _attributes.AttributeViInt32(1150043)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
+    '''Type: str
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].instrument_firmware_revision
+    '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     instrument_model = _attributes.AttributeViString(1050512)
     interchange_check = _attributes.AttributeViBoolean(1050021)
@@ -298,6 +308,16 @@ class _SessionBase(object):
     pattern_label_history_ram_trigger_label = _attributes.AttributeViString(1150046)
     pattern_label_history_ram_trigger_vector_offset = _attributes.AttributeViInt64(1150052)
     pattern_opcode_event_terminal_name = _attributes.AttributeViString(1150042)
+    '''Type: str
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].pattern_opcode_event_terminal_name
+    '''
     ppmu_allow_extended_voltage_range = _attributes.AttributeViBoolean(1150076)
     '''Type: bool
 
@@ -1205,34 +1225,6 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def map_pin_to_channel(self, pin, site):
-        r'''map_pin_to_channel
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (channels). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].map_pin_to_channel(pin, site)
-
-        Args:
-            pin (str):
-
-            site (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
-        site_ctype = _visatype.ViInt32(site)  # case S150
-        channel_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDigital_MapPinToChannel(vi_ctype, pin_ctype, site_ctype, channel_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def ppmu_measure(self, measurement_type):
         r'''ppmu_measure
 
@@ -1641,8 +1633,9 @@ class Session(_SessionBase):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
         self.pins = _RepeatedCapabilities(self, '')
-        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
+        self.devices = _RepeatedCapabilities(self, '')
         self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent')
+        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
 
         self.tclk = nitclk.SessionReference(self._vi)
 
@@ -2080,60 +2073,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_channel_map(self, num_sites):
-        r'''create_channel_map
-
-        TBD
-
-        Args:
-            num_sites (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        num_sites_ctype = _visatype.ViInt32(num_sites)  # case S150
-        error_code = self._library.niDigital_CreateChannelMap(vi_ctype, num_sites_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_pin_group(self, pin_group_name, pin_list):
-        r'''create_pin_group
-
-        TBD
-
-        Args:
-            pin_group_name (str):
-
-            pin_list (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_group_name_ctype = ctypes.create_string_buffer(pin_group_name.encode(self._encoding))  # case C020
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_CreatePinGroup(vi_ctype, pin_group_name_ctype, pin_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_pin_map(self, dut_pin_list, system_pin_list):
-        r'''create_pin_map
-
-        TBD
-
-        Args:
-            dut_pin_list (str):
-
-            system_pin_list (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        dut_pin_list_ctype = ctypes.create_string_buffer(dut_pin_list.encode(self._encoding))  # case C020
-        system_pin_list_ctype = ctypes.create_string_buffer(system_pin_list.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_CreatePinMap(vi_ctype, dut_pin_list_ctype, system_pin_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data):
         r'''create_source_waveform_from_file_tdms
 
@@ -2261,17 +2200,6 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def end_channel_map(self):
-        r'''end_channel_map
-
-        TBD
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDigital_EndChannelMap(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

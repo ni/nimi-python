@@ -936,83 +936,6 @@ create_capture_waveform_serial
 
             :type bit_order: int
 
-create_channel_map
-------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_channel_map(num_sites)
-
-            TBD
-
-            
-
-
-
-            :param num_sites:
-
-
-                
-
-
-            :type num_sites: int
-
-create_pin_group
-----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_pin_group(pin_group_name, pin_list)
-
-            TBD
-
-            
-
-
-
-            :param pin_group_name:
-
-
-                
-
-
-            :type pin_group_name: str
-            :param pin_list:
-
-
-                
-
-
-            :type pin_list: str
-
-create_pin_map
---------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_pin_map(dut_pin_list, system_pin_list)
-
-            TBD
-
-            
-
-
-
-            :param dut_pin_list:
-
-
-                
-
-
-            :type dut_pin_list: str
-            :param system_pin_list:
-
-
-                
-
-
-            :type system_pin_list: str
-
 create_source_waveform_from_file_tdms
 -------------------------------------
 
@@ -1207,19 +1130,6 @@ enable_sites
 
 
             :type site_list: str
-
-end_channel_map
----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: end_channel_map()
-
-            TBD
-
-            
-
-
 
 fetch_capture_waveform
 ----------------------
@@ -2199,43 +2109,6 @@ lock
         a context manager and unlock will be called when the `with` block is exited
 
 
-map_pin_to_channel
-------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: map_pin_to_channel(pin, site)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].map_pin_to_channel(pin, site)
-
-
-            :param pin:
-
-
-                
-
-
-            :type pin: str
-            :param site:
-
-
-                
-
-
-            :type site: int
-
 ppmu_measure
 ------------
 
@@ -2825,30 +2698,16 @@ pins
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
-conditional_jump_triggers
--------------------------
+devices
+-------
 
-    .. py:attribute:: nidigital.Session.conditional_jump_triggers[]
-
-        If no prefix is added to the items in the parameter, the correct prefix will be added when
-        the driver function call is made.
+    .. py:attribute:: nidigital.Session.devices[]
 
         .. code:: python
 
-            session.conditional_jump_triggers['0-2'].channel_enabled = True
+            session.devices['0-2'].channel_enabled = True
 
-        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
-
-        If an invalid repeated capability is passed to the driver, the driver will return an error.
-
-        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
-        for the specific repeated capability.
-
-        .. code:: python
-
-            session.conditional_jump_triggers['conditionalJumpTrigger0-conditionalJumpTrigger2'].channel_enabled = True
-
-        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
 pattern_opcode_events
@@ -2875,6 +2734,32 @@ pattern_opcode_events
             session.pattern_opcode_events['patternOpcodeEvent0-patternOpcodeEvent2'].channel_enabled = True
 
         passes a string of :python:`'patternOpcodeEvent0, patternOpcodeEvent1, patternOpcodeEvent2'` to the set attribute function.
+
+
+conditional_jump_triggers
+-------------------------
+
+    .. py:attribute:: nidigital.Session.conditional_jump_triggers[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.conditional_jump_triggers['0-2'].channel_enabled = True
+
+        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.conditional_jump_triggers['conditionalJumpTrigger0-conditionalJumpTrigger2'].channel_enabled = True
+
+        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
 
 
 
@@ -3682,7 +3567,14 @@ instrument_firmware_revision
 
     .. py:attribute:: instrument_firmware_revision
 
-        
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].instrument_firmware_revision
 
         The following table lists the characteristics of this property.
 
@@ -3693,7 +3585,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3976,7 +3868,14 @@ pattern_opcode_event_terminal_name
 
     .. py:attribute:: pattern_opcode_event_terminal_name
 
-        
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].pattern_opcode_event_terminal_name
 
         The following table lists the characteristics of this property.
 
@@ -3987,7 +3886,7 @@ pattern_opcode_event_terminal_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4611,17 +4510,17 @@ simulate
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

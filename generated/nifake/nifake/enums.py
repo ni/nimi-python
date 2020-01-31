@@ -46,18 +46,18 @@ class FloatEnum(Enum):
     '''
 
 
-class MobileOS(Enum):
+class MobileOSNames(Enum):
     ANDROID = 'Android'
     r'''
-    most popular OS
+    Most popular OS.
     '''
     IOS = 'iOS'
     r'''
-    most secure OS.
+    Most secure OS.
     '''
-    NONE = 'nothing else'
+    NONE = 'None'
     r'''
-    Remember Symbian?
+    Remember Symbian?.
     '''
 
 

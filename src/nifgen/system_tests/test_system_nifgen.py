@@ -3,6 +3,7 @@ import nifgen
 import numpy
 import os
 import pytest
+import tempfile
 
 
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
@@ -141,13 +142,12 @@ def test_disable(session):
     assert channel.output_enabled is False
 
 
-def test_get_ext_cal_last_date_and_time():
-    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 throws out unrecoverable error on calling get_ext_cal_last_date_and_time()
-        try:
-            session.get_ext_cal_last_date_and_time()
-            assert False
-        except nifgen.Error as e:
-            assert e.code == -1074118632  # This operation is not supported for simulated device
+def test_get_ext_cal_last_date_and_time(session):
+    try:
+        session.get_ext_cal_last_date_and_time()
+        assert False, "If we hit this, it means a simulated 5433 now works properly for this. You can now remove the check for -1074135040"
+    except nifgen.Error as e:
+        assert e.code == -1074118632 or e.code == -1074135040  # This operation is not supported for simulated device or Unrecoverable Failure
 
 
 def test_get_ext_cal_last_temp(session):
@@ -437,4 +437,34 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 2
     with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
         assert simulated_session.channel_count == 2
+
+
+def test_import_export_buffer(session):
+    test_value_1 = 1.0
+    test_value_2 = 2.0
+    session.arb_gain = test_value_1
+    assert session.arb_gain == test_value_1
+    buffer = session.export_attribute_configuration_buffer()
+    session.arb_gain = test_value_2
+    assert session.arb_gain == test_value_2
+    session.import_attribute_configuration_buffer(buffer)
+    assert session.arb_gain == test_value_1
+
+
+def test_import_export_file(session):
+    test_value_1 = 2.0
+    test_value_2 = 3.0
+    path = tempfile.gettempdir() + 'test.txt'
+    session.arb_gain = test_value_1
+    assert session.arb_gain == test_value_1
+    session.export_attribute_configuration_file(path)
+    session.arb_gain = test_value_2
+    assert session.arb_gain == test_value_2
+    session.import_attribute_configuration_file(path)
+    assert session.arb_gain == test_value_1
+
+
+def test_get_channel_name(session):
+    name = session.get_channel_name(1)
+    assert name == '0'
 

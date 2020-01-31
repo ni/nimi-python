@@ -156,8 +156,8 @@ class SideEffectsHelper(object):
         self._defaults['SetCustomType']['return'] = 0
         self._defaults['SetCustomTypeArray'] = {}
         self._defaults['SetCustomTypeArray']['return'] = 0
-        self._defaults['StringEnumInputFunctionWithDefaults'] = {}
-        self._defaults['StringEnumInputFunctionWithDefaults']['return'] = 0
+        self._defaults['StringValuedEnumInputFunctionWithDefaults'] = {}
+        self._defaults['StringValuedEnumInputFunctionWithDefaults']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
         self._defaults['TwoInputFunction']['return'] = 0
         self._defaults['UnlockSession'] = {}
@@ -726,10 +726,10 @@ class SideEffectsHelper(object):
             return self._defaults['SetCustomTypeArray']['return']
         return self._defaults['SetCustomTypeArray']['return']
 
-    def niFake_StringEnumInputFunctionWithDefaults(self, vi, a_mobile_os):  # noqa: N802
-        if self._defaults['StringEnumInputFunctionWithDefaults']['return'] != 0:
-            return self._defaults['StringEnumInputFunctionWithDefaults']['return']
-        return self._defaults['StringEnumInputFunctionWithDefaults']['return']
+    def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os_name):  # noqa: N802
+        if self._defaults['StringValuedEnumInputFunctionWithDefaults']['return'] != 0:
+            return self._defaults['StringValuedEnumInputFunctionWithDefaults']['return']
+        return self._defaults['StringValuedEnumInputFunctionWithDefaults']['return']
 
     def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['TwoInputFunction']['return'] != 0:
@@ -893,8 +893,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetCustomType.return_value = 0
         mock_library.niFake_SetCustomTypeArray.side_effect = MockFunctionCallError("niFake_SetCustomTypeArray")
         mock_library.niFake_SetCustomTypeArray.return_value = 0
-        mock_library.niFake_StringEnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_StringEnumInputFunctionWithDefaults")
-        mock_library.niFake_StringEnumInputFunctionWithDefaults.return_value = 0
+        mock_library.niFake_StringValuedEnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_StringValuedEnumInputFunctionWithDefaults")
+        mock_library.niFake_StringValuedEnumInputFunctionWithDefaults.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
         mock_library.niFake_TwoInputFunction.return_value = 0
         mock_library.niFake_UnlockSession.side_effect = MockFunctionCallError("niFake_UnlockSession")
