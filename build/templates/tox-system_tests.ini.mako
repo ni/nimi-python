@@ -63,6 +63,11 @@ deps =
     ${module_name}-system_tests: scipy
     ${module_name}-system_tests: codecov
 
+% if config['supports_nitclk']:
+depends =
+    ${module_name}-system_tests: ${nitclk_env}
+
+% endif
 passenv = 
     GIT_BRANCH
     GIT_COMMIT
