@@ -31,7 +31,7 @@ install:
   - travis_retry pip install --upgrade tox tox-travis codecov
 
 script:
-  - tox -c tox-travis.ini
+  - tox -c tox-travis.ini --parallel auto
 
 after_success:
   - travis_retry codecov --flags codegenunittests --file codegen.xml
