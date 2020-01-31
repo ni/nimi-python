@@ -62,7 +62,7 @@ deps =
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
-    ${module_name}-system_tests: codecov
+    ${module_name}-coverage: coverage
     ${module_name}-coverage: codecov
 
 depends =
