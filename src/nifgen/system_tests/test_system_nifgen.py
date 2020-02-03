@@ -60,14 +60,16 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
-@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_get_self_cal_last_date_and_time():
-    try:
-        with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
-            session.get_self_cal_last_date_and_time()
-            assert False
-    except nifgen.Error as e:
-        assert e.code == -1074118632  # This operation is not supported for simulated device
+    if daqmx_sim_5421 is None:
+        assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
+    else:
+        try:
+            with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
+                session.get_self_cal_last_date_and_time()
+                assert False
+        except nifgen.Error as e:
+            assert e.code == -1074118632  # This operation is not supported for simulated device
 
 
 def test_self_cal(session):
@@ -171,10 +173,12 @@ def test_get_ext_cal_recommended_interval(session):
     assert interval.days == 730  # recommended external cal interval is 24 months
 
 
-@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_get_hardware_state():
-    with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # Function or method not supported for 5413/23/33
-        assert session.get_hardware_state() == nifgen.HardwareState.IDLE
+    if daqmx_sim_5421 is None:
+        assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
+    else:
+        with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # Function or method not supported for 5413/23/33
+            assert session.get_hardware_state() == nifgen.HardwareState.IDLE
 
 
 def test_get_self_cal_last_temp(session):
@@ -237,37 +241,41 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
-@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_create_advanced_arb_sequence():
-    with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
-        seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
-        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-        waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
-        marker_location_array = [0, 16, 32]
-        sample_counts_array = [256, 128, 64]
-        loop_counts_array = [10, 20, 30]
-        session.output_mode = nifgen.OutputMode.SEQ
-        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-        assert ([], seq_handle_base + 0) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
-        assert ([], seq_handle_base + 1) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
-        assert (marker_location_array, seq_handle_base + 2) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-        assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
+    if daqmx_sim_5421 is None:
+        assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
+    else:
+        with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+            seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
+            waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+            waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
+            marker_location_array = [0, 16, 32]
+            sample_counts_array = [256, 128, 64]
+            loop_counts_array = [10, 20, 30]
+            session.output_mode = nifgen.OutputMode.SEQ
+            # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+            assert ([], seq_handle_base + 0) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
+            assert ([], seq_handle_base + 1) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
+            assert (marker_location_array, seq_handle_base + 2) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+            assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
-@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_create_advanced_arb_sequence_wrong_size():
-    with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
-        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-        waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
-        marker_location_array = [0, 16]
-        loop_counts_array = [10, 20, 30]
-        session.output_mode = nifgen.OutputMode.SEQ
-        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-        try:
-            session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-            assert False
-        except ValueError:
-            pass
+    if daqmx_sim_5421 is None:
+        assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
+    else:
+        with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+            waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+            waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
+            marker_location_array = [0, 16]
+            loop_counts_array = [10, 20, 30]
+            session.output_mode = nifgen.OutputMode.SEQ
+            # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+            try:
+                session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+                assert False
+            except ValueError:
+                pass
 
 
 def test_arb_script(session):

@@ -260,28 +260,30 @@ def test_configure_chan_characteristics(session):
     assert 50.0 == session.input_impedance
 
 
-@pytest.mark.skipif(daqmx_sim_5142 is None, reason="No Simulated DAQmx device created")
 def test_filter_coefficients():
-    with niscope.Session(daqmx_sim_5142) as session:  # filter coefficients methods are available on devices with OSP
-        assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
-        try:
-            filter_coefficients = [1.0, 0.0, 0.0]
-            session.configure_equalization_filter_coefficients(filter_coefficients)
-        except niscope.Error as e:
-            assert "Incorrect number of filter coefficients." in e.description
-            assert e.code == -1074135024
-        filter_coefficients = [0.01] * 35
-        try:
-            # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
-            #                     The workaround is to explicitly pass channel "0" rather than the default "" to the driver runtime
-            #                     even though the two should be equivalent on a PXI-5142 (a 1 channel device).
-            #                     This
-            session.configure_equalization_filter_coefficients(filter_coefficients)
-            assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
-        except niscope.errors.DriverError as e:
-            assert e.code == -214202
-        session.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
-        assert filter_coefficients == session.get_equalization_filter_coefficients()
+    if daqmx_sim_5142 is None:
+        assert False, 'You must have a simulated 5142 configured in NI-MAX and it must be named as "5142"'
+    else:
+        with niscope.Session(daqmx_sim_5142) as session:  # filter coefficients methods are available on devices with OSP
+            assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
+            try:
+                filter_coefficients = [1.0, 0.0, 0.0]
+                session.configure_equalization_filter_coefficients(filter_coefficients)
+            except niscope.Error as e:
+                assert "Incorrect number of filter coefficients." in e.description
+                assert e.code == -1074135024
+            filter_coefficients = [0.01] * 35
+            try:
+                # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
+                #                     The workaround is to explicitly pass channel "0" rather than the default "" to the driver runtime
+                #                     even though the two should be equivalent on a PXI-5142 (a 1 channel device).
+                #                     This
+                session.configure_equalization_filter_coefficients(filter_coefficients)
+                assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
+            except niscope.errors.DriverError as e:
+                assert e.code == -214202
+            session.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
+            assert filter_coefficients == session.get_equalization_filter_coefficients()
 
 
 def test_send_software_trigger_edge(session):
@@ -349,14 +351,16 @@ def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
 
-@pytest.mark.skipif(daqmx_sim_5124 is None, reason="No Simulated DAQmx device created")
 def test_configure_trigger_video():
-    with niscope.Session(daqmx_sim_5124) as session:  # Unable to invoke configure_trigger_video method on 5164
-        session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
-        assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
-        assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
-        assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
-        assert niscope.TriggerCoupling.DC == session.trigger_coupling
+    if daqmx_sim_5124 is None:
+        assert False, 'You must have a simulated 5124 configured in NI-MAX and it must be named as "5124"'
+    else:
+        with niscope.Session(daqmx_sim_5124) as session:  # Unable to invoke configure_trigger_video method on 5164
+            session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
+            assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
+            assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
+            assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
+            assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
 
 def test_configure_trigger_window(session):
