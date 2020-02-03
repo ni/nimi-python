@@ -1,9 +1,21 @@
 import math
+import nimodinst
 import niscope
 import numpy
 import pytest
 import sys
 import tempfile
+
+
+# We look for persistent simulated DAQmx devices so we can skip the test if they don't exist
+daqmx_sim_5142 = None
+daqmx_sim_5124 = None
+with nimodinst.Session('niscope') as session:
+    for dev in session:
+        if dev.device_name == '5142':
+            daqmx_sim_5142 = dev.device_name
+        if dev.device_name == '5124':
+            daqmx_sim_5124 = dev.device_name
 
 
 @pytest.fixture(scope='function')
