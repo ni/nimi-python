@@ -10,11 +10,11 @@ import tempfile
 # Set up some global information we need
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 # Make sure the persistent simulated 5421 has been created
-daqmx_sim_device = None
+daqmx_sim_5421 = None
 with nimodinst.Session('nifgen') as session:
     for dev in session:
-        if dev.device_name in ['5421']:
-            daqmx_sim_device = dev.device_name
+        if dev.device_name == '5421':
+            daqmx_sim_5421 = dev.device_name
 
 
 def get_test_file_path(file_name):
@@ -60,10 +60,10 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
-@pytest.mark.skipif(daqmx_sim_device is None, reason="No Simulated DAQmx device created")
+@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_get_self_cal_last_date_and_time():
     try:
-        with nifgen.Session(daqmx_sim_device, '0', False) as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
+        with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
             session.get_self_cal_last_date_and_time()
             assert False
     except nifgen.Error as e:
@@ -171,9 +171,9 @@ def test_get_ext_cal_recommended_interval(session):
     assert interval.days == 730  # recommended external cal interval is 24 months
 
 
-@pytest.mark.skipif(daqmx_sim_device is None, reason="No Simulated DAQmx device created")
+@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_get_hardware_state():
-    with nifgen.Session(daqmx_sim_device, '0', False) as session:  # Function or method not supported for 5413/23/33
+    with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # Function or method not supported for 5413/23/33
         assert session.get_hardware_state() == nifgen.HardwareState.IDLE
 
 
@@ -237,9 +237,9 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
-@pytest.mark.skipif(daqmx_sim_device is None, reason="No Simulated DAQmx device created")
+@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_create_advanced_arb_sequence():
-    with nifgen.Session(daqmx_sim_device, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+    with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
         seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
         waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
@@ -254,9 +254,9 @@ def test_create_advanced_arb_sequence():
         assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
-@pytest.mark.skipif(daqmx_sim_device is None, reason="No Simulated DAQmx device created")
+@pytest.mark.skipif(daqmx_sim_5421 is None, reason="No Simulated DAQmx device created")
 def test_create_advanced_arb_sequence_wrong_size():
-    with nifgen.Session(daqmx_sim_device, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+    with nifgen.Session(daqmx_sim_5421, '0', False) as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
         waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
         marker_location_array = [0, 16]
