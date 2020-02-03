@@ -1,12 +1,20 @@
 import datetime
 import nifgen
+import nimodinst
 import numpy
 import os
 import pytest
 import tempfile
 
 
+# Set up some global information we need
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
+# Make sure the persistent simulated 5421 has been created
+daqmx_sim_device = None
+with nimodinst.Session('nifgen') as session:
+    for dev in session:
+        if dev.device_name in ['5421']:
+            daqmx_sim_device = dev.device_name
 
 
 def get_test_file_path(file_name):
