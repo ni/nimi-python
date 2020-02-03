@@ -46,7 +46,8 @@ commands =
 % if config['supports_nitclk']:
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver nitclk --start-path ../..
 % endif
-    ${module_name}-system_tests: pip install --force-reinstall .
+    ${module_name}-system_tests: python -m pip install --upgrade pip
+    ${module_name}-system_tests: python -m pip install --force-reinstall .
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
