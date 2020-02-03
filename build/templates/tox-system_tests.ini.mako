@@ -67,6 +67,7 @@ deps =
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
+    ${module_name}-system_tests: flaky
 % if module_name != 'nimodinst':
     # Only add this dependency if we are not testing nimodinst
     ${module_name}-system_tests: nimodinst
