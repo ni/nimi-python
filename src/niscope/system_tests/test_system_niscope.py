@@ -1,9 +1,21 @@
 import math
+import nimodinst
 import niscope
 import numpy
 import pytest
 import sys
 import tempfile
+
+
+# We look for persistent simulated DAQmx devices so we can skip the test if they don't exist
+daqmx_sim_5142 = None
+daqmx_sim_5124 = None
+with nimodinst.Session('niscope') as session:
+    for dev in session:
+        if dev.device_name == '5142':
+            daqmx_sim_5142 = dev.device_name
+        if dev.device_name == '5124':
+            daqmx_sim_5124 = dev.device_name
 
 
 @pytest.fixture(scope='function')
@@ -248,8 +260,9 @@ def test_configure_chan_characteristics(session):
     assert 50.0 == session.input_impedance
 
 
+@pytest.mark.skipif(daqmx_sim_5142 is None, reason="No Simulated DAQmx device created")
 def test_filter_coefficients():
-    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
+    with niscope.Session(daqmx_sim_5142) as session:  # filter coefficients methods are available on devices with OSP
         assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
         try:
             filter_coefficients = [1.0, 0.0, 0.0]
@@ -336,8 +349,9 @@ def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
 
+@pytest.mark.skipif(daqmx_sim_5124 is None, reason="No Simulated DAQmx device created")
 def test_configure_trigger_video():
-    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
+    with niscope.Session(daqmx_sim_5124) as session:  # Unable to invoke configure_trigger_video method on 5164
         session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
         assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
         assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
