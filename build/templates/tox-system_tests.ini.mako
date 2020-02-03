@@ -62,6 +62,7 @@ deps =
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
     ${module_name}-system_tests: codecov
+    ${module_name}-system_tests: nimodinst
 
 passenv = 
     GIT_BRANCH
