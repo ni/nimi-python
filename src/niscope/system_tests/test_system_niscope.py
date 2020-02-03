@@ -18,6 +18,13 @@ with nimodinst.Session('niscope') as session:
             daqmx_sim_5124 = dev.device_name
 
 
+# We need to delay rerunning failed tests to give the other tests a chance to finish
+# and release the device_name
+def delay_rerun(*args):
+    time.sleep(5)
+    return True
+
+
 @pytest.fixture(scope='function')
 def session():
     with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
@@ -260,7 +267,7 @@ def test_configure_chan_characteristics(session):
     assert 50.0 == session.input_impedance
 
 
-@pytest.mark.flaky(max_runs=10)
+@pytest.mark.flaky(max_runs=10, rerun_filter=delay_rerun)
 def test_filter_coefficients():
     if daqmx_sim_5142 is None:
         assert False, 'You must have a simulated 5142 configured in NI-MAX and it must be named as "5142"'
@@ -352,7 +359,7 @@ def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
 
-@pytest.mark.flaky(max_runs=10)
+@pytest.mark.flaky(max_runs=10, rerun_filter=delay_rerun)
 def test_configure_trigger_video():
     if daqmx_sim_5124 is None:
         assert False, 'You must have a simulated 5124 configured in NI-MAX and it must be named as "5124"'
