@@ -12,9 +12,9 @@ daqmx_sim_5142 = None
 daqmx_sim_5124 = None
 with nimodinst.Session('niscope') as session:
     for dev in session:
-        if dev.device_name == '5142':
+        if '5142' in dev.device_name:
             daqmx_sim_5142 = dev.device_name
-        if dev.device_name == '5124':
+        if '5124' in dev.device_name:
             daqmx_sim_5124 = dev.device_name
 
 
@@ -260,6 +260,7 @@ def test_configure_chan_characteristics(session):
     assert 50.0 == session.input_impedance
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_filter_coefficients():
     if daqmx_sim_5142 is None:
         assert False, 'You must have a simulated 5142 configured in NI-MAX and it must be named as "5142"'
@@ -351,6 +352,7 @@ def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_configure_trigger_video():
     if daqmx_sim_5124 is None:
         assert False, 'You must have a simulated 5124 configured in NI-MAX and it must be named as "5124"'

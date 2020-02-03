@@ -13,7 +13,7 @@ test_files_base_dir = os.path.join(os.path.dirname(__file__))
 daqmx_sim_5421 = None
 with nimodinst.Session('nifgen') as session:
     for dev in session:
-        if dev.device_name == '5421':
+        if '5421' in dev.device_name:
             daqmx_sim_5421 = dev.device_name
 
 
@@ -60,6 +60,7 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_get_self_cal_last_date_and_time():
     if daqmx_sim_5421 is None:
         assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
@@ -173,6 +174,7 @@ def test_get_ext_cal_recommended_interval(session):
     assert interval.days == 730  # recommended external cal interval is 24 months
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_get_hardware_state():
     if daqmx_sim_5421 is None:
         assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
@@ -241,6 +243,7 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_create_advanced_arb_sequence():
     if daqmx_sim_5421 is None:
         assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
@@ -260,6 +263,7 @@ def test_create_advanced_arb_sequence():
             assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_create_advanced_arb_sequence_wrong_size():
     if daqmx_sim_5421 is None:
         assert False, 'You must have a simulated 5421 configured in NI-MAX and it must be named as "5421"'
