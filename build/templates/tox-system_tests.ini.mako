@@ -26,12 +26,14 @@ description =
     ${module_name}-nitclk_wheel: Build the nitclk wheel
 % endif
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
+    ${module_name}-coverage: Report all coverage results to codecov.io
 
 changedir =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: ../../generated/nitclk
 % endif
     ${module_name}-system_tests: .
+    ${module_name}-coverage: .
 
 commands =
 % if config['supports_nitclk']:
