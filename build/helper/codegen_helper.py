@@ -1294,7 +1294,7 @@ parameters_for_testing = [
         'ctypes_type_library_call': 'ViString',
         'ctypes_variable_name': 'a_string_enum_ctype',
         'direction': 'in',
-        'documentation': {'description': 'An input string enum.'},
+        'documentation': {'description': 'An input string-valued enum.'},
         'enum': 'Color',
         'is_buffer': False,
         'is_string': True,
