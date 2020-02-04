@@ -40,6 +40,7 @@ commands =
     ${module_name}-nitclk_wheel: python.exe setup.py bdist_wheel --universal
 % endif
     ${module_name}-system_tests: python --version
+    # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
     ${module_name}-system_tests: python -m pip install --disable-pip-version-check --upgrade pip
 % if config['supports_nitclk']:
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver nitclk --start-path ../..
