@@ -5,6 +5,7 @@ import numpy
 import os
 import pytest
 import tempfile
+import time
 
 
 # Set up some global information we need

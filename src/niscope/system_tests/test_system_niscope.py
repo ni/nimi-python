@@ -5,6 +5,7 @@ import numpy
 import pytest
 import sys
 import tempfile
+import time
 
 
 # We look for persistent simulated DAQmx devices so we can skip the test if they don't exist
