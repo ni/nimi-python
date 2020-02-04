@@ -1,5 +1,5 @@
 echo Testing %1
-rem Make sure the junit folder exists, otherwise we can have a race collision creating it in parallel
+rem Make sure the junit folder exists, otherwise we can have a race condition creating it in parallel
 mkdir generated\junit
 pushd generated\%1
 rem We don't need no spinner - mainly because we aren't running tox interactively
