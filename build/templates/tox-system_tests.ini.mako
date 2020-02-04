@@ -86,3 +86,7 @@ passenv =
     BRANCH_NAME
     JENKINS_URL
     BUILD_NUMBER
+
+[pytest]
+junit_family = xunit1
+
