@@ -46,8 +46,8 @@ commands =
 % endif
     ${module_name}-system_tests: python -c "import platform; print(platform.architecture())"
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
