@@ -251,14 +251,14 @@ def test_import_export_buffer(single_channel_session):
 def test_import_export_file(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
-    path = tempfile.gettempdir() + 'test.txt'
-    single_channel_session.voltage_level = test_value_1
-    assert single_channel_session.voltage_level == test_value_1
-    single_channel_session.export_attribute_configuration_file(path)
-    single_channel_session.voltage_level = test_value_2
-    assert single_channel_session.voltage_level == test_value_2
-    single_channel_session.import_attribute_configuration_file(path)
-    assert single_channel_session.voltage_level == test_value_1
+    with tempfile.NamedTemporaryFile() as path:
+        single_channel_session.voltage_level = test_value_1
+        assert single_channel_session.voltage_level == test_value_1
+        single_channel_session.export_attribute_configuration_file(path)
+        single_channel_session.voltage_level = test_value_2
+        assert single_channel_session.voltage_level == test_value_2
+        single_channel_session.import_attribute_configuration_file(path)
+        assert single_channel_session.voltage_level == test_value_1
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):

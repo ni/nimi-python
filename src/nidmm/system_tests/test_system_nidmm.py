@@ -294,14 +294,14 @@ def test_import_export_buffer(session):
 def test_import_export_file(session):
     test_value_1 = 1
     test_value_2 = 2
-    path = tempfile.gettempdir() + 'test.txt'
-    session.sample_count = test_value_1
-    assert session.sample_count == test_value_1
-    session.export_attribute_configuration_file(path)
-    session.sample_count = test_value_2
-    assert session.sample_count == test_value_2
-    session.import_attribute_configuration_file(path)
-    assert session.sample_count == test_value_1
+    with tempfile.NamedTemporaryFile() as path:
+        session.sample_count = test_value_1
+        assert session.sample_count == test_value_1
+        session.export_attribute_configuration_file(path)
+        session.sample_count = test_value_2
+        assert session.sample_count == test_value_2
+        session.import_attribute_configuration_file(path)
+        assert session.sample_count == test_value_1
 
 
 def test_error_message():
