@@ -256,7 +256,7 @@ def test_configure_chan_characteristics(session):
 
 @fasteners.interprocess_locked(daqmx_sim_db_lock_file)
 def test_filter_coefficients():
-    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
+    with niscope.Session('5142') as session:  # filter coefficients methods are available on devices with OSP
         assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
         try:
             filter_coefficients = [1.0, 0.0, 0.0]
@@ -345,7 +345,7 @@ def test_configure_trigger_software(session):
 
 @fasteners.interprocess_locked(daqmx_sim_db_lock_file)
 def test_configure_trigger_video():
-    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
+    with niscope.Session('5124') as session:  # Unable to invoke configure_trigger_video method on 5164
         session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
         assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
         assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
