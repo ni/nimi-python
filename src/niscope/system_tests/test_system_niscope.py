@@ -10,7 +10,7 @@ import tempfile
 
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
-daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
+daqmx_sim_db_lock = fasteners.InterProcessLock(os.path.join(tempfile.gettempdir(), 'daqmx_db.lock'))
 
 
 @pytest.fixture(scope='function')
@@ -255,28 +255,28 @@ def test_configure_chan_characteristics(session):
     assert 50.0 == session.input_impedance
 
 
-@fasteners.interprocess_locked(daqmx_sim_db_lock_file)
 def test_filter_coefficients():
-    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
-        assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
-        try:
-            filter_coefficients = [1.0, 0.0, 0.0]
-            session.configure_equalization_filter_coefficients(filter_coefficients)
-        except niscope.Error as e:
-            assert "Incorrect number of filter coefficients." in e.description
-            assert e.code == -1074135024
-        filter_coefficients = [0.01] * 35
-        try:
-            # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
-            #                     The workaround is to explicitly pass channel "0" rather than the default "" to the driver runtime
-            #                     even though the two should be equivalent on a PXI-5142 (a 1 channel device).
-            #                     This
-            session.configure_equalization_filter_coefficients(filter_coefficients)
-            assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
-        except niscope.errors.DriverError as e:
-            assert e.code == -214202
-        session.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
-        assert filter_coefficients == session.get_equalization_filter_coefficients()
+    with daqmx_sim_db_lock:
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI') as session:  # filter coefficients methods are available on devices with OSP
+            assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
+            try:
+                filter_coefficients = [1.0, 0.0, 0.0]
+                session.configure_equalization_filter_coefficients(filter_coefficients)
+            except niscope.Error as e:
+                assert "Incorrect number of filter coefficients." in e.description
+                assert e.code == -1074135024
+            filter_coefficients = [0.01] * 35
+            try:
+                # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
+                #                     The workaround is to explicitly pass channel "0" rather than the default "" to the driver runtime
+                #                     even though the two should be equivalent on a PXI-5142 (a 1 channel device).
+                #                     This
+                session.configure_equalization_filter_coefficients(filter_coefficients)
+                assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
+            except niscope.errors.DriverError as e:
+                assert e.code == -214202
+            session.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
+            assert filter_coefficients == session.get_equalization_filter_coefficients()
 
 
 def test_send_software_trigger_edge(session):
@@ -344,14 +344,14 @@ def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
 
-@fasteners.interprocess_locked(daqmx_sim_db_lock_file)
 def test_configure_trigger_video():
-    with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
-        session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
-        assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
-        assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
-        assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
-        assert niscope.TriggerCoupling.DC == session.trigger_coupling
+    with daqmx_sim_db_lock:
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
+            session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
+            assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
+            assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
+            assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
+            assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
 
 def test_configure_trigger_window(session):
