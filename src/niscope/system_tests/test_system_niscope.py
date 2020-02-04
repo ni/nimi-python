@@ -1,6 +1,5 @@
 import fasteners
 import math
-import nimodinst
 import niscope
 import numpy
 import os

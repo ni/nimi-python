@@ -1,7 +1,6 @@
 import datetime
 import fasteners
 import nifgen
-import nimodinst
 import numpy
 import os
 import pytest
