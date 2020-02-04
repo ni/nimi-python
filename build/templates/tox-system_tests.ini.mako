@@ -40,7 +40,7 @@ commands =
     ${module_name}-nitclk_wheel: python.exe setup.py bdist_wheel --universal
 % endif
     ${module_name}-system_tests: python --version
-    ${module_name}-system_tests: python -m pip install --upgrade pip
+    ${module_name}-system_tests: python -m pip install --disable-pip-version-check --upgrade pip
 % if config['supports_nitclk']:
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver nitclk --start-path ../..
 % endif
