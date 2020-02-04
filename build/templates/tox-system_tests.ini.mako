@@ -17,7 +17,6 @@
 envlist = ${nitclk_env}py{35,36,37,38,py3}-${module_name}-system_tests, py38-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
-skipsdist = true
 # We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
 toxworkdir = ../../../.tox
 
@@ -41,13 +40,12 @@ commands =
     ${module_name}-nitclk_wheel: python.exe setup.py bdist_wheel --universal
 % endif
     ${module_name}-system_tests: python --version
+    ${module_name}-system_tests: python -m pip install --upgrade pip
 % if config['supports_nitclk']:
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver nitclk --start-path ../..
 % endif
     ${module_name}-system_tests: python -c "import platform; print(platform.architecture())"
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    ${module_name}-system_tests: python -m pip install --upgrade pip
-    ${module_name}-system_tests: python -m pip install --force-reinstall .
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
