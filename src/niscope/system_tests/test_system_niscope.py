@@ -7,6 +7,7 @@ import os
 import pytest
 import sys
 import tempfile
+import time
 
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
@@ -346,6 +347,8 @@ def test_configure_trigger_software(session):
 
 def test_configure_trigger_video():
     with daqmx_sim_db_lock:
+        time.sleep(5)   # Wait so that required sync objects in the driver are actually avialable. We close the session and release the daqmx db lock
+                        # but the driver is still cleaning up and if we try to open a session too fast, we will fail with can't get sync object
         with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI') as session:  # Unable to invoke configure_trigger_video method on 5164
             session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
             assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
