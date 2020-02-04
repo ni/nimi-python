@@ -62,6 +62,19 @@ def genJob(driver, platform) {
         steps {
             batchFile {
                 command("""@echo off
+echo Useful environment variables
+echo ghprbActualCommit =            %ghprbActualCommit%
+echo ghprbActualCommitAuthor =      %ghprbActualCommitAuthor%
+echo ghprbActualCommitAuthorEmail = %ghprbActualCommitAuthorEmail%
+echo ghprbPullDescription =         %ghprbPullDescription%
+echo ghprbPullId =                  %ghprbPullId%
+echo ghprbPullLink =                %ghprbPullLink%
+echo ghprbPullTitle =               %ghprbPullTitle%
+echo ghprbSourceBranch =            %ghprbSourceBranch%
+echo ghprbTargetBranch =            %ghprbTargetBranch%
+echo ghprbCommentBody =             %ghprbCommentBody%
+echo sha1 =                         %sha1%
+echo .
 echo Running system tests for ${driver} on ${platform}
 tools\\system_tests.bat ${driver}
 """)
