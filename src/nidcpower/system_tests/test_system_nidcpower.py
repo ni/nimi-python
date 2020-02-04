@@ -251,7 +251,8 @@ def test_import_export_buffer(single_channel_session):
 def test_import_export_file(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
-    with tempfile.NamedTemporaryFile() as path:
+    with tempfile.NamedTemporaryFile() as temp_file:
+        path = temp_file.name
         single_channel_session.voltage_level = test_value_1
         assert single_channel_session.voltage_level == test_value_1
         single_channel_session.export_attribute_configuration_file(path)

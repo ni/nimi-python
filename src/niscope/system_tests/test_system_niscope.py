@@ -8,7 +8,7 @@ import sys
 import tempfile
 
 
-# We need a lock file so multiple tests aren't hitting the db at the same time
+# We need a lock file so multiple tests aren't hitting the simulated HW at the same time
 daqmx_sim_5124_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5124.lock')
 daqmx_sim_5124_lock = fasteners.InterProcessLock(daqmx_sim_5124_lock_file)
 daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
@@ -332,7 +332,8 @@ def test_import_export_buffer(session):
 def test_import_export_file(session):
     test_value_1 = 1
     test_value_2 = 5
-    with tempfile.NamedTemporaryFile() as path:
+    with tempfile.NamedTemporaryFile() as temp_file:
+        path = temp_file.name
         session.vertical_range = test_value_1
         assert session.vertical_range == test_value_1
         session.export_attribute_configuration_file(path)

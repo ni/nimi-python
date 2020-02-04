@@ -462,7 +462,8 @@ def test_import_export_buffer(session):
 def test_import_export_file(session):
     test_value_1 = 2.0
     test_value_2 = 3.0
-    with tempfile.NamedTemporaryFile() as path:
+    with tempfile.NamedTemporaryFile() as temp_file:
+        path = temp_file.name
         session.arb_gain = test_value_1
         assert session.arb_gain == test_value_1
         session.export_attribute_configuration_file(path)

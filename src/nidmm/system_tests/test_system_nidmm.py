@@ -294,7 +294,8 @@ def test_import_export_buffer(session):
 def test_import_export_file(session):
     test_value_1 = 1
     test_value_2 = 2
-    with tempfile.NamedTemporaryFile() as path:
+    with tempfile.NamedTemporaryFile() as temp_file:
+        path = temp_file.name
         session.sample_count = test_value_1
         assert session.sample_count == test_value_1
         session.export_attribute_configuration_file(path)

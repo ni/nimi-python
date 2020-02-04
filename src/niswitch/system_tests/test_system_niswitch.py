@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import datetime
+import fasteners
 import niswitch
 import os
 import pytest
