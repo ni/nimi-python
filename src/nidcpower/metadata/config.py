@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 19.6.0d2
+# This file is generated from NI-DCPower API metadata version 20.2.0d15
 config = {
-    'api_version': '19.6.0d2',
+    'api_version': '20.2.0d15',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
@@ -12,7 +12,10 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-DCPower',
-    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
+    'extra_errors_used': [
+        'InvalidRepeatedCapabilityError',
+        'SelfTestError'
+    ],
     'init_function': 'InitializeWithChannels',
     'library_info': {
         'Linux': {
@@ -42,4 +45,5 @@ config = {
     ],
     'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
     'session_handle_parameter_name': 'vi',
+    'supports_nitclk': False
 }
