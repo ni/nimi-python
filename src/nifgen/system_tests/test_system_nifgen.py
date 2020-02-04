@@ -462,15 +462,15 @@ def test_import_export_buffer(session):
 def test_import_export_file(session):
     test_value_1 = 2.0
     test_value_2 = 3.0
-    with tempfile.NamedTemporaryFile() as temp_file:
-        path = temp_file.name
-        session.arb_gain = test_value_1
-        assert session.arb_gain == test_value_1
-        session.export_attribute_configuration_file(path)
-        session.arb_gain = test_value_2
-        assert session.arb_gain == test_value_2
-        session.import_attribute_configuration_file(path)
-        assert session.arb_gain == test_value_1
+    path = tempfile.mkstemp(suffix='.txt')
+    session.arb_gain = test_value_1
+    assert session.arb_gain == test_value_1
+    session.export_attribute_configuration_file(path)
+    session.arb_gain = test_value_2
+    assert session.arb_gain == test_value_2
+    session.import_attribute_configuration_file(path)
+    assert session.arb_gain == test_value_1
+    os.remove(path)
 
 
 def test_get_channel_name(session):

@@ -1,5 +1,6 @@
 import datetime
 import nidcpower
+import os
 import pytest
 import tempfile
 
@@ -251,15 +252,15 @@ def test_import_export_buffer(single_channel_session):
 def test_import_export_file(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
-    with tempfile.NamedTemporaryFile() as temp_file:
-        path = temp_file.name
-        single_channel_session.voltage_level = test_value_1
-        assert single_channel_session.voltage_level == test_value_1
-        single_channel_session.export_attribute_configuration_file(path)
-        single_channel_session.voltage_level = test_value_2
-        assert single_channel_session.voltage_level == test_value_2
-        single_channel_session.import_attribute_configuration_file(path)
-        assert single_channel_session.voltage_level == test_value_1
+    path = tempfile.mkstemp(suffix='.txt')
+    single_channel_session.voltage_level = test_value_1
+    assert single_channel_session.voltage_level == test_value_1
+    single_channel_session.export_attribute_configuration_file(path)
+    single_channel_session.voltage_level = test_value_2
+    assert single_channel_session.voltage_level == test_value_2
+    single_channel_session.import_attribute_configuration_file(path)
+    assert single_channel_session.voltage_level == test_value_1
+    os.remove(path)
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):
