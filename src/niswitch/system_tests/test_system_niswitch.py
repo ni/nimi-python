@@ -10,7 +10,6 @@ import tempfile
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
 daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
-daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 
 @pytest.fixture(scope='function')
@@ -45,8 +44,8 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
+@fasteners.interprocess_locked(daqmx_sim_db_lock_file)
 def test_continuous_software_scanning(session):
-    daqmx_sim_db_lock.acquire()
     with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
         scan_list = 'r0->c0; r1->c1'
         session.scan_list = scan_list
@@ -67,7 +66,6 @@ def test_continuous_software_scanning(session):
                 assert False
             except niswitch.Error as e:
                 assert e.code == -1074126826  # Error : Max time exceeded.
-    daqmx_sim_db_lock.release()
 
 
 # Attribute Tests
@@ -94,11 +92,10 @@ def test_vi_real64_attribute(session):
     assert session.settling_time.total_seconds() == 0.1
 
 
+@fasteners.interprocess_locked(daqmx_sim_db_lock_file)
 def test_enum_attribute():
-    daqmx_sim_db_lock.acquire()
     with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
         assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
-    daqmx_sim_db_lock.release()
 
 
 def test_write_only_attribute(session):
