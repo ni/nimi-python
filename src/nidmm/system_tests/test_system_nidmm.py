@@ -2,6 +2,7 @@ import datetime
 import math
 import nidmm
 import numpy
+import os
 import pytest
 import tempfile
 import time
@@ -294,7 +295,10 @@ def test_import_export_buffer(session):
 def test_import_export_file(session):
     test_value_1 = 1
     test_value_2 = 2
-    path = tempfile.gettempdir() + 'test.txt'
+    temp_file = tempfile.NamedTemporaryFile(suffix='.txt', delete=False)
+    # NamedTemporaryFile() returns the file already opened, so we need to close it before we can use it
+    temp_file.close()
+    path = temp_file.name
     session.sample_count = test_value_1
     assert session.sample_count == test_value_1
     session.export_attribute_configuration_file(path)
@@ -302,6 +306,7 @@ def test_import_export_file(session):
     assert session.sample_count == test_value_2
     session.import_attribute_configuration_file(path)
     assert session.sample_count == test_value_1
+    os.remove(path)
 
 
 def test_error_message():
