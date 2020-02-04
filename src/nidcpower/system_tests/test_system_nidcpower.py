@@ -252,7 +252,10 @@ def test_import_export_buffer(single_channel_session):
 def test_import_export_file(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
-    path = tempfile.mkstemp(suffix='.txt')
+    temp_file = tempfile.NamedTemporaryFile(suffix='.txt', delete=False)
+    # NamedTemporaryFile() returns the file already opened, so we need to close it before we can use it
+    temp_file.close()
+    path = temp_file.name
     single_channel_session.voltage_level = test_value_1
     assert single_channel_session.voltage_level == test_value_1
     single_channel_session.export_attribute_configuration_file(path)
