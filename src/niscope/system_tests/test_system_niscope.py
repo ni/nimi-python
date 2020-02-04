@@ -3,6 +3,7 @@ import math
 import nimodinst
 import niscope
 import numpy
+import os
 import pytest
 import sys
 import tempfile
