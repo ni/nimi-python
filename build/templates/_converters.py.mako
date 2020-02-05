@@ -242,11 +242,16 @@ def convert_to_nitclk_session_number_list(item_list):
 
 
 % endif
+<%
+# This converter is only needed for nifake testing
+%>\
+% if config['module_name'] == 'nifake':
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
 
 
+% endif
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
     assert convert_init_with_options_dictionary('', 'ascii') == ''
