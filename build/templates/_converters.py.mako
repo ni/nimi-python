@@ -11,7 +11,7 @@ import ${module_name}.errors as errors
 import datetime
 import numbers
 
-from functools import singledispatch  # Python 3.4+
+from functools import singledispatch
 
 
 @singledispatch
@@ -211,6 +211,10 @@ def convert_init_with_options_dictionary(values, encoding):
     return init_with_options_string
 
 
+<%
+# nitclk is different. Only nitclk needs to be able to convert sessions like this
+%>\
+% if config['module_name'] == 'nitclk':
 # nitclk specific converters
 def convert_to_nitclk_session_number(item):
     '''Convert from supported objects to NI-TClk Session Num
@@ -237,6 +241,7 @@ def convert_to_nitclk_session_number_list(item_list):
     return [convert_to_nitclk_session_number(i) for i in item_list]
 
 
+% endif
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
