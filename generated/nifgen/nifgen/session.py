@@ -3670,6 +3670,98 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        r'''export_attribute_configuration_buffer
+
+        Exports the property configuration of the session to a configuration
+        buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑FGEN returns an
+        error.
+
+        Returns:
+            configuration (list of int): Specifies the byte array buffer to be populated with the exported
+                property configuration.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_in_bytes_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niFgen_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_in_bytes_ctype.value  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        error_code = self._library.niFgen_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(configuration_ctype[i]) for i in range(size_in_bytes_ctype.value)]
+
+    @ivi_synchronized
+    def export_attribute_configuration_file(self, file_path):
+        r'''export_attribute_configuration_file
+
+        Exports the property configuration of the session to the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        This method verifies that the properties you have configured for the
+        session are valid. If the configuration is invalid, NI‑FGEN returns an
+        error.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file to contain the exported
+                property configuration. If you specify an empty or relative path, this
+                method returns an error.
+                **Default file extension:** .nifgenconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niFgen_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def get_channel_name(self, index):
+        r'''get_channel_name
+
+        Returns the channel string that is in the channel table at an index you
+        specify.
+
+        Note:
+        This method is included for compliance with the IviFgen Class
+        Specification.
+
+        Args:
+            index (int): A 1-based index into the channel table.
+
+
+        Returns:
+            channel_string (str): Returns the channel string that is in the channel table at the index you
+                specify. Do not modify the contents of the channel string.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        channel_string_ctype = None  # case C050
+        error_code = self._library.niFgen_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        channel_string_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niFgen_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_string_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return channel_string_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
     def _get_ext_cal_last_date_and_time(self):
         r'''_get_ext_cal_last_date_and_time
 
@@ -3875,6 +3967,61 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(self_cal_supported_ctype.value)
 
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        r'''import_attribute_configuration_buffer
+
+        Imports a property configuration to the session from the specified
+        configuration buffer.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        Note:
+        You cannot call this method while the session is in a running state,
+        such as while generating a signal.
+
+        Args:
+            configuration (list of int): Specifies the byte array buffer that contains the property
+                configuration to import.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niFgen_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def import_attribute_configuration_file(self, file_path):
+        r'''import_attribute_configuration_file
+
+        Imports a property configuration to the session from the specified
+        file.
+
+        You can export and import session property configurations only between
+        devices with identical model numbers, channel counts, and onboard memory
+        sizes.
+
+        Note:
+        You cannot call this method while the session is in a running state,
+        such as while generating a signal.
+
+        Args:
+            file_path (str): Specifies the absolute path to the file containing the property
+                configuration to import. If you specify an empty or relative path, this
+                method returns an error.
+                **Default File Extension:** .nifgenconfig
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niFgen_ImportAttributeConfigurationFile(vi_ctype, file_path_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def _initialize_with_channels(self, resource_name, channel_name=None, reset_device=False, option_string=""):
         r'''_initialize_with_channels
 
@@ -3988,14 +4135,17 @@ class Session(_SessionBase):
                 +------------------+-------------------------+-------------+
                 | Property Name    | Property                | Values      |
                 +==================+=========================+=============+
-                | RangeCheck       | range_check             | True, False |
+                | RangeCheck       | RANGE_CHECK             | True, False |
                 +------------------+-------------------------+-------------+
-                | QueryInstrStatus | query_instrument_status | True, False |
+                | QueryInstrStatus | QUERY_INSTRUMENT_STATUS | True, False |
                 +------------------+-------------------------+-------------+
-                | Cache            | cache                   | True, False |
+                | Cache            | CACHE                   | True, False |
                 +------------------+-------------------------+-------------+
                 | Simulate         | simulate                | True, False |
                 +------------------+-------------------------+-------------+
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
 
 
         Returns:

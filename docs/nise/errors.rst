@@ -49,16 +49,6 @@ InvalidRepeatedCapabilityError
         An error due to an invalid character in a repeated capability
 
 
-SelfTestError
--------------
-
-    .. py:currentmodule:: nise.errors
-
-    .. exception:: SelfTestError
-
-        An error due to a failed self-test
-
-
 DriverWarning
 -------------
 

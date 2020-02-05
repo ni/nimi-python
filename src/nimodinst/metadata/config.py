@@ -6,6 +6,7 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-ModInst',
+    'extra_errors_used': [],
     'init_function': 'OpenInstalledDevicesSession',
     'api_version': '255.0.0d4',
     'library_info': {
