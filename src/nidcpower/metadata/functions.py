@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d15
+# This file is generated from NI-DCPower API metadata version 20.2.0d16
 functions = {
     'Abort': {
         'documentation': {
@@ -1090,54 +1090,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'FetchMultipleLCR': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'method_name_for_documentation': 'fetch_multiple_lcr',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
-                'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
-            },
-            {
-                'direction': 'in',
-                'name': 'count',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'measurements',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'count'
-                },
-                'type': 'NILCRMeasurement[]',
-                'use_array': True
-            },
-            {
-                'direction': 'out',
-                'name': 'actualCount',
-                'type': 'ViInt32',
-                'use_in_python_api': False
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'GetAttributeViBoolean': {
         'codegen_method': 'private',
         'documentation': {
@@ -1979,36 +1931,6 @@ functions = {
                     'value': 'self._parse_channel_count()'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'MeasureMultipleLCR': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'method_name_for_documentation': 'measure_multiple_lcr',
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'measurements',
-                'size': {
-                    'mechanism': 'python-code',
-                    'value': 'self._parse_channel_count()'
-                },
-                'type': 'NILCRMeasurement[]',
                 'use_array': True
             }
         ],

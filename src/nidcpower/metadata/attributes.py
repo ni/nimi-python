@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d15
+# This file is generated from NI-DCPower API metadata version 20.2.0d16
 attributes = {
     1050003: {
         'access': 'read-write',
