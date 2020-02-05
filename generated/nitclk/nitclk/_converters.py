@@ -6,10 +6,7 @@ import nitclk.errors as errors
 import datetime
 import numbers
 
-try:
-    from functools import singledispatch  # Python 3.4+
-except ImportError:
-    from singledispatch import singledispatch  # Python 2.7
+from functools import singledispatch
 
 
 @singledispatch
@@ -233,11 +230,6 @@ def convert_to_nitclk_session_number(item):
 def convert_to_nitclk_session_number_list(item_list):
     '''Converts a list of items to nitclk session nums'''
     return [convert_to_nitclk_session_number(i) for i in item_list]
-
-
-# nifake specific converter(s) - used only for testing
-def convert_double_each_element(numbers):
-    return [x * 2 for x in numbers]
 
 
 # Let's run some tests

@@ -6,10 +6,7 @@ import nidmm.errors as errors
 import datetime
 import numbers
 
-try:
-    from functools import singledispatch  # Python 3.4+
-except ImportError:
-    from singledispatch import singledispatch  # Python 2.7
+from functools import singledispatch
 
 
 @singledispatch
@@ -207,37 +204,6 @@ def convert_init_with_options_dictionary(values, encoding):
         init_with_options_string = ','.join(init_with_options)
 
     return init_with_options_string
-
-
-# nitclk specific converters
-def convert_to_nitclk_session_number(item):
-    '''Convert from supported objects to NI-TClk Session Num
-
-    Supported objects are:
-    - class with .tclk object of type nitclk.SessionReference
-    - nitclk.SessionReference
-    '''
-    try:
-        return item.tclk._get_tclk_session_reference()
-    except AttributeError:
-        pass
-
-    try:
-        return item._get_tclk_session_reference()
-    except AttributeError:
-        pass
-
-    raise TypeError('Unsupported type for nitclk session: {}'.format(type(item)))
-
-
-def convert_to_nitclk_session_number_list(item_list):
-    '''Converts a list of items to nitclk session nums'''
-    return [convert_to_nitclk_session_number(i) for i in item_list]
-
-
-# nifake specific converter(s) - used only for testing
-def convert_double_each_element(numbers):
-    return [x * 2 for x in numbers]
 
 
 # Let's run some tests
