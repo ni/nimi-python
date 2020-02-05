@@ -2,6 +2,7 @@
 
 import argparse
 import codecs
+from configure_logging import configure_logging
 import logging
 from mako.exceptions import RichTraceback
 from mako.lookup import TemplateLookup
@@ -56,20 +57,6 @@ def generate_template(template_name, template_params, dest_file):
         file_handle_public = open(dest_file, 'wb')
         file_handle_public.write(bytes(rendered_template, "UTF-8"))
         file_handle_public.close()
-
-
-def configure_logging(lvl=logging.WARNING, logfile=None):
-    root = logging.getLogger()
-    root.setLevel(lvl)
-
-    formatter = logging.Formatter("[%(asctime)s] [%(levelname)8s] --- %(message)s (%(filename)s:%(funcName)s:%(lineno)s)", "%Y-%m-%d %H:%M:%S")
-    if logfile is None:
-        hndlr = logging.StreamHandler(sys.stdout)
-    else:
-        print("Logging to file %s" % logfile)
-        hndlr = logging.FileHandler(logfile)
-    hndlr.setFormatter(formatter)
-    root.addHandler(hndlr)
 
 
 def main():
