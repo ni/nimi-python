@@ -76,6 +76,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
         * Ability to pass an integer as a session / session reference
+        * `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on nitclk attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
 
 
 ## 1.1.5 - 2019-11-22
