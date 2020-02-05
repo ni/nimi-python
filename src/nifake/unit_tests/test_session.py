@@ -351,6 +351,16 @@ class TestSession(object):
             calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt16Matcher(0)), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt16Matcher(1))]  # 0 is the value of the default of nifake.Turtle.LEONARDO, 1 is the value of nifake.Turtle.DONATELLO
             self.patched_library.niFake_EnumInputFunctionWithDefaults.assert_has_calls(calls)
 
+    def test_string_valued_enum_input_function_with_defaults(self):
+        test_mobile_os_name = nifake.MobileOSNames.IOS
+        self.patched_library.niFake_StringValuedEnumInputFunctionWithDefaults.side_effect = self.side_effects_helper.niFake_StringValuedEnumInputFunctionWithDefaults
+        with nifake.Session('dev1') as session:
+            session.string_valued_enum_input_function_with_defaults()
+            session.string_valued_enum_input_function_with_defaults(test_mobile_os_name)
+            from mock import call
+            calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher('Android')), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher('iOS'))]  # 'ANDROID' is the value of the default of nifake.MobileOSNames.Android, 'iOS' is the value of nifake.MobileOSNames.IOS
+            self.patched_library.niFake_StringValuedEnumInputFunctionWithDefaults.assert_has_calls(calls)
+
     def test_fetch_waveform(self):
         expected_waveform_list = [1.0, 0.1, 42, .42]
         self.patched_library.niFake_FetchWaveform.side_effect = self.side_effects_helper.niFake_FetchWaveform
