@@ -14,10 +14,10 @@
 # test suite on all supported python versions. To use it, "pip install tox"
 # and then run "tox -c tox-system_tests.ini" from the driver directory. (generated/${module_name})
 [tox]
-envlist = ${nitclk_env}py{35,36,37,38,py3}-${module_name}-system_tests
+envlist = ${nitclk_env}py{35,36,37,38,py3}-${module_name}-system_tests, py38-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
-# We put the .tox directory outside of the workspace so that it isn't wiped with the rest of the repo
+# We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
 toxworkdir = ../../../.tox
 
 [testenv]
@@ -26,31 +26,36 @@ description =
     ${module_name}-nitclk_wheel: Build the nitclk wheel
 % endif
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
+    ${module_name}-coverage: Report all coverage results to codecov.io
 
 changedir =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: ../../generated/nitclk
 % endif
     ${module_name}-system_tests: .
+    ${module_name}-coverage: .
 
 commands =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: python.exe setup.py bdist_wheel --universal
 % endif
     ${module_name}-system_tests: python --version
-    ${module_name}-system_tests: python -c "import platform; print(platform.architecture())"
-    ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
+    # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
+    ${module_name}-system_tests: python -m pip install --disable-pip-version-check --upgrade pip
 % if config['supports_nitclk']:
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver nitclk --start-path ../..
 % endif
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
+    ${module_name}-system_tests: python -c "import platform; print(platform.architecture())"
+    ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
+    ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
-    ${module_name}-system_tests: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
+    ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
     # Display the coverage results
-    ${module_name}-system_tests: coverage report --rcfile=../../tools/coverage_system_tests.rc
+    ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
     # token is from codecov
-    ${module_name}-system_tests: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
+    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
 
 deps =
 % if config['supports_nitclk']:
@@ -61,7 +66,15 @@ deps =
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
-    ${module_name}-system_tests: codecov
+    ${module_name}-system_tests: fasteners
+    ${module_name}-coverage: coverage
+    ${module_name}-coverage: codecov
+
+depends =
+    ${module_name}-coverage: py{35,36,37,38,py3}-${module_name}-system_tests
+% if config['supports_nitclk']:
+    ${module_name}-system_tests: ${nitclk_env}
+% endif
 
 passenv = 
     GIT_BRANCH
@@ -70,3 +83,7 @@ passenv =
     BRANCH_NAME
     JENKINS_URL
     BUILD_NUMBER
+
+[pytest]
+junit_family = xunit1
+
