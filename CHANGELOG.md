@@ -74,7 +74,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-TClk
     * #### Added
     * #### Changed
-        * Functions parameters and attributes that are time based now take or return a `datetime.timedelta` object
+        * Mthod parameters and properties that are time based now take or return a `datetime.timedelta` object
     * #### Removed
         * `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on nitclk attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
 
