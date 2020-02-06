@@ -4,7 +4,7 @@
 %>\
     .. py:method:: send_software_edge_trigger()
 
-        Sends a command to trigger the signal generator. This VI can act as an
+        Sends a command to trigger the Digital Pattern Instrument. This VI can act as an
         override for an external edge trigger.
 
         If called directly on the session, this will send a software start trigger.
