@@ -43,6 +43,7 @@ def genJob(driver, platform) {
             githubPullRequest {
                 admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
                 orgWhitelist('ni')
+                cron('H/5 * * * *')
                 extensions {
                     commitStatus {
                         context("system-tests/${platform}/${driver}")
@@ -61,6 +62,19 @@ def genJob(driver, platform) {
         steps {
             batchFile {
                 command("""@echo off
+echo Useful environment variables
+echo ghprbActualCommit =            %ghprbActualCommit%
+echo ghprbActualCommitAuthor =      %ghprbActualCommitAuthor%
+echo ghprbActualCommitAuthorEmail = %ghprbActualCommitAuthorEmail%
+echo ghprbPullDescription =         %ghprbPullDescription%
+echo ghprbPullId =                  %ghprbPullId%
+echo ghprbPullLink =                %ghprbPullLink%
+echo ghprbPullTitle =               %ghprbPullTitle%
+echo ghprbSourceBranch =            %ghprbSourceBranch%
+echo ghprbTargetBranch =            %ghprbTargetBranch%
+echo ghprbCommentBody =             %ghprbCommentBody%
+echo sha1 =                         %sha1%
+echo .
 echo Running system tests for ${driver} on ${platform}
 tools\\system_tests.bat ${driver}
 """)
@@ -94,64 +108,4 @@ for (driver in DRIVERS)
     }
 }
 
-// Generate the trigger job
-job("${ROOT_FOLDER}/Trigger") {
-    description "Run all driver system tests on all platforms"
-
-    parameters {
-        stringParam('sha1', 'master', 'SHA to build')
-    }
-
-    label('master')
-
-    scm {
-        git {
-            extensions {
-                wipeWorkspace()
-            }
-            branch('${sha1}')
-            remote {
-                github('ni/nimi-python')
-                credentials("${credentials_to_use}")
-                refspec('+refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*')
-                name('origin')
-            }
-        }
-    }
-
-    steps {
-        batchFile {
-            command("echo Starting system tests")
-        }
-    }
-
-    triggers {
-        githubPullRequest {
-            admins(['texasaggie97', 'marcoskirsch', 'sbethur'])
-            orgWhitelist('ni')
-            cron('H/5 * * * *')
-            extensions {
-                commitStatus {
-                    context('system-tests')
-                    triggeredStatus('Waiting to trigger system test jobs')
-                    startedStatus('Triggering system test jobs')
-                    completedStatus('SUCCESS', 'All system test jobs triggered')
-                    completedStatus('FAILURE', 'Failure triggering system test jobs')
-                    completedStatus('ERROR', 'Error triggering system test jobs')
-                }
-            }
-        }
-    }
-
-    publishers {
-        downstreamParameterized {
-            trigger(jobList) {
-                condition('UNSTABLE_OR_BETTER')
-                parameters {
-                    predefinedProp('sha1', '${sha1}')
-                }
-            }
-        }
-    }
-}
 

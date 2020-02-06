@@ -1614,7 +1614,7 @@ class Session(_SessionBase):
         if type(a_mobile_os_name) is not enums.MobileOSNames:
             raise TypeError('Parameter mode must be of type ' + str(enums.MobileOSNames))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.encode(self._encoding))  # case C020
+        a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.value.encode(self._encoding))  # case C030
         error_code = self._library.niFake_StringValuedEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
