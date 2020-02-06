@@ -72,8 +72,6 @@ NI-FGEN Python API Status
 +===============================+=======================+
 | Driver Version Tested Against | 19.1.0                |
 +-------------------------------+-----------------------+
-| Driver API Version            | 20.0.0d1              |
-+-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nifgenPythonVersion| |

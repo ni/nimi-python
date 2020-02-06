@@ -72,8 +72,6 @@ NI-TClk Python API Status
 +===============================+=======================+
 | Driver Version Tested Against | 19.5.0                |
 +-------------------------------+-----------------------+
-| Driver API Version            | 255.0.0d0             |
-+-------------------------------+-----------------------+
 | PyPI Version                  | |nitclkLatestVersion| |
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nitclkPythonVersion| |

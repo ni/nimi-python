@@ -270,9 +270,9 @@ def test_filter_coefficients():
             filter_coefficients = [0.01] * 35
             try:
                 # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
-                #                     The workaround is to explicitly pass channel "0" rather than the default "" to the driver runtime
-                #                     even though the two should be equivalent on a PXI-5142 (a 1 channel device).
-                #                     This
+                #                     The bug is fixed in NI-SCOPE 20.0 which has not shipped at the time of this writing.
+                #                     The workaround is to explicitly pass a channel rather than the default "" to the driver runtime
+                #                     which should be equivalent to "all channels" (in the PXI-5142 case, that would be "0,1").
                 session.configure_equalization_filter_coefficients(filter_coefficients)
                 assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
             except niscope.errors.DriverError as e:
