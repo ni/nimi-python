@@ -7,8 +7,6 @@ NI-DCPower Python API Status
 +===============================+==========================+
 | Driver Version Tested Against | 19.1.0                   |
 +-------------------------------+--------------------------+
-| Driver API Version            | 20.2.0d16                |
-+-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nidcpowerPythonVersion| |

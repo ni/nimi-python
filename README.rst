@@ -72,8 +72,6 @@ NI-DCPower Python API Status
 +===============================+==========================+
 | Driver Version Tested Against | 19.1.0                   |
 +-------------------------------+--------------------------+
-| Driver API Version            | 20.2.0d16                |
-+-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nidcpowerPythonVersion| |
@@ -112,8 +110,6 @@ NI-Digital Pattern Driver Python API Status
 | NI-Digital Pattern Driver (nidigital) |                          |
 +=======================================+==========================+
 | Driver Version Tested Against         | 19.0.1                   |
-+---------------------------------------+--------------------------+
-| Driver API Version                    | 19.5.0d7                 |
 +---------------------------------------+--------------------------+
 | PyPI Version                          | |nidigitalLatestVersion| |
 +---------------------------------------+--------------------------+
@@ -154,8 +150,6 @@ NI-DMM Python API Status
 +===============================+======================+
 | Driver Version Tested Against | 19.1.0               |
 +-------------------------------+----------------------+
-| Driver API Version            | 19.6.0d0             |
-+-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
 | Supported Python Version      | |nidmmPythonVersion| |
@@ -194,8 +188,6 @@ NI-FGEN Python API Status
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
 | Driver Version Tested Against | 19.1.0                |
-+-------------------------------+-----------------------+
-| Driver API Version            | 20.0.0d1              |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
@@ -236,8 +228,6 @@ NI-ModInst Python API Status
 +===============================+==========================+
 | Driver Version Tested Against | 19.0.0                   |
 +-------------------------------+--------------------------+
-| Driver API Version            | 255.0.0d4                |
-+-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nimodinstPythonVersion| |
@@ -276,8 +266,6 @@ NI-SCOPE Python API Status
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
 | Driver Version Tested Against | 19.1.0                 |
-+-------------------------------+------------------------+
-| Driver API Version            | 19.1.0d50              |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
@@ -318,8 +306,6 @@ NI Switch Executive Python API Status
 +===============================+=====================+
 | Driver Version Tested Against | 19.0.0              |
 +-------------------------------+---------------------+
-| Driver API Version            | 19.1.0d1            |
-+-------------------------------+---------------------+
 | PyPI Version                  | |niseLatestVersion| |
 +-------------------------------+---------------------+
 | Supported Python Version      | |nisePythonVersion| |
@@ -359,8 +345,6 @@ NI-SWITCH Python API Status
 +===============================+=========================+
 | Driver Version Tested Against | 19.1.0                  |
 +-------------------------------+-------------------------+
-| Driver API Version            | 19.1.0d2                |
-+-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+
 | Supported Python Version      | |niswitchPythonVersion| |
@@ -399,8 +383,6 @@ NI-TClk Python API Status
 | NI-TClk (nitclk)              |                       |
 +===============================+=======================+
 | Driver Version Tested Against | 19.5.0                |
-+-------------------------------+-----------------------+
-| Driver API Version            | 255.0.0d0             |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nitclkLatestVersion| |
 +-------------------------------+-----------------------+
