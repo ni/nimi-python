@@ -3,6 +3,7 @@ ${template_parameters['encoding_tag']}
 <%
     config = template_parameters['metadata'].config
     module_name = config['module_name']
+    extra_errors_used = config['extra_errors_used']
 %>\
 import ${module_name}._visatype as _visatype
 import ${module_name}.errors as errors
@@ -351,6 +352,11 @@ def test_convert_timedelta_to_microseconds_int():
     assert isinstance(test_result, _visatype.ViInt32)
 
 
+<%
+# If the driver does not need InvalidRepeatedCapabilityError, then it does not call convert_repeated_capabilities() and
+# there is no need to test it
+%>\
+% if 'InvalidRepeatedCapabilityError' in extra_errors_used:
 # Tests - repeated capabilities
 def test_repeated_capabilies_string_channel():
     test_result_list = convert_repeated_capabilities('0')
@@ -513,6 +519,7 @@ def test_repeated_capabilies_from_init():
     assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
 
 
+% endif
 def test_string_to_list_channel():
     test_result = _convert_repeated_capabilities('r0', '')
     assert test_result == ['r0']

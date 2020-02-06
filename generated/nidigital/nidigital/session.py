@@ -276,6 +276,16 @@ class _SessionBase(object):
     history_ram_pretrigger_samples = _attributes.AttributeViInt32(1150048)
     history_ram_trigger_type = _attributes.AttributeViInt32(1150043)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
+    '''Type: str
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].instrument_firmware_revision
+    '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     instrument_model = _attributes.AttributeViString(1050512)
     interchange_check = _attributes.AttributeViBoolean(1050021)
@@ -298,6 +308,16 @@ class _SessionBase(object):
     pattern_label_history_ram_trigger_label = _attributes.AttributeViString(1150046)
     pattern_label_history_ram_trigger_vector_offset = _attributes.AttributeViInt64(1150052)
     pattern_opcode_event_terminal_name = _attributes.AttributeViString(1150042)
+    '''Type: str
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].pattern_opcode_event_terminal_name
+    '''
     ppmu_allow_extended_voltage_range = _attributes.AttributeViBoolean(1150076)
     '''Type: bool
 
@@ -1613,8 +1633,9 @@ class Session(_SessionBase):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
         self.pins = _RepeatedCapabilities(self, '')
-        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
+        self.devices = _RepeatedCapabilities(self, '')
         self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent')
+        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
 
         self.tclk = nitclk.SessionReference(self._vi)
 

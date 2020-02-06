@@ -1,26 +1,12 @@
 # !python
 
 import argparse
+from configure_logging import configure_logging
 import logging
 import pprint
 import re
-import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
-
-
-def configure_logging(lvl=logging.WARNING, logfile=None):
-    root = logging.getLogger()
-    root.setLevel(lvl)
-
-    formatter = logging.Formatter("[%(asctime)s] [%(levelname)8s] --- %(message)s (%(filename)s:%(funcName)s:%(lineno)s)", "%Y-%m-%d %H:%M:%S")
-    if logfile is None:
-        hndlr = logging.StreamHandler(sys.stdout)
-    else:
-        print("Logging to file %s" % logfile)
-        hndlr = logging.FileHandler(logfile)
-    hndlr.setFormatter(formatter)
-    root.addHandler(hndlr)
 
 
 def main():
