@@ -610,36 +610,6 @@ sample_clock_delay
                 - LabVIEW Property: **Sample Clock Delay**
                 - C Attribute: **NITCLK_ATTR_SAMPLE_CLOCK_DELAY**
 
-script_trigger_master_session
------------------------------
-
-    .. py:currentmodule:: nitclk.SessionReference
-
-    .. py:attribute:: script_trigger_master_session
-
-        Specifies the script trigger master session.
-        For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
-
-        The following table lists the characteristics of this property.
-
-            +----------------+------------------------------------------------------+
-            | Characteristic | Value                                                |
-            +================+======================================================+
-            | Datatype       | nimi-python Session class or nitclk.SessionReference |
-            +----------------+------------------------------------------------------+
-            | Permissions    | read-write                                           |
-            +----------------+------------------------------------------------------+
-            | Channel Based  | No                                                   |
-            +----------------+------------------------------------------------------+
-            | Resettable     | No                                                   |
-            +----------------+------------------------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Script Trigger Master Session**
-                - C Attribute: **NITCLK_ATTR_SCRIPT_TRIGGER_MASTER_SESSION**
-
 sequencer_flag_master_session
 -----------------------------
 

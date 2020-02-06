@@ -53,6 +53,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
+        'codegen_method': 'no',
         'documentation': {
             'description': '\nSpecifies the script trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
         },

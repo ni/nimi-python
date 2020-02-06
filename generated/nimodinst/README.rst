@@ -72,8 +72,6 @@ NI-ModInst Python API Status
 +===============================+==========================+
 | Driver Version Tested Against | 19.0.0                   |
 +-------------------------------+--------------------------+
-| Driver API Version            | 255.0.0d4                |
-+-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nimodinstPythonVersion| |

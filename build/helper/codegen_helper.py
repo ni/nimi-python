@@ -205,6 +205,7 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 
     C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
     C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
+    C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(self._encoding))
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
@@ -218,6 +219,8 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
     if parameter['direction'] == 'in':
         if parameter['is_repeated_capability'] is True:
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010'
+        elif parameter['enum'] is not None:
+            definition = 'ctypes.create_string_buffer({0}.value.encode(self._encoding))  # case C030'.format(parameter['python_name'])
         else:
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C020'.format(parameter['python_name'])
     else:
@@ -1286,6 +1289,28 @@ parameters_for_testing = [
         'type': 'ViReal64',
         'use_in_python_api': True,
     },
+    {  # 33
+        'ctypes_type': 'ViString',
+        'ctypes_type_library_call': 'ViString',
+        'ctypes_variable_name': 'a_string_enum_ctype',
+        'direction': 'in',
+        'documentation': {'description': 'An input string-valued enum.'},
+        'enum': 'Color',
+        'is_buffer': False,
+        'is_string': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'a_string_enum_ctype',
+        'name': 'aStringEnum',
+        'numpy': False,
+        'python_name': 'a_string_enum',
+        'python_name_with_default': 'a_string_enum',
+        'python_name_with_doc_default': 'a_string_enum',
+        'python_type': 'enums.Color',
+        'size': {'mechanism': 'len', 'value': 'a_string_enum'},
+        'type': 'ViString',
+        'use_in_python_api': True,
+    },
 ]
 
 
@@ -1342,6 +1367,11 @@ def test_get_ctype_variable_declaration_snippet_case_c010():
 def test_get_ctype_variable_declaration_snippet_case_c020():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020"]
+
+
+def test_get_ctype_variable_declaration_snippet_case_c030():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[33], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(self._encoding))  # case C030"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c050():
