@@ -595,17 +595,17 @@ sample_clock_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | No         |
-            +----------------+------------+
+            +----------------+----------------------------------------+
+            | Characteristic | Value                                  |
+            +================+========================================+
+            | Datatype       | float in seconds or datetime.timedelta |
+            +----------------+----------------------------------------+
+            | Permissions    | read-write                             |
+            +----------------+----------------------------------------+
+            | Channel Based  | No                                     |
+            +----------------+----------------------------------------+
+            | Resettable     | No                                     |
+            +----------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

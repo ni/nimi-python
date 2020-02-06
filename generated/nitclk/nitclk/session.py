@@ -85,7 +85,7 @@ class SessionReference(object):
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
     sample_clock_delay = _attributes.AttributeViReal64TimeDeltaSeconds(11)
-    '''Type: float
+    '''Type: float in seconds or datetime.timedelta
 
     Specifies the sample clock delay.
     Specifies the delay, in seconds, to apply to the session sample clock  relative to the other synchronized sessions. During synchronization,  NI-TClk aligns the sample clocks on the synchronized devices. If you want  to delay the sample clocks, set this property before calling  synchronize.
