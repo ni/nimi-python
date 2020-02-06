@@ -120,7 +120,8 @@ attributes = {
         'lv_property': 'Sample Clock Delay',
         'name': 'SAMPLE_CLOCK_DELAY',
         'resettable': False,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'float in seconds or datetime.timedelta',
     },
     13: {
         'access': 'read-write',
