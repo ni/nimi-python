@@ -1188,72 +1188,11 @@ fetch_history_ram_cycle_information
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_history_ram_cycle_information(site, sample_index)
+    .. py:method:: fetch_history_ram_cycle_information(site, pin_list, position, samples_to_read)
 
-            TBD
+            <FILL IN THE BLANK HERE>
 
-            
-
-
-
-            :param site:
-
-
-                
-
-
-            :type site: str
-            :param sample_index:
-
-
-                
-
-
-            :type sample_index: int
-
-            :rtype: tuple (pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles)
-
-                WHERE
-
-                pattern_index (int): 
-
-
-                    
-
-
-                time_set_index (int): 
-
-
-                    
-
-
-                vector_number (int): 
-
-
-                    
-
-
-                cycle_number (int): 
-
-
-                    
-
-
-                num_dut_cycles (int): 
-
-
-                    
-
-
-
-fetch_history_ram_cycle_pin_data
---------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: fetch_history_ram_cycle_pin_data(site, pin_list, sample_index, dut_cycle_index)
-
-            TBD
+             TODO
 
             
 
@@ -1273,75 +1212,26 @@ fetch_history_ram_cycle_pin_data
 
 
             :type pin_list: str
-            :param sample_index:
+            :param position:
 
 
                 
 
 
-            :type sample_index: int
-            :param dut_cycle_index:
+            :type position: int
+            :param samples_to_read:
 
 
                 
 
 
-            :type dut_cycle_index: int
+            :type samples_to_read: int
 
-            :rtype: tuple (expected_pin_states, actual_pin_states, per_pin_pass_fail)
-
-                WHERE
-
-                expected_pin_states (list of int): 
-
-
-                    
-
-
-                actual_pin_states (list of int): 
-
-
-                    
-
-
-                per_pin_pass_fail (list of bool): 
-
-
-                    
-
-
-
-fetch_history_ram_scan_cycle_number
------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: fetch_history_ram_scan_cycle_number(site, sample_index)
-
-            TBD
-
-            
-
-
-
-            :param site:
-
-
-                
-
-
-            :type site: str
-            :param sample_index:
-
-
-                
-
-
-            :type sample_index: int
-
-            :rtype: int
+            :rtype: list of HistoryRAMCycleInformation
             :return:
 
+
+                    List of <FILL IN THE BLANKS> TODO
 
                     
 

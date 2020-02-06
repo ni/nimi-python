@@ -928,6 +928,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchHistoryRAMCycleInformation': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -976,6 +977,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchHistoryRAMCyclePinData': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1049,6 +1051,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchHistoryRAMScanCycleNumber': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },

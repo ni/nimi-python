@@ -13,7 +13,8 @@ test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
-    with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+    #with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+    with nidigital.Session(resource_name=','.join(instr), options='') as simulated_session:
         yield simulated_session
 
 
@@ -95,7 +96,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
     multi_instrument_session.burst_pattern(
         site_list='',
         start_label='new_pattern',
-        select_digital_function=False,
+        select_digital_function=True,
         wait_until_done=True,
         timeout=5)
 
@@ -165,8 +166,8 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     multi_instrument_session.burst_pattern(
         site_list='',
         start_label='new_pattern',
-        select_digital_function=False,
-        wait_until_done=False,
+        select_digital_function=True,
+        wait_until_done=True,
         timeout=5)
 
     # Pattern burst is configured to fetch num_samples samples
@@ -203,8 +204,8 @@ def test_fetch_capture_waveform(multi_instrument_session):
     multi_instrument_session.burst_pattern(
         site_list='',
         start_label='new_pattern',
-        select_digital_function=False,
-        wait_until_done=False,
+        select_digital_function=True,
+        wait_until_done=True,
         timeout=5)
 
     # Pattern burst is configured to fetch num_samples samples
@@ -226,8 +227,8 @@ def test_fetch_capture_waveform(multi_instrument_session):
     multi_instrument_session.burst_pattern(
         site_list='site1',
         start_label='new_pattern',
-        select_digital_function=False,
-        wait_until_done=False,
+        select_digital_function=True,
+        wait_until_done=True,
         timeout=5)
     fetched_waveform = multi_instrument_session.fetch_capture_waveform(
         site_list='',
@@ -254,3 +255,181 @@ def test_get_pin_results_pin_information(multi_instrument_session):
     assert pins == ['PinA', 'PinB', '']
     assert sites == [1, 0, -1]
     assert channels == fully_qualified_channels
+
+
+def test_fetch_history_ram_cycle_information_position_negative(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    with pytest.raises(ValueError, match='position should be greater than or equal to 0.'):
+        multi_instrument_session.fetch_history_ram_cycle_information(
+            site='site1',
+            pin_list='',
+            position=-1,
+            samples_to_read=-1)
+
+
+def configure_for_history_ram_test(session):
+    test_files_folder = 'test_fetch_history_ram_cycle_information'
+    configure_session(session, test_files_folder)
+
+    session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    session.history_ram_trigger_type = 2200
+    session.history_ram_cycles_to_acquire = 2304
+    session.history_ram_pretrigger_samples = 0
+    session.history_ram_number_of_samples_is_finite = True
+
+    session.burst_pattern(
+        site_list='site1',
+        start_label='new_pattern',
+        select_digital_function=True,
+        wait_until_done=True,
+        timeout=5)
+
+
+def test_fetch_history_ram_cycle_information_position_out_of_bound(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    with pytest.raises(ValueError, match='position: Specified value = 7, Maximum value = 6.'):
+        multi_instrument_session.fetch_history_ram_cycle_information(
+            site='site1',
+            pin_list='',
+            position=7,
+            samples_to_read=-1)
+
+
+def test_fetch_history_ram_cycle_information_position_last(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
+        site='site1',
+        pin_list='',
+        position=6,
+        samples_to_read=-1)
+
+    assert len(history_ram_cycle_info) == 1
+    assert history_ram_cycle_info[0].vector_number == 9
+    assert history_ram_cycle_info[0].cycle_number == 11
+
+
+def test_fetch_history_ram_cycle_information_is_finite_invalid(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+    multi_instrument_session.history_ram_number_of_samples_is_finite = False
+
+    expected_error_description = (
+        '-1074118484: '
+        'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument '
+        'is configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
+    with pytest.raises(nidigital.errors.DriverError, match=expected_error_description):
+        multi_instrument_session.fetch_history_ram_cycle_information(
+            site='site1',
+            pin_list='',
+            position=0,
+            samples_to_read=-1)
+
+
+def test_fetch_history_ram_cycle_information_samples_to_read_too_much(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    expected_error_description = (
+        'position: Specified value = 1, samples_to_read: Specified value = 7; Samples available = 7.')
+    with pytest.raises(ValueError, match=expected_error_description):
+        multi_instrument_session.fetch_history_ram_cycle_information(
+            site='site1',
+            pin_list='',
+            position=1,
+            samples_to_read=7)
+
+
+def test_fetch_history_ram_cycle_information_samples_to_read_negative(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    with pytest.raises(ValueError, match='samples_to_read should be greater than or equal to -1.'):
+        multi_instrument_session.fetch_history_ram_cycle_information(
+            site='site1',
+            pin_list='',
+            position=0,
+            samples_to_read=-2)
+
+
+def test_fetch_history_ram_cycle_information_samples_to_read_zero(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
+        site='site1',
+        pin_list='',
+        position=0,
+        samples_to_read=0)
+
+    assert len(history_ram_cycle_info) == 0
+
+
+def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
+        site='site1',
+        pin_list='',
+        position=0,
+        samples_to_read=-1)
+
+    assert len(history_ram_cycle_info) == 7
+    assert all([i.pattern_name == 'new_pattern' for i in history_ram_cycle_info])
+
+    time_set_names = [i.time_set_name for i in history_ram_cycle_info]
+    assert time_set_names == ['t0', 'tScan', 'tScan', 't2X', 't2X', 't2X', 't0']
+
+    vector_numbers = [i.vector_number for i in history_ram_cycle_info]
+    assert vector_numbers == [5, 6, 6, 7, 7, 8, 9]
+
+    cycle_numbers = [i.cycle_number for i in history_ram_cycle_info]
+    assert cycle_numbers == list(range(5, 12))
+
+    scan_cycle_numbers = [i.scan_cycle_number for i in history_ram_cycle_info]
+    assert scan_cycle_numbers == [-1, 0, 1, -1, -1, -1, -1]
+
+    pin_names = multi_instrument_session.get_pattern_pin_list('new_pattern')
+    assert pin_names == 'LO0, LO1, LO2, LO3, HI0, HI1, HI2, HI3'
+
+    expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
+    assert expected_pin_states == [
+        [[0, 4, 5, 5, 4, 0, 5, 5]],
+        [[5, 5, 0, 1, 5, 5, 3, 4]],
+        [[5, 5, 1, 0, 5, 5, 4, 3]],
+        [[1, 1, 5, 5, 4, 4, 5, 5], [0, 0, 5, 5, 3, 3, 5, 5]],
+        [[1, 1, 5, 5, 4, 4, 5, 5], [0, 0, 5, 5, 3, 3, 5, 5]],
+        [[0, 1, 5, 5, 3, 4, 5, 5], [1, 0, 5, 5, 4, 3, 5, 5]],
+        [[5, 5, 5, 5, 5, 5, 5, 5]]
+    ]
+
+    # If test expects actual pin state to be 'X', then value returned by the returned can be anything.
+    # So, need to skip those pin states while comparing.
+    actual_pin_states = [i.actual_pin_states for i in history_ram_cycle_info]
+    actual_pin_states_expected_by_test = [
+        [[3, 3, 5, 5, 3, 3, 5, 5]],
+        [[5, 5, 3, 4, 5, 5, 3, 4]],
+        [[5, 5, 4, 3, 5, 5, 4, 3]],
+        [[4, 4, 5, 5, 4, 4, 5, 5], [3, 3, 5, 5, 3, 3, 5, 5]],
+        [[4, 4, 5, 5, 4, 4, 5, 5], [3, 3, 5, 5, 3, 3, 5, 5]],
+        [[3, 4, 5, 5, 3, 4, 5, 5], [4, 3, 5, 5, 4, 3, 5, 5]],
+        [[5, 5, 5, 5, 5, 5, 5, 5]]
+    ]
+    assert len(actual_pin_states) == len(actual_pin_states_expected_by_test)
+    for vector_pin_states, vector_pin_states_expected_by_test in zip(actual_pin_states, actual_pin_states_expected_by_test):
+        for cycle_pin_states, cycle_pin_states_expected_by_test in zip(vector_pin_states, vector_pin_states_expected_by_test):
+            for pin_state, pin_state_expected_by_test in zip(cycle_pin_states, cycle_pin_states_expected_by_test):
+                if pin_state_expected_by_test is not 5:
+                    assert pin_state == pin_state_expected_by_test
+
+    # Only the first cycle returned is expected to have failures
+    per_pin_pass_fail = [i.per_pin_pass_fail for i in history_ram_cycle_info]
+    assert per_pin_pass_fail == [
+        [[True, False, True, True, False, True, True, True]],
+        [[True, True, True, True, True, True, True, True]],
+        [[True, True, True, True, True, True, True, True]],
+        [[True, True, True, True, True, True, True, True], [True, True, True, True, True, True, True, True]],
+        [[True, True, True, True, True, True, True, True], [True, True, True, True, True, True, True, True]],
+        [[True, True, True, True, True, True, True, True], [True, True, True, True, True, True, True, True]],
+        [[True, True, True, True, True, True, True, True]],
+    ]
+

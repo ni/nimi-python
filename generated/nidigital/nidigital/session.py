@@ -13,6 +13,8 @@ import nidigital._visatype as _visatype
 import nidigital.enums as enums
 import nidigital.errors as errors
 
+import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
+
 import nitclk
 
 # Used for __repr__
@@ -2266,6 +2268,85 @@ class Session(_SessionBase):
         return waveforms
 
     @ivi_synchronized
+    def fetch_history_ram_cycle_information(self, site, pin_list, position, samples_to_read):
+        '''fetch_history_ram_cycle_information
+
+        <FILL IN THE BLANK HERE>
+
+         TODO
+
+        Args:
+            site (str):
+
+            pin_list (str):
+
+            position (int):
+
+            samples_to_read (int):
+
+
+        Returns:
+            history_ram_cycle_information (list of HistoryRAMCycleInformation): List of <FILL IN THE BLANKS> TODO
+
+        '''
+        if position < 0:
+            raise ValueError('position should be greater than or equal to 0.')
+
+        if samples_to_read < -1:
+            raise ValueError('samples_to_read should be greater than or equal to -1.')
+
+        samples_available = self.get_history_ram_sample_count(site)
+        if position >= samples_available:
+            raise ValueError('position: Specified value = {0}, Maximum value = {1}.'.format(position, samples_available - 1))
+
+        if samples_to_read == -1:
+            if not self.history_ram_number_of_samples_is_finite:
+                raise errors.DriverError(
+                    -1074118484,
+                    'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument is '
+                    'configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
+            samples_to_read = samples_available - position
+
+        if position + samples_to_read > samples_available:
+            raise ValueError(
+                'position: Specified value = {0}, samples_to_read: Specified value = {1}; Samples available = {2}.'
+                .format(position, samples_to_read, samples_available))
+
+        pattern_names = {}
+        time_set_names = {}
+        cycle_infos = []
+        for _ in range(samples_to_read):
+            cycle_info = history_ram_cycle_information.HistoryRAMCycleInformation()
+
+            pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles = self._fetch_history_ram_cycle_information(site, position)
+
+            if pattern_index not in pattern_names:
+                pattern_names[pattern_index] = self.get_pattern_name(pattern_index)
+            cycle_info.pattern_name = pattern_names[pattern_index]
+
+            if time_set_index not in time_set_names:
+                time_set_names[time_set_index] = self.get_time_set_name(time_set_index)
+            cycle_info.time_set_name = time_set_names[time_set_index]
+
+            cycle_info.vector_number = vector_number
+            cycle_info.cycle_number = cycle_number
+            cycle_info.scan_cycle_number = self._fetch_history_ram_scan_cycle_number(site, position)
+
+            cycle_info.expected_pin_states = []
+            cycle_info.actual_pin_states = []
+            cycle_info.per_pin_pass_fail = []
+            for dut_cycle_index in range(num_dut_cycles):
+                expected_pin_states, actual_pin_states, per_pin_pass_fail = self._fetch_history_ram_cycle_pin_data(site, pin_list, position, dut_cycle_index)
+                cycle_info.expected_pin_states.append(expected_pin_states)
+                cycle_info.actual_pin_states.append(actual_pin_states)
+                cycle_info.per_pin_pass_fail.append(per_pin_pass_fail)
+
+            cycle_infos.append(cycle_info)
+            position += 1
+
+        return cycle_infos
+
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2335,8 +2416,8 @@ class Session(_SessionBase):
         self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
-    def fetch_history_ram_cycle_information(self, site, sample_index):
-        r'''fetch_history_ram_cycle_information
+    def _fetch_history_ram_cycle_information(self, site, sample_index):
+        r'''_fetch_history_ram_cycle_information
 
         TBD
 
@@ -2371,8 +2452,8 @@ class Session(_SessionBase):
         return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
 
     @ivi_synchronized
-    def fetch_history_ram_cycle_pin_data(self, site, pin_list, sample_index, dut_cycle_index):
-        r'''fetch_history_ram_cycle_pin_data
+    def _fetch_history_ram_cycle_pin_data(self, site, pin_list, sample_index, dut_cycle_index):
+        r'''_fetch_history_ram_cycle_pin_data
 
         TBD
 
@@ -2418,8 +2499,8 @@ class Session(_SessionBase):
         return [int(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [int(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def fetch_history_ram_scan_cycle_number(self, site, sample_index):
-        r'''fetch_history_ram_scan_cycle_number
+    def _fetch_history_ram_scan_cycle_number(self, site, sample_index):
+        r'''_fetch_history_ram_scan_cycle_number
 
         TBD
 

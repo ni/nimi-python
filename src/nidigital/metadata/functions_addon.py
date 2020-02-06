@@ -142,3 +142,59 @@ functions_additional_fetch_capture_waveform = {
         ],
     },
 }
+
+functions_additional_fetch_history_ram_cycle_information = {
+    'FancyFetchHistoryRAMCycleInformation': {
+        'python_name': 'fetch_history_ram_cycle_information',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_fetch_history_ram_cycle_information',
+            }
+        ],
+        'documentation': {
+            'description': '\n<FILL IN THE BLANK HERE>\n\n TODO \n\n',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'site',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'pinList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'position',
+                'type': 'ViInt64'
+            },
+            {
+                'direction': 'in',
+                'name': 'samples_to_read',
+                'type': 'ViInt64'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nList of <FILL IN THE BLANKS> TODO\n'
+                },
+                'name': 'history_ram_cycle_information',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'HistoryRAMCycleInformation[]'
+            }
+        ],
+    },
+}

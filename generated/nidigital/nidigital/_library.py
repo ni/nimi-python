@@ -6,6 +6,8 @@ import threading
 
 from nidigital._visatype import *  # noqa: F403,H303
 
+import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
+
 
 class Library(object):
     '''Library

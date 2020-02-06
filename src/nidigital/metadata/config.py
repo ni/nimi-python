@@ -10,6 +10,11 @@ config = {
         'task': 'burst'
     },
     'custom_types': [
+        {
+            'ctypes_type': '',
+            'file_name': 'history_ram_cycle_information',
+            'python_name': 'HistoryRAMCycleInformation'
+        }
     ],
     'driver_name': 'NI-Digital Pattern Driver',
     'enum_whitelist_suffix': [
