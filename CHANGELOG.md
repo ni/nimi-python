@@ -50,6 +50,11 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-FGEN
     * #### Added
+        * `nifgen.Session.import_attribute_configuration_file()`
+        * `nifgen.Session.import_attribute_configuration_buffer()`
+        * `nifgen.Session.export_attribute_configuration_file()`
+        * `nifgen.Session.export_attribute_configuration_buffer()`
+        * `nifgen.Session.get_channel_name()`
     * #### Changed
     * #### Removed
 * ### NI-SCOPE
@@ -72,8 +77,9 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-    
-    
+        * `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on nitclk attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
+
+
 ## 1.1.5 - 2019-11-22
 * ### ALL
     * #### Changed
@@ -148,7 +154,7 @@ All notable changes to this project will be documented in this file.
         * **[Source Breaker]** No longer return the "actual size" from functions that use 'ivi-dance-with-a-twist'. This only affects `nidigital`.
 
     * #### Removed
-        * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`, 
+        * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`,
             `get_number_of_vectors()`, `get_pattern_file_path()`, `get_pin_type()`, `get_time_set_compare_edges()`, `get_time_set_drive_edges()`,
             `is_pattern_file_modified_since_load()`, `load_levels_internal()`, `load_pattern_internal()`, `load_timing_internal()`, `uncommit()`
         * Need to determine how to generate this function - `fetch_capture_waveform_u32()`

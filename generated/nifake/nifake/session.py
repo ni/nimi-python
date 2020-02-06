@@ -145,6 +145,18 @@ class _SessionBase(object):
 
     Property in seconds
     '''
+    read_write_double_with_repeated_capability = _attributes.AttributeViReal64(1000009)
+    '''Type: float
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nifake.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nifake.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].read_write_double_with_repeated_capability = var
+        var = session.channels[0,1].read_write_double_with_repeated_capability
+    '''
     read_write_int64 = _attributes.AttributeViInt64(1000006)
     '''Type: int
 
@@ -835,7 +847,7 @@ class Session(_SessionBase):
     def enum_input_function_with_defaults(self, a_turtle=enums.Turtle.LEONARDO):
         r'''enum_input_function_with_defaults
 
-        This method takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.
+        This method takes one parameter other than the session, which happens to be an enum and has a default value.
 
         Args:
             a_turtle (enums.Turtle): Indicates a ninja turtle
@@ -1618,6 +1630,32 @@ class Session(_SessionBase):
         number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
         cs_ctype = get_ctypes_pointer_for_buffer([custom_struct.struct_CustomStruct(c) for c in cs], library_type=custom_struct.struct_CustomStruct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name=enums.MobileOSNames.ANDROID):
+        r'''string_valued_enum_input_function_with_defaults
+
+        This method takes one parameter other than the session, which happens to be a string-valued enum and has a default value.
+
+        Args:
+            a_mobile_os_name (str): Indicates a Mobile OS
+
+                +---------+---------+
+                | ANDROID | Android |
+                +---------+---------+
+                | IOS     | iOS     |
+                +---------+---------+
+                | NONE    | None    |
+                +---------+---------+
+
+        '''
+        if type(a_mobile_os_name) is not enums.MobileOSNames:
+            raise TypeError('Parameter mode must be of type ' + str(enums.MobileOSNames))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.value.encode(self._encoding))  # case C030
+        error_code = self._library.niFake_StringValuedEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

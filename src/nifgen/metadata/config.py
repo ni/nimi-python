@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 19.6.0d0
+# This file is generated from NI-FGEN API metadata version 20.0.0d1
 config = {
-    'api_version': '19.6.0d0',
+    'api_version': '20.0.0d1',
     'c_function_prefix': 'niFgen_',
     'close_function': 'close',
     'context_manager_name': {
@@ -12,6 +12,7 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-FGEN',
+    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
     'init_function': 'InitializeWithChannels',
     'library_info': {
         'Linux': {
@@ -49,5 +50,5 @@ config = {
     ],
     'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
     'session_handle_parameter_name': 'vi',
-    'supports_nitclk': True,
+    'supports_nitclk': True
 }

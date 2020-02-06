@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 0.2.0d23
+# This file is generated from NI-FAKE API metadata version 1.2.0d5
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -27,7 +27,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -55,19 +55,39 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'ClearError': {
-        'codegen_method': 'no',
+    'DoubleAllTheNums': {
         'documentation': {
-            'description': 'Clears the error for the current thread and session'
+            'description': 'Test for buffer with converter'
         },
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session.'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of elements in the number array'
+                },
+                'name': 'numberCount',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'numbers is an array of numbers we want to double.'
+                },
+                'name': 'numbers',
+                'python_api_converter_name': 'convert_double_each_element',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberCount'
+                },
+                'type': 'ViReal64[]'
             }
         ],
         'returns': 'ViStatus'
@@ -81,7 +101,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -113,13 +133,13 @@ functions = {
     'EnumInputFunctionWithDefaults': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value defined in functions_addon.'
+            'description': 'This function takes one parameter other than the session, which happens to be an enum and has a default value.'
         },
         'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -741,47 +761,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'GetAttributeViSession': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Queries the value of a ViSession attribute.'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'This is the channel(s) that this function will apply to.'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attributeId',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the value of the attribute.'
-                },
-                'name': 'attributeValue',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'GetAttributeViString': {
         'codegen_method': 'private',
         'documentation': {
@@ -922,39 +901,6 @@ functions = {
                 'python_api_converter_name': 'convert_month_to_timedelta',
                 'type': 'ViInt32',
                 'type_in_documentation': 'datetime.timedelta'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetChannelName': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'index',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'name': 'nameSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'name',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'nameSize'
-                },
-                'type': 'ViChar[]'
             }
         ],
         'returns': 'ViStatus'
@@ -1122,53 +1068,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'GetErrorMessage': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'Returns the errorMessage as a user-readable string. Uses IVI-dance'
-        },
-        'is_error_handling': True,
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'The error code returned for which you want to get a string.'
-                },
-                'name': 'errorCode',
-                'type': 'ViStatus'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Number of bytes allocated for errorMessage'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Error information formatted into a user-readable string.'
-                },
-                'name': 'errorMessage',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]'
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': False
-    },
     'GetLastCalDateAndTime': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -1317,40 +1216,6 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': False
-    },
-    'InitializeWithChannels': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'resourceName',
-                'type': 'ViRsrc'
-            },
-            {
-                'direction': 'in',
-                'name': 'channels',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'reset',
-                'type': 'ViBoolean'
-            },
-            {
-                'direction': 'in',
-                'name': 'optionString',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'newVi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
     },
     'Initiate': {
         'codegen_method': 'private',
@@ -1567,7 +1432,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -1579,25 +1444,6 @@ functions = {
                 },
                 'name': 'aNumber',
                 'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'OneOutputFunction': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'out',
-                'name': 'aNumber',
-                'type': 'ViInt16'
             }
         ],
         'returns': 'ViStatus'
@@ -1716,7 +1562,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -1799,30 +1645,6 @@ functions = {
                 },
                 'name': 'reading',
                 'type': 'ViReal64'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ResetAttribute': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'attributeId',
-                'type': 'ViAttr'
             }
         ],
         'returns': 'ViStatus'
@@ -2155,47 +1977,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SetAttributeViSession': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'This function sets the value of a ViSession attribute.'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'This is the channel(s) that this function will apply to.'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attributeId',
-                'type': 'ViAttr'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the value that you want to set the attribute to.'
-                },
-                'name': 'attributeValue',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'SetAttributeViString': {
         'codegen_method': 'private',
         'documentation': {
@@ -2299,6 +2080,47 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'StringValuedEnumInputFunctionWithDefaults': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'This function takes one parameter other than the session, which happens to be a string-valued enum and has a default value.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'default_value': 'MobileOSNames.ANDROID',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Indicates a Mobile OS',
+                    'table_body': [
+                        [
+                            'ANDROID',
+                            'Android'
+                        ],
+                        [
+                            'IOS',
+                            'iOS'
+                        ],
+                        [
+                            'NONE',
+                            'None'
+                        ]
+                    ]
+                },
+                'enum': 'MobileOSNames',
+                'name': 'aMobileOSName',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'TwoInputFunction': {
         'codegen_method': 'public',
         'documentation': {
@@ -2308,7 +2130,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi**'
+                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
@@ -2466,6 +2288,7 @@ functions = {
                 'type': 'ViSession'
             }
         ],
+        'python_name': '_close',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -2569,42 +2392,5 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
-    },
-    'DoubleAllTheNums': {
-        'documentation': {
-            'description': 'Test for buffer with converter'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session. You obtain the **vi** parameter from niFake_InitWithOptions.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Number of elements in the number array'
-                },
-                'name': 'numberCount',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'numbers is an array of numbers we want to double.'
-                },
-                'python_api_converter_name': 'convert_double_each_element',
-                'name': 'numbers',
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'numberCount'
-                },
-                'type': 'ViReal64[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
+    }
 }

@@ -57,22 +57,6 @@ class DriverNotInstalledError(Error):
         super(DriverNotInstalledError, self).__init__('The NI-TClk runtime could not be loaded. Make sure it is installed and its bitness matches that of your Python interpreter. Please visit http://www.ni.com/downloads/drivers/ to download and install it.')
 
 
-class InvalidRepeatedCapabilityError(Error):
-    '''An error due to an invalid character in a repeated capability'''
-
-    def __init__(self, invalid_character, invalid_string):
-        super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({0}) was found in repeated capability string ({1})'.format(invalid_character, invalid_string))
-
-
-class SelfTestError(Error):
-    '''An error due to a failed self-test'''
-
-    def __init__(self, code, msg):
-        self.code = code
-        self.message = msg
-        super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
-
-
 def handle_error(session, code, ignore_warnings, is_error_handling):
     '''handle_error
 

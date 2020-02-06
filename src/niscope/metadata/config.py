@@ -17,6 +17,7 @@ config = {
         }
     ],
     'driver_name': 'NI-SCOPE',
+    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {

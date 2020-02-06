@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 0.2.0d23
+# This file is generated from NI-FAKE API metadata version 1.2.0d5
 enums = {
     'BeautifulColor': {
         'values': [
@@ -53,6 +53,46 @@ enums = {
             }
         ]
     },
+    'ColorObsolete': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_RED',
+                'value': 1
+            },
+            {
+                'name': 'NIFAKE_VAL_BLUE',
+                'value': 2
+            },
+            {
+                'name': 'NIFAKE_VAL_YELLOW',
+                'value': 5
+            },
+            {
+                'name': 'NIFAKE_VAL_BLACK',
+                'value': 42
+            }
+        ]
+    },
+    'ColorPrivate': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_RED',
+                'value': 1
+            },
+            {
+                'name': 'NIFAKE_VAL_BLUE',
+                'value': 2
+            },
+            {
+                'name': 'NIFAKE_VAL_YELLOW',
+                'value': 5
+            },
+            {
+                'name': 'NIFAKE_VAL_BLACK',
+                'value': 42
+            }
+        ]
+    },
     'FloatEnum': {
         'values': [
             {
@@ -89,6 +129,31 @@ enums = {
                 },
                 'name': 'NIFAKE_VAL_SEVEN_POINT_FIVE',
                 'value': 7.5
+            }
+        ]
+    },
+    'MobileOSNames': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Most popular OS.'
+                },
+                'name': 'NIFAKE_VAL_ANDROID',
+                'value': 'Android'
+            },
+            {
+                'documentation': {
+                    'description': 'Most secure OS.'
+                },
+                'name': 'NIFAKE_VAL_IOS',
+                'value': 'iOS'
+            },
+            {
+                'documentation': {
+                    'description': 'Remember Symbian?.'
+                },
+                'name': 'NIFAKE_VAL_NONE',
+                'value': 'None'
             }
         ]
     },
