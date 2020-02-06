@@ -49,7 +49,9 @@ def zipdir(path, ziph):
 def main():
     # Setup the required arguments for this script
     usage = """
-Zip folder recursivly into file
+Script for compressing a directory of Python examples as a ZIP file in a way that prevents the resulting file from being binary different if the source files didn't change.
+* Reset the file modification timestamps on each file because these are preserved during zipping.
+* Ignore .pyc files that may be encountered.
 """
     parser = argparse.ArgumentParser(description=usage)
     file_group = parser.add_argument_group("Input and Output files")
