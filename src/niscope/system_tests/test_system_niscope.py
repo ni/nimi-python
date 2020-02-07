@@ -1,3 +1,4 @@
+import datetime
 import fasteners
 import math
 import niscope
@@ -436,25 +437,25 @@ def test_nitclk_sync_pulse_sender_synchronize(session_multiple_sessions):
 
 def test_nitclk_synchronize(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions)
+    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
 
 
 def test_nitclk_initiate(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions)
+    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
     nitclk.initiate(session_multiple_sessions)
 
 
 def test_nitclk_is_done(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions)
+    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
     nitclk.initiate(session_multiple_sessions)
     nitclk.is_done(session_multiple_sessions)
 
 
 def test_nitclk_wait_until_done(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions)
+    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
     nitclk.initiate(session_multiple_sessions)
     nitclk.wait_until_done(session_multiple_sessions)
 
