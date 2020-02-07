@@ -380,32 +380,32 @@ def test_configure_trigger_window(session):
 
 # NI-TClk system tests - they use niscope so put them here
 def test_nitclk_integration(session_5124):
-    assert type(nitclk_session.tclk) == nitclk.SessionReference
+    assert type(session_5124.tclk) == nitclk.SessionReference
 
 
 def test_nitclk_vi_string(session_5124):
     # default is empty string
-    assert nitclk_session.tclk.exported_tclk_output_terminal == ''
-    nitclk_session.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
-    assert nitclk_session.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
+    assert session_5124.tclk.exported_tclk_output_terminal == ''
+    session_5124.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
+    assert session_5124.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
 
 
 def test_nitclk_session_reference(session_5124):
     test_session = niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe')
-    nitclk_session.tclk.pause_trigger_master_session = test_session
+    session_5124.tclk.pause_trigger_master_session = test_session
     # We need to look at the actual session number inside the class
     # we know the type returned from session.tclk.pause_trigger_master_session will be nitclk.SessionReference
     # This test assumes knowledge of the class internals
-    assert nitclk_session.tclk.pause_trigger_master_session._session_number == test_session.tclk._get_session_number()
-    assert nitclk_session.tclk.pause_trigger_master_session._session_number == test_session._vi
+    assert session_5124.tclk.pause_trigger_master_session._session_number == test_session.tclk._get_session_number()
+    assert session_5124.tclk.pause_trigger_master_session._session_number == test_session._vi
 
 
 def test_nitclk_vi_real64(session_5124):
     # default is 0
-    assert nitclk_session.tclk.sample_clock_delay == 0
+    assert session_5124.tclk.sample_clock_delay == 0
     test_number = 4.2
-    nitclk_session.tclk.sample_clock_delay = test_number
-    assert nitclk_session.tclk.sample_clock_delay == test_number
+    session_5124.tclk.sample_clock_delay = test_number
+    assert session_5124.tclk.sample_clock_delay == test_number
 
 
 def test_nitclk_error_handling():
