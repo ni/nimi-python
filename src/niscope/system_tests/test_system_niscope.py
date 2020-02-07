@@ -430,32 +430,32 @@ def test_nitclk_configure_for_homogeneous_triggers(session_multiple_sessions):
 
 
 def test_nitclk_sync_pulse_sender_synchronize(session_multiple_sessions):
-    nitclk.setup_for_sync_pulse_sender_synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
-    nitclk.synchronize_to_sync_pulse_sender(session_multiple_sessions, datetime.timedelta(seconds=.001))
-    nitclk.finish_sync_pulse_sender_synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
+    nitclk.setup_for_sync_pulse_sender_synchronize(session_multiple_sessions, .001)
+    nitclk.synchronize_to_sync_pulse_sender(session_multiple_sessions, .001)
+    nitclk.finish_sync_pulse_sender_synchronize(session_multiple_sessions, .001)
 
 
 def test_nitclk_synchronize(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
+    nitclk.synchronize(session_multiple_sessions, .001)
 
 
 def test_nitclk_initiate(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
+    nitclk.synchronize(session_multiple_sessions, .001)
     nitclk.initiate(session_multiple_sessions)
 
 
 def test_nitclk_is_done(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
+    nitclk.synchronize(session_multiple_sessions, .001)
     nitclk.initiate(session_multiple_sessions)
     nitclk.is_done(session_multiple_sessions)
 
 
 def test_nitclk_wait_until_done(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
-    nitclk.synchronize(session_multiple_sessions, datetime.timedelta(seconds=.001))
+    nitclk.synchronize(session_multiple_sessions, .001)
     nitclk.initiate(session_multiple_sessions)
     nitclk.wait_until_done(session_multiple_sessions)
 
