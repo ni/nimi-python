@@ -45,7 +45,7 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
-def test_continuous_software_scanning(session):
+def test_continuous_software_scanning():
     with daqmx_sim_db_lock:
         with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
             scan_list = 'r0->c0; r1->c1'
