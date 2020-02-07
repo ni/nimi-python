@@ -392,12 +392,12 @@ def test_nitclk_vi_string(session_5124):
 
 def test_nitclk_session_reference(session_5124):
     test_session = niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe')
-    session_5124.tclk.pause_trigger_master_session = test_session
+    session_5124.tclk.ref_trigger_master_session = test_session
     # We need to look at the actual session number inside the class
     # we know the type returned from session.tclk.pause_trigger_master_session will be nitclk.SessionReference
     # This test assumes knowledge of the class internals
-    assert session_5124.tclk.pause_trigger_master_session._session_number == test_session.tclk._get_session_number()
-    assert session_5124.tclk.pause_trigger_master_session._session_number == test_session._vi
+    assert session_5124.tclk.ref_trigger_master_session._session_number == test_session.tclk._get_session_number()
+    assert session_5124.tclk.ref_trigger_master_session._session_number == test_session._vi
 
 
 def test_nitclk_vi_real64(session_5124):
@@ -414,7 +414,7 @@ def test_nitclk_error_handling():
         test_session_reference.exported_tclk_output_terminal = 'test'
         assert False
     except niscope.errors.DriverError as e:
-        assert e.code == -0
+        assert e.code == -250032
 
 
 
