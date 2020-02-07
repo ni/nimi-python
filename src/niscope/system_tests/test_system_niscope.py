@@ -14,12 +14,20 @@ daqmx_sim_5124_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5124.lock'
 daqmx_sim_5124_lock = fasteners.InterProcessLock(daqmx_sim_5124_lock_file)
 daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
 daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
-
+daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
+daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 @pytest.fixture(scope='function')
 def session():
     with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
         yield simulated_session
+
+
+@pytest.fixture(scope='function')
+def nitclk_session():
+    with daqmx_sim_db_lock:
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5122; BoardType:PXIe') as simulated_session:
+            yield simulated_session
 
 
 # Attribute tests
@@ -367,18 +375,19 @@ def test_configure_trigger_window(session):
     assert niscope.TriggerWindowMode.ENTERING == session.trigger_window_mode
 
 
-def test_nitclk_integration(session):
+# NI-TClk system tests - they use niscope so put them here
+def test_nitclk_integration(nitclk_session):
     assert type(session.tclk) == nitclk.SessionReference
 
 
-def test_nitclk_vi_string(session):
+def test_nitclk_vi_string(nitclk_session):
     # default is empty string
     assert session.tclk.exported_tclk_output_terminal == ''
     session.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
     assert session.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
 
 
-def test_nitclk_session_reference(session):
+def test_nitclk_session_reference(nitclk_session):
     test_session = niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe')
     session.tclk.pause_trigger_master_session = test_session
     # We need to look at the actual session number inside the class
@@ -388,7 +397,7 @@ def test_nitclk_session_reference(session):
     assert session.tclk.pause_trigger_master_session._session_number == test_session._vi
 
 
-def test_nitclk_vi_real64(session):
+def test_nitclk_vi_real64(nitclk_session):
     # default is 0
     assert session.tclk.sample_clock_delay == 0
     test_number = 4.2
