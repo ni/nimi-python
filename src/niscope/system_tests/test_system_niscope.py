@@ -1,6 +1,7 @@
 import fasteners
 import math
 import niscope
+import nitclk
 import numpy
 import os
 import pytest
@@ -364,5 +365,45 @@ def test_configure_trigger_window(session):
     session.configure_trigger_window('1', 0, 5, niscope.TriggerWindowMode.ENTERING, niscope.TriggerCoupling.DC)
     assert '1' == session.trigger_source
     assert niscope.TriggerWindowMode.ENTERING == session.trigger_window_mode
+
+
+def test_nitclk_integration(session):
+    assert type(session.tclk) == nitclk.SessionReference
+
+
+def test_nitclk_vi_string(session):
+    # default is empty string
+    assert session.tclk.exported_tclk_output_terminal == ''
+    session.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
+    assert session.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
+
+
+def test_nitclk_session_reference(session):
+    test_session = niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe')
+    session.tclk.pause_trigger_master_session = test_session
+    # We need to look at the actual session number inside the class
+    # we know the type returned from session.tclk.pause_trigger_master_session will be nitclk.SessionReference
+    # This test assumes knowledge of the class internals
+    assert session.tclk.pause_trigger_master_session._session_number == test_session.tclk._get_session_number()
+    assert session.tclk.pause_trigger_master_session._session_number == test_session._vi
+
+
+def test_nitclk_vi_real64(session):
+    # default is 0
+    assert session.tclk.sample_clock_delay == 0
+    test_number = 4.2
+    session.tclk.sample_clock_delay = test_number
+    assert session.tclk.sample_clock_delay == test_number
+
+
+def test_nitclk_error_handling():
+    test_session_reference = nitclk.SessionReference(42)  # Invalid session
+    try:
+        test_session_reference.exported_tclk_output_terminal = 'test'
+        assert False
+    except niscope.errors.DriverError as e:
+        assert e.code == -0
+
+
 
 
