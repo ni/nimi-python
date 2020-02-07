@@ -377,31 +377,31 @@ def test_configure_trigger_window(session):
 
 # NI-TClk system tests - they use niscope so put them here
 def test_nitclk_integration(nitclk_session):
-    assert type(session.tclk) == nitclk.SessionReference
+    assert type(nitclk_session.tclk) == nitclk.SessionReference
 
 
 def test_nitclk_vi_string(nitclk_session):
     # default is empty string
-    assert session.tclk.exported_tclk_output_terminal == ''
-    session.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
-    assert session.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
+    assert nitclk_session.tclk.exported_tclk_output_terminal == ''
+    nitclk_session.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
+    assert nitclk_session.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
 
 
 def test_nitclk_session_reference(nitclk_session):
     test_session = niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe')
-    session.tclk.pause_trigger_master_session = test_session
+    nitclk_session.tclk.pause_trigger_master_session = test_session
     # We need to look at the actual session number inside the class
     # we know the type returned from session.tclk.pause_trigger_master_session will be nitclk.SessionReference
     # This test assumes knowledge of the class internals
-    assert session.tclk.pause_trigger_master_session._session_number == test_session.tclk._get_session_number()
-    assert session.tclk.pause_trigger_master_session._session_number == test_session._vi
+    assert nitclk_session.tclk.pause_trigger_master_session._session_number == test_session.tclk._get_session_number()
+    assert nitclk_session.tclk.pause_trigger_master_session._session_number == test_session._vi
 
 
 def test_nitclk_vi_real64(nitclk_session):
     # default is 0
-    assert session.tclk.sample_clock_delay == 0
+    assert nitclk_session.tclk.sample_clock_delay == 0
     test_number = 4.2
-    session.tclk.sample_clock_delay = test_number
+    nitclk_session.tclk.sample_clock_delay = test_number
     assert session.tclk.sample_clock_delay == test_number
 
 
