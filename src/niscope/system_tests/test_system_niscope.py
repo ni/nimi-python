@@ -24,9 +24,16 @@ def session():
 
 
 @pytest.fixture(scope='function')
-def nitclk_session():
-    with daqmx_sim_db_lock:
-        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
+def session_5124():
+    with daqmx_sim_5124_lock:
+        with niscope.Session('5124') as simulated_session:
+            yield simulated_session
+
+
+@pytest.fixture(scope='function')
+def session_5142():
+    with daqmx_sim_5142_lock:
+        with niscope.Session('5142') as simulated_session:
             yield simulated_session
 
 
@@ -266,28 +273,26 @@ def test_configure_chan_characteristics(session):
     assert 50.0 == session.input_impedance
 
 
-def test_filter_coefficients():
-    with daqmx_sim_5142_lock:
-        with niscope.Session('5142') as session:  # filter coefficients methods are available on devices with OSP
-            assert [1.0] + [0.0] * 34 == session.get_equalization_filter_coefficients() # coefficients list should have 35 items
-            try:
-                filter_coefficients = [1.0, 0.0, 0.0]
-                session.configure_equalization_filter_coefficients(filter_coefficients)
-            except niscope.Error as e:
-                assert "Incorrect number of filter coefficients." in e.description
-                assert e.code == -1074135024
-            filter_coefficients = [0.01] * 35
-            try:
-                # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
-                #                     The bug is fixed in NI-SCOPE 20.0 which has not shipped at the time of this writing.
-                #                     The workaround is to explicitly pass a channel rather than the default "" to the driver runtime
-                #                     which should be equivalent to "all channels" (in the PXI-5142 case, that would be "0,1").
-                session.configure_equalization_filter_coefficients(filter_coefficients)
-                assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
-            except niscope.errors.DriverError as e:
-                assert e.code == -214202
-            session.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
-            assert filter_coefficients == session.get_equalization_filter_coefficients()
+def test_filter_coefficients(session_5142):
+    assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients() # coefficients list should have 35 items
+    try:
+        filter_coefficients = [1.0, 0.0, 0.0]
+        session_5142.configure_equalization_filter_coefficients(filter_coefficients)
+    except niscope.Error as e:
+        assert "Incorrect number of filter coefficients." in e.description
+        assert e.code == -1074135024
+    filter_coefficients = [0.01] * 35
+    try:
+        # TODO(marcoskirsch): The following should work. It doesn't due to internal NI-SCOPE driver bug 959625.
+        #                     The bug is fixed in NI-SCOPE 20.0 which has not shipped at the time of this writing.
+        #                     The workaround is to explicitly pass a channel rather than the default "" to the driver runtime
+        #                     which should be equivalent to "all channels" (in the PXI-5142 case, that would be "0,1").
+        session_5142.configure_equalization_filter_coefficients(filter_coefficients)
+        assert False, "Looks like NI-SCOPE bug 959625 has been fixed. You can now remove this try/except clause"
+    except niscope.errors.DriverError as e:
+        assert e.code == -214202
+    session_5142.channels[0].configure_equalization_filter_coefficients(filter_coefficients)
+    assert filter_coefficients == session_5142.get_equalization_filter_coefficients()
 
 
 def test_send_software_trigger_edge(session):
@@ -359,14 +364,12 @@ def test_configure_trigger_software(session):
     session.configure_trigger_software()
 
 
-def test_configure_trigger_video():
-    with daqmx_sim_5124_lock:
-        with niscope.Session('5124') as session:  # Unable to invoke configure_trigger_video method on 5164
-            session.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
-            assert niscope.VideoSignalFormat.PAL == session.tv_trigger_signal_format
-            assert niscope.VideoTriggerEvent.FIELD1 == session.tv_trigger_event
-            assert niscope.VideoPolarity.POSITIVE == session.tv_trigger_polarity
-            assert niscope.TriggerCoupling.DC == session.trigger_coupling
+def test_configure_trigger_video(session_5124):
+    session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
+    assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
+    assert niscope.VideoTriggerEvent.FIELD1 == session_5124.tv_trigger_event
+    assert niscope.VideoPolarity.POSITIVE == session_5124.tv_trigger_polarity
+    assert niscope.TriggerCoupling.DC == session_5124.trigger_coupling
 
 
 def test_configure_trigger_window(session):
@@ -376,18 +379,18 @@ def test_configure_trigger_window(session):
 
 
 # NI-TClk system tests - they use niscope so put them here
-def test_nitclk_integration(nitclk_session):
+def test_nitclk_integration(session_5124):
     assert type(nitclk_session.tclk) == nitclk.SessionReference
 
 
-def test_nitclk_vi_string(nitclk_session):
+def test_nitclk_vi_string(session_5124):
     # default is empty string
     assert nitclk_session.tclk.exported_tclk_output_terminal == ''
     nitclk_session.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
     assert nitclk_session.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
 
 
-def test_nitclk_session_reference(nitclk_session):
+def test_nitclk_session_reference(session_5124):
     test_session = niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe')
     nitclk_session.tclk.pause_trigger_master_session = test_session
     # We need to look at the actual session number inside the class
@@ -397,7 +400,7 @@ def test_nitclk_session_reference(nitclk_session):
     assert nitclk_session.tclk.pause_trigger_master_session._session_number == test_session._vi
 
 
-def test_nitclk_vi_real64(nitclk_session):
+def test_nitclk_vi_real64(session_5124):
     # default is 0
     assert nitclk_session.tclk.sample_clock_delay == 0
     test_number = 4.2
