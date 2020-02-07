@@ -40,7 +40,7 @@ def session_5142():
 @pytest.fixture(scope='function')
 def session_multiple_sessions():
     with daqmx_sim_5124_lock, daqmx_sim_5142_lock:
-        with niscope.Session('5142') as simulated_session_5124, niscope.Session('5142') as simulated_session_5142:
+        with niscope.Session('5124') as simulated_session_5124, niscope.Session('5142') as simulated_session_5142:
             yield [simulated_session_5124, simulated_session_5142]
 
 
