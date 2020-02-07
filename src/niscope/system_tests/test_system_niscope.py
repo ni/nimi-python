@@ -26,7 +26,7 @@ def session():
 @pytest.fixture(scope='function')
 def nitclk_session():
     with daqmx_sim_db_lock:
-        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5122; BoardType:PXIe') as simulated_session:
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
             yield simulated_session
 
 
