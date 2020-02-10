@@ -72,6 +72,8 @@ def test_nitclk_configure_for_homogeneous_triggers(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
 
 
+# TODO(texasaggie97) - Remove once we determine how to configure the session(s) for these functions
+@pytest.mark.skip(reason='Need to figure out how to configure in order to test these functions')
 def test_nitclk_sync_pulse_sender_synchronize(session_multiple_sessions):
     for session in session_multiple_sessions:
         session.tclk.sync_pulse_clock_source = 'PXI_CLK100'
