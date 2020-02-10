@@ -53,7 +53,7 @@ def test_nitclk_session_reference(session_5124):
 
 def test_nitclk_vi_real64(session_5124):
     # default is 0
-    assert session_5124.tclk.sample_clock_delay == 0
+    assert session_5124.tclk.sample_clock_delay.total_seconds() == 0
     test_number = 4.2
     session_5124.tclk.sample_clock_delay = test_number
     assert session_5124.tclk.sample_clock_delay.total_seconds() == test_number
