@@ -13,8 +13,8 @@ import threading
 _instance = None
 _instance_lock = threading.Lock()
 _library_info = {'Linux': {'64bit': {'name': 'niscope', 'type': 'cdll'}},
-                 'Windows': {'32bit': {'name': 'niscope_32.dll', 'type': 'windll'},
-                             '64bit': {'name': 'niscope_64.dll', 'type': 'cdll'}}}
+                 'Windows': {'32bit': {'name': 'niScope_32.dll', 'type': 'windll'},
+                             '64bit': {'name': 'niScope_64.dll', 'type': 'cdll'}}}
 
 
 def _get_library_name():

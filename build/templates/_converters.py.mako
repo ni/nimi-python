@@ -11,10 +11,7 @@ import ${module_name}.errors as errors
 import datetime
 import numbers
 
-try:
-    from functools import singledispatch  # Python 3.4+
-except ImportError:
-    from singledispatch import singledispatch  # Python 2.7
+from functools import singledispatch
 
 
 @singledispatch
@@ -214,6 +211,10 @@ def convert_init_with_options_dictionary(values, encoding):
     return init_with_options_string
 
 
+<%
+# nitclk is different. Only nitclk needs to be able to convert sessions like this
+%>\
+% if config['module_name'] == 'nitclk':
 # nitclk specific converters
 def convert_to_nitclk_session_number(item):
     '''Convert from supported objects to NI-TClk Session Num
@@ -221,20 +222,18 @@ def convert_to_nitclk_session_number(item):
     Supported objects are:
     - class with .tclk object of type nitclk.SessionReference
     - nitclk.SessionReference
-    - NI-TClk Session Num
     '''
     try:
-        return item.tclk._get_session_number()
+        return item.tclk._get_tclk_session_reference()
     except AttributeError:
         pass
 
     try:
-        return item._get_session_number()
+        return item._get_tclk_session_reference()
     except AttributeError:
         pass
 
-    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
-    return item
+    raise TypeError('Unsupported type for nitclk session: {}'.format(type(item)))
 
 
 def convert_to_nitclk_session_number_list(item_list):
@@ -242,11 +241,17 @@ def convert_to_nitclk_session_number_list(item_list):
     return [convert_to_nitclk_session_number(i) for i in item_list]
 
 
+% endif
+<%
+# This converter is only needed for nifake testing
+%>\
+% if config['module_name'] == 'nifake':
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
 
 
+% endif
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
     assert convert_init_with_options_dictionary('', 'ascii') == ''
