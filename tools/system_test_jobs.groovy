@@ -86,6 +86,9 @@ echo ^<testsuite errors="0" failures="0" skipped="0" tests="0"^> >> generated\\j
 echo ^</testsuite^> >> generated\\junit\\junit-empty.xml
 echo ^</testsuites^> >> generated\\junit\\junit-empty.xml
 
+IF EXIST src\\${driver}\\system_tests echo Running system tests for ${driver} on ${platform}
+IF EXIST src\\${driver}\\system_tests tools\\system_tests.bat ${driver}
+IF NOT EXIST src\\${driver}\\system_tests echo System test folder does not exist, skipping system tests for ${driver}
 """)
             }
         }
