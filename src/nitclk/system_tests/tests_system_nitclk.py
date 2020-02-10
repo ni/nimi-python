@@ -56,7 +56,7 @@ def test_nitclk_vi_real64(session_5124):
     assert session_5124.tclk.sample_clock_delay == 0
     test_number = 4.2
     session_5124.tclk.sample_clock_delay = test_number
-    assert session_5124.tclk.sample_clock_delay == test_number
+    assert session_5124.tclk.sample_clock_delay.total_seconds() == test_number
 
 
 def test_nitclk_error_handling():
