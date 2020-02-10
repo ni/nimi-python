@@ -51,7 +51,10 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
 
 
 class SessionReference(object):
-    '''Properties container for NI-TClk attributes.'''
+    '''Properties container for NI-TClk attributes.
+
+    Note: Constructing this class is an advanced use case and should not be needed in most circumstances.
+    '''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -112,7 +115,7 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
         except errors.Error:
             return "Failed to retrieve error description."
 
-    def _get_session_number(self):
+    def _get_tclk_session_reference(self):
         return self._${config['session_handle_parameter_name']}
 
 <%

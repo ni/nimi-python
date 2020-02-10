@@ -160,7 +160,7 @@ configure_for_homogeneous_triggers
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
 
 finish_sync_pulse_sender_synchronize
 ------------------------------------
@@ -169,7 +169,7 @@ finish_sync_pulse_sender_synchronize
 
     .. py:function:: finish_sync_pulse_sender_synchronize(sessions, min_time=datetime.timedelta(seconds=0.0))
 
-        TBD
+        Finishes synchronizing the Sync Pulse Sender.
 
         
 
@@ -183,7 +183,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (nimi-python Session class or nitclk.SessionReference)
         :param min_time:
 
 
@@ -224,7 +224,7 @@ initiate
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
 
 is_done
 -------
@@ -248,7 +248,7 @@ is_done
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
 
         :rtype: bool
         :return:
@@ -269,7 +269,7 @@ setup_for_sync_pulse_sender_synchronize
 
     .. py:function:: setup_for_sync_pulse_sender_synchronize(sessions, min_time=datetime.timedelta(seconds=0.0))
 
-        TBD
+        Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
         
 
@@ -283,7 +283,7 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
         :param min_time:
 
 
@@ -325,7 +325,7 @@ synchronize
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
         :param min_tclk_period:
 
 
@@ -348,7 +348,7 @@ synchronize_to_sync_pulse_sender
 
     .. py:function:: synchronize_to_sync_pulse_sender(sessions, min_time=datetime.timedelta(seconds=0.0))
 
-        TBD
+        Synchronizes the other devices to the Sync Pulse Sender.
 
         
 
@@ -362,7 +362,7 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
         :param min_time:
 
 
@@ -406,7 +406,7 @@ wait_until_done
             
 
 
-        :type sessions: list of list of int, list of nimi-python Session class, list of SessionReference
+        :type sessions: list of (Driver Session or nitclk.SessionReference)
         :param timeout:
 
 
@@ -430,9 +430,10 @@ SessionReference
     any nimi-python Session class tclk attribute when the driver supports NI-TClk
 
     .. code:: python
-
         with niscope.Session('dev1') as session:
             session.tclk.sample_clock_delay = .42
+
+    ..note:: Constructing this class is an advanced use case and should not be needed in most circumstances.
 
     :param session_number:
         nitclk session
@@ -527,17 +528,17 @@ pause_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
+            +----------------+-------------------------------------------+
+            | Characteristic | Value                                     |
+            +================+===========================================+
+            | Datatype       | Driver Session or nitclk.SessionReference |
+            +----------------+-------------------------------------------+
+            | Permissions    | read-write                                |
+            +----------------+-------------------------------------------+
+            | Channel Based  | No                                        |
+            +----------------+-------------------------------------------+
+            | Resettable     | No                                        |
+            +----------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -557,17 +558,17 @@ ref_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
+            +----------------+-------------------------------------------+
+            | Characteristic | Value                                     |
+            +================+===========================================+
+            | Datatype       | Driver Session or nitclk.SessionReference |
+            +----------------+-------------------------------------------+
+            | Permissions    | read-write                                |
+            +----------------+-------------------------------------------+
+            | Channel Based  | No                                        |
+            +----------------+-------------------------------------------+
+            | Resettable     | No                                        |
+            +----------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -627,17 +628,17 @@ sequencer_flag_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
+            +----------------+-------------------------------------------+
+            | Characteristic | Value                                     |
+            +================+===========================================+
+            | Datatype       | Driver Session or nitclk.SessionReference |
+            +----------------+-------------------------------------------+
+            | Permissions    | read-write                                |
+            +----------------+-------------------------------------------+
+            | Channel Based  | No                                        |
+            +----------------+-------------------------------------------+
+            | Resettable     | No                                        |
+            +----------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -657,17 +658,17 @@ start_trigger_master_session
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------------------------------------------+
-            | Characteristic | Value                                                                      |
-            +================+============================================================================+
-            | Datatype       | nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number |
-            +----------------+----------------------------------------------------------------------------+
-            | Permissions    | read-write                                                                 |
-            +----------------+----------------------------------------------------------------------------+
-            | Channel Based  | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
-            | Resettable     | No                                                                         |
-            +----------------+----------------------------------------------------------------------------+
+            +----------------+-------------------------------------------+
+            | Characteristic | Value                                     |
+            +================+===========================================+
+            | Datatype       | Driver Session or nitclk.SessionReference |
+            +----------------+-------------------------------------------+
+            | Permissions    | read-write                                |
+            +----------------+-------------------------------------------+
+            | Channel Based  | No                                        |
+            +----------------+-------------------------------------------+
+            | Resettable     | No                                        |
+            +----------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

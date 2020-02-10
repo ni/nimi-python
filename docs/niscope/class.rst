@@ -436,12 +436,14 @@ configure_horizontal_timing
 
 
                 The minimum number of points you need in the record for each channel;
-                call :py:meth:`niscope.Session.actual_record_length` to obtain the actual record length
+                call :py:meth:`niscope.Session.ActualRecordLength` to obtain the actual record length
                 used.
 
                 Valid Values: Greater than 1; limited by available memory
 
                 
+
+                .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
             :type min_num_pts: int
@@ -2065,7 +2067,7 @@ acquisition_start_time
 
     .. py:attribute:: acquisition_start_time
 
-        Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  :py:attr:`niscope.Session.trigger_delay_time`).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  :py:attr:`niscope.Session.horz_record_ref_position`).
+        Specifies the length of time from the trigger event to the first point in the waveform record in seconds.  If the value is positive, the first point in the waveform record occurs after the trigger event (same as specifying :py:attr:`niscope.Session.trigger_delay_time`).  If the value is negative, the first point in the waveform record occurs before the trigger event (same as specifying :py:attr:`niscope.Session.horz_record_ref_position`).
 
         The following table lists the characteristics of this property.
 
@@ -2119,7 +2121,7 @@ acq_arm_source
 
     .. py:attribute:: acq_arm_source
 
-        Specifies the source the digitizer monitors for a start (acquisition arm) trigger.   When the start trigger is received, the digitizer begins acquiring pretrigger  samples.
+        Specifies the source the digitizer monitors for a start (acquisition arm) trigger.  When the start trigger is received, the digitizer begins acquiring pretrigger samples.
         Valid Values:
         :py:data:`~niscope.NISCOPE_VAL_IMMEDIATE`     ('VAL_IMMEDIATE')    - Triggers immediately
         :py:data:`~niscope.NISCOPE_VAL_RTSI_0`        ('VAL_RTSI_0')       - RTSI 0
@@ -2163,7 +2165,7 @@ adv_trig_src
 
     .. py:attribute:: adv_trig_src
 
-        Specifies the source the digitizer monitors for an advance trigger.   When the advance trigger is received, the digitizer begins acquiring pretrigger  samples.
+        Specifies the source the digitizer monitors for an advance trigger.  When the advance trigger is received, the digitizer begins acquiring pretrigger samples.
 
         The following table lists the characteristics of this property.
 
@@ -2190,7 +2192,7 @@ allow_more_records_than_memory
 
     .. py:attribute:: allow_more_records_than_memory
 
-        Indicates whether more records can be configured with :py:meth:`niscope.Session.configure_horizontal_timing`  than fit in the onboard memory. If this property is set to True, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch method  if you attempt to fetch a record that has been overwritten.
+        Indicates whether more records can be configured with :py:meth:`niscope.Session.configure_horizontal_timing` than fit in the onboard memory. If this property is set to True, it is necessary to fetch records while the acquisition is in progress.  Eventually, some of the records will be overwritten.  An error is returned from the fetch method if you attempt to fetch a record that has been overwritten.
 
         The following table lists the characteristics of this property.
 
@@ -2217,7 +2219,7 @@ arm_ref_trig_src
 
     .. py:attribute:: arm_ref_trig_src
 
-        Specifies the source the digitizer monitors for an arm reference trigger.   When the arm reference trigger is received, the digitizer begins looking for a  reference (stop) trigger from the user-configured trigger source.
+        Specifies the source the digitizer monitors for an arm reference trigger.  When the arm reference trigger is received, the digitizer begins looking for a reference (stop) trigger from the user-configured trigger source.
 
         The following table lists the characteristics of this property.
 
@@ -2244,7 +2246,7 @@ backlog
 
     .. py:attribute:: backlog
 
-        Returns the number of samples (:py:attr:`niscope.Session.points_done`) that have been acquired but not fetched  for the record specified by :py:attr:`niscope.Session.fetch_record_number`.
+        Returns the number of samples (:py:attr:`niscope.Session.points_done`) that have been acquired but not fetched for the record specified by :py:attr:`niscope.Session.fetch_record_number`.
 
         The following table lists the characteristics of this property.
 
@@ -2341,7 +2343,7 @@ cable_sense_mode
 
     .. py:attribute:: cable_sense_mode
 
-        Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the :py:meth:`niscope.Session.cable_sense_signal_start` method is called.
+        Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the :py:meth:`niscope.Session.CableSenseSignalStart` method is called.
 
         Device-Specific Behavior:
             PXIe-5160/5162
@@ -2363,6 +2365,8 @@ cable_sense_mode
         +-----------------------+
 
         .. note:: the input impedance of the channel(s) to convey the CableSense signal must be set to 50 ohms.
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -2454,7 +2458,7 @@ channel_count
 
     .. py:attribute:: channel_count
 
-        Indicates the number of channels that the specific instrument driver  supports.
+        Indicates the number of channels that the specific instrument driver supports.
         For channel-based properties, the IVI engine maintains a separate cache value for each channel.
 
         The following table lists the characteristics of this property.
@@ -2648,35 +2652,6 @@ device_temperature
 
         Returns the temperature of the device in degrees Celsius from the onboard sensor.
 
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | float     |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device:Temperature**
-                - C Attribute: **NISCOPE_ATTR_DEVICE_TEMPERATURE**
-
-driver_setup
-------------
-
-    .. py:attribute:: driver_setup
-
-        This property indicates the Driver Setup string that the user  specified when initializing the driver.
-        Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  :py:meth:`niscope.Session.__init__`, or through the IVI Configuration Utility.
-        If the user does not specify a Driver Setup string, this property returns an empty string.
-
 
 
 
@@ -2687,14 +2662,14 @@ driver_setup
 
             .. code:: python
 
-                var = session.channels[0,1].driver_setup
+                var = session.channels[0,1].device_temperature
 
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
             | Characteristic | Value     |
             +================+===========+
-            | Datatype       | str       |
+            | Datatype       | float     |
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
@@ -2706,7 +2681,8 @@ driver_setup
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - C Attribute: **NISCOPE_ATTR_DRIVER_SETUP**
+                - LabVIEW Property: **Device:Temperature**
+                - C Attribute: **NISCOPE_ATTR_DEVICE_TEMPERATURE**
 
 enabled_channels
 ----------------
@@ -2722,18 +2698,6 @@ enabled_channels
 
         Refer to Channel String Syntax in the NI High-Speed Digitizers Help for more information on the effects of channel order in NI-SCOPE.
 
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].enabled_channels
-
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -2743,9 +2707,9 @@ enabled_channels
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | Yes       |
+            | Channel Based  | No        |
             +----------------+-----------+
-            | Resettable     | Yes       |
+            | Resettable     | No        |
             +----------------+-----------+
 
         .. tip::
@@ -2788,7 +2752,7 @@ enable_time_interleaved_sampling
 
     .. py:attribute:: enable_time_interleaved_sampling
 
-        Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel  enabling a higher maximum real-time sampling rate.
+        Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel enabling a higher maximum real-time sampling rate.
         Valid Values:
         True  (1) - Use multiple interleaved ADCs on this channel
         False (0) - Use only this channel's ADC to acquire data for this channel
@@ -2920,7 +2884,7 @@ equalization_filter_enabled
 
     .. py:attribute:: equalization_filter_enabled
 
-        Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside  of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients  should be between +1 and -1 in value.
+        Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
 
 
@@ -2960,7 +2924,7 @@ equalization_num_coefficients
 
     .. py:attribute:: equalization_num_coefficients
 
-        Returns the number of coefficients that the FIR filter can accept.  This filter is designed  to compensate the input signal for artifacts introduced to the signal outside of the digitizer.   However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be  between +1 and -1 in value.
+        Returns the number of coefficients that the FIR filter can accept.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer.  However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
 
 
@@ -2999,7 +2963,7 @@ exported_advance_trigger_output_terminal
 
     .. py:attribute:: exported_advance_trigger_output_terminal
 
-        Specifies the destination to export the advance trigger.   When the advance trigger is received, the digitizer begins acquiring  samples for the Nth record.
+        Specifies the destination to export the advance trigger.  When the advance trigger is received, the digitizer begins acquiring samples for the Nth record.
         Consult your device documentation for a specific list of valid destinations.
 
         The following table lists the characteristics of this property.
@@ -3055,7 +3019,7 @@ exported_start_trigger_output_terminal
 
     .. py:attribute:: exported_start_trigger_output_terminal
 
-        Specifies the destination to export the Start trigger.   When the start trigger is received, the digitizer begins acquiring  samples.
+        Specifies the destination to export the Start trigger.  When the start trigger is received, the digitizer begins acquiring samples.
         Consult your device documentation for a specific list of valid destinations.
 
         The following table lists the characteristics of this property.
@@ -3243,6 +3207,19 @@ high_pass_filter_frequency
         **Related topics:**
         `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].high_pass_filter_frequency = var
+                var = session.channels[0,1].high_pass_filter_frequency
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3252,7 +3229,7 @@ high_pass_filter_frequency
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3268,7 +3245,7 @@ horz_enforce_realtime
 
     .. py:attribute:: horz_enforce_realtime
 
-        Indicates whether the digitizer enforces real-time measurements  or allows equivalent-time measurements.
+        Indicates whether the digitizer enforces real-time measurements or allows equivalent-time measurements.
 
         The following table lists the characteristics of this property.
 
@@ -3295,7 +3272,7 @@ horz_min_num_pts
 
     .. py:attribute:: horz_min_num_pts
 
-        Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. :py:attr:`niscope.Session.horz_record_length` returns the actual record length.
+        Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses for waveform acquisition. :py:attr:`niscope.Session.horz_record_length` returns the actual record length.
         Valid Values: 1 - available onboard memory
 
         The following table lists the characteristics of this property.
@@ -3323,7 +3300,7 @@ horz_num_records
 
     .. py:attribute:: horz_num_records
 
-        Specifies the number of records to acquire. Can be used for multi-record acquisition  and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
+        Specifies the number of records to acquire. Can be used for multi-record acquisition and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
 
         The following table lists the characteristics of this property.
 
@@ -3350,8 +3327,8 @@ horz_record_length
 
     .. py:attribute:: horz_record_length
 
-        Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  :py:attr:`niscope.Session.horz_min_num_pts`.
-        Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch methods. This property is only valid after a call to the one of the  Configure Horizontal methods.
+        Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with :py:attr:`niscope.Session.horz_min_num_pts`.
+        Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of the Read and Fetch methods. This property is only valid after a call to the one of the Configure Horizontal methods.
 
         The following table lists the characteristics of this property.
 
@@ -3378,7 +3355,7 @@ horz_record_ref_position
 
     .. py:attribute:: horz_record_ref_position
 
-        Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  :py:attr:`niscope.Session.trigger_delay_time` property specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
+        Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the :py:attr:`niscope.Session.trigger_delay_time` property specifies. The event that occurs when the delay time elapses is the Reference Event. The Reference Event is relative to the start of the record and is a percentage of the record length. For example, the value 50.0 corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
         Valid Values: 0.0 - 100.0
 
         The following table lists the characteristics of this property.
@@ -3462,7 +3439,7 @@ input_clock_source
 
     .. py:attribute:: input_clock_source
 
-        Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock  for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source  of the board clock.
+        Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source of the board clock.
 
         The following table lists the characteristics of this property.
 
@@ -3529,7 +3506,19 @@ instrument_firmware_revision
 
     .. py:attribute:: instrument_firmware_revision
 
-        A string that contains the firmware revision information  for the instrument you are currently using.
+        A string that contains the firmware revision information for the instrument you are currently using.
+
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].instrument_firmware_revision
 
         The following table lists the characteristics of this property.
 
@@ -3540,7 +3529,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3620,6 +3609,17 @@ interleaving_offset_correction_enabled
 
         .. note:: If disabled, warranted specifications are not guaranteed.
 
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].interleaving_offset_correction_enabled = var
+                var = session.channels[0,1].interleaving_offset_correction_enabled
+
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -3629,7 +3629,7 @@ interleaving_offset_correction_enabled
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | No         |
+            | Channel Based  | Yes        |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -3645,8 +3645,8 @@ io_resource_descriptor
 
     .. py:attribute:: io_resource_descriptor
 
-        Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-        If you initialize the instrument driver with the resource descriptor, this property contains that  value.You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session.__init__`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+        Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
+        If you initialize the instrument driver with the resource descriptor, this property contains that value.You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session.__init__`. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a virtual instrument section in the IVI Configuration file. The virtual instrument section specifies a physical device and initial user options.
 
 
 
@@ -3672,12 +3672,45 @@ io_resource_descriptor
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Resource Descriptor**
                 - C Attribute: **NISCOPE_ATTR_IO_RESOURCE_DESCRIPTOR**
 
+is_probe_comp_on
+----------------
+
+    .. py:attribute:: is_probe_comp_on
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].is_probe_comp_on
+
+        The following table lists the characteristics of this property.
+
+            +----------------+-----------+
+            | Characteristic | Value     |
+            +================+===========+
+            | Datatype       | bool      |
+            +----------------+-----------+
+            | Permissions    | read only |
+            +----------------+-----------+
+            | Channel Based  | Yes       |
+            +----------------+-----------+
+            | Resettable     | No        |
+            +----------------+-----------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_IS_PROBE_COMP_ON**
+
 logical_name
 ------------
 
     .. py:attribute:: logical_name
 
-        A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session.__init__`. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+        A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to :py:meth:`niscope.Session.Init` or :py:meth:`niscope.Session.__init__`. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a virtual instrument section in the IVI Configuration file. The virtual instrument section specifies a physical device and initial user options.
 
 
 
@@ -3708,7 +3741,7 @@ master_enable
 
     .. py:attribute:: master_enable
 
-        Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this property to False.
+        Specifies whether you want the device to be a master or a slave. The master typically originates the trigger signal and clock sync pulse. For a standalone device, set this property to False.
 
         The following table lists the characteristics of this property.
 
@@ -3735,7 +3768,7 @@ max_input_frequency
 
     .. py:attribute:: max_input_frequency
 
-        Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
+        Specifies the bandwidth of the channel. Express this value as the frequency at which the input circuitry attenuates the input signal by 3 dB. The units are hertz.
         Defined Values:
         :py:data:`~niscope.NISCOPE_VAL_BANDWIDTH_FULL` (-1.0)
         :py:data:`~niscope.NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT` (0.0)
@@ -3840,7 +3873,11 @@ min_sample_rate
 
         Specify the sampling rate for the acquisition in Samples per second.
         Valid Values:
-        The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in :py:meth:`niscope.Session.configure_acquisition` and not require more memory than the  onboard memory module allows.
+        The combination of sampling rate and min record length must allow the digitizer to sample at a valid sampling rate for the acquisition type specified in :py:meth:`niscope.Session.ConfigureAcquisition` and not require more memory than the onboard memory module allows.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -3869,6 +3906,18 @@ onboard_memory_size
 
         Returns the total combined amount of onboard memory for all channels in bytes.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].onboard_memory_size
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -3878,7 +3927,7 @@ onboard_memory_size
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3923,6 +3972,18 @@ pll_lock_status
 
         If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].pll_lock_status
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -3932,7 +3993,7 @@ pll_lock_status
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3975,20 +4036,7 @@ poll_interval
 
     .. py:attribute:: poll_interval
 
-        Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].poll_interval = var
-                var = session.channels[0,1].poll_interval
+        Specifies the poll interval in milliseconds to use during RIS acquisitions to check whether the acquisition is complete.
 
         The following table lists the characteristics of this property.
 
@@ -3999,7 +4047,7 @@ poll_interval
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | Yes        |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -4051,32 +4099,6 @@ probe_attenuation
                 - LabVIEW Property: **Vertical:Probe Attenuation**
                 - C Attribute: **NISCOPE_ATTR_PROBE_ATTENUATION**
 
-product_code
-------------
-
-    .. py:attribute:: product_code
-
-        
-
-        The following table lists the characteristics of this property.
-
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - C Attribute: **NISCOPE_ATTR_PRODUCT_CODE**
-
 ready_for_advance_event_output_terminal
 ---------------------------------------
 
@@ -4110,7 +4132,7 @@ ready_for_ref_event_output_terminal
 
     .. py:attribute:: ready_for_ref_event_output_terminal
 
-        Specifies the destination for the Ready for Reference Event.   When this event is asserted, the digitizer is ready to receive a reference trigger.
+        Specifies the destination for the Ready for Reference Event.  When this event is asserted, the digitizer is ready to receive a reference trigger.
         Consult your device documentation for a specific list of valid destinations.
 
         The following table lists the characteristics of this property.
@@ -4138,7 +4160,7 @@ ready_for_start_event_output_terminal
 
     .. py:attribute:: ready_for_start_event_output_terminal
 
-        Specifies the destination for the Ready for Start Event.   When this event is asserted, the digitizer is ready to receive a start trigger.
+        Specifies the destination for the Ready for Start Event.  When this event is asserted, the digitizer is ready to receive a start trigger.
         Consult your device documentation for a specific list of valid destinations.
 
         The following table lists the characteristics of this property.
@@ -4274,7 +4296,7 @@ ref_trigger_minimum_quiet_time
 
     .. py:attribute:: ref_trigger_minimum_quiet_time
 
-        The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This property is useful for triggering at the beginning and not in the  middle of signal bursts.
+        The amount of time the trigger circuit must not detect a signal above the trigger level before the trigger is armed.  This property is useful for triggering at the beginning and not in the middle of signal bursts.
 
         The following table lists the characteristics of this property.
 
@@ -4385,7 +4407,7 @@ ris_method
 
     .. py:attribute:: ris_method
 
-        Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of :py:attr:`niscope.Session.max_real_time_sampling_rate`.
+        Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the value of :py:attr:`niscope.Session.max_real_time_sampling_rate`.
 
         The following table lists the characteristics of this property.
 
@@ -4412,7 +4434,7 @@ ris_num_averages
 
     .. py:attribute:: ris_num_averages
 
-        The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
+        The number of averages for each bin in an RIS acquisition.  The number of averages times the oversampling factor is the minimum number of real-time acquisitions necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because the trigger times are not evenly spaced, so adjacent points in the reconstructed waveform not be accurately spaced.  By averaging, the errors in both time and voltage are smoothed.
 
         The following table lists the characteristics of this property.
 
@@ -4726,7 +4748,7 @@ samp_clk_timebase_src
 
     .. py:attribute:: samp_clk_timebase_src
 
-        Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  :py:attr:`niscope.Session.min_sample_rate` (for internal sources) or the :py:attr:`niscope.Session.samp_clk_timebase_div` (for external sources).
+        Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the :py:attr:`niscope.Session.min_sample_rate` (for internal sources) or the :py:attr:`niscope.Session.samp_clk_timebase_div` (for external sources).
 
         The following table lists the characteristics of this property.
 
@@ -4755,6 +4777,18 @@ serial_number
 
         Returns the serial number of the device.
 
+
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            niscope.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].serial_number
+
         The following table lists the characteristics of this property.
 
             +----------------+-----------+
@@ -4764,7 +4798,7 @@ serial_number
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4866,22 +4900,22 @@ simulate
 
     .. py:attribute:: simulate
 
-        Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-        The default value is False.   Use the :py:meth:`niscope.Session.__init__`  method to override this value.
+        Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver methods perform range checking and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver methods return calculated values.
+        The default value is False.  Use the :py:meth:`niscope.Session.__init__` method to override this value.
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4894,7 +4928,7 @@ specific_driver_description
 
     .. py:attribute:: specific_driver_description
 
-        A string that contains a brief description of the specific  driver
+        A string that contains a brief description of the specific driver
 
         The following table lists the characteristics of this property.
 
@@ -4921,7 +4955,7 @@ specific_driver_revision
 
     .. py:attribute:: specific_driver_revision
 
-        A string that contains additional version information about this  instrument driver.
+        A string that contains additional version information about this instrument driver.
 
         The following table lists the characteristics of this property.
 
@@ -4975,22 +5009,9 @@ start_to_ref_trigger_holdoff
 
     .. py:attribute:: start_to_ref_trigger_holdoff
 
-        Pass the length of time you want the digitizer to wait after it starts acquiring  data until the digitizer enables the trigger system to detect a reference (stop) trigger.
+        Pass the length of time you want the digitizer to wait after it starts acquiring data until the digitizer enables the trigger system to detect a reference (stop) trigger.
         Units: Seconds
         Valid Values: 0.0 - 171.8
-
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].start_to_ref_trigger_holdoff = var
-                var = session.channels[0,1].start_to_ref_trigger_holdoff
 
         The following table lists the characteristics of this property.
 
@@ -5001,7 +5022,7 @@ start_to_ref_trigger_holdoff
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
+            | Channel Based  | No                                     |
             +----------------+----------------------------------------+
             | Resettable     | Yes                                    |
             +----------------+----------------------------------------+
@@ -5044,7 +5065,7 @@ trigger_auto_triggered
 
     .. py:attribute:: trigger_auto_triggered
 
-        Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered property to find out if the last acquisition was triggered.
+        Specifies if the last acquisition was auto triggered.  You can use the Auto Triggered property to find out if the last acquisition was triggered.
 
         The following table lists the characteristics of this property.
 
@@ -5071,7 +5092,7 @@ trigger_coupling
 
     .. py:attribute:: trigger_coupling
 
-        Specifies how the digitizer couples the trigger source. This property affects instrument operation only when  :py:attr:`niscope.Session.trigger_type` is set to :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
+        Specifies how the digitizer couples the trigger source. This property affects instrument operation only when :py:attr:`niscope.Session.trigger_type` is set to :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
 
         The following table lists the characteristics of this property.
 
@@ -5098,7 +5119,7 @@ trigger_delay_time
 
     .. py:attribute:: trigger_delay_time
 
-        Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
+        Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
         Valid Values: 0.0 - 171.8
 
         The following table lists the characteristics of this property.
@@ -5126,7 +5147,7 @@ trigger_holdoff
 
     .. py:attribute:: trigger_holdoff
 
-        Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This property affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to :py:meth:`niscope.Session.configure_horizontal_timing`.
+        Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before enabling the trigger subsystem to detect another trigger. This property affects instrument operation only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a multi-record acquisition through a call to :py:meth:`niscope.Session.configure_horizontal_timing`.
         Valid Values: 0.0 - 171.8
 
         The following table lists the characteristics of this property.
@@ -5154,7 +5175,7 @@ trigger_hysteresis
 
     .. py:attribute:: trigger_hysteresis
 
-        Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify  with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.
+        Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.
 
         The following table lists the characteristics of this property.
 
@@ -5211,9 +5232,9 @@ trigger_level
 
     .. py:attribute:: trigger_level
 
-        Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the :py:attr:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
+        Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the :py:attr:`niscope.Session.trigger_type` is set to :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
         Valid Values:
-        The values of the range and offset parameters in :py:meth:`niscope.Session.configure_vertical` determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
+        The values of the range and offset parameters in :py:meth:`niscope.Session.configure_vertical` determine the valid range for the trigger level on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
 
         The following table lists the characteristics of this property.
 
@@ -5270,7 +5291,7 @@ trigger_slope
 
     .. py:attribute:: trigger_slope
 
-        Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when :py:attr:`niscope.Session.trigger_type` is set to  :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
+        Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when :py:attr:`niscope.Session.trigger_type` is set to :py:data:`~niscope.TriggerType.EDGE`, :py:data:`~niscope.TriggerType.HYSTERESIS`, or :py:data:`~niscope.TriggerType.WINDOW`.
 
         The following table lists the characteristics of this property.
 
@@ -5351,10 +5372,10 @@ trigger_window_high_level
 
     .. py:attribute:: trigger_window_high_level
 
-        Pass the upper voltage threshold you want the digitizer to use for  window triggering.
-        The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:attr:`niscope.Session.trigger_window_low_level` and :py:attr:`niscope.Session.trigger_window_high_level`
+        Pass the upper voltage threshold you want the digitizer to use for window triggering.
+        The digitizer triggers when the trigger signal enters or leaves the window you specify with :py:attr:`niscope.Session.trigger_window_low_level` and :py:attr:`niscope.Session.trigger_window_high_level`
         Valid Values:
-        The values of the Vertical Range and Vertical Offset parameters in  :py:meth:`niscope.Session.configure_vertical` determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter  must meet the following conditions.
+        The values of the Vertical Range and Vertical Offset parameters in :py:meth:`niscope.Session.configure_vertical` determine the valid range for the High Window Level on the channel you use as the Trigger Source parameter in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter must meet the following conditions.
         High Trigger Level <= Vertical Range/2 + Vertical Offset
         High Trigger Level >= (-Vertical Range/2) + Vertical Offset
         High Trigger Level > Low Trigger Level
@@ -5388,11 +5409,11 @@ trigger_window_low_level
 
     .. py:attribute:: trigger_window_low_level
 
-        Pass the lower voltage threshold you want the digitizer to use for  window triggering.
-        The digitizer triggers when the trigger signal enters or leaves  the window you specify with :py:attr:`niscope.Session.trigger_window_low_level` and :py:attr:`niscope.Session.trigger_window_high_level`.
+        Pass the lower voltage threshold you want the digitizer to use for window triggering.
+        The digitizer triggers when the trigger signal enters or leaves the window you specify with :py:attr:`niscope.Session.trigger_window_low_level` and :py:attr:`niscope.Session.trigger_window_high_level`.
         Units: Volts
         Valid Values:
-        The values of the Vertical Range and Vertical Offset parameters in  :py:meth:`niscope.Session.configure_vertical` determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter  must meet the following conditions.
+        The values of the Vertical Range and Vertical Offset parameters in :py:meth:`niscope.Session.configure_vertical` determine the valid range for the Low Window Level on the channel you use as the Trigger Source parameter in :py:meth:`niscope.Session.ConfigureTriggerSource`.  The value you pass for this parameter must meet the following conditions.
         Low Trigger Level <= Vertical Range/2 + Vertical Offset
         Low Trigger Level >= (-Vertical Range/2) + Vertical Offset
         Low Trigger Level < High Trigger Level
@@ -5426,7 +5447,7 @@ trigger_window_mode
 
     .. py:attribute:: trigger_window_mode
 
-        Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  :py:attr:`niscope.Session.trigger_window_low_level`, or :py:attr:`niscope.Session.trigger_window_high_level`.
+        Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by :py:attr:`niscope.Session.trigger_window_low_level`, or :py:attr:`niscope.Session.trigger_window_high_level`.
 
         The following table lists the characteristics of this property.
 
@@ -5480,7 +5501,7 @@ tv_trigger_line_number
 
     .. py:attribute:: tv_trigger_line_number
 
-        Specifies the line on which to trigger, if :py:attr:`niscope.Session.tv_trigger_event` is set to line number. The  valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
+        Specifies the line on which to trigger, if :py:attr:`niscope.Session.tv_trigger_event` is set to line number. The valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of 1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
 
         The following table lists the characteristics of this property.
 
@@ -5536,19 +5557,6 @@ tv_trigger_signal_format
 
         Specifies the type of video signal, such as NTSC, PAL, or SECAM.
 
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].tv_trigger_signal_format = var
-                var = session.channels[0,1].tv_trigger_signal_format
-
         The following table lists the characteristics of this property.
 
             +----------------+-------------------------+
@@ -5558,7 +5566,7 @@ tv_trigger_signal_format
             +----------------+-------------------------+
             | Permissions    | read-write              |
             +----------------+-------------------------+
-            | Channel Based  | Yes                     |
+            | Channel Based  | No                      |
             +----------------+-------------------------+
             | Resettable     | Yes                     |
             +----------------+-------------------------+
@@ -5568,6 +5576,32 @@ tv_trigger_signal_format
 
                 - LabVIEW Property: **Triggering:Trigger Video:Signal Format**
                 - C Attribute: **NISCOPE_ATTR_TV_TRIGGER_SIGNAL_FORMAT**
+
+use_spec_initial_x
+------------------
+
+    .. py:attribute:: use_spec_initial_x
+
+        
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - C Attribute: **NISCOPE_ATTR_USE_SPEC_INITIAL_X**
 
 vertical_coupling
 -----------------
@@ -5657,7 +5691,7 @@ vertical_range
     .. py:attribute:: vertical_range
 
         Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
-        Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced  up to the next valid range.
+        Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced up to the next valid range.
 
 
 
@@ -5699,19 +5733,6 @@ width_condition
 
         Specifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the :py:attr:`niscope.Session.width_low_threshold` and :py:attr:`niscope.Session.width_high_threshold` properties.
 
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].width_condition = var
-                var = session.channels[0,1].width_condition
-
         The following table lists the characteristics of this property.
 
             +----------------+----------------------+
@@ -5721,7 +5742,7 @@ width_condition
             +----------------+----------------------+
             | Permissions    | read-write           |
             +----------------+----------------------+
-            | Channel Based  | Yes                  |
+            | Channel Based  | No                   |
             +----------------+----------------------+
             | Resettable     | Yes                  |
             +----------------+----------------------+
@@ -5740,19 +5761,6 @@ width_high_threshold
 
         This properties sets the upper bound on the duration range that triggers the oscilloscope. The :py:attr:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
 
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].width_high_threshold = var
-                var = session.channels[0,1].width_high_threshold
-
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5762,7 +5770,7 @@ width_high_threshold
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | Yes        |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -5781,19 +5789,6 @@ width_low_threshold
 
         This property sets the lower bound on the duration range that triggers the oscilloscope. The :py:attr:`niscope.Session.width_condition` property determines how the oscilloscope triggers in relation to the width thresholds.
 
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].width_low_threshold = var
-                var = session.channels[0,1].width_low_threshold
-
         The following table lists the characteristics of this property.
 
             +----------------+------------+
@@ -5803,7 +5798,7 @@ width_low_threshold
             +----------------+------------+
             | Permissions    | read-write |
             +----------------+------------+
-            | Channel Based  | Yes        |
+            | Channel Based  | No         |
             +----------------+------------+
             | Resettable     | Yes        |
             +----------------+------------+
@@ -5820,19 +5815,6 @@ width_polarity
 
         Specifies the polarity of pulses that trigger the oscilloscope for width triggering.
 
-
-
-
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
-            niscope.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].width_polarity = var
-                var = session.channels[0,1].width_polarity
-
         The following table lists the characteristics of this property.
 
             +----------------+---------------------+
@@ -5842,7 +5824,7 @@ width_polarity
             +----------------+---------------------+
             | Permissions    | read-write          |
             +----------------+---------------------+
-            | Channel Based  | Yes                 |
+            | Channel Based  | No                  |
             +----------------+---------------------+
             | Resettable     | Yes                 |
             +----------------+---------------------+
