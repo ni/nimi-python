@@ -124,6 +124,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'size': {
                     'mechanism': 'len',
@@ -134,11 +135,14 @@ functions = {
             },
             {
                 'direction': 'in',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
+                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'type_in_documentation': 'float in seconds or datetime.timedelta',
+                'type': 'ViReal64',
                 'documentation': {
                     'description': '\nMinimal period of TClk, expressed in seconds. Supported values are\nbetween 0.0 s and 0.050 s (50 ms). Minimal period for a single\nchassis/PC is 200 ns. If the specified value is less than 200 ns,\nNI-TClk automatically coerces minTime to 200 ns. For multichassis\nsynchronization, adjust this value to account for propagation delays\nthrough the various devices and cables.\n'
                 },
                 'name': 'minTime',
-                'type': 'ViReal64'
             }
         ],
         'returns': 'ViStatus'
@@ -985,6 +989,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
+                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'type_in_documentation': 'float in seconds or datetime.timedelta',
                 'documentation': {
                     'description': '\nMinimal period of TClk, expressed in seconds. Supported values are\nbetween 0.0 s and 0.050 s (50 ms). Minimal period for a single\nchassis/PC is 200 ns. If the specified value is less than 200 ns,\nNI-TClk automatically coerces minTime to 200 ns. For multichassis\nsynchronization, adjust this value to account for propagation delays\nthrough the various devices and cables.\n'
                 },
@@ -1129,6 +1136,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
+                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'type_in_documentation': 'float in seconds or datetime.timedelta',
                 'documentation': {
                     'description': '\nMinimal period of TClk, expressed in seconds. Supported values are\nbetween 0.0 s and 0.050 s (50 ms). Minimal period for a single\nchassis/PC is 200 ns. If the specified value is less than 200 ns,\nNI-TClk automatically coerces minTime to 200 ns. For multichassis\nsynchronization, adjust this value to account for propagation delays\nthrough the various devices and cables.\n'
                 },
@@ -1168,6 +1178,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'default_value': 'datetime.timedelta(seconds=0.0)',
+                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'type_in_documentation': 'float in seconds or datetime.timedelta',
                 'documentation': {
                     'description': '\nThe amount of time in seconds that niTClk_WaitUntilDone waits for the\nsessions to complete. If timeout is exceeded, niTClk_WaitUntilDone\nreturns an error.\n'
                 },

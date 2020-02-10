@@ -87,8 +87,8 @@ class SessionReference(object):
     Specifies the reference trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
-    sample_clock_delay = _attributes.AttributeViReal64(11)
-    '''Type: float
+    sample_clock_delay = _attributes.AttributeViReal64TimeDeltaSeconds(11)
+    '''Type: float in seconds or datetime.timedelta
 
     Specifies the sample clock delay.
     Specifies the delay, in seconds, to apply to the session sample clock  relative to the other synchronized sessions. During synchronization,  NI-TClk aligns the sample clocks on the synchronized devices. If you want  to delay the sample clocks, set this property before calling  synchronize.
@@ -608,7 +608,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def finish_sync_pulse_sender_synchronize(self, sessions, min_time):
+    def finish_sync_pulse_sender_synchronize(self, sessions, min_time=datetime.timedelta(seconds=0.0)):
         r'''finish_sync_pulse_sender_synchronize
 
         Finishes synchronizing the Sync Pulse Sender.
@@ -616,7 +616,7 @@ class _Session(object):
         Args:
             sessions (list of (nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-            min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
                 chassis/PC is 200 ns. If the specified value is less than 200 ns,
                 NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -625,8 +625,8 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
-        min_time_ctype = _visatype.ViReal64(min_time)  # case S150
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_number_list(sessions), library_type=_visatype.ViSession)  # case B520
+        min_time_ctype = _converters.convert_timedelta_to_seconds(min_time, _visatype.ViReal64)  # case S140
         error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -699,7 +699,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
 
-    def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time):
+    def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time=datetime.timedelta(seconds=0.0)):
         r'''setup_for_sync_pulse_sender_synchronize
 
         Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
@@ -707,7 +707,7 @@ class _Session(object):
         Args:
             sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-            min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
                 chassis/PC is 200 ns. If the specified value is less than 200 ns,
                 NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -717,7 +717,7 @@ class _Session(object):
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
         sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_number_list(sessions), library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _visatype.ViReal64(min_time)  # case S150
+        min_time_ctype = _converters.convert_timedelta_to_seconds(min_time, _visatype.ViReal64)  # case S140
         error_code = self._library.niTClk_SetupForSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -750,7 +750,7 @@ class _Session(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def synchronize_to_sync_pulse_sender(self, sessions, min_time):
+    def synchronize_to_sync_pulse_sender(self, sessions, min_time=datetime.timedelta(seconds=0.0)):
         r'''synchronize_to_sync_pulse_sender
 
         Synchronizes the other devices to the Sync Pulse Sender.
@@ -758,7 +758,7 @@ class _Session(object):
         Args:
             sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-            min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+            min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
                 chassis/PC is 200 ns. If the specified value is less than 200 ns,
                 NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -768,12 +768,12 @@ class _Session(object):
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
         sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_number_list(sessions), library_type=_visatype.ViSession)  # case B520
-        min_time_ctype = _visatype.ViReal64(min_time)  # case S150
+        min_time_ctype = _converters.convert_timedelta_to_seconds(min_time, _visatype.ViReal64)  # case S140
         error_code = self._library.niTClk_SynchronizeToSyncPulseSender(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def wait_until_done(self, sessions, timeout):
+    def wait_until_done(self, sessions, timeout=datetime.timedelta(seconds=0.0)):
         r'''wait_until_done
 
         Call this method to pause execution of your program until the
@@ -788,14 +788,14 @@ class _Session(object):
         Args:
             sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-            timeout (float): The amount of time in seconds that wait_until_done waits for the
+            timeout (float in seconds or datetime.timedelta): The amount of time in seconds that wait_until_done waits for the
                 sessions to complete. If timeout is exceeded, wait_until_done
                 returns an error.
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
         sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_number_list(sessions), library_type=_visatype.ViSession)  # case B520
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
         error_code = self._library.niTClk_WaitUntilDone(session_count_ctype, sessions_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -941,7 +941,7 @@ def finish_sync_pulse_sender_synchronize(sessions, min_time):
     Args:
         sessions (list of (nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+        min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
             chassis/PC is 200 ns. If the specified value is less than 200 ns,
             NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -995,7 +995,7 @@ def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
     Args:
         sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+        min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
             chassis/PC is 200 ns. If the specified value is less than 200 ns,
             NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -1038,7 +1038,7 @@ def synchronize_to_sync_pulse_sender(sessions, min_time):
     Args:
         sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-        min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
+        min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
             chassis/PC is 200 ns. If the specified value is less than 200 ns,
             NI-TClk automatically coerces minTime to 200 ns. For multichassis
@@ -1064,7 +1064,7 @@ def wait_until_done(sessions, timeout):
     Args:
         sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
-        timeout (float): The amount of time in seconds that wait_until_done waits for the
+        timeout (float in seconds or datetime.timedelta): The amount of time in seconds that wait_until_done waits for the
             sessions to complete. If timeout is exceeded, wait_until_done
             returns an error.
 
