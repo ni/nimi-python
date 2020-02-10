@@ -404,7 +404,7 @@ def test_nitclk_session_reference(session_5124):
     # We need to look at the actual session number inside the class
     # we know the type returned from session.tclk.pause_trigger_master_session will be nitclk.SessionReference
     # This test assumes knowledge of the class internals
-    assert session_5124.tclk.ref_trigger_master_session._session_number == test_session.tclk._get_session_number()
+    assert session_5124.tclk.ref_trigger_master_session._session_number == test_session.tclk._get_tclk_session_reference()
     assert session_5124.tclk.ref_trigger_master_session._session_number == test_session._vi
 
 
