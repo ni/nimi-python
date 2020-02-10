@@ -61,6 +61,10 @@ deps =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: packaging
 % endif
+% if module_name == 'nitclk':
+    # nitclk system tests use simulated niscope devices
+    ${module_name}-system_tests: niscope
+% endif
     ${module_name}-system_tests: pytest==4.6.5;platform_python_implementation=='PyPy'
     ${module_name}-system_tests: pytest;platform_python_implementation=='CPython'
     ${module_name}-system_tests: coverage
