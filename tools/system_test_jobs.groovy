@@ -62,21 +62,19 @@ def genJob(driver, platform) {
         steps {
             batchFile {
                 command("""@echo off
-echo Useful environment variables
-echo ghprbActualCommit =            %ghprbActualCommit%
-echo ghprbActualCommitAuthor =      %ghprbActualCommitAuthor%
-echo ghprbActualCommitAuthorEmail = %ghprbActualCommitAuthorEmail%
-echo ghprbPullDescription =         %ghprbPullDescription%
-echo ghprbPullId =                  %ghprbPullId%
-echo ghprbPullLink =                %ghprbPullLink%
-echo ghprbPullTitle =               %ghprbPullTitle%
-echo ghprbSourceBranch =            %ghprbSourceBranch%
-echo ghprbTargetBranch =            %ghprbTargetBranch%
-echo ghprbCommentBody =             %ghprbCommentBody%
-echo sha1 =                         %sha1%
-echo .
-echo Running system tests for ${driver} on ${platform}
-tools\\system_tests.bat ${driver}
+rem echo Useful environment variables
+rem echo ghprbActualCommit =            %ghprbActualCommit%
+rem echo ghprbActualCommitAuthor =      %ghprbActualCommitAuthor%
+rem echo ghprbActualCommitAuthorEmail = %ghprbActualCommitAuthorEmail%
+rem echo ghprbPullDescription =         %ghprbPullDescription%
+rem echo ghprbPullId =                  %ghprbPullId%
+rem echo ghprbPullLink =                %ghprbPullLink%
+rem echo ghprbPullTitle =               %ghprbPullTitle%
+rem echo ghprbSourceBranch =            %ghprbSourceBranch%
+rem echo ghprbTargetBranch =            %ghprbTargetBranch%
+rem echo ghprbCommentBody =             %ghprbCommentBody%
+rem echo sha1 =                         %sha1%
+rem echo .
 """)
             }
         }
