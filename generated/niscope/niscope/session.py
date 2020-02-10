@@ -138,7 +138,7 @@ class _SessionBase(object):
     acquisition_start_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250109)
     '''Type: float in seconds or datetime.timedelta
 
-    Specifies the length of time from the trigger event to the first point in  the waveform record in seconds.  If the value is positive, the first point  in the waveform record occurs after the trigger event (same as specifying  trigger_delay_time).  If the value is negative, the first point  in the waveform record occurs before the trigger event (same as specifying  horz_record_ref_position).
+    Specifies the length of time from the trigger event to the first point in the waveform record in seconds.  If the value is positive, the first point in the waveform record occurs after the trigger event (same as specifying trigger_delay_time).  If the value is negative, the first point in the waveform record occurs before the trigger event (same as specifying horz_record_ref_position).
     '''
     acquisition_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AcquisitionType, 1250101)
     '''Type: enums.AcquisitionType
@@ -148,7 +148,7 @@ class _SessionBase(object):
     acq_arm_source = _attributes.AttributeViString(1150053)
     '''Type: str
 
-    Specifies the source the digitizer monitors for a start (acquisition arm) trigger.   When the start trigger is received, the digitizer begins acquiring pretrigger  samples.
+    Specifies the source the digitizer monitors for a start (acquisition arm) trigger.  When the start trigger is received, the digitizer begins acquiring pretrigger samples.
     Valid Values:
     NISCOPE_VAL_IMMEDIATE     ('VAL_IMMEDIATE')    - Triggers immediately
     NISCOPE_VAL_RTSI_0        ('VAL_RTSI_0')       - RTSI 0
@@ -169,22 +169,22 @@ class _SessionBase(object):
     adv_trig_src = _attributes.AttributeViString(1150094)
     '''Type: str
 
-    Specifies the source the digitizer monitors for an advance trigger.   When the advance trigger is received, the digitizer begins acquiring pretrigger  samples.
+    Specifies the source the digitizer monitors for an advance trigger.  When the advance trigger is received, the digitizer begins acquiring pretrigger samples.
     '''
     allow_more_records_than_memory = _attributes.AttributeViBoolean(1150068)
     '''Type: bool
 
-    Indicates whether more records can be configured with configure_horizontal_timing  than fit in the onboard memory. If this property is set to True, it is necessary  to fetch records while the acquisition is in progress.  Eventually, some of  the records will be overwritten.  An error is returned from the fetch method  if you attempt to fetch a record that has been overwritten.
+    Indicates whether more records can be configured with configure_horizontal_timing than fit in the onboard memory. If this property is set to True, it is necessary to fetch records while the acquisition is in progress.  Eventually, some of the records will be overwritten.  An error is returned from the fetch method if you attempt to fetch a record that has been overwritten.
     '''
     arm_ref_trig_src = _attributes.AttributeViString(1150095)
     '''Type: str
 
-    Specifies the source the digitizer monitors for an arm reference trigger.   When the arm reference trigger is received, the digitizer begins looking for a  reference (stop) trigger from the user-configured trigger source.
+    Specifies the source the digitizer monitors for an arm reference trigger.  When the arm reference trigger is received, the digitizer begins looking for a reference (stop) trigger from the user-configured trigger source.
     '''
     backlog = _attributes.AttributeViReal64(1150084)
     '''Type: float
 
-    Returns the number of samples (points_done) that have been acquired but not fetched  for the record specified by fetch_record_number.
+    Returns the number of samples (points_done) that have been acquired but not fetched for the record specified by fetch_record_number.
     '''
     bandpass_filter_enabled = _attributes.AttributeViBoolean(1150318)
     '''Type: bool
@@ -211,7 +211,7 @@ class _SessionBase(object):
     cable_sense_mode = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.CableSenseMode, 1150138)
     '''Type: enums.CableSenseMode
 
-    Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the cable_sense_signal_start method is called.
+    Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the CableSenseSignalStart method is called.
 
     Device-Specific Behavior:
         PXIe-5160/5162
@@ -233,6 +233,9 @@ class _SessionBase(object):
     +-----------------------+
 
     Note: the input impedance of the channel(s) to convey the CableSense signal must be set to 50 ohms.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     cable_sense_signal_enable = _attributes.AttributeViBoolean(1150139)
     '''Type: bool
@@ -261,7 +264,7 @@ class _SessionBase(object):
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
 
-    Indicates the number of channels that the specific instrument driver  supports.
+    Indicates the number of channels that the specific instrument driver supports.
     For channel-based properties, the IVI engine maintains a separate cache value for each channel.
     '''
     channel_enabled = _attributes.AttributeViBoolean(1250005)
@@ -314,13 +317,6 @@ class _SessionBase(object):
     '''Type: float
 
     Returns the temperature of the device in degrees Celsius from the onboard sensor.
-    '''
-    driver_setup = _attributes.AttributeViString(1050007)
-    '''Type: str
-
-    This property indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter in  __init__, or through the IVI Configuration Utility.
-    If the user does not specify a Driver Setup string, this property returns an empty string.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -328,7 +324,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     niscope.Session repeated capabilities container, and calling set/get value on the result.:
 
-        var = session.channels[0,1].driver_setup
+        var = session.channels[0,1].device_temperature
     '''
     enabled_channels = _attributes.AttributeViString(1150140)
     '''Type: str
@@ -341,14 +337,6 @@ class _SessionBase(object):
     Because this property returns channels in ascending order, but the order in which you specify channels for the input is important, the value of this property may not necessarily reflect the order in which NI-SCOPE performs certain actions.
 
     Refer to Channel String Syntax in the NI High-Speed Digitizers Help for more information on the effects of channel order in NI-SCOPE.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].enabled_channels
     '''
     enable_dc_restore = _attributes.AttributeViBoolean(1150093)
     '''Type: bool
@@ -361,7 +349,7 @@ class _SessionBase(object):
     enable_time_interleaved_sampling = _attributes.AttributeViBoolean(1150128)
     '''Type: bool
 
-    Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel  enabling a higher maximum real-time sampling rate.
+    Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel enabling a higher maximum real-time sampling rate.
     Valid Values:
     True  (1) - Use multiple interleaved ADCs on this channel
     False (0) - Use only this channel's ADC to acquire data for this channel
@@ -401,7 +389,7 @@ class _SessionBase(object):
     equalization_filter_enabled = _attributes.AttributeViBoolean(1150313)
     '''Type: bool
 
-    Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside  of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients  should be between +1 and -1 in value.
+    Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -415,7 +403,7 @@ class _SessionBase(object):
     equalization_num_coefficients = _attributes.AttributeViInt32(1150312)
     '''Type: int
 
-    Returns the number of coefficients that the FIR filter can accept.  This filter is designed  to compensate the input signal for artifacts introduced to the signal outside of the digitizer.   However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be  between +1 and -1 in value.
+    Returns the number of coefficients that the FIR filter can accept.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer.  However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -428,7 +416,7 @@ class _SessionBase(object):
     exported_advance_trigger_output_terminal = _attributes.AttributeViString(1150109)
     '''Type: str
 
-    Specifies the destination to export the advance trigger.   When the advance trigger is received, the digitizer begins acquiring  samples for the Nth record.
+    Specifies the destination to export the advance trigger.  When the advance trigger is received, the digitizer begins acquiring samples for the Nth record.
     Consult your device documentation for a specific list of valid destinations.
     '''
     exported_ref_trigger_output_terminal = _attributes.AttributeViString(1150098)
@@ -440,7 +428,7 @@ class _SessionBase(object):
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150097)
     '''Type: str
 
-    Specifies the destination to export the Start trigger.   When the start trigger is received, the digitizer begins acquiring  samples.
+    Specifies the destination to export the Start trigger.  When the start trigger is received, the digitizer begins acquiring samples.
     Consult your device documentation for a specific list of valid destinations.
     '''
     _fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
@@ -458,7 +446,7 @@ class _SessionBase(object):
     _fetch_offset = _attributes.AttributeViInt32(1150078)
     '''Type: int
 
-    Offset in samples to start fetching data within each record. The offset is applied relative to  fetch_relative_to.The offset can be positive or negative.
+    Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to.The offset can be positive or negative.
     Default Value: 0
     '''
     _fetch_record_number = _attributes.AttributeViInt32(1150079)
@@ -522,33 +510,42 @@ class _SessionBase(object):
     0 90 450
     **Related topics:**
     `Digital Filtering <digitizers.chm::/Digital_Filtering_Overview.html>`__
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].high_pass_filter_frequency = var
+        var = session.channels[0,1].high_pass_filter_frequency
     '''
     horz_enforce_realtime = _attributes.AttributeViBoolean(1150004)
     '''Type: bool
 
-    Indicates whether the digitizer enforces real-time measurements  or allows equivalent-time measurements.
+    Indicates whether the digitizer enforces real-time measurements or allows equivalent-time measurements.
     '''
     horz_min_num_pts = _attributes.AttributeViInt32(1250009)
     '''Type: int
 
-    Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses  for waveform acquisition. horz_record_length returns the actual record length.
+    Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses for waveform acquisition. horz_record_length returns the actual record length.
     Valid Values: 1 - available onboard memory
     '''
     horz_num_records = _attributes.AttributeViInt32(1150001)
     '''Type: int
 
-    Specifies the number of records to acquire. Can be used for multi-record acquisition  and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
+    Specifies the number of records to acquire. Can be used for multi-record acquisition and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
     '''
     horz_record_length = _attributes.AttributeViInt32(1250008)
     '''Type: int
 
-    Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with  horz_min_num_pts.
-    Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of  the Read and Fetch methods. This property is only valid after a call to the one of the  Configure Horizontal methods.
+    Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with horz_min_num_pts.
+    Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of the Read and Fetch methods. This property is only valid after a call to the one of the Configure Horizontal methods.
     '''
     horz_record_ref_position = _attributes.AttributeViReal64(1250011)
     '''Type: float
 
-    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the  trigger_delay_time property specifies. The event that occurs when  the delay time elapses is the Reference Event. The Reference Event is relative to the  start of the record and is a percentage of the record length. For example, the value 50.0  corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
+    Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the trigger_delay_time property specifies. The event that occurs when the delay time elapses is the Reference Event. The Reference Event is relative to the start of the record and is a percentage of the record length. For example, the value 50.0 corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
     Valid Values: 0.0 - 100.0
     '''
     horz_sample_rate = _attributes.AttributeViReal64(1250010)
@@ -566,7 +563,7 @@ class _SessionBase(object):
     input_clock_source = _attributes.AttributeViString(1150002)
     '''Type: str
 
-    Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock  for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source  of the board clock.
+    Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source of the board clock.
     '''
     input_impedance = _attributes.AttributeViReal64(1250103)
     '''Type: float
@@ -585,7 +582,15 @@ class _SessionBase(object):
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
-    A string that contains the firmware revision information  for the instrument you are currently using.
+    A string that contains the firmware revision information for the instrument you are currently using.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].instrument_firmware_revision
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -607,20 +612,40 @@ class _SessionBase(object):
     Sampling <digitizers.chm::/TimeInterleavedSampling.html>`__
 
     Note: If disabled, warranted specifications are not guaranteed.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].interleaving_offset_correction_enabled = var
+        var = session.channels[0,1].interleaving_offset_correction_enabled
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
 
-    Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
-    If you initialize the instrument driver with the resource descriptor, this property contains that  value.You can pass a logical name to Init or __init__. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
+    If you initialize the instrument driver with the resource descriptor, this property contains that value.You can pass a logical name to Init or __init__. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a virtual instrument section in the IVI Configuration file. The virtual instrument section specifies a physical device and initial user options.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
     '''
+    is_probe_comp_on = _attributes.AttributeViBoolean(1150066)
+    '''Type: bool
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].is_probe_comp_on
+    '''
     logical_name = _attributes.AttributeViString(1050305)
     '''Type: str
 
-    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or __init__. The IVI Configuration  utility must contain an entry for the logical name. The logical name entry refers to a virtual  instrument section in the IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
+    A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or __init__. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a virtual instrument section in the IVI Configuration file. The virtual instrument section specifies a physical device and initial user options.
 
     Note:
     One or more of the referenced methods are not in the Python API for this driver.
@@ -628,12 +653,12 @@ class _SessionBase(object):
     master_enable = _attributes.AttributeViBoolean(1150008)
     '''Type: bool
 
-    Specifies whether you want the device to be a master or a slave. The master typically originates  the trigger signal and clock sync pulse. For a standalone device, set this property to False.
+    Specifies whether you want the device to be a master or a slave. The master typically originates the trigger signal and clock sync pulse. For a standalone device, set this property to False.
     '''
     max_input_frequency = _attributes.AttributeViReal64(1250006)
     '''Type: float
 
-    Specifies the bandwidth of the channel. Express this value as the frequency at which the input  circuitry attenuates the input signal by 3 dB. The units are hertz.
+    Specifies the bandwidth of the channel. Express this value as the frequency at which the input circuitry attenuates the input signal by 3 dB. The units are hertz.
     Defined Values:
     NISCOPE_VAL_BANDWIDTH_FULL (-1.0)
     NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT (0.0)
@@ -697,11 +722,8 @@ class _SessionBase(object):
     _meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
     '''Type: float
 
-    Stores the high reference level used in many scalar measurements. Different channels may have different reference  levels. Do not use the IVI-defined, nonchannel-based properties such as MEAS_HIGH_REF if you use  this property to set various channels to different values.
+    Stores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_high_ref if you use this property to set various channels to different values.
     Default: 90%
-
-    Note:
-    One or more of the referenced properties are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -715,11 +737,8 @@ class _SessionBase(object):
     _meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
     '''Type: float
 
-    Stores the low reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_LOW_REF if you use this property to set various channels to different values.
+    Stores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_low_ref if you use this property to set various channels to different values.
     Default: 10%
-
-    Note:
-    One or more of the referenced properties are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -733,11 +752,8 @@ class _SessionBase(object):
     _meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
     '''Type: float
 
-    Stores the mid reference level used in many scalar measurements. Different channels  may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as  MEAS_MID_REF if you use this property to set various channels to different values.
+    Stores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_mid_ref if you use this property to set various channels to different values.
     Default: 50%
-
-    Note:
-    One or more of the referenced properties are not in the Python API for this driver.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -783,18 +799,45 @@ class _SessionBase(object):
 
     Specifies the order of an IIR filter. All positive integers are valid.
     Default: 2
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_filter_order = var
+        var = session.channels[0,1].meas_filter_order
     '''
     _meas_filter_ripple = _attributes.AttributeViReal64(1150033)
     '''Type: float
 
     Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
     Default: 0.1 dB
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_filter_ripple = var
+        var = session.channels[0,1].meas_filter_ripple
     '''
     _meas_filter_taps = _attributes.AttributeViInt32(1150037)
     '''Type: int
 
     Defines the number of taps (coefficients) for an FIR filter.
     Default: 25
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_filter_taps = var
+        var = session.channels[0,1].meas_filter_taps
     '''
     _meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
     '''Type: float
@@ -823,12 +866,30 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_filter_type = var
+        var = session.channels[0,1].meas_filter_type
     '''
     _meas_filter_width = _attributes.AttributeViReal64(1150041)
     '''Type: float
 
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_filter_width = var
+        var = session.channels[0,1].meas_filter_width
     '''
     _meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._FIRFilterWindow, 1150042)
     '''Type: enums.FIRFilterWindow
@@ -852,6 +913,7 @@ class _SessionBase(object):
         session.channels[0,1].meas_fir_filter_window = var
         var = session.channels[0,1].meas_fir_filter_window
     '''
+    _meas_high_ref = _attributes.AttributeViReal64(1250607)
     _meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
     '''Type: float
 
@@ -900,6 +962,8 @@ class _SessionBase(object):
         session.channels[0,1].meas_last_acq_histogram_size = var
         var = session.channels[0,1].meas_last_acq_histogram_size
     '''
+    _meas_low_ref = _attributes.AttributeViReal64(1250608)
+    _meas_mid_ref = _attributes.AttributeViReal64(1250609)
     _meas_other_channel = _attributes.AttributeViString(1150018)
     '''Type: str
 
@@ -941,6 +1005,15 @@ class _SessionBase(object):
 
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_polynomial_interpolation_order = var
+        var = session.channels[0,1].meas_polynomial_interpolation_order
     '''
     _meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._RefLevelUnits, 1150016)
     '''Type: enums.RefLevelUnits
@@ -967,6 +1040,15 @@ class _SessionBase(object):
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_time_histogram_high_time = var
+        var = session.channels[0,1].meas_time_histogram_high_time
     '''
     _meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
     '''Type: float
@@ -988,6 +1070,15 @@ class _SessionBase(object):
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_time_histogram_low_time = var
+        var = session.channels[0,1].meas_time_histogram_low_time
     '''
     _meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
     '''Type: float
@@ -1024,30 +1115,68 @@ class _SessionBase(object):
 
     Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
     Default: 10.0 V
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_voltage_histogram_high_volts = var
+        var = session.channels[0,1].meas_voltage_histogram_high_volts
     '''
     _meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
     Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
     Default: -10.0 V
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_voltage_histogram_low_volts = var
+        var = session.channels[0,1].meas_voltage_histogram_low_volts
     '''
     _meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
     '''Type: int
 
     Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method _clear_waveform_measurement_stats.
     Default: 256
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].meas_voltage_histogram_size = var
+        var = session.channels[0,1].meas_voltage_histogram_size
     '''
     min_sample_rate = _attributes.AttributeViReal64(1150009)
     '''Type: float
 
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
-    The combination of sampling rate and min record length must allow the  digitizer to sample at a valid sampling rate for the acquisition type specified  in configure_acquisition and not require more memory than the  onboard memory module allows.
+    The combination of sampling rate and min record length must allow the digitizer to sample at a valid sampling rate for the acquisition type specified in ConfigureAcquisition and not require more memory than the onboard memory module allows.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     onboard_memory_size = _attributes.AttributeViInt32(1150069)
     '''Type: int
 
     Returns the total combined amount of onboard memory for all channels in bytes.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].onboard_memory_size
     '''
     output_clock_source = _attributes.AttributeViString(1150003)
     '''Type: str
@@ -1058,6 +1187,14 @@ class _SessionBase(object):
     '''Type: bool
 
     If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].pll_lock_status
     '''
     points_done = _attributes.AttributeViReal64(1150082)
     '''Type: float
@@ -1067,16 +1204,7 @@ class _SessionBase(object):
     poll_interval = _attributes.AttributeViInt32(1150100)
     '''Type: int
 
-    Specifies the poll interval in milliseconds to use during RIS acquisitions to check  whether the acquisition is complete.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].poll_interval = var
-        var = session.channels[0,1].poll_interval
+    Specifies the poll interval in milliseconds to use during RIS acquisitions to check whether the acquisition is complete.
     '''
     probe_attenuation = _attributes.AttributeViReal64(1250004)
     '''Type: float
@@ -1094,7 +1222,6 @@ class _SessionBase(object):
         session.channels[0,1].probe_attenuation = var
         var = session.channels[0,1].probe_attenuation
     '''
-    product_code = _attributes.AttributeViInt32(1100105)
     ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
     '''Type: str
 
@@ -1104,13 +1231,13 @@ class _SessionBase(object):
     ready_for_ref_event_output_terminal = _attributes.AttributeViString(1150111)
     '''Type: str
 
-    Specifies the destination for the Ready for Reference Event.   When this event is asserted, the digitizer is ready to receive a reference trigger.
+    Specifies the destination for the Ready for Reference Event.  When this event is asserted, the digitizer is ready to receive a reference trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150110)
     '''Type: str
 
-    Specifies the destination for the Ready for Start Event.   When this event is asserted, the digitizer is ready to receive a start trigger.
+    Specifies the destination for the Ready for Start Event.  When this event is asserted, the digitizer is ready to receive a start trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
     records_done = _attributes.AttributeViInt32(1150083)
@@ -1136,7 +1263,7 @@ class _SessionBase(object):
     ref_trigger_minimum_quiet_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150315)
     '''Type: float in seconds or datetime.timedelta
 
-    The amount of time the trigger circuit must not detect a signal above the trigger level before  the trigger is armed.  This property is useful for triggering at the beginning and not in the  middle of signal bursts.
+    The amount of time the trigger circuit must not detect a signal above the trigger level before the trigger is armed.  This property is useful for triggering at the beginning and not in the middle of signal bursts.
     '''
     ref_trig_tdc_enable = _attributes.AttributeViBoolean(1150096)
     '''Type: bool
@@ -1159,12 +1286,12 @@ class _SessionBase(object):
     ris_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RISMethod, 1150071)
     '''Type: enums.RISMethod
 
-    Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the  value of max_real_time_sampling_rate.
+    Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the value of max_real_time_sampling_rate.
     '''
     ris_num_averages = _attributes.AttributeViInt32(1150070)
     '''Type: int
 
-    The number of averages for each bin in an RIS acquisition.  The number of averages  times the oversampling factor is the minimum number of real-time acquisitions  necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because  the trigger times are not evenly spaced, so adjacent points in the reconstructed  waveform not be accurately spaced.  By averaging, the errors in both time and  voltage are smoothed.
+    The number of averages for each bin in an RIS acquisition.  The number of averages times the oversampling factor is the minimum number of real-time acquisitions necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because the trigger times are not evenly spaced, so adjacent points in the reconstructed waveform not be accurately spaced.  By averaging, the errors in both time and voltage are smoothed.
     '''
     runt_high_threshold = _attributes.AttributeViReal64(1250301)
     '''Type: float
@@ -1243,12 +1370,20 @@ class _SessionBase(object):
     samp_clk_timebase_src = _attributes.AttributeViString(1150087)
     '''Type: str
 
-    Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the  min_sample_rate (for internal sources) or the samp_clk_timebase_div (for external sources).
+    Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the min_sample_rate (for internal sources) or the samp_clk_timebase_div (for external sources).
     '''
     serial_number = _attributes.AttributeViString(1150104)
     '''Type: str
 
     Returns the serial number of the device.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    niscope.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    niscope.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].serial_number
     '''
     accessory_gain = _attributes.AttributeViReal64(1150279)
     '''Type: float
@@ -1291,18 +1426,18 @@ class _SessionBase(object):
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
 
-    Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-    The default value is False.   Use the __init__  method to override this value.
+    Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver methods perform range checking and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver methods return calculated values.
+    The default value is False.  Use the __init__ method to override this value.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
 
-    A string that contains a brief description of the specific  driver
+    A string that contains a brief description of the specific driver
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
     '''Type: str
 
-    A string that contains additional version information about this  instrument driver.
+    A string that contains additional version information about this instrument driver.
     '''
     specific_driver_vendor = _attributes.AttributeViString(1050513)
     '''Type: str
@@ -1312,18 +1447,9 @@ class _SessionBase(object):
     start_to_ref_trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1150103)
     '''Type: float in seconds or datetime.timedelta
 
-    Pass the length of time you want the digitizer to wait after it starts acquiring  data until the digitizer enables the trigger system to detect a reference (stop) trigger.
+    Pass the length of time you want the digitizer to wait after it starts acquiring data until the digitizer enables the trigger system to detect a reference (stop) trigger.
     Units: Seconds
     Valid Values: 0.0 - 171.8
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].start_to_ref_trigger_holdoff = var
-        var = session.channels[0,1].start_to_ref_trigger_holdoff
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
     '''Type: str
@@ -1333,29 +1459,29 @@ class _SessionBase(object):
     trigger_auto_triggered = _attributes.AttributeViBoolean(1150278)
     '''Type: bool
 
-    Specifies if the last acquisition was auto triggered.   You can use the Auto Triggered property to find out if the last acquisition was triggered.
+    Specifies if the last acquisition was auto triggered.  You can use the Auto Triggered property to find out if the last acquisition was triggered.
     '''
     trigger_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
     '''Type: enums.TriggerCoupling
 
-    Specifies how the digitizer couples the trigger source. This property affects instrument operation only when  trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
+    Specifies how the digitizer couples the trigger source. This property affects instrument operation only when trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
     trigger_delay_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250015)
     '''Type: float in seconds or datetime.timedelta
 
-    Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits  after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
+    Specifies the trigger delay time in seconds. The trigger delay time is the length of time the digitizer waits after it receives the trigger. The event that occurs when the trigger delay elapses is the Reference Event.
     Valid Values: 0.0 - 171.8
     '''
     trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1250016)
     '''Type: float in seconds or datetime.timedelta
 
-    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before  enabling the trigger subsystem to detect another trigger. This property affects instrument operation  only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires  multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a  multi-record acquisition through a call to configure_horizontal_timing.
+    Specifies the length of time (in seconds) the digitizer waits after detecting a trigger before enabling the trigger subsystem to detect another trigger. This property affects instrument operation only when the digitizer requires multiple acquisitions to build a complete waveform. The digitizer requires multiple waveform acquisitions when it uses equivalent-time sampling or when the digitizer is configured for a multi-record acquisition through a call to configure_horizontal_timing.
     Valid Values: 0.0 - 171.8
     '''
     trigger_hysteresis = _attributes.AttributeViReal64(1150006)
     '''Type: float
 
-    Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify  with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.
+    Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.
     '''
     trigger_impedance = _attributes.AttributeViReal64(1150075)
     '''Type: float
@@ -1368,9 +1494,9 @@ class _SessionBase(object):
     trigger_level = _attributes.AttributeViReal64(1250017)
     '''Type: float
 
-    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
+    Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     Valid Values:
-    The values of the range and offset parameters in configure_vertical determine the valid range for the trigger level  on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
+    The values of the range and offset parameters in configure_vertical determine the valid range for the trigger level on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
     '''
     trigger_modifier = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerModifier, 1250102)
     '''Type: enums.TriggerModifier
@@ -1383,7 +1509,7 @@ class _SessionBase(object):
     trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
     '''Type: enums.TriggerSlope
 
-    Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when trigger_type is set to  TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
+    Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
     trigger_source = _attributes.AttributeViString(1250013)
     '''Type: str
@@ -1398,10 +1524,10 @@ class _SessionBase(object):
     trigger_window_high_level = _attributes.AttributeViReal64(1150014)
     '''Type: float
 
-    Pass the upper voltage threshold you want the digitizer to use for  window triggering.
-    The digitizer triggers when the trigger signal enters or leaves  the window you specify with trigger_window_low_level and trigger_window_high_level
+    Pass the upper voltage threshold you want the digitizer to use for window triggering.
+    The digitizer triggers when the trigger signal enters or leaves the window you specify with trigger_window_low_level and trigger_window_high_level
     Valid Values:
-    The values of the Vertical Range and Vertical Offset parameters in  configure_vertical determine the valid range for the  High Window Level on the channel you use as the Trigger Source parameter  in ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+    The values of the Vertical Range and Vertical Offset parameters in configure_vertical determine the valid range for the High Window Level on the channel you use as the Trigger Source parameter in ConfigureTriggerSource.  The value you pass for this parameter must meet the following conditions.
     High Trigger Level <= Vertical Range/2 + Vertical Offset
     High Trigger Level >= (-Vertical Range/2) + Vertical Offset
     High Trigger Level > Low Trigger Level
@@ -1412,11 +1538,11 @@ class _SessionBase(object):
     trigger_window_low_level = _attributes.AttributeViReal64(1150013)
     '''Type: float
 
-    Pass the lower voltage threshold you want the digitizer to use for  window triggering.
-    The digitizer triggers when the trigger signal enters or leaves  the window you specify with trigger_window_low_level and trigger_window_high_level.
+    Pass the lower voltage threshold you want the digitizer to use for window triggering.
+    The digitizer triggers when the trigger signal enters or leaves the window you specify with trigger_window_low_level and trigger_window_high_level.
     Units: Volts
     Valid Values:
-    The values of the Vertical Range and Vertical Offset parameters in  configure_vertical determine the valid range for the  Low Window Level on the channel you use as the Trigger Source parameter  in ConfigureTriggerSource.  The value you pass for this parameter  must meet the following conditions.
+    The values of the Vertical Range and Vertical Offset parameters in configure_vertical determine the valid range for the Low Window Level on the channel you use as the Trigger Source parameter in ConfigureTriggerSource.  The value you pass for this parameter must meet the following conditions.
     Low Trigger Level <= Vertical Range/2 + Vertical Offset
     Low Trigger Level >= (-Vertical Range/2) + Vertical Offset
     Low Trigger Level < High Trigger Level
@@ -1427,7 +1553,7 @@ class _SessionBase(object):
     trigger_window_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
     '''Type: enums.TriggerWindowMode
 
-    Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by  trigger_window_low_level, or trigger_window_high_level.
+    Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by trigger_window_low_level, or trigger_window_high_level.
     '''
     tv_trigger_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoTriggerEvent, 1250205)
     '''Type: enums.VideoTriggerEvent
@@ -1437,7 +1563,7 @@ class _SessionBase(object):
     tv_trigger_line_number = _attributes.AttributeViInt32(1250206)
     '''Type: int
 
-    Specifies the line on which to trigger, if tv_trigger_event is set to line number. The  valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of  1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
+    Specifies the line on which to trigger, if tv_trigger_event is set to line number. The valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of 1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
     tv_trigger_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
     '''Type: enums.VideoPolarity
@@ -1448,16 +1574,8 @@ class _SessionBase(object):
     '''Type: enums.VideoSignalFormat
 
     Specifies the type of video signal, such as NTSC, PAL, or SECAM.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].tv_trigger_signal_format = var
-        var = session.channels[0,1].tv_trigger_signal_format
     '''
+    use_spec_initial_x = _attributes.AttributeViBoolean(1150067)
     vertical_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
     '''Type: enums.VerticalCoupling
 
@@ -1492,7 +1610,7 @@ class _SessionBase(object):
     '''Type: float
 
     Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
-    Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced  up to the next valid range.
+    Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced up to the next valid range.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -1507,15 +1625,6 @@ class _SessionBase(object):
     '''Type: enums.WidthCondition
 
     Specifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the width_low_threshold and width_high_threshold properties.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].width_condition = var
-        var = session.channels[0,1].width_condition
     '''
     width_high_threshold = _attributes.AttributeViReal64(1250502)
     '''Type: float
@@ -1523,15 +1632,6 @@ class _SessionBase(object):
     Specifies the high width threshold, in seconds.
 
     This properties sets the upper bound on the duration range that triggers the oscilloscope. The width_condition property determines how the oscilloscope triggers in relation to the width thresholds.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].width_high_threshold = var
-        var = session.channels[0,1].width_high_threshold
     '''
     width_low_threshold = _attributes.AttributeViReal64(1250501)
     '''Type: float
@@ -1539,29 +1639,11 @@ class _SessionBase(object):
     Specifies the low width threshold, in seconds.
 
     This property sets the lower bound on the duration range that triggers the oscilloscope. The width_condition property determines how the oscilloscope triggers in relation to the width thresholds.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].width_low_threshold = var
-        var = session.channels[0,1].width_low_threshold
     '''
-    width_polarity = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.WidthPolarity, 1250503)
+    width_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WidthPolarity, 1250503)
     '''Type: enums.WidthPolarity
 
     Specifies the polarity of pulses that trigger the oscilloscope for width triggering.
-
-    Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
-    niscope.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].width_polarity = var
-        var = session.channels[0,1].width_polarity
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -4221,10 +4303,13 @@ class Session(_SessionBase):
                 min_sample_rate for more information.
 
             min_num_pts (int): The minimum number of points you need in the record for each channel;
-                call actual_record_length to obtain the actual record length
+                call ActualRecordLength to obtain the actual record length
                 used.
 
                 Valid Values: Greater than 1; limited by available memory
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
 
             ref_position (float): The position of the Reference Event in the waveform record specified as
                 a percentage.
