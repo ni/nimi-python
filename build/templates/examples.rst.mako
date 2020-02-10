@@ -23,7 +23,9 @@
     if v.dev is None and v.pre is None:
         url = 'https://github.com/ni/nimi-python/releases/download/{0}/{1}_examples.zip'.format(global_version, module_name)
     else:
-        url = 'https://github.com/ni/nimi-python/blob/master/generated/examples/{0}_examples.zip'.format(module_name)
+        with open('./LAST_RELEASE') as vf:
+            last_release_version = vf.read().strip()
+        url = 'https://github.com/ni/nimi-python/releases/download/{0}/{1}_examples.zip'.format(last_release_version, module_name)
 %>\
 ${helper.get_rst_header_snippet('Examples', '=')}
 
