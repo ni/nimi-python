@@ -1,6 +1,50 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 19.1.0d50
+# This file is generated from NI-SCOPE API metadata version 20.0.0d10
 enums = {
+    '5900AccessoryInAScopeSessionValues': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_DRIVER_SETUP_OPTION',
+                'value': 'Accessory'
+            },
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_DRIVER_SETUP_ACCMODEL',
+                'value': 'AccModel'
+            },
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_DRIVER_SETUP_ACCBUS',
+                'value': 'AccBoardType'
+            },
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_DRIVER_SETUP_DEFAULT_MODEL',
+                'value': '5900'
+            },
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_DRIVER_SETUP_DEFAULT_BUS',
+                'value': 'PXI'
+            },
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_DIGITIZER_IMPEDANCE',
+                'value': 1000000.0
+            },
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_5900_SCALE_FACTOR',
+                'value': 4.0
+            }
+        ]
+    },
+    'AccessoryTypes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_TYPE_NONE',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_ACCESSORY_TYPE_5900',
+                'value': 1
+            }
+        ]
+    },
     'AcquisitionStatus': {
         'values': [
             {
@@ -60,6 +104,24 @@ enums = {
             }
         ]
     },
+    'AgcAverageControl': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Mean average.'
+                },
+                'name': 'NISCOPE_VAL_MEAN',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Median average.'
+                },
+                'name': 'NISCOPE_VAL_MEDIAN',
+                'value': 1
+            }
+        ]
+    },
     'AoutParallelOutputSource': {
         'values': [
             {
@@ -103,6 +165,20 @@ enums = {
             },
             {
                 'documentation': {
+                    'description': 'FFT Phase Spectrum'
+                },
+                'name': 'NISCOPE_VAL_FFT_PHASE_SPECTRUM',
+                'value': 4002
+            },
+            {
+                'documentation': {
+                    'description': 'FFT Amp. Spectrum (Volts RMS)'
+                },
+                'name': 'NISCOPE_VAL_FFT_AMP_SPECTRUM_VOLTS_RMS',
+                'value': 4003
+            },
+            {
+                'documentation': {
                     'description': 'Multi Acquisition Voltage Histogram'
                 },
                 'name': 'NISCOPE_VAL_MULTI_ACQ_VOLTAGE_HISTOGRAM',
@@ -114,20 +190,6 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_MULTI_ACQ_TIME_HISTOGRAM',
                 'value': 4005
-            },
-            {
-                'documentation': {
-                    'description': 'Multi Acquisition Average'
-                },
-                'name': 'NISCOPE_VAL_MULTI_ACQ_AVERAGE',
-                'value': 4016
-            },
-            {
-                'documentation': {
-                    'description': 'Polynomial Interpolation'
-                },
-                'name': 'NISCOPE_VAL_POLYNOMIAL_INTERPOLATION',
-                'value': 4011
             },
             {
                 'documentation': {
@@ -149,6 +211,27 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_INVERSE',
                 'value': 4008
+            },
+            {
+                'documentation': {
+                    'description': 'Hanning Window'
+                },
+                'name': 'NISCOPE_VAL_HANNING_WINDOW',
+                'value': 4009
+            },
+            {
+                'documentation': {
+                    'description': 'Flat Top Window'
+                },
+                'name': 'NISCOPE_VAL_FLAT_TOP_WINDOW',
+                'value': 4010
+            },
+            {
+                'documentation': {
+                    'description': 'Polynomial Interpolation'
+                },
+                'name': 'NISCOPE_VAL_POLYNOMIAL_INTERPOLATION',
+                'value': 4011
             },
             {
                 'documentation': {
@@ -180,66 +263,10 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Array Offset'
+                    'description': 'Multi Acquisition Average'
                 },
-                'name': 'NISCOPE_VAL_ARRAY_OFFSET',
-                'value': 4025
-            },
-            {
-                'documentation': {
-                    'description': 'Array Gain'
-                },
-                'name': 'NISCOPE_VAL_ARRAY_GAIN',
-                'value': 4026
-            },
-            {
-                'documentation': {
-                    'description': 'Hanning Window'
-                },
-                'name': 'NISCOPE_VAL_HANNING_WINDOW',
-                'value': 4009
-            },
-            {
-                'documentation': {
-                    'description': 'Flat Top Window'
-                },
-                'name': 'NISCOPE_VAL_FLAT_TOP_WINDOW',
-                'value': 4010
-            },
-            {
-                'documentation': {
-                    'description': 'Hamming Window'
-                },
-                'name': 'NISCOPE_VAL_HAMMING_WINDOW',
-                'value': 4020
-            },
-            {
-                'documentation': {
-                    'description': 'Triangle Window'
-                },
-                'name': 'NISCOPE_VAL_TRIANGLE_WINDOW',
-                'value': 4023
-            },
-            {
-                'documentation': {
-                    'description': 'Blackman Window'
-                },
-                'name': 'NISCOPE_VAL_BLACKMAN_WINDOW',
-                'value': 4024
-            },
-            {
-                'documentation': {
-                    'description': 'FIR Windowed Filter'
-                },
-                'name': 'NISCOPE_VAL_WINDOWED_FIR_FILTER',
-                'value': 4021
-            },
-            {
-                'documentation': {
-                    'description': 'Bessel IIR Filter'
-                },
-                'name': 'NISCOPE_VAL_BESSEL_FILTER',
-                'value': 4022
+                'name': 'NISCOPE_VAL_MULTI_ACQ_AVERAGE',
+                'value': 4016
             },
             {
                 'documentation': {
@@ -257,24 +284,75 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'FFT Phase Spectrum'
-                },
-                'name': 'NISCOPE_VAL_FFT_PHASE_SPECTRUM',
-                'value': 4002
-            },
-            {
-                'documentation': {
-                    'description': 'FFT Amp. Spectrum (Volts RMS)'
-                },
-                'name': 'NISCOPE_VAL_FFT_AMP_SPECTRUM_VOLTS_RMS',
-                'value': 4003
-            },
-            {
-                'documentation': {
                     'description': 'FFT Amp. Spectrum (dB)'
                 },
                 'name': 'NISCOPE_VAL_FFT_AMP_SPECTRUM_DB',
                 'value': 4019
+            },
+            {
+                'documentation': {
+                    'description': 'Hamming Window'
+                },
+                'name': 'NISCOPE_VAL_HAMMING_WINDOW',
+                'value': 4020
+            },
+            {
+                'documentation': {
+                    'description': 'FIR Windowed Filter'
+                },
+                'name': 'NISCOPE_VAL_WINDOWED_FIR_FILTER',
+                'value': 4021
+            },
+            {
+                'documentation': {
+                    'description': 'Bessel IIR Filter'
+                },
+                'name': 'NISCOPE_VAL_BESSEL_FILTER',
+                'value': 4022
+            },
+            {
+                'documentation': {
+                    'description': 'Triangle Window'
+                },
+                'name': 'NISCOPE_VAL_TRIANGLE_WINDOW',
+                'value': 4023
+            },
+            {
+                'documentation': {
+                    'description': 'Blackman Window'
+                },
+                'name': 'NISCOPE_VAL_BLACKMAN_WINDOW',
+                'value': 4024
+            },
+            {
+                'documentation': {
+                    'description': 'Array Offset'
+                },
+                'name': 'NISCOPE_VAL_ARRAY_OFFSET',
+                'value': 4025
+            },
+            {
+                'documentation': {
+                    'description': 'Array Gain'
+                },
+                'name': 'NISCOPE_VAL_ARRAY_GAIN',
+                'value': 4026
+            }
+        ]
+    },
+    'AttributeRetrievalModes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_COERCED',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DEFAULT',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_ATTRIBUTE_RETRIEVAL_MODE_DESIRED',
+                'value': 1
             }
         ]
     },
@@ -318,6 +396,62 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_CABLE_SENSE_MODE_ON_DEMAND',
                 'value': 1
+            }
+        ]
+    },
+    'CalEndActions': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CAL_ACTION_STORE',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_ACTION_ABORT',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_ACTION_RESET',
+                'value': 101
+            }
+        ]
+    },
+    'CalibrationAccessorySources': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CAL_SOURCE_GROUND',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_SOURCE_POSITIVEFS',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_SOURCE_NEGATIVEFS',
+                'value': 2
+            }
+        ]
+    },
+    'CalibrationOptions': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CALIBRATE_LINEARITY',
+                'value': 102
+            }
+        ]
+    },
+    'CalibrationTypes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CAL_SELF',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_EXTERNAL',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_MANUFACTURE',
+                'value': 2
             }
         ]
     },
@@ -593,6 +727,148 @@ enums = {
             }
         ]
     },
+    'ClockingTerminalValues': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_NO_SOURCE',
+                'value': 'VAL_NO_SOURCE'
+            },
+            {
+                'name': 'NISCOPE_VAL_RTSI_CLOCK',
+                'value': 'VAL_RTSI_CLOCK'
+            },
+            {
+                'name': 'NISCOPE_VAL_EXTERNAL',
+                'value': 'VAL_EXTERNAL'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_0',
+                'value': 'VAL_PFI_0'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_1',
+                'value': 'VAL_PFI_1'
+            },
+            {
+                'name': 'NISCOPE_VAL_PFI_2',
+                'value': 'VAL_PFI_2'
+            },
+            {
+                'name': 'NISCOPE_VAL_CLK_IN',
+                'value': 'VAL_CLK_IN'
+            },
+            {
+                'name': 'NISCOPE_VAL_CLK_OUT',
+                'value': 'VAL_CLK_OUT'
+            },
+            {
+                'name': 'NISCOPE_VAL_INTERNAL10MHZ_OSC',
+                'value': 'VAL_INTERNAL10MHZ_OSC'
+            },
+            {
+                'name': 'NISCOPE_VAL_PXI_CLK',
+                'value': 'VAL_PXI_CLK'
+            },
+            {
+                'name': 'NISCOPE_VAL_PXI_CLK10',
+                'value': 'VAL_PXI_CLK10'
+            },
+            {
+                'name': 'NISCOPE_VAL_PXI_CLK100',
+                'value': 'VAL_PXI_CLK100'
+            },
+            {
+                'name': 'NISCOPE_VAL_PXIE_DSTAR_A',
+                'value': 'VAL_PXIE_DSTAR_A'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_CLK_IN',
+                'value': 'VAL_AUX_0_CLK_IN'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_CLK_OUT',
+                'value': 'VAL_AUX_0_CLK_OUT'
+            },
+            {
+                'name': 'NISCOPE_VAL_ONBOARD_CONFIGURABLE_RATE_CLK',
+                'value': 'VAL_ONBOARD_CONFIGURABLE_RATE_CLK'
+            }
+        ]
+    },
+    'CoefficientType': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_PFIR_COEFFICIENTS',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_DISCRIMINATOR_FIR_COEFFICIENTS',
+                'value': 1
+            }
+        ]
+    },
+    'ConfigurationListStepTriggerSources': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_END_OF_RECORD_EVENT_STR',
+                'value': 'VAL_END_OF_RECORD_EVENT'
+            },
+            {
+                'name': 'NISCOPE_VAL_TIMER_EVENT_STR',
+                'value': 'VAL_TIMER_EVENT'
+            },
+            {
+                'name': 'NISCOPE_VAL_START_TRIGGER_STR',
+                'value': 'VAL_START_TRIGGER'
+            }
+        ]
+    },
+    'ControlBandwidthLimitBandpassFilters': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_BANDWIDTH_LIMIT_DEFAULT',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_BANDWIDTH_LIMIT_25MHZ',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_BANDWIDTH_LIMIT_50MHZ',
+                'value': 2
+            }
+        ]
+    },
+    'CoordinateConverterInput': {
+        'values': [
+            {
+                'documentation': {
+                    'description': '\nSelects the HB filter as the source for the input to the coordinate\nconverter.\n'
+                },
+                'name': 'NISCOPE_VAL_RESAMPLER_HB',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': '\nSelects the programmable FIR filter as the source for the input to the\ncoordinate converter.\n'
+                },
+                'name': 'NISCOPE_VAL_PROGRAMMABLE_FIR',
+                'value': 1
+            }
+        ]
+    },
+    'DDCMuxModes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_MUX_ADC',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_MUX_DDC',
+                'value': 1
+            }
+        ]
+    },
     'DataJustificationMode': {
         'values': [
             {
@@ -629,39 +905,125 @@ enums = {
             }
         ]
     },
-    'ExportableSignals': {
+    'DeviceStatuses': {
         'values': [
             {
-                'name': 'NISCOPE_VAL_START_TRIGGER',
-                'value': 2
+                'name': 'NISCOPE_VAL_DEVICE_STATE_UNKNOWN',
+                'value': 0
             },
             {
-                'name': 'NISCOPE_VAL_ADVANCE_TRIGGER',
-                'value': 5
+                'name': 'NISCOPE_VAL_DEVICE_INITIALIZING',
+                'value': 1
             },
+            {
+                'name': 'NISCOPE_VAL_DEVICE_READY',
+                'value': 16
+            },
+            {
+                'name': 'NISCOPE_VAL_DEVICE_RESERVED',
+                'value': 256
+            }
+        ]
+    },
+    'DiscriminatorFIRInputSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR input source to phase.'
+                },
+                'name': 'NISCOPE_VAL_PHASE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR input source to magnitude.'
+                },
+                'name': 'NISCOPE_VAL_MAGNITUDE',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR input source to resampler.'
+                },
+                'name': 'NISCOPE_VAL_RESAMPLER',
+                'value': 2
+            }
+        ]
+    },
+    'DiscriminatorFIRSymmetry': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR symmetry to symmetric.'
+                },
+                'name': 'NISCOPE_VAL_SYMMETRIC',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR symmetry to asymmetric.'
+                },
+                'name': 'NISCOPE_VAL_ASYMMETRIC',
+                'value': 1
+            }
+        ]
+    },
+    'DiscriminatorFIRSymmetryType': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR symmetry type to even.'
+                },
+                'name': 'NISCOPE_VAL_EVEN',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR symmetry type to odd.'
+                },
+                'name': 'NISCOPE_VAL_ODD',
+                'value': 1
+            }
+        ]
+    },
+    'ExportableSignals': {
+        'values': [
             {
                 'name': 'NISCOPE_VAL_REF_TRIGGER',
                 'value': 1
             },
             {
-                'name': 'NISCOPE_VAL_END_OF_RECORD_EVENT',
-                'value': 4
+                'name': 'NISCOPE_VAL_START_TRIGGER',
+                'value': 2
             },
             {
                 'name': 'NISCOPE_VAL_END_OF_ACQUISITION_EVENT',
                 'value': 3
             },
             {
-                'name': 'NISCOPE_VAL_READY_FOR_START_EVENT',
-                'value': 7
+                'name': 'NISCOPE_VAL_END_OF_RECORD_EVENT',
+                'value': 4
+            },
+            {
+                'name': 'NISCOPE_VAL_ADVANCE_TRIGGER',
+                'value': 5
             },
             {
                 'name': 'NISCOPE_VAL_READY_FOR_ADVANCE_EVENT',
                 'value': 6
             },
             {
+                'name': 'NISCOPE_VAL_READY_FOR_START_EVENT',
+                'value': 7
+            },
+            {
                 'name': 'NISCOPE_VAL_READY_FOR_REF_EVENT',
                 'value': 10
+            },
+            {
+                'name': 'NISCOPE_VAL_5V_OUT',
+                'python_name': 'FIVE_V_OUT',
+                'value': 13
             },
             {
                 'name': 'NISCOPE_VAL_REF_CLOCK',
@@ -670,11 +1032,6 @@ enums = {
             {
                 'name': 'NISCOPE_VAL_SAMPLE_CLOCK',
                 'value': 101
-            },
-            {
-                'name': 'NISCOPE_VAL_5V_OUT',
-                'python_name': 'FIVE_V_OUT',
-                'value': 13
             }
         ]
     },
@@ -724,6 +1081,22 @@ enums = {
             }
         ]
     },
+    'FetchRecordModes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_RELATIVE_TO_RECORD_NUMBER',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_RELATIVE_TO_NEXT_RECORD',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_RELATIVE_TO_LAST_FETCHED',
+                'value': 2
+            }
+        ]
+    },
     'FetchRelativeTo': {
         'values': [
             {
@@ -760,6 +1133,30 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_TRIGGER',
                 'value': 483
+            }
+        ]
+    },
+    'FetchWaitModes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_WAIT_DEFAULT',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_WAIT_POLL',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_WAIT_SLEEP',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_WAIT_YIELD',
+                'value': 3
+            },
+            {
+                'name': 'NISCOPE_VAL_WAIT_INTERRUPT',
+                'value': 4
             }
         ]
     },
@@ -874,6 +1271,242 @@ enums = {
             }
         ]
     },
+    'HorzConfigModes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_AMBIGUOUS_USE_CASE',
+                'value': -1
+            },
+            {
+                'name': 'NISCOPE_VAL_USE_IVI_SAMPLE_RATE',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_USE_DAQMX_SAMPLE_RATE',
+                'value': 1
+            }
+        ]
+    },
+    'InputImpedance': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_50_OHMS',
+                'value': 50.0
+            },
+            {
+                'name': 'NISCOPE_VAL_75_OHMS',
+                'value': 75.0
+            },
+            {
+                'name': 'NISCOPE_VAL_1_MEG_OHM',
+                'value': 1000000.0
+            }
+        ]
+    },
+    'InternalExportSignalValues': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_READY_FOR_START_OR_ADVANCE_EVENT',
+                'value': 8
+            },
+            {
+                'name': 'NISCOPE_VAL_READY_FOR_REF_ARM_EVENT',
+                'value': 9
+            },
+            {
+                'name': 'NISCOPE_VAL_ASYNC_REF_EVENT',
+                'value': 11
+            },
+            {
+                'name': 'NISCOPE_VAL_STARTED_EVENT',
+                'value': 12
+            },
+            {
+                'name': 'NISCOPE_VAL_TIMER_EVENT',
+                'value': 15
+            }
+        ]
+    },
+    'InternalExternalCalibrationRoutingTerminal': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_INTERNAL_TIMEBASE',
+                'value': 'VAL_INTERNAL_TIMEBASE'
+            }
+        ]
+    },
+    'Interpolation': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_NO_INTERPOLATION',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_SINE_X',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_LINEAR',
+                'value': 3
+            }
+        ]
+    },
+    'LinearizationCalMethods': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_LINEARIZATION_CAL_METHOD_SOFTWARE',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_LINEARIZATION_CAL_METHOD_FIRMWARE',
+                'value': 2
+            }
+        ]
+    },
+    'LvfpgaCoercionValues': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_NO_SIZE_COERCION',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_PROPORTIONAL_SIZE_COERCION',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_FIXED_SIZE_COERCION',
+                'value': 2
+            }
+        ]
+    },
+    'MaxInputFrequency': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_BANDWIDTH_FULL',
+                'value': -1.0
+            },
+            {
+                'name': 'NISCOPE_VAL_BANDWIDTH_DEVICE_DEFAULT',
+                'value': 0.0
+            },
+            {
+                'name': 'NISCOPE_VAL_20MHZ_BANDWIDTH',
+                'value': 20000000.0
+            },
+            {
+                'name': 'NISCOPE_VAL_100MHZ_BANDWIDTH',
+                'value': 100000000.0
+            },
+            {
+                'name': 'NISCOPE_VAL_20MHZ_MAX_INPUT_FREQUENCY',
+                'value': 20000000.0
+            },
+            {
+                'name': 'NISCOPE_VAL_100MHZ_MAX_INPUT_FREQUENCY',
+                'value': 100000000.0
+            }
+        ]
+    },
+    'MaxTime': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_MAX_TIME_INFINITE',
+                'value': 4294967295
+            },
+            {
+                'name': 'NISCOPE_VAL_MAX_TIME_IMMEDIATE',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_MAX_TIME_NONE',
+                'value': 0
+            }
+        ]
+    },
+    'MeasFilterType': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_MEAS_LOWPASS',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_MEAS_HIGHPASS',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_MEAS_BANDPASS',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_MEAS_BANDSTOP',
+                'value': 3
+            }
+        ]
+    },
+    'MeasPercentageMethod': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_MEAS_LOW_HIGH',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_MEAS_MIN_MAX',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_MEAS_BASE_TOP',
+                'value': 2
+            }
+        ]
+    },
+    'MeasRefLevelUnits': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_MEAS_VOLTAGE',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_MEAS_PERCENTAGE',
+                'value': 1
+            }
+        ]
+    },
+    'MruSignalNames': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_START_TRIG_SIGNAL_STR',
+                'value': 'StartTrigger'
+            },
+            {
+                'name': 'NISCOPE_VAL_REF_TRIG_SIGNAL_STR',
+                'value': 'ReferenceTrigger'
+            },
+            {
+                'name': 'NISCOPE_VAL_ADV_TRIG_SIGNAL_STR',
+                'value': 'RecordAdvanceTrigger'
+            },
+            {
+                'name': 'NISCOPE_VAL_RDY_FOR_START_EVENT_SIGNAL_STR',
+                'value': 'ReadyForStartEvent'
+            },
+            {
+                'name': 'NISCOPE_VAL_RDY_FOR_REF_EVENT_SIGNAL_STR',
+                'value': 'ReadyForReferenceEvent'
+            },
+            {
+                'name': 'NISCOPE_VAL_RDY_FOR_ADV_EVENT_SIGNAL_STR',
+                'value': 'ReadyForAdvanceEvent'
+            },
+            {
+                'name': 'NISCOPE_VAL_END_OF_RECORD_EVENT_SIGNAL_STR',
+                'value': 'EndOfRecordEvent'
+            },
+            {
+                'name': 'NISCOPE_VAL_DONE_EVENT_SIGNAL_STR',
+                'value': 'DoneEvent'
+            }
+        ]
+    },
     'NotificationType': {
         'values': [
             {
@@ -910,6 +1543,26 @@ enums = {
             }
         ]
     },
+    'OptionsForErrorHandling': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CAL_ABORT_ON_ERR',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_ABORT_ON_MAJOR_ERR',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_SKIP_BAD_SECTIONS',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_RESET_BAD_SECTIONS',
+                'value': 3
+            }
+        ]
+    },
     'OverflowErrorReporting': {
         'values': [
             {
@@ -931,6 +1584,22 @@ enums = {
                     'description': '\nNI-SCOPE does not return an error when an overflow has occurred in the\nOSP block.\n'
                 },
                 'name': 'NISCOPE_VAL_ERROR_REPORTING_DISABLED',
+                'value': 2
+            }
+        ]
+    },
+    'P2PStreamRelativeTo': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_STREAM_RELATIVE_TO_START_TRIGGER',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_STREAM_RELATIVE_TO_REFERENCE_TRIGGER',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_STREAM_RELATIVE_TO_SYNC_TRIGGER',
                 'value': 2
             }
         ]
@@ -960,6 +1629,56 @@ enums = {
             }
         ]
     },
+    'PllCommitActions': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_PLL_COMMIT_ACTION_NORMAL',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_PLL_COMMIT_ACTION_SKIP_NEW_TASK_LOCK',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_PLL_COMMIT_ACTION_FORCE_LOCK',
+                'value': 2
+            }
+        ]
+    },
+    'Privileges': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_MONITOR',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_REVOKABLE_CONTROL',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_NON_REVOKABLE_CONTROL',
+                'value': 3
+            }
+        ]
+    },
+    'ProgFIRFilterRealComplex': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Sets a dual real filter.'
+                },
+                'name': 'NISCOPE_VAL_REAL',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Sets a complex filter.'
+                },
+                'name': 'NISCOPE_VAL_COMPLEX',
+                'value': 1
+            }
+        ]
+    },
     'ProgFIRFilterSymmetry': {
         'values': [
             {
@@ -974,6 +1693,42 @@ enums = {
                     'description': 'Sets an asymmetric filter.'
                 },
                 'name': 'NISCOPE_VAL_ASYMMETRIC',
+                'value': 1
+            }
+        ]
+    },
+    'ProgFIRFilterSymmetryType': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR symmetry type to even.'
+                },
+                'name': 'NISCOPE_VAL_EVEN',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Sets the discriminator FIR symmetry type to odd.'
+                },
+                'name': 'NISCOPE_VAL_ODD',
+                'value': 1
+            }
+        ]
+    },
+    'QInputToCoordConverter': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Enables the Q input to coordinate converter.'
+                },
+                'name': 'NISCOPE_VAL_I_AND_Q',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Zeroes out the Q input the to coordinate converter.'
+                },
+                'name': 'NISCOPE_VAL_Q_ZEROED',
                 'value': 1
             }
         ]
@@ -1010,6 +1765,18 @@ enums = {
             }
         ]
     },
+    'RecordCountModes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_FINITE_RECORDS',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_CONTINUOUS_RECORDS',
+                'value': 1
+            }
+        ]
+    },
     'RefLevelUnits': {
         'values': [
             {
@@ -1043,6 +1810,69 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_DDC_OUTPUT',
                 'value': 1
+            }
+        ]
+    },
+    'ReferenceParameterForRoutingAndStoringAndFetchingIntRef': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CAL_10V_CH0',
+                'value': 0
+            }
+        ]
+    },
+    'ResamplerFilterMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Resampler enabled.'
+                },
+                'name': 'NISCOPE_VAL_RESAMPLER_ENABLED',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'HB 1 enabled.'
+                },
+                'name': 'NISCOPE_VAL_HB_1_ENABLED',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Resampler and HB 1.'
+                },
+                'name': 'NISCOPE_VAL_RESAMPLER_AND_HB_1',
+                'value': 3
+            },
+            {
+                'documentation': {
+                    'description': 'Both HB Filters.'
+                },
+                'name': 'NISCOPE_VAL_BOTH_HB_FILTERS',
+                'value': 6
+            },
+            {
+                'documentation': {
+                    'description': 'Resampler and Both HB Filters.'
+                },
+                'name': 'NISCOPE_VAL_RESAMPLER_AND_BOTH_HB_FILTERS',
+                'value': 7
+            }
+        ]
+    },
+    'RouteInternalReferenceOptions': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CAL_UNROUTE_SIGNAL',
+                'value': '(ViUInt32)0xfffffff'
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_POSITIVE',
+                'value': '(ViUInt32)0xffff'
+            },
+            {
+                'name': 'NISCOPE_VAL_CAL_NEGATIVE',
+                'value': 0
             }
         ]
     },
@@ -1096,6 +1926,58 @@ enums = {
             }
         ]
     },
+    'SampClkTimepaceSrc': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CLK_IN',
+                'value': 'VAL_CLK_IN'
+            },
+            {
+                'name': 'NISCOPE_VAL_NO_SOURCE',
+                'value': 'VAL_NO_SOURCE'
+            },
+            {
+                'name': 'NISCOPE_VAL_PXI_STAR',
+                'value': 'VAL_PXI_STAR'
+            },
+            {
+                'name': 'NISCOPE_VAL_PXIE_DSTAR_A',
+                'value': 'VAL_PXIE_DSTAR_A'
+            },
+            {
+                'name': 'NISCOPE_VAL_AUX_0_CLK_IN',
+                'value': 'VAL_AUX_0_CLK_IN'
+            },
+            {
+                'name': 'NISCOPE_VAL_ONBOARD_CONFIGURABLE_RATE_CLK',
+                'value': 'VAL_ONBOARD_CONFIGURABLE_RATE_CLK'
+            }
+        ]
+    },
+    'SampleCountModes': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_FINITE_SAMPLES',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_CONTINUOUS_SAMPLES',
+                'value': 1
+            }
+        ]
+    },
+    'SampleMode': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_REAL_TIME',
+                'value': 0
+            },
+            {
+                'name': 'NISCOPE_VAL_EQUIVALENT_TIME',
+                'value': 1
+            }
+        ]
+    },
     'ScalarMeasurement': {
         'values': [
             {
@@ -1106,26 +1988,6 @@ enums = {
                 'value': 4000
             },
             {
-                'name': 'NISCOPE_VAL_FREQUENCY',
-                'value': 2
-            },
-            {
-                'name': 'NISCOPE_VAL_AVERAGE_FREQUENCY',
-                'value': 1016
-            },
-            {
-                'name': 'NISCOPE_VAL_FFT_FREQUENCY',
-                'value': 1008
-            },
-            {
-                'name': 'NISCOPE_VAL_PERIOD',
-                'value': 3
-            },
-            {
-                'name': 'NISCOPE_VAL_AVERAGE_PERIOD',
-                'value': 1015
-            },
-            {
                 'name': 'NISCOPE_VAL_RISE_TIME',
                 'value': 0
             },
@@ -1134,48 +1996,20 @@ enums = {
                 'value': 1
             },
             {
-                'name': 'NISCOPE_VAL_RISE_SLEW_RATE',
-                'value': 1010
+                'name': 'NISCOPE_VAL_FREQUENCY',
+                'value': 2
             },
             {
-                'name': 'NISCOPE_VAL_FALL_SLEW_RATE',
-                'value': 1011
-            },
-            {
-                'name': 'NISCOPE_VAL_OVERSHOOT',
-                'value': 18
-            },
-            {
-                'name': 'NISCOPE_VAL_PRESHOOT',
-                'value': 19
+                'name': 'NISCOPE_VAL_PERIOD',
+                'value': 3
             },
             {
                 'name': 'NISCOPE_VAL_VOLTAGE_RMS',
                 'value': 4
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_CYCLE_RMS',
-                'value': 16
-            },
-            {
-                'name': 'NISCOPE_VAL_AC_ESTIMATE',
-                'value': 1012
-            },
-            {
-                'name': 'NISCOPE_VAL_FFT_AMPLITUDE',
-                'value': 1009
-            },
-            {
-                'name': 'NISCOPE_VAL_VOLTAGE_AVERAGE',
-                'value': 10
-            },
-            {
-                'name': 'NISCOPE_VAL_VOLTAGE_CYCLE_AVERAGE',
-                'value': 17
-            },
-            {
-                'name': 'NISCOPE_VAL_DC_ESTIMATE',
-                'value': 1013
+                'name': 'NISCOPE_VAL_VOLTAGE_PEAK_TO_PEAK',
+                'value': 5
             },
             {
                 'name': 'NISCOPE_VAL_VOLTAGE_MAX',
@@ -1186,10 +2020,6 @@ enums = {
                 'value': 7
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_PEAK_TO_PEAK',
-                'value': 5
-            },
-            {
                 'name': 'NISCOPE_VAL_VOLTAGE_HIGH',
                 'value': 8
             },
@@ -1198,20 +2028,8 @@ enums = {
                 'value': 9
             },
             {
-                'name': 'NISCOPE_VAL_AMPLITUDE',
-                'value': 15
-            },
-            {
-                'name': 'NISCOPE_VAL_VOLTAGE_TOP',
-                'value': 1007
-            },
-            {
-                'name': 'NISCOPE_VAL_VOLTAGE_BASE',
-                'value': 1006
-            },
-            {
-                'name': 'NISCOPE_VAL_VOLTAGE_BASE_TO_TOP',
-                'value': 1017
+                'name': 'NISCOPE_VAL_VOLTAGE_AVERAGE',
+                'value': 10
             },
             {
                 'name': 'NISCOPE_VAL_WIDTH_NEG',
@@ -1230,24 +2048,24 @@ enums = {
                 'value': 14
             },
             {
-                'name': 'NISCOPE_VAL_INTEGRAL',
-                'value': 1005
+                'name': 'NISCOPE_VAL_AMPLITUDE',
+                'value': 15
             },
             {
-                'name': 'NISCOPE_VAL_AREA',
-                'value': 1003
+                'name': 'NISCOPE_VAL_VOLTAGE_CYCLE_RMS',
+                'value': 16
             },
             {
-                'name': 'NISCOPE_VAL_CYCLE_AREA',
-                'value': 1004
+                'name': 'NISCOPE_VAL_VOLTAGE_CYCLE_AVERAGE',
+                'value': 17
             },
             {
-                'name': 'NISCOPE_VAL_TIME_DELAY',
-                'value': 1014
+                'name': 'NISCOPE_VAL_OVERSHOOT',
+                'value': 18
             },
             {
-                'name': 'NISCOPE_VAL_PHASE_DELAY',
-                'value': 1018
+                'name': 'NISCOPE_VAL_PRESHOOT',
+                'value': 19
             },
             {
                 'name': 'NISCOPE_VAL_LOW_REF_VOLTS',
@@ -1262,96 +2080,88 @@ enums = {
                 'value': 1002
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN',
-                'value': 2000
+                'name': 'NISCOPE_VAL_AREA',
+                'value': 1003
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_STDEV',
-                'value': 2001
+                'name': 'NISCOPE_VAL_CYCLE_AREA',
+                'value': 1004
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEDIAN',
-                'value': 2003
+                'name': 'NISCOPE_VAL_INTEGRAL',
+                'value': 1005
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MODE',
-                'value': 2010
+                'name': 'NISCOPE_VAL_VOLTAGE_BASE',
+                'value': 1006
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MAX',
-                'value': 2005
+                'name': 'NISCOPE_VAL_VOLTAGE_TOP',
+                'value': 1007
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MIN',
-                'value': 2006
+                'name': 'NISCOPE_VAL_FFT_FREQUENCY',
+                'value': 1008
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_PEAK_TO_PEAK',
-                'value': 2002
+                'name': 'NISCOPE_VAL_FFT_AMPLITUDE',
+                'value': 1009
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV',
-                'value': 2007
+                'name': 'NISCOPE_VAL_RISE_SLEW_RATE',
+                'value': 1010
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV',
-                'value': 2008
+                'name': 'NISCOPE_VAL_FALL_SLEW_RATE',
+                'value': 1011
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV',
-                'value': 2009
+                'name': 'NISCOPE_VAL_AC_ESTIMATE',
+                'value': 1012
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_HITS',
-                'value': 2004
+                'name': 'NISCOPE_VAL_DC_ESTIMATE',
+                'value': 1013
             },
             {
-                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_NEW_HITS',
-                'value': 2011
+                'name': 'NISCOPE_VAL_TIME_DELAY',
+                'value': 1014
             },
             {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEAN',
-                'value': 3000
+                'name': 'NISCOPE_VAL_AVERAGE_PERIOD',
+                'value': 1015
             },
             {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_STDEV',
-                'value': 3001
+                'name': 'NISCOPE_VAL_AVERAGE_FREQUENCY',
+                'value': 1016
             },
             {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEDIAN',
-                'value': 3003
+                'name': 'NISCOPE_VAL_VOLTAGE_BASE_TO_TOP',
+                'value': 1017
             },
             {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MODE',
-                'value': 3010
+                'name': 'NISCOPE_VAL_PHASE_DELAY',
+                'value': 1018
+            }
+        ]
+    },
+    'SessionState': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_IDLE',
+                'value': 1
             },
             {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MAX',
-                'value': 3005
+                'name': 'NISCOPE_VAL_VERIFIED',
+                'value': 2
             },
             {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MIN',
-                'value': 3006
+                'name': 'NISCOPE_VAL_COMMITTED',
+                'value': 4
             },
             {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_PEAK_TO_PEAK',
-                'value': 3002
-            },
-            {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEAN_PLUS_STDEV',
-                'value': 3007
-            },
-            {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEAN_PLUS_2_STDEV',
-                'value': 3008
-            },
-            {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_HITS',
-                'value': 3004
-            },
-            {
-                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_NEW_HITS',
-                'value': 3011
+                'name': 'NISCOPE_VAL_RUNNING',
+                'value': 8
             }
         ]
     },
@@ -1380,6 +2190,96 @@ enums = {
             }
         ]
     },
+    'SyncoutClkSelect': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Specifies CLKIN as the source for Syncout CLK.'
+                },
+                'name': 'NISCOPE_VAL_CLKIN',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies PROCCLK as the source for Syncout CLK.'
+                },
+                'name': 'NISCOPE_VAL_PROCCLK',
+                'value': 1
+            }
+        ]
+    },
+    'TVTriggerSignalFormat': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_NTSC',
+                'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_PAL',
+                'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_SECAM',
+                'value': 3
+            },
+            {
+                'name': 'NISCOPE_VAL_M_PAL',
+                'value': 1001
+            },
+            {
+                'name': 'NISCOPE_VAL_480I_59_94_FIELDS_PER_SECOND',
+                'value': 1010
+            },
+            {
+                'name': 'NISCOPE_VAL_480I_60_FIELDS_PER_SECOND',
+                'value': 1011
+            },
+            {
+                'name': 'NISCOPE_VAL_480P_59_94_FRAMES_PER_SECOND',
+                'value': 1015
+            },
+            {
+                'name': 'NISCOPE_VAL_480P_60_FRAMES_PER_SECOND',
+                'value': 1016
+            },
+            {
+                'name': 'NISCOPE_VAL_576I_50_FIELDS_PER_SECOND',
+                'value': 1020
+            },
+            {
+                'name': 'NISCOPE_VAL_576P_50_FRAMES_PER_SECOND',
+                'value': 1025
+            },
+            {
+                'name': 'NISCOPE_VAL_720P_50_FRAMES_PER_SECOND',
+                'value': 1031
+            },
+            {
+                'name': 'NISCOPE_VAL_720P_59_94_FRAMES_PER_SECOND',
+                'value': 1032
+            },
+            {
+                'name': 'NISCOPE_VAL_720P_60_FRAMES_PER_SECOND',
+                'value': 1033
+            },
+            {
+                'name': 'NISCOPE_VAL_1080I_50_FIELDS_PER_SECOND',
+                'value': 1040
+            },
+            {
+                'name': 'NISCOPE_VAL_1080I_59_94_FIELDS_PER_SECOND',
+                'value': 1041
+            },
+            {
+                'name': 'NISCOPE_VAL_1080I_60_FIELDS_PER_SECOND',
+                'value': 1042
+            },
+            {
+                'name': 'NISCOPE_VAL_1080P_24_FRAMES_PER_SECOND',
+                'value': 1045
+            }
+        ]
+    },
     'TerminalConfiguration': {
         'values': [
             {
@@ -1402,6 +2302,90 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_DIFFERENTIAL',
                 'value': 2
+            }
+        ]
+    },
+    'TimeHistogram': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEAN',
+                'value': 3000
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_STDEV',
+                'value': 3001
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_PEAK_TO_PEAK',
+                'value': 3002
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEDIAN',
+                'value': 3003
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_HITS',
+                'value': 3004
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MAX',
+                'value': 3005
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MIN',
+                'value': 3006
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEAN_PLUS_STDEV',
+                'value': 3007
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEAN_PLUS_2_STDEV',
+                'value': 3008
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MEAN_PLUS_3_STDEV',
+                'value': 3009
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_MODE',
+                'value': 3010
+            },
+            {
+                'name': 'NISCOPE_VAL_TIME_HISTOGRAM_NEW_HITS',
+                'value': 3011
+            }
+        ]
+    },
+    'TimingNcoFreqOffsetBits': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Specifies 8 offset bits in the timing NCO.'
+                },
+                'name': 'NISCOPE_VAL__8_BITS',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies 16 offset bits in the timing NCO.'
+                },
+                'name': 'NISCOPE_VAL__16_BITS',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies 24 offset bits in the timing NCO.'
+                },
+                'name': 'NISCOPE_VAL__24_BITS',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies 32 offset bits in the timing NCO.'
+                },
+                'name': 'NISCOPE_VAL__32_BITS',
+                'value': 3
             }
         ]
     },
@@ -1459,6 +2443,10 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_AUTO',
                 'value': 2
+            },
+            {
+                'name': 'NISCOPE_VAL_AUTO_LEVEL',
+                'value': 3
             }
         ]
     },
@@ -1491,155 +2479,155 @@ enums = {
         'values': [
             {
                 'name': 'NISCOPE_VAL_IMMEDIATE',
-                'value': '"VAL_IMMEDIATE"'
+                'value': 'VAL_IMMEDIATE'
             },
             {
                 'name': 'NISCOPE_VAL_EXTERNAL',
-                'value': '"VAL_EXTERNAL"'
+                'value': 'VAL_EXTERNAL'
             },
             {
                 'name': 'NISCOPE_VAL_SW_TRIG_FUNC',
-                'value': '"VAL_SW_TRIG_FUNC"'
+                'value': 'VAL_SW_TRIG_FUNC'
             },
             {
                 'name': 'NISCOPE_VAL_TTL0',
-                'value': '"VAL_TTL0"'
+                'value': 'VAL_TTL0'
             },
             {
                 'name': 'NISCOPE_VAL_TTL1',
-                'value': '"VAL_TTL1"'
+                'value': 'VAL_TTL1'
             },
             {
                 'name': 'NISCOPE_VAL_TTL2',
-                'value': '"VAL_TTL2"'
+                'value': 'VAL_TTL2'
             },
             {
                 'name': 'NISCOPE_VAL_TTL3',
-                'value': '"VAL_TTL3"'
+                'value': 'VAL_TTL3'
             },
             {
                 'name': 'NISCOPE_VAL_TTL4',
-                'value': '"VAL_TTL4"'
+                'value': 'VAL_TTL4'
             },
             {
                 'name': 'NISCOPE_VAL_TTL5',
-                'value': '"VAL_TTL5"'
+                'value': 'VAL_TTL5'
             },
             {
                 'name': 'NISCOPE_VAL_TTL6',
-                'value': '"VAL_TTL6"'
+                'value': 'VAL_TTL6'
             },
             {
                 'name': 'NISCOPE_VAL_TTL7',
-                'value': '"VAL_TTL7"'
+                'value': 'VAL_TTL7'
             },
             {
                 'name': 'NISCOPE_VAL_ECL0',
-                'value': '"VAL_ECL0"'
+                'value': 'VAL_ECL0'
             },
             {
                 'name': 'NISCOPE_VAL_ECL1',
-                'value': '"VAL_ECL1"'
+                'value': 'VAL_ECL1'
             },
             {
                 'name': 'NISCOPE_VAL_PXI_STAR',
-                'value': '"VAL_PXI_STAR"'
+                'value': 'VAL_PXI_STAR'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_0',
-                'value': '"VAL_RTSI_0"'
+                'value': 'VAL_RTSI_0'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_1',
-                'value': '"VAL_RTSI_1"'
+                'value': 'VAL_RTSI_1'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_2',
-                'value': '"VAL_RTSI_2"'
+                'value': 'VAL_RTSI_2'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_3',
-                'value': '"VAL_RTSI_3"'
+                'value': 'VAL_RTSI_3'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_4',
-                'value': '"VAL_RTSI_4"'
+                'value': 'VAL_RTSI_4'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_5',
-                'value': '"VAL_RTSI_5"'
+                'value': 'VAL_RTSI_5'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_6',
-                'value': '"VAL_RTSI_6"'
+                'value': 'VAL_RTSI_6'
             },
             {
                 'name': 'NISCOPE_VAL_RTSI_7',
-                'value': '"VAL_RTSI_7"'
+                'value': 'VAL_RTSI_7'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_0',
-                'value': '"VAL_PFI_0"'
+                'value': 'VAL_PFI_0'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_1',
-                'value': '"VAL_PFI_1"'
+                'value': 'VAL_PFI_1'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_2',
-                'value': '"VAL_PFI_2"'
+                'value': 'VAL_PFI_2'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_3',
-                'value': '"VAL_PFI_3"'
+                'value': 'VAL_PFI_3'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_4',
-                'value': '"VAL_PFI_4"'
+                'value': 'VAL_PFI_4'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_5',
-                'value': '"VAL_PFI_5"'
+                'value': 'VAL_PFI_5'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_6',
-                'value': '"VAL_PFI_6"'
+                'value': 'VAL_PFI_6'
             },
             {
                 'name': 'NISCOPE_VAL_PFI_7',
-                'value': '"VAL_PFI_7"'
+                'value': 'VAL_PFI_7'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_0',
-                'value': '"VAL_AUX_0_PFI_0"'
+                'value': 'VAL_AUX_0_PFI_0'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_1',
-                'value': '"VAL_AUX_0_PFI_1"'
+                'value': 'VAL_AUX_0_PFI_1'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_3',
-                'value': '"VAL_AUX_0_PFI_3"'
+                'value': 'VAL_AUX_0_PFI_3'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_4',
-                'value': '"VAL_AUX_0_PFI_4"'
+                'value': 'VAL_AUX_0_PFI_4'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_5',
-                'value': '"VAL_AUX_0_PFI_5"'
+                'value': 'VAL_AUX_0_PFI_5'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_6',
-                'value': '"VAL_AUX_0_PFI_6"'
+                'value': 'VAL_AUX_0_PFI_6'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_7',
-                'value': '"VAL_AUX_0_PFI_7"'
+                'value': 'VAL_AUX_0_PFI_7'
             },
             {
                 'name': 'NISCOPE_VAL_AUX_0_PFI_2',
-                'value': '"VAL_AUX_0_PFI_2"'
+                'value': 'VAL_AUX_0_PFI_2'
             }
         ]
     },
@@ -1723,6 +2711,10 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_LEAVING_WINDOW',
                 'value': 1
+            },
+            {
+                'name': 'NISCOPE_VAL_ENTERING_OR_LEAVING_WINDOW',
+                'value': 2
             }
         ]
     },
@@ -1748,6 +2740,14 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_GND',
                 'value': 2
+            }
+        ]
+    },
+    'VideoFormats': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_CUSTOM_FORMAT',
+                'value': 400
             }
         ]
     },
@@ -1928,6 +2928,58 @@ enums = {
                 },
                 'name': 'NISCOPE_VAL_TV_EVENT_LINE_NUMBER',
                 'value': 5
+            }
+        ]
+    },
+    'VoltageHistogram': {
+        'values': [
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN',
+                'value': 2000
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_STDEV',
+                'value': 2001
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_PEAK_TO_PEAK',
+                'value': 2002
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEDIAN',
+                'value': 2003
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_HITS',
+                'value': 2004
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MAX',
+                'value': 2005
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MIN',
+                'value': 2006
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV',
+                'value': 2007
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV',
+                'value': 2008
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV',
+                'value': 2009
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_MODE',
+                'value': 2010
+            },
+            {
+                'name': 'NISCOPE_VAL_VOLTAGE_HISTOGRAM_NEW_HITS',
+                'value': 2011
             }
         ]
     },
