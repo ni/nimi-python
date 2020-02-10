@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 19.1.0d1
+# This file is generated from NI Switch Executive API metadata version 21.0.0d0
 config = {
-    'api_version': '19.1.0d1',
+    'api_version': '21.0.0d0',
     'c_function_prefix': 'niSE_',
     'close_function': 'CloseSession',
     'context_manager_name': {
@@ -10,7 +10,9 @@ config = {
     ],
     'driver_name': 'NI Switch Executive',
     'driver_registry': 'Switch Executive',
-    'extra_errors_used': ['InvalidRepeatedCapabilityError', ],
+    'extra_errors_used': [
+        'InvalidRepeatedCapabilityError'
+    ],
     'init_function': 'OpenSession',
     'library_info': {
         'Linux': {
@@ -36,5 +38,5 @@ config = {
     ],
     'session_class_description': 'An NI Switch Executive session',
     'session_handle_parameter_name': 'vi',
-    'use_locking': False,
+    'use_locking': False
 }

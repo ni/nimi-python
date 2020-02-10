@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 19.1.0d1
+# This file is generated from NI Switch Executive API metadata version 21.0.0d0
 functions = {
-    'ClearError': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThis function clears the error information stored on a session. Note\nthat niSE_GetError actually clears the error information after it is\nretrieved. niSE_ClearError is thus only necessary when a call to\nniSE_GetError is not being performed.\n'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe Session handle that you obtain from niSE_OpenSession. The handle\nidentifies a particular session to the virtual switch device.\n'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'CloseSession': {
         'codegen_method': 'private',
         'documentation': {
@@ -401,39 +384,6 @@ functions = {
                     'value': 1
                 },
                 'type': 'ViInt32[]'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetIviDeviceSession': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nRetrieves an IVI instrument session for an IVI switching device that is\nbeing managed by the NI Switch Executive. The retrieved session handle\ncan be used to access instrument specific functionality through the\ninstrument driver. The retrieved handle should not be closed. Note: Use\ncaution when using the session handle. Calling functions on an\ninstrument driver can invalidate the NI Switch Executive configuration\nand cache. You should not use the retrieved session handle to make or\nbreak connections or modify the configuration channels as this can cause\nundefined, and potentially unwanted, behavior.\n'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe Session handle that you obtain from niSE_OpenSession. The handle\nidentifies a particular session to the virtual switch device.\n'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': '\nThe IVI logical name of the IVI device for which to retrieve an IVI\nsession.\n'
-                },
-                'name': 'iviLogicalName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'The IVI instrument handle of the specified IVI device.'
-                },
-                'name': 'iviSessionHandle',
-                'type': 'ViSession'
             }
         ],
         'returns': 'ViStatus'
