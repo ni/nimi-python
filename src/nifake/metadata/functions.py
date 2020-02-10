@@ -482,7 +482,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Array of custom type using puthon-code size mechanism'
+                    'description': 'Array of custom type using python-code size mechanism'
                 },
                 'name': 'arrayOut',
                 'size': {
@@ -2270,6 +2270,59 @@ functions = {
                 'type': 'ViReal64[]',
                 'use_array': True
             }
+        ],
+        'returns': 'ViStatus'
+    },
+    'AcceptListOfTimeValues': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Accepts a list of values representing time.',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Count of input values.'
+                },
+                'name': 'count',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A collection of timestamp values.'
+                },
+                'name': 'timestamps',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'count'
+                },
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A collection of delay values.'
+                },
+                'name': 'delays',
+                'python_api_converter_name': 'convert_timedeltas_to_milliseconds',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'count'
+                },
+                'type': 'ViInt32[]',
+                'type_in_documentation': 'int in milliseconds or datetime.timedelta'
+            },
         ],
         'returns': 'ViStatus'
     },

@@ -1405,6 +1405,34 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert str(type(session.tclk)) == "<class 'nitclk.session.SessionReference'>"
 
+    def test_accept_time_values(self):
+        self.patched_library.niFake_AcceptListOfTimeValues.side_effect = self.side_effects_helper.niFake_AcceptListOfTimeValues
+        # Pass one argument as list and one as array.array
+        timestamps = [-1.5, 2.0]
+        delays = array.array('l', [2, -4])
+        with nifake.Session('dev1') as session:
+            session.accept_list_of_time_values(timestamps, delays)
+            self.patched_library.niFake_AcceptListOfTimeValues.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViInt32Matcher(len(timestamps)),
+                _matchers.ViReal64BufferMatcher(timestamps),
+                _matchers.ViInt32BufferMatcher([2000, -4000])
+            )
+
+    def test_accept_timedeltas(self):
+        self.patched_library.niFake_AcceptListOfTimeValues.side_effect = self.side_effects_helper.niFake_AcceptListOfTimeValues
+        time_values = [-1.5, 2.0]
+        timestamps = [datetime.timedelta(seconds=i) for i in time_values]
+        delays = [datetime.timedelta(seconds=i) for i in [2, -4]]
+        with nifake.Session('dev1') as session:
+            session.accept_list_of_time_values(timestamps, delays)
+            self.patched_library.niFake_AcceptListOfTimeValues.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViInt32Matcher(len(timestamps)),
+                _matchers.ViReal64BufferMatcher(time_values),
+                _matchers.ViInt32BufferMatcher([2000, -4000])
+            )
+
 
 # not session tests per se
 def test_diagnostic_information():

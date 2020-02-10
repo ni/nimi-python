@@ -21,6 +21,7 @@ class Library(object):
         self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFake_Abort_cfunc = None
+        self.niFake_AcceptListOfTimeValues_cfunc = None
         self.niFake_BoolArrayOutputFunction_cfunc = None
         self.niFake_DoubleAllTheNums_cfunc = None
         self.niFake_EnumArrayOutputFunction_cfunc = None
@@ -84,6 +85,14 @@ class Library(object):
                 self.niFake_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFake_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Abort_cfunc(vi)
+
+    def niFake_AcceptListOfTimeValues(self, vi, count, timestamps, delays):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_AcceptListOfTimeValues_cfunc is None:
+                self.niFake_AcceptListOfTimeValues_cfunc = self._library.niFake_AcceptListOfTimeValues
+                self.niFake_AcceptListOfTimeValues_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_AcceptListOfTimeValues_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_AcceptListOfTimeValues_cfunc(vi, count, timestamps, delays)
 
     def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         with self._func_lock:

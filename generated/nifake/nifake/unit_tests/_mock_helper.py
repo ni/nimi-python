@@ -18,6 +18,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
+        self._defaults['AcceptListOfTimeValues'] = {}
+        self._defaults['AcceptListOfTimeValues']['return'] = 0
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
@@ -193,6 +195,11 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
+
+    def niFake_AcceptListOfTimeValues(self, vi, count, timestamps, delays):  # noqa: N802
+        if self._defaults['AcceptListOfTimeValues']['return'] != 0:
+            return self._defaults['AcceptListOfTimeValues']['return']
+        return self._defaults['AcceptListOfTimeValues']['return']
 
     def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         if self._defaults['BoolArrayOutputFunction']['return'] != 0:
@@ -828,6 +835,8 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
         mock_library.niFake_Abort.return_value = 0
+        mock_library.niFake_AcceptListOfTimeValues.side_effect = MockFunctionCallError("niFake_AcceptListOfTimeValues")
+        mock_library.niFake_AcceptListOfTimeValues.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
         mock_library.niFake_DoubleAllTheNums.side_effect = MockFunctionCallError("niFake_DoubleAllTheNums")

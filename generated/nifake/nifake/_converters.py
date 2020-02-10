@@ -164,6 +164,22 @@ def convert_timedelta_to_microseconds(value, library_type):
     return _convert_timedelta(value, library_type, 1000000)
 
 
+def _convert_timedeltas(values, library_type, scaling):
+    return [_convert_timedelta(i, library_type, scaling) for i in values]
+
+
+def convert_timedeltas_to_seconds(values, library_type):
+    return _convert_timedeltas(values, library_type, 1)
+
+
+def convert_timedeltas_to_milliseconds(values, library_type):
+    return _convert_timedeltas(values, library_type, 1000)
+
+
+def convert_timedeltas_to_microseconds(values, library_type):
+    return _convert_timedeltas(values, library_type, 1000000)
+
+
 def convert_month_to_timedelta(months):
     return datetime.timedelta(days=(30.4167 * months))
 
@@ -208,7 +224,7 @@ def convert_init_with_options_dictionary(values, encoding):
 
 
 # nifake specific converter(s) - used only for testing
-def convert_double_each_element(numbers):
+def convert_double_each_element(numbers, unused):
     return [x * 2 for x in numbers]
 
 
@@ -357,6 +373,72 @@ def test_convert_timedelta_to_microseconds_int():
     test_result = convert_timedelta_to_microseconds(-1, _visatype.ViInt32)
     assert test_result.value == -1000000
     assert isinstance(test_result, _visatype.ViInt32)
+
+
+def test_convert_timedeltas_to_seconds_double():
+    time_values = [10.5, -1]
+    test_result = convert_timedeltas_to_seconds(time_values, _visatype.ViReal64)
+    assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+    timedeltas = [datetime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
+    test_result = convert_timedeltas_to_seconds(timedeltas, _visatype.ViReal64)
+    assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+
+
+def test_convert_timedeltas_to_seconds_int():
+    time_values = [10.5, -1]
+    test_result = convert_timedeltas_to_seconds(time_values, _visatype.ViInt32)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10, -1])])
+    assert all([isinstance(i, _visatype.ViInt32) for i in test_result])
+    timedeltas = [datetime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
+    test_result = convert_timedeltas_to_seconds(timedeltas, _visatype.ViInt32)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10, -1])])
+    assert all([isinstance(i, _visatype.ViInt32) for i in test_result])
+
+
+def test_convert_timedeltas_to_milliseconds_double():
+    time_values = [10.5, -1]
+    test_result = convert_timedeltas_to_milliseconds(time_values, _visatype.ViReal64)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500, -1000])])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+    timedeltas = [datetime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
+    test_result = convert_timedeltas_to_milliseconds(timedeltas, _visatype.ViReal64)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500, -1000])])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+
+
+def test_convert_timedeltas_to_milliseconds_int():
+    time_values = [10.5, -1]
+    test_result = convert_timedeltas_to_milliseconds(time_values, _visatype.ViInt32)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500, -1000])])
+    assert all([isinstance(i, _visatype.ViInt32) for i in test_result])
+    timedeltas = [datetime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
+    test_result = convert_timedeltas_to_milliseconds(timedeltas, _visatype.ViInt32)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500, -1000])])
+    assert all([isinstance(i, _visatype.ViInt32) for i in test_result])
+
+
+def test_convert_timedeltas_to_microseconds_double():
+    time_values = [10.5, -1]
+    test_result = convert_timedeltas_to_microseconds(time_values, _visatype.ViReal64)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500000, -1000000])])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+    timedeltas = [datetime.timedelta(seconds=s, microseconds=ms) for s, ms in zip([10, -1], [500000, 0])]
+    test_result = convert_timedeltas_to_microseconds(timedeltas, _visatype.ViReal64)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500000, -1000000])])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+
+
+def test_convert_timedeltas_to_microseconds_int():
+    time_values = [10.5, -1]
+    test_result = convert_timedeltas_to_microseconds(time_values, _visatype.ViInt32)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500000, -1000000])])
+    assert all([isinstance(i, _visatype.ViInt32) for i in test_result])
+    timedeltas = [datetime.timedelta(seconds=s, microseconds=ms) for s, ms in zip([10, -1], [500000, 0])]
+    test_result = convert_timedeltas_to_microseconds(timedeltas, _visatype.ViInt32)
+    assert all([actual.value == expected for actual, expected in zip(test_result, [10500000, -1000000])])
+    assert all([isinstance(i, _visatype.ViInt32) for i in test_result])
 
 
 # Tests - repeated capabilities
