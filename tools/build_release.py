@@ -50,6 +50,8 @@ Steps
         * Upload to PyPI - you will need to type in your credentials
     * Merge the pull request to origin/master
     * Create a release on GitHub using the portion from the changelog for this release for the description
+        * Add example zip files as artifacts
+        * Update LAST_RELEASE with the version of this release (1.1.5, 1.1.6, 1.2.0)
     * Create and checkout another branch for post-release changes
     * `python3 tools/build_release.py --update`
         * This will update the version to X.X.(N+1).dev0
