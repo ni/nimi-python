@@ -75,6 +75,17 @@ rem echo ghprbTargetBranch =            %ghprbTargetBranch%
 rem echo ghprbCommentBody =             %ghprbCommentBody%
 rem echo sha1 =                         %sha1%
 rem echo .
+echo Creting empty junit file
+
+rem Make sure the junit folder exists, otherwise we can have a race condition creating it in parallel
+mkdir generated\\junit
+rem We are going to make an empty junit file so we will report no tests ran if the tox.ini file doesn't exist
+echo ^<?xml version="1.0" encoding="utf-8"?^> > generated\\junit\\junit-empty.xml
+echo ^<testsuites^> >> generated\\junit\\junit-empty.xml
+echo ^<testsuite errors="0" failures="0" skipped="0" tests="0"^> >> generated\\junit\\junit-empty.xml
+echo ^</testsuite^> >> generated\\junit\\junit-empty.xml
+echo ^</testsuites^> >> generated\\junit\\junit-empty.xml
+
 """)
             }
         }
