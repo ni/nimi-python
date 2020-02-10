@@ -73,6 +73,7 @@ def test_nitclk_configure_for_homogeneous_triggers(session_multiple_sessions):
 
 
 def test_nitclk_sync_pulse_sender_synchronize(session_multiple_sessions):
+    session_multiple_sessions[0].tclk.sync_pulse_clock_source = 'PXI_CLK100'
     nitclk.setup_for_sync_pulse_sender_synchronize(session_multiple_sessions, .001)
     nitclk.synchronize_to_sync_pulse_sender(session_multiple_sessions, .001)
     nitclk.finish_sync_pulse_sender_synchronize(session_multiple_sessions, .001)
