@@ -34,7 +34,7 @@ attributes = {
         'name': 'START_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     4: {
         'access': 'read-write',
@@ -47,7 +47,7 @@ attributes = {
         'name': 'REF_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     5: {
         'access': 'read-write',
@@ -61,7 +61,7 @@ attributes = {
         'name': 'SCRIPT_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     6: {
         'access': 'read-write',
@@ -74,7 +74,7 @@ attributes = {
         'name': 'PAUSE_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     8: {
         'access': 'read only',
@@ -143,6 +143,6 @@ attributes = {
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     }
 }

@@ -39,7 +39,10 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
 
 
 class SessionReference(object):
-    '''Properties container for NI-TClk attributes.'''
+    '''Properties container for NI-TClk attributes.
+
+    Note: Constructing this class is an advanced use case and should not be needed in most circumstances.
+    '''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
@@ -73,13 +76,13 @@ class SessionReference(object):
     Default Value is empty string
     '''
     pause_trigger_master_session = _attributes.AttributeSessionReference(6)
-    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
+    '''Type: Driver Session or nitclk.SessionReference
 
     Specifies the pause trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
     ref_trigger_master_session = _attributes.AttributeSessionReference(4)
-    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
+    '''Type: Driver Session or nitclk.SessionReference
 
     Specifies the reference trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
@@ -97,7 +100,7 @@ class SessionReference(object):
     Note: Sample clock delay is supported for generation sessions only; it is
     '''
     sequencer_flag_master_session = _attributes.AttributeSessionReference(16)
-    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
+    '''Type: Driver Session or nitclk.SessionReference
 
     Specifies the sequencer flag master session.
     For external triggers, the session that originally receives the trigger.
@@ -105,7 +108,7 @@ class SessionReference(object):
     originally generates the trigger.
     '''
     start_trigger_master_session = _attributes.AttributeSessionReference(3)
-    '''Type: nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number
+    '''Type: Driver Session or nitclk.SessionReference
 
     Specifies the start trigger master session.
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
@@ -596,7 +599,7 @@ class _Session(object):
         sessions.
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
@@ -608,10 +611,10 @@ class _Session(object):
     def finish_sync_pulse_sender_synchronize(self, sessions, min_time):
         r'''finish_sync_pulse_sender_synchronize
 
-        TBD
+        Finishes synchronizing the Sync Pulse Sender.
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -622,7 +625,7 @@ class _Session(object):
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
-        sessions_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_number_list(sessions), library_type=_visatype.ViSession)  # case B520
+        sessions_ctype = get_ctypes_pointer_for_buffer(value=sessions, library_type=_visatype.ViSession)  # case B550
         min_time_ctype = _visatype.ViReal64(min_time)  # case S150
         error_code = self._library.niTClk_FinishSyncPulseSenderSynchronize(session_count_ctype, sessions_ctype, min_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -664,7 +667,7 @@ class _Session(object):
         that import the TClk-synchronized start trigger.
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         '''
         session_count_ctype = _visatype.ViUInt32(0 if sessions is None else len(sessions))  # case S160
@@ -680,7 +683,7 @@ class _Session(object):
         corresponding to sessions.
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
 
         Returns:
@@ -699,10 +702,10 @@ class _Session(object):
     def setup_for_sync_pulse_sender_synchronize(self, sessions, min_time):
         r'''setup_for_sync_pulse_sender_synchronize
 
-        TBD
+        Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -730,7 +733,7 @@ class _Session(object):
         help file at Start>>Programs>>National Instruments>>NI-TClk.
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
             min_tclk_period (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -750,10 +753,10 @@ class _Session(object):
     def synchronize_to_sync_pulse_sender(self, sessions, min_time):
         r'''synchronize_to_sync_pulse_sender
 
-        TBD
+        Synchronizes the other devices to the Sync Pulse Sender.
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
             min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -783,7 +786,7 @@ class _Session(object):
         complete within a certain time.
 
         Args:
-            sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+            sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
             timeout (float): The amount of time in seconds that wait_until_done waits for the
                 sessions to complete. If timeout is exceeded, wait_until_done
@@ -924,7 +927,7 @@ def configure_for_homogeneous_triggers(sessions):
     sessions.
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
     '''
     return _Session().configure_for_homogeneous_triggers(sessions)
@@ -933,10 +936,10 @@ def configure_for_homogeneous_triggers(sessions):
 def finish_sync_pulse_sender_synchronize(sessions, min_time):
     '''finish_sync_pulse_sender_synchronize
 
-    TBD
+    Finishes synchronizing the Sync Pulse Sender.
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -959,7 +962,7 @@ def initiate(sessions):
     that import the TClk-synchronized start trigger.
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
     '''
     return _Session().initiate(sessions)
@@ -972,7 +975,7 @@ def is_done(sessions):
     corresponding to sessions.
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
 
     Returns:
@@ -987,10 +990,10 @@ def is_done(sessions):
 def setup_for_sync_pulse_sender_synchronize(sessions, min_time):
     '''setup_for_sync_pulse_sender_synchronize
 
-    TBD
+    Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -1014,7 +1017,7 @@ def synchronize(sessions, min_tclk_period):
     help file at Start>>Programs>>National Instruments>>NI-TClk.
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         min_tclk_period (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -1030,10 +1033,10 @@ def synchronize(sessions, min_tclk_period):
 def synchronize_to_sync_pulse_sender(sessions, min_time):
     '''synchronize_to_sync_pulse_sender
 
-    TBD
+    Synchronizes the other devices to the Sync Pulse Sender.
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         min_time (float): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -1059,7 +1062,7 @@ def wait_until_done(sessions, timeout):
     complete within a certain time.
 
     Args:
-        sessions (list of list of int, list of nimi-python Session class, list of SessionReference): sessions is an array of sessions that are being synchronized.
+        sessions (list of (Driver Session or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         timeout (float): The amount of time in seconds that wait_until_done waits for the
             sessions to complete. If timeout is exceeded, wait_until_done

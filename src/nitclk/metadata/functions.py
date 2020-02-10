@@ -19,7 +19,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -48,7 +48,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -84,7 +84,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             }
         ],
@@ -106,7 +106,7 @@ functions = {
     },
     'FinishSyncPulseSenderSynchronize': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Finishes synchronizing the Sync Pulse Sender.'
         },
         'parameters': [
             {
@@ -124,12 +124,12 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
-                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(nimi-python Session class or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -161,7 +161,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -437,7 +437,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(nimi-python Session class or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -497,7 +497,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             }
         ],
@@ -563,7 +563,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(nimi-python Session class or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -788,7 +788,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -957,7 +957,7 @@ functions = {
     },
     'SetupForSyncPulseSenderSynchronize': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Configures the TClks on all the devices and prepares the Sync Pulse Sender for synchronization'
         },
         'parameters': [
             {
@@ -980,7 +980,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1019,7 +1019,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1054,7 +1054,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1083,7 +1083,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1101,7 +1101,7 @@ functions = {
     },
     'SynchronizeToSyncPulseSender': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Synchronizes the other devices to the Sync Pulse Sender.'
         },
         'parameters': [
             {
@@ -1124,7 +1124,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1163,7 +1163,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': 'list of int, list of nimi-python Session class, list of SessionReference',
+                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
