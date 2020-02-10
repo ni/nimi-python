@@ -457,7 +457,7 @@ def test_nitclk_wait_until_done(session_multiple_sessions):
     nitclk.configure_for_homogeneous_triggers(session_multiple_sessions)
     nitclk.synchronize(session_multiple_sessions, .001)
     nitclk.initiate(session_multiple_sessions)
-    nitclk.wait_until_done(session_multiple_sessions)
+    nitclk.wait_until_done(session_multiple_sessions, .001)
 
 
 
