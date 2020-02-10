@@ -34,6 +34,14 @@ class _ArrayMeasurement(Enum):
     r'''
     Last Acquisition Histogram
     '''
+    FFT_PHASE_SPECTRUM = 4002
+    r'''
+    FFT Phase Spectrum
+    '''
+    FFT_AMP_SPECTRUM_VOLTS_RMS = 4003
+    r'''
+    FFT Amp. Spectrum (Volts RMS)
+    '''
     MULTI_ACQ_VOLTAGE_HISTOGRAM = 4004
     r'''
     Multi Acquisition Voltage Histogram
@@ -41,14 +49,6 @@ class _ArrayMeasurement(Enum):
     MULTI_ACQ_TIME_HISTOGRAM = 4005
     r'''
     Multi Acquisition Time Histogram
-    '''
-    MULTI_ACQ_AVERAGE = 4016
-    r'''
-    Multi Acquisition Average
-    '''
-    POLYNOMIAL_INTERPOLATION = 4011
-    r'''
-    Polynomial Interpolation
     '''
     ARRAY_INTEGRAL = 4006
     r'''
@@ -61,6 +61,18 @@ class _ArrayMeasurement(Enum):
     INVERSE = 4008
     r'''
     Inverse
+    '''
+    HANNING_WINDOW = 4009
+    r'''
+    Hanning Window
+    '''
+    FLAT_TOP_WINDOW = 4010
+    r'''
+    Flat Top Window
+    '''
+    POLYNOMIAL_INTERPOLATION = 4011
+    r'''
+    Polynomial Interpolation
     '''
     MULTIPLY_CHANNELS = 4012
     r'''
@@ -78,41 +90,9 @@ class _ArrayMeasurement(Enum):
     r'''
     Divide Channels
     '''
-    ARRAY_OFFSET = 4025
+    MULTI_ACQ_AVERAGE = 4016
     r'''
-    Array Offset
-    '''
-    ARRAY_GAIN = 4026
-    r'''
-    Array Gain
-    '''
-    HANNING_WINDOW = 4009
-    r'''
-    Hanning Window
-    '''
-    FLAT_TOP_WINDOW = 4010
-    r'''
-    Flat Top Window
-    '''
-    HAMMING_WINDOW = 4020
-    r'''
-    Hamming Window
-    '''
-    TRIANGLE_WINDOW = 4023
-    r'''
-    Triangle Window
-    '''
-    BLACKMAN_WINDOW = 4024
-    r'''
-    Blackman Window
-    '''
-    WINDOWED_FIR_FILTER = 4021
-    r'''
-    FIR Windowed Filter
-    '''
-    BESSEL_FILTER = 4022
-    r'''
-    Bessel IIR Filter
+    Multi Acquisition Average
     '''
     BUTTERWORTH_FILTER = 4017
     r'''
@@ -122,17 +102,37 @@ class _ArrayMeasurement(Enum):
     r'''
     Chebyshev IIR Filter
     '''
-    FFT_PHASE_SPECTRUM = 4002
-    r'''
-    FFT Phase Spectrum
-    '''
-    FFT_AMP_SPECTRUM_VOLTS_RMS = 4003
-    r'''
-    FFT Amp. Spectrum (Volts RMS)
-    '''
     FFT_AMP_SPECTRUM_DB = 4019
     r'''
     FFT Amp. Spectrum (dB)
+    '''
+    HAMMING_WINDOW = 4020
+    r'''
+    Hamming Window
+    '''
+    WINDOWED_FIR_FILTER = 4021
+    r'''
+    FIR Windowed Filter
+    '''
+    BESSEL_FILTER = 4022
+    r'''
+    Bessel IIR Filter
+    '''
+    TRIANGLE_WINDOW = 4023
+    r'''
+    Triangle Window
+    '''
+    BLACKMAN_WINDOW = 4024
+    r'''
+    Blackman Window
+    '''
+    ARRAY_OFFSET = 4025
+    r'''
+    Array Offset
+    '''
+    ARRAY_GAIN = 4026
+    r'''
+    Array Gain
     '''
 
 
@@ -436,68 +436,45 @@ class _ScalarMeasurement(Enum):
     r'''
     None
     '''
-    FREQUENCY = 2
-    AVERAGE_FREQUENCY = 1016
-    FFT_FREQUENCY = 1008
-    PERIOD = 3
-    AVERAGE_PERIOD = 1015
     RISE_TIME = 0
     FALL_TIME = 1
-    RISE_SLEW_RATE = 1010
-    FALL_SLEW_RATE = 1011
-    OVERSHOOT = 18
-    PRESHOOT = 19
+    FREQUENCY = 2
+    PERIOD = 3
     VOLTAGE_RMS = 4
-    VOLTAGE_CYCLE_RMS = 16
-    AC_ESTIMATE = 1012
-    FFT_AMPLITUDE = 1009
-    VOLTAGE_AVERAGE = 10
-    VOLTAGE_CYCLE_AVERAGE = 17
-    DC_ESTIMATE = 1013
+    VOLTAGE_PEAK_TO_PEAK = 5
     VOLTAGE_MAX = 6
     VOLTAGE_MIN = 7
-    VOLTAGE_PEAK_TO_PEAK = 5
     VOLTAGE_HIGH = 8
     VOLTAGE_LOW = 9
-    AMPLITUDE = 15
-    VOLTAGE_TOP = 1007
-    VOLTAGE_BASE = 1006
-    VOLTAGE_BASE_TO_TOP = 1017
+    VOLTAGE_AVERAGE = 10
     WIDTH_NEG = 11
     WIDTH_POS = 12
     DUTY_CYCLE_NEG = 13
     DUTY_CYCLE_POS = 14
-    INTEGRAL = 1005
-    AREA = 1003
-    CYCLE_AREA = 1004
-    TIME_DELAY = 1014
-    PHASE_DELAY = 1018
+    AMPLITUDE = 15
+    VOLTAGE_CYCLE_RMS = 16
+    VOLTAGE_CYCLE_AVERAGE = 17
+    OVERSHOOT = 18
+    PRESHOOT = 19
     LOW_REF_VOLTS = 1000
     MID_REF_VOLTS = 1001
     HIGH_REF_VOLTS = 1002
-    VOLTAGE_HISTOGRAM_MEAN = 2000
-    VOLTAGE_HISTOGRAM_STDEV = 2001
-    VOLTAGE_HISTOGRAM_MEDIAN = 2003
-    VOLTAGE_HISTOGRAM_MODE = 2010
-    VOLTAGE_HISTOGRAM_MAX = 2005
-    VOLTAGE_HISTOGRAM_MIN = 2006
-    VOLTAGE_HISTOGRAM_PEAK_TO_PEAK = 2002
-    VOLTAGE_HISTOGRAM_MEAN_PLUS_STDEV = 2007
-    VOLTAGE_HISTOGRAM_MEAN_PLUS_2_STDEV = 2008
-    VOLTAGE_HISTOGRAM_MEAN_PLUS_3_STDEV = 2009
-    VOLTAGE_HISTOGRAM_HITS = 2004
-    VOLTAGE_HISTOGRAM_NEW_HITS = 2011
-    TIME_HISTOGRAM_MEAN = 3000
-    TIME_HISTOGRAM_STDEV = 3001
-    TIME_HISTOGRAM_MEDIAN = 3003
-    TIME_HISTOGRAM_MODE = 3010
-    TIME_HISTOGRAM_MAX = 3005
-    TIME_HISTOGRAM_MIN = 3006
-    TIME_HISTOGRAM_PEAK_TO_PEAK = 3002
-    TIME_HISTOGRAM_MEAN_PLUS_STDEV = 3007
-    TIME_HISTOGRAM_MEAN_PLUS_2_STDEV = 3008
-    TIME_HISTOGRAM_HITS = 3004
-    TIME_HISTOGRAM_NEW_HITS = 3011
+    AREA = 1003
+    CYCLE_AREA = 1004
+    INTEGRAL = 1005
+    VOLTAGE_BASE = 1006
+    VOLTAGE_TOP = 1007
+    FFT_FREQUENCY = 1008
+    FFT_AMPLITUDE = 1009
+    RISE_SLEW_RATE = 1010
+    FALL_SLEW_RATE = 1011
+    AC_ESTIMATE = 1012
+    DC_ESTIMATE = 1013
+    TIME_DELAY = 1014
+    AVERAGE_PERIOD = 1015
+    AVERAGE_FREQUENCY = 1016
+    VOLTAGE_BASE_TO_TOP = 1017
+    PHASE_DELAY = 1018
 
 
 class TerminalConfiguration(Enum):
@@ -548,6 +525,7 @@ class TriggerModifier(Enum):
     Software will trigger an acquisition automatically if no trigger arrives
     after a certain amount of time.
     '''
+    AUTO_LEVEL = 3
 
 
 class TriggerSlope(Enum):
@@ -608,6 +586,7 @@ class TriggerWindowMode(Enum):
     r'''
     Trigger upon leaving the window
     '''
+    ENTERING_OR_LEAVING = 2
 
 
 class VerticalCoupling(Enum):
