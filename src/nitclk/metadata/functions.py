@@ -124,6 +124,7 @@ functions = {
                 },
                 'is_session_handle': False,
                 'name': 'sessions',
+                'python_api_converter_name': 'convert_to_nitclk_session_number_list',
                 'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
                 'size': {
                     'mechanism': 'len',
