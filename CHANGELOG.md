@@ -27,6 +27,8 @@ All notable changes to this project will be documented in this file.
         * Link to zip file on examples documentation
         * Support for Python 3.8
     * #### Changed
+        * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
+        * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
     * #### Removed
         * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
         * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
