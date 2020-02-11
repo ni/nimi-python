@@ -1434,6 +1434,22 @@ class TestSession(object):
             )
 
 
+    def test_return_timedeltas(self):
+        self.patched_library.niFake_ReturnListOfTimedeltas.side_effect = self.side_effects_helper.niFake_ReturnListOfTimedeltas
+        time_values = [-1.5, 2.0]
+        time_values_ctype = (nifake._visatype.ViReal64 * len(time_values))(*time_values)
+        expected_timedeltas = [datetime.timedelta(seconds=i) for i in time_values]
+        self.side_effects_helper['ReturnListOfTimedeltas']['timedeltas'] = time_values_ctype
+        with nifake.Session('dev1') as session:
+            returned_timedeltas = session.return_list_of_timedeltas(len(expected_timedeltas))
+            assert len(returned_timedeltas) == len(expected_timedeltas)
+            self.patched_library.niFake_ReturnListOfTimedeltas.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViInt32Matcher(len(time_values)),
+                _matchers.ViReal64BufferMatcher(len(time_values))
+            )
+
+
 # not session tests per se
 def test_diagnostic_information():
     info = nifake.print_diagnostic_information()

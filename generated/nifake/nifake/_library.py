@@ -61,6 +61,7 @@ class Library(object):
         self.niFake_Read_cfunc = None
         self.niFake_ReadFromChannel_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
+        self.niFake_ReturnListOfTimedeltas_cfunc = None
         self.niFake_ReturnMultipleTypes_cfunc = None
         self.niFake_SetAttributeViBoolean_cfunc = None
         self.niFake_SetAttributeViInt32_cfunc = None
@@ -405,6 +406,14 @@ class Library(object):
                 self.niFake_ReturnANumberAndAString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ReturnANumberAndAString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnANumberAndAString_cfunc(vi, a_number, a_string)
+
+    def niFake_ReturnListOfTimedeltas(self, vi, number_of_elements, timedeltas):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ReturnListOfTimedeltas_cfunc is None:
+                self.niFake_ReturnListOfTimedeltas_cfunc = self._library.niFake_ReturnListOfTimedeltas
+                self.niFake_ReturnListOfTimedeltas_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_ReturnListOfTimedeltas_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ReturnListOfTimedeltas_cfunc(vi, number_of_elements, timedeltas)
 
     def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
         with self._func_lock:

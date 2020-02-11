@@ -317,7 +317,7 @@ functions = {
     'GetAStringOfFixedMaximumSize': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Illustrates resturning a string of fixed size.'
+            'description': 'Illustrates returning a string of fixed size.'
         },
         'parameters': [
             {
@@ -2276,7 +2276,7 @@ functions = {
     'AcceptListOfTimeValues': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Accepts a list of values representing time.',
+            'description': 'Accepts lists of values representing time.',
         },
         'parameters': [
             {
@@ -2323,6 +2323,45 @@ functions = {
                 'type': 'ViInt32[]',
                 'type_in_documentation': 'int in milliseconds or datetime.timedelta'
             },
+        ],
+        'returns': 'ViStatus'
+    },
+    'ReturnListOfTimedeltas': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns a list of datetime.timedelta instances.',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of elements in output.'
+                },
+                'name': 'numberOfElements',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains a list of datetime.timedelta instances'
+                },
+                'name': 'timedeltas',
+                'python_api_converter_name': 'convert_seconds_to_timedeltas',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfElements'
+                },
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'datetime.timedelta'
+            }
         ],
         'returns': 'ViStatus'
     },

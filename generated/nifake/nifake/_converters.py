@@ -180,6 +180,18 @@ def convert_timedeltas_to_microseconds(values, library_type):
     return _convert_timedeltas(values, library_type, 1000000)
 
 
+def convert_seconds_to_timedeltas(seconds):
+    return [datetime.timedelta(seconds=i) for i in seconds]
+
+
+def convert_milliseconds_to_timedeltas(milliseconds):
+    return [datetime.timedelta(milliseconds=i) for i in milliseconds]
+
+
+def convert_microseconds_to_timedeltas(microseconds):
+    return [datetime.timedelta(microseconds=i) for i in microseconds]
+
+
 def convert_month_to_timedelta(months):
     return datetime.timedelta(days=(30.4167 * months))
 
@@ -439,6 +451,24 @@ def test_convert_timedeltas_to_microseconds_int():
     test_result = convert_timedeltas_to_microseconds(timedeltas, _visatype.ViInt32)
     assert all([actual.value == expected for actual, expected in zip(test_result, [10500000, -1000000])])
     assert all([isinstance(i, _visatype.ViInt32) for i in test_result])
+
+
+def test_convert_seconds_to_timedeltas():
+    time_values = [10.5, -1]
+    timedeltas = convert_seconds_to_timedeltas(time_values)
+    assert all([actual.total_seconds() == expected for actual, expected in zip(timedeltas, time_values)])
+
+
+def test_convert_milliseconds_to_timedeltas():
+    time_values = [2, -1]
+    timedeltas = convert_milliseconds_to_timedeltas(time_values)
+    assert all([actual.total_seconds() * 1000 == expected for actual, expected in zip(timedeltas, time_values)])
+
+
+def test_convert_microseconds_to_timedeltas():
+    time_values = [2, -1]
+    timedeltas = convert_microseconds_to_timedeltas(time_values)
+    assert all([actual.total_seconds() * 1000000 == expected for actual, expected in zip(timedeltas, time_values)])
 
 
 # Tests - repeated capabilities

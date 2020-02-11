@@ -139,6 +139,9 @@ class SideEffectsHelper(object):
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
         self._defaults['ReturnANumberAndAString']['aString'] = None
+        self._defaults['ReturnListOfTimedeltas'] = {}
+        self._defaults['ReturnListOfTimedeltas']['return'] = 0
+        self._defaults['ReturnListOfTimedeltas']['timedeltas'] = None
         self._defaults['ReturnMultipleTypes'] = {}
         self._defaults['ReturnMultipleTypes']['return'] = 0
         self._defaults['ReturnMultipleTypes']['aBoolean'] = None
@@ -672,6 +675,22 @@ class SideEffectsHelper(object):
             a_string[i] = test_value[i]
         return self._defaults['ReturnANumberAndAString']['return']
 
+    def niFake_ReturnListOfTimedeltas(self, vi, number_of_elements, timedeltas):  # noqa: N802
+        if self._defaults['ReturnListOfTimedeltas']['return'] != 0:
+            return self._defaults['ReturnListOfTimedeltas']['return']
+        # timedeltas
+        if self._defaults['ReturnListOfTimedeltas']['timedeltas'] is None:
+            raise MockFunctionCallError("niFake_ReturnListOfTimedeltas", param='timedeltas')
+        test_value = self._defaults['ReturnListOfTimedeltas']['timedeltas']
+        try:
+            timedeltas_ref = timedeltas.contents
+        except AttributeError:
+            timedeltas_ref = timedeltas
+        assert len(timedeltas_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            timedeltas_ref[i] = test_value[i]
+        return self._defaults['ReturnListOfTimedeltas']['return']
+
     def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
         if self._defaults['ReturnMultipleTypes']['return'] != 0:
             return self._defaults['ReturnMultipleTypes']['return']
@@ -915,6 +934,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ReadFromChannel.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
+        mock_library.niFake_ReturnListOfTimedeltas.side_effect = MockFunctionCallError("niFake_ReturnListOfTimedeltas")
+        mock_library.niFake_ReturnListOfTimedeltas.return_value = 0
         mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")
         mock_library.niFake_ReturnMultipleTypes.return_value = 0
         mock_library.niFake_SetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_SetAttributeViBoolean")

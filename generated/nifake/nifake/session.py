@@ -786,7 +786,7 @@ class Session(_SessionBase):
     def accept_list_of_time_values(self, timestamps, delays):
         r'''accept_list_of_time_values
 
-        Accepts a list of values representing time.
+        Accepts lists of values representing time.
 
         Args:
             timestamps (list of float in seconds or datetime.timedelta): A collection of timestamp values.
@@ -1016,7 +1016,7 @@ class Session(_SessionBase):
     def get_a_string_of_fixed_maximum_size(self):
         r'''get_a_string_of_fixed_maximum_size
 
-        Illustrates resturning a string of fixed size.
+        Illustrates returning a string of fixed size.
 
         Returns:
             a_string (str): String comes back here. Buffer must be 256 big.
@@ -1561,6 +1561,28 @@ class Session(_SessionBase):
         error_code = self._library.niFake_ReturnANumberAndAString(vi_ctype, None if a_number_ctype is None else (ctypes.pointer(a_number_ctype)), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def return_list_of_timedeltas(self, number_of_elements):
+        r'''return_list_of_timedeltas
+
+        Returns a list of datetime.timedelta instances.
+
+        Args:
+            number_of_elements (int): Number of elements in output.
+
+
+        Returns:
+            timedeltas (list of datetime.timedelta): Contains a list of datetime.timedelta instances
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
+        timedeltas_size = number_of_elements  # case B600
+        timedeltas_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=timedeltas_size)  # case B600
+        error_code = self._library.niFake_ReturnListOfTimedeltas(vi_ctype, number_of_elements_ctype, timedeltas_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_seconds_to_timedeltas([float(timedeltas_ctype[i]) for i in range(number_of_elements_ctype.value)])
 
     @ivi_synchronized
     def return_multiple_types(self, array_size):
