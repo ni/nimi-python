@@ -254,7 +254,7 @@ def _(value):
     return value
 
 
-def convert_import_buffer_to_array(value):  # noqa: F811
+def convert_import_buffer_to_array(value, unused):  # noqa: F811
     import array
     return array.array('b', _convert_import_buffer_to_array(value))
 
