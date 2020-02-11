@@ -1433,7 +1433,6 @@ class TestSession(object):
                 _matchers.ViInt32BufferMatcher([2000, -4000])
             )
 
-
     def test_return_timedeltas(self):
         self.patched_library.niFake_ReturnListOfTimedeltas.side_effect = self.side_effects_helper.niFake_ReturnListOfTimedeltas
         time_values = [-1.5, 2.0]
