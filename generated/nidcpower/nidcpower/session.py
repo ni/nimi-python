@@ -194,6 +194,9 @@ class _SessionBase(object):
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
     Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
@@ -211,6 +214,14 @@ class _SessionBase(object):
     power source to generate power. Use the power_source_in_use property to retrieve this information.
 
     Note: This property does not necessarily indicate if the device is using the auxiliary
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].auxiliary_power_source_available
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -311,10 +322,13 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
+    If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
     Query the current_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The current_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
-    Default Value: AutoZero.OFF
+    Default Value: NIDCPOWER_VAL_OFF
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -368,10 +382,13 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from AutoZero.ON to  AutoZero.OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
+    If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
     Query the current_limit_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The current_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
-    Default Value: AutoZero.OFF
+    Default Value: NIDCPOWER_VAL_OFF
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -526,6 +543,15 @@ class _SessionBase(object):
     Default Value: TransientResponse.NORMAL
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].dc_noise_rejection = var
+        var = session.channels[0,1].dc_noise_rejection
     '''
     digital_edge_measure_trigger_input_terminal = _attributes.AttributeViString(1150036)
     '''Type: str
@@ -536,6 +562,15 @@ class _SessionBase(object):
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].digital_edge_measure_trigger_input_terminal = var
+        var = session.channels[0,1].digital_edge_measure_trigger_input_terminal
     '''
     digital_edge_pulse_trigger_input_terminal = _attributes.AttributeViString(1150097)
     '''Type: str
@@ -545,6 +580,15 @@ class _SessionBase(object):
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].digital_edge_pulse_trigger_input_terminal = var
+        var = session.channels[0,1].digital_edge_pulse_trigger_input_terminal
     '''
     digital_edge_sequence_advance_trigger_input_terminal = _attributes.AttributeViString(1150028)
     '''Type: str
@@ -555,6 +599,15 @@ class _SessionBase(object):
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the  input terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].digital_edge_sequence_advance_trigger_input_terminal = var
+        var = session.channels[0,1].digital_edge_sequence_advance_trigger_input_terminal
     '''
     digital_edge_source_trigger_input_terminal = _attributes.AttributeViString(1150032)
     '''Type: str
@@ -565,6 +618,15 @@ class _SessionBase(object):
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input  terminal on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].digital_edge_source_trigger_input_terminal = var
+        var = session.channels[0,1].digital_edge_source_trigger_input_terminal
     '''
     digital_edge_start_trigger_input_terminal = _attributes.AttributeViString(1150023)
     '''Type: str
@@ -575,6 +637,15 @@ class _SessionBase(object):
     Input terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can  specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name,  PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal  on Dev1 to be /Dev2/SourceCompleteEvent.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].digital_edge_start_trigger_input_terminal = var
+        var = session.channels[0,1].digital_edge_start_trigger_input_terminal
     '''
     driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
@@ -592,6 +663,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].exported_measure_trigger_output_terminal = var
+        var = session.channels[0,1].exported_measure_trigger_output_terminal
     '''
     exported_pulse_trigger_output_terminal = _attributes.AttributeViString(1150098)
     '''Type: str
@@ -601,6 +681,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].exported_pulse_trigger_output_terminal = var
+        var = session.channels[0,1].exported_pulse_trigger_output_terminal
     '''
     exported_sequence_advance_trigger_output_terminal = _attributes.AttributeViString(1150029)
     '''Type: str
@@ -611,6 +700,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].exported_sequence_advance_trigger_output_terminal = var
+        var = session.channels[0,1].exported_sequence_advance_trigger_output_terminal
     '''
     exported_source_trigger_output_terminal = _attributes.AttributeViString(1150033)
     '''Type: str
@@ -621,6 +719,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].exported_source_trigger_output_terminal = var
+        var = session.channels[0,1].exported_source_trigger_output_terminal
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150024)
     '''Type: str
@@ -631,16 +738,41 @@ class _SessionBase(object):
     for information about supported devices.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].exported_start_trigger_output_terminal = var
+        var = session.channels[0,1].exported_start_trigger_output_terminal
     '''
     fetch_backlog = _attributes.AttributeViInt32(1150056)
     '''Type: int
 
     Returns the number of measurements acquired that have not been fetched yet.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].fetch_backlog
     '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
     Contains the firmware revision information for the device you are currently using.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].instrument_firmware_revision
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -651,6 +783,14 @@ class _SessionBase(object):
     '''Type: str
 
     Contains the model number or name of the device that you are currently using.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].instrument_model
     '''
     interlock_input_open = _attributes.AttributeViBoolean(1150105)
     '''Type: bool
@@ -660,6 +800,14 @@ class _SessionBase(object):
     about supported devices.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].interlock_input_open
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
@@ -684,6 +832,15 @@ class _SessionBase(object):
     Default Value: Varies by device. Refer to Supported Properties by Device topic in  the NI DC Power Supplies and SMUs Help for more information about default values.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_buffer_size = var
+        var = session.channels[0,1].measure_buffer_size
     '''
     measure_complete_event_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
     '''Type: float in seconds or datetime.timedelta
@@ -694,6 +851,15 @@ class _SessionBase(object):
     Default Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_complete_event_delay = var
+        var = session.channels[0,1].measure_complete_event_delay
     '''
     measure_complete_event_output_terminal = _attributes.AttributeViString(1150047)
     '''Type: str
@@ -703,6 +869,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_complete_event_output_terminal = var
+        var = session.channels[0,1].measure_complete_event_output_terminal
     '''
     measure_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150044)
     '''Type: enums.Polarity
@@ -712,6 +887,15 @@ class _SessionBase(object):
     Default Value: Polarity.HIGH
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_complete_event_pulse_polarity = var
+        var = session.channels[0,1].measure_complete_event_pulse_polarity
     '''
     measure_complete_event_pulse_width = _attributes.AttributeViReal64(1150045)
     '''Type: float
@@ -724,6 +908,15 @@ class _SessionBase(object):
     Default Value: The default value for PXI devices is 150 ns. The default value  for PXI Express devices is 250 ns.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_complete_event_pulse_width = var
+        var = session.channels[0,1].measure_complete_event_pulse_width
     '''
     measure_record_delta_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150065)
     '''Type: float in seconds or datetime.timedelta
@@ -733,6 +926,14 @@ class _SessionBase(object):
     two measurements and the rest would differ.
 
     Note: This property is not available when Auto Zero is configured to Once because the amount of time between the first
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].measure_record_delta_time
     '''
     measure_record_length = _attributes.AttributeViInt32(1150063)
     '''Type: int
@@ -744,6 +945,15 @@ class _SessionBase(object):
 
     Note:
     This property is not available in a session involving multiple channels.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_record_length = var
+        var = session.channels[0,1].measure_record_length
     '''
     measure_record_length_is_finite = _attributes.AttributeViBoolean(1150064)
     '''Type: bool
@@ -754,6 +964,15 @@ class _SessionBase(object):
 
     Note:
     This property is not available in a session involving multiple channels.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_record_length_is_finite = var
+        var = session.channels[0,1].measure_record_length_is_finite
     '''
     measure_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150034)
     '''Type: enums.TriggerType
@@ -763,6 +982,15 @@ class _SessionBase(object):
     Default Value: TriggerType.DIGITAL_EDGE
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_trigger_type = var
+        var = session.channels[0,1].measure_trigger_type
     '''
     measure_when = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
     '''Type: enums.MeasureWhen
@@ -770,6 +998,15 @@ class _SessionBase(object):
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
     Default Value: If the source_mode property is set to SourceMode.SINGLE_POINT, the default value is  MeasureWhen.ON_DEMAND. This value supports only the measure method and measure_multiple  method. If the source_mode property is set to SourceMode.SEQUENCE, the default value is  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the fetch_multiple method.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].measure_when = var
+        var = session.channels[0,1].measure_when
     '''
     output_capacitance = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
     '''Type: enums.OutputCapacitance
@@ -882,6 +1119,15 @@ class _SessionBase(object):
     Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the  device specification limits. True means that overranging is enabled.
     Refer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.
     Default Value: False
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].overranging_enabled = var
+        var = session.channels[0,1].overranging_enabled
     '''
     ovp_enabled = _attributes.AttributeViBoolean(1250002)
     '''Type: bool
@@ -892,6 +1138,15 @@ class _SessionBase(object):
     Default Value: False
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].ovp_enabled = var
+        var = session.channels[0,1].ovp_enabled
     '''
     ovp_limit = _attributes.AttributeViReal64(1250003)
     '''Type: float
@@ -902,6 +1157,15 @@ class _SessionBase(object):
     Default Value: 210 V
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].ovp_limit = var
+        var = session.channels[0,1].ovp_limit
     '''
     power_line_frequency = _attributes.AttributeViReal64(1150020)
     '''Type: float
@@ -937,6 +1201,14 @@ class _SessionBase(object):
     '''Type: enums.PowerSourceInUse
 
     Indicates whether the device is using the internal or auxiliary power source to generate power.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        var = session.channels[0,1].power_source_in_use
     '''
     pulse_bias_current_level = _attributes.AttributeViReal64(1150088)
     '''Type: float
@@ -1220,6 +1492,15 @@ class _SessionBase(object):
     Default Value:The default value for PXI Express devices is 250 ns.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].pulse_complete_event_output_terminal = var
+        var = session.channels[0,1].pulse_complete_event_output_terminal
     '''
     pulse_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150100)
     '''Type: enums.Polarity
@@ -1228,6 +1509,15 @@ class _SessionBase(object):
     Default Value: Polarity.HIGH
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].pulse_complete_event_pulse_polarity = var
+        var = session.channels[0,1].pulse_complete_event_pulse_polarity
     '''
     pulse_complete_event_pulse_width = _attributes.AttributeViReal64(1150101)
     '''Type: float
@@ -1238,6 +1528,15 @@ class _SessionBase(object):
     Default Value: The default value for PXI Express devices is 250 ns.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].pulse_complete_event_pulse_width = var
+        var = session.channels[0,1].pulse_complete_event_pulse_width
     '''
     pulse_current_level = _attributes.AttributeViReal64(1150086)
     '''Type: float
@@ -1448,6 +1747,15 @@ class _SessionBase(object):
     Default Value: TriggerType.NONE
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].pulse_trigger_type = var
+        var = session.channels[0,1].pulse_trigger_type
     '''
     pulse_voltage_level = _attributes.AttributeViReal64(1150080)
     '''Type: float
@@ -1631,6 +1939,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].ready_for_pulse_trigger_event_output_terminal = var
+        var = session.channels[0,1].ready_for_pulse_trigger_event_output_terminal
     '''
     ready_for_pulse_trigger_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150103)
     '''Type: enums.Polarity
@@ -1639,6 +1956,15 @@ class _SessionBase(object):
     Default Value: Polarity.HIGH
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].ready_for_pulse_trigger_event_pulse_polarity = var
+        var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_polarity
     '''
     ready_for_pulse_trigger_event_pulse_width = _attributes.AttributeViReal64(1150104)
     '''Type: float
@@ -1649,6 +1975,15 @@ class _SessionBase(object):
     Default Value: The default value for PXI Express devices is 250 ns
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].ready_for_pulse_trigger_event_pulse_width = var
+        var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_width
     '''
     reset_average_before_measurement = _attributes.AttributeViBoolean(1150006)
     '''Type: bool
@@ -1727,6 +2062,15 @@ class _SessionBase(object):
     Default Value: TriggerType.NONE
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_advance_trigger_type = var
+        var = session.channels[0,1].sequence_advance_trigger_type
     '''
     sequence_engine_done_event_output_terminal = _attributes.AttributeViString(1150050)
     '''Type: str
@@ -1736,6 +2080,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_engine_done_event_output_terminal = var
+        var = session.channels[0,1].sequence_engine_done_event_output_terminal
     '''
     sequence_engine_done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150048)
     '''Type: enums.Polarity
@@ -1745,6 +2098,15 @@ class _SessionBase(object):
     Default Value: Polarity.HIGH
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_engine_done_event_pulse_polarity = var
+        var = session.channels[0,1].sequence_engine_done_event_pulse_polarity
     '''
     sequence_engine_done_event_pulse_width = _attributes.AttributeViReal64(1150049)
     '''Type: float
@@ -1757,6 +2119,15 @@ class _SessionBase(object):
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_engine_done_event_pulse_width = var
+        var = session.channels[0,1].sequence_engine_done_event_pulse_width
     '''
     sequence_iteration_complete_event_output_terminal = _attributes.AttributeViString(1150040)
     '''Type: str
@@ -1766,6 +2137,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal  is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or  with the shortened terminal name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_iteration_complete_event_output_terminal = var
+        var = session.channels[0,1].sequence_iteration_complete_event_output_terminal
     '''
     sequence_iteration_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150038)
     '''Type: enums.Polarity
@@ -1775,6 +2155,15 @@ class _SessionBase(object):
     Default Value: Polarity.HIGH
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_iteration_complete_event_pulse_polarity = var
+        var = session.channels[0,1].sequence_iteration_complete_event_pulse_polarity
     '''
     sequence_iteration_complete_event_pulse_width = _attributes.AttributeViReal64(1150039)
     '''Type: float
@@ -1787,6 +2176,15 @@ class _SessionBase(object):
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic in
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_iteration_complete_event_pulse_width = var
+        var = session.channels[0,1].sequence_iteration_complete_event_pulse_width
     '''
     sequence_loop_count = _attributes.AttributeViInt32(1150025)
     '''Type: int
@@ -1798,6 +2196,15 @@ class _SessionBase(object):
     Default Value: 1
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_loop_count = var
+        var = session.channels[0,1].sequence_loop_count
     '''
     sequence_loop_count_is_finite = _attributes.AttributeViBoolean(1150078)
     '''Type: bool
@@ -1808,6 +2215,15 @@ class _SessionBase(object):
     Default Value: True
 
     Note: This property is not supported by all devices. When the
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].sequence_loop_count_is_finite = var
+        var = session.channels[0,1].sequence_loop_count_is_finite
     '''
     sequence_step_delta_time = _attributes.AttributeViReal64(1150198)
     '''Type: float
@@ -1847,6 +2263,15 @@ class _SessionBase(object):
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you  can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal  name, PXI_Trig0.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].source_complete_event_output_terminal = var
+        var = session.channels[0,1].source_complete_event_output_terminal
     '''
     source_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150041)
     '''Type: enums.Polarity
@@ -1856,6 +2281,15 @@ class _SessionBase(object):
     Default Value: Polarity.HIGH
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].source_complete_event_pulse_polarity = var
+        var = session.channels[0,1].source_complete_event_pulse_polarity
     '''
     source_complete_event_pulse_width = _attributes.AttributeViReal64(1150042)
     '''Type: float
@@ -1868,6 +2302,15 @@ class _SessionBase(object):
     Default Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].source_complete_event_pulse_width = var
+        var = session.channels[0,1].source_complete_event_pulse_width
     '''
     source_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
     '''Type: float in seconds or datetime.timedelta
@@ -1894,6 +2337,15 @@ class _SessionBase(object):
 
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
     Default value: SourceMode.SINGLE_POINT
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].source_mode = var
+        var = session.channels[0,1].source_mode
     '''
     source_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150030)
     '''Type: enums.TriggerType
@@ -1903,6 +2355,15 @@ class _SessionBase(object):
     Default Value: TriggerType.NONE
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].source_trigger_type = var
+        var = session.channels[0,1].source_trigger_type
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
@@ -1932,6 +2393,15 @@ class _SessionBase(object):
     Default Value: TriggerType.NONE
 
     Note: This property is not supported by all devices. Refer to Supported Properties by Device topic
+
+    Tip:
+    This property can use repeated capabilities (channels). If set or get directly on the
+    nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+        session.channels[0,1].start_trigger_type = var
+        var = session.channels[0,1].start_trigger_type
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
     '''Type: str
@@ -2015,10 +2485,13 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
+    If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
     Query the voltage_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The voltage_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
-    Default Value: AutoZero.OFF
+    Default Value: NIDCPOWER_VAL_OFF
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2072,10 +2545,13 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-    If this property is set to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
+    If this property is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
     Query the voltage_limit_range property by using the _get_attribute_vi_int32 method to find out  which range NI-DCPower automatically selects.
     The voltage_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
-    Default Value: AutoZero.OFF
+    Default Value: NIDCPOWER_VAL_OFF
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2836,7 +3312,10 @@ class _SessionBase(object):
           **vi** is an invalid session, the method does nothing and returns an
           error. Normally, the error information describes the first error that
           occurred since the user last called _get_error or
-          clear_error.
+          ClearError.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             code (int): Returns the error code for the session or execution thread.
@@ -3033,20 +3512,23 @@ class _SessionBase(object):
         The compliance limit is the current limit when the output method is
         set to OutputFunction.DC_VOLTAGE. If the output is operating at the
         compliance limit, the output reaches the current limit before the
-        desired voltage level. Refer to the configure_output_function
-        method and the configure_current_limit method for more
+        desired voltage level. Refer to the ConfigureOutputFunction
+        method and the ConfigureCurrentLimit method for more
         information about output method and current limit, respectively.
 
         The compliance limit is the voltage limit when the output method is
         set to OutputFunction.DC_CURRENT. If the output is operating at the
         compliance limit, the output reaches the voltage limit before the
-        desired current level. Refer to the configure_output_function
-        method and the configure_voltage_limit method for more
+        desired current level. Refer to the ConfigureOutputFunction
+        method and the ConfigureVoltageLimit method for more
         information about output method and voltage limit, respectively.
 
         **Related Topics:**
 
         `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
         This method requires repeated capabilities (channels). If called directly on the
@@ -3719,7 +4201,7 @@ class Session(_SessionBase):
 
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
-        state. To return to the Committed state call the abort
+        state. To return to the Uncommitted state call the abort
         method. Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for information about the
@@ -3741,7 +4223,7 @@ class Session(_SessionBase):
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         method, the output channels remain in their existing state and
-        continue providing power. Use the configure_output_enabled
+        continue providing power. Use the ConfigureOutputEnabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).
 
@@ -3749,6 +4231,9 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Note:
         This method is not needed when using the session context manager
@@ -3767,13 +4252,13 @@ class Session(_SessionBase):
         r'''abort
 
         Transitions the NI-DCPower session from the Running state to the
-        Committed state. If a sequence is running, it is stopped. Any
+        Uncommitted state. If a sequence is running, it is stopped. Any
         configuration methods called after this method are not applied until
         the initiate method is called. If power output is enabled
         when you call the abort method, the output channels remain
         in their current state and continue providing power.
 
-        Use the configure_output_enabled method to disable power
+        Use the ConfigureOutputEnabled method to disable power
         output on a per channel basis. Use the reset method to
         disable output on all channels.
 
@@ -3786,6 +4271,9 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_Abort(vi_ctype)
@@ -4606,7 +5094,7 @@ class Session(_SessionBase):
 
         Starts generation or acquisition, causing the NI-DCPower session to
         leave the Uncommitted state or Committed state and enter the Running
-        state. To return to the Committed state call the abort
+        state. To return to the Uncommitted state call the abort
         method. Refer to the `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
         the *NI DC Power Supplies and SMUs Help* for information about the
@@ -4787,7 +5275,7 @@ class Session(_SessionBase):
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
         method, the output channels remain in their existing state and
-        continue providing power. Use the configure_output_enabled
+        continue providing power. Use the ConfigureOutputEnabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).
 
@@ -4795,6 +5283,9 @@ class Session(_SessionBase):
 
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDCPower_close(vi_ctype)

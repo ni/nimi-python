@@ -872,6 +872,29 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def export_attribute_configuration_buffer(self):
+        r'''export_attribute_configuration_buffer
+
+        Export configuration buffer.
+
+        Returns:
+            configuration (array.array("b")):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_in_bytes_ctype = _visatype.ViInt32()  # case S170
+        configuration_ctype = None  # case B580
+        error_code = self._library.niFake_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
+        configuration_size = size_in_bytes_ctype.value  # case B590
+        configuration_array = array.array("b", [0] * configuration_size)  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
+        error_code = self._library.niFake_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_to_bytes(configuration_array)
+
+    @ivi_synchronized
     def fetch_waveform(self, number_of_samples):
         r'''fetch_waveform
 
@@ -1259,6 +1282,23 @@ class Session(_SessionBase):
         '''
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
         return datetime.datetime(year, month, day, hour, minute)
+
+    @ivi_synchronized
+    def import_attribute_configuration_buffer(self, configuration):
+        r'''import_attribute_configuration_buffer
+
+        Import configuration buffer.
+
+        Args:
+            configuration (list of int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_import_buffer_to_array(configuration), library_type=_visatype.ViInt8)  # case B520
+        error_code = self._library.niFake_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
 
     def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
         r'''_init_with_options
