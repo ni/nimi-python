@@ -3685,7 +3685,7 @@ class Session(_SessionBase):
         error.
 
         Returns:
-            configuration (list of int): Specifies the byte array buffer to be populated with the exported
+            configuration (array.array("b")): Specifies the byte array buffer to be populated with the exported
                 property configuration.
 
         '''
@@ -3696,10 +3696,11 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_in_bytes_ctype.value  # case B590
-        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        configuration_array = array.array("b", [0] * configuration_size)  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niFgen_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(configuration_ctype[i]) for i in range(size_in_bytes_ctype.value)]
+        return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
     def export_attribute_configuration_file(self, file_path):
@@ -3989,7 +3990,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_import_buffer_to_array(configuration), library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niFgen_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

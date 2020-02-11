@@ -1552,7 +1552,7 @@ export_attribute_configuration_buffer
 
 
 
-            :rtype: list of int
+            :rtype: array.array("b")
             :return:
 
 
