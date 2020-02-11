@@ -280,13 +280,14 @@ def test_reset_method(session):
     assert default_function == function_after_reset
 
 
-@pytest.mark.flaky(max_runs=10)
+@pytest.mark.flaky(max_runs=30)
 def test_import_export_buffer(session):
     test_value_1 = 1
     test_value_2 = 2
     session.sample_count = test_value_1
     assert session.sample_count == test_value_1
     buffer = session.export_attribute_configuration_buffer()
+    print('[DEBUG] type: "{0}", len: "{1}", content: "{2}"\n'.format(type(buffer), len(buffer), buffer))
     session.sample_count = test_value_2
     assert session.sample_count == test_value_2
     session.import_attribute_configuration_buffer(buffer)

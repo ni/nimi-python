@@ -237,13 +237,14 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
-@pytest.mark.flaky(max_runs=10)
+@pytest.mark.flaky(max_runs=30)
 def test_import_export_buffer(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
     single_channel_session.voltage_level = test_value_1
     assert single_channel_session.voltage_level == test_value_1
     buffer = single_channel_session.export_attribute_configuration_buffer()
+    print('[DEBUG] type: "{0}", len: "{1}", content: "{2}"\n'.format(type(buffer), len(buffer), buffer))
     single_channel_session.voltage_level = test_value_2
     assert single_channel_session.voltage_level == test_value_2
     single_channel_session.import_attribute_configuration_buffer(buffer)
