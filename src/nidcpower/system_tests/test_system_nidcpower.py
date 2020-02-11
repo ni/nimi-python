@@ -237,6 +237,7 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_import_export_buffer(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2

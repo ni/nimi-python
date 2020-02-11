@@ -317,6 +317,7 @@ def test_configure_trigger_hysteresis(session):
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_import_export_buffer(session):
     test_value_1 = 1
     test_value_2 = 5

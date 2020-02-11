@@ -447,6 +447,7 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 2
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_import_export_buffer(session):
     test_value_1 = 1.0
     test_value_2 = 2.0

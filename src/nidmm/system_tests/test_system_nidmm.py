@@ -280,6 +280,7 @@ def test_reset_method(session):
     assert default_function == function_after_reset
 
 
+@pytest.mark.flaky(max_runs=10)
 def test_import_export_buffer(session):
     test_value_1 = 1
     test_value_2 = 2
