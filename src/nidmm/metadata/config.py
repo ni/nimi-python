@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 19.6.0d0
+# This file is generated from NI-DMM API metadata version 19.6.0d4
 config = {
-    'api_version': '19.6.0d0',
+    'api_version': '19.6.0d4',
     'c_function_prefix': 'niDMM_',
     'close_function': 'close',
     'context_manager_name': {
@@ -12,7 +12,10 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-DMM',
-    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
+    'extra_errors_used': [
+        'InvalidRepeatedCapabilityError',
+        'SelfTestError'
+    ],
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -37,5 +40,5 @@ config = {
     'repeated_capabilities': [
     ],
     'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
-    'session_handle_parameter_name': 'vi',
+    'session_handle_parameter_name': 'vi'
 }
