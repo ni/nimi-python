@@ -64,8 +64,8 @@ deps =
     ${module_name}-system_tests: pytest==4.6.5;platform_python_implementation=='PyPy'
     ${module_name}-system_tests: pytest;platform_python_implementation=='CPython'
     ${module_name}-system_tests: coverage
-    ${module_name}-system_tests: numpy
-    ${module_name}-system_tests: scipy
+    ${module_name}-system_tests: numpy;platform_python_implementation=='CPython'
+    ${module_name}-system_tests: scipy;platform_python_implementation=='CPython'
     ${module_name}-system_tests: fasteners
     ${module_name}-coverage: coverage
     ${module_name}-coverage: codecov
