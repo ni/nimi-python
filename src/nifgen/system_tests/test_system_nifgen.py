@@ -174,7 +174,7 @@ def test_get_ext_cal_recommended_interval(session):
     assert interval.days == 730  # recommended external cal interval is 24 months
 
 
-def test_get_hardware_state():
+def test_get_hardware_state(session_5421):
     assert session_5421.get_hardware_state() == nifgen.HardwareState.IDLE
 
 
@@ -245,7 +245,7 @@ def test_create_advanced_arb_sequence(session_5421):
     marker_location_array = [0, 16, 32]
     sample_counts_array = [256, 128, 64]
     loop_counts_array = [10, 20, 30]
-    session.output_mode = nifgen.OutputMode.SEQ
+    session_5421.output_mode = nifgen.OutputMode.SEQ
     # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
     assert ([], seq_handle_base + 0) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
     assert ([], seq_handle_base + 1) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
