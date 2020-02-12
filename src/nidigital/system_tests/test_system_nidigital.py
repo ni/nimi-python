@@ -3,6 +3,7 @@ import collections
 import os
 
 import numpy
+import platform
 import pytest
 
 import nidigital
@@ -122,7 +123,13 @@ def get_test_file_path(test_name, file_name):
     return os.path.join(test_files_base_dir, test_name, file_name)
 
 
-@pytest.fixture(params=[array.array, numpy.array, list])
+# PyPy doesn't support numpy easily so we do not test with a numpy array
+if platform.python_implementation() == 'PyPy':
+    iterative_types = [array.array, list]
+else:
+    iterative_types = [array.array, numpy.array, list]
+
+@pytest.fixture(params=iterative_types)
 def source_waveform_type(request):
     return request.param
 
