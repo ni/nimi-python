@@ -247,7 +247,7 @@ def test_import_export_buffer(single_channel_session):
     single_channel_session.voltage_level = test_value_2
     assert single_channel_session.voltage_level == test_value_2
     try:
-        session.import_attribute_configuration_buffer(buffer)
+        single_channel_session.import_attribute_configuration_buffer(buffer)
     except nidcpower.errors.DriverError as e:
         if e.code == -1074100298:
             print('[DEBUG] len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
