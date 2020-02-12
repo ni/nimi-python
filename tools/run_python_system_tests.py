@@ -16,8 +16,7 @@ args = parser.parse_args()
 
 
 print('****Installing tox to Python.****')
-subprocess.check_call(["python", '-m', 'pip', 'install', '--upgrade', 'pip'])
-subprocess.check_call(["python", '-m', 'pip', 'install', '--upgrade', 'tox'])
+subprocess.check_call(["python", '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', 'pip', 'tox'])
 
 
 print('****Creating temporary directory.****')
@@ -55,7 +54,7 @@ print(zip_folder)
 
 
 print('****Running system tests in tox.****')
-tox_dir = os.path.join(zip_folder, os.listdir(zip_folder)[0])
+tox_dir = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated', args.driver)
 os.chdir(tox_dir)
-result = os.system('tox ' + args.python_bitness + ' -e ' + args.python_version + '-' + args.driver + '_system_tests')
+result = os.system('tox ' + args.python_bitness + ' -e ' + args.python_version + '-test_suite -c tox-system_tests.ini')
 sys.exit(result)
