@@ -1065,9 +1065,9 @@ class Session(_SessionBase):
 
         -  Creates a new IVI instrument driver session and, optionally, sets the
            initial state of the following session properties:
-           range_check, QUERY_INSTR_STATUS,
-           cache, simulate,
-           record_coercions.
+           RANGE_CHECK, QUERY_INSTR_STATUS,
+           CACHE, simulate,
+           RECORD_COERCIONS.
         -  Opens a session to the device you specify for the **Resource_Name**
            parameter. If the **ID_Query** parameter is set to True, this
            method queries the instrument ID and checks that it is valid for
@@ -1502,16 +1502,25 @@ class Session(_SessionBase):
 
         Args:
             thermistor_a (float): Specifies the Steinhart-Hart A coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the configure_thermistor_type
+                Thermistor Type is set to Custom in the ConfigureThermistorType
                 method. The default is 1.0295e-3 (44006).
 
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
             thermistor_b (float): Specifies the Steinhart-Hart B coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the configure_thermistor_type
+                Thermistor Type is set to Custom in the ConfigureThermistorType
                 method. The default is 2.391e-4 (44006).
 
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
+
             thermistor_c (float): Specifies the Steinhart-Hart C coefficient for thermistor scaling when
-                Thermistor Type is set to Custom in the configure_thermistor_type
+                Thermistor Type is set to Custom in the ConfigureThermistorType
                 method. The default is 1.568e-7 (44006).
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2269,9 +2278,9 @@ class Session(_SessionBase):
 
         -  Creates a new IVI instrument driver session and, optionally, sets the
            initial state of the following session properties:
-           range_check, QUERY_INSTR_STATUS,
-           cache, simulate,
-           record_coercions.
+           RANGE_CHECK, QUERY_INSTR_STATUS,
+           CACHE, simulate,
+           RECORD_COERCIONS.
         -  Opens a session to the device you specify for the **Resource_Name**
            parameter. If the **ID_Query** parameter is set to True, this
            method queries the instrument ID and checks that it is valid for
@@ -2347,15 +2356,15 @@ class Session(_SessionBase):
                 information.
 
                 +------------------+--------------------+-------------------+----+
-                | Check            | range_check        | True              | 1  |
+                | Check            | RANGE_CHECK        | True              | 1  |
                 +------------------+--------------------+-------------------+----+
                 | QueryInstrStatus | QUERY_INSTR_STATUS | False             | 0  |
                 +------------------+--------------------+-------------------+----+
-                | Cache            | cache              | True              | 1  |
+                | Cache            | CACHE              | True              | 1  |
                 +------------------+--------------------+-------------------+----+
                 | Simulate         | simulate           | False             | 0  |
                 +------------------+--------------------+-------------------+----+
-                | RecordCoercions  | record_coercions   | False             | 0  |
+                | RecordCoercions  | RECORD_COERCIONS   | False             | 0  |
                 +------------------+--------------------+-------------------+----+
                 | DriverSetup      | driver_setup       | "" (empty string) | "" |
                 +------------------+--------------------+-------------------+----+
@@ -2401,11 +2410,14 @@ class Session(_SessionBase):
         measurements for the current capacitance/inductance range, and returns
         open cable compensation **Conductance** and **Susceptance** values. You
         can use the return values of this method as inputs to
-        configure_open_cable_comp_values.
+        ConfigureOpenCableCompValues.
 
         This method returns an error if the value of the method
         property is not set to Method.CAPACITANCE (1005) or
         Method.INDUCTANCE (1006).
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             conductance (float): **conductance** is the measured value of open cable compensation
@@ -2429,11 +2441,14 @@ class Session(_SessionBase):
         Performs the short cable compensation measurements for the current
         capacitance/inductance range, and returns short cable compensation
         **Resistance** and **Reactance** values. You can use the return values
-        of this method as inputs to configure_short_cable_comp_values.
+        of this method as inputs to ConfigureShortCableCompValues.
 
         This method returns an error if the value of the method
         property is not set to Method.CAPACITANCE (1005) or
         Method.INDUCTANCE (1006).
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             resistance (float): **resistance** is the measured value of short cable compensation
