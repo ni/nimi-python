@@ -290,11 +290,13 @@ def test_import_export_buffer(session):
     session.sample_count = test_value_2
     assert session.sample_count == test_value_2
     try:
-        session.import_attribute_configuration_buffer(buffer)
+        session.import_attribute_configuration_buffer([x for x in buffer])
     except nidmm.errors.DriverError as e:
         if e.code == -1074100298:
-            print('[DEBUG] len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
+            print('[DEBUG] bad: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
         raise
+    else:
+        print('[DEBUG] good: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
     assert session.sample_count == test_value_1
 
 
