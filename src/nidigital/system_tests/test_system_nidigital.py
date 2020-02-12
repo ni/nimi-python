@@ -6,6 +6,7 @@ import numpy
 import pytest
 
 import nidigital
+from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 
 instr = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
@@ -13,7 +14,7 @@ test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
-    #with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+    # with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
     with nidigital.Session(resource_name=','.join(instr), options='') as simulated_session:
         yield simulated_session
 
@@ -255,6 +256,20 @@ def test_get_pin_results_pin_information(multi_instrument_session):
     assert pins == ['PinA', 'PinB', '']
     assert sites == [1, 0, -1]
     assert channels == fully_qualified_channels
+
+
+def test_history_ram_cycle_information_representation():
+    cycle_info = HistoryRAMCycleInformation(
+        pattern_name='pat',
+        time_set_name='t0',
+        vector_number=42,
+        cycle_number=999,
+        scan_cycle_number=13,
+        expected_pin_states=[[1, 1], [2, 2]],
+        actual_pin_states=[[3, 3], [4, 4]],
+        per_pin_pass_fail=[[True, True], [False, False]])
+    recreated_cycle_info = eval(repr(cycle_info))
+    assert str(recreated_cycle_info) == str(cycle_info)
 
 
 def test_fetch_history_ram_cycle_information_position_negative(multi_instrument_session):

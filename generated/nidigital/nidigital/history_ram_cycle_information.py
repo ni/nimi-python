@@ -1,53 +1,45 @@
 class HistoryRAMCycleInformation(object):
-    def __init__(self):
-        # Attributes populated while History RAM data is being fetched from driver
-        self.pattern_name = None
-        self.time_set_name = None
-        self.vector_number = None
-        self.cycle_number = None
-        self.scan_cycle_number = None
-        self.expected_pin_states = None
-        self.actual_pin_states = None
-        self.per_pin_pass_fail = None
+    def __init__(self, pattern_name, time_set_name, vector_number, cycle_number, scan_cycle_number, expected_pin_states, actual_pin_states, per_pin_pass_fail):
+        self.pattern_name = pattern_name
+        self.time_set_name = time_set_name
+        self.vector_number = vector_number
+        self.cycle_number = cycle_number
+        self.scan_cycle_number = scan_cycle_number
+        self.expected_pin_states = expected_pin_states
+        self.actual_pin_states = actual_pin_states
+        self.per_pin_pass_fail = per_pin_pass_fail
 
     def __repr__(self):
-        # parameter_list = [
-        #     'absolute_initial_x={}'.format(self.absolute_initial_x),
-        #     'relative_initial_x={}'.format(self.relative_initial_x),
-        #     'x_increment={}'.format(self.x_increment),
-        #     'offset={}'.format(self.offset),
-        #     'gain={}'.format(self.gain),
-        # ]
-        #
-        # return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
+        parameter_list = [
+            'pattern_name="{}"'.format(self.pattern_name),
+            'time_set_name="{}"'.format(self.time_set_name),
+            'vector_number={}'.format(self.vector_number),
+            'cycle_number={}'.format(self.cycle_number),
+            'scan_cycle_number={}'.format(self.scan_cycle_number),
+            'expected_pin_states={}'.format(self.expected_pin_states),
+            'actual_pin_states={}'.format(self.actual_pin_states),
+            'per_pin_pass_fail={}'.format(self.per_pin_pass_fail),
+        ]
+
+        return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
         return self.__class__.__name__
 
     def __str__(self):
-        # # different format lines
-        # row_format_g = '{:<20}: {:,.6g}\n'
-        # row_format_d = '{:<20}: {:,}\n'
-        # row_format_s = '{:<20}: {:}\n'
-        #
-        # string_representation = ''
-        # if self.channel is not None:  # We explicitly look for not None to differentiate from empty string
-        #     string_representation += row_format_s.format('channel', self.channel)
-        # if self.record is not None:  # We explicitly look for not None to differentiate from 0
-        #     string_representation += row_format_d.format('record', self.record)
-        #
-        # string_representation += row_format_g.format('Absolute X0', self.absolute_initial_x)
-        # string_representation += row_format_g.format('Relative X0', self.relative_initial_x)
-        # string_representation += row_format_g.format('dt', self.x_increment)
-        # string_representation += row_format_g.format('offset', self.offset)
-        # string_representation += row_format_g.format('gain', self.gain)
-        # if self.samples is not None:  # We explicitly look for not None to differentiate from empty array
-        #     string_representation += row_format_g.format('wfm length', len(self.samples))
-        #
-        # # Put possible private variable last
-        # if self._actual_samples is not None:  # We explicitly look for not None to differentiate from 0
-        #     string_representation += row_format_d.format('_actual samples', self._actual_samples)
-        #
-        # return string_representation
-        return self.__class__.__name__
+        # different format lines
+        row_format_d = '{:<20}: {:,}\n'
+        row_format_s = '{:<20}: {:}\n'
+
+        string_representation = ''
+        string_representation += row_format_s.format('Pattern Name', self.pattern_name)
+        string_representation += row_format_s.format('Time Set Name', self.time_set_name)
+        string_representation += row_format_d.format('Vector Number', self.vector_number)
+        string_representation += row_format_d.format('Cycle Number', self.cycle_number)
+        string_representation += row_format_d.format('Scan Cycle Number', self.scan_cycle_number)
+        string_representation += row_format_s.format('Expected Pin States', self.expected_pin_states)
+        string_representation += row_format_s.format('Actual Pin States', self.actual_pin_states)
+        string_representation += row_format_s.format('Per Pin Pass Fail', self.per_pin_pass_fail)
+
+        return string_representation
 
 
 
