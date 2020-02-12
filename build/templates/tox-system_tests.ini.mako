@@ -5,7 +5,8 @@
     module_name = config['module_name']
     driver_name = config['driver_name']
     if config['supports_nitclk'] or module_name == 'nitclk':
-        wheel_env = 'py38-{}-wheel_dep,'.format(module_name)
+        wheel_env_no_py = '{}-wheel_dep,'.format(module_name)
+        wheel_env = 'py38-' + wheel_env_no_py
         uses_other_wheel = True
         if module_name == 'nitclk':
             other_wheel = 'niscope'
@@ -30,21 +31,21 @@ toxworkdir = ../../../.tox
 [testenv]
 description =
 % if uses_other_wheel:
-    ${wheel_env}: Build the ${other_wheel} wheel
+    ${wheel_env_no_py}: Build the ${other_wheel} wheel
 % endif
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
     ${module_name}-coverage: Report all coverage results to codecov.io
 
 changedir =
 % if uses_other_wheel:
-    ${module_name}-wheel: ../../generated/${other_wheel}
+    ${wheel_env_no_py}: ../../generated/${other_wheel}
 % endif
     ${module_name}-system_tests: .
     ${module_name}-coverage: .
 
 commands =
 % if uses_other_wheel:
-    ${wheel_env}: python.exe setup.py bdist_wheel --universal
+    ${wheel_env_no_py}: python.exe setup.py bdist_wheel --universal
 % endif
     ${module_name}-system_tests: python --version
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
@@ -66,7 +67,7 @@ commands =
 
 deps =
 % if uses_other_wheel:
-    ${wheel_env}: packaging
+    ${wheel_env_no_py}: packaging
 % endif
     ${module_name}-system_tests: pytest==4.6.5;platform_python_implementation=='PyPy'
     ${module_name}-system_tests: pytest;platform_python_implementation=='CPython'
