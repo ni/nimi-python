@@ -25,14 +25,14 @@ def session():
 @pytest.fixture(scope='function')
 def session_5124():
     with daqmx_sim_5124_lock:
-        with niscope.Session('5124') as simulated_session:
+        with niscope.Session('5124') as simulated_session:  # 5124 is needed for video triggering
             yield simulated_session
 
 
 @pytest.fixture(scope='function')
 def session_5142():
     with daqmx_sim_5142_lock:
-        with niscope.Session('5142') as simulated_session:
+        with niscope.Session('5142') as simulated_session:  # 5142 is needed for OSP
             yield simulated_session
 
 
