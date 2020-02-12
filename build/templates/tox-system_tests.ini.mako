@@ -27,6 +27,7 @@ description =
 % endif
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
     ${module_name}-coverage: Report all coverage results to codecov.io
+    ${module_name}-test_suite: Run system tests in the Automates Test Suite context - uses released module
 
 changedir =
 % if config['supports_nitclk']:
@@ -34,10 +35,12 @@ changedir =
 % endif
     ${module_name}-system_tests: .
     ${module_name}-coverage: .
+    ${module_name}-test_suite: .
 
 commands =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: python.exe setup.py bdist_wheel --universal
+
 % endif
     ${module_name}-system_tests: python --version
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
@@ -49,6 +52,7 @@ commands =
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
+
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
@@ -57,9 +61,15 @@ commands =
     # token is from codecov
     ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
 
+    ${module_name}-test_suite: python --version
+    ${module_name}-test_suite: python -c "import platform; print(platform.architecture())"
+    ${module_name}-test_suite: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
+    ${module_name}-test_suite: python -m pytest ../../src/${module_name}/system_tests --json=generated/kibana/${module_name}_system_test_result.json {posargs}
+
 deps =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: packaging
+
 % endif
     ${module_name}-system_tests: pytest==4.6.5;platform_python_implementation=='PyPy'
     ${module_name}-system_tests: pytest;platform_python_implementation=='CPython'
@@ -67,8 +77,19 @@ deps =
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
     ${module_name}-system_tests: fasteners
+
     ${module_name}-coverage: coverage
     ${module_name}-coverage: codecov
+
+    ${module_name}-test_suite: pytest==4.6.5;platform_python_implementation=='PyPy'
+    ${module_name}-test_suite: pytest;platform_python_implementation=='CPython'
+    ${module_name}-test_suite: numpy
+    ${module_name}-test_suite: scipy
+    ${module_name}-test_suite: fasteners
+% if config['supports_nitclk']:
+    ${module_name}-test_suite: nitclk
+% endif
+    ${module_name}-test_suite: ${module_name}
 
 depends =
     ${module_name}-coverage: py{35,36,37,38,py3}-${module_name}-system_tests
