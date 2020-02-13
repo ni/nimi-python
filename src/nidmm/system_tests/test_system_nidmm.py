@@ -223,7 +223,7 @@ def test_fetch_waveform(session):
         assert isinstance(measurements[1], float)
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_fetch_waveform_into(session):
     number_of_points_to_read = 100
     session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)

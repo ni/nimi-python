@@ -107,14 +107,14 @@ def test_create_waveform_from_list(session):
     assert type(session.create_waveform(data)) is int
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_create_waveform_from_numpy_array_float64(session):
     data = numpy.ndarray(10000, dtype=numpy.float64)
     data.fill(0.5)
     assert type(session.create_waveform(data)) is int
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_create_waveform_numpy_array_int16(session):
     data = numpy.ndarray(10000, dtype=numpy.int16)
     data.fill(256)
@@ -330,14 +330,14 @@ def test_write_waveform_from_list(session):
     session.write_waveform(session.allocate_waveform(len(data)), data)
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_write_waveform_from_numpy_array_float64(session):
     data = numpy.ndarray(10000, dtype=numpy.float64)
     data.fill(0.5)
     session.write_waveform(session.allocate_waveform(len(data)), data)
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_write_waveform_numpy_array_int16(session):
     data = numpy.ndarray(10000, dtype=numpy.int16)
     data.fill(256)
@@ -350,7 +350,7 @@ def test_write_named_waveform_from_list(session):
     session.write_waveform('foo', data)
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_write_named_waveform_from_numpy_array_float64(session):
     data = numpy.ndarray(10000, dtype=numpy.float64)
     data.fill(0.5)
@@ -358,7 +358,7 @@ def test_write_named_waveform_from_numpy_array_float64(session):
     session.write_waveform('foo', data)
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_write_named_waveform_numpy_array_int16(session):
     data = numpy.ndarray(10000, dtype=numpy.int16)
     data.fill(256)

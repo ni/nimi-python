@@ -87,7 +87,7 @@ def test_fetch_defaults(session):
         assert len(waveforms[i].samples) == test_record_length
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_fetch_binary8_into(session):
     test_voltage = 1.0
     test_record_length = 2000
@@ -112,7 +112,7 @@ def test_fetch_binary8_into(session):
             assert record_wfm[j] == waveform[i * test_record_length + j]
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_fetch_binary16_into(session):
     test_voltage = 1.0
     test_record_length = 2000
@@ -137,7 +137,7 @@ def test_fetch_binary16_into(session):
             assert record_wfm[j] == waveform[i * test_record_length + j]
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_fetch_binary32_into(session):
     test_voltage = 1.0
     test_record_length = 2000
@@ -162,7 +162,7 @@ def test_fetch_binary32_into(session):
             assert record_wfm[j] == waveform[i * test_record_length + j]
 
 
-@pytest.mark.skipif(platform.python_implementation() == 'PyPy')
+@pytest.mark.skipif(platform.python_implementation() == 'PyPy', reason='numpy not supported on PyPy')
 def test_fetch_double_into(session):
     test_voltage = 1.0
     test_record_length = 2000
