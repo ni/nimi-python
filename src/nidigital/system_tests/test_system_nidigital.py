@@ -332,10 +332,9 @@ def test_fetch_history_ram_cycle_information_is_finite_invalid(multi_instrument_
     multi_instrument_session.history_ram_number_of_samples_is_finite = False
 
     expected_error_description = (
-        '-1074118484: '
         'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument '
         'is configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
-    with pytest.raises(nidigital.errors.DriverError, match=expected_error_description):
+    with pytest.raises(RuntimeError, match=expected_error_description):
         multi_instrument_session.fetch_history_ram_cycle_information(
             site='site1',
             pin_list='',

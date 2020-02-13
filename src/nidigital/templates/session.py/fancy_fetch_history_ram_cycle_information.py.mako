@@ -8,7 +8,6 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        # TODO : Figure out how to do error handling
         if position < 0:
             raise ValueError('position should be greater than or equal to 0.')
 
@@ -21,8 +20,7 @@
 
         if samples_to_read == -1:
             if not self.history_ram_number_of_samples_is_finite:
-                raise errors.DriverError(
-                    -1074118484,
+                raise RuntimeError(
                     'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument is '
                     'configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
             samples_to_read = samples_available - position
