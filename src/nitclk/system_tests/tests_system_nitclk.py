@@ -8,11 +8,10 @@ import os
 import pytest
 import tempfile
 
-
-# nitclk system tests require a different HW that the PXIe-5164 that we simulate else where. It does not support NI-TClk
-# in simulation. As a workaround, the nimi-bot VMs are configured with two simulated instrument of the PXIe-5122
-# named "5122_1" and "5122_2". If you want to run these tests on your own system, you will need to create these two simulated
-# instruments.
+# nitclk does not work with session based simulated devices.
+# As a workaround, the nimi-bot VMs are configured with two persistently simulated PXIe-5122 instruments named
+# "5122_1" and "5122_2". If you want to run these tests on your own system, you will need to create these two
+# simulated instruments.
 # In addition, we need a global lock in order to keep us from opening more than one session to the same simulated instrument
 # at the same time. This is because NI-SCOPE (like other MI driver runtimes) disallow two simultaneous sessions to the same
 # instrument, even when the instrument is simulated. This will impact the performance at which system tests run because we

@@ -9,6 +9,7 @@
         wheel_env = 'py38-' + wheel_env_no_py
         uses_other_wheel = True
         if module_name == 'nitclk':
+            # nitclk system tests use niscope
             other_wheel = 'niscope'
         else:
             other_wheel = 'nitclk'
@@ -31,7 +32,7 @@ toxworkdir = ../../../.tox
 [testenv]
 description =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: Build the ${other_wheel} wheel
+    ${wheel_env_no_py}: Build the ${other_wheel} wheel because we use it in ${module_name} tests
 % endif
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
     ${module_name}-coverage: Report all coverage results to codecov.io
