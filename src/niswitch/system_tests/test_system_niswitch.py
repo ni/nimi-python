@@ -19,6 +19,14 @@ def session():
         yield simulated_session
 
 
+@pytest.fixture(scope='function')
+def session_2532():
+    with daqmx_sim_db_lock:
+        simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
+    yield simulated_session
+    with daqmx_sim_db_lock:
+        simulated_session.close()
+
 # Basic Use Case Tests
 def test_relayclose(session):
     relay_name = 'kr0c0'
@@ -45,28 +53,26 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
-def test_continuous_software_scanning():
-    with daqmx_sim_db_lock:
-        with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
-            scan_list = 'r0->c0; r1->c1'
-            session.scan_list = scan_list
-            assert session.scan_list == scan_list
-            session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
-            session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.TTL0)
-            session.trigger_input = niswitch.TriggerInput.SOFTWARE_TRIG
-            session.scan_advanced_output = niswitch.ScanAdvancedOutput.NONE
-            session.scan_list = scan_list
-            session.scan_mode = niswitch.ScanMode.BREAK_BEFORE_MAKE
-            session.continuous_scan = True
-            session.commit()
-            with session.initiate():
-                assert session.is_scanning is True
-                session.send_software_trigger()
-                try:
-                    session.wait_for_scan_complete()
-                    assert False
-                except niswitch.Error as e:
-                    assert e.code == -1074126826  # Error : Max time exceeded.
+def test_continuous_software_scanning(session_2532):
+    scan_list = 'r0->c0; r1->c1'
+    session_2532.scan_list = scan_list
+    assert session_2532.scan_list == scan_list
+    session_2532.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
+    session_2532.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.TTL0)
+    session_2532.trigger_input = niswitch.TriggerInput.SOFTWARE_TRIG
+    session_2532.scan_advanced_output = niswitch.ScanAdvancedOutput.NONE
+    session_2532.scan_list = scan_list
+    session_2532.scan_mode = niswitch.ScanMode.BREAK_BEFORE_MAKE
+    session_2532.continuous_scan = True
+    session_2532.commit()
+    with session_2532.initiate():
+        assert session_2532.is_scanning is True
+        session_2532.send_software_trigger()
+        try:
+            session_2532.wait_for_scan_complete()
+            assert False
+        except niswitch.Error as e:
+            assert e.code == -1074126826  # Error : Max time exceeded.
 
 
 # Attribute Tests
@@ -93,10 +99,8 @@ def test_vi_real64_attribute(session):
     assert session.settling_time.total_seconds() == 0.1
 
 
-def test_enum_attribute():
-    with daqmx_sim_db_lock:
-        with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
-            assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
+def test_enum_attribute(session_2532):
+    assert session_2532.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
 
 def test_write_only_attribute(session):

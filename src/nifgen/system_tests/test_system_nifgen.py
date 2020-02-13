@@ -23,6 +23,15 @@ def session():
         yield simulated_session
 
 
+@pytest.fixture(scope='function')
+def session_5421():
+    with daqmx_sim_db_lock:
+        simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
+    yield simulated_session
+    with daqmx_sim_db_lock:
+        simulated_session.close()
+
+
 def test_self_test(session):
     # We should not get an assert if self_test passes
     session.self_test()
@@ -56,14 +65,12 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
-def test_get_self_cal_last_date_and_time():
-    with daqmx_sim_db_lock:
-        try:
-            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
-                session.get_self_cal_last_date_and_time()
-                assert False
-        except nifgen.Error as e:
-            assert e.code == -1074118632  # This operation is not supported for simulated device
+def test_get_self_cal_last_date_and_time(session_5421):
+    try:
+        session_5421.get_self_cal_last_date_and_time()
+        assert False
+    except nifgen.Error as e:
+        assert e.code == -1074118632  # This operation is not supported for simulated device
 
 
 def test_self_cal(session):
@@ -167,10 +174,8 @@ def test_get_ext_cal_recommended_interval(session):
     assert interval.days == 730  # recommended external cal interval is 24 months
 
 
-def test_get_hardware_state():
-    with daqmx_sim_db_lock:
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
-            assert session.get_hardware_state() == nifgen.HardwareState.IDLE
+def test_get_hardware_state(session_5421):
+    assert session_5421.get_hardware_state() == nifgen.HardwareState.IDLE
 
 
 def test_get_self_cal_last_temp(session):
@@ -233,37 +238,33 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
-def test_create_advanced_arb_sequence():
-    with daqmx_sim_db_lock:
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
-            seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
-            waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-            waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
-            marker_location_array = [0, 16, 32]
-            sample_counts_array = [256, 128, 64]
-            loop_counts_array = [10, 20, 30]
-            session.output_mode = nifgen.OutputMode.SEQ
-            # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-            assert ([], seq_handle_base + 0) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
-            assert ([], seq_handle_base + 1) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
-            assert (marker_location_array, seq_handle_base + 2) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-            assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
+def test_create_advanced_arb_sequence(session_5421):
+    seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
+    marker_location_array = [0, 16, 32]
+    sample_counts_array = [256, 128, 64]
+    loop_counts_array = [10, 20, 30]
+    session_5421.output_mode = nifgen.OutputMode.SEQ
+    # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+    assert ([], seq_handle_base + 0) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
+    assert ([], seq_handle_base + 1) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
+    assert (marker_location_array, seq_handle_base + 2) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+    assert (marker_location_array, seq_handle_base + 3) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
-def test_create_advanced_arb_sequence_wrong_size():
-    with daqmx_sim_db_lock:
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
-            waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-            waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
-            marker_location_array = [0, 16]
-            loop_counts_array = [10, 20, 30]
-            session.output_mode = nifgen.OutputMode.SEQ
-            # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-            try:
-                session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-                assert False
-            except ValueError:
-                pass
+def test_create_advanced_arb_sequence_wrong_size(session_5421):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
+    marker_location_array = [0, 16]
+    loop_counts_array = [10, 20, 30]
+    session_5421.output_mode = nifgen.OutputMode.SEQ
+    # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+    try:
+        session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+        assert False
+    except ValueError:
+        pass
 
 
 def test_arb_script(session):
