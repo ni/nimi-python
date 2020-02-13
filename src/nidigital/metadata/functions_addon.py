@@ -155,7 +155,7 @@ functions_additional_fetch_history_ram_cycle_information = {
             }
         ],
         'documentation': {
-            'description': '\n<FILL IN THE BLANK HERE>\n\n TODO \n\n',
+            'description': '\nReturns the pattern information acquired for the specified cycles.\n\nIf the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may\nconsist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return\nNIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.\n'
         },
         'parameters': [
             {
@@ -165,28 +165,40 @@ functions_additional_fetch_history_ram_cycle_information = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,\nwhere N is the site number. The VI returns an error if more than one site is specified.'
+                },
                 'name': 'site',
                 'type': 'ViConstString'
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Pins for which to retrieve History RAM data. If empty, the pin list from the pattern\ncontaining the start label is used. Call get_pattern_pin_list or get_pattern_pin_names with the start\nlabel to retrieve the pins associated with the pattern burst.'
+                },
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Sample index from which to start fetching pattern information.'
+                },
                 'name': 'position',
                 'type': 'ViInt64'
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Number of samples to fetch. A value of -1 specifies to fetch all available samples.'
+                },
                 'name': 'samples_to_read',
                 'type': 'ViInt64'
             },
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nList of <FILL IN THE BLANKS> TODO\n'
+                    'description': '\nReturns a list of class instances with\nthe following information about each pattern cycle:\n\n-  **pattern_name** (str)  Name of the pattern for the acquired cycle.\n-  **time_set_name** (str) Time set for the acquired cycle.\n-  **vector_number** (int) Vector number within the pattern for the acquired cycle. Vector numbers start\nat 0 from the beginning of the pattern.\n-  **cycle_number** (int) Cycle number acquired by this History RAM sample. Cycle numbers start at 0\nfrom the beginning of the pattern burst.\n-  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers\nstart at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not\nhave a scan opcode.\n-  **expected_pin_states** (list) Pin state as expected by the loaded pattern in the order specified in\nthe pin list. Pins without defined edges in the specified DUT cycle will have a value of\nNIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED.\n-  **actual_pin_states** (list) Pin state acquired by History RAM in the order specified in the pin\nlist. Pins without defined edges in the specified DUT cycle will have a value of\nNIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED.\n-  **per_pin_pass_fail** (list) pass fail information for pins in the order specified in the pin list.\nPins without defined edges in the specified DUT cycle will have a value of pass (True).\n'
                 },
                 'name': 'history_ram_cycle_information',
                 'size': {

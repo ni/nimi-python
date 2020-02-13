@@ -1190,16 +1190,23 @@ fetch_history_ram_cycle_information
 
     .. py:method:: fetch_history_ram_cycle_information(site, pin_list, position, samples_to_read)
 
-            <FILL IN THE BLANK HERE>
+            Returns the pattern information acquired for the specified cycles.
 
-             TODO
+            If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
+            consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
+            :py:data:`~nidigital.NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
 
             
+
+            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
             :param site:
 
+
+                Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
+                where N is the site number. The VI returns an error if more than one site is specified.
 
                 
 
@@ -1208,6 +1215,10 @@ fetch_history_ram_cycle_information
             :param pin_list:
 
 
+                Pins for which to retrieve History RAM data. If empty, the pin list from the pattern
+                containing the start label is used. Call get_pattern_pin_list or get_pattern_pin_names with the start
+                label to retrieve the pins associated with the pattern burst.
+
                 
 
 
@@ -1215,12 +1226,16 @@ fetch_history_ram_cycle_information
             :param position:
 
 
+                Sample index from which to start fetching pattern information.
+
                 
 
 
             :type position: int
             :param samples_to_read:
 
+
+                Number of samples to fetch. A value of -1 specifies to fetch all available samples.
 
                 
 
@@ -1231,9 +1246,30 @@ fetch_history_ram_cycle_information
             :return:
 
 
-                    List of <FILL IN THE BLANKS> TODO
+                    Returns a list of class instances with
+                    the following information about each pattern cycle:
+
+                    -  **pattern_name** (str)  Name of the pattern for the acquired cycle.
+                    -  **time_set_name** (str) Time set for the acquired cycle.
+                    -  **vector_number** (int) Vector number within the pattern for the acquired cycle. Vector numbers start
+                    at 0 from the beginning of the pattern.
+                    -  **cycle_number** (int) Cycle number acquired by this History RAM sample. Cycle numbers start at 0
+                    from the beginning of the pattern burst.
+                    -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
+                    start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
+                    have a scan opcode.
+                    -  **expected_pin_states** (list) Pin state as expected by the loaded pattern in the order specified in
+                    the pin list. Pins without defined edges in the specified DUT cycle will have a value of
+                    :py:data:`~nidigital.NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED`.
+                    -  **actual_pin_states** (list) Pin state acquired by History RAM in the order specified in the pin
+                    list. Pins without defined edges in the specified DUT cycle will have a value of
+                    :py:data:`~nidigital.NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED`.
+                    -  **per_pin_pass_fail** (list) pass fail information for pins in the order specified in the pin list.
+                    Pins without defined edges in the specified DUT cycle will have a value of pass (True).
 
                     
+
+                    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
