@@ -38,28 +38,28 @@ changedir =
 commands =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: python.exe setup.py bdist_wheel --universal
+
 % endif
-    ${module_name}-system_tests: python --version
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
     ${module_name}-system_tests: python -m pip install --disable-pip-version-check --upgrade pip
 % if config['supports_nitclk']:
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver nitclk --start-path ../..
 % endif
-    ${module_name}-system_tests: python -c "import platform; print(platform.architecture())"
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml {posargs} --durations=5
+
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    # token is from codecov
-    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
+    ${module_name}-coverage: coveralls --coveralls_yaml .coveralls-jenkins.yml --config_file ../../tools/coverage_system_tests.rc
 
 deps =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: packaging
+
 % endif
     ${module_name}-system_tests: pytest==4.6.5;platform_python_implementation=='PyPy'
     ${module_name}-system_tests: pytest;platform_python_implementation=='CPython'
@@ -67,8 +67,9 @@ deps =
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
     ${module_name}-system_tests: fasteners
+
     ${module_name}-coverage: coverage
-    ${module_name}-coverage: codecov
+    ${module_name}-coverage: python-coveralls
 
 depends =
     ${module_name}-coverage: py{35,36,37,38,py3}-${module_name}-system_tests
