@@ -54,7 +54,7 @@ commands =
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    ${module_name}-coverage: coveralls --rcfile=../../tools/coverage_system_tests.rc
+    ${module_name}-coverage: coveralls debug --rcfile=../../tools/coverage_system_tests.rc
 
 deps =
 % if config['supports_nitclk']:
