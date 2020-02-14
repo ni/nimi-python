@@ -24,12 +24,19 @@ def session():
 
 
 @pytest.fixture(scope='function')
-def session_5421():
+def session_5421_1():
     with daqmx_sim_db_lock:
         simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
     yield simulated_session
     with daqmx_sim_db_lock:
         simulated_session.close()
+
+
+@pytest.fixture(scope='function')
+def session_5421():
+    simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
+    yield simulated_session
+    simulated_session.close()
 
 
 def test_self_test(session):

@@ -20,12 +20,20 @@ def session():
 
 
 @pytest.fixture(scope='function')
-def session_2532():
+def session_2532_1():
     with daqmx_sim_db_lock:
         simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
     yield simulated_session
     with daqmx_sim_db_lock:
         simulated_session.close()
+
+
+@pytest.fixture(scope='function')
+def session_2532():
+    simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
+    yield simulated_session
+    simulated_session.close()
+
 
 # Basic Use Case Tests
 def test_relayclose(session):
