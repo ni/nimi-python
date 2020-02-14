@@ -28,6 +28,9 @@ class SideEffectsHelper(object):
         self._defaults['EnumArrayOutputFunction']['anArray'] = None
         self._defaults['EnumInputFunctionWithDefaults'] = {}
         self._defaults['EnumInputFunctionWithDefaults']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer'] = {}
+        self._defaults['ExportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ExportAttributeConfigurationBuffer']['configuration'] = None
         self._defaults['FetchWaveform'] = {}
         self._defaults['FetchWaveform']['return'] = 0
         self._defaults['FetchWaveform']['waveformData'] = None
@@ -102,6 +105,8 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['description'] = None
+        self._defaults['ImportAttributeConfigurationBuffer'] = {}
+        self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -156,6 +161,8 @@ class SideEffectsHelper(object):
         self._defaults['SetCustomType']['return'] = 0
         self._defaults['SetCustomTypeArray'] = {}
         self._defaults['SetCustomTypeArray']['return'] = 0
+        self._defaults['StringValuedEnumInputFunctionWithDefaults'] = {}
+        self._defaults['StringValuedEnumInputFunctionWithDefaults']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
         self._defaults['TwoInputFunction']['return'] = 0
         self._defaults['UnlockSession'] = {}
@@ -228,6 +235,21 @@ class SideEffectsHelper(object):
         if self._defaults['EnumInputFunctionWithDefaults']['return'] != 0:
             return self._defaults['EnumInputFunctionWithDefaults']['return']
         return self._defaults['EnumInputFunctionWithDefaults']['return']
+
+    def niFake_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
+            raise MockFunctionCallError("niFake_ExportAttributeConfigurationBuffer", param='configuration')
+        if size_in_bytes.value == 0:
+            return len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])
+        try:
+            configuration_ref = configuration.contents
+        except AttributeError:
+            configuration_ref = configuration
+        for i in range(len(self._defaults['ExportAttributeConfigurationBuffer']['configuration'])):
+            configuration_ref[i] = self._defaults['ExportAttributeConfigurationBuffer']['configuration'][i]
+        return self._defaults['ExportAttributeConfigurationBuffer']['return']
 
     def niFake_FetchWaveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
         if self._defaults['FetchWaveform']['return'] != 0:
@@ -527,6 +549,11 @@ class SideEffectsHelper(object):
         description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
+    def niFake_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationBuffer']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationBuffer']['return']
+        return self._defaults['ImportAttributeConfigurationBuffer']['return']
+
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
@@ -724,6 +751,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetCustomTypeArray']['return']
         return self._defaults['SetCustomTypeArray']['return']
 
+    def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os_name):  # noqa: N802
+        if self._defaults['StringValuedEnumInputFunctionWithDefaults']['return'] != 0:
+            return self._defaults['StringValuedEnumInputFunctionWithDefaults']['return']
+        return self._defaults['StringValuedEnumInputFunctionWithDefaults']['return']
+
     def niFake_TwoInputFunction(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['TwoInputFunction']['return'] != 0:
             return self._defaults['TwoInputFunction']['return']
@@ -804,6 +836,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_EnumArrayOutputFunction.return_value = 0
         mock_library.niFake_EnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_EnumInputFunctionWithDefaults")
         mock_library.niFake_EnumInputFunctionWithDefaults.return_value = 0
+        mock_library.niFake_ExportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niFake_ExportAttributeConfigurationBuffer")
+        mock_library.niFake_ExportAttributeConfigurationBuffer.return_value = 0
         mock_library.niFake_FetchWaveform.side_effect = MockFunctionCallError("niFake_FetchWaveform")
         mock_library.niFake_FetchWaveform.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
@@ -848,6 +882,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetEnumValue.return_value = 0
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
         mock_library.niFake_GetError.return_value = 0
+        mock_library.niFake_ImportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niFake_ImportAttributeConfigurationBuffer")
+        mock_library.niFake_ImportAttributeConfigurationBuffer.return_value = 0
         mock_library.niFake_InitWithOptions.side_effect = MockFunctionCallError("niFake_InitWithOptions")
         mock_library.niFake_InitWithOptions.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
@@ -886,6 +922,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetCustomType.return_value = 0
         mock_library.niFake_SetCustomTypeArray.side_effect = MockFunctionCallError("niFake_SetCustomTypeArray")
         mock_library.niFake_SetCustomTypeArray.return_value = 0
+        mock_library.niFake_StringValuedEnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_StringValuedEnumInputFunctionWithDefaults")
+        mock_library.niFake_StringValuedEnumInputFunctionWithDefaults.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")
         mock_library.niFake_TwoInputFunction.return_value = 0
         mock_library.niFake_UnlockSession.side_effect = MockFunctionCallError("niFake_UnlockSession")

@@ -402,139 +402,6 @@ configure_active_load_levels
 
             :type vcom: float
 
-configure_cycle_number_history_ram_trigger
-------------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_cycle_number_history_ram_trigger(cycle_number, pretrigger_samples)
-
-            TBD
-
-            
-
-
-
-            :param cycle_number:
-
-
-                
-
-
-            :type cycle_number: int
-            :param pretrigger_samples:
-
-
-                
-
-
-            :type pretrigger_samples: int
-
-configure_digital_edge_conditional_jump_trigger
------------------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_digital_edge_conditional_jump_trigger(trigger_identifier, source, edge)
-
-            TBD
-
-            
-
-
-
-            :param trigger_identifier:
-
-
-                
-
-
-            :type trigger_identifier: str
-            :param source:
-
-
-                
-
-
-            :type source: str
-            :param edge:
-
-
-                
-
-
-            :type edge: int
-
-configure_digital_edge_start_trigger
-------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_digital_edge_start_trigger(source, edge)
-
-            TBD
-
-            
-
-
-
-            :param source:
-
-
-                
-
-
-            :type source: str
-            :param edge:
-
-
-                
-
-
-            :type edge: int
-
-configure_first_failure_history_ram_trigger
--------------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_first_failure_history_ram_trigger(pretrigger_samples)
-
-            TBD
-
-            
-
-
-
-            :param pretrigger_samples:
-
-
-                
-
-
-            :type pretrigger_samples: int
-
-configure_history_ram_cycles_to_acquire
----------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_history_ram_cycles_to_acquire(cycles_to_acquire)
-
-            TBD
-
-            
-
-
-
-            :param cycles_to_acquire:
-
-
-                
-
-
-            :type cycles_to_acquire: int
-
 configure_pattern_burst_sites
 -----------------------------
 
@@ -555,133 +422,6 @@ configure_pattern_burst_sites
 
 
             :type site_list: str
-
-configure_pattern_label_history_ram_trigger
--------------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_pattern_label_history_ram_trigger(label, vector_offset, cycle_offset, pretrigger_samples)
-
-            TBD
-
-            
-
-
-
-            :param label:
-
-
-                
-
-
-            :type label: str
-            :param vector_offset:
-
-
-                
-
-
-            :type vector_offset: int
-            :param cycle_offset:
-
-
-                
-
-
-            :type cycle_offset: int
-            :param pretrigger_samples:
-
-
-                
-
-
-            :type pretrigger_samples: int
-
-configure_software_edge_conditional_jump_trigger
-------------------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_software_edge_conditional_jump_trigger(trigger_identifier)
-
-            TBD
-
-            
-
-
-
-            :param trigger_identifier:
-
-
-                
-
-
-            :type trigger_identifier: str
-
-configure_software_edge_start_trigger
--------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_software_edge_start_trigger()
-
-            TBD
-
-            
-
-
-
-configure_start_label
----------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_start_label(label)
-
-            TBD
-
-            
-
-
-
-            :param label:
-
-
-                
-
-
-            :type label: str
-
-configure_termination_mode
---------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: configure_termination_mode(mode)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_termination_mode(mode)
-
-
-            :param mode:
-
-
-                
-
-
-            :type mode: :py:data:`nidigital.TerminationMode`
 
 configure_time_set_compare_edges_strobe
 ---------------------------------------
@@ -1196,83 +936,6 @@ create_capture_waveform_serial
 
             :type bit_order: int
 
-create_channel_map
-------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_channel_map(num_sites)
-
-            TBD
-
-            
-
-
-
-            :param num_sites:
-
-
-                
-
-
-            :type num_sites: int
-
-create_pin_group
-----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_pin_group(pin_group_name, pin_list)
-
-            TBD
-
-            
-
-
-
-            :param pin_group_name:
-
-
-                
-
-
-            :type pin_group_name: str
-            :param pin_list:
-
-
-                
-
-
-            :type pin_list: str
-
-create_pin_map
---------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: create_pin_map(dut_pin_list, system_pin_list)
-
-            TBD
-
-            
-
-
-
-            :param dut_pin_list:
-
-
-                
-
-
-            :type dut_pin_list: str
-            :param system_pin_list:
-
-
-                
-
-
-            :type system_pin_list: str
-
 create_source_waveform_from_file_tdms
 -------------------------------------
 
@@ -1426,27 +1089,6 @@ delete_all_time_sets
 
 
 
-disable_conditional_jump_trigger
---------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: disable_conditional_jump_trigger(trigger_identifier)
-
-            TBD
-
-            
-
-
-
-            :param trigger_identifier:
-
-
-                
-
-
-            :type trigger_identifier: str
-
 disable_sites
 -------------
 
@@ -1468,19 +1110,6 @@ disable_sites
 
             :type site_list: str
 
-disable_start_trigger
----------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: disable_start_trigger()
-
-            TBD
-
-            
-
-
-
 enable_sites
 ------------
 
@@ -1501,54 +1130,6 @@ enable_sites
 
 
             :type site_list: str
-
-end_channel_map
----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: end_channel_map()
-
-            TBD
-
-            
-
-
-
-export_signal
--------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: export_signal(signal, signal_identifier, output_terminal)
-
-            TBD
-
-            
-
-
-
-            :param signal:
-
-
-                
-
-
-            :type signal: :py:data:`nidigital.Signal`
-            :param signal_identifier:
-
-
-                
-
-
-            :type signal_identifier: str
-            :param output_terminal:
-
-
-                
-
-
-            :type output_terminal: str
 
 fetch_capture_waveform
 ----------------------
@@ -1765,36 +1346,6 @@ fetch_history_ram_scan_cycle_number
                     
 
 
-
-frequency_counter_configure_measurement_time
---------------------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: frequency_counter_configure_measurement_time(measurement_time)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].frequency_counter_configure_measurement_time(measurement_time)
-
-
-            :param measurement_time:
-
-
-                
-
-
-            :type measurement_time: float
 
 frequency_counter_measure_frequency
 -----------------------------------
@@ -2558,304 +2109,6 @@ lock
         a context manager and unlock will be called when the `with` block is exited
 
 
-map_pin_to_channel
-------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: map_pin_to_channel(pin, site)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].map_pin_to_channel(pin, site)
-
-
-            :param pin:
-
-
-                
-
-
-            :type pin: str
-            :param site:
-
-
-                
-
-
-            :type site: int
-
-ppmu_configure_aperture_time
-----------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_aperture_time(aperture_time, units)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_aperture_time(aperture_time, units)
-
-
-            :param aperture_time:
-
-
-                
-
-
-            :type aperture_time: float
-            :param units:
-
-
-                
-
-
-            :type units: :py:data:`nidigital.ApertureTimeUnits`
-
-ppmu_configure_current_level
-----------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_current_level(current_level)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_current_level(current_level)
-
-
-            :param current_level:
-
-
-                
-
-
-            :type current_level: float
-
-ppmu_configure_current_level_range
-----------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_current_level_range(range)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_current_level_range(range)
-
-
-            :param range:
-
-
-                
-
-
-            :type range: float
-
-ppmu_configure_current_limit
-----------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_current_limit(behavior, limit)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_current_limit(behavior, limit)
-
-
-            :param behavior:
-
-
-                
-
-
-            :type behavior: int
-            :param limit:
-
-
-                
-
-
-            :type limit: float
-
-ppmu_configure_current_limit_range
-----------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_current_limit_range(range)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_current_limit_range(range)
-
-
-            :param range:
-
-
-                
-
-
-            :type range: float
-
-ppmu_configure_output_function
-------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_output_function(output_function)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_output_function(output_function)
-
-
-            :param output_function:
-
-
-                
-
-
-            :type output_function: int
-
-ppmu_configure_voltage_level
-----------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_voltage_level(voltage_level)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_voltage_level(voltage_level)
-
-
-            :param voltage_level:
-
-
-                
-
-
-            :type voltage_level: float
-
-ppmu_configure_voltage_limits
------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: ppmu_configure_voltage_limits(lower_voltage_limit, upper_voltage_limit)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_configure_voltage_limits(lower_voltage_limit, upper_voltage_limit)
-
-
-            :param lower_voltage_limit:
-
-
-                
-
-
-            :type lower_voltage_limit: float
-            :param upper_voltage_limit:
-
-
-                
-
-
-            :type upper_voltage_limit: float
-
 ppmu_measure
 ------------
 
@@ -3059,36 +2312,6 @@ reset_device
             
 
 
-
-select_function
----------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: select_function(function)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].select_function(method)
-
-
-            :param function:
-
-
-                
-
-
-            :type function: int
 
 self_calibrate
 --------------
@@ -3473,6 +2696,70 @@ pins
             session.pins['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
+devices
+-------
+
+    .. py:attribute:: nidigital.Session.devices[]
+
+        .. code:: python
+
+            session.devices['0-2'].channel_enabled = True
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
+pattern_opcode_events
+---------------------
+
+    .. py:attribute:: nidigital.Session.pattern_opcode_events[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.pattern_opcode_events['0-2'].channel_enabled = True
+
+        passes a string of :python:`'patternOpcodeEvent0, patternOpcodeEvent1, patternOpcodeEvent2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.pattern_opcode_events['patternOpcodeEvent0-patternOpcodeEvent2'].channel_enabled = True
+
+        passes a string of :python:`'patternOpcodeEvent0, patternOpcodeEvent1, patternOpcodeEvent2'` to the set attribute function.
+
+
+conditional_jump_triggers
+-------------------------
+
+    .. py:attribute:: nidigital.Session.conditional_jump_triggers[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.conditional_jump_triggers['0-2'].channel_enabled = True
+
+        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.conditional_jump_triggers['conditionalJumpTrigger0-conditionalJumpTrigger2'].channel_enabled = True
+
+        passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
 
 
 
@@ -4280,7 +3567,14 @@ instrument_firmware_revision
 
     .. py:attribute:: instrument_firmware_revision
 
-        
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].instrument_firmware_revision
 
         The following table lists the characteristics of this property.
 
@@ -4291,7 +3585,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -4574,7 +3868,14 @@ pattern_opcode_event_terminal_name
 
     .. py:attribute:: pattern_opcode_event_terminal_name
 
-        
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                var = session.channels[0,1].pattern_opcode_event_terminal_name
 
         The following table lists the characteristics of this property.
 
@@ -4585,7 +3886,7 @@ pattern_opcode_event_terminal_name
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | No        |
+            | Channel Based  | Yes       |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -5209,17 +4510,17 @@ simulate
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | bool      |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | bool       |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | No         |
+            +----------------+------------+
+            | Resettable     | Yes        |
+            +----------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

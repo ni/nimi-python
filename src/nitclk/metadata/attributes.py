@@ -34,7 +34,7 @@ attributes = {
         'name': 'START_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     4: {
         'access': 'read-write',
@@ -47,12 +47,13 @@ attributes = {
         'name': 'REF_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     5: {
         'access': 'read-write',
         'attribute_class': 'AttributeSessionReference',
         'channel_based': False,
+        'codegen_method': 'no',
         'documentation': {
             'description': '\nSpecifies the script trigger master session.\nFor external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.\n'
         },
@@ -60,7 +61,7 @@ attributes = {
         'name': 'SCRIPT_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     6: {
         'access': 'read-write',
@@ -73,7 +74,7 @@ attributes = {
         'name': 'PAUSE_TRIGGER_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     },
     8: {
         'access': 'read only',
@@ -110,6 +111,7 @@ attributes = {
     },
     11: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': False,
         'documentation': {
             'description': '\nSpecifies the sample clock delay.\nSpecifies the delay, in seconds, to apply to the session sample clock  relative to the other synchronized sessions. During synchronization,  NI-TClk aligns the sample clocks on the synchronized devices. If you want  to delay the sample clocks, set this attribute before calling  niTClk_Synchronize.\nnot supported for acquisition sessions.\nValues - Between minus one and plus one period of the sample clock.\nOne sample clock period is equal to (1/sample clock rate). For example,  for a session with sample rate of 100 MS/s, you can specify sample clock  delays between -10.0 ns and +10.0 ns.\nDefault Value is 0\n',
@@ -118,7 +120,8 @@ attributes = {
         'lv_property': 'Sample Clock Delay',
         'name': 'SAMPLE_CLOCK_DELAY',
         'resettable': False,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'float in seconds or datetime.timedelta',
     },
     13: {
         'access': 'read-write',
@@ -142,6 +145,6 @@ attributes = {
         'name': 'SEQUENCER_FLAG_MASTER_SESSION',
         'resettable': False,
         'type': 'ViSession',
-        'type_in_documentation': 'nimi-python Session class, nitclk.SessionReference, NI-TClk Session Number'
+        'type_in_documentation': 'Driver Session or nitclk.SessionReference',
     }
 }

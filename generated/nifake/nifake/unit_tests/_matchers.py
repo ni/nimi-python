@@ -284,6 +284,11 @@ class ViCharBufferMatcher(_BufferMatcher):
         _BufferMatcher.__init__(self, _visatype.ViChar, expected_size_or_value)
 
 
+class ViInt8BufferMatcher(_BufferMatcher):
+    def __init__(self, expected_size_or_value):
+        _BufferMatcher.__init__(self, _visatype.ViInt8, expected_size_or_value)
+
+
 class ViInt16BufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, _visatype.ViInt16, expected_size_or_value)

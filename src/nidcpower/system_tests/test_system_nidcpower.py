@@ -1,5 +1,6 @@
 import datetime
 import nidcpower
+import os
 import pytest
 import tempfile
 
@@ -22,12 +23,8 @@ def multiple_channel_session():
         yield simulated_session
 
 
-def test_self_test():
-    # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
-    # Update to use the session created with 'session' function above after internal NI bug is fixed.
-    with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        # We should not get an assert if self_test passes
-        session.self_test()
+def test_self_test(session):
+    session.self_test()
 
 
 def test_self_cal(session):
@@ -82,17 +79,14 @@ def test_read_current_temperature(session):
     assert temperature == 25.0
 
 
-def test_reset_device():
-    # TODO(frank): reset_device does not work with simulated PXIe-4162 modules due to internal NI bug.
-    # Update to use the session created with 'session' function above after internal NI bug is fixed.
-    with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        channel = session.channels['0']
-        default_output_function = channel.output_function
-        assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
-        channel.output_function = nidcpower.OutputFunction.DC_CURRENT
-        session.reset_device()
-        function_after_reset = channel.output_function
-        assert function_after_reset == default_output_function
+def test_reset_device(session):
+    channel = session.channels['0']
+    default_output_function = channel.output_function
+    assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
+    channel.output_function = nidcpower.OutputFunction.DC_CURRENT
+    session.reset_device()
+    function_after_reset = channel.output_function
+    assert function_after_reset == default_output_function
 
 
 def test_reset_with_default(session):
@@ -258,7 +252,10 @@ def test_import_export_buffer(single_channel_session):
 def test_import_export_file(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
-    path = tempfile.gettempdir() + 'test.txt'
+    temp_file = tempfile.NamedTemporaryFile(suffix='.txt', delete=False)
+    # NamedTemporaryFile() returns the file already opened, so we need to close it before we can use it
+    temp_file.close()
+    path = temp_file.name
     single_channel_session.voltage_level = test_value_1
     assert single_channel_session.voltage_level == test_value_1
     single_channel_session.export_attribute_configuration_file(path)
@@ -266,6 +263,7 @@ def test_import_export_file(single_channel_session):
     assert single_channel_session.voltage_level == test_value_2
     single_channel_session.import_attribute_configuration_file(path)
     assert single_channel_session.voltage_level == test_value_1
+    os.remove(path)
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):

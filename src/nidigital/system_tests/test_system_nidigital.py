@@ -1,22 +1,29 @@
 import array
 import collections
 import os
-import sys
 
 import numpy
 import pytest
 
 import nidigital
 
-
 instr = ['PXI1Slot2', 'PXI1Slot5']
-test_files_base_dir = os.path.join(os.getcwd(), 'src', 'nidigital', 'system_tests', 'test_files')
+test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
     with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
         yield simulated_session
+
+
+def test_pins_rep_cap(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.vil = 1
+    multi_instrument_session.pins['PinA', 'PinB', 'PinC'].vil = 2
+    assert multi_instrument_session.pins['DutPins'].vil == pytest.approx(2, abs=1e-3)
+    assert multi_instrument_session.pins['SysPins'].vil == pytest.approx(1, abs=1e-3)
 
 
 def test_property_boolean(multi_instrument_session):
@@ -70,10 +77,6 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
-def test_get_pin_results_pin_information(multi_instrument_session):
-    pass
-
-
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
@@ -121,8 +124,6 @@ def get_test_file_path(test_name, file_name):
 
 @pytest.fixture(params=[array.array, numpy.array, list])
 def source_waveform_type(request):
-    if request.param != array.array:
-        pytest.skip('Source waveform types other than array.array are not supported yet (#1132)')
     return request.param
 
 
@@ -146,8 +147,8 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
             0: array.array('L', [i for i in reversed(range(num_samples))])}
     elif source_waveform_type == numpy.array:
         source_waveform = {
-            1: numpy.array([i for i in range(num_samples)]),
-            0: numpy.array([i for i in reversed(range(num_samples))])}
+            1: numpy.array([i for i in range(num_samples)], dtype=numpy.uint32),
+            0: numpy.array([i for i in reversed(range(num_samples))], dtype=numpy.uint32)}
     elif source_waveform_type == list:
         source_waveform = {
             1: [i for i in range(num_samples)],
@@ -239,3 +240,17 @@ def test_fetch_capture_waveform(multi_instrument_session):
     assert fetched_site == 1
     assert len(fetched_waveform[fetched_site]) == num_samples
 
+
+def test_get_pin_results_pin_information(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    fully_qualified_channels = [instr[1] + '/0', instr[0] + '/1', instr[1] + '/11']
+    pin_info = multi_instrument_session.channels[fully_qualified_channels].get_pin_results_pin_information()
+
+    pins = [i.pin_name for i in pin_info]
+    sites = [i.site_number for i in pin_info]
+    channels = [i.channel_name for i in pin_info]
+
+    assert pins == ['PinA', 'PinB', '']
+    assert sites == [1, 0, -1]
+    assert channels == fully_qualified_channels

@@ -7,8 +7,6 @@ NI Switch Executive Python API Status
 +===============================+=====================+
 | Driver Version Tested Against | 19.0.0              |
 +-------------------------------+---------------------+
-| Driver API Version            | 19.1.0d1            |
-+-------------------------------+---------------------+
 | PyPI Version                  | |niseLatestVersion| |
 +-------------------------------+---------------------+
 | Supported Python Version      | |nisePythonVersion| |

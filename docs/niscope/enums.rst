@@ -525,6 +525,10 @@ TriggerModifier
 
 
 
+    .. py:attribute:: TriggerModifier.AUTO_LEVEL
+
+
+
 TriggerSlope
 ------------
 
@@ -669,6 +673,10 @@ TriggerWindowMode
         Trigger upon leaving the window
 
         
+
+
+
+    .. py:attribute:: TriggerWindowMode.ENTERING_OR_LEAVING
 
 
 

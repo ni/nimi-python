@@ -72,8 +72,6 @@ NI-Digital Pattern Driver Python API Status
 +=======================================+==========================+
 | Driver Version Tested Against         | 19.0.1                   |
 +---------------------------------------+--------------------------+
-| Driver API Version                    | 19.0.0a0                 |
-+---------------------------------------+--------------------------+
 | PyPI Version                          | |nidigitalLatestVersion| |
 +---------------------------------------+--------------------------+
 | Supported Python Version              | |nidigitalPythonVersion| |
@@ -140,7 +138,7 @@ The following is a basic example of using the **nidigital** module to open a ses
     with nidigital.Session(resource_name='PXI1Slot2', channels='0') as session:
         pass
 
-Additional examples for NI-Digital are located in src/nidigital/examples/ directory.
+Additional examples for NI-Digital Pattern Driver are located in src/nidigital/examples/ directory.
 
 .. _support-section:
 

@@ -23,8 +23,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
+        * Zip file per driver for all examples and any helper files
+        * Link to zip file on examples documentation
         * Support for Python 3.8
     * #### Changed
+        * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
+        * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
     * #### Removed
         * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
         * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
@@ -46,6 +50,11 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-FGEN
     * #### Added
+        * `nifgen.Session.import_attribute_configuration_file()`
+        * `nifgen.Session.import_attribute_configuration_buffer()`
+        * `nifgen.Session.export_attribute_configuration_file()`
+        * `nifgen.Session.export_attribute_configuration_buffer()`
+        * `nifgen.Session.get_channel_name()`
     * #### Changed
     * #### Removed
 * ### NI-SCOPE
@@ -58,14 +67,21 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
+        * `conditional_jump_triggers` and `pattern_opcode_events` repeated capabilities - [#1191](https://github.com/ni/nimi-python/issues/1191), [#1192](https://github.com/ni/nimi-python/issues/1192)
     * #### Changed
+        * `write_source_waveform_site_unique()` now supports `numpy.array` and `list` as site waveform types
     * #### Removed
+        * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
+        * Removed programmatic pin map creation API - [#1124](https://github.com/ni/nimi-python/issues/1124)
 * ### NI-TClk
     * #### Added
     * #### Changed
+        * Method parameters and properties that are time based now take or return a `datetime.timedelta` object
     * #### Removed
-    
-    
+        * Ability to pass an integer as a session / session reference
+        * `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on nitclk attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
+
+
 ## 1.1.5 - 2019-11-22
 * ### ALL
     * #### Changed
@@ -140,7 +156,7 @@ All notable changes to this project will be documented in this file.
         * **[Source Breaker]** No longer return the "actual size" from functions that use 'ivi-dance-with-a-twist'. This only affects `nidigital`.
 
     * #### Removed
-        * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`, 
+        * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`,
             `get_number_of_vectors()`, `get_pattern_file_path()`, `get_pin_type()`, `get_time_set_compare_edges()`, `get_time_set_drive_edges()`,
             `is_pattern_file_modified_since_load()`, `load_levels_internal()`, `load_pattern_internal()`, `load_timing_internal()`, `uncommit()`
         * Need to determine how to generate this function - `fetch_capture_waveform_u32()`

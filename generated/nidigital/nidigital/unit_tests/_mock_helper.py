@@ -38,28 +38,8 @@ class SideEffectsHelper(object):
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureActiveLoadLevels'] = {}
         self._defaults['ConfigureActiveLoadLevels']['return'] = 0
-        self._defaults['ConfigureCycleNumberHistoryRAMTrigger'] = {}
-        self._defaults['ConfigureCycleNumberHistoryRAMTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeConditionalJumpTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeConditionalJumpTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalEdgeStartTrigger'] = {}
-        self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
-        self._defaults['ConfigureFirstFailureHistoryRAMTrigger'] = {}
-        self._defaults['ConfigureFirstFailureHistoryRAMTrigger']['return'] = 0
-        self._defaults['ConfigureHistoryRAMCyclesToAcquire'] = {}
-        self._defaults['ConfigureHistoryRAMCyclesToAcquire']['return'] = 0
         self._defaults['ConfigurePatternBurstSites'] = {}
         self._defaults['ConfigurePatternBurstSites']['return'] = 0
-        self._defaults['ConfigurePatternLabelHistoryRAMTrigger'] = {}
-        self._defaults['ConfigurePatternLabelHistoryRAMTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger']['return'] = 0
-        self._defaults['ConfigureSoftwareEdgeStartTrigger'] = {}
-        self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] = 0
-        self._defaults['ConfigureStartLabel'] = {}
-        self._defaults['ConfigureStartLabel']['return'] = 0
-        self._defaults['ConfigureTerminationMode'] = {}
-        self._defaults['ConfigureTerminationMode']['return'] = 0
         self._defaults['ConfigureTimeSetCompareEdgesStrobe'] = {}
         self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return'] = 0
         self._defaults['ConfigureTimeSetCompareEdgesStrobe2x'] = {}
@@ -84,12 +64,6 @@ class SideEffectsHelper(object):
         self._defaults['CreateCaptureWaveformParallel']['return'] = 0
         self._defaults['CreateCaptureWaveformSerial'] = {}
         self._defaults['CreateCaptureWaveformSerial']['return'] = 0
-        self._defaults['CreateChannelMap'] = {}
-        self._defaults['CreateChannelMap']['return'] = 0
-        self._defaults['CreatePinGroup'] = {}
-        self._defaults['CreatePinGroup']['return'] = 0
-        self._defaults['CreatePinMap'] = {}
-        self._defaults['CreatePinMap']['return'] = 0
         self._defaults['CreateSourceWaveformFromFileTDMS'] = {}
         self._defaults['CreateSourceWaveformFromFileTDMS']['return'] = 0
         self._defaults['CreateSourceWaveformParallel'] = {}
@@ -100,18 +74,10 @@ class SideEffectsHelper(object):
         self._defaults['CreateTimeSet']['return'] = 0
         self._defaults['DeleteAllTimeSets'] = {}
         self._defaults['DeleteAllTimeSets']['return'] = 0
-        self._defaults['DisableConditionalJumpTrigger'] = {}
-        self._defaults['DisableConditionalJumpTrigger']['return'] = 0
         self._defaults['DisableSites'] = {}
         self._defaults['DisableSites']['return'] = 0
-        self._defaults['DisableStartTrigger'] = {}
-        self._defaults['DisableStartTrigger']['return'] = 0
         self._defaults['EnableSites'] = {}
         self._defaults['EnableSites']['return'] = 0
-        self._defaults['EndChannelMap'] = {}
-        self._defaults['EndChannelMap']['return'] = 0
-        self._defaults['ExportSignal'] = {}
-        self._defaults['ExportSignal']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation'] = {}
         self._defaults['FetchHistoryRAMCycleInformation']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation']['patternIndex'] = None
@@ -128,8 +94,6 @@ class SideEffectsHelper(object):
         self._defaults['FetchHistoryRAMScanCycleNumber'] = {}
         self._defaults['FetchHistoryRAMScanCycleNumber']['return'] = 0
         self._defaults['FetchHistoryRAMScanCycleNumber']['scanCycleNumber'] = None
-        self._defaults['FrequencyCounter_ConfigureMeasurementTime'] = {}
-        self._defaults['FrequencyCounter_ConfigureMeasurementTime']['return'] = 0
         self._defaults['FrequencyCounter_MeasureFrequency'] = {}
         self._defaults['FrequencyCounter_MeasureFrequency']['return'] = 0
         self._defaults['FrequencyCounter_MeasureFrequency']['actualNumFrequencies'] = None
@@ -232,24 +196,6 @@ class SideEffectsHelper(object):
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
-        self._defaults['MapPinToChannel'] = {}
-        self._defaults['MapPinToChannel']['return'] = 0
-        self._defaults['PPMU_ConfigureApertureTime'] = {}
-        self._defaults['PPMU_ConfigureApertureTime']['return'] = 0
-        self._defaults['PPMU_ConfigureCurrentLevel'] = {}
-        self._defaults['PPMU_ConfigureCurrentLevel']['return'] = 0
-        self._defaults['PPMU_ConfigureCurrentLevelRange'] = {}
-        self._defaults['PPMU_ConfigureCurrentLevelRange']['return'] = 0
-        self._defaults['PPMU_ConfigureCurrentLimit'] = {}
-        self._defaults['PPMU_ConfigureCurrentLimit']['return'] = 0
-        self._defaults['PPMU_ConfigureCurrentLimitRange'] = {}
-        self._defaults['PPMU_ConfigureCurrentLimitRange']['return'] = 0
-        self._defaults['PPMU_ConfigureOutputFunction'] = {}
-        self._defaults['PPMU_ConfigureOutputFunction']['return'] = 0
-        self._defaults['PPMU_ConfigureVoltageLevel'] = {}
-        self._defaults['PPMU_ConfigureVoltageLevel']['return'] = 0
-        self._defaults['PPMU_ConfigureVoltageLimits'] = {}
-        self._defaults['PPMU_ConfigureVoltageLimits']['return'] = 0
         self._defaults['PPMU_Measure'] = {}
         self._defaults['PPMU_Measure']['return'] = 0
         self._defaults['PPMU_Measure']['actualNumRead'] = None
@@ -270,8 +216,6 @@ class SideEffectsHelper(object):
         self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
-        self._defaults['SelectFunction'] = {}
-        self._defaults['SelectFunction']['return'] = 0
         self._defaults['SelfCalibrate'] = {}
         self._defaults['SelfCalibrate']['return'] = 0
         self._defaults['SendSoftwareEdgeTrigger'] = {}
@@ -384,60 +328,10 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureActiveLoadLevels']['return']
         return self._defaults['ConfigureActiveLoadLevels']['return']
 
-    def niDigital_ConfigureCycleNumberHistoryRAMTrigger(self, vi, cycle_number, pretrigger_samples):  # noqa: N802
-        if self._defaults['ConfigureCycleNumberHistoryRAMTrigger']['return'] != 0:
-            return self._defaults['ConfigureCycleNumberHistoryRAMTrigger']['return']
-        return self._defaults['ConfigureCycleNumberHistoryRAMTrigger']['return']
-
-    def niDigital_ConfigureDigitalEdgeConditionalJumpTrigger(self, vi, trigger_identifier, source, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeConditionalJumpTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeConditionalJumpTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeConditionalJumpTrigger']['return']
-
-    def niDigital_ConfigureDigitalEdgeStartTrigger(self, vi, source, edge):  # noqa: N802
-        if self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
-        return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
-
-    def niDigital_ConfigureFirstFailureHistoryRAMTrigger(self, vi, pretrigger_samples):  # noqa: N802
-        if self._defaults['ConfigureFirstFailureHistoryRAMTrigger']['return'] != 0:
-            return self._defaults['ConfigureFirstFailureHistoryRAMTrigger']['return']
-        return self._defaults['ConfigureFirstFailureHistoryRAMTrigger']['return']
-
-    def niDigital_ConfigureHistoryRAMCyclesToAcquire(self, vi, cycles_to_acquire):  # noqa: N802
-        if self._defaults['ConfigureHistoryRAMCyclesToAcquire']['return'] != 0:
-            return self._defaults['ConfigureHistoryRAMCyclesToAcquire']['return']
-        return self._defaults['ConfigureHistoryRAMCyclesToAcquire']['return']
-
     def niDigital_ConfigurePatternBurstSites(self, vi, site_list):  # noqa: N802
         if self._defaults['ConfigurePatternBurstSites']['return'] != 0:
             return self._defaults['ConfigurePatternBurstSites']['return']
         return self._defaults['ConfigurePatternBurstSites']['return']
-
-    def niDigital_ConfigurePatternLabelHistoryRAMTrigger(self, vi, label, vector_offset, cycle_offset, pretrigger_samples):  # noqa: N802
-        if self._defaults['ConfigurePatternLabelHistoryRAMTrigger']['return'] != 0:
-            return self._defaults['ConfigurePatternLabelHistoryRAMTrigger']['return']
-        return self._defaults['ConfigurePatternLabelHistoryRAMTrigger']['return']
-
-    def niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger(self, vi, trigger_identifier):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeConditionalJumpTrigger']['return']
-
-    def niDigital_ConfigureSoftwareEdgeStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['ConfigureSoftwareEdgeStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-        return self._defaults['ConfigureSoftwareEdgeStartTrigger']['return']
-
-    def niDigital_ConfigureStartLabel(self, vi, label):  # noqa: N802
-        if self._defaults['ConfigureStartLabel']['return'] != 0:
-            return self._defaults['ConfigureStartLabel']['return']
-        return self._defaults['ConfigureStartLabel']['return']
-
-    def niDigital_ConfigureTerminationMode(self, vi, channel_list, mode):  # noqa: N802
-        if self._defaults['ConfigureTerminationMode']['return'] != 0:
-            return self._defaults['ConfigureTerminationMode']['return']
-        return self._defaults['ConfigureTerminationMode']['return']
 
     def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set, strobe_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return'] != 0:
@@ -499,21 +393,6 @@ class SideEffectsHelper(object):
             return self._defaults['CreateCaptureWaveformSerial']['return']
         return self._defaults['CreateCaptureWaveformSerial']['return']
 
-    def niDigital_CreateChannelMap(self, vi, num_sites):  # noqa: N802
-        if self._defaults['CreateChannelMap']['return'] != 0:
-            return self._defaults['CreateChannelMap']['return']
-        return self._defaults['CreateChannelMap']['return']
-
-    def niDigital_CreatePinGroup(self, vi, pin_group_name, pin_list):  # noqa: N802
-        if self._defaults['CreatePinGroup']['return'] != 0:
-            return self._defaults['CreatePinGroup']['return']
-        return self._defaults['CreatePinGroup']['return']
-
-    def niDigital_CreatePinMap(self, vi, dut_pin_list, system_pin_list):  # noqa: N802
-        if self._defaults['CreatePinMap']['return'] != 0:
-            return self._defaults['CreatePinMap']['return']
-        return self._defaults['CreatePinMap']['return']
-
     def niDigital_CreateSourceWaveformFromFileTDMS(self, vi, waveform_name, waveform_file_path, write_waveform_data):  # noqa: N802
         if self._defaults['CreateSourceWaveformFromFileTDMS']['return'] != 0:
             return self._defaults['CreateSourceWaveformFromFileTDMS']['return']
@@ -539,35 +418,15 @@ class SideEffectsHelper(object):
             return self._defaults['DeleteAllTimeSets']['return']
         return self._defaults['DeleteAllTimeSets']['return']
 
-    def niDigital_DisableConditionalJumpTrigger(self, vi, trigger_identifier):  # noqa: N802
-        if self._defaults['DisableConditionalJumpTrigger']['return'] != 0:
-            return self._defaults['DisableConditionalJumpTrigger']['return']
-        return self._defaults['DisableConditionalJumpTrigger']['return']
-
     def niDigital_DisableSites(self, vi, site_list):  # noqa: N802
         if self._defaults['DisableSites']['return'] != 0:
             return self._defaults['DisableSites']['return']
         return self._defaults['DisableSites']['return']
 
-    def niDigital_DisableStartTrigger(self, vi):  # noqa: N802
-        if self._defaults['DisableStartTrigger']['return'] != 0:
-            return self._defaults['DisableStartTrigger']['return']
-        return self._defaults['DisableStartTrigger']['return']
-
     def niDigital_EnableSites(self, vi, site_list):  # noqa: N802
         if self._defaults['EnableSites']['return'] != 0:
             return self._defaults['EnableSites']['return']
         return self._defaults['EnableSites']['return']
-
-    def niDigital_EndChannelMap(self, vi):  # noqa: N802
-        if self._defaults['EndChannelMap']['return'] != 0:
-            return self._defaults['EndChannelMap']['return']
-        return self._defaults['EndChannelMap']['return']
-
-    def niDigital_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        if self._defaults['ExportSignal']['return'] != 0:
-            return self._defaults['ExportSignal']['return']
-        return self._defaults['ExportSignal']['return']
 
     def niDigital_FetchHistoryRAMCycleInformation(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         if self._defaults['FetchHistoryRAMCycleInformation']['return'] != 0:
@@ -648,11 +507,6 @@ class SideEffectsHelper(object):
         if scan_cycle_number is not None:
             scan_cycle_number.contents.value = self._defaults['FetchHistoryRAMScanCycleNumber']['scanCycleNumber']
         return self._defaults['FetchHistoryRAMScanCycleNumber']['return']
-
-    def niDigital_FrequencyCounter_ConfigureMeasurementTime(self, vi, channel_list, measurement_time):  # noqa: N802
-        if self._defaults['FrequencyCounter_ConfigureMeasurementTime']['return'] != 0:
-            return self._defaults['FrequencyCounter_ConfigureMeasurementTime']['return']
-        return self._defaults['FrequencyCounter_ConfigureMeasurementTime']['return']
 
     def niDigital_FrequencyCounter_MeasureFrequency(self, vi, channel_list, frequencies_buffer_size, frequencies, actual_num_frequencies):  # noqa: N802
         if self._defaults['FrequencyCounter_MeasureFrequency']['return'] != 0:
@@ -1039,51 +893,6 @@ class SideEffectsHelper(object):
             caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
         return self._defaults['LockSession']['return']
 
-    def niDigital_MapPinToChannel(self, vi, pin, site, channel):  # noqa: N802
-        if self._defaults['MapPinToChannel']['return'] != 0:
-            return self._defaults['MapPinToChannel']['return']
-        return self._defaults['MapPinToChannel']['return']
-
-    def niDigital_PPMU_ConfigureApertureTime(self, vi, channel_name, aperture_time, units):  # noqa: N802
-        if self._defaults['PPMU_ConfigureApertureTime']['return'] != 0:
-            return self._defaults['PPMU_ConfigureApertureTime']['return']
-        return self._defaults['PPMU_ConfigureApertureTime']['return']
-
-    def niDigital_PPMU_ConfigureCurrentLevel(self, vi, channel_list, current_level):  # noqa: N802
-        if self._defaults['PPMU_ConfigureCurrentLevel']['return'] != 0:
-            return self._defaults['PPMU_ConfigureCurrentLevel']['return']
-        return self._defaults['PPMU_ConfigureCurrentLevel']['return']
-
-    def niDigital_PPMU_ConfigureCurrentLevelRange(self, vi, channel_list, range):  # noqa: N802
-        if self._defaults['PPMU_ConfigureCurrentLevelRange']['return'] != 0:
-            return self._defaults['PPMU_ConfigureCurrentLevelRange']['return']
-        return self._defaults['PPMU_ConfigureCurrentLevelRange']['return']
-
-    def niDigital_PPMU_ConfigureCurrentLimit(self, vi, channel_list, behavior, limit):  # noqa: N802
-        if self._defaults['PPMU_ConfigureCurrentLimit']['return'] != 0:
-            return self._defaults['PPMU_ConfigureCurrentLimit']['return']
-        return self._defaults['PPMU_ConfigureCurrentLimit']['return']
-
-    def niDigital_PPMU_ConfigureCurrentLimitRange(self, vi, channel_list, range):  # noqa: N802
-        if self._defaults['PPMU_ConfigureCurrentLimitRange']['return'] != 0:
-            return self._defaults['PPMU_ConfigureCurrentLimitRange']['return']
-        return self._defaults['PPMU_ConfigureCurrentLimitRange']['return']
-
-    def niDigital_PPMU_ConfigureOutputFunction(self, vi, channel_list, output_function):  # noqa: N802
-        if self._defaults['PPMU_ConfigureOutputFunction']['return'] != 0:
-            return self._defaults['PPMU_ConfigureOutputFunction']['return']
-        return self._defaults['PPMU_ConfigureOutputFunction']['return']
-
-    def niDigital_PPMU_ConfigureVoltageLevel(self, vi, channel_list, voltage_level):  # noqa: N802
-        if self._defaults['PPMU_ConfigureVoltageLevel']['return'] != 0:
-            return self._defaults['PPMU_ConfigureVoltageLevel']['return']
-        return self._defaults['PPMU_ConfigureVoltageLevel']['return']
-
-    def niDigital_PPMU_ConfigureVoltageLimits(self, vi, channel_list, lower_voltage_limit, upper_voltage_limit):  # noqa: N802
-        if self._defaults['PPMU_ConfigureVoltageLimits']['return'] != 0:
-            return self._defaults['PPMU_ConfigureVoltageLimits']['return']
-        return self._defaults['PPMU_ConfigureVoltageLimits']['return']
-
     def niDigital_PPMU_Measure(self, vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read):  # noqa: N802
         if self._defaults['PPMU_Measure']['return'] != 0:
             return self._defaults['PPMU_Measure']['return']
@@ -1158,11 +967,6 @@ class SideEffectsHelper(object):
         if self._defaults['ResetDevice']['return'] != 0:
             return self._defaults['ResetDevice']['return']
         return self._defaults['ResetDevice']['return']
-
-    def niDigital_SelectFunction(self, vi, channel_list, function):  # noqa: N802
-        if self._defaults['SelectFunction']['return'] != 0:
-            return self._defaults['SelectFunction']['return']
-        return self._defaults['SelectFunction']['return']
 
     def niDigital_SelfCalibrate(self, vi):  # noqa: N802
         if self._defaults['SelfCalibrate']['return'] != 0:
@@ -1341,28 +1145,8 @@ class SideEffectsHelper(object):
         mock_library.niDigital_Commit.return_value = 0
         mock_library.niDigital_ConfigureActiveLoadLevels.side_effect = MockFunctionCallError("niDigital_ConfigureActiveLoadLevels")
         mock_library.niDigital_ConfigureActiveLoadLevels.return_value = 0
-        mock_library.niDigital_ConfigureCycleNumberHistoryRAMTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureCycleNumberHistoryRAMTrigger")
-        mock_library.niDigital_ConfigureCycleNumberHistoryRAMTrigger.return_value = 0
-        mock_library.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureDigitalEdgeConditionalJumpTrigger")
-        mock_library.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger.return_value = 0
-        mock_library.niDigital_ConfigureDigitalEdgeStartTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureDigitalEdgeStartTrigger")
-        mock_library.niDigital_ConfigureDigitalEdgeStartTrigger.return_value = 0
-        mock_library.niDigital_ConfigureFirstFailureHistoryRAMTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureFirstFailureHistoryRAMTrigger")
-        mock_library.niDigital_ConfigureFirstFailureHistoryRAMTrigger.return_value = 0
-        mock_library.niDigital_ConfigureHistoryRAMCyclesToAcquire.side_effect = MockFunctionCallError("niDigital_ConfigureHistoryRAMCyclesToAcquire")
-        mock_library.niDigital_ConfigureHistoryRAMCyclesToAcquire.return_value = 0
         mock_library.niDigital_ConfigurePatternBurstSites.side_effect = MockFunctionCallError("niDigital_ConfigurePatternBurstSites")
         mock_library.niDigital_ConfigurePatternBurstSites.return_value = 0
-        mock_library.niDigital_ConfigurePatternLabelHistoryRAMTrigger.side_effect = MockFunctionCallError("niDigital_ConfigurePatternLabelHistoryRAMTrigger")
-        mock_library.niDigital_ConfigurePatternLabelHistoryRAMTrigger.return_value = 0
-        mock_library.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger")
-        mock_library.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger.return_value = 0
-        mock_library.niDigital_ConfigureSoftwareEdgeStartTrigger.side_effect = MockFunctionCallError("niDigital_ConfigureSoftwareEdgeStartTrigger")
-        mock_library.niDigital_ConfigureSoftwareEdgeStartTrigger.return_value = 0
-        mock_library.niDigital_ConfigureStartLabel.side_effect = MockFunctionCallError("niDigital_ConfigureStartLabel")
-        mock_library.niDigital_ConfigureStartLabel.return_value = 0
-        mock_library.niDigital_ConfigureTerminationMode.side_effect = MockFunctionCallError("niDigital_ConfigureTerminationMode")
-        mock_library.niDigital_ConfigureTerminationMode.return_value = 0
         mock_library.niDigital_ConfigureTimeSetCompareEdgesStrobe.side_effect = MockFunctionCallError("niDigital_ConfigureTimeSetCompareEdgesStrobe")
         mock_library.niDigital_ConfigureTimeSetCompareEdgesStrobe.return_value = 0
         mock_library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x.side_effect = MockFunctionCallError("niDigital_ConfigureTimeSetCompareEdgesStrobe2x")
@@ -1387,12 +1171,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_CreateCaptureWaveformParallel.return_value = 0
         mock_library.niDigital_CreateCaptureWaveformSerial.side_effect = MockFunctionCallError("niDigital_CreateCaptureWaveformSerial")
         mock_library.niDigital_CreateCaptureWaveformSerial.return_value = 0
-        mock_library.niDigital_CreateChannelMap.side_effect = MockFunctionCallError("niDigital_CreateChannelMap")
-        mock_library.niDigital_CreateChannelMap.return_value = 0
-        mock_library.niDigital_CreatePinGroup.side_effect = MockFunctionCallError("niDigital_CreatePinGroup")
-        mock_library.niDigital_CreatePinGroup.return_value = 0
-        mock_library.niDigital_CreatePinMap.side_effect = MockFunctionCallError("niDigital_CreatePinMap")
-        mock_library.niDigital_CreatePinMap.return_value = 0
         mock_library.niDigital_CreateSourceWaveformFromFileTDMS.side_effect = MockFunctionCallError("niDigital_CreateSourceWaveformFromFileTDMS")
         mock_library.niDigital_CreateSourceWaveformFromFileTDMS.return_value = 0
         mock_library.niDigital_CreateSourceWaveformParallel.side_effect = MockFunctionCallError("niDigital_CreateSourceWaveformParallel")
@@ -1403,26 +1181,16 @@ class SideEffectsHelper(object):
         mock_library.niDigital_CreateTimeSet.return_value = 0
         mock_library.niDigital_DeleteAllTimeSets.side_effect = MockFunctionCallError("niDigital_DeleteAllTimeSets")
         mock_library.niDigital_DeleteAllTimeSets.return_value = 0
-        mock_library.niDigital_DisableConditionalJumpTrigger.side_effect = MockFunctionCallError("niDigital_DisableConditionalJumpTrigger")
-        mock_library.niDigital_DisableConditionalJumpTrigger.return_value = 0
         mock_library.niDigital_DisableSites.side_effect = MockFunctionCallError("niDigital_DisableSites")
         mock_library.niDigital_DisableSites.return_value = 0
-        mock_library.niDigital_DisableStartTrigger.side_effect = MockFunctionCallError("niDigital_DisableStartTrigger")
-        mock_library.niDigital_DisableStartTrigger.return_value = 0
         mock_library.niDigital_EnableSites.side_effect = MockFunctionCallError("niDigital_EnableSites")
         mock_library.niDigital_EnableSites.return_value = 0
-        mock_library.niDigital_EndChannelMap.side_effect = MockFunctionCallError("niDigital_EndChannelMap")
-        mock_library.niDigital_EndChannelMap.return_value = 0
-        mock_library.niDigital_ExportSignal.side_effect = MockFunctionCallError("niDigital_ExportSignal")
-        mock_library.niDigital_ExportSignal.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCycleInformation")
         mock_library.niDigital_FetchHistoryRAMCycleInformation.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCyclePinData")
         mock_library.niDigital_FetchHistoryRAMCyclePinData.return_value = 0
         mock_library.niDigital_FetchHistoryRAMScanCycleNumber.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMScanCycleNumber")
         mock_library.niDigital_FetchHistoryRAMScanCycleNumber.return_value = 0
-        mock_library.niDigital_FrequencyCounter_ConfigureMeasurementTime.side_effect = MockFunctionCallError("niDigital_FrequencyCounter_ConfigureMeasurementTime")
-        mock_library.niDigital_FrequencyCounter_ConfigureMeasurementTime.return_value = 0
         mock_library.niDigital_FrequencyCounter_MeasureFrequency.side_effect = MockFunctionCallError("niDigital_FrequencyCounter_MeasureFrequency")
         mock_library.niDigital_FrequencyCounter_MeasureFrequency.return_value = 0
         mock_library.niDigital_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDigital_GetAttributeViBoolean")
@@ -1489,24 +1257,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_LoadTiming.return_value = 0
         mock_library.niDigital_LockSession.side_effect = MockFunctionCallError("niDigital_LockSession")
         mock_library.niDigital_LockSession.return_value = 0
-        mock_library.niDigital_MapPinToChannel.side_effect = MockFunctionCallError("niDigital_MapPinToChannel")
-        mock_library.niDigital_MapPinToChannel.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureApertureTime.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureApertureTime")
-        mock_library.niDigital_PPMU_ConfigureApertureTime.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureCurrentLevel.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureCurrentLevel")
-        mock_library.niDigital_PPMU_ConfigureCurrentLevel.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureCurrentLevelRange.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureCurrentLevelRange")
-        mock_library.niDigital_PPMU_ConfigureCurrentLevelRange.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureCurrentLimit.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureCurrentLimit")
-        mock_library.niDigital_PPMU_ConfigureCurrentLimit.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureCurrentLimitRange.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureCurrentLimitRange")
-        mock_library.niDigital_PPMU_ConfigureCurrentLimitRange.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureOutputFunction.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureOutputFunction")
-        mock_library.niDigital_PPMU_ConfigureOutputFunction.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureVoltageLevel.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureVoltageLevel")
-        mock_library.niDigital_PPMU_ConfigureVoltageLevel.return_value = 0
-        mock_library.niDigital_PPMU_ConfigureVoltageLimits.side_effect = MockFunctionCallError("niDigital_PPMU_ConfigureVoltageLimits")
-        mock_library.niDigital_PPMU_ConfigureVoltageLimits.return_value = 0
         mock_library.niDigital_PPMU_Measure.side_effect = MockFunctionCallError("niDigital_PPMU_Measure")
         mock_library.niDigital_PPMU_Measure.return_value = 0
         mock_library.niDigital_PPMU_Source.side_effect = MockFunctionCallError("niDigital_PPMU_Source")
@@ -1521,8 +1271,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_ResetAttribute.return_value = 0
         mock_library.niDigital_ResetDevice.side_effect = MockFunctionCallError("niDigital_ResetDevice")
         mock_library.niDigital_ResetDevice.return_value = 0
-        mock_library.niDigital_SelectFunction.side_effect = MockFunctionCallError("niDigital_SelectFunction")
-        mock_library.niDigital_SelectFunction.return_value = 0
         mock_library.niDigital_SelfCalibrate.side_effect = MockFunctionCallError("niDigital_SelfCalibrate")
         mock_library.niDigital_SelfCalibrate.return_value = 0
         mock_library.niDigital_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niDigital_SendSoftwareEdgeTrigger")

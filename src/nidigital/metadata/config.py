@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 19.0.0a0
+# This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d7
 config = {
-    'api_version': '19.0.0a0',
+    'api_version': '19.5.0d7',
     'c_function_prefix': 'niDigital_',
     'close_function': 'close',
     'context_manager_name': {
@@ -14,6 +14,10 @@ config = {
     'driver_name': 'NI-Digital Pattern Driver',
     'enum_whitelist_suffix': [
     ],
+    'extra_errors_used': [
+        'InvalidRepeatedCapabilityError',
+        'SelfTestError'
+    ],
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -24,11 +28,11 @@ config = {
         },
         'Windows': {
             '32bit': {
-                'name': 'nidigital_32.dll',
+                'name': 'niDigital_32.dll',
                 'type': 'windll'
             },
             '64bit': {
-                'name': 'nidigital_64.dll',
+                'name': 'niDigital_64.dll',
                 'type': 'cdll'
             }
         }
@@ -42,10 +46,22 @@ config = {
         },
         {
             'prefix': '',
-            'python_name': 'pins',
+            'python_name': 'pins'
         },
+        {
+            'prefix': '',
+            'python_name': 'devices'
+        },
+        {
+            'prefix': 'patternOpcodeEvent',
+            'python_name': 'pattern_opcode_events'
+        },
+        {
+            'prefix': 'conditionalJumpTrigger',
+            'python_name': 'conditional_jump_triggers'
+        }
     ],
-    'session_class_description': 'An NI-Digital session',
+    'session_class_description': 'An NI-Digital Pattern Driver session',
     'session_handle_parameter_name': 'vi',
-    'supports_nitclk': True,
+    'supports_nitclk': True
 }

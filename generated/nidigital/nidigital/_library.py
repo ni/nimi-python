@@ -29,17 +29,7 @@ class Library(object):
         self.niDigital_ClockGenerator_Initiate_cfunc = None
         self.niDigital_Commit_cfunc = None
         self.niDigital_ConfigureActiveLoadLevels_cfunc = None
-        self.niDigital_ConfigureCycleNumberHistoryRAMTrigger_cfunc = None
-        self.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger_cfunc = None
-        self.niDigital_ConfigureDigitalEdgeStartTrigger_cfunc = None
-        self.niDigital_ConfigureFirstFailureHistoryRAMTrigger_cfunc = None
-        self.niDigital_ConfigureHistoryRAMCyclesToAcquire_cfunc = None
         self.niDigital_ConfigurePatternBurstSites_cfunc = None
-        self.niDigital_ConfigurePatternLabelHistoryRAMTrigger_cfunc = None
-        self.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger_cfunc = None
-        self.niDigital_ConfigureSoftwareEdgeStartTrigger_cfunc = None
-        self.niDigital_ConfigureStartLabel_cfunc = None
-        self.niDigital_ConfigureTerminationMode_cfunc = None
         self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc = None
         self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc = None
         self.niDigital_ConfigureTimeSetDriveEdges_cfunc = None
@@ -52,25 +42,17 @@ class Library(object):
         self.niDigital_CreateCaptureWaveformFromFileDigicapture_cfunc = None
         self.niDigital_CreateCaptureWaveformParallel_cfunc = None
         self.niDigital_CreateCaptureWaveformSerial_cfunc = None
-        self.niDigital_CreateChannelMap_cfunc = None
-        self.niDigital_CreatePinGroup_cfunc = None
-        self.niDigital_CreatePinMap_cfunc = None
         self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc = None
         self.niDigital_CreateSourceWaveformParallel_cfunc = None
         self.niDigital_CreateSourceWaveformSerial_cfunc = None
         self.niDigital_CreateTimeSet_cfunc = None
         self.niDigital_DeleteAllTimeSets_cfunc = None
-        self.niDigital_DisableConditionalJumpTrigger_cfunc = None
         self.niDigital_DisableSites_cfunc = None
-        self.niDigital_DisableStartTrigger_cfunc = None
         self.niDigital_EnableSites_cfunc = None
-        self.niDigital_EndChannelMap_cfunc = None
-        self.niDigital_ExportSignal_cfunc = None
         self.niDigital_FetchCaptureWaveformU32_cfunc = None
         self.niDigital_FetchHistoryRAMCycleInformation_cfunc = None
         self.niDigital_FetchHistoryRAMCyclePinData_cfunc = None
         self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc = None
-        self.niDigital_FrequencyCounter_ConfigureMeasurementTime_cfunc = None
         self.niDigital_FrequencyCounter_MeasureFrequency_cfunc = None
         self.niDigital_GetAttributeViBoolean_cfunc = None
         self.niDigital_GetAttributeViInt32_cfunc = None
@@ -104,15 +86,6 @@ class Library(object):
         self.niDigital_LoadSpecifications_cfunc = None
         self.niDigital_LoadTiming_cfunc = None
         self.niDigital_LockSession_cfunc = None
-        self.niDigital_MapPinToChannel_cfunc = None
-        self.niDigital_PPMU_ConfigureApertureTime_cfunc = None
-        self.niDigital_PPMU_ConfigureCurrentLevel_cfunc = None
-        self.niDigital_PPMU_ConfigureCurrentLevelRange_cfunc = None
-        self.niDigital_PPMU_ConfigureCurrentLimit_cfunc = None
-        self.niDigital_PPMU_ConfigureCurrentLimitRange_cfunc = None
-        self.niDigital_PPMU_ConfigureOutputFunction_cfunc = None
-        self.niDigital_PPMU_ConfigureVoltageLevel_cfunc = None
-        self.niDigital_PPMU_ConfigureVoltageLimits_cfunc = None
         self.niDigital_PPMU_Measure_cfunc = None
         self.niDigital_PPMU_Source_cfunc = None
         self.niDigital_ReadSequencerFlag_cfunc = None
@@ -120,7 +93,6 @@ class Library(object):
         self.niDigital_ReadStatic_cfunc = None
         self.niDigital_ResetAttribute_cfunc = None
         self.niDigital_ResetDevice_cfunc = None
-        self.niDigital_SelectFunction_cfunc = None
         self.niDigital_SelfCalibrate_cfunc = None
         self.niDigital_SendSoftwareEdgeTrigger_cfunc = None
         self.niDigital_SetAttributeViBoolean_cfunc = None
@@ -232,46 +204,6 @@ class Library(object):
                 self.niDigital_ConfigureActiveLoadLevels_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigureActiveLoadLevels_cfunc(vi, channel_list, iol, ioh, vcom)
 
-    def niDigital_ConfigureCycleNumberHistoryRAMTrigger(self, vi, cycle_number, pretrigger_samples):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureCycleNumberHistoryRAMTrigger_cfunc is None:
-                self.niDigital_ConfigureCycleNumberHistoryRAMTrigger_cfunc = self._library.niDigital_ConfigureCycleNumberHistoryRAMTrigger
-                self.niDigital_ConfigureCycleNumberHistoryRAMTrigger_cfunc.argtypes = [ViSession, ViInt64, ViInt32]  # noqa: F405
-                self.niDigital_ConfigureCycleNumberHistoryRAMTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureCycleNumberHistoryRAMTrigger_cfunc(vi, cycle_number, pretrigger_samples)
-
-    def niDigital_ConfigureDigitalEdgeConditionalJumpTrigger(self, vi, trigger_identifier, source, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger_cfunc is None:
-                self.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger_cfunc = self._library.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger
-                self.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureDigitalEdgeConditionalJumpTrigger_cfunc(vi, trigger_identifier, source, edge)
-
-    def niDigital_ConfigureDigitalEdgeStartTrigger(self, vi, source, edge):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureDigitalEdgeStartTrigger_cfunc is None:
-                self.niDigital_ConfigureDigitalEdgeStartTrigger_cfunc = self._library.niDigital_ConfigureDigitalEdgeStartTrigger
-                self.niDigital_ConfigureDigitalEdgeStartTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDigital_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureDigitalEdgeStartTrigger_cfunc(vi, source, edge)
-
-    def niDigital_ConfigureFirstFailureHistoryRAMTrigger(self, vi, pretrigger_samples):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureFirstFailureHistoryRAMTrigger_cfunc is None:
-                self.niDigital_ConfigureFirstFailureHistoryRAMTrigger_cfunc = self._library.niDigital_ConfigureFirstFailureHistoryRAMTrigger
-                self.niDigital_ConfigureFirstFailureHistoryRAMTrigger_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niDigital_ConfigureFirstFailureHistoryRAMTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureFirstFailureHistoryRAMTrigger_cfunc(vi, pretrigger_samples)
-
-    def niDigital_ConfigureHistoryRAMCyclesToAcquire(self, vi, cycles_to_acquire):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureHistoryRAMCyclesToAcquire_cfunc is None:
-                self.niDigital_ConfigureHistoryRAMCyclesToAcquire_cfunc = self._library.niDigital_ConfigureHistoryRAMCyclesToAcquire
-                self.niDigital_ConfigureHistoryRAMCyclesToAcquire_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niDigital_ConfigureHistoryRAMCyclesToAcquire_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureHistoryRAMCyclesToAcquire_cfunc(vi, cycles_to_acquire)
-
     def niDigital_ConfigurePatternBurstSites(self, vi, site_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigurePatternBurstSites_cfunc is None:
@@ -279,46 +211,6 @@ class Library(object):
                 self.niDigital_ConfigurePatternBurstSites_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_ConfigurePatternBurstSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigurePatternBurstSites_cfunc(vi, site_list)
-
-    def niDigital_ConfigurePatternLabelHistoryRAMTrigger(self, vi, label, vector_offset, cycle_offset, pretrigger_samples):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigurePatternLabelHistoryRAMTrigger_cfunc is None:
-                self.niDigital_ConfigurePatternLabelHistoryRAMTrigger_cfunc = self._library.niDigital_ConfigurePatternLabelHistoryRAMTrigger
-                self.niDigital_ConfigurePatternLabelHistoryRAMTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt32]  # noqa: F405
-                self.niDigital_ConfigurePatternLabelHistoryRAMTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigurePatternLabelHistoryRAMTrigger_cfunc(vi, label, vector_offset, cycle_offset, pretrigger_samples)
-
-    def niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger(self, vi, trigger_identifier):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger_cfunc is None:
-                self.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger_cfunc = self._library.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger
-                self.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureSoftwareEdgeConditionalJumpTrigger_cfunc(vi, trigger_identifier)
-
-    def niDigital_ConfigureSoftwareEdgeStartTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureSoftwareEdgeStartTrigger_cfunc is None:
-                self.niDigital_ConfigureSoftwareEdgeStartTrigger_cfunc = self._library.niDigital_ConfigureSoftwareEdgeStartTrigger
-                self.niDigital_ConfigureSoftwareEdgeStartTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDigital_ConfigureSoftwareEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureSoftwareEdgeStartTrigger_cfunc(vi)
-
-    def niDigital_ConfigureStartLabel(self, vi, label):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureStartLabel_cfunc is None:
-                self.niDigital_ConfigureStartLabel_cfunc = self._library.niDigital_ConfigureStartLabel
-                self.niDigital_ConfigureStartLabel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_ConfigureStartLabel_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureStartLabel_cfunc(vi, label)
-
-    def niDigital_ConfigureTerminationMode(self, vi, channel_list, mode):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ConfigureTerminationMode_cfunc is None:
-                self.niDigital_ConfigureTerminationMode_cfunc = self._library.niDigital_ConfigureTerminationMode
-                self.niDigital_ConfigureTerminationMode_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDigital_ConfigureTerminationMode_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTerminationMode_cfunc(vi, channel_list, mode)
 
     def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set, strobe_edge):  # noqa: N802
         with self._func_lock:
@@ -416,30 +308,6 @@ class Library(object):
                 self.niDigital_CreateCaptureWaveformSerial_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_CreateCaptureWaveformSerial_cfunc(vi, pin_list, waveform_name, sample_width, bit_order)
 
-    def niDigital_CreateChannelMap(self, vi, num_sites):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_CreateChannelMap_cfunc is None:
-                self.niDigital_CreateChannelMap_cfunc = self._library.niDigital_CreateChannelMap
-                self.niDigital_CreateChannelMap_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niDigital_CreateChannelMap_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_CreateChannelMap_cfunc(vi, num_sites)
-
-    def niDigital_CreatePinGroup(self, vi, pin_group_name, pin_list):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_CreatePinGroup_cfunc is None:
-                self.niDigital_CreatePinGroup_cfunc = self._library.niDigital_CreatePinGroup
-                self.niDigital_CreatePinGroup_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_CreatePinGroup_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_CreatePinGroup_cfunc(vi, pin_group_name, pin_list)
-
-    def niDigital_CreatePinMap(self, vi, dut_pin_list, system_pin_list):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_CreatePinMap_cfunc is None:
-                self.niDigital_CreatePinMap_cfunc = self._library.niDigital_CreatePinMap
-                self.niDigital_CreatePinMap_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_CreatePinMap_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_CreatePinMap_cfunc(vi, dut_pin_list, system_pin_list)
-
     def niDigital_CreateSourceWaveformFromFileTDMS(self, vi, waveform_name, waveform_file_path, write_waveform_data):  # noqa: N802
         with self._func_lock:
             if self.niDigital_CreateSourceWaveformFromFileTDMS_cfunc is None:
@@ -480,14 +348,6 @@ class Library(object):
                 self.niDigital_DeleteAllTimeSets_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_DeleteAllTimeSets_cfunc(vi)
 
-    def niDigital_DisableConditionalJumpTrigger(self, vi, trigger_identifier):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_DisableConditionalJumpTrigger_cfunc is None:
-                self.niDigital_DisableConditionalJumpTrigger_cfunc = self._library.niDigital_DisableConditionalJumpTrigger
-                self.niDigital_DisableConditionalJumpTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_DisableConditionalJumpTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_DisableConditionalJumpTrigger_cfunc(vi, trigger_identifier)
-
     def niDigital_DisableSites(self, vi, site_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_DisableSites_cfunc is None:
@@ -496,14 +356,6 @@ class Library(object):
                 self.niDigital_DisableSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_DisableSites_cfunc(vi, site_list)
 
-    def niDigital_DisableStartTrigger(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_DisableStartTrigger_cfunc is None:
-                self.niDigital_DisableStartTrigger_cfunc = self._library.niDigital_DisableStartTrigger
-                self.niDigital_DisableStartTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDigital_DisableStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_DisableStartTrigger_cfunc(vi)
-
     def niDigital_EnableSites(self, vi, site_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_EnableSites_cfunc is None:
@@ -511,22 +363,6 @@ class Library(object):
                 self.niDigital_EnableSites_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_EnableSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_EnableSites_cfunc(vi, site_list)
-
-    def niDigital_EndChannelMap(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_EndChannelMap_cfunc is None:
-                self.niDigital_EndChannelMap_cfunc = self._library.niDigital_EndChannelMap
-                self.niDigital_EndChannelMap_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDigital_EndChannelMap_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_EndChannelMap_cfunc(vi)
-
-    def niDigital_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ExportSignal_cfunc is None:
-                self.niDigital_ExportSignal_cfunc = self._library.niDigital_ExportSignal
-                self.niDigital_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
     def niDigital_FetchCaptureWaveformU32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
         with self._func_lock:
@@ -559,14 +395,6 @@ class Library(object):
                 self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ctypes.POINTER(ViInt64)]  # noqa: F405
                 self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_FetchHistoryRAMScanCycleNumber_cfunc(vi, site, sample_index, scan_cycle_number)
-
-    def niDigital_FrequencyCounter_ConfigureMeasurementTime(self, vi, channel_list, measurement_time):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_FrequencyCounter_ConfigureMeasurementTime_cfunc is None:
-                self.niDigital_FrequencyCounter_ConfigureMeasurementTime_cfunc = self._library.niDigital_FrequencyCounter_ConfigureMeasurementTime
-                self.niDigital_FrequencyCounter_ConfigureMeasurementTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
-                self.niDigital_FrequencyCounter_ConfigureMeasurementTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_FrequencyCounter_ConfigureMeasurementTime_cfunc(vi, channel_list, measurement_time)
 
     def niDigital_FrequencyCounter_MeasureFrequency(self, vi, channel_list, frequencies_buffer_size, frequencies, actual_num_frequencies):  # noqa: N802
         with self._func_lock:
@@ -832,78 +660,6 @@ class Library(object):
                 self.niDigital_LockSession_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LockSession_cfunc(vi, caller_has_lock)
 
-    def niDigital_MapPinToChannel(self, vi, pin, site, channel):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_MapPinToChannel_cfunc is None:
-                self.niDigital_MapPinToChannel_cfunc = self._library.niDigital_MapPinToChannel
-                self.niDigital_MapPinToChannel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_MapPinToChannel_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_MapPinToChannel_cfunc(vi, pin, site, channel)
-
-    def niDigital_PPMU_ConfigureApertureTime(self, vi, channel_name, aperture_time, units):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureApertureTime_cfunc is None:
-                self.niDigital_PPMU_ConfigureApertureTime_cfunc = self._library.niDigital_PPMU_ConfigureApertureTime
-                self.niDigital_PPMU_ConfigureApertureTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
-                self.niDigital_PPMU_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
-
-    def niDigital_PPMU_ConfigureCurrentLevel(self, vi, channel_list, current_level):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureCurrentLevel_cfunc is None:
-                self.niDigital_PPMU_ConfigureCurrentLevel_cfunc = self._library.niDigital_PPMU_ConfigureCurrentLevel
-                self.niDigital_PPMU_ConfigureCurrentLevel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
-                self.niDigital_PPMU_ConfigureCurrentLevel_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureCurrentLevel_cfunc(vi, channel_list, current_level)
-
-    def niDigital_PPMU_ConfigureCurrentLevelRange(self, vi, channel_list, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureCurrentLevelRange_cfunc is None:
-                self.niDigital_PPMU_ConfigureCurrentLevelRange_cfunc = self._library.niDigital_PPMU_ConfigureCurrentLevelRange
-                self.niDigital_PPMU_ConfigureCurrentLevelRange_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
-                self.niDigital_PPMU_ConfigureCurrentLevelRange_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureCurrentLevelRange_cfunc(vi, channel_list, range)
-
-    def niDigital_PPMU_ConfigureCurrentLimit(self, vi, channel_list, behavior, limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureCurrentLimit_cfunc is None:
-                self.niDigital_PPMU_ConfigureCurrentLimit_cfunc = self._library.niDigital_PPMU_ConfigureCurrentLimit
-                self.niDigital_PPMU_ConfigureCurrentLimit_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64]  # noqa: F405
-                self.niDigital_PPMU_ConfigureCurrentLimit_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureCurrentLimit_cfunc(vi, channel_list, behavior, limit)
-
-    def niDigital_PPMU_ConfigureCurrentLimitRange(self, vi, channel_list, range):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureCurrentLimitRange_cfunc is None:
-                self.niDigital_PPMU_ConfigureCurrentLimitRange_cfunc = self._library.niDigital_PPMU_ConfigureCurrentLimitRange
-                self.niDigital_PPMU_ConfigureCurrentLimitRange_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
-                self.niDigital_PPMU_ConfigureCurrentLimitRange_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureCurrentLimitRange_cfunc(vi, channel_list, range)
-
-    def niDigital_PPMU_ConfigureOutputFunction(self, vi, channel_list, output_function):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureOutputFunction_cfunc is None:
-                self.niDigital_PPMU_ConfigureOutputFunction_cfunc = self._library.niDigital_PPMU_ConfigureOutputFunction
-                self.niDigital_PPMU_ConfigureOutputFunction_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDigital_PPMU_ConfigureOutputFunction_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureOutputFunction_cfunc(vi, channel_list, output_function)
-
-    def niDigital_PPMU_ConfigureVoltageLevel(self, vi, channel_list, voltage_level):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureVoltageLevel_cfunc is None:
-                self.niDigital_PPMU_ConfigureVoltageLevel_cfunc = self._library.niDigital_PPMU_ConfigureVoltageLevel
-                self.niDigital_PPMU_ConfigureVoltageLevel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
-                self.niDigital_PPMU_ConfigureVoltageLevel_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureVoltageLevel_cfunc(vi, channel_list, voltage_level)
-
-    def niDigital_PPMU_ConfigureVoltageLimits(self, vi, channel_list, lower_voltage_limit, upper_voltage_limit):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_PPMU_ConfigureVoltageLimits_cfunc is None:
-                self.niDigital_PPMU_ConfigureVoltageLimits_cfunc = self._library.niDigital_PPMU_ConfigureVoltageLimits
-                self.niDigital_PPMU_ConfigureVoltageLimits_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViReal64]  # noqa: F405
-                self.niDigital_PPMU_ConfigureVoltageLimits_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_PPMU_ConfigureVoltageLimits_cfunc(vi, channel_list, lower_voltage_limit, upper_voltage_limit)
-
     def niDigital_PPMU_Measure(self, vi, channel_list, measurement_type, buffer_size, measurements, actual_num_read):  # noqa: N802
         with self._func_lock:
             if self.niDigital_PPMU_Measure_cfunc is None:
@@ -959,14 +715,6 @@ class Library(object):
                 self.niDigital_ResetDevice_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niDigital_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ResetDevice_cfunc(vi)
-
-    def niDigital_SelectFunction(self, vi, channel_list, function):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_SelectFunction_cfunc is None:
-                self.niDigital_SelectFunction_cfunc = self._library.niDigital_SelectFunction
-                self.niDigital_SelectFunction_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
-                self.niDigital_SelectFunction_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_SelectFunction_cfunc(vi, channel_list, function)
 
     def niDigital_SelfCalibrate(self, vi):  # noqa: N802
         with self._func_lock:

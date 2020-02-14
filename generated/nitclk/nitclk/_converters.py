@@ -3,13 +3,11 @@
 import nitclk._visatype as _visatype
 import nitclk.errors as errors
 
+import array
 import datetime
 import numbers
 
-try:
-    from functools import singledispatch  # Python 3.4+
-except ImportError:
-    from singledispatch import singledispatch  # Python 2.7
+from functools import singledispatch
 
 
 @singledispatch
@@ -216,20 +214,18 @@ def convert_to_nitclk_session_number(item):
     Supported objects are:
     - class with .tclk object of type nitclk.SessionReference
     - nitclk.SessionReference
-    - NI-TClk Session Num
     '''
     try:
-        return item.tclk._get_session_number()
+        return item.tclk._get_tclk_session_reference()
     except AttributeError:
         pass
 
     try:
-        return item._get_session_number()
+        return item._get_tclk_session_reference()
     except AttributeError:
         pass
 
-    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
-    return item
+    raise TypeError('Unsupported type for nitclk session: {}'.format(type(item)))
 
 
 def convert_to_nitclk_session_number_list(item_list):
@@ -237,9 +233,46 @@ def convert_to_nitclk_session_number_list(item_list):
     return [convert_to_nitclk_session_number(i) for i in item_list]
 
 
-# nifake specific converter(s) - used only for testing
-def convert_double_each_element(numbers):
-    return [x * 2 for x in numbers]
+# buffer input to import buffer functions
+@singledispatch
+def _convert_import_buffer_to_array(value):  # noqa: F811
+    pass
+
+
+@_convert_import_buffer_to_array.register(list)  # noqa: F811
+@_convert_import_buffer_to_array.register(bytes)  # noqa: F811
+@_convert_import_buffer_to_array.register(bytearray)  # noqa: F811
+@_convert_import_buffer_to_array.register(array.array)  # noqa: F811
+def _(value):
+    return value
+
+
+def convert_import_buffer_to_array(value):  # noqa: F811
+    import array
+    return array.array('b', _convert_import_buffer_to_array(value))
+
+
+# convert value to bytes
+@singledispatch
+def _convert_to_bytes(value):  # noqa: F811
+    pass
+
+
+@_convert_to_bytes.register(list)  # noqa: F811
+@_convert_to_bytes.register(bytes)  # noqa: F811
+@_convert_to_bytes.register(bytearray)  # noqa: F811
+@_convert_to_bytes.register(array.array)  # noqa: F811
+def _(value):
+    return value
+
+
+@_convert_to_bytes.register(str)  # noqa: F811
+def _(value):
+    return value.encode()
+
+
+def convert_to_bytes(value):  # noqa: F811
+    return bytes(_convert_to_bytes(value))
 
 
 # Let's run some tests
@@ -345,168 +378,6 @@ def test_convert_timedelta_to_microseconds_int():
     test_result = convert_timedelta_to_microseconds(-1, _visatype.ViInt32)
     assert test_result.value == -1000000
     assert isinstance(test_result, _visatype.ViInt32)
-
-
-# Tests - repeated capabilities
-def test_repeated_capabilies_string_channel():
-    test_result_list = convert_repeated_capabilities('0')
-    assert test_result_list == ['0']
-    test_result_list = convert_repeated_capabilities('r0')
-    assert test_result_list == ['r0']
-    test_result_list = convert_repeated_capabilities('0,1')
-    assert test_result_list == ['0', '1']
-
-
-def test_repeated_capabilies_string_prefix():
-    test_result_list = convert_repeated_capabilities('0', prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0']
-
-
-def test_repeated_capabilies_list_channel():
-    test_result_list = convert_repeated_capabilities(['0'])
-    assert test_result_list == ['0']
-    test_result_list = convert_repeated_capabilities(['r0'])
-    assert test_result_list == ['r0']
-    test_result_list = convert_repeated_capabilities(['0', '1'])
-    assert test_result_list == ['0', '1']
-    test_result_list = convert_repeated_capabilities([0, 1])
-    assert test_result_list == ['0', '1']
-    test_result_list = convert_repeated_capabilities([0, 1, '3'])
-    assert test_result_list == ['0', '1', '3']
-
-
-def test_repeated_capabilies_list_prefix():
-    test_result_list = convert_repeated_capabilities(['ScriptTrigger0', 'ScriptTrigger1'], prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(['0'], prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0']
-    test_result_list = convert_repeated_capabilities(['0', '1'], prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities([0, 1], prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-
-
-def test_repeated_capabilies_tuple_channel():
-    test_result_list = convert_repeated_capabilities(('0'))
-    assert test_result_list == ['0']
-    test_result_list = convert_repeated_capabilities(('0,1'))
-    assert test_result_list == ['0', '1']
-    test_result_list = convert_repeated_capabilities(('0', '1'))
-    assert test_result_list == ['0', '1']
-    test_result_list = convert_repeated_capabilities((0, 1))
-    assert test_result_list == ['0', '1']
-    test_result_list = convert_repeated_capabilities((0, 1, '3'))
-    assert test_result_list == ['0', '1', '3']
-
-
-def test_repeated_capabilies_tuple_prefix():
-    test_result_list = convert_repeated_capabilities(('ScriptTrigger0,ScriptTrigger1'), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(('0'), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0']
-    test_result_list = convert_repeated_capabilities(('0', '1'), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities((0, 1), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-
-
-def test_repeated_capabilies_unicode():
-    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities('ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-
-
-def test_repeated_capabilies_raw():
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities('ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-
-
-def test_repeated_capabilies_slice_channel():
-    test_result_list = convert_repeated_capabilities(slice(0, 1))
-    assert test_result_list == ['0']
-    test_result_list = convert_repeated_capabilities(slice(0, 2))
-    assert test_result_list == ['0', '1']
-    test_result_list = convert_repeated_capabilities(slice(None, 2))
-    assert test_result_list == ['0', '1']
-
-
-def test_repeated_capabilies_mixed_channel():
-    test_result_list = convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'))
-    assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
-    test_result_list = convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'])
-    assert test_result_list == ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
-
-
-def test_repeated_capabilies_mixed_prefix():
-    test_result_list = convert_repeated_capabilities((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
-    test_result_list = convert_repeated_capabilities([slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'], prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger2', 'ScriptTrigger4', 'ScriptTrigger5', 'ScriptTrigger6', 'ScriptTrigger7', 'ScriptTrigger8', 'ScriptTrigger9', 'ScriptTrigger11', 'ScriptTrigger12', 'ScriptTrigger13', 'ScriptTrigger14', 'ScriptTrigger16', 'ScriptTrigger17']
-
-
-def test_invalid_repeated_capabilies():
-    try:
-        convert_repeated_capabilities('6-8-10')
-        assert False
-    except errors.InvalidRepeatedCapabilityError:
-        pass
-    try:
-        convert_repeated_capabilities(['5', '6-8-10'])
-        assert False
-    except errors.InvalidRepeatedCapabilityError:
-        pass
-    try:
-        convert_repeated_capabilities(('5', '6-8-10'))
-        assert False
-    except errors.InvalidRepeatedCapabilityError:
-        pass
-    try:
-        convert_repeated_capabilities('5,6-8-10')
-        assert False
-    except errors.InvalidRepeatedCapabilityError:
-        pass
-    try:
-        convert_repeated_capabilities(5.0)
-        assert False
-    except errors.InvalidRepeatedCapabilityError:
-        pass
-    try:
-        convert_repeated_capabilities([5.0, '0'])
-        assert False
-    except errors.InvalidRepeatedCapabilityError:
-        pass
-    try:
-        convert_repeated_capabilities((5.0, '0'))
-        assert False
-    except errors.InvalidRepeatedCapabilityError:
-        pass
-
-
-def test_repeated_capabilies_slice_prefix():
-    test_result_list = convert_repeated_capabilities(slice(0, 1), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0']
-    test_result_list = convert_repeated_capabilities(slice(0, 2), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(slice(None, 2), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-
-
-def test_repeated_capabilies_from_init():
-    test_result = convert_repeated_capabilities_from_init((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), '')
-    assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
 
 
 def test_string_to_list_channel():
