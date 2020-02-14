@@ -89,7 +89,6 @@ passenv =
 
 setenv =
     COVERALLS_REPO_TOKEN = AzNHcZZM2ZFPWQ8FuhwPQRCIFs7URdzte
-    COVERALLS_PARALLEL = true 
 
 [pytest]
 junit_family = xunit1
