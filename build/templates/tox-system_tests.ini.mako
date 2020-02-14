@@ -54,7 +54,7 @@ commands =
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    ${module_name}-coverage: coveralls --coveralls_yaml .coveralls-jenkins.yml --config_file ../../tools/coverage_system_tests.rc
+    ${module_name}-coverage: COVERALLS_REPO_TOKEN=AzNHcZZM2ZFPWQ8FuhwPQRCIFs7URdzte COVERALLS_PARALLEL=true coveralls --rcfile=../../tools/coverage_system_tests.rc
 
 deps =
 % if config['supports_nitclk']:
@@ -69,7 +69,7 @@ deps =
     ${module_name}-system_tests: fasteners
 
     ${module_name}-coverage: coverage
-    ${module_name}-coverage: python-coveralls
+    ${module_name}-coverage: coveralls
 
 depends =
     ${module_name}-coverage: py{35,36,37,38,py3}-${module_name}-system_tests
@@ -84,6 +84,8 @@ passenv =
     BRANCH_NAME
     JENKINS_URL
     BUILD_NUMBER
+    JENKINS_HOME
+    CI_PULL_REQUEST
 
 [pytest]
 junit_family = xunit1
