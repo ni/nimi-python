@@ -9,8 +9,15 @@ import tempfile
 
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
-# daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
-# daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
+# Trying to create simulated DAQmx devices at the same time (which can happen when running
+# tox with --parallel N, or when two different drivers are being tested at the same time on
+# the same machine, can result in an internal error:
+# -2147220733: MAX:  (Hex 0x80040303) Internal error: The requested object was not found in
+# the configuration database. Please note the steps you performed that led to this error and
+# contact technical support at http://ni.com/support.
+# This is filed as internal bug 255545
+daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
+daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 
 @pytest.fixture(scope='function')
@@ -19,19 +26,13 @@ def session():
         yield simulated_session
 
 
-# @pytest.fixture(scope='function')
-# def session_2532_1():
-#     with daqmx_sim_db_lock:
-#         simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
-#     yield simulated_session
-#     with daqmx_sim_db_lock:
-#         simulated_session.close()
-
-
 @pytest.fixture(scope='function')
 def session_2532():
-    with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as simulated_session:
-        yield simulated_session
+    with daqmx_sim_db_lock:
+        simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
+    yield simulated_session
+    with daqmx_sim_db_lock:
+        simulated_session.close()
 
 
 # Basic Use Case Tests
