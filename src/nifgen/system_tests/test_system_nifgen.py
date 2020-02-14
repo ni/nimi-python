@@ -10,8 +10,8 @@ import tempfile
 # Set up some global information we need
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 # We need a lock file so multiple tests aren't hitting the db at the same time
-daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
-daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
+# daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
+# daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
@@ -23,20 +23,19 @@ def session():
         yield simulated_session
 
 
-@pytest.fixture(scope='function')
-def session_5421_1():
-    with daqmx_sim_db_lock:
-        simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
-    yield simulated_session
-    with daqmx_sim_db_lock:
-        simulated_session.close()
+# @pytest.fixture(scope='function')
+# def session_5421():
+#     with daqmx_sim_db_lock:
+#         simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
+#     yield simulated_session
+#     with daqmx_sim_db_lock:
+#         simulated_session.close()
 
 
 @pytest.fixture(scope='function')
 def session_5421():
-    simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
-    yield simulated_session
-    simulated_session.close()
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as simulated_session:
+        yield simulated_session
 
 
 def test_self_test(session):

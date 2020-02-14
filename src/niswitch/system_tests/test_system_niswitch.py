@@ -9,8 +9,8 @@ import tempfile
 
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
-daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
-daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
+# daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
+# daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 
 @pytest.fixture(scope='function')
@@ -19,20 +19,19 @@ def session():
         yield simulated_session
 
 
-@pytest.fixture(scope='function')
-def session_2532_1():
-    with daqmx_sim_db_lock:
-        simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
-    yield simulated_session
-    with daqmx_sim_db_lock:
-        simulated_session.close()
+# @pytest.fixture(scope='function')
+# def session_2532_1():
+#     with daqmx_sim_db_lock:
+#         simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
+#     yield simulated_session
+#     with daqmx_sim_db_lock:
+#         simulated_session.close()
 
 
 @pytest.fixture(scope='function')
 def session_2532():
-    simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
-    yield simulated_session
-    simulated_session.close()
+    with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as simulated_session:
+        yield simulated_session
 
 
 # Basic Use Case Tests
