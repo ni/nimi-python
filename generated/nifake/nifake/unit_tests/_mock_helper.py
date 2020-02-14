@@ -199,7 +199,7 @@ class SideEffectsHelper(object):
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
 
-    def niFake_AcceptListOfTimeValues(self, vi, count, timestamps, delays):  # noqa: N802
+    def niFake_AcceptListOfTimeValues(self, vi, count, delays):  # noqa: N802
         if self._defaults['AcceptListOfTimeValues']['return'] != 0:
             return self._defaults['AcceptListOfTimeValues']['return']
         return self._defaults['AcceptListOfTimeValues']['return']

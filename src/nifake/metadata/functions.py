@@ -2276,7 +2276,7 @@ functions = {
     'AcceptListOfTimeValues': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Accepts lists of values representing time.',
+            'description': 'Accepts list of floats or datetime.timedelta instances representing time delays.',
         },
         'parameters': [
             {
@@ -2298,9 +2298,9 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'A collection of timestamp values.'
+                    'description': 'A collection of time delay values.'
                 },
-                'name': 'timestamps',
+                'name': 'delays',
                 'python_api_converter_name': 'convert_timedeltas_to_seconds',
                 'size': {
                     'mechanism': 'len',
@@ -2308,20 +2308,6 @@ functions = {
                 },
                 'type': 'ViReal64[]',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'A collection of delay values.'
-                },
-                'name': 'delays',
-                'python_api_converter_name': 'convert_timedeltas_to_milliseconds',
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'count'
-                },
-                'type': 'ViInt32[]',
-                'type_in_documentation': 'int in milliseconds or datetime.timedelta'
             },
         ],
         'returns': 'ViStatus'

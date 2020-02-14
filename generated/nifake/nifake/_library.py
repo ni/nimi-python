@@ -87,13 +87,13 @@ class Library(object):
                 self.niFake_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Abort_cfunc(vi)
 
-    def niFake_AcceptListOfTimeValues(self, vi, count, timestamps, delays):  # noqa: N802
+    def niFake_AcceptListOfTimeValues(self, vi, count, delays):  # noqa: N802
         with self._func_lock:
             if self.niFake_AcceptListOfTimeValues_cfunc is None:
                 self.niFake_AcceptListOfTimeValues_cfunc = self._library.niFake_AcceptListOfTimeValues
-                self.niFake_AcceptListOfTimeValues_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_AcceptListOfTimeValues_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_AcceptListOfTimeValues_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_AcceptListOfTimeValues_cfunc(vi, count, timestamps, delays)
+        return self.niFake_AcceptListOfTimeValues_cfunc(vi, count, delays)
 
     def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         with self._func_lock:

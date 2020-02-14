@@ -783,24 +783,19 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def accept_list_of_time_values(self, timestamps, delays):
+    def accept_list_of_time_values(self, delays):
         r'''accept_list_of_time_values
 
-        Accepts lists of values representing time.
+        Accepts list of floats or datetime.timedelta instances representing time delays.
 
         Args:
-            timestamps (list of float in seconds or datetime.timedelta): A collection of timestamp values.
-
-            delays (list of int in milliseconds or datetime.timedelta): A collection of delay values.
+            delays (list of float in seconds or datetime.timedelta): A collection of time delay values.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        count_ctype = _visatype.ViInt32(0 if timestamps is None else len(timestamps))  # case S160
-        if delays is not None and len(delays) != len(timestamps):  # case S160
-            raise ValueError("Length of delays and timestamps parameters do not match.")  # case S160
-        timestamps_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_seconds(timestamps, _visatype.ViReal64), library_type=_visatype.ViReal64)  # case B520
-        delays_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_milliseconds(delays, _visatype.ViInt32), library_type=_visatype.ViInt32)  # case B520
-        error_code = self._library.niFake_AcceptListOfTimeValues(vi_ctype, count_ctype, timestamps_ctype, delays_ctype)
+        count_ctype = _visatype.ViInt32(0 if delays is None else len(delays))  # case S160
+        delays_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_seconds(delays, _visatype.ViReal64), library_type=_visatype.ViReal64)  # case B520
+        error_code = self._library.niFake_AcceptListOfTimeValues(vi_ctype, count_ctype, delays_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

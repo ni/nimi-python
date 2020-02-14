@@ -170,6 +170,16 @@ def convert_timedelta_to_microseconds(value, library_type):
 
 
 def _convert_timedeltas(values, library_type, scaling):
+    assert library_type in [
+        _visatype.ViReal64,
+        _visatype.ViReal32,
+        _visatype.ViInt64,
+        _visatype.ViInt32,
+        _visatype.ViUInt32,
+        _visatype.ViInt16,
+        _visatype.ViUInt16,
+        _visatype.ViInt8,
+        _visatype.ViUInt8]
     return [_convert_timedelta(i, library_type, scaling) for i in values]
 
 
