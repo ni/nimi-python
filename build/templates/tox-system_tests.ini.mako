@@ -54,7 +54,7 @@ commands =
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    ${module_name}-coverage: COVERALLS_REPO_TOKEN=AzNHcZZM2ZFPWQ8FuhwPQRCIFs7URdzte COVERALLS_PARALLEL=true coveralls --rcfile=../../tools/coverage_system_tests.rc
+    ${module_name}-coverage: coveralls --rcfile=../../tools/coverage_system_tests.rc
 
 deps =
 % if config['supports_nitclk']:
@@ -86,6 +86,10 @@ passenv =
     BUILD_NUMBER
     JENKINS_HOME
     CI_PULL_REQUEST
+
+setenv =
+    COVERALLS_REPO_TOKEN = AzNHcZZM2ZFPWQ8FuhwPQRCIFs7URdzte
+    COVERALLS_PARALLEL = true 
 
 [pytest]
 junit_family = xunit1
