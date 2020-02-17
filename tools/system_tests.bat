@@ -4,7 +4,7 @@ rem We don't need no spinner - mainly because we aren't running tox interactivel
 set TOX_PARALLEL_NO_SPINNER=1
 rem Run up to 3 environments in parallel, but still send the output to stdout
 rem We only run the tests if the tox file exists
-c:\python38\python.exe -m tox -c tox-system_tests.ini --parallel 3 --parallel-live 
+c:\python38\python.exe -m tox -c tox-system_tests.ini
 popd
 
 
