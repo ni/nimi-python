@@ -89,6 +89,7 @@ IF NOT EXIST src\\${driver}\\system_tests echo System test folder does not exist
         publishers {
             archiveJunit("generated/junit/*.xml") {
                 retainLongStdout()
+                allowEmptyResults()
             }
         }
     }
