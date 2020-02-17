@@ -75,7 +75,13 @@ rem echo ghprbTargetBranch =            %ghprbTargetBranch%
 rem echo ghprbCommentBody =             %ghprbCommentBody%
 rem echo sha1 =                         %sha1%
 rem echo .
-
+rem echo JENKINS_HOME =                 %JENKINS_HOME%
+rem echo BUILD_NUMBER =                 %BUILD_NUMBER%
+rem echo CI_PULL_REQUEST =              %CI_PULL_REQUEST%
+rem echo .
+echo We need to set CI_PULL_REQUEST for coveralls
+set CI_PULL_REQUEST=%ghprbPullId%
+echo .
 echo Make the junit folder so there isn't any collisions while running tests
 mkdir generated\\junit
 echo .
