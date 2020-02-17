@@ -19,6 +19,7 @@ def genJob(driver, platform) {
         description "Run system tests for ${driver} on ${platform}"
 
         label(platform)
+        concurrentBuild()
 
         parameters {
             stringParam('sha1', 'master', 'SHA to build')
