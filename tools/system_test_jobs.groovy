@@ -19,7 +19,12 @@ def genJob(driver, platform) {
         description "Run system tests for ${driver} on ${platform}"
 
         label(platform)
+
+        // We want to allow multiple builds running at the same time, just not on one node
         concurrentBuild()
+        throttleConcurrentBuilds {
+            maxPerNode(1)
+        }
 
         parameters {
             stringParam('sha1', 'master', 'SHA to build')
