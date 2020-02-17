@@ -14,7 +14,7 @@
 # test suite on all supported python versions. To use it, "pip install tox"
 # and then run "tox -c tox-system_tests.ini" from the driver directory. (generated/${module_name})
 [tox]
-envlist = ${nitclk_env}py{35,36,37,38,py3}-${module_name}-system_tests, py38-${module_name}-coverage
+envlist = ${nitclk_env}py{35,36,37,38}-${module_name}-system_tests, py38-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
 # We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
@@ -61,8 +61,7 @@ deps =
 % if config['supports_nitclk']:
     ${module_name}-nitclk_wheel: packaging
 % endif
-    ${module_name}-system_tests: pytest==4.6.5;platform_python_implementation=='PyPy'
-    ${module_name}-system_tests: pytest;platform_python_implementation=='CPython'
+    ${module_name}-system_tests: pytest
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
@@ -71,7 +70,7 @@ deps =
     ${module_name}-coverage: codecov
 
 depends =
-    ${module_name}-coverage: py{35,36,37,38,py3}-${module_name}-system_tests
+    ${module_name}-coverage: py{35,36,37,38}-${module_name}-system_tests
 % if config['supports_nitclk']:
     ${module_name}-system_tests: ${nitclk_env}
 % endif
