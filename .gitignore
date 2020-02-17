@@ -9,6 +9,7 @@
 #   2. So that our system tests can create a wheel out of the files and quickly install them, instead of going through the full code-generation process.
 # These are the generated files we do NOT want in git
 generated/docs/
+generated/examples/
 generated/htmlcov/
 generated/processed_metadata/
 generated/*/build/
