@@ -10,7 +10,7 @@ import tempfile
 
 
 @pytest.fixture(scope='function')
-def session_5122_1():
+def session_5164():
     with niscope.Session('', False, False, 'Simulate=1, DriverSetup=Model:5164;BoardType:PXIe') as simulated_session:
         yield simulated_session
 
@@ -21,18 +21,18 @@ def session_multiple_sessions():
         yield [simulated_session_1, simulated_session_2]
 
 
-def test_nitclk_integration(session_5122_1):
+def test_nitclk_integration(session_5164):
     assert type(session_5122_1.tclk) == nitclk.SessionReference
 
 
-def test_nitclk_vi_string(session_5122_1):
+def test_nitclk_vi_string(session_5164):
     # default is empty string
     assert session_5122_1.tclk.exported_tclk_output_terminal == ''
     session_5122_1.tclk.exported_tclk_output_terminal = 'PXI_Trig0'
     assert session_5122_1.tclk.exported_tclk_output_terminal == 'PXI_Trig0'
 
 
-def test_nitclk_session_reference(session_5122_1):
+def test_nitclk_session_reference(session_5164):
     test_session = niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe')
     session_5122_1.tclk.ref_trigger_master_session = test_session
     # We need to look at the actual session number inside the class
@@ -42,7 +42,7 @@ def test_nitclk_session_reference(session_5122_1):
     assert session_5122_1.tclk.ref_trigger_master_session._session_number == test_session._vi
 
 
-def test_nitclk_vi_real64(session_5122_1):
+def test_nitclk_vi_real64(session_5164):
     # default is 0
     assert session_5122_1.tclk.sample_clock_delay.total_seconds() == 0
     test_number = 4.2
