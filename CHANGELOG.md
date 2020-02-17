@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
         * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
         * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
+        * PyPy and PyPy3 support [#1271](https://github.com/ni/nimi-python/issues/1271)
 * ### NI-DMM
     * #### Added
     * #### Changed
