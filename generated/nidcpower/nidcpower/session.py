@@ -4716,8 +4716,10 @@ class Session(_SessionBase):
         attribute_ids_used = set()
         for step in sequence:
             for key in step:
-                if key not in Session.__base__.__dict__ or not isinstance(Session.__base__.__dict__[key], _attributes.Attribute):
-                    raise TypeError('{0} is not an attribute'.format(key))
+                if key not in Session.__base__.__dict__:
+                    raise TypeError('{0} is not an property on the nidcpower Session class'.format(key))
+                if not isinstance(Session.__base__.__dict__[key], _attributes.Attribute) or not isinstance(Session.__base__.__dict__[key], _attributes.AttributeEnum):
+                    raise TypeError('{0} is not an attribute type: {1}'.format(key, type(Session.__base__.__dict__[key])))
                 attribute_ids_used.add(Session.__base__.__dict__[key]._attribute_id)
 
         # Create the sequence with the list of attr ids we have

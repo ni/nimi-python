@@ -271,10 +271,23 @@ def test_create_and_delete_advanced_sequence_step(single_channel_session):
     single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
 
 
-def test_create_and_delete_advanced_sequence_step_invalid_attribute(single_channel_session):
+def test_create_and_delete_advanced_sequence_step_invalid_attribute_name(single_channel_session):
     my_advanced_sequence = [
         {"output_func": nidcpower.OutputFunction.DC_VOLTAGE, "voltage_level": 5.0},
         {"output_func": nidcpower.OutputFunction.DC_CURRENT, "current_level": 0.1}
+    ]
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    try:
+        single_channel_session.create_advanced_sequence(sequence_name='my_sequence', sequence=my_advanced_sequence, set_as_active_sequence=True)
+        assert False
+    except TypeError:
+        pass
+
+
+def test_create_and_delete_advanced_sequence_step_invalid_attribute_type(single_channel_session):
+    my_advanced_sequence = [
+        {"_fetch_multiple": nidcpower.OutputFunction.DC_VOLTAGE, "voltage_level": 5.0},
+        {"_fetch_multiple": nidcpower.OutputFunction.DC_CURRENT, "current_level": 0.1}
     ]
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
     try:
