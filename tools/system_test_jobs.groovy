@@ -3,7 +3,7 @@
 // once the documentation is finalized)
 
 // Driver list
-DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", "nise", "nimodinst" ]
+DRIVERS = [ "nidcpower", "nidigital", "nidmm", "nifgen", "niscope", "niswitch", "nise", "nimodinst", "nitclk" ]
 // Platform list - also used as node label
 PLATFORMS = [ "win32", "win64" ]
 
@@ -19,6 +19,7 @@ def genJob(driver, platform) {
         description "Run system tests for ${driver} on ${platform}"
 
         label(platform)
+        concurrentBuild()
 
         parameters {
             stringParam('sha1', 'master', 'SHA to build')
@@ -62,21 +63,32 @@ def genJob(driver, platform) {
         steps {
             batchFile {
                 command("""@echo off
-echo Useful environment variables
-echo ghprbActualCommit =            %ghprbActualCommit%
-echo ghprbActualCommitAuthor =      %ghprbActualCommitAuthor%
-echo ghprbActualCommitAuthorEmail = %ghprbActualCommitAuthorEmail%
-echo ghprbPullDescription =         %ghprbPullDescription%
-echo ghprbPullId =                  %ghprbPullId%
-echo ghprbPullLink =                %ghprbPullLink%
-echo ghprbPullTitle =               %ghprbPullTitle%
-echo ghprbSourceBranch =            %ghprbSourceBranch%
-echo ghprbTargetBranch =            %ghprbTargetBranch%
-echo ghprbCommentBody =             %ghprbCommentBody%
-echo sha1 =                         %sha1%
+rem echo Useful environment variables
+rem echo ghprbActualCommit =            %ghprbActualCommit%
+rem echo ghprbActualCommitAuthor =      %ghprbActualCommitAuthor%
+rem echo ghprbActualCommitAuthorEmail = %ghprbActualCommitAuthorEmail%
+rem echo ghprbPullDescription =         %ghprbPullDescription%
+rem echo ghprbPullId =                  %ghprbPullId%
+rem echo ghprbPullLink =                %ghprbPullLink%
+rem echo ghprbPullTitle =               %ghprbPullTitle%
+rem echo ghprbSourceBranch =            %ghprbSourceBranch%
+rem echo ghprbTargetBranch =            %ghprbTargetBranch%
+rem echo ghprbCommentBody =             %ghprbCommentBody%
+rem echo sha1 =                         %sha1%
+rem echo .
+rem echo JENKINS_HOME =                 %JENKINS_HOME%
+rem echo BUILD_NUMBER =                 %BUILD_NUMBER%
+rem echo CI_PULL_REQUEST =              %CI_PULL_REQUEST%
+rem echo .
+echo We need to set CI_PULL_REQUEST for coveralls
+set CI_PULL_REQUEST=%ghprbPullId%
 echo .
-echo Running system tests for ${driver} on ${platform}
-tools\\system_tests.bat ${driver}
+echo Make the junit folder so there isn't any collisions while running tests
+mkdir generated\\junit
+echo .
+IF EXIST src\\${driver}\\system_tests echo Running system tests for ${driver} on ${platform}
+IF EXIST src\\${driver}\\system_tests tools\\system_tests.bat ${driver}
+IF NOT EXIST src\\${driver}\\system_tests echo System test folder does not exist, skipping system tests for ${driver}
 """)
             }
         }
@@ -84,6 +96,7 @@ tools\\system_tests.bat ${driver}
         publishers {
             archiveJunit("generated/junit/*.xml") {
                 retainLongStdout()
+                allowEmptyResults()
             }
         }
     }
