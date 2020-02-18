@@ -80,7 +80,7 @@ deps =
 
 depends =
     ${module_name}-coverage: py{35,36,37,38}-${module_name}-system_tests
-% if config['supports_nitclk']:
+% if uses_other_wheel:
     ${module_name}-system_tests: ${wheel_env}
 % endif
 
