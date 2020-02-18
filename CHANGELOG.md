@@ -27,9 +27,12 @@ All notable changes to this project will be documented in this file.
         * Link to zip file on examples documentation
         * Support for Python 3.8
     * #### Changed
+        * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
+        * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
     * #### Removed
         * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
         * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
+        * PyPy and PyPy3 support [#1271](https://github.com/ni/nimi-python/issues/1271)
 * ### NI-DMM
     * #### Added
     * #### Changed
@@ -75,7 +78,9 @@ All notable changes to this project will be documented in this file.
 * ### NI-TClk
     * #### Added
     * #### Changed
+        * Method parameters and properties that are time based now take or return a `datetime.timedelta` object
     * #### Removed
+        * Ability to pass an integer as a session / session reference
         * `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on nitclk attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
 
 

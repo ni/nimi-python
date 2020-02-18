@@ -175,6 +175,33 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ExportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': 'Export configuration buffer.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'sizeInBytes',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'name': 'configuration',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'sizeInBytes'
+                },
+                'type': 'ViInt8[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'FetchWaveform': {
         'codegen_method': 'public',
         'documentation': {
@@ -1081,6 +1108,33 @@ functions = {
         ],
         'python_name': 'get_cal_date_and_time',
         'real_datetime_call': 'GetCalDateAndTime',
+        'returns': 'ViStatus'
+    },
+    'ImportAttributeConfigurationBuffer': {
+        'documentation': {
+            'description': 'Import configuration buffer.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'sizeInBytes',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'configuration',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'sizeInBytes'
+                },
+                'type': 'ViInt8[]'
+            }
+        ],
         'returns': 'ViStatus'
     },
     'InitWithOptions': {

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 19.1.0d50
+# This file is generated from NI-SCOPE API metadata version 20.0.0d10
 config = {
-    'api_version': '19.1.0d50',
+    'api_version': '20.0.0d10',
     'c_function_prefix': 'niScope_',
     'close_function': 'close',
     'context_manager_name': {
@@ -17,7 +17,10 @@ config = {
         }
     ],
     'driver_name': 'NI-SCOPE',
-    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
+    'extra_errors_used': [
+        'InvalidRepeatedCapabilityError',
+        'SelfTestError'
+    ],
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -28,11 +31,11 @@ config = {
         },
         'Windows': {
             '32bit': {
-                'name': 'niscope_32.dll',
+                'name': 'niScope_32.dll',
                 'type': 'windll'
             },
             '64bit': {
-                'name': 'niscope_64.dll',
+                'name': 'niScope_64.dll',
                 'type': 'cdll'
             }
         }
@@ -47,5 +50,5 @@ config = {
     ],
     'session_class_description': 'An NI-SCOPE session to a National Instruments Digitizer.',
     'session_handle_parameter_name': 'vi',
-    'supports_nitclk': True,
+    'supports_nitclk': True
 }

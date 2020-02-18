@@ -8,13 +8,11 @@ ${template_parameters['encoding_tag']}
 import ${module_name}._visatype as _visatype
 import ${module_name}.errors as errors
 
+import array
 import datetime
 import numbers
 
-try:
-    from functools import singledispatch  # Python 3.4+
-except ImportError:
-    from singledispatch import singledispatch  # Python 2.7
+from functools import singledispatch
 
 
 @singledispatch
@@ -214,6 +212,10 @@ def convert_init_with_options_dictionary(values, encoding):
     return init_with_options_string
 
 
+<%
+# nitclk is different. Only nitclk needs to be able to convert sessions like this
+%>\
+% if config['module_name'] == 'nitclk':
 # nitclk specific converters
 def convert_to_nitclk_session_number(item):
     '''Convert from supported objects to NI-TClk Session Num
@@ -221,20 +223,18 @@ def convert_to_nitclk_session_number(item):
     Supported objects are:
     - class with .tclk object of type nitclk.SessionReference
     - nitclk.SessionReference
-    - NI-TClk Session Num
     '''
     try:
-        return item.tclk._get_session_number()
+        return item.tclk._get_tclk_session_reference()
     except AttributeError:
         pass
 
     try:
-        return item._get_session_number()
+        return item._get_tclk_session_reference()
     except AttributeError:
         pass
 
-    # If we haven't gotten a SessionReference, we assume the item is the actual nitclk session num and return it
-    return item
+    raise TypeError('Unsupported type for nitclk session: {}'.format(type(item)))
 
 
 def convert_to_nitclk_session_number_list(item_list):
@@ -242,9 +242,57 @@ def convert_to_nitclk_session_number_list(item_list):
     return [convert_to_nitclk_session_number(i) for i in item_list]
 
 
+% endif
+<%
+# This converter is only needed for nifake testing
+%>\
+% if config['module_name'] == 'nifake':
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
+
+
+% endif
+# buffer input to import buffer functions
+@singledispatch
+def _convert_import_buffer_to_array(value):  # noqa: F811
+    pass
+
+
+@_convert_import_buffer_to_array.register(list)  # noqa: F811
+@_convert_import_buffer_to_array.register(bytes)  # noqa: F811
+@_convert_import_buffer_to_array.register(bytearray)  # noqa: F811
+@_convert_import_buffer_to_array.register(array.array)  # noqa: F811
+def _(value):
+    return value
+
+
+def convert_import_buffer_to_array(value):  # noqa: F811
+    import array
+    return array.array('b', _convert_import_buffer_to_array(value))
+
+
+# convert value to bytes
+@singledispatch
+def _convert_to_bytes(value):  # noqa: F811
+    pass
+
+
+@_convert_to_bytes.register(list)  # noqa: F811
+@_convert_to_bytes.register(bytes)  # noqa: F811
+@_convert_to_bytes.register(bytearray)  # noqa: F811
+@_convert_to_bytes.register(array.array)  # noqa: F811
+def _(value):
+    return value
+
+
+@_convert_to_bytes.register(str)  # noqa: F811
+def _(value):
+    return value.encode()
+
+
+def convert_to_bytes(value):  # noqa: F811
+    return bytes(_convert_to_bytes(value))
 
 
 # Let's run some tests

@@ -25,6 +25,7 @@ class Library(object):
         self.niFake_DoubleAllTheNums_cfunc = None
         self.niFake_EnumArrayOutputFunction_cfunc = None
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
+        self.niFake_ExportAttributeConfigurationBuffer_cfunc = None
         self.niFake_FetchWaveform_cfunc = None
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
@@ -47,6 +48,7 @@ class Library(object):
         self.niFake_GetCustomTypeArray_cfunc = None
         self.niFake_GetEnumValue_cfunc = None
         self.niFake_GetError_cfunc = None
+        self.niFake_ImportAttributeConfigurationBuffer_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
         self.niFake_LockSession_cfunc = None
@@ -114,6 +116,14 @@ class Library(object):
                 self.niFake_EnumInputFunctionWithDefaults_cfunc.argtypes = [ViSession, ViInt16]  # noqa: F405
                 self.niFake_EnumInputFunctionWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_EnumInputFunctionWithDefaults_cfunc(vi, a_turtle)
+
+    def niFake_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ExportAttributeConfigurationBuffer_cfunc is None:
+                self.niFake_ExportAttributeConfigurationBuffer_cfunc = self._library.niFake_ExportAttributeConfigurationBuffer
+                self.niFake_ExportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niFake_ExportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ExportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
     def niFake_FetchWaveform(self, vi, number_of_samples, waveform_data, actual_number_of_samples):  # noqa: N802
         with self._func_lock:
@@ -290,6 +300,14 @@ class Library(object):
                 self.niFake_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetError_cfunc(vi, error_code, buffer_size, description)
+
+    def niFake_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ImportAttributeConfigurationBuffer_cfunc is None:
+                self.niFake_ImportAttributeConfigurationBuffer_cfunc = self._library.niFake_ImportAttributeConfigurationBuffer
+                self.niFake_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niFake_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
