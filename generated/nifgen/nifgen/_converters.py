@@ -218,7 +218,7 @@ def _convert_import_buffer_to_array(value):  # noqa: F811
 @_convert_import_buffer_to_array.register(bytearray)  # noqa: F811
 @_convert_import_buffer_to_array.register(array.array)  # noqa: F811
 def _(value):
-    return value
+    return [x for x in value]
 
 
 def convert_import_buffer_to_array(value):  # noqa: F811

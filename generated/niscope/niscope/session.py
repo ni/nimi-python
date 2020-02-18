@@ -4852,8 +4852,7 @@ class Session(_SessionBase):
         error_code = self._library.niScope_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
-        print('[DEBUG] size: {0}'.format(size_in_bytes_ctype.value))
-        configuration_size = size_in_bytes_ctype.value + 1  # case B590
+        configuration_size = size_in_bytes_ctype.value  # case B590
         configuration_array = array.array("b", [0] * configuration_size)  # case B590
         configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niScope_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
