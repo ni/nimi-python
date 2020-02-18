@@ -21,6 +21,8 @@ def genJob(driver, platform) {
         label(platform)
 
         // We want to allow multiple builds running at the same time, just not on one node
+        // This is to avoid collisions with the virtual environments - without it, they can
+        // be corrupted
         concurrentBuild()
         throttleConcurrentBuilds {
             maxPerNode(1)
