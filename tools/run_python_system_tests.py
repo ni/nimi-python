@@ -52,9 +52,14 @@ zip_ref.extractall(zip_folder)
 zip_ref.close()
 print(zip_folder)
 
+drivers_using_other_driver = ['niscope', 'nifgen', 'nidigital', 'nitclk', ]
+other_driver_env = ''
+if args.driver in drivers_using_other_driver:
+    # Creating the wheel for the other required driver only uses Python 3.8
+    other_driver_env = 'py38-{0}-wheel_dep,'.format(args.driver)
 
 print('****Running system tests in tox.****')
 tox_dir = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated', args.driver)
 os.chdir(tox_dir)
-result = os.system('python -m tox {0} -e {1}-{2}-system_tests -c tox-system_tests.ini'.format(args.python_bitness, args.python_version, args.driver))
+result = os.system('python -m tox {0} -e {1}{2}-{3}-system_tests -c tox-system_tests.ini'.format(args.python_bitness, other_driver_env, args.python_version, args.driver))
 sys.exit(result)
