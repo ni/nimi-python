@@ -264,12 +264,11 @@ def _convert_import_buffer_to_array(value):  # noqa: F811
 @_convert_import_buffer_to_array.register(bytearray)  # noqa: F811
 @_convert_import_buffer_to_array.register(array.array)  # noqa: F811
 def _(value):
-    return [x for x in value]
+    return value
 
 
 def convert_import_buffer_to_array(value):  # noqa: F811
-    import array
-    return array.array('b', _convert_import_buffer_to_array(value))
+    return [x for x in _convert_import_buffer_to_array(value)]
 
 
 # convert value to bytes
