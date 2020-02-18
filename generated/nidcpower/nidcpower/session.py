@@ -4718,7 +4718,7 @@ class Session(_SessionBase):
             for key in step:
                 if key not in Session.__base__.__dict__:
                     raise TypeError('{0} is not an property on the nidcpower Session class'.format(key))
-                if not isinstance(Session.__base__.__dict__[key], _attributes.Attribute) or not isinstance(Session.__base__.__dict__[key], _attributes.AttributeEnum):
+                if not isinstance(Session.__base__.__dict__[key], _attributes.Attribute) and not isinstance(Session.__base__.__dict__[key], _attributes.AttributeEnum):
                     raise TypeError('{0} is not an attribute type: {1}'.format(key, type(Session.__base__.__dict__[key])))
                 attribute_ids_used.add(Session.__base__.__dict__[key]._attribute_id)
 
