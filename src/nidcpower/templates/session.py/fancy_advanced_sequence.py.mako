@@ -19,6 +19,8 @@
         attribute_ids_used = set()
         for step in sequence:
             for key in step:
+                if key not in Session.__base__.__dict__ or not isinstance(Session.__base__.__dict__[key], _attributes.Attribute):
+                    raise TypeError('{0} is not an attribute'.format(key))
                 attribute_ids_used.add(Session.__base__.__dict__[key]._attribute_id)
 
         # Create the sequence with the list of attr ids we have
