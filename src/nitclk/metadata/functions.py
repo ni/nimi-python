@@ -19,7 +19,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -48,7 +48,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -84,7 +84,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             }
         ],
@@ -125,7 +125,7 @@ functions = {
                 'is_session_handle': False,
                 'name': 'sessions',
                 'python_api_converter_name': 'convert_to_nitclk_session_number_list',
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sessionCount'
@@ -165,7 +165,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -501,7 +501,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             }
         ],
@@ -792,7 +792,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -984,7 +984,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1026,7 +1026,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1061,7 +1061,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1090,7 +1090,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1131,7 +1131,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -1173,7 +1173,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(Driver Session or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (Driver Session or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
