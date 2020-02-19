@@ -5,7 +5,6 @@ import math
 import nifake
 import nifake.errors
 import numpy
-import pytest
 import six
 import warnings
 
@@ -1297,8 +1296,18 @@ class TestSession(object):
                 session.import_attribute_configuration_buffer(configuration)
             self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
 
+    def test_import_attribute_configuration_buffer_str(self):
+        self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
+        expected_list = [ord('a'), ord('b'), ord('c'), ord('d')]
+        configuration = 'abcd'
+        with nifake.Session('dev1') as session:
+            self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
+            self.get_ctypes_pointer_for_buffer_side_effect_count = 0
+            with patch('nifake.session.get_ctypes_pointer_for_buffer', side_effect=self.get_ctypes_pointer_for_buffer_side_effect):
+                session.import_attribute_configuration_buffer(configuration)
+            self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
+
     # Invalid types
-    @pytest.mark.skip(reason='Not working right now')
     def test_import_attribute_configuration_buffer_list_i8_big(self):
         self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
         expected_list = [ord('a') * 100, ord('b') * 100, ord('c') * 100, ord('d') * 100]
@@ -1310,13 +1319,12 @@ class TestSession(object):
                 try:
                     session.import_attribute_configuration_buffer(configuration)
                     assert False
-                except OverflowError:
+                except ValueError:
                     pass
 
-    @pytest.mark.skip(reason='Not working right now')
-    def test_import_attribute_configuration_buffer_list_i8_big_float(self):
+    def test_import_attribute_configuration_buffer_list_i8_float(self):
         self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
-        expected_list = [ord('a') * 100.0, ord('b') * 100.0, ord('c') * 100.0, ord('d') * 100.0]
+        expected_list = [ord('a') * 1.0, ord('b') * 1.0, ord('c') * 1.0, ord('d') * 1.0]
         configuration = expected_list
         with nifake.Session('dev1') as session:
             self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
@@ -1328,11 +1336,10 @@ class TestSession(object):
                 except TypeError:
                     pass
 
-    @pytest.mark.skip(reason='Not working right now')
-    def test_import_attribute_configuration_buffer_str(self):
+    def test_import_attribute_configuration_buffer_list_i8_big_float(self):
         self.patched_library.niFake_ImportAttributeConfigurationBuffer.side_effect = self.side_effects_helper.niFake_ImportAttributeConfigurationBuffer
-        expected_list = [ord('a'), ord('b'), ord('c'), ord('d')]
-        configuration = 'abcd'
+        expected_list = [ord('a') * 100.0, ord('b') * 100.0, ord('c') * 100.0, ord('d') * 100.0]
+        configuration = expected_list
         with nifake.Session('dev1') as session:
             self.get_ctypes_pointer_for_buffer_side_effect_items = [expected_list]
             self.get_ctypes_pointer_for_buffer_side_effect_count = 0
