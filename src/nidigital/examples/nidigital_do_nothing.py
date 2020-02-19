@@ -3,9 +3,8 @@
 # This is an empty example that doesn't really do anything. Just needed temporarily to make the build process happy until
 # we add real examples
 import argparse
-import nidigital
+# import nidigital
 import sys
-import time
 
 
 def example(resource_name, options):

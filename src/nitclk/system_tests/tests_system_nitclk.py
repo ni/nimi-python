@@ -1,12 +1,8 @@
 #!/usr/bin/python
 
-import datetime
-import fasteners
 import niscope
 import nitclk
-import os
 import pytest
-import tempfile
 
 
 @pytest.fixture(scope='function')

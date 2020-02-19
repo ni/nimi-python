@@ -1,12 +1,9 @@
-import datetime
 import fasteners
 import math
 import niscope
-import nitclk
 import numpy
 import os
 import pytest
-import sys
 import tempfile
 
 
@@ -23,6 +20,7 @@ daqmx_sim_5124_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5124.lock'
 daqmx_sim_5124_lock = fasteners.InterProcessLock(daqmx_sim_5124_lock_file)
 daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
 daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
+
 
 @pytest.fixture(scope='function')
 def session():
@@ -281,7 +279,7 @@ def test_configure_chan_characteristics(session):
 
 
 def test_filter_coefficients(session_5142):
-    assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients() # coefficients list should have 35 items
+    assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
     try:
         filter_coefficients = [1.0, 0.0, 0.0]
         session_5142.configure_equalization_filter_coefficients(filter_coefficients)
