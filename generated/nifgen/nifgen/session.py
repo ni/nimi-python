@@ -119,7 +119,7 @@ class _SessionBase(object):
     _is_frozen = False
 
     absolute_delay = _attributes.AttributeViReal64(1150413)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the sub-Sample Clock delay, in seconds, to apply to the
     waveform. Use this property to reduce the trigger jitter when
@@ -138,45 +138,45 @@ class _SessionBase(object):
     adjustment.
     '''
     all_marker_events_latched_status = _attributes.AttributeViInt32(1150349)
-    '''Type: default_int
+    '''Type: int
 
     Returns a bit field of the latched status of all Marker Events.  Write 0 to this property to clear the latched status of all Marker Events.
     '''
     all_marker_events_live_status = _attributes.AttributeViInt32(1150344)
-    '''Type: default_int
+    '''Type: int
 
     Returns a bit field of the live status of all Marker Events.
     '''
     analog_data_mask = _attributes.AttributeViInt32(1150234)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the mask to apply to the analog output. The masked data is replaced with the data in analog_static_value.
     '''
     analog_filter_enabled = _attributes.AttributeViBoolean(1150103)
-    '''Type: default_bool
+    '''Type: bool
 
     Controls whether the signal generator applies to an analog filter to the output signal. This property is valid in arbitrary waveform, arbitrary sequence, and script modes. This property can also be used in standard method and frequency list modes for user-defined waveforms.
     '''
     analog_path = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogPath, 1150222)
-    '''Type: default_enums.AnalogPath
+    '''Type: enums.AnalogPath
 
     Specifies the analog signal path that should be used. The main path allows you to configure gain, offset, analog filter status, output impedance, and output enable. The main path has two amplifier options, high- and low-gain.
     The direct path presents a much smaller gain range, and you cannot adjust offset or the filter status. The direct path also provides a smaller output range but also lower distortion. NI-FGEN normally chooses the amplifier based on the user-specified gain.
     '''
     analog_static_value = _attributes.AttributeViInt32(1150235)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the static value that replaces data masked by analog_data_mask.
     '''
     arb_gain = _attributes.AttributeViReal64(1250202)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the factor by which the signal generator scales the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to scale the arbitrary waveform to other ranges.
     For example, when you set this property to 2.0, the output signal ranges from -2.0 V to +2.0 V.
     Use this property when output_mode is set to OutputMode.ARB or OutputMode.SEQ.
     '''
     arb_marker_position = _attributes.AttributeViInt32(1150327)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the position for a marker to be asserted in the arbitrary waveform. This property defaults to -1 when no marker position is specified. Use this property when output_mode is set to OutputMode.ARB.
     Use ExportSignal to export the marker signal.
@@ -194,7 +194,7 @@ class _SessionBase(object):
         var = session.markers[0,1].arb_marker_position
     '''
     arb_offset = _attributes.AttributeViReal64(1250203)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the value that the signal generator adds to the arbitrary waveform data. When you create arbitrary waveforms, you must first normalize the data points to the range -1.0 to +1.0. Use this property to shift the arbitrary waveform range.
     For example, when you set this property to 1.0, the output signal ranges from 2.0 V to 0.0 V.
@@ -202,25 +202,25 @@ class _SessionBase(object):
     Units: Volts
     '''
     arb_repeat_count = _attributes.AttributeViInt32(1150328)
-    '''Type: default_int
+    '''Type: int
 
     Specifies number of times to repeat the arbitrary waveform when the triggerMode parameter of ConfigureTriggerMode is set to TriggerMode.SINGLE or TriggerMode.STEPPED. This property is ignored if the triggerMode parameter is set to TriggerMode.CONTINUOUS or TriggerMode.BURST. Use this property when output_mode is set to OutputMode.ARB.
     When used during streaming, this property specifies the number of times to repeat the streaming waveform (the onboard memory allocated for streaming).  For more information about streaming, refer to the Streaming topic.
     '''
     arb_sample_rate = _attributes.AttributeViReal64(1250204)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the rate at which the signal generator outputs the points in arbitrary waveforms.  Use this property when output_mode is set  to OutputMode.ARB or OutputMode.SEQ.
     Units: Samples/s
     '''
     arb_sequence_handle = _attributes.AttributeViInt32(1250211)
-    '''Type: default_int
+    '''Type: int
 
     This channel-based property identifies which sequence the signal generator produces. You can create multiple sequences using create_arb_sequence. create_arb_sequence returns a handle that you can use to identify the particular sequence. To configure the signal generator to produce a particular sequence, set this property to the sequence handle.
     Use this property only when output_mode is set to OutputMode.SEQ.
     '''
     arb_waveform_handle = _attributes.AttributeViInt32(1250201)
-    '''Type: default_int
+    '''Type: int
 
     Selects which arbitrary waveform the signal generator produces. You can create multiple arbitrary waveforms using one of the following niFgen Create Waveform methods:
     create_waveform
@@ -235,38 +235,38 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     aux_power_enabled = _attributes.AttributeViBoolean(1150411)
-    '''Type: default_bool
+    '''Type: bool
 
     Controls the specified auxiliary power pin. Setting this property to TRUE energizes the auxiliary power when the session is committed. When this property is FALSE, the power pin of the connector outputs no power.
     '''
     bus_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.BusType, 1150215)
-    '''Type: default_enums.BusType
+    '''Type: enums.BusType
 
     The bus type of the signal generator.
     '''
     channel_delay = _attributes.AttributeViReal64(1150369)
-    '''Type: default_float
+    '''Type: float
 
     Specifies, in seconds, the delay to apply to the analog output of the channel specified by the channel string. You can use the channel delay to configure the timing relationship between channels on a multichannel device. Values for this property can be zero or positive. A value of zero indicates that the channels are aligned. A positive value delays the analog output by the specified number of seconds.
     '''
     clock_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ClockMode, 1150110)
-    '''Type: default_enums.ClockMode
+    '''Type: enums.ClockMode
 
     Controls which clock mode is used for the signal generator.
     For signal generators that support it, this property allows switching the sample  clock to High-Resolution mode. When in Divide-Down  mode, the sample rate can only be set to certain frequences, based on  dividing down the update clock. However, in High-Resolution mode, the  sample rate may be set to any value.
     '''
     common_mode_offset = _attributes.AttributeViReal64(1150366)
-    '''Type: default_float
+    '''Type: float
 
     Specifies, in volts, the value the signal generator adds to or subtracts from the arbitrary waveform data. This property applies only when you set the terminal_configuration property to TerminalConfiguration.DIFFERENTIAL. Common mode offset is applied to the signals generated at each differential output terminal.
     '''
     data_marker_events_count = _attributes.AttributeViInt32(1150273)
-    '''Type: default_int
+    '''Type: int
 
     Returns the number of Data Marker Events supported by the device.
     '''
     data_marker_event_data_bit_number = _attributes.AttributeViInt32(1150337)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the bit number to assign to the Data Marker Event.
 
@@ -280,7 +280,7 @@ class _SessionBase(object):
         var = session.markers[0,1].data_marker_event_data_bit_number
     '''
     data_marker_event_level_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
-    '''Type: default_enums.DataMarkerEventLevelPolarity
+    '''Type: enums.DataMarkerEventLevelPolarity
 
     Specifies the output polarity of the Data marker event.
 
@@ -294,7 +294,7 @@ class _SessionBase(object):
         var = session.markers[0,1].data_marker_event_level_polarity
     '''
     data_marker_event_output_terminal = _attributes.AttributeViString(1150339)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination terminal for the Data Marker Event.
 
@@ -308,24 +308,24 @@ class _SessionBase(object):
         var = session.markers[0,1].data_marker_event_output_terminal
     '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150241)
-    '''Type: default_int
+    '''Type: int
 
     The number of samples at a time to download to onboard memory. Useful when the total data to be transferred to onboard memory is large.
     '''
     data_transfer_maximum_bandwidth = _attributes.AttributeViReal64(1150373)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the maximum amount of bus bandwidth (in bytes per second) to use for data transfers. The signal generator limits data transfer speeds on the PCIe bus to the value you specify for this property. Set this property to optimize bus bandwidth usage for multi-device streaming applications by preventing the signal generator from consuming all of the available bandwidth on a PCI express link when waveforms are being written to the onboard memory of the device.
     '''
     data_transfer_maximum_in_flight_reads = _attributes.AttributeViInt32(1150375)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the maximum number of concurrent PCI Express read requests the signal generator can issue.
     When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this property is set to the highest value the signal generator supports.
     If other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the NI signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.
     '''
     data_transfer_preferred_packet_size = _attributes.AttributeViInt32(1150374)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the preferred size of the data field in a PCI Express read request packet. In general, the larger the packet size, the more efficiently the device uses the bus. By default, NI signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.
     Recommended values for this property are powers of two between 64 and 512.
@@ -336,12 +336,12 @@ class _SessionBase(object):
     :
     '''
     digital_data_mask = _attributes.AttributeViInt32(1150236)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the mask to apply to the output on the digital connector. The masked data is replaced with the data in digital_static_value.
     '''
     digital_edge_script_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerDigitalEdgeEdge, 1150292)
-    '''Type: default_enums.ScriptTriggerDigitalEdgeEdge
+    '''Type: enums.ScriptTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
 
@@ -355,7 +355,7 @@ class _SessionBase(object):
         var = session.script_triggers[0,1].digital_edge_script_trigger_edge
     '''
     digital_edge_script_trigger_source = _attributes.AttributeViString(1150291)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
 
@@ -369,48 +369,48 @@ class _SessionBase(object):
         var = session.script_triggers[0,1].digital_edge_script_trigger_source
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
-    '''Type: default_enums.StartTriggerDigitalEdgeEdge
+    '''Type: enums.StartTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Start trigger. This property is used only when start_trigger_type is set to Digital Edge.
     '''
     digital_edge_start_trigger_source = _attributes.AttributeViString(1150281)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the source terminal for the Start trigger. This property is used only when start_trigger_type is set to Digital Edge.
     '''
     digital_filter_enabled = _attributes.AttributeViBoolean(1150102)
-    '''Type: default_bool
+    '''Type: bool
 
     Controls whether the signal generator applies a digital filter to the output signal. This property is valid in arbitrary waveform, arbitrary sequence, and script modes. This property can also be used in standard method and frequency list modes for user-defined waveforms.
     '''
     digital_filter_interpolation_factor = _attributes.AttributeViReal64(1150218)
-    '''Type: default_float
+    '''Type: float
 
     This property only affects the device when digital_filter_enabled is set to True. If you do not set this property directly, NI-FGEN automatically selects the maximum interpolation factor allowed for the current sample rate. Valid values are 2, 4, and 8.
     '''
     digital_gain = _attributes.AttributeViReal64(1150254)
-    '''Type: default_float
+    '''Type: float
 
     Specifies a factor by which the signal generator digitally multiplies generated data before converting it to an analog signal in the DAC. For a digital gain greater than 1.0, the product of digital gain times the generated data must be inside the range plus or minus 1.0 (assuming floating point data).  If the product exceeds these limits, the signal generator clips the output signal, and an error results.
     Some signal generators support both digital gain and an analog gain (analog gain is specified with the func_amplitude property or the arb_gain property). Digital gain can be changed during generation without the glitches that may occur when changing analog gains, due to relay switching. However, the DAC output resolution is a method of analog gain, so only analog gain makes full use of the resolution of the DAC.
     '''
     digital_pattern_enabled = _attributes.AttributeViBoolean(1150101)
-    '''Type: default_bool
+    '''Type: bool
 
     Controls whether the signal generator generates a digital pattern of the output signal.
     '''
     digital_static_value = _attributes.AttributeViInt32(1150237)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the static value that replaces data masked by digital_data_mask.
     '''
     done_event_output_terminal = _attributes.AttributeViString(1150315)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination terminal for the Done Event.
     '''
     driver_setup = _attributes.AttributeViString(1050007)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the driver setup portion of the option string that was passed into the InitWithOptions method.
 
@@ -418,17 +418,17 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     exported_onboard_reference_clock_output_terminal = _attributes.AttributeViString(1150322)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the terminal to which to export the Onboard Reference Clock.
     '''
     exported_reference_clock_output_terminal = _attributes.AttributeViString(1150321)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the terminal to which to export the Reference Clock.
     '''
     exported_sample_clock_divisor = _attributes.AttributeViInt32(1150219)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the factor by which to divide the Sample clock, also known as the Update clock, before it is exported.  To export the Sample clock, use the ExportSignal method or the  exported_sample_clock_output_terminal property.
 
@@ -436,12 +436,12 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     exported_sample_clock_output_terminal = _attributes.AttributeViString(1150320)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the terminal to which to export the Sample Clock.
     '''
     exported_sample_clock_timebase_divisor = _attributes.AttributeViInt32(1150230)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the factor by which to divide the sample clock timebase (board clock) before it is exported.  To export the Sample clock timebase, use the ExportSignal method or the  exported_sample_clock_timebase_output_terminal property.
 
@@ -449,7 +449,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     exported_sample_clock_timebase_output_terminal = _attributes.AttributeViString(1150329)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the terminal to which to export the Sample clock timebase. If you specify a divisor with the exported_sample_clock_timebase_divisor property,   the Sample clock exported with the exported_sample_clock_timebase_output_terminal  property is the value of the Sample clock timebase after it is divided-down.  For a list of the terminals available on your device, refer to the Device Routes tab in MAX.
     To change the device configuration, call abort or wait for the generation to complete.
@@ -457,7 +457,7 @@ class _SessionBase(object):
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
     exported_script_trigger_output_terminal = _attributes.AttributeViString(1150295)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for the exported Script trigger.
     Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
@@ -472,53 +472,53 @@ class _SessionBase(object):
         var = session.script_triggers[0,1].exported_script_trigger_output_terminal
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150283)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination terminal for exporting the Start trigger.
     '''
     external_clock_delay_binary_value = _attributes.AttributeViInt32(1150233)
-    '''Type: default_int
+    '''Type: int
 
     Binary value of the external clock delay.
     '''
     external_sample_clock_multiplier = _attributes.AttributeViReal64(1150376)
-    '''Type: default_float
+    '''Type: float
 
     Specifies a multiplication factor to use to obtain a desired sample rate from an external Sample clock.  The resulting sample rate is equal to this factor multiplied by the external Sample clock rate.  You can use this property to generate samples at a rate higher than your external clock rate.  When using this property, you do not need to explicitly set the external clock rate.
     '''
     file_transfer_block_size = _attributes.AttributeViInt32(1150240)
-    '''Type: default_int
+    '''Type: int
 
     The number of samples at a time to read from the file and download to onboard memory. Used in conjunction with the Create From File and Write From File methods.
     '''
     filter_correction_frequency = _attributes.AttributeViReal64(1150104)
-    '''Type: default_float
+    '''Type: float
 
     Controls the filter correction frequency of the analog filter. This property corrects for the ripples in the analog filter frequency response at the frequency specified. For standard waveform output, the filter correction frequency should be set to be the same as the frequency of the standard waveform. To have no filter correction, set this property to 0 Hz.
     '''
     flatness_correction_enabled = _attributes.AttributeViBoolean(1150323)
-    '''Type: default_bool
+    '''Type: bool
 
     When True, the signal generator applies a flatness correction factor to the generated sine wave in order to ensure the same output power level at all frequencies.
     This property should be set to False when performing Flatness Calibration.
     '''
     fpga_bitfile_path = _attributes.AttributeViString(1150412)
-    '''Type: default_str
+    '''Type: str
 
     Gets the absolute file path to the bitfile loaded on the FPGA.
     '''
     freq_list_duration_quantum = _attributes.AttributeViReal64(1150214)
-    '''Type: default_float
+    '''Type: float
 
     Returns the quantum of which all durations must be a multiple in a  frequency list.
     '''
     freq_list_handle = _attributes.AttributeViInt32(1150208)
-    '''Type: default_int
+    '''Type: int
 
     Sets which frequency list the signal generator  produces. Create a frequency list using create_freq_list.  create_freq_list returns a handle that you can  use to identify the list.
     '''
     func_amplitude = _attributes.AttributeViReal64(1250102)
-    '''Type: default_float
+    '''Type: float
 
     Controls the amplitude of the standard waveform that the  signal generator produces. This value is the amplitude at the  output terminal.
     For example, to produce a waveform ranging from -5.00 V to +5.00 V, set  the amplitude to 10.00 V.
@@ -528,7 +528,7 @@ class _SessionBase(object):
     Note: This parameter does not affect signal generator behavior when you
     '''
     func_buffer_size = _attributes.AttributeViInt32(1150238)
-    '''Type: default_int
+    '''Type: int
 
     This property contains the number of samples used in the standard method waveform  buffer. This property is only valid on devices that implement standard method mode  in software, and is read-only for all other devices.
     implementation of Standard Method Mode on your device.
@@ -536,14 +536,14 @@ class _SessionBase(object):
     Note: Refer to the Standard Method Mode topic for more information on the
     '''
     func_dc_offset = _attributes.AttributeViReal64(1250103)
-    '''Type: default_float
+    '''Type: float
 
     Controls the DC offset of the standard waveform that the  signal generator produces.  This value is the offset at the output  terminal. The value is the offset from ground to the center of the  waveform that you specify with the Waveform parameter.
     For example, to configure a waveform with an amplitude of 10.00 V to  range from 0.00 V to +10.00 V, set DC Offset to 5.00 V.
     Units: volts
     '''
     func_duty_cycle_high = _attributes.AttributeViReal64(1250106)
-    '''Type: default_float
+    '''Type: float
 
     Controls the duty cycle of the square wave the signal generator  produces. Specify this property as a percentage of  the time the square wave is high in a cycle.
     set the Waveform parameter to Waveform.SQUARE.
@@ -552,7 +552,7 @@ class _SessionBase(object):
     Note: This parameter only affects signal generator behavior when you
     '''
     func_frequency = _attributes.AttributeViReal64(1250104)
-    '''Type: default_float
+    '''Type: float
 
     Controls the frequency of the standard waveform that the  signal generator produces.
     Units: hertz
@@ -563,7 +563,7 @@ class _SessionBase(object):
     :
     '''
     func_max_buffer_size = _attributes.AttributeViInt32(1150239)
-    '''Type: default_int
+    '''Type: int
 
     This property sets the maximum number of samples that can be used in the standard  method waveform buffer. Increasing this value may increase the quality of  the waveform. This property is only valid on devices that implement standard  method mode in software, and is read-only for all other devices.
     implementation of Standard Method Mode on your device.
@@ -571,7 +571,7 @@ class _SessionBase(object):
     Note: Refer to the Standard Method Mode topic for more information on the
     '''
     func_start_phase = _attributes.AttributeViReal64(1250105)
-    '''Type: default_float
+    '''Type: float
 
     Controls horizontal offset of the standard waveform the  signal generator produces. Specify this property in degrees of  one waveform cycle.
     A start phase of 180 degrees means output generation begins halfway  through the waveform. A start phase of 360 degrees offsets the output by  an entire waveform cycle, which is identical to a start phase of 0  degrees.
@@ -581,7 +581,7 @@ class _SessionBase(object):
     Note: This parameter does not affect signal generator behavior when you
     '''
     func_waveform = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Waveform, 1250101)
-    '''Type: default_enums.Waveform
+    '''Type: enums.Waveform
 
     This channel-based property specifies which standard waveform the signal generator produces.
     Use this property only when output_mode is set to  OutputMode.FUNC.
@@ -596,39 +596,39 @@ class _SessionBase(object):
     define_user_standard_waveform
     '''
     idle_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IdleBehavior, 1150377)
-    '''Type: default_enums.IdleBehavior
+    '''Type: enums.IdleBehavior
 
     Specifies the behavior of the output during the Idle state.  The output can be configured to hold the last generated voltage before entering the Idle state or jump to the Idle Value.
     '''
     idle_value = _attributes.AttributeViInt32(1150378)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the value to generate in the Idle state.  The Idle Behavior must be configured to jump to this value.
     '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the firmware revision information  for the device that you are currently using.
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the name of the device manufacturer you are currently  using.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the model number or name of the device that you  are currently using.
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
-    '''Type: default_str
+    '''Type: str
 
     Indicates the resource descriptor that NI-FGEN uses to identify the physical device.
     If you initialize NI-FGEN with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration Utility.
     If you initialize NI-FGEN with the resource  descriptor, this property contains that value.
     '''
     load_impedance = _attributes.AttributeViReal64(1150220)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property specifies the load impedance connected to the analog output of the channel. If you set this property to NIFGEN_VAL_MATCHED_LOAD_IMPEDANCE (-1.0), NI-FGEN assumes that the load impedance matches the output impedance. NI-FGEN compensates to give the desired peak-to-peak voltage amplitude or arbitrary gain (relative to 1 V).
 
@@ -636,7 +636,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     logical_name = _attributes.AttributeViString(1050305)
-    '''Type: default_str
+    '''Type: str
 
     A string containing the logical name that you specified when opening the  current IVI session.
     You may pass a logical name to init or  InitWithOptions.  The IVI Configuration Utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file. The virtual instrument section specifies a physical  device and initial user options.
@@ -645,12 +645,12 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     marker_events_count = _attributes.AttributeViInt32(1150271)
-    '''Type: default_int
+    '''Type: int
 
     Returns the number of markers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
     marker_event_output_terminal = _attributes.AttributeViString(1150312)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination terminal for the Marker Event.
 
@@ -664,105 +664,105 @@ class _SessionBase(object):
         var = session.markers[0,1].marker_event_output_terminal
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
-    '''Type: default_float
+    '''Type: float
 
     Returns the maximum duration of any one step in the frequency  list.
     '''
     max_freq_list_length = _attributes.AttributeViInt32(1150211)
-    '''Type: default_int
+    '''Type: int
 
     Returns the maximum number of steps that can be in a frequency  list.
     '''
     max_loop_count = _attributes.AttributeViInt32(1250215)
-    '''Type: default_int
+    '''Type: int
 
     Returns the maximum number of times that the signal generator can repeat a waveform in a sequence. Typically, this value is constant for the signal generator.
     '''
     max_num_freq_lists = _attributes.AttributeViInt32(1150209)
-    '''Type: default_int
+    '''Type: int
 
     Returns the maximum number of frequency lists the signal generator allows.
     '''
     max_num_sequences = _attributes.AttributeViInt32(1250212)
-    '''Type: default_int
+    '''Type: int
 
     Returns the maximum number of arbitrary sequences that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
     max_num_waveforms = _attributes.AttributeViInt32(1250205)
-    '''Type: default_int
+    '''Type: int
 
     Returns the maximum number of arbitrary waveforms that the signal generator allows. Typically, this value is constant for the signal generator.
     '''
     max_sequence_length = _attributes.AttributeViInt32(1250214)
-    '''Type: default_int
+    '''Type: int
 
     Returns the maximum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
     max_waveform_size = _attributes.AttributeViInt32(1250208)
-    '''Type: default_int
+    '''Type: int
 
     Returns the size, in samples, of the largest waveform that can be created. This property reflects the space currently available, taking into account previously allocated waveforms and instructions.
     '''
     memory_size = _attributes.AttributeViInt32(1150242)
-    '''Type: default_int
+    '''Type: int
 
     The total amount of memory, in bytes, on the signal generator.
     '''
     min_freq_list_duration = _attributes.AttributeViReal64(1150212)
-    '''Type: default_float
+    '''Type: float
 
     Returns the minimum number of steps that can be in a frequency  list.
     '''
     min_freq_list_length = _attributes.AttributeViInt32(1150210)
-    '''Type: default_int
+    '''Type: int
 
     Returns the minimum number of frequency lists that the signal generator allows.
     '''
     min_sequence_length = _attributes.AttributeViInt32(1250213)
-    '''Type: default_int
+    '''Type: int
 
     Returns the minimum number of arbitrary waveforms that the signal generator allows in a sequence. Typically, this value is constant for the signal generator.
     '''
     min_waveform_size = _attributes.AttributeViInt32(1250207)
-    '''Type: default_int
+    '''Type: int
 
     Returns the minimum number of points that the signal generator allows in an arbitrary waveform. Typically, this value is constant for the signal generator.
     '''
     module_revision = _attributes.AttributeViString(1150390)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the module revision  for the device that you are currently using.
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
-    '''Type: default_int
+    '''Type: int
 
     Indicates the number of channels that the specific instrument  driver supports.
     For each property for which IVI_VAL_MULTI_CHANNEL is set, the IVI Engine maintains a separate cache value for each channel.
     '''
     output_enabled = _attributes.AttributeViBoolean(1250003)
-    '''Type: default_bool
+    '''Type: bool
 
     This channel-based property specifies whether the signal that the signal generator produces appears at the output connector.
     '''
     output_impedance = _attributes.AttributeViReal64(1250004)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property specifies the signal generator output impedance at the output connector. NI signal sources modules have an output impedance of 50 ohms and an optional 75 ohms on select modules. If the load impedance matches the output impedance, then the voltage at the signal output connector is at the needed level. The voltage at the signal output connector varies with load output impedance, up to doubling the voltage for a high-impedance load.
     '''
     output_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputMode, 1250001)
-    '''Type: default_enums.OutputMode
+    '''Type: enums.OutputMode
 
     Sets which output mode the signal generator will use. The value you specify determines which methods and properties you use to configure the waveform the signal generator produces.
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150310)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination terminal for the Ready for Start Event.
     '''
     reference_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ReferenceClockSource, 1150113)
-    '''Type: default_enums.ReferenceClockSource
+    '''Type: enums.ReferenceClockSource
 
     Specifies the reference clock source used by the signal generator.
     The signal generator derives the frequencies and sample rates that it uses  to generate waveforms from the source you specify.  For example, when you set this property to ClkIn, the signal  generator uses the signal it receives at the CLK IN front  panel connector as the Reference clock.
@@ -771,12 +771,12 @@ class _SessionBase(object):
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
     ref_clock_frequency = _attributes.AttributeViReal64(1150107)
-    '''Type: default_float
+    '''Type: float
 
     Sets the frequency of the signal generator reference  clock. The signal generator uses the reference clock to derive  frequencies and sample rates when generating output.
     '''
     sample_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.SampleClockSource, 1150112)
-    '''Type: default_enums.SampleClockSource
+    '''Type: enums.SampleClockSource
 
     Specifies the Sample clock source. If you specify a divisor with the exported_sample_clock_divisor  property, the Sample clock exported with the exported_sample_clock_output_terminal property is the  value of the Sample clock after it is divided-down. For a list of the terminals available on your device, refer  to the Device Routes tab in MAX.
     To change the device configuration, call abort or wait for the generation to complete.
@@ -784,7 +784,7 @@ class _SessionBase(object):
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
     sample_clock_timebase_rate = _attributes.AttributeViReal64(1150368)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the Sample clock timebase rate. This property applies only to external Sample clock timebases.
     To change the device configuration, call abort or wait for the generation to complete.
@@ -792,7 +792,7 @@ class _SessionBase(object):
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
     sample_clock_timebase_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.SampleClockTimebaseSource, 1150367)
-    '''Type: default_enums.SampleClockTimebaseSource
+    '''Type: enums.SampleClockTimebaseSource
 
     Specifies the Sample Clock Timebase source.
     To change the device configuration, call the abort method or wait for the generation to complete.
@@ -800,19 +800,19 @@ class _SessionBase(object):
     Note: The signal generator must not be in the Generating state when you change this property.
     '''
     script_to_generate = _attributes.AttributeViString(1150270)
-    '''Type: default_str
+    '''Type: str
 
     Specifies which script the generator produces. To configure the generator to run a particular script, set this property to the name of the script. Use write_script to create multiple scripts. Use this property when output_mode is set to OutputMode.SCRIPT.
 
     Note: The signal generator must not be in the Generating state when you change this property. To change the device configuration, call abort or wait for the generation to complete.
     '''
     script_triggers_count = _attributes.AttributeViInt32(1150272)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the number of Script triggers supported by the device. Use this property when output_mode is set to OutputMode.SCRIPT.
     '''
     script_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerType, 1150290)
-    '''Type: default_enums.ScriptTriggerType
+    '''Type: enums.ScriptTriggerType
 
     Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
 
@@ -826,12 +826,12 @@ class _SessionBase(object):
         var = session.script_triggers[0,1].script_trigger_type
     '''
     serial_number = _attributes.AttributeViString(1150243)
-    '''Type: default_str
+    '''Type: str
 
     The signal generator's serial number.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether to simulate NI-FGEN I/O  operations. If simulation is enabled, NI-FGEN  methods perform range checking and call Ivi_GetAttribute and  Ivi_SetAttribute, but they do not perform device I/O.   For output parameters that represent device data, NI-FGEN  methods return calculated values.
     Default Value: False
@@ -841,55 +841,55 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
-    '''Type: default_str
+    '''Type: str
 
     Returns a brief description of NI-FGEN.
     '''
     major_version = _attributes.AttributeViInt32(1050503)
-    '''Type: default_int
+    '''Type: int
 
     Returns the major version number of NI-FGEN.
     '''
     minor_version = _attributes.AttributeViInt32(1050504)
-    '''Type: default_int
+    '''Type: int
 
     Returns the minor version number of NI-FGEN.
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains additional version information about  NI-FGEN.
     '''
     specific_driver_vendor = _attributes.AttributeViString(1050513)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the name of the vendor that supplies NI-FGEN.
     '''
     started_event_output_terminal = _attributes.AttributeViString(1150314)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination terminal for the Started Event.
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
-    '''Type: default_enums.StartTriggerType
+    '''Type: enums.StartTriggerType
 
     Specifies whether you want the Start trigger to be a Digital Edge, or Software trigger. You can also choose None as the value for this property.
     '''
     streaming_space_available_in_waveform = _attributes.AttributeViInt32(1150325)
-    '''Type: default_int
+    '''Type: int
 
     Indicates the space available (in samples) in the streaming waveform for writing new data. During generation, this available space may be in multiple locations with, for example, part of the available space at the end of the streaming waveform and the rest at the beginning. In this situation, writing a block of waveform data the size of the  total space available in the streaming waveform causes NI-FGEN to return an error, as  NI-FGEN will not wrap the data from the end of the waveform to the beginning and cannot write data past the end of the waveform buffer.
     To avoid writing data past the end of the waveform, write new data to the waveform in a fixed size that is an integer divisor of the total size of the streaming waveform.
     Used in conjunction with the streaming_waveform_handle or streaming_waveform_name properties.
     '''
     streaming_waveform_handle = _attributes.AttributeViInt32(1150324)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the waveform handle of the waveform used to continuously stream data during generation. This property defaults to -1 when no streaming waveform is specified.
     Used in conjunction with streaming_space_available_in_waveform.
     '''
     streaming_waveform_name = _attributes.AttributeViString(1150326)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the name of the waveform used to continuously stream data during generation. This property defaults to // when no streaming waveform is specified.
     Use in conjunction with streaming_space_available_in_waveform.
@@ -900,32 +900,32 @@ class _SessionBase(object):
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: default_str
+    '''Type: str
 
     Returns a model code of the device. For NI-FGEN versions that support more than one device, this  property contains a comma-separated list of supported device  models.
     '''
     terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150365)
-    '''Type: default_enums.TerminalConfiguration
+    '''Type: enums.TerminalConfiguration
 
     Specifies whether gain and offset values will be analyzed based on single-ended or differential operation.
     '''
     trigger_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerMode, 1150108)
-    '''Type: default_enums.TriggerMode
+    '''Type: enums.TriggerMode
 
     Controls the trigger mode.
     '''
     wait_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WaitBehavior, 1150379)
-    '''Type: default_enums.WaitBehavior
+    '''Type: enums.WaitBehavior
 
     Specifies the behavior of the output while waiting for a script trigger or during a wait instruction.  The output can be configured to hold the last generated voltage before waiting or jump to the Wait Value.
     '''
     wait_value = _attributes.AttributeViInt32(1150380)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the value to generate while waiting.  The Wait Behavior must be configured to jump to this value.
     '''
     waveform_quantum = _attributes.AttributeViInt32(1250206)
-    '''Type: default_int
+    '''Type: int
 
     The size of each arbitrary waveform must be a multiple of a quantum value. This property returns the quantum value that the signal generator allows.
     For example, when this property returns a value of 8, all waveform sizes must be a multiple of 8. Typically, this value is constant for the signal generator.

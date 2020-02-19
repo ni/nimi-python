@@ -121,22 +121,22 @@ class _SessionBase(object):
     _is_frozen = False
 
     float_enum = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.FloatEnum, 1000005)
-    '''Type: default_enums.FloatEnum
+    '''Type: enums.FloatEnum
 
     A property with an enum that is also a float
     '''
     read_write_bool = _attributes.AttributeViBoolean(1000000)
-    '''Type: default_bool
+    '''Type: bool
 
     A property of type bool with read/write access.
     '''
     read_write_color = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Color, 1000003)
-    '''Type: default_enums.Color
+    '''Type: enums.Color
 
     A property of type Color with read/write access.
     '''
     read_write_double = _attributes.AttributeViReal64(1000001)
-    '''Type: default_float
+    '''Type: float
 
     A property of type float with read/write access.
     '''
@@ -146,7 +146,7 @@ class _SessionBase(object):
     Property in seconds
     '''
     read_write_double_with_repeated_capability = _attributes.AttributeViReal64(1000009)
-    '''Type: default_float
+    '''Type: float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -158,12 +158,12 @@ class _SessionBase(object):
         var = session.channels[0,1].read_write_double_with_repeated_capability
     '''
     read_write_int64 = _attributes.AttributeViInt64(1000006)
-    '''Type: default_int
+    '''Type: int
 
     A property of type 64-bit integer with read/write access.
     '''
     read_write_integer = _attributes.AttributeViInt32(1000004)
-    '''Type: default_int
+    '''Type: int
 
     A property of type integer with read/write access.
     '''
@@ -173,7 +173,7 @@ class _SessionBase(object):
     Property in milliseconds
     '''
     read_write_string = _attributes.AttributeViString(1000002)
-    '''Type: default_str
+    '''Type: str
 
     A property of type string with read/write access.
     '''

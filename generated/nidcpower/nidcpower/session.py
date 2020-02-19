@@ -118,7 +118,7 @@ class _SessionBase(object):
     _is_frozen = False
 
     _active_advanced_sequence = _attributes.AttributeViString(1150074)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the advanced sequence to configure or generate.
 
@@ -134,7 +134,7 @@ class _SessionBase(object):
         var = session.channels[0,1].active_advanced_sequence
     '''
     _active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the advanced sequence step to configure.
 
@@ -150,7 +150,7 @@ class _SessionBase(object):
         var = session.channels[0,1].active_advanced_sequence_step
     '''
     aperture_time = _attributes.AttributeViReal64(1150058)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the measurement aperture time for the channel configuration. Aperture time is specified in the units set by  the aperture_time_units property.
     for information about supported devices.
@@ -169,7 +169,7 @@ class _SessionBase(object):
         var = session.channels[0,1].aperture_time
     '''
     aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150059)
-    '''Type: default_enums.ApertureTimeUnits
+    '''Type: enums.ApertureTimeUnits
 
     Specifies the units of the aperture_time property for the channel configuration.
     for information about supported devices.
@@ -188,7 +188,7 @@ class _SessionBase(object):
         var = session.channels[0,1].aperture_time_units
     '''
     auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutoZero, 1150055)
-    '''Type: default_enums.AutoZero
+    '''Type: enums.AutoZero
 
     Specifies the auto-zero method to use on the device.
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
@@ -207,7 +207,7 @@ class _SessionBase(object):
         var = session.channels[0,1].auto_zero
     '''
     auxiliary_power_source_available = _attributes.AttributeViBoolean(1150002)
-    '''Type: default_bool
+    '''Type: bool
 
     Indicates whether an auxiliary power source is connected to the device.
     A value of False may indicate that the auxiliary input fuse has blown.  Refer to the Detecting Internal/Auxiliary Power topic in the NI DC Power Supplies and SMUs Help for  more information about internal and auxiliary power.
@@ -224,12 +224,12 @@ class _SessionBase(object):
         var = session.channels[0,1].auxiliary_power_source_available
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
-    '''Type: default_int
+    '''Type: int
 
     Indicates the number of channels that NI-DCPower supports for the instrument that was chosen when  the current session was opened. For channel-based properties, the IVI engine maintains a separate  cache value for each channel.
     '''
     compliance_limit_symmetry = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ComplianceLimitSymmetry, 1150184)
-    '''Type: default_enums.ComplianceLimitSymmetry
+    '''Type: enums.ComplianceLimitSymmetry
 
     Specifies whether compliance limits for current generation and voltage
     generation for the device are applied symmetrically about 0 V and 0 A or
@@ -264,7 +264,7 @@ class _SessionBase(object):
         var = session.channels[0,1].compliance_limit_symmetry
     '''
     current_compensation_frequency = _attributes.AttributeViReal64(1150071)
-    '''Type: default_float
+    '''Type: float
 
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Current mode.
     for information about supported devices.
@@ -282,7 +282,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_compensation_frequency
     '''
     current_gain_bandwidth = _attributes.AttributeViReal64(1150070)
-    '''Type: default_float
+    '''Type: float
 
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes.  This property takes effect when the channel is in Constant Current mode.
     for information about supported devices.
@@ -300,7 +300,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_gain_bandwidth
     '''
     current_level = _attributes.AttributeViReal64(1150009)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the current level, in amps, that the device attempts to generate on the specified channel(s).
     This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT.
@@ -319,7 +319,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_level
     '''
     current_level_autorange = _attributes.AttributeViInt32(1150017)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
     If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
@@ -340,7 +340,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_level_autorange
     '''
     current_level_range = _attributes.AttributeViReal64(1150011)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the current level range, in amps, for the specified channel(s).
     The range defines the valid value to which the current level can be set. Use the  current_level_autorange property to enable automatic selection of the current level range.
@@ -360,7 +360,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_level_range
     '''
     current_limit = _attributes.AttributeViReal64(1250005)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level  on the specified channel(s).
     This property is applicable only if the output_function property is set to  OutputFunction.DC_VOLTAGE and the compliance_limit_symmetry property is set to  ComplianceLimitSymmetry.SYMMETRIC.
@@ -379,7 +379,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_limit
     '''
     current_limit_autorange = _attributes.AttributeViInt32(1150016)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
     If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
@@ -400,7 +400,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_limit_autorange
     '''
     current_limit_behavior = _attributes.AttributeViInt32(1250004)
-    '''Type: default_int
+    '''Type: int
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -412,7 +412,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_limit_behavior
     '''
     current_limit_high = _attributes.AttributeViReal64(1150187)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
@@ -455,7 +455,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_limit_high
     '''
     current_limit_low = _attributes.AttributeViReal64(1150188)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired voltage on the specified channel(s).
@@ -498,7 +498,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_limit_low
     '''
     current_limit_range = _attributes.AttributeViReal64(1150004)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the current limit range, in amps, for the specified channel(s).
     The range defines the valid value to which the current limit can be set. Use the current_limit_autorange  property to enable automatic selection of the current limit range.
@@ -518,7 +518,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_limit_range
     '''
     current_pole_zero_ratio = _attributes.AttributeViReal64(1150072)
-    '''Type: default_float
+    '''Type: float
 
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Current mode.
     for information about supported devices.
@@ -536,7 +536,7 @@ class _SessionBase(object):
         var = session.channels[0,1].current_pole_zero_ratio
     '''
     dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DCNoiseRejection, 1150066)
-    '''Type: default_enums.DCNoiseRejection
+    '''Type: enums.DCNoiseRejection
 
     Determines the relative weighting of samples in a measurement. Refer to the NI PXIe-4140/4141 DC Noise Rejection,  NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic in the NI DC Power Supplies  and SMUs Help for more information about noise rejection.
     for information about supported devices.
@@ -554,7 +554,7 @@ class _SessionBase(object):
         var = session.channels[0,1].dc_noise_rejection
     '''
     digital_edge_measure_trigger_input_terminal = _attributes.AttributeViString(1150036)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the input terminal for the Measure trigger. This property is used only when the  measure_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for this property.
@@ -573,7 +573,7 @@ class _SessionBase(object):
         var = session.channels[0,1].digital_edge_measure_trigger_input_terminal
     '''
     digital_edge_pulse_trigger_input_terminal = _attributes.AttributeViString(1150097)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the input terminal for the Pulse trigger. This property is used only when the pulse_trigger_type property is set to digital edge.
     You can specify any valid input terminal for this property. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.
@@ -591,7 +591,7 @@ class _SessionBase(object):
         var = session.channels[0,1].digital_edge_pulse_trigger_input_terminal
     '''
     digital_edge_sequence_advance_trigger_input_terminal = _attributes.AttributeViString(1150028)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the input terminal for the Sequence Advance trigger. Use this property only when the  sequence_advance_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     the NI DC Power Supplies and SMUs Help for information about supported devices.
@@ -610,7 +610,7 @@ class _SessionBase(object):
         var = session.channels[0,1].digital_edge_sequence_advance_trigger_input_terminal
     '''
     digital_edge_source_trigger_input_terminal = _attributes.AttributeViString(1150032)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the input terminal for the Source trigger. Use this property only when the  source_trigger_type property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
@@ -629,7 +629,7 @@ class _SessionBase(object):
         var = session.channels[0,1].digital_edge_source_trigger_input_terminal
     '''
     digital_edge_start_trigger_input_terminal = _attributes.AttributeViString(1150023)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the input terminal for the Start trigger. Use this property only when the start_trigger_type  property is set to TriggerType.DIGITAL_EDGE.
     for information about supported devices.
@@ -648,14 +648,14 @@ class _SessionBase(object):
         var = session.channels[0,1].digital_edge_start_trigger_input_terminal
     '''
     driver_setup = _attributes.AttributeViString(1050007)
-    '''Type: default_str
+    '''Type: str
 
     Indicates the Driver Setup string that you specified when initializing the driver.
     Some cases exist where you must specify the instrument driver options at initialization  time. An example of this case is specifying a particular device model from among a family  of devices that the driver supports. This property is useful when simulating a device.  You can specify the driver-specific options through the DriverSetup keyword in the optionsString  parameter in the __init__ method or through the  IVI Configuration Utility.
     You can specify  driver-specific options through the DriverSetup keyword in the  optionsString parameter in the __init__ method. If you do not specify a Driver Setup string, this property returns an empty string.
     '''
     exported_measure_trigger_output_terminal = _attributes.AttributeViString(1150037)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Measure trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.
@@ -674,7 +674,7 @@ class _SessionBase(object):
         var = session.channels[0,1].exported_measure_trigger_output_terminal
     '''
     exported_pulse_trigger_output_terminal = _attributes.AttributeViString(1150098)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Pulse trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals available on your device.
@@ -692,7 +692,7 @@ class _SessionBase(object):
         var = session.channels[0,1].exported_pulse_trigger_output_terminal
     '''
     exported_sequence_advance_trigger_output_terminal = _attributes.AttributeViString(1150029)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Sequence Advance trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer for a list of the terminals  available on your device.
@@ -711,7 +711,7 @@ class _SessionBase(object):
         var = session.channels[0,1].exported_sequence_advance_trigger_output_terminal
     '''
     exported_source_trigger_output_terminal = _attributes.AttributeViString(1150033)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Source trigger.
     Refer to the Device Routes tab in MAX for a list of the terminals available on your device.
@@ -730,7 +730,7 @@ class _SessionBase(object):
         var = session.channels[0,1].exported_source_trigger_output_terminal
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150024)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Start trigger.
     Refer to the Device Routes tab in Measurement & Automation Explorer (MAX) for a list of the terminals available  on your device.
@@ -749,7 +749,7 @@ class _SessionBase(object):
         var = session.channels[0,1].exported_start_trigger_output_terminal
     '''
     fetch_backlog = _attributes.AttributeViInt32(1150056)
-    '''Type: default_int
+    '''Type: int
 
     Returns the number of measurements acquired that have not been fetched yet.
 
@@ -762,7 +762,7 @@ class _SessionBase(object):
         var = session.channels[0,1].fetch_backlog
     '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
-    '''Type: default_str
+    '''Type: str
 
     Contains the firmware revision information for the device you are currently using.
 
@@ -775,12 +775,12 @@ class _SessionBase(object):
         var = session.channels[0,1].instrument_firmware_revision
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
-    '''Type: default_str
+    '''Type: str
 
     Contains the name of the manufacturer for the device you are currently using.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
-    '''Type: default_str
+    '''Type: str
 
     Contains the model number or name of the device that you are currently using.
 
@@ -793,7 +793,7 @@ class _SessionBase(object):
         var = session.channels[0,1].instrument_model
     '''
     interlock_input_open = _attributes.AttributeViBoolean(1150105)
-    '''Type: default_bool
+    '''Type: bool
 
     Indicates whether the safety interlock circuit is open.
     Refer to the Safety Interlock topic in the NI DC Power Supplies and SMUs Help for more information about  the safety interlock circuit.
@@ -810,20 +810,20 @@ class _SessionBase(object):
         var = session.channels[0,1].interlock_input_open
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
-    '''Type: default_str
+    '''Type: str
 
     Indicates the resource descriptor NI-DCPower uses to identify the physical device.
     If you initialize NI-DCPower with a logical name, this property contains the resource descriptor  that corresponds to the entry in the IVI Configuration utility.
     If you initialize NI-DCPower with the resource descriptor, this property contains that value.
     '''
     logical_name = _attributes.AttributeViString(1050305)
-    '''Type: default_str
+    '''Type: str
 
     Contains the logical name you specified when opening the current IVI session.
     You can pass a logical name to the __init__ method.  The IVI Configuration utility must contain an entry for the logical name. The logical name entry  refers to a method section in the IVI Configuration file. The method section specifies a physical  device and initial user options.
     '''
     measure_buffer_size = _attributes.AttributeViInt32(1150077)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the number of samples that the active channel measurement buffer can hold.
     The default value is the maximum number of samples that a device is capable of recording in one second.
@@ -862,7 +862,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_complete_event_delay
     '''
     measure_complete_event_output_terminal = _attributes.AttributeViString(1150047)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Measure Complete event.
     for information about supported devices.
@@ -880,7 +880,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_complete_event_output_terminal
     '''
     measure_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150044)
-    '''Type: default_enums.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Measure Complete event.
     for information about supported devices.
@@ -898,7 +898,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_complete_event_pulse_polarity
     '''
     measure_complete_event_pulse_width = _attributes.AttributeViReal64(1150045)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the width of the Measure Complete event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse  width value for PXI Express devices is 250 ns.
@@ -936,7 +936,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_record_delta_time
     '''
     measure_record_length = _attributes.AttributeViInt32(1150063)
-    '''Type: default_int
+    '''Type: int
 
     Specifies how many measurements compose a measure record. When this property is set to a value greater than 1, the  measure_when property must be set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or  MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
@@ -956,7 +956,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_record_length
     '''
     measure_record_length_is_finite = _attributes.AttributeViBoolean(1150064)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether to take continuous measurements. Call the abort method to stop continuous measurements.  When this property is set to False and the source_mode property is set to  SourceMode.SINGLE_POINT, the measure_when property must be set to  MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE or MeasureWhen.ON_MEASURE_TRIGGER. When this property is set to  False and the source_mode property is set to SourceMode.SEQUENCE, the measure_when  property must be set to MeasureWhen.ON_MEASURE_TRIGGER.
     for information about supported devices.
@@ -975,7 +975,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_record_length_is_finite
     '''
     measure_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150034)
-    '''Type: default_enums.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Measure trigger.
     for information about supported devices.
@@ -993,7 +993,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_trigger_type
     '''
     measure_when = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasureWhen, 1150057)
-    '''Type: default_enums.MeasureWhen
+    '''Type: enums.MeasureWhen
 
     Specifies when the measure unit should acquire measurements. Unless this property is configured to  MeasureWhen.ON_MEASURE_TRIGGER, the measure_trigger_type property is ignored.
     Refer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to  configure your measurements.
@@ -1009,7 +1009,7 @@ class _SessionBase(object):
         var = session.channels[0,1].measure_when
     '''
     output_capacitance = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputCapacitance, 1150014)
-    '''Type: default_enums.OutputCapacitance
+    '''Type: enums.OutputCapacitance
 
     Specifies whether to use a low or high capacitance on the output for the specified channel(s).
     for information about supported devices.
@@ -1027,7 +1027,7 @@ class _SessionBase(object):
         var = session.channels[0,1].output_capacitance
     '''
     output_connected = _attributes.AttributeViBoolean(1150060)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether the output relay is connected (closed) or disconnected (open). The output_enabled  property does not change based on this property; they are independent of each other.
     about supported devices.
@@ -1047,7 +1047,7 @@ class _SessionBase(object):
         var = session.channels[0,1].output_connected
     '''
     output_enabled = _attributes.AttributeViBoolean(1250006)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether the output is enabled (True) or disabled (False).
     Depending on the value you specify for the output_function property, you also must set the  voltage level or current level in addition to  enabling the output
@@ -1066,7 +1066,7 @@ class _SessionBase(object):
         var = session.channels[0,1].output_enabled
     '''
     output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputFunction, 1150008)
-    '''Type: default_enums.OutputFunction
+    '''Type: enums.OutputFunction
 
     Configures the method to generate on the specified channel(s).
     When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the  output current is below the current limit. You can use the following properties to configure the channel when  OutputFunction.DC_VOLTAGE is selected:
@@ -1096,7 +1096,7 @@ class _SessionBase(object):
         var = session.channels[0,1].output_function
     '''
     output_resistance = _attributes.AttributeViReal64(1150061)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the output resistance that the device attempts to generate for the specified channel(s). This property is  available only when you set the output_function property on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
     about supported devices.
@@ -1114,7 +1114,7 @@ class _SessionBase(object):
         var = session.channels[0,1].output_resistance
     '''
     overranging_enabled = _attributes.AttributeViBoolean(1150007)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether NI-DCPower allows setting the voltage level, current level, voltage limit and current limit outside the  device specification limits. True means that overranging is enabled.
     Refer to the Ranges topic in the NI DC Power Supplies and SMUs Help for more information about overranging.
@@ -1130,7 +1130,7 @@ class _SessionBase(object):
         var = session.channels[0,1].overranging_enabled
     '''
     ovp_enabled = _attributes.AttributeViBoolean(1250002)
-    '''Type: default_bool
+    '''Type: bool
 
     Enables (True) or disables (False) overvoltage protection (OVP).
     Refer to the Output Overvoltage Protection topic in the NI DC Power Supplies and SMUs Help for more information about  overvoltage protection.
@@ -1149,7 +1149,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ovp_enabled
     '''
     ovp_limit = _attributes.AttributeViReal64(1250003)
-    '''Type: default_float
+    '''Type: float
 
     Determines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.
     for information about supported devices.
@@ -1168,7 +1168,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ovp_limit
     '''
     power_line_frequency = _attributes.AttributeViReal64(1150020)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the power line frequency for specified channel(s). NI-DCPower uses this value to select a timebase for setting the  aperture_time property in power line cycles (PLCs).
     in the NI DC Power Supplies and SMUs Help for information about supported devices.
@@ -1189,7 +1189,7 @@ class _SessionBase(object):
         var = session.channels[0,1].power_line_frequency
     '''
     power_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSource, 1150000)
-    '''Type: default_enums.PowerSource
+    '''Type: enums.PowerSource
 
     Specifies the power source to use. NI-DCPower switches the power source used by the  device to the specified value.
     Default Value: PowerSource.AUTOMATIC
@@ -1198,7 +1198,7 @@ class _SessionBase(object):
     Note: Automatic selection is not persistent and occurs only at the time this property
     '''
     power_source_in_use = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSourceInUse, 1150001)
-    '''Type: default_enums.PowerSourceInUse
+    '''Type: enums.PowerSourceInUse
 
     Indicates whether the device is using the internal or auxiliary power source to generate power.
 
@@ -1211,7 +1211,7 @@ class _SessionBase(object):
         var = session.channels[0,1].power_source_in_use
     '''
     pulse_bias_current_level = _attributes.AttributeViReal64(1150088)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse bias current level, in amps, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
@@ -1229,7 +1229,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_current_level
     '''
     pulse_bias_current_limit = _attributes.AttributeViReal64(1150083)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse bias current limit, in amps, that the output cannot exceed when generating the desired pulse bias voltage on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
@@ -1247,7 +1247,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_current_limit
     '''
     pulse_bias_current_limit_high = _attributes.AttributeViReal64(1150195)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -1293,7 +1293,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_current_limit_high
     '''
     pulse_bias_current_limit_low = _attributes.AttributeViReal64(1150196)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -1339,7 +1339,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_current_limit_low
     '''
     pulse_bias_delay = _attributes.AttributeViReal64(1150092)
-    '''Type: default_float
+    '''Type: float
 
     Determines when, in seconds, the device generates the Pulse Complete event after generating the off level of a pulse.
     Valid Values: 0 to 167 seconds
@@ -1357,7 +1357,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_delay
     '''
     pulse_bias_voltage_level = _attributes.AttributeViReal64(1150082)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse bias voltage level, in volts, that the device attempts to generate on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
@@ -1375,7 +1375,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_voltage_level
     '''
     pulse_bias_voltage_limit = _attributes.AttributeViReal64(1150089)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired current on the specified channel(s) during the off phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
@@ -1393,7 +1393,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_voltage_limit
     '''
     pulse_bias_voltage_limit_high = _attributes.AttributeViReal64(1150191)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -1439,7 +1439,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_voltage_limit_high
     '''
     pulse_bias_voltage_limit_low = _attributes.AttributeViReal64(1150192)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -1485,7 +1485,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_bias_voltage_limit_low
     '''
     pulse_complete_event_output_terminal = _attributes.AttributeViString(1150099)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Pulse Complete event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
@@ -1503,7 +1503,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_complete_event_output_terminal
     '''
     pulse_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150100)
-    '''Type: default_enums.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Pulse Complete event.
     Default Value: Polarity.HIGH
@@ -1520,7 +1520,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_complete_event_pulse_polarity
     '''
     pulse_complete_event_pulse_width = _attributes.AttributeViReal64(1150101)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the width of the Pulse Complete event, in seconds.
     The minimum event pulse width value for PXI Express devices is 250 ns.
@@ -1539,7 +1539,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_complete_event_pulse_width
     '''
     pulse_current_level = _attributes.AttributeViReal64(1150086)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse current level, in amps, that the device attempts to generate on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
@@ -1557,7 +1557,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_current_level
     '''
     pulse_current_level_range = _attributes.AttributeViReal64(1150090)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse current level range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current level and pulse bias current level.
@@ -1576,7 +1576,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_current_level_range
     '''
     pulse_current_limit = _attributes.AttributeViReal64(1150081)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE and the compliance_limit_symmetry  property is set to ComplianceLimitSymmetry.SYMMETRIC.
@@ -1594,7 +1594,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_current_limit
     '''
     pulse_current_limit_high = _attributes.AttributeViReal64(1150193)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the maximum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -1640,7 +1640,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_current_limit_high
     '''
     pulse_current_limit_low = _attributes.AttributeViReal64(1150194)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the minimum current, in amps, that the output can produce when
     generating the desired pulse voltage on the specified channel(s) during
@@ -1686,7 +1686,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_current_limit_low
     '''
     pulse_current_limit_range = _attributes.AttributeViReal64(1150085)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse current limit range, in amps, for the specified channel(s).
     The range defines the valid values to which you can set the pulse current limit and pulse bias current limit.
@@ -1741,7 +1741,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_on_time
     '''
     pulse_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150095)
-    '''Type: default_enums.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Pulse trigger.
     Default Value: TriggerType.NONE
@@ -1758,7 +1758,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_trigger_type
     '''
     pulse_voltage_level = _attributes.AttributeViReal64(1150080)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_VOLTAGE.
@@ -1776,7 +1776,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_voltage_level
     '''
     pulse_voltage_level_range = _attributes.AttributeViReal64(1150084)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse voltage level range, in volts, for the specified channel(s).
     The range defines the valid values at which you can set the pulse voltage level and pulse bias voltage level.
@@ -1795,7 +1795,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_voltage_level_range
     '''
     pulse_voltage_limit = _attributes.AttributeViReal64(1150087)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT and the compliance_limit_symmetry property  is set to ComplianceLimitSymmetry.SYMMETRIC.
@@ -1813,7 +1813,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_voltage_limit
     '''
     pulse_voltage_limit_high = _attributes.AttributeViReal64(1150189)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -1859,7 +1859,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_voltage_limit_high
     '''
     pulse_voltage_limit_low = _attributes.AttributeViReal64(1150190)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired pulse current on the specified channel(s)
@@ -1905,7 +1905,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_voltage_limit_low
     '''
     pulse_voltage_limit_range = _attributes.AttributeViReal64(1150091)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the pulse voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.
@@ -1924,7 +1924,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pulse_voltage_limit_range
     '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether NI-DCPower queries the device status after each operation.
     Querying the device status is useful for debugging. After you validate your program, you can set this  property to False to disable status checking and maximize performance.
@@ -1933,7 +1933,7 @@ class _SessionBase(object):
     Default Value: True
     '''
     ready_for_pulse_trigger_event_output_terminal = _attributes.AttributeViString(1150102)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Ready For Pulse Trigger event.
     Output terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0.
@@ -1950,7 +1950,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ready_for_pulse_trigger_event_output_terminal
     '''
     ready_for_pulse_trigger_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150103)
-    '''Type: default_enums.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Ready For Pulse Trigger event.
     Default Value: Polarity.HIGH
@@ -1967,7 +1967,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_polarity
     '''
     ready_for_pulse_trigger_event_pulse_width = _attributes.AttributeViReal64(1150104)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the width of the Ready For Pulse Trigger event, in seconds.
     The minimum event pulse width value for PXI Express devices is 250 ns.
@@ -1986,7 +1986,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_width
     '''
     reset_average_before_measurement = _attributes.AttributeViBoolean(1150006)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or  returns a measurement that has already begun or completed(False).
     for information about supported devices.
@@ -2005,7 +2005,7 @@ class _SessionBase(object):
         var = session.channels[0,1].reset_average_before_measurement
     '''
     samples_to_average = _attributes.AttributeViInt32(1150003)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the number of samples to average when you take a measurement.
     Increasing the number of samples to average decreases measurement noise but increases the time required to take  a measurement. Refer to the NI PXI-4110, NI PXI-4130, NI PXI-4132, or NI PXIe-4154 Averaging topic for  optional property settings to improve immunity to certain noise types, or refer to the NI PXIe-4140/4141  DC Noise Rejection, NI PXIe-4142/4143 DC Noise Rejection, or NI PXIe-4144/4145 DC Noise Rejection topic for  information about improving noise immunity for those devices.
@@ -2029,7 +2029,7 @@ class _SessionBase(object):
         var = session.channels[0,1].samples_to_average
     '''
     self_calibration_persistence = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelfCalibrationPersistence, 1150073)
-    '''Type: default_enums.SelfCalibrationPersistence
+    '''Type: enums.SelfCalibrationPersistence
 
     Specifies whether the values calculated during self-calibration should be written to hardware to be used until the  next self-calibration or only used until the reset_device method is called or the machine  is powered down.
     This property affects the behavior of the self_cal method. When set to  SelfCalibrationPersistence.KEEP_IN_MEMORY, the values calculated by the self_cal method are used in  the existing session, as well as in all further sessions until you call the reset_device method  or restart the machine. When you set this property to SelfCalibrationPersistence.WRITE_TO_EEPROM, the values calculated  by the self_cal method are written to hardware and used in the existing session and  in all subsequent sessions until another call to the self_cal method is made.
@@ -2039,7 +2039,7 @@ class _SessionBase(object):
     Note: This property is not supported by all devices. Refer to Supported Properties by Device for information
     '''
     sense = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Sense, 1150013)
-    '''Type: default_enums.Sense
+    '''Type: enums.Sense
 
     Selects either local or remote sensing of the output voltage for the specified channel(s).
     Refer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more  information about sensing voltage on supported channels and about devices that support local and/or remote sensing.
@@ -2055,7 +2055,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sense
     '''
     sequence_advance_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150026)
-    '''Type: default_enums.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Sequence Advance trigger.
     for information about supported devices.
@@ -2073,7 +2073,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_advance_trigger_type
     '''
     sequence_engine_done_event_output_terminal = _attributes.AttributeViString(1150050)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Sequence Engine Done Complete event.
     for information about supported devices.
@@ -2091,7 +2091,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_engine_done_event_output_terminal
     '''
     sequence_engine_done_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150048)
-    '''Type: default_enums.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Engine Done event.
     for information about supported devices.
@@ -2109,7 +2109,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_engine_done_event_pulse_polarity
     '''
     sequence_engine_done_event_pulse_width = _attributes.AttributeViReal64(1150049)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the width of the Sequence Engine Done event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value  for PXI Express devices is 250 ns.
@@ -2130,7 +2130,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_engine_done_event_pulse_width
     '''
     sequence_iteration_complete_event_output_terminal = _attributes.AttributeViString(1150040)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Sequence Iteration Complete event.
     for information about supported devices.
@@ -2148,7 +2148,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_iteration_complete_event_output_terminal
     '''
     sequence_iteration_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150038)
-    '''Type: default_enums.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Sequence Iteration Complete event.
     for information about supported devices.
@@ -2166,7 +2166,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_iteration_complete_event_pulse_polarity
     '''
     sequence_iteration_complete_event_pulse_width = _attributes.AttributeViReal64(1150039)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the width of the Sequence Iteration Complete event, in seconds.
     The minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width  value for PXI Express devices is 250 ns.
@@ -2187,7 +2187,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_iteration_complete_event_pulse_width
     '''
     sequence_loop_count = _attributes.AttributeViInt32(1150025)
-    '''Type: default_int
+    '''Type: int
 
     Specifies the number of times a sequence is run after initiation.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence  loop count.
@@ -2207,7 +2207,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_loop_count
     '''
     sequence_loop_count_is_finite = _attributes.AttributeViBoolean(1150078)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether a sequence should repeat indefinitely.
     Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about  infinite sequencing.
@@ -2226,7 +2226,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_loop_count_is_finite
     '''
     sequence_step_delta_time = _attributes.AttributeViReal64(1150198)
-    '''Type: default_float
+    '''Type: float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2238,7 +2238,7 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_step_delta_time
     '''
     sequence_step_delta_time_enabled = _attributes.AttributeViBoolean(1150199)
-    '''Type: default_bool
+    '''Type: bool
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2250,13 +2250,13 @@ class _SessionBase(object):
         var = session.channels[0,1].sequence_step_delta_time_enabled
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether to simulate NI-DCPower I/O operations. True specifies that operation is simulated.
     Default Value: False
     '''
     source_complete_event_output_terminal = _attributes.AttributeViString(1150043)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the output terminal for exporting the Source Complete event.
     for information about supported devices.
@@ -2274,7 +2274,7 @@ class _SessionBase(object):
         var = session.channels[0,1].source_complete_event_output_terminal
     '''
     source_complete_event_pulse_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Polarity, 1150041)
-    '''Type: default_enums.Polarity
+    '''Type: enums.Polarity
 
     Specifies the behavior of the Source Complete event.
     for information about supported devices.
@@ -2292,7 +2292,7 @@ class _SessionBase(object):
         var = session.channels[0,1].source_complete_event_pulse_polarity
     '''
     source_complete_event_pulse_width = _attributes.AttributeViReal64(1150042)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the width of the Source Complete event, in seconds.
     for information about supported devices.
@@ -2333,7 +2333,7 @@ class _SessionBase(object):
         var = session.channels[0,1].source_delay
     '''
     source_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SourceMode, 1150054)
-    '''Type: default_enums.SourceMode
+    '''Type: enums.SourceMode
 
     Specifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source  Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.
     Default value: SourceMode.SINGLE_POINT
@@ -2348,7 +2348,7 @@ class _SessionBase(object):
         var = session.channels[0,1].source_mode
     '''
     source_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150030)
-    '''Type: default_enums.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Source trigger.
     for information about supported devices.
@@ -2366,27 +2366,27 @@ class _SessionBase(object):
         var = session.channels[0,1].source_trigger_type
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
-    '''Type: default_str
+    '''Type: str
 
     Contains a brief description of the specific driver.
     '''
     specific_driver_prefix = _attributes.AttributeViString(1050302)
-    '''Type: default_str
+    '''Type: str
 
     Contains the prefix for NI-DCPower. The name of each user-callable  method in NI-DCPower begins with this prefix.
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
-    '''Type: default_str
+    '''Type: str
 
     Contains additional version information about NI-DCPower.
     '''
     specific_driver_vendor = _attributes.AttributeViString(1050513)
-    '''Type: default_str
+    '''Type: str
 
     Contains the name of the vendor that supplies NI-DCPower.
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150021)
-    '''Type: default_enums.TriggerType
+    '''Type: enums.TriggerType
 
     Specifies the behavior of the Start trigger.
     for information about supported devices.
@@ -2404,12 +2404,12 @@ class _SessionBase(object):
         var = session.channels[0,1].start_trigger_type
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: default_str
+    '''Type: str
 
     Contains a comma-separated (,) list of supported NI-DCPower device models.
     '''
     transient_response = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TransientResponse, 1150062)
-    '''Type: default_enums.TransientResponse
+    '''Type: enums.TransientResponse
 
     Specifies the transient response. Refer to the Transient Response topic in the NI DC Power Supplies and SMUs Help  for more information about transient response.
     for information about supported devices.
@@ -2427,7 +2427,7 @@ class _SessionBase(object):
         var = session.channels[0,1].transient_response
     '''
     voltage_compensation_frequency = _attributes.AttributeViReal64(1150068)
-    '''Type: default_float
+    '''Type: float
 
     The frequency at which a pole-zero pair is added to the system when the channel is in  Constant Voltage mode.
     for information about supported devices.
@@ -2445,7 +2445,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_compensation_frequency
     '''
     voltage_gain_bandwidth = _attributes.AttributeViReal64(1150067)
-    '''Type: default_float
+    '''Type: float
 
     The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the channel is in Constant Voltage mode.
     for information about supported devices.
@@ -2463,7 +2463,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_gain_bandwidth
     '''
     voltage_level = _attributes.AttributeViReal64(1250001)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).
     This property is applicable only if the output_function property is set to OutputFunction.DC_VOLTAGE.
@@ -2482,7 +2482,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_level
     '''
     voltage_level_autorange = _attributes.AttributeViInt32(1150015)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
     If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
@@ -2503,7 +2503,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_level_autorange
     '''
     voltage_level_range = _attributes.AttributeViReal64(1150005)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the voltage level range, in volts, for the specified channel(s).
     The range defines the valid values to which the voltage level can be set. Use the voltage_level_autorange  property to enable automatic selection of the voltage level range.
@@ -2523,7 +2523,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_level_range
     '''
     voltage_limit = _attributes.AttributeViReal64(1150010)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level  on the specified channels.
     This property is applicable only if the output_function property is set to OutputFunction.DC_CURRENT  and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
@@ -2542,7 +2542,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_limit
     '''
     voltage_limit_autorange = _attributes.AttributeViInt32(1150018)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
     If this property is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
@@ -2563,7 +2563,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_limit_autorange
     '''
     voltage_limit_high = _attributes.AttributeViReal64(1150185)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the maximum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
@@ -2606,7 +2606,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_limit_high
     '''
     voltage_limit_low = _attributes.AttributeViReal64(1150186)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the minimum voltage, in volts, that the output can produce
     when generating the desired current on the specified channel(s).
@@ -2649,7 +2649,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_limit_low
     '''
     voltage_limit_range = _attributes.AttributeViReal64(1150012)
-    '''Type: default_float
+    '''Type: float
 
     Specifies the voltage limit range, in volts, for the specified channel(s).
     The range defines the valid values to which the voltage limit can be set. Use the voltage_limit_autorange  property to enable automatic selection of the voltage limit range.
@@ -2669,7 +2669,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voltage_limit_range
     '''
     voltage_pole_zero_ratio = _attributes.AttributeViReal64(1150069)
-    '''Type: default_float
+    '''Type: float
 
     The ratio of the pole frequency to the zero frequency when the channel is in  Constant Voltage mode.
     for information about supported devices.

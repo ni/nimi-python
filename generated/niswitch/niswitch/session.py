@@ -118,7 +118,7 @@ class _SessionBase(object):
     _is_frozen = False
 
     analog_bus_sharing_enable = _attributes.AttributeViBoolean(1150018)
-    '''Type: default_bool
+    '''Type: bool
 
     Enables or disables sharing of an analog bus line so that multiple  NI SwitchBlock devices may connect to it simultaneously. To enable  multiple NI SwitchBlock devices to share an analog bus line, set this  property to True for each device on the channel that corresponds  with the shared analog bus line. The default value for all devices is  False, which disables sharing of the analog bus.
     Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
@@ -133,7 +133,7 @@ class _SessionBase(object):
         var = session.channels[0,1].analog_bus_sharing_enable
     '''
     bandwidth = _attributes.AttributeViReal64(1250005)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the bandwidth for the channel.
     The units are hertz.
@@ -147,12 +147,12 @@ class _SessionBase(object):
         var = session.channels[0,1].bandwidth
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
-    '''Type: default_int
+    '''Type: int
 
     Indicates the number of channels that the specific instrument  driver supports.
     '''
     characteristic_impedance = _attributes.AttributeViReal64(1250016)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the characteristic impedance for the  channel.
     The units are ohms.
@@ -166,19 +166,19 @@ class _SessionBase(object):
         var = session.channels[0,1].characteristic_impedance
     '''
     continuous_scan = _attributes.AttributeViBoolean(1250026)
-    '''Type: default_bool
+    '''Type: bool
 
     When a switch device is scanning, the swich can either stop scanning when  the end of the scan (False) or continue scanning from the top of the  scan list again (True).
     Notice that if you set the scan to continuous (True), the Wait For Scan  Complete operation will always time out and you must call Abort to stop  the scan.
     '''
     digital_filter_enable = _attributes.AttributeViBoolean(1150016)
-    '''Type: default_bool
+    '''Type: bool
 
     This property specifies whether to apply the pulse width filter to the  Trigger Input. Enabling the Digital Filter (True) prevents the switch  module from being triggered by pulses that are less than 150 ns on PXI  trigger lines 0–7.
     When Digital Filter is disabled (False), it is possible for the switch  module to be triggered by noise on the PXI trigger lines. If the device  triggering the switch is capable of sending pulses greater than 150 ns, you should not disable the Digital Filter.
     '''
     driver_setup = _attributes.AttributeViString(1050007)
-    '''Type: default_str
+    '''Type: str
 
     This property indicates the Driver Setup string that the user  specified when initializing the driver.
     Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  init_with_options method, or through the IVI Configuration Utility.
@@ -186,29 +186,29 @@ class _SessionBase(object):
     '''
     handshaking_initiation = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HandshakingInitiation, 1150013)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the firmware revision information  for the instrument you are currently using.
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the name of the instrument manufacturer you are currently  using.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the model number or name of the instrument that you  are currently using.
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
-    '''Type: default_str
+    '''Type: str
 
     Indicates the resource descriptor the driver  uses to identify the physical device.
     If you initialize the driver with a logical name, this  property contains the resource descriptor that corresponds  to the entry in the IVI Configuration utility.
     If you initialize the instrument driver with the resource  descriptor, this property contains that value.
     '''
     is_configuration_channel = _attributes.AttributeViBoolean(1250003)
-    '''Type: default_bool
+    '''Type: bool
 
     This channel-based property specifies whether to reserve the channel for  internal path creation.  A channel that is available for internal path  creation is called a configuration channel.  The driver may use  configuration channels to create paths between two channels you specify in  the connect method.  Configuration channels are not available  for external connections.
     Set this property to True to mark the channel as a configuration  channel.  Set this property to False to mark the channel as available  for external connections.
@@ -224,17 +224,17 @@ class _SessionBase(object):
         var = session.channels[0,1].is_configuration_channel
     '''
     is_debounced = _attributes.AttributeViBoolean(1250002)
-    '''Type: default_bool
+    '''Type: bool
 
     This property indicates whether the entire switch device has settled  since the last switching command.  A value of True indicates that all  signals going through the switch device are valid.
     '''
     is_scanning = _attributes.AttributeViBoolean(1250024)
-    '''Type: default_bool
+    '''Type: bool
 
     If True, the switch module is currently scanning through the scan list  (i.e. it is not in the Idle state). If False, the switch module is not  currently scanning through the scan list (i.e. it is in the Idle state).
     '''
     is_source_channel = _attributes.AttributeViBoolean(1250001)
-    '''Type: default_bool
+    '''Type: bool
 
     This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The connect method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
@@ -248,18 +248,18 @@ class _SessionBase(object):
         var = session.channels[0,1].is_source_channel
     '''
     is_waiting_for_trig = _attributes.AttributeViBoolean(1150004)
-    '''Type: default_bool
+    '''Type: bool
 
     In a scan list, a semi-colon (;) is used to indicate that at that point in  the scan list, the scan engine should pause until a trigger is received  from the trigger input.  If that trigger is user generated through either  a hardware pulse or the Send SW Trigger operation, it is necessary for the  user to know  when the scan engine has reached such a state.
     '''
     logical_name = _attributes.AttributeViString(1050305)
-    '''Type: default_str
+    '''Type: str
 
     A string containing the logical name you specified when opening the  current IVI session.
     You may pass a logical name to the init or  init_with_options methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
     '''
     max_ac_voltage = _attributes.AttributeViReal64(1250007)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum AC voltage the channel  can switch.
     The units are volts RMS.
@@ -273,7 +273,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_ac_voltage
     '''
     max_carry_ac_current = _attributes.AttributeViReal64(1250011)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum AC current the channel  can carry.
     The units are amperes RMS.
@@ -287,7 +287,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_carry_ac_current
     '''
     max_carry_ac_power = _attributes.AttributeViReal64(1250015)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum AC power the channel can  carry.
     The units are volt-amperes.
@@ -301,7 +301,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_carry_ac_power
     '''
     max_carry_dc_current = _attributes.AttributeViReal64(1250010)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum DC current the channel  can carry.
     The units are amperes.
@@ -315,7 +315,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_carry_dc_current
     '''
     max_carry_dc_power = _attributes.AttributeViReal64(1250014)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum DC power the channel can  carry.
     The units are watts.
@@ -329,7 +329,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_carry_dc_power
     '''
     max_dc_voltage = _attributes.AttributeViReal64(1250006)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum DC voltage the channel  can switch.
     The units are volts.
@@ -343,7 +343,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_dc_voltage
     '''
     max_switching_ac_current = _attributes.AttributeViReal64(1250009)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum AC current the channel  can switch.
     The units are amperes RMS.
@@ -357,7 +357,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_switching_ac_current
     '''
     max_switching_ac_power = _attributes.AttributeViReal64(1250013)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum AC power the channel can  switch.
     The units are volt-amperes.
@@ -371,7 +371,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_switching_ac_power
     '''
     max_switching_dc_current = _attributes.AttributeViReal64(1250008)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum DC current the channel  can switch.
     The units are amperes.
@@ -385,7 +385,7 @@ class _SessionBase(object):
         var = session.channels[0,1].max_switching_dc_current
     '''
     max_switching_dc_power = _attributes.AttributeViReal64(1250012)
-    '''Type: default_float
+    '''Type: float
 
     This channel-based property returns the maximum DC power the channel can  switch.
     The units are watts.
@@ -399,30 +399,30 @@ class _SessionBase(object):
         var = session.channels[0,1].max_switching_dc_power
     '''
     number_of_relays = _attributes.AttributeViInt32(1150014)
-    '''Type: default_int
+    '''Type: int
 
     This property returns the number of relays.
     '''
     num_of_columns = _attributes.AttributeViInt32(1250019)
-    '''Type: default_int
+    '''Type: int
 
     This property returns the number of channels on the column of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  input channels.
     The wire_mode property affects the number of available  columns.  For example, if your device has 8 input lines and you use the  four-wire mode, then the number of columns you have available is 2.
     '''
     num_of_rows = _attributes.AttributeViInt32(1250018)
-    '''Type: default_int
+    '''Type: int
 
     This property returns the number of channels on the row of a matrix or  scanner.  If the switch device is a scanner, this value is the number of  output channels.
     The wire_mode property affects the number of available  rows.  For example, if your device has 8 input lines and you use the  two-wire mode, then the number of columns you have available is 4.
     '''
     power_down_latching_relays_after_debounce = _attributes.AttributeViBoolean(1150017)
-    '''Type: default_bool
+    '''Type: bool
 
     This property specifies whether to power down latching relays after  calling Wait For Debounce.
     When Power Down Latching Relays After Debounce is enabled (True),  a call to Wait For Debounce ensures that the relays are settled  and the latching relays are powered down.
     '''
     scan_advanced_output = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanAdvancedOutput, 1250023)
-    '''Type: default_enums.ScanAdvancedOutput
+    '''Type: enums.ScanAdvancedOutput
 
     This property specifies the method you want to use to notify another  instrument that all signals going through the switch device have settled  following the processing of one entry in the scan list.
     '''
@@ -436,7 +436,7 @@ class _SessionBase(object):
     Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
     '''
     scan_list = _attributes.AttributeViString(1250020)
-    '''Type: default_str
+    '''Type: str
 
     This property contains a scan list, which is a string that specifies  channel connections and trigger conditions.  The initiate  method makes or breaks connections and waits for triggers according to  the instructions in the scan list.
     The scan list is comprised of channel names that you separate with  special characters.  These special characters determine the operations the  scanner performs on the channels when it executes this scan list.
@@ -451,7 +451,7 @@ class _SessionBase(object):
     Example:  'CH1->CH2;CH3->CH4' tells the switch to make the path from channel CH1  to channel CH2, wait for a trigger, and then make the path from CH3 to  CH4.
     '''
     scan_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanMode, 1250021)
-    '''Type: default_enums.ScanMode
+    '''Type: enums.ScanMode
 
     This property specifies what happens to existing connections that  conflict with the connections you make in a scan list.  For example, if  CH1 is already connected to CH2 and the scan list instructs the switch  device to connect CH1 to CH3, this property specifies what happens to the  connection between CH1 and CH2.
     If the value of this property is ScanMode.NONE, the switch device  takes no action on existing paths.  If the value is  ScanMode.BREAK_BEFORE_MAKE, the switch device breaks conflicting paths  before making new ones.  If the value is ScanMode.BREAK_AFTER_MAKE,  the switch device breaks conflicting paths after making new ones.
@@ -461,7 +461,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     serial_number = _attributes.AttributeViString(1150015)
-    '''Type: default_str
+    '''Type: str
 
     This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
@@ -483,48 +483,48 @@ class _SessionBase(object):
         var = session.channels[0,1].settling_time
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: default_bool
+    '''Type: bool
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
     The default value is False.   Use the init_with_options  method to override this value.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains a brief description of the specific  driver.
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains additional version information about this  instrument driver.
     '''
     specific_driver_vendor = _attributes.AttributeViString(1050513)
-    '''Type: default_str
+    '''Type: str
 
     A string that contains the name of the vendor that supplies this driver.
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: default_str
+    '''Type: str
 
     Contains a comma-separated list of supported instrument models.
     '''
     temperature = _attributes.AttributeViReal64(1150019)
-    '''Type: default_float
+    '''Type: float
 
     This property returns the temperature as read by the Switch module.     The units are degrees Celsius.
     '''
     trigger_input = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerInput, 1250022)
-    '''Type: default_enums.TriggerInput
+    '''Type: enums.TriggerInput
 
     This property specifies the source of the trigger for which the switch  device can wait when processing a scan list.  The switch device waits for  a trigger when it encounters a semi-colon in a scan list.  When the trigger  occurs, the switch device advances to the next entry in the scan list.
     '''
     trigger_input_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerInputPolarity, 1150010)
-    '''Type: default_enums.TriggerInputPolarity
+    '''Type: enums.TriggerInputPolarity
 
     Determines the behavior of the trigger Input.
     '''
     wire_mode = _attributes.AttributeViInt32(1250017)
-    '''Type: default_int
+    '''Type: int
 
     This property returns the wire mode of the switch device.
     This property affects the values of the num_of_rows and  num_of_columns properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
