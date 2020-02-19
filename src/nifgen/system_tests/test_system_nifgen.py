@@ -464,14 +464,7 @@ def test_import_export_buffer(session):
     buffer = session.export_attribute_configuration_buffer()
     session.arb_gain = test_value_2
     assert session.arb_gain == test_value_2
-    try:
-        session.import_attribute_configuration_buffer([x for x in buffer])
-    except nifgen.errors.DriverError as e:
-        if e.code == -1074100298:
-            print('[DEBUG] bad: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
-        raise
-    else:
-        print('[DEBUG] good: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
+    session.import_attribute_configuration_buffer([x for x in buffer])
     assert session.arb_gain == test_value_1
 
 
