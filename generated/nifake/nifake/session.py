@@ -32,6 +32,8 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         import numpy
         return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
+        allowed_library_types = [_visatype.c_int8, _visatype.c_uint8]
+        assert library_type in allowed_library_types, 'Library type must be one of {0}: Actual {1}'.format(allowed_library_types, library_type)
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
         assert library_type is not None, 'library_type is required for list'
@@ -1292,7 +1294,7 @@ class Session(_SessionBase):
         Import configuration buffer.
 
         Args:
-            configuration (list of int):
+            configuration (list of bytes):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
