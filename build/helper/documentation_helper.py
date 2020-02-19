@@ -483,16 +483,19 @@ def format_type_for_rst_documentation(param, numpy, config):
     elif param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
     else:
-        p_type = param['type_in_documentation']
+        p_type = param['type_in_documentation'].replace('default_', '')
 
-    if param['is_string'] is True:
-        p_type = 'str'
-    elif param['is_buffer'] is True and numpy is True:
-        p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
-    elif param['use_list'] is True:
-        p_type = 'list of ' + p_type
-    elif param['use_array'] is True:
-        p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+    # If 'type_in_documentation' does not start with 'default_', we know that it was
+    # explicitly set in metadata and we do not over write it.
+    if param['type_in_documentation'].startswith('default_') or numpy:
+        if param['is_string'] is True:
+            p_type = 'str'
+        elif param['is_buffer'] is True and numpy is True:
+            p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+        elif param['use_list'] is True:
+            p_type = 'list of ' + p_type
+        elif param['use_array'] is True:
+            p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
 
@@ -557,18 +560,21 @@ def _format_type_for_docstring(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
     else:
-        p_type = param['type_in_documentation']
+        p_type = param['type_in_documentation'].replace('default_', '')
 
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
-    if param['is_string'] is True:
-        p_type = 'str'
-    elif param['is_buffer'] is True and numpy is True:
-        p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
-    elif param['use_list'] is True:
-        p_type = 'list of ' + p_type
-    elif param['use_array'] is True:
-        p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+    # If 'type_in_documentation' does not start with 'default_', we know that it was
+    # explicitly set in metadata and we do not over write it.
+    if param['type_in_documentation'].startswith('default_') or numpy:
+        if param['is_string'] is True:
+            p_type = 'str'
+        elif param['is_buffer'] is True and numpy is True:
+            p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+        elif param['use_list'] is True:
+            p_type = 'list of ' + p_type
+        elif param['use_array'] is True:
+            p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
 
