@@ -2,9 +2,6 @@ group: travis_latest
 language: python
 matrix:
     include:
-      # We put pypy at the beginning because for some reason the build takes much longer, this starts it earlier 
-      # so multiple others can be running while these continue to run.
-      - python: pypy3
       # We run Python 3.8 based tests towards the start. This is where additional tests are run so we give it more time
       - python: 3.8
         dist: xenial
