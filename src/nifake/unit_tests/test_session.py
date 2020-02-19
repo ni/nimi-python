@@ -1449,6 +1449,7 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             returned_timedeltas = session.return_list_of_timedeltas(len(expected_timedeltas))
             assert len(returned_timedeltas) == len(expected_timedeltas)
+            assert returned_timedeltas == expected_timedeltas
             self.patched_library.niFake_ReturnListOfTimedeltas.assert_called_once_with(
                 _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
                 _matchers.ViInt32Matcher(len(time_values)),
