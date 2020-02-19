@@ -248,7 +248,7 @@ def _(value):
 
 
 def convert_import_buffer_to_array(value):  # noqa: F811
-    return [x for x in _convert_import_buffer_to_array(value)]
+    return _convert_import_buffer_to_array(value)
 
 
 # convert value to bytes

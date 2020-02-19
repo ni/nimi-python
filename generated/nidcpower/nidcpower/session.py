@@ -28,6 +28,8 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
         return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, bytes):
+        return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
         assert library_type is not None, 'library_type is required for list'
         return (library_type * len(value))(*value)
@@ -4931,7 +4933,7 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_import_buffer_to_array(configuration), library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_bytes(configuration), library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
