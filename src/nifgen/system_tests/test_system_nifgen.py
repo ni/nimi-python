@@ -464,7 +464,7 @@ def test_import_export_buffer(session):
     buffer = session.export_attribute_configuration_buffer()
     session.arb_gain = test_value_2
     assert session.arb_gain == test_value_2
-    session.import_attribute_configuration_buffer([x for x in buffer])
+    session.import_attribute_configuration_buffer(buffer)
     assert session.arb_gain == test_value_1
 
 

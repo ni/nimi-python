@@ -245,7 +245,7 @@ def test_import_export_buffer(single_channel_session):
     buffer = single_channel_session.export_attribute_configuration_buffer()
     single_channel_session.voltage_level = test_value_2
     assert single_channel_session.voltage_level == test_value_2
-    single_channel_session.import_attribute_configuration_buffer([x for x in buffer])
+    single_channel_session.import_attribute_configuration_buffer(buffer)
     assert single_channel_session.voltage_level == test_value_1
 
 
