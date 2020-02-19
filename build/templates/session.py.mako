@@ -164,7 +164,7 @@ helper.add_attribute_rep_cap_tip_docstring(attributes[attribute], config)
     ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
     %endif
 %   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
-    '''Type: ${attributes[attribute]['type_in_documentation'].replace('default_', '')}
+    '''Type: ${attributes[attribute]['type_in_documentation']}
 
     ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''

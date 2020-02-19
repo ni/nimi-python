@@ -48,7 +48,7 @@ class SessionReference(object):
     _is_frozen = False
 
     exported_sync_pulse_output_terminal = _attributes.AttributeViString(2)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination of the Sync Pulse. This property is most often  used when synchronizing a multichassis system.
     Values
@@ -62,7 +62,7 @@ class SessionReference(object):
     Default Value is empty string
     '''
     exported_tclk_output_terminal = _attributes.AttributeViString(9)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the destination of the device's TClk signal.
     Values
@@ -114,7 +114,7 @@ class SessionReference(object):
     For external triggers, the session that originally receives the trigger.  For None (no trigger configured) or software triggers, the session that  originally generates the trigger.
     '''
     sync_pulse_clock_source = _attributes.AttributeViString(10)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the Sync Pulse Clock source. This property is typically used to  synchronize PCI devices when you want to control RTSI 7 yourself. Make  sure that a 10 MHz clock is driven onto RTSI 7.
     Values
@@ -123,7 +123,7 @@ class SessionReference(object):
     Default Value -  'None' directs synchronize to create the necessary routes. For  PCI, one of the synchronized devices drives a 10 MHz clock on RTSI 7  unless that line is already being driven.
     '''
     sync_pulse_sender_sync_pulse_source = _attributes.AttributeViString(13)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the external sync pulse source for the Sync Pulse Sender.  You can use this source to synchronize  the Sync Pulse Sender with an external non-TClk source.
     Values
@@ -137,7 +137,7 @@ class SessionReference(object):
     Default Value is empty string
     '''
     sync_pulse_source = _attributes.AttributeViString(1)
-    '''Type: default_str
+    '''Type: str
 
     Specifies the Sync Pulse source. This property is most often used when  synchronizing a multichassis system.
     Values
@@ -151,7 +151,7 @@ class SessionReference(object):
     Default Value - Empty string. This default value directs  synchronize to set this property when all the synchronized devices  are in one PXI chassis. To synchronize a multichassis system, you must set  this property before calling synchronize.
     '''
     tclk_actual_period = _attributes.AttributeViReal64(8)
-    '''Type: default_float
+    '''Type: float
 
     Indicates the computed TClk period that will be used during the acquisition.
     '''

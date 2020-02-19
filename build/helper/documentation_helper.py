@@ -483,11 +483,11 @@ def format_type_for_rst_documentation(param, numpy, config):
     elif param['enum'] is not None:
         p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
     else:
-        p_type = param['type_in_documentation'].replace('default_', '')
+        p_type = param['type_in_documentation']
 
     # If 'type_in_documentation' does not start with 'default_', we know that it was
     # explicitly set in metadata and we do not over write it.
-    if param['type_in_documentation'].startswith('default_') or numpy:
+    if param['default_type_in_documentation'] or numpy:
         if param['is_string'] is True:
             p_type = 'str'
         elif param['is_buffer'] is True and numpy is True:
@@ -560,13 +560,13 @@ def _format_type_for_docstring(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
     else:
-        p_type = param['type_in_documentation'].replace('default_', '')
+        p_type = param['type_in_documentation']
 
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
     # If 'type_in_documentation' does not start with 'default_', we know that it was
     # explicitly set in metadata and we do not over write it.
-    if param['type_in_documentation'].startswith('default_') or numpy:
+    if param['default_type_in_documentation'] or numpy:
         if param['is_string'] is True:
             p_type = 'str'
         elif param['is_buffer'] is True and numpy is True:
@@ -943,6 +943,7 @@ config = {
                     'python_name': 'vi',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'default_type_in_documentation': True,
                     'ctypes_variable_name': 'vi_ctype',
                     'ctypes_type': 'ViSession',
                     'ctypes_type_library_call': 'ViSession',
@@ -980,6 +981,7 @@ wanted to choose.''',
                     'python_name': 'turtle_type',
                     'python_type': 'Turtle',
                     'type_in_documentation': 'Turtle',
+                    'default_type_in_documentation': True,
                     'ctypes_variable_name': 'turtle_type_ctype',
                     'ctypes_type': 'ViInt32',
                     'ctypes_type_library_call': 'ViInt32',
@@ -1009,6 +1011,7 @@ wanted to choose.''',
                     'python_name': 'turtle_id',
                     'python_type': 'float',
                     'type_in_documentation': 'float',
+                    'default_type_in_documentation': True,
                     'ctypes_variable_name': 'turtleId_ctype',
                     'ctypes_type': 'ViReal64',
                     'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
@@ -1070,6 +1073,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'vi',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'default_type_in_documentation': True,
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViSession',
                     'use_in_python_api': True,
@@ -1095,6 +1099,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'number_of_samples',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'default_type_in_documentation': True,
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViInt32',
                     'use_in_python_api': True,
@@ -1122,6 +1127,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'waveform_data',
                     'python_type': 'float',
                     'type_in_documentation': 'float',
+                    'default_type_in_documentation': True,
                     'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                     'type': 'ViReal64',
                     'use_in_python_api': True,
@@ -1147,6 +1153,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'actual_number_of_samples',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'default_type_in_documentation': True,
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViInt32',
                     'use_in_python_api': True,

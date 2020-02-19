@@ -129,7 +129,7 @@ ${helper.get_rst_header_snippet(attributes[attr]['python_name'], '-')}
 a = attributes[attr]
 table_contents = [
          ('Characteristic', 'Value'),
-         ('Datatype', a['type_in_documentation'].replace('default_', '')),
+         ('Datatype', a['type_in_documentation']),
          ('Permissions', a['access']),
          ('Channel Based', 'Yes' if a['channel_based'] else 'No'),
          ('Resettable', 'Yes' if a['resettable'] else 'No'),

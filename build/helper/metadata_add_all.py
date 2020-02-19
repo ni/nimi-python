@@ -74,11 +74,10 @@ def _add_python_type(item, config):
             item['python_type'] = 'enums.' + item['enum']
 
     # If 'type_in_documentation' isn't in the item, use 'python_type'
+    item['default_type_in_documentation'] = False
     if 'type_in_documentation' not in item:
-        # This is kinda hacky, but we need to know later if the 'type_in_documentation'
-        # was explicitly set, or we got this default. Adding 'default_' to the beginning
-        # is how we will check later, and remove it if needed
-        item['type_in_documentation'] = 'default_' + item['python_type']
+        item['type_in_documentation'] = item['python_type']
+        item['default_type_in_documentation'] = True
 
     return item
 
@@ -813,7 +812,8 @@ functions_expected = {
                 'enum': None,
                 'numpy': False,
                 'python_type': 'int',
-                'type_in_documentation': 'default_int',
+                'type_in_documentation': 'int',
+                'default_type_in_documentation': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -845,7 +845,8 @@ functions_expected = {
                 'enum': None,
                 'numpy': False,
                 'python_type': 'str',
-                'type_in_documentation': 'default_str',
+                'type_in_documentation': 'str',
+                'default_type_in_documentation': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -873,7 +874,8 @@ functions_expected = {
                 'enum': None,
                 'numpy': False,
                 'python_type': 'int',
-                'type_in_documentation': 'default_int',
+                'type_in_documentation': 'int',
+                'default_type_in_documentation': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -904,7 +906,8 @@ functions_expected = {
                 'enum': None,
                 'numpy': False,
                 'python_type': 'int',
-                'type_in_documentation': 'default_int',
+                'type_in_documentation': 'int',
+                'default_type_in_documentation': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -935,7 +938,8 @@ functions_expected = {
                 'enum': None,
                 'numpy': False,
                 'python_type': 'int',
-                'type_in_documentation': 'default_int',
+                'type_in_documentation': 'int',
+                'default_type_in_documentation': True,
                 'use_array': False,
                 'is_buffer': True,
                 'use_list': True,
@@ -976,7 +980,8 @@ functions_expected = {
                 },
                 'python_name': 'vi',
                 'python_type': 'int',
-                'type_in_documentation': 'default_int',
+                'type_in_documentation': 'int',
+                'default_type_in_documentation': True,
                 'ctypes_variable_name': 'vi_ctype',
                 'ctypes_type': 'ViSession',
                 'ctypes_type_library_call': 'ViSession',
@@ -1007,7 +1012,8 @@ functions_expected = {
                 },
                 'python_name': 'status',
                 'python_type': 'str',
-                'type_in_documentation': 'default_str',
+                'type_in_documentation': 'str',
+                'default_type_in_documentation': True,
                 'ctypes_variable_name': 'status_ctype',
                 'ctypes_type': 'ViString',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
@@ -1040,7 +1046,8 @@ functions_expected = {
                 'enum': None,
                 'numpy': False,
                 'python_type': 'int',
-                'type_in_documentation': 'default_int',
+                'type_in_documentation': 'int',
+                'default_type_in_documentation': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -1071,7 +1078,8 @@ functions_expected = {
                 'enum': None,
                 'numpy': False,
                 'python_type': 'int',
-                'type_in_documentation': 'default_int',
+                'type_in_documentation': 'int',
+                'default_type_in_documentation': True,
                 'use_array': False,
                 'is_buffer': True,
                 'use_list': True,
@@ -1132,7 +1140,8 @@ attributes_expected = {
         'resettable': False,
         'type': 'ViBoolean',
         'python_type': 'bool',
-        'type_in_documentation': 'default_bool',
+        'type_in_documentation': 'bool',
+        'default_type_in_documentation': True,
         'attribute_class': 'AttributeViBoolean',
     },
 }
