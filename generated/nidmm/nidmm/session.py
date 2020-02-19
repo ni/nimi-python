@@ -91,24 +91,24 @@ class _SessionBase(object):
     _is_frozen = False
 
     ac_max_freq = _attributes.AttributeViReal64(1250007)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the maximum frequency component of the input signal for AC  measurements. This property is used only for error checking and verifies  that the value of this parameter is less than the maximum frequency  of the device. This property affects the DMM only when you set the   method property to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
     ac_min_freq = _attributes.AttributeViReal64(1250006)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the minimum frequency component of the input signal for AC  measurements. This property affects the DMM only when you set the  method property to AC measurements.
     The valid range is 1 Hz-300 kHz for the NI 4070/4071/4072, 10 Hz-100 kHz  for the NI 4065, and 20 Hz-25 kHz for the NI 4050 and NI 4060.
     '''
     adc_calibration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ADCCalibration, 1150022)
-    '''Type: enums.ADCCalibration
+    '''Type: default_enums.ADCCalibration
 
     For the NI 4070/4071/4072 only, specifies the ADC calibration mode.
     '''
     aperture_time = _attributes.AttributeViReal64(1250321)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the measurement aperture time for the current configuration.  Aperture time is specified in units set by aperture_time_units. To  override the default aperture, set this property to the desired  aperture time after calling ConfigureMeasurement. To return to the  default, set this property to NIDMM_VAL_APERTURE_TIME_AUTO (-1).
     On the NI 4070/4071/4072, the minimum aperture time is 8.89 usec,  and the maximum aperture time is 149 sec. Any number of powerline cycles (PLCs)  within the minimum and maximum ranges is allowed on the NI 4070/4071/4072.
@@ -122,24 +122,24 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1250322)
-    '''Type: enums.ApertureTimeUnits
+    '''Type: default_enums.ApertureTimeUnits
 
     Specifies the units of aperture time for the current configuration.
     The NI 4060 does not support an aperture time set in seconds.
     '''
     auto_range_value = _attributes.AttributeViReal64(1250331)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the value of the range. If auto ranging, shows the actual value of  the active range. The value of this property is set during a read operation.
     '''
     auto_zero = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AutoZero, 1250332)
-    '''Type: enums.AutoZero
+    '''Type: default_enums.AutoZero
 
     Specifies the AutoZero mode.
     The NI 4050 is not supported.
     '''
     buffer_size = _attributes.AttributeViInt32(1150037)
-    '''Type: int
+    '''Type: default_int
 
     Size in samples of the internal data buffer. Maximum is 134,217,727 (OX7FFFFFF) samples. When  set to NIDMM_VAL_BUFFER_SIZE_AUTO (-1), NI-DMM chooses the buffer size.
 
@@ -147,146 +147,146 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     cable_comp_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CableCompensationType, 1150045)
-    '''Type: enums.CableCompensationType
+    '''Type: default_enums.CableCompensationType
 
     For the NI 4072 only,  the type of cable compensation that is applied to the current capacitance  or inductance measurement for the current range.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
-    '''Type: int
+    '''Type: default_int
 
     Indicates the number of channels that the specific instrument driver  supports. For each property for which the IVI_VAL_MULTI_CHANNEL flag  property is set, the IVI engine maintains a separate cache value for each  channel.
     '''
     current_source = _attributes.AttributeViReal64(1150025)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the current source provided during diode measurements.
     The NI 4050 and NI 4060 are not supported.
     '''
     dc_bias = _attributes.AttributeViInt32(1150053)
-    '''Type: int
+    '''Type: default_int
 
     For the NI 4072 only, controls the available DC bias for capacitance measurements.
     '''
     dc_noise_rejection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DCNoiseRejection, 1150026)
-    '''Type: enums.DCNoiseRejection
+    '''Type: default_enums.DCNoiseRejection
 
     Specifies the DC noise rejection mode.
     The NI 4050 and NI 4060 are not supported.
     '''
     driver_setup = _attributes.AttributeViString(1050007)
-    '''Type: str
+    '''Type: default_str
 
     This property indicates the Driver Setup string that the user specified when  initializing the driver.
     Some cases exist where the end-user must specify instrument driver options  at initialization time.  An example of this is specifying a particular  instrument model from among a family of instruments that the driver supports.   This is useful when using simulation.  The end-user can specify  driver-specific options through the DriverSetup keyword in the optionsString  parameter to the niDMM Init With Options.vi.
     If the user does not specify a Driver Setup string, this property returns  an empty string.
     '''
     freq_voltage_auto_range = _attributes.AttributeViReal64(1150044)
-    '''Type: float
+    '''Type: default_float
 
     For the NI 4070/4071/4072 only, specifies the value of the frequency voltage range.  If Auto Ranging, shows the actual value of the active frequency voltage range.  If not Auto Ranging, the value of this property is the same as that of  freq_voltage_range.
     '''
     freq_voltage_range = _attributes.AttributeViReal64(1250101)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the maximum amplitude of the input signal for frequency  measurements.
     '''
     function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Function, 1250001)
-    '''Type: enums.Function
+    '''Type: default_enums.Function
 
     Specifies the measurement method.
     Refer to the method topic in  the NI Digital Multimeters Help for device-specific information.
     If you are setting this property directly, you must also set the operation_mode property,  which controls whether the DMM takes standard single or multipoint measurements, or acquires a waveform.  If you are programming properties directly, you must set the operation_mode property before  setting other configuration properties. If the operation_mode property is set to OperationMode.WAVEFORM,  the only valid method types are Method.WAVEFORM_VOLTAGE and Method.WAVEFORM_CURRENT. Set the  operation_mode property to OperationMode.IVIDMM to set all other method values.
     '''
     input_resistance = _attributes.AttributeViReal64(1150029)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the input resistance of the instrument.
     The NI 4050 and NI 4060 are not supported.
     '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the instrument firmware revision number.
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the manufacturer of the instrument.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the instrument model.
     '''
     instrument_product_id = _attributes.AttributeViInt32(1150061)
-    '''Type: int
+    '''Type: default_int
 
     The PCI product ID.
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the resource descriptor of the instrument.
     '''
     lc_calculation_model = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCCalculationModel, 1150052)
-    '''Type: enums.LCCalculationModel
+    '''Type: default_enums.LCCalculationModel
 
     For the NI 4072 only, specifies the type of algorithm that the measurement processing uses for  capacitance and inductance measurements.
     '''
     lc_number_meas_to_average = _attributes.AttributeViInt32(1150055)
-    '''Type: int
+    '''Type: default_int
 
     For the NI 4072 only, specifies the number of LC measurements that are averaged to produce one reading.
     '''
     logical_name = _attributes.AttributeViString(1050305)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the logical name of the instrument.
     '''
     meas_complete_dest = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MeasurementCompleteDest, 1250305)
-    '''Type: enums.MeasurementCompleteDest
+    '''Type: default_enums.MeasurementCompleteDest
 
     Specifies the destination of the measurement complete (MC) signal.
     The NI 4050 is not supported.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
     number_of_averages = _attributes.AttributeViInt32(1150032)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the number of averages to perform in a measurement. For the NI 4070/4071/4072,  applies only when the aperture time is not set to AUTO and Auto Zero is ON.  The default is 1.
     The NI 4050 and NI 4060 are not supported.
     '''
     offset_comp_ohms = _attributes.AttributeViInt32(1150023)
-    '''Type: int
+    '''Type: default_int
 
     For the NI 4070/4071/4072 only, enables or disables offset compensated ohms.
     '''
     open_cable_comp_conductance = _attributes.AttributeViReal64(1150049)
-    '''Type: float
+    '''Type: default_float
 
     For the NI 4072 only, specifies the active part (conductance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     open_cable_comp_susceptance = _attributes.AttributeViReal64(1150048)
-    '''Type: float
+    '''Type: default_float
 
     For the NI 4072 only, specifies the reactive part (susceptance) of the open cable compensation.  The valid range is any real number greater than 0. The default value (-1.0)  indicates that compensation has not taken place.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     operation_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OperationMode, 1150014)
-    '''Type: enums.OperationMode
+    '''Type: default_enums.OperationMode
 
     Specifies how the NI 4065 and NI 4070/4071/4072 acquire data. When you call  configure_measurement_digits, NI-DMM sets this property to OperationMode.IVIDMM.  When you call configure_waveform_acquisition, NI-DMM sets this property to OperationMode.WAVEFORM.  If you are programming properties directly, you must set this property before  setting other configuration properties.
     '''
     powerline_freq = _attributes.AttributeViReal64(1250333)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the powerline frequency. The NI 4050 and NI 4060 use this value to select an aperture time to reject  powerline noise by selecting the appropriate internal sample clock and filter. The NI 4065 and  NI 4070/4071/4072 use this value to select a timebase for setting the aperture_time  property in powerline cycles (PLCs).
     After configuring powerline frequency, set the aperture_time_units property to PLCs.  When setting the aperture_time property, select the number of PLCs for the powerline frequency.  For example, if powerline frequency = 50 Hz (or 20ms) and aperture time in PLCs = 5, then aperture time in  Seconds = 20ms * 5 PLCs = 100 ms. Similarly, if powerline frequency = 60 Hz (or 16.667 ms) and aperture time  in PLCs = 6, then aperture time in Seconds = 16.667 ms * 6 PLCs = 100 ms.
     '''
     range = _attributes.AttributeViReal64(1250002)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the measurement range. Use positive values to represent the  absolute value of the maximum expected measurement. The value is in units  appropriate for the current value of the method property. For  example, if method is set to NIDMM_VAL_VOLTS, the units are  volts.
     The NI 4050 and NI 4060 only support Auto Range when the trigger and  sample trigger is set to IMMEDIATE.
@@ -301,19 +301,19 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     resolution_absolute = _attributes.AttributeViReal64(1250008)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the measurement resolution in absolute units. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
     NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.
     '''
     resolution_digits = _attributes.AttributeViReal64(1250003)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the measurement resolution in digits. Setting this  property to higher values increases the measurement accuracy. Setting this  property to lower values increases the measurement speed.
     NI-DMM ignores this property for capacitance and inductance measurements on the NI 4072.  To achieve better resolution for such measurements, use the lc_number_meas_to_average property.
     '''
     sample_count = _attributes.AttributeViInt32(1250301)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
     '''
@@ -327,13 +327,13 @@ class _SessionBase(object):
     The NI 4050 is not supported.
     '''
     sample_trigger = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SampleTrigger, 1250302)
-    '''Type: enums.SampleTrigger
+    '''Type: default_enums.SampleTrigger
 
     Specifies the sample trigger source.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
     serial_number = _attributes.AttributeViString(1150054)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the serial number of the instrument. This property corresponds  to the serial number label that is attached to most products.
     '''
@@ -347,87 +347,87 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     short_cable_comp_reactance = _attributes.AttributeViReal64(1150046)
-    '''Type: float
+    '''Type: default_float
 
     For the NI 4072 only, represents the reactive part (reactance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     short_cable_comp_resistance = _attributes.AttributeViReal64(1150047)
-    '''Type: float
+    '''Type: default_float
 
     For the NI 4072 only, represents the active part (resistance) of the short cable compensation.  The valid range is any real number greater than 0. The default value (-1)  indicates that compensation has not taken place.
     Changing the method or the range through this property or through configure_measurement_digits  resets the value of this property to the default value.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: bool
+    '''Type: default_bool
 
     Specifies whether or not to simulate instrument driver I/O operations. If  simulation is enabled, instrument driver methods perform range checking and  call IVI Get and Set methods, but they do not perform  instrument I/O. For output parameters that represent instrument data, the  instrument driver methods return calculated values.
     The default value is False (0). Use the __init__ method to  override this setting.
     Simulate can only be set within the InitWithOptions method.  The property value cannot be changed outside of the method.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
-    '''Type: str
+    '''Type: default_str
 
     A string containing a description of the specific driver.
     '''
     specific_driver_major_version = _attributes.AttributeViInt32(1050503)
-    '''Type: int
+    '''Type: default_int
 
     Returns the major version number of this instrument driver.
     '''
     specific_driver_minor_version = _attributes.AttributeViInt32(1050504)
-    '''Type: int
+    '''Type: default_int
 
     The minor version number of this instrument driver.
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains additional version information about this specific  instrument driver.
     '''
     specific_driver_vendor = _attributes.AttributeViString(1050513)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the vendor of the specific driver.
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the instrument models supported by the specific driver.
     '''
     temp_rtd_a = _attributes.AttributeViReal64(1150121)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the Callendar-Van Dusen A coefficient for RTD scaling when the RTD Type property   is set to Custom. The default value is 3.9083e-3 (Pt3851).
     '''
     temp_rtd_b = _attributes.AttributeViReal64(1150122)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the Callendar-Van Dusen B coefficient for RTD scaling when the RTD Type property  is set to Custom. The default value is -5.775e-7(Pt3851).
     '''
     temp_rtd_c = _attributes.AttributeViReal64(1150123)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the Callendar-Van Dusen C coefficient for RTD scaling when the RTD Type property  is set to Custom. The default value is -4.183e-12(Pt3851).
     '''
     temp_rtd_res = _attributes.AttributeViReal64(1250242)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the RTD resistance at 0 degrees Celsius. This applies to all supported RTDs,  including custom RTDs. The default value is 100 (?).
     '''
     temp_rtd_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RTDType, 1150120)
-    '''Type: enums.RTDType
+    '''Type: default_enums.RTDType
 
     Specifies the type of RTD used to measure temperature. The default value is RTDType.PT3851.
     Refer to the temp_rtd_type topic in the NI Digital Multimeters Help for additional information about defined values.
     '''
     temp_tc_fixed_ref_junc = _attributes.AttributeViReal64(1250233)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the reference junction temperature when a fixed reference junction is used to take  a thermocouple measurement. The default value is 25.0 (°C).
     '''
     temp_tc_ref_junc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleReferenceJunctionType, 1250232)
-    '''Type: enums.ThermocoupleReferenceJunctionType
+    '''Type: default_enums.ThermocoupleReferenceJunctionType
 
     Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, NIDMM_VAL_TEMP_REF_JUNC_FIXED, is fixed.
 
@@ -435,33 +435,33 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     temp_tc_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermocoupleType, 1250231)
-    '''Type: enums.ThermocoupleType
+    '''Type: default_enums.ThermocoupleType
 
     Specifies the type of thermocouple used to measure the temperature. The default value is ThermocoupleType.J.
     '''
     temp_thermistor_a = _attributes.AttributeViReal64(1150125)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the Steinhart-Hart A coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 0.0010295 (44006).
     '''
     temp_thermistor_b = _attributes.AttributeViReal64(1150126)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the Steinhart-Hart B coefficient for thermistor scaling when the Thermistor Type  proerty is set to Custom. The default value is 0.0002391 (44006).
     '''
     temp_thermistor_c = _attributes.AttributeViReal64(1150127)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the Steinhart-Hart C coefficient for thermistor scaling when the Thermistor Type  property is set to Custom. The default value is 1.568e-7 (44006).
     '''
     temp_thermistor_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ThermistorType, 1150124)
-    '''Type: enums.ThermistorType
+    '''Type: default_enums.ThermistorType
 
     Specifies the type of thermistor used to measure the temperature. The default value is  ThermistorType.THERMISTOR_44006.
     Refer to the temp_thermistor_type topic in the NI Digital Multimeters Help for additional information about defined values.
     '''
     temp_transducer_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TransducerType, 1250201)
-    '''Type: enums.TransducerType
+    '''Type: default_enums.TransducerType
 
     Specifies the type of device used to measure the temperature. The default value is NIDMM_VAL_4_THERMOCOUPLE.
 
@@ -469,7 +469,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     trigger_count = _attributes.AttributeViInt32(1250304)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the number of triggers the DMM receives before returning to the  Idle state.
     This property can be set to any positive ViInt32 value for the NI 4065 and NI 4070/4071/4072.
@@ -491,24 +491,24 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     trigger_source = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSource, 1250004)
-    '''Type: enums.TriggerSource
+    '''Type: default_enums.TriggerSource
 
     Specifies the trigger source. When _initiate is called, the DMM waits  for the trigger specified with this property. After it receives the trigger,  the DMM waits the length of time specified with the trigger_delay  property. The DMM then takes a measurement.
     This property is not supported on the NI 4050.
     To determine which values are supported by each device, refer to the LabWindows/CVI Trigger Routing section in  the NI Digital Multimeters Help.
     '''
     waveform_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WaveformCoupling, 1150027)
-    '''Type: enums.WaveformCoupling
+    '''Type: default_enums.WaveformCoupling
 
     For the NI 4070/4071/4072 only, specifies the coupling during a waveform acquisition.
     '''
     waveform_points = _attributes.AttributeViInt32(1150019)
-    '''Type: int
+    '''Type: default_int
 
     For the NI 4070/4071/4072 only, specifies the number of points to acquire in a waveform acquisition.
     '''
     waveform_rate = _attributes.AttributeViReal64(1150018)
-    '''Type: float
+    '''Type: default_float
 
     For the NI 4070/4071/4072 only, specifies the rate of the waveform acquisition in Samples per second (S/s).  The valid Range is 10.0-1,800,000 S/s. Values are coerced to the  closest integer divisor of 1,800,000. The default value is 1,800,000.
     '''
@@ -1125,7 +1125,7 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -2338,7 +2338,7 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
-            option_string (str): | Sets the initial value of certain properties for the session. The
+            option_string (dict): | Sets the initial value of certain properties for the session. The
                   following table specifies the property name, property constant, and
                   default value for each property that you can use in this parameter:
 

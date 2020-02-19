@@ -141,12 +141,12 @@ class _SessionBase(object):
     Specifies the length of time from the trigger event to the first point in the waveform record in seconds.  If the value is positive, the first point in the waveform record occurs after the trigger event (same as specifying trigger_delay_time).  If the value is negative, the first point in the waveform record occurs before the trigger event (same as specifying horz_record_ref_position).
     '''
     acquisition_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AcquisitionType, 1250101)
-    '''Type: enums.AcquisitionType
+    '''Type: default_enums.AcquisitionType
 
     Specifies how the digitizer acquires data and fills the waveform record.
     '''
     acq_arm_source = _attributes.AttributeViString(1150053)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the source the digitizer monitors for a start (acquisition arm) trigger.  When the start trigger is received, the digitizer begins acquiring pretrigger samples.
     Valid Values:
@@ -167,27 +167,27 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     adv_trig_src = _attributes.AttributeViString(1150094)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the source the digitizer monitors for an advance trigger.  When the advance trigger is received, the digitizer begins acquiring pretrigger samples.
     '''
     allow_more_records_than_memory = _attributes.AttributeViBoolean(1150068)
-    '''Type: bool
+    '''Type: default_bool
 
     Indicates whether more records can be configured with configure_horizontal_timing than fit in the onboard memory. If this property is set to True, it is necessary to fetch records while the acquisition is in progress.  Eventually, some of the records will be overwritten.  An error is returned from the fetch method if you attempt to fetch a record that has been overwritten.
     '''
     arm_ref_trig_src = _attributes.AttributeViString(1150095)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the source the digitizer monitors for an arm reference trigger.  When the arm reference trigger is received, the digitizer begins looking for a reference (stop) trigger from the user-configured trigger source.
     '''
     backlog = _attributes.AttributeViReal64(1150084)
-    '''Type: float
+    '''Type: default_float
 
     Returns the number of samples (points_done) that have been acquired but not fetched for the record specified by fetch_record_number.
     '''
     bandpass_filter_enabled = _attributes.AttributeViBoolean(1150318)
-    '''Type: bool
+    '''Type: default_bool
 
     Enables the bandpass filter on the specificed channel.  The default value is FALSE.
 
@@ -201,7 +201,7 @@ class _SessionBase(object):
         var = session.channels[0,1].bandpass_filter_enabled
     '''
     binary_sample_width = _attributes.AttributeViInt32(1150005)
-    '''Type: int
+    '''Type: default_int
 
     Indicates the bit width of the binary data in the acquired waveform.  Useful for determining which Binary Fetch method to use. Compare to resolution.
     To configure the device to store samples with a lower resolution that the native, set this property to the desired binary width.
@@ -209,7 +209,7 @@ class _SessionBase(object):
     Valid Values: 8, 16, 32
     '''
     cable_sense_mode = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.CableSenseMode, 1150138)
-    '''Type: enums.CableSenseMode
+    '''Type: default_enums.CableSenseMode
 
     Specifies whether and how the oscilloscope is configured to generate a CableSense signal on the specified channels when the CableSenseSignalStart method is called.
 
@@ -238,12 +238,12 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     cable_sense_signal_enable = _attributes.AttributeViBoolean(1150139)
-    '''Type: bool
+    '''Type: default_bool
 
     TBD
     '''
     cable_sense_voltage = _attributes.AttributeViReal64(1150137)
-    '''Type: float
+    '''Type: default_float
 
     Returns the voltage of the CableSense signal that is written to the EEPROM of the oscilloscope during factory calibration.
 
@@ -262,13 +262,13 @@ class _SessionBase(object):
     +-----------------------+
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
-    '''Type: int
+    '''Type: default_int
 
     Indicates the number of channels that the specific instrument driver supports.
     For channel-based properties, the IVI engine maintains a separate cache value for each channel.
     '''
     channel_enabled = _attributes.AttributeViBoolean(1250005)
-    '''Type: bool
+    '''Type: default_bool
 
     Specifies whether the digitizer acquires a waveform for the channel.
     Valid Values:
@@ -285,7 +285,7 @@ class _SessionBase(object):
         var = session.channels[0,1].channel_enabled
     '''
     channel_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminalConfiguration, 1150107)
-    '''Type: enums.TerminalConfiguration
+    '''Type: default_enums.TerminalConfiguration
 
     Specifies the terminal configuration for the channel.
 
@@ -299,22 +299,22 @@ class _SessionBase(object):
         var = session.channels[0,1].channel_terminal_configuration
     '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150316)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the maximum number of samples to transfer at one time from the device to host memory. Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may also increase the amount of page-locked memory required from the system.
     '''
     data_transfer_maximum_bandwidth = _attributes.AttributeViReal64(1150321)
-    '''Type: float
+    '''Type: default_float
 
     This property specifies the maximum bandwidth that the device is allowed to consume.
     '''
     data_transfer_preferred_packet_size = _attributes.AttributeViInt32(1150322)
-    '''Type: int
+    '''Type: default_int
 
     This property specifies the size of (read request|memory write) data payload. Due to alignment of the data buffers, the hardware may not always generate a packet of this size.
     '''
     device_temperature = _attributes.AttributeViReal64(1150086)
-    '''Type: float
+    '''Type: default_float
 
     Returns the temperature of the device in degrees Celsius from the onboard sensor.
 
@@ -327,7 +327,7 @@ class _SessionBase(object):
         var = session.channels[0,1].device_temperature
     '''
     enabled_channels = _attributes.AttributeViString(1150140)
-    '''Type: str
+    '''Type: default_str
 
     Returns a comma-separated list of the channels enabled for the session in ascending order.
 
@@ -339,7 +339,7 @@ class _SessionBase(object):
     Refer to Channel String Syntax in the NI High-Speed Digitizers Help for more information on the effects of channel order in NI-SCOPE.
     '''
     enable_dc_restore = _attributes.AttributeViBoolean(1150093)
-    '''Type: bool
+    '''Type: default_bool
 
     Restores the video-triggered data retrieved by the digitizer to the video signal's zero reference point.
     Valid Values:
@@ -347,7 +347,7 @@ class _SessionBase(object):
     False - Disable DC restore
     '''
     enable_time_interleaved_sampling = _attributes.AttributeViBoolean(1150128)
-    '''Type: bool
+    '''Type: default_bool
 
     Specifies whether the digitizer acquires the waveform using multiple ADCs for the channel enabling a higher maximum real-time sampling rate.
     Valid Values:
@@ -364,13 +364,13 @@ class _SessionBase(object):
         var = session.channels[0,1].enable_time_interleaved_sampling
     '''
     end_of_acquisition_event_output_terminal = _attributes.AttributeViString(1150101)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination for the End of Acquisition Event.    When this event is asserted, the digitizer has completed sampling for all records.
     Consult your device documentation for a specific list of valid destinations.
     '''
     end_of_record_event_output_terminal = _attributes.AttributeViString(1150099)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination for the End of Record Event.    When this event is asserted, the digitizer has completed sampling for the current record.
     Consult your device documentation for a specific list of valid destinations.
@@ -387,7 +387,7 @@ class _SessionBase(object):
     **Supported Devices**: NI 5185/5186
     '''
     equalization_filter_enabled = _attributes.AttributeViBoolean(1150313)
-    '''Type: bool
+    '''Type: default_bool
 
     Enables the onboard signal processing FIR block. This block is connected directly to the input signal.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer. However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
@@ -401,7 +401,7 @@ class _SessionBase(object):
         var = session.channels[0,1].equalization_filter_enabled
     '''
     equalization_num_coefficients = _attributes.AttributeViInt32(1150312)
-    '''Type: int
+    '''Type: default_int
 
     Returns the number of coefficients that the FIR filter can accept.  This filter is designed to compensate the input signal for artifacts introduced to the signal outside of the digitizer.  However, since this is a generic FIR filter any coefficients are valid.  Coefficients should be between +1 and -1 in value.
 
@@ -414,55 +414,55 @@ class _SessionBase(object):
         var = session.channels[0,1].equalization_num_coefficients
     '''
     exported_advance_trigger_output_terminal = _attributes.AttributeViString(1150109)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination to export the advance trigger.  When the advance trigger is received, the digitizer begins acquiring samples for the Nth record.
     Consult your device documentation for a specific list of valid destinations.
     '''
     exported_ref_trigger_output_terminal = _attributes.AttributeViString(1150098)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination export for the reference (stop) trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150097)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination to export the Start trigger.  When the start trigger is received, the digitizer begins acquiring samples.
     Consult your device documentation for a specific list of valid destinations.
     '''
     _fetch_meas_num_samples = _attributes.AttributeViInt32(1150081)
-    '''Type: int
+    '''Type: default_int
 
     Number of samples to fetch when performing a measurement. Use -1 to fetch the actual record length.
     Default Value: -1
     '''
     _fetch_num_records = _attributes.AttributeViInt32(1150080)
-    '''Type: int
+    '''Type: default_int
 
     Number of records to fetch. Use -1 to fetch all configured records.
     Default Value: -1
     '''
     _fetch_offset = _attributes.AttributeViInt32(1150078)
-    '''Type: int
+    '''Type: default_int
 
     Offset in samples to start fetching data within each record. The offset is applied relative to fetch_relative_to.The offset can be positive or negative.
     Default Value: 0
     '''
     _fetch_record_number = _attributes.AttributeViInt32(1150079)
-    '''Type: int
+    '''Type: default_int
 
     Zero-based index of the first record to fetch.  Use NISCOPE_FETCH_NUM_RECORDS to set the number of records to fetch.
     Default Value: 0.
     '''
     _fetch_relative_to = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FetchRelativeTo, 1150077)
-    '''Type: enums.FetchRelativeTo
+    '''Type: default_enums.FetchRelativeTo
 
     Position to start fetching within one record.
     Default Value: FetchRelativeTo.PRETRIGGER
     '''
     flex_fir_antialias_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FlexFIRAntialiasFilterType, 1150271)
-    '''Type: enums.FlexFIRAntialiasFilterType
+    '''Type: default_enums.FlexFIRAntialiasFilterType
 
     The NI 5922 flexible-resolution digitizer uses an onboard FIR lowpass antialias filter.
     Use this property to select from several types of filters to achieve desired filtering characteristics.
@@ -477,31 +477,31 @@ class _SessionBase(object):
         var = session.channels[0,1].flex_fir_antialias_filter_type
     '''
     fpga_bitfile_path = _attributes.AttributeViString(1150375)
-    '''Type: str
+    '''Type: default_str
 
     Gets the absolute file path to the bitfile loaded on the FPGA.
 
     Note: Gets the absolute file path to the bitfile loaded on the FPGA.
     '''
     glitch_condition = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.GlitchCondition, 1250403)
-    '''Type: enums.GlitchCondition
+    '''Type: default_enums.GlitchCondition
 
     Specifies whether the oscilloscope triggers on pulses of duration less than or greater than the value specified by the glitch_width property.
     '''
     glitch_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.GlitchPolarity, 1250402)
-    '''Type: enums.GlitchPolarity
+    '''Type: default_enums.GlitchPolarity
 
     Specifies the polarity of pulses that trigger the oscilloscope for glitch triggering.
     '''
     glitch_width = _attributes.AttributeViReal64(1250401)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the glitch duration, in seconds.
 
     The oscilloscope triggers when it detects of pulse of duration either less than or greater than this value depending on the value of the glitch_condition property.
     '''
     high_pass_filter_frequency = _attributes.AttributeViReal64(1150377)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the frequency for the highpass filter in Hz. The device uses
     one of the valid values listed below. If an invalid value is specified,
@@ -521,35 +521,35 @@ class _SessionBase(object):
         var = session.channels[0,1].high_pass_filter_frequency
     '''
     horz_enforce_realtime = _attributes.AttributeViBoolean(1150004)
-    '''Type: bool
+    '''Type: default_bool
 
     Indicates whether the digitizer enforces real-time measurements or allows equivalent-time measurements.
     '''
     horz_min_num_pts = _attributes.AttributeViInt32(1250009)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the minimum number of points you require in the waveform record for each channel.  NI-SCOPE uses the value you specify to configure the record length that the digitizer uses for waveform acquisition. horz_record_length returns the actual record length.
     Valid Values: 1 - available onboard memory
     '''
     horz_num_records = _attributes.AttributeViInt32(1150001)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the number of records to acquire. Can be used for multi-record acquisition and single-record acquisitions. Setting this to 1 indicates a single-record acquisition.
     '''
     horz_record_length = _attributes.AttributeViInt32(1250008)
-    '''Type: int
+    '''Type: default_int
 
     Returns the actual number of points the digitizer acquires for each channel.  The value is equal to or greater than the minimum number of points you specify with horz_min_num_pts.
     Allocate a ViReal64 array of this size or greater to pass as the WaveformArray parameter of the Read and Fetch methods. This property is only valid after a call to the one of the Configure Horizontal methods.
     '''
     horz_record_ref_position = _attributes.AttributeViReal64(1250011)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the position of the Reference Event in the waveform record.  When the digitizer detects a trigger, it waits the length of time the trigger_delay_time property specifies. The event that occurs when the delay time elapses is the Reference Event. The Reference Event is relative to the start of the record and is a percentage of the record length. For example, the value 50.0 corresponds to the center of the waveform record and 0.0 corresponds to the first element in the waveform record.
     Valid Values: 0.0 - 100.0
     '''
     horz_sample_rate = _attributes.AttributeViReal64(1250010)
-    '''Type: float
+    '''Type: default_float
 
     Returns the effective sample rate using the current configuration. The units are samples per second.  This property is only valid after a call to the one of the Configure Horizontal methods.
     Units: Hertz (Samples / Second)
@@ -561,12 +561,12 @@ class _SessionBase(object):
     Units: Seconds
     '''
     input_clock_source = _attributes.AttributeViString(1150002)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the input source for the PLL reference clock (the 1 MHz to 20 MHz clock on the NI 5122, the 10 MHz clock for the NI 5112/5620/5621/5911) to which the digitizer will be phase-locked; for the NI 5102, this is the source of the board clock.
     '''
     input_impedance = _attributes.AttributeViReal64(1250103)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the input impedance for the channel in Ohms.
 
@@ -580,7 +580,7 @@ class _SessionBase(object):
         var = session.channels[0,1].input_impedance
     '''
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains the firmware revision information for the instrument you are currently using.
 
@@ -593,17 +593,17 @@ class _SessionBase(object):
         var = session.channels[0,1].instrument_firmware_revision
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains the name of the instrument manufacturer.
     '''
     instrument_model = _attributes.AttributeViString(1050512)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains the model number of the current instrument.
     '''
     interleaving_offset_correction_enabled = _attributes.AttributeViBoolean(1150376)
-    '''Type: bool
+    '''Type: default_bool
 
     Enables the interleaving offset correction on the specified channel. The
     default value is TRUE.
@@ -623,7 +623,7 @@ class _SessionBase(object):
         var = session.channels[0,1].interleaving_offset_correction_enabled
     '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
-    '''Type: str
+    '''Type: default_str
 
     Indicates the resource descriptor the driver uses to identify the physical device.  If you initialize the driver with a logical name, this property contains the resource descriptor that corresponds to the entry in the IVI Configuration utility.
     If you initialize the instrument driver with the resource descriptor, this property contains that value.You can pass a logical name to Init or __init__. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a virtual instrument section in the IVI Configuration file. The virtual instrument section specifies a physical device and initial user options.
@@ -632,7 +632,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     is_probe_comp_on = _attributes.AttributeViBoolean(1150066)
-    '''Type: bool
+    '''Type: default_bool
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -643,7 +643,7 @@ class _SessionBase(object):
         var = session.channels[0,1].is_probe_comp_on
     '''
     logical_name = _attributes.AttributeViString(1050305)
-    '''Type: str
+    '''Type: default_str
 
     A string containing the logical name you specified when opening the current IVI session.  You can pass a logical name to Init or __init__. The IVI Configuration utility must contain an entry for the logical name. The logical name entry refers to a virtual instrument section in the IVI Configuration file. The virtual instrument section specifies a physical device and initial user options.
 
@@ -651,12 +651,12 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     master_enable = _attributes.AttributeViBoolean(1150008)
-    '''Type: bool
+    '''Type: default_bool
 
     Specifies whether you want the device to be a master or a slave. The master typically originates the trigger signal and clock sync pulse. For a standalone device, set this property to False.
     '''
     max_input_frequency = _attributes.AttributeViReal64(1250006)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the bandwidth of the channel. Express this value as the frequency at which the input circuitry attenuates the input signal by 3 dB. The units are hertz.
     Defined Values:
@@ -680,17 +680,17 @@ class _SessionBase(object):
         var = session.channels[0,1].max_input_frequency
     '''
     max_real_time_sampling_rate = _attributes.AttributeViReal64(1150073)
-    '''Type: float
+    '''Type: default_float
 
     Returns the maximum real time sample rate in Hz.
     '''
     max_ris_rate = _attributes.AttributeViReal64(1150074)
-    '''Type: float
+    '''Type: default_float
 
     Returns the maximum sample rate in RIS mode in Hz.
     '''
     _meas_array_gain = _attributes.AttributeViReal64(1150043)
-    '''Type: float
+    '''Type: default_float
 
     Every element of an array is multiplied by this scalar value during the Array Gain measurement.  Refer to _ArrayMeasurement.ARRAY_GAIN for more information.
     Default: 1.0
@@ -705,7 +705,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_array_gain
     '''
     _meas_array_offset = _attributes.AttributeViReal64(1150044)
-    '''Type: float
+    '''Type: default_float
 
     Every element of an array is added to this scalar value during the Array Offset measurement. Refer to _ArrayMeasurement.ARRAY_OFFSET for more information.
     Default: 0.0
@@ -720,7 +720,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_array_offset
     '''
     _meas_chan_high_ref_level = _attributes.AttributeViReal64(1150040)
-    '''Type: float
+    '''Type: default_float
 
     Stores the high reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_high_ref if you use this property to set various channels to different values.
     Default: 90%
@@ -735,7 +735,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_chan_high_ref_level
     '''
     _meas_chan_low_ref_level = _attributes.AttributeViReal64(1150038)
-    '''Type: float
+    '''Type: default_float
 
     Stores the low reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_low_ref if you use this property to set various channels to different values.
     Default: 10%
@@ -750,7 +750,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_chan_low_ref_level
     '''
     _meas_chan_mid_ref_level = _attributes.AttributeViReal64(1150039)
-    '''Type: float
+    '''Type: default_float
 
     Stores the mid reference level used in many scalar measurements. Different channels may have different reference levels. Do not use the IVI-defined, nonchannel-based properties such as meas_mid_ref if you use this property to set various channels to different values.
     Default: 50%
@@ -765,7 +765,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_chan_mid_ref_level
     '''
     _meas_filter_center_freq = _attributes.AttributeViReal64(1150032)
-    '''Type: float
+    '''Type: default_float
 
     The center frequency in hertz for filters of type bandpass and bandstop. The width of the filter is specified by meas_filter_width, where the cutoff frequencies are the center ± width.
     Default: 1.0e6 Hz
@@ -780,7 +780,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_center_freq
     '''
     _meas_filter_cutoff_freq = _attributes.AttributeViReal64(1150031)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the cutoff frequency in hertz for filters of type lowpass and highpass. The cutoff frequency definition varies depending on the filter.
     Default: 1.0e6 Hz
@@ -795,7 +795,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_cutoff_freq
     '''
     _meas_filter_order = _attributes.AttributeViInt32(1150036)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the order of an IIR filter. All positive integers are valid.
     Default: 2
@@ -810,7 +810,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_order
     '''
     _meas_filter_ripple = _attributes.AttributeViReal64(1150033)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the amount of ripple in the passband in units of decibels (positive values). Used only for Chebyshev filters. The more ripple allowed gives a sharper cutoff for a given filter order.
     Default: 0.1 dB
@@ -825,7 +825,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_ripple
     '''
     _meas_filter_taps = _attributes.AttributeViInt32(1150037)
-    '''Type: int
+    '''Type: default_int
 
     Defines the number of taps (coefficients) for an FIR filter.
     Default: 25
@@ -840,7 +840,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_taps
     '''
     _meas_filter_transient_waveform_percent = _attributes.AttributeViReal64(1150034)
-    '''Type: float
+    '''Type: default_float
 
     The percentage (0 - 100%) of the IIR filtered waveform to eliminate from the beginning of the waveform. This allows eliminating the transient portion of the waveform that is undefined due to the assumptions necessary at the boundary condition.
     Default: 20.0%
@@ -855,7 +855,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_transient_waveform_percent
     '''
     _meas_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._FilterType, 1150035)
-    '''Type: enums.FilterType
+    '''Type: default_enums.FilterType
 
     Specifies the type of filter, for both IIR and FIR filters. The allowed values are the following:
     ·  NISCOPE_VAL_MEAS_LOWPASS
@@ -877,7 +877,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_type
     '''
     _meas_filter_width = _attributes.AttributeViReal64(1150041)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the width of bandpass and bandstop type filters in hertz. The cutoff frequencies occur at meas_filter_center_freq ± one-half width.
     Default: 1.0e3 Hz
@@ -892,7 +892,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_filter_width
     '''
     _meas_fir_filter_window = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._FIRFilterWindow, 1150042)
-    '''Type: enums.FIRFilterWindow
+    '''Type: default_enums.FIRFilterWindow
 
     Specifies the FIR window type. The possible choices are:
     _FIRFilterWindow.NONE
@@ -915,7 +915,7 @@ class _SessionBase(object):
     '''
     _meas_high_ref = _attributes.AttributeViReal64(1250607)
     _meas_hysteresis_percent = _attributes.AttributeViReal64(1150019)
-    '''Type: float
+    '''Type: default_float
 
     Digital hysteresis that is used in several of the scalar waveform measurements. This property specifies the percentage of the full-scale vertical range for the hysteresis window size.
     Default: 2%
@@ -930,7 +930,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_hysteresis_percent
     '''
     _meas_interpolation_sampling_factor = _attributes.AttributeViReal64(1150030)
-    '''Type: float
+    '''Type: default_float
 
     The new number of points for polynomial interpolation is the sampling factor times the input number of points. For example, if you acquire 1,000 points with the digitizer and set this property to 2.5, calling FetchWaveformMeasurementArray with the _ArrayMeasurement.POLYNOMIAL_INTERPOLATION measurement resamples the waveform to 2,500 points.
     Default: 2.0
@@ -948,7 +948,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_interpolation_sampling_factor
     '''
     _meas_last_acq_histogram_size = _attributes.AttributeViInt32(1150020)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the size (that is, the number of bins) in the last acquisition histogram. This histogram is used to determine several scalar measurements, most importantly voltage low and voltage high.
     Default: 256
@@ -965,7 +965,7 @@ class _SessionBase(object):
     _meas_low_ref = _attributes.AttributeViReal64(1250608)
     _meas_mid_ref = _attributes.AttributeViReal64(1250609)
     _meas_other_channel = _attributes.AttributeViString(1150018)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the second channel for two-channel measurements, such as _ArrayMeasurement.ADD_CHANNELS. If processing steps are registered with this channel, the processing is done before the waveform is used in a two-channel measurement.
     Default: '0'
@@ -980,7 +980,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_other_channel
     '''
     _meas_percentage_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._PercentageMethod, 1150045)
-    '''Type: enums.PercentageMethod
+    '''Type: default_enums.PercentageMethod
 
     Specifies the method used to map percentage reference units to voltages for the reference. Possible values are:
     NISCOPE_VAL_MEAS_LOW_HIGH
@@ -1001,7 +1001,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_percentage_method
     '''
     _meas_polynomial_interpolation_order = _attributes.AttributeViInt32(1150029)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the polynomial order used for the polynomial interpolation measurement. For example, an order of 1 is linear interpolation whereas an order of 2 specifies parabolic interpolation. Any positive integer is valid.
     Default: 1
@@ -1016,7 +1016,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_polynomial_interpolation_order
     '''
     _meas_ref_level_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums._RefLevelUnits, 1150016)
-    '''Type: enums.RefLevelUnits
+    '''Type: default_enums.RefLevelUnits
 
     Specifies the units of the reference levels.
     NISCOPE_VAL_MEAS_VOLTAGE--Specifies that the reference levels are given in units of volts
@@ -1036,7 +1036,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_ref_level_units
     '''
     _meas_time_histogram_high_time = _attributes.AttributeViReal64(1150028)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the highest time value included in the multiple acquisition time histogram. The units are always seconds.
     Default: 5.0e-4 seconds
@@ -1051,7 +1051,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_time_histogram_high_time
     '''
     _meas_time_histogram_high_volts = _attributes.AttributeViReal64(1150026)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the highest voltage value included in the multiple-acquisition time histogram. The units are always volts.
     Default: 10.0 V
@@ -1066,7 +1066,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_time_histogram_high_volts
     '''
     _meas_time_histogram_low_time = _attributes.AttributeViReal64(1150027)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the lowest time value included in the multiple-acquisition time histogram. The units are always seconds.
     Default: -5.0e-4 seconds
@@ -1081,7 +1081,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_time_histogram_low_time
     '''
     _meas_time_histogram_low_volts = _attributes.AttributeViReal64(1150025)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the lowest voltage value included in the multiple acquisition time histogram. The units are always volts.
     Default: -10.0 V
@@ -1096,7 +1096,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_time_histogram_low_volts
     '''
     _meas_time_histogram_size = _attributes.AttributeViInt32(1150024)
-    '''Type: int
+    '''Type: default_int
 
     Determines the multiple acquisition voltage histogram size. The size is set during the first call to a time histogram measurement after clearing the measurement history with _clear_waveform_measurement_stats.
     Default: 256
@@ -1111,7 +1111,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_time_histogram_size
     '''
     _meas_voltage_histogram_high_volts = _attributes.AttributeViReal64(1150023)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the highest voltage value included in the multiple acquisition voltage histogram. The units are always volts.
     Default: 10.0 V
@@ -1126,7 +1126,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_voltage_histogram_high_volts
     '''
     _meas_voltage_histogram_low_volts = _attributes.AttributeViReal64(1150022)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the lowest voltage value included in the multiple-acquisition voltage histogram. The units are always volts.
     Default: -10.0 V
@@ -1141,7 +1141,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_voltage_histogram_low_volts
     '''
     _meas_voltage_histogram_size = _attributes.AttributeViInt32(1150021)
-    '''Type: int
+    '''Type: default_int
 
     Determines the multiple acquisition voltage histogram size. The size is set the first time a voltage histogram measurement is called after clearing the measurement history with the method _clear_waveform_measurement_stats.
     Default: 256
@@ -1156,7 +1156,7 @@ class _SessionBase(object):
         var = session.channels[0,1].meas_voltage_histogram_size
     '''
     min_sample_rate = _attributes.AttributeViReal64(1150009)
-    '''Type: float
+    '''Type: default_float
 
     Specify the sampling rate for the acquisition in Samples per second.
     Valid Values:
@@ -1166,7 +1166,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     onboard_memory_size = _attributes.AttributeViInt32(1150069)
-    '''Type: int
+    '''Type: default_int
 
     Returns the total combined amount of onboard memory for all channels in bytes.
 
@@ -1179,12 +1179,12 @@ class _SessionBase(object):
         var = session.channels[0,1].onboard_memory_size
     '''
     output_clock_source = _attributes.AttributeViString(1150003)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the output source for the 10 MHz clock to which another digitizer's sample clock can be phased-locked.
     '''
     pll_lock_status = _attributes.AttributeViBoolean(1151303)
-    '''Type: bool
+    '''Type: default_bool
 
     If TRUE, the PLL has remained locked to the external reference clock since it was last checked. If FALSE,  the PLL has become unlocked from the external reference clock since it was last checked.
 
@@ -1197,17 +1197,17 @@ class _SessionBase(object):
         var = session.channels[0,1].pll_lock_status
     '''
     points_done = _attributes.AttributeViReal64(1150082)
-    '''Type: float
+    '''Type: default_float
 
     Actual number of samples acquired in the record specified by fetch_record_number from the fetch_relative_to and fetch_offset properties.
     '''
     poll_interval = _attributes.AttributeViInt32(1150100)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the poll interval in milliseconds to use during RIS acquisitions to check whether the acquisition is complete.
     '''
     probe_attenuation = _attributes.AttributeViReal64(1250004)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the probe attenuation for the input channel. For example, for a 10:1 probe,  set this property to 10.0.
     Valid Values:
@@ -1223,40 +1223,40 @@ class _SessionBase(object):
         var = session.channels[0,1].probe_attenuation
     '''
     ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150112)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination for the Ready for Advance Event.    When this event is asserted, the digitizer is ready to receive an advance trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
     ready_for_ref_event_output_terminal = _attributes.AttributeViString(1150111)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination for the Ready for Reference Event.  When this event is asserted, the digitizer is ready to receive a reference trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150110)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the destination for the Ready for Start Event.  When this event is asserted, the digitizer is ready to receive a start trigger.
     Consult your device documentation for a specific list of valid destinations.
     '''
     records_done = _attributes.AttributeViInt32(1150083)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the number of records that have been completely acquired.
     '''
     record_arm_source = _attributes.AttributeViString(1150065)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the record arm source.
     '''
     ref_clk_rate = _attributes.AttributeViReal64(1150090)
-    '''Type: float
+    '''Type: default_float
 
     If input_clock_source is an external source, this property specifies the frequency of the input,  or reference clock, to which the internal sample clock timebase is synchronized. The frequency is in hertz.
     '''
     ref_trigger_detector_location = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTriggerDetectorLocation, 1150314)
-    '''Type: enums.RefTriggerDetectorLocation
+    '''Type: default_enums.RefTriggerDetectorLocation
 
     Indicates which analog compare circuitry to use on the device.
     '''
@@ -1266,17 +1266,17 @@ class _SessionBase(object):
     The amount of time the trigger circuit must not detect a signal above the trigger level before the trigger is armed.  This property is useful for triggering at the beginning and not in the middle of signal bursts.
     '''
     ref_trig_tdc_enable = _attributes.AttributeViBoolean(1150096)
-    '''Type: bool
+    '''Type: default_bool
 
     This property controls whether the TDC is used to compute an accurate trigger.
     '''
     resolution = _attributes.AttributeViInt32(1150102)
-    '''Type: int
+    '''Type: default_int
 
     Indicates the bit width of valid data (as opposed to padding bits) in the acquired waveform. Compare to binary_sample_width.
     '''
     ris_in_auto_setup_enable = _attributes.AttributeViBoolean(1150106)
-    '''Type: bool
+    '''Type: default_bool
 
     Indicates whether the digitizer should use RIS sample rates when searching for a frequency in autosetup.
     Valid Values:
@@ -1284,31 +1284,31 @@ class _SessionBase(object):
     False (0) - Do not use RIS sample rates in autosetup
     '''
     ris_method = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RISMethod, 1150071)
-    '''Type: enums.RISMethod
+    '''Type: default_enums.RISMethod
 
     Specifies the algorithm for random-interleaved sampling, which is used if the sample rate exceeds the value of max_real_time_sampling_rate.
     '''
     ris_num_averages = _attributes.AttributeViInt32(1150070)
-    '''Type: int
+    '''Type: default_int
 
     The number of averages for each bin in an RIS acquisition.  The number of averages times the oversampling factor is the minimum number of real-time acquisitions necessary to reconstruct the RIS waveform.  Averaging is useful in RIS because the trigger times are not evenly spaced, so adjacent points in the reconstructed waveform not be accurately spaced.  By averaging, the errors in both time and voltage are smoothed.
     '''
     runt_high_threshold = _attributes.AttributeViReal64(1250301)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the higher of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
 
     The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the runt_polarity property for more information.
     '''
     runt_low_threshold = _attributes.AttributeViReal64(1250302)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the lower of two thresholds, in volts, that bound the vertical range to examine for runt pulses.
 
     The runt threshold that causes the oscilloscope to trigger depends on the runt polarity you select. Refer to the runt_polarity property for more information.
     '''
     runt_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RuntPolarity, 1250303)
-    '''Type: enums.RuntPolarity
+    '''Type: default_enums.RuntPolarity
 
     Specifies the polarity of pulses that trigger the oscilloscope for runt triggering.
 
@@ -1325,36 +1325,36 @@ class _SessionBase(object):
     When set to RuntPolarity.EITHER, the oscilloscope triggers in either case.
     '''
     runt_time_condition = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RuntTimeCondition, 1150132)
-    '''Type: enums.RuntTimeCondition
+    '''Type: default_enums.RuntTimeCondition
 
     Specifies whether runt triggers are time qualified, and if so, how the oscilloscope triggers in relation to the duration range bounded by the runt_time_low_limit and runt_time_high_limit properties.
     '''
     runt_time_high_limit = _attributes.AttributeViReal64(1150134)
-    '''Type: float
+    '''Type: default_float
 
     Specifies, in seconds, the high runt threshold time.
 
     This property sets the upper bound on the duration of runt pulses that may trigger the oscilloscope. The runt_time_condition property determines how the oscilloscope triggers in relation to the runt time limits.
     '''
     runt_time_low_limit = _attributes.AttributeViReal64(1150133)
-    '''Type: float
+    '''Type: default_float
 
     Specifies, in seconds, the low runt threshold time.
 
     This property sets the lower bound on the duration of runt pulses that may trigger the oscilloscope. The runt_time_condition property determines how the oscilloscope triggers in relation to the runt time limits.
     '''
     sample_mode = _attributes.AttributeViInt32(1250106)
-    '''Type: int
+    '''Type: default_int
 
     Indicates the sample mode the digitizer is currently using.
     '''
     samp_clk_timebase_div = _attributes.AttributeViInt32(1150089)
-    '''Type: int
+    '''Type: default_int
 
     If samp_clk_timebase_src is an external source, specifies the ratio between the sample clock timebase rate and the actual sample rate, which can be slower.
     '''
     sample_clock_timebase_multiplier = _attributes.AttributeViInt32(1150367)
-    '''Type: int
+    '''Type: default_int
 
     If samp_clk_timebase_src is an external source, this property specifies the ratio between the samp_clk_timebase_rate and the actual sample rate, which can be higher. This property can be used in conjunction with samp_clk_timebase_div.
     Some devices use multiple ADCs to sample the same channel at an effective sample rate that is greater than the specified clock rate. When providing an external sample clock use this property to indicate when you want a higher sample rate. Valid values for this property vary by device and current configuration.
@@ -1363,17 +1363,17 @@ class _SessionBase(object):
     `Sample Clock <digitizers.chm::/Sample_Clock.html>`__
     '''
     samp_clk_timebase_rate = _attributes.AttributeViReal64(1150088)
-    '''Type: float
+    '''Type: default_float
 
     If samp_clk_timebase_src is an external source, specifies the frequency in hertz of the external clock used as the timebase source.
     '''
     samp_clk_timebase_src = _attributes.AttributeViString(1150087)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the source of the sample clock timebase, which is the timebase used to control waveform sampling.  The actual sample rate may be the timebase itself or a divided version of the timebase, depending on the min_sample_rate (for internal sources) or the samp_clk_timebase_div (for external sources).
     '''
     serial_number = _attributes.AttributeViString(1150104)
-    '''Type: str
+    '''Type: default_str
 
     Returns the serial number of the device.
 
@@ -1386,7 +1386,7 @@ class _SessionBase(object):
         var = session.channels[0,1].serial_number
     '''
     accessory_gain = _attributes.AttributeViReal64(1150279)
-    '''Type: float
+    '''Type: default_float
 
     Returns the calibration gain for the current device configuration.
 
@@ -1405,7 +1405,7 @@ class _SessionBase(object):
         var = session.channels[0,1].signal_cond_gain
     '''
     accessory_offset = _attributes.AttributeViReal64(1150280)
-    '''Type: float
+    '''Type: default_float
 
     Returns the calibration offset for the current device configuration.
 
@@ -1424,23 +1424,23 @@ class _SessionBase(object):
         var = session.channels[0,1].signal_cond_offset
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: bool
+    '''Type: default_bool
 
     Specifies whether or not to simulate instrument driver I/O operations.  If simulation is enabled, instrument driver methods perform range checking and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not perform instrument I/O.  For output parameters that represent instrument data, the instrument driver methods return calculated values.
     The default value is False.  Use the __init__ method to override this value.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains a brief description of the specific driver
     '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains additional version information about this instrument driver.
     '''
     specific_driver_vendor = _attributes.AttributeViString(1050513)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains the name of the vendor that supplies this driver.
     '''
@@ -1452,17 +1452,17 @@ class _SessionBase(object):
     Valid Values: 0.0 - 171.8
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: str
+    '''Type: default_str
 
     A string that contains a comma-separated list of the instrument model numbers supported by this driver.
     '''
     trigger_auto_triggered = _attributes.AttributeViBoolean(1150278)
-    '''Type: bool
+    '''Type: default_bool
 
     Specifies if the last acquisition was auto triggered.  You can use the Auto Triggered property to find out if the last acquisition was triggered.
     '''
     trigger_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerCoupling, 1250014)
-    '''Type: enums.TriggerCoupling
+    '''Type: default_enums.TriggerCoupling
 
     Specifies how the digitizer couples the trigger source. This property affects instrument operation only when trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
@@ -1479,12 +1479,12 @@ class _SessionBase(object):
     Valid Values: 0.0 - 171.8
     '''
     trigger_hysteresis = _attributes.AttributeViReal64(1150006)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the size of the hysteresis window on either side of the trigger level.  The digitizer triggers when the trigger signal passes through the threshold you specify with the Trigger Level parameter, has the slope you specify with the Trigger Slope parameter,  and passes through the hysteresis window that you specify with this parameter.
     '''
     trigger_impedance = _attributes.AttributeViReal64(1150075)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the input impedance for the external analog trigger channel in Ohms.
     Valid Values:
@@ -1492,14 +1492,14 @@ class _SessionBase(object):
     1000000 - 1 mega ohm
     '''
     trigger_level = _attributes.AttributeViReal64(1250017)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the voltage threshold for the trigger subsystem. The units are volts.  This property affects instrument behavior only when the trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     Valid Values:
     The values of the range and offset parameters in configure_vertical determine the valid range for the trigger level on the channel you use as the Trigger Source. The value you pass for this parameter must meet the following conditions:
     '''
     trigger_modifier = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerModifier, 1250102)
-    '''Type: enums.TriggerModifier
+    '''Type: default_enums.TriggerModifier
 
     Configures the device to automatically complete an acquisition if a trigger has not been received.
     Valid Values:
@@ -1507,22 +1507,22 @@ class _SessionBase(object):
     Auto Trigger (2) - Auto trigger acquisition if no trigger arrives
     '''
     trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerSlope, 1250018)
-    '''Type: enums.TriggerSlope
+    '''Type: default_enums.TriggerSlope
 
     Specifies if a rising or a falling edge triggers the digitizer.  This property affects instrument operation only when trigger_type is set to TriggerType.EDGE, TriggerType.HYSTERESIS, or TriggerType.WINDOW.
     '''
     trigger_source = _attributes.AttributeViString(1250013)
-    '''Type: str
+    '''Type: default_str
 
     Specifies the source the digitizer monitors for the trigger event.
     '''
     trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1250012)
-    '''Type: enums.TriggerType
+    '''Type: default_enums.TriggerType
 
     Specifies the type of trigger to use.
     '''
     trigger_window_high_level = _attributes.AttributeViReal64(1150014)
-    '''Type: float
+    '''Type: default_float
 
     Pass the upper voltage threshold you want the digitizer to use for window triggering.
     The digitizer triggers when the trigger signal enters or leaves the window you specify with trigger_window_low_level and trigger_window_high_level
@@ -1536,7 +1536,7 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     trigger_window_low_level = _attributes.AttributeViReal64(1150013)
-    '''Type: float
+    '''Type: default_float
 
     Pass the lower voltage threshold you want the digitizer to use for window triggering.
     The digitizer triggers when the trigger signal enters or leaves the window you specify with trigger_window_low_level and trigger_window_high_level.
@@ -1551,33 +1551,33 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
     '''
     trigger_window_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerWindowMode, 1150012)
-    '''Type: enums.TriggerWindowMode
+    '''Type: default_enums.TriggerWindowMode
 
     Specifies whether you want a trigger to occur when the signal enters or leaves the window specified by trigger_window_low_level, or trigger_window_high_level.
     '''
     tv_trigger_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoTriggerEvent, 1250205)
-    '''Type: enums.VideoTriggerEvent
+    '''Type: default_enums.VideoTriggerEvent
 
     Specifies the condition in the video signal that causes the digitizer to trigger.
     '''
     tv_trigger_line_number = _attributes.AttributeViInt32(1250206)
-    '''Type: int
+    '''Type: default_int
 
     Specifies the line on which to trigger, if tv_trigger_event is set to line number. The valid ranges of the property depend on the signal format selected.  M-NTSC has a valid range of 1 to 525.  B/G-PAL, SECAM, 576i, and 576p have a valid range of 1 to 625. 720p has a valid range of 1 to 750. 1080i and 1080p have a valid range of 1125.
     '''
     tv_trigger_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoPolarity, 1250204)
-    '''Type: enums.VideoPolarity
+    '''Type: default_enums.VideoPolarity
 
     Specifies whether the video signal sync is positive or negative.
     '''
     tv_trigger_signal_format = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VideoSignalFormat, 1250201)
-    '''Type: enums.VideoSignalFormat
+    '''Type: default_enums.VideoSignalFormat
 
     Specifies the type of video signal, such as NTSC, PAL, or SECAM.
     '''
     use_spec_initial_x = _attributes.AttributeViBoolean(1150067)
     vertical_coupling = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.VerticalCoupling, 1250003)
-    '''Type: enums.VerticalCoupling
+    '''Type: default_enums.VerticalCoupling
 
     Specifies how the digitizer couples the input signal for the channel.  When input coupling changes, the input stage takes a finite amount of time to settle.
 
@@ -1591,7 +1591,7 @@ class _SessionBase(object):
         var = session.channels[0,1].vertical_coupling
     '''
     vertical_offset = _attributes.AttributeViReal64(1250002)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the location of the center of the range. The value is with respect to ground and is in volts.  For example, to acquire a sine wave that spans between 0.0 and 10.0 V, set this property to 5.0 V.
 
@@ -1607,7 +1607,7 @@ class _SessionBase(object):
         var = session.channels[0,1].vertical_offset
     '''
     vertical_range = _attributes.AttributeViReal64(1250001)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the absolute value of the input range for a channel in volts.  For example, to acquire a sine wave that spans between -5 and +5 V, set this property to 10.0 V.
     Refer to the NI High-Speed Digitizers Help for a list of supported vertical ranges for each device.  If the specified range is not supported by a device, the value is coerced up to the next valid range.
@@ -1622,26 +1622,26 @@ class _SessionBase(object):
         var = session.channels[0,1].vertical_range
     '''
     width_condition = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WidthCondition, 1250504)
-    '''Type: enums.WidthCondition
+    '''Type: default_enums.WidthCondition
 
     Specifies whether the oscilloscope triggers on pulses within or outside the duration range bounded by the width_low_threshold and width_high_threshold properties.
     '''
     width_high_threshold = _attributes.AttributeViReal64(1250502)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the high width threshold, in seconds.
 
     This properties sets the upper bound on the duration range that triggers the oscilloscope. The width_condition property determines how the oscilloscope triggers in relation to the width thresholds.
     '''
     width_low_threshold = _attributes.AttributeViReal64(1250501)
-    '''Type: float
+    '''Type: default_float
 
     Specifies the low width threshold, in seconds.
 
     This property sets the lower bound on the duration range that triggers the oscilloscope. The width_condition property determines how the oscilloscope triggers in relation to the width thresholds.
     '''
     width_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WidthPolarity, 1250503)
-    '''Type: enums.WidthPolarity
+    '''Type: default_enums.WidthPolarity
 
     Specifies the polarity of pulses that trigger the oscilloscope for width triggering.
     '''
@@ -4065,7 +4065,7 @@ class Session(_SessionBase):
                 Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
                 for recommended programming practices.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -5062,7 +5062,7 @@ class Session(_SessionBase):
                 Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
                 for recommended programming practices.
 
-            option_string (str): | Specifies initialization commands. The following table lists the
+            option_string (dict): | Specifies initialization commands. The following table lists the
                   properties and the name you use in the **optionString** to identify
                   the property.
 

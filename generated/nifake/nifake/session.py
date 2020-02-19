@@ -121,22 +121,22 @@ class _SessionBase(object):
     _is_frozen = False
 
     float_enum = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.FloatEnum, 1000005)
-    '''Type: enums.FloatEnum
+    '''Type: default_enums.FloatEnum
 
     A property with an enum that is also a float
     '''
     read_write_bool = _attributes.AttributeViBoolean(1000000)
-    '''Type: bool
+    '''Type: default_bool
 
     A property of type bool with read/write access.
     '''
     read_write_color = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Color, 1000003)
-    '''Type: enums.Color
+    '''Type: default_enums.Color
 
     A property of type Color with read/write access.
     '''
     read_write_double = _attributes.AttributeViReal64(1000001)
-    '''Type: float
+    '''Type: default_float
 
     A property of type float with read/write access.
     '''
@@ -146,7 +146,7 @@ class _SessionBase(object):
     Property in seconds
     '''
     read_write_double_with_repeated_capability = _attributes.AttributeViReal64(1000009)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -158,12 +158,12 @@ class _SessionBase(object):
         var = session.channels[0,1].read_write_double_with_repeated_capability
     '''
     read_write_int64 = _attributes.AttributeViInt64(1000006)
-    '''Type: int
+    '''Type: default_int
 
     A property of type 64-bit integer with read/write access.
     '''
     read_write_integer = _attributes.AttributeViInt32(1000004)
-    '''Type: int
+    '''Type: default_int
 
     A property of type integer with read/write access.
     '''
@@ -173,7 +173,7 @@ class _SessionBase(object):
     Property in milliseconds
     '''
     read_write_string = _attributes.AttributeViString(1000002)
-    '''Type: str
+    '''Type: default_str
 
     A property of type string with read/write access.
     '''
@@ -666,7 +666,7 @@ class Session(_SessionBase):
 
                 Contains the **resource_name** of the device to initialize.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -1310,7 +1310,7 @@ class Session(_SessionBase):
 
                 Contains the **resource_name** of the device to initialize.
 
-            option_string (str): Some options
+            option_string (dict): Some options
 
             id_query (bool): NI-FAKE is probably not needed.
 

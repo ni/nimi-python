@@ -119,7 +119,7 @@ class _SessionBase(object):
     _is_frozen = False
 
     active_load_ioh = _attributes.AttributeViReal64(1150013)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -131,7 +131,7 @@ class _SessionBase(object):
         var = session.channels[0,1].active_load_ioh
     '''
     active_load_iol = _attributes.AttributeViReal64(1150012)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -143,7 +143,7 @@ class _SessionBase(object):
         var = session.channels[0,1].active_load_iol
     '''
     active_load_vcom = _attributes.AttributeViReal64(1150014)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -157,7 +157,7 @@ class _SessionBase(object):
     cache = _attributes.AttributeViBoolean(1050004)
     channel_count = _attributes.AttributeViInt32(1050203)
     clock_generator_frequency = _attributes.AttributeViReal64(1150073)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -169,7 +169,7 @@ class _SessionBase(object):
         var = session.channels[0,1].clock_generator_frequency
     '''
     clock_generator_is_running = _attributes.AttributeViBoolean(1150074)
-    '''Type: bool
+    '''Type: default_bool
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -180,7 +180,7 @@ class _SessionBase(object):
         var = session.channels[0,1].clock_generator_is_running
     '''
     conditional_jump_trigger_terminal_name = _attributes.AttributeViString(1150040)
-    '''Type: str
+    '''Type: default_str
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -191,7 +191,7 @@ class _SessionBase(object):
         var = session.channels[0,1].conditional_jump_trigger_terminal_name
     '''
     conditional_jump_trigger_type = _attributes.AttributeViInt32(1150033)
-    '''Type: int
+    '''Type: default_int
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -204,7 +204,7 @@ class _SessionBase(object):
     '''
     cycle_number_history_ram_trigger_cycle_number = _attributes.AttributeViInt64(1150044)
     digital_edge_conditional_jump_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150035)
-    '''Type: enums.DigitalEdge
+    '''Type: default_enums.DigitalEdge
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -216,7 +216,7 @@ class _SessionBase(object):
         var = session.channels[0,1].digital_edge_conditional_jump_trigger_edge
     '''
     digital_edge_conditional_jump_trigger_source = _attributes.AttributeViString(1150034)
-    '''Type: str
+    '''Type: default_str
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -231,7 +231,7 @@ class _SessionBase(object):
     digital_edge_start_trigger_source = _attributes.AttributeViString(1150030)
     driver_setup = _attributes.AttributeViString(1050007)
     exported_conditional_jump_trigger_output_terminal = _attributes.AttributeViString(1150036)
-    '''Type: str
+    '''Type: default_str
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -243,7 +243,7 @@ class _SessionBase(object):
         var = session.channels[0,1].exported_conditional_jump_trigger_output_terminal
     '''
     exported_pattern_opcode_event_output_terminal = _attributes.AttributeViString(1150041)
-    '''Type: str
+    '''Type: default_str
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -256,7 +256,7 @@ class _SessionBase(object):
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     frequency_counter_measurement_time = _attributes.AttributeViReal64(1150069)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -276,7 +276,7 @@ class _SessionBase(object):
     history_ram_pretrigger_samples = _attributes.AttributeViInt32(1150048)
     history_ram_trigger_type = _attributes.AttributeViInt32(1150043)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
-    '''Type: str
+    '''Type: default_str
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -293,7 +293,7 @@ class _SessionBase(object):
     is_keep_alive_active = _attributes.AttributeViBoolean(1150063)
     logical_name = _attributes.AttributeViString(1050305)
     mask_compare = _attributes.AttributeViBoolean(1150060)
-    '''Type: bool
+    '''Type: default_bool
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -308,7 +308,7 @@ class _SessionBase(object):
     pattern_label_history_ram_trigger_label = _attributes.AttributeViString(1150046)
     pattern_label_history_ram_trigger_vector_offset = _attributes.AttributeViInt64(1150052)
     pattern_opcode_event_terminal_name = _attributes.AttributeViString(1150042)
-    '''Type: str
+    '''Type: default_str
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -319,7 +319,7 @@ class _SessionBase(object):
         var = session.channels[0,1].pattern_opcode_event_terminal_name
     '''
     ppmu_allow_extended_voltage_range = _attributes.AttributeViBoolean(1150076)
-    '''Type: bool
+    '''Type: default_bool
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -331,7 +331,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_allow_extended_voltage_range
     '''
     ppmu_aperture_time = _attributes.AttributeViReal64(1150037)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -343,7 +343,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_aperture_time
     '''
     ppmu_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150038)
-    '''Type: enums.ApertureTimeUnits
+    '''Type: default_enums.ApertureTimeUnits
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -355,7 +355,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_aperture_time_units
     '''
     ppmu_current_level = _attributes.AttributeViReal64(1150019)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -367,7 +367,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_current_level
     '''
     ppmu_current_level_range = _attributes.AttributeViReal64(1150020)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -379,7 +379,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_current_level_range
     '''
     ppmu_current_limit = _attributes.AttributeViReal64(1150054)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -391,7 +391,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_current_limit
     '''
     ppmu_current_limit_behavior = _attributes.AttributeViInt32(1150064)
-    '''Type: int
+    '''Type: default_int
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -403,7 +403,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_current_limit_behavior
     '''
     ppmu_current_limit_range = _attributes.AttributeViReal64(1150017)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -415,7 +415,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_current_limit_range
     '''
     ppmu_current_limit_supported = _attributes.AttributeViBoolean(1150055)
-    '''Type: bool
+    '''Type: default_bool
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -426,7 +426,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_current_limit_supported
     '''
     ppmu_output_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUOutputFunction, 1150015)
-    '''Type: enums.PPMUOutputFunction
+    '''Type: default_enums.PPMUOutputFunction
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -438,7 +438,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_output_function
     '''
     ppmu_voltage_level = _attributes.AttributeViReal64(1150016)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -450,7 +450,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_voltage_level
     '''
     ppmu_voltage_limit_high = _attributes.AttributeViReal64(1150022)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -462,7 +462,7 @@ class _SessionBase(object):
         var = session.channels[0,1].ppmu_voltage_limit_high
     '''
     ppmu_voltage_limit_low = _attributes.AttributeViReal64(1150021)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -477,7 +477,7 @@ class _SessionBase(object):
     range_check = _attributes.AttributeViBoolean(1050002)
     record_coercions = _attributes.AttributeViBoolean(1050006)
     selected_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelectedFunction, 1150004)
-    '''Type: enums.SelectedFunction
+    '''Type: default_enums.SelectedFunction
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -503,7 +503,7 @@ class _SessionBase(object):
     supported_instrument_models = _attributes.AttributeViString(1050327)
     tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
     tdr_offset = _attributes.AttributeViReal64(1150051)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -515,7 +515,7 @@ class _SessionBase(object):
         var = session.channels[0,1].tdr_offset
     '''
     termination_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TerminationMode, 1150006)
-    '''Type: enums.TerminationMode
+    '''Type: default_enums.TerminationMode
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -529,7 +529,7 @@ class _SessionBase(object):
     timing_absolute_delay = _attributes.AttributeViReal64(1150072)
     timing_absolute_delay_enabled = _attributes.AttributeViBoolean(1150071)
     vih = _attributes.AttributeViReal64(1150008)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -541,7 +541,7 @@ class _SessionBase(object):
         var = session.channels[0,1].vih
     '''
     vil = _attributes.AttributeViReal64(1150007)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -553,7 +553,7 @@ class _SessionBase(object):
         var = session.channels[0,1].vil
     '''
     voh = _attributes.AttributeViReal64(1150010)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -565,7 +565,7 @@ class _SessionBase(object):
         var = session.channels[0,1].voh
     '''
     vol = _attributes.AttributeViReal64(1150009)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -577,7 +577,7 @@ class _SessionBase(object):
         var = session.channels[0,1].vol
     '''
     vterm = _attributes.AttributeViReal64(1150011)
-    '''Type: float
+    '''Type: default_float
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -1588,7 +1588,7 @@ class Session(_SessionBase):
 
             reset_device (bool):
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -2763,7 +2763,7 @@ class Session(_SessionBase):
 
             reset_device (bool):
 
-            option_string (str):
+            option_string (dict):
 
 
         Returns:
