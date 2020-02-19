@@ -1115,6 +1115,7 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
@@ -2401,6 +2402,7 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
