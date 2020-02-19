@@ -2339,7 +2339,7 @@ class Session(_SessionBase):
         if position + samples_to_read > samples_available:
             raise ValueError(
                 'position: Specified value = {0}, samples_to_read: Specified value = {1}; Samples available = {2}.'
-                .format(position, samples_to_read, samples_available))
+                .format(position, samples_to_read, samples_available - position))
 
         pattern_names = {}
         time_set_names = {}

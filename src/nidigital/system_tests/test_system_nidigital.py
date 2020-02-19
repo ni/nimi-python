@@ -350,14 +350,23 @@ def test_fetch_history_ram_cycle_information_is_finite_invalid(multi_instrument_
 def test_fetch_history_ram_cycle_information_samples_to_read_too_much(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
+    site = 'site1'
+    assert multi_instrument_session.get_history_ram_sample_count(site) == 7
+
+    multi_instrument_session.fetch_history_ram_cycle_information(
+        site=site,
+        pin_list='',
+        position=0,
+        samples_to_read=3)
+
     expected_error_description = (
-        'position: Specified value = 1, samples_to_read: Specified value = 7; Samples available = 7.')
+        'position: Specified value = 3, samples_to_read: Specified value = 5; Samples available = 4.')
     with pytest.raises(ValueError, match=expected_error_description):
         multi_instrument_session.fetch_history_ram_cycle_information(
-            site='site1',
+            site=site,
             pin_list='',
-            position=1,
-            samples_to_read=7)
+            position=3,
+            samples_to_read=5)
 
 
 def test_fetch_history_ram_cycle_information_samples_to_read_negative(multi_instrument_session):
