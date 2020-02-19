@@ -10,19 +10,22 @@ class HistoryRAMCycleInformation(object):
         self.per_pin_pass_fail = per_pin_pass_fail
 
     def __repr__(self):
+        def digital_states_representation(states):
+            states_representation = [['{0}.{1}'.format(i.__class__.__name__, i.name) for i in j] for j in states]
+            return '[{}]'.format(','.join(['[{}]'.format(','.join(i)) for i in states_representation]))
+
         parameter_list = [
             'pattern_name="{}"'.format(self.pattern_name),
             'time_set_name="{}"'.format(self.time_set_name),
             'vector_number={}'.format(self.vector_number),
             'cycle_number={}'.format(self.cycle_number),
             'scan_cycle_number={}'.format(self.scan_cycle_number),
-            'expected_pin_states={}'.format(self.expected_pin_states),
-            'actual_pin_states={}'.format(self.actual_pin_states),
+            'expected_pin_states={}'.format(digital_states_representation(self.expected_pin_states)),
+            'actual_pin_states={}'.format(digital_states_representation(self.actual_pin_states)),
             'per_pin_pass_fail={}'.format(self.per_pin_pass_fail),
         ]
 
         return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
-        return self.__class__.__name__
 
     def __str__(self):
         # different format lines
@@ -40,6 +43,4 @@ class HistoryRAMCycleInformation(object):
         string_representation += row_format_s.format('Per Pin Pass Fail', self.per_pin_pass_fail)
 
         return string_representation
-
-
 

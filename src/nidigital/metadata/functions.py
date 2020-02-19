@@ -1014,6 +1014,7 @@ functions = {
             },
             {
                 'direction': 'out',
+                'enum': 'DigitalState',
                 'name': 'expectedPinStates',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -1024,6 +1025,7 @@ functions = {
             },
             {
                 'direction': 'out',
+                'enum': 'DigitalState',
                 'name': 'actualPinStates',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',

@@ -2,5 +2,7 @@
 # Any changes to the API should be made here. enums.py is code generated
 
 enums_override_metadata = {
+    'DigitalState': {
+        'codegen_method': 'public',
+    },
 }
-

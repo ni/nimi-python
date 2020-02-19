@@ -2275,17 +2275,14 @@ class Session(_SessionBase):
 
         If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
         consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
-        NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        DigitalState.PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
 
         Args:
             site (str): Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
                 where N is the site number. The VI returns an error if more than one site is specified.
 
             pin_list (str): Pins for which to retrieve History RAM data. If empty, the pin list from the pattern
-                containing the start label is used. Call get_pattern_pin_list or get_pattern_pin_names with the start
+                containing the start label is used. Call get_pattern_pin_list or get_pattern_pin_indexes with the start
                 label to retrieve the pins associated with the pattern burst.
 
             position (int): Sample index from which to start fetching pattern information.
@@ -2300,23 +2297,26 @@ class Session(_SessionBase):
                 -  **pattern_name** (str)  Name of the pattern for the acquired cycle.
                 -  **time_set_name** (str) Time set for the acquired cycle.
                 -  **vector_number** (int) Vector number within the pattern for the acquired cycle. Vector numbers start
-                at 0 from the beginning of the pattern.
+                   at 0 from the beginning of the pattern.
                 -  **cycle_number** (int) Cycle number acquired by this History RAM sample. Cycle numbers start at 0
-                from the beginning of the pattern burst.
+                   from the beginning of the pattern burst.
                 -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
-                start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
-                have a scan opcode.
-                -  **expected_pin_states** (list) Pin state as expected by the loaded pattern in the order specified in
-                the pin list. Pins without defined edges in the specified DUT cycle will have a value of
-                NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED.
-                -  **actual_pin_states** (list) Pin state acquired by History RAM in the order specified in the pin
-                list. Pins without defined edges in the specified DUT cycle will have a value of
-                NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED.
-                -  **per_pin_pass_fail** (list) pass fail information for pins in the order specified in the pin list.
-                Pins without defined edges in the specified DUT cycle will have a value of pass (True).
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                   start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
+                   have a scan opcode.
+                -  **expected_pin_states** (list of list of enums.DigitalState) Pin states as expected by the loaded
+                   pattern in the order specified in the pin list. Pins without defined edges in the specified DUT cycle
+                   will have a value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+                -  **actual_pin_states** (list of list of enums.DigitalState) Pin states acquired by History RAM in the
+                   order specified in the pin list. Pins without defined edges in the specified DUT cycle will have a
+                   value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+                -  **per_pin_pass_fail** (list of list of bool) Pass fail information for pins in the order specified in
+                   the pin list. Pins without defined edges in the specified DUT cycle will have a value of pass (True).
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
 
         '''
         if position < 0:
@@ -2504,9 +2504,9 @@ class Session(_SessionBase):
 
 
         Returns:
-            expected_pin_states (list of int):
+            expected_pin_states (list of enums.DigitalState):
 
-            actual_pin_states (list of int):
+            actual_pin_states (list of enums.DigitalState):
 
             per_pin_pass_fail (list of bool):
 
@@ -2532,7 +2532,7 @@ class Session(_SessionBase):
         per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
         error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [int(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
+        return [enums.DigitalState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.DigitalState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def _fetch_history_ram_scan_cycle_number(self, site, sample_index):

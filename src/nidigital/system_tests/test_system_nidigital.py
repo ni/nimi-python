@@ -7,6 +7,7 @@ import pytest
 
 import nidigital
 from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
+from nidigital.enums import DigitalState
 
 instr = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
@@ -264,14 +265,14 @@ def test_history_ram_cycle_information_representation():
         vector_number=42,
         cycle_number=999,
         scan_cycle_number=13,
-        expected_pin_states=[[1, 1], [2, 2]],
-        actual_pin_states=[[3, 3], [4, 4]],
+        expected_pin_states=[[DigitalState.D, DigitalState.D], [DigitalState.V, DigitalState.V]],
+        actual_pin_states=[[DigitalState.PIN_STATE_NOT_ACQUIRED, DigitalState.PIN_STATE_NOT_ACQUIRED], [DigitalState.NOT_A_PIN_STATE, DigitalState.NOT_A_PIN_STATE]],
         per_pin_pass_fail=[[True, True], [False, False]])
     recreated_cycle_info = eval(repr(cycle_info))
     assert str(recreated_cycle_info) == str(cycle_info)
 
 
-@pytest.mark.skip(reason="no way of currently testing this")
+@pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_position_negative(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
@@ -413,32 +414,32 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
 
     expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
     assert expected_pin_states == [
-        [[0, 4, 5, 5, 4, 0, 5, 5]],
-        [[5, 5, 0, 1, 5, 5, 3, 4]],
-        [[5, 5, 1, 0, 5, 5, 4, 3]],
-        [[1, 1, 5, 5, 4, 4, 5, 5], [0, 0, 5, 5, 3, 3, 5, 5]],
-        [[1, 1, 5, 5, 4, 4, 5, 5], [0, 0, 5, 5, 3, 3, 5, 5]],
-        [[0, 1, 5, 5, 3, 4, 5, 5], [1, 0, 5, 5, 4, 3, 5, 5]],
-        [[5, 5, 5, 5, 5, 5, 5, 5]]
+        [[DigitalState.ZERO, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.ZERO, DigitalState.X, DigitalState.X]],
+        [[DigitalState.X, DigitalState.X, DigitalState.ZERO, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H]],
+        [[DigitalState.X, DigitalState.X, DigitalState.ONE, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L]],
+        [[DigitalState.ONE, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.ZERO, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
+        [[DigitalState.ONE, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.ZERO, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
+        [[DigitalState.ZERO, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.ONE, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X]],
+        [[DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X]]
     ]
 
     # If test expects actual pin state to be 'X', then value returned by the returned can be anything.
     # So, need to skip those pin states while comparing.
     actual_pin_states = [i.actual_pin_states for i in history_ram_cycle_info]
     actual_pin_states_expected_by_test = [
-        [[3, 3, 5, 5, 3, 3, 5, 5]],
-        [[5, 5, 3, 4, 5, 5, 3, 4]],
-        [[5, 5, 4, 3, 5, 5, 4, 3]],
-        [[4, 4, 5, 5, 4, 4, 5, 5], [3, 3, 5, 5, 3, 3, 5, 5]],
-        [[4, 4, 5, 5, 4, 4, 5, 5], [3, 3, 5, 5, 3, 3, 5, 5]],
-        [[3, 4, 5, 5, 3, 4, 5, 5], [4, 3, 5, 5, 4, 3, 5, 5]],
-        [[5, 5, 5, 5, 5, 5, 5, 5]]
+        [[DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
+        [[DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H]],
+        [[DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L]],
+        [[DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
+        [[DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
+        [[DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X]],
+        [[DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X]]
     ]
     assert len(actual_pin_states) == len(actual_pin_states_expected_by_test)
     for vector_pin_states, vector_pin_states_expected_by_test in zip(actual_pin_states, actual_pin_states_expected_by_test):
         for cycle_pin_states, cycle_pin_states_expected_by_test in zip(vector_pin_states, vector_pin_states_expected_by_test):
             for pin_state, pin_state_expected_by_test in zip(cycle_pin_states, cycle_pin_states_expected_by_test):
-                if pin_state_expected_by_test is not 5:
+                if pin_state_expected_by_test is not DigitalState.X:
                     assert pin_state == pin_state_expected_by_test
 
     # Only the first cycle returned is expected to have failures
