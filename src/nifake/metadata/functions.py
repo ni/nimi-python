@@ -1130,7 +1130,7 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'configuration',
-                'python_api_converter_name': 'convert_import_buffer_to_array',
+                'python_api_converter_name': 'convert_to_bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
