@@ -880,7 +880,7 @@ class Session(_SessionBase):
         Export configuration buffer.
 
         Returns:
-            configuration (array.array("b")):
+            configuration (bytes):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1292,7 +1292,7 @@ class Session(_SessionBase):
         Import configuration buffer.
 
         Args:
-            configuration (list of bytes):
+            configuration (bytes):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

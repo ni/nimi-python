@@ -3687,7 +3687,7 @@ class Session(_SessionBase):
         error.
 
         Returns:
-            configuration (array.array("b")): Specifies the byte array buffer to be populated with the exported
+            configuration (bytes): Specifies the byte array buffer to be populated with the exported
                 property configuration.
 
         '''
@@ -3986,7 +3986,7 @@ class Session(_SessionBase):
         such as while generating a signal.
 
         Args:
-            configuration (list of bytes): Specifies the byte array buffer that contains the property
+            configuration (bytes): Specifies the byte array buffer that contains the property
                 configuration to import.
 
         '''

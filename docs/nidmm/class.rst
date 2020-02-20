@@ -800,7 +800,7 @@ export_attribute_configuration_buffer
 
 
 
-            :rtype: array.array("b")
+            :rtype: bytes
             :return:
 
 
@@ -1361,7 +1361,7 @@ import_attribute_configuration_buffer
                 
 
 
-            :type configuration: list of bytes
+            :type configuration: bytes
 
 import_attribute_configuration_file
 -----------------------------------

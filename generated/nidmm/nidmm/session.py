@@ -1739,7 +1739,7 @@ class Session(_SessionBase):
         Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
 
         Returns:
-            configuration (array.array("b")): Specifies the byte array buffer to be populated with the exported
+            configuration (bytes): Specifies the byte array buffer to be populated with the exported
                 property configuration.
 
         '''
@@ -2214,7 +2214,7 @@ class Session(_SessionBase):
         Note: Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.
 
         Args:
-            configuration (list of bytes): Specifies the byte array buffer that contains the property
+            configuration (bytes): Specifies the byte array buffer that contains the property
                 configuration to import.
 
         '''
