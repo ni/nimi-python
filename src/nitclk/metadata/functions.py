@@ -130,7 +130,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sessionCount'
                 },
-                'type_in_documentation': '(nimi-python Session class or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (nimi-python Session class or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -441,7 +441,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': '(nimi-python Session class or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (nimi-python Session class or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
@@ -567,7 +567,7 @@ functions = {
                     'mechanism': 'TBD',
                     'value': 'TBD'
                 },
-                'type_in_documentation': '(nimi-python Session class or nitclk.SessionReference)',
+                'type_in_documentation': 'list of (nimi-python Session class or nitclk.SessionReference)',
                 'type': 'ViSession[]'
             },
             {
