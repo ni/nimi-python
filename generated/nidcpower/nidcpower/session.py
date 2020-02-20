@@ -4107,7 +4107,7 @@ class Session(_SessionBase):
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
 
-            channels (str): Specifies which output channel(s) to include in a new session. Specify
+            channels (str, list, range, tuple): Specifies which output channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
@@ -4121,7 +4121,7 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -5035,7 +5035,7 @@ class Session(_SessionBase):
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
 
-            channels (str): Specifies which output channel(s) to include in a new session. Specify
+            channels (str, list, range, tuple): Specifies which output channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
@@ -5049,7 +5049,7 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            option_string (str): Specifies the initial value of certain properties for the session. The
+            option_string (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **optionString** is a list of properties with an assigned
                 value where 1 is True and 0 is False. For example:
 

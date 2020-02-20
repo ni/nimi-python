@@ -1,20 +1,17 @@
-import datetime
 import fasteners
 import math
 import niscope
-import nitclk
 import numpy
 import os
 import pytest
-import sys
 import tempfile
 
 
 # There are system tests below that need either a PXI-5124 or a PXI-5142 instead of the PXIe-5164 we use everywhere else
 # because of specific capabilities on those models. Due to internal NI bug 969274, opening a simulated session to those models
-# sometimes fails. As a workaround, the nimi-bot VMs are configured with one simulated instrument of each kind respectively
+# sometimes fails. As a workaround, the nimi-bot VMs are configured with one persistently simulated instrument of each kind respectively
 # named "5124" and "5142". If you want to run these tests on your own system, you will need to create these two simulated
-# instruments.
+# instruments using MAX.
 # In addition, we need a global lock in order to keep us from opening more than one session to the same simulated instrument
 # at the same time. This is because NI-SCOPE (like other MI driver runtimes) disallow two simultaneous sessions to the same
 # instrument, even when the instrument is simulated. This will impact the performance at which system tests run because we
@@ -23,6 +20,7 @@ daqmx_sim_5124_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5124.lock'
 daqmx_sim_5124_lock = fasteners.InterProcessLock(daqmx_sim_5124_lock_file)
 daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
 daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
+
 
 @pytest.fixture(scope='function')
 def session():
@@ -281,7 +279,7 @@ def test_configure_chan_characteristics(session):
 
 
 def test_filter_coefficients(session_5142):
-    assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients() # coefficients list should have 35 items
+    assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
     try:
         filter_coefficients = [1.0, 0.0, 0.0]
         session_5142.configure_equalization_filter_coefficients(filter_coefficients)

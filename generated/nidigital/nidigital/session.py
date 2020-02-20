@@ -1590,7 +1590,7 @@ class Session(_SessionBase):
 
             reset_device (bool):
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -2765,7 +2765,7 @@ class Session(_SessionBase):
 
             reset_device (bool):
 
-            option_string (str):
+            option_string (dict):
 
 
         Returns:

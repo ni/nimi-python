@@ -4067,7 +4067,7 @@ class Session(_SessionBase):
                 Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
                 for recommended programming practices.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -5065,7 +5065,7 @@ class Session(_SessionBase):
                 Electromechanical Relays <REPLACE_DRIVER_SPECIFIC_URL_1(5112_relays)>`__
                 for recommended programming practices.
 
-            option_string (str): | Specifies initialization commands. The following table lists the
+            option_string (dict): | Specifies initialization commands. The following table lists the
                   properties and the name you use in the **optionString** to identify
                   the property.
 

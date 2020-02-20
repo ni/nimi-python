@@ -124,7 +124,7 @@ Session
         +-------------------------+---------+
 
 
-    :type options: str
+    :type options: dict
 
 
 Methods

@@ -1127,7 +1127,7 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -2341,7 +2341,7 @@ class Session(_SessionBase):
                 | False          | 0 | Don't Reset  |
                 +----------------+---+--------------+
 
-            option_string (str): | Sets the initial value of certain properties for the session. The
+            option_string (dict): | Sets the initial value of certain properties for the session. The
                   following table specifies the property name, property constant, and
                   default value for each property that you can use in this parameter:
 
