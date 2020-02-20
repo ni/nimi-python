@@ -456,7 +456,6 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 2
 
 
-@pytest.mark.flaky(max_runs=5)
 def test_import_export_buffer(session):
     test_value_1 = 1.0
     test_value_2 = 2.0
@@ -465,14 +464,7 @@ def test_import_export_buffer(session):
     buffer = session.export_attribute_configuration_buffer()
     session.arb_gain = test_value_2
     assert session.arb_gain == test_value_2
-    try:
-        session.import_attribute_configuration_buffer([x for x in buffer])
-    except nifgen.errors.DriverError as e:
-        if e.code == -1074100298:
-            print('[DEBUG] bad: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
-        raise
-    else:
-        print('[DEBUG] good: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
+    session.import_attribute_configuration_buffer(buffer)
     assert session.arb_gain == test_value_1
 
 

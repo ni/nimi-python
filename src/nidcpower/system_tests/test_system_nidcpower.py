@@ -237,7 +237,6 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
-@pytest.mark.flaky(max_runs=5)
 def test_import_export_buffer(single_channel_session):
     test_value_1 = 1
     test_value_2 = 2
@@ -246,14 +245,7 @@ def test_import_export_buffer(single_channel_session):
     buffer = single_channel_session.export_attribute_configuration_buffer()
     single_channel_session.voltage_level = test_value_2
     assert single_channel_session.voltage_level == test_value_2
-    try:
-        single_channel_session.import_attribute_configuration_buffer([x for x in buffer])
-    except nidcpower.errors.DriverError as e:
-        if e.code == -1074100298:
-            print('[DEBUG] bad: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
-        raise
-    else:
-        print('[DEBUG] good: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
+    single_channel_session.import_attribute_configuration_buffer(buffer)
     assert single_channel_session.voltage_level == test_value_1
 
 

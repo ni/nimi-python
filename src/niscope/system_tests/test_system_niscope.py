@@ -337,7 +337,6 @@ def test_configure_trigger_hysteresis(session):
     assert '1' == session.trigger_source
     assert niscope.TriggerCoupling.DC == session.trigger_coupling
 
-@pytest.mark.flaky(max_runs=5)
 def test_import_export_buffer(session):
     test_value_1 = 1
     test_value_2 = 5
@@ -346,14 +345,7 @@ def test_import_export_buffer(session):
     buffer = session.export_attribute_configuration_buffer()
     session.vertical_range = test_value_2
     assert session.vertical_range == test_value_2
-    try:
-        session.import_attribute_configuration_buffer([x for x in buffer])
-    except niscope.errors.DriverError as e:
-        if e.code == -1074100298:
-            print('[DEBUG] bad: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
-        raise
-    else:
-        print('[DEBUG] good: len: "{0}", content: "{1}"\n'.format(len(buffer), buffer))
+    session.import_attribute_configuration_buffer(buffer)
     assert session.vertical_range == test_value_1
 
 

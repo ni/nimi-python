@@ -723,7 +723,7 @@ import_attribute_configuration_buffer
                 
 
 
-            :type configuration: list of int
+            :type configuration: list of bytes
 
 import_attribute_configuration_file
 -----------------------------------

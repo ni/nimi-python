@@ -29,6 +29,8 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
         return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, bytes):
+        return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
         assert library_type is not None, 'library_type is required for list'
         return (library_type * len(value))(*value)
@@ -3695,8 +3697,7 @@ class Session(_SessionBase):
         error_code = self._library.niFgen_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
-        print('[DEBUG] size: {0}'.format(size_in_bytes_ctype.value))
-        configuration_size = size_in_bytes_ctype.value + 1  # case B590
+        configuration_size = size_in_bytes_ctype.value  # case B590
         configuration_array = array.array("b", [0] * configuration_size)  # case B590
         configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niFgen_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
@@ -3985,13 +3986,13 @@ class Session(_SessionBase):
         such as while generating a signal.
 
         Args:
-            configuration (list of int): Specifies the byte array buffer that contains the property
+            configuration (list of bytes): Specifies the byte array buffer that contains the property
                 configuration to import.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_import_buffer_to_array(configuration), library_type=_visatype.ViInt8)  # case B520
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_bytes(configuration), library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niFgen_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

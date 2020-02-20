@@ -233,25 +233,6 @@ def convert_to_nitclk_session_number_list(item_list):
     return [convert_to_nitclk_session_number(i) for i in item_list]
 
 
-# buffer input to import buffer functions
-@singledispatch
-def _convert_import_buffer_to_array(value):  # noqa: F811
-    pass
-
-
-@_convert_import_buffer_to_array.register(list)  # noqa: F811
-@_convert_import_buffer_to_array.register(bytes)  # noqa: F811
-@_convert_import_buffer_to_array.register(bytearray)  # noqa: F811
-@_convert_import_buffer_to_array.register(array.array)  # noqa: F811
-def _(value):
-    return value
-
-
-def convert_import_buffer_to_array(value):  # noqa: F811
-    import array
-    return array.array('b', _convert_import_buffer_to_array(value))
-
-
 # convert value to bytes
 @singledispatch
 def _convert_to_bytes(value):  # noqa: F811
