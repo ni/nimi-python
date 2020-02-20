@@ -74,10 +74,10 @@ def _add_python_type(item, config):
             item['python_type'] = 'enums.' + item['enum']
 
     # If 'type_in_documentation' isn't in the item, use 'python_type'
-    item['default_type_in_documentation'] = False
+    item['type_in_documentation_was_calculated'] = False
     if 'type_in_documentation' not in item:
         item['type_in_documentation'] = item['python_type']
-        item['default_type_in_documentation'] = True
+        item['type_in_documentation_was_calculated'] = True
 
     return item
 
@@ -813,7 +813,7 @@ functions_expected = {
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -846,7 +846,7 @@ functions_expected = {
                 'numpy': False,
                 'python_type': 'str',
                 'type_in_documentation': 'str',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -875,7 +875,7 @@ functions_expected = {
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -907,7 +907,7 @@ functions_expected = {
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -939,7 +939,7 @@ functions_expected = {
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'use_array': False,
                 'is_buffer': True,
                 'use_list': True,
@@ -981,7 +981,7 @@ functions_expected = {
                 'python_name': 'vi',
                 'python_type': 'int',
                 'type_in_documentation': 'int',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'ctypes_variable_name': 'vi_ctype',
                 'ctypes_type': 'ViSession',
                 'ctypes_type_library_call': 'ViSession',
@@ -1013,7 +1013,7 @@ functions_expected = {
                 'python_name': 'status',
                 'python_type': 'str',
                 'type_in_documentation': 'str',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'ctypes_variable_name': 'status_ctype',
                 'ctypes_type': 'ViString',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
@@ -1047,7 +1047,7 @@ functions_expected = {
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'use_array': False,
                 'is_buffer': False,
                 'use_list': False,
@@ -1079,7 +1079,7 @@ functions_expected = {
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
-                'default_type_in_documentation': True,
+                'type_in_documentation_was_calculated': True,
                 'use_array': False,
                 'is_buffer': True,
                 'use_list': True,
@@ -1141,7 +1141,7 @@ attributes_expected = {
         'type': 'ViBoolean',
         'python_type': 'bool',
         'type_in_documentation': 'bool',
-        'default_type_in_documentation': True,
+        'type_in_documentation_was_calculated': True,
         'attribute_class': 'AttributeViBoolean',
     },
 }
