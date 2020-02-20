@@ -614,7 +614,7 @@ class _Session(object):
         Finishes synchronizing the Sync Pulse Sender.
 
         Args:
-            sessions ((nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
+            sessions (list of (nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
             min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
                 between 0.0 s and 0.050 s (50 ms). Minimal period for a single
@@ -939,7 +939,7 @@ def finish_sync_pulse_sender_synchronize(sessions, min_time):
     Finishes synchronizing the Sync Pulse Sender.
 
     Args:
-        sessions ((nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
+        sessions (list of (nimi-python Session class or nitclk.SessionReference)): sessions is an array of sessions that are being synchronized.
 
         min_time (float in seconds or datetime.timedelta): Minimal period of TClk, expressed in seconds. Supported values are
             between 0.0 s and 0.050 s (50 ms). Minimal period for a single

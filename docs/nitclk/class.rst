@@ -183,7 +183,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type sessions: (nimi-python Session class or nitclk.SessionReference)
+        :type sessions: list of (nimi-python Session class or nitclk.SessionReference)
         :param min_time:
 
 
