@@ -666,7 +666,7 @@ class Session(_SessionBase):
 
                 Contains the **resource_name** of the device to initialize.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -1310,7 +1310,7 @@ class Session(_SessionBase):
 
                 Contains the **resource_name** of the device to initialize.
 
-            option_string (str): Some options
+            option_string (dict): Some options
 
             id_query (bool): NI-FAKE is probably not needed.
 

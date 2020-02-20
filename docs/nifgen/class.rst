@@ -78,7 +78,7 @@ Session
         
 
 
-    :type channel_name: str
+    :type channel_name: str, list, range, tuple
 
     :param reset_device:
         
@@ -132,7 +132,7 @@ Session
         +-------------------------+---------+
 
 
-    :type options: str
+    :type options: dict
 
 
 Methods

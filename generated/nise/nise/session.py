@@ -193,7 +193,7 @@ class Session(_SessionBase):
         Args:
             virtual_device_name (str): The name of the NI Switch Executive virtual device.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -746,7 +746,7 @@ class Session(_SessionBase):
         Args:
             virtual_device_name (str): The name of the NI Switch Executive virtual device.
 
-            option_string (str): The option string can be used to pass information to each of the IVI
+            option_string (dict): The option string can be used to pass information to each of the IVI
                 devices on startup. It can be used to set things such as simulation,
                 range checking, etc. Consult your driver documentation for more
                 information about valid entries for the option string.

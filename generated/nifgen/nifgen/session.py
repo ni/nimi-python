@@ -3072,7 +3072,7 @@ class Session(_SessionBase):
                 | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
                 +-----------+--------------------------------------+------------------------+---------------------------------+
 
-            channel_name (str): Specifies the channel that this VI uses.
+            channel_name (str, list, range, tuple): Specifies the channel that this VI uses.
 
                 **Default Value**: "0"
 
@@ -3090,7 +3090,7 @@ class Session(_SessionBase):
                 | False | Do not reset device |
                 +-------+---------------------+
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -4078,7 +4078,7 @@ class Session(_SessionBase):
                 | 5         | IVI logical name or IVI virtual name | *myLogicalName*        | (*myLogicalName* = name)        |
                 +-----------+--------------------------------------+------------------------+---------------------------------+
 
-            channel_name (str): Specifies the channel that this VI uses.
+            channel_name (str, list, range, tuple): Specifies the channel that this VI uses.
 
                 **Default Value**: "0"
 
@@ -4096,7 +4096,7 @@ class Session(_SessionBase):
                 | False | Do not reset device |
                 +-------+---------------------+
 
-            option_string (str): Sets the initial value of certain session properties.
+            option_string (dict): Sets the initial value of certain session properties.
 
                 The syntax for **optionString** is
 

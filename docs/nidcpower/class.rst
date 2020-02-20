@@ -70,7 +70,7 @@ Session
         
 
 
-    :type channels: str
+    :type channels: str, list, range, tuple
 
     :param reset:
         
@@ -115,7 +115,7 @@ Session
         +-------------------------+---------+
 
 
-    :type options: str
+    :type options: dict
 
 
 Methods
