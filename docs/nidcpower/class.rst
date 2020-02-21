@@ -274,6 +274,49 @@ configure_aperture_time
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
+create_advanced_sequence
+------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: create_advanced_sequence(sequence_name, property_names, set_as_active_sequence=True)
+
+            Test.
+
+            
+
+            .. note:: Test.
+
+
+
+            :param sequence_name:
+
+
+                Name of sequence.
+
+                
+
+
+            :type sequence_name: str
+            :param property_names:
+
+
+                Sequence.
+
+                
+
+
+            :type property_names: list of str
+            :param set_as_active_sequence:
+
+
+                Specifies that this current sequence is active.
+
+                
+
+
+            :type set_as_active_sequence: bool
+
 create_advanced_sequence_step
 -----------------------------
 

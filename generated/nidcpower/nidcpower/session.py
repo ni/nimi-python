@@ -4683,6 +4683,36 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def create_advanced_sequence(self, sequence_name, property_names, set_as_active_sequence=True):
+        '''create_advanced_sequence
+
+        Test.
+
+        Note: Test.
+
+        Args:
+            sequence_name (str): Name of sequence.
+
+            property_names (list of str): Sequence.
+
+            set_as_active_sequence (bool): Specifies that this current sequence is active.
+
+        '''
+        # First we need to get all possible properties we might be setting. The way the NI-DCPower C API is designed,
+        # we need to know this upfront in order to call `niDCPower_CreateAdvancedSequence`. In order to find the attribute
+        # ID of each property, we look at the member Attribute objects of Session.
+        attribute_ids_used = set()
+        for prop in property_names:
+            if prop not in Session.__base__.__dict__:
+                raise KeyError('{0} is not an property on the nidcpower.Session'.format(prop))
+            if not isinstance(Session.__base__.__dict__[prop], _attributes.Attribute) and not isinstance(Session.__base__.__dict__[prop], _attributes.AttributeEnum):
+                raise TypeError('{0} is not an attribute type: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
+            attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
+
+        # Create the sequence with the list of attr ids we have
+        self._create_advanced_sequence(sequence_name, list(attribute_ids_used), set_as_active_sequence)
+
+    @ivi_synchronized
     def get_channel_name(self, index):
         r'''get_channel_name
 
