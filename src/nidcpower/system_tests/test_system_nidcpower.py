@@ -267,12 +267,13 @@ def test_import_export_file(single_channel_session):
 
 
 def test_create_and_delete_advanced_sequence_step(single_channel_session):
-    ids = [1250001]  # work around #507
+    properties_used = ['output_function', 'voltage_level']
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
-    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
-    single_channel_session._create_advanced_sequence_step(set_as_active_step=True)
+    single_channel_session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=properties_used, set_as_active_sequence=True)
+    single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    single_channel_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     single_channel_session.voltage_level = 1
-    single_channel_session._delete_advanced_sequence(sequence_name='my_sequence')
+    single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
 
 
 def test_send_software_edge_trigger_error(session):
