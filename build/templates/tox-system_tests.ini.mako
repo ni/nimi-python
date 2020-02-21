@@ -76,6 +76,7 @@ deps =
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: scipy
     ${module_name}-system_tests: fasteners
+    ${module_name}-system_tests: pytest-json
 
     ${module_name}-coverage: coverage
     ${module_name}-coverage: codecov
