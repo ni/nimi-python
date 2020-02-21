@@ -17,7 +17,7 @@ def example(resource_name, channels, options, voltage_max, current_max, points_p
         session.current_limit_autorange = True
         session.source_delay = datetime.timedelta(seconds=delay)
         properties_used = ['output_function', 'voltage_level', 'current_level']
-        session.create_advanced_sequence(sequence_name='my_sequence', attribute_ids=properties_used, set_as_active_sequence=True)
+        session.create_advanced_sequence(sequence_name='my_sequence', property_names=properties_used, set_as_active_sequence=True)
 
         voltage_per_step = voltage_max / points_per_output_function
         for i in range(points_per_output_function):
