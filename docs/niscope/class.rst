@@ -156,7 +156,7 @@ Session
         +-------------------------+---------+
 
 
-    :type options: str
+    :type options: dict
 
 
 Methods
@@ -1205,7 +1205,7 @@ export_attribute_configuration_buffer
 
 
 
-            :rtype: list of int
+            :rtype: bytes
             :return:
 
 
@@ -1347,7 +1347,7 @@ fetch
             :return:
 
 
-                    Returns an array of classes with the following timing and scaling information about each waveform:
+                    Returns a list of class instances with the following timing and scaling information about each waveform:
 
                     -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                     -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -1418,7 +1418,7 @@ fetch_into
                 .. code-block:: python
 
                     waveform = numpy.ndarray(num_samples * session.actual_num_wfms(), dtype=numpy.float64)
-                    wfm_info = session['0,1'].fetch_into(num_samples, waveform, timeout=5.0)
+                    wfm_info = session['0,1'].fetch_into(waveform, timeout=5.0)
 
                 
 
@@ -1474,7 +1474,7 @@ fetch_into
             :return:
 
 
-                    Returns an array of classed with the following timing and scaling information about each waveform:
+                    Returns a list of class instances with the following timing and scaling information about each waveform:
 
                     -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                     -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
@@ -1559,7 +1559,7 @@ import_attribute_configuration_buffer
                 
 
 
-            :type configuration: list of int
+            :type configuration: bytes
 
 import_attribute_configuration_file
 -----------------------------------
@@ -1788,7 +1788,7 @@ read
             :return:
 
 
-                    Returns an array of classes with the following timing and scaling information about each waveform:
+                    Returns a list of class instances with the following timing and scaling information about each waveform:
 
                     -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                     -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.

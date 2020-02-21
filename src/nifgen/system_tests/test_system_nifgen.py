@@ -394,6 +394,12 @@ def test_named_waveform_operations(session):
     session.delete_waveform(waveform_name)
 
 
+def test_handle_waveform_operations(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handle = session.create_waveform(waveform_data_array=waveform_data)
+    session.delete_waveform(waveform_handle)
+
+
 def test_write_waveform_from_file_f64(session):
     try:
         session.create_waveform_from_file_f64(get_test_file_path('SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)

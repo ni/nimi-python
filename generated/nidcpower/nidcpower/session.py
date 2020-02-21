@@ -28,6 +28,8 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
         return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, bytes):
+        return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
         assert library_type is not None, 'library_type is required for list'
         return (library_type * len(value))(*value)
@@ -194,9 +196,6 @@ class _SessionBase(object):
     Refer to the NI PXI-4132 Measurement Configuration and Timing and Auto Zero topics for more information  about how to configure your measurements.
     Default Value: The default value for the NI PXI-4132 is AutoZero.ON. The default value for  all other devices is AutoZero.OFF, which is the only supported value for these devices.
 
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
     nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
@@ -322,13 +321,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current level range based on the desired current level for  the specified channels.
-    If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_level_range property. If you change the current_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the current_level_range  property was set to (or the default value if the property was never set) and uses that value as the  current level range.
     Query the current_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The current_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
-    Default Value: NIDCPOWER_VAL_OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -382,13 +378,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the current limit range based on the desired current limit for the  specified channel(s).
-    If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from NIDCPOWER_VAL_ON to  NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  current_limit_range property. If you change this property from AutoZero.ON to  AutoZero.OFF, NI-DCPower retains the last value the current_limit_range property was set to  (or the default value if the property was never set) and uses that value as the current limit range.
     Query the current_limit_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The current_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
-    Default Value: NIDCPOWER_VAL_OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2485,13 +2478,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage level range based on the desired voltage level  for the specified channel(s).
-    If you set this property to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
+    If you set this property to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_level_range property. If you change the voltage_level_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_level_range  property was set to (or the default value if the property was never set) and uses that value as  the voltage level range.
     Query the voltage_level_range property by using the _get_attribute_vi_int32 method for  information about which range NI-DCPower automatically selects.
     The voltage_level_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_VOLTAGE.
-    Default Value: NIDCPOWER_VAL_OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -2545,13 +2535,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether NI-DCPower automatically selects the voltage limit range based on the desired voltage limit for  the specified channel(s).
-    If this property is set to NIDCPOWER_VAL_ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  NIDCPOWER_VAL_ON to NIDCPOWER_VAL_OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
+    If this property is set to AutoZero.ON, NI-DCPower ignores any changes you make to the  voltage_limit_range property. If you change the voltage_limit_autorange property from  AutoZero.ON to AutoZero.OFF, NI-DCPower retains the last value the voltage_limit_range  property was set to (or the default value if the property was never set) and uses that value as the voltage limit  range.
     Query the voltage_limit_range property by using the _get_attribute_vi_int32 method to find out  which range NI-DCPower automatically selects.
     The voltage_limit_autorange property is applicable only if the output_function property  is set to OutputFunction.DC_CURRENT.
-    Default Value: NIDCPOWER_VAL_OFF
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    Default Value: AutoZero.OFF
 
     Tip:
     This property can use repeated capabilities (channels). If set or get directly on the
@@ -4120,7 +4107,7 @@ class Session(_SessionBase):
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
 
-            channels (str): Specifies which output channel(s) to include in a new session. Specify
+            channels (str, list, range, tuple): Specifies which output channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
@@ -4134,7 +4121,7 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -4618,7 +4605,7 @@ class Session(_SessionBase):
         of channels initialized for the importing session.
 
         Returns:
-            configuration (list of int): Specifies the byte array buffer to be populated with the exported
+            configuration (bytes): Specifies the byte array buffer to be populated with the exported
                 property configuration.
 
         '''
@@ -4629,10 +4616,11 @@ class Session(_SessionBase):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         size_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_ctype.value  # case B590
-        configuration_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt8, size=configuration_size)  # case B590
+        configuration_array = array.array("b", [0] * configuration_size)  # case B590
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niDCPower_ExportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(configuration_ctype[i]) for i in range(size_ctype.value)]
+        return _converters.convert_to_bytes(configuration_array)
 
     @ivi_synchronized
     def export_attribute_configuration_file(self, file_path):
@@ -4976,13 +4964,13 @@ class Session(_SessionBase):
         of channels initialized for the importing session.
 
         Args:
-            configuration (list of int): Specifies the byte array buffer that contains the property
+            configuration (bytes): Specifies the byte array buffer that contains the property
                 configuration to import.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
-        configuration_ctype = get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        configuration_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_bytes(configuration), library_type=_visatype.ViInt8)  # case B520
         error_code = self._library.niDCPower_ImportAttributeConfigurationBuffer(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -5084,7 +5072,7 @@ class Session(_SessionBase):
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
 
-            channels (str): Specifies which output channel(s) to include in a new session. Specify
+            channels (str, list, range, tuple): Specifies which output channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
@@ -5098,7 +5086,7 @@ class Session(_SessionBase):
             reset (bool): Specifies whether to reset the device during the initialization
                 procedure.
 
-            option_string (str): Specifies the initial value of certain properties for the session. The
+            option_string (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **optionString** is a list of properties with an assigned
                 value where 1 is True and 0 is False. For example:
 

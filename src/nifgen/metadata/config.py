@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 20.0.0d1
+# This file is generated from NI-FGEN API metadata version 20.0.0d3
 config = {
-    'api_version': '20.0.0d1',
+    'api_version': '20.0.0d3',
     'c_function_prefix': 'niFgen_',
     'close_function': 'close',
     'context_manager_name': {
@@ -12,7 +12,10 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-FGEN',
-    'extra_errors_used': ['InvalidRepeatedCapabilityError', 'SelfTestError', ],
+    'extra_errors_used': [
+        'InvalidRepeatedCapabilityError',
+        'SelfTestError'
+    ],
     'init_function': 'InitializeWithChannels',
     'library_info': {
         'Linux': {
@@ -23,11 +26,11 @@ config = {
         },
         'Windows': {
             '32bit': {
-                'name': 'nifgen_32.dll',
+                'name': 'niFgen_32.dll',
                 'type': 'windll'
             },
             '64bit': {
-                'name': 'nifgen_64.dll',
+                'name': 'niFgen_64.dll',
                 'type': 'cdll'
             }
         }
