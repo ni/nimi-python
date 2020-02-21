@@ -10,7 +10,7 @@ import zipfile
 
 parser = argparse.ArgumentParser(description='Downloads the latest release nimi-python and runs system tests on the specified driver.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str, help='Driver Name.')
-parser.add_argument('-pv', '--python_version', required=False, type=str, help='Python version to be run.', default='py27')  # pass py36 if wanted to run on python-3.6
+parser.add_argument('-pv', '--python_version', required=False, type=str, help='Python version to be run.', default='py38')  # pass py36 if wanted to run on python-3.6
 parser.add_argument('-pb', '--python_bitness', required=False, type=str, help='Python bitness to be run.', default=' ')  # pass '--32' if you want to run on a 32bit python if both available
 args = parser.parse_args()
 
