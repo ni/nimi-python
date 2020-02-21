@@ -21,13 +21,13 @@ def example(resource_name, channels, options, voltage_max, current_max, points_p
 
         voltage_per_step = voltage_max / points_per_output_function
         for i in range(points_per_output_function):
-            session.create_advanced_sequence_step(set_as_active_sequence=False)
+            session.create_advanced_sequence_step(set_as_active_step=False)
             session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
             session.voltage_level = voltage_per_step * i
 
         current_per_step = current_max / points_per_output_function
         for i in range(points_per_output_function):
-            session.create_advanced_sequence_step(set_as_active_sequence=False)
+            session.create_advanced_sequence_step(set_as_active_step=False)
             session.output_function = nidcpower.OutputFunction.DC_CURRENT
             session.current_level = current_per_step * i
 
