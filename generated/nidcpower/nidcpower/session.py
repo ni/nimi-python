@@ -4296,7 +4296,7 @@ class Session(_SessionBase):
         r'''_create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
-        _create_advanced_sequence_step method to add steps to the
+        create_advanced_sequence_step method to add steps to the
         active advanced sequence.
 
         You can create multiple advanced sequences in a session.
@@ -4322,7 +4322,7 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-        _create_advanced_sequence_step
+        create_advanced_sequence_step
 
         Note:
         This method is not supported on all devices. Refer to `Supported
@@ -4461,8 +4461,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _create_advanced_sequence_step(self, set_as_active_step=True):
-        r'''_create_advanced_sequence_step
+    def create_advanced_sequence_step(self, set_as_active_step=True):
+        r'''create_advanced_sequence_step
 
         Creates a new advanced sequence step in the advanced sequence specified
         by the Active advanced sequence. When you create an advanced sequence

@@ -274,6 +274,55 @@ configure_aperture_time
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
+create_advanced_sequence_step
+-----------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: create_advanced_sequence_step(set_as_active_step=True)
+
+            Creates a new advanced sequence step in the advanced sequence specified
+            by the Active advanced sequence. When you create an advanced sequence
+            step, each property you passed to the :py:meth:`nidcpower.Session._create_advanced_sequence`
+            method is reset to its default value for that step unless otherwise
+            specified.
+
+            **Support for this Method**
+
+            You must set the source mode to Sequence to use this method.
+
+            Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+            methods is unsupported.
+
+            **Related Topics**:
+
+            `Advanced Sequence
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            :py:meth:`nidcpower.Session._create_advanced_sequence`
+
+            
+
+            .. note:: This method is not supported on all devices. Refer to `Supported
+                Methods by
+                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+                for more information about supported devices.
+
+
+
+            :param set_as_active_step:
+
+
+                Specifies that this current step in the active sequence is active.
+
+                
+
+
+            :type set_as_active_step: bool
+
 disable
 -------
 
