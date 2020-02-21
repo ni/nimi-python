@@ -50,7 +50,7 @@ def _main(argsv):
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
     parser.add_argument('-p', '--number-points', default=256, help='Number of points per output function')
     parser.add_argument('-v', '--voltage-max', default=1.0, type=float, help='Maximum voltage (V)')
-    parser.add_argument('-i', '--current-max', default=0.1, type=float, help='Maximum Current (I)')
+    parser.add_argument('-i', '--current-max', default=0.001, type=float, help='Maximum Current (I)')
     parser.add_argument('-d', '--delay', default=0.05, type=float, help='Source delay (s)')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
@@ -68,7 +68,7 @@ def test_main():
 
 def test_example():
     options = {'simulate': True, 'driver_setup': {'Model': '4162', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2', '0', options, 1.0, 0.1, 256, 0.05)
+    example('PXI1Slot2', '0', options, 1.0, 0.001, 256, 0.05)
 
 
 if __name__ == '__main__':
