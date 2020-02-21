@@ -78,7 +78,7 @@ Session
         
 
 
-    :type channel_name: str
+    :type channel_name: str, list, range, tuple
 
     :param reset_device:
         
@@ -132,7 +132,7 @@ Session
         +-------------------------+---------+
 
 
-    :type options: str
+    :type options: dict
 
 
 Methods
@@ -1552,7 +1552,7 @@ export_attribute_configuration_buffer
 
 
 
-            :rtype: list of int
+            :rtype: bytes
             :return:
 
 
@@ -1854,7 +1854,7 @@ import_attribute_configuration_buffer
                 
 
 
-            :type configuration: list of int
+            :type configuration: bytes
 
 import_attribute_configuration_file
 -----------------------------------

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import argparse
-import nitclk
+# import nitclk
 import pprint
 import sys
 
