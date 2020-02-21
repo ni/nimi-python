@@ -366,6 +366,50 @@ create_advanced_sequence_step
 
             :type set_as_active_step: bool
 
+delete_advanced_sequence
+------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: delete_advanced_sequence(sequence_name)
+
+            Deletes a previously created advanced sequence and all the advanced
+            sequence steps in the advanced sequence.
+
+            **Support for this Method**
+
+            You must set the source mode to Sequence to use this method.
+
+            Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+            methods is unsupported.
+
+            **Related Topics**:
+
+            `Advanced Sequence
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            
+
+            .. note:: This method is not supported on all devices. Refer to `Supported
+                Methods by
+                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+                for more information about supported devices.
+
+
+
+            :param sequence_name:
+
+
+                specifies the name of the sequence to delete.
+
+                
+
+
+            :type sequence_name: str
+
 disable
 -------
 

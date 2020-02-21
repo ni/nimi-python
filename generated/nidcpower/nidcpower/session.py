@@ -4504,8 +4504,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _delete_advanced_sequence(self, sequence_name):
-        r'''_delete_advanced_sequence
+    def delete_advanced_sequence(self, sequence_name):
+        r'''delete_advanced_sequence
 
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
