@@ -36,7 +36,7 @@ def example(resource_name, channels, options, voltage_max, current_max, points_p
             measurements = session.fetch_multiple(points_per_output_function * 2, timeout=timeout)
 
         session.delete_advanced_sequence(sequence_name='my_sequence')
-        line_format = '{:,<4} {:,.6g<10} {:,.6g<10} {:<6}\n'
+        line_format = '{:,<4} {:,.6g} {:,.6g} {:<6}\n'
         print('{:<4} {:<10} {:,<10} {:<6}'.format('Num', 'Voltage', 'Current', 'In Compliance'))
         i = 0
         for measurement in measurements:
