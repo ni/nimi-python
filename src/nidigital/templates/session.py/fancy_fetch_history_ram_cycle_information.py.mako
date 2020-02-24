@@ -45,8 +45,6 @@
                 time_set_names[time_set_index] = self.get_time_set_name(time_set_index)
             time_set_name = time_set_names[time_set_index]
 
-            vector_number = vector_number
-            cycle_number = cycle_number
             scan_cycle_number = self._fetch_history_ram_scan_cycle_number(site, position)
 
             vector_expected_pin_states = []
