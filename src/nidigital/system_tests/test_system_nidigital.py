@@ -31,7 +31,7 @@ def test_pins_rep_cap(multi_instrument_session):
 def test_property_boolean(multi_instrument_session):
     channel = multi_instrument_session.get_channel_name(index=42)
     multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range = True
-    assert multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range == True
+    assert multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range is True
 
 
 def test_property_int32(multi_instrument_session):
