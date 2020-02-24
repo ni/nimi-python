@@ -93,13 +93,12 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         waveform_data=[i for i in range(4)])
 
     multi_instrument_session.burst_pattern(
-        site_list='',
         start_label='new_pattern',
         select_digital_function=False,
         wait_until_done=True,
         timeout=5)
 
-    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
+    pass_fail = multi_instrument_session.get_site_pass_fail()
     assert pass_fail == [True, True]
 
 
@@ -110,7 +109,6 @@ def configure_session(session, test_name):
     session.load_levels(get_test_file_path(test_name, 'pin_levels.digilevels'))
     session.load_timing(get_test_file_path(test_name, 'timing.digitiming'))
     session.apply_levels_and_timing(
-        site_list='',
         levels_sheet='pin_levels',
         timing_sheet='timing',
         initial_state_high_pins='',
@@ -163,7 +161,6 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     multi_instrument_session.create_capture_waveform_parallel(pin_list='HighPins', waveform_name='capt_wfm')
 
     multi_instrument_session.burst_pattern(
-        site_list='',
         start_label='new_pattern',
         select_digital_function=False,
         wait_until_done=False,
@@ -171,7 +168,6 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
 
     # Pattern burst is configured to fetch num_samples samples
     fetched_waveforms = multi_instrument_session.fetch_capture_waveform(
-        site_list='',
         waveform_name='capt_wfm',
         samples_to_read=num_samples,
         timeout=10.0)
@@ -201,7 +197,6 @@ def test_fetch_capture_waveform(multi_instrument_session):
     multi_instrument_session.create_capture_waveform_parallel(pin_list='HighPins', waveform_name='capt_wfm')
 
     multi_instrument_session.burst_pattern(
-        site_list='',
         start_label='new_pattern',
         select_digital_function=False,
         wait_until_done=False,
@@ -211,8 +206,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
     samples_per_fetch = 8
     waveforms = collections.defaultdict(list)
     for i in range(num_samples // samples_per_fetch):
-        fetched_waveform = multi_instrument_session.fetch_capture_waveform(
-            site_list='site1,site0',
+        fetched_waveform = multi_instrument_session.sites[[1, 0]].fetch_capture_waveform(
             waveform_name='capt_wfm',
             samples_to_read=samples_per_fetch,
             timeout=10.0)
@@ -223,14 +217,12 @@ def test_fetch_capture_waveform(multi_instrument_session):
     assert all(len(waveforms[site]) == num_samples for site in waveforms)
 
     # Burst on subset of sites and verify fetch_capture_waveform()
-    multi_instrument_session.burst_pattern(
-        site_list='site1',
+    multi_instrument_session.sites[1].burst_pattern(
         start_label='new_pattern',
         select_digital_function=False,
         wait_until_done=False,
         timeout=5)
     fetched_waveform = multi_instrument_session.fetch_capture_waveform(
-        site_list='',
         waveform_name='capt_wfm',
         samples_to_read=num_samples,
         timeout=10.0)

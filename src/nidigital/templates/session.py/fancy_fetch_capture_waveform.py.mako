@@ -10,7 +10,7 @@
         # the (modified) line below
         # Also, we want to return the two sized that normally wouldn't be returned
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -33,10 +33,10 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
+        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
 
         # Get the site list
-        site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.CAPTURE_WAVEFORM)
+        site_list = self.get_site_results_site_numbers(self._repeated_capability, enums.SiteResult.CAPTURE_WAVEFORM)
         assert len(site_list) == actual_num_waveforms
 
         waveforms = {}

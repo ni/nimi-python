@@ -106,6 +106,8 @@ functions_additional_fetch_capture_waveform = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },

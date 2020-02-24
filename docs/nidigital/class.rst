@@ -1143,21 +1143,23 @@ fetch_capture_waveform
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
+    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout)
 
             Returns dictionary where each key is the site number and the value is array.array of unsigned int
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
+
+                    session.sites[0,1].fetch_capture_waveform(waveform_name, samples_to_read, timeout)
 
 
-                
-
-
-            :type site_list: str
             :param waveform_name:
 
 
