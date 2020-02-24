@@ -106,21 +106,23 @@ apply_levels_and_timing
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: apply_levels_and_timing(site_list, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
+    .. py:method:: apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
+
+                    session.sites[0,1].apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
 
 
-                
-
-
-            :type site_list: str
             :param levels_sheet:
 
 
@@ -192,21 +194,23 @@ burst_pattern
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: burst_pattern(site_list, start_label, select_digital_function, wait_until_done, timeout)
+    .. py:method:: burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
+
+                    session.sites[0,1].burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
 
 
-                
-
-
-            :type site_list: str
             :param start_label:
 
 
@@ -407,21 +411,22 @@ configure_pattern_burst_sites
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_pattern_burst_sites(site_list)
+    .. py:method:: configure_pattern_burst_sites()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
 
+                    session.sites[0,1].configure_pattern_burst_sites()
 
-                
-
-
-            :type site_list: str
 
 configure_time_set_compare_edges_strobe
 ---------------------------------------
@@ -1094,42 +1099,44 @@ disable_sites
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: disable_sites(site_list)
+    .. py:method:: disable_sites()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
 
+                    session.sites[0,1].disable_sites()
 
-                
-
-
-            :type site_list: str
 
 enable_sites
 ------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: enable_sites(site_list)
+    .. py:method:: enable_sites()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
 
+                    session.sites[0,1].enable_sites()
 
-                
-
-
-            :type site_list: str
 
 fetch_capture_waveform
 ----------------------
@@ -1188,21 +1195,23 @@ fetch_history_ram_cycle_information
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_history_ram_cycle_information(site, sample_index)
+    .. py:method:: fetch_history_ram_cycle_information(sample_index)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site:
+                .. code:: python
+
+                    session.sites[0,1].fetch_history_ram_cycle_information(sample_index)
 
 
-                
-
-
-            :type site: str
             :param sample_index:
 
 
@@ -1251,21 +1260,23 @@ fetch_history_ram_cycle_pin_data
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_history_ram_cycle_pin_data(site, pin_list, sample_index, dut_cycle_index)
+    .. py:method:: fetch_history_ram_cycle_pin_data(pin_list, sample_index, dut_cycle_index)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site:
+                .. code:: python
+
+                    session.sites[0,1].fetch_history_ram_cycle_pin_data(pin_list, sample_index, dut_cycle_index)
 
 
-                
-
-
-            :type site: str
             :param pin_list:
 
 
@@ -1316,21 +1327,23 @@ fetch_history_ram_scan_cycle_number
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_history_ram_scan_cycle_number(site, sample_index)
+    .. py:method:: fetch_history_ram_scan_cycle_number(sample_index)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site:
+                .. code:: python
+
+                    session.sites[0,1].fetch_history_ram_scan_cycle_number(sample_index)
 
 
-                
-
-
-            :type site: str
             :param sample_index:
 
 
@@ -1470,21 +1483,22 @@ get_history_ram_sample_count
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_history_ram_sample_count(site)
+    .. py:method:: get_history_ram_sample_count()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site:
+                .. code:: python
 
+                    session.sites[0,1].get_history_ram_sample_count()
 
-                
-
-
-            :type site: str
 
             :rtype: int
             :return:
@@ -1657,21 +1671,22 @@ get_site_pass_fail
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_site_pass_fail(site_list)
+    .. py:method:: get_site_pass_fail()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
 
+                    session.sites[0,1].get_site_pass_fail()
 
-                
-
-
-            :type site_list: str
 
             :rtype: list of bool
             :return:
@@ -1686,21 +1701,23 @@ get_site_results_site_numbers
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_site_results_site_numbers(site_list, site_result_type)
+    .. py:method:: get_site_results_site_numbers(site_result_type)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site_list:
+                .. code:: python
+
+                    session.sites[0,1].get_site_results_site_numbers(site_result_type)
 
 
-                
-
-
-            :type site_list: str
             :param site_result_type:
 
 
@@ -1931,21 +1948,22 @@ is_site_enabled
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: is_site_enabled(site)
+    .. py:method:: is_site_enabled()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (sites). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param site:
+                .. code:: python
 
+                    session.sites[0,1].is_site_enabled()
 
-                
-
-
-            :type site: str
 
             :rtype: bool
             :return:
@@ -2760,6 +2778,32 @@ conditional_jump_triggers
             session.conditional_jump_triggers['conditionalJumpTrigger0-conditionalJumpTrigger2'].channel_enabled = True
 
         passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
+
+
+sites
+-----
+
+    .. py:attribute:: nidigital.Session.sites[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.sites['0-2'].channel_enabled = True
+
+        passes a string of :python:`'site0, site1, site2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.sites['site0-site2'].channel_enabled = True
+
+        passes a string of :python:`'site0, site1, site2'` to the set attribute function.
 
 
 
