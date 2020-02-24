@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d5
+# This file is generated from NI-FAKE API metadata version 1.2.0d6
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -193,11 +193,14 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'configuration',
+                'python_api_converter_name': 'convert_to_bytes',
+                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]'
+                'type': 'ViInt8[]',
+                'use_array': True
             }
         ],
         'returns': 'ViStatus'
@@ -1128,6 +1131,8 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'configuration',
+                'python_api_converter_name': 'convert_to_bytes',
+                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'

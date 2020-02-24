@@ -2,19 +2,6 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
-    'ImportAttributeConfigurationBuffer': {
-        'parameters': {
-            2: {'python_api_converter_name': 'convert_import_buffer_to_array', }
-        },
-    },
-    'ExportAttributeConfigurationBuffer': {
-        'parameters': {
-            2: {
-                'python_api_converter_name': 'convert_to_bytes',
-                'use_array': True,
-            },
-        },
-    },
 }
 
 

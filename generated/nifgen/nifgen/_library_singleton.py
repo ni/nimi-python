@@ -13,8 +13,8 @@ import threading
 _instance = None
 _instance_lock = threading.Lock()
 _library_info = {'Linux': {'64bit': {'name': 'nifgen', 'type': 'cdll'}},
-                 'Windows': {'32bit': {'name': 'nifgen_32.dll', 'type': 'windll'},
-                             '64bit': {'name': 'nifgen_64.dll', 'type': 'cdll'}}}
+                 'Windows': {'32bit': {'name': 'niFgen_32.dll', 'type': 'windll'},
+                             '64bit': {'name': 'niFgen_64.dll', 'type': 'cdll'}}}
 
 
 def _get_library_name():

@@ -29,6 +29,8 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
         return numpy.ctypeslib.as_ctypes(value)
+    elif isinstance(value, bytes):
+        return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
         assert library_type is not None, 'library_type is required for list'
         return (library_type * len(value))(*value)
@@ -1588,7 +1590,7 @@ class Session(_SessionBase):
 
             reset_device (bool):
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -2763,7 +2765,7 @@ class Session(_SessionBase):
 
             reset_device (bool):
 
-            option_string (str):
+            option_string (dict):
 
 
         Returns:

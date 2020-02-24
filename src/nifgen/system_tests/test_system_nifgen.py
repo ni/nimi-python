@@ -21,6 +21,7 @@ test_files_base_dir = os.path.join(os.path.dirname(__file__))
 daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
 daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
+
 def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
 
@@ -391,6 +392,12 @@ def test_named_waveform_operations(session):
     session.write_waveform(waveform_name, waveform_data_1)
     session.write_waveform(waveform_name, waveform_data_2)
     session.delete_waveform(waveform_name)
+
+
+def test_handle_waveform_operations(session):
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    waveform_handle = session.create_waveform(waveform_data_array=waveform_data)
+    session.delete_waveform(waveform_handle)
 
 
 def test_write_waveform_from_file_f64(session):
