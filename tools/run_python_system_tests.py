@@ -10,56 +10,23 @@ import zipfile
 
 parser = argparse.ArgumentParser(description='Downloads the latest release nimi-python and runs system tests on the specified driver.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-d', '--driver', required=True, type=str, help='Driver Name.')
-parser.add_argument('-pv', '--python_version', required=False, type=str, help='Python version to be run.', default='py38')  # pass py36 if wanted to run on python-3.6
-parser.add_argument('-pb', '--python_bitness', required=False, type=str, help='Python bitness to be run.', default=' ')  # pass '--32' if you want to run on a 32bit python if both available
+parser.add_argument('-pv', '--python-version', required=False, type=str, help='Python version to be run.', default='py38')  # pass py36 if wanted to run on python-3.6
+parser.add_argument('-pb', '--python-bitness', required=False, type=str, help='Python bitness to be run.', default=None)  # pass '--32' if you want to run on a 32bit python if both available
 args = parser.parse_args()
 
 
-print('****Installing tox to Python.****')
-subprocess.check_call(["python", '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', 'pip', 'tox'])
-
-
-print('****Creating temporary directory.****')
-temp_dir = tempfile.gettempdir()
-working_directory = os.path.join(temp_dir, str(time.time()))
-if not os.path.exists(working_directory):
-    os.makedirs(working_directory)
-print(working_directory)
-
-
-print('****Parsing GitHub releases to obtain the latest zip file URL.****')
-release_url = 'https://api.github.com/repos/ni/nimi-python/releases'
-with urllib.request.urlopen(release_url) as response:
-    html = response.read()
-url_data = json.loads(html.decode('utf-8'))
-zip_url = url_data[0]['zipball_url']
-print(zip_url)
-
-print('****Downloading latest zip file from github.****')
-try:
-    from urllib.request import urlretrieve
-except ImportError:
-    from urllib import urlretrieve
-my_zip_file = os.path.join(working_directory, 'zip.zip')
-urlretrieve(zip_url, my_zip_file)
-print('Download complete.')
-
-
-print('****Unzipping Zip file.****')
-zip_folder = os.path.join(working_directory, 'zip_folder')
-zip_ref = zipfile.ZipFile(my_zip_file, 'r')
-zip_ref.extractall(zip_folder)
-zip_ref.close()
-print(zip_folder)
+command = ['python', '-m', 'tox']
+if args.python_bitness is not None:
+    command.append(args.python_bitness)
 
 drivers_using_other_driver = ['niscope', 'nifgen', 'nidigital', 'nitclk', ]
-other_driver_env = ''
 if args.driver in drivers_using_other_driver:
     # Creating the wheel for the other required driver only uses Python 3.8
-    other_driver_env = 'py38-{0}-wheel_dep,'.format(args.driver)
+    command.append(['-e', 'py38-{0}-wheel_dep,'.format(args.driver)])
+
+command.append(['-e', '{0}-{1}-system_tests'.format(args.python_version, args.driver)])
+command.append(['-c', 'tox-system_tests.ini'])
 
 print('****Running system tests in tox.****')
-tox_dir = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated', args.driver)
-os.chdir(tox_dir)
-result = os.system('python -m tox {0} -e {1}{2}-{3}-system_tests -c tox-system_tests.ini'.format(args.python_bitness, other_driver_env, args.python_version, args.driver))
-sys.exit(result)
+results = subprocess.run(command, check=True)
+
