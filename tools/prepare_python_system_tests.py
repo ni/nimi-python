@@ -66,5 +66,7 @@ if args.python_version is not None:
 if args.python_bitness is not None:
     command.append(['--python-bitness', args.python_bitness])
 
+print('Running command:')
+print(command)
 results = subprocess.run(command, check=True)
 
