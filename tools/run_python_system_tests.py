@@ -15,10 +15,10 @@ if args.python_bitness is not None:
 drivers_using_other_driver = ['niscope', 'nifgen', 'nidigital', 'nitclk', ]
 if args.driver in drivers_using_other_driver:
     # Creating the wheel for the other required driver only uses Python 3.8
-    command.append(['-e', 'py38-{0}-wheel_dep,'.format(args.driver)])
+    command += ['-e', 'py38-{0}-wheel_dep,'.format(args.driver)]
 
-command.append(['-e', '{0}-{1}-system_tests'.format(args.python_version, args.driver)])
-command.append(['-c', 'tox-system_tests.ini'])
+command += ['-e', '{0}-{1}-system_tests'.format(args.python_version, args.driver)]
+command += ['-c', 'tox-system_tests.ini']
 
 print('****Running system tests in tox.****')
 results = subprocess.run(command, check=True)

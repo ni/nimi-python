@@ -62,9 +62,9 @@ tox_dir = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated', args.
 os.chdir(tox_dir)
 command = ['python', '../../tools/run_python_system_tests.py', '-d', args.driver]
 if args.python_version is not None:
-    command.append(['--python-version', args.python_version])
+    command += ['--python-version', args.python_version]
 if args.python_bitness is not None:
-    command.append(['--python-bitness', args.python_bitness])
+    command += ['--python-bitness', args.python_bitness]
 
 print('Running command:')
 print(command)
