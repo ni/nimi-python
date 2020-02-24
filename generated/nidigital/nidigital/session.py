@@ -2636,7 +2636,7 @@ class Session(_SessionBase):
             else:
                 raise TypeError('Unknown array type: {}'.format(type(waveform_data[site])))
 
-            site_list.append('site' + str(site))
+            site_list.append(site)
 
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
@@ -2644,9 +2644,7 @@ class Session(_SessionBase):
 
             i += 1
 
-        site_list_str = ','.join(site_list)
-
-        self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
+        self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
     def get_channel_name_from_string(self, index):
