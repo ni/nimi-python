@@ -39,6 +39,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -114,6 +116,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -278,6 +282,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             }
@@ -822,6 +828,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             }
@@ -840,6 +848,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             }
@@ -881,6 +891,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -939,6 +951,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -987,6 +1001,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1060,6 +1076,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1419,6 +1437,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1636,6 +1656,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -1674,6 +1696,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -1936,6 +1960,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -2669,6 +2695,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
