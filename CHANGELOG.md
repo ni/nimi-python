@@ -26,6 +26,12 @@ All notable changes to this project will be documented in this file.
         * Zip file per driver for all examples and any helper files
         * Link to zip file on examples documentation
         * Support for Python 3.8
+        * Support for nested repeated capabilities. This allows things like
+            ``` python
+            session.sites[0, 1].pins['A', 'B'].ppmu_voltage_level = 4
+            ``` 
+
+            The repeated capabilities will be expanded to `'site0/A,site0/B,site1/A,site1/B'`
     * #### Changed
         * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
         * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
