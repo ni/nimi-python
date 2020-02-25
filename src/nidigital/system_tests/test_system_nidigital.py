@@ -6,8 +6,8 @@ import numpy
 import pytest
 
 import nidigital
-from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 from nidigital.enums import DigitalState
+from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 
 instr = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
