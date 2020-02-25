@@ -275,6 +275,7 @@ def convert_to_nitclk_session_number(item):
     raise TypeError('Unsupported type for nitclk session: {}'.format(type(item)))
 
 
+# The unused parameter is required for case B520 in codegen, which expects a two-parameter converter.
 def convert_to_nitclk_session_number_list(item_list, unused):
     '''Converts a list of items to nitclk session nums'''
     return [convert_to_nitclk_session_number(i) for i in item_list]
@@ -286,6 +287,7 @@ def convert_to_nitclk_session_number_list(item_list, unused):
 %>\
 % if config['module_name'] == 'nifake':
 # nifake specific converter(s) - used only for testing
+# The unused parameter is required for case B520 in codegen, which expects a two-parameter converter.
 def convert_double_each_element(numbers, unused):
     return [x * 2 for x in numbers]
 
@@ -310,7 +312,8 @@ def _(value):
     return value.encode()
 
 
-def convert_to_bytes(value):  # noqa: F811
+# The unused parameter is required for case B520 in codegen, which expects a two-parameter converter.
+def convert_to_bytes(value, unused=None):  # noqa: F811
     return bytes(_convert_to_bytes(value))
 
 
