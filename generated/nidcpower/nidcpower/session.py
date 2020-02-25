@@ -2689,6 +2689,9 @@ class _SessionBase(object):
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
+        # Instantiate any repeated capability objects
+        self.channels = _RepeatedCapabilities(self, '')
+
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -4163,9 +4166,6 @@ class Session(_SessionBase):
         # Call specified init function
         self._vi = 0  # This must be set before calling _initialize_with_channels().
         self._vi = self._initialize_with_channels(resource_name, channels, reset, options)
-
-        # Instantiate any repeated capability objects
-        self.channels = _RepeatedCapabilities(self, '')
 
         # Store the parameter list for later printing in __repr__
         param_list = []

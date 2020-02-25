@@ -70,6 +70,8 @@ class _SessionBase(object):
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
+        # Instantiate any repeated capability objects
+
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -236,8 +238,6 @@ class Session(_SessionBase):
         # Call specified init function
         self._vi = 0  # This must be set before calling _open_session().
         self._vi = self._open_session(virtual_device_name, options)
-
-        # Instantiate any repeated capability objects
 
         # Store the parameter list for later printing in __repr__
         param_list = []

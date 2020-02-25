@@ -196,6 +196,11 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
+        # Instantiate any repeated capability objects
+% for rep_cap in config['repeated_capabilities']:
+        self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}')
+% endfor
+
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -259,11 +264,6 @@ class Session(_SessionBase):
         # Call specified init function
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
-
-        # Instantiate any repeated capability objects
-% for rep_cap in config['repeated_capabilities']:
-        self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}')
-% endfor
 
 % if config['supports_nitclk']:
         self.tclk = nitclk.SessionReference(self._${config['session_handle_parameter_name']})
