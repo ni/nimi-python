@@ -934,7 +934,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout):
+    def _fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
         # This is slightly modified codegen from the function
         # We cannot use codegen without major modifications to the code generator
         # This function uses two 'ivi-dance' parameters and then multiplies them together - see
