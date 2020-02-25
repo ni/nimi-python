@@ -859,6 +859,22 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert session.channels['r0']._repeated_capability_list == ['r0']
 
+    def test_nested_repeated_capabilities_list(self):
+        with nifake.Session('dev1') as session:
+            assert session.sites[0, 1].channels[2, 3]._repeated_capability_list == ['site0/2', 'site0/3', 'site1/2', 'site1/3']
+
+    def test_nested_repeated_capability_method_on_specific_channel(self):
+        test_maximum_time_ms = 10     # milliseconds
+        test_maximum_time_us = 10000  # microseconds
+        test_maximum_time = datetime.timedelta(milliseconds=test_maximum_time_ms)
+        test_reading = 5
+        self.patched_library.niFake_ReadFromChannel.side_effect = self.side_effects_helper.niFake_ReadFromChannel
+        self.side_effects_helper['ReadFromChannel']['reading'] = test_reading
+        with nifake.Session('dev1') as session:
+            value = session.sites[0, 1].channels[2, 3].read_from_channel(test_maximum_time)
+        self.patched_library.niFake_ReadFromChannel.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher('site0/2,site0/3,site1/2,site1/3'), _matchers.ViInt32Matcher(test_maximum_time_us), _matchers.ViReal64PointerMatcher())
+        assert value == test_reading
+
     # Attributes
 
     def test_get_attribute_int32(self):
