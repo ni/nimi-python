@@ -487,7 +487,7 @@ def format_type_for_rst_documentation(param, numpy, config):
 
     # If type_in_documentation was set in metadata, we use it as is
     if param['type_in_documentation_was_calculated'] or numpy:
-        if param['is_string'] is True:
+        if param['is_string'] is True and param['enum'] is None:
             p_type = 'str'
         elif param['is_buffer'] is True and numpy is True:
             p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
@@ -565,7 +565,7 @@ def _format_type_for_docstring(param, numpy, config):
     # it would end up as 'list of int'
     # If type_in_documentation was set in metadata, we use it as is
     if param['type_in_documentation_was_calculated'] or numpy:
-        if param['is_string'] is True:
+        if param['is_string'] is True and param['enum'] is None:
             p_type = 'str'
         elif param['is_buffer'] is True and numpy is True:
             p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
