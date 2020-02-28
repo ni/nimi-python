@@ -839,7 +839,7 @@ class _SessionBase(object):
 
         pin_infos = []
         for i in range(len(pin_indexes)):
-            pin_name = "" if pin_indexes[i] == -1 else self.get_pin_name(pin_indexes[i])
+            pin_name = "" if pin_indexes[i] == -1 else self._get_pin_name(pin_indexes[i])
             channel_name = self.get_channel_name(channel_indexes[i])
             pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
 
@@ -1114,8 +1114,8 @@ class _SessionBase(object):
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_pin_name(self, pin_index):
-        r'''get_pin_name
+    def _get_pin_name(self, pin_index):
+        r'''_get_pin_name
 
         TBD
 
@@ -2268,6 +2268,23 @@ class Session(_SessionBase):
         return waveforms
 
     @ivi_synchronized
+    def get_pattern_pin_names(self, start_label):
+        '''get_pattern_pin_names
+
+        Returns the names of the pins referenced by the pattern.
+
+        Args:
+            start_label (str): Pattern name or exported pattern label from which to get the pin names referenced by the pattern.
+
+
+        Returns:
+            pin_names (list of str): List of pin names referenced by the pattern.
+
+        '''
+        pattern_pin_list = self.get_pattern_pin_list(start_label)
+        return [x.strip() for x in pattern_pin_list.split(',')]
+
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2515,34 +2532,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_GetPatternName(vi_ctype, pattern_index_ctype, name_buffer_size_ctype, name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return name_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
-    def get_pattern_pin_indexes(self, start_label):
-        r'''get_pattern_pin_indexes
-
-        TBD
-
-        Args:
-            start_label (str):
-
-
-        Returns:
-            pin_indexes (list of int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
-        pin_indexes_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        pin_indexes_ctype = None  # case B610
-        actual_num_pins_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetPatternPinIndexes(vi_ctype, start_label_ctype, pin_indexes_buffer_size_ctype, pin_indexes_ctype, None if actual_num_pins_ctype is None else (ctypes.pointer(actual_num_pins_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        pin_indexes_buffer_size_ctype = _visatype.ViInt32(actual_num_pins_ctype.value)  # case S200
-        pin_indexes_size = actual_num_pins_ctype.value  # case B620
-        pin_indexes_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=pin_indexes_size)  # case B620
-        error_code = self._library.niDigital_GetPatternPinIndexes(vi_ctype, start_label_ctype, pin_indexes_buffer_size_ctype, pin_indexes_ctype, None if actual_num_pins_ctype is None else (ctypes.pointer(actual_num_pins_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(pin_indexes_ctype[i]) for i in range(pin_indexes_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_pattern_pin_list(self, start_label):

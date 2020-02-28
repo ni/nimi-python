@@ -65,7 +65,6 @@ class Library(object):
         self.niDigital_GetFailCount_cfunc = None
         self.niDigital_GetHistoryRAMSampleCount_cfunc = None
         self.niDigital_GetPatternName_cfunc = None
-        self.niDigital_GetPatternPinIndexes_cfunc = None
         self.niDigital_GetPatternPinList_cfunc = None
         self.niDigital_GetPinName_cfunc = None
         self.niDigital_GetPinResultsPinInformation_cfunc = None
@@ -491,14 +490,6 @@ class Library(object):
                 self.niDigital_GetPatternName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_GetPatternName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetPatternName_cfunc(vi, pattern_index, name_buffer_size, name)
-
-    def niDigital_GetPatternPinIndexes(self, vi, start_label, pin_indexes_buffer_size, pin_indexes, actual_num_pins):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_GetPatternPinIndexes_cfunc is None:
-                self.niDigital_GetPatternPinIndexes_cfunc = self._library.niDigital_GetPatternPinIndexes
-                self.niDigital_GetPatternPinIndexes_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niDigital_GetPatternPinIndexes_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetPatternPinIndexes_cfunc(vi, start_label, pin_indexes_buffer_size, pin_indexes, actual_num_pins)
 
     def niDigital_GetPatternPinList(self, vi, start_label, pin_list_buffer_size, pin_list):  # noqa: N802
         with self._func_lock:

@@ -1523,35 +1523,6 @@ get_pattern_name
 
 
 
-get_pattern_pin_indexes
------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: get_pattern_pin_indexes(start_label)
-
-            TBD
-
-            
-
-
-
-            :param start_label:
-
-
-                
-
-
-            :type start_label: str
-
-            :rtype: list of int
-            :return:
-
-
-                    
-
-
-
 get_pattern_pin_list
 --------------------
 
@@ -1581,30 +1552,34 @@ get_pattern_pin_list
 
 
 
-get_pin_name
-------------
+get_pattern_pin_names
+---------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_pin_name(pin_index)
+    .. py:method:: get_pattern_pin_names(start_label)
 
-            TBD
+            Returns the names of the pins referenced by the pattern.
 
             
 
 
 
-            :param pin_index:
+            :param start_label:
 
+
+                Pattern name or exported pattern label from which to get the pin names referenced by the pattern.
 
                 
 
 
-            :type pin_index: int
+            :type start_label: str
 
-            :rtype: str
+            :rtype: list of str
             :return:
 
+
+                    List of pin names referenced by the pattern.
 
                     
 

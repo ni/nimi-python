@@ -254,3 +254,15 @@ def test_get_pin_results_pin_information(multi_instrument_session):
     assert pins == ['PinA', 'PinB', '']
     assert sites == [1, 0, -1]
     assert channels == fully_qualified_channels
+
+
+def test_get_pattern_pin_names(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+
+    pattern_pin_names = multi_instrument_session.get_pattern_pin_names(start_label='new_pattern')
+
+    expected_pin_names = ['LO' + str(i) for i in range(8)] + ['HI' + str(i) for i in range(8)]
+    assert pattern_pin_names == expected_pin_names

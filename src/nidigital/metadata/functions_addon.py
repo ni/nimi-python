@@ -42,6 +42,50 @@ functions_additional_write_source_waveform_site_unique = {
     },
 }
 
+functions_additional_get_pattern_pin_names = {
+    'FancyGetPatternPinNames': {
+        'python_name': 'get_pattern_pin_names',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_pattern_pin_names',
+            }
+        ],
+        'documentation': {
+            'description': 'Returns the names of the pins referenced by the pattern.',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Pattern name or exported pattern label from which to get the pin names referenced by the pattern. ',
+                },
+                'name': 'startLabel',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'List of pin names referenced by the pattern.'
+                },
+                'name': 'pin_names',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'ViString[]',
+            }
+        ],
+    },
+}
+
 functions_additional_get_pin_results_pin_information = {
     'FancyGetPinResultsPinInformation': {
         'python_name': 'get_pin_results_pin_information',

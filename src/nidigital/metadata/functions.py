@@ -1463,6 +1463,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPatternPinIndexes': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -1533,6 +1534,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinName': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
