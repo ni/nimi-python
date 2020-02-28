@@ -1642,7 +1642,7 @@ class Session(_SessionBase):
         This method takes one parameter other than the session, which happens to be a string-valued enum and has a default value.
 
         Args:
-            a_mobile_os_name (str): Indicates a Mobile OS
+            a_mobile_os_name (enums.MobileOSNames): Indicates a Mobile OS
 
                 +---------+---------+
                 | ANDROID | Android |
