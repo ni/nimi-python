@@ -69,11 +69,13 @@ All notable changes to this project will be documented in this file.
 * ### NI-Digital Pattern Driver
     * #### Added
         * `conditional_jump_triggers` and `pattern_opcode_events` repeated capabilities - [#1191](https://github.com/ni/nimi-python/issues/1191), [#1192](https://github.com/ni/nimi-python/issues/1192)
+        * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
     * #### Changed
         * `write_source_waveform_site_unique()` now supports `numpy.array` and `list` as site waveform types
     * #### Removed
         * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
         * Removed programmatic pin map creation API - [#1124](https://github.com/ni/nimi-python/issues/1124)
+        * `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
 * ### NI-TClk
     * #### Added
     * #### Changed
