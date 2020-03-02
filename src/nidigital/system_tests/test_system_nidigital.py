@@ -206,7 +206,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
     samples_per_fetch = 8
     waveforms = collections.defaultdict(list)
     for i in range(num_samples // samples_per_fetch):
-        fetched_waveform = multi_instrument_session.sites[[1, 0]].fetch_capture_waveform(
+        fetched_waveform = multi_instrument_session.sites[1, 0].fetch_capture_waveform(
             waveform_name='capt_wfm',
             samples_to_read=samples_per_fetch,
             timeout=10.0)
