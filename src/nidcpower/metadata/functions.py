@@ -741,7 +741,6 @@ functions = {
                 'type': 'ViInt32[]'
             },
             {
-                'default_value': True,
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies that this current sequence is active.'
