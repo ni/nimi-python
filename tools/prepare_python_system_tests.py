@@ -16,8 +16,8 @@ parser.add_argument('-pv', '--python-version', required=False, type=str,
                     help='Python version to be run. This is used to invoke the appropriate tox environment.',
                     choices=['py35', 'py36', 'py37', 'py38', ], default='py38')
 parser.add_argument('-pb', '--python-bitness', required=False, type=str,
-                    help='Python bitness to be run. This is passed to tox.',
-                    choices=[None, '--32'], default=None)
+                    help='Python bitness to be run. "32" means pass "--32" to tox, which will force 32 bit. "any" does not pass anything to tox, so it will used whatever bitness is installed, preferring 64 if available',
+                    choices=['32', 'any'], default=None)
 args = parser.parse_args()
 
 
