@@ -13,6 +13,20 @@ class DigitalEdge(Enum):
     FALLING = 1801
 
 
+class DigitalState(Enum):
+    ZERO = 0
+    ONE = 1
+    L = 3
+    H = 4
+    X = 5
+    M = 6
+    V = 7
+    D = 8
+    E = 9
+    NOT_A_PIN_STATE = 254
+    PIN_STATE_NOT_ACQUIRED = 255
+
+
 class PPMUOutputFunction(Enum):
     VOLTAGE = 1300
     CURRENT = 1301
