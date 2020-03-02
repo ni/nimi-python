@@ -2306,7 +2306,7 @@ functions = {
                     'description': 'A collection of time delay values.'
                 },
                 'name': 'delays',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
                 'size': {
                     'mechanism': 'len',
                     'value': 'count'
@@ -2345,7 +2345,7 @@ functions = {
                     'description': 'Contains a list of datetime.timedelta instances'
                 },
                 'name': 'timedeltas',
-                'python_api_converter_name': 'convert_seconds_to_timedeltas',
+                'python_api_converter_name': 'convert_seconds_real64_to_timedeltas',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfElements'

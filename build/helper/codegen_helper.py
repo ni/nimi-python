@@ -378,7 +378,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 definitions.append(array_declaration)
                 definition = 'get_ctypes_pointer_for_buffer(value={0}_array, library_type={1}.{2})  # case B520'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
             elif parameter['use_list']:
-                definition = 'get_ctypes_pointer_for_buffer(value=_converters.{2}({0}, {1}), library_type={1})  # case B520'.format(parameter['python_name'], module_name + '.' + parameter['ctypes_type'], parameter['python_api_converter_name'])
+                definition = 'get_ctypes_pointer_for_buffer(value=_converters.{3}({0}), library_type={1}.{2})  # case B520'.format(parameter['python_name'], module_name, parameter['ctypes_type'], parameter['python_api_converter_name'])
             else:
                 assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
     elif parameter['direction'] == 'in':
@@ -1482,7 +1482,7 @@ def test_get_ctype_variable_declaration_snippet_case_b520_array():
 
 def test_get_ctype_variable_declaration_snippet_case_b520_list():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[29], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["input_array_2_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(input_array_2, _visatype.ViReal64), library_type=_visatype.ViReal64)  # case B520"]
+    assert snippet == ["input_array_2_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(input_array_2), library_type=_visatype.ViReal64)  # case B520"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b520_custom_type():
