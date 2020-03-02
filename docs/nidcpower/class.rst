@@ -1732,6 +1732,90 @@ channels
 Properties
 ==========
 
+active_advanced_sequence
+------------------------
+
+    .. py:attribute:: active_advanced_sequence
+
+        Specifies the advanced sequence to configure or generate.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].active_advanced_sequence = var
+                var = session.channels[0,1].active_advanced_sequence
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Active Advanced Sequence**
+                - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE**
+
+active_advanced_sequence_step
+-----------------------------
+
+    .. py:attribute:: active_advanced_sequence_step
+
+        Specifies the advanced sequence step to configure.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].active_advanced_sequence_step = var
+                var = session.channels[0,1].active_advanced_sequence_step
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Active Advanced Sequence Step**
+                - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE_STEP**
+
 aperture_time
 -------------
 

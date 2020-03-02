@@ -119,7 +119,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    _active_advanced_sequence = _attributes.AttributeViString(1150074)
+    active_advanced_sequence = _attributes.AttributeViString(1150074)
     '''Type: str
 
     Specifies the advanced sequence to configure or generate.
@@ -135,7 +135,7 @@ class _SessionBase(object):
         session.channels[0,1].active_advanced_sequence = var
         var = session.channels[0,1].active_advanced_sequence
     '''
-    _active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
+    active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
     '''Type: int
 
     Specifies the advanced sequence step to configure.
@@ -4698,18 +4698,17 @@ class Session(_SessionBase):
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
         '''
-        # First we need to get all possible properties we might be setting. The way the NI-DCPower C API is designed,
-        # we need to know this upfront in order to call `niDCPower_CreateAdvancedSequence`. In order to find the attribute
-        # ID of each property, we look at the member Attribute objects of Session.
+        # The way the NI-DCPower C API is designed, we need to know all the attribute ID's upfront in order to call
+        # `niDCPower_CreateAdvancedSequence`. In order to find the attribute ID of each property, we look at the
+        # member Attribute objects of Session. We use a set since we don't have to worry about is it already there.
         attribute_ids_used = set()
         for prop in property_names:
             if prop not in Session.__base__.__dict__:
                 raise KeyError('{0} is not an property on the nidcpower.Session'.format(prop))
             if not isinstance(Session.__base__.__dict__[prop], _attributes.Attribute) and not isinstance(Session.__base__.__dict__[prop], _attributes.AttributeEnum):
-                raise TypeError('{0} is not an attribute type: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
+                raise TypeError('{0} is not a valid property: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 
-        # Create the sequence with the list of attr ids we have
         self._create_advanced_sequence(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
     @ivi_synchronized
