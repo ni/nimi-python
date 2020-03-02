@@ -2184,17 +2184,18 @@ class _SessionBase(object):
         NI 5401/5411/5431.
 
         Args:
-            trigger (enums.Trigger): Sets the clock mode of the signal generator.
+            trigger (enums.Trigger): Trigger specifies the type of software trigger to send
 
                 ****Defined Values****
 
-                +---------------------------+
-                | ClockMode.DIVIDE_DOWN     |
-                +---------------------------+
-                | ClockMode.HIGH_RESOLUTION |
-                +---------------------------+
-                | ClockMode.AUTOMATIC       |
-                +---------------------------+
+                +----------------+
+                | Trigger.START  |
+                +----------------+
+                | Trigger.SCRIPT |
+                +----------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             trigger_id (str):
 
@@ -2217,6 +2218,8 @@ class _SessionBase(object):
         else:
             raise ValueError('Both trigger ({0}) and trigger_id ({1}) should be passed in to the function'.format(str(trigger), str(trigger_id)))
 
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger)  # case S130
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020

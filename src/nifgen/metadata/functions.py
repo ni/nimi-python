@@ -2435,17 +2435,14 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSets the clock mode of the signal generator.\n\n****Defined Values****\n',
+                    'description': 'Trigger specifies the type of software trigger to send\n\n****Defined Values****\n',
                     'table_body': [
                         [
-                            'NIFGEN_VAL_DIVIDE_DOWN'
+                            'NIFGEN_VAL_START_TRIGGER'
                         ],
                         [
-                            'NIFGEN_VAL_HIGH_RESOLUTION'
+                            'NIFGEN_VAL_SCRIPT_TRIGGER'
                         ],
-                        [
-                            'NIFGEN_VAL_AUTOMATIC'
-                        ]
                     ]
                 },
                 'enum': 'Trigger',
