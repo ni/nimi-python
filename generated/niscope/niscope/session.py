@@ -2317,7 +2317,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self._actual_num_wfms())  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
@@ -2448,7 +2448,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2540,7 +2540,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
         meas_wfm_size_ctype = _visatype.ViInt32(self._actual_meas_wfm_size(array_meas_function))  # case S120
         meas_wfm_size = (self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())  # case B560
@@ -2669,7 +2669,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=int16, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2796,7 +2796,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=int32, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2923,7 +2923,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=int8, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -3092,7 +3092,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
@@ -3170,7 +3170,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
@@ -3616,7 +3616,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self._actual_num_wfms())  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
@@ -3673,7 +3673,7 @@ class _SessionBase(object):
             raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_array = array.array("d", [0] * result_size)  # case B560
@@ -4101,7 +4101,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -4457,8 +4457,8 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4519,8 +4519,8 @@ class Session(_SessionBase):
         level_ctype = _visatype.ViReal64(level)  # case S150
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4592,8 +4592,8 @@ class Session(_SessionBase):
         hysteresis_ctype = _visatype.ViReal64(hysteresis)  # case S150
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4651,8 +4651,8 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerSoftware(vi_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4737,8 +4737,8 @@ class Session(_SessionBase):
         line_number_ctype = _visatype.ViInt32(line_number)  # case S150
         polarity_ctype = _visatype.ViInt32(polarity.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4802,8 +4802,8 @@ class Session(_SessionBase):
         high_level_ctype = _visatype.ViReal64(high_level)  # case S150
         window_mode_ctype = _visatype.ViInt32(window_mode.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

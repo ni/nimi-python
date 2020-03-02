@@ -2978,7 +2978,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         count_ctype = _visatype.ViInt32(count)  # case S210
         voltage_measurements_size = count  # case B600
         voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
@@ -4155,8 +4155,8 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        channels = _converters.convert_repeated_capabilities_from_init(channels, self._encoding)
-        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        channels = _converters.convert_repeated_capabilities_from_init(channels)
+        options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -5252,7 +5252,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.Event))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

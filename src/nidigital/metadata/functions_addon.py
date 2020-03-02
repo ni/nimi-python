@@ -123,7 +123,7 @@ functions_additional_fetch_capture_waveform = {
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'python_type': 'float or datetime.timedelta',
             },
             {

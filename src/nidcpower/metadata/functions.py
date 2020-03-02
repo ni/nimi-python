@@ -932,7 +932,7 @@ functions = {
                     'note': 'When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.'
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
@@ -1031,7 +1031,7 @@ functions = {
                     'note': '\nWhen setting the timeout interval, ensure you take into account any\ntriggers so that the timeout interval is long enough for your\napplication.\n'
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
@@ -2630,7 +2630,7 @@ functions = {
                     'note': '\nWhen setting the timeout interval, ensure you take into account any\ntriggers so that the timeout interval is long enough for your\napplication.\n'
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
