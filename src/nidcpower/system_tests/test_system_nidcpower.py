@@ -261,14 +261,21 @@ def test_import_export_file(single_channel_session):
     os.remove(path)
 
 
-def test_create_and_delete_advanced_sequence_step(single_channel_session):
+def test_create_and_delete_advanced_sequence(single_channel_session):
     properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
-    single_channel_session.create_advanced_sequence(sequence_name='my_sequence', property_names=properties_used, set_as_active_sequence=True)
+    single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    assert session.active_advanced_sequence == sequence_name
     single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
     single_channel_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     single_channel_session.voltage_level = 1
-    single_channel_session.delete_advanced_sequence(sequence_name='my_sequence')
+    single_channel_session.delete_advanced_sequence(sequence_name=sequence_name)
+    try:
+        session.active_advanced_sequence = sequence_name
+        assert False
+    except nidcpower.errors.DriverError:
+        pass
 
 
 def test_create_and_delete_advanced_sequence_bad_name(single_channel_session):
