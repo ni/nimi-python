@@ -3,8 +3,8 @@
     '''Need different behavior depending on whether we are called on a rep cap container or not'''
     import build.helper as helper
 %>\
-    def send_software_edge_trigger(self):
         '''send_software_edge_trigger
+    def send_software_edge_trigger(self, trigger=None, trigger_id=None):
 
         Sends a command to trigger the signal generator. This VI can act as an
         override for an external edge trigger.
