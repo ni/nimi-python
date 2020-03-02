@@ -290,7 +290,7 @@ def test_create_and_delete_advanced_sequence_bad_name(single_channel_session):
 
 
 def test_create_and_delete_advanced_sequence_bad_type(single_channel_session):
-    properties_used = ['create_advanced_sequence', 'voltage_level']
+    properties_used = ['channels', 'voltage_level']
     sequence_name = 'my_sequence'
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
     try:
