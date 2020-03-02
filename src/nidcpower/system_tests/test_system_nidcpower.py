@@ -266,8 +266,8 @@ def test_create_and_delete_advanced_sequence(single_channel_session):
     sequence_name = 'my_sequence'
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
     single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
-    assert single_channel_session.active_advanced_sequence == sequence_name
     single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    assert single_channel_session.active_advanced_sequence == sequence_name
     single_channel_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     single_channel_session.voltage_level = 1
     single_channel_session.delete_advanced_sequence(sequence_name=sequence_name)
@@ -290,7 +290,7 @@ def test_create_and_delete_advanced_sequence_bad_name(single_channel_session):
 
 
 def test_create_and_delete_advanced_sequence_bad_type(single_channel_session):
-    properties_used = ['channels', 'voltage_level']
+    properties_used = ['unlock', 'voltage_level']
     sequence_name = 'my_sequence'
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
     try:
