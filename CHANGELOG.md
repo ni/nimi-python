@@ -57,6 +57,10 @@ All notable changes to this project will be documented in this file.
         * `nifgen.Session.export_attribute_configuration_buffer()`
         * `nifgen.Session.get_channel_name()`
     * #### Changed
+        * `nifgen.Session.send_software_edge_trigger()` now takes two parameters - `trigger` and `trigger_id`
+            * See documentation on how to call this function
+            * Calling the previous way will log a DeprecationWarning to the warning subsystem
+            * [#1300](https://github.com/ni/nimi-python/issues/1300)
     * #### Removed
 * ### NI-SCOPE
     * #### Added
