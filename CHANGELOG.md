@@ -75,6 +75,8 @@ All notable changes to this project will be documented in this file.
     * #### Removed
         * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
         * Removed programmatic pin map creation API - [#1124](https://github.com/ni/nimi-python/issues/1124)
+        * Removed `fetch_history_ram_cycle_pin_data` and `fetch_history_ram_scan_cycle_number`. They are not needed since `fetch_history_ram_cycle_information`
+            was updated to return class instances that contains cycle pin data and scan cycle number - [#1071](https://github.com/ni/nimi-python/issues/1071)
 * ### NI-TClk
     * #### Added
     * #### Changed
