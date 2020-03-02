@@ -303,6 +303,11 @@ class TerminalConfiguration(Enum):
     '''
 
 
+class Trigger(Enum):
+    START = 1004
+    SCRIPT = 103
+
+
 class TriggerMode(Enum):
     SINGLE = 1
     r'''
