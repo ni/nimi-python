@@ -13,9 +13,9 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        # First we need to get all possible properties we might be setting. The way the NI-DCPower C API is designed,
-        # we need to know this upfront in order to call `niDCPower_CreateAdvancedSequence`. In order to find the attribute
-        # ID of each property, we look at the member Attribute objects of Session.
+        # The way the NI-DCPower C API is designed, we need to know all the attribute ID's upfront in order to call
+        # `niDCPower_CreateAdvancedSequence`. In order to find the attribute ID of each property, we look at the
+        # member Attribute objects of Session. We use a set since we don't have to worry about is it already there.
         attribute_ids_used = set()
         for prop in property_names:
             if prop not in Session.__base__.__dict__:
@@ -24,6 +24,5 @@
                 raise TypeError('{0} is not an attribute type: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 
-        # Create the sequence with the list of attr ids we have
         self._create_advanced_sequence(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
