@@ -6,8 +6,8 @@ import nidcpower
 import sys
 
 
-def example(resource_name, channels, options, voltage_max, current_max, points_per_output_function, delay):
-    timeout = datetime.timedelta(seconds=(delay + 1.0))
+def example(resource_name, channels, options, voltage_max, current_max, points_per_output_function, delay_in_seconds):
+    timeout = datetime.timedelta(seconds=(delay_in_seconds + 1.0))
 
     with nidcpower.Session(resource_name=resource_name, channels=channels, options=options) as session:
 
@@ -15,7 +15,7 @@ def example(resource_name, channels, options, voltage_max, current_max, points_p
         session.source_mode = nidcpower.SourceMode.SEQUENCE
         session.voltage_level_autorange = True
         session.current_limit_autorange = True
-        session.source_delay = datetime.timedelta(seconds=delay)
+        session.source_delay = datetime.timedelta(seconds=delay_in_seconds)
         properties_used = ['output_function', 'voltage_level', 'current_level']
         session.create_advanced_sequence(sequence_name='my_sequence', property_names=properties_used, set_as_active_sequence=True)
 
@@ -45,7 +45,7 @@ def example(resource_name, channels, options, voltage_max, current_max, points_p
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Outputs voltage 1, waits for source delay, and then takes a measurement. Then orepeat with voltage 2.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Output ramping voltage to voltage max, then ramping current to current max.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments SMU')
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
     parser.add_argument('-p', '--number-points', default=256, help='Number of points per output function')
