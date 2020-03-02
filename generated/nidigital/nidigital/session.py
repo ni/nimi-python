@@ -768,6 +768,34 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def configure_time_set_drive_format(self, time_set, drive_format):
+        r'''configure_time_set_drive_format
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_drive_format(time_set, drive_format)
+
+        Args:
+            time_set (str):
+
+            drive_format (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        drive_format_ctype = _visatype.ViInt32(drive_format)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_ctype, drive_format_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def configure_voltage_levels(self, vil, vih, vol, voh, vterm):
         r'''configure_voltage_levels
 
@@ -1182,6 +1210,36 @@ class _SessionBase(object):
         error_code = self._library.niDigital_GetPinResultsPinInformation(vi_ctype, channel_list_ctype, buffer_size_ctype, pin_indexes_ctype, site_numbers_ctype, channel_indexes_ctype, None if actual_num_values_ctype is None else (ctypes.pointer(actual_num_values_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)]
+
+    @ivi_synchronized
+    def get_time_set_drive_format(self, time_set):
+        r'''get_time_set_drive_format
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].get_time_set_drive_format(time_set)
+
+        Args:
+            time_set (str):
+
+
+        Returns:
+            format (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        format_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(format_ctype.value)
 
     def lock(self):
         '''lock
@@ -1922,28 +1980,6 @@ class Session(_SessionBase):
         drive_data2_edge_ctype = _visatype.ViReal64(drive_data2_edge)  # case S150
         drive_return2_edge_ctype = _visatype.ViReal64(drive_return2_edge)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_drive_format(self, pin_list, time_set, drive_format):
-        r'''configure_time_set_drive_format
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            drive_format (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        drive_format_ctype = _visatype.ViInt32(drive_format)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_ctype, drive_format_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2745,30 +2781,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def get_time_set_drive_format(self, pin, time_set):
-        r'''get_time_set_drive_format
-
-        TBD
-
-        Args:
-            pin (str):
-
-            time_set (str):
-
-
-        Returns:
-            format (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(format_ctype.value)
 
     @ivi_synchronized
     def get_time_set_edge(self, pin, time_set, edge):

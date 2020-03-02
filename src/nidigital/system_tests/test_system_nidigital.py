@@ -22,11 +22,21 @@ def multi_instrument_session():
 def test_pins_rep_cap(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
+    # Channel-based properties
     multi_instrument_session.vil = 1
     multi_instrument_session.pins['PinA', 'PinB', 'PinC'].vil = 2
     assert multi_instrument_session.pins['DutPins'].vil == pytest.approx(2, abs=1e-3)
     assert multi_instrument_session.pins['SysPins'].vil == pytest.approx(1, abs=1e-3)
 
+    # Methods that accept channel_list parameter
+    states = multi_instrument_session.pins['PinA', 'PinB'].read_static()
+    assert len(states) == 4    # 2 sites per pin
+
+    # Methods that accept pin_list parameter
+    multi_instrument_session.create_time_set('t0')
+    multi_instrument_session.pins['PinA', 'PinB'].configure_time_set_drive_format('t0', 1501)
+    drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format('t0')
+    assert drive_format == 1501
 
 def test_property_boolean(multi_instrument_session):
     channel = multi_instrument_session.get_channel_name(index=42)

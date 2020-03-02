@@ -645,21 +645,23 @@ configure_time_set_drive_format
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_format(pin_list, time_set, drive_format)
+    .. py:method:: configure_time_set_drive_format(time_set, drive_format)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_drive_format(time_set, drive_format)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -1650,21 +1652,23 @@ get_time_set_drive_format
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_drive_format(pin, time_set)
+    .. py:method:: get_time_set_drive_format(time_set)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin:
+                .. code:: python
+
+                    session.pins[0,1].get_time_set_drive_format(time_set)
 
 
-                
-
-
-            :type pin: str
             :param time_set:
 
 
