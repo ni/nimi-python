@@ -26,6 +26,8 @@
         else:
             raise ValueError('Both trigger ({0}) and trigger_id ({1}) should be passed in to the function'.format(str(trigger), str(trigger_id)))
 
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger)  # case S130
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
