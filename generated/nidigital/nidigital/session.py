@@ -13,6 +13,8 @@ import nidigital._visatype as _visatype
 import nidigital.enums as enums
 import nidigital.errors as errors
 
+import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
+
 import nitclk
 
 # Used for __repr__
@@ -2268,6 +2270,119 @@ class Session(_SessionBase):
         return waveforms
 
     @ivi_synchronized
+    def fetch_history_ram_cycle_information(self, site, pin_list, position, samples_to_read):
+        '''fetch_history_ram_cycle_information
+
+        Returns the pattern information acquired for the specified cycles.
+
+        If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
+        consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
+        DigitalState.PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
+
+        Args:
+            site (str): Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
+                where N is the site number. The VI returns an error if more than one site is specified.
+
+            pin_list (str): Pins for which to retrieve History RAM data. If empty, the pin list from the pattern
+                containing the start label is used. Call get_pattern_pin_list or get_pattern_pin_indexes with the start
+                label to retrieve the pins associated with the pattern burst.
+
+            position (int): Sample index from which to start fetching pattern information.
+
+            samples_to_read (int): Number of samples to fetch. A value of -1 specifies to fetch all available samples.
+
+
+        Returns:
+            history_ram_cycle_information (list of HistoryRAMCycleInformation): Returns a list of class instances with
+                the following information about each pattern cycle:
+
+                -  **pattern_name** (str)  Name of the pattern for the acquired cycle.
+                -  **time_set_name** (str) Time set for the acquired cycle.
+                -  **vector_number** (int) Vector number within the pattern for the acquired cycle. Vector numbers start
+                   at 0 from the beginning of the pattern.
+                -  **cycle_number** (int) Cycle number acquired by this History RAM sample. Cycle numbers start at 0
+                   from the beginning of the pattern burst.
+                -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
+                   start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
+                   have a scan opcode.
+                -  **expected_pin_states** (list of list of enums.DigitalState) Pin states as expected by the loaded
+                   pattern in the order specified in the pin list. Pins without defined edges in the specified DUT cycle
+                   will have a value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+                -  **actual_pin_states** (list of list of enums.DigitalState) Pin states acquired by History RAM in the
+                   order specified in the pin list. Pins without defined edges in the specified DUT cycle will have a
+                   value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+                -  **per_pin_pass_fail** (list of list of bool) Pass fail information for pins in the order specified in
+                   the pin list. Pins without defined edges in the specified DUT cycle will have a value of pass (True).
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+
+        '''
+        if position < 0:
+            raise ValueError('position should be greater than or equal to 0.')
+
+        if samples_to_read < -1:
+            raise ValueError('samples_to_read should be greater than or equal to -1.')
+
+        samples_available = self.get_history_ram_sample_count(site)
+        if position >= samples_available:
+            raise ValueError('position: Specified value = {0}, Maximum value = {1}.'.format(position, samples_available - 1))
+
+        if samples_to_read == -1:
+            if not self.history_ram_number_of_samples_is_finite:
+                raise RuntimeError(
+                    'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument is '
+                    'configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
+            samples_to_read = samples_available - position
+
+        if position + samples_to_read > samples_available:
+            raise ValueError(
+                'position: Specified value = {0}, samples_to_read: Specified value = {1}; Samples available = {2}.'
+                .format(position, samples_to_read, samples_available - position))
+
+        pattern_names = {}
+        time_set_names = {}
+        cycle_infos = []
+        for _ in range(samples_to_read):
+
+            pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles = self._fetch_history_ram_cycle_information(site, position)
+
+            if pattern_index not in pattern_names:
+                pattern_names[pattern_index] = self.get_pattern_name(pattern_index)
+            pattern_name = pattern_names[pattern_index]
+
+            if time_set_index not in time_set_names:
+                time_set_names[time_set_index] = self.get_time_set_name(time_set_index)
+            time_set_name = time_set_names[time_set_index]
+
+            scan_cycle_number = self._fetch_history_ram_scan_cycle_number(site, position)
+
+            vector_expected_pin_states = []
+            vector_actual_pin_states = []
+            vector_per_pin_pass_fail = []
+            for dut_cycle_index in range(num_dut_cycles):
+                cycle_expected_pin_states, cycle_actual_pin_states, cycle_per_pin_pass_fail = self._fetch_history_ram_cycle_pin_data(site, pin_list, position, dut_cycle_index)
+                vector_expected_pin_states.append(cycle_expected_pin_states)
+                vector_actual_pin_states.append(cycle_actual_pin_states)
+                vector_per_pin_pass_fail.append(cycle_per_pin_pass_fail)
+
+            cycle_infos.append(history_ram_cycle_information.HistoryRAMCycleInformation(
+                pattern_name=pattern_name,
+                time_set_name=time_set_name,
+                vector_number=vector_number,
+                cycle_number=cycle_number,
+                scan_cycle_number=scan_cycle_number,
+                expected_pin_states=vector_expected_pin_states,
+                actual_pin_states=vector_actual_pin_states,
+                per_pin_pass_fail=vector_per_pin_pass_fail))
+            position += 1
+
+        return cycle_infos
+
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2337,8 +2452,8 @@ class Session(_SessionBase):
         self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
-    def fetch_history_ram_cycle_information(self, site, sample_index):
-        r'''fetch_history_ram_cycle_information
+    def _fetch_history_ram_cycle_information(self, site, sample_index):
+        r'''_fetch_history_ram_cycle_information
 
         TBD
 
@@ -2373,8 +2488,8 @@ class Session(_SessionBase):
         return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
 
     @ivi_synchronized
-    def fetch_history_ram_cycle_pin_data(self, site, pin_list, sample_index, dut_cycle_index):
-        r'''fetch_history_ram_cycle_pin_data
+    def _fetch_history_ram_cycle_pin_data(self, site, pin_list, sample_index, dut_cycle_index):
+        r'''_fetch_history_ram_cycle_pin_data
 
         TBD
 
@@ -2389,9 +2504,9 @@ class Session(_SessionBase):
 
 
         Returns:
-            expected_pin_states (list of int):
+            expected_pin_states (list of enums.DigitalState):
 
-            actual_pin_states (list of int):
+            actual_pin_states (list of enums.DigitalState):
 
             per_pin_pass_fail (list of bool):
 
@@ -2417,11 +2532,11 @@ class Session(_SessionBase):
         per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
         error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [int(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
+        return [enums.DigitalState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.DigitalState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def fetch_history_ram_scan_cycle_number(self, site, sample_index):
-        r'''fetch_history_ram_scan_cycle_number
+    def _fetch_history_ram_scan_cycle_number(self, site, sample_index):
+        r'''_fetch_history_ram_scan_cycle_number
 
         TBD
 

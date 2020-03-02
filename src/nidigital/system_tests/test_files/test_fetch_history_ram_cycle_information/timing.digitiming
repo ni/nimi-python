@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TimingFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0" xmlns="http://www.ni.com/Semiconductor/Timing">
+  <TimingSheet>
+    <TimeSets>
+      <TimeSet name="t0">
+        <Period>AC.Period</Period>
+        <PinEdges>
+          <PinEdge pin="AllPins">
+            <ReturnToLow>
+              <On>AC.Period * 0.1</On>
+              <Data>AC.Period * 0.2</Data>
+              <Return>AC.Period * 0.8</Return>
+              <Off>AC.Period * 0.9</Off>
+            </ReturnToLow>
+            <CompareStrobe>
+              <Strobe>AC.Period * 0.5</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+        </PinEdges>
+      </TimeSet>
+      <TimeSet name="tScan">
+        <Period>AC.Period</Period>
+        <PinEdges>
+          <PinEdge pin="AllPins">
+            <ReturnToLow>
+              <On>AC.Period * 0.1</On>
+              <Data>AC.Period * 0.2</Data>
+              <Return>AC.Period * 0.8</Return>
+              <Off>AC.Period * 0.9</Off>
+            </ReturnToLow>
+            <CompareStrobe>
+              <Strobe>AC.Period * 0.5</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+        </PinEdges>
+      </TimeSet>
+      <TimeSet name="t2X">
+        <Period>AC.Period</Period>
+        <PinEdges>
+          <PinEdge pin="AllPins" edgeMultiplier="2x">
+            <ReturnToLow>
+              <On>AC.Period * 0.1</On>
+              <Data>AC.Period * 0.2</Data>
+              <Return>AC.Period * 0.5</Return>
+              <Data2>AC.Period * 0.7</Data2>
+              <Return2>AC.Period * 0.9</Return2>
+              <Off>AC.Period * 0.9</Off>
+            </ReturnToLow>
+            <CompareStrobe>
+              <Strobe>AC.Period * 0.4</Strobe>
+              <Strobe2>AC.Period * 0.8</Strobe2>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+        </PinEdges>
+      </TimeSet>
+    </TimeSets>
+  </TimingSheet>
+</TimingFile>
