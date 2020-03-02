@@ -2448,8 +2448,9 @@ functions = {
                         ]
                     ]
                 },
+                'enum': 'Trigger',
                 'name': 'trigger',
-                'type': 'ViInt32'
+                'type': 'ViInt32',
             },
             {
                 'direction': 'in',
