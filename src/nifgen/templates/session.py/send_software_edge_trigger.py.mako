@@ -3,25 +3,15 @@
     '''Need different behavior depending on whether we are called on a rep cap container or not'''
     import build.helper as helper
 %>\
-        '''send_software_edge_trigger
     def send_software_edge_trigger(self, trigger=None, trigger_id=None):
+        '''${f['python_name']}
 
-        Sends a command to trigger the signal generator. This VI can act as an
-        override for an external edge trigger.
+        ${helper.get_function_docstring(f, False, config, indent=8)}
+        '''
 
-        If called directly on the session, this will send a software start trigger.
-
-            session.send_software_edge_trigger()
-
-        If called using the script trigger repeated capability container, this will
-        send a software trigger to the specified script trigger
 
             session.script_triggers[1].send_software_edge_trigger()
 
-        Note:
-        This method does not override external digital edge triggers of the
-        NI 5401/5411/5431.
-        '''
         # We look at whether we are called directly on the session or a repeated capability container to determine how to behave
         if len(self._repeated_capability) > 0:
             trigger_id = self._repeated_capability
