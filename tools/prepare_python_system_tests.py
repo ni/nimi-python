@@ -7,10 +7,17 @@ import time
 import urllib.request
 import zipfile
 
-parser = argparse.ArgumentParser(description='Downloads the latest release nimi-python and runs system tests on the specified driver.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('-d', '--driver', required=True, type=str, help='Driver Name.')
-parser.add_argument('-pv', '--python-version', required=False, type=str, help='Python version to be run.', default=None)
-parser.add_argument('-pb', '--python-bitness', required=False, type=str, help='Python bitness to be run.', default=None)
+parser = argparse.ArgumentParser(description='Downloads the latest release artifacts from nimi-python and runs system tests on the specified python package.',
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-d', '--driver', required=True, type=str,
+                    help='Python package name.',
+                    choices=os.listdir('src'))
+parser.add_argument('-pv', '--python-version', required=False, type=str,
+                    help='Python version to be run. This is used to invoke the appropriate tox environment.',
+                    choices=['py35', 'py36', 'py37', 'py38', ], default='py38')
+parser.add_argument('-pb', '--python-bitness', required=False, type=str,
+                    help='Python bitness to be run. This is passed to tox.',
+                    choices=[None, '--32'], default=None)
 args = parser.parse_args()
 
 
@@ -34,7 +41,7 @@ url_data = json.loads(html.decode('utf-8'))
 zip_url = url_data[0]['zipball_url']
 print(zip_url)
 
-print('****Downloading latest zip file from github.****')
+print('****Downloading latest zip file from GitHub.****')
 try:
     from urllib.request import urlretrieve
 except ImportError:
@@ -61,8 +68,7 @@ print('****Invoking build specific script****')
 tox_dir = os.path.join(zip_folder, os.listdir(zip_folder)[0], 'generated', args.driver)
 os.chdir(tox_dir)
 command = ['python', '../../tools/run_python_system_tests.py', '-d', args.driver]
-if args.python_version is not None:
-    command += ['--python-version', args.python_version]
+command += ['--python-version', args.python_version]
 if args.python_bitness is not None:
     command += ['--python-bitness', args.python_bitness]
 
