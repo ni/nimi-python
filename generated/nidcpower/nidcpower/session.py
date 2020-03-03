@@ -2818,7 +2818,7 @@ class _SessionBase(object):
 
         '''
         if type(units) is not enums.ApertureTimeUnits:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
+            raise TypeError('Parameter units must be of type ' + str(enums.ApertureTimeUnits))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
@@ -3413,7 +3413,7 @@ class _SessionBase(object):
 
         '''
         if type(measurement_type) is not enums.MeasurementTypes:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementTypes))
+            raise TypeError('Parameter measurement_type must be of type ' + str(enums.MeasurementTypes))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
@@ -3671,7 +3671,7 @@ class _SessionBase(object):
 
         '''
         if type(output_state) is not enums.OutputStates:
-            raise TypeError('Parameter mode must be of type ' + str(enums.OutputStates))
+            raise TypeError('Parameter output_state must be of type ' + str(enums.OutputStates))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
@@ -5193,7 +5193,7 @@ class Session(_SessionBase):
 
         '''
         if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
+            raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
         error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
@@ -5249,7 +5249,7 @@ class Session(_SessionBase):
 
         '''
         if type(event_id) is not enums.Event:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Event))
+            raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140

@@ -1715,7 +1715,7 @@ class _SessionBase(object):
 
         '''
         if type(array_meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
+            raise TypeError('Parameter array_meas_function must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
         meas_waveform_size_ctype = _visatype.ViInt32()  # case S220
@@ -1783,7 +1783,7 @@ class _SessionBase(object):
 
         '''
         if type(meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
+            raise TypeError('Parameter meas_function must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         meas_function_ctype = _visatype.ViInt32(meas_function.value)  # case S130
@@ -1833,7 +1833,7 @@ class _SessionBase(object):
 
         '''
         if type(option) is not enums.Option:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Option))
+            raise TypeError('Parameter option must be of type ' + str(enums.Option))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         option_ctype = _visatype.ViInt32(option.value)  # case S130
@@ -1873,7 +1873,7 @@ class _SessionBase(object):
 
         '''
         if type(clearable_measurement_function) is not enums._ClearableMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ClearableMeasurement))
+            raise TypeError('Parameter clearable_measurement_function must be of type ' + str(enums._ClearableMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
@@ -2009,7 +2009,7 @@ class _SessionBase(object):
 
         '''
         if type(coupling) is not enums.VerticalCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VerticalCoupling))
+            raise TypeError('Parameter coupling must be of type ' + str(enums.VerticalCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         range_ctype = _visatype.ViReal64(range)  # case S150
@@ -2537,7 +2537,7 @@ class _SessionBase(object):
 
         '''
         if type(array_meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
+            raise TypeError('Parameter array_meas_function must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -3089,7 +3089,7 @@ class _SessionBase(object):
 
         '''
         if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -3167,7 +3167,7 @@ class _SessionBase(object):
 
         '''
         if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -3670,7 +3670,7 @@ class _SessionBase(object):
 
         '''
         if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
@@ -4453,7 +4453,7 @@ class Session(_SessionBase):
 
         '''
         if type(slope) is not enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+            raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
@@ -4511,9 +4511,9 @@ class Session(_SessionBase):
 
         '''
         if type(slope) is not enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+            raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
@@ -4583,9 +4583,9 @@ class Session(_SessionBase):
 
         '''
         if type(slope) is not enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+            raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
@@ -4722,13 +4722,13 @@ class Session(_SessionBase):
 
         '''
         if type(signal_format) is not enums.VideoSignalFormat:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VideoSignalFormat))
+            raise TypeError('Parameter signal_format must be of type ' + str(enums.VideoSignalFormat))
         if type(event) is not enums.VideoTriggerEvent:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VideoTriggerEvent))
+            raise TypeError('Parameter event must be of type ' + str(enums.VideoTriggerEvent))
         if type(polarity) is not enums.VideoPolarity:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VideoPolarity))
+            raise TypeError('Parameter polarity must be of type ' + str(enums.VideoPolarity))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         enable_dc_restore_ctype = _visatype.ViBoolean(enable_dc_restore)  # case S150
@@ -4793,9 +4793,9 @@ class Session(_SessionBase):
 
         '''
         if type(window_mode) is not enums.TriggerWindowMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWindowMode))
+            raise TypeError('Parameter window_mode must be of type ' + str(enums.TriggerWindowMode))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         low_level_ctype = _visatype.ViReal64(low_level)  # case S150
@@ -5193,7 +5193,7 @@ class Session(_SessionBase):
 
         '''
         if type(which_trigger) is not enums.WhichTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.WhichTrigger))
+            raise TypeError('Parameter which_trigger must be of type ' + str(enums.WhichTrigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         which_trigger_ctype = _visatype.ViInt32(which_trigger.value)  # case S130
         error_code = self._library.niScope_SendSoftwareTriggerEdge(vi_ctype, which_trigger_ctype)
