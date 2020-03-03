@@ -28,6 +28,55 @@ DigitalEdge
 
 
 
+DigitalState
+------------
+
+.. py:class:: DigitalState
+
+    .. py:attribute:: DigitalState.ZERO
+
+
+
+    .. py:attribute:: DigitalState.ONE
+
+
+
+    .. py:attribute:: DigitalState.L
+
+
+
+    .. py:attribute:: DigitalState.H
+
+
+
+    .. py:attribute:: DigitalState.X
+
+
+
+    .. py:attribute:: DigitalState.M
+
+
+
+    .. py:attribute:: DigitalState.V
+
+
+
+    .. py:attribute:: DigitalState.D
+
+
+
+    .. py:attribute:: DigitalState.E
+
+
+
+    .. py:attribute:: DigitalState.NOT_A_PIN_STATE
+
+
+
+    .. py:attribute:: DigitalState.PIN_STATE_NOT_ACQUIRED
+
+
+
 PPMUOutputFunction
 ------------------
 

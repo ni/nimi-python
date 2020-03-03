@@ -940,6 +940,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchHistoryRAMCycleInformation': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -990,6 +991,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchHistoryRAMCyclePinData': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1028,6 +1030,7 @@ functions = {
             },
             {
                 'direction': 'out',
+                'enum': 'DigitalState',
                 'name': 'expectedPinStates',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -1038,6 +1041,7 @@ functions = {
             },
             {
                 'direction': 'out',
+                'enum': 'DigitalState',
                 'name': 'actualPinStates',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -1065,6 +1069,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'FetchHistoryRAMScanCycleNumber': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
