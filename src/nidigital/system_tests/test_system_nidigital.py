@@ -38,6 +38,7 @@ def test_pins_rep_cap(multi_instrument_session):
     drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format('t0')
     assert drive_format == 1501
 
+
 def test_property_boolean(multi_instrument_session):
     channel = multi_instrument_session.get_channel_name(index=42)
     multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range = True
@@ -95,10 +96,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
 
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
-    multi_instrument_session.create_source_waveform_parallel(
-        pin_list='LowPins',
-        waveform_name='src_wfm',
-        data_mapping=2600)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2600)
 
     multi_instrument_session.write_source_waveform_broadcast(
         waveform_name='src_wfm',
@@ -148,10 +146,7 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     num_samples = 256
     multi_instrument_session.write_sequencer_register(reg='reg0', value=num_samples)
 
-    multi_instrument_session.create_source_waveform_parallel(
-        pin_list='LowPins',
-        waveform_name='src_wfm',
-        data_mapping=2601)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2601)
 
     if source_waveform_type == array.array:
         source_waveform = {
@@ -172,7 +167,7 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
         waveform_name='src_wfm',
         waveform_data=source_waveform)
 
-    multi_instrument_session.create_capture_waveform_parallel(pin_list='HighPins', waveform_name='capt_wfm')
+    multi_instrument_session.pins['HighPins'].create_capture_waveform_parallel(waveform_name='capt_wfm')
 
     multi_instrument_session.burst_pattern(
         site_list='',
@@ -201,16 +196,11 @@ def test_fetch_capture_waveform(multi_instrument_session):
     num_samples = 256
     multi_instrument_session.write_sequencer_register(reg='reg0', value=num_samples)
 
-    multi_instrument_session.create_source_waveform_parallel(
-        pin_list='LowPins',
-        waveform_name='src_wfm',
-        data_mapping=2600)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2600)
     source_waveform = [i for i in range(num_samples)]
-    multi_instrument_session.write_source_waveform_broadcast(
-        waveform_name='src_wfm',
-        waveform_data=source_waveform)
+    multi_instrument_session.write_source_waveform_broadcast(waveform_name='src_wfm', waveform_data=source_waveform)
 
-    multi_instrument_session.create_capture_waveform_parallel(pin_list='HighPins', waveform_name='capt_wfm')
+    multi_instrument_session.pins['HighPins'].create_capture_waveform_parallel(waveform_name='capt_wfm')
 
     multi_instrument_session.burst_pattern(
         site_list='',
@@ -289,7 +279,6 @@ def test_fetch_history_ram_cycle_information_position_negative(multi_instrument_
     with pytest.raises(ValueError, match='position should be greater than or equal to 0.'):
         multi_instrument_session.fetch_history_ram_cycle_information(
             site='site1',
-            pin_list='',
             position=-1,
             samples_to_read=-1)
 
@@ -320,7 +309,6 @@ def test_fetch_history_ram_cycle_information_position_out_of_bound(multi_instrum
     with pytest.raises(ValueError, match='position: Specified value = 7, Maximum value = 6.'):
         multi_instrument_session.fetch_history_ram_cycle_information(
             site='site1',
-            pin_list='',
             position=7,
             samples_to_read=-1)
 
@@ -331,7 +319,6 @@ def test_fetch_history_ram_cycle_information_position_last(multi_instrument_sess
 
     history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
         site='site1',
-        pin_list='',
         position=6,
         samples_to_read=-1)
 
@@ -351,7 +338,6 @@ def test_fetch_history_ram_cycle_information_is_finite_invalid(multi_instrument_
     with pytest.raises(RuntimeError, match=expected_error_description):
         multi_instrument_session.fetch_history_ram_cycle_information(
             site='site1',
-            pin_list='',
             position=0,
             samples_to_read=-1)
 
@@ -365,7 +351,6 @@ def test_fetch_history_ram_cycle_information_samples_to_read_too_much(multi_inst
 
     multi_instrument_session.fetch_history_ram_cycle_information(
         site=site,
-        pin_list='',
         position=0,
         samples_to_read=3)
 
@@ -374,7 +359,6 @@ def test_fetch_history_ram_cycle_information_samples_to_read_too_much(multi_inst
     with pytest.raises(ValueError, match=expected_error_description):
         multi_instrument_session.fetch_history_ram_cycle_information(
             site=site,
-            pin_list='',
             position=3,
             samples_to_read=5)
 
@@ -385,7 +369,6 @@ def test_fetch_history_ram_cycle_information_samples_to_read_negative(multi_inst
     with pytest.raises(ValueError, match='samples_to_read should be greater than or equal to -1.'):
         multi_instrument_session.fetch_history_ram_cycle_information(
             site='site1',
-            pin_list='',
             position=0,
             samples_to_read=-2)
 
@@ -396,7 +379,6 @@ def test_fetch_history_ram_cycle_information_samples_to_read_zero(multi_instrume
 
     history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
         site='site1',
-        pin_list='',
         position=0,
         samples_to_read=0)
 
@@ -409,7 +391,6 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
 
     history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
         site='site1',
-        pin_list='',
         position=0,
         samples_to_read=-1)
 
