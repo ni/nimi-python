@@ -164,7 +164,7 @@ def convert_month_to_timedelta(months):
 
 
 # This converter is not called from the normal codegen path for function. Instead it is
-# call from init and is a special case. Also, it just returns a string rather than a ctype object
+# call from init and is a special case.
 def convert_init_with_options_dictionary(values):
     if type(values) is str:
         init_with_options_string = values
