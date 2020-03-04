@@ -463,5 +463,4 @@ def test_get_pattern_pin_names(multi_instrument_session):
 
     pattern_pin_names = multi_instrument_session.get_pattern_pin_names(start_label='new_pattern')
 
-    expected_pin_names = ['LO' + str(i) for i in range(8)] + ['HI' + str(i) for i in range(8)]
-    assert pattern_pin_names == expected_pin_names
+    assert pattern_pin_names == ['LO' + str(i) for i in range(8)] + ['HI' + str(i) for i in range(8)]

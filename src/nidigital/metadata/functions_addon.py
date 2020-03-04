@@ -206,7 +206,7 @@ consist of multiple DUT cycles. When using pins with mixed edge multipliers, pin
 NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
 
 If pins are not specified, pin list from the pattern containing the start label is used. Call
-niDigital_GetPatternPinList or niDigital_GetPatternPinIndexes with the start label to retrieve the pins
+niDigital_FancyGetPatternPinNames with the start label to retrieve the pins
 associated with the pattern burst.
 """
         },
@@ -229,7 +229,7 @@ associated with the pattern burst.
                 'is_repeated_capability': True,
                 'repeated_capability_type': 'pins',
                 'documentation': {
-                    'description': 'Pins for which to retrieve History RAM data. If empty, the pin list from the pattern\ncontaining the start label is used. Call niDigital_GetPatternPinList or niDigital_GetPatternPinIndexes with the start\nlabel to retrieve the pins associated with the pattern burst.'
+                    'description': 'Pins for which to retrieve History RAM data. If empty, the pin list from the pattern\ncontaining the start label is used. Call niDigital_FancyGetPatternPinNames with the start\nlabel to retrieve the pins associated with the pattern burst.'
                 },
                 'name': 'pinList',
                 'type': 'ViConstString'
