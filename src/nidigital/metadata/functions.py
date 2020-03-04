@@ -973,10 +973,10 @@ functions = {
                 'type': 'ViSession'
             },
             {
+
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
                 'name': 'site',
+                'python_api_converter_name': 'convert_site_string',
                 'type': 'ViConstString'
             },
             {
@@ -1025,8 +1025,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
+                'python_api_converter_name': 'convert_site_string',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1105,8 +1104,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
+                'python_api_converter_name': 'convert_site_string',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1466,8 +1464,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
+                'python_api_converter_name': 'convert_site_string',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1995,8 +1992,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'sites',
+                'python_api_converter_name': 'convert_site_string',
                 'name': 'site',
                 'type': 'ViConstString'
             },
