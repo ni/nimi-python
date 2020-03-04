@@ -9,6 +9,8 @@ from nidigital.errors import DriverWarning  # noqa: F401
 from nidigital.errors import Error  # noqa: F401
 from nidigital.session import Session  # noqa: F401
 
+from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation  # noqa: F401
+
 
 def get_diagnostic_information():
     '''Get diagnostic information about the system state that is suitable for printing or logging

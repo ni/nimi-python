@@ -92,6 +92,7 @@ set CI_PULL_REQUEST=%ghprbPullId%
 echo .
 echo Make the junit folder so there isn't any collisions while running tests
 mkdir generated\\junit
+mkdir generated\\kibana
 echo .
 IF EXIST src\\${driver}\\system_tests echo Running system tests for ${driver} on ${platform}
 IF EXIST src\\${driver}\\system_tests tools\\system_tests.bat ${driver}

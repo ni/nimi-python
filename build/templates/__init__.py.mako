@@ -47,10 +47,14 @@ from ${module_name}.session import Session  # noqa: F401
  # Otherwise flake8 test fails
 %>\
 % for c in config['custom_types']:
+% if c['python_name']:
 
 from ${module_name}.${c['file_name']} import ${c['python_name']}  # noqa: F401
+% endif
+% if c['ctypes_type']:
 
 from ${module_name}.${c['file_name']} import ${c['ctypes_type']}  # noqa: F401
+% endif
 % endfor
 
 

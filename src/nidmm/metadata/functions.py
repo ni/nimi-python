@@ -185,7 +185,7 @@ functions = {
                     'note': 'This attribute is not used on the NI 4080/4081/4082 and the NI 4050.'
                 },
                 'name': 'sampleInterval',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
@@ -475,7 +475,7 @@ functions = {
                     'note': '\nWhen using the NI 4050, **Trigger_Delay** must be set to\nNIDMM_VAL_AUTO_DELAY (-1).\n'
                 },
                 'name': 'triggerDelay',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             }
@@ -644,7 +644,7 @@ functions = {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
@@ -679,7 +679,7 @@ functions = {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
@@ -749,7 +749,7 @@ functions = {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
@@ -1609,7 +1609,7 @@ functions = {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
@@ -1644,7 +1644,7 @@ functions = {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },
@@ -1759,7 +1759,7 @@ functions = {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             },

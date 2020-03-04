@@ -250,7 +250,7 @@ class Session(_SessionBase):
         super(Session, self).__init__(repeated_capability_list=[], ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
 % for p in init_function['parameters']:
 %   if 'python_api_converter_name' in p:
-        ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
+        ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
 %   endif
 % endfor
         self._library = _library_singleton.get()
