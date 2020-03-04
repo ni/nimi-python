@@ -467,7 +467,7 @@ class _SessionBase(object):
             session.channels[0,1].read_from_channel(maximum_time)
 
         Args:
-            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in microseconds.
+            maximum_time (datetime.timedelta): Specifies the **maximum_time** allowed in milliseconds.
 
 
         Returns:
@@ -476,7 +476,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        maximum_time_ctype = _converters.convert_timedelta_to_microseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -718,7 +718,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -883,7 +883,7 @@ class Session(_SessionBase):
 
         '''
         if type(a_turtle) is not enums.Turtle:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
+            raise TypeError('Parameter a_turtle must be of type ' + str(enums.Turtle))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_turtle_ctype = _visatype.ViInt16(a_turtle.value)  # case S130
         error_code = self._library.niFake_EnumInputFunctionWithDefaults(vi_ctype, a_turtle_ctype)
@@ -1490,9 +1490,9 @@ class Session(_SessionBase):
 
         '''
         if type(an_int_enum) is not enums.Turtle:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
+            raise TypeError('Parameter an_int_enum must be of type ' + str(enums.Turtle))
         if type(a_float_enum) is not enums.FloatEnum:
-            raise TypeError('Parameter mode must be of type ' + str(enums.FloatEnum))
+            raise TypeError('Parameter a_float_enum must be of type ' + str(enums.FloatEnum))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_boolean_ctype = _visatype.ViBoolean(a_boolean)  # case S150
         an_int32_ctype = _visatype.ViInt32(an_int32)  # case S150
@@ -1532,7 +1532,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_seconds(maximum_time, _visatype.ViReal64)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_seconds_real64(maximum_time)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niFake_Read(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1681,7 +1681,7 @@ class Session(_SessionBase):
         This method takes one parameter other than the session, which happens to be a string-valued enum and has a default value.
 
         Args:
-            a_mobile_os_name (str): Indicates a Mobile OS
+            a_mobile_os_name (enums.MobileOSNames): Indicates a Mobile OS
 
                 +---------+---------+
                 | ANDROID | Android |
@@ -1693,7 +1693,7 @@ class Session(_SessionBase):
 
         '''
         if type(a_mobile_os_name) is not enums.MobileOSNames:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MobileOSNames))
+            raise TypeError('Parameter a_mobile_os_name must be of type ' + str(enums.MobileOSNames))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.value.encode(self._encoding))  # case C030
         error_code = self._library.niFake_StringValuedEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_name_ctype)

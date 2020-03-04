@@ -1715,7 +1715,7 @@ class _SessionBase(object):
 
         '''
         if type(array_meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
+            raise TypeError('Parameter array_meas_function must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
         meas_waveform_size_ctype = _visatype.ViInt32()  # case S220
@@ -1783,7 +1783,7 @@ class _SessionBase(object):
 
         '''
         if type(meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
+            raise TypeError('Parameter meas_function must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         meas_function_ctype = _visatype.ViInt32(meas_function.value)  # case S130
@@ -1833,7 +1833,7 @@ class _SessionBase(object):
 
         '''
         if type(option) is not enums.Option:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Option))
+            raise TypeError('Parameter option must be of type ' + str(enums.Option))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         option_ctype = _visatype.ViInt32(option.value)  # case S130
@@ -1873,7 +1873,7 @@ class _SessionBase(object):
 
         '''
         if type(clearable_measurement_function) is not enums._ClearableMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ClearableMeasurement))
+            raise TypeError('Parameter clearable_measurement_function must be of type ' + str(enums._ClearableMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         clearable_measurement_function_ctype = _visatype.ViInt32(clearable_measurement_function.value)  # case S130
@@ -2009,7 +2009,7 @@ class _SessionBase(object):
 
         '''
         if type(coupling) is not enums.VerticalCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VerticalCoupling))
+            raise TypeError('Parameter coupling must be of type ' + str(enums.VerticalCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         range_ctype = _visatype.ViReal64(range)  # case S150
@@ -2317,7 +2317,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self._actual_num_wfms())  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
@@ -2448,7 +2448,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2537,10 +2537,10 @@ class _SessionBase(object):
 
         '''
         if type(array_meas_function) is not enums._ArrayMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ArrayMeasurement))
+            raise TypeError('Parameter array_meas_function must be of type ' + str(enums._ArrayMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         array_meas_function_ctype = _visatype.ViInt32(array_meas_function.value)  # case S130
         meas_wfm_size_ctype = _visatype.ViInt32(self._actual_meas_wfm_size(array_meas_function))  # case S120
         meas_wfm_size = (self._actual_meas_wfm_size(array_meas_function) * self._actual_num_wfms())  # case B560
@@ -2669,7 +2669,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=int16, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2796,7 +2796,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=int32, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -2923,7 +2923,7 @@ class _SessionBase(object):
             raise TypeError('waveform must be numpy.ndarray of dtype=int8, is ' + str(waveform.dtype))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_ctype = get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         wfm_info_size = self._actual_num_wfms()  # case B560
@@ -3089,10 +3089,10 @@ class _SessionBase(object):
 
         '''
         if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
@@ -3167,10 +3167,10 @@ class _SessionBase(object):
 
         '''
         if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=result_size)  # case B560
@@ -3616,7 +3616,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self._actual_num_wfms())  # case B560
         waveform_array = array.array("d", [0] * waveform_size)  # case B560
@@ -3670,10 +3670,10 @@ class _SessionBase(object):
 
         '''
         if type(scalar_meas_function) is not enums._ScalarMeasurement:
-            raise TypeError('Parameter mode must be of type ' + str(enums._ScalarMeasurement))
+            raise TypeError('Parameter scalar_meas_function must be of type ' + str(enums._ScalarMeasurement))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         scalar_meas_function_ctype = _visatype.ViInt32(scalar_meas_function.value)  # case S130
         result_size = self._actual_num_wfms()  # case B560
         result_array = array.array("d", [0] * result_size)  # case B560
@@ -4101,7 +4101,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -4453,12 +4453,12 @@ class Session(_SessionBase):
 
         '''
         if type(slope) is not enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+            raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerDigital(vi_ctype, trigger_source_ctype, slope_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4511,16 +4511,16 @@ class Session(_SessionBase):
 
         '''
         if type(slope) is not enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+            raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerEdge(vi_ctype, trigger_source_ctype, level_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4583,17 +4583,17 @@ class Session(_SessionBase):
 
         '''
         if type(slope) is not enums.TriggerSlope:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSlope))
+            raise TypeError('Parameter slope must be of type ' + str(enums.TriggerSlope))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
         hysteresis_ctype = _visatype.ViReal64(hysteresis)  # case S150
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerHysteresis(vi_ctype, trigger_source_ctype, level_ctype, hysteresis_ctype, slope_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4651,8 +4651,8 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerSoftware(vi_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4722,13 +4722,13 @@ class Session(_SessionBase):
 
         '''
         if type(signal_format) is not enums.VideoSignalFormat:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VideoSignalFormat))
+            raise TypeError('Parameter signal_format must be of type ' + str(enums.VideoSignalFormat))
         if type(event) is not enums.VideoTriggerEvent:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VideoTriggerEvent))
+            raise TypeError('Parameter event must be of type ' + str(enums.VideoTriggerEvent))
         if type(polarity) is not enums.VideoPolarity:
-            raise TypeError('Parameter mode must be of type ' + str(enums.VideoPolarity))
+            raise TypeError('Parameter polarity must be of type ' + str(enums.VideoPolarity))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         enable_dc_restore_ctype = _visatype.ViBoolean(enable_dc_restore)  # case S150
@@ -4737,8 +4737,8 @@ class Session(_SessionBase):
         line_number_ctype = _visatype.ViInt32(line_number)  # case S150
         polarity_ctype = _visatype.ViInt32(polarity.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerVideo(vi_ctype, trigger_source_ctype, enable_dc_restore_ctype, signal_format_ctype, event_ctype, line_number_ctype, polarity_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -4793,17 +4793,17 @@ class Session(_SessionBase):
 
         '''
         if type(window_mode) is not enums.TriggerWindowMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerWindowMode))
+            raise TypeError('Parameter window_mode must be of type ' + str(enums.TriggerWindowMode))
         if type(trigger_coupling) is not enums.TriggerCoupling:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerCoupling))
+            raise TypeError('Parameter trigger_coupling must be of type ' + str(enums.TriggerCoupling))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = ctypes.create_string_buffer(trigger_source.encode(self._encoding))  # case C020
         low_level_ctype = _visatype.ViReal64(low_level)  # case S150
         high_level_ctype = _visatype.ViReal64(high_level)  # case S150
         window_mode_ctype = _visatype.ViInt32(window_mode.value)  # case S130
         trigger_coupling_ctype = _visatype.ViInt32(trigger_coupling.value)  # case S130
-        holdoff_ctype = _converters.convert_timedelta_to_seconds(holdoff, _visatype.ViReal64)  # case S140
-        delay_ctype = _converters.convert_timedelta_to_seconds(delay, _visatype.ViReal64)  # case S140
+        holdoff_ctype = _converters.convert_timedelta_to_seconds_real64(holdoff)  # case S140
+        delay_ctype = _converters.convert_timedelta_to_seconds_real64(delay)  # case S140
         error_code = self._library.niScope_ConfigureTriggerWindow(vi_ctype, trigger_source_ctype, low_level_ctype, high_level_ctype, window_mode_ctype, trigger_coupling_ctype, holdoff_ctype, delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -5193,7 +5193,7 @@ class Session(_SessionBase):
 
         '''
         if type(which_trigger) is not enums.WhichTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.WhichTrigger))
+            raise TypeError('Parameter which_trigger must be of type ' + str(enums.WhichTrigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         which_trigger_ctype = _visatype.ViInt32(which_trigger.value)  # case S130
         error_code = self._library.niScope_SendSoftwareTriggerEdge(vi_ctype, which_trigger_ctype)
