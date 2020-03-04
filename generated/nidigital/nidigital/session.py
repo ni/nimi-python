@@ -1518,49 +1518,7 @@ class _SessionBase(object):
         return pin_infos
 
     @ivi_synchronized
-    def _fetch_history_ram_cycle_information(self, sample_index):
-        r'''_fetch_history_ram_cycle_information
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (sites). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1]._fetch_history_ram_cycle_information(sample_index)
-
-        Args:
-            sample_index (int):
-
-
-        Returns:
-            pattern_index (int):
-
-            time_set_index (int):
-
-            vector_number (int):
-
-            cycle_number (int):
-
-            num_dut_cycles (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
-        pattern_index_ctype = _visatype.ViInt32()  # case S220
-        time_set_index_ctype = _visatype.ViInt32()  # case S220
-        vector_number_ctype = _visatype.ViInt64()  # case S220
-        cycle_number_ctype = _visatype.ViInt64()  # case S220
-        num_dut_cycles_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_FetchHistoryRAMCycleInformation(vi_ctype, site_ctype, sample_index_ctype, None if pattern_index_ctype is None else (ctypes.pointer(pattern_index_ctype)), None if time_set_index_ctype is None else (ctypes.pointer(time_set_index_ctype)), None if vector_number_ctype is None else (ctypes.pointer(vector_number_ctype)), None if cycle_number_ctype is None else (ctypes.pointer(cycle_number_ctype)), None if num_dut_cycles_ctype is None else (ctypes.pointer(num_dut_cycles_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
-
-    @ivi_synchronized
-    def _fetch_history_ram_cycle_pin_data(self, sample_index, dut_cycle_index):
+    def _fetch_history_ram_cycle_pin_data(self, site, sample_index, dut_cycle_index):
         r'''_fetch_history_ram_cycle_pin_data
 
         TBD
@@ -1571,9 +1529,11 @@ class _SessionBase(object):
         You can specify a subset of repeated capabilities using the Python index notation on an
         nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            session.pins[0,1]._fetch_history_ram_cycle_pin_data(sample_index, dut_cycle_index)
+            session.pins[0,1]._fetch_history_ram_cycle_pin_data(site, sample_index, dut_cycle_index)
 
         Args:
+            site (str):
+
             sample_index (int):
 
             dut_cycle_index (int):
@@ -1588,7 +1548,7 @@ class _SessionBase(object):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
         dut_cycle_index_ctype = _visatype.ViInt32(dut_cycle_index)  # case S150
@@ -1609,36 +1569,6 @@ class _SessionBase(object):
         error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [enums.DigitalState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.DigitalState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def _fetch_history_ram_scan_cycle_number(self, sample_index):
-        r'''_fetch_history_ram_scan_cycle_number
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (sites). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1]._fetch_history_ram_scan_cycle_number(sample_index)
-
-        Args:
-            sample_index (int):
-
-
-        Returns:
-            scan_cycle_number (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
-        scan_cycle_number_ctype = _visatype.ViInt64()  # case S220
-        error_code = self._library.niDigital_FetchHistoryRAMScanCycleNumber(vi_ctype, site_ctype, sample_index_ctype, None if scan_cycle_number_ctype is None else (ctypes.pointer(scan_cycle_number_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(scan_cycle_number_ctype.value)
 
     @ivi_synchronized
     def frequency_counter_measure_frequency(self):
@@ -1909,31 +1839,6 @@ class _SessionBase(object):
         return [int(failure_count_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_history_ram_sample_count(self):
-        r'''get_history_ram_sample_count
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (sites). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].get_history_ram_sample_count()
-
-        Returns:
-            sample_count (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        sample_count_ctype = _visatype.ViInt64()  # case S220
-        error_code = self._library.niDigital_GetHistoryRAMSampleCount(vi_ctype, site_ctype, None if sample_count_ctype is None else (ctypes.pointer(sample_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(sample_count_ctype.value)
-
-    @ivi_synchronized
     def get_pin_name(self, pin_index):
         r'''get_pin_name
 
@@ -2164,31 +2069,6 @@ class _SessionBase(object):
         error_code = self._library.niDigital_GetTimeSetEdgeMultiplier(vi_ctype, pin_ctype, time_set_ctype, None if edge_multiplier_ctype is None else (ctypes.pointer(edge_multiplier_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(edge_multiplier_ctype.value)
-
-    @ivi_synchronized
-    def is_site_enabled(self):
-        r'''is_site_enabled
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities (sites). If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].is_site_enabled()
-
-        Returns:
-            enable (bool):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        enable_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niDigital_IsSiteEnabled(vi_ctype, site_ctype, None if enable_ctype is None else (ctypes.pointer(enable_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(enable_ctype.value)
 
     def lock(self):
         '''lock
@@ -2927,6 +2807,66 @@ class Session(_SessionBase):
         self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
+    def _fetch_history_ram_cycle_information(self, site, sample_index):
+        r'''_fetch_history_ram_cycle_information
+
+        TBD
+
+        Args:
+            site (str):
+
+            sample_index (int):
+
+
+        Returns:
+            pattern_index (int):
+
+            time_set_index (int):
+
+            vector_number (int):
+
+            cycle_number (int):
+
+            num_dut_cycles (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
+        pattern_index_ctype = _visatype.ViInt32()  # case S220
+        time_set_index_ctype = _visatype.ViInt32()  # case S220
+        vector_number_ctype = _visatype.ViInt64()  # case S220
+        cycle_number_ctype = _visatype.ViInt64()  # case S220
+        num_dut_cycles_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_FetchHistoryRAMCycleInformation(vi_ctype, site_ctype, sample_index_ctype, None if pattern_index_ctype is None else (ctypes.pointer(pattern_index_ctype)), None if time_set_index_ctype is None else (ctypes.pointer(time_set_index_ctype)), None if vector_number_ctype is None else (ctypes.pointer(vector_number_ctype)), None if cycle_number_ctype is None else (ctypes.pointer(cycle_number_ctype)), None if num_dut_cycles_ctype is None else (ctypes.pointer(num_dut_cycles_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
+
+    @ivi_synchronized
+    def _fetch_history_ram_scan_cycle_number(self, site, sample_index):
+        r'''_fetch_history_ram_scan_cycle_number
+
+        TBD
+
+        Args:
+            site (str):
+
+            sample_index (int):
+
+
+        Returns:
+            scan_cycle_number (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
+        scan_cycle_number_ctype = _visatype.ViInt64()  # case S220
+        error_code = self._library.niDigital_FetchHistoryRAMScanCycleNumber(vi_ctype, site_ctype, sample_index_ctype, None if scan_cycle_number_ctype is None else (ctypes.pointer(scan_cycle_number_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(scan_cycle_number_ctype.value)
+
+    @ivi_synchronized
     def get_channel_name_from_string(self, index):
         r'''get_channel_name_from_string
 
@@ -2951,6 +2891,27 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return name_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def get_history_ram_sample_count(self, site):
+        r'''get_history_ram_sample_count
+
+        TBD
+
+        Args:
+            site (str):
+
+
+        Returns:
+            sample_count (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        sample_count_ctype = _visatype.ViInt64()  # case S220
+        error_code = self._library.niDigital_GetHistoryRAMSampleCount(vi_ctype, site_ctype, None if sample_count_ctype is None else (ctypes.pointer(sample_count_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(sample_count_ctype.value)
 
     @ivi_synchronized
     def get_pattern_name(self, pattern_index):
@@ -3133,6 +3094,27 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_IsDone(vi_ctype, None if done_ctype is None else (ctypes.pointer(done_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return bool(done_ctype.value)
+
+    @ivi_synchronized
+    def is_site_enabled(self, site):
+        r'''is_site_enabled
+
+        TBD
+
+        Args:
+            site (str):
+
+
+        Returns:
+            enable (bool):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        enable_ctype = _visatype.ViBoolean()  # case S220
+        error_code = self._library.niDigital_IsSiteEnabled(vi_ctype, site_ctype, None if enable_ctype is None else (ctypes.pointer(enable_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return bool(enable_ctype.value)
 
     @ivi_synchronized
     def load_levels(self, levels_file_path):

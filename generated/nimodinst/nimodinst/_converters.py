@@ -202,6 +202,7 @@ def convert_init_with_options_dictionary(values):
     return init_with_options_string
 
 
+# Beginning of module specific converters
 # convert value to bytes
 @singledispatch
 def _convert_to_bytes(value):  # noqa: F811
@@ -292,4 +293,5 @@ def test_string_to_list_prefix():
     assert test_result == ['2', '1', '0']
     test_result = _convert_repeated_capabilities(['ScriptTrigger2:ScriptTrigger0'], 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
+
 

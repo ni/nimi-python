@@ -202,6 +202,20 @@ def convert_init_with_options_dictionary(values):
     return init_with_options_string
 
 
+# Beginning of module specific converters
+def convert_site_string(site):
+    if isinstance(site, str):
+        if site.beginswith('site'):
+            return site
+        else:
+            return 'site' + site
+    else:
+        if type(site) != int:
+            # Don't use assert here since this comes from the user
+            raise TypeError('site must be a string or an integer. Actual: {}'.format(type(site)))
+        return 'site' + str(site)
+
+
 # convert value to bytes
 @singledispatch
 def _convert_to_bytes(value):  # noqa: F811
@@ -454,4 +468,27 @@ def test_string_to_list_prefix():
     assert test_result == ['2', '1', '0']
     test_result = _convert_repeated_capabilities(['ScriptTrigger2:ScriptTrigger0'], 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
+
+
+def test_convert_site_string():
+    test_result = convert_site_string('1')
+    assert test_result == 'site1'
+    test_result = convert_site_string(1)
+    assert test_result == 'site1'
+    test_result = convert_site_string('site1')
+    assert test_result == 'site1'
+
+
+def test_convert_site_string_errors():
+    try:
+        convert_site_string(1.0)
+        assert False
+    except TypeError:
+        pass
+    try:
+        convert_site_string(['1'])
+        assert False
+    except TypeError:
+        pass
+
 

@@ -1431,22 +1431,21 @@ get_history_ram_sample_count
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_history_ram_sample_count()
+    .. py:method:: get_history_ram_sample_count(site)
 
             TBD
 
             
 
 
-            .. tip:: This method requires repeated capabilities (sites). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-                .. code:: python
+            :param site:
 
-                    session.sites[0,1].get_history_ram_sample_count()
 
+                
+
+
+            :type site: str
 
             :rtype: int
             :return:
@@ -1902,22 +1901,21 @@ is_site_enabled
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: is_site_enabled()
+    .. py:method:: is_site_enabled(site)
 
             TBD
 
             
 
 
-            .. tip:: This method requires repeated capabilities (sites). If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-                .. code:: python
+            :param site:
 
-                    session.sites[0,1].is_site_enabled()
 
+                
+
+
+            :type site: str
 
             :rtype: bool
             :return:
