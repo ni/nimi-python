@@ -1165,7 +1165,7 @@ class _SessionBase(object):
         DigitalState.PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
 
         If pins are not specified, pin list from the pattern containing the start label is used. Call
-        get_pattern_pin_list or get_pattern_pin_indexes with the start label to retrieve the pins
+        get_pattern_pin_names or get_pattern_pin_indexes with the start label to retrieve the pins
         associated with the pattern burst.
 
         Tip:
@@ -2603,23 +2603,6 @@ class Session(_SessionBase):
         return waveforms
 
     @ivi_synchronized
-    def get_pattern_pin_names(self, start_label):
-        '''get_pattern_pin_names
-
-        Returns the names of the pins referenced by the pattern.
-
-        Args:
-            start_label (str): Pattern name or exported pattern label from which to get the pin names referenced by the pattern.
-
-
-        Returns:
-            pin_names (list of str): List of pin names referenced by the pattern.
-
-        '''
-        pattern_pin_list = self.get_pattern_pin_list(start_label)
-        return [x.strip() for x in pattern_pin_list.split(',')]
-
-    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2822,8 +2805,8 @@ class Session(_SessionBase):
         return name_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def get_pattern_pin_list(self, start_label):
-        r'''get_pattern_pin_list
+    def get_pattern_pin_names(self, start_label):
+        r'''get_pattern_pin_names
 
         TBD
 
@@ -2845,7 +2828,7 @@ class Session(_SessionBase):
         pin_list_ctype = (_visatype.ViChar * pin_list_buffer_size_ctype.value)()  # case C060
         error_code = self._library.niDigital_GetPatternPinList(vi_ctype, start_label_ctype, pin_list_buffer_size_ctype, pin_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return pin_list_ctype.value.decode(self._encoding)
+        return _converters.convert_comma_separated_string_to_list(pin_list_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
     def get_site_pass_fail(self, site_list):

@@ -213,6 +213,11 @@ def _convert_to_bytes(value):  # noqa: F811
     pass
 
 
+# nidigital specific converter
+def convert_comma_separated_string_to_list(comma_separated_string):
+    return convert_repeated_capabilities(comma_separated_string, '')
+
+
 @_convert_to_bytes.register(list)  # noqa: F811
 @_convert_to_bytes.register(bytes)  # noqa: F811
 @_convert_to_bytes.register(bytearray)  # noqa: F811

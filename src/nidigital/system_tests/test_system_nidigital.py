@@ -409,8 +409,8 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
     scan_cycle_numbers = [i.scan_cycle_number for i in history_ram_cycle_info]
     assert scan_cycle_numbers == [-1, 0, 1, -1, -1, -1, -1]
 
-    pin_names = multi_instrument_session.get_pattern_pin_list('new_pattern')
-    assert pin_names == 'LO0, LO1, LO2, LO3, HI0, HI1, HI2, HI3'
+    pin_names = multi_instrument_session.get_pattern_pin_names('new_pattern')
+    assert pin_names == ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
 
     expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
     assert expected_pin_states == [
@@ -463,5 +463,4 @@ def test_get_pattern_pin_names(multi_instrument_session):
 
     pattern_pin_names = multi_instrument_session.get_pattern_pin_names(start_label='new_pattern')
 
-    expected_pin_names = ['LO' + str(i) for i in range(8)] + ['HI' + str(i) for i in range(8)]
-    assert pattern_pin_names == expected_pin_names
+    assert pattern_pin_names == ['LO' + str(i) for i in range(8)] + ['HI' + str(i) for i in range(8)]
