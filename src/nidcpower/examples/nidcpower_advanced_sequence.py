@@ -48,13 +48,13 @@ def _main(argsv):
     parser = argparse.ArgumentParser(description='Output ramping voltage to voltage max, then ramping current to current max.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments SMU')
     parser.add_argument('-c', '--channels', default='0', help='Channel(s) to use')
-    parser.add_argument('-p', '--number-points', default=256, help='Number of points per output function')
+    parser.add_argument('-s', '--number-steps', default=256, help='Number of steps per output function')
     parser.add_argument('-v', '--voltage-max', default=1.0, type=float, help='Maximum voltage (V)')
     parser.add_argument('-i', '--current-max', default=0.001, type=float, help='Maximum Current (I)')
     parser.add_argument('-d', '--delay', default=0.05, type=float, help='Source delay (s)')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.channels, args.option_string, args.voltage_max, args.current_max, args.number_points, args.delay)
+    example(args.resource_name, args.channels, args.option_string, args.voltage_max, args.current_max, args.number_steps, args.delay)
 
 
 def main():
