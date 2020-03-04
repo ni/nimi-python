@@ -2418,7 +2418,7 @@ functions = {
         },
         'method_templates': [
             {
-                'documentation_filename': 'send_software_edge_trigger',
+                'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'send_software_edge_trigger'
             }
