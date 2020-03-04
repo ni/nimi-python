@@ -296,6 +296,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -324,6 +326,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -357,6 +361,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -405,6 +411,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -463,6 +471,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -491,6 +501,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -524,6 +536,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -641,6 +655,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -664,6 +680,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -725,6 +743,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -753,6 +773,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -994,6 +1016,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -1723,6 +1747,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pin',
                 'type': 'ViConstString'
             },
@@ -1751,6 +1777,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pin',
                 'type': 'ViConstString'
             },
@@ -1784,6 +1812,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pin',
                 'type': 'ViConstString'
             },
