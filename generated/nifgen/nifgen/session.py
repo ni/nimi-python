@@ -1416,7 +1416,7 @@ class _SessionBase(object):
 
         '''
         if type(waveform) is not enums.Waveform:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
+            raise TypeError('Parameter waveform must be of type ' + str(enums.Waveform))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_ctype = _visatype.ViInt32(waveform.value)  # case S130
@@ -1630,7 +1630,7 @@ class _SessionBase(object):
 
         '''
         if type(byte_order) is not enums.ByteOrder:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
+            raise TypeError('Parameter byte_order must be of type ' + str(enums.ByteOrder))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case C020
@@ -1694,7 +1694,7 @@ class _SessionBase(object):
 
         '''
         if type(byte_order) is not enums.ByteOrder:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ByteOrder))
+            raise TypeError('Parameter byte_order must be of type ' + str(enums.ByteOrder))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         file_name_ctype = ctypes.create_string_buffer(file_name.encode(self._encoding))  # case C020
@@ -2478,7 +2478,7 @@ class _SessionBase(object):
 
         '''
         if type(relative_to) is not enums.RelativeTo:
-            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
+            raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
@@ -2581,7 +2581,7 @@ class _SessionBase(object):
 
         '''
         if type(relative_to) is not enums.RelativeTo:
-            raise TypeError('Parameter mode must be of type ' + str(enums.RelativeTo))
+            raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_handle_ctype = _visatype.ViInt32(waveform_handle)  # case S150
@@ -3645,7 +3645,7 @@ class Session(_SessionBase):
 
         '''
         if type(waveform) is not enums.Waveform:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Waveform))
+            raise TypeError('Parameter waveform must be of type ' + str(enums.Waveform))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         waveform_ctype = _visatype.ViInt32(waveform.value)  # case S130
         frequency_list_length_ctype = _visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case S160
