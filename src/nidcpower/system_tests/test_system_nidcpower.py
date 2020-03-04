@@ -196,11 +196,6 @@ def test_query_min_current_limit(single_channel_session):
     assert min_current_limit_in_range is True
 
 
-def test_create_advanced_sequence(single_channel_session):
-    ids = [1150008, 1250001, 1150009]  # work around #507
-    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
-
-
 def test_set_sequence_with_source_delays(single_channel_session):
     single_channel_session.set_sequence([0.1, 0.2, 0.3], [0.001, 0.002, 0.003])
 
@@ -266,13 +261,43 @@ def test_import_export_file(single_channel_session):
     os.remove(path)
 
 
-def test_create_and_delete_advanced_sequence_step(single_channel_session):
-    ids = [1250001]  # work around #507
+def test_create_and_delete_advanced_sequence(single_channel_session):
+    properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
-    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
-    single_channel_session._create_advanced_sequence_step(set_as_active_step=True)
+    single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    assert single_channel_session.active_advanced_sequence == sequence_name
+    single_channel_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     single_channel_session.voltage_level = 1
-    single_channel_session._delete_advanced_sequence(sequence_name='my_sequence')
+    single_channel_session.delete_advanced_sequence(sequence_name=sequence_name)
+    try:
+        single_channel_session.active_advanced_sequence = sequence_name
+        assert False
+    except nidcpower.errors.DriverError:
+        pass
+
+
+def test_create_and_delete_advanced_sequence_bad_name(single_channel_session):
+    properties_used = ['output_function_bad', 'voltage_level']
+    sequence_name = 'my_sequence'
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    try:
+        single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+        assert False
+    except KeyError:
+        pass
+
+
+def test_create_and_delete_advanced_sequence_bad_type(single_channel_session):
+    properties_used = ['unlock', 'voltage_level']
+    sequence_name = 'my_sequence'
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    try:
+        single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+        assert False
+    except TypeError:
+        pass
 
 
 def test_send_software_edge_trigger_error(session):
@@ -305,8 +330,8 @@ def test_get_ext_cal_recommended_interval(session):
 
 
 def test_set_get_vi_int_64_attribute(session):
-    session.channels['0']._active_advanced_sequence_step = 1
-    read_advanced_sequence_step = session.channels['0']._active_advanced_sequence_step
+    session.channels['0'].active_advanced_sequence_step = 1
+    read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
     assert read_advanced_sequence_step == 1
 
 

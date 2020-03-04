@@ -501,7 +501,7 @@ functions = {
                     'description': '\nThe amount of time to wait (in milliseconds) for the debounce to\ncomplete. A value of 0 checks for debouncing once and returns an error\nif the system is not debounced at that time. A value of -1 means to\nblock for an infinite period of time until the system is debounced.\n'
                 },
                 'name': 'maximumTimeMs',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             }

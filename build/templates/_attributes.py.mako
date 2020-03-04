@@ -25,22 +25,13 @@ class AttributeViInt32(Attribute):
         session._set_attribute_vi_int32(self._attribute_id, value)
 
 
-class AttributeViInt32TimeDeltaSeconds(Attribute):
-
-    def __get__(self, session, session_type):
-        return datetime.timedelta(seconds=session._get_attribute_vi_int32(self._attribute_id))
-
-    def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_seconds(value, int))
-
-
 class AttributeViInt32TimeDeltaMilliseconds(Attribute):
 
     def __get__(self, session, session_type):
         return datetime.timedelta(milliseconds=session._get_attribute_vi_int32(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, int))
+        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds_int32(value).value)
 
 
 class AttributeViInt64(Attribute):
@@ -67,16 +58,7 @@ class AttributeViReal64TimeDeltaSeconds(Attribute):
         return datetime.timedelta(seconds=session._get_attribute_vi_real64(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds(value, float))
-
-
-class AttributeViReal64TimeDeltaMilliseconds(Attribute):
-
-    def __get__(self, session, session_type):
-        return datetime.timedelta(milliseconds=session._get_attribute_vi_real64(self._attribute_id))
-
-    def __set__(self, session, value):
-        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, float))
+        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds_real64(value).value)
 
 
 class AttributeViString(Attribute):

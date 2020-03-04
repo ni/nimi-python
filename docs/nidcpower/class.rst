@@ -274,6 +274,278 @@ configure_aperture_time
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
+create_advanced_sequence
+------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: create_advanced_sequence(sequence_name, property_names, set_as_active_sequence=True)
+
+            Creates an empty advanced sequence. Call the
+            :py:meth:`nidcpower.Session.create_advanced_sequence_step` method to add steps to the
+            active advanced sequence.
+
+            You can create multiple advanced sequences in a session.
+
+            **Support for this method**
+
+            You must set the source mode to Sequence to use this method.
+
+            Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+            methods is unsupported.
+
+            Use this method in the Uncommitted or Committed programming states.
+            Refer to the `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+            the *NI DC Power Supplies and SMUs Help* for more information about
+            NI-DCPower programming states.
+
+            **Related Topics**:
+
+            `Advanced Sequence
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            :py:meth:`nidcpower.Session.create_advanced_sequence_step`
+
+            
+
+            .. note:: This method is not supported on all devices. Refer to `Supported
+                Methods by
+                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+                for more information about supported devices.
+
+
+
+            :param sequence_name:
+
+
+                Specifies the name of the sequence to create.
+
+                
+
+
+            :type sequence_name: str
+            :param property_names:
+
+
+                Specifies the names of the properties you reconfigure per step in the advanced sequence. The following table lists which properties can be configured in an advanced sequence for each NI-DCPower device that supports advanced sequencing. A Yes indicates that the property can be configured in advanced sequencing. An No indicates that the property cannot be configured in advanced sequencing.
+
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | Property                                                    | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
+                +=============================================================+===========+===========+===========+===========+===========+=====================+=====================+================+
+                | :py:attr:`nidcpower.Session.dc_noise_rejection`             | Yes       | No        | Yes       | No        | Yes       | No                  | No                  | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.aperture_time`                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.measure_record_length`          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.sense`                          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.ovp_enabled`                    | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.ovp_limit`                      | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_delay`               | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_off_time`                 | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_on_time`                  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.source_delay`                   | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_compensation_frequency` | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_gain_bandwidth`         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_pole_zero_ratio`        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_compensation_frequency` | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_gain_bandwidth`         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_pole_zero_ratio`        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_level`                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_level_range`            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_limit`                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_limit_high`             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_limit_low`              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_limit_range`            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_limit`                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_limit_high`             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_limit_low`              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.current_limit_range`            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_level`                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.voltage_level_range`            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.output_enabled`                 | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.output_function`                | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.output_resistance`              | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_current_level`       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_voltage_limit`       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_voltage_limit_high`  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_voltage_limit_low`   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_current_level`            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_current_level_range`      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_voltage_limit`            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_voltage_limit_high`       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_voltage_limit_low`        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_voltage_limit_range`      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_current_limit`       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_current_limit_high`  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_current_limit_low`   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_bias_voltage_level`       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_current_limit`            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_current_limit_high`       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_current_limit_low`        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_current_limit_range`      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_voltage_level`            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.pulse_voltage_level_range`      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | :py:attr:`nidcpower.Session.transient_response`             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +-------------------------------------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+
+
+            :type property_names: list of str
+            :param set_as_active_sequence:
+
+
+                Specifies that this current sequence is active.
+
+                
+
+
+            :type set_as_active_sequence: bool
+
+create_advanced_sequence_step
+-----------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: create_advanced_sequence_step(set_as_active_step=True)
+
+            Creates a new advanced sequence step in the advanced sequence specified
+            by the Active advanced sequence. When you create an advanced sequence
+            step, each property you passed to the :py:meth:`nidcpower.Session._create_advanced_sequence`
+            method is reset to its default value for that step unless otherwise
+            specified.
+
+            **Support for this Method**
+
+            You must set the source mode to Sequence to use this method.
+
+            Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+            methods is unsupported.
+
+            **Related Topics**:
+
+            `Advanced Sequence
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            :py:meth:`nidcpower.Session._create_advanced_sequence`
+
+            
+
+            .. note:: This method is not supported on all devices. Refer to `Supported
+                Methods by
+                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+                for more information about supported devices.
+
+
+
+            :param set_as_active_step:
+
+
+                Specifies that this current step in the active sequence is active.
+
+                
+
+
+            :type set_as_active_step: bool
+
+delete_advanced_sequence
+------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: delete_advanced_sequence(sequence_name)
+
+            Deletes a previously created advanced sequence and all the advanced
+            sequence steps in the advanced sequence.
+
+            **Support for this Method**
+
+            You must set the source mode to Sequence to use this method.
+
+            Using the :py:meth:`nidcpower.Session.set_sequence` method with Advanced Sequence
+            methods is unsupported.
+
+            **Related Topics**:
+
+            `Advanced Sequence
+            Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+            `Programming
+            States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+            
+
+            .. note:: This method is not supported on all devices. Refer to `Supported
+                Methods by
+                Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+                for more information about supported devices.
+
+
+
+            :param sequence_name:
+
+
+                specifies the name of the sequence to delete.
+
+                
+
+
+            :type sequence_name: str
+
 disable
 -------
 
@@ -1595,6 +1867,90 @@ channels
 
 Properties
 ==========
+
+active_advanced_sequence
+------------------------
+
+    .. py:attribute:: active_advanced_sequence
+
+        Specifies the advanced sequence to configure or generate.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].active_advanced_sequence = var
+                var = session.channels[0,1].active_advanced_sequence
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | str        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Active Advanced Sequence**
+                - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE**
+
+active_advanced_sequence_step
+-----------------------------
+
+    .. py:attribute:: active_advanced_sequence_step
+
+        Specifies the advanced sequence step to configure.
+
+
+
+        .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
+
+
+        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+            nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
+
+            .. code:: python
+
+                session.channels[0,1].active_advanced_sequence_step = var
+                var = session.channels[0,1].active_advanced_sequence_step
+
+        The following table lists the characteristics of this property.
+
+            +----------------+------------+
+            | Characteristic | Value      |
+            +================+============+
+            | Datatype       | int        |
+            +----------------+------------+
+            | Permissions    | read-write |
+            +----------------+------------+
+            | Channel Based  | Yes        |
+            +----------------+------------+
+            | Resettable     | No         |
+            +----------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Active Advanced Sequence Step**
+                - C Attribute: **NIDCPOWER_ATTR_ACTIVE_ADVANCED_SEQUENCE_STEP**
 
 aperture_time
 -------------

@@ -979,7 +979,6 @@ attributes = {
     1150074: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
         'documentation': {
             'description': '\nSpecifies the advanced sequence to configure or generate.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
@@ -992,7 +991,6 @@ attributes = {
     1150075: {
         'access': 'read-write',
         'channel_based': True,
-        'codegen_method': 'private',
         'documentation': {
             'description': '\nSpecifies the advanced sequence step to configure.\n',
             'note': 'This attribute is not supported by all devices. Refer to Supported Attributes by Device topic.'
