@@ -455,7 +455,6 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
     ]
 
 
-
 def test_get_pattern_pin_names(multi_instrument_session):
     test_name = 'simple_pattern'
     configure_session(multi_instrument_session, test_name)
