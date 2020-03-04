@@ -2331,28 +2331,44 @@ send_software_edge_trigger
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: send_software_edge_trigger()
+    .. py:method:: send_software_edge_trigger(trigger, trigger_id)
 
-        Sends a command to trigger the signal generator. This VI can act as an
-        override for an external edge trigger.
+            Sends a command to trigger the signal generator. This VI can act as an
+            override for an external edge trigger.
 
-        If called directly on the session, this will send a software start trigger.
+            
 
-        ..code:: python
+            .. note:: This VI does not override external digital edge triggers of the
+                NI 5401/5411/5431.
 
-            session.send_software_edge_trigger()
 
-        If called using the script trigger repeated capability container, this will
-        send a software trigger to the specified script trigger
 
-        ..code:: python
+            :param trigger:
 
-            session.script_triggers[1].send_software_edge_trigger()
 
-        ..note::
+                Trigger specifies the type of software trigger to send
 
-            This method does not override external digital edge triggers of the NI 5401/5411/5431.
+                +-----------------------------------+
+                | Defined Values                    |
+                +===================================+
+                | :py:data:`~nifgen.Trigger.START`  |
+                +-----------------------------------+
+                | :py:data:`~nifgen.Trigger.SCRIPT` |
+                +-----------------------------------+
 
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type trigger: :py:data:`nifgen.Trigger`
+            :param trigger_id:
+
+
+                Trigger ID specifies the Script Trigger to use for triggering.
+
+                
+
+
+            :type trigger_id: str
 
 set_next_write_position
 -----------------------
