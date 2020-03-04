@@ -3126,8 +3126,8 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        channel_name = _converters.convert_repeated_capabilities_from_init(channel_name, self._encoding)
-        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        channel_name = _converters.convert_repeated_capabilities_from_init(channel_name)
+        options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -4411,7 +4411,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        max_time_ctype = _converters.convert_timedelta_to_milliseconds(max_time, _visatype.ViInt32)  # case S140
+        max_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(max_time)  # case S140
         error_code = self._library.niFgen_WaitUntilDone(vi_ctype, max_time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

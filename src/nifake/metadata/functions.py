@@ -1596,7 +1596,7 @@ functions = {
                     'description': 'Specifies the **maximum_time** allowed in seconds.'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'datetime.timedelta'
             },
@@ -1636,10 +1636,10 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the **maximum_time** allowed in microseconds.'
+                    'description': 'Specifies the **maximum_time** allowed in milliseconds.'
                 },
                 'name': 'maximumTime',
-                'python_api_converter_name': 'convert_timedelta_to_microseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'datetime.timedelta'
             },
