@@ -1161,7 +1161,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -1419,7 +1419,7 @@ class Session(_SessionBase):
         trigger_count_ctype = _visatype.ViInt32(trigger_count)  # case S150
         sample_count_ctype = _visatype.ViInt32(sample_count)  # case S150
         sample_trigger_ctype = _visatype.ViInt32(sample_trigger.value)  # case S130
-        sample_interval_ctype = _converters.convert_timedelta_to_seconds(sample_interval, _visatype.ViReal64)  # case S140
+        sample_interval_ctype = _converters.convert_timedelta_to_seconds_real64(sample_interval)  # case S140
         error_code = self._library.niDMM_ConfigureMultiPoint(vi_ctype, trigger_count_ctype, sample_count_ctype, sample_trigger_ctype, sample_interval_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1624,7 +1624,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = _visatype.ViInt32(trigger_source.value)  # case S130
-        trigger_delay_ctype = _converters.convert_timedelta_to_seconds(trigger_delay, _visatype.ViReal64)  # case S140
+        trigger_delay_ctype = _converters.convert_timedelta_to_seconds_real64(trigger_delay)  # case S140
         error_code = self._library.niDMM_ConfigureTrigger(vi_ctype, trigger_source_ctype, trigger_delay_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1837,7 +1837,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDMM_Fetch(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1888,7 +1888,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
@@ -1935,7 +1935,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600
@@ -1990,7 +1990,7 @@ class Session(_SessionBase):
         array_size = len(waveform_array)
 
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_ctype = get_ctypes_pointer_for_buffer(value=waveform_array)  # case B510
         actual_number_of_points_ctype = _visatype.ViInt32()  # case S220
@@ -2495,7 +2495,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         reading_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDMM_Read(vi_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2545,7 +2545,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         reading_array_size = array_size  # case B600
         reading_array_array = array.array("d", [0] * reading_array_size)  # case B600
@@ -2642,7 +2642,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time, _visatype.ViInt32)  # case S140
+        maximum_time_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time)  # case S140
         array_size_ctype = _visatype.ViInt32(array_size)  # case S210
         waveform_array_size = array_size  # case B600
         waveform_array_array = array.array("d", [0] * waveform_array_size)  # case B600

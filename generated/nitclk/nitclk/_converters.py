@@ -120,7 +120,7 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     return [prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)]
 
 
-def convert_repeated_capabilities_from_init(repeated_capability, encoding):
+def convert_repeated_capabilities_from_init(repeated_capability):
     '''Convert a repeated capabilities object to a comma delimited list
 
     Parameter list is so it can be called from the code generated __init__(). We know it is for channels when called
@@ -128,7 +128,6 @@ def convert_repeated_capabilities_from_init(repeated_capability, encoding):
 
     Args:
         repeated_capability (str, list, tuple, slice, None) -
-        encoding (str) - ignored for this converter
 
     Returns:
         rep_cal (str) - comma delimited string of each repeated capability item with ranges expanded
@@ -152,16 +151,12 @@ def _convert_timedelta(value, library_type, scaling):
     return library_type(scaled_value)
 
 
-def convert_timedelta_to_seconds(value, library_type):
-    return _convert_timedelta(value, library_type, 1)
+def convert_timedelta_to_seconds_real64(value):
+    return _convert_timedelta(value, _visatype.ViReal64, 1)
 
 
-def convert_timedelta_to_milliseconds(value, library_type):
-    return _convert_timedelta(value, library_type, 1000)
-
-
-def convert_timedelta_to_microseconds(value, library_type):
-    return _convert_timedelta(value, library_type, 1000000)
+def convert_timedelta_to_milliseconds_int32(value):
+    return _convert_timedelta(value, _visatype.ViInt32, 1000)
 
 
 def convert_month_to_timedelta(months):
@@ -169,8 +164,8 @@ def convert_month_to_timedelta(months):
 
 
 # This converter is not called from the normal codegen path for function. Instead it is
-# call from init and is a special case. Also, it just returns a string rather than a ctype object
-def convert_init_with_options_dictionary(values, encoding):
+# call from init and is a special case.
+def convert_init_with_options_dictionary(values):
     if type(values) is str:
         init_with_options_string = values
     else:
@@ -258,106 +253,46 @@ def convert_to_bytes(value):  # noqa: F811
 
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
-    assert convert_init_with_options_dictionary('', 'ascii') == ''
-    assert convert_init_with_options_dictionary('Simulate=1', 'ascii') == 'Simulate=1'
-    assert convert_init_with_options_dictionary({'Simulate': True, }, 'ascii') == 'Simulate=1'
-    assert convert_init_with_options_dictionary({'Simulate': False, }, 'ascii') == 'Simulate=0'
-    assert convert_init_with_options_dictionary({'Simulate': True, 'Cache': False}, 'ascii') == 'Cache=0,Simulate=1'
-    assert convert_init_with_options_dictionary({'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
-    assert convert_init_with_options_dictionary({'Simulate': True, 'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
-    assert convert_init_with_options_dictionary({'simulate': True, 'cache': False}, 'ascii') == 'Cache=0,Simulate=1'
-    assert convert_init_with_options_dictionary({'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
-    assert convert_init_with_options_dictionary({'simulate': True, 'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
+    assert convert_init_with_options_dictionary('') == ''
+    assert convert_init_with_options_dictionary('Simulate=1') == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': True, }) == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': False, }) == 'Simulate=0'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'Cache': False}) == 'Cache=0,Simulate=1'
+    assert convert_init_with_options_dictionary({'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
+    assert convert_init_with_options_dictionary({'simulate': True, 'cache': False}) == 'Cache=0,Simulate=1'
+    assert convert_init_with_options_dictionary({'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
+    assert convert_init_with_options_dictionary({'simulate': True, 'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
 
 
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
+    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=10))
     assert test_result.value == 10.0
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
+    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=-1))
     assert test_result.value == -1
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds(10.5, _visatype.ViReal64)
+    test_result = convert_timedelta_to_seconds_real64(10.5)
     assert test_result.value == 10.5
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds(-1, _visatype.ViReal64)
+    test_result = convert_timedelta_to_seconds_real64(-1)
     assert test_result.value == -1
     assert isinstance(test_result, _visatype.ViReal64)
 
 
-def test_convert_timedelta_to_seconds_int():
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
-    assert test_result.value == 10
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
-    assert test_result.value == -1
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_seconds(10.5, _visatype.ViInt32)
-    assert test_result.value == 10
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_seconds(-1, _visatype.ViInt32)
-    assert test_result.value == -1
-    assert isinstance(test_result, _visatype.ViInt32)
-
-
-def test_convert_timedelta_to_milliseconds_double():
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
-    assert test_result.value == 10000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
-    assert test_result.value == -1000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_milliseconds(10.5, _visatype.ViReal64)
-    assert test_result.value == 10500.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_milliseconds(-1, _visatype.ViReal64)
-    assert test_result.value == -1000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-
-
-def test_convert_timedelta_to_milliseconds_int():
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
+def test_convert_timedelta_to_milliseconds_int32():
+    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=10))
     assert test_result.value == 10000
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
+    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=-1))
     assert test_result.value == -1000
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds(10.5, _visatype.ViInt32)
+    test_result = convert_timedelta_to_milliseconds_int32(10.5)
     assert test_result.value == 10500
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds(-1, _visatype.ViInt32)
+    test_result = convert_timedelta_to_milliseconds_int32(-1)
     assert test_result.value == -1000
-    assert isinstance(test_result, _visatype.ViInt32)
-
-
-def test_convert_timedelta_to_microseconds_double():
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
-    assert test_result.value == 10000000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
-    assert test_result.value == -1000000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_microseconds(10.5, _visatype.ViReal64)
-    assert test_result.value == 10500000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_microseconds(-1, _visatype.ViReal64)
-    assert test_result.value == -1000000.0
-    assert isinstance(test_result, _visatype.ViReal64)
-
-
-def test_convert_timedelta_to_microseconds_int():
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
-    assert test_result.value == 10000000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
-    assert test_result.value == -1000000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_microseconds(10.5, _visatype.ViInt32)
-    assert test_result.value == 10500000
-    assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_microseconds(-1, _visatype.ViInt32)
-    assert test_result.value == -1000000
     assert isinstance(test_result, _visatype.ViInt32)
 
 

@@ -51,7 +51,7 @@
             vector_actual_pin_states = []
             vector_per_pin_pass_fail = []
             for dut_cycle_index in range(num_dut_cycles):
-                cycle_expected_pin_states, cycle_actual_pin_states, cycle_per_pin_pass_fail = self._fetch_history_ram_cycle_pin_data(site, pin_list, position, dut_cycle_index)
+                cycle_expected_pin_states, cycle_actual_pin_states, cycle_per_pin_pass_fail = self._fetch_history_ram_cycle_pin_data(site, position, dut_cycle_index)
                 vector_expected_pin_states.append(cycle_expected_pin_states)
                 vector_actual_pin_states.append(cycle_actual_pin_states)
                 vector_per_pin_pass_fail.append(cycle_per_pin_pass_fail)

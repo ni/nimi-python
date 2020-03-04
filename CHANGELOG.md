@@ -47,6 +47,14 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
+        * `create_advanced_sequence()` - [#504](https://github.com/ni/nimi-python/issues/504)
+            * Instead of a list of attribute IDs, you pass in a list of property names as strings
+            * Includes example to see how to use it
+            * Additional methods and properties that were made public (rather than private)
+                * `create_advanced_sequence_step()`
+                * `delete_advanced_sequence()`
+                * `active_advanced_sequence`
+                * `active_advanced_sequence_step`
     * #### Changed
     * #### Removed
 * ### NI-FGEN
@@ -73,6 +81,7 @@ All notable changes to this project will be documented in this file.
         * `write_source_waveform_site_unique()` now supports `numpy.array` and `list` as site waveform types
         * sites are now a repeated capability instead of a parameter: `session.sites[1,2].fetch_capture_waveform(...)` - [#1111](https://github.com/ni/nimi-python/issues/1111)
         * `fetch_history_ram_cycle_information` method now supports fetching multiple History RAM samples in a single API call - [#1071](https://github.com/ni/nimi-python/issues/1071)
+        * Update methods that require `pin_list` to be passed in, such that `pin_list` can be passed in via `pins` repeated capability - [#1294](https://github.com/ni/nimi-python/issues/1294)
     * #### Removed
         * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
         * Removed programmatic pin map creation API - [#1124](https://github.com/ni/nimi-python/issues/1124)

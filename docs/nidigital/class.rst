@@ -433,21 +433,23 @@ configure_time_set_compare_edges_strobe
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_compare_edges_strobe(pin_list, time_set, strobe_edge)
+    .. py:method:: configure_time_set_compare_edges_strobe(time_set, strobe_edge)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_compare_edges_strobe(time_set, strobe_edge)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -468,21 +470,23 @@ configure_time_set_compare_edges_strobe2x
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_compare_edges_strobe2x(pin_list, time_set, strobe_edge, strobe2_edge)
+    .. py:method:: configure_time_set_compare_edges_strobe2x(time_set, strobe_edge, strobe2_edge)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_compare_edges_strobe2x(time_set, strobe_edge, strobe2_edge)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -510,21 +514,23 @@ configure_time_set_drive_edges
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_edges(pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
+    .. py:method:: configure_time_set_drive_edges(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_drive_edges(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -573,21 +579,23 @@ configure_time_set_drive_edges2x
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_edges2x(pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
+    .. py:method:: configure_time_set_drive_edges2x(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_drive_edges2x(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -650,21 +658,23 @@ configure_time_set_drive_format
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_format(pin_list, time_set, drive_format)
+    .. py:method:: configure_time_set_drive_format(time_set, drive_format)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_drive_format(time_set, drive_format)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -685,21 +695,23 @@ configure_time_set_edge
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_edge(pin_list, time_set, edge, time)
+    .. py:method:: configure_time_set_edge(time_set, edge, time)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_edge(time_set, edge, time)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -727,21 +739,23 @@ configure_time_set_edge_multiplier
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_edge_multiplier(pin_list, time_set, edge_multiplier)
+    .. py:method:: configure_time_set_edge_multiplier(time_set, edge_multiplier)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].configure_time_set_edge_multiplier(time_set, edge_multiplier)
 
 
-                
-
-
-            :type pin_list: str
             :param time_set:
 
 
@@ -876,21 +890,23 @@ create_capture_waveform_parallel
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_capture_waveform_parallel(pin_list, waveform_name)
+    .. py:method:: create_capture_waveform_parallel(waveform_name)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].create_capture_waveform_parallel(waveform_name)
 
 
-                
-
-
-            :type pin_list: str
             :param waveform_name:
 
 
@@ -904,21 +920,23 @@ create_capture_waveform_serial
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_capture_waveform_serial(pin_list, waveform_name, sample_width, bit_order)
+    .. py:method:: create_capture_waveform_serial(waveform_name, sample_width, bit_order)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].create_capture_waveform_serial(waveform_name, sample_width, bit_order)
 
 
-                
-
-
-            :type pin_list: str
             :param waveform_name:
 
 
@@ -981,21 +999,23 @@ create_source_waveform_parallel
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_source_waveform_parallel(pin_list, waveform_name, data_mapping)
+    .. py:method:: create_source_waveform_parallel(waveform_name, data_mapping)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].create_source_waveform_parallel(waveform_name, data_mapping)
 
 
-                
-
-
-            :type pin_list: str
             :param waveform_name:
 
 
@@ -1016,21 +1036,23 @@ create_source_waveform_serial
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_source_waveform_serial(pin_list, waveform_name, data_mapping, sample_width, bit_order)
+    .. py:method:: create_source_waveform_serial(waveform_name, data_mapping, sample_width, bit_order)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin_list:
+                .. code:: python
+
+                    session.pins[0,1].create_source_waveform_serial(waveform_name, data_mapping, sample_width, bit_order)
 
 
-                
-
-
-            :type pin_list: str
             :param waveform_name:
 
 
@@ -1197,7 +1219,7 @@ fetch_history_ram_cycle_information
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_history_ram_cycle_information(site, pin_list, position, samples_to_read)
+    .. py:method:: fetch_history_ram_cycle_information(site, position, samples_to_read)
 
             Returns the pattern information acquired for the specified cycles.
 
@@ -1205,8 +1227,21 @@ fetch_history_ram_cycle_information
             consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
             :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
 
+            If pins are not specified, pin list from the pattern containing the start label is used. Call
+            :py:meth:`nidigital.Session.get_pattern_pin_list` or :py:meth:`nidigital.Session.get_pattern_pin_indexes` with the start label to retrieve the pins
+            associated with the pattern burst.
+
             
 
+
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+                .. code:: python
+
+                    session.pins[0,1].fetch_history_ram_cycle_information(site, position, samples_to_read)
 
 
             :param site:
@@ -1219,17 +1254,6 @@ fetch_history_ram_cycle_information
 
 
             :type site: str
-            :param pin_list:
-
-
-                Pins for which to retrieve History RAM data. If empty, the pin list from the pattern
-                containing the start label is used. Call :py:meth:`nidigital.Session.get_pattern_pin_list` or :py:meth:`nidigital.Session.get_pattern_pin_indexes` with the start
-                label to retrieve the pins associated with the pattern burst.
-
-                
-
-
-            :type pin_list: str
             :param position:
 
 
@@ -1663,21 +1687,23 @@ get_time_set_drive_format
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_drive_format(pin, time_set)
+    .. py:method:: get_time_set_drive_format(time_set)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin:
+                .. code:: python
+
+                    session.pins[0,1].get_time_set_drive_format(time_set)
 
 
-                
-
-
-            :type pin: str
             :param time_set:
 
 
@@ -1699,21 +1725,23 @@ get_time_set_edge
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_edge(pin, time_set, edge)
+    .. py:method:: get_time_set_edge(time_set, edge)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin:
+                .. code:: python
+
+                    session.pins[0,1].get_time_set_edge(time_set, edge)
 
 
-                
-
-
-            :type pin: str
             :param time_set:
 
 
@@ -1742,21 +1770,23 @@ get_time_set_edge_multiplier
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_edge_multiplier(pin, time_set)
+    .. py:method:: get_time_set_edge_multiplier(time_set)
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.:
 
-            :param pin:
+                .. code:: python
+
+                    session.pins[0,1].get_time_set_edge_multiplier(time_set)
 
 
-                
-
-
-            :type pin: str
             :param time_set:
 
 

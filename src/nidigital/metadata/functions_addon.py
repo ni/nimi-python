@@ -125,7 +125,7 @@ functions_additional_fetch_capture_waveform = {
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64',
-                'python_api_converter_name': 'convert_timedelta_to_seconds',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'python_type': 'float or datetime.timedelta',
             },
             {
@@ -157,7 +157,16 @@ functions_additional_fetch_history_ram_cycle_information = {
             }
         ],
         'documentation': {
-            'description': '\nReturns the pattern information acquired for the specified cycles.\n\nIf the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may\nconsist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return\nNIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.\n'
+            'description': """\nReturns the pattern information acquired for the specified cycles.
+            
+If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
+consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
+NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
+
+If pins are not specified, pin list from the pattern containing the start label is used. Call
+niDigital_GetPatternPinList or niDigital_GetPatternPinIndexes with the start label to retrieve the pins
+associated with the pattern burst.
+"""
         },
         'parameters': [
             {
@@ -175,6 +184,8 @@ functions_additional_fetch_history_ram_cycle_information = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'Pins for which to retrieve History RAM data. If empty, the pin list from the pattern\ncontaining the start label is used. Call niDigital_GetPatternPinList or niDigital_GetPatternPinIndexes with the start\nlabel to retrieve the pins associated with the pattern burst.'
                 },
