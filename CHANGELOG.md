@@ -50,6 +50,11 @@ All notable changes to this project will be documented in this file.
         * `create_advanced_sequence()` - [#504](https://github.com/ni/nimi-python/issues/504)
             * Instead of a list of attribute IDs, you pass in a list of property names as strings
             * Includes example to see how to use it
+            * Additional methods and properties that were made public (rather than private)
+                * `create_advanced_sequence_step()`
+                * `delete_advanced_sequence()`
+                * `active_advanced_sequence`
+                * `active_advanced_sequence_step`
     * #### Changed
     * #### Removed
 * ### NI-FGEN
