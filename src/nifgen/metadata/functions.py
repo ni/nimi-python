@@ -2435,7 +2435,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Trigger specifies the type of software trigger to send\n\n****Defined Values****\n',
+                    'description': 'Trigger specifies the type of software trigger to send',
                     'table_body': [
                         [
                             'NIFGEN_VAL_START_TRIGGER'
@@ -2443,7 +2443,10 @@ functions = {
                         [
                             'NIFGEN_VAL_SCRIPT_TRIGGER'
                         ],
-                    ]
+                    ],
+                    'table_header': [
+                        'Defined Values',
+                    ],
                 },
                 'enum': 'Trigger',
                 'name': 'trigger',
