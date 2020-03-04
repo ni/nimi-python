@@ -2,4 +2,11 @@
 config_additional_config = {
     'module_version': '0.2.2.dev0',
     'latest_runtime_version_tested_against': '19.0.1',
+    'custom_types': [
+        {
+            'ctypes_type': '',
+            'file_name': 'history_ram_cycle_information',
+            'python_name': 'HistoryRAMCycleInformation'
+        }
+    ],
 }

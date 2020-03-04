@@ -13,6 +13,8 @@ import nidigital._visatype as _visatype
 import nidigital.enums as enums
 import nidigital.errors as errors
 
+import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
+
 import nitclk
 
 # Used for __repr__
@@ -766,6 +768,238 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def configure_time_set_compare_edges_strobe(self, time_set, strobe_edge):
+        r'''configure_time_set_compare_edges_strobe
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_compare_edges_strobe(time_set, strobe_edge)
+
+        Args:
+            time_set (str):
+
+            strobe_edge (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_compare_edges_strobe2x(self, time_set, strobe_edge, strobe2_edge):
+        r'''configure_time_set_compare_edges_strobe2x
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_compare_edges_strobe2x(time_set, strobe_edge, strobe2_edge)
+
+        Args:
+            time_set (str):
+
+            strobe_edge (float):
+
+            strobe2_edge (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
+        strobe2_edge_ctype = _visatype.ViReal64(strobe2_edge)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype, strobe2_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_drive_edges(self, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
+        r'''configure_time_set_drive_edges
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_drive_edges(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
+
+        Args:
+            time_set (str):
+
+            format (int):
+
+            drive_on_edge (float):
+
+            drive_data_edge (float):
+
+            drive_return_edge (float):
+
+            drive_off_edge (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        format_ctype = _visatype.ViInt32(format)  # case S150
+        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
+        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
+        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
+        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_drive_edges2x(self, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
+        r'''configure_time_set_drive_edges2x
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_drive_edges2x(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
+
+        Args:
+            time_set (str):
+
+            format (int):
+
+            drive_on_edge (float):
+
+            drive_data_edge (float):
+
+            drive_return_edge (float):
+
+            drive_off_edge (float):
+
+            drive_data2_edge (float):
+
+            drive_return2_edge (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        format_ctype = _visatype.ViInt32(format)  # case S150
+        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
+        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
+        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
+        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
+        drive_data2_edge_ctype = _visatype.ViReal64(drive_data2_edge)  # case S150
+        drive_return2_edge_ctype = _visatype.ViReal64(drive_return2_edge)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_drive_format(self, time_set, drive_format):
+        r'''configure_time_set_drive_format
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_drive_format(time_set, drive_format)
+
+        Args:
+            time_set (str):
+
+            drive_format (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        drive_format_ctype = _visatype.ViInt32(drive_format)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_ctype, drive_format_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_edge(self, time_set, edge, time):
+        r'''configure_time_set_edge
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_edge(time_set, edge, time)
+
+        Args:
+            time_set (str):
+
+            edge (int):
+
+            time (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_ctype = _visatype.ViInt32(edge)  # case S150
+        time_ctype = _visatype.ViReal64(time)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_ctype, edge_ctype, time_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_time_set_edge_multiplier(self, time_set, edge_multiplier):
+        r'''configure_time_set_edge_multiplier
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].configure_time_set_edge_multiplier(time_set, edge_multiplier)
+
+        Args:
+            time_set (str):
+
+            edge_multiplier (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_multiplier_ctype = _visatype.ViInt32(edge_multiplier)  # case S150
+        error_code = self._library.niDigital_ConfigureTimeSetEdgeMultiplier(vi_ctype, pin_list_ctype, time_set_ctype, edge_multiplier_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def configure_voltage_levels(self, vil, vih, vol, voh, vterm):
         r'''configure_voltage_levels
 
@@ -801,6 +1035,245 @@ class _SessionBase(object):
         error_code = self._library.niDigital_ConfigureVoltageLevels(vi_ctype, channel_list_ctype, vil_ctype, vih_ctype, vol_ctype, voh_ctype, vterm_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def create_capture_waveform_parallel(self, waveform_name):
+        r'''create_capture_waveform_parallel
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].create_capture_waveform_parallel(waveform_name)
+
+        Args:
+            waveform_name (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_CreateCaptureWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def create_capture_waveform_serial(self, waveform_name, sample_width, bit_order):
+        r'''create_capture_waveform_serial
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].create_capture_waveform_serial(waveform_name, sample_width, bit_order)
+
+        Args:
+            waveform_name (str):
+
+            sample_width (int):
+
+            bit_order (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
+        bit_order_ctype = _visatype.ViInt32(bit_order)  # case S150
+        error_code = self._library.niDigital_CreateCaptureWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, sample_width_ctype, bit_order_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def create_source_waveform_parallel(self, waveform_name, data_mapping):
+        r'''create_source_waveform_parallel
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].create_source_waveform_parallel(waveform_name, data_mapping)
+
+        Args:
+            waveform_name (str):
+
+            data_mapping (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        data_mapping_ctype = _visatype.ViInt32(data_mapping)  # case S150
+        error_code = self._library.niDigital_CreateSourceWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def create_source_waveform_serial(self, waveform_name, data_mapping, sample_width, bit_order):
+        r'''create_source_waveform_serial
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].create_source_waveform_serial(waveform_name, data_mapping, sample_width, bit_order)
+
+        Args:
+            waveform_name (str):
+
+            data_mapping (int):
+
+            sample_width (int):
+
+            bit_order (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        data_mapping_ctype = _visatype.ViInt32(data_mapping)  # case S150
+        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
+        bit_order_ctype = _visatype.ViInt32(bit_order)  # case S150
+        error_code = self._library.niDigital_CreateSourceWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype, sample_width_ctype, bit_order_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def fetch_history_ram_cycle_information(self, site, position, samples_to_read):
+        '''fetch_history_ram_cycle_information
+
+        Returns the pattern information acquired for the specified cycles.
+
+        If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
+        consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
+        DigitalState.PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
+
+        If pins are not specified, pin list from the pattern containing the start label is used. Call
+        get_pattern_pin_list or get_pattern_pin_indexes with the start label to retrieve the pins
+        associated with the pattern burst.
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].fetch_history_ram_cycle_information(site, position, samples_to_read)
+
+        Args:
+            site (str): Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
+                where N is the site number. The VI returns an error if more than one site is specified.
+
+            position (int): Sample index from which to start fetching pattern information.
+
+            samples_to_read (int): Number of samples to fetch. A value of -1 specifies to fetch all available samples.
+
+
+        Returns:
+            history_ram_cycle_information (list of HistoryRAMCycleInformation): Returns a list of class instances with
+                the following information about each pattern cycle:
+
+                -  **pattern_name** (str)  Name of the pattern for the acquired cycle.
+                -  **time_set_name** (str) Time set for the acquired cycle.
+                -  **vector_number** (int) Vector number within the pattern for the acquired cycle. Vector numbers start
+                   at 0 from the beginning of the pattern.
+                -  **cycle_number** (int) Cycle number acquired by this History RAM sample. Cycle numbers start at 0
+                   from the beginning of the pattern burst.
+                -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
+                   start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
+                   have a scan opcode.
+                -  **expected_pin_states** (list of list of enums.DigitalState) Pin states as expected by the loaded
+                   pattern in the order specified in the pin list. Pins without defined edges in the specified DUT cycle
+                   will have a value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+                -  **actual_pin_states** (list of list of enums.DigitalState) Pin states acquired by History RAM in the
+                   order specified in the pin list. Pins without defined edges in the specified DUT cycle will have a
+                   value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+                -  **per_pin_pass_fail** (list of list of bool) Pass fail information for pins in the order specified in
+                   the pin list. Pins without defined edges in the specified DUT cycle will have a value of pass (True).
+                   Length of the outer list will be equal to the value of edge multiplier for the given vector.
+                   Length of the inner list will be equal to the number of pins requested.
+
+        '''
+        if position < 0:
+            raise ValueError('position should be greater than or equal to 0.')
+
+        if samples_to_read < -1:
+            raise ValueError('samples_to_read should be greater than or equal to -1.')
+
+        samples_available = self.get_history_ram_sample_count(site)
+        if position >= samples_available:
+            raise ValueError('position: Specified value = {0}, Maximum value = {1}.'.format(position, samples_available - 1))
+
+        if samples_to_read == -1:
+            if not self.history_ram_number_of_samples_is_finite:
+                raise RuntimeError(
+                    'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument is '
+                    'configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
+            samples_to_read = samples_available - position
+
+        if position + samples_to_read > samples_available:
+            raise ValueError(
+                'position: Specified value = {0}, samples_to_read: Specified value = {1}; Samples available = {2}.'
+                .format(position, samples_to_read, samples_available - position))
+
+        pattern_names = {}
+        time_set_names = {}
+        cycle_infos = []
+        for _ in range(samples_to_read):
+
+            pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles = self._fetch_history_ram_cycle_information(site, position)
+
+            if pattern_index not in pattern_names:
+                pattern_names[pattern_index] = self.get_pattern_name(pattern_index)
+            pattern_name = pattern_names[pattern_index]
+
+            if time_set_index not in time_set_names:
+                time_set_names[time_set_index] = self.get_time_set_name(time_set_index)
+            time_set_name = time_set_names[time_set_index]
+
+            scan_cycle_number = self._fetch_history_ram_scan_cycle_number(site, position)
+
+            vector_expected_pin_states = []
+            vector_actual_pin_states = []
+            vector_per_pin_pass_fail = []
+            for dut_cycle_index in range(num_dut_cycles):
+                cycle_expected_pin_states, cycle_actual_pin_states, cycle_per_pin_pass_fail = self._fetch_history_ram_cycle_pin_data(site, position, dut_cycle_index)
+                vector_expected_pin_states.append(cycle_expected_pin_states)
+                vector_actual_pin_states.append(cycle_actual_pin_states)
+                vector_per_pin_pass_fail.append(cycle_per_pin_pass_fail)
+
+            cycle_infos.append(history_ram_cycle_information.HistoryRAMCycleInformation(
+                pattern_name=pattern_name,
+                time_set_name=time_set_name,
+                vector_number=vector_number,
+                cycle_number=cycle_number,
+                scan_cycle_number=scan_cycle_number,
+                expected_pin_states=vector_expected_pin_states,
+                actual_pin_states=vector_actual_pin_states,
+                per_pin_pass_fail=vector_per_pin_pass_fail))
+            position += 1
+
+        return cycle_infos
 
     @ivi_synchronized
     def get_pin_results_pin_information(self):
@@ -844,6 +1317,59 @@ class _SessionBase(object):
             pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
 
         return pin_infos
+
+    @ivi_synchronized
+    def _fetch_history_ram_cycle_pin_data(self, site, sample_index, dut_cycle_index):
+        r'''_fetch_history_ram_cycle_pin_data
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1]._fetch_history_ram_cycle_pin_data(site, sample_index, dut_cycle_index)
+
+        Args:
+            site (str):
+
+            sample_index (int):
+
+            dut_cycle_index (int):
+
+
+        Returns:
+            expected_pin_states (list of enums.DigitalState):
+
+            actual_pin_states (list of enums.DigitalState):
+
+            per_pin_pass_fail (list of bool):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
+        pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
+        dut_cycle_index_ctype = _visatype.ViInt32(dut_cycle_index)  # case S150
+        pin_data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        expected_pin_states_ctype = None  # case B610
+        actual_pin_states_ctype = None  # case B610
+        per_pin_pass_fail_ctype = None  # case B610
+        actual_num_pin_data_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        pin_data_buffer_size_ctype = _visatype.ViInt32(actual_num_pin_data_ctype.value)  # case S200
+        expected_pin_states_size = actual_num_pin_data_ctype.value  # case B620
+        expected_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=expected_pin_states_size)  # case B620
+        actual_pin_states_size = actual_num_pin_data_ctype.value  # case B620
+        actual_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=actual_pin_states_size)  # case B620
+        per_pin_pass_fail_size = actual_num_pin_data_ctype.value  # case B620
+        per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
+        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [enums.DigitalState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.DigitalState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def frequency_counter_measure_frequency(self):
@@ -1180,6 +1706,99 @@ class _SessionBase(object):
         error_code = self._library.niDigital_GetPinResultsPinInformation(vi_ctype, channel_list_ctype, buffer_size_ctype, pin_indexes_ctype, site_numbers_ctype, channel_indexes_ctype, None if actual_num_values_ctype is None else (ctypes.pointer(actual_num_values_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)]
+
+    @ivi_synchronized
+    def get_time_set_drive_format(self, time_set):
+        r'''get_time_set_drive_format
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].get_time_set_drive_format(time_set)
+
+        Args:
+            time_set (str):
+
+
+        Returns:
+            format (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        format_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(format_ctype.value)
+
+    @ivi_synchronized
+    def get_time_set_edge(self, time_set, edge):
+        r'''get_time_set_edge
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].get_time_set_edge(time_set, edge)
+
+        Args:
+            time_set (str):
+
+            edge (int):
+
+
+        Returns:
+            time (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_ctype = _visatype.ViInt32(edge)  # case S150
+        time_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(time_ctype.value)
+
+    @ivi_synchronized
+    def get_time_set_edge_multiplier(self, time_set):
+        r'''get_time_set_edge_multiplier
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities (pins). If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.:
+
+            session.pins[0,1].get_time_set_edge_multiplier(time_set)
+
+        Args:
+            time_set (str):
+
+
+        Returns:
+            edge_multiplier (int):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        edge_multiplier_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetTimeSetEdgeMultiplier(vi_ctype, pin_ctype, time_set_ctype, None if edge_multiplier_ctype is None else (ctypes.pointer(edge_multiplier_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(edge_multiplier_ctype.value)
 
     def lock(self):
         '''lock
@@ -1803,196 +2422,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_time_set_compare_edges_strobe(self, pin_list, time_set, strobe_edge):
-        r'''configure_time_set_compare_edges_strobe
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            strobe_edge (float):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_compare_edges_strobe2x(self, pin_list, time_set, strobe_edge, strobe2_edge):
-        r'''configure_time_set_compare_edges_strobe2x
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            strobe_edge (float):
-
-            strobe2_edge (float):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
-        strobe2_edge_ctype = _visatype.ViReal64(strobe2_edge)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype, strobe2_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_drive_edges(self, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
-        r'''configure_time_set_drive_edges
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            format (int):
-
-            drive_on_edge (float):
-
-            drive_data_edge (float):
-
-            drive_return_edge (float):
-
-            drive_off_edge (float):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32(format)  # case S150
-        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
-        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
-        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
-        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_drive_edges2x(self, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
-        r'''configure_time_set_drive_edges2x
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            format (int):
-
-            drive_on_edge (float):
-
-            drive_data_edge (float):
-
-            drive_return_edge (float):
-
-            drive_off_edge (float):
-
-            drive_data2_edge (float):
-
-            drive_return2_edge (float):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32(format)  # case S150
-        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
-        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
-        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
-        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
-        drive_data2_edge_ctype = _visatype.ViReal64(drive_data2_edge)  # case S150
-        drive_return2_edge_ctype = _visatype.ViReal64(drive_return2_edge)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_drive_format(self, pin_list, time_set, drive_format):
-        r'''configure_time_set_drive_format
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            drive_format (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        drive_format_ctype = _visatype.ViInt32(drive_format)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_ctype, drive_format_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_edge(self, pin_list, time_set, edge, time):
-        r'''configure_time_set_edge
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            edge (int):
-
-            time (float):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge)  # case S150
-        time_ctype = _visatype.ViReal64(time)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_ctype, edge_ctype, time_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_time_set_edge_multiplier(self, pin_list, time_set, edge_multiplier):
-        r'''configure_time_set_edge_multiplier
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            time_set (str):
-
-            edge_multiplier (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        edge_multiplier_ctype = _visatype.ViInt32(edge_multiplier)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetEdgeMultiplier(vi_ctype, pin_list_ctype, time_set_ctype, edge_multiplier_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def configure_time_set_period(self, time_set, period):
         r'''configure_time_set_period
 
@@ -2031,50 +2460,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_capture_waveform_parallel(self, pin_list, waveform_name):
-        r'''create_capture_waveform_parallel
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            waveform_name (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_CreateCaptureWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_capture_waveform_serial(self, pin_list, waveform_name, sample_width, bit_order):
-        r'''create_capture_waveform_serial
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            waveform_name (str):
-
-            sample_width (int):
-
-            bit_order (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
-        bit_order_ctype = _visatype.ViInt32(bit_order)  # case S150
-        error_code = self._library.niDigital_CreateCaptureWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, sample_width_ctype, bit_order_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data):
         r'''create_source_waveform_from_file_tdms
 
@@ -2093,56 +2478,6 @@ class Session(_SessionBase):
         waveform_file_path_ctype = ctypes.create_string_buffer(waveform_file_path.encode(self._encoding))  # case C020
         write_waveform_data_ctype = _visatype.ViBoolean(write_waveform_data)  # case S150
         error_code = self._library.niDigital_CreateSourceWaveformFromFileTDMS(vi_ctype, waveform_name_ctype, waveform_file_path_ctype, write_waveform_data_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_source_waveform_parallel(self, pin_list, waveform_name, data_mapping):
-        r'''create_source_waveform_parallel
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            waveform_name (str):
-
-            data_mapping (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        data_mapping_ctype = _visatype.ViInt32(data_mapping)  # case S150
-        error_code = self._library.niDigital_CreateSourceWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def create_source_waveform_serial(self, pin_list, waveform_name, data_mapping, sample_width, bit_order):
-        r'''create_source_waveform_serial
-
-        TBD
-
-        Args:
-            pin_list (str):
-
-            waveform_name (str):
-
-            data_mapping (int):
-
-            sample_width (int):
-
-            bit_order (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        data_mapping_ctype = _visatype.ViInt32(data_mapping)  # case S150
-        sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
-        bit_order_ctype = _visatype.ViInt32(bit_order)  # case S150
-        error_code = self._library.niDigital_CreateSourceWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype, sample_width_ctype, bit_order_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2354,8 +2689,8 @@ class Session(_SessionBase):
         self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
-    def fetch_history_ram_cycle_information(self, site, sample_index):
-        r'''fetch_history_ram_cycle_information
+    def _fetch_history_ram_cycle_information(self, site, sample_index):
+        r'''_fetch_history_ram_cycle_information
 
         TBD
 
@@ -2390,55 +2725,8 @@ class Session(_SessionBase):
         return int(pattern_index_ctype.value), int(time_set_index_ctype.value), int(vector_number_ctype.value), int(cycle_number_ctype.value), int(num_dut_cycles_ctype.value)
 
     @ivi_synchronized
-    def fetch_history_ram_cycle_pin_data(self, site, pin_list, sample_index, dut_cycle_index):
-        r'''fetch_history_ram_cycle_pin_data
-
-        TBD
-
-        Args:
-            site (str):
-
-            pin_list (str):
-
-            sample_index (int):
-
-            dut_cycle_index (int):
-
-
-        Returns:
-            expected_pin_states (list of int):
-
-            actual_pin_states (list of int):
-
-            per_pin_pass_fail (list of bool):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_ctype = ctypes.create_string_buffer(site.encode(self._encoding))  # case C020
-        pin_list_ctype = ctypes.create_string_buffer(pin_list.encode(self._encoding))  # case C020
-        sample_index_ctype = _visatype.ViInt64(sample_index)  # case S150
-        dut_cycle_index_ctype = _visatype.ViInt32(dut_cycle_index)  # case S150
-        pin_data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        expected_pin_states_ctype = None  # case B610
-        actual_pin_states_ctype = None  # case B610
-        per_pin_pass_fail_ctype = None  # case B610
-        actual_num_pin_data_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        pin_data_buffer_size_ctype = _visatype.ViInt32(actual_num_pin_data_ctype.value)  # case S200
-        expected_pin_states_size = actual_num_pin_data_ctype.value  # case B620
-        expected_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=expected_pin_states_size)  # case B620
-        actual_pin_states_size = actual_num_pin_data_ctype.value  # case B620
-        actual_pin_states_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=actual_pin_states_size)  # case B620
-        per_pin_pass_fail_size = actual_num_pin_data_ctype.value  # case B620
-        per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
-        error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [int(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def fetch_history_ram_scan_cycle_number(self, site, sample_index):
-        r'''fetch_history_ram_scan_cycle_number
+    def _fetch_history_ram_scan_cycle_number(self, site, sample_index):
+        r'''_fetch_history_ram_scan_cycle_number
 
         TBD
 
@@ -2619,81 +2907,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def get_time_set_drive_format(self, pin, time_set):
-        r'''get_time_set_drive_format
-
-        TBD
-
-        Args:
-            pin (str):
-
-            time_set (str):
-
-
-        Returns:
-            format (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(format_ctype.value)
-
-    @ivi_synchronized
-    def get_time_set_edge(self, pin, time_set, edge):
-        r'''get_time_set_edge
-
-        TBD
-
-        Args:
-            pin (str):
-
-            time_set (str):
-
-            edge (int):
-
-
-        Returns:
-            time (float):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge)  # case S150
-        time_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(time_ctype.value)
-
-    @ivi_synchronized
-    def get_time_set_edge_multiplier(self, pin, time_set):
-        r'''get_time_set_edge_multiplier
-
-        TBD
-
-        Args:
-            pin (str):
-
-            time_set (str):
-
-
-        Returns:
-            edge_multiplier (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_ctype = ctypes.create_string_buffer(pin.encode(self._encoding))  # case C020
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        edge_multiplier_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetTimeSetEdgeMultiplier(vi_ctype, pin_ctype, time_set_ctype, None if edge_multiplier_ctype is None else (ctypes.pointer(edge_multiplier_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(edge_multiplier_ctype.value)
 
     @ivi_synchronized
     def get_time_set_name(self, time_set_index):
