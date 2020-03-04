@@ -10,7 +10,7 @@
         '''
         if trigger is None or trigger_id is None:
             import warnings
-            warnings.warn('trigger and trigger_id should now always be passed in to the function', category=DeprecationWarning)
+            warnings.warn('trigger and trigger_id should now always be passed in to the method', category=DeprecationWarning)
 
             # We look at whether we are called directly on the session or a repeated capability container to determine how to behave
             if len(self._repeated_capability) > 0:
@@ -24,7 +24,7 @@
             pass  # This is how the function should be called
 
         else:
-            raise ValueError('Both trigger ({0}) and trigger_id ({1}) should be passed in to the function'.format(str(trigger), str(trigger_id)))
+            raise ValueError('Both trigger ({0}) and trigger_id ({1}) should be passed in to the method'.format(str(trigger), str(trigger_id)))
 
         if type(trigger) is not enums.Trigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
