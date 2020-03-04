@@ -286,8 +286,7 @@ def configure_for_history_ram_test(session):
     session.history_ram_pretrigger_samples = 0
     session.history_ram_number_of_samples_is_finite = True
 
-    session.burst_pattern(
-        site_list='site1',
+    session.sites[1].burst_pattern(
         start_label='new_pattern',
         select_digital_function=True,
         wait_until_done=True,
