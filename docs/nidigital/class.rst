@@ -1219,7 +1219,7 @@ fetch_history_ram_cycle_information
             :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
 
             If pins are not specified, pin list from the pattern containing the start label is used. Call
-            :py:meth:`nidigital.Session.get_pattern_pin_names` or :py:meth:`nidigital.Session.get_pattern_pin_indexes` with the start label to retrieve the pins
+            :py:meth:`nidigital.Session.get_pattern_pin_names` with the start label to retrieve the pins
             associated with the pattern burst.
 
             
