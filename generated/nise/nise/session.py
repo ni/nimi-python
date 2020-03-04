@@ -339,7 +339,7 @@ class Session(_SessionBase):
 
         '''
         if type(multiconnect_mode) is not enums.MulticonnectMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MulticonnectMode))
+            raise TypeError('Parameter multiconnect_mode must be of type ' + str(enums.MulticonnectMode))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
         multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
@@ -430,9 +430,9 @@ class Session(_SessionBase):
 
         '''
         if type(multiconnect_mode) is not enums.MulticonnectMode:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MulticonnectMode))
+            raise TypeError('Parameter multiconnect_mode must be of type ' + str(enums.MulticonnectMode))
         if type(operation_order) is not enums.OperationOrder:
-            raise TypeError('Parameter mode must be of type ' + str(enums.OperationOrder))
+            raise TypeError('Parameter operation_order must be of type ' + str(enums.OperationOrder))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
         disconnect_spec_ctype = ctypes.create_string_buffer(disconnect_spec.encode(self._encoding))  # case C020
@@ -541,7 +541,7 @@ class Session(_SessionBase):
 
         '''
         if type(expand_action) is not enums.ExpandAction:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ExpandAction))
+            raise TypeError('Parameter expand_action must be of type ' + str(enums.ExpandAction))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
         expand_action_ctype = _visatype.ViInt32(expand_action.value)  # case S130

@@ -866,7 +866,7 @@ class Session(_SessionBase):
 
         '''
         if type(a_turtle) is not enums.Turtle:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
+            raise TypeError('Parameter a_turtle must be of type ' + str(enums.Turtle))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_turtle_ctype = _visatype.ViInt16(a_turtle.value)  # case S130
         error_code = self._library.niFake_EnumInputFunctionWithDefaults(vi_ctype, a_turtle_ctype)
@@ -1473,9 +1473,9 @@ class Session(_SessionBase):
 
         '''
         if type(an_int_enum) is not enums.Turtle:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Turtle))
+            raise TypeError('Parameter an_int_enum must be of type ' + str(enums.Turtle))
         if type(a_float_enum) is not enums.FloatEnum:
-            raise TypeError('Parameter mode must be of type ' + str(enums.FloatEnum))
+            raise TypeError('Parameter a_float_enum must be of type ' + str(enums.FloatEnum))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_boolean_ctype = _visatype.ViBoolean(a_boolean)  # case S150
         an_int32_ctype = _visatype.ViInt32(an_int32)  # case S150
@@ -1654,7 +1654,7 @@ class Session(_SessionBase):
 
         '''
         if type(a_mobile_os_name) is not enums.MobileOSNames:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MobileOSNames))
+            raise TypeError('Parameter a_mobile_os_name must be of type ' + str(enums.MobileOSNames))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         a_mobile_os_name_ctype = ctypes.create_string_buffer(a_mobile_os_name.value.encode(self._encoding))  # case C030
         error_code = self._library.niFake_StringValuedEnumInputFunctionWithDefaults(vi_ctype, a_mobile_os_name_ctype)
