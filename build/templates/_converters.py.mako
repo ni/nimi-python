@@ -207,6 +207,7 @@ def convert_init_with_options_dictionary(values):
     return init_with_options_string
 
 
+# Beginning of module specific converters
 <%
 # nitclk is different. Only nitclk needs to be able to convert sessions like this
 %>\
@@ -245,6 +246,26 @@ def convert_to_nitclk_session_number_list(item_list):
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
+
+
+% endif
+<%
+# There are some parameters in nidigital that are a single site so not strictly a repeated capability
+# We add a converter that acts similar to repeated capabilities but only works on a single item and
+# not a list of some sorte
+%>\
+% if config['module_name'] == 'nidigital':
+def convert_site_string(site):
+    if isinstance(site, str):
+        if site.beginswith('site'):
+            return site
+        else:
+            return 'site' + site
+    else:
+        if type(site) != int:
+            # Don't use assert here since this comes from the user
+            raise TypeError('site must be a string or an integer. Actual: {}'.format(type(site)))
+        return 'site' + str(site)
 
 
 % endif
