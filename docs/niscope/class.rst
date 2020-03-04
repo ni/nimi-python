@@ -333,14 +333,10 @@ configure_chan_characteristics
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_chan_characteristics(input_impedance, max_input_frequency)
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
             :param input_impedance:
@@ -382,14 +378,10 @@ configure_equalization_filter_coefficients
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_equalization_filter_coefficients(coefficients)
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
             :param coefficients:
@@ -1100,14 +1092,10 @@ configure_vertical
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_vertical(range, coupling, offset=0.0, probe_attenuation=1.0, enabled=True)
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
             :param range:
@@ -1278,14 +1266,10 @@ fetch
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
             :param num_samples:
@@ -1391,14 +1375,10 @@ fetch_into
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].fetch(waveform, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
             :param waveform:
@@ -1511,14 +1491,10 @@ get_equalization_filter_coefficients
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_equalization_filter_coefficients()
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
 import_attribute_configuration_buffer
@@ -1719,14 +1695,10 @@ read
             .. note:: Some functionality, such as time stamping, is not supported in all digitizers.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].read(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
             :param num_samples:
@@ -1889,14 +1861,10 @@ self_cal
             .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 niscope.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                niscope.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].self_cal(option=niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+                niscope.Session repeated capabilities container, and calling this method on the result.
 
 
             :param option:
@@ -2278,15 +2246,10 @@ bandpass_filter_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].bandpass_filter_enabled = var
-                var = session.channels[0,1].bandpass_filter_enabled
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2494,15 +2457,10 @@ channel_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].channel_enabled = var
-                var = session.channels[0,1].channel_enabled
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2534,15 +2492,10 @@ channel_terminal_configuration
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].channel_terminal_configuration = var
-                var = session.channels[0,1].channel_terminal_configuration
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2655,14 +2608,10 @@ device_temperature
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].device_temperature
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2760,15 +2709,10 @@ enable_time_interleaved_sampling
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].enable_time_interleaved_sampling = var
-                var = session.channels[0,1].enable_time_interleaved_sampling
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2889,15 +2833,10 @@ equalization_filter_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].equalization_filter_enabled = var
-                var = session.channels[0,1].equalization_filter_enabled
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2929,14 +2868,10 @@ equalization_num_coefficients
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].equalization_num_coefficients
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3053,15 +2988,10 @@ flex_fir_antialias_filter_type
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].flex_fir_antialias_filter_type = var
-                var = session.channels[0,1].flex_fir_antialias_filter_type
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3210,15 +3140,10 @@ high_pass_filter_frequency
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].high_pass_filter_frequency = var
-                var = session.channels[0,1].high_pass_filter_frequency
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3471,15 +3396,10 @@ input_impedance
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].input_impedance = var
-                var = session.channels[0,1].input_impedance
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3511,14 +3431,10 @@ instrument_firmware_revision
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].instrument_firmware_revision
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3610,15 +3526,10 @@ interleaving_offset_correction_enabled
         .. note:: If disabled, warranted specifications are not guaranteed.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].interleaving_offset_correction_enabled = var
-                var = session.channels[0,1].interleaving_offset_correction_enabled
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3677,14 +3588,10 @@ is_probe_comp_on
 
     .. py:attribute:: is_probe_comp_on
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].is_probe_comp_on
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3782,15 +3689,10 @@ max_input_frequency
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].max_input_frequency = var
-                var = session.channels[0,1].max_input_frequency
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3909,14 +3811,10 @@ onboard_memory_size
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].onboard_memory_size
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3975,14 +3873,10 @@ pll_lock_status
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].pll_lock_status
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4069,15 +3963,10 @@ probe_attenuation
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].probe_attenuation = var
-                var = session.channels[0,1].probe_attenuation
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4780,14 +4669,10 @@ serial_number
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].serial_number
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4824,14 +4709,10 @@ accessory_gain
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].signal_cond_gain
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4867,14 +4748,10 @@ accessory_offset
         .. note:: This property is supported only by the NI PXI-5900 differential amplifier.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].signal_cond_offset
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5613,15 +5490,10 @@ vertical_coupling
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].vertical_coupling = var
-                var = session.channels[0,1].vertical_coupling
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5655,15 +5527,10 @@ vertical_offset
         .. note:: This property is not supported by all digitizers.Refer to the NI High-Speed Digitizers Help for a list of vertical offsets supported for each device.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].vertical_offset = var
-                var = session.channels[0,1].vertical_offset
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5696,15 +5563,10 @@ vertical_range
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niscope.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niscope.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].vertical_range = var
-                var = session.channels[0,1].vertical_range
+            niscope.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
