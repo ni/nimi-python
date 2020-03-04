@@ -434,7 +434,7 @@ def test_fir_filter_coefficients():
 '''
 
 
-def test_send_software_edge_trigger_start_old(session):
+def test_send_software_edge_trigger_start_deprecated(session):
     warnings.filterwarnings("always", category=DeprecationWarning)
 
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
@@ -446,7 +446,7 @@ def test_send_software_edge_trigger_start_old(session):
             assert issubclass(w[0].category, DeprecationWarning)
 
 
-def test_send_software_edge_trigger_script_old(session):
+def test_send_software_edge_trigger_script_deprecated(session):
     warnings.filterwarnings("always", category=DeprecationWarning)
 
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
