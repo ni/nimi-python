@@ -210,7 +210,7 @@ def _convert_to_bytes(value):  # noqa: F811
 
 # nidigital specific converter
 def convert_comma_separated_string_to_list(comma_separated_string):
-    return convert_repeated_capabilities(comma_separated_string, '')
+    return [x.strip() for x in comma_separated_string.split(',')]
 
 
 @_convert_to_bytes.register(list)  # noqa: F811
