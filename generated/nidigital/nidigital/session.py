@@ -1961,7 +1961,7 @@ class _SessionBase(object):
 
         '''
         if type(site_result_type) is not enums.SiteResult:
-            raise TypeError('Parameter mode must be of type ' + str(enums.SiteResult))
+            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResult))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
@@ -2992,67 +2992,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_GetPatternPinList(vi_ctype, start_label_ctype, pin_list_buffer_size_ctype, pin_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return pin_list_ctype.value.decode(self._encoding)
-
-    @ivi_synchronized
-    def get_site_pass_fail(self, site_list):
-        r'''get_site_pass_fail
-
-        TBD
-
-        Args:
-            site_list (str):
-
-
-        Returns:
-            pass_fail (list of bool):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        pass_fail_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        pass_fail_ctype = None  # case B610
-        actual_num_sites_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        pass_fail_buffer_size_ctype = _visatype.ViInt32(actual_num_sites_ctype.value)  # case S200
-        pass_fail_size = actual_num_sites_ctype.value  # case B620
-        pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
-        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def get_site_results_site_numbers(self, site_list, site_result_type):
-        r'''get_site_results_site_numbers
-
-        TBD
-
-        Args:
-            site_list (str):
-
-            site_result_type (enums.SiteResult):
-
-
-        Returns:
-            site_numbers (list of int):
-
-        '''
-        if type(site_result_type) is not enums.SiteResult:
-            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResult))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
-        site_numbers_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        site_numbers_ctype = None  # case B610
-        actual_num_site_numbers_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        site_numbers_buffer_size_ctype = _visatype.ViInt32(actual_num_site_numbers_ctype.value)  # case S200
-        site_numbers_size = actual_num_site_numbers_ctype.value  # case B620
-        site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
-        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_time_set_name(self, time_set_index):
