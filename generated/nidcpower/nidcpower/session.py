@@ -124,7 +124,7 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    _active_advanced_sequence = _attributes.AttributeViString(1150074)
+    active_advanced_sequence = _attributes.AttributeViString(1150074)
     '''Type: str
 
     Specifies the advanced sequence to configure or generate.
@@ -140,7 +140,7 @@ class _SessionBase(object):
         session.channels[0,1].active_advanced_sequence = var
         var = session.channels[0,1].active_advanced_sequence
     '''
-    _active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
+    active_advanced_sequence_step = _attributes.AttributeViInt64(1150075)
     '''Type: int
 
     Specifies the advanced sequence step to configure.
@@ -2826,7 +2826,7 @@ class _SessionBase(object):
 
         '''
         if type(units) is not enums.ApertureTimeUnits:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ApertureTimeUnits))
+            raise TypeError('Parameter units must be of type ' + str(enums.ApertureTimeUnits))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
@@ -2986,7 +2986,7 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         count_ctype = _visatype.ViInt32(count)  # case S210
         voltage_measurements_size = count  # case B600
         voltage_measurements_array = array.array("d", [0] * voltage_measurements_size)  # case B600
@@ -3421,7 +3421,7 @@ class _SessionBase(object):
 
         '''
         if type(measurement_type) is not enums.MeasurementTypes:
-            raise TypeError('Parameter mode must be of type ' + str(enums.MeasurementTypes))
+            raise TypeError('Parameter measurement_type must be of type ' + str(enums.MeasurementTypes))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
@@ -3679,7 +3679,7 @@ class _SessionBase(object):
 
         '''
         if type(output_state) is not enums.OutputStates:
-            raise TypeError('Parameter mode must be of type ' + str(enums.OutputStates))
+            raise TypeError('Parameter output_state must be of type ' + str(enums.OutputStates))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         output_state_ctype = _visatype.ViInt32(output_state.value)  # case S130
@@ -4163,8 +4163,8 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        channels = _converters.convert_repeated_capabilities_from_init(channels, self._encoding)
-        options = _converters.convert_init_with_options_dictionary(options, self._encoding)
+        channels = _converters.convert_repeated_capabilities_from_init(channels)
+        options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'
 
@@ -4297,11 +4297,11 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence=True):
+    def _create_advanced_sequence(self, sequence_name, attribute_ids, set_as_active_sequence):
         r'''_create_advanced_sequence
 
         Creates an empty advanced sequence. Call the
-        _create_advanced_sequence_step method to add steps to the
+        create_advanced_sequence_step method to add steps to the
         active advanced sequence.
 
         You can create multiple advanced sequences in a session.
@@ -4327,7 +4327,7 @@ class Session(_SessionBase):
         `Programming
         States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
-        _create_advanced_sequence_step
+        create_advanced_sequence_step
 
         Note:
         This method is not supported on all devices. Refer to `Supported
@@ -4341,116 +4341,116 @@ class Session(_SessionBase):
             attribute_ids (list of int): Specifies the properties you reconfigure per step in the advanced
                 sequence. The following table lists which properties can be configured
                 in an advanced sequence for each NI-DCPower device that supports
-                advanced sequencing. A ✓ indicates that the property can be configured
-                in advanced sequencing. An ✕ indicates that the property cannot be
+                advanced sequencing. A Yes indicates that the property can be configured
+                in advanced sequencing. An No indicates that the property cannot be
                 configured in advanced sequencing.
 
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
                 | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
                 +================================+===========+===========+===========+===========+===========+=====================+=====================+================+
-                | dc_noise_rejection             | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✕                   | ✓              |
+                | dc_noise_rejection             | Yes       | No        | Yes       | No        | Yes       | No                  | No                  | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | aperture_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | aperture_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | measure_record_length          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | measure_record_length          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | sense                          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | sense                          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | ovp_enabled                    | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
+                | ovp_enabled                    | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | ovp_limit                      | ✓         | ✓         | ✓         | ✕         | ✕         | ✕                   | ✕                   | ✕              |
+                | ovp_limit                      | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_delay               | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_delay               | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_off_time                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_off_time                 | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_on_time                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_on_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | source_delay                   | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | source_delay                   | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                | current_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                | current_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                | current_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_compensation_frequency | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                | voltage_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_gain_bandwidth         | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                | voltage_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_pole_zero_ratio        | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✓              |
+                | voltage_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | current_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | current_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | voltage_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                | voltage_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                | voltage_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | voltage_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | current_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_high             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                | current_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_low              | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✕              |
+                | current_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | current_limit_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | current_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_level                  | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | voltage_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | voltage_level_range            | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | voltage_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_enabled                 | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | output_enabled                 | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_function                | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | output_function                | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | output_resistance              | ✓         | ✕         | ✓         | ✕         | ✓         | ✕                   | ✓                   | ✕              |
+                | output_resistance              | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_current_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_voltage_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_voltage_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_voltage_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_current_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_current_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_voltage_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_voltage_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_voltage_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_voltage_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_current_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit_high  | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_current_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_current_limit_low   | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_current_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_bias_voltage_level       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_bias_voltage_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_current_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_high       | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_current_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_low        | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_current_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_current_limit_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_current_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_level            | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_voltage_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | pulse_voltage_level_range      | ✓         | ✓         | ✓         | ✓         | ✓         | ✕                   | ✕                   | ✕              |
+                | pulse_voltage_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
-                | transient_response             | ✓         | ✓         | ✓         | ✓         | ✓         | ✓                   | ✓                   | ✓              |
+                | transient_response             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
                 +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
@@ -4466,8 +4466,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _create_advanced_sequence_step(self, set_as_active_step=True):
-        r'''_create_advanced_sequence_step
+    def create_advanced_sequence_step(self, set_as_active_step=True):
+        r'''create_advanced_sequence_step
 
         Creates a new advanced sequence step in the advanced sequence specified
         by the Active advanced sequence. When you create an advanced sequence
@@ -4509,8 +4509,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _delete_advanced_sequence(self, sequence_name):
-        r'''_delete_advanced_sequence
+    def delete_advanced_sequence(self, sequence_name):
+        r'''delete_advanced_sequence
 
         Deletes a previously created advanced sequence and all the advanced
         sequence steps in the advanced sequence.
@@ -4686,6 +4686,174 @@ class Session(_SessionBase):
         error_code = self._library.niDCPower_ExportAttributeConfigurationFile(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def create_advanced_sequence(self, sequence_name, property_names, set_as_active_sequence=True):
+        '''create_advanced_sequence
+
+        Creates an empty advanced sequence. Call the
+        create_advanced_sequence_step method to add steps to the
+        active advanced sequence.
+
+        You can create multiple advanced sequences in a session.
+
+        **Support for this method**
+
+        You must set the source mode to Sequence to use this method.
+
+        Using the set_sequence method with Advanced Sequence
+        methods is unsupported.
+
+        Use this method in the Uncommitted or Committed programming states.
+        Refer to the `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
+        the *NI DC Power Supplies and SMUs Help* for more information about
+        NI-DCPower programming states.
+
+        **Related Topics**:
+
+        `Advanced Sequence
+        Mode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__
+
+        `Programming
+        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
+
+        create_advanced_sequence_step
+
+        Note:
+        This method is not supported on all devices. Refer to `Supported
+        Methods by
+        Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm',%20'supportedfunctions)>`__
+        for more information about supported devices.
+
+        Args:
+            sequence_name (str): Specifies the name of the sequence to create.
+
+            property_names (list of str): Specifies the names of the properties you reconfigure per step in the advanced sequence. The following table lists which properties can be configured in an advanced sequence for each NI-DCPower device that supports advanced sequencing. A Yes indicates that the property can be configured in advanced sequencing. An No indicates that the property cannot be configured in advanced sequencing.
+
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4162/4163 |
+                +================================+===========+===========+===========+===========+===========+=====================+=====================+================+
+                | dc_noise_rejection             | Yes       | No        | Yes       | No        | Yes       | No                  | No                  | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | aperture_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | measure_record_length          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | sense                          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_enabled                    | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | ovp_limit                      | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_delay               | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_off_time                 | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_on_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | source_delay                   | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | current_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | voltage_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_enabled                 | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_function                | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | output_resistance              | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_current_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_bias_voltage_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_current_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | pulse_voltage_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No             |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+                | transient_response             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes            |
+                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+----------------+
+
+            set_as_active_sequence (bool): Specifies that this current sequence is active.
+
+        '''
+        # The way the NI-DCPower C API is designed, we need to know all the attribute ID's upfront in order to call
+        # `niDCPower_CreateAdvancedSequence`. In order to find the attribute ID of each property, we look at the
+        # member Attribute objects of Session. We use a set since we don't have to worry about is it already there.
+        attribute_ids_used = set()
+        for prop in property_names:
+            if prop not in Session.__base__.__dict__:
+                raise KeyError('{0} is not an property on the nidcpower.Session'.format(prop))
+            if not isinstance(Session.__base__.__dict__[prop], _attributes.Attribute) and not isinstance(Session.__base__.__dict__[prop], _attributes.AttributeEnum):
+                raise TypeError('{0} is not a valid property: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
+            attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
+
+        self._create_advanced_sequence(sequence_name, list(attribute_ids_used), set_as_active_sequence)
 
     @ivi_synchronized
     def get_channel_name(self, index):
@@ -5198,7 +5366,7 @@ class Session(_SessionBase):
 
         '''
         if type(trigger) is not enums.SendSoftwareEdgeTriggerType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
+            raise TypeError('Parameter trigger must be of type ' + str(enums.SendSoftwareEdgeTriggerType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
         error_code = self._library.niDCPower_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype)
@@ -5254,10 +5422,10 @@ class Session(_SessionBase):
 
         '''
         if type(event_id) is not enums.Event:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Event))
+            raise TypeError('Parameter event_id must be of type ' + str(enums.Event))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         event_id_ctype = _visatype.ViInt32(event_id.value)  # case S130
-        timeout_ctype = _converters.convert_timedelta_to_seconds(timeout, _visatype.ViReal64)  # case S140
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDCPower_WaitForEvent(vi_ctype, event_id_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

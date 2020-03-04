@@ -2240,7 +2240,7 @@ class Session(_SessionBase):
 
         '''
         if type(relay_action) is not enums.RelayAction:
-            raise TypeError('Parameter mode must be of type ' + str(enums.RelayAction))
+            raise TypeError('Parameter relay_action must be of type ' + str(enums.RelayAction))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
         relay_action_ctype = _visatype.ViInt32(relay_action.value)  # case S130
@@ -2292,9 +2292,9 @@ class Session(_SessionBase):
 
         '''
         if type(scan_advanced_output_connector) is not enums.ScanAdvancedOutput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
+            raise TypeError('Parameter scan_advanced_output_connector must be of type ' + str(enums.ScanAdvancedOutput))
         if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ScanAdvancedOutput))
+            raise TypeError('Parameter scan_advanced_output_bus_line must be of type ' + str(enums.ScanAdvancedOutput))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         scan_advanced_output_connector_ctype = _visatype.ViInt32(scan_advanced_output_connector.value)  # case S130
         scan_advanced_output_bus_line_ctype = _visatype.ViInt32(scan_advanced_output_bus_line.value)  # case S130
@@ -2334,9 +2334,9 @@ class Session(_SessionBase):
 
         '''
         if type(trigger_input_connector) is not enums.TriggerInput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+            raise TypeError('Parameter trigger_input_connector must be of type ' + str(enums.TriggerInput))
         if type(trigger_input_bus_line) is not enums.TriggerInput:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerInput))
+            raise TypeError('Parameter trigger_input_bus_line must be of type ' + str(enums.TriggerInput))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_input_connector_ctype = _visatype.ViInt32(trigger_input_connector.value)  # case S130
         trigger_input_bus_line_ctype = _visatype.ViInt32(trigger_input_bus_line.value)  # case S130
@@ -2402,7 +2402,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, _visatype.ViInt32)  # case S140
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
         error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2425,7 +2425,7 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds(maximum_time_ms, _visatype.ViInt32)  # case S140
+        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
         error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

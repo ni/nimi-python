@@ -2873,7 +2873,7 @@ functions = {
                     'description': 'Specifies the timeout value in milliseconds.'
                 },
                 'name': 'maxTime',
-                'python_api_converter_name': 'convert_timedelta_to_milliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
                 'type_in_documentation': 'float in seconds or datetime.timedelta'
             }

@@ -146,7 +146,7 @@ def get_enum_type_check_snippet(parameter, indent):
     assert parameter['enum'] is not None, pp.pformat(parameter)
     assert parameter['direction'] == 'in', pp.pformat(parameter)
     enum_check = 'if type(' + parameter['python_name'] + ') is not ' + parameter['python_type'] + ':\n'
-    enum_check += (' ' * indent) + 'raise TypeError(\'Parameter mode must be of type \' + str(' + parameter['python_type'] + '))'
+    enum_check += (' ' * indent) + 'raise TypeError(\'Parameter {0} must be of type \' + str({1}))'.format(parameter['python_name'], parameter['python_type'])
     return enum_check
 
 
@@ -266,7 +266,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         S110. Input session handle:                                                visatype.ViSession(self._vi)
         S120. Input is size of buffer with mechanism is python-code:               visatype.ViInt32(<custom python code>)
         S130. Input enum:                                                          visatype.ViInt32(parameter_name.value)
-        S140. Input uses converter                                                 timedelta_converter_seconds(timeout, visatype.ViReal64)
+        S140. Input uses converter                                                 timedelta_converter_seconds_real64(timeout)
         S150. Input scalar:                                                        visatype.ViInt32(parameter_name)
         S160. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list))
         S170. Input is size of output buffer with mechanism ivi-dance, QUERY_SIZE: visatype.ViInt32()
@@ -294,7 +294,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         elif parameter['enum'] is not None:
             definition = '{0}.{1}({2}.value)  # case S130'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif 'python_api_converter_name' in parameter:
-            definition = '_converters.{0}({1}, {2})  # case S140'.format(parameter['python_api_converter_name'], parameter['python_name'], module_name + '.' + parameter['ctypes_type'])
+            definition = '_converters.{0}({1})  # case S140'.format(parameter['python_api_converter_name'], parameter['python_name'])
         elif not corresponding_buffer_parameters:
             definition = '{0}.{1}({2})  # case S150'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif corresponding_buffer_parameters and corresponding_buffer_parameters[0]['direction'] == 'in':  # We are only looking at the first one to see if it is 'in'. Assumes all are the same here, assert below if not
@@ -852,7 +852,7 @@ parameters_for_testing = [
         'size': {'mechanism': 'fixed', 'value': 1},
         'type': 'ViReal64',
         'use_in_python_api': True,
-        'python_api_converter_name': 'timedelta_converter_seconds',
+        'python_api_converter_name': 'timedelta_converter_seconds_real64',
         'python_api_converter_type': 'datetime.timedelta',
     },
     {  # 15
@@ -1346,7 +1346,7 @@ def test_get_method_return_snippet_into():
 
 def test_get_enum_type_check_snippet():
     param = parameters_for_testing[6]
-    assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter mode must be of type ' + str(enums.Turtle))"
+    assert get_enum_type_check_snippet(param, 0) == "if type(an_int_enum) is not enums.Turtle:\nraise TypeError('Parameter an_int_enum must be of type ' + str(enums.Turtle))"
 
 
 def test_get_buffer_parameters_for_size_parameter_none():
@@ -1421,7 +1421,7 @@ def test_get_ctype_variable_declaration_snippet_case_s130():
 
 def test_get_ctype_variable_declaration_snippet_case_s140():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[14], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["timeout_ctype = _converters.timedelta_converter_seconds(timeout, _visatype.ViReal64)  # case S140"]
+    assert snippet == ["timeout_ctype = _converters.timedelta_converter_seconds_real64(timeout)  # case S140"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s150():
