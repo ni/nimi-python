@@ -528,3 +528,28 @@ def test_string_to_list_prefix():
     test_result = _convert_repeated_capabilities(['ScriptTrigger2:ScriptTrigger0'], 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
 
+
+% if config['module_name'] == 'nidigital':
+def test_convert_site_string():
+    test_result = convert_site_string('1')
+    assert test_result == 'site1'
+    test_result = convert_site_string(1)
+    assert test_result == 'site1'
+    test_result = convert_site_string('site1')
+    assert test_result == 'site1'
+
+
+def test_convert_site_string_errors():
+    try:
+        convert_site_string(1.0)
+        assert False
+    except TypeError:
+        pass
+    try:
+        convert_site_string(['1'])
+        assert False
+    except TypeError:
+        pass
+
+
+% endif
