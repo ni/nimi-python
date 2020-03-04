@@ -2453,6 +2453,9 @@ functions = {
                 'type': 'ViInt32',
             },
             {
+                'documentation': {
+                    'description': 'Trigger ID specifies the Script Trigger to use for triggering.',
+                },
                 'direction': 'in',
                 'name': 'triggerId',
                 'type': 'ViString'
