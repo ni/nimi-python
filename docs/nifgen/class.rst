@@ -2455,7 +2455,7 @@ wait_until_done
                 
 
 
-            :type max_time: float in seconds or datetime.timedelta
+            :type max_time: int in milliseconds or datetime.timedelta
 
 write_script
 ------------

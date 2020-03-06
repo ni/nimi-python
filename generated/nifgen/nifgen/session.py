@@ -4407,7 +4407,7 @@ class Session(_SessionBase):
         expired.
 
         Args:
-            max_time (float in seconds or datetime.timedelta): Specifies the timeout value in milliseconds.
+            max_time (int in milliseconds or datetime.timedelta): Specifies the timeout value in milliseconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
