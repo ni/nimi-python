@@ -183,8 +183,11 @@ class _SessionBase(object):
     '''Type: str
 
     This property indicates the Driver Setup string that the user  specified when initializing the driver.
-    Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  init_with_options method, or through the IVI Configuration Utility.
+    Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  InitWithOptions method, or through the IVI Configuration Utility.
     If the user does not specify a Driver Setup string, this property returns an empty string.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     handshaking_initiation = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HandshakingInitiation, 1150013)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
@@ -258,7 +261,10 @@ class _SessionBase(object):
     '''Type: str
 
     A string containing the logical name you specified when opening the  current IVI session.
-    You may pass a logical name to the init or  init_with_options methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+    You may pass a logical name to the init or  InitWithOptions methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     max_ac_voltage = _attributes.AttributeViReal64(1250007)
     '''Type: float
@@ -488,7 +494,10 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-    The default value is False.   Use the init_with_options  method to override this value.
+    The default value is False.   Use the InitWithOptions  method to override this value.
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
     '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
@@ -855,7 +864,10 @@ class _SessionBase(object):
         current execution thread. If the InstrumentHandle parameter is an
         invalid session, the method does nothing and returns an error.
         Normally, the error information describes the first error that occurred
-        since the user last called _get_error or clear_error.
+        since the user last called _get_error or ClearError.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Returns:
             code (int): Returns the error code for the session or execution thread. If you pass
@@ -1530,7 +1542,10 @@ class Session(_SessionBase):
         deallocates any memory resources the driver uses. Notes: (1) You must
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
-        call init or init_with_options.
+        call init or InitWithOptions.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Note:
         This method is not needed when using the session context manager
@@ -2182,8 +2197,11 @@ class Session(_SessionBase):
 
         Returns:
             vi (int): A particular NI-SWITCH session established with
-                __init__, init_with_options, or init
+                __init__, InitWithOptions, or init
                 and used for all subsequent NI-SWITCH calls.
+
+                Note:
+                One or more of the referenced methods are not in the Python API for this driver.
 
         '''
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
@@ -2346,10 +2364,13 @@ class Session(_SessionBase):
 
         Sends a software trigger to the switch module specified in the NI-SWITCH
         session. When the trigger input is set to TriggerInput.SOFTWARE_TRIG
-        through either the configure_scan_trigger or the
+        through either the ConfigureScanTrigger or the
         trigger_input property, the scan does not proceed from
         a semi-colon (wait for trigger) until send_software_trigger is
         called.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_SendSoftwareTrigger(vi_ctype)
@@ -2390,7 +2411,7 @@ class Session(_SessionBase):
         NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
         Args:
-            maximum_time_ms (float in seconds or datetime.timedelta): Specifies the maximum length of time to wait for all relays in the
+            maximum_time_ms (int in milliseconds or datetime.timedelta): Specifies the maximum length of time to wait for all relays in the
                 switch module to activate or deactivate. If the specified time elapses
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
@@ -2413,7 +2434,7 @@ class Session(_SessionBase):
         error.
 
         Args:
-            maximum_time_ms (float in seconds or datetime.timedelta): Specifies the maximum length of time to wait for the switch module to
+            maximum_time_ms (int in milliseconds or datetime.timedelta): Specifies the maximum length of time to wait for the switch module to
                 stop scanning. If the specified time elapses before the scan ends,
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms
@@ -2432,7 +2453,10 @@ class Session(_SessionBase):
         deallocates any memory resources the driver uses. Notes: (1) You must
         unlock the session before calling _close. (2) After calling
         _close, you cannot use the instrument driver again until you
-        call init or init_with_options.
+        call init or InitWithOptions.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niSwitch_close(vi_ctype)
