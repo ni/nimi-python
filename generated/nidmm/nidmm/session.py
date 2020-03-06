@@ -1817,7 +1817,7 @@ class Session(_SessionBase):
         _initiate before calling this method.
 
         Args:
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1862,7 +1862,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1912,7 +1912,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1957,7 +1957,7 @@ class Session(_SessionBase):
             waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2475,7 +2475,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2519,7 +2519,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2616,7 +2616,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
