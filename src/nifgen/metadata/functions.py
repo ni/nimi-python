@@ -2418,7 +2418,7 @@ functions = {
         },
         'method_templates': [
             {
-                'documentation_filename': 'send_software_edge_trigger',
+                'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'send_software_edge_trigger'
             }
@@ -2435,23 +2435,27 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSets the clock mode of the signal generator.\n\n****Defined Values****\n',
+                    'description': 'Trigger specifies the type of software trigger to send',
                     'table_body': [
                         [
-                            'NIFGEN_VAL_DIVIDE_DOWN'
+                            'NIFGEN_VAL_START_TRIGGER'
                         ],
                         [
-                            'NIFGEN_VAL_HIGH_RESOLUTION'
+                            'NIFGEN_VAL_SCRIPT_TRIGGER'
                         ],
-                        [
-                            'NIFGEN_VAL_AUTOMATIC'
-                        ]
-                    ]
+                    ],
+                    'table_header': [
+                        'Defined Values',
+                    ],
                 },
+                'enum': 'Trigger',
                 'name': 'trigger',
-                'type': 'ViInt32'
+                'type': 'ViInt32',
             },
             {
+                'documentation': {
+                    'description': 'Trigger ID specifies the Script Trigger to use for triggering.',
+                },
                 'direction': 'in',
                 'name': 'triggerId',
                 'type': 'ViString'

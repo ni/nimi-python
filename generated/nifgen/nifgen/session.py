@@ -2173,35 +2173,55 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def send_software_edge_trigger(self):
+    def send_software_edge_trigger(self, trigger=None, trigger_id=None):
         '''send_software_edge_trigger
 
         Sends a command to trigger the signal generator. This VI can act as an
         override for an external edge trigger.
 
-        If called directly on the session, this will send a software start trigger.
-
-            session.send_software_edge_trigger()
-
-        If called using the script trigger repeated capability container, this will
-        send a software trigger to the specified script trigger
-
-            session.script_triggers[1].send_software_edge_trigger()
-
         Note:
-        This method does not override external digital edge triggers of the
+        This VI does not override external digital edge triggers of the
         NI 5401/5411/5431.
-        '''
-        # We look at whether we are called directly on the session or a repeated capability container to determine how to behave
-        if len(self._repeated_capability) > 0:
-            trigger_id = self._repeated_capability
-            trigger = 103  # enums.Trigger.SCRIPT
-        else:
-            trigger_id = "None"
-            trigger = 1004  # enums.Trigger.START
 
+        Args:
+            trigger (enums.Trigger): Trigger specifies the type of software trigger to send
+
+                +----------------+
+                | Defined Values |
+                +================+
+                | Trigger.START  |
+                +----------------+
+                | Trigger.SCRIPT |
+                +----------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            trigger_id (str): Trigger ID specifies the Script Trigger to use for triggering.
+
+        '''
+        if trigger is None or trigger_id is None:
+            import warnings
+            warnings.warn('trigger and trigger_id should now always be passed in to the method', category=DeprecationWarning)
+
+            # We look at whether we are called directly on the session or a repeated capability container to determine how to behave
+            if len(self._repeated_capability) > 0:
+                trigger_id = self._repeated_capability
+                trigger = enums.Trigger.SCRIPT
+            else:
+                trigger_id = "None"
+                trigger = enums.Trigger.START
+
+        elif trigger is not None and trigger_id is not None:
+            pass  # This is how the function should be called
+
+        else:
+            raise ValueError('Both trigger ({0}) and trigger_id ({1}) should be passed in to the method'.format(str(trigger), str(trigger_id)))
+
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger)  # case S130
+        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
