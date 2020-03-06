@@ -70,7 +70,7 @@ NI Switch Executive Python API Status
 +-------------------------------+---------------------+
 | NI Switch Executive (nise)    |                     |
 +===============================+=====================+
-| Driver Version Tested Against | 19.0.0              |
+| Driver Version Tested Against | 19.5.0              |
 +-------------------------------+---------------------+
 | PyPI Version                  | |niseLatestVersion| |
 +-------------------------------+---------------------+
@@ -112,7 +112,7 @@ As a prerequisite to using the nise module, you must install the NI Switch Execu
 
 The nimi-python modules (i.e. for **NI Switch Executive**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nise
+  $ python -m pip install nise~=1.2.0
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::
