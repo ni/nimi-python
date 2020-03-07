@@ -29,7 +29,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='0.4.0',
+    version='0.4.1.dev0',
     description='NI-Digital Pattern Driver Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
