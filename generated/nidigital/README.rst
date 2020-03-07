@@ -112,7 +112,7 @@ As a prerequisite to using the nidigital module, you must install the NI-Digital
 
 The nimi-python modules (i.e. for **NI-Digital Pattern Driver**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nidigital~=0.5.0
+  $ python -m pip install nidigital~=0.4.0
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::
