@@ -1,6 +1,8 @@
 Examples
 ========
 
+`You can download all nifgen examples here <https://github.com/ni/nimi-python/releases/download/1.2.0/nifgen_examples.zip>`_
+
 nifgen_arb_waveform.py
 ----------------------
 
@@ -9,6 +11,15 @@ nifgen_arb_waveform.py
    :linenos:
    :encoding: utf8
    :caption: `(nifgen_arb_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_arb_waveform.py>`_
+
+nifgen_script.py
+----------------
+
+.. literalinclude:: ../../src/nifgen/examples/nifgen_script.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nifgen_script.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_script.py>`_
 
 nifgen_standard_function.py
 ---------------------------

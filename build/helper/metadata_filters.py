@@ -5,197 +5,222 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 # Filters
 
-_parameterUsageOptionsFiltering = {}
-
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'skip_repeated_capability_parameter': True,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'fixed, passed-in, len',
-    'python_api_list': True,
+_ParameterUsageOptionsFiltering = {
+    ParameterUsageOptions.SESSION_METHOD_DECLARATION: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': True,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'fixed, passed-in, len',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': True,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'fixed, passed-in, len',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': True,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': True,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'fixed, passed-in',
+        'python_api_list': False,
+    },
+    ParameterUsageOptions.SESSION_METHOD_CALL: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': True,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'fixed, passed-in',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': True,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.CTYPES_CALL: {
+        'skip_session_handle': False,
+        'skip_input_parameters': False,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': True,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.LIBRARY_METHOD_CALL: {
+        'skip_session_handle': False,
+        'skip_input_parameters': False,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': True,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.CTYPES_ARGTYPES: {
+        'skip_session_handle': False,
+        'skip_input_parameters': False,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
+        'skip_session_handle': False,
+        'skip_input_parameters': False,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.INPUT_PARAMETERS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.OUTPUT_PARAMETERS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': True,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': True,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',  # any but ivi-dance
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.NUMPY_PARAMETERS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': True,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.IVI_DANCE_PARAMETER: {
+        'skip_session_handle': True,
+        'skip_input_parameters': True,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'ivi-dance, ivi-dance-with-a-twist',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.LEN_PARAMETER: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': False,
+        'skip_non_enum_parameter': False,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'len',
+        'python_api_list': True,
+    },
+    ParameterUsageOptions.INPUT_ENUM_PARAMETERS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': True,
+        'but_keep_output_numpy_array_parameters': False,
+        'skip_size_parameter': False,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': True,
+        'skip_all_except_numpy_parameters': False,
+        'mechanism': 'any',
+        'python_api_list': True,
+    },
 }
 # Only difference is we want to skip parameters not in api
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION] = _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION].copy()
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION]['python_api_list'] = False
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_DECLARATION].copy()
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_DECLARATION]['python_api_list'] = False
 
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'but_keep_output_numpy_array_parameters': True,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': True,
-    'skip_repeated_capability_parameter': True,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'fixed, passed-in',
-    'python_api_list': False,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'skip_repeated_capability_parameter': True,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'fixed, passed-in',
-    'python_api_list': True,
-}
 # Only difference is we want to skip parameters not in api
-_parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _parameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL].copy()
-
-_parameterUsageOptionsFiltering[ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': True,
-    'reordered_for_default_values': True,
-    'skip_repeated_capability_parameter': True,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_CALL] = {
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'but_keep_output_numpy_array_parameters': True,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_CALL] = {
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'but_keep_output_numpy_array_parameters': True,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.CTYPES_ARGTYPES] = {
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.LIBRARY_METHOD_DECLARATION] = {
-    'skip_session_handle': False,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_PARAMETERS] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': True,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.OUTPUT_PARAMETERS] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': True,
-    'skip_output_parameters': False,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'fixed, passed-in, len, python-code',  # any but ivi-dance
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.NUMPY_PARAMETERS] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': False,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': True,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.IVI_DANCE_PARAMETER] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': True,
-    'skip_output_parameters': False,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'ivi-dance',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.LEN_PARAMETER] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': False,
-    'skip_non_enum_parameter': False,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'len',
-    'python_api_list': True,
-}
-_parameterUsageOptionsFiltering[ParameterUsageOptions.INPUT_ENUM_PARAMETERS] = {
-    'skip_session_handle': True,
-    'skip_input_parameters': False,
-    'skip_output_parameters': True,
-    'but_keep_output_numpy_array_parameters': False,
-    'skip_size_parameter': False,
-    'reordered_for_default_values': False,
-    'skip_repeated_capability_parameter': True,
-    'skip_non_enum_parameter': True,
-    'skip_all_except_numpy_parameters': False,
-    'mechanism': 'any',
-    'python_api_list': True,
-}
+_ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_INIT_CALL] = _ParameterUsageOptionsFiltering[ParameterUsageOptions.SESSION_METHOD_CALL].copy()
 
 
 def filter_parameters(function, parameter_usage_options):
@@ -206,12 +231,13 @@ def filter_parameters(function, parameter_usage_options):
     if type(parameter_usage_options) is not ParameterUsageOptions:
         raise TypeError('parameter_usage_options must be of type ' + str(ParameterUsageOptions))
 
-    options_to_use = _parameterUsageOptionsFiltering[parameter_usage_options]
+    options_to_use = _ParameterUsageOptionsFiltering[parameter_usage_options]
 
     parameters_to_use = []
 
     # Filter based on options
     size_parameter = None
+    size_twist_parameter = None
     # If we are being called looking for the ivi-dance, len or code param, we do not care about the size param so we do
     #  not call back into ourselves, to avoid infinite recursion
     if parameter_usage_options not in [ParameterUsageOptions.IVI_DANCE_PARAMETER, ParameterUsageOptions.LEN_PARAMETER]:
@@ -219,6 +245,7 @@ def filter_parameters(function, parameter_usage_options):
         size_parameter = find_size_parameter(filter_ivi_dance_parameters(function), function['parameters'])
         if size_parameter is None:
             size_parameter = find_size_parameter(filter_len_parameters(function), function['parameters'])
+        size_twist_parameter = find_size_parameter(filter_ivi_dance_twist_parameters(function), function['parameters'], key='value_twist')
     for x in function['parameters']:
         skip = False
         if x['direction'] == 'out' and options_to_use['skip_output_parameters']:
@@ -226,6 +253,8 @@ def filter_parameters(function, parameter_usage_options):
         if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
             skip = True
         if x == size_parameter and options_to_use['skip_size_parameter']:
+            skip = True
+        if size_twist_parameter is not None and x == size_twist_parameter and options_to_use['skip_size_parameter']:
             skip = True
         if x['is_session_handle'] is True and options_to_use['skip_session_handle']:
             skip = True
@@ -276,6 +305,25 @@ def filter_ivi_dance_parameters(function):
     return params
 
 
+def filter_ivi_dance_twist_parameters(function):
+    '''Returns the ivi-dance parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the ivi-dance.
+
+    asserts all parameters that use ivi-dance reference the same parameter
+    Args:
+        function: function whose parameters should be checked
+
+    Return:
+        None if no ivi-dance parameter found
+        Parameters dict if one is found
+    '''
+    params = filter_parameters(function, ParameterUsageOptions.IVI_DANCE_PARAMETER)
+    if len(params) > 0:
+        if params[0]['size']['mechanism'] == 'ivi-dance-with-a-twist':
+            size_param = params[0]['size']['value_twist']
+            assert all(x['size']['value_twist'] == size_param for x in params)
+    return params
+
+
 def filter_len_parameters(function):
     '''Returns the len parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the value of a different parameter.
 
@@ -296,7 +344,7 @@ def filter_len_parameters(function):
 
 def filter_codegen_functions(functions):
     '''Returns function metadata only for those functions to be included in codegen'''
-    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no'}
+    return {k: v for k, v in functions.items() if v['codegen_method'] != 'no' and v['codegen_method'] != 'library-only'}
 
 
 def filter_library_functions(functions):

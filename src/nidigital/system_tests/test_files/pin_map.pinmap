@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PinMap xmlns="http://www.ni.com/TestStand/SemiconductorModule/PinMap.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.5">
+	<Instruments>
+		<NIDigitalPatternInstrument name="PXI1Slot2" numberOfChannels="32" group="Digital" />
+		<NIDigitalPatternInstrument name="PXI1Slot5" numberOfChannels="32" group="Digital" />
+	</Instruments>
+	<Pins>
+		<DUTPin name="PinA" />
+		<DUTPin name="PinB" />
+		<DUTPin name="PinC" />
+		<SystemPin name="SysPin" />
+	</Pins>
+	<PinGroups>
+		<PinGroup name="DutPins">
+			<PinReference pin="PinA" />
+			<PinReference pin="PinB" />
+			<PinReference pin="PinC" />
+		</PinGroup>
+		<PinGroup name="SysPins">
+			<PinReference pin="SysPin" />
+		</PinGroup>
+	</PinGroups>
+	<Sites>
+		<Site siteNumber="0" />
+		<Site siteNumber="1" />
+	</Sites>
+	<Connections>
+		<Connection pin="PinA" siteNumber="0" instrument="PXI1Slot2" channel="0" />
+		<Connection pin="PinA" siteNumber="1" instrument="PXI1Slot5" channel="0" />
+		<Connection pin="PinB" siteNumber="0" instrument="PXI1Slot2" channel="1" />
+		<Connection pin="PinB" siteNumber="1" instrument="PXI1Slot5" channel="1" />
+		<Connection pin="PinC" siteNumber="0" instrument="PXI1Slot2" channel="2" />
+		<Connection pin="PinC" siteNumber="1" instrument="PXI1Slot5" channel="2" />
+		<SystemConnection pin="SysPin" instrument="PXI1Slot2" channel="3" />
+	</Connections>
+</PinMap>

@@ -1,3 +1,4 @@
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
 import build.helper as helper
@@ -84,7 +85,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_params, params)
             setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
 %           elif p['is_string']:
         test_value = self._defaults['${func_name}']['${p['name']}']
-        if sys.version_info.major > 2 and type(test_value) is str:
+        if type(test_value) is str:
             test_value = test_value.encode('ascii')
 <%
 param_name = p['python_name']

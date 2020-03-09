@@ -1,6 +1,8 @@
 import datetime
 import nidcpower
+import os
 import pytest
+import tempfile
 
 
 @pytest.fixture(scope='function')
@@ -21,12 +23,8 @@ def multiple_channel_session():
         yield simulated_session
 
 
-def test_self_test():
-    # TODO(frank): self_test does not work with simulated PXIe-4162 modules due to internal NI bug.
-    # Update to use the session created with 'session' function above after internal NI bug is fixed.
-    with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        # We should not get an assert if self_test passes
-        session.self_test()
+def test_self_test(session):
+    session.self_test()
 
 
 def test_self_cal(session):
@@ -81,17 +79,14 @@ def test_read_current_temperature(session):
     assert temperature == 25.0
 
 
-def test_reset_device():
-    # TODO(frank): reset_device does not work with simulated PXIe-4162 modules due to internal NI bug.
-    # Update to use the session created with 'session' function above after internal NI bug is fixed.
-    with nidcpower.Session('', '', False, 'Simulate=1, DriverSetup=Model:4143; BoardType:PXIe') as session:
-        channel = session.channels['0']
-        default_output_function = channel.output_function
-        assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
-        channel.output_function = nidcpower.OutputFunction.DC_CURRENT
-        session.reset_device()
-        function_after_reset = channel.output_function
-        assert function_after_reset == default_output_function
+def test_reset_device(session):
+    channel = session.channels['0']
+    default_output_function = channel.output_function
+    assert default_output_function == nidcpower.OutputFunction.DC_VOLTAGE
+    channel.output_function = nidcpower.OutputFunction.DC_CURRENT
+    session.reset_device()
+    function_after_reset = channel.output_function
+    assert function_after_reset == default_output_function
 
 
 def test_reset_with_default(session):
@@ -188,10 +183,10 @@ def test_query_max_current_limit(single_channel_session):
 
 
 def test_query_max_voltage_level(single_channel_session):
-        max_voltage_level = single_channel_session.query_max_voltage_level(0.03)
-        expected_max_voltage_level = 24  # for a simulated 4162 max voltage level should be 24V for 30mA current limit
-        max_voltage_level_in_range = abs(max_voltage_level - expected_max_voltage_level) <= max(1e-09 * max(abs(max_voltage_level), abs(expected_max_voltage_level)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-        assert max_voltage_level_in_range is True
+    max_voltage_level = single_channel_session.query_max_voltage_level(0.03)
+    expected_max_voltage_level = 24  # for a simulated 4162 max voltage level should be 24V for 30mA current limit
+    max_voltage_level_in_range = abs(max_voltage_level - expected_max_voltage_level) <= max(1e-09 * max(abs(max_voltage_level), abs(expected_max_voltage_level)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+    assert max_voltage_level_in_range is True
 
 
 def test_query_min_current_limit(single_channel_session):
@@ -199,11 +194,6 @@ def test_query_min_current_limit(single_channel_session):
     expected_min_current_limit = 0.0000001  # for a simulated 4162 min_current_limit should be 1uA for 6V voltage level
     min_current_limit_in_range = abs(min_current_limit - expected_min_current_limit) <= max(1e-09 * max(abs(min_current_limit), abs(expected_min_current_limit)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
     assert min_current_limit_in_range is True
-
-
-def test_create_advanced_sequence(single_channel_session):
-    ids = [1150008, 1250001, 1150009]  # work around #507
-    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
 
 
 def test_set_sequence_with_source_delays(single_channel_session):
@@ -242,13 +232,72 @@ def test_commit(single_channel_session):
     single_channel_session.commit()
 
 
-def test_create_and_delete_advanced_sequence_step(single_channel_session):
-    ids = [1250001]  # work around #507
+def test_import_export_buffer(single_channel_session):
+    test_value_1 = 1
+    test_value_2 = 2
+    single_channel_session.voltage_level = test_value_1
+    assert single_channel_session.voltage_level == test_value_1
+    buffer = single_channel_session.export_attribute_configuration_buffer()
+    single_channel_session.voltage_level = test_value_2
+    assert single_channel_session.voltage_level == test_value_2
+    single_channel_session.import_attribute_configuration_buffer(buffer)
+    assert single_channel_session.voltage_level == test_value_1
+
+
+def test_import_export_file(single_channel_session):
+    test_value_1 = 1
+    test_value_2 = 2
+    temp_file = tempfile.NamedTemporaryFile(suffix='.txt', delete=False)
+    # NamedTemporaryFile() returns the file already opened, so we need to close it before we can use it
+    temp_file.close()
+    path = temp_file.name
+    single_channel_session.voltage_level = test_value_1
+    assert single_channel_session.voltage_level == test_value_1
+    single_channel_session.export_attribute_configuration_file(path)
+    single_channel_session.voltage_level = test_value_2
+    assert single_channel_session.voltage_level == test_value_2
+    single_channel_session.import_attribute_configuration_file(path)
+    assert single_channel_session.voltage_level == test_value_1
+    os.remove(path)
+
+
+def test_create_and_delete_advanced_sequence(single_channel_session):
+    properties_used = ['output_function', 'voltage_level']
+    sequence_name = 'my_sequence'
     single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
-    single_channel_session._create_advanced_sequence(sequence_name='my_sequence', attribute_ids=ids, set_as_active_sequence=True)
-    single_channel_session._create_advanced_sequence_step(set_as_active_step=True)
+    single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+    single_channel_session.create_advanced_sequence_step(set_as_active_step=True)
+    assert single_channel_session.active_advanced_sequence == sequence_name
+    single_channel_session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
     single_channel_session.voltage_level = 1
-    single_channel_session._delete_advanced_sequence(sequence_name='my_sequence')
+    single_channel_session.delete_advanced_sequence(sequence_name=sequence_name)
+    try:
+        single_channel_session.active_advanced_sequence = sequence_name
+        assert False
+    except nidcpower.errors.DriverError:
+        pass
+
+
+def test_create_and_delete_advanced_sequence_bad_name(single_channel_session):
+    properties_used = ['output_function_bad', 'voltage_level']
+    sequence_name = 'my_sequence'
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    try:
+        single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+        assert False
+    except KeyError:
+        pass
+
+
+def test_create_and_delete_advanced_sequence_bad_type(single_channel_session):
+    properties_used = ['unlock', 'voltage_level']
+    sequence_name = 'my_sequence'
+    single_channel_session.source_mode = nidcpower.SourceMode.SEQUENCE
+    try:
+        single_channel_session.create_advanced_sequence(sequence_name=sequence_name, property_names=properties_used, set_as_active_sequence=True)
+        assert False
+    except TypeError:
+        pass
 
 
 def test_send_software_edge_trigger_error(session):
@@ -281,8 +330,8 @@ def test_get_ext_cal_recommended_interval(session):
 
 
 def test_set_get_vi_int_64_attribute(session):
-    session.channels['0']._active_advanced_sequence_step = 1
-    read_advanced_sequence_step = session.channels['0']._active_advanced_sequence_step
+    session.channels['0'].active_advanced_sequence_step = 1
+    read_advanced_sequence_step = session.channels['0'].active_advanced_sequence_step
     assert read_advanced_sequence_step == 1
 
 

@@ -11,7 +11,7 @@
 <%
 table_contents = []
 table_contents.append(['{0} ({1})'.format(driver_name, module_name), '', ])
-table_contents.append(['Driver Version Tested Against', config['last_tested_version']])
+table_contents.append(['Driver Version Tested Against', config['latest_runtime_version_tested_against']])
 table_contents.append(['PyPI Version', '|{0}LatestVersion|'.format(module_name)])
 table_contents.append(['Supported Python Version', '|{0}PythonVersion|'.format(module_name)])
 table_contents.append(['Open Issues', '|{0}OpenIssues|'.format(module_name)])

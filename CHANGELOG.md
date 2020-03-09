@@ -1,7 +1,14 @@
 # Changelog
 
 * [Unreleased](#unreleased)
-* [1.0.0](#090---2018-06-08)
+* [1.2.0](#120---2020-03-06)
+* [1.1.5](#115---2019-11-22)
+* [1.1.4](#114---2019-11-19)
+* [1.1.3](#113---2019-10-21)
+* [1.1.2](#112---2019-06-06)
+* [1.1.0](#110---2018-10-25)
+* [1.0.1](#101---2018-10-17)
+* [1.0.0](#100---2018-06-08)
 * [0.9.0](#090---2018-05-22)
 * [0.8.0](#080---2018-04-27)
 * [0.7.0](#070---2018-02-20)
@@ -43,6 +50,212 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-TClk
+    * #### Added
+    * #### Changed
+    * #### Removed
+    
+    
+## 1.2.0 - 2020-03-06
+* ### ALL
+    * #### Added
+        * Zip file per driver for all examples and any helper files
+        * Link to zip file on examples documentation
+        * Support for Python 3.8
+    * #### Changed
+        * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
+        * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
+    * #### Removed
+        * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
+        * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
+        * PyPy and PyPy3 support [#1271](https://github.com/ni/nimi-python/issues/1271)
+* ### NI-DCPower
+    * #### Added
+        * `create_advanced_sequence()` - [#504](https://github.com/ni/nimi-python/issues/504)
+            * Instead of a list of attribute IDs, you pass in a list of property names as strings
+            * Includes example to see how to use it
+            * Additional methods and properties that were made public (rather than private)
+                * `create_advanced_sequence_step()`
+                * `delete_advanced_sequence()`
+                * `active_advanced_sequence`
+                * `active_advanced_sequence_step`
+* ### NI-FGEN
+    * #### Added
+        * `nifgen.Session.import_attribute_configuration_file()`
+        * `nifgen.Session.import_attribute_configuration_buffer()`
+        * `nifgen.Session.export_attribute_configuration_file()`
+        * `nifgen.Session.export_attribute_configuration_buffer()`
+        * `nifgen.Session.get_channel_name()`
+    * #### Changed
+        * `nifgen.Session.send_software_edge_trigger()` now takes two parameters - `trigger` and `trigger_id`
+            * See documentation on how to call this function
+            * Calling the previous way will log a DeprecationWarning to the warning subsystem
+            * [#1300](https://github.com/ni/nimi-python/issues/1300)
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * `conditional_jump_triggers` and `pattern_opcode_events` repeated capabilities - [#1191](https://github.com/ni/nimi-python/issues/1191), [#1192](https://github.com/ni/nimi-python/issues/1192)
+    * #### Changed
+        * `write_source_waveform_site_unique()` now supports `numpy.array` and `list` as site waveform types
+        * `fetch_history_ram_cycle_information` method now supports fetching multiple History RAM samples in a single API call - [#1071](https://github.com/ni/nimi-python/issues/1071)
+        * Update methods that require `pin_list` to be passed in, such that `pin_list` can be passed in via `pins` repeated capability - [#1294](https://github.com/ni/nimi-python/issues/1294)
+    * #### Removed
+        * Removed redundant (redundant because corresponding properties can be used instead) API methods - [#1065](https://github.com/ni/nimi-python/issues/1065)
+        * Removed programmatic pin map creation API - [#1124](https://github.com/ni/nimi-python/issues/1124)
+        * Removed `fetch_history_ram_cycle_pin_data` and `fetch_history_ram_scan_cycle_number`. They are not needed since `fetch_history_ram_cycle_information`
+            was updated to return class instances that contains cycle pin data and scan cycle number - [#1071](https://github.com/ni/nimi-python/issues/1071)
+* ### NI-TClk
+    * #### Changed
+        * Method parameters and properties that are time based now take or return a `datetime.timedelta` object
+    * #### Removed
+        * Ability to pass an integer as a session / session reference
+        * `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on nitclk attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
+
+
+## 1.1.5 - 2019-11-22
+* ### ALL
+    * #### Changed
+        * Fix #1140: Linux support was accidentally broken.
+        * Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
+
+
+## 1.1.4 - 2019-11-19
+* ### ALL
+    * #### Added
+        * Support for Python 3.8
+        * `ViUInt8` is now a valid type in APIs
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * `fetch_capture_waveform()` - returns dictionary { site: data, site: data, ... }
+        * `write_source_waveform_site_unique()` - takes waveform_name and dictionary { site: data, site: data, ... }
+        * `pins` is now a valid repeated capability
+    * #### Changed
+        * Fix get/set properties - [#1062](https://github.com/ni/nimi-python/issues/1062)
+        * Removed array-size parameter from apply_tdr_offsets() and write_source_waveform_broadcast_u32() methods - [#1070](https://github.com/ni/nimi-python/issues/1070)
+        * Renamed `write_source_waveform_broadcast_u32()` to `write_source_waveform_broadcast()`
+        * `get_pin_results_pin_information()` - returns namedtuple `PinInfo(pin_indexes, site_numbers, channel_indexes)`
+* ### NI Switch Executive
+    * #### Changed
+        * Version updated to 1.1.4 to match other released nimi-python modules
+
+
+## 1.1.3 - 2019-10-21
+* ### ALL
+    * #### Changed
+        * The development status in `setup.py` will be based on the module version:
+            * version >= 1.0
+                * .devN or .aN - Alpha
+                * .bN, .cN or .rcN - Beta
+                * \<nothing\> or .postN - Stable
+            * version < 1.0 and version >= 0.5 - Beta
+            * version < 0.5 - Alpha
+        * Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
+* ### NI-DCPower
+    * #### Changed
+        * Fix type of `sequence_step_delta_time_enabled ` property - [#1015](https://github.com/ni/nimi-python/issues/1015)
+* ### NI-FGEN
+    * #### Removed
+        * `configure_custom_fir_filter_coefficients()` - [#996](https://github.com/ni/nimi-python/issues/996) - Should have been removed as part of - [#891](https://github.com/ni/nimi-python/issues/891)
+* ### NI-SCOPE
+    * #### Added
+        * `cable_sense_signal_enable`, `cable_sense_voltage`, `cable_sense_mode` properties and associated enum
+        * `enabled_channels`, `product_code` properties
+        * `glitch_condition`, `glitch_polarity`, `glitch_width` properties and associated enums
+        * `runt_high_threshold`, `runt_low_threshold`, `runt_polarity`, `runt_condition`, `runt_time_high_limit`, `runt_time_low_limit` properties and associated enums
+        * `width_condition`, `width_high_threshold`, `width_low_threshold`, `width_polarity` properties and associated enums
+* ### NI Switch Executive
+    * #### Changed
+        * Update to 1.0 - now ready for production use
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * Initial support
+        * Very basic at this point and subject to change
+        * Looking for any testing and/or feedback
+        * `get_channel_name_from_string()`
+    * #### Changed
+        *  New enums:
+
+           | Enum name                  | Where used                                                                       |
+           |----------------------------|----------------------------------------------------------------------------------|
+           | `DigitalEdge`              | `digital_edge_conditional_jump_trigger_edge`, `digital_edge_start_trigger_edge`  |
+           | `ApertureTimeUnits`        | `ppmu_aperture_time_units`, `ppmu_configure_aperture_time(units)`                |
+           | `PPMUOutputFunction`       | `ppmu_output_function`                                                           |
+           | `SelectedFunction`         | `selected_function`                                                              |
+           | `TDREndpointTermination`   | `tdr_endpoint_termination`                                                       |
+           | `Signal`                   | `export_signal(signal)`                                                          |
+        * **[Source Breaker]** No longer return the "actual size" from functions that use 'ivi-dance-with-a-twist'. This only affects `nidigital`.
+
+    * #### Removed
+        * Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`,
+            `get_number_of_vectors()`, `get_pattern_file_path()`, `get_pin_type()`, `get_time_set_compare_edges()`, `get_time_set_drive_edges()`,
+            `is_pattern_file_modified_since_load()`, `load_levels_internal()`, `load_pattern_internal()`, `load_timing_internal()`, `uncommit()`
+        * Need to determine how to generate this function - `fetch_capture_waveform_u32()`
+* ### NI-TClk
+    * #### Added
+        * Initial support
+
+
+## 1.1.2 - 2019-06-06
+* ### ALL
+    * #### Changed
+        * Switched to slightly different metadata format - Actual `True`/`False` instead of strings
+        * New internal process for generating metadata
+* ### NI-FGEN
+    * #### Changed
+        * Enum values for `HardwareState` were incorrect - fix to match niFgen.h
+* ### NI-SCOPE
+    * #### Changed
+        * Fixed enum values for `TIME_HISTOGRAM_MEAN_PLUS_STDEV`, `TIME_HISTOGRAM_MEAN_PLUS_2_STDEV`, `HF_REJECT` and `LF_REJECT`
+
+
+## 1.1.0 - 2018-10-25
+* ### ALL
+    * #### Changed
+        * Updated generated metadata
+        * Updated "Driver Version Tested Against"
+        * Update visatype definitions to work on Linux as well as Windows - [#911](https://github.com/ni/nimi-python/issues/911)
+* ### NI-DMM
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+* ### NI-DCPower
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+* ### NI-SCOPE
+    * #### Added
+        * import_attribute_configuration_file function
+        * export_attribute_configuration_file function
+        * import_attribute_configuration_buffer function
+        * import_attribute_configuration_buffer function
+
+
+## 1.0.1 - 2018-10-17
+* ### ALL
+    * #### Added
+        * Support for Python 3.7 - [#895](https://github.com/ni/nimi-python/issues/895)
+        * \_\_version\_\_ for all drivers - [#928](https://github.com/ni/nimi-python/issues/928)
+    * #### Changed
+        * No longer globally set warnings filter for `DriverWarning` - if you want all warnings from the driver, you will need to set `warnings.filterwarnings("always", category=<driver>.DriverWarning)` in your code
+        * Fix \_\_repr\_\_ for niscope.WaveformInfo - [#920](https://github.com/ni/nimi-python/issues/920)
+* ### NI-SCOPE
+    * #### Changed
+        * Format of output of wavefrom_info.__str__()
+* ### NI Switch Executive
+    * #### Added
+        * Initial Release
+
 
 ## 1.0.0 - 2018-06-08
 * ### ALL
@@ -680,6 +893,18 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Changed
     * #### Removed
 * ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-TClk
     * #### Added
     * #### Changed
     * #### Removed

@@ -15,13 +15,13 @@ The following is a basic example of using the **niscope** module to open a sessi
         for wfm in waveforms:
             print('Channel {0}, record {1} samples acquired: {2:,}\n'.format(wfm.channel, wfm.record, len(wfm.samples)))
 
-        # Find all channel 1 records (Note channel name is always a sting even if integers used in channel[])
+        # Find all channel 1 records (Note channel name is always a string even if integers used in channel[])
         chan1 = [wfm for wfm in waveforms if wfm.channel == '0']
 
         # Find all record number 3
         rec3 = [wfm for wfm in waveforms if wfm.record == 3]
 
-The waveform returned from `fetch <http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch>`_ is a flat list of Python objects
+The waveform returned from `fetch <niscope/class.html#fetch>`_ is a flat list of Python objects
 
     - Attributes:
 
@@ -32,13 +32,9 @@ The waveform returned from `fetch <http://nimi-python.readthedocs.io/en/master/n
         -  **record** (int) record number of this waveform
         -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-            .. math::
-
                 voltage = binary data * gain factor + offset
 
         -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-            .. math::
 
                 voltage = binary data * gain factor + offset
 
@@ -74,7 +70,7 @@ method takes an already allocated `numpy <http://www.numpy.org/>`_ array and put
     with session.initiate():
         waveform_infos = session.channels[channels].fetch_into(wfm=wfm, num_records=num_records)
 
-The waveform_infos returned from `fetch_into <http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into>`_ is a 1D list of Python objects
+The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ is a 1D list of Python objects
 
     - Attributes:
 
@@ -85,13 +81,9 @@ The waveform_infos returned from `fetch_into <http://nimi-python.readthedocs.io/
         -  **record** (int) record number of this waveform
         -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
-            .. math::
-
                 voltage = binary data * gain factor + offset
 
         -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-            .. math::
 
                 voltage = binary data * gain factor + offset
 
