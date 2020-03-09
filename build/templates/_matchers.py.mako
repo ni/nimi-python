@@ -1,5 +1,3 @@
-${template_parameters['encoding_tag']}
-# This file was generated
 '''Matcher classes used by unit tests in order to set mock expectations.
 These work well with our visatype definitions.
 '''
@@ -21,10 +19,10 @@ class _ScalarMatcher(object):
 
     def __eq__(self, other):
         if not isinstance(other, self.expected_type):
-            print("{0}: Unexpected type. Expected: {1}. Received: {2}".format(self.__class__.__name__, self.expected_type, type(other)))
+            print("Unexpected type. Expected: {0}. Received: {1}".format(self.expected_type, type(other)))
             return False
         if other.value != self.expected_value:
-            print("{0}: Unexpected value. Expected: {1}. Received: {2}".format(self.__class__.__name__, self.expected_value, other.value))
+            print("Unexpected value. Expected: {0}. Received: {1}".format(self.expected_value, other.value))
             return False
         return True
 
@@ -218,16 +216,6 @@ class ViInt32Matcher(_ScalarMatcher):
         _ScalarMatcher.__init__(self, _visatype.ViInt32, expected_value)
 
 
-class ViUInt32Matcher(_ScalarMatcher):
-    def __init__(self, expected_value):
-        _ScalarMatcher.__init__(self, _visatype.ViUInt32, expected_value)
-
-
-class ViAttrMatcher(_ScalarMatcher):
-    def __init__(self, expected_value):
-        _ScalarMatcher.__init__(self, _visatype.ViAttr, expected_value)
-
-
 class ViInt64Matcher(_ScalarMatcher):
     def __init__(self, expected_value):
         _ScalarMatcher.__init__(self, _visatype.ViInt64, expected_value)
@@ -284,11 +272,6 @@ class ViCharBufferMatcher(_BufferMatcher):
         _BufferMatcher.__init__(self, _visatype.ViChar, expected_size_or_value)
 
 
-class ViInt8BufferMatcher(_BufferMatcher):
-    def __init__(self, expected_size_or_value):
-        _BufferMatcher.__init__(self, _visatype.ViInt8, expected_size_or_value)
-
-
 class ViInt16BufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, _visatype.ViInt16, expected_size_or_value)
@@ -307,11 +290,6 @@ class ViInt64BufferMatcher(_BufferMatcher):
 class ViReal64BufferMatcher(_BufferMatcher):
     def __init__(self, expected_size_or_value):
         _BufferMatcher.__init__(self, _visatype.ViReal64, expected_size_or_value)
-
-
-class ViSessionBufferMatcher(_BufferMatcher):
-    def __init__(self, expected_size_or_value):
-        _BufferMatcher.__init__(self, _visatype.ViSession, expected_size_or_value)
 
 
 

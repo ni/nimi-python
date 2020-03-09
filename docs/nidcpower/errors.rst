@@ -1,20 +1,10 @@
 Exceptions and Warnings
 =======================
 
-Error
------
-
-    .. py:currentmodule:: nidcpower.errors
-
-    .. exception:: Error
-
-        Base exception type that all NI-DCPower exceptions derive from
-
-
 DriverError
 -----------
 
-    .. py:currentmodule:: nidcpower.errors
+    .. py:currentmodule:: nidcpower
 
     .. exception:: DriverError
 
@@ -24,7 +14,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: nidcpower.errors
+    .. py:currentmodule:: nidcpower
 
     .. exception:: UnsupportedConfigurationError
 
@@ -33,7 +23,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: nidcpower.errors
+    .. py:currentmodule:: nidcpower
 
     .. exception:: DriverNotInstalledError
 
@@ -42,7 +32,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: nidcpower.errors
+    .. py:currentmodule:: nidcpower
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -52,7 +42,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: nidcpower.errors
+    .. py:currentmodule:: nidcpower
 
     .. exception:: SelfTestError
 
@@ -62,7 +52,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: nidcpower.errors
+    .. py:currentmodule:: nidcpower
 
     .. exception:: DriverWarning
 

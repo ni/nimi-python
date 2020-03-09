@@ -1,20 +1,10 @@
 Exceptions and Warnings
 =======================
 
-Error
------
-
-    .. py:currentmodule:: nifgen.errors
-
-    .. exception:: Error
-
-        Base exception type that all NI-FGEN exceptions derive from
-
-
 DriverError
 -----------
 
-    .. py:currentmodule:: nifgen.errors
+    .. py:currentmodule:: nifgen
 
     .. exception:: DriverError
 
@@ -24,7 +14,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: nifgen.errors
+    .. py:currentmodule:: nifgen
 
     .. exception:: UnsupportedConfigurationError
 
@@ -33,7 +23,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: nifgen.errors
+    .. py:currentmodule:: nifgen
 
     .. exception:: DriverNotInstalledError
 
@@ -42,7 +32,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: nifgen.errors
+    .. py:currentmodule:: nifgen
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -52,7 +42,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: nifgen.errors
+    .. py:currentmodule:: nifgen
 
     .. exception:: SelfTestError
 
@@ -62,7 +52,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: nifgen.errors
+    .. py:currentmodule:: nifgen
 
     .. exception:: DriverWarning
 

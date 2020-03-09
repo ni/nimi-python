@@ -1,18 +1,18 @@
-${template_parameters['encoding_tag']}
-# This file was generated
 <%
     config = template_parameters['metadata'].config
     module_name = config['module_name']
-    extra_errors_used = config['extra_errors_used']
 %>\
 import ${module_name}._visatype as _visatype
 import ${module_name}.errors as errors
 
-import array
 import datetime
 import numbers
+import six
 
-from functools import singledispatch
+try:
+    from functools import singledispatch  # Python 3.4+
+except ImportError:
+    from singledispatch import singledispatch  # Python 2.7
 
 
 @singledispatch
@@ -55,6 +55,8 @@ def _(repeated_capability, prefix):
 
 
 # This parsing function duplicate the parsing in the driver, so if changes to the allowed format are made there, they will need to be replicated here.
+@_convert_repeated_capabilities.register(six.string_types)  # noqa: F811
+@_convert_repeated_capabilities.register(six.text_type)  # noqa: F811
 @_convert_repeated_capabilities.register(str)  # noqa: F811
 def _(repeated_capability, prefix):
     '''String version (this is the most complex)
@@ -125,7 +127,7 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     return [prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)]
 
 
-def convert_repeated_capabilities_from_init(repeated_capability):
+def convert_repeated_capabilities_from_init(repeated_capability, encoding):
     '''Convert a repeated capabilities object to a comma delimited list
 
     Parameter list is so it can be called from the code generated __init__(). We know it is for channels when called
@@ -133,6 +135,7 @@ def convert_repeated_capabilities_from_init(repeated_capability):
 
     Args:
         repeated_capability (str, list, tuple, slice, None) -
+        encoding (str) - ignored for this converter
 
     Returns:
         rep_cal (str) - comma delimited string of each repeated capability item with ranges expanded
@@ -156,12 +159,16 @@ def _convert_timedelta(value, library_type, scaling):
     return library_type(scaled_value)
 
 
-def convert_timedelta_to_seconds_real64(value):
-    return _convert_timedelta(value, _visatype.ViReal64, 1)
+def convert_timedelta_to_seconds(value, library_type):
+    return _convert_timedelta(value, library_type, 1)
 
 
-def convert_timedelta_to_milliseconds_int32(value):
-    return _convert_timedelta(value, _visatype.ViInt32, 1000)
+def convert_timedelta_to_milliseconds(value, library_type):
+    return _convert_timedelta(value, library_type, 1000)
+
+
+def convert_timedelta_to_microseconds(value, library_type):
+    return _convert_timedelta(value, library_type, 1000000)
 
 
 def convert_month_to_timedelta(months):
@@ -169,8 +176,8 @@ def convert_month_to_timedelta(months):
 
 
 # This converter is not called from the normal codegen path for function. Instead it is
-# call from init and is a special case.
-def convert_init_with_options_dictionary(values):
+# call from init and is a special case. Also, it just returns a string rather than a ctype object
+def convert_init_with_options_dictionary(values, encoding):
     if type(values) is str:
         init_with_options_string = values
     else:
@@ -207,120 +214,111 @@ def convert_init_with_options_dictionary(values):
     return init_with_options_string
 
 
-<%
-# nitclk is different. Only nitclk needs to be able to convert sessions like this
-%>\
-% if config['module_name'] == 'nitclk':
-# nitclk specific converters
-def convert_to_nitclk_session_number(item):
-    '''Convert from supported objects to NI-TClk Session Num
-
-    Supported objects are:
-    - class with .tclk object of type nitclk.SessionReference
-    - nitclk.SessionReference
-    '''
-    try:
-        return item.tclk._get_tclk_session_reference()
-    except AttributeError:
-        pass
-
-    try:
-        return item._get_tclk_session_reference()
-    except AttributeError:
-        pass
-
-    raise TypeError('Unsupported type for nitclk session: {}'.format(type(item)))
-
-
-def convert_to_nitclk_session_number_list(item_list):
-    '''Converts a list of items to nitclk session nums'''
-    return [convert_to_nitclk_session_number(i) for i in item_list]
-
-
-% endif
-<%
-# This converter is only needed for nifake testing
-%>\
-% if config['module_name'] == 'nifake':
-# nifake specific converter(s) - used only for testing
-def convert_double_each_element(numbers):
-    return [x * 2 for x in numbers]
-
-
-% endif
-# convert value to bytes
-@singledispatch
-def _convert_to_bytes(value):  # noqa: F811
-    pass
-
-
-@_convert_to_bytes.register(list)  # noqa: F811
-@_convert_to_bytes.register(bytes)  # noqa: F811
-@_convert_to_bytes.register(bytearray)  # noqa: F811
-@_convert_to_bytes.register(array.array)  # noqa: F811
-def _(value):
-    return value
-
-
-@_convert_to_bytes.register(str)  # noqa: F811
-def _(value):
-    return value.encode()
-
-
-def convert_to_bytes(value):  # noqa: F811
-    return bytes(_convert_to_bytes(value))
-
-
 # Let's run some tests
 def test_convert_init_with_options_dictionary():
-    assert convert_init_with_options_dictionary('') == ''
-    assert convert_init_with_options_dictionary('Simulate=1') == 'Simulate=1'
-    assert convert_init_with_options_dictionary({'Simulate': True, }) == 'Simulate=1'
-    assert convert_init_with_options_dictionary({'Simulate': False, }) == 'Simulate=0'
-    assert convert_init_with_options_dictionary({'Simulate': True, 'Cache': False}) == 'Cache=0,Simulate=1'
-    assert convert_init_with_options_dictionary({'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
-    assert convert_init_with_options_dictionary({'Simulate': True, 'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
-    assert convert_init_with_options_dictionary({'simulate': True, 'cache': False}) == 'Cache=0,Simulate=1'
-    assert convert_init_with_options_dictionary({'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
-    assert convert_init_with_options_dictionary({'simulate': True, 'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}) == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
+    assert convert_init_with_options_dictionary('', 'ascii') == ''
+    assert convert_init_with_options_dictionary('Simulate=1', 'ascii') == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': True, }, 'ascii') == 'Simulate=1'
+    assert convert_init_with_options_dictionary({'Simulate': False, }, 'ascii') == 'Simulate=0'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'Cache': False}, 'ascii') == 'Cache=0,Simulate=1'
+    assert convert_init_with_options_dictionary({'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
+    assert convert_init_with_options_dictionary({'Simulate': True, 'DriverSetup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
+    assert convert_init_with_options_dictionary({'simulate': True, 'cache': False}, 'ascii') == 'Cache=0,Simulate=1'
+    assert convert_init_with_options_dictionary({'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH)'
+    assert convert_init_with_options_dictionary({'simulate': True, 'driver_setup': {'Model': '5162 (4CH)', 'Bitfile': 'CustomProcessing'}}, 'ascii') == 'DriverSetup=Bitfile:CustomProcessing;Model:5162 (4CH),Simulate=1'
 
 
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
-    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=10))
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
     assert test_result.value == 10.0
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=-1))
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
     assert test_result.value == -1
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds_real64(10.5)
+    test_result = convert_timedelta_to_seconds(10.5, _visatype.ViReal64)
     assert test_result.value == 10.5
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds_real64(-1)
+    test_result = convert_timedelta_to_seconds(-1, _visatype.ViReal64)
     assert test_result.value == -1
     assert isinstance(test_result, _visatype.ViReal64)
 
 
-def test_convert_timedelta_to_milliseconds_int32():
-    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=10))
+def test_convert_timedelta_to_seconds_int():
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
+    assert test_result.value == 10
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_seconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
+    assert test_result.value == -1
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_seconds(10.5, _visatype.ViInt32)
+    assert test_result.value == 10
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_seconds(-1, _visatype.ViInt32)
+    assert test_result.value == -1
+    assert isinstance(test_result, _visatype.ViInt32)
+
+
+def test_convert_timedelta_to_milliseconds_double():
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
+    assert test_result.value == 10000.0
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
+    assert test_result.value == -1000.0
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_milliseconds(10.5, _visatype.ViReal64)
+    assert test_result.value == 10500.0
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_milliseconds(-1, _visatype.ViReal64)
+    assert test_result.value == -1000.0
+    assert isinstance(test_result, _visatype.ViReal64)
+
+
+def test_convert_timedelta_to_milliseconds_int():
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
     assert test_result.value == 10000
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=-1))
+    test_result = convert_timedelta_to_milliseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
     assert test_result.value == -1000
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds_int32(10.5)
+    test_result = convert_timedelta_to_milliseconds(10.5, _visatype.ViInt32)
     assert test_result.value == 10500
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds_int32(-1)
+    test_result = convert_timedelta_to_milliseconds(-1, _visatype.ViInt32)
     assert test_result.value == -1000
     assert isinstance(test_result, _visatype.ViInt32)
 
 
-<%
-# If the driver does not need InvalidRepeatedCapabilityError, then it does not call convert_repeated_capabilities() and
-# there is no need to test it
-%>\
-% if 'InvalidRepeatedCapabilityError' in extra_errors_used:
+def test_convert_timedelta_to_microseconds_double():
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViReal64)
+    assert test_result.value == 10000000.0
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViReal64)
+    assert test_result.value == -1000000.0
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_microseconds(10.5, _visatype.ViReal64)
+    assert test_result.value == 10500000.0
+    assert isinstance(test_result, _visatype.ViReal64)
+    test_result = convert_timedelta_to_microseconds(-1, _visatype.ViReal64)
+    assert test_result.value == -1000000.0
+    assert isinstance(test_result, _visatype.ViReal64)
+
+
+def test_convert_timedelta_to_microseconds_int():
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=10), _visatype.ViInt32)
+    assert test_result.value == 10000000
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_microseconds(datetime.timedelta(seconds=-1), _visatype.ViInt32)
+    assert test_result.value == -1000000
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_microseconds(10.5, _visatype.ViInt32)
+    assert test_result.value == 10500000
+    assert isinstance(test_result, _visatype.ViInt32)
+    test_result = convert_timedelta_to_microseconds(-1, _visatype.ViInt32)
+    assert test_result.value == -1000000
+    assert isinstance(test_result, _visatype.ViInt32)
+
+
 # Tests - repeated capabilities
 def test_repeated_capabilies_string_channel():
     test_result_list = convert_repeated_capabilities('0')
@@ -381,30 +379,6 @@ def test_repeated_capabilies_tuple_prefix():
     test_result_list = convert_repeated_capabilities(('0', '1'), prefix='ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
     test_result_list = convert_repeated_capabilities((0, 1), prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-
-
-def test_repeated_capabilies_unicode():
-    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities('ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-
-
-def test_repeated_capabilies_raw():
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix='ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities('ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=u'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(r'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
-    assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
-    test_result_list = convert_repeated_capabilities(u'ScriptTrigger0,ScriptTrigger1', prefix=r'ScriptTrigger')
     assert test_result_list == ['ScriptTrigger0', 'ScriptTrigger1']
 
 
@@ -479,11 +453,10 @@ def test_repeated_capabilies_slice_prefix():
 
 
 def test_repeated_capabilies_from_init():
-    test_result = convert_repeated_capabilities_from_init((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'))
+    test_result = convert_repeated_capabilities_from_init((slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17'), '')
     assert test_result == '0,2,4,5,6,7,8,9,11,12,13,14,16,17'
 
 
-% endif
 def test_string_to_list_channel():
     test_result = _convert_repeated_capabilities('r0', '')
     assert test_result == ['r0']

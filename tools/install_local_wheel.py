@@ -1,7 +1,6 @@
 # !python
 
 import argparse
-from configure_logging import configure_logging
 import logging
 import os
 import pprint
@@ -11,15 +10,28 @@ import sys
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
 
+def configure_logging(lvl=logging.WARNING, logfile=None):
+    root = logging.getLogger()
+    root.setLevel(lvl)
+
+    formatter = logging.Formatter("[%(asctime)s] [%(levelname)8s] --- %(message)s (%(filename)s:%(funcName)s:%(lineno)s)", "%Y-%m-%d %H:%M:%S")
+    if logfile is None:
+        hndlr = logging.StreamHandler(sys.stdout)
+    else:
+        print("Logging to file %s" % logfile)
+        hndlr = logging.FileHandler(logfile)
+    hndlr.setFormatter(formatter)
+    root.addHandler(hndlr)
+
+
 def main():
     # Setup the required arguments for this script
     usage = """
-Install the wheel found in generated/<driver>/dist
+Install the wheel found in bin/<driver>/dist
 """
     parser = argparse.ArgumentParser(description=usage)
     file_group = parser.add_argument_group("Input and Output files")
-    file_group.add_argument("--driver", action="store", default=None, required=True, help="Source file")
-    file_group.add_argument("--start-path", action="store", default=None, help="Prepend to path to search")
+    file_group.add_argument("--driver", action="store", dest="driver", default=None, required=True, help="Source file")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument("-v", "--verbose", action="count", dest="verbose", default=0, help="Verbose output")
@@ -36,9 +48,7 @@ Install the wheel found in generated/<driver>/dist
 
     logging.info(pp.pformat(args))
 
-    rel_path = os.path.join('generated', args.driver, 'dist')
-    if args.start_path is not None:
-        rel_path = os.path.join(args.start_path, rel_path)
+    rel_path = os.path.join('bin', args.driver, 'dist')
     wheel = None
     for file in os.listdir(rel_path):
         if file.endswith(".whl"):

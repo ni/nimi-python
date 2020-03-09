@@ -1,38 +1,14 @@
 #!/usr/bin/python
 
 import datetime
-import fasteners
 import niswitch
-import os
 import pytest
-import tempfile
-
-
-# We need a lock file so multiple tests aren't hitting the db at the same time
-# Trying to create simulated DAQmx devices at the same time (which can happen when running
-# tox with --parallel N, or when two different drivers are being tested at the same time on
-# the same machine, can result in an internal error:
-# -2147220733: MAX:  (Hex 0x80040303) Internal error: The requested object was not found in
-# the configuration database. Please note the steps you performed that led to this error and
-# contact technical support at http://ni.com/support.
-# This is filed as internal bug 255545
-daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
-daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 
 @pytest.fixture(scope='function')
 def session():
     with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True) as simulated_session:
         yield simulated_session
-
-
-@pytest.fixture(scope='function')
-def session_2532():
-    with daqmx_sim_db_lock:
-        simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
-    yield simulated_session
-    with daqmx_sim_db_lock:
-        simulated_session.close()
 
 
 # Basic Use Case Tests
@@ -61,26 +37,27 @@ def test_channel_connection(session):
     assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
 
-def test_continuous_software_scanning(session_2532):
-    scan_list = 'r0->c0; r1->c1'
-    session_2532.scan_list = scan_list
-    assert session_2532.scan_list == scan_list
-    session_2532.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
-    session_2532.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.TTL0)
-    session_2532.trigger_input = niswitch.TriggerInput.SOFTWARE_TRIG
-    session_2532.scan_advanced_output = niswitch.ScanAdvancedOutput.NONE
-    session_2532.scan_list = scan_list
-    session_2532.scan_mode = niswitch.ScanMode.BREAK_BEFORE_MAKE
-    session_2532.continuous_scan = True
-    session_2532.commit()
-    with session_2532.initiate():
-        assert session_2532.is_scanning is True
-        session_2532.send_software_trigger()
-        try:
-            session_2532.wait_for_scan_complete()
-            assert False
-        except niswitch.Error as e:
-            assert e.code == -1074126826  # Error : Max time exceeded.
+def test_continuous_software_scanning(session):
+    with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
+        scan_list = 'r0->c0; r1->c1'
+        session.scan_list = scan_list
+        assert session.scan_list == scan_list
+        session.route_scan_advanced_output(niswitch.ScanAdvancedOutput.FRONTCONNECTOR, niswitch.ScanAdvancedOutput.NONE)
+        session.route_trigger_input(niswitch.TriggerInput.FRONTCONNECTOR, niswitch.TriggerInput.TTL0)
+        session.trigger_input = niswitch.TriggerInput.SOFTWARE_TRIG
+        session.scan_advanced_output = niswitch.ScanAdvancedOutput.NONE
+        session.scan_list = scan_list
+        session.scan_mode = niswitch.ScanMode.BREAK_BEFORE_MAKE
+        session.continuous_scan = True
+        session.commit()
+        with session.initiate():
+            assert session.is_scanning is True
+            session.send_software_trigger()
+            try:
+                session.wait_for_scan_complete()
+                assert False
+            except niswitch.Error as e:
+                assert e.code == -1074126826  # Error : Max time exceeded.
 
 
 # Attribute Tests
@@ -107,8 +84,9 @@ def test_vi_real64_attribute(session):
     assert session.settling_time.total_seconds() == 0.1
 
 
-def test_enum_attribute(session_2532):
-    assert session_2532.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
+def test_enum_attribute():
+    with niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False) as session:
+        assert session.scan_mode == niswitch.ScanMode.BREAK_BEFORE_MAKE
 
 
 def test_write_only_attribute(session):

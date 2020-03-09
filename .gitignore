@@ -1,33 +1,10 @@
 *.pyc
 .cache
 .com.apple.timemachine.supported
-
-# The "generated" folder is created during a build.
-# Normally you wouldn't want build artifacts to be in source control.
-# But we actually do keep the latest copy of some of the generated code, specifically the Python modules, for two reasons:
-#   1. So that we can make changes to the generator and easily review what effect those changes have in the generated code.
-#   2. So that our system tests can create a wheel out of the files and quickly install them, instead of going through the full code-generation process.
-# These are the generated files we do NOT want in git
-generated/docs/
-generated/examples/
-generated/htmlcov/
-generated/processed_metadata/
-generated/*/build/
-generated/*/dist/
-generated/*/log/
-generated/*/*.egg-info/
-generated/driver_file_built
-generated/printed_global_files
-generated/junit/
-generated/*/coverage.xml
-
+bin/
 .eggs/
 .tox/
 .coverage
-nifakeunittest.xml
-nimodinstunittest.xml
-nitclkunittest.xml
-codegen.xml
 commands.log
 .vscode/launch.json
 .vscode/settings.json

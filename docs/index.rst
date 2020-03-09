@@ -6,7 +6,7 @@
 NI Modular Instruments Python Documentation
 ============================================================
 
-.. include:: _static/about.inc
+.. include:: _static/intro.inc
 
 .. include:: _static/installation.inc
 
@@ -25,17 +25,16 @@ Refer to your driver documentation for device-specific information and detailed 
 .. include:: _static/license.inc
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
    :caption: Drivers
+   :hidden:
 
    nidcpower
    nidmm
    nifgen
    niscope
    niswitch
-   nise
    nimodinst
-   nitclk
 
 Indices and tables
 ==================

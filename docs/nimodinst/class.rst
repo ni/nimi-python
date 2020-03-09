@@ -1,7 +1,7 @@
-.. py:module:: nimodinst
+nimodinst.Session
+=================
 
-Session
-=======
+.. py:module:: nimodinst
 
 .. py:class:: Session(self, driver)
 
@@ -41,33 +41,46 @@ Session
     :type driver: str
 
 
-Methods
-=======
+    **Properties**
 
-close
------
+    +--------------------------------------+----------+
+    | Property                             | Datatype |
+    +======================================+==========+
+    | :py:attr:`bus_number`                | int      |
+    +--------------------------------------+----------+
+    | :py:attr:`chassis_number`            | int      |
+    +--------------------------------------+----------+
+    | :py:attr:`device_model`              | str      |
+    +--------------------------------------+----------+
+    | :py:attr:`device_name`               | str      |
+    +--------------------------------------+----------+
+    | :py:attr:`max_pciexpress_link_width` | int      |
+    +--------------------------------------+----------+
+    | :py:attr:`pciexpress_link_width`     | int      |
+    +--------------------------------------+----------+
+    | :py:attr:`serial_number`             | str      |
+    +--------------------------------------+----------+
+    | :py:attr:`slot_number`               | int      |
+    +--------------------------------------+----------+
+    | :py:attr:`socket_number`             | int      |
+    +--------------------------------------+----------+
 
-    .. py:currentmodule:: nimodinst.Session
+    **Public methods**
 
-    .. py:method:: close()
-
-            Cleans up the NI-ModInst session created by a call to
-            :py:meth:`nimodinst.Session._open_installed_devices_session`. Call this method when you are
-            finished using the session handle and do not use this handle again.
-
-            
-
-            .. note:: This method is not needed when using the session context manager
-
-
-
+    +-------------+
+    | Method name |
+    +=============+
+    | Method name |
+    +-------------+
 
 
 Properties
-==========
+----------
 
 bus_number
-----------
+~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: bus_number
 
@@ -75,17 +88,17 @@ bus_number
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | int   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -93,7 +106,9 @@ bus_number
                 - C Attribute: **NIMODINST_ATTR_BUS_NUMBER**
 
 chassis_number
---------------
+~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: chassis_number
 
@@ -101,17 +116,17 @@ chassis_number
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | int   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -119,7 +134,9 @@ chassis_number
                 - C Attribute: **NIMODINST_ATTR_CHASSIS_NUMBER**
 
 device_model
-------------
+~~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: device_model
 
@@ -127,17 +144,17 @@ device_model
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | str   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -145,7 +162,9 @@ device_model
                 - C Attribute: **NIMODINST_ATTR_DEVICE_MODEL**
 
 device_name
------------
+~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: device_name
 
@@ -153,17 +172,17 @@ device_name
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | str   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -171,7 +190,9 @@ device_name
                 - C Attribute: **NIMODINST_ATTR_DEVICE_NAME**
 
 max_pciexpress_link_width
--------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: max_pciexpress_link_width
 
@@ -179,17 +200,17 @@ max_pciexpress_link_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | int   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -197,7 +218,9 @@ max_pciexpress_link_width
                 - C Attribute: **NIMODINST_ATTR_MAX_PCIEXPRESS_LINK_WIDTH**
 
 pciexpress_link_width
----------------------
+~~~~~~~~~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: pciexpress_link_width
 
@@ -205,17 +228,17 @@ pciexpress_link_width
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | int   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -223,7 +246,9 @@ pciexpress_link_width
                 - C Attribute: **NIMODINST_ATTR_PCIEXPRESS_LINK_WIDTH**
 
 serial_number
--------------
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: serial_number
 
@@ -231,17 +256,17 @@ serial_number
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | str       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | str   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -249,7 +274,9 @@ serial_number
                 - C Attribute: **NIMODINST_ATTR_SERIAL_NUMBER**
 
 slot_number
------------
+~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: slot_number
 
@@ -257,17 +284,17 @@ slot_number
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | int   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -275,7 +302,9 @@ slot_number
                 - C Attribute: **NIMODINST_ATTR_SLOT_NUMBER**
 
 socket_number
--------------
+~~~~~~~~~~~~~
+
+    .. py:currentmodule:: nimodinst.Session
 
     .. py:attribute:: socket_number
 
@@ -283,17 +312,17 @@ socket_number
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------+
-            | Characteristic | Value     |
-            +================+===========+
-            | Datatype       | int       |
-            +----------------+-----------+
-            | Permissions    | read only |
-            +----------------+-----------+
-            | Channel Based  | No        |
-            +----------------+-----------+
-            | Resettable     | No        |
-            +----------------+-----------+
+            +----------------+-------+
+            | Characteristic | Value |
+            +================+=======+
+            | Datatype       | int   |
+            +----------------+-------+
+            | Permissions    | read  |
+            +----------------+-------+
+            | Channel Based  | False |
+            +----------------+-------+
+            | Resettable     | No    |
+            +----------------+-------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -301,6 +330,43 @@ socket_number
                 - C Attribute: **NIMODINST_ATTR_SOCKET_NUMBER**
 
 
-.. contents:: Session
+Methods
+-------
 
+
+
+
+Properties
+----------
+
++--------------------------------------------------------+----------+
+| Property                                               | Datatype |
++========================================================+==========+
+| :py:attr:`nimodinst.Session.bus_number`                | int      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.chassis_number`            | int      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.device_model`              | str      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.device_name`               | str      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.max_pciexpress_link_width` | int      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.pciexpress_link_width`     | int      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.serial_number`             | str      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.slot_number`               | int      |
++--------------------------------------------------------+----------+
+| :py:attr:`nimodinst.Session.socket_number`             | int      |
++--------------------------------------------------------+----------+
+
+Methods
+-------
+
++-------------+
+| Method name |
++=============+
+| Method name |
++-------------+
 

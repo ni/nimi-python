@@ -1,49 +1,31 @@
-# -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 20.2.0d17
 config = {
-    'api_version': '20.2.0d17',
-    'c_function_prefix': 'niDCPower_',
-    'close_function': 'close',
-    'context_manager_name': {
-        'abort_function': 'Abort',
-        'initiate_function': 'Initiate',
-        'task': 'acquisition'
-    },
-    'custom_types': [
-    ],
-    'driver_name': 'NI-DCPower',
-    'extra_errors_used': [
-        'InvalidRepeatedCapabilityError',
-        'SelfTestError'
-    ],
-    'init_function': 'InitializeWithChannels',
-    'library_info': {
-        'Linux': {
-            '64bit': {
-                'name': 'nidcpower',
-                'type': 'cdll'
-            }
-        },
-        'Windows': {
-            '32bit': {
-                'name': 'nidcpower_32.dll',
-                'type': 'windll'
-            },
-            '64bit': {
-                'name': 'nidcpower_64.dll',
-                'type': 'cdll'
-            }
-        }
-    },
-    'metadata_version': '2.0',
+    'metadata_version': '1.0',
     'module_name': 'nidcpower',
-    'repeated_capabilities': [
-        {
-            'prefix': '',
-            'python_name': 'channels'
-        }
-    ],
+    'module_version': '1.0.1.dev0',
+    'c_function_prefix': 'niDCPower_',
+    'driver_name': 'NI-DCPower',
     'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
     'session_handle_parameter_name': 'vi',
-    'supports_nitclk': False
+    'library_info':
+    {
+        'Windows': {
+            '32bit': {'name': 'nidcpower_32.dll', 'type': 'windll'},
+            '64bit': {'name': 'nidcpower_64.dll', 'type': 'cdll'},
+        },
+        'Linux': {
+            '64bit': {'name': 'libnidcpower.so', 'type': 'cdll'},
+        },
+    },
+    'context_manager_name': {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
+    },
+    'init_function': 'InitializeWithChannels',
+    'custom_types': [],
+    'last_tested_version': '17.6.0',
+    'repeated_capabilities': [
+        {'python_name': 'channels', 'prefix': '', },
+    ],
 }
+

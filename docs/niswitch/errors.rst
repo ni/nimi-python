@@ -1,20 +1,10 @@
 Exceptions and Warnings
 =======================
 
-Error
------
-
-    .. py:currentmodule:: niswitch.errors
-
-    .. exception:: Error
-
-        Base exception type that all NI-SWITCH exceptions derive from
-
-
 DriverError
 -----------
 
-    .. py:currentmodule:: niswitch.errors
+    .. py:currentmodule:: niswitch
 
     .. exception:: DriverError
 
@@ -24,7 +14,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: niswitch.errors
+    .. py:currentmodule:: niswitch
 
     .. exception:: UnsupportedConfigurationError
 
@@ -33,7 +23,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: niswitch.errors
+    .. py:currentmodule:: niswitch
 
     .. exception:: DriverNotInstalledError
 
@@ -42,7 +32,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: niswitch.errors
+    .. py:currentmodule:: niswitch
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -52,7 +42,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: niswitch.errors
+    .. py:currentmodule:: niswitch
 
     .. exception:: SelfTestError
 
@@ -62,7 +52,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: niswitch.errors
+    .. py:currentmodule:: niswitch
 
     .. exception:: DriverWarning
 

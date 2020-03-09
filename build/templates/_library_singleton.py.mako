@@ -1,4 +1,3 @@
-${template_parameters['encoding_tag']}
 # This file was generated
 <%
 import build.helper as helper
@@ -10,7 +9,6 @@ module_name = config['module_name']
 import platform
 
 import ctypes
-import ctypes.util
 import ${module_name}._library as _library
 import ${module_name}.errors as errors
 import threading
@@ -23,7 +21,7 @@ _library_info = ${helper.get_dictionary_snippet(config['library_info'], indent=1
 
 def _get_library_name():
     try:
-        return ctypes.util.find_library(_library_info[platform.system()][platform.architecture()[0]]['name'])  # We find and return full path to the DLL
+        return _library_info[platform.system()][platform.architecture()[0]]['name']
     except KeyError:
         raise errors.UnsupportedConfigurationError
 

@@ -10,19 +10,19 @@ def merge_helper(metadata, metadata_type, config, use_re):
     metadata_module = 'metadata.{0}_addon'.format(metadata_type)
     if 'modules' in config and metadata_module in config['modules']:
         for m in dir(config['modules'][metadata_module]):
-            if m.startswith('{0}_additional_'.format(metadata_type)):
-                # We need to explicitly copy new entries
+            if m.startswith('{0}_'.format(metadata_type)):
+                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re)
+            # We need to explicitly copy new entries
+            if m == '{0}_additional_{0}'.format(metadata_type):
                 outof = config['modules'][metadata_module].__getattribute__(m)
                 for a in outof:
                     metadata[a] = outof[a]
-            elif m.startswith('{0}_'.format(metadata_type)):
-                merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re, m)
 
     # Delete any entries that are empty
     # Have to do this in two steps. Otherwise the dictionary changes size and errors
     to_delete = []
     for m in metadata:
-        if type(m) is dict and len(metadata[m]) == 0:
+        if len(metadata[m]) == 0:
             to_delete.append(m)
     for m in to_delete:
         metadata.pop(m, None)
@@ -30,7 +30,7 @@ def merge_helper(metadata, metadata_type, config, use_re):
     return metadata
 
 
-def merge_dicts(into, outof, use_re, dict_name):
+def merge_dicts(into, outof, use_re):
     '''merge_dicts
 
     Recursively merges the contents of dictionary 'outof' into dictionary 'into'.
@@ -39,21 +39,9 @@ def merge_dicts(into, outof, use_re, dict_name):
     merged with all key matches in into.
     '''
     for item in sorted(outof):
-        # If we're not using regex's then this is an easy check
-        if not use_re and item not in into and dict_name is not None:
-            raise KeyError('Key {0} from {1} is not in the destination'.format(item, dict_name))
-        # If we are using regex's we need to seach all keys to see if any match
-        if use_re and dict_name is not None:
-            key_exists = False
-            for item2 in into:
-                if re.search(item, item2):
-                    key_exists = True
-            if not key_exists:
-                raise KeyError('Key {0} from {1} is not in the destination'.format(item, dict_name))
-
         if type(outof[item]) is dict:
             if item in into:
-                merge_dicts(into[item], outof[item], use_re, None)
+                merge_dicts(into[item], outof[item], use_re)
             elif type(into) is list:
                 for item2 in outof[item]:
                     into[item][item2] = outof[item][item2]
@@ -65,7 +53,7 @@ def merge_dicts(into, outof, use_re, dict_name):
                     for item2 in into:
                         if use_re is True and re.search(item, item2):
                             assert type(into[item2]) is dict
-                            merge_dicts(into[item2], outof[item], use_re, None)
+                            merge_dicts(into[item2], outof[item], use_re)
         else:
             into[item] = outof[item]
 
@@ -73,7 +61,7 @@ def merge_dicts(into, outof, use_re, dict_name):
 # Unit Tests
 def _do_the_test_merge_dicts(a, b, expected, use_re):
     actual = a.copy()
-    merge_dicts(actual, b, use_re, 'test')
+    merge_dicts(actual, b, use_re)
     assert expected == actual, "\na = {0}\nb = {1}\nexpected = {2}\nactual = {3}".format(a, b, expected, actual)
 
 
@@ -84,17 +72,31 @@ def test_merge_dict_second_is_empty():
     _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
+def test_merge_dict_simple():
+    a = {'a': 1, 'b': 2}
+    b = {'c': 3}
+    expected = {'a': 1, 'b': 2, 'c': 3}
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
+
+
+def test_merge_dict_first_is_empty():
+    a = {}
+    b = {'a': 1, 'b': 2}
+    expected = {'a': 1, 'b': 2}
+    _do_the_test_merge_dicts(a, b, expected, use_re=True)
+
+
 def test_merge_dict_key_exists():
     a = {'a': 1, 'b': 2}
-    b = {'b': 3}
-    expected = {'a': 1, 'b': 3}
+    b = {'b': 3, 'c': 4}
+    expected = {'a': 1, 'b': 3, 'c': 4}
     _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
 def test_merge_dict_recurse():
     a = {'a': 1, 'b': {'b1': 5, 'b2': 6}}
-    b = {'b': {'b3': 7}}
-    expected = {'a': 1, 'b': {'b1': 5, 'b2': 6, 'b3': 7}}
+    b = {'b': {'b3': 7}, 'c': 4}
+    expected = {'a': 1, 'b': {'b1': 5, 'b2': 6, 'b3': 7}, 'c': 4}
     _do_the_test_merge_dicts(a, b, expected, use_re=True)
 
 
@@ -126,13 +128,4 @@ def test_merge_dict_with_regex_off():
     _do_the_test_merge_dicts(a, b, expected, use_re=False)
 
 
-def test_merge_dict_top_level_key_missing():
-    a = {'a': 1, 'b': 2}
-    b = {'b': 3, 'c': 4}
-    expected = {'a': 1, 'b': 3, 'c': 4}
-    try:
-        _do_the_test_merge_dicts(a, b, expected, use_re=True)
-        assert False
-    except KeyError:
-        pass
 

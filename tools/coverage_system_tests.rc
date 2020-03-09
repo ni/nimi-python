@@ -1,12 +1,3 @@
 [run]
-omit =
-    */__init__.py
-    */_attributes.py
-    */_converters.py
-    */_library_singleton.py
-    */_visatype.py
-    */enums.py
-    */errors.py
-    */session.py
-
-
+include =
+    */library.py

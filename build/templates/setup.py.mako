@@ -1,11 +1,7 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 # This file was generated
 <%
-import build.helper as helper
-
-config         = template_parameters['metadata'].config
-module_version = config['module_version']
+config        = template_parameters['metadata'].config
 %>
 
 from setuptools.command.test import test as test_command
@@ -37,7 +33,6 @@ setup(
     version='${config['module_version']}',
     description='${config['driver_name']} Python API',
     long_description=read_contents('README.rst'),
-    long_description_content_type='text/x-rst',
     author='National Instruments',
     author_email="opensource@ni.com",
     url="https://github.com/ni/nimi-python",
@@ -50,27 +45,27 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
-        % if config['supports_nitclk']:
-        'nitclk',
-        % endif
+        'six',
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: ${helper.get_development_status(config)}",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: Implementation :: CPython",
+        "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
     cmdclass={'test': PyTest},

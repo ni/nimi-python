@@ -27,7 +27,7 @@ def example(resource_name, topology, simulate, device, channel, relay):
                 channel = session.channels[channel_name]
                 print(row_format.format(i, channel_name, str(channel.is_configuration_channel), str(channel.is_source_channel)))
         if relay:
-            print('Relay Info:')
+            print('Realy Info:')
             row_format = '{:6}' + ' ' * 12 + '{:<15}{:<22}{:6}'
             print(row_format.format('Number', 'Name', 'Position', 'Count'))
             for i in range(1, session.number_of_relays + 1):
@@ -39,14 +39,13 @@ def _main(argsv):
     parser = argparse.ArgumentParser(description='Prints information for the specified National Instruments Switch module.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Switch.')
     parser.add_argument('-d', '--device', default=False, action='store_true', help='Prints information for the device')
-    parser.add_argument('-c', '--channel', default=False, action='store_true', help='Prints information for all channels on the device')
-    parser.add_argument('-r', '--relay', default=False, action='store_true', help='Prints information for all relays on the device')
+    parser.add_argument('-c', '--channel', default=False, action='store_true', help='Prints information for all relays on the device')
+    parser.add_argument('-r', '--relay', default=False, action='store_true', help='Prints information for all channels on the device')
     parser.add_argument('-t', '--topology', default='Configured Topology', help='Topology.')
     parser.add_argument('-s', '--simulate', default=False, action='store_true', help='Simulate device.')
     args = parser.parse_args(argsv)
 
     if not (args.device or args.channel or args.relay):
-        print('You must specify at least one of -d, -c, or -r!')
         parser.print_help()
         sys.exit(1)
 

@@ -1,20 +1,10 @@
 Exceptions and Warnings
 =======================
 
-Error
------
-
-    .. py:currentmodule:: niscope.errors
-
-    .. exception:: Error
-
-        Base exception type that all NI-SCOPE exceptions derive from
-
-
 DriverError
 -----------
 
-    .. py:currentmodule:: niscope.errors
+    .. py:currentmodule:: niscope
 
     .. exception:: DriverError
 
@@ -24,7 +14,7 @@ DriverError
 UnsupportedConfigurationError
 -----------------------------
 
-    .. py:currentmodule:: niscope.errors
+    .. py:currentmodule:: niscope
 
     .. exception:: UnsupportedConfigurationError
 
@@ -33,7 +23,7 @@ UnsupportedConfigurationError
 DriverNotInstalledError
 -----------------------
 
-    .. py:currentmodule:: niscope.errors
+    .. py:currentmodule:: niscope
 
     .. exception:: DriverNotInstalledError
 
@@ -42,7 +32,7 @@ DriverNotInstalledError
 InvalidRepeatedCapabilityError
 ------------------------------
 
-    .. py:currentmodule:: niscope.errors
+    .. py:currentmodule:: niscope
 
     .. exception:: InvalidRepeatedCapabilityError
 
@@ -52,7 +42,7 @@ InvalidRepeatedCapabilityError
 SelfTestError
 -------------
 
-    .. py:currentmodule:: niscope.errors
+    .. py:currentmodule:: niscope
 
     .. exception:: SelfTestError
 
@@ -62,7 +52,7 @@ SelfTestError
 DriverWarning
 -------------
 
-    .. py:currentmodule:: niscope.errors
+    .. py:currentmodule:: niscope
 
     .. exception:: DriverWarning
 

@@ -1,894 +1,1047 @@
+
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 19.6.0d7
+# This file is code generated, do not make changes here.
+#  If the generated information is not correct for python
+#  changes can be made in enums_addon.py and they will be
+#  applied at build time.
+
 enums = {
     'ADCCalibration': {
         'values': [
             {
-                'documentation': {
-                    'description': 'The DMM enables or disables ADC calibration for you.'
-                },
                 'name': 'NIDMM_VAL_ADC_CALIBRATION_AUTO',
-                'value': -1
+                'value': -1,
+'documentation': {
+'description': 'The DMM enables or disables ADC calibration for you.',
+},
             },
             {
-                'documentation': {
-                    'description': 'The DMM does not compensate for changes to the gain.'
-                },
                 'name': 'NIDMM_VAL_ADC_CALIBRATION_OFF',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'The DMM does not compensate for changes to the gain.',
+},
             },
             {
-                'documentation': {
-                    'description': 'The DMM measures an internal reference to calculate the correct gain for the  measurement.'
-                },
                 'name': 'NIDMM_VAL_ADC_CALIBRATION_ON',
-                'value': 1
-            }
-        ]
+                'value': 1,
+'documentation': {
+'description': 'The DMM measures an internal reference to calculate the correct gain for the  measurement.',
+},
+            },
+        ],
     },
     'AcquisitionStatus': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Running'
-                },
-                'name': 'NIDMM_VAL_RUNNING_ANTICOLLISION',
-                'python_name': 'RUNNING',
-                'value': 0
+                'name': 'RUNNING',
+                'value': 0,
+'documentation': {
+'description': 'Running',
+},
             },
             {
-                'documentation': {
-                    'description': 'Finished with **Backlog**'
-                },
-                'name': 'NIDMM_VAL_FINISHED_WITH_BACKLOG',
-                'value': 1
+                'name': 'FINISHED_WITH_BACKLOG',
+                'value': 1,
+'documentation': {
+'description': 'Finished with **Backlog**',
+},
             },
             {
-                'documentation': {
-                    'description': 'Finished with no **Backlog**'
-                },
-                'name': 'NIDMM_VAL_FINISHED_WITH_NO_BACKLOG',
-                'value': 2
+                'name': 'FINISHED_WITH_NO_BACKLOG',
+                'value': 2,
+'documentation': {
+'description': 'Finished with no **Backlog**',
+},
             },
             {
-                'documentation': {
-                    'description': 'Paused'
-                },
-                'name': 'NIDMM_VAL_PAUSED',
-                'value': 3
+                'name': 'PAUSED',
+                'value': 3,
+'documentation': {
+'description': 'Paused',
+},
             },
             {
-                'documentation': {
-                    'description': 'No acquisition in progress'
-                },
-                'name': 'NIDMM_VAL_NO_ACQUISITION_IN_PROGRESS',
-                'value': 4
-            }
-        ]
+                'name': 'NO_ACQUISITION_IN_PROGRESS',
+                'value': 4,
+'documentation': {
+'description': 'No acquisition in progress',
+},
+            },
+        ],
     },
     'ApertureTimeUnits': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Seconds'
-                },
                 'name': 'NIDMM_VAL_SECONDS',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'Seconds',
+},
             },
             {
-                'documentation': {
-                    'description': 'Powerline Cycles'
-                },
                 'name': 'NIDMM_VAL_POWER_LINE_CYCLES',
-                'value': 1
-            }
-        ]
+                'value': 1,
+'documentation': {
+'description': 'Powerline Cycles',
+},
+            },
+        ],
     },
     'AutoZero': {
         'values': [
             {
-                'documentation': {
-                    'description': 'The drivers chooses the AutoZero setting based on the configured function  and resolution.'
-                },
                 'name': 'NIDMM_VAL_AUTO_ZERO_AUTO',
-                'value': -1
+                'value': -1,
+'documentation': {
+'description': 'The drivers chooses the AutoZero setting based on the configured function  and resolution.',
+},
             },
             {
-                'documentation': {
-                    'description': 'Disables AutoZero.'
-                },
                 'name': 'NIDMM_VAL_AUTO_ZERO_OFF',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'Disables AutoZero.',
+},
             },
             {
-                'documentation': {
-                    'description': 'The DMM internally disconnects the input signal following each measurement  and takes a zero reading. It then subtracts the zero reading from the  preceding reading.'
-                },
                 'name': 'NIDMM_VAL_AUTO_ZERO_ON',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'The DMM internally disconnects the input signal following each measurement  and takes a zero reading. It then subtracts the zero reading from the  preceding reading.',
+},
             },
             {
-                'documentation': {
-                    'description': 'The DMM internally disconnects the input signal for the first measurement  and takes a zero reading. It then subtracts the zero reading from the first  reading and the following readings.'
-                },
                 'name': 'NIDMM_VAL_AUTO_ZERO_ONCE',
-                'value': 2
-            }
-        ]
+                'value': 2,
+'documentation': {
+'description': 'The DMM internally disconnects the input signal for the first measurement  and takes a zero reading. It then subtracts the zero reading from the first  reading and the following readings.',
+},
+            },
+        ],
     },
     'CableCompensationType': {
         'values': [
             {
-                'documentation': {
-                    'description': 'No Cable Compensation'
-                },
                 'name': 'NIDMM_VAL_CABLE_COMP_NONE',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'No Cable Compensation',
+},
             },
             {
-                'documentation': {
-                    'description': 'Open Cable Compensation'
-                },
                 'name': 'NIDMM_VAL_CABLE_COMP_OPEN',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'Open Cable Compensation',
+},
             },
             {
-                'documentation': {
-                    'description': 'Short Cable Compensation'
-                },
                 'name': 'NIDMM_VAL_CABLE_COMP_SHORT',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': 'Short Cable Compensation',
+},
             },
             {
-                'documentation': {
-                    'description': 'Open and Short Cable Compensation'
-                },
                 'name': 'NIDMM_VAL_CABLE_COMP_OPEN_AND_SHORT',
-                'value': 3
-            }
-        ]
+                'value': 3,
+'documentation': {
+'description': 'Open and Short Cable Compensation',
+},
+            },
+        ],
+    },
+    'CurrentSource': {
+        'values': [
+            {
+                'name': 'NIDMM_VAL_1_MICROAMP',
+                'value': 1e-06,
+'documentation': {
+'description': 'NI 4070/4071/4072 are supported.',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_10_MICROAMP',
+                'value': 1e-05,
+'documentation': {
+'description': 'NI 4080/4081/4082 and NI 4070/4071/4072 are supported.',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_100_MICROAMP',
+                'value': 0.0001,
+'documentation': {
+'description': 'NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_1_MILLIAMP',
+                'value': 0.001,
+'documentation': {
+'description': 'NI 4080/4081/4082, NI 4070/4071/4072, and NI 4065 are supported.',
+},
+            },
+        ],
+    },
+    'DCBias': {
+        'values': [
+            {
+                'name': 'NIDMM_VAL_DC_BIAS_OFF',
+                'value': 0,
+'documentation': {
+'description': 'NI-DMM programs the device not to use the DC bias',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_DC_BIAS_ON',
+                'value': 1,
+'documentation': {
+'description': 'NI-DMM programs the device to use the DC bias',
+},
+            },
+        ],
     },
     'DCNoiseRejection': {
         'values': [
             {
-                'documentation': {
-                    'description': 'The driver chooses the DC noise rejection setting based on the configured  function and resolution.'
-                },
                 'name': 'NIDMM_VAL_DCNR_AUTO',
-                'value': -1
+                'value': -1,
+'documentation': {
+'description': 'The driver chooses the DC noise rejection setting based on the configured  function and resolution.',
+},
             },
             {
-                'documentation': {
-                    'description': 'NI-DMM weighs all samples equally.'
-                },
                 'name': 'NIDMM_VAL_DCNR_NORMAL',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'NI-DMM weighs all samples equally.',
+},
             },
             {
-                'documentation': {
-                    'description': 'NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing function.'
-                },
                 'name': 'NIDMM_VAL_DCNR_SECOND_ORDER',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  triangular weighing function.',
+},
             },
             {
-                'documentation': {
-                    'description': 'NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing function.'
-                },
                 'name': 'NIDMM_VAL_DCNR_HIGH_ORDER',
-                'value': 2
-            }
-        ]
+                'value': 2,
+'documentation': {
+'description': 'NI-DMM weighs the samples taken in the middle of the aperture time more than  samples taken at the beginning and the end of the measurement using a  bell-curve weighing function.',
+},
+            },
+        ],
+    },
+    'DigitsResolution': {
+        'values': [
+            {
+                'name': '_3_5',
+                'value': 3.5,
+'documentation': {
+'description': 'Specifies 3.5 digits resolution.',
+},
+            },
+            {
+                'name': '_4_5',
+                'value': 4.5,
+'documentation': {
+'description': 'Specifies 4.5 digits resolution.',
+},
+            },
+            {
+                'name': '_5_5',
+                'value': 5.5,
+'documentation': {
+'description': 'Specifies 5.5 digits resolution.',
+},
+            },
+            {
+                'name': '_6_5',
+                'value': 6.5,
+'documentation': {
+'description': 'Specifies 6.5 digits resolution.',
+},
+            },
+            {
+                'name': '_7_5',
+                'value': 7.5,
+'documentation': {
+'description': 'Specifies 7.5 digits resolution.',
+},
+            },
+        ],
     },
     'Function': {
         'values': [
             {
-                'documentation': {
-                    'description': 'DC Voltage'
-                },
                 'name': 'NIDMM_VAL_DC_VOLTS',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'DC Voltage',
+},
             },
             {
-                'documentation': {
-                    'description': 'AC Voltage'
-                },
                 'name': 'NIDMM_VAL_AC_VOLTS',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': 'AC Voltage',
+},
             },
             {
-                'documentation': {
-                    'description': 'DC Current'
-                },
                 'name': 'NIDMM_VAL_DC_CURRENT',
-                'value': 3
+                'value': 3,
+'documentation': {
+'description': 'DC Current',
+},
             },
             {
-                'documentation': {
-                    'description': 'AC Current'
-                },
                 'name': 'NIDMM_VAL_AC_CURRENT',
-                'value': 4
+                'value': 4,
+'documentation': {
+'description': 'AC Current',
+},
             },
             {
-                'documentation': {
-                    'description': '2-Wire Resistance'
-                },
                 'name': 'NIDMM_VAL_2_WIRE_RES',
-                'python_name': 'TWO_WIRE_RES',
-                'value': 5
+                'value': 5,
+'documentation': {
+'description': '2-Wire Resistance',
+},
             },
             {
-                'documentation': {
-                    'description': '4-Wire Resistance'
-                },
                 'name': 'NIDMM_VAL_4_WIRE_RES',
-                'python_name': 'FOUR_WIRE_RES',
-                'value': 101
+                'value': 101,
+'documentation': {
+'description': '4-Wire Resistance',
+},
             },
             {
-                'documentation': {
-                    'description': 'Frequency'
-                },
                 'name': 'NIDMM_VAL_FREQ',
-                'value': 104
+                'value': 104,
+'documentation': {
+'description': 'Frequency',
+},
             },
             {
-                'documentation': {
-                    'description': 'Period'
-                },
                 'name': 'NIDMM_VAL_PERIOD',
-                'value': 105
+                'value': 105,
+'documentation': {
+'description': 'Period',
+},
             },
             {
-                'documentation': {
-                    'description': 'NI 4065, NI 4070/4071/4072, and NI 4080/4081/4182 supported.'
-                },
-                'name': 'NIDMM_VAL_TEMPERATURE',
-                'value': 108
+                'name': 'TEMPERATURE',
+                'value': 108,
+'documentation': {
+'description': 'NI 4065, and NI 4070/4071/4072 supported.',
+},
             },
             {
-                'documentation': {
-                    'description': 'AC Voltage with DC Coupling'
-                },
                 'name': 'NIDMM_VAL_AC_VOLTS_DC_COUPLED',
-                'value': 1001
+                'value': 1001,
+'documentation': {
+'description': 'AC Voltage with DC Coupling',
+},
             },
             {
-                'documentation': {
-                    'description': 'Diode'
-                },
                 'name': 'NIDMM_VAL_DIODE',
-                'value': 1002
+                'value': 1002,
+'documentation': {
+'description': 'Diode',
+},
             },
             {
-                'documentation': {
-                    'description': 'Waveform voltage'
-                },
                 'name': 'NIDMM_VAL_WAVEFORM_VOLTAGE',
-                'value': 1003
+                'value': 1003,
+'documentation': {
+'description': 'Waveform voltage',
+},
             },
             {
-                'documentation': {
-                    'description': 'Waveform current'
-                },
                 'name': 'NIDMM_VAL_WAVEFORM_CURRENT',
-                'value': 1004
+                'value': 1004,
+'documentation': {
+'description': 'Waveform current',
+},
             },
             {
-                'documentation': {
-                    'description': 'Capacitance'
-                },
                 'name': 'NIDMM_VAL_CAPACITANCE',
-                'value': 1005
+                'value': 1005,
+'documentation': {
+'description': 'Capacitance',
+},
             },
             {
-                'documentation': {
-                    'description': 'Inductance'
-                },
                 'name': 'NIDMM_VAL_INDUCTANCE',
-                'value': 1006
-            }
-        ]
+                'value': 1006,
+'documentation': {
+'description': 'Inductance',
+},
+            },
+        ],
+    },
+    'InputResistance': {
+        'values': [
+            {
+                'name': 'NIDMM_VAL_1_MEGAOHM',
+                'value': 1000000.0,
+'documentation': {
+'description': 'Input resistance of 1 M Ohm',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_10_MEGAOHM',
+                'value': 10000000.0,
+'documentation': {
+'description': 'Input resistance of 10 M Ohm',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_GREATER_THAN_10_GIGAOHM',
+                'value': 10000000000.0,
+'documentation': {
+'description': 'Input resistance greater than 10 G Ohm',
+},
+            },
+        ],
     },
     'LCCalculationModel': {
         'values': [
             {
-                'documentation': {
-                    'description': 'NI-DMM chooses the algorithm based on function and range'
-                },
                 'name': 'NIDMM_VAL_CALC_MODEL_AUTO',
-                'value': -1
+                'value': -1,
+'documentation': {
+'description': 'NI-DMM chooses the algorithm based on function and range',
+},
             },
             {
-                'documentation': {
-                    'description': 'NI-DMM uses the series impedance model to calculate capacitance and inductance'
-                },
                 'name': 'NIDMM_VAL_CALC_MODEL_SERIES',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'NI-DMM uses the series impedance model to calculate capacitance and inductance',
+},
             },
             {
-                'documentation': {
-                    'description': 'NI-DMM uses the parallel admittance model to calculate capacitance and inductance'
-                },
                 'name': 'NIDMM_VAL_CALC_MODEL_PARALLEL',
-                'value': 1
-            }
-        ]
+                'value': 1,
+'documentation': {
+'description': 'NI-DMM uses the parallel admittance model to calculate capacitance and inductance',
+},
+            },
+        ],
     },
     'MeasurementCompleteDest': {
         'values': [
             {
-                'documentation': {
-                    'description': 'No Trigger'
-                },
                 'name': 'NIDMM_VAL_NONE',
-                'value': -1
+                'value': -1,
+'documentation': {
+'description': 'No Trigger',
+},
             },
             {
-                'documentation': {
-                    'description': 'AUX I/O Connector'
-                },
                 'name': 'NIDMM_VAL_EXTERNAL',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': 'AUX I/O Connector',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 0'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG0',
-                'value': 111
+                'value': 111,
+'documentation': {
+'description': 'PXI Trigger Line 0',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 1'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG1',
-                'value': 112
+                'value': 112,
+'documentation': {
+'description': 'PXI Trigger Line 1',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 2'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG2',
-                'value': 113
+                'value': 113,
+'documentation': {
+'description': 'PXI Trigger Line 2',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 3'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG3',
-                'value': 114
+                'value': 114,
+'documentation': {
+'description': 'PXI Trigger Line 3',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 4'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG4',
-                'value': 115
+                'value': 115,
+'documentation': {
+'description': 'PXI Trigger Line 4',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 5'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG5',
-                'value': 116
+                'value': 116,
+'documentation': {
+'description': 'PXI Trigger Line 5',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 6'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG6',
-                'value': 117
+                'value': 117,
+'documentation': {
+'description': 'PXI Trigger Line 6',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 7'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG7',
-                'value': 118
+                'value': 118,
+'documentation': {
+'description': 'PXI Trigger Line 7',
+},
             },
             {
-                'documentation': {
-                    'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis'
-                },
                 'name': 'NIDMM_VAL_LBR_TRIG0',
-                'value': 1003
-            }
-        ]
+                'value': 1003,
+'documentation': {
+'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis',
+},
+            },
+        ],
     },
     'MeasurementDestinationSlope': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Rising Edgs'
-                },
                 'name': 'NIDMM_VAL_POSITIVE',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'Rising Edgs',
+},
             },
             {
-                'documentation': {
-                    'description': 'Falling Edge'
-                },
                 'name': 'NIDMM_VAL_NEGATIVE',
-                'value': 1
-            }
-        ]
+                'value': 1,
+'documentation': {
+'description': 'Falling Edge',
+},
+            },
+        ],
+    },
+    'OffsetCompensatedOhms': {
+        'values': [
+            {
+                'name': 'NIDMM_VAL_OFFSET_COMP_OHMS_OFF',
+                'value': 0,
+'documentation': {
+'description': 'The DMM disables offset compensated ohms.',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_OFFSET_COMP_OHMS_ON',
+                'value': 1,
+'documentation': {
+'description': 'The DMM enables offset compensated ohms.',
+},
+            },
+        ],
     },
     'OperationMode': {
         'values': [
             {
-                'documentation': {
-                    'description': 'IviDmm Mode'
-                },
                 'name': 'NIDMM_VAL_IVIDMM_MODE',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'IviDmm Mode',
+},
             },
             {
-                'documentation': {
-                    'description': 'Waveform acquisition mode'
-                },
                 'name': 'NIDMM_VAL_WAVEFORM_MODE',
-                'value': 1
-            }
-        ]
+                'value': 1,
+'documentation': {
+'description': 'Waveform acquisition mode',
+},
+            },
+        ],
+    },
+    'PowerlineFrequency': {
+        'values': [
+            {
+                'name': 'NIDMM_VAL_50_HERTZ',
+                'value': 50.0,
+'documentation': {
+'description': 'Specifies the powerline frequency as 50 Hz.',
+},
+            },
+            {
+                'name': 'NIDMM_VAL_60_HERTZ',
+                'value': 60.0,
+'documentation': {
+'description': 'Specifies the powerline frequency as 60 Hz.',
+},
+            },
+        ],
     },
     'RTDType': {
         'values': [
             {
-                'documentation': {
-                    'description': '\nPerforms Callendar-Van Dusen RTD scaling with the user-specified A, B,\nand C coefficients.\n'
-                },
                 'name': 'NIDMM_VAL_TEMP_RTD_CUSTOM',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': '''
+Performs Callendar-Van Dusen RTD scaling with the user-specified A, B,
+and C coefficients.
+''',
+},
             },
             {
-                'documentation': {
-                    'description': 'Performs scaling for a Pt 3750 RTD.'
-                },
                 'name': 'NIDMM_VAL_TEMP_RTD_PT3750',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'Performs scaling for a Pt 3750 RTD.',
+},
             },
             {
-                'documentation': {
-                    'description': 'Performs scaling for a Pt 3851 RTD.'
-                },
                 'name': 'NIDMM_VAL_TEMP_RTD_PT3851',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': 'Performs scaling for a Pt 3851 RTD.',
+},
             },
             {
-                'documentation': {
-                    'description': 'Performs scaling for a Pt 3911 RTD.'
-                },
                 'name': 'NIDMM_VAL_TEMP_RTD_PT3911',
-                'value': 3
+                'value': 3,
+'documentation': {
+'description': 'Performs scaling for a Pt 3911 RTD.',
+},
             },
             {
-                'documentation': {
-                    'description': 'Performs scaling for a Pt 3916 RTD.'
-                },
                 'name': 'NIDMM_VAL_TEMP_RTD_PT3916',
-                'value': 4
+                'value': 4,
+'documentation': {
+'description': 'Performs scaling for a Pt 3916 RTD.',
+},
             },
             {
-                'documentation': {
-                    'description': 'Performs scaling for a Pt 3920 RTD.'
-                },
                 'name': 'NIDMM_VAL_TEMP_RTD_PT3920',
-                'value': 5
+                'value': 5,
+'documentation': {
+'description': 'Performs scaling for a Pt 3920 RTD.',
+},
             },
             {
-                'documentation': {
-                    'description': 'Performs scaling for a Pt 3928 RTD.'
-                },
                 'name': 'NIDMM_VAL_TEMP_RTD_PT3928',
-                'value': 6
-            }
-        ]
+                'value': 6,
+'documentation': {
+'description': 'Performs scaling for a Pt 3928 RTD.',
+},
+            },
+        ],
     },
     'SampleTrigSlope': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Rising Edgs'
-                },
                 'name': 'NIDMM_VAL_POSITIVE',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'Rising Edgs',
+},
             },
             {
-                'documentation': {
-                    'description': 'Falling Edge'
-                },
                 'name': 'NIDMM_VAL_NEGATIVE',
-                'value': 1
-            }
-        ]
+                'value': 1,
+'documentation': {
+'description': 'Falling Edge',
+},
+            },
+        ],
     },
     'SampleTrigger': {
         'values': [
             {
-                'documentation': {
-                    'description': 'No Trigger'
-                },
                 'name': 'NIDMM_VAL_IMMEDIATE',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'No Trigger',
+},
             },
             {
-                'documentation': {
-                    'description': 'AUX I/O Connector Trigger Line 0'
-                },
                 'name': 'NIDMM_VAL_EXTERNAL',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': 'AUX I/O Connector Trigger Line 0',
+},
             },
             {
-                'documentation': {
-                    'description': 'Software Trigger'
-                },
                 'name': 'NIDMM_VAL_SOFTWARE_TRIG',
-                'value': 3
+                'value': 3,
+'documentation': {
+'description': 'Software Trigger',
+},
             },
             {
-                'documentation': {
-                    'description': 'Interval Trigger'
-                },
                 'name': 'NIDMM_VAL_INTERVAL',
-                'value': 10
+                'value': 10,
+'documentation': {
+'description': 'Interval Trigger',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 0'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG0',
-                'value': 111
+                'value': 111,
+'documentation': {
+'description': 'PXI Trigger Line 0',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 1'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG1',
-                'value': 112
+                'value': 112,
+'documentation': {
+'description': 'PXI Trigger Line 1',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 2'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG2',
-                'value': 113
+                'value': 113,
+'documentation': {
+'description': 'PXI Trigger Line 2',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 3'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG3',
-                'value': 114
+                'value': 114,
+'documentation': {
+'description': 'PXI Trigger Line 3',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 4'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG4',
-                'value': 115
+                'value': 115,
+'documentation': {
+'description': 'PXI Trigger Line 4',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 5'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG5',
-                'value': 116
+                'value': 116,
+'documentation': {
+'description': 'PXI Trigger Line 5',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 6'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG6',
-                'value': 117
+                'value': 117,
+'documentation': {
+'description': 'PXI Trigger Line 6',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 7'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG7',
-                'value': 118
+                'value': 118,
+'documentation': {
+'description': 'PXI Trigger Line 7',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Star Trigger Line'
-                },
                 'name': 'NIDMM_VAL_PXI_STAR',
-                'value': 131
+                'value': 131,
+'documentation': {
+'description': 'PXI Star Trigger Line',
+},
             },
             {
-                'documentation': {
-                    'description': 'AUX I/0 Connector Trigger Line 1'
-                },
                 'name': 'NIDMM_VAL_AUX_TRIG1',
-                'value': 1001
+                'value': 1001,
+'documentation': {
+'description': 'AUX I/0 Connector Trigger Line 1',
+},
             },
             {
-                'documentation': {
-                    'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis'
-                },
                 'name': 'NIDMM_VAL_LBR_TRIG1',
-                'value': 1004
-            }
-        ]
+                'value': 1004,
+'documentation': {
+'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis',
+},
+            },
+        ],
     },
     'ThermistorType': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Custom'
-                },
                 'name': 'NIDMM_VAL_TEMP_THERMISTOR_CUSTOM',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'Custom',
+},
             },
             {
-                'documentation': {
-                    'description': '44004'
-                },
                 'name': 'NIDMM_VAL_TEMP_THERMISTOR_44004',
-                'python_name': 'TEMP_THERMISTOR_THERMISTOR_44004',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': '44004',
+},
             },
             {
-                'documentation': {
-                    'description': '44006'
-                },
                 'name': 'NIDMM_VAL_TEMP_THERMISTOR_44006',
-                'python_name': 'TEMP_THERMISTOR_THERMISTOR_44006',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': '44006',
+},
             },
             {
-                'documentation': {
-                    'description': '44007'
-                },
                 'name': 'NIDMM_VAL_TEMP_THERMISTOR_44007',
-                'python_name': 'TEMP_THERMISTOR_THERMISTOR_44007',
-                'value': 3
-            }
-        ]
+                'value': 3,
+'documentation': {
+'description': '44007',
+},
+            },
+        ],
     },
     'ThermocoupleReferenceJunctionType': {
         'values': [
             {
-                'documentation': {
-                    'description': '\nThermocouple reference juction is fixed at the user-specified\ntemperature.\n'
-                },
-                'name': 'NIDMM_VAL_FIXED',
-                'value': 2
-            }
-        ]
+                'name': 'FIXED',
+                'value': 2,
+'documentation': {
+'description': '''
+Thermocouple reference juction is fixed at the user-specified
+temperature.
+''',
+},
+            },
+        ],
     },
     'ThermocoupleType': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Thermocouple type B'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_B',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'Thermocouple type B',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermocouple type E'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_E',
-                'value': 4
+                'value': 4,
+'documentation': {
+'description': 'Thermocouple type E',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermocouple type J'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_J',
-                'value': 6
+                'value': 6,
+'documentation': {
+'description': 'Thermocouple type J',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermocouple type K'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_K',
-                'value': 7
+                'value': 7,
+'documentation': {
+'description': 'Thermocouple type K',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermocouple type N'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_N',
-                'value': 8
+                'value': 8,
+'documentation': {
+'description': 'Thermocouple type N',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermocouple type R'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_R',
-                'value': 9
+                'value': 9,
+'documentation': {
+'description': 'Thermocouple type R',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermocouple type S'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_S',
-                'value': 10
+                'value': 10,
+'documentation': {
+'description': 'Thermocouple type S',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermocouple type T'
-                },
                 'name': 'NIDMM_VAL_TEMP_TC_T',
-                'value': 11
-            }
-        ]
+                'value': 11,
+'documentation': {
+'description': 'Thermocouple type T',
+},
+            },
+        ],
     },
     'TransducerType': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Thermocouple'
-                },
                 'name': 'NIDMM_VAL_THERMOCOUPLE',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'Thermocouple',
+},
             },
             {
-                'documentation': {
-                    'description': 'Thermistor'
-                },
                 'name': 'NIDMM_VAL_THERMISTOR',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': 'Thermistor',
+},
             },
             {
-                'documentation': {
-                    'description': '2-wire RTD'
-                },
                 'name': 'NIDMM_VAL_2_WIRE_RTD',
-                'python_name': 'TWO_WIRE_RTD',
-                'value': 3
+                'value': 3,
+'documentation': {
+'description': '2-wire RTD',
+},
             },
             {
-                'documentation': {
-                    'description': '4-wire RTD'
-                },
                 'name': 'NIDMM_VAL_4_WIRE_RTD',
-                'python_name': 'FOUR_WIRE_RTD',
-                'value': 4
-            }
-        ]
+                'value': 4,
+'documentation': {
+'description': '4-wire RTD',
+},
+            },
+        ],
     },
     'TriggerSlope': {
         'values': [
             {
-                'documentation': {
-                    'description': 'Rising Edgs'
-                },
                 'name': 'NIDMM_VAL_POSITIVE',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'Rising Edgs',
+},
             },
             {
-                'documentation': {
-                    'description': 'Falling Edge'
-                },
                 'name': 'NIDMM_VAL_NEGATIVE',
-                'value': 1
-            }
-        ]
+                'value': 1,
+'documentation': {
+'description': 'Falling Edge',
+},
+            },
+        ],
     },
     'TriggerSource': {
         'values': [
             {
-                'documentation': {
-                    'description': 'No Trigger'
-                },
                 'name': 'NIDMM_VAL_IMMEDIATE',
-                'value': 1
+                'value': 1,
+'documentation': {
+'description': 'No Trigger',
+},
             },
             {
-                'documentation': {
-                    'description': 'AUX I/O Connector Trigger Line 0'
-                },
                 'name': 'NIDMM_VAL_EXTERNAL',
-                'value': 2
+                'value': 2,
+'documentation': {
+'description': 'AUX I/O Connector Trigger Line 0',
+},
             },
             {
-                'documentation': {
-                    'description': 'Software Trigger'
-                },
                 'name': 'NIDMM_VAL_SOFTWARE_TRIG',
-                'value': 3
+                'value': 3,
+'documentation': {
+'description': 'Software Trigger',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 0'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG0',
-                'value': 111
+                'value': 111,
+'documentation': {
+'description': 'PXI Trigger Line 0',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 1'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG1',
-                'value': 112
+                'value': 112,
+'documentation': {
+'description': 'PXI Trigger Line 1',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 2'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG2',
-                'value': 113
+                'value': 113,
+'documentation': {
+'description': 'PXI Trigger Line 2',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 3'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG3',
-                'value': 114
+                'value': 114,
+'documentation': {
+'description': 'PXI Trigger Line 3',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 4'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG4',
-                'value': 115
+                'value': 115,
+'documentation': {
+'description': 'PXI Trigger Line 4',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 5'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG5',
-                'value': 116
+                'value': 116,
+'documentation': {
+'description': 'PXI Trigger Line 5',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 6'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG6',
-                'value': 117
+                'value': 117,
+'documentation': {
+'description': 'PXI Trigger Line 6',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Trigger Line 7'
-                },
                 'name': 'NIDMM_VAL_PXI_TRIG7',
-                'value': 118
+                'value': 118,
+'documentation': {
+'description': 'PXI Trigger Line 7',
+},
             },
             {
-                'documentation': {
-                    'description': 'PXI Star Trigger Line'
-                },
                 'name': 'NIDMM_VAL_PXI_STAR',
-                'value': 131
+                'value': 131,
+'documentation': {
+'description': 'PXI Star Trigger Line',
+},
             },
             {
-                'documentation': {
-                    'description': 'AUX I/O Connector Trigger Line 1'
-                },
                 'name': 'NIDMM_VAL_AUX_TRIG1',
-                'value': 1001
+                'value': 1001,
+'documentation': {
+'description': 'AUX I/O Connector Trigger Line 1',
+},
             },
             {
-                'documentation': {
-                    'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis'
-                },
                 'name': 'NIDMM_VAL_LBR_TRIG1',
-                'value': 1004
-            }
-        ]
+                'value': 1004,
+'documentation': {
+'description': 'Internal Trigger Line of a PXI/SCXI Combination Chassis',
+},
+            },
+        ],
     },
     'WaveformCoupling': {
         'values': [
             {
-                'documentation': {
-                    'description': 'AC Coupled'
-                },
                 'name': 'NIDMM_VAL_WAVEFORM_COUPLING_AC',
-                'value': 0
+                'value': 0,
+'documentation': {
+'description': 'AC Coupled',
+},
             },
             {
-                'documentation': {
-                    'description': 'DC Coupled'
-                },
                 'name': 'NIDMM_VAL_WAVEFORM_COUPLING_DC',
-                'value': 1
-            }
-        ]
-    }
+                'value': 1,
+'documentation': {
+'description': 'DC Coupled',
+},
+            },
+        ],
+    },
 }

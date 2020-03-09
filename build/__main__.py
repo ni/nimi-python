@@ -33,7 +33,8 @@ build_group = parser.add_argument_group("Build")
 build_group.add_argument(
     "--metadata",
     action='append', dest='metadata', default=[],
-    help='Absolute or relative path to metadata package. Multiple allowed. Will build in order added to command line.')
+    help='Absolute or relative path to metadata package. Multiple allowed. ' +
+    'Will build in order added to command line.')
 utility_group = parser.add_argument_group("Utility")
 utility_group.add_argument(
     "--template",

@@ -17,6 +17,4 @@ To report a bug or submit a feature request specific to NI Modular Instruments P
 Fill in the issue template as completely as possible and we will respond as soon
 as we can.
 
-For hardware support or any other questions not specific to this GitHub project, please visit `NI Community Forums <https://forums.ni.com/>`_.
-
-
+For hardware support or any other questions not specific to this GitHub project, please visit [NI Community Forums](https://forums.ni.com/).

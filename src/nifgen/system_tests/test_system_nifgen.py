@@ -1,45 +1,14 @@
 import datetime
-import fasteners
 import nifgen
 import numpy
 import os
 import pytest
-import tempfile
-import warnings
-
-
-# Set up some global information we need
-test_files_base_dir = os.path.join(os.path.dirname(__file__))
-
-# We need a lock file so multiple tests aren't hitting the db at the same time
-# Trying to create simulated DAQmx devices at the same time (which can happen when running
-# tox with --parallel N, or when two different drivers are being tested at the same time on
-# the same machine, can result in an internal error:
-# -2147220733: MAX:  (Hex 0x80040303) Internal error: The requested object was not found in
-# the configuration database. Please note the steps you performed that led to this error and
-# contact technical support at http://ni.com/support.
-# This is filed as internal bug 255545
-daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
-daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
-
-
-def get_test_file_path(file_name):
-    return os.path.join(test_files_base_dir, file_name)
 
 
 @pytest.fixture(scope='function')
 def session():
     with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
         yield simulated_session
-
-
-@pytest.fixture(scope='function')
-def session_5421():
-    with daqmx_sim_db_lock:
-        simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
-    yield simulated_session
-    with daqmx_sim_db_lock:
-        simulated_session.close()
 
 
 def test_self_test(session):
@@ -75,16 +44,17 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
-def test_get_self_cal_last_date_and_time(session_5421):
+def test_get_self_cal_last_date_and_time():
     try:
-        session_5421.get_self_cal_last_date_and_time()
-        assert False
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Simulated 5433 returns unrecoverable error when calling get_self_cal_last_date_and_time()
+            session.get_self_cal_last_date_and_time()
+            assert False
     except nifgen.Error as e:
         assert e.code == -1074118632  # This operation is not supported for simulated device
 
 
 def test_self_cal(session):
-    session.self_cal()
+        session.self_cal()
 
 
 def test_standard_waveform(session):
@@ -164,12 +134,13 @@ def test_disable(session):
     assert channel.output_enabled is False
 
 
-def test_get_ext_cal_last_date_and_time(session):
-    try:
-        session.get_ext_cal_last_date_and_time()
-        assert False, "If we hit this, it means a simulated 5433 now works properly for this. You can now remove the check for -1074135040"
-    except nifgen.Error as e:
-        assert e.code == -1074118632 or e.code == -1074135040  # This operation is not supported for simulated device or Unrecoverable Failure
+def test_get_ext_cal_last_date_and_time():
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # 5433 throws out unrecoverable error on calling get_ext_cal_last_date_and_time()
+        try:
+            session.get_ext_cal_last_date_and_time()
+            assert False
+        except nifgen.Error as e:
+            assert e.code == -1074118632  # This operation is not supported for simulated device
 
 
 def test_get_ext_cal_last_temp(session):
@@ -184,8 +155,9 @@ def test_get_ext_cal_recommended_interval(session):
     assert interval.days == 730  # recommended external cal interval is 24 months
 
 
-def test_get_hardware_state(session_5421):
-    assert session_5421.get_hardware_state() == nifgen.HardwareState.IDLE
+def test_get_hardware_state():
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # Function or method not supported for 5413/23/33
+        assert session.get_hardware_state() == nifgen.HardwareState.IDLE
 
 
 def test_get_self_cal_last_temp(session):
@@ -248,33 +220,35 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
-def test_create_advanced_arb_sequence(session_5421):
-    seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
-    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
-    marker_location_array = [0, 16, 32]
-    sample_counts_array = [256, 128, 64]
-    loop_counts_array = [10, 20, 30]
-    session_5421.output_mode = nifgen.OutputMode.SEQ
-    # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-    assert ([], seq_handle_base + 0) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
-    assert ([], seq_handle_base + 1) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
-    assert (marker_location_array, seq_handle_base + 2) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-    assert (marker_location_array, seq_handle_base + 3) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
+def test_create_advanced_arb_sequence():
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+        seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
+        marker_location_array = [0, 16, 32]
+        sample_counts_array = [256, 128, 64]
+        loop_counts_array = [10, 20, 30]
+        session.output_mode = nifgen.OutputMode.SEQ
+        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+        assert ([], seq_handle_base + 0) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array)
+        assert ([], seq_handle_base + 1) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array)
+        assert (marker_location_array, seq_handle_base + 2) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+        assert (marker_location_array, seq_handle_base + 3) == session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
-def test_create_advanced_arb_sequence_wrong_size(session_5421):
-    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
-    marker_location_array = [0, 16]
-    loop_counts_array = [10, 20, 30]
-    session_5421.output_mode = nifgen.OutputMode.SEQ
-    # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-    try:
-        session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-        assert False
-    except ValueError:
-        pass
+def test_create_advanced_arb_sequence_wrong_size():
+    with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI') as session:  # TODO(marcoskirsch): Use 5433 once internal NI bug 677115 is fixed.
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
+        marker_location_array = [0, 16]
+        loop_counts_array = [10, 20, 30]
+        session.output_mode = nifgen.OutputMode.SEQ
+        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+        try:
+            session.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+            assert False
+        except ValueError:
+            pass
 
 
 def test_arb_script(session):
@@ -379,7 +353,7 @@ def test_set_waveform_next_write_position(session):
 
 
 def test_write_waveform_from_filei64(session):
-    session.create_waveform_from_file_i16(get_test_file_path('SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+    session.create_waveform_from_file_i16(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
 
 
 def test_named_waveform_operations(session):
@@ -395,15 +369,9 @@ def test_named_waveform_operations(session):
     session.delete_waveform(waveform_name)
 
 
-def test_handle_waveform_operations(session):
-    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    waveform_handle = session.create_waveform(waveform_data_array=waveform_data)
-    session.delete_waveform(waveform_handle)
-
-
 def test_write_waveform_from_file_f64(session):
     try:
-        session.create_waveform_from_file_f64(get_test_file_path('SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
+        session.create_waveform_from_file_f64(os.path.join(os.getcwd(), 'src\\nifgen\\system_tests', 'SineI16BigEndian_1000.bin'), nifgen.ByteOrder.BIG)
     except nifgen.Error as e:
         assert e.code == -1074135024  # Expecting error since loading an I16 file when f64 is expected.
 
@@ -434,38 +402,11 @@ def test_fir_filter_coefficients():
 '''
 
 
-def test_send_software_edge_trigger_start_deprecated(session):
-    warnings.filterwarnings("always", category=DeprecationWarning)
-
-    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    session.create_waveform(waveform_data)
-    with session.initiate():
-        with warnings.catch_warnings(record=True) as w:
-            session.send_software_edge_trigger()
-            assert len(w) == 1
-            assert issubclass(w[0].category, DeprecationWarning)
-
-
-def test_send_software_edge_trigger_script_deprecated(session):
-    warnings.filterwarnings("always", category=DeprecationWarning)
-
-    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-    session.create_waveform(waveform_data)
-    session.output_mode = nifgen.OutputMode.SCRIPT
-    session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
-    session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
-    with session.initiate():
-        with warnings.catch_warnings(record=True) as w:
-            session.script_triggers[0].send_software_edge_trigger()
-            assert len(w) == 1
-            assert issubclass(w[0].category, DeprecationWarning)
-
-
 def test_send_software_edge_trigger_start(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.create_waveform(waveform_data)
     with session.initiate():
-        session.send_software_edge_trigger(nifgen.Trigger.START, 'None')
+        session.send_software_edge_trigger()
 
 
 def test_send_software_edge_trigger_script(session):
@@ -475,7 +416,7 @@ def test_send_software_edge_trigger_script(session):
     session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
     session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
     with session.initiate():
-        session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
+        session.script_triggers[0].send_software_edge_trigger()
 
 
 def test_channel_format_types():
@@ -489,38 +430,4 @@ def test_channel_format_types():
         assert simulated_session.channel_count == 2
     with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
         assert simulated_session.channel_count == 2
-
-
-def test_import_export_buffer(session):
-    test_value_1 = 1.0
-    test_value_2 = 2.0
-    session.arb_gain = test_value_1
-    assert session.arb_gain == test_value_1
-    buffer = session.export_attribute_configuration_buffer()
-    session.arb_gain = test_value_2
-    assert session.arb_gain == test_value_2
-    session.import_attribute_configuration_buffer(buffer)
-    assert session.arb_gain == test_value_1
-
-
-def test_import_export_file(session):
-    test_value_1 = 2.0
-    test_value_2 = 3.0
-    temp_file = tempfile.NamedTemporaryFile(suffix='.txt', delete=False)
-    # NamedTemporaryFile() returns the file already opened, so we need to close it before we can use it
-    temp_file.close()
-    path = temp_file.name
-    session.arb_gain = test_value_1
-    assert session.arb_gain == test_value_1
-    session.export_attribute_configuration_file(path)
-    session.arb_gain = test_value_2
-    assert session.arb_gain == test_value_2
-    session.import_attribute_configuration_file(path)
-    assert session.arb_gain == test_value_1
-    os.remove(path)
-
-
-def test_get_channel_name(session):
-    name = session.get_channel_name(1)
-    assert name == '0'
 

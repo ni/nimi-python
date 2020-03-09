@@ -10,8 +10,6 @@
     c_function_prefix = config['c_function_prefix']
 
     functions = helper.filter_codegen_functions(functions)
-
-    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 %>\
 
 import ctypes
@@ -189,8 +187,8 @@ class Session(object):
 
     def close(self):
         try:
-            self._${close_function_name}()
-        except errors.DriverError:
+            self._close_installed_devices_session()
+        except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0

@@ -30,7 +30,7 @@ def example(resource_name, options, total_acquisition_time_in_seconds, voltage, 
         # This starts an infinite acquisition, until you call session.abort() or session.close()
         session.configure_trigger_software()
         current_pos = 0
-        # 4. initiating
+        # 4. initating
         with session.initiate():
             while current_pos < total_samples:
                 # We fetch each channel at a time so we don't have to de-interleave afterwards

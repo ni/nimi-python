@@ -1,4 +1,8 @@
-${template_parameters['encoding_tag']}
+<%
+# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
+encoding_tag = '# -*- coding: utf-8 -*-'
+%>\
+${encoding_tag}
 # This file was generated
 <%
     import build.helper as helper
@@ -12,8 +16,6 @@ ${template_parameters['encoding_tag']}
 
     attributes = helper.filter_codegen_attributes(config['attributes'])
 
-    close_function_name = helper.camelcase_to_snakecase(config['close_function'])
-
     session_context_manager = None
     if 'task' in config['context_manager_name']:
         session_context_manager = '_' + config['context_manager_name']['task'].title()
@@ -22,15 +24,9 @@ ${template_parameters['encoding_tag']}
 %>\
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
-% if config['use_locking']:
-# Used by @ivi_synchronized
-from functools import wraps
-% endif
+import datetime
 
-% if attributes:
 import ${module_name}._attributes as _attributes
-% endif
 import ${module_name}._converters as _converters
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
@@ -40,10 +36,6 @@ import ${module_name}.errors as errors
 
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
-
-% if config['supports_nitclk']:
-import nitclk
-% endif
 
 # Used for __repr__
 import pprint
@@ -59,8 +51,6 @@ def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
         return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, bytes):
-        return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
         assert library_type is not None, 'library_type is required for list'
         return (library_type * len(value))(*value)
@@ -97,10 +87,8 @@ class ${session_context_manager}(object):
 
 
 % endif
-% if config['use_locking']:
 # From https://stackoverflow.com/questions/5929107/decorators-with-parameters
 def ivi_synchronized(f):
-    @wraps(f)
     def aux(*xs, **kws):
         session = xs[0]  # parameter 0 is 'self' which is the session object
         with session.lock():
@@ -120,8 +108,6 @@ class _Lock(object):
         self._session.unlock()
 
 
-% endif
-% if len(config['repeated_capabilities']) > 0:
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix):
         self._session = session
@@ -149,7 +135,6 @@ class _NoChannel(object):
         self._session._repeated_capability = self._repeated_capability_cache
 
 
-% endif
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
 
@@ -178,9 +163,7 @@ init_method_params = helper.get_params_snippet(init_function, helper.ParameterUs
 init_call_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_CALL)
 constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
 %>\
-% if attributes:
 
-% endif
     def __init__(self, repeated_capability_list, ${config['session_handle_parameter_name']}, library, encoding, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
@@ -205,6 +188,13 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         if self._is_frozen and key not in dir(self):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
+
+    def __getitem__(self, key):
+        rep_caps = []
+% for rep_cap in config['repeated_capabilities']:
+        rep_caps.append("${rep_cap['python_name']}")
+% endfor
+        raise TypeError("'Session' object does not support indexing. You should use the applicable repeated capabilities container(s): {}".format(', '.join(rep_caps)))
 
     def _get_error_description(self, error_code):
         '''_get_error_description
@@ -232,7 +222,7 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
 
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-% if functions[func_name]['use_session_lock'] and config['use_locking']:
+% if functions[func_name]['use_session_lock']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\
@@ -243,14 +233,14 @@ class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
     def __init__(${init_method_params}):
-        r'''${config['session_class_description']}
+        '''${config['session_class_description']}
 
         ${helper.get_function_docstring(init_function, False, config, indent=8)}
         '''
         super(Session, self).__init__(repeated_capability_list=[], ${config['session_handle_parameter_name']}=None, library=None, encoding=None, freeze_it=False)
 % for p in init_function['parameters']:
 %   if 'python_api_converter_name' in p:
-        ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})
+        ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']}, self._encoding)
 %   endif
 % endfor
         self._library = _library_singleton.get()
@@ -265,10 +255,6 @@ class Session(_SessionBase):
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}')
 % endfor
 
-% if config['supports_nitclk']:
-        self.tclk = nitclk.SessionReference(self._${config['session_handle_parameter_name']})
-
-% endif
         # Store the parameter list for later printing in __repr__
         param_list = []
 %       for param in constructor_params:
@@ -284,23 +270,13 @@ class Session(_SessionBase):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-% if session_context_manager is not None:
     def initiate(self):
-        '''initiate
-
-        ${helper.get_function_docstring(helper.initiate_function_def_for_doc(functions, config), False, config, indent=8)}
-        '''
         return ${session_context_manager}(self)
 
-% endif
     def close(self):
-        '''close
-
-        ${helper.get_function_docstring(helper.close_function_def_for_doc(functions, config), False, config, indent=8)}
-        '''
         try:
-            self._${close_function_name}()
-        except errors.DriverError:
+            self._close()
+        except errors.DriverError as e:
             self._${config['session_handle_parameter_name']} = 0
             raise
         self._${config['session_handle_parameter_name']} = 0
@@ -309,7 +285,7 @@ class Session(_SessionBase):
 
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
-% if functions[func_name]['use_session_lock'] and config['use_locking']:
+% if functions[func_name]['use_session_lock']:
     @ivi_synchronized
 % endif
 <%include file="${'/session.py' + method_template['session_filename'] + '.py.mako'}" args="f=functions[func_name], config=config, method_template=method_template" />\

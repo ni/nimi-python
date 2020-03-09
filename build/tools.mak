@@ -9,17 +9,9 @@ define trace_to_console
 	@echo "$(shell printf '%15s' $1): $(subst $(CURRENT_DIR)/,,$2)"
 endef
 
-# Executes a command, logs it to $(COMMAND_LOG), updates tracking file to show module file generated.
-# $1 is the command.
-define log_command
-	$1
-	@echo '$1' >> $(COMMAND_LOG)
-	@touch $(DRIVER_FILE_BUILT)
-endef
-
 # Executes a command, then logs it to $(COMMAND_LOG).
 # $1 is the command.
-define log_command_no_tracking
+define log_command
 	$1
 	@echo '$1' >> $(COMMAND_LOG)
 endef
