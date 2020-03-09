@@ -6,6 +6,10 @@
     c_function_prefix = config['c_function_prefix']
 
 %>\
+.. py:module:: ${module_name}
+
+.. py:currentmodule:: ${module_name}.Session
+
 .. role:: c(code)
     :language: c
 

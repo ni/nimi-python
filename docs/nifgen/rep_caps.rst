@@ -1,3 +1,7 @@
+.. py:module:: nifgen
+
+.. py:currentmodule:: nifgen.Session
+
 .. role:: c(code)
     :language: c
 

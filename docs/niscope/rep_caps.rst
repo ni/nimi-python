@@ -1,3 +1,7 @@
+.. py:module:: niscope
+
+.. py:currentmodule:: niscope.Session
+
 .. role:: c(code)
     :language: c
 

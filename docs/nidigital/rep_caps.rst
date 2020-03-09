@@ -1,3 +1,7 @@
+.. py:module:: nidigital
+
+.. py:currentmodule:: nidigital.Session
+
 .. role:: c(code)
     :language: c
 

@@ -1,3 +1,7 @@
+.. py:module:: nidcpower
+
+.. py:currentmodule:: nidcpower.Session
+
 .. role:: c(code)
     :language: c
 

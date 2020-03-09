@@ -1,3 +1,7 @@
+.. py:module:: niswitch
+
+.. py:currentmodule:: niswitch.Session
+
 .. role:: c(code)
     :language: c
 
