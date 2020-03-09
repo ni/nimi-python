@@ -74,8 +74,10 @@ def _add_python_type(item, config):
             item['python_type'] = 'enums.' + item['enum']
 
     # If 'type_in_documentation' isn't in the item, use 'python_type'
+    item['type_in_documentation_was_calculated'] = False
     if 'type_in_documentation' not in item:
         item['type_in_documentation'] = item['python_type']
+        item['type_in_documentation_was_calculated'] = True
 
     return item
 
@@ -292,7 +294,7 @@ def _add_is_session_handle(parameter):
 
 def _fix_type(parameter):
     '''Replace any spaces in the parameter type with an underscore.'''
-    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' ', '_')
+    parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
 
 
 def _add_use_in_python_api(p, parameters):
@@ -302,6 +304,13 @@ def _add_use_in_python_api(p, parameters):
 
     if p['size']['mechanism'] == 'len' or p['size']['mechanism'] == 'ivi-dance':
         size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
+
+    if p['size']['mechanism'] == 'ivi-dance-with-a-twist':
+        # We have two parameters to remove from the API
+        size_param = find_size_parameter(p, parameters)
+        size_param['use_in_python_api'] = False
+        size_param = find_size_parameter(p, parameters, key='value_twist')
         size_param['use_in_python_api'] = False
 
 
@@ -314,7 +323,7 @@ def _setup_init_function(functions, config):
         # Change the init_function information for generating the docstring
         # We are assuming the last parameter is vi out
         for p in init_function['parameters']:
-            if p['name'] == 'vi':
+            if p['name'] == config['session_handle_parameter_name']:
                 p['documentation']['description'] = session_return_text
                 p['type_in_documentation'] = config['module_name'] + '.Session'
                 p['python_name'] = 'session'
@@ -328,7 +337,12 @@ def _setup_init_function(functions, config):
 
         functions['_init_function'] = init_function
     except KeyError:
-        pass
+        if 'init_function' not in config or config['init_function'] is None:
+            # We don't have an init function or it is set to None (same thing) so we can't
+            # do anything here
+            pass
+        else:
+            print("Couldn't find {} init function".format(config['init_function']))
 
 
 def add_all_function_metadata(functions, config):
@@ -337,14 +351,20 @@ def add_all_function_metadata(functions, config):
 
     for f in functions:
         _add_codegen_method(functions[f])
+        # Some drivers do not have any documentation, so make sure the
+        # documentation key exists
+        if 'documentation' not in functions[f]:
+            functions[f]['documentation'] = {}
 
-    for f in filter_codegen_functions(functions):
+    for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
         _add_use_session_lock(functions[f])
         for p in functions[f]['parameters']:
+            if 'documentation' not in p:
+                p['documentation'] = {}
             _add_enum(p)
             _fix_type(p)
             _add_buffer_info(p, config)
@@ -393,7 +413,7 @@ def _add_default_attribute_class(a, attributes):
 
 def _add_repeated_capability_type(a, attributes):
     '''Add 'repeated_capability_type' if not already there.'''
-    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based'] == 'True':
+    if 'repeated_capability_type' not in attributes[a] and attributes[a]['channel_based']:
         attributes[a]['repeated_capability_type'] = 'channels'
 
 
@@ -441,7 +461,7 @@ def _add_enum_codegen_method(enums, config):
         if a_codegen_method != 'no':
             e = config['attributes'][a]['enum']
             if e is not None and e not in enums:
-                print('Missing enum {0} referenced by attribute {1}'.format(e, a['name']))
+                print('Missing enum {0} referenced by attribute {1}'.format(e, a))
             elif e is not None:
                 if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
                     enums[e]['codegen_method'] = a_codegen_method
@@ -497,10 +517,37 @@ def _add_enum_value_python_name(enum_info, config):
             v['python_name'] = v['python_name'].replace(suffix, '')
 
     # We need to check again to see if we have any values that start with a digit
+    # If we are not going to code generate this enum, we don't care about this
     for v in enum_info['values']:
-        assert not v['python_name'][0].isdigit()
+        if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
+            raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
 
     return enum_info
+
+
+def fixup_enum_names(config):
+    '''Fix enum types for private enums
+
+    Now that we have all the metadata calculated, we need to fix any enum types in attributes and functions
+    where the underlying enum is private. At the time the 'python_type' was set, we hadn't yet calculated
+    whether the enum would be private or not. We couldn't because we needed to process all the functions and
+    attributes first.
+    '''
+    # Check all the functions that will be code generated
+    for f in config['functions']:
+        if config['functions'][f]['codegen_method'] != 'no':
+            for p in config['functions'][f]['parameters']:
+                if p['enum'] is not None and config['enums'][p['enum']]['codegen_method'] == 'private':
+                    # We need to update the python type since the enum is private
+                    p['python_type'] = 'enums.' + config['enums'][p['enum']]['python_name']
+
+    # Check all attributes that will be code generated
+    for a in config['attributes']:
+        attr = config['attributes'][a]
+        if attr['codegen_method'] != 'no':
+            if attr['enum'] is not None and config['enums'][attr['enum']]['codegen_method'] == 'private':
+                # We need to update the python type since the enum is private
+                attr['python_type'] = 'enums.' + config['enums'][attr['enum']]['python_name']
 
 
 def add_all_enum_metadata(enums, config):
@@ -523,13 +570,31 @@ def add_all_enum_metadata(enums, config):
     return enums
 
 
-def add_all_metadata(functions, attributes, enums, config):
+def add_all_config_metadata(config):
+    '''add_all_config_metadata
+
+    Ensure all defaults added to config
+    '''
+    config = merge_helper(config, 'config', config, use_re=False)
+
+    if 'use_locking' not in config:
+        config['use_locking'] = True
+
+    if 'supports_nitclk' not in config:
+        config['supports_nitclk'] = False
+
+    return config
+
+
+def add_all_metadata(functions, attributes, enums, config, persist_output=True):
     '''merge and add all additional metadata_dir
 
     Updates all parameters
         functions, attributes, enums - addon data merged, additional metadata
         config - functions, attributes, enums added
     '''
+    config = add_all_config_metadata(config)
+
     functions = add_all_function_metadata(functions, config)
     config['functions'] = functions
 
@@ -543,8 +608,15 @@ def add_all_metadata(functions, attributes, enums, config):
 
     square_up_tables(config)
 
+    fixup_enum_names(config)
+
     pp_persist = pprint.PrettyPrinter(indent=4, width=200)
-    metadata_dir = os.path.join('bin', 'processed_metadata')
+    metadata_dir = os.path.join('generated', 'processed_metadata')
+
+    # If we are not persisting the output (I.e. during a test) we return early
+    if not persist_output:
+        return config
+
     if not os.path.exists(metadata_dir):
         os.makedirs(metadata_dir)
 
@@ -556,6 +628,22 @@ def add_all_metadata(functions, attributes, enums, config):
 
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w", "utf-8") as text_file:
         text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
+
+    # We need to delete modules before we deepcopy, otherwise we get an error
+    # These were needed only for merging, which has already happened
+    del config['modules']
+
+    # We need to make a copy so we can delete functions, attributes and enums since
+    # they are already in individual files
+    config_copy = copy.deepcopy(config)
+    del config_copy['functions']
+    del config_copy['attributes']
+    del config_copy['enums']
+
+    with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_config.py'), "w", "utf-8") as text_file:
+        text_file.write("enums =\n{0}".format(pp_persist.pformat(config_copy)))
+
+    return config
 
 
 # Unit Tests
@@ -584,167 +672,304 @@ def _compare_dicts(actual, expected):
         assert k in actual, 'Key {0} not in actual'.format(k)
 
 
-config_for_testing = {
-    'session_handle_parameter_name': 'vi',
-    'module_name': 'nifake',
-    'functions': {},
-    'attributes': {},
-    'modules': {
-        'metadata.enums_addon': {}
+functions_input = {
+    'MakeAFoo': {
+        'codegen_method': 'public',
+        'returns': 'ViStatus',
+        'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'channelName',
+                'type': 'ViString',
+                'documentation': {
+                    'description': 'The channel to call this on.',
+                },
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size input',
+                },
+                'enum': None,
+                'name': 'pinDataBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer size output',
+                },
+                'enum': None,
+                'name': 'actualNumPinData',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'enum': None,
+                'name': 'expectedPinStates',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'pinDataBufferSize',
+                    'value_twist': 'actualNumPinData'
+                },
+                'type': 'ViUInt8[]'
+            },
+        ],
+        'documentation': {
+            'description': 'Performs a foo, and performs it well.',
+        },
     },
-    'custom_types': [],
-    'init_function': None,
+    'MakeAPrivateMethod': {
+        'codegen_method': 'private',
+        'returns': 'ViStatus',
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': None,
+                'name': 'vi',
+                'type': 'ViSession',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.',
+                },
+            },
+            {
+                'direction': 'out',
+                'enum': None,
+                'name': 'status',
+                'type': 'ViString',
+                'documentation': {
+                    'description': 'Return a device status',
+                },
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size',
+                },
+                'enum': None,
+                'name': 'dataBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'enum': None,
+                'name': 'data',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'dataBufferSize'
+                },
+                'type': 'ViUInt32[]'
+            },
+        ],
+        'documentation': {
+            'description': 'Perform actions as method defined',
+        },
+    },
 }
 
 
-def _do_the_test_add_all_metadata(functions, expected):
-    actual = copy.deepcopy(functions)
-    actual = add_all_function_metadata(actual, config_for_testing)
-    _compare_dicts(actual, expected)
-
-
-def test_add_all_metadata_simple():
-    functions = {
-        'MakeAFoo': {
-            'codegen_method': 'public',
-            'returns': 'ViStatus',
-            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
-            'parameters': [
-                {
-                    'direction': 'in',
-                    'enum': None,
-                    'name': 'vi',
-                    'type': 'ViSession',
-                    'documentation': {
-                        'description': 'Identifies a particular instrument session.',
-                    },
-                },
-                {
-                    'direction': 'in',
-                    'enum': None,
-                    'name': 'channelName',
-                    'type': 'ViString',
-                    'documentation': {
-                        'description': 'The channel to call this on.',
-                    },
-                },
-            ],
-            'documentation': {
-                'description': 'Performs a foo, and performs it well.',
-            },
+functions_expected = {
+    'MakeAFoo': {
+        'name': 'MakeAFoo',
+        'codegen_method': 'public',
+        'use_session_lock': True,
+        'documentation': {
+            'description': 'Performs a foo, and performs it well.'
         },
-        'MakeAPrivateMethod': {
-            'codegen_method': 'private',
-            'returns': 'ViStatus',
-            'parameters': [
-                {
-                    'direction': 'in',
-                    'enum': None,
-                    'name': 'vi',
-                    'type': 'ViSession',
-                    'documentation': {
-                        'description': 'Identifies a particular instrument session.',
-                    },
+        'has_repeated_capability': True,
+        'repeated_capability_type': 'channels',
+        'is_error_handling': False,
+        'render_in_session_base': True,
+        'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'parameters': [
+            {
+                'ctypes_type': 'ViSession',
+                'ctypes_variable_name': 'vi_ctype',
+                'ctypes_type_library_call': 'ViSession',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
                 },
-                {
-                    'direction': 'out',
-                    'enum': None,
-                    'name': 'status',
-                    'type': 'ViString',
-                    'documentation': {
-                        'description': 'Return a device status',
-                    },
-                }
-            ],
-            'documentation': {
-                'description': 'Perform actions as method defined',
+                'is_repeated_capability': False,
+                'is_session_handle': True,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'vi',
+                'python_name': 'vi',
+                'python_name_with_default': 'vi',
+                'python_name_with_doc_default': 'vi',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViSession',
+                'library_method_call_snippet': 'vi_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'vi',
             },
-        },
-    }
-    expected = {
-        'MakeAFoo': {
-            'name': 'MakeAFoo',
-            'codegen_method': 'public',
-            'use_session_lock': True,
-            'documentation': {
-                'description': 'Performs a foo, and performs it well.'
+            {
+                'ctypes_type': 'ViString',
+                'ctypes_variable_name': 'channel_name_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The channel to call this on.'
+                },
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'str',
+                'type_in_documentation': 'str',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': True,
+                'name': 'channelName',
+                'python_name': 'channel_name',
+                'python_name_with_default': 'channel_name',
+                'python_name_with_doc_default': 'channel_name',
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'ViString',
+                'library_method_call_snippet': 'channel_name_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'channel_name',
             },
-            'has_repeated_capability': True,
-            'repeated_capability_type': 'channels',
-            'is_error_handling': False,
-            'render_in_session_base': True,
-            'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
-            'parameters': [
-                {
-                    'ctypes_type': 'ViSession',
-                    'ctypes_variable_name': 'vi_ctype',
-                    'ctypes_type_library_call': 'ViSession',
-                    'direction': 'in',
-                    'documentation': {
-                        'description': 'Identifies a particular instrument session.'
-                    },
-                    'is_repeated_capability': False,
-                    'is_session_handle': True,
-                    'enum': None,
-                    'numpy': False,
-                    'python_type': 'int',
-                    'type_in_documentation': 'int',
-                    'use_array': False,
-                    'is_buffer': False,
-                    'use_list': False,
-                    'is_string': False,
-                    'name': 'vi',
-                    'python_name': 'vi',
-                    'python_name_with_default': 'vi',
-                    'python_name_with_doc_default': 'vi',
-                    'size': {
-                        'mechanism': 'fixed',
-                        'value': 1
-                    },
-                    'type': 'ViSession',
-                    'library_method_call_snippet': 'vi_ctype',
-                    'use_in_python_api': True,
-                    'python_name_or_default_for_init': 'vi',
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'pin_data_buffer_size_ctype',
+                'ctypes_type_library_call': 'ViInt32',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size input',
                 },
-                {
-                    'ctypes_type': 'ViString',
-                    'ctypes_variable_name': 'channel_name_ctype',
-                    'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
-                    'direction': 'in',
-                    'documentation': {
-                        'description': 'The channel to call this on.'
-                    },
-                    'is_repeated_capability': True,
-                    'repeated_capability_type': 'channels',
-                    'is_session_handle': False,
-                    'enum': None,
-                    'numpy': False,
-                    'python_type': 'str',
-                    'type_in_documentation': 'str',
-                    'use_array': False,
-                    'is_buffer': False,
-                    'use_list': False,
-                    'is_string': True,
-                    'name': 'channelName',
-                    'python_name': 'channel_name',
-                    'python_name_with_default': 'channel_name',
-                    'python_name_with_doc_default': 'channel_name',
-                    'size': {'mechanism': 'fixed', 'value': 1},
-                    'type': 'ViString',
-                    'library_method_call_snippet': 'channel_name_ctype',
-                    'use_in_python_api': True,
-                    'python_name_or_default_for_init': 'channel_name',
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'pinDataBufferSize',
+                'python_name': 'pin_data_buffer_size',
+                'python_name_with_default': 'pin_data_buffer_size',
+                'python_name_with_doc_default': 'pin_data_buffer_size',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
                 },
-            ],
-            'python_name': 'make_a_foo',
-            'returns': 'ViStatus',
-        },
-        'MakeAPrivateMethod': {
-            'codegen_method': 'private',
-            'returns': 'ViStatus',
-            'use_session_lock': True,
-            'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
-            'parameters': [{
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'pin_data_buffer_size_ctype',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'pin_data_buffer_size',
+            },
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'actual_num_pin_data_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer size output',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'actualNumPinData',
+                'python_name': 'actual_num_pin_data',
+                'python_name_with_default': 'actual_num_pin_data',
+                'python_name_with_doc_default': 'actual_num_pin_data',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'actual_num_pin_data',
+            },
+            {
+                'ctypes_type': 'ViUInt8',
+                'ctypes_variable_name': 'expected_pin_states_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt8)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': True,
+                'use_list': True,
+                'is_string': False,
+                'name': 'expectedPinStates',
+                'original_type': 'ViUInt8[]',
+                'python_name': 'expected_pin_states',
+                'python_name_with_default': 'expected_pin_states',
+                'python_name_with_doc_default': 'expected_pin_states',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'pinDataBufferSize',
+                    'value_twist': 'actualNumPinData'
+                },
+                'type': 'ViUInt8',
+                'library_method_call_snippet': 'expected_pin_states_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'expected_pin_states',
+            },
+        ],
+        'python_name': 'make_a_foo',
+        'returns': 'ViStatus',
+    },
+    'MakeAPrivateMethod': {
+        'codegen_method': 'private',
+        'returns': 'ViStatus',
+        'use_session_lock': True,
+        'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
+        'parameters': [
+            {
                 'direction': 'in',
                 'enum': None,
                 'numpy': False,
@@ -756,6 +981,7 @@ def test_add_all_metadata_simple():
                 'python_name': 'vi',
                 'python_type': 'int',
                 'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
                 'ctypes_variable_name': 'vi_ctype',
                 'ctypes_type': 'ViSession',
                 'ctypes_type_library_call': 'ViSession',
@@ -774,7 +1000,8 @@ def test_add_all_metadata_simple():
                 'library_method_call_snippet': 'vi_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
-            }, {
+            },
+            {
                 'direction': 'out',
                 'enum': None,
                 'numpy': False,
@@ -786,6 +1013,7 @@ def test_add_all_metadata_simple():
                 'python_name': 'status',
                 'python_type': 'str',
                 'type_in_documentation': 'str',
+                'type_in_documentation_was_calculated': True,
                 'ctypes_variable_name': 'status_ctype',
                 'ctypes_type': 'ViString',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
@@ -804,117 +1032,317 @@ def test_add_all_metadata_simple():
                 'library_method_call_snippet': 'status_ctype',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
-            }],
-            'documentation': {
-                'description': 'Perform actions as method defined'
             },
-            'name': 'MakeAPrivateMethod',
-            'python_name': '_make_a_private_method',
-            'is_error_handling': False,
-            'render_in_session_base': False,
-            'has_repeated_capability': False
-        }
+            {
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'data_buffer_size_ctype',
+                'ctypes_type_library_call': 'ViInt32',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'buffer size',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'dataBufferSize',
+                'python_name': 'data_buffer_size',
+                'python_name_with_default': 'data_buffer_size',
+                'python_name_with_doc_default': 'data_buffer_size',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViInt32',
+                'library_method_call_snippet': 'data_buffer_size_ctype',
+                'use_in_python_api': False,
+                'python_name_or_default_for_init': 'data_buffer_size',
+            },
+            {
+                'ctypes_type': 'ViUInt32',
+                'ctypes_variable_name': 'data_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(ViUInt32)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'buffer',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': True,
+                'use_list': True,
+                'is_string': False,
+                'name': 'data',
+                'original_type': 'ViUInt32[]',
+                'python_name': 'data',
+                'python_name_with_default': 'data',
+                'python_name_with_doc_default': 'data',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'dataBufferSize',
+                },
+                'type': 'ViUInt32',
+                'library_method_call_snippet': 'data_ctype',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'data',
+            },
+        ],
+        'documentation': {
+            'description': 'Perform actions as method defined'
+        },
+        'name': 'MakeAPrivateMethod',
+        'python_name': '_make_a_private_method',
+        'is_error_handling': False,
+        'render_in_session_base': False,
+        'has_repeated_capability': False
     }
+}
 
-    _do_the_test_add_all_metadata(functions=functions, expected=expected)
+
+attributes_input = {
+    1000000: {
+        'access': 'read-write',
+        'channel_based': False,
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Bool',
+        'name': 'READ_WRITE_BOOL',
+        'resettable': False,
+        'type': 'ViBoolean',
+        'documentation': {
+            'description': 'An attribute of type bool with read/write access.',
+        },
+    },
+}
+
+
+attributes_expected = {
+    1000000: {
+        'access': 'read-write',
+        'channel_based': False,
+        'codegen_method': 'public',
+        'documentation': {'description': 'An attribute of type bool with read/write access.'},
+        'enum': None,
+        'lv_property': 'Fake attributes:Read Write Bool',
+        'name': 'READ_WRITE_BOOL',
+        'python_name': 'read_write_bool',
+        'resettable': False,
+        'type': 'ViBoolean',
+        'python_type': 'bool',
+        'type_in_documentation': 'bool',
+        'type_in_documentation_was_calculated': True,
+        'attribute_class': 'AttributeViBoolean',
+    },
+}
+
+
+enums_input = {
+    'Color': {
+        'values': [
+            {
+                'name': 'RED',
+                'value': 1,
+                'documentation': {
+                    'description': 'Like blood.',
+                }
+            },
+            {
+                'name': 'BLUE',
+                'value': 2,
+                'documentation': {
+                    'description': 'Like the sky.',
+                }
+            },
+            {
+                'name': 'YELLOW',
+                'value': 2,
+                'documentation': {
+                    'description': 'Like a banana.',
+                }
+            },
+            {
+                'name': 'BLACK',
+                'value': 2,
+                'documentation': {
+                    'description': 'Like this developer\'s conscience.',
+                }
+            },
+        ],
+    },
+}
+
+
+enums_expected = {
+    'Color': {
+        'codegen_method': 'no',
+        'python_name': 'Color',
+        'values': [
+            {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
+            {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
+            {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
+            {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
+        ]
+    },
+}
+
+
+config_input = {
+    'metadata_version': '1.0',
+    'module_name': 'nifake',
+    'module_version': '1.1.1.dev0',
+    'c_function_prefix': 'niFake_',
+    'driver_name': 'NI-FAKE',
+    'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
+    'session_handle_parameter_name': 'vi',
+    'library_info':
+    {
+        'Windows': {
+            '32bit': {'name': 'nifake_32.dll', 'type': 'windll'},
+            '64bit': {'name': 'nifake_64.dll', 'type': 'cdll'},
+        },
+        'Linux': {
+            '64bit': {'name': 'libnifake.so', 'type': 'cdll'},
+        },
+    },
+    'context_manager_name': {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
+    },
+    'init_function': 'InitWithOptions',
+    'close_function': 'close',
+    'custom_types': [
+        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+    ],
+    'enum_whitelist_suffix': ['_POINT_FIVE'],
+    'repeated_capabilities': [
+        {'python_name': 'channels', 'prefix': '', },
+    ],
+    # These are added here strictly for testing.
+    'functions': {},
+    'attributes': {},
+    'modules': {
+        'metadata.enums_addon': {}
+    },
+}
+
+
+config_expected = {
+    'metadata_version': '1.0',
+    'module_name': 'nifake',
+    'module_version': '1.1.1.dev0',
+    'c_function_prefix': 'niFake_',
+    'driver_name': 'NI-FAKE',
+    'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
+    'session_handle_parameter_name': 'vi',
+    'library_info':
+    {
+        'Windows': {
+            '32bit': {'name': 'nifake_32.dll', 'type': 'windll'},
+            '64bit': {'name': 'nifake_64.dll', 'type': 'cdll'},
+        },
+        'Linux': {
+            '64bit': {'name': 'libnifake.so', 'type': 'cdll'},
+        },
+    },
+    'context_manager_name': {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
+    },
+    'init_function': 'InitWithOptions',
+    'close_function': 'close',
+    'custom_types': [
+        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+    ],
+    'enum_whitelist_suffix': ['_POINT_FIVE'],
+    'repeated_capabilities': [
+        {'python_name': 'channels', 'prefix': '', },
+    ],
+    'use_locking': True,
+    'functions': functions_expected,
+    'attributes': attributes_expected,
+    'enums': enums_expected,
+    'modules': {
+        'metadata.enums_addon': {}
+    },
+    'supports_nitclk': False
+}
+
+
+def _do_the_test_add_functions_metadata(functions, expected):
+    actual = copy.deepcopy(functions)
+    actual = add_all_function_metadata(actual, config_input)
+    _compare_dicts(actual, expected)
+
+
+def test_add_functions_metadata_simple():
+    _do_the_test_add_functions_metadata(functions=functions_input, expected=functions_expected)
 
 
 def _do_the_test_add_attributes_metadata(attributes, expected):
     actual = copy.deepcopy(attributes)
-    actual = add_all_attribute_metadata(actual, config_for_testing)
+    actual = add_all_attribute_metadata(actual, config_input)
     _compare_dicts(actual, expected)
 
 
 def test_add_attributes_metadata_simple():
-    attributes = {
-        1000000: {
-            'access': 'read-write',
-            'channel_based': 'False',
-            'enum': None,
-            'lv_property': 'Fake attributes:Read Write Bool',
-            'name': 'READ_WRITE_BOOL',
-            'resettable': 'No',
-            'type': 'ViBoolean',
-            'documentation': {
-                'description': 'An attribute of type bool with read/write access.',
-            },
-        },
-    }
-    expected = {
-        1000000: {
-            'access': 'read-write',
-            'channel_based': 'False',
-            'codegen_method': 'public',
-            'documentation': {'description': 'An attribute of type bool with read/write access.'},
-            'enum': None,
-            'lv_property': 'Fake attributes:Read Write Bool',
-            'name': 'READ_WRITE_BOOL',
-            'python_name': 'read_write_bool',
-            'resettable': 'No',
-            'type': 'ViBoolean',
-            'python_type': 'bool',
-            'type_in_documentation': 'bool',
-            'attribute_class': 'AttributeViBoolean',
-        },
-    }
-
-    _do_the_test_add_attributes_metadata(attributes, expected)
+    _do_the_test_add_attributes_metadata(attributes=attributes_input, expected=attributes_expected)
 
 
 def _do_the_test_add_enums_metadata(enums, expected):
     actual = copy.deepcopy(enums)
-    actual = add_all_enum_metadata(actual, config_for_testing)
+    actual = add_all_enum_metadata(actual, config_input)
     _compare_dicts(actual, expected)
 
 
 def test_add_enums_metadata_simple():
-    enums = {
-        'Color': {
-            'values': [
-                {
-                    'name': 'RED',
-                    'value': 1,
-                    'documentation': {
-                        'description': 'Like blood.',
-                    }
-                },
-                {
-                    'name': 'BLUE',
-                    'value': 2,
-                    'documentation': {
-                        'description': 'Like the sky.',
-                    }
-                },
-                {
-                    'name': 'YELLOW',
-                    'value': 2,
-                    'documentation': {
-                        'description': 'Like a banana.',
-                    }
-                },
-                {
-                    'name': 'BLACK',
-                    'value': 2,
-                    'documentation': {
-                        'description': 'Like this developer\'s conscience.',
-                    }
-                },
-            ],
-        },
-    }
-    expected = {
-        'Color': {
-            'codegen_method': 'no',
-            'python_name': 'Color',
-            'values': [
-                {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
-                {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
-                {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
-                {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
-            ]
-        },
-    }
+    _do_the_test_add_enums_metadata(enums_input, expected=enums_expected)
 
-    _do_the_test_add_enums_metadata(enums, expected)
+
+def _do_the_test_add_all_metadata(functions, attributes, enums, config, expected):
+    actual = add_all_metadata(functions, attributes, enums, config, persist_output=False)
+    _compare_dicts(actual, expected)
+
+
+def test_add_all_metadata_defaults():
+    actual_functions = copy.deepcopy(functions_input)
+    actual_attributes = copy.deepcopy(attributes_input)
+    actual_enums = copy.deepcopy(enums_input)
+    actual_config = copy.deepcopy(config_input)
+    _do_the_test_add_all_metadata(
+        functions=actual_functions,
+        attributes=actual_attributes,
+        enums=actual_enums,
+        config=actual_config,
+        expected=config_expected)
+
+
+def test_add_all_metadata():
+    actual_functions = copy.deepcopy(functions_input)
+    actual_attributes = copy.deepcopy(attributes_input)
+    actual_enums = copy.deepcopy(enums_input)
+    actual_config = copy.deepcopy(config_input)
+    actual_config['use_locking'] = False
+    expected = copy.deepcopy(config_expected)
+    expected['use_locking'] = False
+    _do_the_test_add_all_metadata(
+        functions=actual_functions,
+        attributes=actual_attributes,
+        enums=actual_enums,
+        config=actual_config,
+        expected=expected)
+
 
 

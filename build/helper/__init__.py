@@ -24,8 +24,12 @@ from build.helper.documentation_helper import get_rst_picture_reference  # noqa:
 from build.helper.documentation_helper import rep_cap_method_desc_rst  # noqa: F401
 from build.helper.documentation_helper import square_up_tables  # noqa: F401
 
+from build.helper.documentation_snippets import close_function_def_for_doc  # noqa: F401
+from build.helper.documentation_snippets import initiate_function_def_for_doc  # noqa: F401
+
 from build.helper.helper import camelcase_to_snakecase  # noqa: F401
 from build.helper.helper import get_array_type_for_api_type  # noqa: F401
+from build.helper.helper import get_development_status  # noqa: F401
 from build.helper.helper import get_numpy_type_for_api_type  # noqa: F401
 from build.helper.helper import get_python_type_for_api_type  # noqa: F401
 from build.helper.helper import sorted_attrs  # noqa: F401

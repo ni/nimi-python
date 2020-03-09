@@ -1,4 +1,4 @@
-OUTPUT_DIR := $(BIN_DIR)/$(DRIVER)
+OUTPUT_DIR := $(GENERATED_DIR)/$(DRIVER)
 LOG_DIR := $(OUTPUT_DIR)/log
 MODULE_DIR := $(OUTPUT_DIR)/$(DRIVER)
 UNIT_TEST_DIR := $(MODULE_DIR)/unit_tests
@@ -13,15 +13,7 @@ METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
 
 BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/helper/*)
 
-DRIVER_GENERATED_DIR := $(GENERATED_DIR)/$(DRIVER)
-
-DOCS_DIR := $(ROOT_DIR)/docs
 DRIVER_DOCS_DIR := $(DOCS_DIR)/$(DRIVER)
-STATIC_DOCS_DIR := $(DOCS_DIR)/_static
-
-VERSION ?= 0.1
-WHEEL := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION)-py2.py3-none-any.whl
-SDIST := $(OUTPUT_DIR)/dist/$(DRIVER)-$(VERSION).tar.gz
 
 MKDIRECTORIES += \
     $(DRIVER_DOCS_DIR) \
@@ -29,11 +21,10 @@ MKDIRECTORIES += \
     $(MODULE_DIR) \
     $(UNIT_TEST_DIR) \
     $(LOG_DIR) \
-    $(DRIVER_GENERATED_DIR) \
 
 VPATH = $(TEMPLATE_DIR)
 
-PYTHON_CMD ?= python3
+PYTHON_CMD ?= python
 define GENERATE_SCRIPT
 $(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,)
 endef
@@ -61,6 +52,7 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     unit_tests/_matchers.py \
     __init__.py \
     _converters.py \
+    VERSION \
 
 DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \

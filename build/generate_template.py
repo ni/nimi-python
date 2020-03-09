@@ -13,6 +13,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 def generate_template(template_name, template_params, dest_file, in_zip_file=False):
     try:
+        template_params['encoding_tag'] = '# -*- coding: utf-8 -*-'
         module_name = template_params['metadata'].config['module_name']
         lookup = TemplateLookup(directories=['build/templates', 'src/{0}/templates'.format(module_name)])
         template = Template(filename=template_name, lookup=lookup)

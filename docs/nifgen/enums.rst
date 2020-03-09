@@ -423,7 +423,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_0RTSI_0
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_0_RTSI_0
 
 
 
@@ -434,7 +434,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_1RTSI_1
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_1_RTSI_1
 
 
 
@@ -445,7 +445,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_2RTSI_2
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_2_RTSI_2
 
 
 
@@ -456,7 +456,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_3RTSI_3
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_3_RTSI_3
 
 
 
@@ -467,7 +467,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_4RTSI_4
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_4_RTSI_4
 
 
 
@@ -478,7 +478,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_5RTSI_5
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_5_RTSI_5
 
 
 
@@ -489,7 +489,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_6RTSI_6
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_6_RTSI_6
 
 
 
@@ -500,7 +500,7 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_7RTSI_7
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_7_RTSI_7
 
 
 
@@ -699,6 +699,19 @@ TerminalConfiguration
         Differential operation
 
         
+
+
+
+Trigger
+-------
+
+.. py:class:: Trigger
+
+    .. py:attribute:: Trigger.START
+
+
+
+    .. py:attribute:: Trigger.SCRIPT
 
 
 

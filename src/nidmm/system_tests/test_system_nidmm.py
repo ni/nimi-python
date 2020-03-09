@@ -2,7 +2,9 @@ import datetime
 import math
 import nidmm
 import numpy
+import os
 import pytest
+import tempfile
 import time
 
 
@@ -59,7 +61,7 @@ def test_enum_attribute(session):
     try:
         session.function = nidmm.LCCalculationModel.SERIES
         assert False
-    except TypeError as e:
+    except TypeError:
         pass
 
 
@@ -76,7 +78,7 @@ def test_method_configure_trigger(session):
     # Calling Configure Trigger function and asserting True if any error occurred while function call.
     try:
         session.configure_trigger(nidmm.TriggerSource.IMMEDIATE)
-    except nidmm.Error as e:
+    except nidmm.Error:
         assert True
 
 
@@ -175,7 +177,7 @@ def test_trigger_max_time_exceeded_errror(session):
 def test_self_cal(session):
     try:
         session.self_cal()
-    except nidmm.Error as e:
+    except nidmm.Error:
         assert False
 
 
@@ -276,6 +278,35 @@ def test_reset_method(session):
     session.reset()
     function_after_reset = session.function
     assert default_function == function_after_reset
+
+
+def test_import_export_buffer(session):
+    test_value_1 = 1
+    test_value_2 = 2
+    session.sample_count = test_value_1
+    assert session.sample_count == test_value_1
+    buffer = session.export_attribute_configuration_buffer()
+    session.sample_count = test_value_2
+    assert session.sample_count == test_value_2
+    session.import_attribute_configuration_buffer(buffer)
+    assert session.sample_count == test_value_1
+
+
+def test_import_export_file(session):
+    test_value_1 = 1
+    test_value_2 = 2
+    temp_file = tempfile.NamedTemporaryFile(suffix='.txt', delete=False)
+    # NamedTemporaryFile() returns the file already opened, so we need to close it before we can use it
+    temp_file.close()
+    path = temp_file.name
+    session.sample_count = test_value_1
+    assert session.sample_count == test_value_1
+    session.export_attribute_configuration_file(path)
+    session.sample_count = test_value_2
+    assert session.sample_count == test_value_2
+    session.import_attribute_configuration_file(path)
+    assert session.sample_count == test_value_1
+    os.remove(path)
 
 
 def test_error_message():

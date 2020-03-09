@@ -352,7 +352,10 @@ def _replace_attribute_python_name(a_match):
             aname = attr['name'].lower()
 
     if config['make_link']:
-        return ':py:data:`{0}.Session.{1}`'.format(config['module_name'], aname)
+        if config['module_name'] == 'nitclk':
+            return ':py:attr:`{0}.SessionReference.{1}`'.format(config['module_name'], aname)
+        else:
+            return ':py:attr:`{0}.Session.{1}`'.format(config['module_name'], aname)
     else:
         return '{0}'.format(aname)
 
@@ -381,7 +384,10 @@ def _replace_func_python_name(f_match):
         print(config['functions'])
 
     if config['make_link']:
-        return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
+        if config['module_name'] == 'nitclk':
+            return ':py:func:`{0}.{1}`'.format(config['module_name'], fname)
+        else:
+            return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
     else:
         return '{0}'.format(fname)
 
@@ -445,7 +451,7 @@ def _fix_references(node, doc, cfg, make_link=False):
 
     if 'driver_urls' in cfg:
         for url_key in cfg['driver_urls']:
-            url_re = re.compile('{0}\((.+?)\)'.format(url_key))
+            url_re = re.compile(r'{0}\((.+?)\)'.format(url_key))
             config['url_key'] = url_key
             doc = url_re.sub(_replace_urls, doc)
 
@@ -479,20 +485,22 @@ def format_type_for_rst_documentation(param, numpy, config):
     else:
         p_type = param['type_in_documentation']
 
-    if param['is_string'] is True:
-        p_type = 'str'
-    elif param['is_buffer'] is True and numpy is True:
-        p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
-    elif param['use_list'] is True:
-        p_type = 'list of ' + p_type
-    elif param['use_array'] is True:
-        p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+    # If type_in_documentation was set in metadata, we use it as is
+    if param['type_in_documentation_was_calculated'] or numpy:
+        if param['is_string'] is True and param['enum'] is None:
+            p_type = 'str'
+        elif param['is_buffer'] is True and numpy is True:
+            p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+        elif param['use_list'] is True:
+            p_type = 'list of ' + p_type
+        elif param['use_array'] is True:
+            p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
 
 
-def get_function_rst(function, method_template, numpy, config, indent=0):
-    '''Gets formatted documentation for given function that can be used in rst documentation
+def get_function_rst(function, method_template, numpy, config, indent=0, method_or_function='method'):
+    '''Gets formatted documentation for given function or method that can be used in rst documentation
 
     Args:
         function (dict): function dictionary
@@ -508,14 +516,14 @@ def get_function_rst(function, method_template, numpy, config, indent=0):
     suffix = method_template['method_python_name_suffix']
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
+    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc_rst.format(config['module_name'], function['repeated_capability_type'], function['python_name'], get_params_snippet(function, session_method))
 
-    rst = '.. py:method:: ' + function['python_name'] + suffix + '('
+    rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['python_name'], suffix)
     rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
@@ -555,14 +563,16 @@ def _format_type_for_docstring(param, numpy, config):
 
     # We assume everything that is a buffer of ViChar is really a string (otherwise
     # it would end up as 'list of int'
-    if param['is_string'] is True:
-        p_type = 'str'
-    elif param['is_buffer'] is True and numpy is True:
-        p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
-    elif param['use_list'] is True:
-        p_type = 'list of ' + p_type
-    elif param['use_array'] is True:
-        p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+    # If type_in_documentation was set in metadata, we use it as is
+    if param['type_in_documentation_was_calculated'] or numpy:
+        if param['is_string'] is True and param['enum'] is None:
+            p_type = 'str'
+        elif param['is_buffer'] is True and numpy is True:
+            p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+        elif param['use_list'] is True:
+            p_type = 'list of ' + p_type
+        elif param['use_array'] is True:
+            p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
 
@@ -581,7 +591,7 @@ def get_function_docstring(function, numpy, config, indent=0):
     '''
     session_method = ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD
     session_declaration = ParameterUsageOptions.SESSION_METHOD_DECLARATION
-    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS
+    output_parameters = ParameterUsageOptions.OUTPUT_PARAMETERS_FOR_DOCS
     if numpy:
         session_declaration = ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION
 
@@ -931,6 +941,7 @@ config = {
                     'python_name': 'vi',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'type_in_documentation_was_calculated': True,
                     'ctypes_variable_name': 'vi_ctype',
                     'ctypes_type': 'ViSession',
                     'ctypes_type_library_call': 'ViSession',
@@ -968,6 +979,7 @@ wanted to choose.''',
                     'python_name': 'turtle_type',
                     'python_type': 'Turtle',
                     'type_in_documentation': 'Turtle',
+                    'type_in_documentation_was_calculated': True,
                     'ctypes_variable_name': 'turtle_type_ctype',
                     'ctypes_type': 'ViInt32',
                     'ctypes_type_library_call': 'ViInt32',
@@ -997,6 +1009,7 @@ wanted to choose.''',
                     'python_name': 'turtle_id',
                     'python_type': 'float',
                     'type_in_documentation': 'float',
+                    'type_in_documentation_was_calculated': True,
                     'ctypes_variable_name': 'turtleId_ctype',
                     'ctypes_type': 'ViReal64',
                     'ctypes_type_library_call': 'ctypes.POINTER(ViReal64)',
@@ -1058,6 +1071,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'vi',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'type_in_documentation_was_calculated': True,
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViSession',
                     'use_in_python_api': True,
@@ -1083,6 +1097,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'number_of_samples',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'type_in_documentation_was_calculated': True,
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViInt32',
                     'use_in_python_api': True,
@@ -1110,6 +1125,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'waveform_data',
                     'python_type': 'float',
                     'type_in_documentation': 'float',
+                    'type_in_documentation_was_calculated': True,
                     'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                     'type': 'ViReal64',
                     'use_in_python_api': True,
@@ -1135,6 +1151,7 @@ wanted to choose.''',
                     'python_name_with_doc_default': 'actual_number_of_samples',
                     'python_type': 'int',
                     'type_in_documentation': 'int',
+                    'type_in_documentation_was_calculated': True,
                     'size': {'mechanism': 'fixed', 'value': 1},
                     'type': 'ViInt32',
                     'use_in_python_api': True,
@@ -1240,7 +1257,7 @@ def test_get_function_rst_default():
 
     .. note:: DO NOT call :py:meth:`nifake.Session.fetch_waveform` after calling this method.
 
-    .. note:: :py:data:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
+    .. note:: :py:attr:`nifake.Session.read_write_bool` will have an incorrect value after this calling this method
 
     :param turtle_type:
 

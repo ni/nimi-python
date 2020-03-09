@@ -11,7 +11,6 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import numpy
-        import sys
 
         # Set the fetch attributes
         with _NoChannel(session=self):
@@ -33,9 +32,7 @@
         else:
             raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(waveform.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
-        if sys.version_info.major >= 3:
-            # In Python 3 and newer we can use memoryview objects to give us pieces of the underlying array. This is much faster
-            mv = memoryview(waveform)
+        mv = memoryview(waveform)
 
         i = 0
         lwfm_i = len(wfm_info)
@@ -47,11 +44,12 @@
                 wfm_info[i].channel = chan
                 wfm_info[i].record = rec
 
-                if sys.version_info.major >= 3:
-                    start = i * num_samples
-                    end = start + wfm_info[i].actual_samples
-                    del wfm_info[i].actual_samples
-                    wfm_info[i].samples = mv[start:end]
+                start = i * num_samples
+                end = start + wfm_info[i]._actual_samples
+                # We use the actual number of samples returned from the device to determine the end of the waveform. We then remove it from the wfm_info
+                # since the length of the wfm will tell us that information
+                wfm_info[i]._actual_samples = None
+                wfm_info[i].samples = mv[start:end]
 
                 i += 1
 

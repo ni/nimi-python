@@ -1,25 +1,38 @@
-sudo: false
-cache: pip
-dist: trusty
+group: travis_latest
 language: python
-# For pypy versions, see https://github.com/pyenv/pyenv/tree/master/plugins/python-build/share/python-build
-python:
-  - 3.6
-  - 3.5
-  - 3.4
-  - 2.7
-  - pypy3.5-5.9.0
-  - pypy2.7-5.8.0
+matrix:
+    include:
+      # We run Python 3.8 based tests towards the start. This is where additional tests are run so we give it more time
+      - python: 3.8
+        dist: xenial
+        sudo: true
+      # End Python 3.8 based tests
+      - python: 3.5
+      - python: 3.6
+      # Python 3.7+ needs OpenSSL 1.0.2+ which isn't supported on trusty - use xenial and sudo: true based on workarounds
+      # in Travis issues (this is from multiple issues)
+      - python: 3.7
+        dist: xenial
+        sudo: true
+      # - python: nightly
+      #   dist: xenial
+      #   sudo: true
+    # No prerelease tests at this point
+    # allow_failures:
+      # Allow tests using under development builds of Python to fail without failing the PR/change
+      # - python: nightly
 
 install:
-  - travis_retry pip install --upgrade tox tox-travis coveralls
+  - travis_retry sudo apt-get -y install python3-pip
+  - travis_retry pip install --upgrade pip
+  - travis_retry pip install --upgrade tox tox-travis codecov
 
 script:
-  - tox -e clean,build_test,codegen PRINT=1 PYTHON_CMD=python
-  - tox
+  - tox -c tox-travis.ini
 
 after_success:
-  - travis_retry coveralls --rcfile=tools/coverage_unit_tests.rc
-
-
+  - travis_retry codecov --flags codegenunittests --file codegen.xml
+  - travis_retry codecov --flags nifakeunittests --file nifakeunittest.xml
+  - travis_retry codecov --flags nimodinstunittests --file nimodinstunittest.xml
+  - travis_retry codecov --flags nitclkunittests --file nitclkunittest.xml
 

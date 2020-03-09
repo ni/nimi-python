@@ -1,11 +1,8 @@
-<%
-# Have to put this in a variable and add it that way because mako keeps thinking it is for it, not for the output file
-encoding_tag = '# -*- coding: utf-8 -*-'
-%>\
-${encoding_tag}
+${template_parameters['encoding_tag']}
 # This file was generated
 <%
     module_name = template_parameters['metadata'].config['module_name']
+    config = template_parameters['metadata'].config
 %>\
 import ${module_name}._converters as _converters
 
@@ -28,22 +25,13 @@ class AttributeViInt32(Attribute):
         session._set_attribute_vi_int32(self._attribute_id, value)
 
 
-class AttributeViInt32TimeDeltaSeconds(Attribute):
-
-    def __get__(self, session, session_type):
-        return datetime.timedelta(seconds=session._get_attribute_vi_int32(self._attribute_id))
-
-    def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_seconds(value, int))
-
-
 class AttributeViInt32TimeDeltaMilliseconds(Attribute):
 
     def __get__(self, session, session_type):
         return datetime.timedelta(milliseconds=session._get_attribute_vi_int32(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, int))
+        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds_int32(value).value)
 
 
 class AttributeViInt64(Attribute):
@@ -70,16 +58,7 @@ class AttributeViReal64TimeDeltaSeconds(Attribute):
         return datetime.timedelta(seconds=session._get_attribute_vi_real64(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds(value, float))
-
-
-class AttributeViReal64TimeDeltaMilliseconds(Attribute):
-
-    def __get__(self, session, session_type):
-        return datetime.timedelta(milliseconds=session._get_attribute_vi_real64(self._attribute_id))
-
-    def __set__(self, session, value):
-        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_milliseconds(value, float))
+        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds_real64(value).value)
 
 
 class AttributeViString(Attribute):
@@ -114,6 +93,18 @@ class AttributeEnum(object):
         if type(value) is not self._attribute_type:
             raise TypeError('must be ' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
         return self._underlying_attribute.__set__(session, value.value)
+
+
+# nitclk specific attribute type
+class AttributeSessionReference(Attribute):
+
+    def __get__(self, session, session_type):
+        # Import here to avoid a circular dependency when initial import happens
+        from ${module_name}.session import SessionReference
+        return SessionReference(session._get_attribute_vi_session(self._attribute_id))
+
+    def __set__(self, session, value):
+        session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
 
 
 
