@@ -1885,7 +1885,7 @@ functions = {
                 'name': 'wfmInfo',
                 'size': {
                     'mechanism': 'python-code',
-                    'value': '(num_samples * self._actual_num_wfms())'
+                    'value': 'self._actual_num_wfms()'
                 },
                 'type': 'struct niScope_wfmInfo[]'
             }
