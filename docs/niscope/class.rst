@@ -1352,7 +1352,7 @@ fetch
                     -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                     -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
                     -  **x_increment** (float) the time between points in the acquired waveform in seconds
-                    -  **channel** (str) channel name this waveform was asquire from
+                    -  **channel** (str) channel name this waveform was acquired from
                     -  **record** (int) record number of this waveform
                     -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
