@@ -1413,6 +1413,57 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert str(type(session.tclk)) == "<class 'nitclk.session.SessionReference'>"
 
+    def test_accept_list_of_time_values_as_floats(self):
+        self.patched_library.niFake_AcceptListOfTimeValues.side_effect = self.side_effects_helper.niFake_AcceptListOfTimeValues
+        delays = [-1.5, 2.0]
+        with nifake.Session('dev1') as session:
+            session.accept_list_of_time_values(delays)
+            self.patched_library.niFake_AcceptListOfTimeValues.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViInt32Matcher(len(delays)),
+                _matchers.ViReal64BufferMatcher(delays)
+            )
+
+    def test_accept_array_of_time_values_as_floats(self):
+        self.patched_library.niFake_AcceptListOfTimeValues.side_effect = self.side_effects_helper.niFake_AcceptListOfTimeValues
+        time_values = [-1.5, 2.0]
+        delays = array.array('d', time_values)
+        with nifake.Session('dev1') as session:
+            session.accept_list_of_time_values(delays)
+            self.patched_library.niFake_AcceptListOfTimeValues.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViInt32Matcher(len(delays)),
+                _matchers.ViReal64BufferMatcher(time_values)
+            )
+
+    def test_accept_list_of_time_values_as_timedelta_instances(self):
+        self.patched_library.niFake_AcceptListOfTimeValues.side_effect = self.side_effects_helper.niFake_AcceptListOfTimeValues
+        time_values = [-1.5, 2.0]
+        delays = [datetime.timedelta(seconds=i) for i in time_values]
+        with nifake.Session('dev1') as session:
+            session.accept_list_of_time_values(delays)
+            self.patched_library.niFake_AcceptListOfTimeValues.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViInt32Matcher(len(delays)),
+                _matchers.ViReal64BufferMatcher(time_values)
+            )
+
+    def test_return_timedeltas(self):
+        self.patched_library.niFake_ReturnListOfTimedeltas.side_effect = self.side_effects_helper.niFake_ReturnListOfTimedeltas
+        time_values = [-1.5, 2.0]
+        time_values_ctype = (nifake._visatype.ViReal64 * len(time_values))(*time_values)
+        expected_timedeltas = [datetime.timedelta(seconds=i) for i in time_values]
+        self.side_effects_helper['ReturnListOfTimedeltas']['timedeltas'] = time_values_ctype
+        with nifake.Session('dev1') as session:
+            returned_timedeltas = session.return_list_of_timedeltas(len(expected_timedeltas))
+            assert len(returned_timedeltas) == len(expected_timedeltas)
+            assert returned_timedeltas == expected_timedeltas
+            self.patched_library.niFake_ReturnListOfTimedeltas.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViInt32Matcher(len(time_values)),
+                _matchers.ViReal64BufferMatcher(len(time_values))
+            )
+
 
 # not session tests per se
 def test_diagnostic_information():

@@ -320,7 +320,7 @@ functions = {
     'GetAStringOfFixedMaximumSize': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Illustrates resturning a string of fixed size.'
+            'description': 'Illustrates returning a string of fixed size.'
         },
         'parameters': [
             {
@@ -485,7 +485,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Array of custom type using puthon-code size mechanism'
+                    'description': 'Array of custom type using python-code size mechanism'
                 },
                 'name': 'arrayOut',
                 'size': {
@@ -2274,6 +2274,84 @@ functions = {
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'AcceptListOfTimeValues': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Accepts list of floats or datetime.timedelta instances representing time delays.',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Count of input values.'
+                },
+                'name': 'count',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A collection of time delay values.'
+                },
+                'name': 'delays',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'count'
+                },
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
+            },
+        ],
+        'returns': 'ViStatus'
+    },
+    'ReturnListOfTimedeltas': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns a list of datetime.timedelta instances.',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of elements in output.'
+                },
+                'name': 'numberOfElements',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains a list of datetime.timedelta instances'
+                },
+                'name': 'timedeltas',
+                'python_api_converter_name': 'convert_seconds_real64_to_timedeltas',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfElements'
+                },
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'

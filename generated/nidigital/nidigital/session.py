@@ -2875,7 +2875,7 @@ class Session(_SessionBase):
 
         '''
         if type(site_result_type) is not enums.SiteResult:
-            raise TypeError('Parameter mode must be of type ' + str(enums.SiteResult))
+            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResult))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
         site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130

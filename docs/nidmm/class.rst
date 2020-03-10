@@ -904,7 +904,7 @@ fetch
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: float in seconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or datetime.timedelta
 
             :rtype: float
             :return:
@@ -967,7 +967,7 @@ fetch_multi_point
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: float in seconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or datetime.timedelta
 
             :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1039,7 +1039,7 @@ fetch_waveform
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: float in seconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or datetime.timedelta
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1107,7 +1107,7 @@ fetch_waveform_into
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: float in seconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or datetime.timedelta
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1610,7 +1610,7 @@ read
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: float in seconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or datetime.timedelta
 
             :rtype: float
             :return:
@@ -1672,7 +1672,7 @@ read_multi_point
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: float in seconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or datetime.timedelta
 
             :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1803,7 +1803,7 @@ read_waveform
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: float in seconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or datetime.timedelta
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 

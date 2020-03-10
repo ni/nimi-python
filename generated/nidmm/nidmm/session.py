@@ -1287,7 +1287,7 @@ class Session(_SessionBase):
 
         '''
         if type(measurement_function) is not enums.Function:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
+            raise TypeError('Parameter measurement_function must be of type ' + str(enums.Function))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         measurement_function_ctype = _visatype.ViInt32(measurement_function.value)  # case S130
         range_ctype = _visatype.ViReal64(range)  # case S150
@@ -1355,7 +1355,7 @@ class Session(_SessionBase):
 
         '''
         if type(measurement_function) is not enums.Function:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
+            raise TypeError('Parameter measurement_function must be of type ' + str(enums.Function))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         measurement_function_ctype = _visatype.ViInt32(measurement_function.value)  # case S130
         range_ctype = _visatype.ViReal64(range)  # case S150
@@ -1414,7 +1414,7 @@ class Session(_SessionBase):
 
         '''
         if type(sample_trigger) is not enums.SampleTrigger:
-            raise TypeError('Parameter mode must be of type ' + str(enums.SampleTrigger))
+            raise TypeError('Parameter sample_trigger must be of type ' + str(enums.SampleTrigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_count_ctype = _visatype.ViInt32(trigger_count)  # case S150
         sample_count_ctype = _visatype.ViInt32(sample_count)  # case S150
@@ -1488,7 +1488,7 @@ class Session(_SessionBase):
 
         '''
         if type(rtd_type) is not enums.RTDType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.RTDType))
+            raise TypeError('Parameter rtd_type must be of type ' + str(enums.RTDType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         rtd_type_ctype = _visatype.ViInt32(rtd_type.value)  # case S130
         rtd_resistance_ctype = _visatype.ViReal64(rtd_resistance)  # case S150
@@ -1573,9 +1573,9 @@ class Session(_SessionBase):
 
         '''
         if type(thermocouple_type) is not enums.ThermocoupleType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleType))
+            raise TypeError('Parameter thermocouple_type must be of type ' + str(enums.ThermocoupleType))
         if type(reference_junction_type) is not enums.ThermocoupleReferenceJunctionType:
-            raise TypeError('Parameter mode must be of type ' + str(enums.ThermocoupleReferenceJunctionType))
+            raise TypeError('Parameter reference_junction_type must be of type ' + str(enums.ThermocoupleReferenceJunctionType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         thermocouple_type_ctype = _visatype.ViInt32(thermocouple_type.value)  # case S130
         reference_junction_type_ctype = _visatype.ViInt32(reference_junction_type.value)  # case S130
@@ -1621,7 +1621,7 @@ class Session(_SessionBase):
 
         '''
         if type(trigger_source) is not enums.TriggerSource:
-            raise TypeError('Parameter mode must be of type ' + str(enums.TriggerSource))
+            raise TypeError('Parameter trigger_source must be of type ' + str(enums.TriggerSource))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_source_ctype = _visatype.ViInt32(trigger_source.value)  # case S130
         trigger_delay_ctype = _converters.convert_timedelta_to_seconds_real64(trigger_delay)  # case S140
@@ -1675,7 +1675,7 @@ class Session(_SessionBase):
 
         '''
         if type(measurement_function) is not enums.Function:
-            raise TypeError('Parameter mode must be of type ' + str(enums.Function))
+            raise TypeError('Parameter measurement_function must be of type ' + str(enums.Function))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         measurement_function_ctype = _visatype.ViInt32(measurement_function.value)  # case S130
         range_ctype = _visatype.ViReal64(range)  # case S150
@@ -1817,7 +1817,7 @@ class Session(_SessionBase):
         _initiate before calling this method.
 
         Args:
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1862,7 +1862,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1912,7 +1912,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1957,7 +1957,7 @@ class Session(_SessionBase):
             waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2475,7 +2475,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2519,7 +2519,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2616,7 +2616,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
