@@ -371,9 +371,11 @@ close
             deallocates any memory resources the driver uses. Notes: (1) You must
             unlock the session before calling :py:meth:`niswitch.Session._close`. (2) After calling
             :py:meth:`niswitch.Session._close`, you cannot use the instrument driver again until you
-            call :py:meth:`niswitch.Session.init` or :py:meth:`niswitch.Session.init_with_options`.
+            call :py:meth:`niswitch.Session.init` or :py:meth:`niswitch.Session.InitWithOptions`.
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
             .. note:: This method is not needed when using the session context manager
 
@@ -1098,12 +1100,14 @@ send_software_trigger
 
             Sends a software trigger to the switch module specified in the NI-SWITCH
             session. When the trigger input is set to :py:data:`~niswitch.TriggerInput.SOFTWARE_TRIG`
-            through either the :py:meth:`niswitch.Session.configure_scan_trigger` or the
+            through either the :py:meth:`niswitch.Session.ConfigureScanTrigger` or the
             :py:attr:`niswitch.Session.trigger_input` property, the scan does not proceed from
             a semi-colon (wait for trigger) until :py:meth:`niswitch.Session.send_software_trigger` is
             called.
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -1178,7 +1182,7 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: float in seconds or datetime.timedelta
+            :type maximum_time_ms: int in milliseconds or datetime.timedelta
 
 wait_for_scan_complete
 ----------------------
@@ -1208,7 +1212,7 @@ wait_for_scan_complete
                 
 
 
-            :type maximum_time_ms: float in seconds or datetime.timedelta
+            :type maximum_time_ms: int in milliseconds or datetime.timedelta
 
 
 .. role:: c(code)
@@ -1457,8 +1461,12 @@ driver_setup
     .. py:attribute:: driver_setup
 
         This property indicates the Driver Setup string that the user  specified when initializing the driver.
-        Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  :py:meth:`niswitch.Session.init_with_options` method, or through the IVI Configuration Utility.
+        Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  :py:meth:`niswitch.Session.InitWithOptions` method, or through the IVI Configuration Utility.
         If the user does not specify a Driver Setup string, this property returns an empty string.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -1786,7 +1794,11 @@ logical_name
     .. py:attribute:: logical_name
 
         A string containing the logical name you specified when opening the  current IVI session.
-        You may pass a logical name to the :py:meth:`niswitch.Session.init` or  :py:meth:`niswitch.Session.init_with_options` methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+        You may pass a logical name to the :py:meth:`niswitch.Session.init` or  :py:meth:`niswitch.Session.InitWithOptions` methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -2551,7 +2563,11 @@ simulate
     .. py:attribute:: simulate
 
         Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-        The default value is False.   Use the :py:meth:`niswitch.Session.init_with_options`  method to override this value.
+        The default value is False.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 

@@ -2062,7 +2062,7 @@ class _SessionBase(object):
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
                 -  **x_increment** (float) the time between points in the acquired waveform in seconds
-                -  **channel** (str) channel name this waveform was asquire from
+                -  **channel** (str) channel name this waveform was acquired from
                 -  **record** (int) record number of this waveform
                 -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
 
@@ -2954,7 +2954,7 @@ class _SessionBase(object):
             session.channels[0,1].fetch(waveform, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
 
         Args:
-            waveform (array.array("d")): numpy array of the appropriate type and size the should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
+            waveform (array.array("d")): numpy array of the appropriate type and size that should be acquired as a 1D array. Size should be **num_samples** times number of waveforms. Call _actual_num_wfms to determine the number of waveforms.
 
                 Types supported are
 

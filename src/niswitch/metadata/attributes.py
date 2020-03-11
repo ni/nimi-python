@@ -1,42 +1,6 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 19.1.0d2
+# This file is generated from NI-SWITCH API metadata version 19.6.0d7
 attributes = {
-    1050002: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to validate attribute values and function parameters.   If enabled, the instrument driver validates the parameter values that  you pass to driver functions.  Range checking  parameters is very useful for debugging.  After you validate your program,  you can set this attribute to VI_FALSE to disable range checking and  maximize performance.\nThe default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
-        'name': 'RANGE_CHECK',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050003: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether the instrument driver queries the instrument status  after each operation.  Querying the instrument status is very useful for  debugging.  After you validate your program, you can set this attribute to  VI_FALSE to disable status checking and maximize performance\nThe instrument driver can choose to ignore status checking for  particular attributes regardless of the setting of this attribute.\nThe default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
-        'name': 'QUERY_INSTRUMENT_STATUS',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050004: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to cache the value of attributes.  When caching is  enabled, the instrument driver keeps track of the current instrument  settings and avoids sending redundant commands to the instrument.\nThe instrument driver can choose always to cache or never to cache  particular attributes regardless of the setting of this attribute.\nThe default value is VI_TRUE.   Use the niSwitch_InitWithOptions  function to override this value.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Cache',
-        'name': 'CACHE',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
     1050005: {
         'access': 'read-write',
         'channel_based': False,
@@ -45,18 +9,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
         'name': 'SIMULATE',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
-    1050006: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether the IVI engine keeps a list of  the value coercions it makes for ViInt32 and ViReal64 attributes.   You call niSwitch_GetNextCoercionRecord to extract and delete the oldest  coercion record from the list.\nThe default value is VI_FALSE.   Use the  niSwitch_InitWithOptions function to override this value.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
-        'name': 'RECORD_COERCIONS',
         'resettable': False,
         'type': 'ViBoolean'
     },
@@ -71,18 +23,6 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1050021: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nSpecifies whether to perform interchangeability checking and retrieve  interchangeability warnings when you call  niSwitch_Connect, niSwitch_SetPath and niSwitch_InitiateScan functions.\nThe default value is VI_FALSE.\nInterchangeability warnings indicate that using your application with a  different instrument might cause different behavior.   You call niSwitch_GetNextInterchangeWarning to extract interchange warnings.   Call the niSwitch_ClearInterchangeWarnings function to clear the list  of interchangeability warnings without reading them.\nInterchangeability checking examines the attributes in a  capability group only if you specify a value for at least one  attribute within that group.  Interchangeability warnings can  occur when an attribute affects the behavior of the instrument and you  have not set that attribute, or the attribute has been invalidated since you set it.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
-        'name': 'INTERCHANGE_CHECK',
-        'resettable': False,
-        'type': 'ViBoolean'
-    },
     1050203: {
         'access': 'read only',
         'channel_based': False,
@@ -93,18 +33,6 @@ attributes = {
         'name': 'CHANNEL_COUNT',
         'resettable': False,
         'type': 'ViInt32'
-    },
-    1050302: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nA string that contains the prefix for the instrument driver.  The name of each  user-callable function in this driver starts with this prefix.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Prefix',
-        'name': 'SPECIFIC_DRIVER_PREFIX',
-        'resettable': False,
-        'type': 'ViString'
     },
     1050304: {
         'access': 'read only',
@@ -136,18 +64,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'resettable': False,
-        'type': 'ViString'
-    },
-    1050401: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nA string that contains a comma-separated list of class-extention groups that  this driver implements.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
-        'name': 'GROUP_CAPABILITIES',
         'resettable': False,
         'type': 'ViString'
     },
@@ -206,30 +122,6 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1050515: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThe major version number of the IviSwtch class specification.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1050516: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThe minor version number of the class specification with which this driver is compliant.\n'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1050551: {
         'access': 'read only',
         'channel_based': False,
@@ -241,18 +133,6 @@ attributes = {
         'resettable': False,
         'type': 'ViString'
     },
-    1150001: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'This attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the NISWITCH_ATTR_SERIAL_NUMBER (string flavor) instead.'
-        },
-        'lv_property': 'Obsolete Attributes:Serial Number',
-        'name': 'SERIAL_NUMBER_I32',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
     1150004: {
         'access': 'read only',
         'channel_based': False,
@@ -263,66 +143,6 @@ attributes = {
         'name': 'IS_WAITING_FOR_TRIG',
         'resettable': False,
         'type': 'ViBoolean'
-    },
-    1150005: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThis attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput and/or niSwitch_RouteScanAdvancedOutput  functions instead.\n'
-        },
-        'lv_property': 'Obsolete Attributes:Trigger Mode',
-        'name': 'TRIGGER_MODE',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150006: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThis attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.\n'
-        },
-        'lv_property': 'Obsolete Attributes:Master Slave Trigger Bus',
-        'name': 'MASTER_SLAVE_TRIGGER_BUS',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150007: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThis attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.\n'
-        },
-        'lv_property': 'Obsolete Attributes:Master Slave Scan Advanced Bus',
-        'name': 'MASTER_SLAVE_SCAN_ADVANCED_BUS',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150008: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThis attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteTriggerInput function instead.\n'
-        },
-        'lv_property': 'Obsolete Attributes:Cabled Module Trigger Bus',
-        'name': 'CABLED_MODULE_TRIGGER_BUS',
-        'resettable': False,
-        'type': 'ViInt32'
-    },
-    1150009: {
-        'access': 'read-write',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThis attribute has been deprecated and may be removed from a future release of  NI-SWITCH.  Use the niSwitch_RouteScanAdvancedOutput function instead.\n'
-        },
-        'lv_property': 'Obsolete Attributes:Cabled Module Scan Advanced Bus',
-        'name': 'CABLED_MODULE_SCAN_ADVANCED_BUS',
-        'resettable': False,
-        'type': 'ViInt32'
     },
     1150010: {
         'access': 'read-write',
@@ -344,18 +164,6 @@ attributes = {
         'name': 'SCAN_ADVANCED_POLARITY',
         'resettable': False,
         'type': 'ViInt32'
-    },
-    1150012: {
-        'access': 'read only',
-        'channel_based': False,
-        'codegen_method': 'no',
-        'documentation': {
-            'description': '\nThis attribute has been deprecated and may be removed from a future release of  NI-SWITCH.\n'
-        },
-        'lv_property': 'Obsolete Attributes:Parsed Scan List',
-        'name': 'PARSED_SCAN_LIST',
-        'resettable': False,
-        'type': 'ViString'
     },
     1150013: {
         'access': 'read-write',

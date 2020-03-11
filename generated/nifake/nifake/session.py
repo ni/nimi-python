@@ -785,6 +785,23 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def accept_list_of_durations_in_seconds(self, delays):
+        r'''accept_list_of_durations_in_seconds
+
+        Accepts list of floats or datetime.timedelta instances representing time delays.
+
+        Args:
+            delays (float in seconds or datetime.timedelta): A collection of time delay values.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        count_ctype = _visatype.ViInt32(0 if delays is None else len(delays))  # case S160
+        delays_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_seconds_real64(delays), library_type=_visatype.ViReal64)  # case B520
+        error_code = self._library.niFake_AcceptListOfDurationsInSeconds(vi_ctype, count_ctype, delays_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def bool_array_output_function(self, number_of_elements):
         r'''bool_array_output_function
 
@@ -996,7 +1013,7 @@ class Session(_SessionBase):
     def get_a_string_of_fixed_maximum_size(self):
         r'''get_a_string_of_fixed_maximum_size
 
-        Illustrates resturning a string of fixed size.
+        Illustrates returning a string of fixed size.
 
         Returns:
             a_string (str): String comes back here. Buffer must be 256 big.
@@ -1081,7 +1098,7 @@ class Session(_SessionBase):
         This method returns an array for use in python-code size mechanism.
 
         Returns:
-            array_out (list of CustomStruct): Array of custom type using puthon-code size mechanism
+            array_out (list of CustomStruct): Array of custom type using python-code size mechanism
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1099,7 +1116,7 @@ class Session(_SessionBase):
         This method returns an array for use in python-code size mechanism.
 
         Returns:
-            array_out (list of float): Array of double using puthon-code size mechanism
+            array_out (list of float): Array of double using python-code size mechanism
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1541,6 +1558,28 @@ class Session(_SessionBase):
         error_code = self._library.niFake_ReturnANumberAndAString(vi_ctype, None if a_number_ctype is None else (ctypes.pointer(a_number_ctype)), a_string_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
+
+    @ivi_synchronized
+    def return_list_of_durations_in_seconds(self, number_of_elements):
+        r'''return_list_of_durations_in_seconds
+
+        Returns a list of datetime.timedelta instances.
+
+        Args:
+            number_of_elements (int): Number of elements in output.
+
+
+        Returns:
+            timedeltas (datetime.timedelta): Contains a list of datetime.timedelta instances.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
+        timedeltas_size = number_of_elements  # case B600
+        timedeltas_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=timedeltas_size)  # case B600
+        error_code = self._library.niFake_ReturnListOfDurationsInSeconds(vi_ctype, number_of_elements_ctype, timedeltas_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_seconds_real64_to_timedeltas([float(timedeltas_ctype[i]) for i in range(number_of_elements_ctype.value)])
 
     @ivi_synchronized
     def return_multiple_types(self, array_size):
