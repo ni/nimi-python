@@ -973,7 +973,6 @@ functions = {
                 'type': 'ViSession'
             },
             {
-
                 'direction': 'in',
                 'name': 'site',
                 'python_api_converter_name': 'convert_site_string',
