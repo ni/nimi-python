@@ -785,8 +785,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def accept_list_of_time_values(self, delays):
-        r'''accept_list_of_time_values
+    def accept_list_of_durations_in_seconds(self, delays):
+        r'''accept_list_of_durations_in_seconds
 
         Accepts list of floats or datetime.timedelta instances representing time delays.
 
@@ -797,7 +797,7 @@ class Session(_SessionBase):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         count_ctype = _visatype.ViInt32(0 if delays is None else len(delays))  # case S160
         delays_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_seconds_real64(delays), library_type=_visatype.ViReal64)  # case B520
-        error_code = self._library.niFake_AcceptListOfTimeValues(vi_ctype, count_ctype, delays_ctype)
+        error_code = self._library.niFake_AcceptListOfDurationsInSeconds(vi_ctype, count_ctype, delays_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1116,7 +1116,7 @@ class Session(_SessionBase):
         This method returns an array for use in python-code size mechanism.
 
         Returns:
-            array_out (list of float): Array of double using puthon-code size mechanism
+            array_out (list of float): Array of double using python-code size mechanism
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1560,8 +1560,8 @@ class Session(_SessionBase):
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def return_list_of_timedeltas(self, number_of_elements):
-        r'''return_list_of_timedeltas
+    def return_list_of_durations_in_seconds(self, number_of_elements):
+        r'''return_list_of_durations_in_seconds
 
         Returns a list of datetime.timedelta instances.
 
@@ -1570,14 +1570,14 @@ class Session(_SessionBase):
 
 
         Returns:
-            timedeltas (datetime.timedelta): Contains a list of datetime.timedelta instances
+            timedeltas (datetime.timedelta): Contains a list of datetime.timedelta instances.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210
         timedeltas_size = number_of_elements  # case B600
         timedeltas_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=timedeltas_size)  # case B600
-        error_code = self._library.niFake_ReturnListOfTimedeltas(vi_ctype, number_of_elements_ctype, timedeltas_ctype)
+        error_code = self._library.niFake_ReturnListOfDurationsInSeconds(vi_ctype, number_of_elements_ctype, timedeltas_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_seconds_real64_to_timedeltas([float(timedeltas_ctype[i]) for i in range(number_of_elements_ctype.value)])
 

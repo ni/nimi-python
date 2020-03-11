@@ -18,8 +18,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['AcceptListOfTimeValues'] = {}
-        self._defaults['AcceptListOfTimeValues']['return'] = 0
+        self._defaults['AcceptListOfDurationsInSeconds'] = {}
+        self._defaults['AcceptListOfDurationsInSeconds']['return'] = 0
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
@@ -139,9 +139,9 @@ class SideEffectsHelper(object):
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
         self._defaults['ReturnANumberAndAString']['aString'] = None
-        self._defaults['ReturnListOfTimedeltas'] = {}
-        self._defaults['ReturnListOfTimedeltas']['return'] = 0
-        self._defaults['ReturnListOfTimedeltas']['timedeltas'] = None
+        self._defaults['ReturnListOfDurationsInSeconds'] = {}
+        self._defaults['ReturnListOfDurationsInSeconds']['return'] = 0
+        self._defaults['ReturnListOfDurationsInSeconds']['timedeltas'] = None
         self._defaults['ReturnMultipleTypes'] = {}
         self._defaults['ReturnMultipleTypes']['return'] = 0
         self._defaults['ReturnMultipleTypes']['aBoolean'] = None
@@ -199,10 +199,10 @@ class SideEffectsHelper(object):
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
 
-    def niFake_AcceptListOfTimeValues(self, vi, count, delays):  # noqa: N802
-        if self._defaults['AcceptListOfTimeValues']['return'] != 0:
-            return self._defaults['AcceptListOfTimeValues']['return']
-        return self._defaults['AcceptListOfTimeValues']['return']
+    def niFake_AcceptListOfDurationsInSeconds(self, vi, count, delays):  # noqa: N802
+        if self._defaults['AcceptListOfDurationsInSeconds']['return'] != 0:
+            return self._defaults['AcceptListOfDurationsInSeconds']['return']
+        return self._defaults['AcceptListOfDurationsInSeconds']['return']
 
     def niFake_BoolArrayOutputFunction(self, vi, number_of_elements, an_array):  # noqa: N802
         if self._defaults['BoolArrayOutputFunction']['return'] != 0:
@@ -675,13 +675,13 @@ class SideEffectsHelper(object):
             a_string[i] = test_value[i]
         return self._defaults['ReturnANumberAndAString']['return']
 
-    def niFake_ReturnListOfTimedeltas(self, vi, number_of_elements, timedeltas):  # noqa: N802
-        if self._defaults['ReturnListOfTimedeltas']['return'] != 0:
-            return self._defaults['ReturnListOfTimedeltas']['return']
+    def niFake_ReturnListOfDurationsInSeconds(self, vi, number_of_elements, timedeltas):  # noqa: N802
+        if self._defaults['ReturnListOfDurationsInSeconds']['return'] != 0:
+            return self._defaults['ReturnListOfDurationsInSeconds']['return']
         # timedeltas
-        if self._defaults['ReturnListOfTimedeltas']['timedeltas'] is None:
-            raise MockFunctionCallError("niFake_ReturnListOfTimedeltas", param='timedeltas')
-        test_value = self._defaults['ReturnListOfTimedeltas']['timedeltas']
+        if self._defaults['ReturnListOfDurationsInSeconds']['timedeltas'] is None:
+            raise MockFunctionCallError("niFake_ReturnListOfDurationsInSeconds", param='timedeltas')
+        test_value = self._defaults['ReturnListOfDurationsInSeconds']['timedeltas']
         try:
             timedeltas_ref = timedeltas.contents
         except AttributeError:
@@ -689,7 +689,7 @@ class SideEffectsHelper(object):
         assert len(timedeltas_ref) >= len(test_value)
         for i in range(len(test_value)):
             timedeltas_ref[i] = test_value[i]
-        return self._defaults['ReturnListOfTimedeltas']['return']
+        return self._defaults['ReturnListOfDurationsInSeconds']['return']
 
     def niFake_ReturnMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, array_size, an_array, string_size, a_string):  # noqa: N802
         if self._defaults['ReturnMultipleTypes']['return'] != 0:
@@ -854,8 +854,8 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
         mock_library.niFake_Abort.return_value = 0
-        mock_library.niFake_AcceptListOfTimeValues.side_effect = MockFunctionCallError("niFake_AcceptListOfTimeValues")
-        mock_library.niFake_AcceptListOfTimeValues.return_value = 0
+        mock_library.niFake_AcceptListOfDurationsInSeconds.side_effect = MockFunctionCallError("niFake_AcceptListOfDurationsInSeconds")
+        mock_library.niFake_AcceptListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
         mock_library.niFake_DoubleAllTheNums.side_effect = MockFunctionCallError("niFake_DoubleAllTheNums")
@@ -934,8 +934,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ReadFromChannel.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
-        mock_library.niFake_ReturnListOfTimedeltas.side_effect = MockFunctionCallError("niFake_ReturnListOfTimedeltas")
-        mock_library.niFake_ReturnListOfTimedeltas.return_value = 0
+        mock_library.niFake_ReturnListOfDurationsInSeconds.side_effect = MockFunctionCallError("niFake_ReturnListOfDurationsInSeconds")
+        mock_library.niFake_ReturnListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")
         mock_library.niFake_ReturnMultipleTypes.return_value = 0
         mock_library.niFake_SetAttributeViBoolean.side_effect = MockFunctionCallError("niFake_SetAttributeViBoolean")
