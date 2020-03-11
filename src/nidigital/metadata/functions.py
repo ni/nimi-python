@@ -977,6 +977,7 @@ functions = {
                 'direction': 'in',
                 'name': 'site',
                 'python_api_converter_name': 'convert_site_string',
+                'type_in_documentation': 'str or int',
                 'type': 'ViConstString'
             },
             {
