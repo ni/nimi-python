@@ -257,7 +257,7 @@ def convert_double_each_element(numbers):
 % if config['module_name'] == 'nidigital':
 def convert_site_string(site):
     if isinstance(site, str):
-        if site.beginswith('site'):
+        if site.startswith('site'):
             return site
         else:
             return 'site' + site
