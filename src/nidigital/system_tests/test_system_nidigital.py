@@ -445,3 +445,41 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
         [[True, True, True, True, True, True, True, True]],
     ]
 
+
+# nidigital specific converter tests
+# We are specifically using a "private" module to get to the converters so we can test the
+# nidigital specific one
+def test_convert_site_string():
+    test_result = nidigital._converters.convert_site_string('1')
+    assert test_result == 'site1'
+    test_result = nidigital._converters.convert_site_string(1)
+    assert test_result == 'site1'
+    test_result = nidigital._converters.convert_site_string('site1')
+    assert test_result == 'site1'
+    test_result = nidigital._converters.convert_site_string('42')
+    assert test_result == 'site42'
+    test_result = nidigital._converters.convert_site_string(42)
+    assert test_result == 'site42'
+    test_result = nidigital._converters.convert_site_string('site42')
+    assert test_result == 'site42'
+
+
+def test_convert_site_string_errors():
+    try:
+        nidigital._converters.convert_site_string(1.0)
+        assert False
+    except TypeError:
+        pass
+    try:
+        nidigital._converters.convert_site_string(['1'])
+        assert False
+    except TypeError:
+        pass
+    try:
+        nidigital._converters.convert_site_string(False)
+        assert False
+    except TypeError:
+        pass
+
+
+
