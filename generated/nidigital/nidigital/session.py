@@ -1435,6 +1435,8 @@ class _SessionBase(object):
                 'position: Specified value = {0}, samples_to_read: Specified value = {1}; Samples available = {2}.'
                 .format(position, samples_to_read, samples_available - position))
 
+        # Site can be 'N', N or 'siteN'. This will normalize all options to 'siteN' which is requried by the driver
+        site = _converters.convert_site_string(site)
         pattern_names = {}
         time_set_names = {}
         cycle_infos = []
@@ -2813,7 +2815,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            site (str):
+            site (str or int):
 
             sample_index (int):
 
