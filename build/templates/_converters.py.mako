@@ -250,9 +250,9 @@ def convert_double_each_element(numbers):
 
 % endif
 <%
-# There are some parameters in nidigital that are a single site so not strictly a repeated capability
-# We add a converter that acts similar to repeated capabilities but only works on a single item and
-# not a list of some sorte
+# There are some parameters in nidigital that cannot be made into a repeated capability because the
+# methods already have a repeated capability (pins), and we want the parameter to behave similarly
+# to repeated capabilities.
 %>\
 % if config['module_name'] == 'nidigital':
 def convert_site_string(site):
