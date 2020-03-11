@@ -213,7 +213,7 @@ def convert_init_with_options_dictionary(values):
 # Beginning of module specific converters
 def convert_site_string(site):
     if isinstance(site, str):
-        if site.beginswith('site'):
+        if site.startswith('site'):
             return site
         else:
             return 'site' + site
