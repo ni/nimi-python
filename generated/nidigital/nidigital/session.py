@@ -1376,7 +1376,7 @@ class _SessionBase(object):
             session.pins[0,1].fetch_history_ram_cycle_information(site, position, samples_to_read)
 
         Args:
-            site (str): Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
+            site (str or int): Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
                 where N is the site number. The VI returns an error if more than one site is specified.
 
             position (int): Sample index from which to start fetching pattern information.
@@ -2815,7 +2815,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            site (str or int):
+            site (str):
 
             sample_index (int):
 

@@ -180,6 +180,8 @@ associated with the pattern burst.
                     'description': 'Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,\nwhere N is the site number. The VI returns an error if more than one site is specified.'
                 },
                 'name': 'site',
+                'python_api_converter_name': 'convert_site_string',  # This won't actually change any code generation but is here for completeness
+                'type_in_documentation': 'str or int',
                 'type': 'ViConstString'
             },
             {

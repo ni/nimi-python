@@ -1253,7 +1253,7 @@ fetch_history_ram_cycle_information
                 
 
 
-            :type site: str
+            :type site: str or int
             :param position:
 
 
