@@ -6,7 +6,7 @@ MODULE_FILES_TO_GENERATE := $(filter-out enums.py _attributes.py,$(DEFAULT_PY_FI
 
 MODULE_FILES_TO_COPY := $(DEFAULT_PY_FILES_TO_COPY)
 
-RST_FILES_TO_GENERATE := $(filter-out enums.rst,$(DEFAULT_RST_FILES_TO_GENERATE))
+RST_FILES_TO_GENERATE := $(filter-out rep_caps.rst enums.rst,$(DEFAULT_RST_FILES_TO_GENERATE))
 
 include $(BUILD_HELPER_DIR)/rules.mak
 

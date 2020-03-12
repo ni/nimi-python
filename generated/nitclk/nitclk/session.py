@@ -204,12 +204,10 @@ class SessionReference(object):
         Gets the value of an NI-TClk ViReal64 property.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nitclk.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
+        nitclk.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): The ID of the property that you want to get Supported Property
@@ -234,12 +232,10 @@ class SessionReference(object):
         Gets the value of an NI-TClk ViSession property.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nitclk.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_session(attribute_id)
+        nitclk.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): The ID of the property that you want to set Supported Properties
@@ -277,12 +273,10 @@ class SessionReference(object):
         for bufSize and VI_NULL for the value.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nitclk.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_string(attribute_id)
+        nitclk.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): The ID of the property that you want to get Supported Properties
@@ -344,12 +338,10 @@ class SessionReference(object):
         methods as much as possible.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nitclk.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_real64(attribute_id, value)
+        nitclk.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): The ID of the property that you want to set Supported Property
@@ -376,12 +368,10 @@ class SessionReference(object):
         high-level methods as much as possible.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nitclk.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_session(attribute_id, value)
+        nitclk.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): The ID of the property that you want to set Supported Properties
@@ -411,12 +401,10 @@ class SessionReference(object):
         high-level methods as much as possible.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nitclk.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nitclk.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_string(attribute_id, value)
+        nitclk.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of the property that you want to set Supported Properties

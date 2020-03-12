@@ -133,10 +133,6 @@ class SideEffectsHelper(object):
         self._defaults['GetPatternName'] = {}
         self._defaults['GetPatternName']['return'] = 0
         self._defaults['GetPatternName']['name'] = None
-        self._defaults['GetPatternPinIndexes'] = {}
-        self._defaults['GetPatternPinIndexes']['return'] = 0
-        self._defaults['GetPatternPinIndexes']['actualNumPins'] = None
-        self._defaults['GetPatternPinIndexes']['pinIndexes'] = None
         self._defaults['GetPatternPinList'] = {}
         self._defaults['GetPatternPinList']['return'] = 0
         self._defaults['GetPatternPinList']['pinList'] = None
@@ -652,26 +648,6 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetPatternName']['name'])
         name.value = self._defaults['GetPatternName']['name'].encode('ascii')
         return self._defaults['GetPatternName']['return']
-
-    def niDigital_GetPatternPinIndexes(self, vi, start_label, pin_indexes_buffer_size, pin_indexes, actual_num_pins):  # noqa: N802
-        if self._defaults['GetPatternPinIndexes']['return'] != 0:
-            return self._defaults['GetPatternPinIndexes']['return']
-        # actual_num_pins
-        if self._defaults['GetPatternPinIndexes']['actualNumPins'] is None:
-            raise MockFunctionCallError("niDigital_GetPatternPinIndexes", param='actualNumPins')
-        if actual_num_pins is not None:
-            actual_num_pins.contents.value = self._defaults['GetPatternPinIndexes']['actualNumPins']
-        if self._defaults['GetPatternPinIndexes']['pinIndexes'] is None:
-            raise MockFunctionCallError("niDigital_GetPatternPinIndexes", param='pinIndexes')
-        if pin_indexes_buffer_size.value == 0:
-            return len(self._defaults['GetPatternPinIndexes']['pinIndexes'])
-        try:
-            pin_indexes_ref = pin_indexes.contents
-        except AttributeError:
-            pin_indexes_ref = pin_indexes
-        for i in range(len(self._defaults['GetPatternPinIndexes']['pinIndexes'])):
-            pin_indexes_ref[i] = self._defaults['GetPatternPinIndexes']['pinIndexes'][i]
-        return self._defaults['GetPatternPinIndexes']['return']
 
     def niDigital_GetPatternPinList(self, vi, start_label, pin_list_buffer_size, pin_list):  # noqa: N802
         if self._defaults['GetPatternPinList']['return'] != 0:
@@ -1215,8 +1191,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_GetHistoryRAMSampleCount.return_value = 0
         mock_library.niDigital_GetPatternName.side_effect = MockFunctionCallError("niDigital_GetPatternName")
         mock_library.niDigital_GetPatternName.return_value = 0
-        mock_library.niDigital_GetPatternPinIndexes.side_effect = MockFunctionCallError("niDigital_GetPatternPinIndexes")
-        mock_library.niDigital_GetPatternPinIndexes.return_value = 0
         mock_library.niDigital_GetPatternPinList.side_effect = MockFunctionCallError("niDigital_GetPatternPinList")
         mock_library.niDigital_GetPatternPinList.return_value = 0
         mock_library.niDigital_GetPinName.side_effect = MockFunctionCallError("niDigital_GetPinName")

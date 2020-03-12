@@ -1506,6 +1506,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPatternPinIndexes': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -1544,6 +1545,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPatternPinList': {
+        'python_name': 'get_pattern_pin_names',
         'documentation': {
             'description': 'TBD'
         },
@@ -1566,6 +1568,7 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'pinList',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'pinListBufferSize'
@@ -1576,6 +1579,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetPinName': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
