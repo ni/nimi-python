@@ -1470,7 +1470,7 @@ fetch_into
 
             :type timeout: float in seconds or datetime.timedelta
 
-            :rtype: WaveformInfo
+            :rtype: list of WaveformInfo
             :return:
 
 

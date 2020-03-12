@@ -2982,7 +2982,7 @@ class _SessionBase(object):
 
 
         Returns:
-            wfm_info (WaveformInfo): Returns a list of class instances with the following timing and scaling information about each waveform:
+            wfm_info (list of WaveformInfo): Returns a list of class instances with the following timing and scaling information about each waveform:
 
                 -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
                 -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
