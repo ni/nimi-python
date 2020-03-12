@@ -56,8 +56,10 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
+        * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
     * #### Changed
     * #### Removed
+        * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
 * ### NI-TClk
     * #### Added
     * #### Changed

@@ -221,6 +221,10 @@ def _convert_to_bytes(value):  # noqa: F811
     pass
 
 
+def convert_comma_separated_string_to_list(comma_separated_string):
+    return [x.strip() for x in comma_separated_string.split(',')]
+
+
 @_convert_to_bytes.register(list)  # noqa: F811
 @_convert_to_bytes.register(bytes)  # noqa: F811
 @_convert_to_bytes.register(bytearray)  # noqa: F811
@@ -485,3 +489,7 @@ def test_string_to_list_prefix():
     test_result = _convert_repeated_capabilities(['ScriptTrigger2:ScriptTrigger0'], 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
 
+
+def test_convert_comma_separated_string_to_list():
+    out_list = convert_comma_separated_string_to_list(' PinA ,  PinB , PinC  ')
+    assert out_list == ['PinA', 'PinB', 'PinC']
