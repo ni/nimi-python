@@ -546,12 +546,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
+        nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             levels_sheet (str):
@@ -607,12 +605,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
+        nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             start_label (str):
@@ -732,12 +728,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].configure_pattern_burst_sites()
+        nidigital.Session repeated capabilities container, and calling this method on the result.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1115,12 +1109,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].disable_sites()
+        nidigital.Session repeated capabilities container, and calling this method on the result.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1135,12 +1127,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].enable_sites()
+        nidigital.Session repeated capabilities container, and calling this method on the result.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1180,12 +1170,10 @@ class _SessionBase(object):
         Returns dictionary where each key is the site number and the value is array.array of unsigned int
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].fetch_capture_waveform(waveform_name, samples_to_read, timeout)
+        nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str):
@@ -1756,12 +1744,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].get_site_pass_fail()
+        nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
             pass_fail (list of bool):
@@ -1788,12 +1774,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1].get_site_results_site_numbers(site_result_type)
+        nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             site_result_type (enums.SiteResult):
@@ -2242,12 +2226,10 @@ class _SessionBase(object):
         TBD
 
         Tip:
-        This method requires repeated capabilities (sites). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidigital.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-            session.sites[0,1]._write_source_waveform_site_unique_u32(waveform_name, num_waveforms, samples_per_waveform, waveform_data)
+        nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str):
