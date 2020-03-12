@@ -1445,7 +1445,7 @@ get_history_ram_sample_count
                 
 
 
-            :type site: str
+            :type site: str or int
 
             :rtype: int
             :return:
@@ -1915,7 +1915,7 @@ is_site_enabled
                 
 
 
-            :type site: str
+            :type site: str or int
 
             :rtype: bool
             :return:

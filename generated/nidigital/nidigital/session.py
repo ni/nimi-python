@@ -2901,7 +2901,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            site (str):
+            site (str or int):
 
 
         Returns:
@@ -3104,7 +3104,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            site (str):
+            site (str or int):
 
 
         Returns:
