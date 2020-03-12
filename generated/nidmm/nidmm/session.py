@@ -580,12 +580,10 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -620,12 +618,10 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -660,12 +656,10 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -703,12 +697,10 @@ class _SessionBase(object):
            parameter.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_string(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -845,12 +837,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -897,12 +887,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -949,12 +937,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -1001,12 +987,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.

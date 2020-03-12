@@ -169,14 +169,10 @@ apply_tdr_offsets
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].apply_tdr_offsets(offsets)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param offsets:
@@ -261,14 +257,10 @@ clock_generator_abort
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].clock_generator_abort()
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
 clock_generator_generate_clock
@@ -283,14 +275,10 @@ clock_generator_generate_clock
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].clock_generator_generate_clock(frequency, select_digital_function)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param frequency:
@@ -320,14 +308,10 @@ clock_generator_initiate
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].clock_generator_initiate()
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
 close
@@ -370,14 +354,10 @@ configure_active_load_levels
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_active_load_levels(iol, ioh, vcom)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param iol:
@@ -435,14 +415,10 @@ configure_time_set_compare_edges_strobe
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].configure_time_set_compare_edges_strobe(time_set, strobe_edge)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -472,14 +448,10 @@ configure_time_set_compare_edges_strobe2x
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].configure_time_set_compare_edges_strobe2x(time_set, strobe_edge, strobe2_edge)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -516,14 +488,10 @@ configure_time_set_drive_edges
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].configure_time_set_drive_edges(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -581,14 +549,10 @@ configure_time_set_drive_edges2x
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].configure_time_set_drive_edges2x(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -660,14 +624,10 @@ configure_time_set_drive_format
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].configure_time_set_drive_format(time_set, drive_format)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -697,14 +657,10 @@ configure_time_set_edge
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].configure_time_set_edge(time_set, edge, time)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -741,14 +697,10 @@ configure_time_set_edge_multiplier
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].configure_time_set_edge_multiplier(time_set, edge_multiplier)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -806,14 +758,10 @@ configure_voltage_levels
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_voltage_levels(vil, vih, vol, voh, vterm)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param vil:
@@ -892,14 +840,10 @@ create_capture_waveform_parallel
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].create_capture_waveform_parallel(waveform_name)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param waveform_name:
@@ -922,14 +866,10 @@ create_capture_waveform_serial
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].create_capture_waveform_serial(waveform_name, sample_width, bit_order)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param waveform_name:
@@ -1001,14 +941,10 @@ create_source_waveform_parallel
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].create_source_waveform_parallel(waveform_name, data_mapping)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param waveform_name:
@@ -1038,14 +974,10 @@ create_source_waveform_serial
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].create_source_waveform_serial(waveform_name, data_mapping, sample_width, bit_order)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param waveform_name:
@@ -1225,14 +1157,10 @@ fetch_history_ram_cycle_information
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].fetch_history_ram_cycle_information(site, position, samples_to_read)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param site:
@@ -1311,14 +1239,10 @@ frequency_counter_measure_frequency
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].frequency_counter_measure_frequency()
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :rtype: list of float
@@ -1399,14 +1323,10 @@ get_fail_count
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_fail_count()
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :rtype: list of int
@@ -1522,14 +1442,10 @@ get_pin_results_pin_information
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].get_pin_results_pin_information()
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :rtype: list of PinInfo
@@ -1623,14 +1539,10 @@ get_time_set_drive_format
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].get_time_set_drive_format(time_set)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -1661,14 +1573,10 @@ get_time_set_edge
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].get_time_set_edge(time_set, edge)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -1706,14 +1614,10 @@ get_time_set_edge_multiplier
             
 
 
-            .. tip:: This method requires repeated capabilities (pins). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.pins[0,1].get_time_set_edge_multiplier(time_set)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param time_set:
@@ -2021,14 +1925,10 @@ ppmu_measure
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_measure(measurement_type)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param measurement_type:
@@ -2059,14 +1959,10 @@ ppmu_source
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].ppmu_source()
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
 read_sequencer_flag
@@ -2139,14 +2035,10 @@ read_static
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].read_static()
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :rtype: list of int
@@ -2182,14 +2074,10 @@ reset_attribute
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].reset_attribute(attribute_id)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param attribute_id:
@@ -2279,14 +2167,10 @@ tdr
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].tdr(apply_offsets)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param apply_offsets:
@@ -2535,14 +2419,10 @@ write_static
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].write_static(state)
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
             :param state:
@@ -2671,15 +2551,10 @@ active_load_ioh
 
     .. py:attribute:: active_load_ioh
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].active_load_ioh = var
-                var = session.channels[0,1].active_load_ioh
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2705,15 +2580,10 @@ active_load_iol
 
     .. py:attribute:: active_load_iol
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].active_load_iol = var
-                var = session.channels[0,1].active_load_iol
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2739,15 +2609,10 @@ active_load_vcom
 
     .. py:attribute:: active_load_vcom
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].active_load_vcom = var
-                var = session.channels[0,1].active_load_vcom
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2825,15 +2690,10 @@ clock_generator_frequency
 
     .. py:attribute:: clock_generator_frequency
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].clock_generator_frequency = var
-                var = session.channels[0,1].clock_generator_frequency
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2859,14 +2719,10 @@ clock_generator_is_running
 
     .. py:attribute:: clock_generator_is_running
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].clock_generator_is_running
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2892,14 +2748,10 @@ conditional_jump_trigger_terminal_name
 
     .. py:attribute:: conditional_jump_trigger_terminal_name
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].conditional_jump_trigger_terminal_name
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2925,15 +2777,10 @@ conditional_jump_trigger_type
 
     .. py:attribute:: conditional_jump_trigger_type
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].conditional_jump_trigger_type = var
-                var = session.channels[0,1].conditional_jump_trigger_type
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2985,15 +2832,10 @@ digital_edge_conditional_jump_trigger_edge
 
     .. py:attribute:: digital_edge_conditional_jump_trigger_edge
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].digital_edge_conditional_jump_trigger_edge = var
-                var = session.channels[0,1].digital_edge_conditional_jump_trigger_edge
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3019,15 +2861,10 @@ digital_edge_conditional_jump_trigger_source
 
     .. py:attribute:: digital_edge_conditional_jump_trigger_source
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].digital_edge_conditional_jump_trigger_source = var
-                var = session.channels[0,1].digital_edge_conditional_jump_trigger_source
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3131,15 +2968,10 @@ exported_conditional_jump_trigger_output_terminal
 
     .. py:attribute:: exported_conditional_jump_trigger_output_terminal
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].exported_conditional_jump_trigger_output_terminal = var
-                var = session.channels[0,1].exported_conditional_jump_trigger_output_terminal
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3165,15 +2997,10 @@ exported_pattern_opcode_event_output_terminal
 
     .. py:attribute:: exported_pattern_opcode_event_output_terminal
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].exported_pattern_opcode_event_output_terminal = var
-                var = session.channels[0,1].exported_pattern_opcode_event_output_terminal
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3225,15 +3052,10 @@ frequency_counter_measurement_time
 
     .. py:attribute:: frequency_counter_measurement_time
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].frequency_counter_measurement_time = var
-                var = session.channels[0,1].frequency_counter_measurement_time
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3467,14 +3289,10 @@ instrument_firmware_revision
 
     .. py:attribute:: instrument_firmware_revision
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].instrument_firmware_revision
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3656,15 +3474,10 @@ mask_compare
 
     .. py:attribute:: mask_compare
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].mask_compare = var
-                var = session.channels[0,1].mask_compare
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3768,14 +3581,10 @@ pattern_opcode_event_terminal_name
 
     .. py:attribute:: pattern_opcode_event_terminal_name
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].pattern_opcode_event_terminal_name
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3801,15 +3610,10 @@ ppmu_allow_extended_voltage_range
 
     .. py:attribute:: ppmu_allow_extended_voltage_range
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_allow_extended_voltage_range = var
-                var = session.channels[0,1].ppmu_allow_extended_voltage_range
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3835,15 +3639,10 @@ ppmu_aperture_time
 
     .. py:attribute:: ppmu_aperture_time
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_aperture_time = var
-                var = session.channels[0,1].ppmu_aperture_time
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3869,15 +3668,10 @@ ppmu_aperture_time_units
 
     .. py:attribute:: ppmu_aperture_time_units
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_aperture_time_units = var
-                var = session.channels[0,1].ppmu_aperture_time_units
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3903,15 +3697,10 @@ ppmu_current_level
 
     .. py:attribute:: ppmu_current_level
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_current_level = var
-                var = session.channels[0,1].ppmu_current_level
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3937,15 +3726,10 @@ ppmu_current_level_range
 
     .. py:attribute:: ppmu_current_level_range
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_current_level_range = var
-                var = session.channels[0,1].ppmu_current_level_range
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3971,15 +3755,10 @@ ppmu_current_limit
 
     .. py:attribute:: ppmu_current_limit
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_current_limit = var
-                var = session.channels[0,1].ppmu_current_limit
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4005,15 +3784,10 @@ ppmu_current_limit_behavior
 
     .. py:attribute:: ppmu_current_limit_behavior
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_current_limit_behavior = var
-                var = session.channels[0,1].ppmu_current_limit_behavior
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4039,15 +3813,10 @@ ppmu_current_limit_range
 
     .. py:attribute:: ppmu_current_limit_range
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_current_limit_range = var
-                var = session.channels[0,1].ppmu_current_limit_range
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4073,14 +3842,10 @@ ppmu_current_limit_supported
 
     .. py:attribute:: ppmu_current_limit_supported
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].ppmu_current_limit_supported
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4106,15 +3871,10 @@ ppmu_output_function
 
     .. py:attribute:: ppmu_output_function
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_output_function = var
-                var = session.channels[0,1].ppmu_output_function
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4140,15 +3900,10 @@ ppmu_voltage_level
 
     .. py:attribute:: ppmu_voltage_level
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_voltage_level = var
-                var = session.channels[0,1].ppmu_voltage_level
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4174,15 +3929,10 @@ ppmu_voltage_limit_high
 
     .. py:attribute:: ppmu_voltage_limit_high
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_voltage_limit_high = var
-                var = session.channels[0,1].ppmu_voltage_limit_high
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4208,15 +3958,10 @@ ppmu_voltage_limit_low
 
     .. py:attribute:: ppmu_voltage_limit_low
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ppmu_voltage_limit_low = var
-                var = session.channels[0,1].ppmu_voltage_limit_low
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4320,15 +4065,10 @@ selected_function
 
     .. py:attribute:: selected_function
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].selected_function = var
-                var = session.channels[0,1].selected_function
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4718,15 +4458,10 @@ tdr_offset
 
     .. py:attribute:: tdr_offset
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].tdr_offset = var
-                var = session.channels[0,1].tdr_offset
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4752,15 +4487,10 @@ termination_mode
 
     .. py:attribute:: termination_mode
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].termination_mode = var
-                var = session.channels[0,1].termination_mode
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4838,15 +4568,10 @@ vih
 
     .. py:attribute:: vih
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].vih = var
-                var = session.channels[0,1].vih
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4872,15 +4597,10 @@ vil
 
     .. py:attribute:: vil
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].vil = var
-                var = session.channels[0,1].vil
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4906,15 +4626,10 @@ voh
 
     .. py:attribute:: voh
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voh = var
-                var = session.channels[0,1].voh
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4940,15 +4655,10 @@ vol
 
     .. py:attribute:: vol
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].vol = var
-                var = session.channels[0,1].vol
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4974,15 +4684,10 @@ vterm
 
     .. py:attribute:: vterm
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidigital.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].vterm = var
-                var = session.channels[0,1].vterm
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 

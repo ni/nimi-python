@@ -126,13 +126,10 @@ class _SessionBase(object):
     Refer to the Using the Analog Bus on an NI SwitchBlock Carrier topic  in the NI Switches Help for more information about sharing the analog bus.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].analog_bus_sharing_enable = var
-        var = session.channels[0,1].analog_bus_sharing_enable
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     bandwidth = _attributes.AttributeViReal64(1250005)
     '''Type: float
@@ -141,12 +138,10 @@ class _SessionBase(object):
     The units are hertz.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].bandwidth
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     channel_count = _attributes.AttributeViInt32(1050203)
     '''Type: int
@@ -160,12 +155,10 @@ class _SessionBase(object):
     The units are ohms.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].characteristic_impedance
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     continuous_scan = _attributes.AttributeViBoolean(1250026)
     '''Type: bool
@@ -220,13 +213,10 @@ class _SessionBase(object):
     After you identify a channel as a configuration channel, you cannot  use that channel for external connections.  The connect method  returns the NISWITCH_ERROR_IS_CONFIGURATION_CHANNEL error when you attempt  to establish a connection between a configuration channel and any other  channel.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].is_configuration_channel = var
-        var = session.channels[0,1].is_configuration_channel
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     is_debounced = _attributes.AttributeViBoolean(1250002)
     '''Type: bool
@@ -244,13 +234,10 @@ class _SessionBase(object):
     This channel-based property specifies whether you want to identify the  channel as a source channel.  Typically, you set this property to True  when you attach the channel to a power supply, a method generator, or an  active measurement point on the unit under test, and you do not want to  connect the channel to another source.  The driver prevents source  channels from connecting to each other.  The connect method  returns the NISWITCH_ERROR_ATTEMPT_TO_CONNECT_SOURCES when you attempt to  connect two channels that you identify as source channels.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].is_source_channel = var
-        var = session.channels[0,1].is_source_channel
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     is_waiting_for_trig = _attributes.AttributeViBoolean(1150004)
     '''Type: bool
@@ -273,12 +260,10 @@ class _SessionBase(object):
     The units are volts RMS.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_ac_voltage
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_carry_ac_current = _attributes.AttributeViReal64(1250011)
     '''Type: float
@@ -287,12 +272,10 @@ class _SessionBase(object):
     The units are amperes RMS.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_carry_ac_current
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_carry_ac_power = _attributes.AttributeViReal64(1250015)
     '''Type: float
@@ -301,12 +284,10 @@ class _SessionBase(object):
     The units are volt-amperes.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_carry_ac_power
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_carry_dc_current = _attributes.AttributeViReal64(1250010)
     '''Type: float
@@ -315,12 +296,10 @@ class _SessionBase(object):
     The units are amperes.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_carry_dc_current
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_carry_dc_power = _attributes.AttributeViReal64(1250014)
     '''Type: float
@@ -329,12 +308,10 @@ class _SessionBase(object):
     The units are watts.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_carry_dc_power
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_dc_voltage = _attributes.AttributeViReal64(1250006)
     '''Type: float
@@ -343,12 +320,10 @@ class _SessionBase(object):
     The units are volts.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_dc_voltage
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_switching_ac_current = _attributes.AttributeViReal64(1250009)
     '''Type: float
@@ -357,12 +332,10 @@ class _SessionBase(object):
     The units are amperes RMS.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_switching_ac_current
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_switching_ac_power = _attributes.AttributeViReal64(1250013)
     '''Type: float
@@ -371,12 +344,10 @@ class _SessionBase(object):
     The units are volt-amperes.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_switching_ac_power
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_switching_dc_current = _attributes.AttributeViReal64(1250008)
     '''Type: float
@@ -385,12 +356,10 @@ class _SessionBase(object):
     The units are amperes.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_switching_dc_current
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_switching_dc_power = _attributes.AttributeViReal64(1250012)
     '''Type: float
@@ -399,12 +368,10 @@ class _SessionBase(object):
     The units are watts.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].max_switching_dc_power
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     number_of_relays = _attributes.AttributeViInt32(1150014)
     '''Type: int
@@ -482,13 +449,10 @@ class _SessionBase(object):
     Note: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.channels[0,1].settling_time = var
-        var = session.channels[0,1].settling_time
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
     '''Type: bool
@@ -541,12 +505,10 @@ class _SessionBase(object):
     This property affects the values of the num_of_rows and  num_of_columns properties.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.
 
     Tip:
-    This property can use repeated capabilities (channels). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     niswitch.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-        var = session.channels[0,1].wire_mode
+    niswitch.Session repeated capabilities container, and calling set/get value on the result.
     '''
 
     def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
@@ -611,12 +573,10 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -667,12 +627,10 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -723,12 +681,10 @@ class _SessionBase(object):
         invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -791,12 +747,10 @@ class _SessionBase(object):
         a negative number for the Array Size parameter.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_string(attribute_id)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -967,12 +921,10 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -1035,12 +987,10 @@ class _SessionBase(object):
         redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -1103,12 +1053,10 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
@@ -1171,12 +1119,10 @@ class _SessionBase(object):
         the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         niswitch.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        niswitch.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
+        niswitch.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property. From the method panel window, you can use
