@@ -39,6 +39,7 @@ Steps
         * Commit to branch
     * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
+        * Update contents of LATEST_RELEASE with the version of the release being created.
         * Commit to branch
     * `python3 tools/build_release.py --build`
         * Clean and build to update generated files with new version
@@ -51,7 +52,6 @@ Steps
     * Merge the pull request to origin/master
     * Create a release on GitHub using the portion from the changelog for this release for the description
         * Add the ZIP files under `generated/examples` for each module as a release artifact.
-        * Update contents of LATEST_RELEASE with the version of the release being created.
     * Create and checkout another branch for post-release changes
     * `python3 tools/build_release.py --update`
         * This will update the version to X.X.(N+1).dev0
