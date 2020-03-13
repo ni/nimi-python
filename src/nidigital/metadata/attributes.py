@@ -287,6 +287,7 @@ attributes = {
     1150029: {
         'access': 'read-write',
         'channel_based': False,
+        'enum': 'TriggerType',
         'name': 'START_TRIGGER_TYPE',
         'resettable': True,
         'type': 'ViInt32'
@@ -316,6 +317,7 @@ attributes = {
     1150033: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'TriggerType',
         'name': 'CONDITIONAL_JUMP_TRIGGER_TYPE',
         'resettable': True,
         'type': 'ViInt32'
@@ -388,6 +390,7 @@ attributes = {
     1150043: {
         'access': 'read-write',
         'channel_based': False,
+        'enum': 'HramTriggerType',
         'name': 'HISTORY_RAM_TRIGGER_TYPE',
         'resettable': True,
         'type': 'ViInt32'
@@ -416,6 +419,7 @@ attributes = {
     1150047: {
         'access': 'read-write',
         'channel_based': False,
+        'enum': 'HramCyclesToAcquire',
         'name': 'HISTORY_RAM_CYCLES_TO_ACQUIRE',
         'resettable': True,
         'type': 'ViInt32'
@@ -486,6 +490,7 @@ attributes = {
     1150064: {
         'access': 'read-write',
         'channel_based': True,
+        'enum': 'PPMUCurrentLimitBehavior',
         'name': 'PPMU_CURRENT_LIMIT_BEHAVIOR',
         'resettable': True,
         'type': 'ViInt32'
