@@ -39,6 +39,11 @@ def test_pins_rep_cap(multi_instrument_session):
     assert drive_format == 1501
 
 
+def test_instruments_rep_cap(multi_instrument_session):
+    fw_rev = multi_instrument_session.channels['PXI1Slot5', 'PXI1Slot2'].instrument_firmware_revision
+    print(fw_rev)
+
+
 def test_property_boolean(multi_instrument_session):
     channel = multi_instrument_session.get_channel_name(index=42)
     multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range = True
