@@ -58,6 +58,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
     * #### Changed
+        * `get_site_pass_fail` returns `dict` of `site`: `pass_fail` - [#1297](https://github.com/ni/nimi-python/issues/1297)
     * #### Removed
         * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
 * ### NI-TClk
