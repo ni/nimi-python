@@ -84,6 +84,48 @@ functions_additional_get_pin_results_pin_information = {
     },
 }
 
+functions_additional_get_site_pass_fail = {
+    'FancyGetSitePassFail': {
+        'python_name': 'get_site_pass_fail',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_site_pass_fail',
+            }
+        ],
+        'documentation': {
+            'description': '\nReturns dictionary where each key is the site number and the value is the pass or fail result\n\n',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'siteList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nDictionary where each key is the site number and the value is the pass or fail result\n'
+                },
+                'name': 'passFail',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'ViBoolean',
+                'type_in_documentation': '{ int: bool, int: bool, ... }',
+            },
+        ],
+    },
+}
+
 functions_additional_fetch_capture_waveform = {
     'FancyFetchCaptureWaveform': {
         'python_name': 'fetch_capture_waveform',

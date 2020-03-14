@@ -110,7 +110,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         timeout=5)
 
     pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
-    assert pass_fail == [True, True]
+    assert pass_fail == {0: True, 1: True}
 
 
 def configure_session(session, test_name):
