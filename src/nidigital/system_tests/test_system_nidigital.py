@@ -9,13 +9,13 @@ import nidigital
 from nidigital.enums import DigitalState
 from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 
-instr = ['PXI1Slot2', 'PXI1Slot5']
+instruments = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
-    with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+    with nidigital.Session(resource_name=','.join(instruments), options='') as simulated_session:
         yield simulated_session
 
 
@@ -40,8 +40,12 @@ def test_pins_rep_cap(multi_instrument_session):
 
 
 def test_instruments_rep_cap(multi_instrument_session):
-    fw_rev = multi_instrument_session.channels['PXI1Slot5', 'PXI1Slot2'].instrument_firmware_revision
-    print(fw_rev)
+    # fw_rev = multi_instrument_session.channels[instruments[1]].channel_count
+    # print(fw_rev)
+    # value = multi_instrument_session.channels[instruments[1]].channel_count
+    # print(value)
+    val2 = multi_instrument_session.channel_count
+    print(val2)
 
 
 def test_property_boolean(multi_instrument_session):
@@ -251,7 +255,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
 def test_get_pin_results_pin_information(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
-    fully_qualified_channels = [instr[1] + '/0', instr[0] + '/1', instr[1] + '/11']
+    fully_qualified_channels = [instruments[1] + '/0', instruments[0] + '/1', instruments[1] + '/11']
     pin_info = multi_instrument_session.channels[fully_qualified_channels].get_pin_results_pin_information()
 
     pins = [i.pin_name for i in pin_info]
