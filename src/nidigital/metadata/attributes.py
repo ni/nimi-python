@@ -390,7 +390,7 @@ attributes = {
     1150043: {
         'access': 'read-write',
         'channel_based': False,
-        'enum': 'HramTriggerType',
+        'enum': 'HistoryRAMTriggerType',
         'name': 'HISTORY_RAM_TRIGGER_TYPE',
         'resettable': True,
         'type': 'ViInt32'
@@ -419,7 +419,7 @@ attributes = {
     1150047: {
         'access': 'read-write',
         'channel_based': False,
-        'enum': 'HramCyclesToAcquire',
+        'enum': 'HistoryRAMCyclesToAcquire',
         'name': 'HISTORY_RAM_CYCLES_TO_ACQUIRE',
         'resettable': True,
         'type': 'ViInt32'

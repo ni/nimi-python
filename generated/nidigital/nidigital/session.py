@@ -240,11 +240,11 @@ class _SessionBase(object):
     group_capabilities = _attributes.AttributeViString(1050401)
     halt_on_keep_alive_opcode = _attributes.AttributeViBoolean(1150062)
     history_ram_buffer_size_per_site = _attributes.AttributeViInt64(1150079)
-    history_ram_cycles_to_acquire = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HramCyclesToAcquire, 1150047)
+    history_ram_cycles_to_acquire = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMCyclesToAcquire, 1150047)
     history_ram_max_samples_to_acquire_per_site = _attributes.AttributeViInt32(1150077)
     history_ram_number_of_samples_is_finite = _attributes.AttributeViBoolean(1150078)
     history_ram_pretrigger_samples = _attributes.AttributeViInt32(1150048)
-    history_ram_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HramTriggerType, 1150043)
+    history_ram_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMTriggerType, 1150043)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 

@@ -39,12 +39,12 @@ class DriveEdgeSetFormat(Enum):
     SBC = 1503
 
 
-class HramCyclesToAcquire(Enum):
+class HistoryRAMCyclesToAcquire(Enum):
     FAILED = 2303
     ALL = 2304
 
 
-class HramTriggerType(Enum):
+class HistoryRAMTriggerType(Enum):
     FIRST_FAILURE = 2200
     CYCLE_NUMBER = 2201
     PATTERN_LABEL = 2202

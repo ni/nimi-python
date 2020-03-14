@@ -3054,17 +3054,17 @@ history_ram_cycles_to_acquire
 
         The following table lists the characteristics of this property.
 
-            +----------------+---------------------------+
-            | Characteristic | Value                     |
-            +================+===========================+
-            | Datatype       | enums.HramCyclesToAcquire |
-            +----------------+---------------------------+
-            | Permissions    | read-write                |
-            +----------------+---------------------------+
-            | Channel Based  | No                        |
-            +----------------+---------------------------+
-            | Resettable     | Yes                       |
-            +----------------+---------------------------+
+            +----------------+---------------------------------+
+            | Characteristic | Value                           |
+            +================+=================================+
+            | Datatype       | enums.HistoryRAMCyclesToAcquire |
+            +----------------+---------------------------------+
+            | Permissions    | read-write                      |
+            +----------------+---------------------------------+
+            | Channel Based  | No                              |
+            +----------------+---------------------------------+
+            | Resettable     | Yes                             |
+            +----------------+---------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3158,17 +3158,17 @@ history_ram_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+-----------------------+
-            | Characteristic | Value                 |
-            +================+=======================+
-            | Datatype       | enums.HramTriggerType |
-            +----------------+-----------------------+
-            | Permissions    | read-write            |
-            +----------------+-----------------------+
-            | Channel Based  | No                    |
-            +----------------+-----------------------+
-            | Resettable     | Yes                   |
-            +----------------+-----------------------+
+            +----------------+-----------------------------+
+            | Characteristic | Value                       |
+            +================+=============================+
+            | Datatype       | enums.HistoryRAMTriggerType |
+            +----------------+-----------------------------+
+            | Permissions    | read-write                  |
+            +----------------+-----------------------------+
+            | Channel Based  | No                          |
+            +----------------+-----------------------------+
+            | Resettable     | Yes                         |
+            +----------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

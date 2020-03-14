@@ -111,33 +111,33 @@ DriveEdgeSetFormat
 
 
 
-HramCyclesToAcquire
--------------------
+HistoryRAMCyclesToAcquire
+-------------------------
 
-.. py:class:: HramCyclesToAcquire
+.. py:class:: HistoryRAMCyclesToAcquire
 
-    .. py:attribute:: HramCyclesToAcquire.FAILED
-
-
-
-    .. py:attribute:: HramCyclesToAcquire.ALL
+    .. py:attribute:: HistoryRAMCyclesToAcquire.FAILED
 
 
 
-HramTriggerType
----------------
-
-.. py:class:: HramTriggerType
-
-    .. py:attribute:: HramTriggerType.FIRST_FAILURE
+    .. py:attribute:: HistoryRAMCyclesToAcquire.ALL
 
 
 
-    .. py:attribute:: HramTriggerType.CYCLE_NUMBER
+HistoryRAMTriggerType
+---------------------
+
+.. py:class:: HistoryRAMTriggerType
+
+    .. py:attribute:: HistoryRAMTriggerType.FIRST_FAILURE
 
 
 
-    .. py:attribute:: HramTriggerType.PATTERN_LABEL
+    .. py:attribute:: HistoryRAMTriggerType.CYCLE_NUMBER
+
+
+
+    .. py:attribute:: HistoryRAMTriggerType.PATTERN_LABEL
 
 
 

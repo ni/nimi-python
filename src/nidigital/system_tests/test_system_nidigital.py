@@ -297,8 +297,8 @@ def configure_for_history_ram_test(session):
 
     session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    session.history_ram_trigger_type = nidigital.HramTriggerType.FIRST_FAILURE
-    session.history_ram_cycles_to_acquire = nidigital.HramCyclesToAcquire.ALL
+    session.history_ram_trigger_type = nidigital.HistoryRAMTriggerType.FIRST_FAILURE
+    session.history_ram_cycles_to_acquire = nidigital.HistoryRAMCyclesToAcquire.ALL
     session.history_ram_pretrigger_samples = 0
     session.history_ram_number_of_samples_is_finite = True
 
