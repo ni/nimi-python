@@ -26,9 +26,7 @@
     if v.dev is None and v.pre is None:
         examples_link_text = '`You can download all {0} examples here <{1}>`_'.format(module_name, released_url)
     else:
-        master_url = 'https://github.com/ni/nimi-python/tree/master/src/{}/examples'.format(module_name)
-        examples_link_text = '`You can download all {0} examples for master version here <{1}>`_'.format(module_name, master_url)
-        examples_link_text += '\n\n`You can download all {0} examples for latest version here <{1}>`_'.format(module_name, released_url)
+        examples_link_text = '`You can download all {0} examples for latest version here <{1}>`_'.format(module_name, released_url)
 %>\
 ${helper.get_rst_header_snippet('Examples', '=')}
 

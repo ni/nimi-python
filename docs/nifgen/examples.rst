@@ -1,8 +1,6 @@
 Examples
 ========
 
-`You can download all nifgen examples for master version here <https://github.com/ni/nimi-python/tree/master/src/nifgen/examples>`_
-
 `You can download all nifgen examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.2.0/nifgen_examples.zip>`_
 
 nifgen_arb_waveform.py
