@@ -5,7 +5,6 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'RANGE_CHECK',
-        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViBoolean'
     },
@@ -13,7 +12,6 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'QUERY_INSTRUMENT_STATUS',
-        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViBoolean'
     },
@@ -21,7 +19,6 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'CACHE',
-        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViBoolean'
     },
@@ -29,7 +26,6 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'SIMULATE',
-        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViBoolean'
     },
@@ -37,7 +33,6 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'RECORD_COERCIONS',
-        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViBoolean'
     },
@@ -45,7 +40,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'DRIVER_SETUP',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -53,7 +47,6 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'INTERCHANGE_CHECK',
-        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViBoolean'
     },
@@ -61,7 +54,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'CHANNEL_COUNT',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViInt32'
     },
@@ -69,7 +61,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SPECIFIC_DRIVER_PREFIX',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -77,7 +68,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'IO_RESOURCE_DESCRIPTOR',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -85,7 +75,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'LOGICAL_NAME',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -93,7 +82,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -101,7 +89,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'GROUP_CAPABILITIES',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -117,7 +104,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'INSTRUMENT_MANUFACTURER',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -125,7 +111,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'INSTRUMENT_MODEL',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -133,7 +118,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SPECIFIC_DRIVER_VENDOR',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -141,7 +125,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -149,7 +132,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViInt32'
     },
@@ -157,7 +139,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViInt32'
     },
@@ -165,7 +146,6 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SPECIFIC_DRIVER_REVISION',
-        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -530,6 +510,7 @@ attributes = {
         'access': 'read-write',
         'channel_based': False,
         'name': 'TIMING_ABSOLUTE_DELAY',
+        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViReal64'
     },

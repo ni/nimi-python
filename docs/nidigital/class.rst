@@ -2529,10 +2529,7 @@ cache
 
     .. py:attribute:: cache
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -2558,10 +2555,7 @@ channel_count
 
     .. py:attribute:: channel_count
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -2839,10 +2833,7 @@ driver_setup
 
     .. py:attribute:: driver_setup
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -2981,10 +2972,7 @@ group_capabilities
 
     .. py:attribute:: group_capabilities
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3221,10 +3209,7 @@ instrument_manufacturer
 
     .. py:attribute:: instrument_manufacturer
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3250,10 +3235,7 @@ instrument_model
 
     .. py:attribute:: instrument_model
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3279,10 +3261,7 @@ interchange_check
 
     .. py:attribute:: interchange_check
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3308,10 +3287,7 @@ io_resource_descriptor
 
     .. py:attribute:: io_resource_descriptor
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3363,10 +3339,7 @@ logical_name
 
     .. py:attribute:: logical_name
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3905,10 +3878,7 @@ query_instrument_status
 
     .. py:attribute:: query_instrument_status
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3934,10 +3904,7 @@ range_check
 
     .. py:attribute:: range_check
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -3963,10 +3930,7 @@ record_coercions
 
     .. py:attribute:: record_coercions
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4076,10 +4040,7 @@ simulate
 
     .. py:attribute:: simulate
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4105,10 +4066,7 @@ specific_driver_class_spec_major_version
 
     .. py:attribute:: specific_driver_class_spec_major_version
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4134,10 +4092,7 @@ specific_driver_class_spec_minor_version
 
     .. py:attribute:: specific_driver_class_spec_minor_version
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4163,10 +4118,7 @@ specific_driver_description
 
     .. py:attribute:: specific_driver_description
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4192,10 +4144,7 @@ specific_driver_prefix
 
     .. py:attribute:: specific_driver_prefix
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4221,10 +4170,7 @@ specific_driver_revision
 
     .. py:attribute:: specific_driver_revision
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4250,10 +4196,7 @@ specific_driver_vendor
 
     .. py:attribute:: specific_driver_vendor
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4357,10 +4300,7 @@ supported_instrument_models
 
     .. py:attribute:: supported_instrument_models
 
-        .. tip:: This property can use repeated capabilities. If set or get directly on the
-            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-            You can specify a subset of repeated capabilities using the Python index notation on an
-            nidigital.Session repeated capabilities container, and calling set/get value on the result.
+        
 
         The following table lists the characteristics of this property.
 
@@ -4470,7 +4410,10 @@ timing_absolute_delay
 
     .. py:attribute:: timing_absolute_delay
 
-        
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 

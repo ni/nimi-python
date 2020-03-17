@@ -150,23 +150,7 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     channel_count = _attributes.AttributeViInt32(1050203)
-    '''Type: int
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     clock_generator_frequency = _attributes.AttributeViReal64(1150073)
     '''Type: float
 
@@ -225,14 +209,6 @@ class _SessionBase(object):
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEdge, 1150031)
     digital_edge_start_trigger_source = _attributes.AttributeViString(1150030)
     driver_setup = _attributes.AttributeViString(1050007)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     exported_conditional_jump_trigger_output_terminal = _attributes.AttributeViString(1150036)
     '''Type: str
 
@@ -262,14 +238,6 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     halt_on_keep_alive_opcode = _attributes.AttributeViBoolean(1150062)
     history_ram_buffer_size_per_site = _attributes.AttributeViInt64(1150079)
     history_ram_cycles_to_acquire = _attributes.AttributeViInt32(1150047)
@@ -287,51 +255,11 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     instrument_model = _attributes.AttributeViString(1050512)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     is_keep_alive_active = _attributes.AttributeViBoolean(1150063)
     logical_name = _attributes.AttributeViString(1050305)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     mask_compare = _attributes.AttributeViBoolean(1150060)
     '''Type: bool
 
@@ -471,32 +399,8 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     query_instrument_status = _attributes.AttributeViBoolean(1050003)
-    '''Type: bool
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     selected_function = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SelectedFunction, 1150004)
     '''Type: enums.SelectedFunction
 
@@ -517,80 +421,16 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: bool
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
-    '''Type: int
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
-    '''Type: int
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     specific_driver_description = _attributes.AttributeViString(1050514)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     specific_driver_prefix = _attributes.AttributeViString(1050302)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     specific_driver_revision = _attributes.AttributeViString(1050551)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     specific_driver_vendor = _attributes.AttributeViString(1050513)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     start_label = _attributes.AttributeViString(1150023)
     start_trigger_terminal_name = _attributes.AttributeViString(1150039)
     start_trigger_type = _attributes.AttributeViInt32(1150029)
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: str
-
-    Tip:
-    This property can use repeated capabilities. If set or get directly on the
-    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
-    You can specify a subset of repeated capabilities using the Python index notation on an
-    nidigital.Session repeated capabilities container, and calling set/get value on the result.
-    '''
     tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
     tdr_offset = _attributes.AttributeViReal64(1150051)
     '''Type: float
@@ -611,6 +451,14 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     timing_absolute_delay = _attributes.AttributeViReal64(1150072)
+    '''Type: float
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     timing_absolute_delay_enabled = _attributes.AttributeViBoolean(1150071)
     vih = _attributes.AttributeViReal64(1150008)
     '''Type: float

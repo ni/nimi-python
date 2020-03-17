@@ -15,7 +15,7 @@ test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
-    with nidigital.Session(resource_name=','.join(instruments), options='') as simulated_session:
+    with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
         yield simulated_session
 
 
@@ -40,12 +40,17 @@ def test_pins_rep_cap(multi_instrument_session):
 
 
 def test_instruments_rep_cap(multi_instrument_session):
-    # fw_rev = multi_instrument_session.channels[instruments[1]].channel_count
-    # print(fw_rev)
-    # value = multi_instrument_session.channels[instruments[1]].channel_count
-    # print(value)
-    val2 = multi_instrument_session.channel_count
-    print(val2)
+    multi_instrument_session.timing_absolute_delay_enabled = True
+    multi_instrument_session.instruments[instruments[0]].timing_absolute_delay = 5e-09
+    multi_instrument_session.instruments[instruments[1]].timing_absolute_delay = -5e-09
+    assert multi_instrument_session.instruments[instruments[0]].timing_absolute_delay == 5e-09
+    assert multi_instrument_session.instruments[instruments[1]].timing_absolute_delay == -5e-09
+
+    for instrument in instruments:
+        assert multi_instrument_session.instruments[instrument].serial_number == '0'
+
+    for instrument in instruments:
+        assert multi_instrument_session.instruments[instrument].instrument_firmware_revision == '0.0.0d0'
 
 
 def test_property_boolean(multi_instrument_session):
