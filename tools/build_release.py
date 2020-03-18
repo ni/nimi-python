@@ -33,9 +33,10 @@ Steps
     * Build master to ensure it is in a good state and ready for release
     * Ensure no commits are made on master until the release is complete
     * Create and checkout a branch for release-related changes
-    * Update changelog
-        * Update the changelog to show the version of the release
-        * Change unreleased in TOC to new version
+    * Update CHANGELOG.md
+        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section
+        * Change the "Unreleased" header to the version of the release
+        * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
     * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
@@ -70,7 +71,7 @@ Steps
     build_group = parser.add_argument_group("Build configuration")
     build_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. build, then update with .dev0")
     build_group.add_argument("--upload", action="store_true", default=False, help="Upload build distributions to PyPI")
-    build_group.add_argument("--update", action="store_true", default=False, help="Update verion in config.py files")
+    build_group.add_argument("--update", action="store_true", default=False, help="Update version in config.py files")
     build_group.add_argument("--build", action="store_true", default=False, help="Clean and build")
     build_group.add_argument("--python-cmd", action="store", default=None, help="Command to use for invoking python. Default: {}".format(default_python_cmd))
 
