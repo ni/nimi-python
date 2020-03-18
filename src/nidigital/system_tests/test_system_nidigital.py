@@ -488,7 +488,7 @@ def test_get_site_pass_fail(multi_instrument_session):
         timeout=5)
 
     pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
-    assert pass_fail == {0: True, 1: True, 2:True, 3:True}
+    assert pass_fail == {0: True, 1: True, 2: True, 3: True}
 
     pass_fail = multi_instrument_session.get_site_pass_fail(site_list='site3,site0')
     assert pass_fail == {3: True, 0: True}
