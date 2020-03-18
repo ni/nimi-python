@@ -178,8 +178,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    conditional_jump_trigger_type = _attributes.AttributeViInt32(1150033)
-    '''Type: int
+    conditional_jump_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150033)
+    '''Type: enums.TriggerType
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -240,11 +240,11 @@ class _SessionBase(object):
     group_capabilities = _attributes.AttributeViString(1050401)
     halt_on_keep_alive_opcode = _attributes.AttributeViBoolean(1150062)
     history_ram_buffer_size_per_site = _attributes.AttributeViInt64(1150079)
-    history_ram_cycles_to_acquire = _attributes.AttributeViInt32(1150047)
+    history_ram_cycles_to_acquire = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMCyclesToAcquire, 1150047)
     history_ram_max_samples_to_acquire_per_site = _attributes.AttributeViInt32(1150077)
     history_ram_number_of_samples_is_finite = _attributes.AttributeViBoolean(1150078)
     history_ram_pretrigger_samples = _attributes.AttributeViInt32(1150048)
-    history_ram_trigger_type = _attributes.AttributeViInt32(1150043)
+    history_ram_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMTriggerType, 1150043)
     instrument_firmware_revision = _attributes.AttributeViString(1050510)
     '''Type: str
 
@@ -335,8 +335,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    ppmu_current_limit_behavior = _attributes.AttributeViInt32(1150064)
-    '''Type: int
+    ppmu_current_limit_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUCurrentLimitBehavior, 1150064)
+    '''Type: enums.PPMUCurrentLimitBehavior
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -421,7 +421,7 @@ class _SessionBase(object):
     specific_driver_vendor = _attributes.AttributeViString(1050513)
     start_label = _attributes.AttributeViString(1150023)
     start_trigger_terminal_name = _attributes.AttributeViString(1150039)
-    start_trigger_type = _attributes.AttributeViInt32(1150029)
+    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150029)
     supported_instrument_models = _attributes.AttributeViString(1050327)
     tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
     tdr_offset = _attributes.AttributeViReal64(1150051)
@@ -724,7 +724,7 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            format (int):
+            format (enums.DriveEdgeSetFormat):
 
             drive_on_edge (float):
 
@@ -735,10 +735,12 @@ class _SessionBase(object):
             drive_off_edge (float):
 
         '''
+        if type(format) is not enums.DriveEdgeSetFormat:
+            raise TypeError('Parameter format must be of type ' + str(enums.DriveEdgeSetFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32(format)  # case S150
+        format_ctype = _visatype.ViInt32(format.value)  # case S130
         drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
         drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
         drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
@@ -762,7 +764,7 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            format (int):
+            format (enums.DriveEdgeSetFormat):
 
             drive_on_edge (float):
 
@@ -777,10 +779,12 @@ class _SessionBase(object):
             drive_return2_edge (float):
 
         '''
+        if type(format) is not enums.DriveEdgeSetFormat:
+            raise TypeError('Parameter format must be of type ' + str(enums.DriveEdgeSetFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32(format)  # case S150
+        format_ctype = _visatype.ViInt32(format.value)  # case S130
         drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
         drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
         drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
@@ -806,13 +810,15 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            drive_format (int):
+            drive_format (enums.DriveEdgeSetFormat):
 
         '''
+        if type(drive_format) is not enums.DriveEdgeSetFormat:
+            raise TypeError('Parameter drive_format must be of type ' + str(enums.DriveEdgeSetFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        drive_format_ctype = _visatype.ViInt32(drive_format)  # case S150
+        drive_format_ctype = _visatype.ViInt32(drive_format.value)  # case S130
         error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_ctype, drive_format_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -832,15 +838,17 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            edge (int):
+            edge (enums.TimeSetEdge):
 
             time (float):
 
         '''
+        if type(edge) is not enums.TimeSetEdge:
+            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdge))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge)  # case S150
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         time_ctype = _visatype.ViReal64(time)  # case S150
         error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_ctype, edge_ctype, time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -947,14 +955,16 @@ class _SessionBase(object):
 
             sample_width (int):
 
-            bit_order (int):
+            bit_order (enums.BitOrder):
 
         '''
+        if type(bit_order) is not enums.BitOrder:
+            raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
-        bit_order_ctype = _visatype.ViInt32(bit_order)  # case S150
+        bit_order_ctype = _visatype.ViInt32(bit_order.value)  # case S130
         error_code = self._library.niDigital_CreateCaptureWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, sample_width_ctype, bit_order_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -974,13 +984,15 @@ class _SessionBase(object):
         Args:
             waveform_name (str):
 
-            data_mapping (int):
+            data_mapping (enums.SourceMemoryDataMapping):
 
         '''
+        if type(data_mapping) is not enums.SourceMemoryDataMapping:
+            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceMemoryDataMapping))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        data_mapping_ctype = _visatype.ViInt32(data_mapping)  # case S150
+        data_mapping_ctype = _visatype.ViInt32(data_mapping.value)  # case S130
         error_code = self._library.niDigital_CreateSourceWaveformParallel(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1000,19 +1012,23 @@ class _SessionBase(object):
         Args:
             waveform_name (str):
 
-            data_mapping (int):
+            data_mapping (enums.SourceMemoryDataMapping):
 
             sample_width (int):
 
-            bit_order (int):
+            bit_order (enums.BitOrder):
 
         '''
+        if type(data_mapping) is not enums.SourceMemoryDataMapping:
+            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceMemoryDataMapping))
+        if type(bit_order) is not enums.BitOrder:
+            raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        data_mapping_ctype = _visatype.ViInt32(data_mapping)  # case S150
+        data_mapping_ctype = _visatype.ViInt32(data_mapping.value)  # case S130
         sample_width_ctype = _visatype.ViUInt32(sample_width)  # case S150
-        bit_order_ctype = _visatype.ViInt32(bit_order)  # case S150
+        bit_order_ctype = _visatype.ViInt32(bit_order.value)  # case S130
         error_code = self._library.niDigital_CreateSourceWaveformSerial(vi_ctype, pin_list_ctype, waveform_name_ctype, data_mapping_ctype, sample_width_ctype, bit_order_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1565,7 +1581,7 @@ class _SessionBase(object):
 
 
         Returns:
-            format (int):
+            format (enums.DriveEdgeSetFormat):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1574,7 +1590,7 @@ class _SessionBase(object):
         format_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(format_ctype.value)
+        return enums.DriveEdgeSetFormat(format_ctype.value)
 
     @ivi_synchronized
     def get_time_set_edge(self, time_set, edge):
@@ -1591,17 +1607,19 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            edge (int):
+            edge (enums.TimeSetEdge):
 
 
         Returns:
             time (float):
 
         '''
+        if type(edge) is not enums.TimeSetEdge:
+            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdge))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge)  # case S150
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         time_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -1693,16 +1711,18 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            measurement_type (int):
+            measurement_type (enums.PPMUMeasurementType):
 
 
         Returns:
             measurements (list of float):
 
         '''
+        if type(measurement_type) is not enums.PPMUMeasurementType:
+            raise TypeError('Parameter measurement_type must be of type ' + str(enums.PPMUMeasurementType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        measurement_type_ctype = _visatype.ViInt32(measurement_type)  # case S150
+        measurement_type_ctype = _visatype.ViInt32(measurement_type.value)  # case S130
         buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         measurements_ctype = None  # case B610
         actual_num_read_ctype = _visatype.ViInt32()  # case S220
@@ -1746,7 +1766,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
-            data (list of int):
+            data (list of enums.DigitalState):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1761,7 +1781,7 @@ class _SessionBase(object):
         data_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=data_size)  # case B620
         error_code = self._library.niDigital_ReadStatic(vi_ctype, channel_list_ctype, buffer_size_ctype, data_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(data_ctype[i]) for i in range(buffer_size_ctype.value)]
+        return [enums.DigitalState(data_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def reset_attribute(self, attribute_id):
@@ -1976,12 +1996,14 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            state (int):
+            state (enums.DigitalState):
 
         '''
+        if type(state) is not enums.DigitalState:
+            raise TypeError('Parameter state must be of type ' + str(enums.DigitalState))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        state_ctype = _visatype.ViUInt8(state)  # case S150
+        state_ctype = _visatype.ViUInt8(state.value)  # case S130
         error_code = self._library.niDigital_WriteStatic(vi_ctype, channel_list_ctype, state_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2936,15 +2958,17 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            flag (str):
+            flag (enums.SequencerFlag):
 
 
         Returns:
             value (bool):
 
         '''
+        if type(flag) is not enums.SequencerFlag:
+            raise TypeError('Parameter flag must be of type ' + str(enums.SequencerFlag))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        flag_ctype = ctypes.create_string_buffer(flag.encode(self._encoding))  # case C020
+        flag_ctype = ctypes.create_string_buffer(flag.value.encode(self._encoding))  # case C030
         value_ctype = _visatype.ViBoolean()  # case S220
         error_code = self._library.niDigital_ReadSequencerFlag(vi_ctype, flag_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2957,15 +2981,17 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            reg (str):
+            reg (enums.SequencerRegister):
 
 
         Returns:
             value (int):
 
         '''
+        if type(reg) is not enums.SequencerRegister:
+            raise TypeError('Parameter reg must be of type ' + str(enums.SequencerRegister))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        reg_ctype = ctypes.create_string_buffer(reg.encode(self._encoding))  # case C020
+        reg_ctype = ctypes.create_string_buffer(reg.value.encode(self._encoding))  # case C030
         value_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDigital_ReadSequencerRegister(vi_ctype, reg_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3067,13 +3093,15 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            flag (str):
+            flag (enums.SequencerFlag):
 
             value (bool):
 
         '''
+        if type(flag) is not enums.SequencerFlag:
+            raise TypeError('Parameter flag must be of type ' + str(enums.SequencerFlag))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        flag_ctype = ctypes.create_string_buffer(flag.encode(self._encoding))  # case C020
+        flag_ctype = ctypes.create_string_buffer(flag.value.encode(self._encoding))  # case C030
         value_ctype = _visatype.ViBoolean(value)  # case S150
         error_code = self._library.niDigital_WriteSequencerFlag(vi_ctype, flag_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3086,13 +3114,15 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            reg (str):
+            reg (enums.SequencerRegister):
 
             value (int):
 
         '''
+        if type(reg) is not enums.SequencerRegister:
+            raise TypeError('Parameter reg must be of type ' + str(enums.SequencerRegister))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        reg_ctype = ctypes.create_string_buffer(reg.encode(self._encoding))  # case C020
+        reg_ctype = ctypes.create_string_buffer(reg.value.encode(self._encoding))  # case C030
         value_ctype = _visatype.ViInt32(value)  # case S150
         error_code = self._library.niDigital_WriteSequencerRegister(vi_ctype, reg_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

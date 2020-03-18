@@ -127,7 +127,7 @@ enums = {
             }
         ]
     },
-    'HramCyclesToAcquire': {
+    'HistoryRAMCyclesToAcquire': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_FAILED_CYCLES',
@@ -139,7 +139,7 @@ enums = {
             }
         ]
     },
-    'HramTriggerType': {
+    'HistoryRAMTriggerType': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_FIRST_FAILURE',
