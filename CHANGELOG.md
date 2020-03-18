@@ -58,6 +58,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
     * #### Changed
+        * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
     * #### Removed
         * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
 * ### NI-TClk
