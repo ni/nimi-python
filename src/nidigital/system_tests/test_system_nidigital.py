@@ -34,9 +34,11 @@ def test_pins_rep_cap(multi_instrument_session):
 
     # Methods that accept pin_list parameter
     multi_instrument_session.create_time_set('t0')
-    multi_instrument_session.pins['PinA', 'PinB'].configure_time_set_drive_format('t0', 1501)
-    drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format('t0')
-    assert drive_format == 1501
+    multi_instrument_session.pins['PinA', 'PinB'].configure_time_set_drive_format(
+        time_set='t0',
+        drive_format=nidigital.DriveEdgeSetFormat.RL)
+    drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format(time_set='t0')
+    assert drive_format == nidigital.DriveEdgeSetFormat.RL
 
 
 def test_instruments_rep_cap(multi_instrument_session):
@@ -110,7 +112,9 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
 
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
-    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2600)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceMemoryDataMapping.BROADCAST)
 
     multi_instrument_session.write_source_waveform_broadcast(
         waveform_name='src_wfm',
@@ -158,9 +162,11 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
     num_samples = 256
-    multi_instrument_session.write_sequencer_register(reg='reg0', value=num_samples)
+    multi_instrument_session.write_sequencer_register(reg=nidigital.SequencerRegister.REGISTER0, value=num_samples)
 
-    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2601)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceMemoryDataMapping.SITE_UNIQUE)
 
     if source_waveform_type == array.array:
         source_waveform = {
@@ -208,9 +214,11 @@ def test_fetch_capture_waveform(multi_instrument_session):
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
     num_samples = 256
-    multi_instrument_session.write_sequencer_register(reg='reg0', value=num_samples)
+    multi_instrument_session.write_sequencer_register(reg=nidigital.SequencerRegister.REGISTER0, value=num_samples)
 
-    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2600)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceMemoryDataMapping.BROADCAST)
     source_waveform = [i for i in range(num_samples)]
     multi_instrument_session.write_source_waveform_broadcast(waveform_name='src_wfm', waveform_data=source_waveform)
 
@@ -303,8 +311,8 @@ def configure_for_history_ram_test(session):
 
     session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    session.history_ram_trigger_type = 2200
-    session.history_ram_cycles_to_acquire = 2304
+    session.history_ram_trigger_type = nidigital.HistoryRAMTriggerType.FIRST_FAILURE
+    session.history_ram_cycles_to_acquire = nidigital.HistoryRAMCyclesToAcquire.ALL
     session.history_ram_pretrigger_samples = 0
     session.history_ram_number_of_samples_is_finite = True
 

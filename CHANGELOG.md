@@ -59,6 +59,7 @@ All notable changes to this project will be documented in this file.
         * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
         * Support for `instruments` repeated capability in following properties - `instrument_firmware_revision`, `serial_number`, and `timing_absolute_delay` -  [#1228](https://github.com/ni/nimi-python/issues/1228)
     * #### Changed
+        * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
     * #### Removed
         * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
 * ### NI-TClk

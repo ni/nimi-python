@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nidigital examples here <https://github.com/ni/nimi-python/releases/download/1.2.0/nidigital_examples.zip>`_
+`You can download all nidigital examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.2.0/nidigital_examples.zip>`_
 
 nidigital_do_nothing.py
 -----------------------
