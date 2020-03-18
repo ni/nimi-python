@@ -1469,7 +1469,7 @@ get_site_pass_fail
 
     .. py:method:: get_site_pass_fail(site_list)
 
-            Returns dictionary where each key is the site number and the value is the pass or fail result
+            Returns dictionary where each key is a site number and value is pass/fail
 
             
 
@@ -1487,7 +1487,7 @@ get_site_pass_fail
             :return:
 
 
-                    Dictionary where each key is the site number and the value is the pass or fail result
+                    Dictionary where each key is a site number and value is pass/fail
 
                     
 

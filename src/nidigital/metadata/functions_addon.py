@@ -96,7 +96,7 @@ functions_additional_get_site_pass_fail = {
             }
         ],
         'documentation': {
-            'description': '\nReturns dictionary where each key is the site number and the value is the pass or fail result\n\n',
+            'description': '\nReturns dictionary where each key is a site number and value is pass/fail\n\n',
         },
         'parameters': [
             {
@@ -112,7 +112,7 @@ functions_additional_get_site_pass_fail = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nDictionary where each key is the site number and the value is the pass or fail result\n'
+                    'description': '\nDictionary where each key is a site number and value is pass/fail\n'
                 },
                 'name': 'passFail',
                 'size': {

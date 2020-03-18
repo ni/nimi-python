@@ -2441,23 +2441,21 @@ class Session(_SessionBase):
     def get_site_pass_fail(self, site_list):
         '''get_site_pass_fail
 
-        Returns dictionary where each key is the site number and the value is the pass or fail result
+        Returns dictionary where each key is a site number and value is pass/fail
 
         Args:
             site_list (str):
 
 
         Returns:
-            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is the site number and the value is the pass or fail result
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
 
         '''
         result_list = self._get_site_pass_fail(site_list)
-
         site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.PASS_FAIL)
         assert len(site_list) == len(result_list)
 
-        pass_fail = dict(zip(site_list, result_list))
-        return pass_fail
+        return dict(zip(site_list, result_list))
 
     @ivi_synchronized
     def self_test(self):

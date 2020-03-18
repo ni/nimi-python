@@ -59,7 +59,7 @@ All notable changes to this project will be documented in this file.
         * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
     * #### Changed
         * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
-        * `get_site_pass_fail` returns `dict` of `site`: `pass_fail` - [#1297](https://github.com/ni/nimi-python/issues/1297)
+        * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
     * #### Removed
         * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
 * ### NI-TClk
