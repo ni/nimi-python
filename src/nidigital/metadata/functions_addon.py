@@ -120,6 +120,7 @@ functions_additional_fetch_capture_waveform = {
                 'type': 'ViInt32'
             },
             {
+                'default_value': 'datetime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64',
