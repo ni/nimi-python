@@ -1468,7 +1468,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'python_api_converter_name': 'convert_site_string',
+                'python_api_converter_name': 'convert_site_to_string',
                 'type_in_documentation': 'str or int',
                 'name': 'site',
                 'type': 'ViConstString'
@@ -2004,7 +2004,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'python_api_converter_name': 'convert_site_string',
+                'python_api_converter_name': 'convert_site_to_string',
                 'type_in_documentation': 'str or int',
                 'name': 'site',
                 'type': 'ViConstString'

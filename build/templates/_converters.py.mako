@@ -215,7 +215,9 @@ def convert_init_with_options_dictionary(values):
     return init_with_options_string
 
 
-# Beginning of module specific converters
+<%
+# Beginning of module-specific converters
+%>\
 <%
 # nitclk is different. Only nitclk needs to be able to convert sessions like this
 %>\
@@ -263,12 +265,12 @@ def convert_double_each_element(numbers):
 # to repeated capabilities.
 %>\
 % if config['module_name'] == 'nidigital':
-def convert_site_string(site):
+def convert_site_to_string(site):
     if isinstance(site, str):
         if site.startswith('site'):
             return site
         else:
-            return 'site' + site
+            return convert_site_to_string(int(site))
     else:
         if type(site) != int:
             # Don't use assert here since this comes from the user
