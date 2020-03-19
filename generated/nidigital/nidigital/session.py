@@ -228,8 +228,8 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
-    frequency_counter_measurement_time = _attributes.AttributeViReal64(1150069)
-    '''Type: float
+    frequency_counter_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150069)
+    '''Type: float in seconds or datetime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -424,8 +424,8 @@ class _SessionBase(object):
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150029)
     supported_instrument_models = _attributes.AttributeViString(1050327)
     tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
-    tdr_offset = _attributes.AttributeViReal64(1150051)
-    '''Type: float
+    tdr_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
+    '''Type: float in seconds or datetime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -442,7 +442,7 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    timing_absolute_delay = _attributes.AttributeViReal64(1150072)
+    timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
     timing_absolute_delay_enabled = _attributes.AttributeViBoolean(1150071)
     vih = _attributes.AttributeViReal64(1150008)
     '''Type: float
@@ -552,13 +552,13 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            offsets (list of float):
+            offsets (list of float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         num_offsets_ctype = _visatype.ViInt32(0 if offsets is None else len(offsets))  # case S160
-        offsets_ctype = get_ctypes_pointer_for_buffer(value=offsets, library_type=_visatype.ViReal64)  # case B550
+        offsets_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_seconds_real64(offsets), library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niDigital_ApplyTDROffsets(vi_ctype, channel_list_ctype, num_offsets_ctype, offsets_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -669,13 +669,13 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            strobe_edge (float):
+            strobe_edge (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
+        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -695,16 +695,16 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            strobe_edge (float):
+            strobe_edge (float in seconds or datetime.timedelta):
 
-            strobe2_edge (float):
+            strobe2_edge (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
-        strobe2_edge_ctype = _visatype.ViReal64(strobe2_edge)  # case S150
+        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
+        strobe2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe2_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype, strobe2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -726,13 +726,13 @@ class _SessionBase(object):
 
             format (enums.DriveEdgeSetFormat):
 
-            drive_on_edge (float):
+            drive_on_edge (float in seconds or datetime.timedelta):
 
-            drive_data_edge (float):
+            drive_data_edge (float in seconds or datetime.timedelta):
 
-            drive_return_edge (float):
+            drive_return_edge (float in seconds or datetime.timedelta):
 
-            drive_off_edge (float):
+            drive_off_edge (float in seconds or datetime.timedelta):
 
         '''
         if type(format) is not enums.DriveEdgeSetFormat:
@@ -741,10 +741,10 @@ class _SessionBase(object):
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
-        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
-        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
-        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
+        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
+        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
+        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
+        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -766,17 +766,17 @@ class _SessionBase(object):
 
             format (enums.DriveEdgeSetFormat):
 
-            drive_on_edge (float):
+            drive_on_edge (float in seconds or datetime.timedelta):
 
-            drive_data_edge (float):
+            drive_data_edge (float in seconds or datetime.timedelta):
 
-            drive_return_edge (float):
+            drive_return_edge (float in seconds or datetime.timedelta):
 
-            drive_off_edge (float):
+            drive_off_edge (float in seconds or datetime.timedelta):
 
-            drive_data2_edge (float):
+            drive_data2_edge (float in seconds or datetime.timedelta):
 
-            drive_return2_edge (float):
+            drive_return2_edge (float in seconds or datetime.timedelta):
 
         '''
         if type(format) is not enums.DriveEdgeSetFormat:
@@ -785,12 +785,12 @@ class _SessionBase(object):
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
-        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
-        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
-        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
-        drive_data2_edge_ctype = _visatype.ViReal64(drive_data2_edge)  # case S150
-        drive_return2_edge_ctype = _visatype.ViReal64(drive_return2_edge)  # case S150
+        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
+        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
+        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
+        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
+        drive_data2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data2_edge)  # case S140
+        drive_return2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return2_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -840,7 +840,7 @@ class _SessionBase(object):
 
             edge (enums.TimeSetEdge):
 
-            time (float):
+            time (float in seconds or datetime.timedelta):
 
         '''
         if type(edge) is not enums.TimeSetEdge:
@@ -849,7 +849,7 @@ class _SessionBase(object):
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        time_ctype = _visatype.ViReal64(time)  # case S150
+        time_ctype = _converters.convert_timedelta_to_seconds_real64(time)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_ctype, edge_ctype, time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1953,7 +1953,7 @@ class _SessionBase(object):
 
 
         Returns:
-            offsets (list of float):
+            offsets (list of datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1969,7 +1969,7 @@ class _SessionBase(object):
         offsets_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=offsets_size)  # case B620
         error_code = self._library.niDigital_TDR(vi_ctype, channel_list_ctype, apply_offsets_ctype, offsets_buffer_size_ctype, offsets_ctype, None if actual_num_offsets_ctype is None else (ctypes.pointer(actual_num_offsets_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)]
+        return _converters.convert_seconds_real64_to_timedeltas([float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)])
 
     def unlock(self):
         '''unlock
@@ -2191,7 +2191,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+    def burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
         r'''burst_pattern
 
         TBD
@@ -2205,7 +2205,7 @@ class Session(_SessionBase):
 
             wait_until_done (bool):
 
-            timeout (float):
+            timeout (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2213,7 +2213,7 @@ class Session(_SessionBase):
         start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
         select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
         wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -2265,12 +2265,12 @@ class Session(_SessionBase):
         Args:
             time_set (str):
 
-            period (float):
+            period (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        period_ctype = _visatype.ViReal64(period)  # case S150
+        period_ctype = _converters.convert_timedelta_to_seconds_real64(period)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetPeriod(vi_ctype, time_set_ctype, period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3069,17 +3069,17 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, timeout=10.0):
+    def wait_until_done(self, timeout=datetime.timedelta(seconds=10.0)):
         r'''wait_until_done
 
         TBD
 
         Args:
-            timeout (float):
+            timeout (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDigital_WaitUntilDone(vi_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

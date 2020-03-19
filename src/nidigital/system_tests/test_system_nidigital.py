@@ -446,12 +446,7 @@ def test_get_site_pass_fail(multi_instrument_session):
 
     multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    multi_instrument_session.burst_pattern(
-        site_list='',
-        start_label='new_pattern',
-        select_digital_function=True,
-        wait_until_done=True,
-        timeout=5)
+    multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern')
 
     pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
     assert pass_fail == {0: True, 1: True, 2: True, 3: True}
