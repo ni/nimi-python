@@ -109,7 +109,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
     multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern')
 
     pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
-    assert pass_fail == [True, True]
+    assert pass_fail == {0: True, 1: True}
 
 
 def configure_session(session, test_name):
@@ -437,4 +437,25 @@ def test_get_pattern_pin_names(multi_instrument_session):
 
     pattern_pin_names = multi_instrument_session.get_pattern_pin_names(start_label='new_pattern')
 
-    assert pattern_pin_names == ['LO' + str(i) for i in range(8)] + ['HI' + str(i) for i in range(8)]
+    assert pattern_pin_names == ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
+
+
+def test_get_site_pass_fail(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    multi_instrument_session.burst_pattern(
+        site_list='',
+        start_label='new_pattern',
+        select_digital_function=True,
+        wait_until_done=True,
+        timeout=5)
+
+    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
+    assert pass_fail == {0: True, 1: True, 2: True, 3: True}
+
+    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='site3,site0')
+    assert pass_fail == {3: True, 0: True}
+

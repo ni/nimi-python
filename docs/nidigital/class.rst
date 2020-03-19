@@ -1469,7 +1469,7 @@ get_site_pass_fail
 
     .. py:method:: get_site_pass_fail(site_list)
 
-            TBD
+            Returns dictionary where each key is a site number and value is pass/fail
 
             
 
@@ -1483,9 +1483,11 @@ get_site_pass_fail
 
             :type site_list: str
 
-            :rtype: list of bool
+            :rtype: { int: bool, int: bool, ... }
             :return:
 
+
+                    Dictionary where each key is a site number and value is pass/fail
 
                     
 

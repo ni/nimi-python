@@ -2438,6 +2438,26 @@ class Session(_SessionBase):
         return waveforms
 
     @ivi_synchronized
+    def get_site_pass_fail(self, site_list):
+        '''get_site_pass_fail
+
+        Returns dictionary where each key is a site number and value is pass/fail
+
+        Args:
+            site_list (str):
+
+
+        Returns:
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
+
+        '''
+        result_list = self._get_site_pass_fail(site_list)
+        site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.PASS_FAIL)
+        assert len(site_list) == len(result_list)
+
+        return dict(zip(site_list, result_list))
+
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2666,8 +2686,8 @@ class Session(_SessionBase):
         return _converters.convert_comma_separated_string_to_list(pin_list_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
-    def get_site_pass_fail(self, site_list):
-        r'''get_site_pass_fail
+    def _get_site_pass_fail(self, site_list):
+        r'''_get_site_pass_fail
 
         TBD
 
