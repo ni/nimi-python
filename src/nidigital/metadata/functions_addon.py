@@ -4,6 +4,83 @@
 functions_override_metadata = {
 }
 
+functions_additional_burst_pattern = {
+    'FancyBurstPattern': {
+        'python_name': 'burst_pattern',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_burst_pattern',
+            }
+        ],
+        'documentation': {
+            'description': """\nUses the start_label you specify to burst the pattern on the sites you
+specify. Digital pins retain their state at the end of a pattern burst until the first vector of the pattern
+burst, a call to niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
+"""
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'siteList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'startLabel',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'selectDigitalFunction',
+                'type': 'ViBoolean'
+            },
+            {
+                'direction': 'in',
+                'name': 'waitUntilDone',
+                'type': 'ViBoolean'
+            },
+            {
+                'direction': 'in',
+                'name': 'timeout',
+                'type': 'ViReal64'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'siteList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nDictionary where each key is a site number and value is pass/fail\n'
+                },
+                'name': 'passFail',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'ViBoolean',
+                'type_in_documentation': '{ int: bool, int: bool, ... }',
+            },
+        ],
+    },
+}
+
 functions_additional_write_source_waveform_site_unique = {
     'FancyWriteSourceWaveformSiteUnique': {
         'python_name': 'write_source_waveform_site_unique',
