@@ -434,7 +434,7 @@ def test_get_pattern_pin_names(multi_instrument_session):
 
     pattern_pin_names = multi_instrument_session.get_pattern_pin_names(start_label='new_pattern')
 
-    assert pattern_pin_names == ['LO' + str(i) for i in range(8)] + ['HI' + str(i) for i in range(8)]
+    assert pattern_pin_names == ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
 
 
 # nidigital specific converter tests
@@ -485,9 +485,9 @@ def test_get_site_pass_fail(multi_instrument_session):
         wait_until_done=True,
         timeout=5)
 
-    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
+    pass_fail = multi_instrument_session.get_site_pass_fail()
     assert pass_fail == {0: True, 1: True, 2: True, 3: True}
 
-    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='site3,site0')
+    pass_fail = multi_instrument_session.sites[3, 0].get_site_pass_fail()
     assert pass_fail == {3: True, 0: True}
 
