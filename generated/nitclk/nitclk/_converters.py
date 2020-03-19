@@ -210,7 +210,6 @@ def convert_init_with_options_dictionary(values):
     return init_with_options_string
 
 
-# Beginning of module specific converters
 # nitclk specific converters
 def convert_to_nitclk_session_number(item):
     '''Convert from supported objects to NI-TClk Session Num

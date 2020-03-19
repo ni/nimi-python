@@ -210,7 +210,6 @@ def convert_init_with_options_dictionary(values):
     return init_with_options_string
 
 
-# Beginning of module specific converters
 # convert value to bytes
 @singledispatch
 def _convert_to_bytes(value):  # noqa: F811
