@@ -21,36 +21,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## Unreleased
 * ### ALL
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-DCPower
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-FGEN
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-SCOPE
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI Switch Executive
     * #### Added
     * #### Changed
     * #### Removed
@@ -62,6 +38,30 @@ All notable changes to this project will be documented in this file.
         * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
     * #### Removed
         * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-TClk
     * #### Added
     * #### Changed
@@ -871,20 +871,8 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 
 <!--
 * [Unreleased](#unreleased)
-## [Unreleased]
+## Unreleased
 * ### ALL
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
     * #### Added
     * #### Changed
     * #### Removed
@@ -892,7 +880,19 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
     * #### Added
     * #### Changed
     * #### Removed
@@ -900,11 +900,11 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI Switch Executive
+* ### NI-Switch
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI-Digital Pattern Driver
+* ### NI Switch Executive
     * #### Added
     * #### Changed
     * #### Removed
