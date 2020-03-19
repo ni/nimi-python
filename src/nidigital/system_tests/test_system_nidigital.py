@@ -112,7 +112,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         wait_until_done=True,
         timeout=5)
 
-    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
+    pass_fail = multi_instrument_session.get_site_pass_fail()
     assert pass_fail == {0: True, 1: True}
 
 
@@ -469,33 +469,33 @@ def test_get_pattern_pin_names(multi_instrument_session):
 # We are specifically using a "private" module to get to the converters so we can test the
 # nidigital specific one
 def test_convert_site_string():
-    test_result = nidigital._converters.convert_site_string('1')
+    test_result = nidigital._converters.convert_site_to_string('1')
     assert test_result == 'site1'
-    test_result = nidigital._converters.convert_site_string(1)
+    test_result = nidigital._converters.convert_site_to_string(1)
     assert test_result == 'site1'
-    test_result = nidigital._converters.convert_site_string('site1')
+    test_result = nidigital._converters.convert_site_to_string('site1')
     assert test_result == 'site1'
-    test_result = nidigital._converters.convert_site_string('42')
+    test_result = nidigital._converters.convert_site_to_string('42')
     assert test_result == 'site42'
-    test_result = nidigital._converters.convert_site_string(42)
+    test_result = nidigital._converters.convert_site_to_string(42)
     assert test_result == 'site42'
-    test_result = nidigital._converters.convert_site_string('site42')
+    test_result = nidigital._converters.convert_site_to_string('site42')
     assert test_result == 'site42'
 
 
 def test_convert_site_string_errors():
     try:
-        nidigital._converters.convert_site_string(1.0)
+        nidigital._converters.convert_site_to_string(1.0)
         assert False
     except TypeError:
         pass
     try:
-        nidigital._converters.convert_site_string(['1'])
+        nidigital._converters.convert_site_to_string(['1'])
         assert False
     except TypeError:
         pass
     try:
-        nidigital._converters.convert_site_string(False)
+        nidigital._converters.convert_site_to_string(False)
         assert False
     except TypeError:
         pass
@@ -508,7 +508,6 @@ def test_get_site_pass_fail(multi_instrument_session):
     multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
     multi_instrument_session.burst_pattern(
-        site_list='',
         start_label='new_pattern',
         select_digital_function=True,
         wait_until_done=True,
