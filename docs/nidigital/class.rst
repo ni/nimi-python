@@ -1452,18 +1452,21 @@ get_site_pass_fail
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_site_pass_fail()
+    .. py:method:: get_site_pass_fail(site_list)
 
             Returns dictionary where each key is a site number and value is pass/fail
 
             
 
 
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
 
+            :param site_list:
+
+
+                
+
+
+            :type site_list: str
 
             :rtype: { int: bool, int: bool, ... }
             :return:
