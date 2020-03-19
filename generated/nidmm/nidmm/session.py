@@ -582,12 +582,10 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -622,12 +620,10 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -662,12 +658,10 @@ class _SessionBase(object):
         -  State caching is enabled, and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -705,12 +699,10 @@ class _SessionBase(object):
            parameter.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_string(attribute_id)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -847,12 +839,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -899,12 +889,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -951,12 +939,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -1003,12 +989,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nidmm.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nidmm.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
+        nidmm.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -1817,7 +1801,7 @@ class Session(_SessionBase):
         _initiate before calling this method.
 
         Args:
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1862,7 +1846,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1912,7 +1896,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1957,7 +1941,7 @@ class Session(_SessionBase):
             waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2475,7 +2459,7 @@ class Session(_SessionBase):
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2519,7 +2503,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2616,7 +2600,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (float in seconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been

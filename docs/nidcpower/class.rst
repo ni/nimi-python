@@ -239,14 +239,10 @@ configure_aperture_time
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].configure_aperture_time(aperture_time, units=nidcpower.ApertureTimeUnits.SECONDS)
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param aperture_time:
@@ -718,14 +714,10 @@ fetch_multiple
             .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].fetch_multiple(count, timeout=datetime.timedelta(seconds=1.0))
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param count:
@@ -1153,14 +1145,10 @@ measure
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].measure(measurement_type)
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param measurement_type:
@@ -1213,14 +1201,10 @@ measure_multiple
             .. note:: This method is not supported on all devices. Refer to `Supported Methods by Device <REPLACE_DRIVER_SPECIFIC_URL_2(nidcpowercref.chm, supportedfunctions)>`__ for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].measure_multiple()
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :rtype: list of Measurement
@@ -1270,14 +1254,10 @@ query_in_compliance
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].query_in_compliance()
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :rtype: bool
@@ -1303,14 +1283,10 @@ query_max_current_limit
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].query_max_current_limit(voltage_level)
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param voltage_level:
@@ -1348,14 +1324,10 @@ query_max_voltage_level
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].query_max_voltage_level(current_limit)
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param current_limit:
@@ -1393,14 +1365,10 @@ query_min_current_limit
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].query_min_current_limit(voltage_level)
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param voltage_level:
@@ -1442,14 +1410,10 @@ query_output_state
             
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].query_output_state(output_state)
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param output_state:
@@ -1601,14 +1565,10 @@ self_cal
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].self_cal()
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
 self_test
@@ -1718,14 +1678,10 @@ set_sequence
                 for more information about supported devices.
 
 
-            .. tip:: This method requires repeated capabilities (channels). If called directly on the
+            .. tip:: This method requires repeated capabilities. If called directly on the
                 nidcpower.Session object, then the method will use all repeated capabilities in the session.
                 You can specify a subset of repeated capabilities using the Python index notation on an
-                nidcpower.Session repeated capabilities container, and calling this method on the result.:
-
-                .. code:: python
-
-                    session.channels[0,1].set_sequence(values, source_delays)
+                nidcpower.Session repeated capabilities container, and calling this method on the result.
 
 
             :param values:
@@ -1832,39 +1788,6 @@ wait_for_event
             :type timeout: float in seconds or datetime.timedelta
 
 
-.. role:: c(code)
-    :language: c
-
-.. role:: python(code)
-    :language: python
-
-Repeated Capabilities
-=====================
-
-    Repeated capabilities attributes are used to set the `channel_string` parameter to the
-    underlying driver function call. This can be the actual function based on the :py:class:`Session`
-    method being called, or it can be the appropriate Get/Set Attribute function, such as :c:`niDCPower_SetAttributeViInt32()`.
-
-    Repeated capbilities attributes use the indexing operator :python:`[]` to indicate the repeated capabilities.
-    The parameter can be a string, list, tuple, or slice (range). Each element of those can be a string or
-    an integer. If it is a string, you can indicate a range using the same format as the driver: :python:`'0-2'` or
-    :python:`'0:2'`
-
-    Some repeated capabilities use a prefix before the number and this is optional
-
-channels
---------
-
-    .. py:attribute:: nidcpower.Session.channels[]
-
-        .. code:: python
-
-            session.channels['0-2'].channel_enabled = True
-
-        passes a string of :python:`'0, 1, 2'` to the set attribute function.
-
-
-
 Properties
 ==========
 
@@ -1880,15 +1803,10 @@ active_advanced_sequence
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].active_advanced_sequence = var
-                var = session.channels[0,1].active_advanced_sequence
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1922,15 +1840,10 @@ active_advanced_sequence_step
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].active_advanced_sequence_step = var
-                var = session.channels[0,1].active_advanced_sequence_step
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1967,15 +1880,10 @@ aperture_time
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].aperture_time = var
-                var = session.channels[0,1].aperture_time
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2012,15 +1920,10 @@ aperture_time_units
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].aperture_time_units = var
-                var = session.channels[0,1].aperture_time_units
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2054,15 +1957,10 @@ auto_zero
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].auto_zero = var
-                var = session.channels[0,1].auto_zero
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2098,14 +1996,10 @@ auxiliary_power_source_available
         .. note:: This property does not necessarily indicate if the device is using the auxiliary
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].auxiliary_power_source_available
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2184,15 +2078,10 @@ compliance_limit_symmetry
             information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].compliance_limit_symmetry = var
-                var = session.channels[0,1].compliance_limit_symmetry
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2228,15 +2117,10 @@ current_compensation_frequency
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_compensation_frequency = var
-                var = session.channels[0,1].current_compensation_frequency
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2272,15 +2156,10 @@ current_gain_bandwidth
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_gain_bandwidth = var
-                var = session.channels[0,1].current_gain_bandwidth
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2317,15 +2196,10 @@ current_level
         .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_level = var
-                var = session.channels[0,1].current_level
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2361,15 +2235,10 @@ current_level_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_level_autorange = var
-                var = session.channels[0,1].current_level_autorange
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2407,15 +2276,10 @@ current_level_range
         .. note:: The channel must be enabled for the specified current level range to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_level_range = var
-                var = session.channels[0,1].current_level_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2452,15 +2316,10 @@ current_limit
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_limit = var
-                var = session.channels[0,1].current_limit
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2496,15 +2355,10 @@ current_limit_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_limit_autorange = var
-                var = session.channels[0,1].current_limit_autorange
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2531,15 +2385,10 @@ current_limit_behavior
 
     .. py:attribute:: current_limit_behavior
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_limit_behavior = var
-                var = session.channels[0,1].current_limit_behavior
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2597,15 +2446,10 @@ current_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_limit_high = var
-                var = session.channels[0,1].current_limit_high
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2664,15 +2508,10 @@ current_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_limit_low = var
-                var = session.channels[0,1].current_limit_low
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2710,15 +2549,10 @@ current_limit_range
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_limit_range = var
-                var = session.channels[0,1].current_limit_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2754,15 +2588,10 @@ current_pole_zero_ratio
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].current_pole_zero_ratio = var
-                var = session.channels[0,1].current_pole_zero_ratio
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2798,15 +2627,10 @@ dc_noise_rejection
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].dc_noise_rejection = var
-                var = session.channels[0,1].dc_noise_rejection
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2843,15 +2667,10 @@ digital_edge_measure_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].digital_edge_measure_trigger_input_terminal = var
-                var = session.channels[0,1].digital_edge_measure_trigger_input_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2887,15 +2706,10 @@ digital_edge_pulse_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].digital_edge_pulse_trigger_input_terminal = var
-                var = session.channels[0,1].digital_edge_pulse_trigger_input_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2932,15 +2746,10 @@ digital_edge_sequence_advance_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].digital_edge_sequence_advance_trigger_input_terminal = var
-                var = session.channels[0,1].digital_edge_sequence_advance_trigger_input_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2977,15 +2786,10 @@ digital_edge_source_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].digital_edge_source_trigger_input_terminal = var
-                var = session.channels[0,1].digital_edge_source_trigger_input_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3022,15 +2826,10 @@ digital_edge_start_trigger_input_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].digital_edge_start_trigger_input_terminal = var
-                var = session.channels[0,1].digital_edge_start_trigger_input_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3096,15 +2895,10 @@ exported_measure_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].exported_measure_trigger_output_terminal = var
-                var = session.channels[0,1].exported_measure_trigger_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3140,15 +2934,10 @@ exported_pulse_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].exported_pulse_trigger_output_terminal = var
-                var = session.channels[0,1].exported_pulse_trigger_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3185,15 +2974,10 @@ exported_sequence_advance_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].exported_sequence_advance_trigger_output_terminal = var
-                var = session.channels[0,1].exported_sequence_advance_trigger_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3230,15 +3014,10 @@ exported_source_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].exported_source_trigger_output_terminal = var
-                var = session.channels[0,1].exported_source_trigger_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3275,15 +3054,10 @@ exported_start_trigger_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].exported_start_trigger_output_terminal = var
-                var = session.channels[0,1].exported_start_trigger_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3315,14 +3089,10 @@ fetch_backlog
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].fetch_backlog
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3354,14 +3124,10 @@ instrument_firmware_revision
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].instrument_firmware_revision
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3420,14 +3186,10 @@ instrument_model
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].instrument_model
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3463,14 +3225,10 @@ interlock_input_open
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].interlock_input_open
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3565,15 +3323,10 @@ measure_buffer_size
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_buffer_size = var
-                var = session.channels[0,1].measure_buffer_size
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3610,15 +3363,10 @@ measure_complete_event_delay
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_complete_event_delay = var
-                var = session.channels[0,1].measure_complete_event_delay
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3654,15 +3402,10 @@ measure_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_complete_event_output_terminal = var
-                var = session.channels[0,1].measure_complete_event_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3698,15 +3441,10 @@ measure_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_complete_event_pulse_polarity = var
-                var = session.channels[0,1].measure_complete_event_pulse_polarity
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3745,15 +3483,10 @@ measure_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_complete_event_pulse_width = var
-                var = session.channels[0,1].measure_complete_event_pulse_width
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3789,14 +3522,10 @@ measure_record_delta_time
         .. note:: This property is not available when Auto Zero is configured to Once because the amount of time between the first
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].measure_record_delta_time
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3833,15 +3562,10 @@ measure_record_length
         .. note:: This property is not available in a session involving multiple channels.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_record_length = var
-                var = session.channels[0,1].measure_record_length
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3877,15 +3601,10 @@ measure_record_length_is_finite
         .. note:: This property is not available in a session involving multiple channels.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_record_length_is_finite = var
-                var = session.channels[0,1].measure_record_length_is_finite
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3921,15 +3640,10 @@ measure_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_trigger_type = var
-                var = session.channels[0,1].measure_trigger_type
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -3963,15 +3677,10 @@ measure_when
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].measure_when = var
-                var = session.channels[0,1].measure_when
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4007,15 +3716,10 @@ output_capacitance
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].output_capacitance = var
-                var = session.channels[0,1].output_capacitance
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4053,15 +3757,10 @@ output_connected
         .. note:: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].output_connected = var
-                var = session.channels[0,1].output_connected
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4098,15 +3797,10 @@ output_enabled
         .. note:: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].output_enabled = var
-                var = session.channels[0,1].output_enabled
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4154,15 +3848,10 @@ output_function
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].output_function = var
-                var = session.channels[0,1].output_function
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4198,15 +3887,10 @@ output_resistance
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic for information
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].output_resistance = var
-                var = session.channels[0,1].output_resistance
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4240,15 +3924,10 @@ overranging_enabled
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].overranging_enabled = var
-                var = session.channels[0,1].overranging_enabled
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4285,15 +3964,10 @@ ovp_enabled
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ovp_enabled = var
-                var = session.channels[0,1].ovp_enabled
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4330,15 +4004,10 @@ ovp_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ovp_limit = var
-                var = session.channels[0,1].ovp_limit
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4376,15 +4045,10 @@ power_line_frequency
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].power_line_frequency = var
-                var = session.channels[0,1].power_line_frequency
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4449,14 +4113,10 @@ power_source_in_use
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].power_source_in_use
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4492,15 +4152,10 @@ pulse_bias_current_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_current_level = var
-                var = session.channels[0,1].pulse_bias_current_level
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4536,15 +4191,10 @@ pulse_bias_current_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_current_limit = var
-                var = session.channels[0,1].pulse_bias_current_limit
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4606,15 +4256,10 @@ pulse_bias_current_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_current_limit_high = var
-                var = session.channels[0,1].pulse_bias_current_limit_high
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4676,15 +4321,10 @@ pulse_bias_current_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_current_limit_low = var
-                var = session.channels[0,1].pulse_bias_current_limit_low
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4720,15 +4360,10 @@ pulse_bias_delay
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_delay = var
-                var = session.channels[0,1].pulse_bias_delay
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4764,15 +4399,10 @@ pulse_bias_voltage_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_voltage_level = var
-                var = session.channels[0,1].pulse_bias_voltage_level
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4808,15 +4438,10 @@ pulse_bias_voltage_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_voltage_limit = var
-                var = session.channels[0,1].pulse_bias_voltage_limit
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4878,15 +4503,10 @@ pulse_bias_voltage_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_voltage_limit_high = var
-                var = session.channels[0,1].pulse_bias_voltage_limit_high
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4948,15 +4568,10 @@ pulse_bias_voltage_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_bias_voltage_limit_low = var
-                var = session.channels[0,1].pulse_bias_voltage_limit_low
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4992,15 +4607,10 @@ pulse_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_complete_event_output_terminal = var
-                var = session.channels[0,1].pulse_complete_event_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5035,15 +4645,10 @@ pulse_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_complete_event_pulse_polarity = var
-                var = session.channels[0,1].pulse_complete_event_pulse_polarity
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5080,15 +4685,10 @@ pulse_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_complete_event_pulse_width = var
-                var = session.channels[0,1].pulse_complete_event_pulse_width
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5124,15 +4724,10 @@ pulse_current_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_current_level = var
-                var = session.channels[0,1].pulse_current_level
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5169,15 +4764,10 @@ pulse_current_level_range
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_current_level_range = var
-                var = session.channels[0,1].pulse_current_level_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5213,15 +4803,10 @@ pulse_current_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_current_limit = var
-                var = session.channels[0,1].pulse_current_limit
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5283,15 +4868,10 @@ pulse_current_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_current_limit_high = var
-                var = session.channels[0,1].pulse_current_limit_high
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5353,15 +4933,10 @@ pulse_current_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_current_limit_low = var
-                var = session.channels[0,1].pulse_current_limit_low
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5398,15 +4973,10 @@ pulse_current_limit_range
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_current_limit_range = var
-                var = session.channels[0,1].pulse_current_limit_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5442,15 +5012,10 @@ pulse_off_time
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_off_time = var
-                var = session.channels[0,1].pulse_off_time
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5486,15 +5051,10 @@ pulse_on_time
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_on_time = var
-                var = session.channels[0,1].pulse_on_time
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5529,15 +5089,10 @@ pulse_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_trigger_type = var
-                var = session.channels[0,1].pulse_trigger_type
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5573,15 +5128,10 @@ pulse_voltage_level
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_voltage_level = var
-                var = session.channels[0,1].pulse_voltage_level
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5618,15 +5168,10 @@ pulse_voltage_level_range
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_voltage_level_range = var
-                var = session.channels[0,1].pulse_voltage_level_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5662,15 +5207,10 @@ pulse_voltage_limit
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_voltage_limit = var
-                var = session.channels[0,1].pulse_voltage_limit
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5732,15 +5272,10 @@ pulse_voltage_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_voltage_limit_high = var
-                var = session.channels[0,1].pulse_voltage_limit_high
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5802,15 +5337,10 @@ pulse_voltage_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_voltage_limit_low = var
-                var = session.channels[0,1].pulse_voltage_limit_low
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5847,15 +5377,10 @@ pulse_voltage_limit_range
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].pulse_voltage_limit_range = var
-                var = session.channels[0,1].pulse_voltage_limit_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5921,15 +5446,10 @@ ready_for_pulse_trigger_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ready_for_pulse_trigger_event_output_terminal = var
-                var = session.channels[0,1].ready_for_pulse_trigger_event_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -5964,15 +5484,10 @@ ready_for_pulse_trigger_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ready_for_pulse_trigger_event_pulse_polarity = var
-                var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_polarity
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6009,15 +5524,10 @@ ready_for_pulse_trigger_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].ready_for_pulse_trigger_event_pulse_width = var
-                var = session.channels[0,1].ready_for_pulse_trigger_event_pulse_width
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6054,15 +5564,10 @@ reset_average_before_measurement
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].reset_average_before_measurement = var
-                var = session.channels[0,1].reset_average_before_measurement
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6104,15 +5609,10 @@ samples_to_average
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].samples_to_average = var
-                var = session.channels[0,1].samples_to_average
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6180,15 +5680,10 @@ sense
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sense = var
-                var = session.channels[0,1].sense
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6224,15 +5719,10 @@ sequence_advance_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_advance_trigger_type = var
-                var = session.channels[0,1].sequence_advance_trigger_type
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6268,15 +5758,10 @@ sequence_engine_done_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_engine_done_event_output_terminal = var
-                var = session.channels[0,1].sequence_engine_done_event_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6312,15 +5797,10 @@ sequence_engine_done_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_engine_done_event_pulse_polarity = var
-                var = session.channels[0,1].sequence_engine_done_event_pulse_polarity
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6359,15 +5839,10 @@ sequence_engine_done_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_engine_done_event_pulse_width = var
-                var = session.channels[0,1].sequence_engine_done_event_pulse_width
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6403,15 +5878,10 @@ sequence_iteration_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_iteration_complete_event_output_terminal = var
-                var = session.channels[0,1].sequence_iteration_complete_event_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6447,15 +5917,10 @@ sequence_iteration_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_iteration_complete_event_pulse_polarity = var
-                var = session.channels[0,1].sequence_iteration_complete_event_pulse_polarity
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6494,15 +5959,10 @@ sequence_iteration_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic in
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_iteration_complete_event_pulse_width = var
-                var = session.channels[0,1].sequence_iteration_complete_event_pulse_width
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6540,15 +6000,10 @@ sequence_loop_count
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_loop_count = var
-                var = session.channels[0,1].sequence_loop_count
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6585,15 +6040,10 @@ sequence_loop_count_is_finite
         .. note:: This property is not supported by all devices. When the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_loop_count_is_finite = var
-                var = session.channels[0,1].sequence_loop_count_is_finite
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6620,15 +6070,10 @@ sequence_step_delta_time
 
     .. py:attribute:: sequence_step_delta_time
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_step_delta_time = var
-                var = session.channels[0,1].sequence_step_delta_time
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6654,15 +6099,10 @@ sequence_step_delta_time_enabled
 
     .. py:attribute:: sequence_step_delta_time_enabled
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].sequence_step_delta_time_enabled = var
-                var = session.channels[0,1].sequence_step_delta_time_enabled
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6725,15 +6165,10 @@ source_complete_event_output_terminal
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].source_complete_event_output_terminal = var
-                var = session.channels[0,1].source_complete_event_output_terminal
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6769,15 +6204,10 @@ source_complete_event_pulse_polarity
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].source_complete_event_pulse_polarity = var
-                var = session.channels[0,1].source_complete_event_pulse_polarity
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6816,15 +6246,10 @@ source_complete_event_pulse_width
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].source_complete_event_pulse_width = var
-                var = session.channels[0,1].source_complete_event_pulse_width
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6861,15 +6286,10 @@ source_delay
         .. note:: Refer to Supported Properties by Device for information about supported devices.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].source_delay = var
-                var = session.channels[0,1].source_delay
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6902,15 +6322,10 @@ source_mode
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].source_mode = var
-                var = session.channels[0,1].source_mode
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -6946,15 +6361,10 @@ source_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].source_trigger_type = var
-                var = session.channels[0,1].source_trigger_type
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7098,15 +6508,10 @@ start_trigger_type
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].start_trigger_type = var
-                var = session.channels[0,1].start_trigger_type
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7169,15 +6574,10 @@ transient_response
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].transient_response = var
-                var = session.channels[0,1].transient_response
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7213,15 +6613,10 @@ voltage_compensation_frequency
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_compensation_frequency = var
-                var = session.channels[0,1].voltage_compensation_frequency
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7257,15 +6652,10 @@ voltage_gain_bandwidth
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_gain_bandwidth = var
-                var = session.channels[0,1].voltage_gain_bandwidth
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7302,15 +6692,10 @@ voltage_level
         .. note:: The channel must be enabled for the specified voltage level to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_level = var
-                var = session.channels[0,1].voltage_level
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7346,15 +6731,10 @@ voltage_level_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_level_autorange = var
-                var = session.channels[0,1].voltage_level_autorange
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7392,15 +6772,10 @@ voltage_level_range
         .. note:: The channel must be enabled for the specified voltage level range to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_level_range = var
-                var = session.channels[0,1].voltage_level_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7437,15 +6812,10 @@ voltage_limit
         .. note:: The channel must be enabled for the specified current level to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_limit = var
-                var = session.channels[0,1].voltage_limit
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7481,15 +6851,10 @@ voltage_limit_autorange
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_limit_autorange = var
-                var = session.channels[0,1].voltage_limit_autorange
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7548,15 +6913,10 @@ voltage_limit_high
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_limit_high = var
-                var = session.channels[0,1].voltage_limit_high
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7615,15 +6975,10 @@ voltage_limit_low
         .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_limit_low = var
-                var = session.channels[0,1].voltage_limit_low
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7661,15 +7016,10 @@ voltage_limit_range
         .. note:: The channel must be enabled for the specified voltage limit range to take effect. Refer to the
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_limit_range = var
-                var = session.channels[0,1].voltage_limit_range
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -7705,15 +7055,10 @@ voltage_pole_zero_ratio
         .. note:: This property is not supported by all devices. Refer to Supported Properties by Device topic
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             nidcpower.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            nidcpower.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].voltage_pole_zero_ratio = var
-                var = session.channels[0,1].voltage_pole_zero_ratio
+            nidcpower.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 

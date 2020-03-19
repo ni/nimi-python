@@ -779,7 +779,7 @@ class Session(_SessionBase):
         signals connected to the switching system.
 
         Args:
-            maximum_time_ms (float in seconds or datetime.timedelta): The amount of time to wait (in milliseconds) for the debounce to
+            maximum_time_ms (int in milliseconds or datetime.timedelta): The amount of time to wait (in milliseconds) for the debounce to
                 complete. A value of 0 checks for debouncing once and returns an error
                 if the system is not debounced at that time. A value of -1 means to
                 block for an infinite period of time until the system is debounced.

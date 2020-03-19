@@ -371,9 +371,11 @@ close
             deallocates any memory resources the driver uses. Notes: (1) You must
             unlock the session before calling :py:meth:`niswitch.Session._close`. (2) After calling
             :py:meth:`niswitch.Session._close`, you cannot use the instrument driver again until you
-            call :py:meth:`niswitch.Session.init` or :py:meth:`niswitch.Session.init_with_options`.
+            call :py:meth:`niswitch.Session.init` or :py:meth:`niswitch.Session.InitWithOptions`.
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
             .. note:: This method is not needed when using the session context manager
 
@@ -1098,12 +1100,14 @@ send_software_trigger
 
             Sends a software trigger to the switch module specified in the NI-SWITCH
             session. When the trigger input is set to :py:data:`~niswitch.TriggerInput.SOFTWARE_TRIG`
-            through either the :py:meth:`niswitch.Session.configure_scan_trigger` or the
+            through either the :py:meth:`niswitch.Session.ConfigureScanTrigger` or the
             :py:attr:`niswitch.Session.trigger_input` property, the scan does not proceed from
             a semi-colon (wait for trigger) until :py:meth:`niswitch.Session.send_software_trigger` is
             called.
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -1178,7 +1182,7 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: float in seconds or datetime.timedelta
+            :type maximum_time_ms: int in milliseconds or datetime.timedelta
 
 wait_for_scan_complete
 ----------------------
@@ -1208,40 +1212,7 @@ wait_for_scan_complete
                 
 
 
-            :type maximum_time_ms: float in seconds or datetime.timedelta
-
-
-.. role:: c(code)
-    :language: c
-
-.. role:: python(code)
-    :language: python
-
-Repeated Capabilities
-=====================
-
-    Repeated capabilities attributes are used to set the `channel_string` parameter to the
-    underlying driver function call. This can be the actual function based on the :py:class:`Session`
-    method being called, or it can be the appropriate Get/Set Attribute function, such as :c:`niSwitch_SetAttributeViInt32()`.
-
-    Repeated capbilities attributes use the indexing operator :python:`[]` to indicate the repeated capabilities.
-    The parameter can be a string, list, tuple, or slice (range). Each element of those can be a string or
-    an integer. If it is a string, you can indicate a range using the same format as the driver: :python:`'0-2'` or
-    :python:`'0:2'`
-
-    Some repeated capabilities use a prefix before the number and this is optional
-
-channels
---------
-
-    .. py:attribute:: niswitch.Session.channels[]
-
-        .. code:: python
-
-            session.channels['0-2'].channel_enabled = True
-
-        passes a string of :python:`'0, 1, 2'` to the set attribute function.
-
+            :type maximum_time_ms: int in milliseconds or datetime.timedelta
 
 
 Properties
@@ -1258,15 +1229,10 @@ analog_bus_sharing_enable
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].analog_bus_sharing_enable = var
-                var = session.channels[0,1].analog_bus_sharing_enable
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1299,14 +1265,10 @@ bandwidth
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].bandwidth
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1366,14 +1328,10 @@ characteristic_impedance
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].characteristic_impedance
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1457,8 +1415,12 @@ driver_setup
     .. py:attribute:: driver_setup
 
         This property indicates the Driver Setup string that the user  specified when initializing the driver.
-        Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  :py:meth:`niswitch.Session.init_with_options` method, or through the IVI Configuration Utility.
+        Some cases exist where the end-user must specify instrument driver  options at initialization time.  An example of this is specifying  a particular instrument model from among a family of instruments  that the driver supports.  This is useful when using simulation.   The end-user can specify driver-specific options through  the DriverSetup keyword in the optionsString parameter to the  :py:meth:`niswitch.Session.InitWithOptions` method, or through the IVI Configuration Utility.
         If the user does not specify a Driver Setup string, this property returns an empty string.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -1629,15 +1591,10 @@ is_configuration_channel
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].is_configuration_channel = var
-                var = session.channels[0,1].is_configuration_channel
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1723,15 +1680,10 @@ is_source_channel
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].is_source_channel = var
-                var = session.channels[0,1].is_source_channel
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1786,7 +1738,11 @@ logical_name
     .. py:attribute:: logical_name
 
         A string containing the logical name you specified when opening the  current IVI session.
-        You may pass a logical name to the :py:meth:`niswitch.Session.init` or  :py:meth:`niswitch.Session.init_with_options` methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+        You may pass a logical name to the :py:meth:`niswitch.Session.init` or  :py:meth:`niswitch.Session.InitWithOptions` methods.   The IVI Configuration utility must contain an entry for the logical name.   The logical name entry refers to a virtual instrument section in the  IVI Configuration file.  The virtual instrument section specifies a physical  device and initial user options.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -1819,14 +1775,10 @@ max_ac_voltage
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_ac_voltage
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1859,14 +1811,10 @@ max_carry_ac_current
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_ac_current
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1899,14 +1847,10 @@ max_carry_ac_power
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_ac_power
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1939,14 +1883,10 @@ max_carry_dc_current
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_dc_current
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -1979,14 +1919,10 @@ max_carry_dc_power
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_carry_dc_power
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2019,14 +1955,10 @@ max_dc_voltage
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_dc_voltage
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2059,14 +1991,10 @@ max_switching_ac_current
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_ac_current
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2099,14 +2027,10 @@ max_switching_ac_power
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_ac_power
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2139,14 +2063,10 @@ max_switching_dc_current
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_dc_current
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2179,14 +2099,10 @@ max_switching_dc_power
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].max_switching_dc_power
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2515,15 +2431,10 @@ settling_time
         .. note:: NI PXI-2501/2503/2565/2590/2591 Users--the actual delay will always be
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                session.channels[0,1].settling_time = var
-                var = session.channels[0,1].settling_time
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -2551,7 +2462,11 @@ simulate
     .. py:attribute:: simulate
 
         Specifies whether or not to simulate instrument driver I/O operations.  If  simulation is enabled, instrument driver methods perform range checking  and call Ivi_GetAttribute and Ivi_SetAttribute methods, but they do not  perform instrument I/O.  For output parameters that represent instrument  data, the instrument driver methods return calculated values.
-        The default value is False.   Use the :py:meth:`niswitch.Session.init_with_options`  method to override this value.
+        The default value is False.   Use the :py:meth:`niswitch.Session.InitWithOptions`  method to override this value.
+
+
+
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -2773,14 +2688,10 @@ wire_mode
 
 
 
-        .. tip:: This property can use repeated capabilities (channels). If set or get directly on the
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
             niswitch.Session object, then the set/get will use all repeated capabilities in the session.
             You can specify a subset of repeated capabilities using the Python index notation on an
-            niswitch.Session repeated capabilities container, and calling set/get value on the result.:
-
-            .. code:: python
-
-                var = session.channels[0,1].wire_mode
+            niswitch.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 

@@ -65,6 +65,7 @@ DEFAULT_RST_FILES_TO_GENERATE := \
     class.rst \
     toc.inc \
     errors.rst \
+    rep_caps.rst \
 
 # Files for tracking parts of the build
 WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done

@@ -192,13 +192,10 @@ class _SessionBase(object):
     One or more of the referenced methods are not in the Python API for this driver.
 
     Tip:
-    This property can use repeated capabilities (markers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.markers[0,1].arb_marker_position = var
-        var = session.markers[0,1].arb_marker_position
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     arb_offset = _attributes.AttributeViReal64(1250203)
     '''Type: float
@@ -278,13 +275,10 @@ class _SessionBase(object):
     Specifies the bit number to assign to the Data Marker Event.
 
     Tip:
-    This property can use repeated capabilities (markers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.markers[0,1].data_marker_event_data_bit_number = var
-        var = session.markers[0,1].data_marker_event_data_bit_number
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     data_marker_event_level_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DataMarkerEventLevelPolarity, 1150338)
     '''Type: enums.DataMarkerEventLevelPolarity
@@ -292,13 +286,10 @@ class _SessionBase(object):
     Specifies the output polarity of the Data marker event.
 
     Tip:
-    This property can use repeated capabilities (markers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.markers[0,1].data_marker_event_level_polarity = var
-        var = session.markers[0,1].data_marker_event_level_polarity
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     data_marker_event_output_terminal = _attributes.AttributeViString(1150339)
     '''Type: str
@@ -306,13 +297,10 @@ class _SessionBase(object):
     Specifies the destination terminal for the Data Marker Event.
 
     Tip:
-    This property can use repeated capabilities (markers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.markers[0,1].data_marker_event_output_terminal = var
-        var = session.markers[0,1].data_marker_event_output_terminal
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     data_transfer_block_size = _attributes.AttributeViInt32(1150241)
     '''Type: int
@@ -353,13 +341,10 @@ class _SessionBase(object):
     Specifies the active edge for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
 
     Tip:
-    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.script_triggers[0,1].digital_edge_script_trigger_edge = var
-        var = session.script_triggers[0,1].digital_edge_script_trigger_edge
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     digital_edge_script_trigger_source = _attributes.AttributeViString(1150291)
     '''Type: str
@@ -367,13 +352,10 @@ class _SessionBase(object):
     Specifies the source terminal for the Script trigger. This property is used when script_trigger_type is set to Digital Edge.
 
     Tip:
-    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.script_triggers[0,1].digital_edge_script_trigger_source = var
-        var = session.script_triggers[0,1].digital_edge_script_trigger_source
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150282)
     '''Type: enums.StartTriggerDigitalEdgeEdge
@@ -470,13 +452,10 @@ class _SessionBase(object):
     Setting this property to an empty string means that when you commit the session, the signal is removed from that terminal and, if possible, the terminal is tristated.
 
     Tip:
-    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.script_triggers[0,1].exported_script_trigger_output_terminal = var
-        var = session.script_triggers[0,1].exported_script_trigger_output_terminal
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150283)
     '''Type: str
@@ -662,13 +641,10 @@ class _SessionBase(object):
     Specifies the destination terminal for the Marker Event.
 
     Tip:
-    This property can use repeated capabilities (markers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.markers[0,1].marker_event_output_terminal = var
-        var = session.markers[0,1].marker_event_output_terminal
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
@@ -824,13 +800,10 @@ class _SessionBase(object):
     Specifies the Script trigger type. Depending upon the value of this property, additional properties may need to be configured to fully configure the trigger.
 
     Tip:
-    This property can use repeated capabilities (script_triggers). If set or get directly on the
+    This property can use repeated capabilities. If set or get directly on the
     nifgen.Session object, then the set/get will use all repeated capabilities in the session.
     You can specify a subset of repeated capabilities using the Python index notation on an
-    nifgen.Session repeated capabilities container, and calling set/get value on the result.:
-
-        session.script_triggers[0,1].script_trigger_type = var
-        var = session.script_triggers[0,1].script_trigger_type
+    nifgen.Session repeated capabilities container, and calling set/get value on the result.
     '''
     serial_number = _attributes.AttributeViString(1150243)
     '''Type: str
@@ -1002,12 +975,10 @@ class _SessionBase(object):
         Waveform methods.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].allocate_named_waveform(waveform_name, waveform_size)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -1038,12 +1009,10 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].allocate_waveform(waveform_size)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_size (int): Specifies, in samples, the size of the waveform to allocate.
@@ -1070,12 +1039,10 @@ class _SessionBase(object):
         define_user_standard_waveform method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].clear_user_standard_waveform()
+        nifgen.Session repeated capabilities container, and calling this method on the result.
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
@@ -1096,12 +1063,10 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].configure_arb_sequence(sequence_handle, gain, offset)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             sequence_handle (int): Specifies the handle of the arbitrary sequence that you want the signal
@@ -1162,12 +1127,10 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].configure_arb_waveform(waveform_handle, gain, offset)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform you want the signal
@@ -1239,12 +1202,10 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].configure_freq_list(frequency_list_handle, amplitude, dc_offset=0.0, start_phase=0.0)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             frequency_list_handle (int): Specifies the handle of the frequency list that you want the signal
@@ -1332,12 +1293,10 @@ class _SessionBase(object):
         One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].configure_standard_waveform(waveform, amplitude, frequency, dc_offset=0.0, start_phase=0.0)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform (enums.Waveform): Specifies the standard waveform that you want the signal generator to
@@ -1447,12 +1406,10 @@ class _SessionBase(object):
         Note: You must set output_mode to OutputMode.ARB or OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].create_waveform(waveform_data_array)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_data_array (iterable of float or int16): Array of data for the new arbitrary waveform. This may be an iterable of float or int16, or for best performance a numpy.ndarray of dtype int16 or float64.
@@ -1497,12 +1454,10 @@ class _SessionBase(object):
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._create_waveform_f64(waveform_data_array)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_data_array (array.array("d")): Specifies the array of data you want to use for the new arbitrary
@@ -1546,12 +1501,10 @@ class _SessionBase(object):
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._create_waveform_f64(waveform_data_array)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.float64)): Specifies the array of data you want to use for the new arbitrary
@@ -1603,12 +1556,10 @@ class _SessionBase(object):
         outputs.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].create_waveform_from_file_f64(file_name, byte_order)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
@@ -1667,12 +1618,10 @@ class _SessionBase(object):
         generate different voltage outputs.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].create_waveform_from_file_i16(file_name, byte_order)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             file_name (str): The full path and name of the file where the waveform data resides.
@@ -1730,12 +1679,10 @@ class _SessionBase(object):
         OutputMode.SEQ before calling this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._create_waveform_i16(waveform_data_array)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.int16)): Specify the array of data that you want to use for the new arbitrary
@@ -1789,12 +1736,10 @@ class _SessionBase(object):
         OutputMode.FREQ_LIST before calling this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].define_user_standard_waveform(waveform_data_array)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_data_array (list of float): Specifies the array of data you want to use for the new arbitrary
@@ -1827,12 +1772,10 @@ class _SessionBase(object):
         this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._delete_named_waveform(waveform_name)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -1852,12 +1795,10 @@ class _SessionBase(object):
         Deletes the specified script from onboard memory.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].delete_script(script_name)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             script_name (str): Specifies the name of the script you want to delete. The script name
@@ -1880,12 +1821,10 @@ class _SessionBase(object):
         Note: The signal generator must not be in the Generating state when you call this method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].delete_waveform(waveform_name_or_handle)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
@@ -1912,12 +1851,10 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_boolean(attribute_id)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -1950,12 +1887,10 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_int32(attribute_id)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -1990,12 +1925,10 @@ class _SessionBase(object):
         -  State caching is enabled and the currently cached value is invalid.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_real64(attribute_id)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2048,12 +1981,10 @@ class _SessionBase(object):
         parameter.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._get_attribute_vi_string(attribute_id)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2183,35 +2114,55 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def send_software_edge_trigger(self):
+    def send_software_edge_trigger(self, trigger=None, trigger_id=None):
         '''send_software_edge_trigger
 
         Sends a command to trigger the signal generator. This VI can act as an
         override for an external edge trigger.
 
-        If called directly on the session, this will send a software start trigger.
-
-            session.send_software_edge_trigger()
-
-        If called using the script trigger repeated capability container, this will
-        send a software trigger to the specified script trigger
-
-            session.script_triggers[1].send_software_edge_trigger()
-
         Note:
-        This method does not override external digital edge triggers of the
+        This VI does not override external digital edge triggers of the
         NI 5401/5411/5431.
-        '''
-        # We look at whether we are called directly on the session or a repeated capability container to determine how to behave
-        if len(self._repeated_capability) > 0:
-            trigger_id = self._repeated_capability
-            trigger = 103  # enums.Trigger.SCRIPT
-        else:
-            trigger_id = "None"
-            trigger = 1004  # enums.Trigger.START
 
+        Args:
+            trigger (enums.Trigger): Trigger specifies the type of software trigger to send
+
+                +----------------+
+                | Defined Values |
+                +================+
+                | Trigger.START  |
+                +----------------+
+                | Trigger.SCRIPT |
+                +----------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            trigger_id (str): Trigger ID specifies the Script Trigger to use for triggering.
+
+        '''
+        if trigger is None or trigger_id is None:
+            import warnings
+            warnings.warn('trigger and trigger_id should now always be passed in to the method', category=DeprecationWarning)
+
+            # We look at whether we are called directly on the session or a repeated capability container to determine how to behave
+            if len(self._repeated_capability) > 0:
+                trigger_id = self._repeated_capability
+                trigger = enums.Trigger.SCRIPT
+            else:
+                trigger_id = "None"
+                trigger = enums.Trigger.START
+
+        elif trigger is not None and trigger_id is not None:
+            pass  # This is how the function should be called
+
+        else:
+            raise ValueError('Both trigger ({0}) and trigger_id ({1}) should be passed in to the method'.format(str(trigger), str(trigger_id)))
+
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger)  # case S130
+        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
         error_code = self._library.niFgen_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -2247,12 +2198,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_boolean(attribute_id, attribute_value)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2303,12 +2252,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_int32(attribute_id, attribute_value)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2359,12 +2306,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_real64(attribute_id, attribute_value)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2415,12 +2360,10 @@ class _SessionBase(object):
         high-level methods without the penalty of redundant instrument I/O.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_attribute_vi_string(attribute_id, attribute_value)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             attribute_id (int): Specifies the ID of a property.
@@ -2461,12 +2404,10 @@ class _SessionBase(object):
         -  CreateWaveformFromFileHWS
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_named_waveform_next_write_position(waveform_name, relative_to, offset)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2512,12 +2453,10 @@ class _SessionBase(object):
         create_waveform method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].set_next_write_position(waveform_name_or_handle, relative_to, offset)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
@@ -2563,12 +2502,10 @@ class _SessionBase(object):
         -  CreateWaveformFromFileHWS
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._set_waveform_next_write_position(waveform_handle, relative_to, offset)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2631,12 +2568,10 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._write_binary16_waveform(waveform_handle, data)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2689,12 +2624,10 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._write_named_waveform_f64(waveform_name, data)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2738,12 +2671,10 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._write_named_waveform_f64(waveform_name, data)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2785,12 +2716,10 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._write_named_waveform_i16(waveform_name, data)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name (str): Specifies the name to associate with the allocated waveform.
@@ -2824,12 +2753,10 @@ class _SessionBase(object):
         generation of waveforms.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].write_script(script)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             script (str): Contains the text of the script you want to use for your generation
@@ -2870,12 +2797,10 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._write_waveform(waveform_handle, data)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2920,12 +2845,10 @@ class _SessionBase(object):
         information about streaming data.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1]._write_waveform(waveform_handle, data)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_handle (int): Specifies the handle of the arbitrary waveform previously allocated with
@@ -2964,12 +2887,10 @@ class _SessionBase(object):
         set_next_write_position method.
 
         Tip:
-        This method requires repeated capabilities (channels). If called directly on the
+        This method requires repeated capabilities. If called directly on the
         nifgen.Session object, then the method will use all repeated capabilities in the session.
         You can specify a subset of repeated capabilities using the Python index notation on an
-        nifgen.Session repeated capabilities container, and calling this method on the result.:
-
-            session.channels[0,1].write_waveform(waveform_name_or_handle, data)
+        nifgen.Session repeated capabilities container, and calling this method on the result.
 
         Args:
             waveform_name_or_handle (str or int): The name (str) or handle (int) of an arbitrary waveform previously allocated with allocate_named_waveform, allocate_waveform or create_waveform.
@@ -4412,7 +4333,7 @@ class Session(_SessionBase):
         expired.
 
         Args:
-            max_time (float in seconds or datetime.timedelta): Specifies the timeout value in milliseconds.
+            max_time (int in milliseconds or datetime.timedelta): Specifies the timeout value in milliseconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

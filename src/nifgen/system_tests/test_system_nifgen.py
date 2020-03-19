@@ -5,6 +5,7 @@ import numpy
 import os
 import pytest
 import tempfile
+import warnings
 
 
 # Set up some global information we need
@@ -433,11 +434,38 @@ def test_fir_filter_coefficients():
 '''
 
 
+def test_send_software_edge_trigger_start_deprecated(session):
+    warnings.filterwarnings("always", category=DeprecationWarning)
+
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    session.create_waveform(waveform_data)
+    with session.initiate():
+        with warnings.catch_warnings(record=True) as w:
+            session.send_software_edge_trigger()
+            assert len(w) == 1
+            assert issubclass(w[0].category, DeprecationWarning)
+
+
+def test_send_software_edge_trigger_script_deprecated(session):
+    warnings.filterwarnings("always", category=DeprecationWarning)
+
+    waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+    session.create_waveform(waveform_data)
+    session.output_mode = nifgen.OutputMode.SCRIPT
+    session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
+    session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
+    with session.initiate():
+        with warnings.catch_warnings(record=True) as w:
+            session.script_triggers[0].send_software_edge_trigger()
+            assert len(w) == 1
+            assert issubclass(w[0].category, DeprecationWarning)
+
+
 def test_send_software_edge_trigger_start(session):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     session.create_waveform(waveform_data)
     with session.initiate():
-        session.send_software_edge_trigger()
+        session.send_software_edge_trigger(nifgen.Trigger.START, 'None')
 
 
 def test_send_software_edge_trigger_script(session):
@@ -447,7 +475,7 @@ def test_send_software_edge_trigger_script(session):
     session.script_triggers[0].digital_edge_script_trigger_source = 'PFI0'
     session.script_triggers[0].digital_edge_script_trigger_edge = nifgen.ScriptTriggerDigitalEdgeEdge.RISING
     with session.initiate():
-        session.script_triggers[0].send_software_edge_trigger()
+        session.send_software_edge_trigger(nifgen.Trigger.SCRIPT, 'ScriptTrigger0')
 
 
 def test_channel_format_types():

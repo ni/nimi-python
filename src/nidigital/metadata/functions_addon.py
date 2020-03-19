@@ -84,6 +84,48 @@ functions_additional_get_pin_results_pin_information = {
     },
 }
 
+functions_additional_get_site_pass_fail = {
+    'FancyGetSitePassFail': {
+        'python_name': 'get_site_pass_fail',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_get_site_pass_fail',
+            }
+        ],
+        'documentation': {
+            'description': '\nReturns dictionary where each key is a site number and value is pass/fail\n\n',
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'siteList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nDictionary where each key is a site number and value is pass/fail\n'
+                },
+                'name': 'passFail',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'ViBoolean',
+                'type_in_documentation': '{ int: bool, int: bool, ... }',
+            },
+        ],
+    },
+}
+
 functions_additional_fetch_capture_waveform = {
     'FancyFetchCaptureWaveform': {
         'python_name': 'fetch_capture_waveform',
@@ -162,7 +204,7 @@ consist of multiple DUT cycles. When using pins with mixed edge multipliers, pin
 NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
 
 If pins are not specified, pin list from the pattern containing the start label is used. Call
-niDigital_GetPatternPinList or niDigital_GetPatternPinIndexes with the start label to retrieve the pins
+niDigital_GetPatternPinList with the start label to retrieve the pins
 associated with the pattern burst.
 """
         },
@@ -185,7 +227,7 @@ associated with the pattern burst.
                 'is_repeated_capability': True,
                 'repeated_capability_type': 'pins',
                 'documentation': {
-                    'description': 'Pins for which to retrieve History RAM data. If empty, the pin list from the pattern\ncontaining the start label is used. Call niDigital_GetPatternPinList or niDigital_GetPatternPinIndexes with the start\nlabel to retrieve the pins associated with the pattern burst.'
+                    'description': 'Pins for which to retrieve History RAM data. If empty, the pin list from the pattern\ncontaining the start label is used. Call niDigital_GetPatternPinList with the start\nlabel to retrieve the pins associated with the pattern burst.'
                 },
                 'name': 'pinList',
                 'type': 'ViConstString'

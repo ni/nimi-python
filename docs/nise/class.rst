@@ -709,8 +709,7 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: float in seconds or datetime.timedelta
-
+            :type maximum_time_ms: int in milliseconds or datetime.timedelta
 
 
 

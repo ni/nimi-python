@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.2.0](#120---2020-03-06)
 * [1.1.5](#115---2019-11-22)
 * [1.1.4](#114---2019-11-19)
 * [1.1.3](#113---2019-10-21)
@@ -23,9 +24,6 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 * ### ALL
     * #### Added
-        * Zip file per driver for all examples and any helper files
-        * Link to zip file on examples documentation
-        * Support for Python 3.8
         * Support for nested repeated capabilities. This allows things like
             ``` python
             session.sites[0, 1].pins['A', 'B'].ppmu_voltage_level = 4
@@ -33,12 +31,7 @@ All notable changes to this project will be documented in this file.
 
             The repeated capabilities will be expanded to `'site0/A,site0/B,site1/A,site1/B'`
     * #### Changed
-        * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
-        * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
     * #### Removed
-        * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
-        * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
-        * PyPy and PyPy3 support [#1271](https://github.com/ni/nimi-python/issues/1271)
 * ### NI-DMM
     * #### Added
     * #### Changed
@@ -53,23 +46,10 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-DCPower
     * #### Added
-        * `create_advanced_sequence()` - [#504](https://github.com/ni/nimi-python/issues/504)
-            * Instead of a list of attribute IDs, you pass in a list of property names as strings
-            * Includes example to see how to use it
-            * Additional methods and properties that were made public (rather than private)
-                * `create_advanced_sequence_step()`
-                * `delete_advanced_sequence()`
-                * `active_advanced_sequence`
-                * `active_advanced_sequence_step`
     * #### Changed
     * #### Removed
 * ### NI-FGEN
     * #### Added
-        * `nifgen.Session.import_attribute_configuration_file()`
-        * `nifgen.Session.import_attribute_configuration_buffer()`
-        * `nifgen.Session.export_attribute_configuration_file()`
-        * `nifgen.Session.export_attribute_configuration_buffer()`
-        * `nifgen.Session.get_channel_name()`
     * #### Changed
     * #### Removed
 * ### NI-SCOPE
@@ -80,6 +60,55 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+    * #### Changed
+        * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
+        * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
+    * #### Removed
+        * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+* ### NI-TClk
+    * #### Added
+    * #### Changed
+    * #### Removed
+    
+    
+## 1.2.0 - 2020-03-06
+* ### ALL
+    * #### Added
+        * Zip file per driver for all examples and any helper files
+        * Link to zip file on examples documentation
+        * Support for Python 3.8
+    * #### Changed
+        * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
+        * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
+    * #### Removed
+        * Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
+        * Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
+        * PyPy and PyPy3 support [#1271](https://github.com/ni/nimi-python/issues/1271)
+* ### NI-DCPower
+    * #### Added
+        * `create_advanced_sequence()` - [#504](https://github.com/ni/nimi-python/issues/504)
+            * Instead of a list of attribute IDs, you pass in a list of property names as strings
+            * Includes example to see how to use it
+            * Additional methods and properties that were made public (rather than private)
+                * `create_advanced_sequence_step()`
+                * `delete_advanced_sequence()`
+                * `active_advanced_sequence`
+                * `active_advanced_sequence_step`
+* ### NI-FGEN
+    * #### Added
+        * `nifgen.Session.import_attribute_configuration_file()`
+        * `nifgen.Session.import_attribute_configuration_buffer()`
+        * `nifgen.Session.export_attribute_configuration_file()`
+        * `nifgen.Session.export_attribute_configuration_buffer()`
+        * `nifgen.Session.get_channel_name()`
+    * #### Changed
+        * `nifgen.Session.send_software_edge_trigger()` now takes two parameters - `trigger` and `trigger_id`
+            * See documentation on how to call this function
+            * Calling the previous way will log a DeprecationWarning to the warning subsystem
+            * [#1300](https://github.com/ni/nimi-python/issues/1300)
 * ### NI-Digital Pattern Driver
     * #### Added
         * `conditional_jump_triggers` and `pattern_opcode_events` repeated capabilities - [#1191](https://github.com/ni/nimi-python/issues/1191), [#1192](https://github.com/ni/nimi-python/issues/1192)
@@ -93,7 +122,6 @@ All notable changes to this project will be documented in this file.
         * Removed `fetch_history_ram_cycle_pin_data` and `fetch_history_ram_scan_cycle_number`. They are not needed since `fetch_history_ram_cycle_information`
             was updated to return class instances that contains cycle pin data and scan cycle number - [#1071](https://github.com/ni/nimi-python/issues/1071)
 * ### NI-TClk
-    * #### Added
     * #### Changed
         * Method parameters and properties that are time based now take or return a `datetime.timedelta` object
     * #### Removed

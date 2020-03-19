@@ -11,6 +11,9 @@ API Reference
 .. toctree::
 
    ${module_name}/class
+% if len(config['repeated_capabilities']) > 0:
+   ${module_name}/rep_caps
+% endif
 % if len(enums) > 0:
    ${module_name}/enums
 % endif

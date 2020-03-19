@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 21.0.0d0
+# This file is generated from NI Switch Executive API metadata version 21.0.0d1
 functions = {
     'CloseSession': {
         'codegen_method': 'private',
@@ -503,7 +503,7 @@ functions = {
                 'name': 'maximumTimeMs',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
+                'type_in_documentation': 'int in milliseconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'

@@ -159,6 +159,14 @@ def convert_timedelta_to_milliseconds_int32(value):
     return _convert_timedelta(value, _visatype.ViInt32, 1000)
 
 
+def convert_timedeltas_to_seconds_real64(values):
+    return [convert_timedelta_to_seconds_real64(i) for i in values]
+
+
+def convert_seconds_real64_to_timedeltas(seconds):
+    return [datetime.timedelta(seconds=i) for i in seconds]
+
+
 def convert_month_to_timedelta(months):
     return datetime.timedelta(days=(30.4167 * months))
 
@@ -206,6 +214,10 @@ def convert_init_with_options_dictionary(values):
 @singledispatch
 def _convert_to_bytes(value):  # noqa: F811
     pass
+
+
+def convert_comma_separated_string_to_list(comma_separated_string):
+    return [x.strip() for x in comma_separated_string.split(',')]
 
 
 @_convert_to_bytes.register(list)  # noqa: F811
@@ -270,6 +282,23 @@ def test_convert_timedelta_to_milliseconds_int32():
     assert isinstance(test_result, _visatype.ViInt32)
 
 
+def test_convert_timedeltas_to_seconds_real64():
+    time_values = [10.5, -1]
+    test_result = convert_timedeltas_to_seconds_real64(time_values)
+    assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+    timedeltas = [datetime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
+    test_result = convert_timedeltas_to_seconds_real64(timedeltas)
+    assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
+    assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+
+
+def test_convert_seconds_real64_to_timedeltas():
+    time_values = [10.5, -1]
+    timedeltas = convert_seconds_real64_to_timedeltas(time_values)
+    assert all([actual.total_seconds() == expected for actual, expected in zip(timedeltas, time_values)])
+
+
 def test_string_to_list_channel():
     test_result = _convert_repeated_capabilities('r0', '')
     assert test_result == ['r0']
@@ -293,3 +322,7 @@ def test_string_to_list_prefix():
     test_result = _convert_repeated_capabilities(['ScriptTrigger2:ScriptTrigger0'], 'ScriptTrigger')
     assert test_result == ['2', '1', '0']
 
+
+def test_convert_comma_separated_string_to_list():
+    out_list = convert_comma_separated_string_to_list(' PinA ,  PinB , PinC  ')
+    assert out_list == ['PinA', 'PinB', 'PinC']

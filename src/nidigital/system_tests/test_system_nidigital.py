@@ -34,9 +34,11 @@ def test_pins_rep_cap(multi_instrument_session):
 
     # Methods that accept pin_list parameter
     multi_instrument_session.create_time_set('t0')
-    multi_instrument_session.pins['PinA', 'PinB'].configure_time_set_drive_format('t0', 1501)
-    drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format('t0')
-    assert drive_format == 1501
+    multi_instrument_session.pins['PinA', 'PinB'].configure_time_set_drive_format(
+        time_set='t0',
+        drive_format=nidigital.DriveEdgeSetFormat.RL)
+    drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format(time_set='t0')
+    assert drive_format == nidigital.DriveEdgeSetFormat.RL
 
 
 def test_property_boolean(multi_instrument_session):
@@ -96,7 +98,9 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
 
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
-    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2600)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceMemoryDataMapping.BROADCAST)
 
     multi_instrument_session.write_source_waveform_broadcast(
         waveform_name='src_wfm',
@@ -110,7 +114,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         timeout=5)
 
     pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
-    assert pass_fail == [True, True]
+    assert pass_fail == {0: True, 1: True}
 
 
 def configure_session(session, test_name):
@@ -144,9 +148,11 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
     num_samples = 256
-    multi_instrument_session.write_sequencer_register(reg='reg0', value=num_samples)
+    multi_instrument_session.write_sequencer_register(reg=nidigital.SequencerRegister.REGISTER0, value=num_samples)
 
-    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2601)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceMemoryDataMapping.SITE_UNIQUE)
 
     if source_waveform_type == array.array:
         source_waveform = {
@@ -194,9 +200,11 @@ def test_fetch_capture_waveform(multi_instrument_session):
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
     num_samples = 256
-    multi_instrument_session.write_sequencer_register(reg='reg0', value=num_samples)
+    multi_instrument_session.write_sequencer_register(reg=nidigital.SequencerRegister.REGISTER0, value=num_samples)
 
-    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(waveform_name='src_wfm', data_mapping=2600)
+    multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
+        waveform_name='src_wfm',
+        data_mapping=nidigital.SourceMemoryDataMapping.BROADCAST)
     source_waveform = [i for i in range(num_samples)]
     multi_instrument_session.write_source_waveform_broadcast(waveform_name='src_wfm', waveform_data=source_waveform)
 
@@ -289,8 +297,8 @@ def configure_for_history_ram_test(session):
 
     session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    session.history_ram_trigger_type = 2200
-    session.history_ram_cycles_to_acquire = 2304
+    session.history_ram_trigger_type = nidigital.HistoryRAMTriggerType.FIRST_FAILURE
+    session.history_ram_cycles_to_acquire = nidigital.HistoryRAMCyclesToAcquire.ALL
     session.history_ram_pretrigger_samples = 0
     session.history_ram_number_of_samples_is_finite = True
 
@@ -409,8 +417,8 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
     scan_cycle_numbers = [i.scan_cycle_number for i in history_ram_cycle_info]
     assert scan_cycle_numbers == [-1, 0, 1, -1, -1, -1, -1]
 
-    pin_names = multi_instrument_session.get_pattern_pin_list('new_pattern')
-    assert pin_names == 'LO0, LO1, LO2, LO3, HI0, HI1, HI2, HI3'
+    pin_names = multi_instrument_session.get_pattern_pin_names('new_pattern')
+    assert pin_names == ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
 
     expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
     assert expected_pin_states == [
@@ -453,4 +461,35 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
         [[True, True, True, True, True, True, True, True], [True, True, True, True, True, True, True, True]],
         [[True, True, True, True, True, True, True, True]],
     ]
+
+
+def test_get_pattern_pin_names(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+
+    pattern_pin_names = multi_instrument_session.get_pattern_pin_names(start_label='new_pattern')
+
+    assert pattern_pin_names == ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
+
+
+def test_get_site_pass_fail(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    multi_instrument_session.burst_pattern(
+        site_list='',
+        start_label='new_pattern',
+        select_digital_function=True,
+        wait_until_done=True,
+        timeout=5)
+
+    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
+    assert pass_fail == {0: True, 1: True, 2: True, 3: True}
+
+    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='site3,site0')
+    assert pass_fail == {3: True, 0: True}
 

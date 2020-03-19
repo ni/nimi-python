@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 20.0.0d3
+# This file is generated from NI-FGEN API metadata version 20.0.0d5
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1249,12 +1249,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
                 },
                 'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes',
                 'use_array': True
             }
         ],
@@ -1921,12 +1921,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
-                'type_in_documentation': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]'
+                'type': 'ViInt8[]',
+                'type_in_documentation': 'bytes'
             }
         ],
         'returns': 'ViStatus'
@@ -2418,7 +2418,7 @@ functions = {
         },
         'method_templates': [
             {
-                'documentation_filename': 'send_software_edge_trigger',
+                'documentation_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'send_software_edge_trigger'
             }
@@ -2435,23 +2435,27 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSets the clock mode of the signal generator.\n\n****Defined Values****\n',
+                    'description': 'Trigger specifies the type of software trigger to send',
                     'table_body': [
                         [
-                            'NIFGEN_VAL_DIVIDE_DOWN'
+                            'NIFGEN_VAL_START_TRIGGER'
                         ],
                         [
-                            'NIFGEN_VAL_HIGH_RESOLUTION'
+                            'NIFGEN_VAL_SCRIPT_TRIGGER'
                         ],
-                        [
-                            'NIFGEN_VAL_AUTOMATIC'
-                        ]
-                    ]
+                    ],
+                    'table_header': [
+                        'Defined Values',
+                    ],
                 },
+                'enum': 'Trigger',
                 'name': 'trigger',
-                'type': 'ViInt32'
+                'type': 'ViInt32',
             },
             {
+                'documentation': {
+                    'description': 'Trigger ID specifies the Script Trigger to use for triggering.',
+                },
                 'direction': 'in',
                 'name': 'triggerId',
                 'type': 'ViString'
@@ -2875,7 +2879,7 @@ functions = {
                 'name': 'maxTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
+                'type_in_documentation': 'int in milliseconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
