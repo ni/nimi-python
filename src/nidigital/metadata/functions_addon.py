@@ -88,6 +88,7 @@ functions_additional_get_site_pass_fail = {
     'FancyGetSitePassFail': {
         'python_name': 'get_site_pass_fail',
         'codegen_method': 'python-only',
+        'render_in_session_base': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -103,11 +104,6 @@ functions_additional_get_site_pass_fail = {
                 'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteList',
-                'type': 'ViConstString'
             },
             {
                 'direction': 'out',
