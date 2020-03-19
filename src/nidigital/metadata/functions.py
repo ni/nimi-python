@@ -1666,6 +1666,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetSitePassFail': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
