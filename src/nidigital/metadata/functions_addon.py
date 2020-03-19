@@ -51,18 +51,6 @@ burst, a call to niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTim
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteList',
-                'type': 'ViConstString'
             },
             {
                 'direction': 'out',
