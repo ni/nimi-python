@@ -16,9 +16,12 @@ functions_additional_burst_pattern = {
             }
         ],
         'documentation': {
-            'description': """\nUses the start_label you specify to burst the pattern on the sites you
-specify. Digital pins retain their state at the end of a pattern burst until the first vector of the pattern
-burst, a call to niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
+            'description': """\nUses the start_label you specify to burst the pattern on the sites you specify. If you
+specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
+
 """
         },
         'parameters': [
@@ -38,16 +41,19 @@ burst, a call to niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTim
                 'type': 'ViConstString'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'selectDigitalFunction',
                 'type': 'ViBoolean'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'waitUntilDone',
                 'type': 'ViBoolean'
             },
             {
+                'default_value': 10.0,
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64'
@@ -55,7 +61,7 @@ burst, a call to niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTim
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nDictionary where each key is a site number and value is pass/fail\n'
+                    'description': '\nDictionary where each key is a site number and value is pass/fail,\nif wait_until_done is specified as True. Else, None.\n'
                 },
                 'name': 'passFail',
                 'size': {

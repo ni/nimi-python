@@ -106,6 +106,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'BurstPattern': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },

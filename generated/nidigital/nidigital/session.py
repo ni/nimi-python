@@ -2191,8 +2191,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
-        r'''burst_pattern
+    def _burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+        r'''_burst_pattern
 
         TBD
 
@@ -2374,6 +2374,40 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+        '''burst_pattern
+
+        Uses the start_label you specify to burst the pattern on the sites you specify. If you
+        specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+        Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+        write_static, or a call to apply_levels_and_timing.
+
+        Args:
+            site_list (str):
+
+            start_label (str):
+
+            select_digital_function (bool):
+
+            wait_until_done (bool):
+
+            timeout (float):
+
+
+        Returns:
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail,
+                if wait_until_done is specified as True. Else, None.
+
+        '''
+        self._burst_pattern(site_list, start_label, select_digital_function, wait_until_done, timeout)
+
+        if wait_until_done:
+            return self.get_site_pass_fail(site_list)
+        else:
+            return None
 
     @ivi_synchronized
     def _fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout):

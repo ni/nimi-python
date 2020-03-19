@@ -190,7 +190,11 @@ burst_pattern
 
     .. py:method:: burst_pattern(site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0)
 
-            TBD
+            Uses the start_label you specify to burst the pattern on the sites you specify. If you
+            specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+            Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+            :py:meth:`nidigital.Session.write_static`, or a call to :py:meth:`nidigital.Session.apply_levels_and_timing`.
 
             
 
@@ -231,6 +235,17 @@ burst_pattern
 
 
             :type timeout: float
+
+            :rtype: { int: bool, int: bool, ... }
+            :return:
+
+
+                    Dictionary where each key is a site number and value is pass/fail,
+                    if wait_until_done is specified as True. Else, None.
+
+                    
+
+
 
 clear_error
 -----------
