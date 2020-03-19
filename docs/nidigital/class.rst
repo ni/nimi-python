@@ -106,7 +106,7 @@ apply_levels_and_timing
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins)
+    .. py:method:: apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins="")
 
             TBD
 
@@ -186,7 +186,7 @@ burst_pattern
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
+    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=10.0)
 
             TBD
 
@@ -264,7 +264,7 @@ clock_generator_generate_clock
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: clock_generator_generate_clock(frequency, select_digital_function)
+    .. py:method:: clock_generator_generate_clock(frequency, select_digital_function=True)
 
             TBD
 
@@ -892,7 +892,7 @@ create_source_waveform_from_file_tdms
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: create_source_waveform_from_file_tdms(waveform_name, waveform_file_path, write_waveform_data)
+    .. py:method:: create_source_waveform_from_file_tdms(waveform_name, waveform_file_path, write_waveform_data=True)
 
             TBD
 
@@ -1077,7 +1077,7 @@ fetch_capture_waveform
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout)
+    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0))
 
             Returns dictionary where each key is the site number and the value is array.array of unsigned int
 
@@ -2145,7 +2145,7 @@ tdr
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: tdr(apply_offsets)
+    .. py:method:: tdr(apply_offsets=True)
 
             TBD
 
@@ -2179,7 +2179,7 @@ unload_all_patterns
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: unload_all_patterns(unload_keep_alive_pattern)
+    .. py:method:: unload_all_patterns(unload_keep_alive_pattern=False)
 
             TBD
 
@@ -2234,7 +2234,7 @@ wait_until_done
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: wait_until_done(timeout)
+    .. py:method:: wait_until_done(timeout=10.0)
 
             TBD
 

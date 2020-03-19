@@ -106,11 +106,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         waveform_name='src_wfm',
         waveform_data=[i for i in range(4)])
 
-    multi_instrument_session.burst_pattern(
-        start_label='new_pattern',
-        select_digital_function=True,
-        wait_until_done=True,
-        timeout=5)
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     pass_fail = multi_instrument_session.get_site_pass_fail()
     assert pass_fail == {0: True, 1: True}
@@ -122,12 +118,7 @@ def configure_session(session, test_name):
     session.load_specifications(get_test_file_path(test_name, 'specifications.specs'))
     session.load_levels(get_test_file_path(test_name, 'pin_levels.digilevels'))
     session.load_timing(get_test_file_path(test_name, 'timing.digitiming'))
-    session.apply_levels_and_timing(
-        levels_sheet='pin_levels',
-        timing_sheet='timing',
-        initial_state_high_pins='',
-        initial_state_low_pins='',
-        initial_state_tristate_pins='')
+    session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
 
 
 def get_test_file_path(test_name, file_name):
@@ -173,17 +164,12 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
 
     multi_instrument_session.pins['HighPins'].create_capture_waveform_parallel(waveform_name='capt_wfm')
 
-    multi_instrument_session.burst_pattern(
-        start_label='new_pattern',
-        select_digital_function=True,
-        wait_until_done=True,
-        timeout=5)
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     # Pattern burst is configured to fetch num_samples samples
     fetched_waveforms = multi_instrument_session.fetch_capture_waveform(
         waveform_name='capt_wfm',
-        samples_to_read=num_samples,
-        timeout=10.0)
+        samples_to_read=num_samples)
 
     assert sorted(fetched_waveforms.keys()) == sorted([0, 1])
     assert all(len(fetched_waveforms[site]) == num_samples for site in fetched_waveforms)
@@ -206,11 +192,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
 
     multi_instrument_session.pins['HighPins'].create_capture_waveform_parallel(waveform_name='capt_wfm')
 
-    multi_instrument_session.burst_pattern(
-        start_label='new_pattern',
-        select_digital_function=True,
-        wait_until_done=True,
-        timeout=5)
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     # Pattern burst is configured to fetch num_samples samples
     samples_per_fetch = 8
@@ -218,8 +200,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
     for i in range(num_samples // samples_per_fetch):
         fetched_waveform = multi_instrument_session.sites[1, 0].fetch_capture_waveform(
             waveform_name='capt_wfm',
-            samples_to_read=samples_per_fetch,
-            timeout=10.0)
+            samples_to_read=samples_per_fetch)
         for site in fetched_waveform:
             waveforms[site] += fetched_waveform[site]
 
@@ -227,15 +208,10 @@ def test_fetch_capture_waveform(multi_instrument_session):
     assert all(len(waveforms[site]) == num_samples for site in waveforms)
 
     # Burst on subset of sites and verify fetch_capture_waveform()
-    multi_instrument_session.sites[1].burst_pattern(
-        start_label='new_pattern',
-        select_digital_function=True,
-        wait_until_done=True,
-        timeout=5)
+    multi_instrument_session.sites[1].burst_pattern(start_label='new_pattern')
     fetched_waveform = multi_instrument_session.fetch_capture_waveform(
         waveform_name='capt_wfm',
-        samples_to_read=num_samples,
-        timeout=10.0)
+        samples_to_read=num_samples)
 
     assert len(fetched_waveform) == 1
     fetched_site = next(iter(fetched_waveform))
@@ -294,11 +270,7 @@ def configure_for_history_ram_test(session):
     session.history_ram_pretrigger_samples = 0
     session.history_ram_number_of_samples_is_finite = True
 
-    session.sites[1].burst_pattern(
-        start_label='new_pattern',
-        select_digital_function=True,
-        wait_until_done=True,
-        timeout=5)
+    session.sites[1].burst_pattern(start_label='new_pattern')
 
 
 @pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")

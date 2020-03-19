@@ -55,16 +55,19 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'name': 'initialStateHighPins',
                 'type': 'ViConstString'
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'name': 'initialStateLowPins',
                 'type': 'ViConstString'
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'name': 'initialStateTristatePins',
                 'type': 'ViConstString'
@@ -127,16 +130,19 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'selectDigitalFunction',
                 'type': 'ViBoolean'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'waitUntilDone',
                 'type': 'ViBoolean'
             },
             {
+                'default_value': 10.0,
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64'
@@ -197,6 +203,7 @@ functions = {
                 'type': 'ViReal64'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'selectDigitalFunction',
                 'type': 'ViBoolean'
@@ -735,6 +742,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'writeWaveformData',
                 'type': 'ViBoolean'
@@ -2519,6 +2527,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'applyOffsets',
                 'type': 'ViBoolean'
@@ -2557,6 +2566,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
+                'default_value': False,
                 'direction': 'in',
                 'name': 'unloadKeepAlivePattern',
                 'type': 'ViBoolean'
@@ -2621,6 +2631,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
+                'default_value': 10.0,
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64'

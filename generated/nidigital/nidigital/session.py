@@ -540,7 +540,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def apply_levels_and_timing(self, levels_sheet, timing_sheet, initial_state_high_pins, initial_state_low_pins, initial_state_tristate_pins):
+    def apply_levels_and_timing(self, levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins=""):
         r'''apply_levels_and_timing
 
         TBD
@@ -599,7 +599,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function, wait_until_done, timeout):
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
         r'''burst_pattern
 
         TBD
@@ -649,7 +649,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def clock_generator_generate_clock(self, frequency, select_digital_function):
+    def clock_generator_generate_clock(self, frequency, select_digital_function=True):
         r'''clock_generator_generate_clock
 
         TBD
@@ -1180,7 +1180,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
 
-    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
+    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0)):
         '''fetch_capture_waveform
 
         Returns dictionary where each key is the site number and the value is array.array of unsigned int
@@ -2193,7 +2193,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def tdr(self, apply_offsets):
+    def tdr(self, apply_offsets=True):
         r'''tdr
 
         TBD
@@ -2510,7 +2510,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data):
+    def create_source_waveform_from_file_tdms(self, waveform_name, waveform_file_path, write_waveform_data=True):
         r'''create_source_waveform_from_file_tdms
 
         TBD
@@ -3095,7 +3095,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def unload_all_patterns(self, unload_keep_alive_pattern):
+    def unload_all_patterns(self, unload_keep_alive_pattern=False):
         r'''unload_all_patterns
 
         TBD
@@ -3127,7 +3127,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, timeout):
+    def wait_until_done(self, timeout=10.0):
         r'''wait_until_done
 
         TBD
