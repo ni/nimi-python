@@ -1452,21 +1452,13 @@ get_site_pass_fail
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_site_pass_fail(site_list)
+    .. py:method:: get_site_pass_fail()
 
             Returns dictionary where each key is a site number and value is pass/fail
 
             
 
 
-
-            :param site_list:
-
-
-                
-
-
-            :type site_list: str
 
             :rtype: { int: bool, int: bool, ... }
             :return:

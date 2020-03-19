@@ -1383,6 +1383,23 @@ class _SessionBase(object):
         return pin_infos
 
     @ivi_synchronized
+    def get_site_pass_fail(self):
+        '''get_site_pass_fail
+
+        Returns dictionary where each key is a site number and value is pass/fail
+
+        Returns:
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
+
+        '''
+        # For site_list, we just use the repeated capability
+        result_list = self._get_site_pass_fail()
+        site_list = self.get_site_results_site_numbers(enums.SiteResult.PASS_FAIL)
+        assert len(site_list) == len(result_list)
+
+        return dict(zip(site_list, result_list))
+
+    @ivi_synchronized
     def _fetch_history_ram_cycle_pin_data(self, site, sample_index, dut_cycle_index):
         r'''_fetch_history_ram_cycle_pin_data
 
@@ -2557,26 +2574,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_DeleteAllTimeSets(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    @ivi_synchronized
-    def get_site_pass_fail(self, site_list):
-        '''get_site_pass_fail
-
-        Returns dictionary where each key is a site number and value is pass/fail
-
-        Args:
-            site_list (str):
-
-
-        Returns:
-            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
-
-        '''
-        result_list = self._get_site_pass_fail(site_list)
-        site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.PASS_FAIL)
-        assert len(site_list) == len(result_list)
-
-        return dict(zip(site_list, result_list))
 
     @ivi_synchronized
     def self_test(self):
