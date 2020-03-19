@@ -19,11 +19,7 @@ repeated capability. They can be nested with the `sites` repeated capability.
     # Configure the session.
 
     with nidigital.Session(resource_name='PXI1Slot2', channels='0') as session:
-        session.sites[0, 1].pins[2, 3].burst_pattern(
-                start_label='new_pattern',
-                select_digital_function=False,
-                wait_until_done=True,
-                timeout=5)
+        session.sites[0, 1].pins['PinA', 'PinB'].ppmu_source()
 
 This will expand the repeated capabilities string given to the driver as `'site0/2,site0/3,site1/2,site1/3'`
 
