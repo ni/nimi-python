@@ -500,7 +500,7 @@ configure_time_set_drive_edges
                 
 
 
-            :type format: int
+            :type format: :py:data:`nidigital.DriveEdgeSetFormat`
             :param drive_on_edge:
 
 
@@ -561,7 +561,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type format: int
+            :type format: :py:data:`nidigital.DriveEdgeSetFormat`
             :param drive_on_edge:
 
 
@@ -636,7 +636,7 @@ configure_time_set_drive_format
                 
 
 
-            :type drive_format: int
+            :type drive_format: :py:data:`nidigital.DriveEdgeSetFormat`
 
 configure_time_set_edge
 -----------------------
@@ -669,7 +669,7 @@ configure_time_set_edge
                 
 
 
-            :type edge: int
+            :type edge: :py:data:`nidigital.TimeSetEdge`
             :param time:
 
 
@@ -885,7 +885,7 @@ create_capture_waveform_serial
                 
 
 
-            :type bit_order: int
+            :type bit_order: :py:data:`nidigital.BitOrder`
 
 create_source_waveform_from_file_tdms
 -------------------------------------
@@ -953,7 +953,7 @@ create_source_waveform_parallel
                 
 
 
-            :type data_mapping: int
+            :type data_mapping: :py:data:`nidigital.SourceMemoryDataMapping`
 
 create_source_waveform_serial
 -----------------------------
@@ -986,7 +986,7 @@ create_source_waveform_serial
                 
 
 
-            :type data_mapping: int
+            :type data_mapping: :py:data:`nidigital.SourceMemoryDataMapping`
             :param sample_width:
 
 
@@ -1000,7 +1000,7 @@ create_source_waveform_serial
                 
 
 
-            :type bit_order: int
+            :type bit_order: :py:data:`nidigital.BitOrder`
 
 create_time_set
 ---------------
@@ -1454,7 +1454,7 @@ get_site_pass_fail
 
     .. py:method:: get_site_pass_fail()
 
-            TBD
+            Returns dictionary where each key is a site number and value is pass/fail
 
             
 
@@ -1465,9 +1465,11 @@ get_site_pass_fail
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :rtype: list of bool
+            :rtype: { int: bool, int: bool, ... }
             :return:
 
+
+                    Dictionary where each key is a site number and value is pass/fail
 
                     
 
@@ -1533,7 +1535,7 @@ get_time_set_drive_format
 
             :type time_set: str
 
-            :rtype: int
+            :rtype: :py:data:`nidigital.DriveEdgeSetFormat`
             :return:
 
 
@@ -1572,7 +1574,7 @@ get_time_set_edge
                 
 
 
-            :type edge: int
+            :type edge: :py:data:`nidigital.TimeSetEdge`
 
             :rtype: float
             :return:
@@ -1917,7 +1919,7 @@ ppmu_measure
                 
 
 
-            :type measurement_type: int
+            :type measurement_type: :py:data:`nidigital.PPMUMeasurementType`
 
             :rtype: list of float
             :return:
@@ -1964,7 +1966,7 @@ read_sequencer_flag
                 
 
 
-            :type flag: str
+            :type flag: :py:data:`nidigital.SequencerFlag`
 
             :rtype: bool
             :return:
@@ -1993,7 +1995,7 @@ read_sequencer_register
                 
 
 
-            :type reg: str
+            :type reg: :py:data:`nidigital.SequencerRegister`
 
             :rtype: int
             :return:
@@ -2021,7 +2023,7 @@ read_static
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :rtype: list of int
+            :rtype: list of :py:data:`nidigital.DigitalState`
             :return:
 
 
@@ -2264,7 +2266,7 @@ write_sequencer_flag
                 
 
 
-            :type flag: str
+            :type flag: :py:data:`nidigital.SequencerFlag`
             :param value:
 
 
@@ -2292,7 +2294,7 @@ write_sequencer_register
                 
 
 
-            :type reg: str
+            :type reg: :py:data:`nidigital.SequencerRegister`
             :param value:
 
 
@@ -2411,7 +2413,7 @@ write_static
                 
 
 
-            :type state: int
+            :type state: :py:data:`nidigital.DigitalState`
 
 
 Properties
@@ -2655,17 +2657,17 @@ conditional_jump_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+-------------------+
+            | Characteristic | Value             |
+            +================+===================+
+            | Datatype       | enums.TriggerType |
+            +----------------+-------------------+
+            | Permissions    | read-write        |
+            +----------------+-------------------+
+            | Channel Based  | Yes               |
+            +----------------+-------------------+
+            | Resettable     | Yes               |
+            +----------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3034,17 +3036,17 @@ history_ram_cycles_to_acquire
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+---------------------------------+
+            | Characteristic | Value                           |
+            +================+=================================+
+            | Datatype       | enums.HistoryRAMCyclesToAcquire |
+            +----------------+---------------------------------+
+            | Permissions    | read-write                      |
+            +----------------+---------------------------------+
+            | Channel Based  | No                              |
+            +----------------+---------------------------------+
+            | Resettable     | Yes                             |
+            +----------------+---------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3138,17 +3140,17 @@ history_ram_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+-----------------------------+
+            | Characteristic | Value                       |
+            +================+=============================+
+            | Datatype       | enums.HistoryRAMTriggerType |
+            +----------------+-----------------------------+
+            | Permissions    | read-write                  |
+            +----------------+-----------------------------+
+            | Channel Based  | No                          |
+            +----------------+-----------------------------+
+            | Resettable     | Yes                         |
+            +----------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3662,17 +3664,17 @@ ppmu_current_limit_behavior
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+--------------------------------+
+            | Characteristic | Value                          |
+            +================+================================+
+            | Datatype       | enums.PPMUCurrentLimitBehavior |
+            +----------------+--------------------------------+
+            | Permissions    | read-write                     |
+            +----------------+--------------------------------+
+            | Channel Based  | Yes                            |
+            +----------------+--------------------------------+
+            | Resettable     | Yes                            |
+            +----------------+--------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4255,17 +4257,17 @@ start_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | int        |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+-------------------+
+            | Characteristic | Value             |
+            +================+===================+
+            | Datatype       | enums.TriggerType |
+            +----------------+-------------------+
+            | Permissions    | read-write        |
+            +----------------+-------------------+
+            | Channel Based  | No                |
+            +----------------+-------------------+
+            | Resettable     | Yes               |
+            +----------------+-------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

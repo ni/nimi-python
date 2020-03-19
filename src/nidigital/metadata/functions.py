@@ -379,6 +379,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'DriveEdgeSetFormat',
                 'name': 'format',
                 'type': 'ViInt32'
             },
@@ -429,6 +430,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'DriveEdgeSetFormat',
                 'name': 'format',
                 'type': 'ViInt32'
             },
@@ -489,6 +491,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'DriveEdgeSetFormat',
                 'name': 'driveFormat',
                 'type': 'ViInt32'
             }
@@ -519,6 +522,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'TimeSetEdge',
                 'name': 'edge',
                 'type': 'ViInt32'
             },
@@ -703,6 +707,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'BitOrder',
                 'name': 'bitOrder',
                 'type': 'ViInt32'
             }
@@ -761,6 +766,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SourceMemoryDataMapping',
                 'name': 'dataMapping',
                 'type': 'ViInt32'
             }
@@ -791,6 +797,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SourceMemoryDataMapping',
                 'name': 'dataMapping',
                 'type': 'ViInt32'
             },
@@ -801,6 +808,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'BitOrder',
                 'name': 'bitOrder',
                 'type': 'ViInt32'
             }
@@ -1672,6 +1680,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetSitePassFail': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1781,6 +1790,7 @@ functions = {
             },
             {
                 'direction': 'out',
+                'enum': 'DriveEdgeSetFormat',
                 'name': 'format',
                 'type': 'ViInt32'
             }
@@ -1811,6 +1821,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'TimeSetEdge',
                 'name': 'edge',
                 'type': 'ViInt32'
             },
@@ -2141,6 +2152,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'PPMUMeasurementType',
                 'name': 'measurementType',
                 'type': 'ViInt32'
             },
@@ -2199,6 +2211,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SequencerFlag',
                 'name': 'flag',
                 'type': 'ViConstString'
             },
@@ -2222,6 +2235,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SequencerRegister',
                 'name': 'reg',
                 'type': 'ViConstString'
             },
@@ -2255,6 +2269,7 @@ functions = {
             },
             {
                 'direction': 'out',
+                'enum': 'DigitalState',
                 'name': 'data',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -2625,6 +2640,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SequencerFlag',
                 'name': 'flag',
                 'type': 'ViConstString'
             },
@@ -2648,6 +2664,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SequencerRegister',
                 'name': 'reg',
                 'type': 'ViConstString'
             },
@@ -2778,6 +2795,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'DigitalState',
                 'name': 'state',
                 'type': 'ViUInt8'
             }
