@@ -1,5 +1,6 @@
 import array
 import collections
+import datetime
 import os
 
 import numpy
@@ -43,10 +44,12 @@ def test_pins_rep_cap(multi_instrument_session):
 
 def test_instruments_rep_cap(multi_instrument_session):
     multi_instrument_session.timing_absolute_delay_enabled = True
-    multi_instrument_session.instruments[instruments[0]].timing_absolute_delay = 5e-09
-    multi_instrument_session.instruments[instruments[1]].timing_absolute_delay = -5e-09
-    assert multi_instrument_session.instruments[instruments[0]].timing_absolute_delay == 5e-09
-    assert multi_instrument_session.instruments[instruments[1]].timing_absolute_delay == -5e-09
+    delay0 = datetime.timedelta(microseconds=5e-3)
+    delay1 = datetime.timedelta(microseconds=-5e-3)
+    multi_instrument_session.instruments[instruments[0]].timing_absolute_delay = delay0
+    multi_instrument_session.instruments[instruments[1]].timing_absolute_delay = delay1
+    assert multi_instrument_session.instruments[instruments[0]].timing_absolute_delay == delay0
+    assert multi_instrument_session.instruments[instruments[1]].timing_absolute_delay == delay1
 
     for instrument in instruments:
         assert multi_instrument_session.instruments[instrument].serial_number == '0'
