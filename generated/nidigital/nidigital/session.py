@@ -1171,7 +1171,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
         '''burst_pattern
 
         Uses the start_label you specify to burst the pattern on the sites you specify. If you
@@ -1193,7 +1193,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float):
+            timeout (float in seconds or datetime.timedelta):
 
 
         Returns:
