@@ -1,7 +1,7 @@
 import array
 import collections
-import os
 import datetime
+import os
 
 import numpy
 import pytest
