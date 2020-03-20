@@ -435,10 +435,12 @@ attributes = {
     },
     1150051: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
         'name': 'TDR_OFFSET',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
     1150052: {
         'access': 'read-write',
@@ -499,10 +501,12 @@ attributes = {
     },
     1150069: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': True,
         'name': 'FREQUENCY_COUNTER_MEASUREMENT_TIME',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
     1150071: {
         'access': 'read-write',
@@ -513,11 +517,13 @@ attributes = {
     },
     1150072: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': False,
         'name': 'TIMING_ABSOLUTE_DELAY',
         'repeated_capability_type': 'instruments',
         'resettable': True,
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'float in seconds or datetime.timedelta'
     },
     1150073: {
         'access': 'read-write',
