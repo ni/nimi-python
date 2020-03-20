@@ -493,3 +493,4 @@ def test_string_to_list_prefix():
 def test_convert_comma_separated_string_to_list():
     out_list = convert_comma_separated_string_to_list(' PinA ,  PinB , PinC  ')
     assert out_list == ['PinA', 'PinB', 'PinC']
+

@@ -94,8 +94,9 @@ attributes = {
     },
     1050510: {
         'access': 'read only',
-        'channel_based': True,
+        'channel_based': False,
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
+        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -152,6 +153,7 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'name': 'SERIAL_NUMBER',
+        'repeated_capability_type': 'instruments',
         'resettable': False,
         'type': 'ViString'
     },
@@ -518,6 +520,7 @@ attributes = {
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'channel_based': False,
         'name': 'TIMING_ABSOLUTE_DELAY',
+        'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViReal64',
         'type_in_documentation': 'float in seconds or datetime.timedelta'

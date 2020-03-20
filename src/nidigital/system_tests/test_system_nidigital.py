@@ -9,13 +9,13 @@ import nidigital
 from nidigital.enums import DigitalState
 from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 
-instr = ['PXI1Slot2', 'PXI1Slot5']
+instruments = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
 @pytest.fixture(scope='function')
 def multi_instrument_session():
-    with nidigital.Session(resource_name=','.join(instr), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
+    with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570') as simulated_session:
         yield simulated_session
 
 
@@ -39,6 +39,20 @@ def test_pins_rep_cap(multi_instrument_session):
         drive_format=nidigital.DriveEdgeSetFormat.RL)
     drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format(time_set='t0')
     assert drive_format == nidigital.DriveEdgeSetFormat.RL
+
+
+def test_instruments_rep_cap(multi_instrument_session):
+    multi_instrument_session.timing_absolute_delay_enabled = True
+    multi_instrument_session.instruments[instruments[0]].timing_absolute_delay = 5e-09
+    multi_instrument_session.instruments[instruments[1]].timing_absolute_delay = -5e-09
+    assert multi_instrument_session.instruments[instruments[0]].timing_absolute_delay == 5e-09
+    assert multi_instrument_session.instruments[instruments[1]].timing_absolute_delay == -5e-09
+
+    for instrument in instruments:
+        assert multi_instrument_session.instruments[instrument].serial_number == '0'
+
+    for instrument in instruments:
+        assert multi_instrument_session.instruments[instrument].instrument_firmware_revision == '0.0.0d0'
 
 
 def test_property_boolean(multi_instrument_session):
@@ -106,9 +120,9 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         waveform_name='src_wfm',
         waveform_data=[i for i in range(4)])
 
-    multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern')
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
-    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
+    pass_fail = multi_instrument_session.get_site_pass_fail()
     assert pass_fail == {0: True, 1: True}
 
 
@@ -118,7 +132,7 @@ def configure_session(session, test_name):
     session.load_specifications(get_test_file_path(test_name, 'specifications.specs'))
     session.load_levels(get_test_file_path(test_name, 'pin_levels.digilevels'))
     session.load_timing(get_test_file_path(test_name, 'timing.digitiming'))
-    session.apply_levels_and_timing(site_list='', levels_sheet='pin_levels', timing_sheet='timing')
+    session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
 
 
 def get_test_file_path(test_name, file_name):
@@ -164,11 +178,10 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
 
     multi_instrument_session.pins['HighPins'].create_capture_waveform_parallel(waveform_name='capt_wfm')
 
-    multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern')
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     # Pattern burst is configured to fetch num_samples samples
     fetched_waveforms = multi_instrument_session.fetch_capture_waveform(
-        site_list='',
         waveform_name='capt_wfm',
         samples_to_read=num_samples)
 
@@ -193,14 +206,13 @@ def test_fetch_capture_waveform(multi_instrument_session):
 
     multi_instrument_session.pins['HighPins'].create_capture_waveform_parallel(waveform_name='capt_wfm')
 
-    multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern')
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     # Pattern burst is configured to fetch num_samples samples
     samples_per_fetch = 8
     waveforms = collections.defaultdict(list)
     for i in range(num_samples // samples_per_fetch):
-        fetched_waveform = multi_instrument_session.fetch_capture_waveform(
-            site_list='site1,site0',
+        fetched_waveform = multi_instrument_session.sites[1, 0].fetch_capture_waveform(
             waveform_name='capt_wfm',
             samples_to_read=samples_per_fetch)
         for site in fetched_waveform:
@@ -210,9 +222,8 @@ def test_fetch_capture_waveform(multi_instrument_session):
     assert all(len(waveforms[site]) == num_samples for site in waveforms)
 
     # Burst on subset of sites and verify fetch_capture_waveform()
-    multi_instrument_session.burst_pattern(site_list='site1', start_label='new_pattern')
+    multi_instrument_session.sites[1].burst_pattern(start_label='new_pattern')
     fetched_waveform = multi_instrument_session.fetch_capture_waveform(
-        site_list='',
         waveform_name='capt_wfm',
         samples_to_read=num_samples)
 
@@ -225,7 +236,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
 def test_get_pin_results_pin_information(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
-    fully_qualified_channels = [instr[1] + '/0', instr[0] + '/1', instr[1] + '/11']
+    fully_qualified_channels = [instruments[1] + '/0', instruments[0] + '/1', instruments[1] + '/11']
     pin_info = multi_instrument_session.channels[fully_qualified_channels].get_pin_results_pin_information()
 
     pins = [i.pin_name for i in pin_info]
@@ -273,7 +284,7 @@ def configure_for_history_ram_test(session):
     session.history_ram_pretrigger_samples = 0
     session.history_ram_number_of_samples_is_finite = True
 
-    session.burst_pattern(site_list='site1', start_label='new_pattern')
+    session.sites[1].burst_pattern(start_label='new_pattern')
 
 
 @pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
@@ -440,17 +451,53 @@ def test_get_pattern_pin_names(multi_instrument_session):
     assert pattern_pin_names == ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
 
 
+# nidigital specific converter tests
+# We are specifically using a "private" module to get to the converters so we can test the
+# nidigital specific one
+def test_convert_site_string():
+    test_result = nidigital._converters.convert_site_to_string('1')
+    assert test_result == 'site1'
+    test_result = nidigital._converters.convert_site_to_string(1)
+    assert test_result == 'site1'
+    test_result = nidigital._converters.convert_site_to_string('site1')
+    assert test_result == 'site1'
+    test_result = nidigital._converters.convert_site_to_string('42')
+    assert test_result == 'site42'
+    test_result = nidigital._converters.convert_site_to_string(42)
+    assert test_result == 'site42'
+    test_result = nidigital._converters.convert_site_to_string('site42')
+    assert test_result == 'site42'
+
+
+def test_convert_site_string_errors():
+    try:
+        nidigital._converters.convert_site_to_string(1.0)
+        assert False
+    except TypeError:
+        pass
+    try:
+        nidigital._converters.convert_site_to_string(['1'])
+        assert False
+    except TypeError:
+        pass
+    try:
+        nidigital._converters.convert_site_to_string(False)
+        assert False
+    except TypeError:
+        pass
+
+
 def test_get_site_pass_fail(multi_instrument_session):
     test_files_folder = 'simple_pattern'
     configure_session(multi_instrument_session, test_files_folder)
 
     multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern')
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
-    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='')
+    pass_fail = multi_instrument_session.get_site_pass_fail()
     assert pass_fail == {0: True, 1: True, 2: True, 3: True}
 
-    pass_fail = multi_instrument_session.get_site_pass_fail(site_list='site3,site0')
+    pass_fail = multi_instrument_session.sites[3, 0].get_site_pass_fail()
     assert pass_fail == {3: True, 0: True}
 
