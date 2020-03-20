@@ -3171,7 +3171,7 @@ instrument_firmware_revision
             +----------------+-----------+
             | Permissions    | read only |
             +----------------+-----------+
-            | Channel Based  | Yes       |
+            | Channel Based  | No        |
             +----------------+-----------+
             | Resettable     | No        |
             +----------------+-----------+
@@ -3988,7 +3988,10 @@ serial_number
 
     .. py:attribute:: serial_number
 
-        
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 
@@ -4384,7 +4387,10 @@ timing_absolute_delay
 
     .. py:attribute:: timing_absolute_delay
 
-        
+        .. tip:: This property can use repeated capabilities. If set or get directly on the
+            nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+            You can specify a subset of repeated capabilities using the Python index notation on an
+            nidigital.Session repeated capabilities container, and calling set/get value on the result.
 
         The following table lists the characteristics of this property.
 

@@ -50,7 +50,7 @@ config = {
         },
         {
             'prefix': '',
-            'python_name': 'devices'
+            'python_name': 'instruments'
         },
         {
             'prefix': 'patternOpcodeEvent',

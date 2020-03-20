@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 * ### NI-Digital Pattern Driver
     * #### Added
         * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+        * Support for `instruments` repeated capability in the following properties - `instrument_firmware_revision`, `serial_number`, and `timing_absolute_delay` -  [#1228](https://github.com/ni/nimi-python/issues/1228) 
     * #### Changed
         * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
         * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)

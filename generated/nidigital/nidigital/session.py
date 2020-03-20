@@ -412,6 +412,14 @@ class _SessionBase(object):
     '''
     sequencer_flag_terminal_name = _attributes.AttributeViString(1150059)
     serial_number = _attributes.AttributeViString(1150001)
+    '''Type: str
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     simulate = _attributes.AttributeViBoolean(1050005)
     specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
     specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
@@ -443,6 +451,14 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     timing_absolute_delay = _attributes.AttributeViReal64(1150072)
+    '''Type: float
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     timing_absolute_delay_enabled = _attributes.AttributeViBoolean(1150071)
     vih = _attributes.AttributeViReal64(1150008)
     '''Type: float
@@ -2395,7 +2411,7 @@ class Session(_SessionBase):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
         self.pins = _RepeatedCapabilities(self, '')
-        self.devices = _RepeatedCapabilities(self, '')
+        self.instruments = _RepeatedCapabilities(self, '')
         self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent')
         self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
         self.sites = _RepeatedCapabilities(self, 'site')

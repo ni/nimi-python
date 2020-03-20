@@ -46,14 +46,14 @@ pins
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
-devices
--------
+instruments
+-----------
 
-    .. py:attribute:: nidigital.Session.devices[]
+    .. py:attribute:: nidigital.Session.instruments[]
 
         .. code:: python
 
-            session.devices['0-2'].channel_enabled = True
+            session.instruments['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
