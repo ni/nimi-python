@@ -451,7 +451,7 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
-    '''Type: float
+    '''Type: float in seconds or datetime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -615,7 +615,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
         r'''burst_pattern
 
         TBD
@@ -633,7 +633,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float):
+            timeout (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -641,7 +641,7 @@ class _SessionBase(object):
         start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
         select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
         wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
