@@ -88,6 +88,7 @@ functions_additional_get_site_pass_fail = {
     'FancyGetSitePassFail': {
         'python_name': 'get_site_pass_fail',
         'codegen_method': 'python-only',
+        'render_in_session_base': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -103,11 +104,6 @@ functions_additional_get_site_pass_fail = {
                 'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'siteList',
-                'type': 'ViConstString'
             },
             {
                 'direction': 'out',
@@ -148,6 +144,8 @@ functions_additional_fetch_capture_waveform = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -221,6 +219,8 @@ associated with the pattern burst.
                     'description': 'Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,\nwhere N is the site number. The VI returns an error if more than one site is specified.'
                 },
                 'name': 'site',
+                'python_api_converter_name': 'convert_site_to_string',  # This won't actually change any code generation but is here for completeness
+                'type_in_documentation': 'str or int',
                 'type': 'ViConstString'
             },
             {
