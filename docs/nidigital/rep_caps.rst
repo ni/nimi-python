@@ -46,14 +46,14 @@ pins
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
-devices
--------
+instruments
+-----------
 
-    .. py:attribute:: nidigital.Session.devices[]
+    .. py:attribute:: nidigital.Session.instruments[]
 
         .. code:: python
 
-            session.devices['0-2'].channel_enabled = True
+            session.instruments['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
@@ -108,6 +108,32 @@ conditional_jump_triggers
             session.conditional_jump_triggers['conditionalJumpTrigger0-conditionalJumpTrigger2'].channel_enabled = True
 
         passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
+
+
+sites
+-----
+
+    .. py:attribute:: nidigital.Session.sites[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.sites['0-2'].channel_enabled = True
+
+        passes a string of :python:`'site0, site1, site2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.sites['site0-site2'].channel_enabled = True
+
+        passes a string of :python:`'site0, site1, site2'` to the set attribute function.
 
 
 

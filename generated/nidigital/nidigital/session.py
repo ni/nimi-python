@@ -412,6 +412,14 @@ class _SessionBase(object):
     '''
     sequencer_flag_terminal_name = _attributes.AttributeViString(1150059)
     serial_number = _attributes.AttributeViString(1150001)
+    '''Type: str
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     simulate = _attributes.AttributeViBoolean(1050005)
     specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
     specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
@@ -443,6 +451,14 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     timing_absolute_delay = _attributes.AttributeViReal64(1150072)
+    '''Type: float
+
+    Tip:
+    This property can use repeated capabilities. If set or get directly on the
+    nidigital.Session object, then the set/get will use all repeated capabilities in the session.
+    You can specify a subset of repeated capabilities using the Python index notation on an
+    nidigital.Session repeated capabilities container, and calling set/get value on the result.
+    '''
     timing_absolute_delay_enabled = _attributes.AttributeViBoolean(1150071)
     vih = _attributes.AttributeViReal64(1150008)
     '''Type: float
@@ -540,6 +556,41 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
+    def apply_levels_and_timing(self, levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins=""):
+        r'''apply_levels_and_timing
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            levels_sheet (str):
+
+            timing_sheet (str):
+
+            initial_state_high_pins (str):
+
+            initial_state_low_pins (str):
+
+            initial_state_tristate_pins (str):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        levels_sheet_ctype = ctypes.create_string_buffer(levels_sheet.encode(self._encoding))  # case C020
+        timing_sheet_ctype = ctypes.create_string_buffer(timing_sheet.encode(self._encoding))  # case C020
+        initial_state_high_pins_ctype = ctypes.create_string_buffer(initial_state_high_pins.encode(self._encoding))  # case C020
+        initial_state_low_pins_ctype = ctypes.create_string_buffer(initial_state_low_pins.encode(self._encoding))  # case C020
+        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(initial_state_tristate_pins.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_ApplyLevelsAndTiming(vi_ctype, site_list_ctype, levels_sheet_ctype, timing_sheet_ctype, initial_state_high_pins_ctype, initial_state_low_pins_ctype, initial_state_tristate_pins_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def apply_tdr_offsets(self, offsets):
         r'''apply_tdr_offsets
 
@@ -560,6 +611,38 @@ class _SessionBase(object):
         num_offsets_ctype = _visatype.ViInt32(0 if offsets is None else len(offsets))  # case S160
         offsets_ctype = get_ctypes_pointer_for_buffer(value=offsets, library_type=_visatype.ViReal64)  # case B550
         error_code = self._library.niDigital_ApplyTDROffsets(vi_ctype, channel_list_ctype, num_offsets_ctype, offsets_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+        r'''burst_pattern
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            start_label (str):
+
+            select_digital_function (bool):
+
+            wait_until_done (bool):
+
+            timeout (float):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
+        select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
+        wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -651,6 +734,24 @@ class _SessionBase(object):
         ioh_ctype = _visatype.ViReal64(ioh)  # case S150
         vcom_ctype = _visatype.ViReal64(vcom)  # case S150
         error_code = self._library.niDigital_ConfigureActiveLoadLevels(vi_ctype, channel_list_ctype, iol_ctype, ioh_ctype, vcom_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def configure_pattern_burst_sites(self):
+        r'''configure_pattern_burst_sites
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDigital_ConfigurePatternBurstSites(vi_ctype, site_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -1034,6 +1135,108 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def disable_sites(self):
+        r'''disable_sites
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDigital_DisableSites(vi_ctype, site_list_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def enable_sites(self):
+        r'''enable_sites
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
+    def _fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
+        # This is slightly modified codegen from the function
+        # We cannot use codegen without major modifications to the code generator
+        # This function uses two 'ivi-dance' parameters and then multiplies them together - see
+        # the (modified) line below
+        # Also, we want to return the two sized that normally wouldn't be returned
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
+        data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        data_ctype = None  # case B610
+        actual_num_waveforms_ctype = _visatype.ViInt32()  # case S220
+        actual_samples_per_waveform_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        data_buffer_size_ctype = _visatype.ViInt32(actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value)  # case S200 (modified)
+        data_size = actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value  # case B620 (modified)
+        data_array = array.array("L", [0] * data_size)  # case B620
+        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViUInt32)  # case B620
+        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
+
+    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0)):
+        '''fetch_capture_waveform
+
+        Returns dictionary where each key is the site number and the value is array.array of unsigned int
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            waveform_name (str):
+
+            samples_to_read (int):
+
+            timeout (float or datetime.timedelta):
+
+
+        Returns:
+            waveform ({ site: data, site: data, ... }): Dictionary where each key is the site number and the value is array.array of unsigned int
+
+        '''
+        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
+
+        # Get the site list
+        site_list = self.get_site_results_site_numbers(enums.SiteResult.CAPTURE_WAVEFORM)
+        assert len(site_list) == actual_num_waveforms
+
+        waveforms = {}
+
+        mv = memoryview(data)
+
+        for i in range(actual_num_waveforms):
+            start = i * actual_samples_per_waveform
+            end = start + actual_samples_per_waveform
+            waveforms[site_list[i]] = mv[start:end]
+
+        return waveforms
+
+    @ivi_synchronized
     def fetch_history_ram_cycle_information(self, site, position, samples_to_read):
         '''fetch_history_ram_cycle_information
 
@@ -1054,7 +1257,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            site (str): Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
+            site (str or int): Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
                 where N is the site number. The VI returns an error if more than one site is specified.
 
             position (int): Sample index from which to start fetching pattern information.
@@ -1113,6 +1316,8 @@ class _SessionBase(object):
                 'position: Specified value = {0}, samples_to_read: Specified value = {1}; Samples available = {2}.'
                 .format(position, samples_to_read, samples_available - position))
 
+        # Site can be 'N', N or 'siteN'. This will normalize all options to 'siteN' which is requried by the driver
+        site = _converters.convert_site_string(site)
         pattern_names = {}
         time_set_names = {}
         cycle_infos = []
@@ -1192,6 +1397,23 @@ class _SessionBase(object):
             pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
 
         return pin_infos
+
+    @ivi_synchronized
+    def get_site_pass_fail(self):
+        '''get_site_pass_fail
+
+        Returns dictionary where each key is a site number and value is pass/fail
+
+        Returns:
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
+
+        '''
+        # For site_list, we just use the repeated capability
+        result_list = self._get_site_pass_fail()
+        site_list = self.get_site_results_site_numbers(enums.SiteResult.PASS_FAIL)
+        assert len(site_list) == len(result_list)
+
+        return dict(zip(site_list, result_list))
 
     @ivi_synchronized
     def _fetch_history_ram_cycle_pin_data(self, site, sample_index, dut_cycle_index):
@@ -1563,6 +1785,73 @@ class _SessionBase(object):
         error_code = self._library.niDigital_GetPinResultsPinInformation(vi_ctype, channel_list_ctype, buffer_size_ctype, pin_indexes_ctype, site_numbers_ctype, channel_indexes_ctype, None if actual_num_values_ctype is None else (ctypes.pointer(actual_num_values_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [int(pin_indexes_ctype[i]) for i in range(buffer_size_ctype.value)], [int(site_numbers_ctype[i]) for i in range(buffer_size_ctype.value)], [int(channel_indexes_ctype[i]) for i in range(buffer_size_ctype.value)]
+
+    @ivi_synchronized
+    def _get_site_pass_fail(self):
+        r'''_get_site_pass_fail
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Returns:
+            pass_fail (list of bool):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        pass_fail_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        pass_fail_ctype = None  # case B610
+        actual_num_sites_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        pass_fail_buffer_size_ctype = _visatype.ViInt32(actual_num_sites_ctype.value)  # case S200
+        pass_fail_size = actual_num_sites_ctype.value  # case B620
+        pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
+        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
+
+    @ivi_synchronized
+    def get_site_results_site_numbers(self, site_result_type):
+        r'''get_site_results_site_numbers
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            site_result_type (enums.SiteResult):
+
+
+        Returns:
+            site_numbers (list of int):
+
+        '''
+        if type(site_result_type) is not enums.SiteResult:
+            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResult))
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
+        site_numbers_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        site_numbers_ctype = None  # case B610
+        actual_num_site_numbers_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        site_numbers_buffer_size_ctype = _visatype.ViInt32(actual_num_site_numbers_ctype.value)  # case S200
+        site_numbers_size = actual_num_site_numbers_ctype.value  # case B620
+        site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
+        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_time_set_drive_format(self, time_set):
@@ -1984,6 +2273,39 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def _write_source_waveform_site_unique_u32(self, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
+        r'''_write_source_waveform_site_unique_u32
+
+        TBD
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            waveform_name (str):
+
+            num_waveforms (int):
+
+            samples_per_waveform (int):
+
+            waveform_data (array.array("L")):
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
+        samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
+        waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
+        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
+        error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    @ivi_synchronized
     def write_static(self, state):
         r'''write_static
 
@@ -2089,9 +2411,10 @@ class Session(_SessionBase):
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '')
         self.pins = _RepeatedCapabilities(self, '')
-        self.devices = _RepeatedCapabilities(self, '')
+        self.instruments = _RepeatedCapabilities(self, '')
         self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent')
         self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
+        self.sites = _RepeatedCapabilities(self, 'site')
 
         self.tclk = nitclk.SessionReference(self._vi)
 
@@ -2237,22 +2560,6 @@ class Session(_SessionBase):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niDigital_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def configure_pattern_burst_sites(self, site_list):
-        r'''configure_pattern_burst_sites
-
-        TBD
-
-        Args:
-            site_list (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_ConfigurePatternBurstSites(vi_ctype, site_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2548,7 +2855,7 @@ class Session(_SessionBase):
             else:
                 raise TypeError('Unknown array type: {}'.format(type(waveform_data[site])))
 
-            site_list.append('site' + str(site))
+            site_list.append(site)
 
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
@@ -2556,9 +2863,7 @@ class Session(_SessionBase):
 
             i += 1
 
-        site_list_str = ','.join(site_list)
-
-        self._write_source_waveform_site_unique_u32(site_list_str, waveform_name, len(waveform_data), actual_samples_per_waveform, data)
+        self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
 
     @ivi_synchronized
     def _fetch_history_ram_cycle_information(self, site, sample_index):
@@ -2653,7 +2958,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            site (str):
+            site (str or int):
 
 
         Returns:
@@ -2718,67 +3023,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_GetPatternPinList(vi_ctype, start_label_ctype, pin_list_buffer_size_ctype, pin_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return _converters.convert_comma_separated_string_to_list(pin_list_ctype.value.decode(self._encoding))
-
-    @ivi_synchronized
-    def _get_site_pass_fail(self, site_list):
-        r'''_get_site_pass_fail
-
-        TBD
-
-        Args:
-            site_list (str):
-
-
-        Returns:
-            pass_fail (list of bool):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        pass_fail_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        pass_fail_ctype = None  # case B610
-        actual_num_sites_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        pass_fail_buffer_size_ctype = _visatype.ViInt32(actual_num_sites_ctype.value)  # case S200
-        pass_fail_size = actual_num_sites_ctype.value  # case B620
-        pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=pass_fail_size)  # case B620
-        error_code = self._library.niDigital_GetSitePassFail(vi_ctype, site_list_ctype, pass_fail_buffer_size_ctype, pass_fail_ctype, None if actual_num_sites_ctype is None else (ctypes.pointer(actual_num_sites_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
-
-    @ivi_synchronized
-    def get_site_results_site_numbers(self, site_list, site_result_type):
-        r'''get_site_results_site_numbers
-
-        TBD
-
-        Args:
-            site_list (str):
-
-            site_result_type (enums.SiteResult):
-
-
-        Returns:
-            site_numbers (list of int):
-
-        '''
-        if type(site_result_type) is not enums.SiteResult:
-            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResult))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
-        site_numbers_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        site_numbers_ctype = None  # case B610
-        actual_num_site_numbers_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        site_numbers_buffer_size_ctype = _visatype.ViInt32(actual_num_site_numbers_ctype.value)  # case S200
-        site_numbers_size = actual_num_site_numbers_ctype.value  # case B620
-        site_numbers_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=site_numbers_size)  # case B620
-        error_code = self._library.niDigital_GetSiteResultsSiteNumbers(vi_ctype, site_list_ctype, site_result_type_ctype, site_numbers_buffer_size_ctype, site_numbers_ctype, None if actual_num_site_numbers_ctype is None else (ctypes.pointer(actual_num_site_numbers_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def get_time_set_name(self, time_set_index):
@@ -2889,7 +3133,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            site (str):
+            site (str or int):
 
 
         Returns:
@@ -3196,35 +3440,6 @@ class Session(_SessionBase):
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
         waveform_file_path_ctype = ctypes.create_string_buffer(waveform_file_path.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_WriteSourceWaveformDataFromFileTDMS(vi_ctype, waveform_name_ctype, waveform_file_path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def _write_source_waveform_site_unique_u32(self, site_list, waveform_name, num_waveforms, samples_per_waveform, waveform_data):
-        r'''_write_source_waveform_site_unique_u32
-
-        TBD
-
-        Args:
-            site_list (str):
-
-            waveform_name (str):
-
-            num_waveforms (int):
-
-            samples_per_waveform (int):
-
-            waveform_data (array.array("L")):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        num_waveforms_ctype = _visatype.ViInt32(num_waveforms)  # case S150
-        samples_per_waveform_ctype = _visatype.ViInt32(samples_per_waveform)  # case S150
-        waveform_data_array = get_ctypes_and_array(value=waveform_data, array_type="L")  # case B550
-        waveform_data_ctype = get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViUInt32)  # case B550
-        error_code = self._library.niDigital_WriteSourceWaveformSiteUniqueU32(vi_ctype, site_list_ctype, waveform_name_ctype, num_waveforms_ctype, samples_per_waveform_ctype, waveform_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

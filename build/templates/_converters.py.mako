@@ -216,6 +216,9 @@ def convert_init_with_options_dictionary(values):
 
 
 <%
+# Beginning of module-specific converters
+%>\
+<%
 # nitclk is different. Only nitclk needs to be able to convert sessions like this
 %>\
 % if config['module_name'] == 'nitclk':
@@ -253,6 +256,26 @@ def convert_to_nitclk_session_number_list(item_list):
 # nifake specific converter(s) - used only for testing
 def convert_double_each_element(numbers):
     return [x * 2 for x in numbers]
+
+
+% endif
+<%
+# There are some parameters in nidigital that cannot be made into a repeated capability because the
+# methods already have a repeated capability (pins), and we want the parameter to behave similarly
+# to repeated capabilities.
+%>\
+% if config['module_name'] == 'nidigital':
+def convert_site_to_string(site):
+    if isinstance(site, str):
+        if site.startswith('site'):
+            return site
+        else:
+            return convert_site_to_string(int(site))
+    else:
+        if type(site) != int:
+            # Don't use assert here since this comes from the user
+            raise TypeError('site must be a string or an integer. Actual: {}'.format(type(site)))
+        return 'site' + str(site)
 
 
 % endif
@@ -540,3 +563,4 @@ def test_string_to_list_prefix():
 def test_convert_comma_separated_string_to_list():
     out_list = convert_comma_separated_string_to_list(' PinA ,  PinB , PinC  ')
     assert out_list == ['PinA', 'PinB', 'PinC']
+
