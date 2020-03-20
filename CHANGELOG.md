@@ -21,7 +21,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## Unreleased
 * ### ALL
     * #### Added
         * Support for nested repeated capabilities. This allows things like
@@ -32,19 +32,20 @@ All notable changes to this project will be documented in this file.
             The repeated capabilities will be expanded to `'site0/A,site0/B,site1/A,site1/B'`
     * #### Changed
     * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-DCPower
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+        * Support for `instruments` repeated capability in the following properties - `instrument_firmware_revision`, `serial_number`, and `timing_absolute_delay` -  [#1228](https://github.com/ni/nimi-python/issues/1228) 
+    * #### Changed
+        * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
+        * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
+    * #### Removed
+        * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+* ### NI-DMM
     * #### Added
     * #### Changed
     * #### Removed
@@ -52,7 +53,15 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
     * #### Added
     * #### Changed
     * #### Removed
@@ -60,14 +69,6 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI-Digital Pattern Driver
-    * #### Added
-        * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
-    * #### Changed
-        * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
-        * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
-    * #### Removed
-        * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
 * ### NI-TClk
     * #### Added
     * #### Changed
@@ -114,6 +115,7 @@ All notable changes to this project will be documented in this file.
         * `conditional_jump_triggers` and `pattern_opcode_events` repeated capabilities - [#1191](https://github.com/ni/nimi-python/issues/1191), [#1192](https://github.com/ni/nimi-python/issues/1192)
     * #### Changed
         * `write_source_waveform_site_unique()` now supports `numpy.array` and `list` as site waveform types
+        * sites are now a repeated capability instead of a parameter: `session.sites[1,2].fetch_capture_waveform(...)` - [#1111](https://github.com/ni/nimi-python/issues/1111)
         * `fetch_history_ram_cycle_information` method now supports fetching multiple History RAM samples in a single API call - [#1071](https://github.com/ni/nimi-python/issues/1071)
         * Update methods that require `pin_list` to be passed in, such that `pin_list` can be passed in via `pins` repeated capability - [#1294](https://github.com/ni/nimi-python/issues/1294)
     * #### Removed
@@ -877,20 +879,8 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 
 <!--
 * [Unreleased](#unreleased)
-## [Unreleased]
+## Unreleased
 * ### ALL
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
     * #### Added
     * #### Changed
     * #### Removed
@@ -898,7 +888,19 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Added
     * #### Changed
     * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
 * ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
     * #### Added
     * #### Changed
     * #### Removed
@@ -906,11 +908,11 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI Switch Executive
+* ### NI-Switch
     * #### Added
     * #### Changed
     * #### Removed
-* ### NI-Digital Pattern Driver
+* ### NI Switch Executive
     * #### Added
     * #### Changed
     * #### Removed

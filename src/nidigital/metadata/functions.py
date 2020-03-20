@@ -39,6 +39,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -53,16 +55,19 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'name': 'initialStateHighPins',
                 'type': 'ViConstString'
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'name': 'initialStateLowPins',
                 'type': 'ViConstString'
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'name': 'initialStateTristatePins',
                 'type': 'ViConstString'
@@ -114,6 +119,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -123,16 +130,19 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'selectDigitalFunction',
                 'type': 'ViBoolean'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'waitUntilDone',
                 'type': 'ViBoolean'
             },
             {
+                'default_value': 10.0,
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64'
@@ -193,6 +203,7 @@ functions = {
                 'type': 'ViReal64'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'selectDigitalFunction',
                 'type': 'ViBoolean'
@@ -278,6 +289,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             }
@@ -729,6 +742,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'writeWaveformData',
                 'type': 'ViBoolean'
@@ -852,6 +866,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             }
@@ -870,6 +886,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             }
@@ -911,6 +929,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -1456,6 +1476,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'python_api_converter_name': 'convert_site_to_string',
+                'type_in_documentation': 'str or int',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1678,6 +1700,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -1716,6 +1740,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
@@ -1986,6 +2012,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'python_api_converter_name': 'convert_site_to_string',
+                'type_in_documentation': 'str or int',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -2499,6 +2527,7 @@ functions = {
                 'type': 'ViConstString'
             },
             {
+                'default_value': True,
                 'direction': 'in',
                 'name': 'applyOffsets',
                 'type': 'ViBoolean'
@@ -2537,6 +2566,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
+                'default_value': False,
                 'direction': 'in',
                 'name': 'unloadKeepAlivePattern',
                 'type': 'ViBoolean'
@@ -2601,6 +2631,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
+                'default_value': 10.0,
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64'
@@ -2725,6 +2756,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },
