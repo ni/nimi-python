@@ -106,23 +106,23 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
-def test_burst_pattern_non_blocking(multi_instrument_session):
+def test_burst_pattern_burst_only(multi_instrument_session):
     test_files_folder = 'simple_pattern'
     configure_session(multi_instrument_session, test_files_folder)
 
     multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    result = multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern', wait_until_done=False)
+    result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=False)
     assert result is None
 
 
-def test_burst_pattern_blocking(multi_instrument_session):
+def test_burst_pattern_pass_fail(multi_instrument_session):
     test_files_folder = 'simple_pattern'
     configure_session(multi_instrument_session, test_files_folder)
 
     multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    result = multi_instrument_session.burst_pattern(site_list='', start_label='new_pattern', wait_until_done=True)
+    result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=True)
     assert result == {0: True, 1: True, 2: True, 3: True}
 
 
@@ -511,11 +511,7 @@ def test_get_site_pass_fail(multi_instrument_session):
 
     multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-    multi_instrument_session.burst_pattern(
-        start_label='new_pattern',
-        select_digital_function=True,
-        wait_until_done=True,
-        timeout=5)
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     pass_fail = multi_instrument_session.get_site_pass_fail()
     assert pass_fail == {0: True, 1: True, 2: True, 3: True}

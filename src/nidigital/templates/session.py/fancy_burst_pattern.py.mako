@@ -9,10 +9,10 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        self._burst_pattern(site_list, start_label, select_digital_function, wait_until_done, timeout)
+        self._burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
 
         if wait_until_done:
-            return self.get_site_pass_fail(site_list)
+            return self.get_site_pass_fail()
         else:
             return None
 

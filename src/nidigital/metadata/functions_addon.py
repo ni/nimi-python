@@ -32,6 +32,8 @@ niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'siteList',
                 'type': 'ViConstString'
             },

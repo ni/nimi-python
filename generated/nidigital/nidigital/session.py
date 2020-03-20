@@ -615,8 +615,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
-        r'''burst_pattern
+    def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+        r'''_burst_pattern
 
         TBD
 
@@ -1169,6 +1169,44 @@ class _SessionBase(object):
         error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
+        '''burst_pattern
+
+        Uses the start_label you specify to burst the pattern on the sites you specify. If you
+        specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+        Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+        write_static, or a call to apply_levels_and_timing.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            start_label (str):
+
+            select_digital_function (bool):
+
+            wait_until_done (bool):
+
+            timeout (float):
+
+
+        Returns:
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail,
+                if wait_until_done is specified as True. Else, None.
+
+        '''
+        self._burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
+
+        if wait_until_done:
+            return self.get_site_pass_fail()
+        else:
+            return None
 
     @ivi_synchronized
     def _fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
@@ -2483,65 +2521,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def apply_levels_and_timing(self, site_list, levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins=""):
-        r'''apply_levels_and_timing
-
-        TBD
-
-        Args:
-            site_list (str):
-
-            levels_sheet (str):
-
-            timing_sheet (str):
-
-            initial_state_high_pins (str):
-
-            initial_state_low_pins (str):
-
-            initial_state_tristate_pins (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        levels_sheet_ctype = ctypes.create_string_buffer(levels_sheet.encode(self._encoding))  # case C020
-        timing_sheet_ctype = ctypes.create_string_buffer(timing_sheet.encode(self._encoding))  # case C020
-        initial_state_high_pins_ctype = ctypes.create_string_buffer(initial_state_high_pins.encode(self._encoding))  # case C020
-        initial_state_low_pins_ctype = ctypes.create_string_buffer(initial_state_low_pins.encode(self._encoding))  # case C020
-        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(initial_state_tristate_pins.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_ApplyLevelsAndTiming(vi_ctype, site_list_ctype, levels_sheet_ctype, timing_sheet_ctype, initial_state_high_pins_ctype, initial_state_low_pins_ctype, initial_state_tristate_pins_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def _burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
-        r'''_burst_pattern
-
-        TBD
-
-        Args:
-            site_list (str):
-
-            start_label (str):
-
-            select_digital_function (bool):
-
-            wait_until_done (bool):
-
-            timeout (float):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
-        select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
-        wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
-        error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def clear_error(self):
         r'''clear_error
 
@@ -2649,154 +2628,6 @@ class Session(_SessionBase):
         error_code = self._library.niDigital_DeleteAllTimeSets(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
-
-    @ivi_synchronized
-    def disable_sites(self, site_list):
-        r'''disable_sites
-
-        TBD
-
-        Args:
-            site_list (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_DisableSites(vi_ctype, site_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def enable_sites(self, site_list):
-        r'''enable_sites
-
-        TBD
-
-        Args:
-            site_list (str):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
-    def burst_pattern(self, site_list, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
-        '''burst_pattern
-
-        Uses the start_label you specify to burst the pattern on the sites you specify. If you
-        specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
-
-        Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
-        write_static, or a call to apply_levels_and_timing.
-
-        Args:
-            site_list (str):
-
-            start_label (str):
-
-            select_digital_function (bool):
-
-            wait_until_done (bool):
-
-            timeout (float):
-
-
-        Returns:
-            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail,
-                if wait_until_done is specified as True. Else, None.
-
-        '''
-        self._burst_pattern(site_list, start_label, select_digital_function, wait_until_done, timeout)
-
-        if wait_until_done:
-            return self.get_site_pass_fail(site_list)
-        else:
-            return None
-
-    @ivi_synchronized
-    def _fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout):
-        # This is slightly modified codegen from the function
-        # We cannot use codegen without major modifications to the code generator
-        # This function uses two 'ivi-dance' parameters and then multiplies them together - see
-        # the (modified) line below
-        # Also, we want to return the two sized that normally wouldn't be returned
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C020
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        samples_to_read_ctype = _visatype.ViInt32(samples_to_read)  # case S150
-        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
-        data_buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        data_ctype = None  # case B610
-        actual_num_waveforms_ctype = _visatype.ViInt32()  # case S220
-        actual_samples_per_waveform_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        data_buffer_size_ctype = _visatype.ViInt32(actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value)  # case S200 (modified)
-        data_size = actual_num_waveforms_ctype.value * actual_samples_per_waveform_ctype.value  # case B620 (modified)
-        data_array = array.array("L", [0] * data_size)  # case B620
-        data_ctype = get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViUInt32)  # case B620
-        error_code = self._library.niDigital_FetchCaptureWaveformU32(vi_ctype, site_list_ctype, waveform_name_ctype, samples_to_read_ctype, timeout_ctype, data_buffer_size_ctype, data_ctype, None if actual_num_waveforms_ctype is None else (ctypes.pointer(actual_num_waveforms_ctype)), None if actual_samples_per_waveform_ctype is None else (ctypes.pointer(actual_samples_per_waveform_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
-
-    def fetch_capture_waveform(self, site_list, waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0)):
-        '''fetch_capture_waveform
-
-        Returns dictionary where each key is the site number and the value is array.array of unsigned int
-
-        Args:
-            site_list (str):
-
-            waveform_name (str):
-
-            samples_to_read (int):
-
-            timeout (float or datetime.timedelta):
-
-
-        Returns:
-            waveform ({ site: data, site: data, ... }): Dictionary where each key is the site number and the value is array.array of unsigned int
-
-        '''
-        data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(site_list, waveform_name, samples_to_read, timeout)
-
-        # Get the site list
-        site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.CAPTURE_WAVEFORM)
-        assert len(site_list) == actual_num_waveforms
-
-        waveforms = {}
-
-        mv = memoryview(data)
-
-        for i in range(actual_num_waveforms):
-            start = i * actual_samples_per_waveform
-            end = start + actual_samples_per_waveform
-            waveforms[site_list[i]] = mv[start:end]
-
-        return waveforms
-
-    @ivi_synchronized
-    def get_site_pass_fail(self, site_list):
-        '''get_site_pass_fail
-
-        Returns dictionary where each key is a site number and value is pass/fail
-
-        Args:
-            site_list (str):
-
-
-        Returns:
-            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
-
-        '''
-        result_list = self._get_site_pass_fail(site_list)
-        site_list = self.get_site_results_site_numbers(site_list, enums.SiteResult.PASS_FAIL)
-        assert len(site_list) == len(result_list)
-
-        return dict(zip(site_list, result_list))
 
     @ivi_synchronized
     def self_test(self):
