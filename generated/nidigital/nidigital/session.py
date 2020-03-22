@@ -1301,7 +1301,7 @@ class _SessionBase(object):
             raise ValueError('samples_to_read should be greater than or equal to -1.')
 
         samples_available = self.get_history_ram_sample_count(site)
-        if position >= samples_available:
+        if position > samples_available:
             raise ValueError('position: Specified value = {0}, Maximum value = {1}.'.format(position, samples_available - 1))
 
         if samples_to_read == -1:
@@ -1317,7 +1317,7 @@ class _SessionBase(object):
                 .format(position, samples_to_read, samples_available - position))
 
         # Site can be 'N', N or 'siteN'. This will normalize all options to 'siteN' which is requried by the driver
-        site = _converters.convert_site_string(site)
+        site = _converters.convert_site_to_string(site)
         pattern_names = {}
         time_set_names = {}
         cycle_infos = []

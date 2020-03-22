@@ -443,6 +443,19 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
     ]
 
 
+def test_fetch_history_ram_cycle_information_no_failures(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
+
+    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(site='site0', position=0, samples_to_read=-1)
+    assert len(history_ram_cycle_info) == 0
+
+    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(site='site0', position=0, samples_to_read=0)
+    assert len(history_ram_cycle_info) == 0
+
+
 def test_get_pattern_pin_names(multi_instrument_session):
     test_name = 'simple_pattern'
     configure_session(multi_instrument_session, test_name)
