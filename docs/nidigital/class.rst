@@ -500,7 +500,7 @@ configure_time_set_drive_edges
                 
 
 
-            :type format: :py:data:`nidigital.DriveEdgeSetFormat`
+            :type format: :py:data:`nidigital.DriveFormat`
             :param drive_on_edge:
 
 
@@ -561,7 +561,7 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type format: :py:data:`nidigital.DriveEdgeSetFormat`
+            :type format: :py:data:`nidigital.DriveFormat`
             :param drive_on_edge:
 
 
@@ -636,7 +636,7 @@ configure_time_set_drive_format
                 
 
 
-            :type drive_format: :py:data:`nidigital.DriveEdgeSetFormat`
+            :type drive_format: :py:data:`nidigital.DriveFormat`
 
 configure_time_set_edge
 -----------------------
@@ -669,7 +669,7 @@ configure_time_set_edge
                 
 
 
-            :type edge: :py:data:`nidigital.TimeSetEdge`
+            :type edge: :py:data:`nidigital.TimeSetEdgeType`
             :param time:
 
 
@@ -953,7 +953,7 @@ create_source_waveform_parallel
                 
 
 
-            :type data_mapping: :py:data:`nidigital.SourceMemoryDataMapping`
+            :type data_mapping: :py:data:`nidigital.SourceDataMapping`
 
 create_source_waveform_serial
 -----------------------------
@@ -986,7 +986,7 @@ create_source_waveform_serial
                 
 
 
-            :type data_mapping: :py:data:`nidigital.SourceMemoryDataMapping`
+            :type data_mapping: :py:data:`nidigital.SourceDataMapping`
             :param sample_width:
 
 
@@ -1133,7 +1133,7 @@ fetch_history_ram_cycle_information
 
             If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
             consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
-            :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
+            :py:data:`~nidigital.PinState.PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
 
             If pins are not specified, pin list from the pattern containing the start label is used. Call
             :py:meth:`nidigital.Session.get_pattern_pin_names` with the start label to retrieve the pins
@@ -1193,14 +1193,14 @@ fetch_history_ram_cycle_information
                     -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
                        start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
                        have a scan opcode.
-                    -  **expected_pin_states** (list of list of enums.DigitalState) Pin states as expected by the loaded
+                    -  **expected_pin_states** (list of list of enums.PinState) Pin states as expected by the loaded
                        pattern in the order specified in the pin list. Pins without defined edges in the specified DUT cycle
-                       will have a value of :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED`.
+                       will have a value of :py:data:`~nidigital.PinState.PIN_STATE_NOT_ACQUIRED`.
                        Length of the outer list will be equal to the value of edge multiplier for the given vector.
                        Length of the inner list will be equal to the number of pins requested.
-                    -  **actual_pin_states** (list of list of enums.DigitalState) Pin states acquired by History RAM in the
+                    -  **actual_pin_states** (list of list of enums.PinState) Pin states acquired by History RAM in the
                        order specified in the pin list. Pins without defined edges in the specified DUT cycle will have a
-                       value of :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED`.
+                       value of :py:data:`~nidigital.PinState.PIN_STATE_NOT_ACQUIRED`.
                        Length of the outer list will be equal to the value of edge multiplier for the given vector.
                        Length of the inner list will be equal to the number of pins requested.
                     -  **per_pin_pass_fail** (list of list of bool) Pass fail information for pins in the order specified in
@@ -1494,7 +1494,7 @@ get_site_results_site_numbers
                 
 
 
-            :type site_result_type: :py:data:`nidigital.SiteResult`
+            :type site_result_type: :py:data:`nidigital.SiteResultType`
 
             :rtype: list of int
             :return:
@@ -1530,7 +1530,7 @@ get_time_set_drive_format
 
             :type time_set: str
 
-            :rtype: :py:data:`nidigital.DriveEdgeSetFormat`
+            :rtype: :py:data:`nidigital.DriveFormat`
             :return:
 
 
@@ -1569,7 +1569,7 @@ get_time_set_edge
                 
 
 
-            :type edge: :py:data:`nidigital.TimeSetEdge`
+            :type edge: :py:data:`nidigital.TimeSetEdgeType`
 
             :rtype: float
             :return:
@@ -2018,7 +2018,7 @@ read_static
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :rtype: list of :py:data:`nidigital.DigitalState`
+            :rtype: list of :py:data:`nidigital.PinState`
             :return:
 
 
@@ -2123,7 +2123,7 @@ send_software_edge_trigger
                 
 
 
-            :type trigger: int
+            :type trigger: :py:data:`nidigital.SoftwareTrigger`
             :param trigger_identifier:
 
 
@@ -2408,7 +2408,7 @@ write_static
                 
 
 
-            :type state: :py:data:`nidigital.DigitalState`
+            :type state: :py:data:`nidigital.WriteStaticPinState`
 
 
 Properties
@@ -3543,17 +3543,17 @@ ppmu_aperture_time_units
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.ApertureTimeUnits |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | Yes                     |
-            +----------------+-------------------------+
-            | Resettable     | Yes                     |
-            +----------------+-------------------------+
+            +----------------+-----------------------------+
+            | Characteristic | Value                       |
+            +================+=============================+
+            | Datatype       | enums.PPMUApertureTimeUnits |
+            +----------------+-----------------------------+
+            | Permissions    | read-write                  |
+            +----------------+-----------------------------+
+            | Channel Based  | Yes                         |
+            +----------------+-----------------------------+
+            | Resettable     | Yes                         |
+            +----------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

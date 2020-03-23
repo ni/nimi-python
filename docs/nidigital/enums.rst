@@ -6,15 +6,6 @@ Enums used in NI-Digital Pattern Driver
 .. py:currentmodule:: nidigital
 
 
-ApertureTimeUnits
------------------
-
-.. py:class:: ApertureTimeUnits
-
-    .. py:attribute:: ApertureTimeUnits.SECONDS
-
-
-
 BitOrder
 --------
 
@@ -41,73 +32,24 @@ DigitalEdge
 
 
 
-DigitalState
-------------
+DriveFormat
+-----------
 
-.. py:class:: DigitalState
+.. py:class:: DriveFormat
 
-    .. py:attribute:: DigitalState.ZERO
-
-
-
-    .. py:attribute:: DigitalState.ONE
+    .. py:attribute:: DriveFormat.NR
 
 
 
-    .. py:attribute:: DigitalState.L
+    .. py:attribute:: DriveFormat.RL
 
 
 
-    .. py:attribute:: DigitalState.H
+    .. py:attribute:: DriveFormat.RH
 
 
 
-    .. py:attribute:: DigitalState.X
-
-
-
-    .. py:attribute:: DigitalState.M
-
-
-
-    .. py:attribute:: DigitalState.V
-
-
-
-    .. py:attribute:: DigitalState.D
-
-
-
-    .. py:attribute:: DigitalState.E
-
-
-
-    .. py:attribute:: DigitalState.NOT_A_PIN_STATE
-
-
-
-    .. py:attribute:: DigitalState.PIN_STATE_NOT_ACQUIRED
-
-
-
-DriveEdgeSetFormat
-------------------
-
-.. py:class:: DriveEdgeSetFormat
-
-    .. py:attribute:: DriveEdgeSetFormat.NR
-
-
-
-    .. py:attribute:: DriveEdgeSetFormat.RL
-
-
-
-    .. py:attribute:: DriveEdgeSetFormat.RH
-
-
-
-    .. py:attribute:: DriveEdgeSetFormat.SBC
+    .. py:attribute:: DriveFormat.SBC
 
 
 
@@ -138,6 +80,15 @@ HistoryRAMTriggerType
 
 
     .. py:attribute:: HistoryRAMTriggerType.PATTERN_LABEL
+
+
+
+PPMUApertureTimeUnits
+---------------------
+
+.. py:class:: PPMUApertureTimeUnits
+
+    .. py:attribute:: PPMUApertureTimeUnits.SECONDS
 
 
 
@@ -173,6 +124,55 @@ PPMUOutputFunction
 
 
     .. py:attribute:: PPMUOutputFunction.CURRENT
+
+
+
+PinState
+--------
+
+.. py:class:: PinState
+
+    .. py:attribute:: PinState.ZERO
+
+
+
+    .. py:attribute:: PinState.ONE
+
+
+
+    .. py:attribute:: PinState.L
+
+
+
+    .. py:attribute:: PinState.H
+
+
+
+    .. py:attribute:: PinState.X
+
+
+
+    .. py:attribute:: PinState.M
+
+
+
+    .. py:attribute:: PinState.V
+
+
+
+    .. py:attribute:: PinState.D
+
+
+
+    .. py:attribute:: PinState.E
+
+
+
+    .. py:attribute:: PinState.NOT_A_PIN_STATE
+
+
+
+    .. py:attribute:: PinState.PIN_STATE_NOT_ACQUIRED
 
 
 
@@ -287,29 +287,42 @@ SequencerRegister
 
 
 
-SiteResult
-----------
+SiteResultType
+--------------
 
-.. py:class:: SiteResult
+.. py:class:: SiteResultType
 
-    .. py:attribute:: SiteResult.PASS_FAIL
-
-
-
-    .. py:attribute:: SiteResult.CAPTURE_WAVEFORM
+    .. py:attribute:: SiteResultType.PASS_FAIL
 
 
 
-SourceMemoryDataMapping
------------------------
-
-.. py:class:: SourceMemoryDataMapping
-
-    .. py:attribute:: SourceMemoryDataMapping.BROADCAST
+    .. py:attribute:: SiteResultType.CAPTURE_WAVEFORM
 
 
 
-    .. py:attribute:: SourceMemoryDataMapping.SITE_UNIQUE
+SoftwareTrigger
+---------------
+
+.. py:class:: SoftwareTrigger
+
+    .. py:attribute:: SoftwareTrigger.START
+
+
+
+    .. py:attribute:: SoftwareTrigger.CONDITIONAL_JUMP
+
+
+
+SourceDataMapping
+-----------------
+
+.. py:class:: SourceDataMapping
+
+    .. py:attribute:: SourceDataMapping.BROADCAST
+
+
+
+    .. py:attribute:: SourceDataMapping.SITE_UNIQUE
 
 
 
@@ -343,40 +356,40 @@ TerminationMode
 
 
 
-TimeSetEdge
------------
+TimeSetEdgeType
+---------------
 
-.. py:class:: TimeSetEdge
+.. py:class:: TimeSetEdgeType
 
-    .. py:attribute:: TimeSetEdge.DRIVE_ON
-
-
-
-    .. py:attribute:: TimeSetEdge.DRIVE_DATA
+    .. py:attribute:: TimeSetEdgeType.DRIVE_ON
 
 
 
-    .. py:attribute:: TimeSetEdge.DRIVE_RETURN
+    .. py:attribute:: TimeSetEdgeType.DRIVE_DATA
 
 
 
-    .. py:attribute:: TimeSetEdge.DRIVE_OFF
+    .. py:attribute:: TimeSetEdgeType.DRIVE_RETURN
 
 
 
-    .. py:attribute:: TimeSetEdge.COMPARE_STROBE
+    .. py:attribute:: TimeSetEdgeType.DRIVE_OFF
 
 
 
-    .. py:attribute:: TimeSetEdge.DRIVE_DATA2
+    .. py:attribute:: TimeSetEdgeType.COMPARE_STROBE
 
 
 
-    .. py:attribute:: TimeSetEdge.DRIVE_RETURN2
+    .. py:attribute:: TimeSetEdgeType.DRIVE_DATA2
 
 
 
-    .. py:attribute:: TimeSetEdge.COMPARE_STROBE2
+    .. py:attribute:: TimeSetEdgeType.DRIVE_RETURN2
+
+
+
+    .. py:attribute:: TimeSetEdgeType.COMPARE_STROBE2
 
 
 
@@ -394,6 +407,23 @@ TriggerType
 
 
     .. py:attribute:: TriggerType.SOFTWARE
+
+
+
+WriteStaticPinState
+-------------------
+
+.. py:class:: WriteStaticPinState
+
+    .. py:attribute:: WriteStaticPinState.ZERO
+
+
+
+    .. py:attribute:: WriteStaticPinState.ONE
+
+
+
+    .. py:attribute:: WriteStaticPinState.X
 
 
 
