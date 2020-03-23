@@ -1,6 +1,10 @@
 [run]
 omit =
     */_library*
+    */nidigital/__init__.py
+    */nidigital/_converters.py
+    */nidigital/_visatype.py
+    */nidigital/errors.py
     */nimodinst/__init__.py
     */nimodinst/_converters.py
     */nimodinst/_visatype.py
@@ -12,6 +16,7 @@ omit =
     */nitclk/errors.py
 include =
     */nifake/*
+    */nidigital/session.py
     */nimodinst/session.py
     */nitclk/session.py
     build/*
