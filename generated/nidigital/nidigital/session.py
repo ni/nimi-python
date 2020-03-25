@@ -1442,6 +1442,12 @@ class _SessionBase(object):
 
         Returns dictionary where each key is a site number and value is pass/fail
 
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
         Returns:
             pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
 

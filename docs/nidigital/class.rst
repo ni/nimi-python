@@ -1474,6 +1474,11 @@ get_site_pass_fail
             
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.
+
 
             :rtype: { int: bool, int: bool, ... }
             :return:
