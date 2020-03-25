@@ -311,10 +311,10 @@ def configure_for_history_ram_test(session):
 def test_fetch_history_ram_cycle_information_position_out_of_bound(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
-    with pytest.raises(ValueError, match='position: Specified value = 7, Maximum value = 6.'):
+    with pytest.raises(ValueError, match='position: Specified value = 8, Maximum value = 6.'):
         multi_instrument_session.fetch_history_ram_cycle_information(
             site='site1',
-            position=7,
+            position=8,
             samples_to_read=-1)
 
 
