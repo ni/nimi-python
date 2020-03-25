@@ -36,7 +36,7 @@ class TestSession(object):
     # API Tests
 
     # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
-    #  this test should be converted to a system test.
+    #  this test should be converted to a system test (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_position_out_of_bound(self):
 
         self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
