@@ -4,6 +4,81 @@
 functions_override_metadata = {
 }
 
+functions_additional_burst_pattern = {
+    'FancyBurstPattern': {
+        'python_name': 'burst_pattern',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_burst_pattern',
+            }
+        ],
+        'documentation': {
+            'description': """\nUses the start_label you specify to burst the pattern on the sites you specify. If you
+specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
+
+"""
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
+                'name': 'siteList',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'startLabel',
+                'type': 'ViConstString'
+            },
+            {
+                'default_value': True,
+                'direction': 'in',
+                'name': 'selectDigitalFunction',
+                'type': 'ViBoolean'
+            },
+            {
+                'default_value': True,
+                'direction': 'in',
+                'name': 'waitUntilDone',
+                'type': 'ViBoolean'
+            },
+            {
+                'default_value': 'datetime.timedelta(seconds=10.0)',
+                'direction': 'in',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'float in seconds or datetime.timedelta'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '\nDictionary where each key is a site number and value is pass/fail,\nif wait_until_done is specified as True. Else, None.\n'
+                },
+                'name': 'passFail',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': None
+                },
+                'type': 'ViBoolean',
+                'type_in_documentation': '{ int: bool, int: bool, ... }',
+            },
+        ],
+    },
+}
+
 functions_additional_write_source_waveform_site_unique = {
     'FancyWriteSourceWaveformSiteUnique': {
         'python_name': 'write_source_waveform_site_unique',

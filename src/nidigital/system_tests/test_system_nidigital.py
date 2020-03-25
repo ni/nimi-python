@@ -109,6 +109,26 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
+def test_burst_pattern_burst_only(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=False)
+    assert result is None
+
+
+def test_burst_pattern_pass_fail(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=True)
+    assert result == {0: True, 1: True, 2: True, 3: True}
+
+
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
@@ -123,9 +143,7 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
         waveform_name='src_wfm',
         waveform_data=[i for i in range(4)])
 
-    multi_instrument_session.burst_pattern(start_label='new_pattern')
-
-    pass_fail = multi_instrument_session.get_site_pass_fail()
+    pass_fail = multi_instrument_session.burst_pattern(start_label='new_pattern')
     assert pass_fail == {0: True, 1: True}
 
 
