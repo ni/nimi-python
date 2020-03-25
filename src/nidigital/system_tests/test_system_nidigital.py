@@ -7,7 +7,7 @@ import numpy
 import pytest
 
 import nidigital
-from nidigital.enums import DigitalState
+from nidigital.enums import PinState
 from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 
 instruments = ['PXI1Slot2', 'PXI1Slot5']
@@ -37,9 +37,9 @@ def test_pins_rep_cap(multi_instrument_session):
     multi_instrument_session.create_time_set('t0')
     multi_instrument_session.pins['PinA', 'PinB'].configure_time_set_drive_format(
         time_set='t0',
-        drive_format=nidigital.DriveEdgeSetFormat.RL)
+        drive_format=nidigital.DriveFormat.RL)
     drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format(time_set='t0')
-    assert drive_format == nidigital.DriveEdgeSetFormat.RL
+    assert drive_format == nidigital.DriveFormat.RL
 
 
 def test_instruments_rep_cap(multi_instrument_session):
@@ -109,6 +109,26 @@ def test_tdr_some_channels(multi_instrument_session):
     assert fetched_offsets == applied_offsets
 
 
+def test_burst_pattern_burst_only(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=False)
+    assert result is None
+
+
+def test_burst_pattern_pass_fail(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=True)
+    assert result == {0: True, 1: True, 2: True, 3: True}
+
+
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
@@ -117,15 +137,13 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
 
     multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
         waveform_name='src_wfm',
-        data_mapping=nidigital.SourceMemoryDataMapping.BROADCAST)
+        data_mapping=nidigital.SourceDataMapping.BROADCAST)
 
     multi_instrument_session.write_source_waveform_broadcast(
         waveform_name='src_wfm',
         waveform_data=[i for i in range(4)])
 
-    multi_instrument_session.burst_pattern(start_label='new_pattern')
-
-    pass_fail = multi_instrument_session.get_site_pass_fail()
+    pass_fail = multi_instrument_session.burst_pattern(start_label='new_pattern')
     assert pass_fail == {0: True, 1: True}
 
 
@@ -158,7 +176,7 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
 
     multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
         waveform_name='src_wfm',
-        data_mapping=nidigital.SourceMemoryDataMapping.SITE_UNIQUE)
+        data_mapping=nidigital.SourceDataMapping.SITE_UNIQUE)
 
     if source_waveform_type == array.array:
         source_waveform = {
@@ -203,7 +221,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
 
     multi_instrument_session.pins['LowPins'].create_source_waveform_parallel(
         waveform_name='src_wfm',
-        data_mapping=nidigital.SourceMemoryDataMapping.BROADCAST)
+        data_mapping=nidigital.SourceDataMapping.BROADCAST)
     source_waveform = [i for i in range(num_samples)]
     multi_instrument_session.write_source_waveform_broadcast(waveform_name='src_wfm', waveform_data=source_waveform)
 
@@ -258,8 +276,8 @@ def test_history_ram_cycle_information_representation():
         vector_number=42,
         cycle_number=999,
         scan_cycle_number=13,
-        expected_pin_states=[[DigitalState.D, DigitalState.D], [DigitalState.V, DigitalState.V]],
-        actual_pin_states=[[DigitalState.PIN_STATE_NOT_ACQUIRED, DigitalState.PIN_STATE_NOT_ACQUIRED], [DigitalState.NOT_A_PIN_STATE, DigitalState.NOT_A_PIN_STATE]],
+        expected_pin_states=[[PinState.D, PinState.D], [PinState.V, PinState.V]],
+        actual_pin_states=[[PinState.PIN_STATE_NOT_ACQUIRED, PinState.PIN_STATE_NOT_ACQUIRED], [PinState.NOT_A_PIN_STATE, PinState.NOT_A_PIN_STATE]],
         per_pin_pass_fail=[[True, True], [False, False]])
     recreated_cycle_info = eval(repr(cycle_info))
     assert str(recreated_cycle_info) == str(cycle_info)
@@ -390,32 +408,32 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
 
     expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
     assert expected_pin_states == [
-        [[DigitalState.ZERO, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.ZERO, DigitalState.X, DigitalState.X]],
-        [[DigitalState.X, DigitalState.X, DigitalState.ZERO, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H]],
-        [[DigitalState.X, DigitalState.X, DigitalState.ONE, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L]],
-        [[DigitalState.ONE, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.ZERO, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
-        [[DigitalState.ONE, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.ZERO, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
-        [[DigitalState.ZERO, DigitalState.ONE, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.ONE, DigitalState.ZERO, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X]],
-        [[DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X]]
+        [[PinState.ZERO, PinState.H, PinState.X, PinState.X, PinState.H, PinState.ZERO, PinState.X, PinState.X]],
+        [[PinState.X, PinState.X, PinState.ZERO, PinState.ONE, PinState.X, PinState.X, PinState.L, PinState.H]],
+        [[PinState.X, PinState.X, PinState.ONE, PinState.ZERO, PinState.X, PinState.X, PinState.H, PinState.L]],
+        [[PinState.ONE, PinState.ONE, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.ZERO, PinState.ZERO, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
+        [[PinState.ONE, PinState.ONE, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.ZERO, PinState.ZERO, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
+        [[PinState.ZERO, PinState.ONE, PinState.X, PinState.X, PinState.L, PinState.H, PinState.X, PinState.X], [PinState.ONE, PinState.ZERO, PinState.X, PinState.X, PinState.H, PinState.L, PinState.X, PinState.X]],
+        [[PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X]]
     ]
 
     # If test expects actual pin state to be 'X', then value returned by the returned can be anything.
     # So, need to skip those pin states while comparing.
     actual_pin_states = [i.actual_pin_states for i in history_ram_cycle_info]
     actual_pin_states_expected_by_test = [
-        [[DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
-        [[DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H]],
-        [[DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L]],
-        [[DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
-        [[DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.L, DigitalState.X, DigitalState.X]],
-        [[DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X, DigitalState.L, DigitalState.H, DigitalState.X, DigitalState.X], [DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X, DigitalState.H, DigitalState.L, DigitalState.X, DigitalState.X]],
-        [[DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X, DigitalState.X]]
+        [[PinState.L, PinState.L, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
+        [[PinState.X, PinState.X, PinState.L, PinState.H, PinState.X, PinState.X, PinState.L, PinState.H]],
+        [[PinState.X, PinState.X, PinState.H, PinState.L, PinState.X, PinState.X, PinState.H, PinState.L]],
+        [[PinState.H, PinState.H, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.L, PinState.L, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
+        [[PinState.H, PinState.H, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.L, PinState.L, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
+        [[PinState.L, PinState.H, PinState.X, PinState.X, PinState.L, PinState.H, PinState.X, PinState.X], [PinState.H, PinState.L, PinState.X, PinState.X, PinState.H, PinState.L, PinState.X, PinState.X]],
+        [[PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X]]
     ]
     assert len(actual_pin_states) == len(actual_pin_states_expected_by_test)
     for vector_pin_states, vector_pin_states_expected_by_test in zip(actual_pin_states, actual_pin_states_expected_by_test):
         for cycle_pin_states, cycle_pin_states_expected_by_test in zip(vector_pin_states, vector_pin_states_expected_by_test):
             for pin_state, pin_state_expected_by_test in zip(cycle_pin_states, cycle_pin_states_expected_by_test):
-                if pin_state_expected_by_test is not DigitalState.X:
+                if pin_state_expected_by_test is not PinState.X:
                     assert pin_state == pin_state_expected_by_test
 
     # Only the first cycle returned is expected to have failures
@@ -429,6 +447,19 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
         [[True, True, True, True, True, True, True, True], [True, True, True, True, True, True, True, True]],
         [[True, True, True, True, True, True, True, True]],
     ]
+
+
+def test_fetch_history_ram_cycle_information_no_failures(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
+
+    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(site='site0', position=0, samples_to_read=-1)
+    assert len(history_ram_cycle_info) == 0
+
+    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(site='site0', position=0, samples_to_read=0)
+    assert len(history_ram_cycle_info) == 0
 
 
 def test_get_pattern_pin_names(multi_instrument_session):

@@ -4,10 +4,6 @@
 from enum import Enum
 
 
-class ApertureTimeUnits(Enum):
-    SECONDS = 2100
-
-
 class BitOrder(Enum):
     MSB = 2500
     LSB = 2501
@@ -18,21 +14,7 @@ class DigitalEdge(Enum):
     FALLING = 1801
 
 
-class DigitalState(Enum):
-    ZERO = 0
-    ONE = 1
-    L = 3
-    H = 4
-    X = 5
-    M = 6
-    V = 7
-    D = 8
-    E = 9
-    NOT_A_PIN_STATE = 254
-    PIN_STATE_NOT_ACQUIRED = 255
-
-
-class DriveEdgeSetFormat(Enum):
+class DriveFormat(Enum):
     NR = 1500
     RL = 1501
     RH = 1502
@@ -50,6 +32,10 @@ class HistoryRAMTriggerType(Enum):
     PATTERN_LABEL = 2202
 
 
+class PPMUApertureTimeUnits(Enum):
+    SECONDS = 2100
+
+
 class PPMUCurrentLimitBehavior(Enum):
     REGULATE = 3100
 
@@ -62,6 +48,20 @@ class PPMUMeasurementType(Enum):
 class PPMUOutputFunction(Enum):
     VOLTAGE = 1300
     CURRENT = 1301
+
+
+class PinState(Enum):
+    ZERO = 0
+    ONE = 1
+    L = 3
+    H = 4
+    X = 5
+    M = 6
+    V = 7
+    D = 8
+    E = 9
+    NOT_A_PIN_STATE = 254
+    PIN_STATE_NOT_ACQUIRED = 255
 
 
 class SelectedFunction(Enum):
@@ -97,12 +97,17 @@ class SequencerRegister(Enum):
     REGISTER15 = 'reg15'
 
 
-class SiteResult(Enum):
+class SiteResultType(Enum):
     PASS_FAIL = 3300
     CAPTURE_WAVEFORM = 3301
 
 
-class SourceMemoryDataMapping(Enum):
+class SoftwareTrigger(Enum):
+    START = 2000
+    CONDITIONAL_JUMP = 2001
+
+
+class SourceDataMapping(Enum):
     BROADCAST = 2600
     SITE_UNIQUE = 2601
 
@@ -118,7 +123,7 @@ class TerminationMode(Enum):
     HIGH_Z = 1202
 
 
-class TimeSetEdge(Enum):
+class TimeSetEdgeType(Enum):
     DRIVE_ON = 2800
     DRIVE_DATA = 2801
     DRIVE_RETURN = 2802
@@ -133,3 +138,9 @@ class TriggerType(Enum):
     NONE = 1700
     DIGITAL_EDGE = 1701
     SOFTWARE = 1702
+
+
+class WriteStaticPinState(Enum):
+    ZERO = 0
+    ONE = 1
+    X = 5

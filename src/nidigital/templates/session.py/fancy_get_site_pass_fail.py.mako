@@ -11,7 +11,7 @@
         '''
         # For site_list, we just use the repeated capability
         result_list = self._get_site_pass_fail()
-        site_list = self.get_site_results_site_numbers(enums.SiteResult.PASS_FAIL)
+        site_list = self.get_site_results_site_numbers(enums.SiteResultType.PASS_FAIL)
         assert len(site_list) == len(result_list)
 
         return dict(zip(site_list, result_list))

@@ -110,6 +110,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'BurstPattern': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -396,7 +397,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'DriveEdgeSetFormat',
+                'enum': 'DriveFormat',
                 'name': 'format',
                 'type': 'ViInt32'
             },
@@ -455,7 +456,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'DriveEdgeSetFormat',
+                'enum': 'DriveFormat',
                 'name': 'format',
                 'type': 'ViInt32'
             },
@@ -528,7 +529,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'DriveEdgeSetFormat',
+                'enum': 'DriveFormat',
                 'name': 'driveFormat',
                 'type': 'ViInt32'
             }
@@ -559,7 +560,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'TimeSetEdge',
+                'enum': 'TimeSetEdgeType',
                 'name': 'edge',
                 'type': 'ViInt32'
             },
@@ -808,7 +809,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'SourceMemoryDataMapping',
+                'enum': 'SourceDataMapping',
                 'name': 'dataMapping',
                 'type': 'ViInt32'
             }
@@ -839,7 +840,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'SourceMemoryDataMapping',
+                'enum': 'SourceDataMapping',
                 'name': 'dataMapping',
                 'type': 'ViInt32'
             },
@@ -1100,7 +1101,7 @@ functions = {
             },
             {
                 'direction': 'out',
-                'enum': 'DigitalState',
+                'enum': 'PinState',
                 'name': 'expectedPinStates',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -1111,7 +1112,7 @@ functions = {
             },
             {
                 'direction': 'out',
-                'enum': 'DigitalState',
+                'enum': 'PinState',
                 'name': 'actualPinStates',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -1555,47 +1556,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'GetPatternPinIndexes': {
-        'codegen_method': 'no',
-        'documentation': {
-            'description': 'TBD'
-        },
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'startLabel',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'in',
-                'name': 'pinIndexesBufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'pinIndexes',
-                'size': {
-                    'mechanism': 'ivi-dance-with-a-twist',
-                    'value': 'pinIndexesBufferSize',
-                    'value_twist': 'actualNumPins'
-                },
-                'type': 'ViInt32[]'
-            },
-            {
-                'direction': 'out',
-                'name': 'actualNumPins',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'GetPatternPinList': {
-        'python_name': 'get_pattern_pin_names',
         'documentation': {
             'description': 'TBD'
         },
@@ -1626,6 +1587,7 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'python_name': 'get_pattern_pin_names',
         'returns': 'ViStatus'
     },
     'GetPinName': {
@@ -1781,7 +1743,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'SiteResult',
+                'enum': 'SiteResultType',
                 'name': 'siteResultType',
                 'type': 'ViInt32'
             },
@@ -1832,7 +1794,7 @@ functions = {
             },
             {
                 'direction': 'out',
-                'enum': 'DriveEdgeSetFormat',
+                'enum': 'DriveFormat',
                 'name': 'format',
                 'type': 'ViInt32'
             }
@@ -1863,7 +1825,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'TimeSetEdge',
+                'enum': 'TimeSetEdgeType',
                 'name': 'edge',
                 'type': 'ViInt32'
             },
@@ -2311,7 +2273,7 @@ functions = {
             },
             {
                 'direction': 'out',
-                'enum': 'DigitalState',
+                'enum': 'PinState',
                 'name': 'data',
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
@@ -2389,6 +2351,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'enum': 'SoftwareTrigger',
                 'name': 'trigger',
                 'type': 'ViInt32'
             },
@@ -2844,7 +2807,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'enum': 'DigitalState',
+                'enum': 'WriteStaticPinState',
                 'name': 'state',
                 'type': 'ViUInt8'
             }
