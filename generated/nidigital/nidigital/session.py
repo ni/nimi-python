@@ -1260,7 +1260,7 @@ class _SessionBase(object):
         data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
 
         # Get the site list
-        site_list = self.get_site_results_site_numbers(enums.SiteResultType.CAPTURE_WAVEFORM)
+        site_list = self._get_site_results_site_numbers(enums._SiteResultType.CAPTURE_WAVEFORM)
         assert len(site_list) == actual_num_waveforms
 
         waveforms = {}
@@ -1454,7 +1454,7 @@ class _SessionBase(object):
         '''
         # For site_list, we just use the repeated capability
         result_list = self._get_site_pass_fail()
-        site_list = self.get_site_results_site_numbers(enums.SiteResultType.PASS_FAIL)
+        site_list = self._get_site_results_site_numbers(enums._SiteResultType.PASS_FAIL)
         assert len(site_list) == len(result_list)
 
         return dict(zip(site_list, result_list))
@@ -1861,8 +1861,8 @@ class _SessionBase(object):
         return [bool(pass_fail_ctype[i]) for i in range(pass_fail_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_site_results_site_numbers(self, site_result_type):
-        r'''get_site_results_site_numbers
+    def _get_site_results_site_numbers(self, site_result_type):
+        r'''_get_site_results_site_numbers
 
         TBD
 
@@ -1880,8 +1880,8 @@ class _SessionBase(object):
             site_numbers (list of int):
 
         '''
-        if type(site_result_type) is not enums.SiteResultType:
-            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResultType))
+        if type(site_result_type) is not enums._SiteResultType:
+            raise TypeError('Parameter site_result_type must be of type ' + str(enums._SiteResultType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130

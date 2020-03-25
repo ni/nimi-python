@@ -1490,40 +1490,6 @@ get_site_pass_fail
 
 
 
-get_site_results_site_numbers
------------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: get_site_results_site_numbers(site_result_type)
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
-
-
-            :param site_result_type:
-
-
-                
-
-
-            :type site_result_type: :py:data:`nidigital.SiteResultType`
-
-            :rtype: list of int
-            :return:
-
-
-                    
-
-
-
 get_time_set_drive_format
 -------------------------
 

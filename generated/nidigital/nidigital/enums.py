@@ -97,7 +97,7 @@ class SequencerRegister(Enum):
     REGISTER15 = 'reg15'
 
 
-class SiteResultType(Enum):
+class _SiteResultType(Enum):
     PASS_FAIL = 3300
     CAPTURE_WAVEFORM = 3301
 
