@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file is generated from NI-Digital Pattern Driver API metadata version 19.5.0d7
 enums = {
-    'ApertureTimeUnits': {
-        'values': [
-            {
-                'name': 'NIDIGITAL_VAL_SECONDS',
-                'value': 2100
-            }
-        ]
-    },
     'BitOrder': {
         'values': [
             {
@@ -21,7 +13,7 @@ enums = {
             }
         ]
     },
-    'ConditionalJumpTrigger': {
+    'ConditionalJumpTriggerId': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER0',
@@ -57,57 +49,7 @@ enums = {
             }
         ]
     },
-    'DigitalState': {
-        'values': [
-            {
-                'name': 'NIDIGITAL_VAL_0',
-                'python_name': 'ZERO',
-                'value': 0
-            },
-            {
-                'name': 'NIDIGITAL_VAL_1',
-                'python_name': 'ONE',
-                'value': 1
-            },
-            {
-                'name': 'NIDIGITAL_VAL_L',
-                'value': 3
-            },
-            {
-                'name': 'NIDIGITAL_VAL_H',
-                'value': 4
-            },
-            {
-                'name': 'NIDIGITAL_VAL_X',
-                'value': 5
-            },
-            {
-                'name': 'NIDIGITAL_VAL_M',
-                'value': 6
-            },
-            {
-                'name': 'NIDIGITAL_VAL_V',
-                'value': 7
-            },
-            {
-                'name': 'NIDIGITAL_VAL_D',
-                'value': 8
-            },
-            {
-                'name': 'NIDIGITAL_VAL_E',
-                'value': 9
-            },
-            {
-                'name': 'NIDIGITAL_VAL_NOT_A_PIN_STATE',
-                'value': 254
-            },
-            {
-                'name': 'NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED',
-                'value': 255
-            }
-        ]
-    },
-    'DriveEdgeSetFormat': {
+    'DriveFormat': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_NR',
@@ -124,6 +66,26 @@ enums = {
             {
                 'name': 'NIDIGITAL_VAL_SBC',
                 'value': 1503
+            }
+        ]
+    },
+    'ExportSignal': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_START_TRIGGER',
+                'value': 2000
+            },
+            {
+                'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
+                'value': 2001
+            },
+            {
+                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT',
+                'value': 2002
+            },
+            {
+                'name': 'NIDIGITAL_VAL_REF_CLOCK',
+                'value': 2003
             }
         ]
     },
@@ -164,6 +126,14 @@ enums = {
             {
                 'name': 'NIDIGITAL_VAL_PARALLEL',
                 'value': 3701
+            }
+        ]
+    },
+    'PPMUApertureTimeUnits': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_SECONDS',
+                'value': 2100
             }
         ]
     },
@@ -216,6 +186,56 @@ enums = {
             {
                 'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT3',
                 'value': 'patternOpcodeEvent3'
+            }
+        ]
+    },
+    'PinState': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_0',
+                'python_name': 'ZERO',
+                'value': 0
+            },
+            {
+                'name': 'NIDIGITAL_VAL_1',
+                'python_name': 'ONE',
+                'value': 1
+            },
+            {
+                'name': 'NIDIGITAL_VAL_L',
+                'value': 3
+            },
+            {
+                'name': 'NIDIGITAL_VAL_H',
+                'value': 4
+            },
+            {
+                'name': 'NIDIGITAL_VAL_X',
+                'value': 5
+            },
+            {
+                'name': 'NIDIGITAL_VAL_M',
+                'value': 6
+            },
+            {
+                'name': 'NIDIGITAL_VAL_V',
+                'value': 7
+            },
+            {
+                'name': 'NIDIGITAL_VAL_D',
+                'value': 8
+            },
+            {
+                'name': 'NIDIGITAL_VAL_E',
+                'value': 9
+            },
+            {
+                'name': 'NIDIGITAL_VAL_NOT_A_PIN_STATE',
+                'value': 254
+            },
+            {
+                'name': 'NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED',
+                'value': 255
             }
         ]
     },
@@ -327,47 +347,7 @@ enums = {
             }
         ]
     },
-    'SessionState': {
-        'values': [
-            {
-                'name': 'NIDIGITAL_VAL_IDLE',
-                'value': 1
-            },
-            {
-                'name': 'NIDIGITAL_VAL_VERIFIED',
-                'value': 2
-            },
-            {
-                'name': 'NIDIGITAL_VAL_COMMITTED',
-                'value': 4
-            },
-            {
-                'name': 'NIDIGITAL_VAL_RUNNING',
-                'value': 8
-            }
-        ]
-    },
-    'Signal': {
-        'values': [
-            {
-                'name': 'NIDIGITAL_VAL_START_TRIGGER',
-                'value': 2000
-            },
-            {
-                'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
-                'value': 2001
-            },
-            {
-                'name': 'NIDIGITAL_VAL_PATTERN_OPCODE_EVENT',
-                'value': 2002
-            },
-            {
-                'name': 'NIDIGITAL_VAL_REF_CLOCK',
-                'value': 2003
-            }
-        ]
-    },
-    'SiteResult': {
+    'SiteResultType': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_PASS_FAIL',
@@ -379,7 +359,19 @@ enums = {
             }
         ]
     },
-    'SourceMemoryDataMapping': {
+    'SoftwareTrigger': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_START_TRIGGER',
+                'value': 2000
+            },
+            {
+                'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
+                'value': 2001
+            }
+        ]
+    },
+    'SourceDataMapping': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_BROADCAST',
@@ -403,7 +395,59 @@ enums = {
             }
         ]
     },
-    'Terminal': {
+    'TerminationMode': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_ACTIVE_LOAD',
+                'value': 1200
+            },
+            {
+                'name': 'NIDIGITAL_VAL_VTERM',
+                'value': 1201
+            },
+            {
+                'name': 'NIDIGITAL_VAL_HIGH_Z',
+                'value': 1202
+            }
+        ]
+    },
+    'TimeSetEdgeType': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_DRIVE_ON',
+                'value': 2800
+            },
+            {
+                'name': 'NIDIGITAL_VAL_DRIVE_DATA',
+                'value': 2801
+            },
+            {
+                'name': 'NIDIGITAL_VAL_DRIVE_RETURN',
+                'value': 2802
+            },
+            {
+                'name': 'NIDIGITAL_VAL_DRIVE_OFF',
+                'value': 2803
+            },
+            {
+                'name': 'NIDIGITAL_VAL_COMPARE_STROBE',
+                'value': 2804
+            },
+            {
+                'name': 'NIDIGITAL_VAL_DRIVE_DATA2',
+                'value': 2805
+            },
+            {
+                'name': 'NIDIGITAL_VAL_DRIVE_RETURN2',
+                'value': 2806
+            },
+            {
+                'name': 'NIDIGITAL_VAL_COMPARE_STROBE2',
+                'value': 2807
+            }
+        ]
+    },
+    'TriggerTerminal': {
         'values': [
             {
                 'name': 'NIDIGITAL_VAL_DO_NOT_EXPORT_STR',
@@ -443,58 +487,6 @@ enums = {
             }
         ]
     },
-    'TerminationMode': {
-        'values': [
-            {
-                'name': 'NIDIGITAL_VAL_ACTIVE_LOAD',
-                'value': 1200
-            },
-            {
-                'name': 'NIDIGITAL_VAL_VTERM',
-                'value': 1201
-            },
-            {
-                'name': 'NIDIGITAL_VAL_HIGH_Z',
-                'value': 1202
-            }
-        ]
-    },
-    'TimeSetEdge': {
-        'values': [
-            {
-                'name': 'NIDIGITAL_VAL_DRIVE_ON',
-                'value': 2800
-            },
-            {
-                'name': 'NIDIGITAL_VAL_DRIVE_DATA',
-                'value': 2801
-            },
-            {
-                'name': 'NIDIGITAL_VAL_DRIVE_RETURN',
-                'value': 2802
-            },
-            {
-                'name': 'NIDIGITAL_VAL_DRIVE_OFF',
-                'value': 2803
-            },
-            {
-                'name': 'NIDIGITAL_VAL_COMPARE_STROBE',
-                'value': 2804
-            },
-            {
-                'name': 'NIDIGITAL_VAL_DRIVE_DATA2',
-                'value': 2805
-            },
-            {
-                'name': 'NIDIGITAL_VAL_DRIVE_RETURN2',
-                'value': 2806
-            },
-            {
-                'name': 'NIDIGITAL_VAL_COMPARE_STROBE2',
-                'value': 2807
-            }
-        ]
-    },
     'TriggerType': {
         'values': [
             {
@@ -508,6 +500,24 @@ enums = {
             {
                 'name': 'NIDIGITAL_VAL_SOFTWARE',
                 'value': 1702
+            }
+        ]
+    },
+    'WriteStaticPinState': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_0',
+                'python_name': 'ZERO',
+                'value': 0
+            },
+            {
+                'name': 'NIDIGITAL_VAL_1',
+                'python_name': 'ONE',
+                'value': 1
+            },
+            {
+                'name': 'NIDIGITAL_VAL_X',
+                'value': 5
             }
         ]
     }

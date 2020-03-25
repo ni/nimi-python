@@ -36,7 +36,7 @@
         data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
 
         # Get the site list
-        site_list = self.get_site_results_site_numbers(enums.SiteResult.CAPTURE_WAVEFORM)
+        site_list = self.get_site_results_site_numbers(enums.SiteResultType.CAPTURE_WAVEFORM)
         assert len(site_list) == actual_num_waveforms
 
         waveforms = {}

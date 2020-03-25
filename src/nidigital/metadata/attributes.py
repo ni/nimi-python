@@ -356,7 +356,7 @@ attributes = {
     1150038: {
         'access': 'read-write',
         'channel_based': True,
-        'enum': 'ApertureTimeUnits',
+        'enum': 'PPMUApertureTimeUnits',
         'name': 'PPMU_APERTURE_TIME_UNITS',
         'resettable': True,
         'type': 'ViInt32'

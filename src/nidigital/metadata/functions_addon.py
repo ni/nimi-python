@@ -345,12 +345,12 @@ the following information about each pattern cycle:
 -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
    start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
    have a scan opcode.
--  **expected_pin_states** (list of list of enums.DigitalState) Pin states as expected by the loaded
+-  **expected_pin_states** (list of list of enums.PinState) Pin states as expected by the loaded
    pattern in the order specified in the pin list. Pins without defined edges in the specified DUT cycle
    will have a value of NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED.
    Length of the outer list will be equal to the value of edge multiplier for the given vector.
    Length of the inner list will be equal to the number of pins requested.
--  **actual_pin_states** (list of list of enums.DigitalState) Pin states acquired by History RAM in the
+-  **actual_pin_states** (list of list of enums.PinState) Pin states acquired by History RAM in the
    order specified in the pin list. Pins without defined edges in the specified DUT cycle will have a
    value of NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED.
    Length of the outer list will be equal to the value of edge multiplier for the given vector.
