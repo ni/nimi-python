@@ -233,8 +233,8 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
-    frequency_counter_measurement_time = _attributes.AttributeViReal64(1150069)
-    '''Type: float
+    frequency_counter_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150069)
+    '''Type: float in seconds or datetime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -304,8 +304,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    ppmu_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ApertureTimeUnits, 1150038)
-    '''Type: enums.ApertureTimeUnits
+    ppmu_aperture_time_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PPMUApertureTimeUnits, 1150038)
+    '''Type: enums.PPMUApertureTimeUnits
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -437,8 +437,8 @@ class _SessionBase(object):
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TriggerType, 1150029)
     supported_instrument_models = _attributes.AttributeViString(1050327)
     tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
-    tdr_offset = _attributes.AttributeViReal64(1150051)
-    '''Type: float
+    tdr_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
+    '''Type: float in seconds or datetime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -455,8 +455,8 @@ class _SessionBase(object):
     You can specify a subset of repeated capabilities using the Python index notation on an
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
-    timing_absolute_delay = _attributes.AttributeViReal64(1150072)
-    '''Type: float
+    timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
+    '''Type: float in seconds or datetime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -616,20 +616,20 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            offsets (list of float):
+            offsets (list of float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         num_offsets_ctype = _visatype.ViInt32(0 if offsets is None else len(offsets))  # case S160
-        offsets_ctype = get_ctypes_pointer_for_buffer(value=offsets, library_type=_visatype.ViReal64)  # case B550
+        offsets_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_timedeltas_to_seconds_real64(offsets), library_type=_visatype.ViReal64)  # case B520
         error_code = self._library.niDigital_ApplyTDROffsets(vi_ctype, channel_list_ctype, num_offsets_ctype, offsets_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=10.0):
-        r'''burst_pattern
+    def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
+        r'''_burst_pattern
 
         TBD
 
@@ -646,7 +646,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float):
+            timeout (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -654,7 +654,7 @@ class _SessionBase(object):
         start_label_ctype = ctypes.create_string_buffer(start_label.encode(self._encoding))  # case C020
         select_digital_function_ctype = _visatype.ViBoolean(select_digital_function)  # case S150
         wait_until_done_ctype = _visatype.ViBoolean(wait_until_done)  # case S150
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDigital_BurstPattern(vi_ctype, site_list_ctype, start_label_ctype, select_digital_function_ctype, wait_until_done_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -783,13 +783,13 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            strobe_edge (float):
+            strobe_edge (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
+        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -809,16 +809,16 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            strobe_edge (float):
+            strobe_edge (float in seconds or datetime.timedelta):
 
-            strobe2_edge (float):
+            strobe2_edge (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        strobe_edge_ctype = _visatype.ViReal64(strobe_edge)  # case S150
-        strobe2_edge_ctype = _visatype.ViReal64(strobe2_edge)  # case S150
+        strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
+        strobe2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe2_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype, strobe2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -838,27 +838,27 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            format (enums.DriveEdgeSetFormat):
+            format (enums.DriveFormat):
 
-            drive_on_edge (float):
+            drive_on_edge (float in seconds or datetime.timedelta):
 
-            drive_data_edge (float):
+            drive_data_edge (float in seconds or datetime.timedelta):
 
-            drive_return_edge (float):
+            drive_return_edge (float in seconds or datetime.timedelta):
 
-            drive_off_edge (float):
+            drive_off_edge (float in seconds or datetime.timedelta):
 
         '''
-        if type(format) is not enums.DriveEdgeSetFormat:
-            raise TypeError('Parameter format must be of type ' + str(enums.DriveEdgeSetFormat))
+        if type(format) is not enums.DriveFormat:
+            raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
-        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
-        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
-        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
+        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
+        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
+        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
+        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -878,33 +878,33 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            format (enums.DriveEdgeSetFormat):
+            format (enums.DriveFormat):
 
-            drive_on_edge (float):
+            drive_on_edge (float in seconds or datetime.timedelta):
 
-            drive_data_edge (float):
+            drive_data_edge (float in seconds or datetime.timedelta):
 
-            drive_return_edge (float):
+            drive_return_edge (float in seconds or datetime.timedelta):
 
-            drive_off_edge (float):
+            drive_off_edge (float in seconds or datetime.timedelta):
 
-            drive_data2_edge (float):
+            drive_data2_edge (float in seconds or datetime.timedelta):
 
-            drive_return2_edge (float):
+            drive_return2_edge (float in seconds or datetime.timedelta):
 
         '''
-        if type(format) is not enums.DriveEdgeSetFormat:
-            raise TypeError('Parameter format must be of type ' + str(enums.DriveEdgeSetFormat))
+        if type(format) is not enums.DriveFormat:
+            raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
-        drive_on_edge_ctype = _visatype.ViReal64(drive_on_edge)  # case S150
-        drive_data_edge_ctype = _visatype.ViReal64(drive_data_edge)  # case S150
-        drive_return_edge_ctype = _visatype.ViReal64(drive_return_edge)  # case S150
-        drive_off_edge_ctype = _visatype.ViReal64(drive_off_edge)  # case S150
-        drive_data2_edge_ctype = _visatype.ViReal64(drive_data2_edge)  # case S150
-        drive_return2_edge_ctype = _visatype.ViReal64(drive_return2_edge)  # case S150
+        drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
+        drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
+        drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
+        drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
+        drive_data2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data2_edge)  # case S140
+        drive_return2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return2_edge)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -924,11 +924,11 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            drive_format (enums.DriveEdgeSetFormat):
+            drive_format (enums.DriveFormat):
 
         '''
-        if type(drive_format) is not enums.DriveEdgeSetFormat:
-            raise TypeError('Parameter drive_format must be of type ' + str(enums.DriveEdgeSetFormat))
+        if type(drive_format) is not enums.DriveFormat:
+            raise TypeError('Parameter drive_format must be of type ' + str(enums.DriveFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
@@ -952,18 +952,18 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            edge (enums.TimeSetEdge):
+            edge (enums.TimeSetEdgeType):
 
-            time (float):
+            time (float in seconds or datetime.timedelta):
 
         '''
-        if type(edge) is not enums.TimeSetEdge:
-            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdge))
+        if type(edge) is not enums.TimeSetEdgeType:
+            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
-        time_ctype = _visatype.ViReal64(time)  # case S150
+        time_ctype = _converters.convert_timedelta_to_seconds_real64(time)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_ctype, edge_ctype, time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -1098,11 +1098,11 @@ class _SessionBase(object):
         Args:
             waveform_name (str):
 
-            data_mapping (enums.SourceMemoryDataMapping):
+            data_mapping (enums.SourceDataMapping):
 
         '''
-        if type(data_mapping) is not enums.SourceMemoryDataMapping:
-            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceMemoryDataMapping))
+        if type(data_mapping) is not enums.SourceDataMapping:
+            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
@@ -1126,15 +1126,15 @@ class _SessionBase(object):
         Args:
             waveform_name (str):
 
-            data_mapping (enums.SourceMemoryDataMapping):
+            data_mapping (enums.SourceDataMapping):
 
             sample_width (int):
 
             bit_order (enums.BitOrder):
 
         '''
-        if type(data_mapping) is not enums.SourceMemoryDataMapping:
-            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceMemoryDataMapping))
+        if type(data_mapping) is not enums.SourceDataMapping:
+            raise TypeError('Parameter data_mapping must be of type ' + str(enums.SourceDataMapping))
         if type(bit_order) is not enums.BitOrder:
             raise TypeError('Parameter bit_order must be of type ' + str(enums.BitOrder))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1182,6 +1182,44 @@ class _SessionBase(object):
         error_code = self._library.niDigital_EnableSites(vi_ctype, site_list_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    @ivi_synchronized
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
+        '''burst_pattern
+
+        Uses the start_label you specify to burst the pattern on the sites you specify. If you
+        specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+        Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+        write_static, or a call to apply_levels_and_timing.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            start_label (str):
+
+            select_digital_function (bool):
+
+            wait_until_done (bool):
+
+            timeout (float in seconds or datetime.timedelta):
+
+
+        Returns:
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail,
+                if wait_until_done is specified as True. Else, None.
+
+        '''
+        self._burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
+
+        if wait_until_done:
+            return self.get_site_pass_fail()
+        else:
+            return None
 
     @ivi_synchronized
     def _fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
@@ -1235,7 +1273,7 @@ class _SessionBase(object):
         data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
 
         # Get the site list
-        site_list = self.get_site_results_site_numbers(enums.SiteResult.CAPTURE_WAVEFORM)
+        site_list = self.get_site_results_site_numbers(enums.SiteResultType.CAPTURE_WAVEFORM)
         assert len(site_list) == actual_num_waveforms
 
         waveforms = {}
@@ -1257,7 +1295,7 @@ class _SessionBase(object):
 
         If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
         consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
-        DigitalState.PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
+        PinState.PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
 
         If pins are not specified, pin list from the pattern containing the start label is used. Call
         get_pattern_pin_names with the start label to retrieve the pins
@@ -1291,14 +1329,14 @@ class _SessionBase(object):
                 -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
                    start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
                    have a scan opcode.
-                -  **expected_pin_states** (list of list of enums.DigitalState) Pin states as expected by the loaded
+                -  **expected_pin_states** (list of list of enums.PinState) Pin states as expected by the loaded
                    pattern in the order specified in the pin list. Pins without defined edges in the specified DUT cycle
-                   will have a value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   will have a value of PinState.PIN_STATE_NOT_ACQUIRED.
                    Length of the outer list will be equal to the value of edge multiplier for the given vector.
                    Length of the inner list will be equal to the number of pins requested.
-                -  **actual_pin_states** (list of list of enums.DigitalState) Pin states acquired by History RAM in the
+                -  **actual_pin_states** (list of list of enums.PinState) Pin states acquired by History RAM in the
                    order specified in the pin list. Pins without defined edges in the specified DUT cycle will have a
-                   value of DigitalState.PIN_STATE_NOT_ACQUIRED.
+                   value of PinState.PIN_STATE_NOT_ACQUIRED.
                    Length of the outer list will be equal to the value of edge multiplier for the given vector.
                    Length of the inner list will be equal to the number of pins requested.
                 -  **per_pin_pass_fail** (list of list of bool) Pass fail information for pins in the order specified in
@@ -1314,7 +1352,7 @@ class _SessionBase(object):
             raise ValueError('samples_to_read should be greater than or equal to -1.')
 
         samples_available = self.get_history_ram_sample_count(site)
-        if position >= samples_available:
+        if position > samples_available:
             raise ValueError('position: Specified value = {0}, Maximum value = {1}.'.format(position, samples_available - 1))
 
         if samples_to_read == -1:
@@ -1330,7 +1368,7 @@ class _SessionBase(object):
                 .format(position, samples_to_read, samples_available - position))
 
         # Site can be 'N', N or 'siteN'. This will normalize all options to 'siteN' which is requried by the driver
-        site = _converters.convert_site_string(site)
+        site = _converters.convert_site_to_string(site)
         pattern_names = {}
         time_set_names = {}
         cycle_infos = []
@@ -1417,13 +1455,19 @@ class _SessionBase(object):
 
         Returns dictionary where each key is a site number and value is pass/fail
 
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
         Returns:
             pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail
 
         '''
         # For site_list, we just use the repeated capability
         result_list = self._get_site_pass_fail()
-        site_list = self.get_site_results_site_numbers(enums.SiteResult.PASS_FAIL)
+        site_list = self.get_site_results_site_numbers(enums.SiteResultType.PASS_FAIL)
         assert len(site_list) == len(result_list)
 
         return dict(zip(site_list, result_list))
@@ -1449,9 +1493,9 @@ class _SessionBase(object):
 
 
         Returns:
-            expected_pin_states (list of enums.DigitalState):
+            expected_pin_states (list of enums.PinState):
 
-            actual_pin_states (list of enums.DigitalState):
+            actual_pin_states (list of enums.PinState):
 
             per_pin_pass_fail (list of bool):
 
@@ -1477,7 +1521,7 @@ class _SessionBase(object):
         per_pin_pass_fail_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViBoolean, size=per_pin_pass_fail_size)  # case B620
         error_code = self._library.niDigital_FetchHistoryRAMCyclePinData(vi_ctype, site_ctype, pin_list_ctype, sample_index_ctype, dut_cycle_index_ctype, pin_data_buffer_size_ctype, expected_pin_states_ctype, actual_pin_states_ctype, per_pin_pass_fail_ctype, None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [enums.DigitalState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.DigitalState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
+        return [enums.PinState(expected_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [enums.PinState(actual_pin_states_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)], [bool(per_pin_pass_fail_ctype[i]) for i in range(pin_data_buffer_size_ctype.value)]
 
     @ivi_synchronized
     def frequency_counter_measure_frequency(self):
@@ -1842,15 +1886,15 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            site_result_type (enums.SiteResult):
+            site_result_type (enums.SiteResultType):
 
 
         Returns:
             site_numbers (list of int):
 
         '''
-        if type(site_result_type) is not enums.SiteResult:
-            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResult))
+        if type(site_result_type) is not enums.SiteResultType:
+            raise TypeError('Parameter site_result_type must be of type ' + str(enums.SiteResultType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         site_result_type_ctype = _visatype.ViInt32(site_result_type.value)  # case S130
@@ -1883,7 +1927,7 @@ class _SessionBase(object):
 
 
         Returns:
-            format (enums.DriveEdgeSetFormat):
+            format (enums.DriveFormat):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1892,7 +1936,7 @@ class _SessionBase(object):
         format_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return enums.DriveEdgeSetFormat(format_ctype.value)
+        return enums.DriveFormat(format_ctype.value)
 
     @ivi_synchronized
     def get_time_set_edge(self, time_set, edge):
@@ -1909,15 +1953,15 @@ class _SessionBase(object):
         Args:
             time_set (str):
 
-            edge (enums.TimeSetEdge):
+            edge (enums.TimeSetEdgeType):
 
 
         Returns:
             time (float):
 
         '''
-        if type(edge) is not enums.TimeSetEdge:
-            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdge))
+        if type(edge) is not enums.TimeSetEdgeType:
+            raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
@@ -2068,7 +2112,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
-            data (list of enums.DigitalState):
+            data (list of enums.PinState):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2083,7 +2127,7 @@ class _SessionBase(object):
         data_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViUInt8, size=data_size)  # case B620
         error_code = self._library.niDigital_ReadStatic(vi_ctype, channel_list_ctype, buffer_size_ctype, data_ctype, None if actual_num_read_ctype is None else (ctypes.pointer(actual_num_read_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [enums.DigitalState(data_ctype[i]) for i in range(buffer_size_ctype.value)]
+        return [enums.PinState(data_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
     def reset_attribute(self, attribute_id):
@@ -2255,7 +2299,7 @@ class _SessionBase(object):
 
 
         Returns:
-            offsets (list of float):
+            offsets (list of datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2271,7 +2315,7 @@ class _SessionBase(object):
         offsets_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=offsets_size)  # case B620
         error_code = self._library.niDigital_TDR(vi_ctype, channel_list_ctype, apply_offsets_ctype, offsets_buffer_size_ctype, offsets_ctype, None if actual_num_offsets_ctype is None else (ctypes.pointer(actual_num_offsets_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return [float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)]
+        return _converters.convert_seconds_real64_to_timedeltas([float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)])
 
     def unlock(self):
         '''unlock
@@ -2331,11 +2375,11 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            state (enums.DigitalState):
+            state (enums.WriteStaticPinState):
 
         '''
-        if type(state) is not enums.DigitalState:
-            raise TypeError('Parameter state must be of type ' + str(enums.DigitalState))
+        if type(state) is not enums.WriteStaticPinState:
+            raise TypeError('Parameter state must be of type ' + str(enums.WriteStaticPinState))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         state_ctype = _visatype.ViUInt8(state.value)  # case S130
@@ -2518,12 +2562,12 @@ class Session(_SessionBase):
         Args:
             time_set (str):
 
-            period (float):
+            period (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
-        period_ctype = _visatype.ViReal64(period)  # case S150
+        period_ctype = _converters.convert_timedelta_to_seconds_real64(period)  # case S140
         error_code = self._library.niDigital_ConfigureTimeSetPeriod(vi_ctype, time_set_ctype, period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -3100,13 +3144,15 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            trigger (int):
+            trigger (enums.SoftwareTrigger):
 
             trigger_identifier (str):
 
         '''
+        if type(trigger) is not enums.SoftwareTrigger:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTrigger))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger)  # case S150
+        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
         trigger_identifier_ctype = ctypes.create_string_buffer(trigger_identifier.encode(self._encoding))  # case C020
         error_code = self._library.niDigital_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_identifier_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -3145,17 +3191,17 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, timeout=10.0):
+    def wait_until_done(self, timeout=datetime.timedelta(seconds=10.0)):
         r'''wait_until_done
 
         TBD
 
         Args:
-            timeout (float):
+            timeout (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        timeout_ctype = _converters.convert_timedelta_to_seconds_real64(timeout)  # case S140
         error_code = self._library.niDigital_WaitUntilDone(vi_ctype, timeout_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

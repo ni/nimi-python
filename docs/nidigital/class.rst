@@ -179,16 +179,20 @@ apply_tdr_offsets
                 
 
 
-            :type offsets: list of float
+            :type offsets: list of float in seconds or datetime.timedelta
 
 burst_pattern
 -------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=10.0)
+    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0))
 
-            TBD
+            Uses the start_label you specify to burst the pattern on the sites you specify. If you
+            specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+            Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+            :py:meth:`nidigital.Session.write_static`, or a call to :py:meth:`nidigital.Session.apply_levels_and_timing`.
 
             
 
@@ -226,7 +230,18 @@ burst_pattern
                 
 
 
-            :type timeout: float
+            :type timeout: float in seconds or datetime.timedelta
+
+            :rtype: { int: bool, int: bool, ... }
+            :return:
+
+
+                    Dictionary where each key is a site number and value is pass/fail,
+                    if wait_until_done is specified as True. Else, None.
+
+                    
+
+
 
 clear_error
 -----------
@@ -427,7 +442,7 @@ configure_time_set_compare_edges_strobe
                 
 
 
-            :type strobe_edge: float
+            :type strobe_edge: float in seconds or datetime.timedelta
 
 configure_time_set_compare_edges_strobe2x
 -----------------------------------------
@@ -460,14 +475,14 @@ configure_time_set_compare_edges_strobe2x
                 
 
 
-            :type strobe_edge: float
+            :type strobe_edge: float in seconds or datetime.timedelta
             :param strobe2_edge:
 
 
                 
 
 
-            :type strobe2_edge: float
+            :type strobe2_edge: float in seconds or datetime.timedelta
 
 configure_time_set_drive_edges
 ------------------------------
@@ -500,35 +515,35 @@ configure_time_set_drive_edges
                 
 
 
-            :type format: :py:data:`nidigital.DriveEdgeSetFormat`
+            :type format: :py:data:`nidigital.DriveFormat`
             :param drive_on_edge:
 
 
                 
 
 
-            :type drive_on_edge: float
+            :type drive_on_edge: float in seconds or datetime.timedelta
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float
+            :type drive_data_edge: float in seconds or datetime.timedelta
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float
+            :type drive_return_edge: float in seconds or datetime.timedelta
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float
+            :type drive_off_edge: float in seconds or datetime.timedelta
 
 configure_time_set_drive_edges2x
 --------------------------------
@@ -561,49 +576,49 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type format: :py:data:`nidigital.DriveEdgeSetFormat`
+            :type format: :py:data:`nidigital.DriveFormat`
             :param drive_on_edge:
 
 
                 
 
 
-            :type drive_on_edge: float
+            :type drive_on_edge: float in seconds or datetime.timedelta
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float
+            :type drive_data_edge: float in seconds or datetime.timedelta
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float
+            :type drive_return_edge: float in seconds or datetime.timedelta
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float
+            :type drive_off_edge: float in seconds or datetime.timedelta
             :param drive_data2_edge:
 
 
                 
 
 
-            :type drive_data2_edge: float
+            :type drive_data2_edge: float in seconds or datetime.timedelta
             :param drive_return2_edge:
 
 
                 
 
 
-            :type drive_return2_edge: float
+            :type drive_return2_edge: float in seconds or datetime.timedelta
 
 configure_time_set_drive_format
 -------------------------------
@@ -636,7 +651,7 @@ configure_time_set_drive_format
                 
 
 
-            :type drive_format: :py:data:`nidigital.DriveEdgeSetFormat`
+            :type drive_format: :py:data:`nidigital.DriveFormat`
 
 configure_time_set_edge
 -----------------------
@@ -669,14 +684,14 @@ configure_time_set_edge
                 
 
 
-            :type edge: :py:data:`nidigital.TimeSetEdge`
+            :type edge: :py:data:`nidigital.TimeSetEdgeType`
             :param time:
 
 
                 
 
 
-            :type time: float
+            :type time: float in seconds or datetime.timedelta
 
 configure_time_set_edge_multiplier
 ----------------------------------
@@ -737,7 +752,7 @@ configure_time_set_period
                 
 
 
-            :type period: float
+            :type period: float in seconds or datetime.timedelta
 
 configure_voltage_levels
 ------------------------
@@ -953,7 +968,7 @@ create_source_waveform_parallel
                 
 
 
-            :type data_mapping: :py:data:`nidigital.SourceMemoryDataMapping`
+            :type data_mapping: :py:data:`nidigital.SourceDataMapping`
 
 create_source_waveform_serial
 -----------------------------
@@ -986,7 +1001,7 @@ create_source_waveform_serial
                 
 
 
-            :type data_mapping: :py:data:`nidigital.SourceMemoryDataMapping`
+            :type data_mapping: :py:data:`nidigital.SourceDataMapping`
             :param sample_width:
 
 
@@ -1133,7 +1148,7 @@ fetch_history_ram_cycle_information
 
             If the pattern is using the edge multiplier feature, cycle numbers represent tester cycles, each of which may
             consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
-            :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
+            :py:data:`~nidigital.PinState.PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
 
             If pins are not specified, pin list from the pattern containing the start label is used. Call
             :py:meth:`nidigital.Session.get_pattern_pin_names` with the start label to retrieve the pins
@@ -1193,14 +1208,14 @@ fetch_history_ram_cycle_information
                     -  **scan_cycle_number** (int) Scan cycle number acquired by this History RAM sample. Scan cycle numbers
                        start at 0 from the first cycle of the scan vector. Scan cycle numbers are -1 for cycles that do not
                        have a scan opcode.
-                    -  **expected_pin_states** (list of list of enums.DigitalState) Pin states as expected by the loaded
+                    -  **expected_pin_states** (list of list of enums.PinState) Pin states as expected by the loaded
                        pattern in the order specified in the pin list. Pins without defined edges in the specified DUT cycle
-                       will have a value of :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED`.
+                       will have a value of :py:data:`~nidigital.PinState.PIN_STATE_NOT_ACQUIRED`.
                        Length of the outer list will be equal to the value of edge multiplier for the given vector.
                        Length of the inner list will be equal to the number of pins requested.
-                    -  **actual_pin_states** (list of list of enums.DigitalState) Pin states acquired by History RAM in the
+                    -  **actual_pin_states** (list of list of enums.PinState) Pin states acquired by History RAM in the
                        order specified in the pin list. Pins without defined edges in the specified DUT cycle will have a
-                       value of :py:data:`~nidigital.DigitalState.PIN_STATE_NOT_ACQUIRED`.
+                       value of :py:data:`~nidigital.PinState.PIN_STATE_NOT_ACQUIRED`.
                        Length of the outer list will be equal to the value of edge multiplier for the given vector.
                        Length of the inner list will be equal to the number of pins requested.
                     -  **per_pin_pass_fail** (list of list of bool) Pass fail information for pins in the order specified in
@@ -1459,6 +1474,11 @@ get_site_pass_fail
             
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.
+
 
             :rtype: { int: bool, int: bool, ... }
             :return:
@@ -1494,7 +1514,7 @@ get_site_results_site_numbers
                 
 
 
-            :type site_result_type: :py:data:`nidigital.SiteResult`
+            :type site_result_type: :py:data:`nidigital.SiteResultType`
 
             :rtype: list of int
             :return:
@@ -1530,7 +1550,7 @@ get_time_set_drive_format
 
             :type time_set: str
 
-            :rtype: :py:data:`nidigital.DriveEdgeSetFormat`
+            :rtype: :py:data:`nidigital.DriveFormat`
             :return:
 
 
@@ -1569,7 +1589,7 @@ get_time_set_edge
                 
 
 
-            :type edge: :py:data:`nidigital.TimeSetEdge`
+            :type edge: :py:data:`nidigital.TimeSetEdgeType`
 
             :rtype: float
             :return:
@@ -2018,7 +2038,7 @@ read_static
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :rtype: list of :py:data:`nidigital.DigitalState`
+            :rtype: list of :py:data:`nidigital.PinState`
             :return:
 
 
@@ -2123,7 +2143,7 @@ send_software_edge_trigger
                 
 
 
-            :type trigger: int
+            :type trigger: :py:data:`nidigital.SoftwareTrigger`
             :param trigger_identifier:
 
 
@@ -2158,7 +2178,7 @@ tdr
 
             :type apply_offsets: bool
 
-            :rtype: list of float
+            :rtype: list of datetime.timedelta
             :return:
 
 
@@ -2226,7 +2246,7 @@ wait_until_done
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: wait_until_done(timeout=10.0)
+    .. py:method:: wait_until_done(timeout=datetime.timedelta(seconds=10.0))
 
             TBD
 
@@ -2240,7 +2260,7 @@ wait_until_done
                 
 
 
-            :type timeout: float
+            :type timeout: float in seconds or datetime.timedelta
 
 write_sequencer_flag
 --------------------
@@ -2408,7 +2428,7 @@ write_static
                 
 
 
-            :type state: :py:data:`nidigital.DigitalState`
+            :type state: :py:data:`nidigital.WriteStaticPinState`
 
 
 Properties
@@ -2927,17 +2947,17 @@ frequency_counter_measurement_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+----------------------------------------+
+            | Characteristic | Value                                  |
+            +================+========================================+
+            | Datatype       | float in seconds or datetime.timedelta |
+            +----------------+----------------------------------------+
+            | Permissions    | read-write                             |
+            +----------------+----------------------------------------+
+            | Channel Based  | Yes                                    |
+            +----------------+----------------------------------------+
+            | Resettable     | Yes                                    |
+            +----------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3543,17 +3563,17 @@ ppmu_aperture_time_units
 
         The following table lists the characteristics of this property.
 
-            +----------------+-------------------------+
-            | Characteristic | Value                   |
-            +================+=========================+
-            | Datatype       | enums.ApertureTimeUnits |
-            +----------------+-------------------------+
-            | Permissions    | read-write              |
-            +----------------+-------------------------+
-            | Channel Based  | Yes                     |
-            +----------------+-------------------------+
-            | Resettable     | Yes                     |
-            +----------------+-------------------------+
+            +----------------+-----------------------------+
+            | Characteristic | Value                       |
+            +================+=============================+
+            | Datatype       | enums.PPMUApertureTimeUnits |
+            +----------------+-----------------------------+
+            | Permissions    | read-write                  |
+            +----------------+-----------------------------+
+            | Channel Based  | Yes                         |
+            +----------------+-----------------------------+
+            | Resettable     | Yes                         |
+            +----------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4336,17 +4356,17 @@ tdr_offset
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | Yes        |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+----------------------------------------+
+            | Characteristic | Value                                  |
+            +================+========================================+
+            | Datatype       | float in seconds or datetime.timedelta |
+            +----------------+----------------------------------------+
+            | Permissions    | read-write                             |
+            +----------------+----------------------------------------+
+            | Channel Based  | Yes                                    |
+            +----------------+----------------------------------------+
+            | Resettable     | Yes                                    |
+            +----------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4394,17 +4414,17 @@ timing_absolute_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+------------+
-            | Characteristic | Value      |
-            +================+============+
-            | Datatype       | float      |
-            +----------------+------------+
-            | Permissions    | read-write |
-            +----------------+------------+
-            | Channel Based  | No         |
-            +----------------+------------+
-            | Resettable     | Yes        |
-            +----------------+------------+
+            +----------------+----------------------------------------+
+            | Characteristic | Value                                  |
+            +================+========================================+
+            | Datatype       | float in seconds or datetime.timedelta |
+            +----------------+----------------------------------------+
+            | Permissions    | read-write                             |
+            +----------------+----------------------------------------+
+            | Channel Based  | No                                     |
+            +----------------+----------------------------------------+
+            | Resettable     | Yes                                    |
+            +----------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
