@@ -2,6 +2,7 @@
 omit =
     */_library*
     */nidigital/__init__.py
+    */nidigital/_attributes.py
     */nidigital/_converters.py
     */nidigital/_visatype.py
     */nidigital/errors.py
