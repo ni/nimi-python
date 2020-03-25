@@ -201,11 +201,13 @@ constructor_params = helper.filter_parameters(init_function, helper.ParameterUsa
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
+% if len(config['repeated_capabilities']) > 0:
         # Instantiate any repeated capability objects
-% for rep_cap in config['repeated_capabilities']:
+%   for rep_cap in config['repeated_capabilities']:
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}', repeated_capability_list)
-% endfor
+%   endfor
 
+% endif
         self._is_frozen = freeze_it
 
     def __repr__(self):
