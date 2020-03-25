@@ -530,8 +530,6 @@ class _SessionBase(object):
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
 
-        # Instantiate any repeated capability objects
-
         self._is_frozen = freeze_it
 
     def __repr__(self):

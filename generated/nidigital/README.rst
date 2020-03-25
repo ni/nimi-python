@@ -137,8 +137,8 @@ The following is a basic example of using the **nidigital** module to open a ses
         pass
 
 
-Some repeated capabilities can be nested. This is useful for some methods that can be used with the `pins`
-repeated capability. They can be nested with the `sites` repeated capability.
+Some repeated capabilities can be chained. This is useful for some methods that can be used with the `pins`
+repeated capability. They can be chained with the `sites` repeated capability.
 
 .. code-block:: python
 
@@ -148,7 +148,7 @@ repeated capability. They can be nested with the `sites` repeated capability.
     with nidigital.Session(resource_name='PXI1Slot2', channels='0') as session:
         session.sites[0, 1].pins['PinA', 'PinB'].ppmu_source()
 
-This will expand the repeated capabilities string given to the driver as `'site0/2,site0/3,site1/2,site1/3'`
+This will apply the method/property to `'site0/PinA`, `site0/PinB`, `site1/PinA`, `site1/PinB'`
 
 Additional examples for NI-Digital Pattern Driver are located in src/nidigital/examples/ directory.
 

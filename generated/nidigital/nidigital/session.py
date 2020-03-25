@@ -96,12 +96,12 @@ class _RepeatedCapabilities(object):
         # We need at least one element. If we get an empty list, make the one element an empty string
         self._current_repeated_capability_list = current_repeated_capability_list if len(current_repeated_capability_list) > 0 else ['']
         # Now we know there is at lease one entry, so we look if it is an empty string or not
-        self._seperator = '/' if len(self._current_repeated_capability_list[0]) > 0 else ''
+        self._separator = '/' if len(self._current_repeated_capability_list[0]) > 0 else ''
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
-        complete_rep_cap_list = [current_rep_cap + self._seperator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
+        complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
         return _SessionBase(vi=self._session._vi, repeated_capability_list=complete_rep_cap_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
