@@ -615,8 +615,8 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
-        r'''burst_pattern
+    def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
+        r'''_burst_pattern
 
         TBD
 
@@ -1171,6 +1171,44 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
+        '''burst_pattern
+
+        Uses the start_label you specify to burst the pattern on the sites you specify. If you
+        specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
+
+        Digital pins retain their state at the end of a pattern burst until the first vector of the pattern burst, a call to
+        write_static, or a call to apply_levels_and_timing.
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
+
+        Args:
+            start_label (str):
+
+            select_digital_function (bool):
+
+            wait_until_done (bool):
+
+            timeout (float in seconds or datetime.timedelta):
+
+
+        Returns:
+            pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail,
+                if wait_until_done is specified as True. Else, None.
+
+        '''
+        self._burst_pattern(start_label, select_digital_function, wait_until_done, timeout)
+
+        if wait_until_done:
+            return self.get_site_pass_fail()
+        else:
+            return None
+
+    @ivi_synchronized
     def _fetch_capture_waveform(self, waveform_name, samples_to_read, timeout):
         # This is slightly modified codegen from the function
         # We cannot use codegen without major modifications to the code generator
@@ -1301,7 +1339,7 @@ class _SessionBase(object):
             raise ValueError('samples_to_read should be greater than or equal to -1.')
 
         samples_available = self.get_history_ram_sample_count(site)
-        if position >= samples_available:
+        if position > samples_available:
             raise ValueError('position: Specified value = {0}, Maximum value = {1}.'.format(position, samples_available - 1))
 
         if samples_to_read == -1:
@@ -1317,7 +1355,7 @@ class _SessionBase(object):
                 .format(position, samples_to_read, samples_available - position))
 
         # Site can be 'N', N or 'siteN'. This will normalize all options to 'siteN' which is requried by the driver
-        site = _converters.convert_site_string(site)
+        site = _converters.convert_site_to_string(site)
         pattern_names = {}
         time_set_names = {}
         cycle_infos = []
@@ -1403,6 +1441,12 @@ class _SessionBase(object):
         '''get_site_pass_fail
 
         Returns dictionary where each key is a site number and value is pass/fail
+
+        Tip:
+        This method requires repeated capabilities. If called directly on the
+        nidigital.Session object, then the method will use all repeated capabilities in the session.
+        You can specify a subset of repeated capabilities using the Python index notation on an
+        nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Returns:
             pass_fail ({ int: bool, int: bool, ... }): Dictionary where each key is a site number and value is pass/fail

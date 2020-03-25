@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
     * #### Changed
         * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
         * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
+        * `burst_pattern` returns dictionary where each key is a site number and value is a bool indicating pass/fail, if `wait_until_done` is specified as `True` - [#1296](https://github.com/ni/nimi-python/issues/1296)
         * Update enum types to match the API in other ADEs - [#1330](https://github.com/ni/nimi-python/issues/1330):
             * Update the names of many enum types. See [#1330](https://github.com/ni/nimi-python/issues/1330) for the full list.
             * Added `WriteStaticPinState` enum type and changed the parameter type of `write_static` method to the newly added enum.
