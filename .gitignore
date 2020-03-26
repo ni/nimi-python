@@ -24,6 +24,7 @@ generated/*/coverage.xml
 .eggs/
 .tox/
 .coverage
+nidigitalunittest.xml
 nifakeunittest.xml
 nimodinstunittest.xml
 nitclkunittest.xml
