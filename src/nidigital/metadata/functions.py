@@ -1725,6 +1725,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetSiteResultsSiteNumbers': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },

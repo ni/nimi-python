@@ -287,19 +287,6 @@ SequencerRegister
 
 
 
-SiteResultType
---------------
-
-.. py:class:: SiteResultType
-
-    .. py:attribute:: SiteResultType.PASS_FAIL
-
-
-
-    .. py:attribute:: SiteResultType.CAPTURE_WAVEFORM
-
-
-
 SoftwareTrigger
 ---------------
 
