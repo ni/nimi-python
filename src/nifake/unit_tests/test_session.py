@@ -857,11 +857,11 @@ class TestSession(object):
         with nifake.Session('dev1') as session:
             assert session.channels['r0']._repeated_capability_list == ['r0']
 
-    def test_nested_repeated_capabilities_list(self):
+    def test_chained_repeated_capabilities_list(self):
         with nifake.Session('dev1') as session:
             assert session.sites[0, 1].channels[2, 3]._repeated_capability_list == ['site0/2', 'site0/3', 'site1/2', 'site1/3']
 
-    def test_nested_repeated_capability_method_on_specific_channel(self):
+    def test_chained_repeated_capability_method_on_specific_channel(self):
         test_maximum_time_ms = 10     # milliseconds
         test_maximum_time = datetime.timedelta(milliseconds=test_maximum_time_ms)
         test_reading = 5
