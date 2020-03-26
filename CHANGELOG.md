@@ -24,6 +24,12 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 * ### ALL
     * #### Added
+        * Support for chained repeated capabilities. This allows things like
+            ``` python
+            session.sites[0, 1].pins['PinA', 'PinB'].ppmu_voltage_level = 4
+            ``` 
+
+            The repeated capabilities will be expanded to `'site0/PinA,site0/PinB,site1/PinA,site1/PinB'`
     * #### Changed
     * #### Removed
 * ### NI-DCPower

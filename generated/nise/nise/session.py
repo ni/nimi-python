@@ -237,8 +237,6 @@ class Session(_SessionBase):
         self._vi = 0  # This must be set before calling _open_session().
         self._vi = self._open_session(virtual_device_name, options)
 
-        # Instantiate any repeated capability objects
-
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("virtual_device_name=" + pp.pformat(virtual_device_name))

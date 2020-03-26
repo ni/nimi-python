@@ -1153,8 +1153,6 @@ class Session(_SessionBase):
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
 
-        # Instantiate any repeated capability objects
-
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))

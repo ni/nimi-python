@@ -90,15 +90,20 @@ class _Lock(object):
 
 
 class _RepeatedCapabilities(object):
-    def __init__(self, session, prefix):
+    def __init__(self, session, prefix, current_repeated_capability_list):
         self._session = session
         self._prefix = prefix
+        # We need at least one element. If we get an empty list, make the one element an empty string
+        self._current_repeated_capability_list = current_repeated_capability_list if len(current_repeated_capability_list) > 0 else ['']
+        # Now we know there is at lease one entry, so we look if it is an empty string or not
+        self._separator = '/' if len(self._current_repeated_capability_list[0]) > 0 else ''
 
     def __getitem__(self, repeated_capability):
         '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
         rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
+        complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
-        return _SessionBase(vi=self._session._vi, repeated_capability_list=rep_caps_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+        return _SessionBase(vi=self._session._vi, repeated_capability_list=complete_rep_cap_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
 
 
 # This is a very simple context manager we can use when we need to set/get attributes
@@ -520,6 +525,14 @@ class _SessionBase(object):
         param_list.append("library=" + pp.pformat(library))
         param_list.append("encoding=" + pp.pformat(encoding))
         self._param_list = ', '.join(param_list)
+
+        # Instantiate any repeated capability objects
+        self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.pins = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.instruments = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent', repeated_capability_list)
+        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger', repeated_capability_list)
+        self.sites = _RepeatedCapabilities(self, 'site', repeated_capability_list)
 
         self._is_frozen = freeze_it
 
@@ -2451,14 +2464,6 @@ class Session(_SessionBase):
         # Call specified init function
         self._vi = 0  # This must be set before calling _init_with_options().
         self._vi = self._init_with_options(resource_name, id_query, reset_device, options)
-
-        # Instantiate any repeated capability objects
-        self.channels = _RepeatedCapabilities(self, '')
-        self.pins = _RepeatedCapabilities(self, '')
-        self.instruments = _RepeatedCapabilities(self, '')
-        self.pattern_opcode_events = _RepeatedCapabilities(self, 'patternOpcodeEvent')
-        self.conditional_jump_triggers = _RepeatedCapabilities(self, 'conditionalJumpTrigger')
-        self.sites = _RepeatedCapabilities(self, 'site')
 
         self.tclk = nitclk.SessionReference(self._vi)
 
