@@ -2378,8 +2378,9 @@ functions = {
             {
                 'documentation': {
                     'description': """Trigger Identifier specifies the instance of the trigger you want to override.
-For NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. For NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER,
-allowed values are conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+If trigger is specified as NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. If trigger is
+specified as NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER, allowed values are conditionalJumpTrigger0,
+conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
 """
                 },
                 'direction': 'in',

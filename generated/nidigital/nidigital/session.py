@@ -3141,11 +3141,8 @@ class Session(_SessionBase):
     def send_software_edge_trigger(self, trigger, trigger_identifier):
         r'''send_software_edge_trigger
 
-        Forces a NIDIGITAL_VAL_START_TRIGGER particular edge-based trigger to occur regardless of how the
+        Forces a particular edge-based trigger to occur regardless of how the
         specified trigger is configured. You can use this method as a software override.
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Args:
             trigger (enums.SoftwareTrigger): Trigger specifies the trigger you want to override.
@@ -3162,8 +3159,9 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             trigger_identifier (str): Trigger Identifier specifies the instance of the trigger you want to override.
-                For NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. For NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER,
-                allowed values are conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+                If trigger is specified as NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. If trigger is
+                specified as NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER, allowed values are conditionalJumpTrigger0,
+                conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
