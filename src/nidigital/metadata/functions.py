@@ -2342,21 +2342,46 @@ functions = {
     },
     'SendSoftwareEdgeTrigger': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Forces a particular edge-based trigger to occur regardless of how the\nspecified trigger is configured. You can use this method as a software override.'
         },
         'parameters': [
             {
+                'documentation': {
+                    'description': '\nSpecifies the instrument session that niDigital_InitWithOptions returns.\n'
+                },
                 'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Trigger specifies the trigger you want to override.',
+                    'table_body': [
+                        [
+                            'NIDIGITAL_VAL_START_TRIGGER',
+                            'Overrides the Start trigger. You must specify an empty string in the trigger_identifier parameter.'
+                        ],
+                        [
+                            'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
+                            'Specifies to route a conditional jump trigger. You must specify a conditional jump trigger in the trigger_identifier parameter.'
+                        ],
+                    ],
+                    'table_header': [
+                        'Defined Values',
+                    ],
+                },
                 'enum': 'SoftwareTrigger',
                 'name': 'trigger',
                 'type': 'ViInt32'
             },
             {
+                'documentation': {
+                    'description': """Trigger Identifier specifies the instance of the trigger you want to override.
+For NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. For NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER,
+allowed values are conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+"""
+                },
                 'direction': 'in',
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString'
