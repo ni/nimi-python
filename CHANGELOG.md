@@ -48,6 +48,7 @@ All notable changes to this project will be documented in this file.
             * Update the names of many enum types. See [#1330](https://github.com/ni/nimi-python/issues/1330) for the full list.
             * Added `WriteStaticPinState` enum type and changed the parameter type of `write_static` method to the newly added enum.
             * Added `SoftwareTrigger` enum type and changed the parameter type of `send_software_edge_trigger` method to the newly added enum.
+        * Update `fetch_history_ram_cycle_information`, `get_history_ram_sample_count`, and `is_site_enabled` to use `sites` repeated capability - [#1337](https://github.com/ni/nimi-python/issues/1337)
     * #### Removed
         * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
         * `get_site_results_site_numbers` method and `SiteResultType` enum - [#1298](https://github.com/ni/nimi-python/issues/1298) 

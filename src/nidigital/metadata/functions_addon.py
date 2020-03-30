@@ -283,9 +283,16 @@ If the pattern is using the edge multiplier feature, cycle numbers represent tes
 consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
 NIDIGITAL_VAL_PIN_STATE_NOT_ACQUIRED for DUT cycles where those pins do not have edges defined.
 
+Site number on which to retrieve pattern information must be specified via sites repeated capability.
+The method returns an error if more than one site is specified.
+
+Pins for which to retrieve pattern information must be specified via pins repeated capability.
 If pins are not specified, pin list from the pattern containing the start label is used. Call
-niDigital_GetPatternPinList with the start label to retrieve the pins
-associated with the pattern burst.
+niDigital_GetPatternPinList with the start label to retrieve the pins associated with the pattern burst:
+
+.. code:: python
+
+ session.sites[0].pins['PinA', 'PinB'].fetch_history_ram_cycle_information(0, -1)
 """
         },
         'parameters': [
@@ -297,20 +304,20 @@ associated with the pattern burst.
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,\nwhere N is the site number. The VI returns an error if more than one site is specified.'
+                    'description': 'Site on which to retrieve History RAM data. The method returns an error if more than one site is specified.'
                 },
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
-                'python_api_converter_name': 'convert_site_to_string',  # This won't actually change any code generation but is here for completeness
-                'type_in_documentation': 'str or int',
                 'type': 'ViConstString'
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'documentation': {
                     'description': 'Pins for which to retrieve History RAM data. If empty, the pin list from the pattern\ncontaining the start label is used. Call niDigital_GetPatternPinList with the start\nlabel to retrieve the pins associated with the pattern burst.'
                 },
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },

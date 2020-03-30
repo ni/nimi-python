@@ -283,14 +283,18 @@ def test_history_ram_cycle_information_representation():
     assert str(recreated_cycle_info) == str(cycle_info)
 
 
+def test_fetch_history_ram_cycle_information_without_site(multi_instrument_session):
+    configure_for_history_ram_test(multi_instrument_session)
+
+    with pytest.raises(ValueError, match='Site number on which to retrieve pattern information must be specified via sites repeated capability.'):
+        multi_instrument_session.fetch_history_ram_cycle_information(position=-1, samples_to_read=-1)
+
+
 def test_fetch_history_ram_cycle_information_position_negative(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
     with pytest.raises(ValueError, match='position should be greater than or equal to 0.'):
-        multi_instrument_session.fetch_history_ram_cycle_information(
-            site='site1',
-            position=-1,
-            samples_to_read=-1)
+        multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=-1, samples_to_read=-1)
 
 
 def configure_for_history_ram_test(session):
@@ -312,18 +316,14 @@ def test_fetch_history_ram_cycle_information_position_out_of_bound(multi_instrum
     configure_for_history_ram_test(multi_instrument_session)
 
     with pytest.raises(ValueError, match='position: Specified value = 8, Maximum value = 6.'):
-        multi_instrument_session.fetch_history_ram_cycle_information(
-            site='site1',
-            position=8,
-            samples_to_read=-1)
+        multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=8, samples_to_read=-1)
 
 
 @pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_position_last(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
-    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
-        site='site1',
+    history_ram_cycle_info = multi_instrument_session.sites[1].fetch_history_ram_cycle_information(
         position=6,
         samples_to_read=-1)
 
@@ -341,49 +341,35 @@ def test_fetch_history_ram_cycle_information_is_finite_invalid(multi_instrument_
         'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument '
         'is configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
     with pytest.raises(RuntimeError, match=expected_error_description):
-        multi_instrument_session.fetch_history_ram_cycle_information(
-            site='site1',
-            position=0,
-            samples_to_read=-1)
+        multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=0, samples_to_read=-1)
 
 
 @pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_samples_to_read_too_much(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
-    site = 'site1'
-    assert multi_instrument_session.get_history_ram_sample_count(site) == 7
+    assert multi_instrument_session.sites[1].get_history_ram_sample_count() == 7
 
-    multi_instrument_session.fetch_history_ram_cycle_information(
-        site=site,
-        position=0,
-        samples_to_read=3)
+    multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=0, samples_to_read=3)
 
     expected_error_description = (
         'position: Specified value = 3, samples_to_read: Specified value = 5; Samples available = 4.')
     with pytest.raises(ValueError, match=expected_error_description):
-        multi_instrument_session.fetch_history_ram_cycle_information(
-            site=site,
-            position=3,
-            samples_to_read=5)
+        multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=3, samples_to_read=5)
 
 
 def test_fetch_history_ram_cycle_information_samples_to_read_negative(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
     with pytest.raises(ValueError, match='samples_to_read should be greater than or equal to -1.'):
-        multi_instrument_session.fetch_history_ram_cycle_information(
-            site='site1',
-            position=0,
-            samples_to_read=-2)
+        multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=0, samples_to_read=-2)
 
 
 @pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_samples_to_read_zero(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
-    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
-        site='site1',
+    history_ram_cycle_info = multi_instrument_session.sites[1].fetch_history_ram_cycle_information(
         position=0,
         samples_to_read=0)
 
@@ -394,8 +380,7 @@ def test_fetch_history_ram_cycle_information_samples_to_read_zero(multi_instrume
 def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
-    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(
-        site='site1',
+    history_ram_cycle_info = multi_instrument_session.sites[1].fetch_history_ram_cycle_information(
         position=0,
         samples_to_read=-1)
 
@@ -466,10 +451,14 @@ def test_fetch_history_ram_cycle_information_no_failures(multi_instrument_sessio
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
     multi_instrument_session.burst_pattern(start_label='new_pattern')
 
-    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(site='site0', position=0, samples_to_read=-1)
+    history_ram_cycle_info = multi_instrument_session.sites[0].fetch_history_ram_cycle_information(
+        position=0,
+        samples_to_read=-1)
     assert len(history_ram_cycle_info) == 0
 
-    history_ram_cycle_info = multi_instrument_session.fetch_history_ram_cycle_information(site='site0', position=0, samples_to_read=0)
+    history_ram_cycle_info = multi_instrument_session.sites[0].fetch_history_ram_cycle_information(
+        position=0,
+        samples_to_read=0)
     assert len(history_ram_cycle_info) == 0
 
 
@@ -482,42 +471,6 @@ def test_get_pattern_pin_names(multi_instrument_session):
     pattern_pin_names = multi_instrument_session.get_pattern_pin_names(start_label='new_pattern')
 
     assert pattern_pin_names == ['LO' + str(i) for i in range(4)] + ['HI' + str(i) for i in range(4)]
-
-
-# nidigital specific converter tests
-# We are specifically using a "private" module to get to the converters so we can test the
-# nidigital specific one
-def test_convert_site_string():
-    test_result = nidigital._converters.convert_site_to_string('1')
-    assert test_result == 'site1'
-    test_result = nidigital._converters.convert_site_to_string(1)
-    assert test_result == 'site1'
-    test_result = nidigital._converters.convert_site_to_string('site1')
-    assert test_result == 'site1'
-    test_result = nidigital._converters.convert_site_to_string('42')
-    assert test_result == 'site42'
-    test_result = nidigital._converters.convert_site_to_string(42)
-    assert test_result == 'site42'
-    test_result = nidigital._converters.convert_site_to_string('site42')
-    assert test_result == 'site42'
-
-
-def test_convert_site_string_errors():
-    try:
-        nidigital._converters.convert_site_to_string(1.0)
-        assert False
-    except TypeError:
-        pass
-    try:
-        nidigital._converters.convert_site_to_string(['1'])
-        assert False
-    except TypeError:
-        pass
-    try:
-        nidigital._converters.convert_site_to_string(False)
-        assert False
-    except TypeError:
-        pass
 
 
 def test_get_site_pass_fail(multi_instrument_session):

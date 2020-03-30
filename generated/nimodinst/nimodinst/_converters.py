@@ -4,6 +4,7 @@ import nimodinst._visatype as _visatype
 import nimodinst.errors as errors
 
 import array
+import collections
 import datetime
 import numbers
 
@@ -112,7 +113,7 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
         prefix (str) - common prefix for all strings
 
     Returns:
-        rep_cal_list (list of str) - list of each repeated capability item with ranges expanded and prefix added
+        rep_cap_list (list of str) - list of each repeated capability item with ranges expanded and prefix added
     '''
     # We need to explicitly handle None here. Everything else we can pass on to the singledispatch functions
     if repeated_capability is None:
@@ -130,7 +131,7 @@ def convert_repeated_capabilities_from_init(repeated_capability):
         repeated_capability (str, list, tuple, slice, None) -
 
     Returns:
-        rep_cal (str) - comma delimited string of each repeated capability item with ranges expanded
+        rep_cap (str) - comma delimited string of each repeated capability item with ranges expanded
     '''
     return ','.join(convert_repeated_capabilities(repeated_capability, ''))
 
@@ -216,10 +217,6 @@ def _convert_to_bytes(value):  # noqa: F811
     pass
 
 
-def convert_comma_separated_string_to_list(comma_separated_string):
-    return [x.strip() for x in comma_separated_string.split(',')]
-
-
 @_convert_to_bytes.register(list)  # noqa: F811
 @_convert_to_bytes.register(bytes)  # noqa: F811
 @_convert_to_bytes.register(bytearray)  # noqa: F811
@@ -235,6 +232,31 @@ def _(value):
 
 def convert_to_bytes(value):  # noqa: F811
     return bytes(_convert_to_bytes(value))
+
+
+def convert_comma_separated_string_to_list(comma_separated_string):
+    return [x.strip() for x in comma_separated_string.split(',')]
+
+
+def convert_chained_repeated_capability_to_parts(chained_repeated_capability):
+    '''Convert a chained repeated capabilities string to a list of comma-delimited repeated capabilities string.
+
+    Converter assumes that the input contains the full cartesian product of its parts.
+    e.g. If chained_repeated_capability is 'site0/PinA,site0/PinB,site1/PinA,site1/PinB',
+    ['site0,site1', 'PinA,PinB'] is returned.
+
+    Args:
+        chained_repeated_capability (str) - comma-delimited repeated capabilities string where each
+        item is a chain of slash-delimited repeated capabilities
+
+    Returns:
+        rep_cap_list (list of str) - list of comma-delimited repeated capabilities string
+    '''
+    chained_repeated_capability_items = convert_comma_separated_string_to_list(chained_repeated_capability)
+    repeated_capability_lists = [[] for _ in range(chained_repeated_capability_items[0].count('/') + 1)]
+    for item in chained_repeated_capability_items:
+        repeated_capability_lists = [x + [y] for x, y in zip(repeated_capability_lists, item.split('/'))]
+    return [','.join(collections.OrderedDict.fromkeys(x)) for x in repeated_capability_lists]
 
 
 # Let's run some tests
@@ -326,4 +348,3 @@ def test_string_to_list_prefix():
 def test_convert_comma_separated_string_to_list():
     out_list = convert_comma_separated_string_to_list(' PinA ,  PinB , PinC  ')
     assert out_list == ['PinA', 'PinB', 'PinC']
-
