@@ -332,6 +332,7 @@ def test_fetch_history_ram_cycle_information_position_last(multi_instrument_sess
     assert history_ram_cycle_info[0].cycle_number == 11
 
 
+@pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_is_finite_invalid(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
     multi_instrument_session.history_ram_number_of_samples_is_finite = False
@@ -364,6 +365,7 @@ def test_fetch_history_ram_cycle_information_samples_to_read_negative(multi_inst
         multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=0, samples_to_read=-2)
 
 
+@pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_samples_to_read_zero(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 
