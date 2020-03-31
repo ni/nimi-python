@@ -2097,7 +2097,8 @@ send_software_edge_trigger
 
     .. py:method:: send_software_edge_trigger(trigger, trigger_identifier)
 
-            TBD
+            Forces a particular edge-based trigger to occur regardless of how the
+            specified trigger is configured. You can use this method as a software override.
 
             
 
@@ -2106,14 +2107,31 @@ send_software_edge_trigger
             :param trigger:
 
 
-                
+                Trigger specifies the trigger you want to override.
+
+                +--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+                | Defined Values                                         |                                                                                                                                 |
+                +========================================================+=================================================================================================================================+
+                | :py:data:`~nidigital.SoftwareTrigger.START`            | Overrides the Start trigger. You must specify an empty string in the trigger_identifier parameter.                              |
+                +--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidigital.SoftwareTrigger.CONDITIONAL_JUMP` | Specifies to route a conditional jump trigger. You must specify a conditional jump trigger in the trigger_identifier parameter. |
+                +--------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type trigger: :py:data:`nidigital.SoftwareTrigger`
             :param trigger_identifier:
 
 
+                Trigger Identifier specifies the instance of the trigger you want to override.
+                If trigger is specified as :py:data:`~nidigital.NIDIGITAL_VAL_START_TRIGGER`, this parameter must be an empty string. If trigger is
+                specified as :py:data:`~nidigital.NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER`, allowed values are conditionalJumpTrigger0,
+                conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+
                 
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type trigger_identifier: str

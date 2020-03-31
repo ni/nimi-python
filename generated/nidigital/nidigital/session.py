@@ -3141,12 +3141,30 @@ class Session(_SessionBase):
     def send_software_edge_trigger(self, trigger, trigger_identifier):
         r'''send_software_edge_trigger
 
-        TBD
+        Forces a particular edge-based trigger to occur regardless of how the
+        specified trigger is configured. You can use this method as a software override.
 
         Args:
-            trigger (enums.SoftwareTrigger):
+            trigger (enums.SoftwareTrigger): Trigger specifies the trigger you want to override.
 
-            trigger_identifier (str):
+                +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+                | Defined Values                   |                                                                                                                                 |
+                +==================================+=================================================================================================================================+
+                | SoftwareTrigger.START            | Overrides the Start trigger. You must specify an empty string in the trigger_identifier parameter.                              |
+                +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+                | SoftwareTrigger.CONDITIONAL_JUMP | Specifies to route a conditional jump trigger. You must specify a conditional jump trigger in the trigger_identifier parameter. |
+                +----------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            trigger_identifier (str): Trigger Identifier specifies the instance of the trigger you want to override.
+                If trigger is specified as NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. If trigger is
+                specified as NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER, allowed values are conditionalJumpTrigger0,
+                conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
         if type(trigger) is not enums.SoftwareTrigger:
