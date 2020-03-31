@@ -1025,6 +1025,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1074,13 +1076,13 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
             {
                 'direction': 'in',
-                'is_repeated_capability': True,
-                'repeated_capability_type': 'pins',
                 'name': 'pinList',
                 'type': 'ViConstString'
             },
@@ -1152,6 +1154,8 @@ functions = {
             },
             {
                 'direction': 'in',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1511,8 +1515,8 @@ functions = {
             },
             {
                 'direction': 'in',
-                'python_api_converter_name': 'convert_site_to_string',
-                'type_in_documentation': 'str or int',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -1554,6 +1558,7 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'render_in_session_base': True,  # Called from FancyFetchHistoryRAMCycleInformation() which uses rep cap
         'returns': 'ViStatus'
     },
     'GetPatternPinList': {
@@ -1898,6 +1903,7 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'render_in_session_base': True,  # Called from FancyFetchHistoryRAMCycleInformation() which uses rep cap
         'returns': 'ViStatus'
     },
     'GetTimeSetPeriod': {
@@ -2009,8 +2015,8 @@ functions = {
             },
             {
                 'direction': 'in',
-                'python_api_converter_name': 'convert_site_to_string',
-                'type_in_documentation': 'str or int',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'sites',
                 'name': 'site',
                 'type': 'ViConstString'
             },
@@ -2342,21 +2348,47 @@ functions = {
     },
     'SendSoftwareEdgeTrigger': {
         'documentation': {
-            'description': 'TBD'
+            'description': 'Forces a particular edge-based trigger to occur regardless of how the\nspecified trigger is configured. You can use this method as a software override.'
         },
         'parameters': [
             {
+                'documentation': {
+                    'description': '\nSpecifies the instrument session that niDigital_InitWithOptions returns.\n'
+                },
                 'direction': 'in',
                 'name': 'vi',
                 'type': 'ViSession'
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Trigger specifies the trigger you want to override.',
+                    'table_body': [
+                        [
+                            'NIDIGITAL_VAL_START_TRIGGER',
+                            'Overrides the Start trigger. You must specify an empty string in the trigger_identifier parameter.'
+                        ],
+                        [
+                            'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
+                            'Specifies to route a conditional jump trigger. You must specify a conditional jump trigger in the trigger_identifier parameter.'
+                        ],
+                    ],
+                    'table_header': [
+                        'Defined Values',
+                    ],
+                },
                 'enum': 'SoftwareTrigger',
                 'name': 'trigger',
                 'type': 'ViInt32'
             },
             {
+                'documentation': {
+                    'description': """Trigger Identifier specifies the instance of the trigger you want to override.
+If trigger is specified as NIDIGITAL_VAL_START_TRIGGER, this parameter must be an empty string. If trigger is
+specified as NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER, allowed values are conditionalJumpTrigger0,
+conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
+"""
+                },
                 'direction': 'in',
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString'
