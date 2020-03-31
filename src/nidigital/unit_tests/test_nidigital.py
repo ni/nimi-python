@@ -36,16 +36,6 @@ class TestSession(object):
     # API Tests
 
     # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
-    #  this test should be converted to a system test.
-    def test_fetch_history_ram_cycle_information_position_negative(self):
-
-        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
-        self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
-        with nidigital.Session('') as session:
-            with pytest.raises(ValueError, match='position should be greater than or equal to 0.'):
-                session.sites[1].fetch_history_ram_cycle_information(position=-1, samples_to_read=-1)
-
-    # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
     #  this test should be converted to a system test. (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_position_out_of_bound(self):
 
@@ -56,23 +46,7 @@ class TestSession(object):
                 session.sites[1].fetch_history_ram_cycle_information(position=8, samples_to_read=-1)
 
     # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
-    #  this test should be converted to a system test.  
-    def test_fetch_history_ram_cycle_information_is_finite_invalid(self):
-
-        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
-        self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
-        self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
-        self.side_effects_helper['GetAttributeViBoolean']['value'] = False # history_ram_number_of_samples_is_finite
-
-        expected_error_description = (
-            'Specifying -1 to fetch all History RAM samples is not supported when the digital pattern instrument '
-            'is configured for continuous History RAM acquisition. You must specify an exact number of samples to fetch.')
-        with nidigital.Session('') as session:
-            with pytest.raises(RuntimeError, match=expected_error_description):
-                session.sites[1].fetch_history_ram_cycle_information(position=0, samples_to_read=-1)
-
-    # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
-    #  this test should be converted to a system test.  
+    #  this test should be converted to a system test. (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_samples_to_read_too_much(self):
 
         self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
@@ -87,17 +61,3 @@ class TestSession(object):
                 'position: Specified value = 3, samples_to_read: Specified value = 5; Samples available = 4.')
             with pytest.raises(ValueError, match=expected_error_description):
                 session.sites[1].fetch_history_ram_cycle_information(position=3, samples_to_read=5)
-
-    # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
-    #  this test should be converted to a system test.  
-    def test_fetch_history_ram_cycle_information_samples_to_read_zero(self):
-
-        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
-        self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
-
-        with nidigital.Session('') as session:
-            history_ram_cycle_info = session.sites[1].fetch_history_ram_cycle_information(
-                position=0,
-                samples_to_read=0)
-
-        assert len(history_ram_cycle_info) == 0
