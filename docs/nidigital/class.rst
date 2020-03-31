@@ -1142,7 +1142,7 @@ fetch_history_ram_cycle_information
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_history_ram_cycle_information(site, position, samples_to_read)
+    .. py:method:: fetch_history_ram_cycle_information(position, samples_to_read)
 
             Returns the pattern information acquired for the specified cycles.
 
@@ -1150,9 +1150,16 @@ fetch_history_ram_cycle_information
             consist of multiple DUT cycles. When using pins with mixed edge multipliers, pins may return
             :py:data:`~nidigital.PinState.PIN_STATE_NOT_ACQUIRED` for DUT cycles where those pins do not have edges defined.
 
+            Site number on which to retrieve pattern information must be specified via sites repeated capability.
+            The method returns an error if more than one site is specified.
+
+            Pins for which to retrieve pattern information must be specified via pins repeated capability.
             If pins are not specified, pin list from the pattern containing the start label is used. Call
-            :py:meth:`nidigital.Session.get_pattern_pin_names` with the start label to retrieve the pins
-            associated with the pattern burst.
+            :py:meth:`nidigital.Session.get_pattern_pin_names` with the start label to retrieve the pins associated with the pattern burst:
+
+            .. code:: python
+
+             session.sites[0].pins['PinA', 'PinB'].fetch_history_ram_cycle_information(0, -1)
 
             
 
@@ -1163,16 +1170,6 @@ fetch_history_ram_cycle_information
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param site:
-
-
-                Site on which to retrieve History RAM data. Specify site as a string in the form of siteN,
-                where N is the site number. The VI returns an error if more than one site is specified.
-
-                
-
-
-            :type site: str or int
             :param position:
 
 
@@ -1342,21 +1339,18 @@ get_history_ram_sample_count
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_history_ram_sample_count(site)
+    .. py:method:: get_history_ram_sample_count()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
-            :param site:
-
-
-                
-
-
-            :type site: str or int
 
             :rtype: int
             :return:
@@ -1698,21 +1692,18 @@ is_site_enabled
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: is_site_enabled(site)
+    .. py:method:: is_site_enabled()
 
             TBD
 
             
 
 
+            .. tip:: This method requires repeated capabilities. If called directly on the
+                nidigital.Session object, then the method will use all repeated capabilities in the session.
+                You can specify a subset of repeated capabilities using the Python index notation on an
+                nidigital.Session repeated capabilities container, and calling this method on the result.
 
-            :param site:
-
-
-                
-
-
-            :type site: str or int
 
             :rtype: bool
             :return:

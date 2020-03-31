@@ -43,7 +43,4 @@ class TestSession(object):
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
         with nidigital.Session('') as session:
             with pytest.raises(ValueError, match='position: Specified value = 8, Maximum value = 6.'):
-                session.fetch_history_ram_cycle_information(
-                    site='site1',
-                    position=8,
-                    samples_to_read=-1)
+                session.sites[1].fetch_history_ram_cycle_information(position=8, samples_to_read=-1)
