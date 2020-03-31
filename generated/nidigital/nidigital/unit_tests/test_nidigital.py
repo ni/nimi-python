@@ -52,7 +52,7 @@ class TestSession(object):
         self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
         self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
-        self.side_effects_helper['GetAttributeViBoolean']['value'] = True # history_ram_number_of_samples_is_finite
+        self.side_effects_helper['GetAttributeViBoolean']['value'] = True  # history_ram_number_of_samples_is_finite
 
         with nidigital.Session('') as session:
             assert session.sites[1].get_history_ram_sample_count() == 7
