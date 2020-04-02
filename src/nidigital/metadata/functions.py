@@ -2298,6 +2298,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ResetAttribute': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
