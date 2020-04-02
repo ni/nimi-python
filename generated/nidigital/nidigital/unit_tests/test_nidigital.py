@@ -1,7 +1,6 @@
 import _mock_helper
 
 import nidigital
-from nidigital.enums import PinState
 
 from mock import patch
 import pytest
@@ -68,8 +67,8 @@ class TestSession(object):
         self.side_effects_helper['FetchHistoryRAMScanCycleNumber']['scanCycleNumber'] = -1
         self.patched_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCyclePinData
         self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualNumPinData'] = 8
-        self.side_effects_helper['FetchHistoryRAMCyclePinData']['expectedPinStates'] = [PinState.X.value] * 8
-        self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualPinStates'] = [PinState.NOT_A_PIN_STATE.value] * 8
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['expectedPinStates'] = [nidigital.enums.PinState.X.value] * 8
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualPinStates'] = [nidigital.enums.PinState.NOT_A_PIN_STATE.value] * 8
         self.side_effects_helper['FetchHistoryRAMCyclePinData']['perPinPassFail'] = [True] * 8
         with nidigital.Session('') as session:
             history_ram_cycle_info = session.sites[1].fetch_history_ram_cycle_information(
