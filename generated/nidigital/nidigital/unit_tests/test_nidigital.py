@@ -76,10 +76,10 @@ class TestSession(object):
                 position=6,
                 samples_to_read=-1)
             self.patched_library.niDigital_FetchHistoryRAMCycleInformation.assert_called_once()
-            self.patched_library.niDigital_GetPatternName.assert_called()
-            self.patched_library.niDigital_GetTimeSetName.assert_called()
+            assert self.patched_library.niDigital_GetPatternName.call_count == 2
+            assert self.patched_library.niDigital_GetTimeSetName.call_count == 2
             self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.assert_called_once()
-            self.patched_library.niDigital_FetchHistoryRAMCyclePinData.assert_called()
+            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 2
 
         assert len(history_ram_cycle_info) == 1
         assert history_ram_cycle_info[0].vector_number == 9
