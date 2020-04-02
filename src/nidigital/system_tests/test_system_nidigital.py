@@ -47,13 +47,6 @@ def test_get_error(multi_instrument_session):
         assert e.description.find('Attribute is read-only.') != -1
 
 
-def test_clear_error(multi_instrument_session):
-    # Session gets and clears the error after calling into the driver runtime. So we can't really
-    # verify errors getting cleared. Just call clear_error() and ensure session is still in a good state.
-    multi_instrument_session.clear_error()
-    multi_instrument_session.self_test()
-
-
 def test_self_calibrate(multi_instrument_session):
     multi_instrument_session.self_calibrate()
 
