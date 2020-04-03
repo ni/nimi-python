@@ -20,6 +20,37 @@ def multi_instrument_session():
         yield simulated_session
 
 
+def test_reset(multi_instrument_session):
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.PPMU
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
+    multi_instrument_session.reset()
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.DISCONNECT
+
+
+def test_reset_device(multi_instrument_session):
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.PPMU
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
+    multi_instrument_session.reset_device()
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.DISCONNECT
+
+
+def test_self_test(multi_instrument_session):
+    multi_instrument_session.self_test()
+
+
+def test_get_error(multi_instrument_session):
+    try:
+        multi_instrument_session.supported_instrument_models = ''
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074135027
+        assert e.description.find('Attribute is read-only.') != -1
+
+
+def test_self_calibrate(multi_instrument_session):
+    multi_instrument_session.self_calibrate()
+
+
 def test_pins_rep_cap(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
