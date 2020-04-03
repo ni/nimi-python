@@ -47,6 +47,45 @@ class TestSession(object):
 
     # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
     #  this test should be converted to a system test. (GitHub issue# 1353).
+    def test_fetch_history_ram_cycle_information_position_last(self):
+
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
+        self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 7
+        self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
+        self.side_effects_helper['GetAttributeViBoolean']['value'] = True  # history_ram_number_of_samples_is_finite
+        self.patched_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCycleInformation
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['patternIndex'] = 0
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['timeSetIndex'] = 0
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['vectorNumber'] = 9
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['cycleNumber'] = 11
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['numDutCycles'] = 1
+        self.patched_library.niDigital_GetPatternName.side_effect = self.side_effects_helper.niDigital_GetPatternName
+        self.side_effects_helper['GetPatternName']['name'] = 'new_pattern'
+        self.patched_library.niDigital_GetTimeSetName.side_effect = self.side_effects_helper.niDigital_GetTimeSetName
+        self.side_effects_helper['GetTimeSetName']['name'] = 't0'
+        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMScanCycleNumber
+        self.side_effects_helper['FetchHistoryRAMScanCycleNumber']['scanCycleNumber'] = -1
+        self.patched_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCyclePinData
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualNumPinData'] = 8
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['expectedPinStates'] = [nidigital.enums.PinState.X.value] * 8
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualPinStates'] = [nidigital.enums.PinState.NOT_A_PIN_STATE.value] * 8
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['perPinPassFail'] = [True] * 8
+        with nidigital.Session('') as session:
+            history_ram_cycle_info = session.sites[1].fetch_history_ram_cycle_information(
+                position=6,
+                samples_to_read=-1)
+            self.patched_library.niDigital_FetchHistoryRAMCycleInformation.assert_called_once()
+            assert self.patched_library.niDigital_GetPatternName.call_count == 2
+            assert self.patched_library.niDigital_GetTimeSetName.call_count == 2
+            self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.assert_called_once()
+            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 2
+
+        assert len(history_ram_cycle_info) == 1
+        assert history_ram_cycle_info[0].vector_number == 9
+        assert history_ram_cycle_info[0].cycle_number == 11
+
+    # TODO(sbethur): When nidigital driver provides better simulation support (internal bug# 992370),
+    #  this test should be converted to a system test. (GitHub issue# 1353).
     def test_fetch_history_ram_cycle_information_samples_to_read_too_much(self):
 
         self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
