@@ -184,7 +184,7 @@ def test_get_ext_cal_recommended_interval(session):
     assert interval.days == 730  # recommended external cal interval is 24 months
 
 
-def test_get_hardware_state(session_5421):
+def test_get_hardware_state(session):
     assert session_5421.get_hardware_state() == nifgen.HardwareState.IDLE
 
 
