@@ -92,7 +92,6 @@ class Library(object):
         self.niDigital_ReadSequencerFlag_cfunc = None
         self.niDigital_ReadSequencerRegister_cfunc = None
         self.niDigital_ReadStatic_cfunc = None
-        self.niDigital_ResetAttribute_cfunc = None
         self.niDigital_ResetDevice_cfunc = None
         self.niDigital_SelfCalibrate_cfunc = None
         self.niDigital_SendSoftwareEdgeTrigger_cfunc = None
@@ -692,14 +691,6 @@ class Library(object):
                 self.niDigital_ReadStatic_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViUInt8), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDigital_ReadStatic_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ReadStatic_cfunc(vi, channel_list, buffer_size, data, actual_num_read)
-
-    def niDigital_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ResetAttribute_cfunc is None:
-                self.niDigital_ResetAttribute_cfunc = self._library.niDigital_ResetAttribute
-                self.niDigital_ResetAttribute_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr]  # noqa: F405
-                self.niDigital_ResetAttribute_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ResetAttribute_cfunc(vi, channel_name, attribute_id)
 
     def niDigital_ResetDevice(self, vi):  # noqa: N802
         with self._func_lock:
