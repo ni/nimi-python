@@ -2695,17 +2695,6 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def clear_error(self):
-        r'''clear_error
-
-        TBD
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niDigital_ClearError(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def commit(self):
         r'''commit
 
