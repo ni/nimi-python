@@ -704,24 +704,6 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def clock_generator_initiate(self):
-        r'''clock_generator_initiate
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        error_code = self._library.niDigital_ClockGenerator_Initiate(vi_ctype, channel_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def configure_active_load_levels(self, iol, ioh, vcom):
         r'''configure_active_load_levels
 

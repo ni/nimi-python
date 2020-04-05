@@ -32,8 +32,6 @@ class SideEffectsHelper(object):
         self._defaults['ClockGenerator_Abort']['return'] = 0
         self._defaults['ClockGenerator_GenerateClock'] = {}
         self._defaults['ClockGenerator_GenerateClock']['return'] = 0
-        self._defaults['ClockGenerator_Initiate'] = {}
-        self._defaults['ClockGenerator_Initiate']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureActiveLoadLevels'] = {}
@@ -306,11 +304,6 @@ class SideEffectsHelper(object):
         if self._defaults['ClockGenerator_GenerateClock']['return'] != 0:
             return self._defaults['ClockGenerator_GenerateClock']['return']
         return self._defaults['ClockGenerator_GenerateClock']['return']
-
-    def niDigital_ClockGenerator_Initiate(self, vi, channel_list):  # noqa: N802
-        if self._defaults['ClockGenerator_Initiate']['return'] != 0:
-            return self._defaults['ClockGenerator_Initiate']['return']
-        return self._defaults['ClockGenerator_Initiate']['return']
 
     def niDigital_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -1108,8 +1101,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_ClockGenerator_Abort.return_value = 0
         mock_library.niDigital_ClockGenerator_GenerateClock.side_effect = MockFunctionCallError("niDigital_ClockGenerator_GenerateClock")
         mock_library.niDigital_ClockGenerator_GenerateClock.return_value = 0
-        mock_library.niDigital_ClockGenerator_Initiate.side_effect = MockFunctionCallError("niDigital_ClockGenerator_Initiate")
-        mock_library.niDigital_ClockGenerator_Initiate.return_value = 0
         mock_library.niDigital_Commit.side_effect = MockFunctionCallError("niDigital_Commit")
         mock_library.niDigital_Commit.return_value = 0
         mock_library.niDigital_ConfigureActiveLoadLevels.side_effect = MockFunctionCallError("niDigital_ConfigureActiveLoadLevels")
