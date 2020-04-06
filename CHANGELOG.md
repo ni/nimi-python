@@ -54,6 +54,7 @@ All notable changes to this project will be documented in this file.
         * `get_site_results_site_numbers` method and `SiteResultType` enum - [#1298](https://github.com/ni/nimi-python/issues/1298) 
         * `reset_attribute` - [#1364](https://github.com/ni/nimi-python/issues/1364) 
         * `clear_error` - [#1366](https://github.com/ni/nimi-python/issues/1366) 
+        * `clock_generator_initiate` - [#1370](https://github.com/ni/nimi-python/issues/1370) 
 * ### NI-DMM
     * #### Added
     * #### Changed

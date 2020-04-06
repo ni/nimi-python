@@ -219,6 +219,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClockGenerator_Initiate': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },

@@ -294,24 +294,6 @@ clock_generator_generate_clock
 
             :type select_digital_function: bool
 
-clock_generator_initiate
-------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: clock_generator_initiate()
-
-            TBD
-
-            
-
-
-            .. tip:: This method requires repeated capabilities. If called directly on the
-                nidigital.Session object, then the method will use all repeated capabilities in the session.
-                You can specify a subset of repeated capabilities using the Python index notation on an
-                nidigital.Session repeated capabilities container, and calling this method on the result.
-
-
 close
 -----
 
