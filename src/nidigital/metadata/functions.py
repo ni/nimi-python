@@ -156,6 +156,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearError': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },

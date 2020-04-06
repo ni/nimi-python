@@ -243,19 +243,6 @@ burst_pattern
 
 
 
-clear_error
------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: clear_error()
-
-            TBD
-
-            
-
-
-
 clock_generator_abort
 ---------------------
 
