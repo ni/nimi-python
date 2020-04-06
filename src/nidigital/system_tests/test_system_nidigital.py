@@ -20,6 +20,37 @@ def multi_instrument_session():
         yield simulated_session
 
 
+def test_reset(multi_instrument_session):
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.PPMU
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
+    multi_instrument_session.reset()
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.DISCONNECT
+
+
+def test_reset_device(multi_instrument_session):
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.PPMU
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
+    multi_instrument_session.reset_device()
+    assert multi_instrument_session.selected_function == nidigital.SelectedFunction.DISCONNECT
+
+
+def test_self_test(multi_instrument_session):
+    multi_instrument_session.self_test()
+
+
+def test_get_error(multi_instrument_session):
+    try:
+        multi_instrument_session.supported_instrument_models = ''
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074135027
+        assert e.description.find('Attribute is read-only.') != -1
+
+
+def test_self_calibrate(multi_instrument_session):
+    multi_instrument_session.self_calibrate()
+
+
 def test_pins_rep_cap(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
@@ -332,7 +363,6 @@ def test_fetch_history_ram_cycle_information_position_last(multi_instrument_sess
     assert history_ram_cycle_info[0].cycle_number == 11
 
 
-@pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_is_finite_invalid(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
     multi_instrument_session.history_ram_number_of_samples_is_finite = False
@@ -365,7 +395,6 @@ def test_fetch_history_ram_cycle_information_samples_to_read_negative(multi_inst
         multi_instrument_session.sites[1].fetch_history_ram_cycle_information(position=0, samples_to_read=-2)
 
 
-@pytest.mark.skip(reason="TODO(sbethur): Enable running on simulated session. GitHub issue #1273")
 def test_fetch_history_ram_cycle_information_samples_to_read_zero(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 

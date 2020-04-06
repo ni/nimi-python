@@ -208,8 +208,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadStatic']['return'] = 0
         self._defaults['ReadStatic']['actualNumRead'] = None
         self._defaults['ReadStatic']['data'] = None
-        self._defaults['ResetAttribute'] = {}
-        self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['SelfCalibrate'] = {}
@@ -934,11 +932,6 @@ class SideEffectsHelper(object):
             data_ref[i] = self._defaults['ReadStatic']['data'][i]
         return self._defaults['ReadStatic']['return']
 
-    def niDigital_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
-        if self._defaults['ResetAttribute']['return'] != 0:
-            return self._defaults['ResetAttribute']['return']
-        return self._defaults['ResetAttribute']['return']
-
     def niDigital_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
             return self._defaults['ResetDevice']['return']
@@ -1241,8 +1234,6 @@ class SideEffectsHelper(object):
         mock_library.niDigital_ReadSequencerRegister.return_value = 0
         mock_library.niDigital_ReadStatic.side_effect = MockFunctionCallError("niDigital_ReadStatic")
         mock_library.niDigital_ReadStatic.return_value = 0
-        mock_library.niDigital_ResetAttribute.side_effect = MockFunctionCallError("niDigital_ResetAttribute")
-        mock_library.niDigital_ResetAttribute.return_value = 0
         mock_library.niDigital_ResetDevice.side_effect = MockFunctionCallError("niDigital_ResetDevice")
         mock_library.niDigital_ResetDevice.return_value = 0
         mock_library.niDigital_SelfCalibrate.side_effect = MockFunctionCallError("niDigital_SelfCalibrate")

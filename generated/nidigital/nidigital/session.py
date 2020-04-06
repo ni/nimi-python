@@ -2316,29 +2316,6 @@ class _SessionBase(object):
         return [enums.PinState(data_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def reset_attribute(self, attribute_id):
-        r'''reset_attribute
-
-        TBD
-
-        Tip:
-        This method requires repeated capabilities. If called directly on the
-        nidigital.Session object, then the method will use all repeated capabilities in the session.
-        You can specify a subset of repeated capabilities using the Python index notation on an
-        nidigital.Session repeated capabilities container, and calling this method on the result.
-
-        Args:
-            attribute_id (int):
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        error_code = self._library.niDigital_ResetAttribute(vi_ctype, channel_name_ctype, attribute_id_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute, value):
         r'''_set_attribute_vi_boolean
 
