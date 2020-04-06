@@ -34,8 +34,8 @@ class HistoryRAMCycleInformation(object):
         string_representation += row_format_d.format('Vector Number', self.vector_number)
         string_representation += row_format_d.format('Cycle Number', self.cycle_number)
         string_representation += row_format_d.format('Scan Cycle Number', self.scan_cycle_number)
-        string_representation += row_format_s.format('Expected Pin States', self._digital_states_representation(self.expected_pin_states))
-        string_representation += row_format_s.format('Actual Pin States', self._digital_states_representation(self.actual_pin_states))
+        string_representation += row_format_s.format('Expected Pin States', self._digital_states_string(self.expected_pin_states))
+        string_representation += row_format_s.format('Actual Pin States', self._digital_states_string(self.actual_pin_states))
         string_representation += row_format_s.format('Per Pin Pass Fail', self.per_pin_pass_fail)
 
         return string_representation
@@ -44,4 +44,9 @@ class HistoryRAMCycleInformation(object):
     def _digital_states_representation(states):
         states_representation = [['{0}.{1}'.format(i.__class__.__name__, i.name) for i in j] for j in states]
         return '[{}]'.format(', '.join(['[{}]'.format(', '.join(i)) for i in states_representation]))
+
+    @staticmethod
+    def _digital_states_string(states):
+        states_string = [['{0}'.format(i.name) for i in j] for j in states]
+        return '[{}]'.format(', '.join(['[{}]'.format(', '.join(i)) for i in states_string]))
 
