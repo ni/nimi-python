@@ -75,6 +75,7 @@ def test_method_get_self_cal_supported(session):
     assert session.get_self_cal_supported() in [True, False]
 
 
+# TODO(sbethur): When internal bug# 999932 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1375)
 def test_get_self_cal_last_date_and_time(session_5421):
     try:
         session_5421.get_self_cal_last_date_and_time()
@@ -248,6 +249,7 @@ def test_create_arb_sequence(session):
     assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
 
+# TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
 def test_create_advanced_arb_sequence(session_5421):
     seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
@@ -263,6 +265,7 @@ def test_create_advanced_arb_sequence(session_5421):
     assert (marker_location_array, seq_handle_base + 3) == session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array)
 
 
+# TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
 def test_create_advanced_arb_sequence_wrong_size(session_5421):
     waveform_data = [x * (1.0 / 256.0) for x in range(256)]
     waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
