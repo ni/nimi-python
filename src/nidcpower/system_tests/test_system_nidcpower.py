@@ -92,7 +92,7 @@ def test_reset_device(session):
 def test_reset_with_default(session):
     channel = session.channels['0']
     assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
-    channel.aperture_time_units == nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES
+    channel.aperture_time_units = nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES
     session.reset_with_defaults()
     assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
 
