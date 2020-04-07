@@ -213,7 +213,7 @@ class TestSession(object):
             assert self.patched_library.niDigital_GetPatternName.call_count == 2  # there's only one pattern, so this is a 2
             assert self.patched_library.niDigital_GetTimeSetName.call_count == 6  # 3 time sets, so this is a 6
             assert self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.call_count == 7
-            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 20  # 10 lists of PinStates
+            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 20  # 10 DUT cycles
 
             assert len(history_ram_cycle_info) == 7
             assert all([i.pattern_name == 'new_pattern' for i in history_ram_cycle_info])
@@ -237,7 +237,7 @@ class TestSession(object):
         expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
         assert expected_pin_states == self.expected_pin_states_looping
 
-        # If test expects actual pin state to be 'X', then value returned by the returned can be anything.
+        # If test expects actual pin state to be 'X', then value returned by the API can be anything.
         # So, need to skip those pin states while comparing.
         actual_pin_states = [i.actual_pin_states for i in history_ram_cycle_info]
         assert len(actual_pin_states) == len(self.actual_pin_states_looping)
