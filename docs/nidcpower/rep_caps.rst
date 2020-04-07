@@ -1,4 +1,5 @@
 .. py:module:: nidcpower
+    :noindex:
 
 .. py:currentmodule:: nidcpower.Session
 

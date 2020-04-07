@@ -1,4 +1,5 @@
 .. py:module:: nidigital
+    :noindex:
 
 .. py:currentmodule:: nidigital.Session
 

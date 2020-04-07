@@ -1,4 +1,5 @@
 .. py:module:: niswitch
+    :noindex:
 
 .. py:currentmodule:: niswitch.Session
 

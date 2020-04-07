@@ -1,4 +1,5 @@
 .. py:module:: nifgen
+    :noindex:
 
 .. py:currentmodule:: nifgen.Session
 
