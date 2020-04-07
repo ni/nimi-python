@@ -152,11 +152,11 @@ class TestSession(object):
     # Helper function for mocking multiple calls
     def niDigital_FetchHistoryRAMCycleInformation_looping(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         sample_index_int = int(sample_index.value)
-        pattern_index[0] = self.pattern_indices_looping[sample_index_int]
-        time_set_index[0] = self.time_set_indices_looping[sample_index_int]
-        vector_number[0] = self.vector_numbers_looping[sample_index_int]
-        cycle_number[0] = self.cycle_numbers_looping[sample_index_int]
-        num_dut_cycles[0] = self.num_duty_cycles_looping[sample_index_int]
+        pattern_index.contents.value = self.pattern_indices_looping[sample_index_int]
+        time_set_index.contents.value = self.time_set_indices_looping[sample_index_int]
+        vector_number.contents.value = self.vector_numbers_looping[sample_index_int]
+        cycle_number.contents.value = self.cycle_numbers_looping[sample_index_int]
+        num_dut_cycles.contents.value = self.num_duty_cycles_looping[sample_index_int]
         return 0
 
     # Helper function for mocking multiple calls
@@ -172,7 +172,7 @@ class TestSession(object):
     # Helper function for mocking multiple calls
     def niDigital_FetchHistoryRAMScanCycleNumber_looping(self, vi, site, sample_index, scan_cycle_number):  # noqa: N802
         sample_index_int = int(sample_index.value)
-        scan_cycle_number[0] = self.scan_cycle_number_looping[sample_index_int]
+        scan_cycle_number.contents.value = self.scan_cycle_number_looping[sample_index_int]
         return 0
 
     # Helper function for mocking multiple calls
@@ -180,8 +180,8 @@ class TestSession(object):
         sample_index_int = int(sample_index.value)
         dut_cycle_index_int = int(dut_cycle_index.value)
         if int(pin_data_buffer_size.value) == 0:
-            actual_num_pin_data[0] = len(self.expected_pin_states_looping[sample_index_int][dut_cycle_index_int])
-            return actual_num_pin_data[0]
+            actual_num_pin_data.contents.value = len(self.expected_pin_states_looping[sample_index_int][dut_cycle_index_int])
+            return actual_num_pin_data.contents.value
         for i in range(0, int(pin_data_buffer_size.value)):
             expected_pin_states[i] = self.expected_pin_states_looping[sample_index_int][dut_cycle_index_int][i].value
             actual_pin_states[i] = self.actual_pin_states_looping[sample_index_int][dut_cycle_index_int][i].value
