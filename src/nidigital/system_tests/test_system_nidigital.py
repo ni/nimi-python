@@ -314,6 +314,29 @@ def test_history_ram_cycle_information_representation():
     assert str(recreated_cycle_info) == str(cycle_info)
 
 
+def test_history_ram_cycle_information_string():
+    cycle_info = HistoryRAMCycleInformation(
+        pattern_name='pat',
+        time_set_name='t0',
+        vector_number=42,
+        cycle_number=999,
+        scan_cycle_number=13,
+        expected_pin_states=[[PinState.D, PinState.V], [PinState.V, PinState.D]],
+        actual_pin_states=[[PinState.PIN_STATE_NOT_ACQUIRED, PinState.PIN_STATE_NOT_ACQUIRED], [PinState.ZERO, PinState.ONE]],
+        per_pin_pass_fail=[[True, True], [False, False]])
+    print(cycle_info)
+    expected_string = '''Pattern Name        : pat
+Time Set Name       : t0
+Vector Number       : 42
+Cycle Number        : 999
+Scan Cycle Number   : 13
+Expected Pin States : [[D, V], [V, D]]
+Actual Pin States   : [[PIN_STATE_NOT_ACQUIRED, PIN_STATE_NOT_ACQUIRED], [ZERO, ONE]]
+Per Pin Pass Fail   : [[True, True], [False, False]]
+'''
+    assert str(cycle_info) == expected_string
+
+
 def test_fetch_history_ram_cycle_information_without_site(multi_instrument_session):
     configure_for_history_ram_test(multi_instrument_session)
 

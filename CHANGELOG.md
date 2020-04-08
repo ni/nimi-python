@@ -53,6 +53,8 @@ All notable changes to this project will be documented in this file.
         * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
         * `get_site_results_site_numbers` method and `SiteResultType` enum - [#1298](https://github.com/ni/nimi-python/issues/1298) 
         * `reset_attribute` - [#1364](https://github.com/ni/nimi-python/issues/1364) 
+        * `clear_error` - [#1366](https://github.com/ni/nimi-python/issues/1366) 
+        * `clock_generator_initiate` - [#1370](https://github.com/ni/nimi-python/issues/1370) 
 * ### NI-DMM
     * #### Added
     * #### Changed

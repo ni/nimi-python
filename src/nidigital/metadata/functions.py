@@ -156,6 +156,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClearError': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -218,6 +219,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'ClockGenerator_Initiate': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },

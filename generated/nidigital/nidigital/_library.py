@@ -25,10 +25,8 @@ class Library(object):
         self.niDigital_ApplyLevelsAndTiming_cfunc = None
         self.niDigital_ApplyTDROffsets_cfunc = None
         self.niDigital_BurstPattern_cfunc = None
-        self.niDigital_ClearError_cfunc = None
         self.niDigital_ClockGenerator_Abort_cfunc = None
         self.niDigital_ClockGenerator_GenerateClock_cfunc = None
-        self.niDigital_ClockGenerator_Initiate_cfunc = None
         self.niDigital_Commit_cfunc = None
         self.niDigital_ConfigureActiveLoadLevels_cfunc = None
         self.niDigital_ConfigurePatternBurstSites_cfunc = None
@@ -156,14 +154,6 @@ class Library(object):
                 self.niDigital_BurstPattern_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_BurstPattern_cfunc(vi, site_list, start_label, select_digital_function, wait_until_done, timeout)
 
-    def niDigital_ClearError(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ClearError_cfunc is None:
-                self.niDigital_ClearError_cfunc = self._library.niDigital_ClearError
-                self.niDigital_ClearError_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niDigital_ClearError_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ClearError_cfunc(vi)
-
     def niDigital_ClockGenerator_Abort(self, vi, channel_list):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ClockGenerator_Abort_cfunc is None:
@@ -179,14 +169,6 @@ class Library(object):
                 self.niDigital_ClockGenerator_GenerateClock_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViBoolean]  # noqa: F405
                 self.niDigital_ClockGenerator_GenerateClock_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ClockGenerator_GenerateClock_cfunc(vi, channel_list, frequency, select_digital_function)
-
-    def niDigital_ClockGenerator_Initiate(self, vi, channel_list):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_ClockGenerator_Initiate_cfunc is None:
-                self.niDigital_ClockGenerator_Initiate_cfunc = self._library.niDigital_ClockGenerator_Initiate
-                self.niDigital_ClockGenerator_Initiate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_ClockGenerator_Initiate_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ClockGenerator_Initiate_cfunc(vi, channel_list)
 
     def niDigital_Commit(self, vi):  # noqa: N802
         with self._func_lock:
