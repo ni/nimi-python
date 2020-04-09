@@ -2118,13 +2118,11 @@ unload_specifications
             Unloads the given specifications sheets present in the previously loaded
             specifications files that you select.
 
-            You must call :py:meth:`nidigital.Session.LoadSpecificationsLevelsAndTiming` to reload the files with updated
+            You must call :py:meth:`nidigital.Session.load_specifications_levels_and_timing` to reload the files with updated
             specifications values. You must then call :py:meth:`nidigital.Session.apply_levels_and_timing` in order to apply
             the levels and timing values that reference the updated specifications values.
 
             
-
-            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 

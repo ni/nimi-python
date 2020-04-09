@@ -455,7 +455,7 @@ functions_additional_unload_specifications = {
             'description': """\nUnloads the given specifications sheets present in the previously loaded
 specifications files that you select.
 
-You must call niDigital_LoadSpecificationsLevelsAndTiming to reload the files with updated
+You must call niDigital_FancyLoadSpecificationsLevelsAndTiming to reload the files with updated
 specifications values. You must then call niDigital_ApplyLevelsAndTiming in order to apply
 the levels and timing values that reference the updated specifications values.
 

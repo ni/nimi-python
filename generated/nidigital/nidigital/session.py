@@ -2824,12 +2824,9 @@ class Session(_SessionBase):
         Unloads the given specifications sheets present in the previously loaded
         specifications files that you select.
 
-        You must call LoadSpecificationsLevelsAndTiming to reload the files with updated
+        You must call load_specifications_levels_and_timing to reload the files with updated
         specifications values. You must then call apply_levels_and_timing in order to apply
         the levels and timing values that reference the updated specifications values.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
             file_paths (str or iterable of str): Absolute file path of one or more loaded specifications files.
