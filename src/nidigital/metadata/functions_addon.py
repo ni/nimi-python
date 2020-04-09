@@ -378,3 +378,64 @@ the following information about each pattern cycle:
         ],
     },
 }
+
+functions_additional_load_specifications_levels_and_timing = {
+    'FancyLoadSpecificationsLevelsAndTiming': {
+        'python_name': 'load_specifications_levels_and_timing',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_load_specifications_levels_and_timing',
+            }
+        ],
+        'documentation': {
+            'description': """\nLoads settings in specifications, levels, and timing sheets. These settings are not
+applied to the digital pattern instrument until niDigital_ApplyLevelsAndTiming is called.
+
+If the levels and timing sheets contains formulas, they are evaluated at load time.
+If the formulas refer to variables, the specifications sheets that define those
+variables must be loaded either first, or at the same time as the levels and timing sheets.
+
+"""
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nAbsolute file path of one or more specifications files.\n'
+                },
+                'name': 'specificationsFilePaths',
+                'type': 'ViConstString[]',  # Value is unused, but required by code generator
+                'type_in_documentation': 'str or iterable of str',
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nAbsolute file path of one or more levels sheet files.\n'
+                },
+                'name': 'levelsFilePaths',
+                'type': 'ViConstString[]',  # Value is unused, but required by code generator
+                'type_in_documentation': 'str or iterable of str',
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': '\nAbsolute file path of one or more timing sheet files.\n'
+                },
+                'name': 'timingFilePaths',
+                'type': 'ViConstString[]',  # Value is unused, but required by code generator
+                'type_in_documentation': 'str or iterable of str',
+            },
+        ],
+    },
+}

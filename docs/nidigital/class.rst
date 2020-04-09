@@ -1682,27 +1682,6 @@ is_site_enabled
 
 
 
-load_levels
------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: load_levels(levels_file_path)
-
-            TBD
-
-            
-
-
-
-            :param levels_file_path:
-
-
-                
-
-
-            :type levels_file_path: str
-
 load_pattern
 ------------
 
@@ -1745,47 +1724,51 @@ load_pin_map
 
             :type pin_map_file_path: str
 
-load_specifications
--------------------
+load_specifications_levels_and_timing
+-------------------------------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: load_specifications(specifications_file_path)
+    .. py:method:: load_specifications_levels_and_timing(specifications_file_paths=None, levels_file_paths=None, timing_file_paths=None)
 
-            TBD
+            Loads settings in specifications, levels, and timing sheets. These settings are not
+            applied to the digital pattern instrument until :py:meth:`nidigital.Session.apply_levels_and_timing` is called.
+
+            If the levels and timing sheets contains formulas, they are evaluated at load time.
+            If the formulas refer to variables, the specifications sheets that define those
+            variables must be loaded either first, or at the same time as the levels and timing sheets.
 
             
 
 
 
-            :param specifications_file_path:
+            :param specifications_file_paths:
 
 
-                
-
-
-            :type specifications_file_path: str
-
-load_timing
------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: load_timing(timing_file_path)
-
-            TBD
-
-            
-
-
-
-            :param timing_file_path:
-
+                Absolute file path of one or more specifications files.
 
                 
 
 
-            :type timing_file_path: str
+            :type specifications_file_paths: str or iterable of str
+            :param levels_file_paths:
+
+
+                Absolute file path of one or more levels sheet files.
+
+                
+
+
+            :type levels_file_paths: str or iterable of str
+            :param timing_file_paths:
+
+
+                Absolute file path of one or more timing sheet files.
+
+                
+
+
+            :type timing_file_paths: str or iterable of str
 
 lock
 ----
@@ -2124,27 +2107,6 @@ unload_all_patterns
 
 
             :type unload_keep_alive_pattern: bool
-
-unload_specifications
----------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: unload_specifications(specifications_file_path)
-
-            TBD
-
-            
-
-
-
-            :param specifications_file_path:
-
-
-                
-
-
-            :type specifications_file_path: str
 
 unlock
 ------

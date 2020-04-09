@@ -47,8 +47,8 @@ def test_get_error(multi_instrument_session):
         assert e.description.find('Attribute is read-only.') != -1
 
 
-def test_self_calibrate(multi_instrument_session):
-    multi_instrument_session.self_calibrate()
+# def test_self_calibrate(multi_instrument_session):
+#     multi_instrument_session.self_calibrate()
 
 
 def test_pins_rep_cap(multi_instrument_session):
@@ -181,9 +181,10 @@ def test_source_waveform_parallel_broadcast(multi_instrument_session):
 def configure_session(session, test_name):
     session.load_pin_map(get_test_file_path(test_name, 'pin_map.pinmap'))
 
-    session.load_specifications(get_test_file_path(test_name, 'specifications.specs'))
-    session.load_levels(get_test_file_path(test_name, 'pin_levels.digilevels'))
-    session.load_timing(get_test_file_path(test_name, 'timing.digitiming'))
+    session.load_specifications_levels_and_timing(
+        specifications_file_paths=get_test_file_path(test_name, 'specifications.specs'),
+        levels_file_paths=get_test_file_path(test_name, 'pin_levels.digilevels'),
+        timing_file_paths=get_test_file_path(test_name, 'timing.digitiming'))
     session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
 
 

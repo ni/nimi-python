@@ -2775,6 +2775,38 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def _load_files(self, loader, files):
+        if isinstance(files, str):
+            files = [files]
+        for f in files:
+            loader(f)
+
+    def load_specifications_levels_and_timing(self, specifications_file_paths=None, levels_file_paths=None, timing_file_paths=None):
+        '''load_specifications_levels_and_timing
+
+        Loads settings in specifications, levels, and timing sheets. These settings are not
+        applied to the digital pattern instrument until apply_levels_and_timing is called.
+
+        If the levels and timing sheets contains formulas, they are evaluated at load time.
+        If the formulas refer to variables, the specifications sheets that define those
+        variables must be loaded either first, or at the same time as the levels and timing sheets.
+
+        Args:
+            specifications_file_paths (str or iterable of str): Absolute file path of one or more specifications files.
+
+            levels_file_paths (str or iterable of str): Absolute file path of one or more levels sheet files.
+
+            timing_file_paths (str or iterable of str): Absolute file path of one or more timing sheet files.
+
+        '''
+        if specifications_file_paths is not None:
+            self._load_files(self._load_specifications, specifications_file_paths)
+        if levels_file_paths is not None:
+            self._load_files(self._load_levels, levels_file_paths)
+        if timing_file_paths is not None:
+            self._load_files(self._load_timing, timing_file_paths)
+
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2970,8 +3002,8 @@ class Session(_SessionBase):
         return bool(done_ctype.value)
 
     @ivi_synchronized
-    def load_levels(self, levels_file_path):
-        r'''load_levels
+    def _load_levels(self, levels_file_path):
+        r'''_load_levels
 
         TBD
 
@@ -3018,8 +3050,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_specifications(self, specifications_file_path):
-        r'''load_specifications
+    def _load_specifications(self, specifications_file_path):
+        r'''_load_specifications
 
         TBD
 
@@ -3034,8 +3066,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_timing(self, timing_file_path):
-        r'''load_timing
+    def _load_timing(self, timing_file_path):
+        r'''_load_timing
 
         TBD
 
@@ -3173,8 +3205,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def unload_specifications(self, specifications_file_path):
-        r'''unload_specifications
+    def _unload_specifications(self, specifications_file_path):
+        r'''_unload_specifications
 
         TBD
 
