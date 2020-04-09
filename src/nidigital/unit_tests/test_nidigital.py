@@ -77,6 +77,16 @@ class TestSession(object):
             [[True, True, True, True, True, True, True, True]],
         ]
 
+        # for niDigital_FetchHistoryRAMCyclePinData_check_pins_looping
+        self.expected_pin_list_check_pins_looping = None
+        self.expected_pin_states_check_pins_looping = [[[nidigital.enums.PinState.ZERO, nidigital.enums.PinState.H]]]
+        self.actual_pin_states_check_pins_looping = [[[nidigital.enums.PinState.L, nidigital.enums.PinState.L]]]
+        self.per_pin_pass_fail_check_pins_looping = [[[True, False]]]
+
+        # for niDigital_GetHistoryRAMSampleCount_check_site_looping
+        self.iteration_check_site_looping = 0
+        self.site_vals_looping = [0, 1, 2]
+
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
         self.patched_library_patcher.stop()
@@ -250,3 +260,61 @@ class TestSession(object):
         # Only the first cycle returned is expected to have failures
         per_pin_pass_fail = [i.per_pin_pass_fail for i in history_ram_cycle_info]
         assert per_pin_pass_fail == self.per_pin_pass_fail_looping
+
+    # Helper function for validating pin list behavior in fetch_hram.
+    def niDigital_FetchHistoryRAMCyclePinData_check_pins_looping(self, vi, site, pin_list, sample_index, dut_cycle_index, pin_data_buffer_size, expected_pin_states, actual_pin_states, per_pin_pass_fail, actual_num_pin_data):  # noqa: N802
+        sample_index_int = int(sample_index.value)
+        dut_cycle_index_int = int(dut_cycle_index.value)
+        if int(pin_data_buffer_size.value) == 0:
+            actual_num_pin_data.contents.value = len(self.expected_pin_states_check_pins_looping[sample_index_int][dut_cycle_index_int])
+            return actual_num_pin_data.contents.value
+        for i in range(0, int(pin_data_buffer_size.value)):
+            expected_pin_states[i] = self.expected_pin_states_check_pins_looping[sample_index_int][dut_cycle_index_int][i].value
+            actual_pin_states[i] = self.actual_pin_states_check_pins_looping[sample_index_int][dut_cycle_index_int][i].value
+            per_pin_pass_fail[i] = self.per_pin_pass_fail_check_pins_looping[sample_index_int][dut_cycle_index_int][i]
+        assert self.expected_pin_list_check_pins_looping is not None
+        assert pin_list.value.decode('ascii') == self.expected_pin_list_check_pins_looping
+        return 0
+
+    def test_fetch_history_ram_cycle_information_pin_list(self):
+
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.side_effects_helper.niDigital_GetHistoryRAMSampleCount
+        self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 1
+        self.patched_library.niDigital_GetAttributeViBoolean.side_effect = self.side_effects_helper.niDigital_GetAttributeViBoolean
+        self.side_effects_helper['GetAttributeViBoolean']['value'] = True  # history_ram_number_of_samples_is_finite
+        self.patched_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCycleInformation
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['patternIndex'] = 0
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['timeSetIndex'] = 0
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['vectorNumber'] = 0
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['cycleNumber'] = 0
+        self.side_effects_helper['FetchHistoryRAMCycleInformation']['numDutCycles'] = 1
+        self.patched_library.niDigital_GetPatternName.side_effect = self.side_effects_helper.niDigital_GetPatternName
+        self.side_effects_helper['GetPatternName']['name'] = 'new_pattern'
+        self.patched_library.niDigital_GetTimeSetName.side_effect = self.side_effects_helper.niDigital_GetTimeSetName
+        self.side_effects_helper['GetTimeSetName']['name'] = 't0'
+        self.patched_library.niDigital_FetchHistoryRAMScanCycleNumber.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMScanCycleNumber
+        self.side_effects_helper['FetchHistoryRAMScanCycleNumber']['scanCycleNumber'] = -1
+        self.patched_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = self.niDigital_FetchHistoryRAMCyclePinData_check_pins_looping
+        with nidigital.Session('') as session:
+            self.expected_pin_list_check_pins_looping = 'PinA,PinB'
+            session.sites[0].pins['PinA', 'PinB'].fetch_history_ram_cycle_information(position=0, samples_to_read=-1)
+            self.expected_pin_list_check_pins_looping = ''
+            session.sites[0].fetch_history_ram_cycle_information(position=0, samples_to_read=-1)
+            assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 4
+
+    # Helper function for validating site behavior in fetch_hram.
+    def niDigital_GetHistoryRAMSampleCount_check_site_looping(self, vi, site, sample_count):  # noqa: N802
+        assert site.value.decode('ascii') == 'site{}'.format(self.site_vals_looping[self.iteration_check_site_looping])
+        sample_count.contents.value = 0  # we don't care if this is right as long as the fetch does not error
+        self.iteration_check_site_looping += 1
+        return 0
+
+    def test_fetch_history_ram_cycle_information_site_n(self):
+
+        self.patched_library.niDigital_GetHistoryRAMSampleCount.side_effect = self.niDigital_GetHistoryRAMSampleCount_check_site_looping
+        self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 1
+
+        with nidigital.Session('') as session:
+            for s in self.site_vals_looping:
+                session.sites[s].fetch_history_ram_cycle_information(position=0, samples_to_read=0)
+            self.patched_library.niDigital_GetHistoryRAMSampleCount.assert_called()
