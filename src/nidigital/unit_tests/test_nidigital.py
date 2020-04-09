@@ -85,7 +85,7 @@ class TestSession(object):
 
         # for niDigital_GetHistoryRAMSampleCount_check_site_looping
         self.iteration_check_site_looping = 0
-        self.site_vals_looping = [0, 1, 2]
+        self.site_numbers_looping = [0, 1, 2]
 
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
@@ -261,7 +261,7 @@ class TestSession(object):
         per_pin_pass_fail = [i.per_pin_pass_fail for i in history_ram_cycle_info]
         assert per_pin_pass_fail == self.per_pin_pass_fail_looping
 
-    # Helper function for validating pin list behavior in fetch_hram.
+    # Helper function for validating pin list behavior in fetch_history_ram_cycle_information.
     def niDigital_FetchHistoryRAMCyclePinData_check_pins_looping(self, vi, site, pin_list, sample_index, dut_cycle_index, pin_data_buffer_size, expected_pin_states, actual_pin_states, per_pin_pass_fail, actual_num_pin_data):  # noqa: N802
         sample_index_int = int(sample_index.value)
         dut_cycle_index_int = int(dut_cycle_index.value)
@@ -302,9 +302,9 @@ class TestSession(object):
             session.sites[0].fetch_history_ram_cycle_information(position=0, samples_to_read=-1)
             assert self.patched_library.niDigital_FetchHistoryRAMCyclePinData.call_count == 4
 
-    # Helper function for validating site behavior in fetch_hram.
+    # Helper function for validating site behavior in fetch_history_ram_cycle_information.
     def niDigital_GetHistoryRAMSampleCount_check_site_looping(self, vi, site, sample_count):  # noqa: N802
-        assert site.value.decode('ascii') == 'site{}'.format(self.site_vals_looping[self.iteration_check_site_looping])
+        assert site.value.decode('ascii') == 'site{}'.format(self.site_numbers_looping[self.iteration_check_site_looping])
         sample_count.contents.value = 0  # we don't care if this is right as long as the fetch does not error
         self.iteration_check_site_looping += 1
         return 0
@@ -315,6 +315,6 @@ class TestSession(object):
         self.side_effects_helper['GetHistoryRAMSampleCount']['sampleCount'] = 1
 
         with nidigital.Session('') as session:
-            for s in self.site_vals_looping:
+            for s in self.site_numbers_looping:
                 session.sites[s].fetch_history_ram_cycle_information(position=0, samples_to_read=0)
-            self.patched_library.niDigital_GetHistoryRAMSampleCount.assert_called()
+            assert self.patched_library.niDigital_GetHistoryRAMSampleCount.call_count == len(self.site_numbers_looping)
