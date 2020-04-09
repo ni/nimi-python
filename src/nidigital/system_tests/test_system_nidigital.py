@@ -541,7 +541,7 @@ def test_get_site_pass_fail(multi_instrument_session):
     assert pass_fail == {3: True, 0: True}
 
 
-def test_load_specifications_levels_and_timing_single(multi_instrument_session):
+def test_specifications_levels_and_timing_single(multi_instrument_session):
     pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
     specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
     # Levels and timing files contain references to variables in specs1
@@ -557,8 +557,18 @@ def test_load_specifications_levels_and_timing_single(multi_instrument_session):
     # Verify the loaded levels and timing sheets can be applied to hardware
     multi_instrument_session.apply_levels_and_timing(levels_sheet='levels', timing_sheet='timing')
 
+    multi_instrument_session.unload_specifications(file_paths=specs)
 
-def test_load_specifications_levels_and_timing_multiple(multi_instrument_session):
+    # Verify reapplying the loaded levels and timing sheets throws
+    try:
+        multi_instrument_session.apply_levels_and_timing(levels_sheet='levels', timing_sheet='timing')
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074118494
+        assert e.description.find('An error occurred while getting values from a levels sheet.') != -1
+
+
+def test_specifications_levels_and_timing_multiple(multi_instrument_session):
     pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
 
     specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
@@ -581,8 +591,18 @@ def test_load_specifications_levels_and_timing_multiple(multi_instrument_session
     multi_instrument_session.apply_levels_and_timing(levels_sheet='levels1', timing_sheet='timing2')
     multi_instrument_session.apply_levels_and_timing(levels_sheet='levels2', timing_sheet='timing1')
 
+    multi_instrument_session.unload_specifications(file_paths=[specs1, specs2])
 
-def test_load_specifications_levels_and_timing_load_sequentially(multi_instrument_session):
+    # Verify reapplying the loaded levels and timing sheets throws
+    try:
+        multi_instrument_session.apply_levels_and_timing(levels_sheet='levels1', timing_sheet='timing2')
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074118494
+        assert e.description.find('An error occurred while getting values from a levels sheet.') != -1
+
+
+def test_specifications_levels_and_timing_load_sequentially(multi_instrument_session):
     pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
 
     specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
@@ -599,7 +619,7 @@ def test_load_specifications_levels_and_timing_load_sequentially(multi_instrumen
 
     # Load just the specs files first, in two separate calls
     multi_instrument_session.load_specifications_levels_and_timing(specifications_file_paths=specs1)
-    multi_instrument_session.load_specifications_levels_and_timing(specifications_file_paths=specs2)
+    multi_instrument_session.load_specifications_levels_and_timing(specifications_file_paths=[specs2])
 
     # Then load both the levels together
     multi_instrument_session.load_specifications_levels_and_timing(levels_file_paths=[levels2, levels1])
@@ -612,5 +632,14 @@ def test_load_specifications_levels_and_timing_load_sequentially(multi_instrumen
     multi_instrument_session.apply_levels_and_timing(levels_sheet='levels1', timing_sheet='timing2')
     multi_instrument_session.apply_levels_and_timing(levels_sheet='levels2', timing_sheet='timing1')
 
-    # TODO: Verify unload specs
+    multi_instrument_session.unload_specifications(file_paths=specs1)
+    multi_instrument_session.unload_specifications(file_paths=(specs2))
+
+    # Verify reapplying the loaded levels and timing sheets throws
+    try:
+        multi_instrument_session.apply_levels_and_timing(levels_sheet='levels1', timing_sheet='timing2')
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074118494
+        assert e.description.find('An error occurred while getting values from a levels sheet.') != -1
 
