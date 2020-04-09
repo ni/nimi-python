@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Specifications xmlns:f="http://www.ni.com/schemas/Semiconductor/Formula.xsd" schemaVersion="1.0" xmlns="http://www.ni.com/schemas/Semiconductor/Specifications.xsd">
+  <Section name="AC">
+    <f:Formula symbol="Period">
+      <f:Definition>10 µ</f:Definition>
+    </f:Formula>
+  </Section>
+  <Section name="DC">
+    <f:Formula symbol="VCC">
+      <f:Definition>2 V</f:Definition>
+    </f:Formula>
+  </Section>
+</Specifications>
