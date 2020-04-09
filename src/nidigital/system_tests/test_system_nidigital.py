@@ -47,8 +47,8 @@ def test_get_error(multi_instrument_session):
         assert e.description.find('Attribute is read-only.') != -1
 
 
-# def test_self_calibrate(multi_instrument_session):
-#     multi_instrument_session.self_calibrate()
+def test_self_calibrate(multi_instrument_session):
+    multi_instrument_session.self_calibrate()
 
 
 def test_pins_rep_cap(multi_instrument_session):
@@ -539,4 +539,78 @@ def test_get_site_pass_fail(multi_instrument_session):
 
     pass_fail = multi_instrument_session.sites[3, 0].get_site_pass_fail()
     assert pass_fail == {3: True, 0: True}
+
+
+def test_load_specifications_levels_and_timing_single(multi_instrument_session):
+    pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
+    specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
+    # Levels and timing files contain references to variables in specs1
+    levels = get_test_file_path('specifications_levels_and_timing_single', 'levels.digilevels')
+    timing = get_test_file_path('specifications_levels_and_timing_single', 'timing.digitiming')
+
+    multi_instrument_session.load_pin_map(pin_map_file_path=pinmap)
+    multi_instrument_session.load_specifications_levels_and_timing(
+        specifications_file_paths=specs,
+        levels_file_paths=levels,
+        timing_file_paths=timing)
+
+    # Verify the loaded levels and timing sheets can be applied to hardware
+    multi_instrument_session.apply_levels_and_timing(levels_sheet='levels', timing_sheet='timing')
+
+
+def test_load_specifications_levels_and_timing_multiple(multi_instrument_session):
+    pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
+
+    specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
+    # Contains reference to variables in specs1
+    specs2 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs2.specs')
+
+    # All levels and timing files contain references to variables in specs1 and specs2
+    levels1 = get_test_file_path('specifications_levels_and_timing_multiple', 'levels1.digilevels')
+    levels2 = get_test_file_path('specifications_levels_and_timing_multiple', 'levels2.digilevels')
+    timing1 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing1.digitiming')
+    timing2 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing2.digitiming')
+
+    multi_instrument_session.load_pin_map(pin_map_file_path=pinmap)
+    multi_instrument_session.load_specifications_levels_and_timing(
+        specifications_file_paths=[specs1, specs2],  # list
+        levels_file_paths=(levels1, levels2),  # tuple
+        timing_file_paths=[timing1, timing2])
+
+    # Verify the loaded levels and timing sheets can be applied to hardware
+    multi_instrument_session.apply_levels_and_timing(levels_sheet='levels1', timing_sheet='timing2')
+    multi_instrument_session.apply_levels_and_timing(levels_sheet='levels2', timing_sheet='timing1')
+
+
+def test_load_specifications_levels_and_timing_load_sequentially(multi_instrument_session):
+    pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
+
+    specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
+    # Contains reference to variables in specs1
+    specs2 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs2.specs')
+
+    # All levels and timing files contain references to variables in specs1 and specs2
+    levels1 = get_test_file_path('specifications_levels_and_timing_multiple', 'levels1.digilevels')
+    levels2 = get_test_file_path('specifications_levels_and_timing_multiple', 'levels2.digilevels')
+    timing1 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing1.digitiming')
+    timing2 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing2.digitiming')
+
+    multi_instrument_session.load_pin_map(pin_map_file_path=pinmap)
+
+    # Load just the specs files first, in two separate calls
+    multi_instrument_session.load_specifications_levels_and_timing(specifications_file_paths=specs1)
+    multi_instrument_session.load_specifications_levels_and_timing(specifications_file_paths=specs2)
+
+    # Then load both the levels together
+    multi_instrument_session.load_specifications_levels_and_timing(levels_file_paths=[levels2, levels1])
+
+    # Then load the two timing files in two separate calls
+    multi_instrument_session.load_specifications_levels_and_timing(timing_file_paths=[timing2])
+    multi_instrument_session.load_specifications_levels_and_timing(timing_file_paths=[timing1])
+
+    # Verify the loaded levels and timing sheets can be applied to hardware
+    multi_instrument_session.apply_levels_and_timing(levels_sheet='levels1', timing_sheet='timing2')
+    multi_instrument_session.apply_levels_and_timing(levels_sheet='levels2', timing_sheet='timing1')
+
+    # TODO: Verify unload specs
 
