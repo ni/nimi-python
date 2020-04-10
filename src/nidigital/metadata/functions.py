@@ -323,7 +323,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -355,7 +355,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -394,7 +394,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -453,7 +453,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -526,7 +526,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -557,7 +557,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -595,7 +595,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -618,7 +618,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1797,7 +1797,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1828,7 +1828,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1864,7 +1864,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1920,7 +1920,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {

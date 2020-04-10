@@ -385,7 +385,7 @@ configure_time_set_compare_edges_strobe
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_compare_edges_strobe(time_set, strobe_edge)
+    .. py:method:: configure_time_set_compare_edges_strobe(time_set_name, strobe_edge)
 
             TBD
 
@@ -398,13 +398,13 @@ configure_time_set_compare_edges_strobe
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param strobe_edge:
 
 
@@ -418,7 +418,7 @@ configure_time_set_compare_edges_strobe2x
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_compare_edges_strobe2x(time_set, strobe_edge, strobe2_edge)
+    .. py:method:: configure_time_set_compare_edges_strobe2x(time_set_name, strobe_edge, strobe2_edge)
 
             TBD
 
@@ -431,13 +431,13 @@ configure_time_set_compare_edges_strobe2x
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param strobe_edge:
 
 
@@ -458,7 +458,7 @@ configure_time_set_drive_edges
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_edges(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
+    .. py:method:: configure_time_set_drive_edges(time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
             TBD
 
@@ -471,13 +471,13 @@ configure_time_set_drive_edges
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param format:
 
 
@@ -519,7 +519,7 @@ configure_time_set_drive_edges2x
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_edges2x(time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
+    .. py:method:: configure_time_set_drive_edges2x(time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
             TBD
 
@@ -532,13 +532,13 @@ configure_time_set_drive_edges2x
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param format:
 
 
@@ -594,7 +594,7 @@ configure_time_set_drive_format
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_drive_format(time_set, drive_format)
+    .. py:method:: configure_time_set_drive_format(time_set_name, drive_format)
 
             TBD
 
@@ -607,13 +607,13 @@ configure_time_set_drive_format
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param drive_format:
 
 
@@ -627,7 +627,7 @@ configure_time_set_edge
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_edge(time_set, edge, time)
+    .. py:method:: configure_time_set_edge(time_set_name, edge, time)
 
             TBD
 
@@ -640,13 +640,13 @@ configure_time_set_edge
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param edge:
 
 
@@ -667,7 +667,7 @@ configure_time_set_edge_multiplier
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_edge_multiplier(time_set, edge_multiplier)
+    .. py:method:: configure_time_set_edge_multiplier(time_set_name, edge_multiplier)
 
             TBD
 
@@ -680,13 +680,13 @@ configure_time_set_edge_multiplier
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param edge_multiplier:
 
 
@@ -700,7 +700,7 @@ configure_time_set_period
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: configure_time_set_period(time_set, period)
+    .. py:method:: configure_time_set_period(time_set_name, period)
 
             TBD
 
@@ -708,13 +708,13 @@ configure_time_set_period
 
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param period:
 
 
@@ -1458,7 +1458,7 @@ get_time_set_drive_format
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_drive_format(time_set)
+    .. py:method:: get_time_set_drive_format(time_set_name)
 
             TBD
 
@@ -1471,13 +1471,13 @@ get_time_set_drive_format
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
 
             :rtype: :py:data:`nidigital.DriveFormat`
             :return:
@@ -1492,7 +1492,7 @@ get_time_set_edge
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_edge(time_set, edge)
+    .. py:method:: get_time_set_edge(time_set_name, edge)
 
             TBD
 
@@ -1505,13 +1505,13 @@ get_time_set_edge
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
             :param edge:
 
 
@@ -1533,7 +1533,7 @@ get_time_set_edge_multiplier
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_edge_multiplier(time_set)
+    .. py:method:: get_time_set_edge_multiplier(time_set_name)
 
             TBD
 
@@ -1546,13 +1546,13 @@ get_time_set_edge_multiplier
                 nidigital.Session repeated capabilities container, and calling this method on the result.
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
 
             :rtype: int
             :return:
@@ -1596,7 +1596,7 @@ get_time_set_period
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_time_set_period(time_set)
+    .. py:method:: get_time_set_period(time_set_name)
 
             TBD
 
@@ -1604,13 +1604,13 @@ get_time_set_period
 
 
 
-            :param time_set:
+            :param time_set_name:
 
 
                 
 
 
-            :type time_set: str
+            :type time_set_name: str
 
             :rtype: float
             :return:

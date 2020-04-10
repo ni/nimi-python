@@ -194,69 +194,69 @@ class Library(object):
                 self.niDigital_ConfigurePatternBurstSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_ConfigurePatternBurstSites_cfunc(vi, site_list)
 
-    def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set, strobe_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set_name, strobe_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc is None:
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc(vi, pin_list, time_set, strobe_edge)
+        return self.niDigital_ConfigureTimeSetCompareEdgesStrobe_cfunc(vi, pin_list, time_set_name, strobe_edge)
 
-    def niDigital_ConfigureTimeSetCompareEdgesStrobe2x(self, vi, pin_list, time_set, strobe_edge, strobe2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe2x(self, vi, pin_list, time_set_name, strobe_edge, strobe2_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc is None:
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViReal64, ViReal64]  # noqa: F405
                 self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc(vi, pin_list, time_set, strobe_edge, strobe2_edge)
+        return self.niDigital_ConfigureTimeSetCompareEdgesStrobe2x_cfunc(vi, pin_list, time_set_name, strobe_edge, strobe2_edge)
 
-    def niDigital_ConfigureTimeSetDriveEdges(self, vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetDriveEdges_cfunc is None:
                 self.niDigital_ConfigureTimeSetDriveEdges_cfunc = self._library.niDigital_ConfigureTimeSetDriveEdges
                 self.niDigital_ConfigureTimeSetDriveEdges_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niDigital_ConfigureTimeSetDriveEdges_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetDriveEdges_cfunc(vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
+        return self.niDigital_ConfigureTimeSetDriveEdges_cfunc(vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge)
 
-    def niDigital_ConfigureTimeSetDriveEdges2x(self, vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges2x(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc is None:
                 self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc = self._library.niDigital_ConfigureTimeSetDriveEdges2x
                 self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViReal64, ViReal64, ViReal64, ViReal64, ViReal64, ViReal64]  # noqa: F405
                 self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc(vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
+        return self.niDigital_ConfigureTimeSetDriveEdges2x_cfunc(vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge)
 
-    def niDigital_ConfigureTimeSetDriveFormat(self, vi, pin_list, time_set, drive_format):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveFormat(self, vi, pin_list, time_set_name, drive_format):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetDriveFormat_cfunc is None:
                 self.niDigital_ConfigureTimeSetDriveFormat_cfunc = self._library.niDigital_ConfigureTimeSetDriveFormat
                 self.niDigital_ConfigureTimeSetDriveFormat_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niDigital_ConfigureTimeSetDriveFormat_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetDriveFormat_cfunc(vi, pin_list, time_set, drive_format)
+        return self.niDigital_ConfigureTimeSetDriveFormat_cfunc(vi, pin_list, time_set_name, drive_format)
 
-    def niDigital_ConfigureTimeSetEdge(self, vi, pin_list, time_set, edge, time):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdge(self, vi, pin_list, time_set_name, edge, time):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetEdge_cfunc is None:
                 self.niDigital_ConfigureTimeSetEdge_cfunc = self._library.niDigital_ConfigureTimeSetEdge
                 self.niDigital_ConfigureTimeSetEdge_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViReal64]  # noqa: F405
                 self.niDigital_ConfigureTimeSetEdge_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetEdge_cfunc(vi, pin_list, time_set, edge, time)
+        return self.niDigital_ConfigureTimeSetEdge_cfunc(vi, pin_list, time_set_name, edge, time)
 
-    def niDigital_ConfigureTimeSetEdgeMultiplier(self, vi, pin_list, time_set, edge_multiplier):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdgeMultiplier(self, vi, pin_list, time_set_name, edge_multiplier):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc is None:
                 self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc = self._library.niDigital_ConfigureTimeSetEdgeMultiplier
                 self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32]  # noqa: F405
                 self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc(vi, pin_list, time_set, edge_multiplier)
+        return self.niDigital_ConfigureTimeSetEdgeMultiplier_cfunc(vi, pin_list, time_set_name, edge_multiplier)
 
-    def niDigital_ConfigureTimeSetPeriod(self, vi, time_set, period):  # noqa: N802
+    def niDigital_ConfigureTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         with self._func_lock:
             if self.niDigital_ConfigureTimeSetPeriod_cfunc is None:
                 self.niDigital_ConfigureTimeSetPeriod_cfunc = self._library.niDigital_ConfigureTimeSetPeriod
                 self.niDigital_ConfigureTimeSetPeriod_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
                 self.niDigital_ConfigureTimeSetPeriod_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_ConfigureTimeSetPeriod_cfunc(vi, time_set, period)
+        return self.niDigital_ConfigureTimeSetPeriod_cfunc(vi, time_set_name, period)
 
     def niDigital_ConfigureVoltageLevels(self, vi, channel_list, vil, vih, vol, voh, vterm):  # noqa: N802
         with self._func_lock:
@@ -514,29 +514,29 @@ class Library(object):
                 self.niDigital_GetSiteResultsSiteNumbers_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetSiteResultsSiteNumbers_cfunc(vi, site_list, site_result_type, site_numbers_buffer_size, site_numbers, actual_num_site_numbers)
 
-    def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set, format):  # noqa: N802
+    def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set_name, format):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetDriveFormat_cfunc is None:
                 self.niDigital_GetTimeSetDriveFormat_cfunc = self._library.niDigital_GetTimeSetDriveFormat
                 self.niDigital_GetTimeSetDriveFormat_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDigital_GetTimeSetDriveFormat_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetTimeSetDriveFormat_cfunc(vi, pin, time_set, format)
+        return self.niDigital_GetTimeSetDriveFormat_cfunc(vi, pin, time_set_name, format)
 
-    def niDigital_GetTimeSetEdge(self, vi, pin, time_set, edge, time):  # noqa: N802
+    def niDigital_GetTimeSetEdge(self, vi, pin, time_set_name, edge, time):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetEdge_cfunc is None:
                 self.niDigital_GetTimeSetEdge_cfunc = self._library.niDigital_GetTimeSetEdge
                 self.niDigital_GetTimeSetEdge_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDigital_GetTimeSetEdge_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetTimeSetEdge_cfunc(vi, pin, time_set, edge, time)
+        return self.niDigital_GetTimeSetEdge_cfunc(vi, pin, time_set_name, edge, time)
 
-    def niDigital_GetTimeSetEdgeMultiplier(self, vi, pin, time_set, edge_multiplier):  # noqa: N802
+    def niDigital_GetTimeSetEdgeMultiplier(self, vi, pin, time_set_name, edge_multiplier):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetEdgeMultiplier_cfunc is None:
                 self.niDigital_GetTimeSetEdgeMultiplier_cfunc = self._library.niDigital_GetTimeSetEdgeMultiplier
                 self.niDigital_GetTimeSetEdgeMultiplier_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDigital_GetTimeSetEdgeMultiplier_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetTimeSetEdgeMultiplier_cfunc(vi, pin, time_set, edge_multiplier)
+        return self.niDigital_GetTimeSetEdgeMultiplier_cfunc(vi, pin, time_set_name, edge_multiplier)
 
     def niDigital_GetTimeSetName(self, vi, time_set_index, name_buffer_size, name):  # noqa: N802
         with self._func_lock:
@@ -546,13 +546,13 @@ class Library(object):
                 self.niDigital_GetTimeSetName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetTimeSetName_cfunc(vi, time_set_index, name_buffer_size, name)
 
-    def niDigital_GetTimeSetPeriod(self, vi, time_set, period):  # noqa: N802
+    def niDigital_GetTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetTimeSetPeriod_cfunc is None:
                 self.niDigital_GetTimeSetPeriod_cfunc = self._library.niDigital_GetTimeSetPeriod
                 self.niDigital_GetTimeSetPeriod_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niDigital_GetTimeSetPeriod_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetTimeSetPeriod_cfunc(vi, time_set, period)
+        return self.niDigital_GetTimeSetPeriod_cfunc(vi, time_set_name, period)
 
     def niDigital_InitWithOptions(self, resource_name, id_query, reset_device, option_string, new_vi):  # noqa: N802
         with self._func_lock:
