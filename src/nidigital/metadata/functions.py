@@ -1507,7 +1507,32 @@ functions = {
     },
     'GetHistoryRAMSampleCount': {
         'documentation': {
-            'description': 'TBD'
+            'description': """\nReturns the number of samples History RAM acquired on the last pattern burst.
+""",
+            'note': """\nBefore bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire. 
+
+NIDIGITAL_ATTR_HISTORY_RAM_TRIGGER_TYPE should be used to specify the trigger condition on which History RAM
+starts acquiring pattern information.
+
+If History RAM trigger is configured as NIDIGITAL_VAL_CYCLE_NUMBER,
+NIDIGITAL_ATTR_CYCLE_NUMBER_HISTORY_RAM_TRIGGER_CYCLE_NUMBER should be used to specify the cycle number on which
+History RAM starts acquiring pattern information.
+
+If History RAM trigger is configured as NIDIGITAL_VAL_PATTERN_LABEL,
+NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_LABEL should be used to specify the pattern label from which to
+start acquiring pattern information. 
+NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_VECTOR_OFFSET should be used to specify the number of vectors
+following the specified pattern label from which to start acquiring pattern information. 
+NIDIGITAL_ATTR_PATTERN_LABEL_HISTORY_RAM_TRIGGER_CYCLE_OFFSET should be used to specify the number of cycles
+following the specified pattern label and vector offset from which to start acquiring pattern information.
+
+For all History RAM trigger conditions, NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES should be used to specify
+the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only
+acquire failed cycles, you must set NIDIGITAL_ATTR_HISTORY_RAM_PRETRIGGER_SAMPLES to 0. 
+
+NIDIGITAL_ATTR_HISTORY_RAM_CYCLES_TO_ACQUIRE should be used to specify which cycles History RAM acquires after
+the trigger conditions are met.
+""",
         },
         'parameters': [
             {
