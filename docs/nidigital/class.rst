@@ -1132,6 +1132,30 @@ fetch_history_ram_cycle_information
 
             
 
+            .. note:: Before bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire.
+
+                :py:attr:`nidigital.Session.history_ram_trigger_type` should be used to specify the trigger condition on which History RAM
+                starts acquiring pattern information.
+
+                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER`,
+                :py:attr:`nidigital.Session.cycle_number_history_ram_trigger_cycle_number` should be used to specify the cycle number on which
+                History RAM starts acquiring pattern information.
+
+                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL`,
+                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_label` should be used to specify the pattern label from which to
+                start acquiring pattern information.
+                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_vector_offset` should be used to specify the number of vectors
+                following the specified pattern label from which to start acquiring pattern information.
+                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_cycle_offset` should be used to specify the number of cycles
+                following the specified pattern label and vector offset from which to start acquiring pattern information.
+
+                For all History RAM trigger conditions, :py:attr:`nidigital.Session.history_ram_pretrigger_samples` should be used to specify
+                the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only
+                acquire failed cycles, you must set :py:attr:`nidigital.Session.history_ram_pretrigger_samples` to 0.
+
+                :py:attr:`nidigital.Session.history_ram_cycles_to_acquire` should be used to specify which cycles History RAM acquires after
+                the trigger conditions are met.
+
 
             .. tip:: This method requires repeated capabilities. If called directly on the
                 nidigital.Session object, then the method will use all repeated capabilities in the session.
@@ -1310,9 +1334,33 @@ get_history_ram_sample_count
 
     .. py:method:: get_history_ram_sample_count()
 
-            TBD
+            Returns the number of samples History RAM acquired on the last pattern burst.
 
             
+
+            .. note:: Before bursting a pattern, you must configure the History RAM trigger and specify which cycles to acquire.
+
+                :py:attr:`nidigital.Session.history_ram_trigger_type` should be used to specify the trigger condition on which History RAM
+                starts acquiring pattern information.
+
+                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.CYCLE_NUMBER`,
+                :py:attr:`nidigital.Session.cycle_number_history_ram_trigger_cycle_number` should be used to specify the cycle number on which
+                History RAM starts acquiring pattern information.
+
+                If History RAM trigger is configured as :py:data:`~nidigital.HistoryRAMTriggerType.PATTERN_LABEL`,
+                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_label` should be used to specify the pattern label from which to
+                start acquiring pattern information.
+                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_vector_offset` should be used to specify the number of vectors
+                following the specified pattern label from which to start acquiring pattern information.
+                :py:attr:`nidigital.Session.pattern_label_history_ram_trigger_cycle_offset` should be used to specify the number of cycles
+                following the specified pattern label and vector offset from which to start acquiring pattern information.
+
+                For all History RAM trigger conditions, :py:attr:`nidigital.Session.history_ram_pretrigger_samples` should be used to specify
+                the number of samples to acquire before the trigger conditions are met. If you configure History RAM to only
+                acquire failed cycles, you must set :py:attr:`nidigital.Session.history_ram_pretrigger_samples` to 0.
+
+                :py:attr:`nidigital.Session.history_ram_cycles_to_acquire` should be used to specify which cycles History RAM acquires after
+                the trigger conditions are met.
 
 
             .. tip:: This method requires repeated capabilities. If called directly on the
