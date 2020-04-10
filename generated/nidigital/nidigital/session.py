@@ -2811,7 +2811,7 @@ class Session(_SessionBase):
         for site in waveform_data:
             if len(waveform_data[site]) != actual_samples_per_waveform:
                 raise ValueError('Mismatched length of waveforms. All must be the same length.')
-            # Check the type by using string comparison so that we don't import numpy unecessarilly.
+            # Check the type by using string comparison so that we don't import numpy unnecessarily.
             if str(type(waveform_data[site])).find("'numpy.ndarray'") != -1:
                 import numpy
                 if waveform_data[site].dtype == numpy.uint32:
