@@ -323,7 +323,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -355,7 +355,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -394,7 +394,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -453,7 +453,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -526,7 +526,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -557,7 +557,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -595,7 +595,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -618,7 +618,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1822,7 +1822,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1853,7 +1853,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1889,7 +1889,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {
@@ -1945,7 +1945,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timeSet',
+                'name': 'timeSetName',
                 'type': 'ViConstString'
             },
             {

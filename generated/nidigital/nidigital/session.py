@@ -751,7 +751,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def configure_time_set_compare_edges_strobe(self, time_set, strobe_edge):
+    def configure_time_set_compare_edges_strobe(self, time_set_name, strobe_edge):
         r'''configure_time_set_compare_edges_strobe
 
         TBD
@@ -763,21 +763,21 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             strobe_edge (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe(vi_ctype, pin_list_ctype, time_set_name_ctype, strobe_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def configure_time_set_compare_edges_strobe2x(self, time_set, strobe_edge, strobe2_edge):
+    def configure_time_set_compare_edges_strobe2x(self, time_set_name, strobe_edge, strobe2_edge):
         r'''configure_time_set_compare_edges_strobe2x
 
         TBD
@@ -789,7 +789,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             strobe_edge (float in seconds or datetime.timedelta):
 
@@ -798,15 +798,15 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         strobe_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe_edge)  # case S140
         strobe2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(strobe2_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_ctype, strobe_edge_ctype, strobe2_edge_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetCompareEdgesStrobe2x(vi_ctype, pin_list_ctype, time_set_name_ctype, strobe_edge_ctype, strobe2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def configure_time_set_drive_edges(self, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
+    def configure_time_set_drive_edges(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):
         r'''configure_time_set_drive_edges
 
         TBD
@@ -818,7 +818,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             format (enums.DriveFormat):
 
@@ -835,18 +835,18 @@ class _SessionBase(object):
             raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
         drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
         drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
         drive_return_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return_edge)  # case S140
         drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges(vi_ctype, pin_list_ctype, time_set_name_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def configure_time_set_drive_edges2x(self, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
+    def configure_time_set_drive_edges2x(self, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):
         r'''configure_time_set_drive_edges2x
 
         TBD
@@ -858,7 +858,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             format (enums.DriveFormat):
 
@@ -879,7 +879,7 @@ class _SessionBase(object):
             raise TypeError('Parameter format must be of type ' + str(enums.DriveFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32(format.value)  # case S130
         drive_on_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_on_edge)  # case S140
         drive_data_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data_edge)  # case S140
@@ -887,12 +887,12 @@ class _SessionBase(object):
         drive_off_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_off_edge)  # case S140
         drive_data2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_data2_edge)  # case S140
         drive_return2_edge_ctype = _converters.convert_timedelta_to_seconds_real64(drive_return2_edge)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetDriveEdges2x(vi_ctype, pin_list_ctype, time_set_name_ctype, format_ctype, drive_on_edge_ctype, drive_data_edge_ctype, drive_return_edge_ctype, drive_off_edge_ctype, drive_data2_edge_ctype, drive_return2_edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def configure_time_set_drive_format(self, time_set, drive_format):
+    def configure_time_set_drive_format(self, time_set_name, drive_format):
         r'''configure_time_set_drive_format
 
         TBD
@@ -904,7 +904,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             drive_format (enums.DriveFormat):
 
@@ -913,14 +913,14 @@ class _SessionBase(object):
             raise TypeError('Parameter drive_format must be of type ' + str(enums.DriveFormat))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         drive_format_ctype = _visatype.ViInt32(drive_format.value)  # case S130
-        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_ctype, drive_format_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetDriveFormat(vi_ctype, pin_list_ctype, time_set_name_ctype, drive_format_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def configure_time_set_edge(self, time_set, edge, time):
+    def configure_time_set_edge(self, time_set_name, edge, time):
         r'''configure_time_set_edge
 
         TBD
@@ -932,7 +932,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             edge (enums.TimeSetEdgeType):
 
@@ -943,15 +943,15 @@ class _SessionBase(object):
             raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         time_ctype = _converters.convert_timedelta_to_seconds_real64(time)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_ctype, edge_ctype, time_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetEdge(vi_ctype, pin_list_ctype, time_set_name_ctype, edge_ctype, time_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def configure_time_set_edge_multiplier(self, time_set, edge_multiplier):
+    def configure_time_set_edge_multiplier(self, time_set_name, edge_multiplier):
         r'''configure_time_set_edge_multiplier
 
         TBD
@@ -963,16 +963,16 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             edge_multiplier (int):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         edge_multiplier_ctype = _visatype.ViInt32(edge_multiplier)  # case S150
-        error_code = self._library.niDigital_ConfigureTimeSetEdgeMultiplier(vi_ctype, pin_list_ctype, time_set_ctype, edge_multiplier_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetEdgeMultiplier(vi_ctype, pin_list_ctype, time_set_name_ctype, edge_multiplier_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2080,7 +2080,7 @@ class _SessionBase(object):
         return [int(site_numbers_ctype[i]) for i in range(site_numbers_buffer_size_ctype.value)]
 
     @ivi_synchronized
-    def get_time_set_drive_format(self, time_set):
+    def get_time_set_drive_format(self, time_set_name):
         r'''get_time_set_drive_format
 
         TBD
@@ -2092,7 +2092,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
 
         Returns:
@@ -2101,14 +2101,14 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         format_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
+        error_code = self._library.niDigital_GetTimeSetDriveFormat(vi_ctype, pin_ctype, time_set_name_ctype, None if format_ctype is None else (ctypes.pointer(format_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return enums.DriveFormat(format_ctype.value)
 
     @ivi_synchronized
-    def get_time_set_edge(self, time_set, edge):
+    def get_time_set_edge(self, time_set_name, edge):
         r'''get_time_set_edge
 
         TBD
@@ -2120,7 +2120,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             edge (enums.TimeSetEdgeType):
 
@@ -2133,15 +2133,15 @@ class _SessionBase(object):
             raise TypeError('Parameter edge must be of type ' + str(enums.TimeSetEdgeType))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         time_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
+        error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_name_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(time_ctype.value)
 
     @ivi_synchronized
-    def get_time_set_edge_multiplier(self, time_set):
+    def get_time_set_edge_multiplier(self, time_set_name):
         r'''get_time_set_edge_multiplier
 
         TBD
@@ -2153,7 +2153,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
 
         Returns:
@@ -2162,9 +2162,9 @@ class _SessionBase(object):
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pin_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         edge_multiplier_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niDigital_GetTimeSetEdgeMultiplier(vi_ctype, pin_ctype, time_set_ctype, None if edge_multiplier_ctype is None else (ctypes.pointer(edge_multiplier_ctype)))
+        error_code = self._library.niDigital_GetTimeSetEdgeMultiplier(vi_ctype, pin_ctype, time_set_name_ctype, None if edge_multiplier_ctype is None else (ctypes.pointer(edge_multiplier_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(edge_multiplier_ctype.value)
 
@@ -2738,21 +2738,21 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_time_set_period(self, time_set, period):
+    def configure_time_set_period(self, time_set_name, period):
         r'''configure_time_set_period
 
         TBD
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
             period (float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         period_ctype = _converters.convert_timedelta_to_seconds_real64(period)  # case S140
-        error_code = self._library.niDigital_ConfigureTimeSetPeriod(vi_ctype, time_set_ctype, period_ctype)
+        error_code = self._library.niDigital_ConfigureTimeSetPeriod(vi_ctype, time_set_name_ctype, period_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -2944,13 +2944,13 @@ class Session(_SessionBase):
         return _converters.convert_comma_separated_string_to_list(pin_list_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
-    def get_time_set_period(self, time_set):
+    def get_time_set_period(self, time_set_name):
         r'''get_time_set_period
 
         TBD
 
         Args:
-            time_set (str):
+            time_set_name (str):
 
 
         Returns:
@@ -2958,9 +2958,9 @@ class Session(_SessionBase):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        time_set_ctype = ctypes.create_string_buffer(time_set.encode(self._encoding))  # case C020
+        time_set_name_ctype = ctypes.create_string_buffer(time_set_name.encode(self._encoding))  # case C020
         period_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niDigital_GetTimeSetPeriod(vi_ctype, time_set_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
+        error_code = self._library.niDigital_GetTimeSetPeriod(vi_ctype, time_set_name_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(period_ctype.value)
 
