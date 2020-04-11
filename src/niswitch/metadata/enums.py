@@ -314,7 +314,7 @@ enums = {
                 'documentation': {
                     'description': 'Resource in use'
                 },
-                'name': 'NISWITCH_VAL_RSRC_IN_USE',
+                'name': 'NISWITCH_VAL_RESOURCE_IN_USE',
                 'value': 4
             },
             {
