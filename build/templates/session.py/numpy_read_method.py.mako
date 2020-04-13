@@ -37,7 +37,7 @@ if parameter['size']['mechanism'] == 'passed-in':
 % endif
 % endfor
 % for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
-%   for declaration in helper.get_ctype_variable_declaration_snippet(parameter, parameters, None, config, use_numpy_array=parameter['numpy']):
+%   for declaration in helper.get_ctype_variable_declaration_snippet(parameter, parameters, None, f['python_name'], config, use_numpy_array=parameter['numpy']):
         ${declaration}
 %   endfor
 % endfor

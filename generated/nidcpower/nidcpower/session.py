@@ -3771,7 +3771,7 @@ class Session(_SessionBase):
 
         '''
         super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        channels = _converters.convert_repeated_capabilities_from_init(channels)
+        channels = _converters.convert_repeated_capabilities_without_prefix(channels)
         options = _converters.convert_init_with_options_dictionary(options)
         self._library = _library_singleton.get()
         self._encoding = 'windows-1251'

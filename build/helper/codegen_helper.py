@@ -172,7 +172,7 @@ class IviDanceStep(Enum):
     'Step 2: Allocate the buffer, call back into the driver to get the actual data.'
 
 
-def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, config, use_numpy_array=False):
+def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step, method_name, config, use_numpy_array=False):
     '''Returns array of python snippets that declares and initializes a ctypes variable for the parameter that can be passed to the Library.
 
     Logic for creating the appropriate snippet is split up in two helper functions. One for scalars and one for buffers.
@@ -191,7 +191,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
         module_name = '_visatype'
 
     if parameter['is_string'] is True:
-        definitions = _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name)
+        definitions = _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name, method_name, config)
     elif parameter['is_buffer'] is True:
         definitions = _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, ivi_dance_step, use_numpy_array, custom_type, module_name)
     else:
@@ -200,12 +200,13 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
     return definitions
 
 
-def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name):
+def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name, method_name, config):
     '''These are the different cases for initializing the ctype variables for strings
 
     C010. Input repeated capability:                                           ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))
     C020. Input string:                                                        ctypes.create_string_buffer(parameter_name.encode(self._encoding))
     C030. Input string enum:                                                   ctypes.create_string_buffer(parameter_name.value.encode(self._encoding))
+    C040. Input uses converter:                                                ctypes.create_string_buffer(_converter.convert(parameter_name).encode(self._encoding))
     C050. Output buffer with mechanism ivi-dance, QUERY_SIZE:                  None
     C060. Output buffer with mechanism ivi-dance, GET_DATA:                    (visatype.ViChar * buffer_size_ctype.value)()
     C070. Output buffer with mechanism fixed-size:                             visatype.ViChar * 256
@@ -221,6 +222,10 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
             definition = 'ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010'
         elif parameter['enum'] is not None:
             definition = 'ctypes.create_string_buffer({0}.value.encode(self._encoding))  # case C030'.format(parameter['python_name'])
+        # _init_function is a special case - Converters should not be called within it since they are
+        # called in Session.__init__() beforehand to aid with Session.__repr__().
+        elif 'python_api_converter_name' in parameter and method_name is not config['functions']['_init_function']['python_name']:
+            definition = 'ctypes.create_string_buffer(_converters.{0}({1}).encode(self._encoding))  # case C040'.format(parameter['python_api_converter_name'], parameter['python_name'])
         else:
             definition = 'ctypes.create_string_buffer({0}.encode(self._encoding))  # case C020'.format(parameter['python_name'])
     else:
@@ -489,7 +494,10 @@ def get_dictionary_snippet(d, indent=4):
 config_for_testing = {
     'session_handle_parameter_name': 'vi',
     'module_name': 'nifake',
-    'functions': {},
+    'functions': {
+        '_init_function': {'python_name': '_init_with_options'},
+        'TestFunction': {'python_name': 'test_function'}
+    },
     'attributes': {},
     'modules': {
         'metadata.enums_addon': {}
@@ -1311,6 +1319,58 @@ parameters_for_testing = [
         'type': 'ViString',
         'use_in_python_api': True,
     },
+    {  # 34
+        'ctypes_type': 'ViConstString',
+        'ctypes_type_library_call': 'ViConstString',
+        'ctypes_variable_name': 'option_string_ctype',
+        'direction': 'in',
+        'documentation': {
+            'description': 'Specifies the initial value of certain attributes for the session.'
+        },
+        'enum': None,
+        'is_buffer': False,
+        'is_string': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'option_string_ctype',
+        'name': 'optionString',
+        'numpy': False,
+        'original_type': 'ViChar[]',
+        'python_api_converter_name': 'convert_init_with_options_dictionary',
+        'python_name': 'options',
+        'python_name_with_default': 'options={}',
+        'python_name_with_doc_default': 'option_string=""',
+        'python_type': 'str',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViConstString',
+        'use_in_python_api': True,
+    },
+    {  # 35
+        'ctypes_type': 'ViConstString',
+        'ctypes_type_library_call': 'ViConstString',
+        'ctypes_variable_name': 'indices_ctype',
+        'direction': 'in',
+        'documentation': {
+            'description': 'Specifies a list of indices for the channels in the session.'
+        },
+        'enum': None,
+        'is_buffer': False,
+        'is_string': True,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'library_method_call_snippet': 'indices_ctype',
+        'name': 'indices',
+        'numpy': False,
+        'original_type': 'ViChar[]',
+        'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+        'python_name': 'indices',
+        'python_name_with_default': 'indices',
+        'python_name_with_doc_default': 'indices',
+        'python_type': 'str',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type': 'ViConstString',
+        'use_in_python_api': True,
+    },
 ]
 
 
@@ -1360,117 +1420,127 @@ def test_get_buffer_parameters_for_size_parameter():
 
 
 def test_get_ctype_variable_declaration_snippet_case_c010():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[15], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[15], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["channel_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c020():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[16], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_ctype = ctypes.create_string_buffer(a_string.encode(self._encoding))  # case C020"]
 
 
+def test_get_ctype_variable_declaration_snippet_case_c020_init_function():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[34], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, '_init_with_options', config_for_testing, use_numpy_array=False)
+    assert snippet == ["option_string_ctype = ctypes.create_string_buffer(options.encode(self._encoding))  # case C020"]
+
+
 def test_get_ctype_variable_declaration_snippet_case_c030():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[33], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[33], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_enum_ctype = ctypes.create_string_buffer(a_string_enum.value.encode(self._encoding))  # case C030"]
 
 
+def test_get_ctype_variable_declaration_snippet_case_c040():
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[35], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
+    assert snippet == ["indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040"]
+
+
 def test_get_ctype_variable_declaration_snippet_case_c050():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_ctype = None  # case C050"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c060():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[13], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_ctype = (_visatype.ViChar * string_size_ctype.value)()  # case C060"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c070():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[19], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[19], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_2_ctype = (_visatype.ViChar * 256)()  # case C070"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c080():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[20], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[20], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_3_ctype = (_visatype.ViChar * string_size)()  # case C080"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c090():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[21], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[21], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_twist_ctype = None  # case C090"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_c100():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[21], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[21], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_string_twist_ctype = (_visatype.ViChar * output_twist_ctype.value)()  # case C100"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s110():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[0], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["vi_ctype = _visatype.ViSession(self._vi)  # case S110"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s120():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[8], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[8], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["number_of_elements_python_code_ctype = _visatype.ViInt32(self.get_array_size_for_python_code())  # case S120"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s130():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[6], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[6], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["an_int_enum_ctype = _visatype.ViInt16(an_int_enum.value)  # case S130"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s140():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[14], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[14], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["timeout_ctype = _converters.timedelta_converter_seconds_real64(timeout)  # case S140"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s150():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[9], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[9], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["input_ctype = _visatype.ViInt16(input)  # case S150"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s160():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[11], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[11], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert actual == ["input_array_size_ctype = _visatype.ViInt32(0 if input_array is None else len(input_array))  # case S160"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s170():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["string_size_ctype = _visatype.ViInt32()  # case S170"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s180():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["string_size_ctype = _visatype.ViInt32(error_code)  # case S180"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s2190():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[23], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[23], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["string_size_twist_ctype = _visatype.ViInt32(0)  # case S190"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s200():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[23], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[23], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["string_size_twist_ctype = _visatype.ViInt32(output_twist_ctype.value)  # case S200"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s210():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[4], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[4], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["number_of_elements_ctype = _visatype.ViInt32(number_of_elements)  # case S210"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s220():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[1], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[1], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["output_ctype = _visatype.ViInt64()  # case S220"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b510():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=True)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=True)
     assert snippet == ["output_ctype = get_ctypes_pointer_for_buffer(value=output)  # case B510"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b520_array():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[30], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[30], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'input_array_3_array = get_ctypes_and_array(value=_converters.convert_to_nitclk_session_num_list(input_array_3), array_type="d")  # case B520',
         'input_array_3_ctype = get_ctypes_pointer_for_buffer(value=input_array_3_array, library_type=_visatype.ViReal64)  # case B520',
@@ -1481,13 +1551,13 @@ def test_get_ctype_variable_declaration_snippet_case_b520_array():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b520_list():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[29], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[29], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["input_array_2_ctype = get_ctypes_pointer_for_buffer(value=_converters.convert_to_nitclk_session_num_list(input_array_2), library_type=_visatype.ViReal64)  # case B520"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b520_custom_type():
     try:
-        get_ctype_variable_declaration_snippet(parameters_for_testing[31], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+        get_ctype_variable_declaration_snippet(parameters_for_testing[31], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
         assert False
     except AssertionError:
         pass
@@ -1495,19 +1565,19 @@ def test_get_ctype_variable_declaration_snippet_case_b520_custom_type():
 
 def test_get_ctype_variable_declaration_snippet_case_b520_not_array_or_list():
     try:
-        get_ctype_variable_declaration_snippet(parameters_for_testing[32], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+        get_ctype_variable_declaration_snippet(parameters_for_testing[32], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
         assert False
     except AssertionError:
         pass
 
 
 def test_get_ctype_variable_declaration_snippet_case_b540():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[17], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[17], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["array_in_ctype = get_ctypes_pointer_for_buffer([custom_struct.custom_struct(c) for c in array_in], library_type=custom_struct.custom_struct)  # case B540"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b550_array():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[10], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'input_array_array = get_ctypes_and_array(value=input_array, array_type="d")  # case B550',
         'input_array_ctype = get_ctypes_pointer_for_buffer(value=input_array_array, library_type=_visatype.ViReal64)  # case B550',
@@ -1518,12 +1588,12 @@ def test_get_ctype_variable_declaration_snippet_case_b550_array():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b550_list():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[28], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[28], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["input_array_2_ctype = get_ctypes_pointer_for_buffer(value=input_array_2, library_type=_visatype.ViReal64)  # case B550"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b560():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[3], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[3], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'array_out_size = self.get_array_size_for_python_code()  # case B560',
         'array_out_ctype = get_ctypes_pointer_for_buffer(library_type=custom_struct.custom_struct, size=array_out_size)  # case B560',
@@ -1534,7 +1604,7 @@ def test_get_ctype_variable_declaration_snippet_case_b560():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b570():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[18], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[18], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'an_int_size = 256  # case B570',
         'an_int_array = array.array("h", [0] * an_int_size)  # case B570',
@@ -1546,12 +1616,12 @@ def test_get_ctype_variable_declaration_snippet_case_b570():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b580_array():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[24], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[24], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_buffer_array_ctype = None  # case B580"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b590_array():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[24], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[24], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'a_buffer_array_size = string_size_ctype.value  # case B590',
         'a_buffer_array_array = array.array("l", [0] * a_buffer_array_size)  # case B590',
@@ -1563,12 +1633,12 @@ def test_get_ctype_variable_declaration_snippet_case_b590_array():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b580_list():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[25], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[25], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_buffer_list_ctype = None  # case B580"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b590_list():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[25], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[25], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'a_buffer_list_size = string_size_ctype.value  # case B590',
         'a_buffer_list_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=a_buffer_list_size)  # case B590',
@@ -1579,7 +1649,7 @@ def test_get_ctype_variable_declaration_snippet_case_b590_list():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b600():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'output_size = number_of_elements  # case B600',
         'output_array = array.array("q", [0] * output_size)  # case B600',
@@ -1591,12 +1661,12 @@ def test_get_ctype_variable_declaration_snippet_case_b600():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b610_array():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[26], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[26], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_buffer_twist_array_ctype = None  # case B610"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b620_array():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[26], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[26], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'a_buffer_twist_array_size = output_twist_ctype.value  # case B620',
         'a_buffer_twist_array_array = array.array("l", [0] * a_buffer_twist_array_size)  # case B620',
@@ -1608,12 +1678,12 @@ def test_get_ctype_variable_declaration_snippet_case_b620_array():
 
 
 def test_get_ctype_variable_declaration_snippet_case_b610_list():
-    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[27], parameters_for_testing, IviDanceStep.QUERY_SIZE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[27], parameters_for_testing, IviDanceStep.QUERY_SIZE, 'test_method', config_for_testing, use_numpy_array=False)
     assert snippet == ["a_buffer_twist_list_ctype = None  # case B610"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b620_list():
-    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[27], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
+    actual = get_ctype_variable_declaration_snippet(parameters_for_testing[27], parameters_for_testing, IviDanceStep.GET_DATA, 'test_method', config_for_testing, use_numpy_array=False)
     expected = [
         'a_buffer_twist_list_size = output_twist_ctype.value  # case B620',
         'a_buffer_twist_list_ctype = get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=a_buffer_twist_list_size)  # case B620',
@@ -1625,7 +1695,7 @@ def test_get_ctype_variable_declaration_snippet_case_b620_list():
 
 def test_get_ctype_variable_declaration_snippet_bad_ivi_dance_step():
     try:
-        get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+        get_ctype_variable_declaration_snippet(parameters_for_testing[12], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, 'test_method', config_for_testing, use_numpy_array=False)
         assert False
     except AssertionError:
         pass
