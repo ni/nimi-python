@@ -9,7 +9,7 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         use_named = isinstance(waveform_name_or_handle, str)
-        # Check the type by using string comparison so that we don't import numpy unecessarilly.
+        # Check the type by using string comparison so that we don't import numpy unnecessarily.
         if str(type(data)).find("'numpy.ndarray'") != -1:
             import numpy
             if data.dtype == numpy.float64:
