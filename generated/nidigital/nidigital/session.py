@@ -2825,11 +2825,13 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _file_helper(self, action, files):
+    def _call_method_with_iterable(self, method, files):
+        if files is None:
+            return
         if isinstance(files, str):
             files = [files]
         for f in files:
-            action(f)
+            method(f)
 
     def load_specifications_levels_and_timing(self, specifications_file_paths=None, levels_file_paths=None, timing_file_paths=None):
         '''load_specifications_levels_and_timing
@@ -2849,12 +2851,9 @@ class Session(_SessionBase):
             timing_file_paths (str or iterable of str): Absolute file path of one or more timing sheet files.
 
         '''
-        if specifications_file_paths is not None:
-            self._file_helper(self._load_specifications, specifications_file_paths)
-        if levels_file_paths is not None:
-            self._file_helper(self._load_levels, levels_file_paths)
-        if timing_file_paths is not None:
-            self._file_helper(self._load_timing, timing_file_paths)
+        self._call_method_with_iterable(self._load_specifications, specifications_file_paths)
+        self._call_method_with_iterable(self._load_levels, levels_file_paths)
+        self._call_method_with_iterable(self._load_timing, timing_file_paths)
 
     @ivi_synchronized
     def self_test(self):
@@ -2882,7 +2881,7 @@ class Session(_SessionBase):
             file_paths (str or iterable of str): Absolute file path of one or more loaded specifications files.
 
         '''
-        self._file_helper(self._unload_specifications, file_paths)
+        self._call_method_with_iterable(self._unload_specifications, file_paths)
 
     @ivi_synchronized
     def write_source_waveform_site_unique(self, waveform_name, waveform_data):

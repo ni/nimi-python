@@ -8,5 +8,5 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        self._file_helper(self._unload_specifications, file_paths)
+        self._call_method_with_iterable(self._unload_specifications, file_paths)
 
