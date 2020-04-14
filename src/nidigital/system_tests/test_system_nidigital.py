@@ -539,3 +539,20 @@ def test_get_site_pass_fail(multi_instrument_session):
     pass_fail = multi_instrument_session.sites[3, 0].get_site_pass_fail()
     assert pass_fail == {3: True, 0: True}
 
+
+def test_ppmu_measure(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
+        nidigital.enums.PPMUMeasurementType.VOLTAGE)
+
+    assert len(voltage_measurements) == 2
+
+
+def test_ppmu_source(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
+
