@@ -556,3 +556,20 @@ def test_ppmu_source(multi_instrument_session):
 
     multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
 
+
+def test_read_static(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+    assert len(pin_states) == 2
+
+
+def test_write_static(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.pins['site0/LO0', 'site1/HI0'].write_static(
+        nidigital.enums.WriteStaticPinState.ONE)
+
