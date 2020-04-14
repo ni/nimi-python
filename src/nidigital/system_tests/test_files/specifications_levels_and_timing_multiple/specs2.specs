@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Specifications xmlns:f="http://www.ni.com/schemas/Semiconductor/Formula.xsd" schemaVersion="1.0" xmlns="http://www.ni.com/schemas/Semiconductor/Specifications.xsd">
+  <Section name="AC">
+    <f:Formula symbol="Frequency">
+      <f:Definition>1 / AC.Period</f:Definition>
+      <f:Comment>Depends on specs1.specs</f:Comment>
+    </f:Formula>
+  </Section>
+  <Section name="DC">
+    <f:Formula symbol="Offset">
+      <f:Definition>100 mV</f:Definition>
+    </f:Formula>
+  </Section>
+</Specifications>

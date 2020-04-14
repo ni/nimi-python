@@ -2825,6 +2825,37 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
+    def _call_method_with_iterable(self, method, files):
+        if files is None:
+            return
+        if isinstance(files, str):
+            files = [files]
+        for f in files:
+            method(f)
+
+    def load_specifications_levels_and_timing(self, specifications_file_paths=None, levels_file_paths=None, timing_file_paths=None):
+        '''load_specifications_levels_and_timing
+
+        Loads settings in specifications, levels, and timing sheets. These settings are not
+        applied to the digital pattern instrument until apply_levels_and_timing is called.
+
+        If the levels and timing sheets contains formulas, they are evaluated at load time.
+        If the formulas refer to variables, the specifications sheets that define those
+        variables must be loaded either first, or at the same time as the levels and timing sheets.
+
+        Args:
+            specifications_file_paths (str or iterable of str): Absolute file path of one or more specifications files.
+
+            levels_file_paths (str or iterable of str): Absolute file path of one or more levels sheet files.
+
+            timing_file_paths (str or iterable of str): Absolute file path of one or more timing sheet files.
+
+        '''
+        self._call_method_with_iterable(self._load_specifications, specifications_file_paths)
+        self._call_method_with_iterable(self._load_levels, levels_file_paths)
+        self._call_method_with_iterable(self._load_timing, timing_file_paths)
+
+    @ivi_synchronized
     def self_test(self):
         '''self_test
 
@@ -2834,6 +2865,23 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
+
+    @ivi_synchronized
+    def unload_specifications(self, file_paths):
+        '''unload_specifications
+
+        Unloads the given specifications sheets present in the previously loaded
+        specifications files that you select.
+
+        You must call load_specifications_levels_and_timing to reload the files with updated
+        specifications values. You must then call apply_levels_and_timing in order to apply
+        the levels and timing values that reference the updated specifications values.
+
+        Args:
+            file_paths (str or iterable of str): Absolute file path of one or more loaded specifications files.
+
+        '''
+        self._call_method_with_iterable(self._unload_specifications, file_paths)
 
     @ivi_synchronized
     def write_source_waveform_site_unique(self, waveform_name, waveform_data):
@@ -3020,8 +3068,8 @@ class Session(_SessionBase):
         return bool(done_ctype.value)
 
     @ivi_synchronized
-    def load_levels(self, levels_file_path):
-        r'''load_levels
+    def _load_levels(self, levels_file_path):
+        r'''_load_levels
 
         TBD
 
@@ -3068,8 +3116,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_specifications(self, specifications_file_path):
-        r'''load_specifications
+    def _load_specifications(self, specifications_file_path):
+        r'''_load_specifications
 
         TBD
 
@@ -3084,8 +3132,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_timing(self, timing_file_path):
-        r'''load_timing
+    def _load_timing(self, timing_file_path):
+        r'''_load_timing
 
         TBD
 
@@ -3223,8 +3271,8 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def unload_specifications(self, specifications_file_path):
-        r'''unload_specifications
+    def _unload_specifications(self, specifications_file_path):
+        r'''_unload_specifications
 
         TBD
 

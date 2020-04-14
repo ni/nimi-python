@@ -2056,6 +2056,7 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'LoadLevels': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -2110,6 +2111,7 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'LoadSpecifications': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -2128,6 +2130,7 @@ the trigger conditions are met.
         'returns': 'ViStatus'
     },
     'LoadTiming': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -2635,6 +2638,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
         'returns': 'ViStatus'
     },
     'UnloadSpecifications': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
