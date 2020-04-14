@@ -28,7 +28,7 @@
             raise TypeError('${parameter['python_name']} must be numpy.ndarray of dtype=${parameter['numpy_type']}, is ' + str(${parameter['python_name']}.dtype))
 % endfor
 % for parameter in helper.filter_parameters(f, helper.ParameterUsageOptions.LIBRARY_METHOD_CALL):
-%   for declaration in helper.get_ctype_variable_declaration_snippet(parameter, parameters, None, f['python_name'], config, use_numpy_array=parameter['numpy']):
+%   for declaration in helper.get_ctype_variable_declaration_snippet(parameter, parameters, None, config, use_numpy_array=parameter['numpy']):
         ${declaration}
 %   endfor
 % endfor

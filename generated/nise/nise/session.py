@@ -757,7 +757,7 @@ class Session(_SessionBase):
 
         '''
         virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
-        option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
+        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
         vi_ctype = _visatype.ViSession()  # case S220
         error_code = self._library.niSE_OpenSession(virtual_device_name_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
