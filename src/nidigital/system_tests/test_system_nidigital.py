@@ -67,9 +67,9 @@ def test_pins_rep_cap(multi_instrument_session):
     # Methods that accept pin_list parameter
     multi_instrument_session.create_time_set('t0')
     multi_instrument_session.pins['PinA', 'PinB'].configure_time_set_drive_format(
-        time_set='t0',
+        time_set_name='t0',
         drive_format=nidigital.DriveFormat.RL)
-    drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format(time_set='t0')
+    drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format(time_set_name='t0')
     assert drive_format == nidigital.DriveFormat.RL
 
 

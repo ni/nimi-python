@@ -313,42 +313,42 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigurePatternBurstSites']['return']
         return self._defaults['ConfigurePatternBurstSites']['return']
 
-    def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set, strobe_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe(self, vi, pin_list, time_set_name, strobe_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return'] != 0:
             return self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return']
         return self._defaults['ConfigureTimeSetCompareEdgesStrobe']['return']
 
-    def niDigital_ConfigureTimeSetCompareEdgesStrobe2x(self, vi, pin_list, time_set, strobe_edge, strobe2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetCompareEdgesStrobe2x(self, vi, pin_list, time_set_name, strobe_edge, strobe2_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetCompareEdgesStrobe2x']['return'] != 0:
             return self._defaults['ConfigureTimeSetCompareEdgesStrobe2x']['return']
         return self._defaults['ConfigureTimeSetCompareEdgesStrobe2x']['return']
 
-    def niDigital_ConfigureTimeSetDriveEdges(self, vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetDriveEdges']['return'] != 0:
             return self._defaults['ConfigureTimeSetDriveEdges']['return']
         return self._defaults['ConfigureTimeSetDriveEdges']['return']
 
-    def niDigital_ConfigureTimeSetDriveEdges2x(self, vi, pin_list, time_set, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveEdges2x(self, vi, pin_list, time_set_name, format, drive_on_edge, drive_data_edge, drive_return_edge, drive_off_edge, drive_data2_edge, drive_return2_edge):  # noqa: N802
         if self._defaults['ConfigureTimeSetDriveEdges2x']['return'] != 0:
             return self._defaults['ConfigureTimeSetDriveEdges2x']['return']
         return self._defaults['ConfigureTimeSetDriveEdges2x']['return']
 
-    def niDigital_ConfigureTimeSetDriveFormat(self, vi, pin_list, time_set, drive_format):  # noqa: N802
+    def niDigital_ConfigureTimeSetDriveFormat(self, vi, pin_list, time_set_name, drive_format):  # noqa: N802
         if self._defaults['ConfigureTimeSetDriveFormat']['return'] != 0:
             return self._defaults['ConfigureTimeSetDriveFormat']['return']
         return self._defaults['ConfigureTimeSetDriveFormat']['return']
 
-    def niDigital_ConfigureTimeSetEdge(self, vi, pin_list, time_set, edge, time):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdge(self, vi, pin_list, time_set_name, edge, time):  # noqa: N802
         if self._defaults['ConfigureTimeSetEdge']['return'] != 0:
             return self._defaults['ConfigureTimeSetEdge']['return']
         return self._defaults['ConfigureTimeSetEdge']['return']
 
-    def niDigital_ConfigureTimeSetEdgeMultiplier(self, vi, pin_list, time_set, edge_multiplier):  # noqa: N802
+    def niDigital_ConfigureTimeSetEdgeMultiplier(self, vi, pin_list, time_set_name, edge_multiplier):  # noqa: N802
         if self._defaults['ConfigureTimeSetEdgeMultiplier']['return'] != 0:
             return self._defaults['ConfigureTimeSetEdgeMultiplier']['return']
         return self._defaults['ConfigureTimeSetEdgeMultiplier']['return']
 
-    def niDigital_ConfigureTimeSetPeriod(self, vi, time_set, period):  # noqa: N802
+    def niDigital_ConfigureTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         if self._defaults['ConfigureTimeSetPeriod']['return'] != 0:
             return self._defaults['ConfigureTimeSetPeriod']['return']
         return self._defaults['ConfigureTimeSetPeriod']['return']
@@ -733,7 +733,7 @@ class SideEffectsHelper(object):
             site_numbers_ref[i] = self._defaults['GetSiteResultsSiteNumbers']['siteNumbers'][i]
         return self._defaults['GetSiteResultsSiteNumbers']['return']
 
-    def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set, format):  # noqa: N802
+    def niDigital_GetTimeSetDriveFormat(self, vi, pin, time_set_name, format):  # noqa: N802
         if self._defaults['GetTimeSetDriveFormat']['return'] != 0:
             return self._defaults['GetTimeSetDriveFormat']['return']
         # format
@@ -743,7 +743,7 @@ class SideEffectsHelper(object):
             format.contents.value = self._defaults['GetTimeSetDriveFormat']['format']
         return self._defaults['GetTimeSetDriveFormat']['return']
 
-    def niDigital_GetTimeSetEdge(self, vi, pin, time_set, edge, time):  # noqa: N802
+    def niDigital_GetTimeSetEdge(self, vi, pin, time_set_name, edge, time):  # noqa: N802
         if self._defaults['GetTimeSetEdge']['return'] != 0:
             return self._defaults['GetTimeSetEdge']['return']
         # time
@@ -753,7 +753,7 @@ class SideEffectsHelper(object):
             time.contents.value = self._defaults['GetTimeSetEdge']['time']
         return self._defaults['GetTimeSetEdge']['return']
 
-    def niDigital_GetTimeSetEdgeMultiplier(self, vi, pin, time_set, edge_multiplier):  # noqa: N802
+    def niDigital_GetTimeSetEdgeMultiplier(self, vi, pin, time_set_name, edge_multiplier):  # noqa: N802
         if self._defaults['GetTimeSetEdgeMultiplier']['return'] != 0:
             return self._defaults['GetTimeSetEdgeMultiplier']['return']
         # edge_multiplier
@@ -773,7 +773,7 @@ class SideEffectsHelper(object):
         name.value = self._defaults['GetTimeSetName']['name'].encode('ascii')
         return self._defaults['GetTimeSetName']['return']
 
-    def niDigital_GetTimeSetPeriod(self, vi, time_set, period):  # noqa: N802
+    def niDigital_GetTimeSetPeriod(self, vi, time_set_name, period):  # noqa: N802
         if self._defaults['GetTimeSetPeriod']['return'] != 0:
             return self._defaults['GetTimeSetPeriod']['return']
         # period
