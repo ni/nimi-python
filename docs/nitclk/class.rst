@@ -430,6 +430,7 @@ SessionReference
     any nimi-python Session class tclk attribute when the driver supports NI-TClk
 
     .. code:: python
+
         with niscope.Session('dev1') as session:
             session.tclk.sample_clock_delay = .42
 

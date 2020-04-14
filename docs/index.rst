@@ -29,6 +29,7 @@ Refer to your driver documentation for device-specific information and detailed 
    :caption: Drivers
 
    nidcpower
+   nidigital
    nidmm
    nifgen
    niscope
