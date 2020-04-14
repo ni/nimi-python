@@ -7,6 +7,7 @@
 
 %>\
 .. py:module:: ${module_name}
+    :noindex:
 
 .. py:currentmodule:: ${module_name}.Session
 
