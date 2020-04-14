@@ -1,4 +1,5 @@
 .. py:module:: niscope
+    :noindex:
 
 .. py:currentmodule:: niscope.Session
 
