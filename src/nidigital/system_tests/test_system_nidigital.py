@@ -573,3 +573,26 @@ def test_write_static(multi_instrument_session):
     multi_instrument_session.pins['site0/LO0', 'site1/HI0'].write_static(
         nidigital.enums.WriteStaticPinState.ONE)
 
+
+def test_read_sequencer_flag(multi_instrument_session):
+    flag_state = multi_instrument_session.read_sequencer_flag(nidigital.enums.SequencerFlag.FLAG1)
+    assert not flag_state
+
+
+def test_write_sequencer_flag(multi_instrument_session):
+    multi_instrument_session.write_sequencer_flag(
+        nidigital.enums.SequencerFlag.FLAG2,
+        True)
+
+
+def test_read_sequencer_register(multi_instrument_session):
+    register_value = multi_instrument_session.read_sequencer_register(
+        nidigital.enums.SequencerRegister.REGISTER10)
+    assert register_value == 0
+
+
+def test_write_sequencer_register(multi_instrument_session):
+    multi_instrument_session.write_sequencer_register(
+        nidigital.enums.SequencerRegister.REGISTER15,
+        65535)
+
