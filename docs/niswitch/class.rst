@@ -335,15 +335,20 @@ can_connect
 
 
                     Indicates whether a path is valid. Possible values include:
-                    ------------------------------------ :py:data:`~niswitch.PathCapability.PATH_AVAILABLE` 1
-                    :py:data:`~niswitch.PathCapability.PATH_EXISTS` 2 :py:data:`~niswitch.PathCapability.PATH_UNSUPPORTED` 3
-                    :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` 4 :py:data:`~niswitch.PathCapability.SOURCE_CONFLICT` 5
-                    :py:data:`~niswitch.PathCapability.CHANNEL_NOT_AVAILABLE` 6 Notes: (1)
+
+                    - :py:data:`~niswitch.PathCapability.PATH_AVAILABLE` 1
+                    - :py:data:`~niswitch.PathCapability.PATH_EXISTS` 2
+                    - :py:data:`~niswitch.PathCapability.PATH_UNSUPPORTED` 3
+                    - :py:data:`~niswitch.PathCapability.RESOURCE_IN_USE` 4
+                    - :py:data:`~niswitch.PathCapability.SOURCE_CONFLICT` 5
+                    - :py:data:`~niswitch.PathCapability.CHANNEL_NOT_AVAILABLE` 6
+
+                    Notes: (1)
                     :py:data:`~niswitch.PathCapability.PATH_AVAILABLE` indicates that the driver can create the
                     path at this time. (2) :py:data:`~niswitch.PathCapability.PATH_EXISTS` indicates that the
                     path already exists. (3) :py:data:`~niswitch.PathCapability.PATH_UNSUPPORTED` indicates that
                     the instrument is not capable of creating a path between the channels
-                    you specify. (4) :py:data:`~niswitch.NISWITCH_VAL_RSRC_IN_USE` indicates that although
+                    you specify. (4) :py:data:`~niswitch.PathCapability.RESOURCE_IN_USE` indicates that although
                     the path is valid, the driver cannot create the path at this moment
                     because the switch device is currently using one or more of the required
                     channels to create another path. You must destroy the other path before
@@ -355,8 +360,6 @@ can_connect
                     configuration channel and thus unavailable for external connections.
 
                     
-
-                    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
@@ -809,7 +812,7 @@ get_relay_position
 
 
                     Indicates whether the relay is open or closed. :py:data:`~niswitch.RelayPosition.OPEN` 10
-                    NIWITCH_VAL_CLOSED 11
+                    :py:data:`~niswitch.RelayPosition.CLOSED` 11
 
                     
 

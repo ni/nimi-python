@@ -1547,15 +1547,20 @@ class Session(_SessionBase):
 
         Returns:
             path_capability (enums.PathCapability): Indicates whether a path is valid. Possible values include:
-                ------------------------------------ PathCapability.PATH_AVAILABLE 1
-                PathCapability.PATH_EXISTS 2 PathCapability.PATH_UNSUPPORTED 3
-                NISWITCH_VAL_RSRC_IN_USE 4 PathCapability.SOURCE_CONFLICT 5
-                PathCapability.CHANNEL_NOT_AVAILABLE 6 Notes: (1)
+
+                - PathCapability.PATH_AVAILABLE 1
+                - PathCapability.PATH_EXISTS 2
+                - PathCapability.PATH_UNSUPPORTED 3
+                - PathCapability.RESOURCE_IN_USE 4
+                - PathCapability.SOURCE_CONFLICT 5
+                - PathCapability.CHANNEL_NOT_AVAILABLE 6
+
+                Notes: (1)
                 PathCapability.PATH_AVAILABLE indicates that the driver can create the
                 path at this time. (2) PathCapability.PATH_EXISTS indicates that the
                 path already exists. (3) PathCapability.PATH_UNSUPPORTED indicates that
                 the instrument is not capable of creating a path between the channels
-                you specify. (4) NISWITCH_VAL_RSRC_IN_USE indicates that although
+                you specify. (4) PathCapability.RESOURCE_IN_USE indicates that although
                 the path is valid, the driver cannot create the path at this moment
                 because the switch device is currently using one or more of the required
                 channels to create another path. You must destroy the other path before
@@ -1565,9 +1570,6 @@ class Session(_SessionBase):
                 PathCapability.CHANNEL_NOT_AVAILABLE indicates that the driver cannot
                 create a path between the two channels because one of the channels is a
                 configuration channel and thus unavailable for external connections.
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1905,7 +1907,7 @@ class Session(_SessionBase):
 
         Returns:
             relay_position (enums.RelayPosition): Indicates whether the relay is open or closed. RelayPosition.OPEN 10
-                NIWITCH_VAL_CLOSED 11
+                RelayPosition.CLOSED 11
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
