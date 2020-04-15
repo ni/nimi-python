@@ -564,7 +564,7 @@ def test_read_static(multi_instrument_session):
 
     pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
 
-    assert len(pin_states) == 2
+    assert pin_states == [nidigital.enums.PinState.L] * 2
 
 
 def test_write_static(multi_instrument_session):
@@ -577,7 +577,7 @@ def test_write_static(multi_instrument_session):
 
 def test_read_sequencer_flag(multi_instrument_session):
     flag_state = multi_instrument_session.read_sequencer_flag(nidigital.enums.SequencerFlag.FLAG1)
-    assert not flag_state
+    assert flag_state is False
 
 
 def test_write_sequencer_flag(multi_instrument_session):
