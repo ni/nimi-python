@@ -2018,7 +2018,7 @@ functions = {
                 },
                 'is_repeated_capability': False,
                 'name': 'channelName',
-                'python_api_converter_name': 'convert_repeated_capabilities_from_init',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
                 'type': 'ViString',
                 'type_in_documentation': 'str, list, range, tuple'
             },

@@ -121,14 +121,20 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     return [prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)]
 
 
-def convert_repeated_capabilities_from_init(repeated_capability):
-    '''Convert a repeated capabilities object to a comma delimited list
-
-    Parameter list is so it can be called from the code generated __init__(). We know it is for channels when called
-    this was so we use a prefix of ''
+def convert_repeated_capabilities_without_prefix(repeated_capability):
+    '''Convert a repeated capabilities object, without any prefix, to a comma delimited list
 
     Args:
-        repeated_capability (str, list, tuple, slice, None) -
+        repeated_capability - Supported types:
+            - str - list (comma-delimited)
+            - str - range (using '-' or ':')
+            - str - single item
+            - int
+            - list of str
+            - tuple or str
+            - range or str
+            - slice or str
+            - None
 
     Returns:
         rep_cap (str) - comma delimited string of each repeated capability item with ranges expanded
