@@ -3068,18 +3068,18 @@ class Session(_SessionBase):
         return bool(done_ctype.value)
 
     @ivi_synchronized
-    def _load_levels(self, levels_file_path):
+    def _load_levels(self, file_path):
         r'''_load_levels
 
         TBD
 
         Args:
-            levels_file_path (str):
+            file_path (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        levels_file_path_ctype = ctypes.create_string_buffer(levels_file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadLevels(vi_ctype, levels_file_path_ctype)
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadLevels(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3100,50 +3100,50 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def load_pin_map(self, pin_map_file_path):
+    def load_pin_map(self, file_path):
         r'''load_pin_map
 
         TBD
 
         Args:
-            pin_map_file_path (str):
+            file_path (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        pin_map_file_path_ctype = ctypes.create_string_buffer(pin_map_file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadPinMap(vi_ctype, pin_map_file_path_ctype)
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadPinMap(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def _load_specifications(self, specifications_file_path):
+    def _load_specifications(self, file_path):
         r'''_load_specifications
 
         TBD
 
         Args:
-            specifications_file_path (str):
+            file_path (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        specifications_file_path_ctype = ctypes.create_string_buffer(specifications_file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadSpecifications(vi_ctype, specifications_file_path_ctype)
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadSpecifications(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
     @ivi_synchronized
-    def _load_timing(self, timing_file_path):
+    def _load_timing(self, file_path):
         r'''_load_timing
 
         TBD
 
         Args:
-            timing_file_path (str):
+            file_path (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        timing_file_path_ctype = ctypes.create_string_buffer(timing_file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_LoadTiming(vi_ctype, timing_file_path_ctype)
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_LoadTiming(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -3271,18 +3271,18 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def _unload_specifications(self, specifications_file_path):
+    def _unload_specifications(self, file_path):
         r'''_unload_specifications
 
         TBD
 
         Args:
-            specifications_file_path (str):
+            file_path (str):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        specifications_file_path_ctype = ctypes.create_string_buffer(specifications_file_path.encode(self._encoding))  # case C020
-        error_code = self._library.niDigital_UnloadSpecifications(vi_ctype, specifications_file_path_ctype)
+        file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
+        error_code = self._library.niDigital_UnloadSpecifications(vi_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
