@@ -573,7 +573,7 @@ def test_specifications_levels_and_timing_single(multi_instrument_session):
     levels = get_test_file_path('specifications_levels_and_timing_single', 'levels.digilevels')
     timing = get_test_file_path('specifications_levels_and_timing_single', 'timing.digitiming')
 
-    multi_instrument_session.load_pin_map(pin_map_file_path=pinmap)
+    multi_instrument_session.load_pin_map(file_path=pinmap)
     multi_instrument_session.load_specifications_levels_and_timing(
         specifications_file_paths=specs,
         levels_file_paths=levels,
@@ -606,7 +606,7 @@ def test_specifications_levels_and_timing_multiple(multi_instrument_session):
     timing1 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing1.digitiming')
     timing2 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing2.digitiming')
 
-    multi_instrument_session.load_pin_map(pin_map_file_path=pinmap)
+    multi_instrument_session.load_pin_map(file_path=pinmap)
     multi_instrument_session.load_specifications_levels_and_timing(
         specifications_file_paths=[specs1, specs2],  # list
         levels_file_paths=(levels1, levels2),  # tuple
@@ -640,7 +640,7 @@ def test_specifications_levels_and_timing_load_sequentially(multi_instrument_ses
     timing1 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing1.digitiming')
     timing2 = get_test_file_path('specifications_levels_and_timing_multiple', 'timing2.digitiming')
 
-    multi_instrument_session.load_pin_map(pin_map_file_path=pinmap)
+    multi_instrument_session.load_pin_map(file_path=pinmap)
 
     # Load just the specs files first, in two separate calls
     multi_instrument_session.load_specifications_levels_and_timing(specifications_file_paths=specs1)

@@ -2099,7 +2099,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'levelsFilePath',
+                'name': 'filePath',
                 'type': 'ViConstString'
             }
         ],
@@ -2135,7 +2135,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'pinMapFilePath',
+                'name': 'filePath',
                 'type': 'ViConstString'
             }
         ],
@@ -2154,7 +2154,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'specificationsFilePath',
+                'name': 'filePath',
                 'type': 'ViConstString'
             }
         ],
@@ -2173,7 +2173,7 @@ the trigger conditions are met.
             },
             {
                 'direction': 'in',
-                'name': 'timingFilePath',
+                'name': 'filePath',
                 'type': 'ViConstString'
             }
         ],
@@ -2681,7 +2681,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
             },
             {
                 'direction': 'in',
-                'name': 'specificationsFilePath',
+                'name': 'filePath',
                 'type': 'ViConstString'
             }
         ],

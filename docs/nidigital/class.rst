@@ -1747,7 +1747,7 @@ load_pin_map
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: load_pin_map(pin_map_file_path)
+    .. py:method:: load_pin_map(file_path)
 
             TBD
 
@@ -1755,13 +1755,13 @@ load_pin_map
 
 
 
-            :param pin_map_file_path:
+            :param file_path:
 
 
                 
 
 
-            :type pin_map_file_path: str
+            :type file_path: str
 
 load_specifications_levels_and_timing
 -------------------------------------

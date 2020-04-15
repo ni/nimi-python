@@ -586,13 +586,13 @@ class Library(object):
                 self.niDigital_IsSiteEnabled_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_IsSiteEnabled_cfunc(vi, site, enable)
 
-    def niDigital_LoadLevels(self, vi, levels_file_path):  # noqa: N802
+    def niDigital_LoadLevels(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadLevels_cfunc is None:
                 self.niDigital_LoadLevels_cfunc = self._library.niDigital_LoadLevels
                 self.niDigital_LoadLevels_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_LoadLevels_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_LoadLevels_cfunc(vi, levels_file_path)
+        return self.niDigital_LoadLevels_cfunc(vi, file_path)
 
     def niDigital_LoadPattern(self, vi, file_path):  # noqa: N802
         with self._func_lock:
@@ -602,29 +602,29 @@ class Library(object):
                 self.niDigital_LoadPattern_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_LoadPattern_cfunc(vi, file_path)
 
-    def niDigital_LoadPinMap(self, vi, pin_map_file_path):  # noqa: N802
+    def niDigital_LoadPinMap(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadPinMap_cfunc is None:
                 self.niDigital_LoadPinMap_cfunc = self._library.niDigital_LoadPinMap
                 self.niDigital_LoadPinMap_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_LoadPinMap_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_LoadPinMap_cfunc(vi, pin_map_file_path)
+        return self.niDigital_LoadPinMap_cfunc(vi, file_path)
 
-    def niDigital_LoadSpecifications(self, vi, specifications_file_path):  # noqa: N802
+    def niDigital_LoadSpecifications(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadSpecifications_cfunc is None:
                 self.niDigital_LoadSpecifications_cfunc = self._library.niDigital_LoadSpecifications
                 self.niDigital_LoadSpecifications_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_LoadSpecifications_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_LoadSpecifications_cfunc(vi, specifications_file_path)
+        return self.niDigital_LoadSpecifications_cfunc(vi, file_path)
 
-    def niDigital_LoadTiming(self, vi, timing_file_path):  # noqa: N802
+    def niDigital_LoadTiming(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_LoadTiming_cfunc is None:
                 self.niDigital_LoadTiming_cfunc = self._library.niDigital_LoadTiming
                 self.niDigital_LoadTiming_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_LoadTiming_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_LoadTiming_cfunc(vi, timing_file_path)
+        return self.niDigital_LoadTiming_cfunc(vi, file_path)
 
     def niDigital_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
@@ -754,13 +754,13 @@ class Library(object):
                 self.niDigital_UnloadAllPatterns_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_UnloadAllPatterns_cfunc(vi, unload_keep_alive_pattern)
 
-    def niDigital_UnloadSpecifications(self, vi, specifications_file_path):  # noqa: N802
+    def niDigital_UnloadSpecifications(self, vi, file_path):  # noqa: N802
         with self._func_lock:
             if self.niDigital_UnloadSpecifications_cfunc is None:
                 self.niDigital_UnloadSpecifications_cfunc = self._library.niDigital_UnloadSpecifications
                 self.niDigital_UnloadSpecifications_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_UnloadSpecifications_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_UnloadSpecifications_cfunc(vi, specifications_file_path)
+        return self.niDigital_UnloadSpecifications_cfunc(vi, file_path)
 
     def niDigital_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:

@@ -818,7 +818,7 @@ class SideEffectsHelper(object):
             enable.contents.value = self._defaults['IsSiteEnabled']['enable']
         return self._defaults['IsSiteEnabled']['return']
 
-    def niDigital_LoadLevels(self, vi, levels_file_path):  # noqa: N802
+    def niDigital_LoadLevels(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadLevels']['return'] != 0:
             return self._defaults['LoadLevels']['return']
         return self._defaults['LoadLevels']['return']
@@ -828,17 +828,17 @@ class SideEffectsHelper(object):
             return self._defaults['LoadPattern']['return']
         return self._defaults['LoadPattern']['return']
 
-    def niDigital_LoadPinMap(self, vi, pin_map_file_path):  # noqa: N802
+    def niDigital_LoadPinMap(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadPinMap']['return'] != 0:
             return self._defaults['LoadPinMap']['return']
         return self._defaults['LoadPinMap']['return']
 
-    def niDigital_LoadSpecifications(self, vi, specifications_file_path):  # noqa: N802
+    def niDigital_LoadSpecifications(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadSpecifications']['return'] != 0:
             return self._defaults['LoadSpecifications']['return']
         return self._defaults['LoadSpecifications']['return']
 
-    def niDigital_LoadTiming(self, vi, timing_file_path):  # noqa: N802
+    def niDigital_LoadTiming(self, vi, file_path):  # noqa: N802
         if self._defaults['LoadTiming']['return'] != 0:
             return self._defaults['LoadTiming']['return']
         return self._defaults['LoadTiming']['return']
@@ -983,7 +983,7 @@ class SideEffectsHelper(object):
             return self._defaults['UnloadAllPatterns']['return']
         return self._defaults['UnloadAllPatterns']['return']
 
-    def niDigital_UnloadSpecifications(self, vi, specifications_file_path):  # noqa: N802
+    def niDigital_UnloadSpecifications(self, vi, file_path):  # noqa: N802
         if self._defaults['UnloadSpecifications']['return'] != 0:
             return self._defaults['UnloadSpecifications']['return']
         return self._defaults['UnloadSpecifications']['return']
