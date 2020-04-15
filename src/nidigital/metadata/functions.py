@@ -1368,6 +1368,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -1402,7 +1403,7 @@ functions = {
     },
     'GetChannelNameFromString': {
         'documentation': {
-            'description': 'TBD'
+            'description': '\nReturns a list of channel names for given channel indices.',
         },
         'parameters': [
             {
@@ -1412,8 +1413,31 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'index',
-                'type': 'ViConstString'
+                'documentation': {
+                    'description': """\nSpecifies indices for the channels in the session.
+Valid values are from zero to the total number of channels in the session minus one.
+The following types and formats are supported:
+  - Basic Sequence types
+    - list - for example, [0, 2, 3, 1]
+    - tuple - for example, (0, 2, 3, 1)
+    - range - for example, range(0, 15, 2)
+  - slice - for example, slice(0, 15, 2)
+  - str
+    - A comma-separated list - for example, "0,2,3,1"
+    - A range using a hyphen - for example, "0-3"
+    - A range using a colon - for example, "0:3"
+  - int - for example, 0
+    
+The input can contain any combination of above types. Both out-of-order and repeated indices are
+supported ("2,3,0", "1,2,2,3"). White space characters, including spaces, tabs, feeds, and
+carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
+
+"""
+                },
+                'name': 'indices',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str or int',
             },
             {
                 'direction': 'in',
@@ -1422,14 +1446,20 @@ functions = {
             },
             {
                 'direction': 'out',
-                'name': 'name',
+                'documentation': {
+                    'description': '\nChannel names'
+                },
+                'name': 'names',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'nameBufferSize'
                 },
-                'type': 'ViChar[]'
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
             }
         ],
+        'python_name': 'get_channel_names',
         'returns': 'ViStatus'
     },
     'GetError': {
@@ -1616,7 +1646,8 @@ the trigger conditions are met.
                     'mechanism': 'ivi-dance',
                     'value': 'pinListBufferSize'
                 },
-                'type': 'ViChar[]'
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
             }
         ],
         'python_name': 'get_pattern_pin_names',

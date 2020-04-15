@@ -434,13 +434,13 @@ class Library(object):
                 self.niDigital_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetChannelName_cfunc(vi, index, name_buffer_size, name)
 
-    def niDigital_GetChannelNameFromString(self, vi, index, name_buffer_size, name):  # noqa: N802
+    def niDigital_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
         with self._func_lock:
             if self.niDigital_GetChannelNameFromString_cfunc is None:
                 self.niDigital_GetChannelNameFromString_cfunc = self._library.niDigital_GetChannelNameFromString
                 self.niDigital_GetChannelNameFromString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_GetChannelNameFromString_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetChannelNameFromString_cfunc(vi, index, name_buffer_size, name)
+        return self.niDigital_GetChannelNameFromString_cfunc(vi, indices, name_buffer_size, names)
 
     def niDigital_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:

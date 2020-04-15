@@ -1243,59 +1243,50 @@ frequency_counter_measure_frequency
 
 
 
-get_channel_name
-----------------
+get_channel_names
+-----------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: get_channel_name(index)
+    .. py:method:: get_channel_names(indices)
 
-            TBD
+            Returns a list of channel names for given channel indices.
 
             
 
 
 
-            :param index:
+            :param indices:
 
 
-                
+                Specifies indices for the channels in the session.
+                Valid values are from zero to the total number of channels in the session minus one.
+                The following types and formats are supported:
+                  - Basic Sequence types
+                    - list - for example, [0, 2, 3, 1]
+                    - tuple - for example, (0, 2, 3, 1)
+                    - range - for example, range(0, 15, 2)
+                  - slice - for example, slice(0, 15, 2)
+                  - str
+                    - A comma-separated list - for example, "0,2,3,1"
+                    - A range using a hyphen - for example, "0-3"
+                    - A range using a colon - for example, "0:3"
+                  - int - for example, 0
 
-
-            :type index: int
-
-            :rtype: str
-            :return:
-
-
-                    
-
-
-
-get_channel_name_from_string
-----------------------------
-
-    .. py:currentmodule:: nidigital.Session
-
-    .. py:method:: get_channel_name_from_string(index)
-
-            TBD
-
-            
-
-
-
-            :param index:
-
+                The input can contain any combination of above types. Both out-of-order and repeated indices are
+                supported ("2,3,0", "1,2,2,3"). White space characters, including spaces, tabs, feeds, and
+                carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
 
                 
 
 
-            :type index: str
+            :type indices: basic sequence types or str or int
 
-            :rtype: str
+            :rtype: list of str
             :return:
 
+
+                    Channel names
 
                     
 
@@ -1427,7 +1418,7 @@ get_pattern_pin_names
 
             :type start_label: str
 
-            :rtype: str
+            :rtype: list of str
             :return:
 
 
