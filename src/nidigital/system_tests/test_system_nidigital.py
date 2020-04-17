@@ -558,6 +558,32 @@ def test_ppmu_source(multi_instrument_session):
     multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
 
 
+def test_configure_voltage_levels(multi_instrument_session):
+    assert round(multi_instrument_session.vil) == 0
+    assert round(multi_instrument_session.vih) == 3
+    assert round(multi_instrument_session.vol) == 2
+    assert round(multi_instrument_session.voh) == 2
+    assert round(multi_instrument_session.vterm) == 2
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_voltage_levels(1, 2, 3, 4, 5)
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].vil) == 1
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].vih) == 2
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].vol) == 3
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].voh) == 4
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].vterm) == 5
+
+
+def test_configure_active_load_levels(multi_instrument_session):
+    assert round(multi_instrument_session.active_load_iol, 4) == 0.0015
+    assert round(multi_instrument_session.active_load_ioh, 4) == -0.0015
+    assert round(multi_instrument_session.active_load_vcom) == 2
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_active_load_levels(.024, -0.024, 3)
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_iol, 3) == 0.024
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_ioh, 3) == -0.024
+    assert round(multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_vcom) == 3
+
+
 def test_specifications_levels_and_timing_single(multi_instrument_session):
     pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
     specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
