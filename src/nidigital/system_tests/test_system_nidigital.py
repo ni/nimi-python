@@ -566,6 +566,44 @@ def test_ppmu_source(multi_instrument_session):
     multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
 
 
+def test_read_static(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+    assert pin_states == [nidigital.PinState.L] * 2
+
+
+def test_write_static(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.pins['site0/LO0', 'site1/HI0'].write_static(
+        nidigital.WriteStaticPinState.ONE)
+
+
+def test_read_sequencer_flag(multi_instrument_session):
+    flag_state = multi_instrument_session.read_sequencer_flag(nidigital.SequencerFlag.FLAG1)
+    assert flag_state is False
+
+
+def test_write_sequencer_flag(multi_instrument_session):
+    multi_instrument_session.write_sequencer_flag(nidigital.SequencerFlag.FLAG2, True)
+
+
+def test_read_sequencer_register(multi_instrument_session):
+    register_value = multi_instrument_session.read_sequencer_register(
+        nidigital.SequencerRegister.REGISTER10)
+    assert register_value == 0
+
+
+def test_write_sequencer_register(multi_instrument_session):
+    multi_instrument_session.write_sequencer_register(
+        nidigital.SequencerRegister.REGISTER15,
+        65535)
+
+
 def test_specifications_levels_and_timing_single(multi_instrument_session):
     pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
     specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
