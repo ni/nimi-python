@@ -1420,9 +1420,9 @@ referenced by their fully-qualified names, for example, PXI1Slot3/0.
                     'description': """\nSpecifies indices for the channels in the session.
 Valid values are from zero to the total number of channels in the session minus one.
 The following types and formats are supported:
-  - int - for example, 0
-  - Basic sequence types (list, tuple, range, slice) - for example, [0, range(2, 4)]
-  - str - for example, "0, 2, 3, 1", "0-3", "0:3"
+  - int - example: 0
+  - Basic sequence - example: [0, range(2, 4)]
+  - str - example: "0, 2, 3, 1", "0-3", "0:3"
     
 The input can contain any combination of above types. Both out-of-order and repeated indices are
 supported ([2,3,0], [1,2,2,3]). White space characters, including spaces, tabs, feeds, and
