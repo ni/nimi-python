@@ -589,11 +589,11 @@ def test_configure_get_time_set_period(multi_instrument_session):
 
 def test_configure_get_time_set_drive_format(multi_instrument_session):
     time_set_name = 'time_set_abc'
-    time_set_drive_format = nidigital.enums.DriveFormat.SBC
+    time_set_drive_format = nidigital.DriveFormat.SBC
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
     multi_instrument_session.create_time_set(time_set_name)
-    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == nidigital.enums.DriveFormat.NR
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == nidigital.DriveFormat.NR
     multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_drive_format(time_set_name, time_set_drive_format)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == time_set_drive_format
 
@@ -614,7 +614,7 @@ def test_configure_get_time_set_edge(multi_instrument_session):
 def test_time_set_edges(multi_instrument_session):
     time_set_name = 'time_set_abc'
     time_set_period = datetime.timedelta(microseconds=10)
-    time_set_drive_format = nidigital.enums.DriveFormat.RL
+    time_set_drive_format = nidigital.DriveFormat.RL
     time_set_drive_on = time_set_period * 0.1
     time_set_drive_data = time_set_period * 0.2
     time_set_drive_return = time_set_period * 0.8
@@ -656,7 +656,7 @@ def test_time_set_edges(multi_instrument_session):
 def test_time_set_edges2x(multi_instrument_session):
     time_set_name = 'time_set_abc'
     time_set_period = datetime.timedelta(microseconds=10)
-    time_set_drive_format = nidigital.enums.DriveFormat.RL
+    time_set_drive_format = nidigital.DriveFormat.RL
     time_set_drive_on = time_set_period * 0.1
     time_set_drive_data = time_set_period * 0.2
     time_set_drive_return = time_set_period * 0.5
