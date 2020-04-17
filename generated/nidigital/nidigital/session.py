@@ -1471,8 +1471,9 @@ class _SessionBase(object):
         pin_infos = []
         for i in range(len(pin_indexes)):
             pin_name = "" if pin_indexes[i] == -1 else self._get_pin_name(pin_indexes[i])
-            channel_name = self._get_channel_name(channel_indexes[i])
-            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
+            channel_names = self.get_channel_names(channel_indexes[i] - 1)  # channel_indexes are 1-based
+            assert 1 == len(channel_names)
+            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_names[0]))
 
         return pin_infos
 
@@ -1794,30 +1795,42 @@ class _SessionBase(object):
         return value_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
-    def _get_channel_name(self, index):
-        r'''_get_channel_name
+    def get_channel_names(self, indices):
+        r'''get_channel_names
 
-        TBD
+        Returns a list of channel names for given channel indices.
+
+        This is useful in multi-instrument sessions, where channels are expected to be
+        referenced by their fully-qualified names, for example, PXI1Slot3/0.
 
         Args:
-            index (int):
+            indices (basic sequence types or str or int): Specifies indices for the channels in the session.
+                Valid values are from zero to the total number of channels in the session minus one.
+                The following types and formats are supported:
+                  - int - for example, 0
+                  - Basic sequence types (list, tuple, range, slice) - for example, [0, range(2, 4)]
+                  - str - for example, "0, 2, 3, 1", "0-3", "0:3"
+
+                The input can contain any combination of above types. Both out-of-order and repeated indices are
+                supported ([2,3,0], [1,2,2,3]). White space characters, including spaces, tabs, feeds, and
+                carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
 
 
         Returns:
-            name (str):
+            names (list of str): Channel names
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
+        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
         name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        name_ctype = None  # case C050
-        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        names_ctype = None  # case C050
+        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        name_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetChannelName(vi_ctype, index_ctype, name_buffer_size_ctype, name_ctype)
+        names_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_ctype.value.decode(self._encoding)
+        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
     def _get_error(self):
         r'''_get_error
@@ -2938,48 +2951,6 @@ class Session(_SessionBase):
             i += 1
 
         self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
-
-    @ivi_synchronized
-    def get_channel_names(self, indices):
-        r'''get_channel_names
-
-        Returns a list of channel names for given channel indices.
-
-        Args:
-            indices (basic sequence types or str or int): Specifies indices for the channels in the session.
-                Valid values are from zero to the total number of channels in the session minus one.
-                The following types and formats are supported:
-                  - Basic Sequence types
-                    - list - for example, [0, 2, 3, 1]
-                    - tuple - for example, (0, 2, 3, 1)
-                    - range - for example, range(0, 15, 2)
-                  - slice - for example, slice(0, 15, 2)
-                  - str
-                    - A comma-separated list - for example, "0,2,3,1"
-                    - A range using a hyphen - for example, "0-3"
-                    - A range using a colon - for example, "0:3"
-                  - int - for example, 0
-
-                The input can contain any combination of above types. Both out-of-order and repeated indices are
-                supported ("2,3,0", "1,2,2,3"). White space characters, including spaces, tabs, feeds, and
-                carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
-
-
-        Returns:
-            names (list of str): Channel names
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        indices_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(indices).encode(self._encoding))  # case C040
-        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        names_ctype = None  # case C050
-        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        names_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niDigital_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return _converters.convert_comma_separated_string_to_list(names_ctype.value.decode(self._encoding))
 
     @ivi_synchronized
     def get_pattern_pin_names(self, start_label):

@@ -1252,6 +1252,9 @@ get_channel_names
 
             Returns a list of channel names for given channel indices.
 
+            This is useful in multi-instrument sessions, where channels are expected to be
+            referenced by their fully-qualified names, for example, PXI1Slot3/0.
+
             
 
 
@@ -1262,19 +1265,12 @@ get_channel_names
                 Specifies indices for the channels in the session.
                 Valid values are from zero to the total number of channels in the session minus one.
                 The following types and formats are supported:
-                  - Basic Sequence types
-                    - list - for example, [0, 2, 3, 1]
-                    - tuple - for example, (0, 2, 3, 1)
-                    - range - for example, range(0, 15, 2)
-                  - slice - for example, slice(0, 15, 2)
-                  - str
-                    - A comma-separated list - for example, "0,2,3,1"
-                    - A range using a hyphen - for example, "0-3"
-                    - A range using a colon - for example, "0:3"
                   - int - for example, 0
+                  - Basic sequence types (list, tuple, range, slice) - for example, [0, range(2, 4)]
+                  - str - for example, "0, 2, 3, 1", "0-3", "0:3"
 
                 The input can contain any combination of above types. Both out-of-order and repeated indices are
-                supported ("2,3,0", "1,2,2,3"). White space characters, including spaces, tabs, feeds, and
+                supported ([2,3,0], [1,2,2,3]). White space characters, including spaces, tabs, feeds, and
                 carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
 
                 

@@ -59,7 +59,6 @@ class Library(object):
         self.niDigital_GetAttributeViInt64_cfunc = None
         self.niDigital_GetAttributeViReal64_cfunc = None
         self.niDigital_GetAttributeViString_cfunc = None
-        self.niDigital_GetChannelName_cfunc = None
         self.niDigital_GetChannelNameFromString_cfunc = None
         self.niDigital_GetError_cfunc = None
         self.niDigital_GetFailCount_cfunc = None
@@ -425,14 +424,6 @@ class Library(object):
                 self.niDigital_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_GetAttributeViString_cfunc(vi, channel_name, attribute, buffer_size, value)
-
-    def niDigital_GetChannelName(self, vi, index, name_buffer_size, name):  # noqa: N802
-        with self._func_lock:
-            if self.niDigital_GetChannelName_cfunc is None:
-                self.niDigital_GetChannelName_cfunc = self._library.niDigital_GetChannelName
-                self.niDigital_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niDigital_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
-        return self.niDigital_GetChannelName_cfunc(vi, index, name_buffer_size, name)
 
     def niDigital_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
         with self._func_lock:
