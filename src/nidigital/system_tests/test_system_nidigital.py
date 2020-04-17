@@ -570,6 +570,15 @@ def test_clock_generator_generate_clock(multi_instrument_session):
         True)
 
 
+def test_frequency_counter_measure_frequency(multi_instrument_session):
+    measurement_time = datetime.timedelta(milliseconds=5)
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].selected_function = nidigital.enums.SelectedFunction.DIGITAL
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].frequency_counter_measurement_time = measurement_time
+    frequencies = multi_instrument_session.pins['site0/PinA', 'site1/PinC'].frequency_counter_measure_frequency()
+    assert frequencies == [0] * 2
+
+
 def test_specifications_levels_and_timing_single(multi_instrument_session):
     pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
     specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
