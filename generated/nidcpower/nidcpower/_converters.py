@@ -131,9 +131,9 @@ def convert_repeated_capabilities_without_prefix(repeated_capability):
             - str - single item
             - int
             - list of str
-            - tuple or str
-            - range or str
-            - slice or str
+            - tuple of str
+            - range of str
+            - slice of str
             - None
 
     Returns:
