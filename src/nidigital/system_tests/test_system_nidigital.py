@@ -90,13 +90,13 @@ def test_instruments_rep_cap(multi_instrument_session):
 
 
 def test_property_boolean(multi_instrument_session):
-    channel = multi_instrument_session.get_channel_name(index=42)
+    channel = multi_instrument_session.get_channel_names(indices=42)
     multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range = True
     assert multi_instrument_session.channels[channel].ppmu_allow_extended_voltage_range is True
 
 
 def test_property_int32(multi_instrument_session):
-    channel = multi_instrument_session.get_channel_name(index=42)
+    channel = multi_instrument_session.get_channel_names(indices=42)
     multi_instrument_session.channels[channel].termination_mode = nidigital.TerminationMode.HIGH_Z
     assert multi_instrument_session.channels[channel].termination_mode == nidigital.TerminationMode.HIGH_Z
 
@@ -107,7 +107,7 @@ def test_property_int64(multi_instrument_session):
 
 
 def test_property_real64(multi_instrument_session):
-    channel = multi_instrument_session.get_channel_name(index=42)
+    channel = multi_instrument_session.get_channel_names(indices=42)
     multi_instrument_session.channels[channel].ppmu_voltage_level = 4
     assert multi_instrument_session.channels[channel].ppmu_voltage_level == pytest.approx(4, rel=1e-3)
 
@@ -117,20 +117,28 @@ def test_property_string(multi_instrument_session):
     assert multi_instrument_session.start_label == 'foo'
 
 
+def test_get_channel_names(multi_instrument_session):
+    expected_string = ['{0}/{1}'.format(instruments[0], x) for x in range(12)]
+    # Sanity test few different types of input. No need for test to be exhaustive
+    # since all the various types are covered by converter unit tests.
+    channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
+    assert multi_instrument_session.get_channel_names(indices=channel_indices) == expected_string
+
+
 def test_tdr_all_channels(multi_instrument_session):
     applied_offsets = multi_instrument_session.tdr(apply_offsets=False)
     assert len(applied_offsets) == multi_instrument_session.channel_count
 
     multi_instrument_session.apply_tdr_offsets(applied_offsets)
 
-    channels = [multi_instrument_session.get_channel_name(i) for i in
-                range(1, multi_instrument_session.channel_count + 1)]
+    channels = [multi_instrument_session.get_channel_names(i) for i in
+                range(0, multi_instrument_session.channel_count)]
     fetched_offsets = [multi_instrument_session.channels[i].tdr_offset for i in channels]
     assert fetched_offsets == applied_offsets
 
 
 def test_tdr_some_channels(multi_instrument_session):
-    channels = [multi_instrument_session.get_channel_name(i) for i in [64, 1, 50, 25]]
+    channels = [multi_instrument_session.get_channel_names(i) for i in [63, 0, 49, 24]]
     applied_offsets = multi_instrument_session.channels[channels].tdr(apply_offsets=False)
     assert len(applied_offsets) == len(channels)
 
@@ -556,6 +564,44 @@ def test_ppmu_source(multi_instrument_session):
     configure_session(multi_instrument_session, test_name)
 
     multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
+
+
+def test_read_static(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+    assert pin_states == [nidigital.PinState.L] * 2
+
+
+def test_write_static(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+
+    multi_instrument_session.pins['site0/LO0', 'site1/HI0'].write_static(
+        nidigital.WriteStaticPinState.ONE)
+
+
+def test_read_sequencer_flag(multi_instrument_session):
+    flag_state = multi_instrument_session.read_sequencer_flag(nidigital.SequencerFlag.FLAG1)
+    assert flag_state is False
+
+
+def test_write_sequencer_flag(multi_instrument_session):
+    multi_instrument_session.write_sequencer_flag(nidigital.SequencerFlag.FLAG2, True)
+
+
+def test_read_sequencer_register(multi_instrument_session):
+    register_value = multi_instrument_session.read_sequencer_register(
+        nidigital.SequencerRegister.REGISTER10)
+    assert register_value == 0
+
+
+def test_write_sequencer_register(multi_instrument_session):
+    multi_instrument_session.write_sequencer_register(
+        nidigital.SequencerRegister.REGISTER15,
+        65535)
 
 
 def test_clock_generator_abort(multi_instrument_session):
