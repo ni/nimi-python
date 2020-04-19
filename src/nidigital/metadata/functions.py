@@ -55,22 +55,37 @@ functions = {
                 'type': 'ViConstString'
             },
             {
-                'default_value': '""',
+                'default_value': 'None',
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Pins or pin groups to initialize to a high state.'
+                },
                 'name': 'initialStateHighPins',
-                'type': 'ViConstString'
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str',
             },
             {
-                'default_value': '""',
+                'default_value': 'None',
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Pins or pin groups to initialize to a low state.'
+                },
                 'name': 'initialStateLowPins',
-                'type': 'ViConstString'
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str',
             },
             {
-                'default_value': '""',
+                'default_value': 'None',
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Pins or pin groups to initialize to a non-drive state (X).'
+                },
                 'name': 'initialStateTristatePins',
-                'type': 'ViConstString'
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str',
             }
         ],
         'returns': 'ViStatus'

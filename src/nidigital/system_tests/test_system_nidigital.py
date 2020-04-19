@@ -706,3 +706,11 @@ def test_specifications_levels_and_timing_load_sequentially(multi_instrument_ses
         assert e.code == -1074118494
         assert e.description.find('An error occurred while getting values from a levels sheet.') != -1
 
+
+def test_apply_levels_and_timing_initial_states(multi_instrument_session):
+    configure_session(multi_instrument_session, 'simple_pattern')
+    multi_instrument_session.sites[0, 2].apply_levels_and_timing(
+        levels_sheet='pin_levels',
+        timing_sheet='timing',
+        initial_state_high_pins=['HI0', 'LowPins'],
+        initial_state_tristate_pins='HI1, HI2')
