@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
         * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
         * Support for `instruments` repeated capability in the following properties - `instrument_firmware_revision`, `serial_number`, and `timing_absolute_delay` -  [#1228](https://github.com/ni/nimi-python/issues/1228) 
         * `load_specifications_levels_and_timing` that allows loading of multiple specs, levels, and/or timing files in a single call - [#1392](https://github.com/ni/nimi-python/issues/1392)
+        * `get_channel_names` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
     * #### Changed
         * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
         * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
@@ -60,6 +61,7 @@ All notable changes to this project will be documented in this file.
         * `clear_error` - [#1366](https://github.com/ni/nimi-python/issues/1366) 
         * `clock_generator_initiate` - [#1370](https://github.com/ni/nimi-python/issues/1370) 
         * `load_specifications`, `load_levels`, and `load_timing` - [#1392](https://github.com/ni/nimi-python/issues/1392) 
+        * `get_channel_name` and `get_channel_name_from_string` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
 * ### NI-DMM
     * #### Added
     * #### Changed

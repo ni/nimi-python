@@ -18,8 +18,9 @@
         pin_infos = []
         for i in range(len(pin_indexes)):
             pin_name = "" if pin_indexes[i] == -1 else self._get_pin_name(pin_indexes[i])
-            channel_name = self.get_channel_name(channel_indexes[i])
-            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_name))
+            channel_names = self.get_channel_names(channel_indexes[i] - 1)  # channel_indexes are 1-based
+            assert 1 == len(channel_names)
+            pin_infos.append(PinInfo(pin_name=pin_name, site_number=site_numbers[i], channel_name=channel_names[0]))
 
         return pin_infos
 

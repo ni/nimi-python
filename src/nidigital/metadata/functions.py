@@ -1368,6 +1368,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetChannelName': {
+        'codegen_method': 'no',
         'documentation': {
             'description': 'TBD'
         },
@@ -1397,12 +1398,15 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
-        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'GetChannelNameFromString': {
         'documentation': {
-            'description': 'TBD'
+            'description': """\nReturns a list of channel names for given channel indices.
+ 
+This is useful in multi-instrument sessions, where channels are expected to be
+referenced by their fully-qualified names, for example, PXI1Slot3/0.
+"""
         },
         'parameters': [
             {
@@ -1412,8 +1416,24 @@ functions = {
             },
             {
                 'direction': 'in',
-                'name': 'index',
-                'type': 'ViConstString'
+                'documentation': {
+                    'description': """\nSpecifies indices for the channels in the session.
+Valid values are from zero to the total number of channels in the session minus one.
+The following types and formats are supported:
+  - int - example: 0
+  - Basic sequence - example: [0, range(2, 4)]
+  - str - example: "0, 2, 3, 1", "0-3", "0:3"
+    
+The input can contain any combination of above types. Both out-of-order and repeated indices are
+supported ([2,3,0], [1,2,2,3]). White space characters, including spaces, tabs, feeds, and
+carriage returns, are allowed within strings. Ranges can be incrementing or decrementing.
+
+"""
+                },
+                'name': 'indices',
+                'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
+                'type': 'ViConstString',
+                'type_in_documentation': 'basic sequence types or str or int',
             },
             {
                 'direction': 'in',
@@ -1422,14 +1442,21 @@ functions = {
             },
             {
                 'direction': 'out',
-                'name': 'name',
+                'documentation': {
+                    'description': '\nChannel names'
+                },
+                'name': 'names',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'nameBufferSize'
                 },
-                'type': 'ViChar[]'
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
             }
         ],
+        'python_name': 'get_channel_names',
+        'render_in_session_base': True,  # Used in FancyGetPinResultsPinInformation()
         'returns': 'ViStatus'
     },
     'GetError': {
@@ -1616,7 +1643,8 @@ the trigger conditions are met.
                     'mechanism': 'ivi-dance',
                     'value': 'pinListBufferSize'
                 },
-                'type': 'ViChar[]'
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
             }
         ],
         'python_name': 'get_pattern_pin_names',
