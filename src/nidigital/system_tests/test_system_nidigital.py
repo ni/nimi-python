@@ -565,7 +565,12 @@ def test_configure_voltage_levels(multi_instrument_session):
     assert multi_instrument_session.voh == pytest.approx(1.7, rel=1e-3)
     assert multi_instrument_session.vterm == pytest.approx(2.0, rel=1e-3)
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
-    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_voltage_levels(1.0, 2.0, 3.0, 4.0, 5.0)
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_voltage_levels(
+        vil=1.0,
+        vih=2.0,
+        vol=3.0,
+        voh=4.0,
+        vterm=5.0)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].vil == pytest.approx(1.0, rel=1e-3)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].vih == pytest.approx(2.0, rel=1e-3)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].vol == pytest.approx(3.0, rel=1e-3)
@@ -578,7 +583,10 @@ def test_configure_active_load_levels(multi_instrument_session):
     assert multi_instrument_session.active_load_ioh == pytest.approx(-0.0015, rel=1e-3)
     assert multi_instrument_session.active_load_vcom == pytest.approx(2.0, rel=1e-3)
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
-    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_active_load_levels(0.024, -0.024, 3.0)
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_active_load_levels(
+        iol=0.024,
+        ioh=-0.024,
+        vcom=3.0)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_iol == pytest.approx(0.024, rel=1e-3)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_ioh == pytest.approx(-0.024, rel=1e-3)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_vcom == pytest.approx(3.0, rel=1e-3)
