@@ -142,6 +142,11 @@ class _SessionBase(object):
 
     A property of type Color with read/write access.
     '''
+    read_write_comma_delimited_string = _attributes.AttributeViStringSequence(1000010)
+    '''Type: basic sequence or str
+
+    Comma-delimited string with read/write access.
+    '''
     read_write_double = _attributes.AttributeViReal64(1000001)
     '''Type: float
 

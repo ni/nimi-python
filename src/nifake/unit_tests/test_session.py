@@ -965,6 +965,29 @@ class TestSession(object):
             session.read_write_string = attrib_string
             self.patched_library.niFake_SetAttributeViString.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViStringMatcher('This is test string'))
 
+    def test_get_attribute_comma_delimited_string(self):
+        self.patched_library.niFake_GetAttributeViString.side_effect = self.side_effects_helper.niFake_GetAttributeViString
+        attribute_id = 1000010
+        test_string = 'PinA, PinB'
+        self.side_effects_helper['GetAttributeViString']['attributeValue'] = test_string
+        with nifake.Session('dev1') as session:
+            attr_string_sequence = session.read_write_comma_delimited_string
+            assert ['PinA', 'PinB'] == attr_string_sequence
+            from mock import call
+            calls = [
+                call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(0), None),
+                call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(10), _matchers.ViCharBufferMatcher(len(test_string)))]
+            self.patched_library.niFake_GetAttributeViString.assert_has_calls(calls)
+            assert self.patched_library.niFake_GetAttributeViString.call_count == 2
+
+    def test_set_attribute_comma_delimited_string(self):
+        self.patched_library.niFake_SetAttributeViString.side_effect = self.side_effects_helper.niFake_SetAttributeViString
+        attribute_id = 1000010
+        test_string = ['PinA', 'PinB']
+        with nifake.Session('dev1') as session:
+            session.read_write_comma_delimited_string = test_string
+            self.patched_library.niFake_SetAttributeViString.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViStringMatcher('PinA,PinB'))
+
     def test_get_attribute_boolean(self):
         self.patched_library.niFake_GetAttributeViBoolean.side_effect = self.side_effects_helper.niFake_GetAttributeViBoolean
         self.side_effects_helper['GetAttributeViBoolean']['attributeValue'] = 1

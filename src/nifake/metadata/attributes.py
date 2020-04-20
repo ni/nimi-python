@@ -112,5 +112,17 @@ attributes = {
         'name': 'READ_WRITE_DOUBLE_WITH_REPEATED_CAPABILITY',
         'resettable': False,
         'type': 'ViReal64'
-    }
+    },
+    1000010: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViStringSequence',
+        'channel_based': False,
+        'documentation': {
+            'description': 'Comma-delimited string with read/write access.'
+        },
+        'name': 'READ_WRITE_COMMA_DELIMITED_STRING',
+        'resettable': False,
+        'type': 'ViString',
+        'type_in_documentation': 'basic sequence or str',
+    },
 }
