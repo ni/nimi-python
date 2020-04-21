@@ -574,12 +574,12 @@ def test_create_get_delete_time_sets(multi_instrument_session):
     assert multi_instrument_session.get_time_set_name(0) == time_set_a
     assert multi_instrument_session.get_time_set_name(1) == time_set_b
     multi_instrument_session.delete_all_time_sets()
-    time_set = None
     try:
-        time_set = multi_instrument_session.get_time_set_name(0)
-    except Exception:
-        pass
-    assert time_set is None
+        multi_instrument_session.get_time_set_name(0)
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074135025
+        assert e.description.find('Invalid parameter.') != -1
 
 
 def test_configure_get_time_set_period(multi_instrument_session):
