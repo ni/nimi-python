@@ -287,6 +287,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
 
 
 def test_get_pin_results_pin_information(multi_instrument_session):
+    # Also tests load_pin_map
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
     fully_qualified_channels = [instruments[1] + '/0', instruments[0] + '/1', instruments[1] + '/11']
