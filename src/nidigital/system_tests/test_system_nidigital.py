@@ -558,6 +558,23 @@ def test_ppmu_source(multi_instrument_session):
     multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
 
 
+def test_disable_sites(multi_instrument_session):
+    # Also tests is_site_enabled
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    assert multi_instrument_session.sites[1].is_site_enabled()
+    multi_instrument_session.sites[1].disable_sites()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+
+
+def test_enable_sites(multi_instrument_session):
+    # Also tests is_site_enabled
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.disable_sites()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+    multi_instrument_session.sites[1].enable_sites()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+
 def test_specifications_levels_and_timing_single(multi_instrument_session):
     pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
     specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
