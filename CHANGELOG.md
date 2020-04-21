@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.2.1](#121---2020-04-21)
 * [1.2.0](#120---2020-03-06)
 * [1.1.5](#115---2019-11-22)
 * [1.1.4](#114---2019-11-19)
@@ -21,7 +21,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.2.1 - 2020-04-21
 * ### ALL
     * #### Added
         * Support for chained repeated capabilities. This allows things like
@@ -30,12 +30,6 @@ All notable changes to this project will be documented in this file.
             ``` 
 
             The repeated capabilities will be expanded to `'site0/PinA,site0/PinB,site1/PinA,site1/PinB'`
-    * #### Changed
-    * #### Removed
-* ### NI-DCPower
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
         * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
@@ -62,34 +56,6 @@ All notable changes to this project will be documented in this file.
         * `clock_generator_initiate` - [#1370](https://github.com/ni/nimi-python/issues/1370) 
         * `load_specifications`, `load_levels`, and `load_timing` - [#1392](https://github.com/ni/nimi-python/issues/1392) 
         * `get_channel_name` and `get_channel_name_from_string` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
-* ### NI-DMM
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-FGEN
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-ModInst
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-SCOPE
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-Switch
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI Switch Executive
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### NI-TClk
-    * #### Added
-    * #### Changed
-    * #### Removed
     
     
 ## 1.2.0 - 2020-03-06
