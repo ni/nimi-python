@@ -56,8 +56,11 @@ All notable changes to this project will be documented in this file.
         * `clock_generator_initiate` - [#1370](https://github.com/ni/nimi-python/issues/1370) 
         * `load_specifications`, `load_levels`, and `load_timing` - [#1392](https://github.com/ni/nimi-python/issues/1392) 
         * `get_channel_name` and `get_channel_name_from_string` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
-    
-    
+* ### NI-TClk
+    * #### Changed
+        * Version updated to 1.2.1 to match other released nimi-python modules    
+
+
 ## 1.2.0 - 2020-03-06
 * ### ALL
     * #### Added
