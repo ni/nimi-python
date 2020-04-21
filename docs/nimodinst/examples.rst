@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nimodinst examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.2.0/nimodinst_examples.zip>`_
+`You can download all nimodinst examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.2.1/nimodinst_examples.zip>`_
 
 nimodinst_all_devices.py
 ------------------------
