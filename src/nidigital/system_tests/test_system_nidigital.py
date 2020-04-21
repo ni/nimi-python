@@ -630,7 +630,7 @@ def test_time_set_edges(multi_instrument_session):
     time_set_drive_data = time_set_period * 0.2
     time_set_drive_return = time_set_period * 0.8
     time_set_drive_off = time_set_period * 0.9
-    time_set_strobe_edge = time_set_period * 0.5
+    time_set_strobe = time_set_period * 0.5
 
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
     multi_instrument_session.create_time_set(time_set_name)
@@ -645,7 +645,7 @@ def test_time_set_edges(multi_instrument_session):
         time_set_drive_off)
     multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_compare_edges_strobe(
         time_set_name,
-        time_set_strobe_edge)
+        time_set_strobe)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
         nidigital.TimeSetEdgeType.DRIVE_ON) == time_set_drive_on.total_seconds()
@@ -660,7 +660,7 @@ def test_time_set_edges(multi_instrument_session):
         nidigital.TimeSetEdgeType.DRIVE_OFF) == time_set_drive_off.total_seconds()
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
-        nidigital.TimeSetEdgeType.COMPARE_STROBE) == time_set_strobe_edge.total_seconds()
+        nidigital.TimeSetEdgeType.COMPARE_STROBE) == time_set_strobe.total_seconds()
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge_multiplier(time_set_name) == 1
 
 
@@ -678,8 +678,8 @@ def test_time_set_edges2x(multi_instrument_session):
     time_set_drive_data2 = time_set_period * 0.7
     time_set_drive_return2 = time_set_period * 0.9
     time_set_drive_off = time_set_period * 0.9
-    time_set_strobe_edge = time_set_period * 0.4
-    time_set_strobe2_edge = time_set_period * 0.8
+    time_set_strobe = time_set_period * 0.4
+    time_set_strobe2 = time_set_period * 0.8
     time_set_edge_multiplier = 2
 
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
@@ -699,8 +699,8 @@ def test_time_set_edges2x(multi_instrument_session):
         time_set_drive_return2)
     multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_compare_edges_strobe2x(
         time_set_name,
-        time_set_strobe_edge,
-        time_set_strobe2_edge)
+        time_set_strobe,
+        time_set_strobe2)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
         nidigital.TimeSetEdgeType.DRIVE_ON) == time_set_drive_on.total_seconds()
@@ -721,10 +721,10 @@ def test_time_set_edges2x(multi_instrument_session):
         nidigital.TimeSetEdgeType.DRIVE_RETURN2) == time_set_drive_return2.total_seconds()
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
-        nidigital.TimeSetEdgeType.COMPARE_STROBE) == time_set_strobe_edge.total_seconds()
+        nidigital.TimeSetEdgeType.COMPARE_STROBE) == time_set_strobe.total_seconds()
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
-        nidigital.TimeSetEdgeType.COMPARE_STROBE2) == time_set_strobe2_edge.total_seconds()
+        nidigital.TimeSetEdgeType.COMPARE_STROBE2) == time_set_strobe2.total_seconds()
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
