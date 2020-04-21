@@ -516,6 +516,7 @@ def test_fetch_history_ram_cycle_information_no_failures(multi_instrument_sessio
 
 
 def test_get_pattern_pin_names(multi_instrument_session):
+    # Also tests load_pattern
     test_name = 'simple_pattern'
     configure_session(multi_instrument_session, test_name)
 
@@ -556,6 +557,47 @@ def test_ppmu_source(multi_instrument_session):
     configure_session(multi_instrument_session, test_name)
 
     multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
+
+
+def test_load_get_unload_patterns(multi_instrument_session):
+    '''Test basic pattern methods.
+
+    - load_pattern
+    - get_pattern_name
+    - unload_all_patterns
+    '''
+    test_name = 'multiple_patterns'
+    multi_instrument_session.load_pin_map(get_test_file_path(test_name, 'pin_map.pinmap'))
+
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_a.digipat'))
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_b.digipat'))
+
+    assert multi_instrument_session.get_pattern_name(0) == 'first_pattern'
+    assert multi_instrument_session.get_pattern_name(1) == 'second_pattern'
+
+    multi_instrument_session.unload_all_patterns(unload_keep_alive_pattern=True)
+    try:
+        multi_instrument_session.get_pattern_name(0)
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074135025
+        assert e.description.find('Invalid parameter.') != -1
+
+
+def test_configure_pattern_burst_sites(multi_instrument_session):
+    test_name = 'multiple_patterns'
+    configure_session(multi_instrument_session, test_name)
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_b.digipat'))
+    multi_instrument_session.start_label = 'second_pattern'
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.DIGITAL
+    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
+
+    multi_instrument_session.sites[0, 2, 3].configure_pattern_burst_sites()
+
+    with multi_instrument_session.initiate() as _:
+        pass
+    result = multi_instrument_session.sites[0, 1, 3].get_site_pass_fail()
+    assert result == {0: True, 3: True}
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
