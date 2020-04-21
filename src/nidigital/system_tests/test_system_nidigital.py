@@ -559,9 +559,12 @@ def test_ppmu_source(multi_instrument_session):
 
 
 def test_create_get_delete_time_sets(multi_instrument_session):
-    # Tests create_time_set()
-    # Tests get_time_set_name()
-    # Tests delete_all_time_sets()
+    '''Test basic time set methods.
+
+    - create_time_set
+    - get_time_set_name
+    - delete_all_time_sets
+    '''
     time_set_a = 'time_set_abc'
     time_set_b = 'time_set_123'
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
@@ -580,8 +583,11 @@ def test_create_get_delete_time_sets(multi_instrument_session):
 
 
 def test_configure_get_time_set_period(multi_instrument_session):
-    # Tests configure_time_set_period()
-    # Tests get_time_set_period()
+    '''Test time set period methods.
+
+    - configure_time_set_period
+    - get_time_set_period
+    '''
     time_set_name = 'time_set_abc'
     time_set_period = datetime.timedelta(microseconds=10)
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
@@ -593,8 +599,11 @@ def test_configure_get_time_set_period(multi_instrument_session):
 
 
 def test_configure_get_time_set_drive_format(multi_instrument_session):
-    # Tests configure_time_set_drive_format()
-    # Tests get_time_set_drive_format()
+    '''Test time set drive format methods.
+
+    - configure_time_set_drive_format
+    - get_time_set_drive_format
+    '''
     time_set_name = 'time_set_abc'
     time_set_drive_format = nidigital.DriveFormat.SBC
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
@@ -606,8 +615,11 @@ def test_configure_get_time_set_drive_format(multi_instrument_session):
 
 
 def test_configure_get_time_set_edge(multi_instrument_session):
-    # Tests configure_time_set_edge()
-    # Tests get_time_set_edge()
+    '''Test time set individual edge methods.
+
+    - configure_time_set_edge
+    - get_time_set_edge
+    '''
     time_set_name = 'time_set_abc'
     time_set_period = datetime.timedelta(microseconds=10)
     time_set_drive_on = time_set_period * 0.5
@@ -672,8 +684,11 @@ def test_configure_time_set_compare_edges_strobe(multi_instrument_session):
 
 
 def test_configure_get_time_set_edge_multiplier(multi_instrument_session):
-    # Tests configure_time_set_edge_multiplier()
-    # Tests get_time_set_edge_multiplier()
+    '''Test time set edge multiplier methods.
+
+    - configure_time_set_edge_multiplier
+    - get_time_set_edge_multiplier
+    '''
     time_set_name = 'time_set_abc'
     time_set_period = datetime.timedelta(microseconds=10)
     time_set_edge_multiplier = 2
