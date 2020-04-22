@@ -1,5 +1,6 @@
 # Changelog
 
+* [Unreleased](#unreleased)
 * [1.2.1](#121---2020-04-21)
 * [1.2.0](#120---2020-03-06)
 * [1.1.5](#115---2019-11-22)
@@ -21,6 +22,50 @@
 
 All notable changes to this project will be documented in this file.
 
+* [Unreleased](#unreleased)
+## Unreleased
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DCPower
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Digital Pattern Driver
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-DMM
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-FGEN
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-ModInst
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-SCOPE
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-Switch
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI Switch Executive
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### NI-TClk
+    * #### Added
+    * #### Changed
+    * #### Removed
+ 
+ 
 ## 1.2.1 - 2020-04-21
 * ### ALL
     * #### Added
