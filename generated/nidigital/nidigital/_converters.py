@@ -5,7 +5,7 @@ import nidigital.errors as errors
 
 import array
 import collections
-import datetime
+import hightime
 import numbers
 
 from functools import singledispatch
@@ -144,7 +144,7 @@ def convert_repeated_capabilities_without_prefix(repeated_capability):
 
 def _convert_timedelta(value, library_type, scaling):
     try:
-        # We first assume it is a datetime.timedelta object
+        # We first assume it is a hightime.TimeDelta object
         scaled_value = value.total_seconds() * scaling
     except AttributeError:
         # If that doesn't work, assume it is a value in seconds
@@ -171,7 +171,7 @@ def convert_timedeltas_to_seconds_real64(values):
 
 
 def convert_seconds_real64_to_timedelta(value):
-    return datetime.timedelta(seconds=value)
+    return hightime.timedelta(seconds=value)
 
 
 def convert_seconds_real64_to_timedeltas(values):
@@ -179,7 +179,7 @@ def convert_seconds_real64_to_timedeltas(values):
 
 
 def convert_month_to_timedelta(months):
-    return datetime.timedelta(days=(30.4167 * months))
+    return hightime.timedelta(days=(30.4167 * months))
 
 
 # This converter is not called from the normal codegen path for function. Instead it is
@@ -285,10 +285,10 @@ def test_convert_init_with_options_dictionary():
 
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
-    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=10))
+    test_result = convert_timedelta_to_seconds_real64(hightime.TimeDelta(seconds=10))
     assert test_result.value == 10.0
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=-1))
+    test_result = convert_timedelta_to_seconds_real64(hightime.TimeDelta(seconds=-1))
     assert test_result.value == -1
     assert isinstance(test_result, _visatype.ViReal64)
     test_result = convert_timedelta_to_seconds_real64(10.5)
@@ -300,10 +300,10 @@ def test_convert_timedelta_to_seconds_double():
 
 
 def test_convert_timedelta_to_milliseconds_int32():
-    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=10))
+    test_result = convert_timedelta_to_milliseconds_int32(hightime.TimeDelta(seconds=10))
     assert test_result.value == 10000
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=-1))
+    test_result = convert_timedelta_to_milliseconds_int32(hightime.TimeDelta(seconds=-1))
     assert test_result.value == -1000
     assert isinstance(test_result, _visatype.ViInt32)
     test_result = convert_timedelta_to_milliseconds_int32(10.5)
@@ -319,7 +319,7 @@ def test_convert_timedeltas_to_seconds_real64():
     test_result = convert_timedeltas_to_seconds_real64(time_values)
     assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
     assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
-    timedeltas = [datetime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
+    timedeltas = [hightime.TimeDelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
     test_result = convert_timedeltas_to_seconds_real64(timedeltas)
     assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
     assert all([isinstance(i, _visatype.ViReal64) for i in test_result])

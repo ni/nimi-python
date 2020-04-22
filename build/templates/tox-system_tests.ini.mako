@@ -77,6 +77,9 @@ deps =
     ${module_name}-system_tests: scipy
     ${module_name}-system_tests: fasteners
     ${module_name}-system_tests: pytest-json
+% if config['uses_hightime']:
+    ${module_name}-system_tests: hightime
+% endif
 
     ${module_name}-coverage: coverage
     ${module_name}-coverage: codecov

@@ -22,7 +22,9 @@ ${template_parameters['encoding_tag']}
 %>\
 import array  # noqa: F401
 import ctypes
+% if not config['uses_hightime']:
 import datetime  # noqa: F401
+% endif
 % if config['use_locking']:
 # Used by @ivi_synchronized
 from functools import wraps
@@ -41,6 +43,9 @@ import ${module_name}.errors as errors
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
+% if config['uses_hightime']:
+import hightime
+% endif
 % if config['uses_nitclk']:
 import nitclk
 % endif

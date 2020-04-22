@@ -583,6 +583,12 @@ def add_all_config_metadata(config):
     if 'uses_nitclk' not in config:
         config['uses_nitclk'] = False
 
+    if 'uses_hightime' in config:
+        config['timedelta_type'] = 'hightime.TimeDelta'
+    else:
+        config['uses_hightime'] = False
+        config['timedelta_type'] = 'datetime.timedelta'
+
     return config
 
 
@@ -1278,6 +1284,8 @@ config_expected = {
         'metadata.enums_addon': {}
     },
     'uses_nitclk': False,
+    'uses_hightime': False,
+    'timedelta_type': 'datetime.timedelta',
 }
 
 

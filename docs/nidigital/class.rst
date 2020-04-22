@@ -138,7 +138,7 @@ apply_levels_and_timing
 
                 Pins or pin groups to initialize to a high state.
 
-                
+
 
 
             :type initial_state_high_pins: basic sequence types or str
@@ -147,7 +147,7 @@ apply_levels_and_timing
 
                 Pins or pin groups to initialize to a low state.
 
-                
+
 
 
             :type initial_state_low_pins: basic sequence types or str
@@ -156,7 +156,7 @@ apply_levels_and_timing
 
                 Pins or pin groups to initialize to a non-drive state (X).
 
-                
+
 
 
             :type initial_state_tristate_pins: basic sequence types or str
@@ -185,7 +185,7 @@ apply_tdr_offsets
                 
 
 
-            :type offsets: basic sequence of float in seconds or datetime.timedelta
+            :type offsets: basic sequence of float in seconds or hightime.TimeDelta
 
 burst_pattern
 -------------
@@ -417,7 +417,7 @@ configure_time_set_compare_edges_strobe
                 
 
 
-            :type strobe_edge: float in seconds or datetime.timedelta
+            :type strobe_edge: float in seconds or hightime.TimeDelta
 
 configure_time_set_compare_edges_strobe2x
 -----------------------------------------
@@ -450,14 +450,14 @@ configure_time_set_compare_edges_strobe2x
                 
 
 
-            :type strobe_edge: float in seconds or datetime.timedelta
+            :type strobe_edge: float in seconds or hightime.TimeDelta
             :param strobe2_edge:
 
 
                 
 
 
-            :type strobe2_edge: float in seconds or datetime.timedelta
+            :type strobe2_edge: float in seconds or hightime.TimeDelta
 
 configure_time_set_drive_edges
 ------------------------------
@@ -497,28 +497,28 @@ configure_time_set_drive_edges
                 
 
 
-            :type drive_on_edge: float in seconds or datetime.timedelta
+            :type drive_on_edge: float in seconds or hightime.TimeDelta
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float in seconds or datetime.timedelta
+            :type drive_data_edge: float in seconds or hightime.TimeDelta
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float in seconds or datetime.timedelta
+            :type drive_return_edge: float in seconds or hightime.TimeDelta
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float in seconds or datetime.timedelta
+            :type drive_off_edge: float in seconds or hightime.TimeDelta
 
 configure_time_set_drive_edges2x
 --------------------------------
@@ -558,42 +558,42 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_on_edge: float in seconds or datetime.timedelta
+            :type drive_on_edge: float in seconds or hightime.TimeDelta
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float in seconds or datetime.timedelta
+            :type drive_data_edge: float in seconds or hightime.TimeDelta
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float in seconds or datetime.timedelta
+            :type drive_return_edge: float in seconds or hightime.TimeDelta
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float in seconds or datetime.timedelta
+            :type drive_off_edge: float in seconds or hightime.TimeDelta
             :param drive_data2_edge:
 
 
                 
 
 
-            :type drive_data2_edge: float in seconds or datetime.timedelta
+            :type drive_data2_edge: float in seconds or hightime.TimeDelta
             :param drive_return2_edge:
 
 
                 
 
 
-            :type drive_return2_edge: float in seconds or datetime.timedelta
+            :type drive_return2_edge: float in seconds or hightime.TimeDelta
 
 configure_time_set_drive_format
 -------------------------------
@@ -666,7 +666,7 @@ configure_time_set_edge
                 
 
 
-            :type time: float in seconds or datetime.timedelta
+            :type time: float in seconds or hightime.TimeDelta
 
 configure_time_set_edge_multiplier
 ----------------------------------
@@ -727,7 +727,7 @@ configure_time_set_period
                 
 
 
-            :type period: float in seconds or datetime.timedelta
+            :type period: float in seconds or hightime.TimeDelta
 
 configure_voltage_levels
 ------------------------
@@ -2120,7 +2120,7 @@ tdr
 
             :type apply_offsets: bool
 
-            :rtype: list of datetime.timedelta
+            :rtype: list of hightime.TimeDelta
             :return:
 
 
@@ -2195,7 +2195,7 @@ wait_until_done
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: wait_until_done(timeout=datetime.timedelta(seconds=10.0))
+    .. py:method:: wait_until_done(timeout=hightime.TimeDelta(seconds=10.0))
 
             TBD
 
@@ -2209,7 +2209,7 @@ wait_until_done
                 
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: float in seconds or hightime.TimeDelta
 
 write_sequencer_flag
 --------------------

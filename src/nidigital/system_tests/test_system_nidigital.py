@@ -3,6 +3,7 @@ import collections
 import datetime
 import os
 
+import hightime
 import numpy
 import pytest
 
@@ -1264,3 +1265,17 @@ def test_apply_levels_and_timing_initial_states(multi_instrument_session):
         timing_sheet='timing',
         initial_state_high_pins=['HI0', 'LowPins'],
         initial_state_tristate_pins='HI1, HI2')
+
+def test_configure_get_time_set_period(multi_instrument_session):
+    '''Test time set period methods.
+    - configure_time_set_period
+    - get_time_set_period
+    '''
+    time_set_name = 'time_set_abc'
+    time_set_period = hightime.TimeDelta(microseconds=10)
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.create_time_set(time_set_name)
+    assert multi_instrument_session.get_time_set_period(time_set_name) == 1e-6
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+    assert multi_instrument_session.get_time_set_period(time_set_name) == time_set_period.total_seconds()
