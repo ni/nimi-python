@@ -277,7 +277,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
             waveform_name='capt_wfm',
             samples_to_read=samples_per_fetch)
         for site in fetched_waveform:
-            waveforms[site] += fetched_waveform[site]
+            waveforms[site] += list(fetched_waveform[site])
 
     assert sorted(waveforms.keys()) == sorted([0, 1])
     assert all(len(waveforms[site]) == num_samples for site in waveforms)

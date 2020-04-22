@@ -46,7 +46,7 @@
         for i in range(actual_num_waveforms):
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
-            waveforms[site_list[i]] = mv[start:end]
+            waveforms[site_list[i]] = capture_waveform.CaptureWaveform(mv[start:end])
 
         return waveforms
 

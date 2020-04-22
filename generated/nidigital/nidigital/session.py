@@ -15,6 +15,8 @@ import nidigital.errors as errors
 
 import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
 
+import nidigital.capture_waveform as capture_waveform  # noqa: F401
+
 import nitclk
 
 # Used for __repr__
@@ -1265,7 +1267,7 @@ class _SessionBase(object):
         for i in range(actual_num_waveforms):
             start = i * actual_samples_per_waveform
             end = start + actual_samples_per_waveform
-            waveforms[site_list[i]] = mv[start:end]
+            waveforms[site_list[i]] = capture_waveform.CaptureWaveform(mv[start:end])
 
         return waveforms
 

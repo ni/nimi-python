@@ -7,6 +7,11 @@ config_additional_config = {
             'ctypes_type': '',
             'file_name': 'history_ram_cycle_information',
             'python_name': 'HistoryRAMCycleInformation'
-        }
+        },
+        {
+            'ctypes_type': '',
+            'file_name': 'capture_waveform',
+            'python_name': 'CaptureWaveform'
+        },
     ],
 }
