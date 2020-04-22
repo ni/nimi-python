@@ -106,7 +106,7 @@ apply_levels_and_timing
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins="")
+    .. py:method:: apply_levels_and_timing(levels_sheet, timing_sheet, initial_state_high_pins=None, initial_state_low_pins=None, initial_state_tristate_pins=None)
 
             TBD
 
@@ -136,24 +136,30 @@ apply_levels_and_timing
             :param initial_state_high_pins:
 
 
+                Pins or pin groups to initialize to a high state.
+
                 
 
 
-            :type initial_state_high_pins: str
+            :type initial_state_high_pins: basic sequence types or str
             :param initial_state_low_pins:
 
 
+                Pins or pin groups to initialize to a low state.
+
                 
 
 
-            :type initial_state_low_pins: str
+            :type initial_state_low_pins: basic sequence types or str
             :param initial_state_tristate_pins:
 
 
+                Pins or pin groups to initialize to a non-drive state (X).
+
                 
 
 
-            :type initial_state_tristate_pins: str
+            :type initial_state_tristate_pins: basic sequence types or str
 
 apply_tdr_offsets
 -----------------
