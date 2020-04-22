@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nitclk examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.2.0/nitclk_examples.zip>`_
+`You can download all nitclk examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.2.1/nitclk_examples.zip>`_
 
 nitclk_configure.py
 -------------------

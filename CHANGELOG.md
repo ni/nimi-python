@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.2.1](#121---2020-04-21)
 * [1.2.0](#120---2020-03-06)
 * [1.1.5](#115---2019-11-22)
 * [1.1.4](#114---2019-11-19)
@@ -21,15 +22,10 @@
 
 All notable changes to this project will be documented in this file.
 
+* [Unreleased](#unreleased)
 ## Unreleased
 * ### ALL
     * #### Added
-        * Support for chained repeated capabilities. This allows things like
-            ``` python
-            session.sites[0, 1].pins['PinA', 'PinB'].ppmu_voltage_level = 4
-            ``` 
-
-            The repeated capabilities will be expanded to `'site0/PinA,site0/PinB,site1/PinA,site1/PinB'`
     * #### Changed
     * #### Removed
 * ### NI-DCPower
@@ -38,31 +34,9 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-Digital Pattern Driver
     * #### Added
-        * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
-        * Support for `instruments` repeated capability in the following properties - `instrument_firmware_revision`, `serial_number`, and `timing_absolute_delay` -  [#1228](https://github.com/ni/nimi-python/issues/1228) 
-        * `load_specifications_levels_and_timing` that allows loading of multiple specs, levels, and/or timing files in a single call - [#1392](https://github.com/ni/nimi-python/issues/1392)
-        * `get_channel_names` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
     * #### Changed
-        * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
-        * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
-        * `burst_pattern` returns dictionary where each key is a site number and value is a bool indicating pass/fail, if `wait_until_done` is specified as `True` - [#1296](https://github.com/ni/nimi-python/issues/1296)
-        * Update enum types to match the API in other ADEs - [#1330](https://github.com/ni/nimi-python/issues/1330):
-            * Update the names of many enum types. See [#1330](https://github.com/ni/nimi-python/issues/1330) for the full list.
-            * Added `WriteStaticPinState` enum type and changed the parameter type of `write_static` method to the newly added enum.
-            * Added `SoftwareTrigger` enum type and changed the parameter type of `send_software_edge_trigger` method to the newly added enum.
-        * Update `fetch_history_ram_cycle_information`, `get_history_ram_sample_count`, and `is_site_enabled` to use `sites` repeated capability - [#1337](https://github.com/ni/nimi-python/issues/1337)
-        * Rename parameter `time_set` to `time_set_name` in applicable time set methods - [#1396](https://github.com/ni/nimi-python/issues/1396)
-        * Modified `unload_specifications` to allow unloading of one or more specs files in a single call - [#1392](https://github.com/ni/nimi-python/issues/1392) 
-        * In `load_pin_map`, changed parameter name `pin_map_file_path` to `file_path` - [#1393](https://github.com/ni/nimi-python/issues/1393) 
         * Changed initial_state parameters in `apply_levels_and_timing` to basic sequence types - [#1391](https://github.com/ni/nimi-python/issues/1391) 
     * #### Removed
-        * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
-        * `get_site_results_site_numbers` method and `SiteResultType` enum - [#1298](https://github.com/ni/nimi-python/issues/1298) 
-        * `reset_attribute` - [#1364](https://github.com/ni/nimi-python/issues/1364) 
-        * `clear_error` - [#1366](https://github.com/ni/nimi-python/issues/1366) 
-        * `clock_generator_initiate` - [#1370](https://github.com/ni/nimi-python/issues/1370) 
-        * `load_specifications`, `load_levels`, and `load_timing` - [#1392](https://github.com/ni/nimi-python/issues/1392) 
-        * `get_channel_name` and `get_channel_name_from_string` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
 * ### NI-DMM
     * #### Added
     * #### Changed
@@ -91,8 +65,48 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-    
-    
+ 
+ 
+## 1.2.1 - 2020-04-21
+* ### ALL
+    * #### Added
+        * Support for chained repeated capabilities. This allows things like
+            ``` python
+            session.sites[0, 1].pins['PinA', 'PinB'].ppmu_voltage_level = 4
+            ``` 
+
+            The repeated capabilities will be expanded to `'site0/PinA,site0/PinB,site1/PinA,site1/PinB'`
+* ### NI-Digital Pattern Driver
+    * #### Added
+        * `get_pattern_pin_names` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+        * Support for `instruments` repeated capability in the following properties - `instrument_firmware_revision`, `serial_number`, and `timing_absolute_delay` -  [#1228](https://github.com/ni/nimi-python/issues/1228) 
+        * `load_specifications_levels_and_timing` that allows loading of multiple specs, levels, and/or timing files in a single call - [#1392](https://github.com/ni/nimi-python/issues/1392)
+        * `get_channel_names` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
+    * #### Changed
+        * Change the type of applicable method parameters and properties to enums - [#1066](https://github.com/ni/nimi-python/issues/1066)
+        * `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
+        * `burst_pattern` returns dictionary where each key is a site number and value is a bool indicating pass/fail, if `wait_until_done` is specified as `True` - [#1296](https://github.com/ni/nimi-python/issues/1296)
+        * Update enum types to match the API in other ADEs - [#1330](https://github.com/ni/nimi-python/issues/1330):
+            * Update the names of many enum types. See [#1330](https://github.com/ni/nimi-python/issues/1330) for the full list.
+            * Added `WriteStaticPinState` enum type and changed the parameter type of `write_static` method to the newly added enum.
+            * Added `SoftwareTrigger` enum type and changed the parameter type of `send_software_edge_trigger` method to the newly added enum.
+        * Update `fetch_history_ram_cycle_information`, `get_history_ram_sample_count`, and `is_site_enabled` to use `sites` repeated capability - [#1337](https://github.com/ni/nimi-python/issues/1337)
+        * Rename parameter `time_set` to `time_set_name` in applicable time set methods - [#1396](https://github.com/ni/nimi-python/issues/1396)
+        * Modified `unload_specifications` to allow unloading of one or more specs files in a single call - [#1392](https://github.com/ni/nimi-python/issues/1392) 
+        * In `load_pin_map`, changed parameter name `pin_map_file_path` to `file_path` - [#1393](https://github.com/ni/nimi-python/issues/1393) 
+    * #### Removed
+        * `get_pattern_pin_list`, `get_pattern_pin_indexes` and `get_pin_name` - [#1292](https://github.com/ni/nimi-python/issues/1292)
+        * `get_site_results_site_numbers` method and `SiteResultType` enum - [#1298](https://github.com/ni/nimi-python/issues/1298) 
+        * `reset_attribute` - [#1364](https://github.com/ni/nimi-python/issues/1364) 
+        * `clear_error` - [#1366](https://github.com/ni/nimi-python/issues/1366) 
+        * `clock_generator_initiate` - [#1370](https://github.com/ni/nimi-python/issues/1370) 
+        * `load_specifications`, `load_levels`, and `load_timing` - [#1392](https://github.com/ni/nimi-python/issues/1392) 
+        * `get_channel_name` and `get_channel_name_from_string` - [#1386](https://github.com/ni/nimi-python/issues/1386) 
+* ### NI-TClk
+    * #### Changed
+        * Version updated to 1.2.1 to match other released nimi-python modules    
+
+
 ## 1.2.0 - 2020-03-06
 * ### ALL
     * #### Added
