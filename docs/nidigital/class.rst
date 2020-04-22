@@ -179,7 +179,7 @@ apply_tdr_offsets
                 
 
 
-            :type offsets: list of float in seconds or datetime.timedelta
+            :type offsets: basic sequence of float in seconds or datetime.timedelta
 
 burst_pattern
 -------------
@@ -1063,7 +1063,7 @@ fetch_capture_waveform
 
     .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0))
 
-            Returns dictionary where each key is the site number and the value is array.array of unsigned int
+            Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
             
 
@@ -1096,11 +1096,11 @@ fetch_capture_waveform
 
             :type timeout: float or datetime.timedelta
 
-            :rtype: { site: data, site: data, ... }
+            :rtype: { int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }
             :return:
 
 
-                    Dictionary where each key is the site number and the value is array.array of unsigned int
+                    Dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
                     
 
@@ -1785,7 +1785,7 @@ load_specifications_levels_and_timing
                 
 
 
-            :type specifications_file_paths: str or iterable of str
+            :type specifications_file_paths: str or basic sequence of str
             :param levels_file_paths:
 
 
@@ -1794,7 +1794,7 @@ load_specifications_levels_and_timing
                 
 
 
-            :type levels_file_paths: str or iterable of str
+            :type levels_file_paths: str or basic sequence of str
             :param timing_file_paths:
 
 
@@ -1803,7 +1803,7 @@ load_specifications_levels_and_timing
                 
 
 
-            :type timing_file_paths: str or iterable of str
+            :type timing_file_paths: str or basic sequence of str
 
 lock
 ----
@@ -2169,7 +2169,7 @@ unload_specifications
                 
 
 
-            :type file_paths: str or iterable of str
+            :type file_paths: str or basic sequence of str
 
 unlock
 ------
@@ -2340,12 +2340,12 @@ write_source_waveform_site_unique
             :param waveform_data:
 
 
-                Dictionary where each key is the site number and the value is array.array of unsigned int
+                Dictionary where each key is a site number and value is a collection of samples to use as source data
 
                 
 
 
-            :type waveform_data: { site: data, site: data, ... }
+            :type waveform_data: { int: basic sequence of unsigned int, int: basic sequence of unsigned int, ... }
 
 write_static
 ------------

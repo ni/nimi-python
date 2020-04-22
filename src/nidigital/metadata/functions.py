@@ -104,7 +104,7 @@ functions = {
                     'value': 'numOffsets'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'list of float in seconds or datetime.timedelta'
+                'type_in_documentation': 'basic sequence of float in seconds or datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
