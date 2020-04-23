@@ -921,6 +921,7 @@ def test_enable_disable_sites_multiple(multi_instrument_session):
 
 def test_load_get_unload_patterns(multi_instrument_session):
     '''Test basic pattern methods.
+
     - load_pattern
     - get_pattern_name
     - unload_all_patterns
