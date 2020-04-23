@@ -639,20 +639,48 @@ def test_configure_active_load_levels(multi_instrument_session):
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_vcom == pytest.approx(3.0, rel=1e-3)
 
 
-def test_disable_sites(multi_instrument_session):
-    # Also tests is_site_enabled
+def test_enable_disable_sites_single(multi_instrument_session):
+    '''Test methods for single site enable configuration.
+
+    - enable_sites
+    - disable_sites
+    - is_site_enabled
+    '''
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
     assert multi_instrument_session.sites[1].is_site_enabled()
+
+    # Single site configuration
     multi_instrument_session.sites[1].disable_sites()
     assert not multi_instrument_session.sites[1].is_site_enabled()
-
-
-def test_enable_sites(multi_instrument_session):
-    # Also tests is_site_enabled
-    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
-    multi_instrument_session.disable_sites()
-    assert not multi_instrument_session.sites[1].is_site_enabled()
     multi_instrument_session.sites[1].enable_sites()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+
+def test_enable_disable_sites_multiple(multi_instrument_session):
+    '''Test methods for multiple site enable configuration.
+
+    - enable_sites
+    - disable_sites
+    - is_site_enabled
+    '''
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    assert multi_instrument_session.sites[0].is_site_enabled()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+    # Multiple site configuration
+    multi_instrument_session.sites[0, 1].disable_sites()
+    assert not multi_instrument_session.sites[0].is_site_enabled()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+    multi_instrument_session.sites[0, 1].enable_sites()
+    assert multi_instrument_session.sites[0].is_site_enabled()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+    # All site configuration
+    multi_instrument_session.disable_sites()
+    assert not multi_instrument_session.sites[0].is_site_enabled()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+    multi_instrument_session.enable_sites()
+    assert multi_instrument_session.sites[0].is_site_enabled()
     assert multi_instrument_session.sites[1].is_site_enabled()
 
 
