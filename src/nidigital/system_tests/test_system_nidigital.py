@@ -954,8 +954,7 @@ def test_configure_pattern_burst_sites(multi_instrument_session):
 
     multi_instrument_session.sites[0, 2, 3].configure_pattern_burst_sites()
 
-    with multi_instrument_session.initiate() as _:
-        pass
+    multi_instrument_session.initiate()
     result = multi_instrument_session.sites[0, 1, 3].get_site_pass_fail()
     assert result == {0: True, 3: True}
 
