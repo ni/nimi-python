@@ -295,6 +295,7 @@ def test_fetch_capture_waveform(multi_instrument_session):
 
 
 def test_get_pin_results_pin_information(multi_instrument_session):
+    # Also tests load_pin_map
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
     fully_qualified_channels = [instruments[1] + '/0', instruments[0] + '/1', instruments[1] + '/11']
@@ -870,6 +871,51 @@ def test_configure_time_set_compare_edges_strobe2x(multi_instrument_session):
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
         nidigital.TimeSetEdgeType.COMPARE_STROBE2) == time_set_strobe2.total_seconds()
+
+
+def test_enable_disable_sites_single(multi_instrument_session):
+    '''Test methods for single site enable configuration.
+
+    - enable_sites
+    - disable_sites
+    - is_site_enabled
+    '''
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+    # Single site configuration
+    multi_instrument_session.sites[1].disable_sites()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+    multi_instrument_session.sites[1].enable_sites()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+
+def test_enable_disable_sites_multiple(multi_instrument_session):
+    '''Test methods for multiple site enable configuration.
+
+    - enable_sites
+    - disable_sites
+    - is_site_enabled
+    '''
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    assert multi_instrument_session.sites[0].is_site_enabled()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+    # Multiple site configuration
+    multi_instrument_session.sites[0, 1].disable_sites()
+    assert not multi_instrument_session.sites[0].is_site_enabled()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+    multi_instrument_session.sites[0, 1].enable_sites()
+    assert multi_instrument_session.sites[0].is_site_enabled()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+    # All site configuration
+    multi_instrument_session.disable_sites()
+    assert not multi_instrument_session.sites[0].is_site_enabled()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+    multi_instrument_session.enable_sites()
+    assert multi_instrument_session.sites[0].is_site_enabled()
+    assert multi_instrument_session.sites[1].is_site_enabled()
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
