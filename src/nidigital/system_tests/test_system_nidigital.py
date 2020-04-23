@@ -652,6 +652,7 @@ def test_configure_time_set_drive_edges(multi_instrument_session):
         time_set_drive_data,
         time_set_drive_return,
         time_set_drive_off)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == time_set_drive_format
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
         nidigital.TimeSetEdgeType.DRIVE_ON) == time_set_drive_on.total_seconds()
@@ -727,6 +728,7 @@ def test_configure_time_set_drive_edges2x(multi_instrument_session):
         time_set_drive_off,
         time_set_drive_data2,
         time_set_drive_return2)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == time_set_drive_format
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
         nidigital.TimeSetEdgeType.DRIVE_ON) == time_set_drive_on.total_seconds()
