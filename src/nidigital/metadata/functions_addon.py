@@ -107,11 +107,11 @@ functions_additional_write_source_waveform_site_unique = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nDictionary where each key is the site number and the value is array.array of unsigned int\n'
+                    'description': '\nDictionary where each key is a site number and value is a collection of samples to use as source data\n'
                 },
                 'name': 'waveform_data',
                 'type': 'ViUInt32',  # This type is ignored since this function isn't code generated
-                'type_in_documentation': '{ site: data, site: data, ... }',
+                'type_in_documentation': '{ int: basic sequence of unsigned int, int: basic sequence of unsigned int, ... }',
             },
         ],
     },
@@ -215,7 +215,7 @@ functions_additional_fetch_capture_waveform = {
             }
         ],
        'documentation': {
-            'description': '\nReturns dictionary where each key is the site number and the value is array.array of unsigned int\n\n',
+            'description': '\nReturns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data\n\n',
         },
         'parameters': [
             {
@@ -251,7 +251,7 @@ functions_additional_fetch_capture_waveform = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nDictionary where each key is the site number and the value is array.array of unsigned int\n'
+                    'description': '\nDictionary where each key is a site number and value is a collection of digital states representing capture waveform data\n'
                 },
                 'name': 'waveform',
                 'size': {
@@ -259,7 +259,7 @@ functions_additional_fetch_capture_waveform = {
                     'value': None
                 },
                 'type': 'ViUInt32',
-                'type_in_documentation': '{ site: data, site: data, ... }',
+                'type_in_documentation': '{ int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }',
             },
         ],
     },
@@ -438,7 +438,7 @@ variables must be loaded either first, or at the same time as the levels and tim
                 },
                 'name': 'specificationsFilePaths',
                 'type': 'ViConstString[]',  # Value is unused, but required by code generator
-                'type_in_documentation': 'str or iterable of str',
+                'type_in_documentation': 'str or basic sequence of str',
             },
             {
                 'default_value': None,
@@ -448,7 +448,7 @@ variables must be loaded either first, or at the same time as the levels and tim
                 },
                 'name': 'levelsFilePaths',
                 'type': 'ViConstString[]',  # Value is unused, but required by code generator
-                'type_in_documentation': 'str or iterable of str',
+                'type_in_documentation': 'str or basic sequence of str',
             },
             {
                 'default_value': None,
@@ -458,7 +458,7 @@ variables must be loaded either first, or at the same time as the levels and tim
                 },
                 'name': 'timingFilePaths',
                 'type': 'ViConstString[]',  # Value is unused, but required by code generator
-                'type_in_documentation': 'str or iterable of str',
+                'type_in_documentation': 'str or basic sequence of str',
             },
         ],
     },
@@ -498,7 +498,7 @@ the levels and timing values that reference the updated specifications values.
                 },
                 'name': 'filePaths',
                 'type': 'ViConstString[]',  # Value is unused, but required by code generator
-                'type_in_documentation': 'str or iterable of str',
+                'type_in_documentation': 'str or basic sequence of str',
             },
         ],
     },

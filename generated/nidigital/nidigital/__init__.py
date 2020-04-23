@@ -2,7 +2,7 @@
 # This file was generated
 
 
-__version__ = '0.4.1.dev0'
+__version__ = '0.5.1.dev0'
 
 from nidigital.enums import *  # noqa: F403,F401,H303
 from nidigital.errors import DriverWarning  # noqa: F401
@@ -66,7 +66,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-Digital Pattern Driver"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nidigital'
-    info['module']['version'] = "0.4.1.dev0"
+    info['module']['version'] = "0.5.1.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
