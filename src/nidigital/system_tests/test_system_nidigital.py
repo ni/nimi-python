@@ -7,8 +7,6 @@ import numpy
 import pytest
 
 import nidigital
-from nidigital.enums import PinState
-from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 
 instruments = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
@@ -312,6 +310,8 @@ def test_get_pin_results_pin_information(multi_instrument_session):
 # TODO(jfitzger): make enum and HistoryRAMCycleInformation access consistent with the rest of the tests
 # and remove unnecessary imports.  Blocked by GitHub issue# 1426.
 def test_history_ram_cycle_information_representation():
+    from nidigital.enums import PinState
+    from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
     cycle_info = HistoryRAMCycleInformation(
         pattern_name='pat',
         time_set_name='t0',
