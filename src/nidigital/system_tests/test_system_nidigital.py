@@ -639,6 +639,240 @@ def test_configure_active_load_levels(multi_instrument_session):
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].active_load_vcom == pytest.approx(3.0, rel=1e-3)
 
 
+def test_clock_generator_abort(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].clock_generator_abort()
+
+
+def test_clock_generator_generate_clock(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].clock_generator_generate_clock(
+        1e6,
+        True)
+
+
+def test_frequency_counter_measure_frequency(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].selected_function = nidigital.SelectedFunction.DIGITAL
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].frequency_counter_measurement_time = datetime.timedelta(milliseconds=5)
+    frequencies = multi_instrument_session.pins['site0/PinA', 'site1/PinC'].frequency_counter_measure_frequency()
+    assert frequencies == [0] * 2
+
+
+def test_create_get_delete_time_sets(multi_instrument_session):
+    '''Test basic time set methods.
+
+    - create_time_set
+    - get_time_set_name
+    - delete_all_time_sets
+    '''
+    time_set_a = 'time_set_abc'
+    time_set_b = 'time_set_123'
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.create_time_set(time_set_a)
+    multi_instrument_session.create_time_set(time_set_b)
+    assert multi_instrument_session.get_time_set_name(0) == time_set_a
+    assert multi_instrument_session.get_time_set_name(1) == time_set_b
+    multi_instrument_session.delete_all_time_sets()
+    try:
+        multi_instrument_session.get_time_set_name(0)
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074135025
+        assert e.description.find('Invalid parameter.') != -1
+
+
+def test_configure_get_time_set_period(multi_instrument_session):
+    '''Test time set period methods.
+
+    - configure_time_set_period
+    - get_time_set_period
+    '''
+    time_set_name = 'time_set_abc'
+    time_set_period = datetime.timedelta(microseconds=10)
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.create_time_set(time_set_name)
+    assert multi_instrument_session.get_time_set_period(time_set_name) == 1e-6
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+    assert multi_instrument_session.get_time_set_period(time_set_name) == time_set_period.total_seconds()
+
+
+def test_configure_get_time_set_drive_format(multi_instrument_session):
+    '''Test time set drive format methods.
+
+    - configure_time_set_drive_format
+    - get_time_set_drive_format
+    '''
+    time_set_name = 'time_set_abc'
+    time_set_drive_format = nidigital.DriveFormat.SBC
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.create_time_set(time_set_name)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == nidigital.DriveFormat.NR
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_drive_format(time_set_name, time_set_drive_format)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == time_set_drive_format
+
+
+def test_configure_get_time_set_edge(multi_instrument_session):
+    '''Test time set individual edge methods.
+
+    - configure_time_set_edge
+    - get_time_set_edge
+    '''
+    time_set_name = 'time_set_abc'
+    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_drive_on = time_set_period * 0.5
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.create_time_set(time_set_name)
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(time_set_name, nidigital.TimeSetEdgeType.DRIVE_ON) == 0
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_edge(time_set_name, nidigital.TimeSetEdgeType.DRIVE_ON, time_set_drive_on)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(time_set_name, nidigital.TimeSetEdgeType.DRIVE_ON) == time_set_drive_on.total_seconds()
+
+
+def test_configure_time_set_drive_edges(multi_instrument_session):
+    time_set_name = 'time_set_abc'
+    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_drive_format = nidigital.DriveFormat.RL
+    time_set_drive_on = time_set_period * 0.1
+    time_set_drive_data = time_set_period * 0.2
+    time_set_drive_return = time_set_period * 0.8
+    time_set_drive_off = time_set_period * 0.9
+
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.create_time_set(time_set_name)
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_drive_edges(
+        time_set_name,
+        time_set_drive_format,
+        time_set_drive_on,
+        time_set_drive_data,
+        time_set_drive_return,
+        time_set_drive_off)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == time_set_drive_format
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_ON) == time_set_drive_on.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_DATA) == time_set_drive_data.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_RETURN) == time_set_drive_return.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_OFF) == time_set_drive_off.total_seconds()
+
+
+def test_configure_time_set_compare_edges_strobe(multi_instrument_session):
+    time_set_name = 'time_set_abc'
+    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_strobe = time_set_period * 0.5
+
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.create_time_set(time_set_name)
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_compare_edges_strobe(
+        time_set_name,
+        time_set_strobe)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.COMPARE_STROBE) == time_set_strobe.total_seconds()
+
+
+def test_configure_get_time_set_edge_multiplier(multi_instrument_session):
+    '''Test time set edge multiplier methods.
+
+    - configure_time_set_edge_multiplier
+    - get_time_set_edge_multiplier
+    '''
+    time_set_name = 'time_set_abc'
+    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_edge_multiplier = 2
+
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.create_time_set(time_set_name)
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge_multiplier(time_set_name) == 1
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_edge_multiplier(time_set_name, time_set_edge_multiplier)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge_multiplier(time_set_name) == time_set_edge_multiplier
+
+
+def test_configure_time_set_drive_edges2x(multi_instrument_session):
+    time_set_name = 'time_set_abc'
+    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_drive_format = nidigital.DriveFormat.RL
+    time_set_drive_on = time_set_period * 0.1
+    time_set_drive_data = time_set_period * 0.2
+    time_set_drive_return = time_set_period * 0.5
+    time_set_drive_data2 = time_set_period * 0.7
+    time_set_drive_return2 = time_set_period * 0.9
+    time_set_drive_off = time_set_period * 0.9
+
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.create_time_set(time_set_name)
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_edge_multiplier(time_set_name, 2)
+
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_drive_edges2x(
+        time_set_name,
+        time_set_drive_format,
+        time_set_drive_on,
+        time_set_drive_data,
+        time_set_drive_return,
+        time_set_drive_off,
+        time_set_drive_data2,
+        time_set_drive_return2)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_drive_format(time_set_name) == time_set_drive_format
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_ON) == time_set_drive_on.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_DATA) == time_set_drive_data.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_RETURN) == time_set_drive_return.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_OFF) == time_set_drive_off.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_DATA2) == time_set_drive_data2.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.DRIVE_RETURN2) == time_set_drive_return2.total_seconds()
+
+
+def test_configure_time_set_compare_edges_strobe2x(multi_instrument_session):
+    time_set_name = 'time_set_abc'
+    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_strobe = time_set_period * 0.4
+    time_set_strobe2 = time_set_period * 0.8
+
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    multi_instrument_session.create_time_set(time_set_name)
+    multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_edge_multiplier(time_set_name, 2)
+
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_compare_edges_strobe2x(
+        time_set_name,
+        time_set_strobe,
+        time_set_strobe2)
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.COMPARE_STROBE) == time_set_strobe.total_seconds()
+    assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
+        time_set_name,
+        nidigital.TimeSetEdgeType.COMPARE_STROBE2) == time_set_strobe2.total_seconds()
+
+
 def test_enable_disable_sites_single(multi_instrument_session):
     '''Test methods for single site enable configuration.
 
@@ -786,3 +1020,11 @@ def test_specifications_levels_and_timing_load_sequentially(multi_instrument_ses
         assert e.code == -1074118494
         assert e.description.find('An error occurred while getting values from a levels sheet.') != -1
 
+
+def test_apply_levels_and_timing_initial_states(multi_instrument_session):
+    configure_session(multi_instrument_session, 'simple_pattern')
+    multi_instrument_session.sites[0, 2].apply_levels_and_timing(
+        levels_sheet='pin_levels',
+        timing_sheet='timing',
+        initial_state_high_pins=['HI0', 'LowPins'],
+        initial_state_tristate_pins='HI1, HI2')
