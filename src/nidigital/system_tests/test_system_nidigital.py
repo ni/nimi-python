@@ -7,8 +7,6 @@ import numpy
 import pytest
 
 import nidigital
-from nidigital.enums import PinState
-from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
 
 instruments = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
@@ -310,7 +308,11 @@ def test_get_pin_results_pin_information(multi_instrument_session):
     assert channels == fully_qualified_channels
 
 
+# TODO(jfitzger): make enum and HistoryRAMCycleInformation access consistent with the rest of the tests
+# and remove unnecessary imports.  Blocked by GitHub issue# 1426.
 def test_history_ram_cycle_information_representation():
+    from nidigital.enums import PinState
+    from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
     cycle_info = HistoryRAMCycleInformation(
         pattern_name='pat',
         time_set_name='t0',
@@ -325,14 +327,14 @@ def test_history_ram_cycle_information_representation():
 
 
 def test_history_ram_cycle_information_string():
-    cycle_info = HistoryRAMCycleInformation(
+    cycle_info = nidigital.HistoryRAMCycleInformation(
         pattern_name='pat',
         time_set_name='t0',
         vector_number=42,
         cycle_number=999,
         scan_cycle_number=13,
-        expected_pin_states=[[PinState.D, PinState.V], [PinState.V, PinState.D]],
-        actual_pin_states=[[PinState.PIN_STATE_NOT_ACQUIRED, PinState.PIN_STATE_NOT_ACQUIRED], [PinState.ZERO, PinState.ONE]],
+        expected_pin_states=[[nidigital.PinState.D, nidigital.PinState.V], [nidigital.PinState.V, nidigital.PinState.D]],
+        actual_pin_states=[[nidigital.PinState.PIN_STATE_NOT_ACQUIRED, nidigital.PinState.PIN_STATE_NOT_ACQUIRED], [nidigital.PinState.ZERO, nidigital.PinState.ONE]],
         per_pin_pass_fail=[[True, True], [False, False]])
     print(cycle_info)
     expected_string = '''Pattern Name        : pat
@@ -466,32 +468,32 @@ def test_fetch_history_ram_cycle_information_samples_to_read_all(multi_instrumen
 
     expected_pin_states = [i.expected_pin_states for i in history_ram_cycle_info]
     assert expected_pin_states == [
-        [[PinState.ZERO, PinState.H, PinState.X, PinState.X, PinState.H, PinState.ZERO, PinState.X, PinState.X]],
-        [[PinState.X, PinState.X, PinState.ZERO, PinState.ONE, PinState.X, PinState.X, PinState.L, PinState.H]],
-        [[PinState.X, PinState.X, PinState.ONE, PinState.ZERO, PinState.X, PinState.X, PinState.H, PinState.L]],
-        [[PinState.ONE, PinState.ONE, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.ZERO, PinState.ZERO, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
-        [[PinState.ONE, PinState.ONE, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.ZERO, PinState.ZERO, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
-        [[PinState.ZERO, PinState.ONE, PinState.X, PinState.X, PinState.L, PinState.H, PinState.X, PinState.X], [PinState.ONE, PinState.ZERO, PinState.X, PinState.X, PinState.H, PinState.L, PinState.X, PinState.X]],
-        [[PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X]]
+        [[nidigital.PinState.ZERO, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.ZERO, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H]],
+        [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.ONE, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L]],
+        [[nidigital.PinState.ONE, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X], [nidigital.PinState.ZERO, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.ONE, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X], [nidigital.PinState.ZERO, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.ZERO, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X], [nidigital.PinState.ONE, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X]]
     ]
 
     # If test expects actual pin state to be 'X', then value returned by the returned can be anything.
     # So, need to skip those pin states while comparing.
     actual_pin_states = [i.actual_pin_states for i in history_ram_cycle_info]
     actual_pin_states_expected_by_test = [
-        [[PinState.L, PinState.L, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
-        [[PinState.X, PinState.X, PinState.L, PinState.H, PinState.X, PinState.X, PinState.L, PinState.H]],
-        [[PinState.X, PinState.X, PinState.H, PinState.L, PinState.X, PinState.X, PinState.H, PinState.L]],
-        [[PinState.H, PinState.H, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.L, PinState.L, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
-        [[PinState.H, PinState.H, PinState.X, PinState.X, PinState.H, PinState.H, PinState.X, PinState.X], [PinState.L, PinState.L, PinState.X, PinState.X, PinState.L, PinState.L, PinState.X, PinState.X]],
-        [[PinState.L, PinState.H, PinState.X, PinState.X, PinState.L, PinState.H, PinState.X, PinState.X], [PinState.H, PinState.L, PinState.X, PinState.X, PinState.H, PinState.L, PinState.X, PinState.X]],
-        [[PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X, PinState.X]]
+        [[nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H]],
+        [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L]],
+        [[nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X], [nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X], [nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X], [nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+        [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X]]
     ]
     assert len(actual_pin_states) == len(actual_pin_states_expected_by_test)
     for vector_pin_states, vector_pin_states_expected_by_test in zip(actual_pin_states, actual_pin_states_expected_by_test):
         for cycle_pin_states, cycle_pin_states_expected_by_test in zip(vector_pin_states, vector_pin_states_expected_by_test):
             for pin_state, pin_state_expected_by_test in zip(cycle_pin_states, cycle_pin_states_expected_by_test):
-                if pin_state_expected_by_test is not PinState.X:
+                if pin_state_expected_by_test is not nidigital.PinState.X:
                     assert pin_state == pin_state_expected_by_test
 
     # Only the first cycle returned is expected to have failures
@@ -556,7 +558,7 @@ def test_ppmu_measure(multi_instrument_session):
     configure_session(multi_instrument_session, test_name)
 
     voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
-        nidigital.enums.PPMUMeasurementType.VOLTAGE)
+        nidigital.PPMUMeasurementType.VOLTAGE)
 
     assert len(voltage_measurements) == 2
 

@@ -44,28 +44,28 @@ class TestSession(object):
 
         # for niDigital_FetchHistoryRAMCyclePinData_looping
         self.expected_pin_states_looping = [
-            [[nidigital.enums.PinState.ZERO, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.ZERO, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.ZERO, nidigital.enums.PinState.ONE, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.H]],
-            [[nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.ONE, nidigital.enums.PinState.ZERO, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.L]],
-            [[nidigital.enums.PinState.ONE, nidigital.enums.PinState.ONE, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X],
-             [nidigital.enums.PinState.ZERO, nidigital.enums.PinState.ZERO, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.ONE, nidigital.enums.PinState.ONE, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X],
-             [nidigital.enums.PinState.ZERO, nidigital.enums.PinState.ZERO, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.ZERO, nidigital.enums.PinState.ONE, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X],
-             [nidigital.enums.PinState.ONE, nidigital.enums.PinState.ZERO, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X]]
+            [[nidigital.PinState.ZERO, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.ZERO, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H]],
+            [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.ONE, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L]],
+            [[nidigital.PinState.ONE, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X],
+             [nidigital.PinState.ZERO, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.ONE, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X],
+             [nidigital.PinState.ZERO, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.ZERO, nidigital.PinState.ONE, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X],
+             [nidigital.PinState.ONE, nidigital.PinState.ZERO, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X]]
         ]
         self.actual_pin_states_looping = [
-            [[nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.H]],
-            [[nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.L]],
-            [[nidigital.enums.PinState.H, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X],
-             [nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.H, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X],
-             [nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.L, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.L, nidigital.enums.PinState.H, nidigital.enums.PinState.X, nidigital.enums.PinState.X],
-             [nidigital.enums.PinState.H, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.H, nidigital.enums.PinState.L, nidigital.enums.PinState.X, nidigital.enums.PinState.X]],
-            [[nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X, nidigital.enums.PinState.X]]
+            [[nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H]],
+            [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L]],
+            [[nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X],
+             [nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X],
+             [nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.L, nidigital.PinState.H, nidigital.PinState.X, nidigital.PinState.X],
+             [nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.H, nidigital.PinState.L, nidigital.PinState.X, nidigital.PinState.X]],
+            [[nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X, nidigital.PinState.X]]
         ]
         self.per_pin_pass_fail_looping = [
             [[True, False, True, True, False, True, True, True]],
@@ -79,8 +79,8 @@ class TestSession(object):
 
         # for niDigital_FetchHistoryRAMCyclePinData_check_pins_looping
         self.expected_pin_list_check_pins_looping = None
-        self.expected_pin_states_check_pins_looping = [[[nidigital.enums.PinState.ZERO, nidigital.enums.PinState.H]]]
-        self.actual_pin_states_check_pins_looping = [[[nidigital.enums.PinState.L, nidigital.enums.PinState.L]]]
+        self.expected_pin_states_check_pins_looping = [[[nidigital.PinState.ZERO, nidigital.PinState.H]]]
+        self.actual_pin_states_check_pins_looping = [[[nidigital.PinState.L, nidigital.PinState.L]]]
         self.per_pin_pass_fail_check_pins_looping = [[[True, False]]]
 
         # for niDigital_GetHistoryRAMSampleCount_check_site_looping
@@ -125,8 +125,8 @@ class TestSession(object):
         self.side_effects_helper['FetchHistoryRAMScanCycleNumber']['scanCycleNumber'] = -1
         self.patched_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = self.side_effects_helper.niDigital_FetchHistoryRAMCyclePinData
         self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualNumPinData'] = 8
-        self.side_effects_helper['FetchHistoryRAMCyclePinData']['expectedPinStates'] = [nidigital.enums.PinState.X.value] * 8
-        self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualPinStates'] = [nidigital.enums.PinState.NOT_A_PIN_STATE.value] * 8
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['expectedPinStates'] = [nidigital.PinState.X.value] * 8
+        self.side_effects_helper['FetchHistoryRAMCyclePinData']['actualPinStates'] = [nidigital.PinState.NOT_A_PIN_STATE.value] * 8
         self.side_effects_helper['FetchHistoryRAMCyclePinData']['perPinPassFail'] = [True] * 8
         with nidigital.Session('') as session:
             history_ram_cycle_info = session.sites[1].fetch_history_ram_cycle_information(
@@ -254,7 +254,7 @@ class TestSession(object):
         for vector_pin_states, vector_pin_states_expected_by_test in zip(actual_pin_states, self.actual_pin_states_looping):
             for cycle_pin_states, cycle_pin_states_expected_by_test in zip(vector_pin_states, vector_pin_states_expected_by_test):
                 for pin_state, pin_state_expected_by_test in zip(cycle_pin_states, cycle_pin_states_expected_by_test):
-                    if pin_state_expected_by_test is not nidigital.enums.PinState.X:
+                    if pin_state_expected_by_test is not nidigital.PinState.X:
                         assert pin_state == pin_state_expected_by_test
 
         # Only the first cycle returned is expected to have failures
