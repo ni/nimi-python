@@ -569,7 +569,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def apply_levels_and_timing(self, levels_sheet, timing_sheet, initial_state_high_pins="", initial_state_low_pins="", initial_state_tristate_pins=""):
+    def apply_levels_and_timing(self, levels_sheet, timing_sheet, initial_state_high_pins=None, initial_state_low_pins=None, initial_state_tristate_pins=None):
         r'''apply_levels_and_timing
 
         TBD
@@ -585,20 +585,20 @@ class _SessionBase(object):
 
             timing_sheet (str):
 
-            initial_state_high_pins (str):
+            initial_state_high_pins (basic sequence types or str): Pins or pin groups to initialize to a high state.
 
-            initial_state_low_pins (str):
+            initial_state_low_pins (basic sequence types or str): Pins or pin groups to initialize to a low state.
 
-            initial_state_tristate_pins (str):
+            initial_state_tristate_pins (basic sequence types or str): Pins or pin groups to initialize to a non-drive state (X).
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
         levels_sheet_ctype = ctypes.create_string_buffer(levels_sheet.encode(self._encoding))  # case C020
         timing_sheet_ctype = ctypes.create_string_buffer(timing_sheet.encode(self._encoding))  # case C020
-        initial_state_high_pins_ctype = ctypes.create_string_buffer(initial_state_high_pins.encode(self._encoding))  # case C020
-        initial_state_low_pins_ctype = ctypes.create_string_buffer(initial_state_low_pins.encode(self._encoding))  # case C020
-        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(initial_state_tristate_pins.encode(self._encoding))  # case C020
+        initial_state_high_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_high_pins).encode(self._encoding))  # case C040
+        initial_state_low_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_low_pins).encode(self._encoding))  # case C040
+        initial_state_tristate_pins_ctype = ctypes.create_string_buffer(_converters.convert_repeated_capabilities_without_prefix(initial_state_tristate_pins).encode(self._encoding))  # case C040
         error_code = self._library.niDigital_ApplyLevelsAndTiming(vi_ctype, site_list_ctype, levels_sheet_ctype, timing_sheet_ctype, initial_state_high_pins_ctype, initial_state_low_pins_ctype, initial_state_tristate_pins_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -616,7 +616,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            offsets (list of float in seconds or datetime.timedelta):
+            offsets (basic sequence of float in seconds or datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1232,7 +1232,7 @@ class _SessionBase(object):
     def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0)):
         '''fetch_capture_waveform
 
-        Returns dictionary where each key is the site number and the value is array.array of unsigned int
+        Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
         Tip:
         This method requires repeated capabilities. If called directly on the
@@ -1249,7 +1249,7 @@ class _SessionBase(object):
 
 
         Returns:
-            waveform ({ site: data, site: data, ... }): Dictionary where each key is the site number and the value is array.array of unsigned int
+            waveform ({ int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }): Dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
         '''
         data, actual_num_waveforms, actual_samples_per_waveform = self._fetch_capture_waveform(waveform_name, samples_to_read, timeout)
@@ -2857,11 +2857,11 @@ class Session(_SessionBase):
         variables must be loaded either first, or at the same time as the levels and timing sheets.
 
         Args:
-            specifications_file_paths (str or iterable of str): Absolute file path of one or more specifications files.
+            specifications_file_paths (str or basic sequence of str): Absolute file path of one or more specifications files.
 
-            levels_file_paths (str or iterable of str): Absolute file path of one or more levels sheet files.
+            levels_file_paths (str or basic sequence of str): Absolute file path of one or more levels sheet files.
 
-            timing_file_paths (str or iterable of str): Absolute file path of one or more timing sheet files.
+            timing_file_paths (str or basic sequence of str): Absolute file path of one or more timing sheet files.
 
         '''
         self._call_method_with_iterable(self._load_specifications, specifications_file_paths)
@@ -2891,7 +2891,7 @@ class Session(_SessionBase):
         the levels and timing values that reference the updated specifications values.
 
         Args:
-            file_paths (str or iterable of str): Absolute file path of one or more loaded specifications files.
+            file_paths (str or basic sequence of str): Absolute file path of one or more loaded specifications files.
 
         '''
         self._call_method_with_iterable(self._unload_specifications, file_paths)
@@ -2905,7 +2905,7 @@ class Session(_SessionBase):
         Args:
             waveform_name (str):
 
-            waveform_data ({ site: data, site: data, ... }): Dictionary where each key is the site number and the value is array.array of unsigned int
+            waveform_data ({ int: basic sequence of unsigned int, int: basic sequence of unsigned int, ... }): Dictionary where each key is a site number and value is a collection of samples to use as source data
 
         '''
         site_list = []
