@@ -167,6 +167,11 @@ def test_burst_pattern_pass_fail(multi_instrument_session):
 
 
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
+    '''Test methods for using source waveform with parallel sourcing and broadcast data mapping.
+
+    - create_source_waveform_parallel
+    - write_source_waveform_broadcast
+    '''
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
 
@@ -204,6 +209,11 @@ def source_waveform_type(request):
 
 
 def test_source_waveform_parallel_site_unique(multi_instrument_session, source_waveform_type):
+    '''Test methods for using source waveform with parallel sourcing and site-unique data mapping.
+
+    - create_source_waveform_parallel
+    - write_source_waveform_site_unique
+    '''
     test_name = test_source_waveform_parallel_site_unique.__name__
     configure_session(multi_instrument_session, test_name)
 
@@ -249,6 +259,11 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
 
 
 def test_fetch_capture_waveform(multi_instrument_session):
+    '''Test methods for using capture waveform with parallel acquisition.
+
+    - create_capture_waveform_parallel
+    - fetch_capture_waveform
+    '''
     test_name = test_fetch_capture_waveform.__name__
     configure_session(multi_instrument_session, test_name)
 
@@ -962,6 +977,12 @@ def test_configure_pattern_burst_sites(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
+    '''Test methods for loading, applying and unloading specifications, levels, and timing files.
+
+    - apply_levels_and_timing
+    - load_specifications_levels_and_timing
+    - unload_specifications
+    '''
     pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
     specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
     # Levels and timing files contain references to variables in specs1
@@ -989,6 +1010,12 @@ def test_specifications_levels_and_timing_single(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_multiple(multi_instrument_session):
+    '''Test methods for loading, applying and unloading multiple specifications, levels, and timing files.
+
+    - apply_levels_and_timing
+    - load_specifications_levels_and_timing
+    - unload_specifications
+    '''
     pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
 
     specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
@@ -1023,6 +1050,12 @@ def test_specifications_levels_and_timing_multiple(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_load_sequentially(multi_instrument_session):
+    '''Test methods for separately loading, applying and unloading multiple specifications, levels, and timing files.
+
+    - apply_levels_and_timing
+    - load_specifications_levels_and_timing
+    - unload_specifications
+    '''
     pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
 
     specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
