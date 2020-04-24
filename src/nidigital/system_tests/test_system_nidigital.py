@@ -953,11 +953,11 @@ def test_configure_pattern_burst_sites(multi_instrument_session):
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_b.digipat'))
     multi_instrument_session.start_label = 'second_pattern'
     multi_instrument_session.selected_function = nidigital.SelectedFunction.DIGITAL
-    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
 
     multi_instrument_session.sites[0, 2, 3].configure_pattern_burst_sites()
 
     multi_instrument_session.initiate()
+    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
     result = multi_instrument_session.sites[0, 1, 3].get_site_pass_fail()
     assert result == {0: True, 3: True}
 
