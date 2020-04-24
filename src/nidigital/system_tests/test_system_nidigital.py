@@ -169,7 +169,7 @@ def test_burst_pattern_pass_fail(multi_instrument_session):
 
 
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
-    '''Test methods for parallel broadcast.
+    '''Test methods for using source waveform with parallel sourcing and broadcast data mapping.
 
     - create_source_waveform_parallel
     - write_source_waveform_broadcast
@@ -211,11 +211,9 @@ def source_waveform_type(request):
 
 
 def test_source_waveform_parallel_site_unique(multi_instrument_session, source_waveform_type):
-    '''Test methods for generating and capturing unique waveforms to multiple sites in parallel.
+    '''Test methods for using source waveform with parallel sourcing and site-unique data mapping.
 
-    - create_capture_waveform_parallel
     - create_source_waveform_parallel
-    - fetch_capture_waveform
     - write_source_waveform_site_unique
     '''
     test_name = test_source_waveform_parallel_site_unique.__name__
@@ -263,12 +261,10 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
 
 
 def test_fetch_capture_waveform(multi_instrument_session):
-    '''Test methods for generating and capturing waveform to multiple sites in parallel.
+    '''Test methods for using capture waveform with parallel acquisition.
 
     - create_capture_waveform_parallel
-    - create_source_waveform_parallel
     - fetch_capture_waveform
-    - write_source_waveform_broadcast
     '''
     test_name = test_fetch_capture_waveform.__name__
     configure_session(multi_instrument_session, test_name)
@@ -658,7 +654,7 @@ def test_configure_active_load_levels(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
-    '''Test methods for using a level and timing specification.
+    '''Test methods for loading, applying and unloading specifications, levels, and timing files.
 
     - apply_levels_and_timing
     - load_specifications_levels_and_timing
@@ -691,7 +687,7 @@ def test_specifications_levels_and_timing_single(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_multiple(multi_instrument_session):
-    '''Test methods for using multiple level and timing specifications, loaded together.
+    '''Test methods for loading, applying and unloading multiple specifications, levels, and timing files.
 
     - apply_levels_and_timing
     - load_specifications_levels_and_timing
@@ -731,7 +727,7 @@ def test_specifications_levels_and_timing_multiple(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_load_sequentially(multi_instrument_session):
-    '''Test methods for using multiple level and timing specifications, loaded separately.
+    '''Test methods for separately loading, applying and unloading multiple specifications, levels, and timing files.
 
     - apply_levels_and_timing
     - load_specifications_levels_and_timing
