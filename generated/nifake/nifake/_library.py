@@ -61,6 +61,7 @@ class Library(object):
         self.niFake_Read_cfunc = None
         self.niFake_ReadFromChannel_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
+        self.niFake_ReturnDurationInSeconds_cfunc = None
         self.niFake_ReturnListOfDurationsInSeconds_cfunc = None
         self.niFake_ReturnMultipleTypes_cfunc = None
         self.niFake_SetAttributeViBoolean_cfunc = None
@@ -406,6 +407,14 @@ class Library(object):
                 self.niFake_ReturnANumberAndAString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ReturnANumberAndAString_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReturnANumberAndAString_cfunc(vi, a_number, a_string)
+
+    def niFake_ReturnDurationInSeconds(self, vi, timedelta):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ReturnDurationInSeconds_cfunc is None:
+                self.niFake_ReturnDurationInSeconds_cfunc = self._library.niFake_ReturnDurationInSeconds
+                self.niFake_ReturnDurationInSeconds_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niFake_ReturnDurationInSeconds_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ReturnDurationInSeconds_cfunc(vi, timedelta)
 
     def niFake_ReturnListOfDurationsInSeconds(self, vi, number_of_elements, timedeltas):  # noqa: N802
         with self._func_lock:
