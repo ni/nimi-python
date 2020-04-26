@@ -21,7 +21,7 @@ class HistoryRAMCycleInformation(object):
             'per_pin_pass_fail={}'.format(self.per_pin_pass_fail),
         ]
 
-        return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
+        return '{0}.{1}({2})'.format(self.__class__.__module__, self.__class__.__qualname__, ', '.join(parameter_list))
 
     def __str__(self):
         # different format lines
@@ -42,7 +42,7 @@ class HistoryRAMCycleInformation(object):
 
     @staticmethod
     def _digital_states_representation(states):
-        states_representation = [['{0}.{1}'.format(i.__class__.__name__, i.name) for i in j] for j in states]
+        states_representation = [['{0}.{1}.{2}'.format(i.__class__.__module__, i.__class__.__qualname__, i.name) for i in j] for j in states]
         return '[{}]'.format(', '.join(['[{}]'.format(', '.join(i)) for i in states_representation]))
 
     @staticmethod

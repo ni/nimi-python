@@ -323,19 +323,16 @@ def test_get_pin_results_pin_information(multi_instrument_session):
     assert channels == fully_qualified_channels
 
 
-# TODO(jfitzger): make enum and HistoryRAMCycleInformation access consistent with the rest of the tests
-# and remove unnecessary imports.  Blocked by GitHub issue# 1426.
 def test_history_ram_cycle_information_representation():
-    from nidigital.enums import PinState
-    from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation
-    cycle_info = HistoryRAMCycleInformation(
+    cycle_info = nidigital.HistoryRAMCycleInformation(
         pattern_name='pat',
         time_set_name='t0',
         vector_number=42,
         cycle_number=999,
         scan_cycle_number=13,
-        expected_pin_states=[[PinState.D, PinState.D], [PinState.V, PinState.V]],
-        actual_pin_states=[[PinState.PIN_STATE_NOT_ACQUIRED, PinState.PIN_STATE_NOT_ACQUIRED], [PinState.NOT_A_PIN_STATE, PinState.NOT_A_PIN_STATE]],
+        expected_pin_states=[[nidigital.PinState.D, nidigital.PinState.D], [nidigital.PinState.V, nidigital.PinState.V]],
+        actual_pin_states=[[nidigital.PinState.PIN_STATE_NOT_ACQUIRED, nidigital.PinState.PIN_STATE_NOT_ACQUIRED],
+                           [nidigital.PinState.NOT_A_PIN_STATE, nidigital.PinState.NOT_A_PIN_STATE]],
         per_pin_pass_fail=[[True, True], [False, False]])
     recreated_cycle_info = eval(repr(cycle_info))
     assert str(recreated_cycle_info) == str(cycle_info)
