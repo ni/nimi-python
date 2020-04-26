@@ -136,7 +136,7 @@ apply_levels_and_timing
             :param initial_state_high_pins:
 
 
-                Pins or pin groups FFFFFFFF to initialize to a high state.
+                Pins or pin groups to initialize to a high state.
 
                 
 

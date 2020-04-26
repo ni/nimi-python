@@ -585,7 +585,7 @@ class _SessionBase(object):
 
             timing_sheet (str):
 
-            initial_state_high_pins (basic sequence types or str): Pins or pin groups FFFFFFFF to initialize to a high state.
+            initial_state_high_pins (basic sequence types or str): Pins or pin groups to initialize to a high state.
 
             initial_state_low_pins (basic sequence types or str): Pins or pin groups to initialize to a low state.
 
