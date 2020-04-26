@@ -585,7 +585,7 @@ class _SessionBase(object):
 
             timing_sheet (str):
 
-            initial_state_high_pins (basic sequence types or str): Pins or pin groups to initialize to a high state.
+            initial_state_high_pins (basic sequence types or str): Pins or pin groups FFFFFFFF to initialize to a high state.
 
             initial_state_low_pins (basic sequence types or str): Pins or pin groups to initialize to a low state.
 
@@ -1166,7 +1166,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.TimeDelta(seconds=10.0)):
         '''burst_pattern
 
         Uses the start_label you specify to burst the pattern on the sites you specify. If you
@@ -1188,7 +1188,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float in seconds or datetime.timedelta):
+            timeout (float in seconds or hightime.TimeDelta):
 
 
         Returns:
@@ -1229,7 +1229,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
 
-    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0)):
+    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=hightime.TimeDelta(seconds=10.0)):
         '''fetch_capture_waveform
 
         Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
@@ -1245,7 +1245,7 @@ class _SessionBase(object):
 
             samples_to_read (int):
 
-            timeout (float or datetime.timedelta):
+            timeout (float in seconds or hightime.TimeDelta):
 
 
         Returns:

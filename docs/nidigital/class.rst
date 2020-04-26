@@ -136,9 +136,9 @@ apply_levels_and_timing
             :param initial_state_high_pins:
 
 
-                Pins or pin groups to initialize to a high state.
+                Pins or pin groups FFFFFFFF to initialize to a high state.
 
-
+                
 
 
             :type initial_state_high_pins: basic sequence types or str
@@ -147,7 +147,7 @@ apply_levels_and_timing
 
                 Pins or pin groups to initialize to a low state.
 
-
+                
 
 
             :type initial_state_low_pins: basic sequence types or str
@@ -156,7 +156,7 @@ apply_levels_and_timing
 
                 Pins or pin groups to initialize to a non-drive state (X).
 
-
+                
 
 
             :type initial_state_tristate_pins: basic sequence types or str
@@ -192,7 +192,7 @@ burst_pattern
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0))
+    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.TimeDelta(seconds=10.0))
 
             Uses the start_label you specify to burst the pattern on the sites you specify. If you
             specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
@@ -236,7 +236,7 @@ burst_pattern
                 
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: float in seconds or hightime.TimeDelta
 
             :rtype: { int: bool, int: bool, ... }
             :return:
@@ -1067,7 +1067,7 @@ fetch_capture_waveform
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0))
+    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=hightime.TimeDelta(seconds=10.0))
 
             Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
@@ -1100,7 +1100,7 @@ fetch_capture_waveform
                 
 
 
-            :type timeout: float or datetime.timedelta
+            :type timeout: float in seconds or hightime.TimeDelta
 
             :rtype: { int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }
             :return:
