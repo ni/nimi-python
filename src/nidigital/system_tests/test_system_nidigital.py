@@ -1025,7 +1025,7 @@ def test_abort_keep_alive(multi_instrument_session):
 
 
 def test_create_source_waveform_serial(multi_instrument_session):
-    test_name = 'test_source_waveform_parallel_broadcast'
+    test_name = 'test_create_source_waveform_serial'
     configure_session(multi_instrument_session, test_name)
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
 
@@ -1038,7 +1038,7 @@ def test_create_source_waveform_serial(multi_instrument_session):
     # load and burst the waveform to confirm that configuration went okay
     multi_instrument_session.write_source_waveform_broadcast(
         waveform_name='src_wfm',
-        waveform_data=[i for i in range(4)])
+        waveform_data=[1, 2])
     pass_fail = multi_instrument_session.burst_pattern(start_label='new_pattern')
     assert pass_fail == {0: True, 1: True}
 
