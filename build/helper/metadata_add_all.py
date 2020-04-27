@@ -584,10 +584,10 @@ def add_all_config_metadata(config):
         config['uses_nitclk'] = False
 
     if 'uses_hightime' in config:
-        config['timedelta_type'] = 'hightime.TimeDelta'
+        config['datetime_library'] = 'hightime'
     else:
         config['uses_hightime'] = False
-        config['timedelta_type'] = 'datetime.timedelta'
+        config['datetime_library'] = 'datetime'
 
     return config
 
@@ -1285,7 +1285,7 @@ config_expected = {
     },
     'uses_nitclk': False,
     'uses_hightime': False,
-    'timedelta_type': 'datetime.timedelta',
+    'datetime_library': 'datetime',
 }
 
 

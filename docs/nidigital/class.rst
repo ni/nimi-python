@@ -185,14 +185,14 @@ apply_tdr_offsets
                 
 
 
-            :type offsets: basic sequence of float in seconds or hightime.TimeDelta
+            :type offsets: basic sequence of float in seconds or hightime.timedelta
 
 burst_pattern
 -------------
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.TimeDelta(seconds=10.0))
+    .. py:method:: burst_pattern(start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0))
 
             Uses the start_label you specify to burst the pattern on the sites you specify. If you
             specify wait_until_done as True, waits for the burst to complete, and returns comparison results for each site.
@@ -236,7 +236,7 @@ burst_pattern
                 
 
 
-            :type timeout: float in seconds or hightime.TimeDelta
+            :type timeout: float in seconds or hightime.timedelta
 
             :rtype: { int: bool, int: bool, ... }
             :return:
@@ -417,7 +417,7 @@ configure_time_set_compare_edges_strobe
                 
 
 
-            :type strobe_edge: float in seconds or hightime.TimeDelta
+            :type strobe_edge: float in seconds or hightime.timedelta
 
 configure_time_set_compare_edges_strobe2x
 -----------------------------------------
@@ -450,14 +450,14 @@ configure_time_set_compare_edges_strobe2x
                 
 
 
-            :type strobe_edge: float in seconds or hightime.TimeDelta
+            :type strobe_edge: float in seconds or hightime.timedelta
             :param strobe2_edge:
 
 
                 
 
 
-            :type strobe2_edge: float in seconds or hightime.TimeDelta
+            :type strobe2_edge: float in seconds or hightime.timedelta
 
 configure_time_set_drive_edges
 ------------------------------
@@ -497,28 +497,28 @@ configure_time_set_drive_edges
                 
 
 
-            :type drive_on_edge: float in seconds or hightime.TimeDelta
+            :type drive_on_edge: float in seconds or hightime.timedelta
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float in seconds or hightime.TimeDelta
+            :type drive_data_edge: float in seconds or hightime.timedelta
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float in seconds or hightime.TimeDelta
+            :type drive_return_edge: float in seconds or hightime.timedelta
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float in seconds or hightime.TimeDelta
+            :type drive_off_edge: float in seconds or hightime.timedelta
 
 configure_time_set_drive_edges2x
 --------------------------------
@@ -558,42 +558,42 @@ configure_time_set_drive_edges2x
                 
 
 
-            :type drive_on_edge: float in seconds or hightime.TimeDelta
+            :type drive_on_edge: float in seconds or hightime.timedelta
             :param drive_data_edge:
 
 
                 
 
 
-            :type drive_data_edge: float in seconds or hightime.TimeDelta
+            :type drive_data_edge: float in seconds or hightime.timedelta
             :param drive_return_edge:
 
 
                 
 
 
-            :type drive_return_edge: float in seconds or hightime.TimeDelta
+            :type drive_return_edge: float in seconds or hightime.timedelta
             :param drive_off_edge:
 
 
                 
 
 
-            :type drive_off_edge: float in seconds or hightime.TimeDelta
+            :type drive_off_edge: float in seconds or hightime.timedelta
             :param drive_data2_edge:
 
 
                 
 
 
-            :type drive_data2_edge: float in seconds or hightime.TimeDelta
+            :type drive_data2_edge: float in seconds or hightime.timedelta
             :param drive_return2_edge:
 
 
                 
 
 
-            :type drive_return2_edge: float in seconds or hightime.TimeDelta
+            :type drive_return2_edge: float in seconds or hightime.timedelta
 
 configure_time_set_drive_format
 -------------------------------
@@ -666,7 +666,7 @@ configure_time_set_edge
                 
 
 
-            :type time: float in seconds or hightime.TimeDelta
+            :type time: float in seconds or hightime.timedelta
 
 configure_time_set_edge_multiplier
 ----------------------------------
@@ -727,7 +727,7 @@ configure_time_set_period
                 
 
 
-            :type period: float in seconds or hightime.TimeDelta
+            :type period: float in seconds or hightime.timedelta
 
 configure_voltage_levels
 ------------------------
@@ -1067,7 +1067,7 @@ fetch_capture_waveform
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=hightime.TimeDelta(seconds=10.0))
+    .. py:method:: fetch_capture_waveform(waveform_name, samples_to_read, timeout=hightime.timedelta(seconds=10.0))
 
             Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
 
@@ -1100,7 +1100,7 @@ fetch_capture_waveform
                 
 
 
-            :type timeout: float in seconds or hightime.TimeDelta
+            :type timeout: float in seconds or hightime.timedelta
 
             :rtype: { int: memoryview of array.array of unsigned int, int: memoryview of array.array of unsigned int, ... }
             :return:
@@ -2120,7 +2120,7 @@ tdr
 
             :type apply_offsets: bool
 
-            :rtype: list of hightime.TimeDelta
+            :rtype: list of hightime.timedelta
             :return:
 
 
@@ -2195,7 +2195,7 @@ wait_until_done
 
     .. py:currentmodule:: nidigital.Session
 
-    .. py:method:: wait_until_done(timeout=hightime.TimeDelta(seconds=10.0))
+    .. py:method:: wait_until_done(timeout=hightime.timedelta(seconds=10.0))
 
             TBD
 
@@ -2209,7 +2209,7 @@ wait_until_done
                 
 
 
-            :type timeout: float in seconds or hightime.TimeDelta
+            :type timeout: float in seconds or hightime.timedelta
 
 write_sequencer_flag
 --------------------

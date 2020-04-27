@@ -144,7 +144,7 @@ def convert_repeated_capabilities_without_prefix(repeated_capability):
 
 def _convert_timedelta(value, library_type, scaling):
     try:
-        # We first assume it is a hightime.TimeDelta object
+        # We first assume it is a hightime.timedelta object
         scaled_value = value.total_seconds() * scaling
     except AttributeError:
         # If that doesn't work, assume it is a value in seconds
@@ -285,10 +285,10 @@ def test_convert_init_with_options_dictionary():
 
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
-    test_result = convert_timedelta_to_seconds_real64(hightime.TimeDelta(seconds=10))
+    test_result = convert_timedelta_to_seconds_real64(hightime.timedelta(seconds=10))
     assert test_result.value == 10.0
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds_real64(hightime.TimeDelta(seconds=-1))
+    test_result = convert_timedelta_to_seconds_real64(hightime.timedelta(seconds=-1))
     assert test_result.value == -1
     assert isinstance(test_result, _visatype.ViReal64)
     test_result = convert_timedelta_to_seconds_real64(10.5)
@@ -300,10 +300,10 @@ def test_convert_timedelta_to_seconds_double():
 
 
 def test_convert_timedelta_to_milliseconds_int32():
-    test_result = convert_timedelta_to_milliseconds_int32(hightime.TimeDelta(seconds=10))
+    test_result = convert_timedelta_to_milliseconds_int32(hightime.timedelta(seconds=10))
     assert test_result.value == 10000
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds_int32(hightime.TimeDelta(seconds=-1))
+    test_result = convert_timedelta_to_milliseconds_int32(hightime.timedelta(seconds=-1))
     assert test_result.value == -1000
     assert isinstance(test_result, _visatype.ViInt32)
     test_result = convert_timedelta_to_milliseconds_int32(10.5)
@@ -319,7 +319,7 @@ def test_convert_timedeltas_to_seconds_real64():
     test_result = convert_timedeltas_to_seconds_real64(time_values)
     assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
     assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
-    timedeltas = [hightime.TimeDelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
+    timedeltas = [hightime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
     test_result = convert_timedeltas_to_seconds_real64(timedeltas)
     assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
     assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
