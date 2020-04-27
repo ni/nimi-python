@@ -1731,6 +1731,33 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ReturnDurationInSeconds': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns a datetime.timedelta instance.'
+        },
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Duration in seconds.'
+                },
+                'name': 'timedelta',
+                'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
+                'type': 'ViReal64',
+                'type_in_documentation': 'datetime.timedelta'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'ReturnListOfDurationsInSeconds': {
         'codegen_method': 'public',
         'documentation': {

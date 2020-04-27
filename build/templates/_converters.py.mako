@@ -175,8 +175,12 @@ def convert_timedeltas_to_seconds_real64(values):
     return [convert_timedelta_to_seconds_real64(i) for i in values]
 
 
-def convert_seconds_real64_to_timedeltas(seconds):
-    return [datetime.timedelta(seconds=i) for i in seconds]
+def convert_seconds_real64_to_timedelta(value):
+    return datetime.timedelta(seconds=value)
+
+
+def convert_seconds_real64_to_timedeltas(values):
+    return [convert_seconds_real64_to_timedelta(i) for i in values]
 
 
 def convert_month_to_timedelta(months):
@@ -368,6 +372,12 @@ def test_convert_timedeltas_to_seconds_real64():
     test_result = convert_timedeltas_to_seconds_real64(timedeltas)
     assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
     assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
+
+
+def test_convert_seconds_real64_to_timedelta():
+    time_value = 10.5
+    timedelta = convert_seconds_real64_to_timedelta(time_value)
+    assert timedelta.total_seconds() == time_value
 
 
 def test_convert_seconds_real64_to_timedeltas():

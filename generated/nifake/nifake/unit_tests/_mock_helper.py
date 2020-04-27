@@ -139,6 +139,9 @@ class SideEffectsHelper(object):
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
         self._defaults['ReturnANumberAndAString']['aString'] = None
+        self._defaults['ReturnDurationInSeconds'] = {}
+        self._defaults['ReturnDurationInSeconds']['return'] = 0
+        self._defaults['ReturnDurationInSeconds']['timedelta'] = None
         self._defaults['ReturnListOfDurationsInSeconds'] = {}
         self._defaults['ReturnListOfDurationsInSeconds']['return'] = 0
         self._defaults['ReturnListOfDurationsInSeconds']['timedeltas'] = None
@@ -675,6 +678,16 @@ class SideEffectsHelper(object):
             a_string[i] = test_value[i]
         return self._defaults['ReturnANumberAndAString']['return']
 
+    def niFake_ReturnDurationInSeconds(self, vi, timedelta):  # noqa: N802
+        if self._defaults['ReturnDurationInSeconds']['return'] != 0:
+            return self._defaults['ReturnDurationInSeconds']['return']
+        # timedelta
+        if self._defaults['ReturnDurationInSeconds']['timedelta'] is None:
+            raise MockFunctionCallError("niFake_ReturnDurationInSeconds", param='timedelta')
+        if timedelta is not None:
+            timedelta.contents.value = self._defaults['ReturnDurationInSeconds']['timedelta']
+        return self._defaults['ReturnDurationInSeconds']['return']
+
     def niFake_ReturnListOfDurationsInSeconds(self, vi, number_of_elements, timedeltas):  # noqa: N802
         if self._defaults['ReturnListOfDurationsInSeconds']['return'] != 0:
             return self._defaults['ReturnListOfDurationsInSeconds']['return']
@@ -934,6 +947,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ReadFromChannel.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
+        mock_library.niFake_ReturnDurationInSeconds.side_effect = MockFunctionCallError("niFake_ReturnDurationInSeconds")
+        mock_library.niFake_ReturnDurationInSeconds.return_value = 0
         mock_library.niFake_ReturnListOfDurationsInSeconds.side_effect = MockFunctionCallError("niFake_ReturnListOfDurationsInSeconds")
         mock_library.niFake_ReturnListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_ReturnMultipleTypes.side_effect = MockFunctionCallError("niFake_ReturnMultipleTypes")

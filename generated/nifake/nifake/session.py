@@ -1541,6 +1541,22 @@ class Session(_SessionBase):
         return int(a_number_ctype.value), a_string_ctype.value.decode(self._encoding)
 
     @ivi_synchronized
+    def return_duration_in_seconds(self):
+        r'''return_duration_in_seconds
+
+        Returns a datetime.timedelta instance.
+
+        Returns:
+            timedelta (datetime.timedelta): Duration in seconds.
+
+        '''
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        timedelta_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niFake_ReturnDurationInSeconds(vi_ctype, None if timedelta_ctype is None else (ctypes.pointer(timedelta_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return _converters.convert_seconds_real64_to_timedelta(float(timedelta_ctype.value))
+
+    @ivi_synchronized
     def return_list_of_durations_in_seconds(self, number_of_elements):
         r'''return_list_of_durations_in_seconds
 

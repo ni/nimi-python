@@ -1463,6 +1463,19 @@ class TestSession(object):
                 _matchers.ViReal64BufferMatcher(time_values)
             )
 
+    def test_return_timedelta(self):
+        self.patched_library.niFake_ReturnDurationInSeconds.side_effect = self.side_effects_helper.niFake_ReturnDurationInSeconds
+        time_value = -1.5
+        expected_timedelta = datetime.timedelta(seconds=time_value)
+        self.side_effects_helper['ReturnDurationInSeconds']['timedelta'] = time_value
+        with nifake.Session('dev1') as session:
+            returned_timedelta = session.return_duration_in_seconds()
+            assert returned_timedelta == expected_timedelta
+            self.patched_library.niFake_ReturnDurationInSeconds.assert_called_once_with(
+                _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+                _matchers.ViReal64PointerMatcher()
+            )
+
     def test_return_timedeltas(self):
         self.patched_library.niFake_ReturnListOfDurationsInSeconds.side_effect = self.side_effects_helper.niFake_ReturnListOfDurationsInSeconds
         time_values = [-1.5, 2.0]
