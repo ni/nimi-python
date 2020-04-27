@@ -995,7 +995,7 @@ def test_initiate_context_manager_and_wait_until_done(multi_instrument_session):
 
     with multi_instrument_session.initiate():
         # note that wait_until_done will return immediately with simulated hardware
-        multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
+        multi_instrument_session.wait_until_done(timeout=hightime.TimeDelta(seconds=5.0))
     assert multi_instrument_session.is_done()
 
 
