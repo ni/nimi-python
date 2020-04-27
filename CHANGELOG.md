@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
         * Changed initial_state parameters in `apply_levels_and_timing` to basic sequence types - [#1391](https://github.com/ni/nimi-python/issues/1391) 
+        * Changed HistoryRAMCycleInformation.__repr__ to include `__module__` - [#1426](https://github.com/ni/nimi-python/issues/1426) 
     * #### Removed
 * ### NI-DMM
     * #### Added
