@@ -258,13 +258,13 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
     assert all(len(fetched_waveforms[site]) == num_samples for site in fetched_waveforms)
 
 
-def test_fetch_capture_waveform(multi_instrument_session):
+def test_fetch_capture_waveform_parallel(multi_instrument_session):
     '''Test methods for using capture waveform with parallel acquisition.
 
     - create_capture_waveform_parallel
     - fetch_capture_waveform
     '''
-    test_name = test_fetch_capture_waveform.__name__
+    test_name = test_fetch_capture_waveform_parallel.__name__
     configure_session(multi_instrument_session, test_name)
 
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
@@ -1085,12 +1085,12 @@ def test_write_source_waveform_data_from_file_tdms(multi_instrument_session):
 
 
 def test_create_capture_waveform_serial(multi_instrument_session):
-    test_name = 'test_fetch_capture_waveform'
+    test_name = 'test_create_capture_waveform_serial'
     configure_session(multi_instrument_session, test_name)
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
-    num_samples = 256
+    num_samples = 2
 
-    multi_instrument_session.pins['LO0'].create_capture_waveform_serial(
+    multi_instrument_session.pins['HI0'].create_capture_waveform_serial(
         waveform_name='capt_wfm',
         sample_width=2,
         bit_order=nidigital.BitOrder.LSB)
@@ -1103,40 +1103,40 @@ def test_create_capture_waveform_serial(multi_instrument_session):
         bit_order=nidigital.BitOrder.LSB)
     multi_instrument_session.write_source_waveform_broadcast(
         waveform_name='src_wfm',
-        waveform_data=[0])
+        waveform_data=[1, 2])
     multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     # Fetch to confirm that configuration went okay
-    multi_instrument_session.sites[1, 0].fetch_capture_waveform(
+    fetched_waveforms = multi_instrument_session.sites[1, 0].fetch_capture_waveform(
         waveform_name='capt_wfm',
         samples_to_read=num_samples)
+    assert sorted(fetched_waveforms.keys()) == sorted([0, 1])
+    assert all(len(fetched_waveforms[site]) == num_samples for site in fetched_waveforms)
 
 
 def test_create_capture_waveform_from_file_digicapture(multi_instrument_session):
-    test_name = 'test_fetch_capture_waveform'
+    test_name = 'test_create_capture_waveform_serial'
     configure_session(multi_instrument_session, test_name)
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
-    num_samples = 256
+    num_samples = 2
 
     multi_instrument_session.create_capture_waveform_from_file_digicapture(
         waveform_name='capt_wfm',
         waveform_file_path=get_test_file_path(test_name, 'capture_waveform.digicapture'))
 
     # The pattern references a wfm 'src_wfm', so we have to load it before we can burst
-    multi_instrument_session.pins['LO0'].create_source_waveform_serial(
+    multi_instrument_session.create_source_waveform_from_file_tdms(
         waveform_name='src_wfm',
-        data_mapping=nidigital.SourceDataMapping.BROADCAST,
-        sample_width=2,
-        bit_order=nidigital.BitOrder.LSB)
-    multi_instrument_session.write_source_waveform_broadcast(
-        waveform_name='src_wfm',
-        waveform_data=[0])
+        waveform_file_path=get_test_file_path(test_name, 'source_waveform.tdms'),
+        write_waveform_data=True)
     multi_instrument_session.burst_pattern(start_label='new_pattern')
 
     # Fetch to confirm that configuration went okay
-    multi_instrument_session.sites[1, 0].fetch_capture_waveform(
+    fetched_waveforms = multi_instrument_session.sites[1, 0].fetch_capture_waveform(
         waveform_name='capt_wfm',
         samples_to_read=num_samples)
+    assert sorted(fetched_waveforms.keys()) == sorted([0, 1])
+    assert all(len(fetched_waveforms[site]) == num_samples for site in fetched_waveforms)
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
