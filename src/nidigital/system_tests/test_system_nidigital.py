@@ -167,6 +167,11 @@ def test_burst_pattern_pass_fail(multi_instrument_session):
 
 
 def test_source_waveform_parallel_broadcast(multi_instrument_session):
+    '''Test methods for using source waveform with parallel sourcing and broadcast data mapping.
+
+    - create_source_waveform_parallel
+    - write_source_waveform_broadcast
+    '''
     test_name = test_source_waveform_parallel_broadcast.__name__
     configure_session(multi_instrument_session, test_name)
 
@@ -204,6 +209,11 @@ def source_waveform_type(request):
 
 
 def test_source_waveform_parallel_site_unique(multi_instrument_session, source_waveform_type):
+    '''Test methods for using source waveform with parallel sourcing and site-unique data mapping.
+
+    - create_source_waveform_parallel
+    - write_source_waveform_site_unique
+    '''
     test_name = test_source_waveform_parallel_site_unique.__name__
     configure_session(multi_instrument_session, test_name)
 
@@ -249,6 +259,11 @@ def test_source_waveform_parallel_site_unique(multi_instrument_session, source_w
 
 
 def test_fetch_capture_waveform(multi_instrument_session):
+    '''Test methods for using capture waveform with parallel acquisition.
+
+    - create_capture_waveform_parallel
+    - fetch_capture_waveform
+    '''
     test_name = test_fetch_capture_waveform.__name__
     configure_session(multi_instrument_session, test_name)
 
@@ -947,18 +962,66 @@ def test_load_get_unload_patterns(multi_instrument_session):
 
 
 def test_configure_pattern_burst_sites(multi_instrument_session):
+    # Also tests initiate
     test_name = 'multiple_patterns'
     configure_session(multi_instrument_session, test_name)
     multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern_b.digipat'))
     multi_instrument_session.start_label = 'second_pattern'
     multi_instrument_session.selected_function = nidigital.SelectedFunction.DIGITAL
-    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
 
     multi_instrument_session.sites[0, 2, 3].configure_pattern_burst_sites()
 
     multi_instrument_session.initiate()
+    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
     result = multi_instrument_session.sites[0, 1, 3].get_site_pass_fail()
     assert result == {0: True, 3: True}
+
+
+def test_commit(multi_instrument_session):
+    multi_instrument_session.cycle_number_history_ram_trigger_cycle_number = 42
+    multi_instrument_session.commit()
+    assert multi_instrument_session.cycle_number_history_ram_trigger_cycle_number == 42
+
+
+def test_initiate_context_manager_and_wait_until_done(multi_instrument_session):
+    '''Test initiate's context manager and pattern completion methods.
+
+    - with initiate
+    - wait_until_done
+    - is_done
+    '''
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+    multi_instrument_session.start_label = 'new_pattern'
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.DIGITAL
+
+    with multi_instrument_session.initiate():
+        # note that wait_until_done will return immediately with simulated hardware
+        multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
+    assert multi_instrument_session.is_done()
+
+
+def test_abort(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+    multi_instrument_session.start_label = 'new_pattern'
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.DIGITAL
+    multi_instrument_session.initiate()
+
+    multi_instrument_session.abort()
+
+
+def test_abort_keep_alive(multi_instrument_session):
+    test_name = 'simple_pattern'
+    configure_session(multi_instrument_session, test_name)
+    multi_instrument_session.load_pattern(get_test_file_path(test_name, 'pattern.digipat'))
+    multi_instrument_session.start_label = 'new_pattern'
+    multi_instrument_session.selected_function = nidigital.SelectedFunction.DIGITAL
+    multi_instrument_session.initiate()
+
+    multi_instrument_session.abort_keep_alive()
 
 
 def test_create_source_waveform_serial(multi_instrument_session):
@@ -1077,6 +1140,12 @@ def test_create_capture_waveform_from_file_digicapture(multi_instrument_session)
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
+    '''Test methods for loading, applying and unloading specifications, levels, and timing files.
+
+    - apply_levels_and_timing
+    - load_specifications_levels_and_timing
+    - unload_specifications
+    '''
     pinmap = get_test_file_path('specifications_levels_and_timing_single', 'pin_map.pinmap')
     specs = get_test_file_path('specifications_levels_and_timing_single', 'specs.specs')
     # Levels and timing files contain references to variables in specs1
@@ -1104,6 +1173,12 @@ def test_specifications_levels_and_timing_single(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_multiple(multi_instrument_session):
+    '''Test methods for loading, applying and unloading multiple specifications, levels, and timing files.
+
+    - apply_levels_and_timing
+    - load_specifications_levels_and_timing
+    - unload_specifications
+    '''
     pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
 
     specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
@@ -1138,6 +1213,12 @@ def test_specifications_levels_and_timing_multiple(multi_instrument_session):
 
 
 def test_specifications_levels_and_timing_load_sequentially(multi_instrument_session):
+    '''Test methods for separately loading, applying and unloading multiple specifications, levels, and timing files.
+
+    - apply_levels_and_timing
+    - load_specifications_levels_and_timing
+    - unload_specifications
+    '''
     pinmap = get_test_file_path('specifications_levels_and_timing_multiple', 'pin_map.pinmap')
 
     specs1 = get_test_file_path('specifications_levels_and_timing_multiple', 'specs1.specs')
