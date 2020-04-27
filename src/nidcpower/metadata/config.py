@@ -45,5 +45,5 @@ config = {
     ],
     'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
     'session_handle_parameter_name': 'vi',
-    'supports_nitclk': False
+    'uses_nitclk': False,
 }

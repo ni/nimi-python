@@ -102,7 +102,7 @@ desc = helper.get_documentation_for_node_rst(a, config, indent=0)
 % endfor
 % endif
 
-% if config['supports_nitclk']:
+% if config['uses_nitclk']:
 ${helper.get_rst_header_snippet('NI-TClk Support', '=')}
 
     .. py:attribute:: tclk

@@ -67,5 +67,5 @@ config = {
     ],
     'session_class_description': 'An NI-Digital Pattern Driver session',
     'session_handle_parameter_name': 'vi',
-    'supports_nitclk': True
+    'uses_nitclk': True,
 }

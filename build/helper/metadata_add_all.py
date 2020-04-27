@@ -580,8 +580,8 @@ def add_all_config_metadata(config):
     if 'use_locking' not in config:
         config['use_locking'] = True
 
-    if 'supports_nitclk' not in config:
-        config['supports_nitclk'] = False
+    if 'uses_nitclk' not in config:
+        config['uses_nitclk'] = False
 
     return config
 
@@ -1277,7 +1277,7 @@ config_expected = {
     'modules': {
         'metadata.enums_addon': {}
     },
-    'supports_nitclk': False
+    'uses_nitclk': False,
 }
 
 

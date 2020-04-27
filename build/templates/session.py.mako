@@ -41,7 +41,7 @@ import ${module_name}.errors as errors
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
-% if config['supports_nitclk']:
+% if config['uses_nitclk']:
 import nitclk
 % endif
 
@@ -272,7 +272,7 @@ class Session(_SessionBase):
         self._${config['session_handle_parameter_name']} = 0  # This must be set before calling ${init_function['python_name']}().
         self._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
 
-% if config['supports_nitclk']:
+% if config['uses_nitclk']:
         self.tclk = nitclk.SessionReference(self._${config['session_handle_parameter_name']})
 
 % endif
