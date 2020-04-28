@@ -18,6 +18,17 @@ def multi_instrument_session():
         yield simulated_session
 
 
+def test_close():
+    session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570')
+    session.vil = 1
+    session.close()
+    try:
+        session.vil = 1
+        assert False
+    except nidigital.Error as e:
+        assert e.code == -1074130544
+
+
 def test_reset(multi_instrument_session):
     multi_instrument_session.selected_function = nidigital.SelectedFunction.PPMU
     assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
@@ -563,6 +574,19 @@ def test_get_site_pass_fail(multi_instrument_session):
 
     pass_fail = multi_instrument_session.sites[3, 0].get_site_pass_fail()
     assert pass_fail == {3: True, 0: True}
+
+
+def test_get_fail_count(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+    multi_instrument_session.burst_pattern(start_label='new_pattern')
+
+    fail_count = multi_instrument_session.get_fail_count()
+    assert fail_count == [0] * multi_instrument_session.channel_count
+
+    fail_count = multi_instrument_session.pins['site0/LO0', 'site0/HI1', 'site2/HI3'].get_fail_count()
+    assert fail_count == [0] * 3
 
 
 def test_ppmu_measure(multi_instrument_session):
@@ -1134,6 +1158,21 @@ def test_create_capture_waveform_from_file_digicapture(multi_instrument_session)
         samples_to_read=num_samples)
     assert sorted(fetched_waveforms.keys()) == sorted([0, 1])
     assert all(len(fetched_waveforms[site]) == num_samples for site in fetched_waveforms)
+
+
+def test_send_software_edge_trigger(multi_instrument_session):
+    test_files_folder = 'simple_pattern'
+    configure_session(multi_instrument_session, test_files_folder)
+    multi_instrument_session.load_pattern(get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+    multi_instrument_session.start_trigger_type = nidigital.TriggerType.SOFTWARE
+    multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=False)
+    multi_instrument_session.send_software_edge_trigger(
+        trigger=nidigital.SoftwareTrigger.START,
+        trigger_identifier='')
+
+    # We shouldn't time out, having sent the trigger, though in simulation it might complete, anyway
+    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
