@@ -2139,7 +2139,7 @@ class _SessionBase(object):
 
 
         Returns:
-            time (datetime.timedelta):
+            time (hightime.timedelta):
 
         '''
         if type(edge) is not enums.TimeSetEdgeType:
@@ -2989,7 +2989,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            period (datetime.timedelta):
+            period (hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

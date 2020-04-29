@@ -1910,7 +1910,7 @@ the trigger conditions are met.
                 'name': 'time',
                 'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
                 'type': 'ViReal64',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1998,7 +1998,7 @@ the trigger conditions are met.
                 'name': 'period',
                 'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
                 'type': 'ViReal64',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'

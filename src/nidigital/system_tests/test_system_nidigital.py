@@ -763,7 +763,7 @@ def test_configure_get_time_set_period(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
     multi_instrument_session.create_time_set(time_set_name)
-    assert multi_instrument_session.get_time_set_period(time_set_name) == datetime.timedelta(microseconds=1)
+    assert multi_instrument_session.get_time_set_period(time_set_name) == hightime.timedelta(microseconds=1)
     multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
     assert multi_instrument_session.get_time_set_period(time_set_name) == time_set_period
 
@@ -799,7 +799,7 @@ def test_configure_get_time_set_edge(multi_instrument_session):
     multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
-        nidigital.TimeSetEdgeType.DRIVE_ON) == datetime.timedelta(seconds=0)
+        nidigital.TimeSetEdgeType.DRIVE_ON) == hightime.timedelta(seconds=0)
     multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_edge(
         time_set_name,
         nidigital.TimeSetEdgeType.DRIVE_ON,
@@ -1209,7 +1209,7 @@ def test_send_software_edge_trigger(multi_instrument_session):
         trigger_identifier='')
 
     # We shouldn't time out, having sent the trigger, though in simulation it might complete, anyway
-    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
+    multi_instrument_session.wait_until_done(timeout=hightime.timedelta(seconds=5.0))
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):

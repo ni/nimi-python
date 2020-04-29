@@ -1561,7 +1561,7 @@ get_time_set_edge
 
             :type edge: :py:data:`nidigital.TimeSetEdgeType`
 
-            :rtype: datetime.timedelta
+            :rtype: hightime.timedelta
             :return:
 
 
@@ -1653,7 +1653,7 @@ get_time_set_period
 
             :type time_set_name: str
 
-            :rtype: datetime.timedelta
+            :rtype: hightime.timedelta
             :return:
 
 
