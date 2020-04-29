@@ -1,9 +1,12 @@
-import _mock_helper
-
+import hightime
 import nidigital
+import pytest
 
 from mock import patch
-import pytest
+
+import _matchers
+import _mock_helper
+
 
 session_id_for_test = 42
 
@@ -318,3 +321,53 @@ class TestSession(object):
             for s in self.site_numbers_looping:
                 session.sites[s].fetch_history_ram_cycle_information(position=0, samples_to_read=0)
             assert self.patched_library.niDigital_GetHistoryRAMSampleCount.call_count == len(self.site_numbers_looping)
+
+    def test_get_attribute_hightime_timedelta(self):
+        self.patched_library.niDigital_GetAttributeViReal64.side_effect = self.side_effects_helper.niDigital_GetAttributeViReal64
+        attribute_id = 1150051
+        tdr_offset_value = 2.5e-9
+        self.side_effects_helper['GetAttributeViReal64']['value'] = tdr_offset_value
+        with nidigital.Session('') as session:
+            returned_tdr_offset = session.tdr_offset
+            assert returned_tdr_offset == hightime.timedelta(seconds=tdr_offset_value)
+            self.patched_library.niDigital_GetAttributeViReal64.assert_called_once_with(
+                _matchers.ViSessionMatcher(session_id_for_test),
+                _matchers.ViStringMatcher(''),
+                _matchers.ViAttrMatcher(attribute_id),
+                _matchers.ViReal64PointerMatcher())
+
+    def test_set_attribute_hightime_timedelta(self):
+        self.patched_library.niDigital_SetAttributeViReal64.side_effect = self.side_effects_helper.niDigital_SetAttributeViReal64
+        attribute_id = 1150051
+        tdr_offset_value = 2.5e-9
+        with nidigital.Session('') as session:
+            session.tdr_offset = hightime.timedelta(seconds=tdr_offset_value)
+            self.patched_library.niDigital_SetAttributeViReal64.assert_called_once_with(
+                _matchers.ViSessionMatcher(session_id_for_test),
+                _matchers.ViStringMatcher(''),
+                _matchers.ViAttrMatcher(attribute_id),
+                _matchers.ViReal64Matcher(tdr_offset_value))
+
+    def test_method_accept_hightime_timedelta(self):
+        self.patched_library.niDigital_ConfigureTimeSetPeriod.side_effect = self.side_effects_helper.niDigital_ConfigureTimeSetPeriod
+        time_set_name = 't0'
+        tdr_offset_value = 2.5e-9
+        with nidigital.Session('') as session:
+            session.configure_time_set_period(time_set_name, hightime.timedelta(seconds=tdr_offset_value))
+            self.patched_library.niDigital_ConfigureTimeSetPeriod.assert_called_once_with(
+                _matchers.ViSessionMatcher(session_id_for_test),
+                _matchers.ViStringMatcher(time_set_name),
+                _matchers.ViReal64Matcher(tdr_offset_value))
+
+    def test_method_return_hightime_timedelta(self):
+        self.patched_library.niDigital_GetTimeSetPeriod.side_effect = self.side_effects_helper.niDigital_GetTimeSetPeriod
+        time_set_name = 't0'
+        tdr_offset_value = 2.5e-9
+        self.side_effects_helper['GetTimeSetPeriod']['period'] = tdr_offset_value
+        with nidigital.Session('') as session:
+            returned_tdr_offset = session.get_time_set_period(time_set_name)
+            assert returned_tdr_offset == hightime.timedelta(seconds=tdr_offset_value)
+            self.patched_library.niDigital_GetTimeSetPeriod.assert_called_once_with(
+                _matchers.ViSessionMatcher(session_id_for_test),
+                _matchers.ViStringMatcher(time_set_name),
+                _matchers.ViReal64PointerMatcher())
