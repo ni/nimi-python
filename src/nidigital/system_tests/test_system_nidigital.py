@@ -60,6 +60,28 @@ def test_self_calibrate(multi_instrument_session):
     multi_instrument_session.self_calibrate()
 
 
+def test_channels_rep_cap(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.vil = 1
+    ch_0_63 = multi_instrument_session.get_channel_names(indices=[0, 63])
+    multi_instrument_session.channels[ch_0_63].vil = 2
+    assert multi_instrument_session.pins[ch_0_63].vil == pytest.approx(2, abs=1e-3)
+    ch_1 = multi_instrument_session.get_channel_names(indices=1)
+    assert multi_instrument_session.pins[ch_1].vil == pytest.approx(1, abs=1e-3)
+
+
+def test_sites_rep_cap(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    assert multi_instrument_session.sites[0].is_site_enabled()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
+    multi_instrument_session.sites[0, 1].disable_sites()
+    assert not multi_instrument_session.sites[0].is_site_enabled()
+    assert not multi_instrument_session.sites[1].is_site_enabled()
+
+
 def test_pins_rep_cap(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
@@ -80,6 +102,15 @@ def test_pins_rep_cap(multi_instrument_session):
         drive_format=nidigital.DriveFormat.RL)
     drive_format = multi_instrument_session.pins['PinA', 'PinB'].get_time_set_drive_format(time_set_name='t0')
     assert drive_format == nidigital.DriveFormat.RL
+
+
+def test_chained_sites_pins_rep_cap(multi_instrument_session):
+    multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+    multi_instrument_session.vil = 1
+    multi_instrument_session.sites[0, 1].pins['PinA', 'PinB', 'PinC'].vil = 2
+    assert multi_instrument_session.sites[0].pins['DutPins'].vil == pytest.approx(2, abs=1e-3)
+    assert multi_instrument_session.sites[1].pins['DutPins'].vil == pytest.approx(2, abs=1e-3)
 
 
 def test_instruments_rep_cap(multi_instrument_session):
@@ -140,14 +171,13 @@ def test_tdr_all_channels(multi_instrument_session):
 
     multi_instrument_session.apply_tdr_offsets(applied_offsets)
 
-    channels = [multi_instrument_session.get_channel_names(i) for i in
-                range(0, multi_instrument_session.channel_count)]
+    channels = multi_instrument_session.get_channel_names(range(0, multi_instrument_session.channel_count))
     fetched_offsets = [multi_instrument_session.channels[i].tdr_offset for i in channels]
     assert fetched_offsets == applied_offsets
 
 
 def test_tdr_some_channels(multi_instrument_session):
-    channels = [multi_instrument_session.get_channel_names(i) for i in [63, 0, 49, 24]]
+    channels = multi_instrument_session.get_channel_names([63, 0, 49, 24])
     applied_offsets = multi_instrument_session.channels[channels].tdr(apply_offsets=False)
     assert len(applied_offsets) == len(channels)
 
