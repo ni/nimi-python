@@ -54,7 +54,7 @@ setup(
         'nitclk',
         % endif
         % if config['uses_hightime']:
-        'hightime',
+        'hightime @ git+https://github.com/thejcannon/hightime.git@simpler',
         % endif
     ],
     setup_requires=['pytest-runner', ],
