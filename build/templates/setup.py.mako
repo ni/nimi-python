@@ -53,6 +53,9 @@ setup(
         % if config['uses_nitclk']:
         'nitclk',
         % endif
+        % if config['uses_hightime']:
+        'hightime',
+        % endif
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
