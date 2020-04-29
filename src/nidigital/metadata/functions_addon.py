@@ -153,8 +153,7 @@ functions_additional_get_pin_results_pin_information = {
                     'mechanism': 'python-code',
                     'value': None
                 },
-                'type': 'ViInt32[]',
-                'type_in_documentation': 'list of PinInfo',
+                'type': 'ViInt32[]'
             }
         ],
     },
