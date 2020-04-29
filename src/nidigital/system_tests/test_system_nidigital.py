@@ -74,6 +74,9 @@ def test_channels_rep_cap(multi_instrument_session):
 def test_sites_rep_cap(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
+    assert multi_instrument_session.sites[0].is_site_enabled()
+    assert multi_instrument_session.sites[1].is_site_enabled()
+
     multi_instrument_session.sites[0, 1].disable_sites()
     assert not multi_instrument_session.sites[0].is_site_enabled()
     assert not multi_instrument_session.sites[1].is_site_enabled()
