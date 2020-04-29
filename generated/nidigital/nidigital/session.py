@@ -2139,7 +2139,7 @@ class _SessionBase(object):
 
 
         Returns:
-            time (float):
+            time (datetime.timedelta):
 
         '''
         if type(edge) is not enums.TimeSetEdgeType:
@@ -2151,7 +2151,7 @@ class _SessionBase(object):
         time_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDigital_GetTimeSetEdge(vi_ctype, pin_ctype, time_set_name_ctype, edge_ctype, None if time_ctype is None else (ctypes.pointer(time_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(time_ctype.value)
+        return _converters.convert_seconds_real64_to_timedelta(float(time_ctype.value))
 
     @ivi_synchronized
     def get_time_set_edge_multiplier(self, time_set_name):
@@ -2989,7 +2989,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            period (float):
+            period (datetime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2997,7 +2997,7 @@ class Session(_SessionBase):
         period_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niDigital_GetTimeSetPeriod(vi_ctype, time_set_name_ctype, None if period_ctype is None else (ctypes.pointer(period_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(period_ctype.value)
+        return _converters.convert_seconds_real64_to_timedelta(float(period_ctype.value))
 
     def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         r'''_init_with_options

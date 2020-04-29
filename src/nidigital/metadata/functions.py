@@ -1908,7 +1908,9 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'name': 'time',
-                'type': 'ViReal64'
+                'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
+                'type': 'ViReal64',
+                'type_in_documentation': 'datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1994,7 +1996,9 @@ the trigger conditions are met.
             {
                 'direction': 'out',
                 'name': 'period',
-                'type': 'ViReal64'
+                'python_api_converter_name': 'convert_seconds_real64_to_timedelta',
+                'type': 'ViReal64',
+                'type_in_documentation': 'datetime.timedelta'
             }
         ],
         'returns': 'ViStatus'
