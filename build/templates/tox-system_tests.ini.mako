@@ -75,8 +75,7 @@ deps =
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
 % if config['uses_hightime']:
-    # TODO(sbethur): Replace with 'hightime' after hightime pulls in https://github.com/ni/hightime/pull/36
-    ${module_name}-system_tests: git+https://github.com/thejcannon/hightime.git@simpler#hightime
+    ${module_name}-system_tests: hightime
 % endif
     ${module_name}-system_tests: scipy
     ${module_name}-system_tests: fasteners
