@@ -46,7 +46,6 @@ setup(
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
         'nitclk',
-        'hightime',
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],

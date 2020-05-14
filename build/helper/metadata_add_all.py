@@ -583,9 +583,6 @@ def add_all_config_metadata(config):
     if 'uses_nitclk' not in config:
         config['uses_nitclk'] = False
 
-    if 'uses_hightime' not in config:
-        config['uses_hightime'] = False
-
     return config
 
 
@@ -1281,7 +1278,6 @@ config_expected = {
         'metadata.enums_addon': {}
     },
     'uses_nitclk': False,
-    'uses_hightime': False,
 }
 
 
