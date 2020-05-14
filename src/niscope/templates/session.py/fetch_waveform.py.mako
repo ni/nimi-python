@@ -30,7 +30,7 @@
         elif waveform.dtype == numpy.int32:
             wfm_info = self._fetch_binary32_into_numpy(num_samples=num_samples, waveform=waveform, timeout=timeout)
         else:
-            raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {5}".format(waveform.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
+            raise TypeError("Unsupported dtype. Is {0}, expected {1}, {2}, {3}, or {4}".format(waveform.dtype, numpy.float64, numpy.int8, numpy.int16, numpy.int32))
 
         mv = memoryview(waveform)
 
