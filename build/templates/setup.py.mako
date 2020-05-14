@@ -50,10 +50,10 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
+        'hightime',
         % if config['uses_nitclk']:
         'nitclk',
         % endif
-        'hightime',
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
