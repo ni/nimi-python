@@ -47,12 +47,12 @@ def get_indented_docstring_snippet(d, indent=4):
     '''
     d_lines = d.strip().splitlines()
     ret_val = ''
-    for l in d_lines:
+    for line in d_lines:
         if len(ret_val) > 0:
             ret_val += '\n'
-            if len(l.rstrip()) > 0:
+            if len(line.rstrip()) > 0:
                 ret_val += (' ' * indent)
-        ret_val += _normalize_string_type(l.rstrip())
+        ret_val += _normalize_string_type(line.rstrip())
     return ret_val
 
 
@@ -880,8 +880,8 @@ def _remove_trailing_whitespace(s):
     initial_lines = s.strip().splitlines()
     fixed_lines = []
     blank_lines = 0
-    for l in initial_lines:
-        stripped_line = l.strip()
+    for line in initial_lines:
+        stripped_line = line.strip()
         if len(stripped_line) == 0 and blank_lines == 0:
             fixed_lines.append(stripped_line)
             blank_lines = 1

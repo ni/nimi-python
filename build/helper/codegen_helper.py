@@ -248,11 +248,11 @@ def _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi
 
         elif parameter['size']['mechanism'] == 'fixed':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
-            definition = '({0}.ViChar * {2})()  # case C070'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            definition = '({0}.ViChar * {1})()  # case C070'.format(module_name, parameter['size']['value'])
 
         elif parameter['size']['mechanism'] == 'python-code':
             assert parameter['size']['value'] != 1, "Parameter {0} has 'direction':'out' and 'size':{1}... seems wrong. Check your metadata, maybe you forgot to specify?".format(parameter['name'], parameter['size'])
-            definition = '({0}.ViChar * {2})()  # case C080'.format(module_name, parameter['ctypes_type'], parameter['size']['value'])
+            definition = '({0}.ViChar * {1})()  # case C080'.format(module_name, parameter['size']['value'])
 
         else:
             assert False, "Invalid mechanism for parameters with 'direction':'out': " + str(parameter)
@@ -386,7 +386,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 assert False, "Expected either 'use_array' or 'use_list' to be True. Both False."
     elif parameter['direction'] == 'in':
         if custom_type is not None:
-            definition = 'get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'], parameter['python_name'])
+            definition = 'get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         else:
             if parameter['use_array']:
                 # If the incoming type is array.array, we can just use that, otherwise we need to create an array.array that is initialized with the passed in value, which must be iterable
@@ -406,7 +406,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['use_array']:
                 line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B560'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                 definitions.append(line2)
-                definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B560'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={1}_array, library_type={0}.{2})  # case B560'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
             elif parameter['use_list']:
                 definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B560'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             else:
@@ -418,7 +418,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             if parameter['use_array']:
                 line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B570'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                 definitions.append(line2)
-                definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B570'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={1}_array, library_type={0}.{2})  # case B570'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
             elif parameter['use_list']:
                 definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B570'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
             else:
@@ -432,7 +432,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 definitions.append(line1)
                 if parameter['use_array']:
                     line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B590'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                    definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B590'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                    definition = 'get_ctypes_pointer_for_buffer(value={1}_array, library_type={0}.{2})  # case B590'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
                     definitions.append(line2)
                 elif parameter['use_list']:
                     definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B590'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
@@ -450,7 +450,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
                 if parameter['use_array']:
                     line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B620'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
                     definitions.append(line2)
-                    definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B620'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                    definition = 'get_ctypes_pointer_for_buffer(value={1}_array, library_type={0}.{2})  # case B620'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
                 elif parameter['use_list']:
                     definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B620'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
                 else:
@@ -463,7 +463,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
             definitions.append(line1)
             if parameter['use_array']:
                 line2 = '{0}_array = array.array("{1}", [0] * {0}_size)  # case B600'.format(parameter['python_name'], get_array_type_for_api_type(parameter['ctypes_type']))
-                definition = 'get_ctypes_pointer_for_buffer(value={2}_array, library_type={1}.{3})  # case B600'.format(parameter['ctypes_variable_name'], module_name, parameter['python_name'], parameter['ctypes_type'])
+                definition = 'get_ctypes_pointer_for_buffer(value={1}_array, library_type={0}.{2})  # case B600'.format(module_name, parameter['python_name'], parameter['ctypes_type'])
                 definitions.append(line2)
             elif parameter['use_list']:
                 definition = 'get_ctypes_pointer_for_buffer(library_type={0}.{1}, size={2}_size)  # case B600'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
