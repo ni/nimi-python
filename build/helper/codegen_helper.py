@@ -856,7 +856,6 @@ parameters_for_testing = [
         'type': 'ViReal64',
         'use_in_python_api': True,
         'python_api_converter_name': 'timedelta_converter_seconds_real64',
-        'python_api_converter_type': 'datetime.timedelta',
     },
     {  # 15
         'ctypes_type': 'ViString',

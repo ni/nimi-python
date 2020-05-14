@@ -2,7 +2,6 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -13,6 +12,7 @@ import nifgen._visatype as _visatype
 import nifgen.enums as enums
 import nifgen.errors as errors
 
+import hightime
 import nitclk
 
 # Used for __repr__
@@ -875,7 +875,7 @@ class _SessionBase(object):
     Use in conjunction with streaming_space_available_in_waveform.
     '''
     streaming_write_timeout = _attributes.AttributeViReal64TimeDeltaSeconds(1150409)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     Specifies the maximum amount of time allowed to complete a streaming write operation.
     '''
@@ -3747,7 +3747,7 @@ class Session(_SessionBase):
         months.
 
         Returns:
-            months (datetime.timedelta): Specifies the recommended interval between external calibrations in
+            months (hightime.timedelta): Specifies the recommended interval between external calibrations in
                 months.
 
         '''
@@ -3797,11 +3797,11 @@ class Session(_SessionBase):
         Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this method returns 14 for the **hour** parameter and 30 for the **minute** parameter.
 
         Returns:
-            month (datetime.datetime): Indicates date and time of the last calibration.
+            month (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
-        return datetime.datetime(year, month, day, hour, minute)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self):
@@ -3810,11 +3810,11 @@ class Session(_SessionBase):
         Returns the date and time of the last successful self-calibration.
 
         Returns:
-            month (datetime.datetime): Returns the date and time the device was last calibrated.
+            month (hightime.datetime): Returns the date and time the device was last calibrated.
 
         '''
         year, month, day, hour, minute = self._get_self_cal_last_date_and_time()
-        return datetime.datetime(year, month, day, hour, minute)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def _get_self_cal_last_date_and_time(self):
@@ -4326,14 +4326,14 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, max_time=datetime.timedelta(seconds=10.0)):
+    def wait_until_done(self, max_time=hightime.timedelta(seconds=10.0)):
         r'''wait_until_done
 
         Waits until the device is done generating or until the maximum time has
         expired.
 
         Args:
-            max_time (int in milliseconds or datetime.timedelta): Specifies the timeout value in milliseconds.
+            max_time (int in milliseconds or hightime.timedelta): Specifies the timeout value in milliseconds.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

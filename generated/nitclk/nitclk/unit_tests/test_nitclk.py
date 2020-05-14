@@ -1,7 +1,7 @@
 import _matchers
 import _mock_helper
 
-import datetime
+import hightime
 import nitclk
 
 from mock import patch
@@ -88,7 +88,7 @@ class TestNitclkApi(object):
         return
 
     def test_synchronize_timedelta(self):
-        min_time = datetime.timedelta(seconds=0.042)
+        min_time = hightime.timedelta(seconds=0.042)
         self.patched_library.niTClk_Synchronize.side_effect = self.side_effects_helper.niTClk_Synchronize
         nitclk.synchronize(multiple_session_references, min_time)
         self.patched_library.niTClk_Synchronize.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViReal64Matcher(min_time.total_seconds()))
@@ -197,7 +197,7 @@ class TestNitclkApi(object):
         self.patched_library.niTClk_SetAttributeViReal64.side_effect = self.side_effects_helper.niTClk_SetAttributeViReal64
         attribute_id = 11
         test_number = 4.2
-        session.sample_clock_delay = datetime.timedelta(seconds=test_number)
+        session.sample_clock_delay = hightime.timedelta(seconds=test_number)
         self.patched_library.niTClk_SetAttributeViReal64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViReal64Matcher(test_number))
 
     def test_get_timedelta(self):

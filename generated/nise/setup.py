@@ -45,6 +45,7 @@ setup(
     install_requires=[
         'enum34;python_version<"3.4"',
         'singledispatch;python_version<"3.4"',
+        'hightime',
     ],
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],

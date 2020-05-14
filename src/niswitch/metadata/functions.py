@@ -1141,7 +1141,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
-                'default_value': 'datetime.timedelta(milliseconds=5000)',
+                'default_value': 'hightime.timedelta(milliseconds=5000)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies the maximum length of time to wait for all relays in the\nswitch module to activate or deactivate. If the specified time elapses\nbefore all relays active or deactivate, a timeout error is returned.\nDefault Value:5000 ms\n'
@@ -1149,7 +1149,7 @@ functions = {
                 'name': 'maximumTimeMs',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or datetime.timedelta'
+                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1168,7 +1168,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
-                'default_value': 'datetime.timedelta(milliseconds=5000)',
+                'default_value': 'hightime.timedelta(milliseconds=5000)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies the maximum length of time to wait for the switch module to\nstop scanning. If the specified time elapses before the scan ends,\nNISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default\nValue:5000 ms\n'
@@ -1176,7 +1176,7 @@ functions = {
                 'name': 'maximumTimeMs',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or datetime.timedelta'
+                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'

@@ -1071,7 +1071,7 @@ attributes = {
         'name': 'STREAMING_WRITE_TIMEOUT',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'float in seconds or hightime.timedelta'
     },
     1150411: {
         'access': 'read-write',

@@ -321,7 +321,7 @@ configure_multi_point
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1))
+    .. py:method:: configure_multi_point(trigger_count, sample_count, sample_trigger=nidmm.SampleTrigger.IMMEDIATE, sample_interval=hightime.timedelta(seconds=-1))
 
             Configures the properties for multipoint measurements. These properties
             include :py:attr:`nidmm.Session.trigger_count`, :py:attr:`nidmm.Session.sample_count`,
@@ -396,7 +396,7 @@ configure_multi_point
                 .. note:: This property is not used on the NI 4080/4081/4082 and the NI 4050.
 
 
-            :type sample_interval: float in seconds or datetime.timedelta
+            :type sample_interval: float in seconds or hightime.timedelta
 
 configure_rtd_custom
 --------------------
@@ -612,7 +612,7 @@ configure_trigger
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: configure_trigger(trigger_source, trigger_delay=datetime.timedelta(seconds=-1))
+    .. py:method:: configure_trigger(trigger_source, trigger_delay=hightime.timedelta(seconds=-1))
 
             Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
             `Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ and `Using
@@ -659,7 +659,7 @@ configure_trigger
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger_delay: float in seconds or datetime.timedelta
+            :type trigger_delay: float in seconds or hightime.timedelta
 
 configure_waveform_acquisition
 ------------------------------
@@ -876,7 +876,7 @@ fetch
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: fetch(maximum_time=datetime.timedelta(milliseconds=-1))
+    .. py:method:: fetch(maximum_time=hightime.timedelta(milliseconds=-1))
 
             Returns the value from a previously initiated measurement. You must call
             :py:meth:`nidmm.Session._initiate` before calling this method.
@@ -904,7 +904,7 @@ fetch
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or hightime.timedelta
 
             :rtype: float
             :return:
@@ -921,7 +921,7 @@ fetch_multi_point
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: fetch_multi_point(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+    .. py:method:: fetch_multi_point(array_size, maximum_time=hightime.timedelta(milliseconds=-1))
 
             Returns an array of values from a previously initiated multipoint
             measurement. The number of measurements the DMM makes is determined by
@@ -967,7 +967,7 @@ fetch_multi_point
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or hightime.timedelta
 
             :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -998,7 +998,7 @@ fetch_waveform
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: fetch_waveform(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+    .. py:method:: fetch_waveform(array_size, maximum_time=hightime.timedelta(milliseconds=-1))
 
             For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
             values from a previously initiated waveform acquisition. You must call
@@ -1039,7 +1039,7 @@ fetch_waveform
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or hightime.timedelta
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1068,7 +1068,7 @@ fetch_waveform_into
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: fetch_waveform_into(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+    .. py:method:: fetch_waveform_into(array_size, maximum_time=hightime.timedelta(milliseconds=-1))
 
             For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
             values from a previously initiated waveform acquisition. You must call
@@ -1107,7 +1107,7 @@ fetch_waveform_into
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or hightime.timedelta
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1164,7 +1164,7 @@ get_cal_date_and_time
 
             :type cal_type: int
 
-            :rtype: datetime.datetime
+            :rtype: hightime.datetime
             :return:
 
 
@@ -1225,7 +1225,7 @@ get_ext_cal_recommended_interval
 
 
 
-            :rtype: datetime.timedelta
+            :rtype: hightime.timedelta
             :return:
 
 
@@ -1583,7 +1583,7 @@ read
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: read(maximum_time=datetime.timedelta(milliseconds=-1))
+    .. py:method:: read(maximum_time=hightime.timedelta(milliseconds=-1))
 
             Acquires a single measurement and returns the measured value.
 
@@ -1610,7 +1610,7 @@ read
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or hightime.timedelta
 
             :rtype: float
             :return:
@@ -1627,7 +1627,7 @@ read_multi_point
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: read_multi_point(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+    .. py:method:: read_multi_point(array_size, maximum_time=hightime.timedelta(milliseconds=-1))
 
             Acquires multiple measurements and returns an array of measured values.
             The number of measurements the DMM makes is determined by the values you
@@ -1672,7 +1672,7 @@ read_multi_point
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or hightime.timedelta
 
             :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1760,7 +1760,7 @@ read_waveform
 
     .. py:currentmodule:: nidmm.Session
 
-    .. py:method:: read_waveform(array_size, maximum_time=datetime.timedelta(milliseconds=-1))
+    .. py:method:: read_waveform(array_size, maximum_time=hightime.timedelta(milliseconds=-1))
 
             For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
             and returns data as an array of values or as a waveform data type. The
@@ -1803,7 +1803,7 @@ read_waveform
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or datetime.timedelta
+            :type maximum_time: int in milliseconds or hightime.timedelta
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -3002,7 +3002,7 @@ sample_interval
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -3089,7 +3089,7 @@ settle_time
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -3764,7 +3764,7 @@ trigger_delay
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+

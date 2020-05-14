@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
 import argparse
-import datetime
+import hightime
 import nidcpower
 import sys
 
 
 def example(resource_name, channels, options, voltage_max, current_max, points_per_output_function, delay_in_seconds):
-    timeout = datetime.timedelta(seconds=(delay_in_seconds + 1.0))
+    timeout = hightime.timedelta(seconds=(delay_in_seconds + 1.0))
 
     with nidcpower.Session(resource_name=resource_name, channels=channels, options=options) as session:
 
@@ -15,7 +15,7 @@ def example(resource_name, channels, options, voltage_max, current_max, points_p
         session.source_mode = nidcpower.SourceMode.SEQUENCE
         session.voltage_level_autorange = True
         session.current_limit_autorange = True
-        session.source_delay = datetime.timedelta(seconds=delay_in_seconds)
+        session.source_delay = hightime.timedelta(seconds=delay_in_seconds)
         properties_used = ['output_function', 'voltage_level', 'current_level']
         session.create_advanced_sequence(sequence_name='my_sequence', property_names=properties_used, set_as_active_sequence=True)
 

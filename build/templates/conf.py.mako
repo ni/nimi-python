@@ -1,6 +1,6 @@
 <%
-from datetime import datetime
-current_year = datetime.today().year
+import datetime
+current_year = datetime.datetime.today().year
 
 with open('./VERSION') as vf:
     global_version = vf.read().strip()

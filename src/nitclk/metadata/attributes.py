@@ -121,7 +121,7 @@ attributes = {
         'name': 'SAMPLE_CLOCK_DELAY',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta',
+        'type_in_documentation': 'float in seconds or hightime.timedelta',
     },
     13: {
         'access': 'read-write',

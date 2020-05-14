@@ -682,7 +682,7 @@ wait_for_debounce
 
     .. py:currentmodule:: nise.Session
 
-    .. py:method:: wait_for_debounce(maximum_time_ms=datetime.timedelta(milliseconds=-1))
+    .. py:method:: wait_for_debounce(maximum_time_ms=hightime.timedelta(milliseconds=-1))
 
             Waits for all of the switches in the NI Switch Executive virtual device
             to debounce. This method does not return until either the switching
@@ -709,7 +709,7 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: int in milliseconds or datetime.timedelta
+            :type maximum_time_ms: int in milliseconds or hightime.timedelta
 
 
 

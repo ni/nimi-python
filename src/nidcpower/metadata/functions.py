@@ -922,7 +922,7 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'datetime.timedelta(seconds=1.0)',
+                'default_value': 'hightime.timedelta(seconds=1.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the maximum time allowed for this function to complete. If the function does not complete within this time interval, NI-DCPower returns an error.',
@@ -931,7 +931,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
+                'type_in_documentation': 'float in seconds or hightime.timedelta'
             },
             {
                 'direction': 'out',
@@ -1030,7 +1030,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
+                'type_in_documentation': 'float in seconds or hightime.timedelta'
             },
             {
                 'direction': 'in',
@@ -1502,7 +1502,7 @@ functions = {
                 'name': 'months',
                 'python_api_converter_name': 'convert_month_to_timedelta',
                 'type': 'ViInt32',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1534,7 +1534,7 @@ functions = {
                     'description': 'Indicates date and time of the last calibration.'
                 },
                 'name': 'month',
-                'type': 'datetime.datetime'
+                'type': 'hightime.datetime'
             }
         ],
         'python_name': 'get_ext_cal_last_date_and_time',
@@ -1569,7 +1569,7 @@ functions = {
                     'description': 'Returns the date and time the device was last calibrated.'
                 },
                 'name': 'month',
-                'type': 'datetime.datetime'
+                'type': 'hightime.datetime'
             }
         ],
         'python_name': 'get_self_cal_last_date_and_time',
@@ -2620,7 +2620,7 @@ functions = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'datetime.timedelta(seconds=10.0)',
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '\nSpecifies the maximum time allowed for this function to complete, in\nseconds. If the function does not complete within this time interval,\nNI-DCPower returns an error.\n',
@@ -2629,7 +2629,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
+                'type_in_documentation': 'float in seconds or hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'

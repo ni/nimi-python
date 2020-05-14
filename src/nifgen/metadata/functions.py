@@ -1655,7 +1655,7 @@ functions = {
                 'name': 'months',
                 'python_api_converter_name': 'convert_month_to_timedelta',
                 'type': 'ViInt32',
-                'type_in_documentation': 'datetime.timedelta'
+                'type_in_documentation': 'hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'
@@ -1735,7 +1735,7 @@ functions = {
                     'description': 'Indicates date and time of the last calibration.'
                 },
                 'name': 'month',
-                'type': 'datetime.datetime'
+                'type': 'hightime.datetime'
             }
         ],
         'python_name': 'get_ext_cal_last_date_and_time',
@@ -1769,7 +1769,7 @@ functions = {
                     'description': 'Returns the date and time the device was last calibrated.'
                 },
                 'name': 'month',
-                'type': 'datetime.datetime'
+                'type': 'hightime.datetime'
             }
         ],
         'python_name': 'get_self_cal_last_date_and_time',
@@ -2871,7 +2871,7 @@ functions = {
                 'type': 'ViSession'
             },
             {
-                'default_value': 'datetime.timedelta(seconds=10.0)',
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the timeout value in milliseconds.'
@@ -2879,7 +2879,7 @@ functions = {
                 'name': 'maxTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or datetime.timedelta'
+                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
             }
         ],
         'returns': 'ViStatus'

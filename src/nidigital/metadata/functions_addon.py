@@ -55,12 +55,12 @@ niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
                 'type': 'ViBoolean'
             },
             {
-                'default_value': 'datetime.timedelta(seconds=10.0)',
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or datetime.timedelta'
+                'type_in_documentation': 'float in seconds or hightime.timedelta',
             },
             {
                 'direction': 'out',
@@ -241,12 +241,12 @@ functions_additional_fetch_capture_waveform = {
                 'type': 'ViInt32'
             },
             {
-                'default_value': 'datetime.timedelta(seconds=10.0)',
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'name': 'timeout',
                 'type': 'ViReal64',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'python_type': 'float or datetime.timedelta',
+                'type_in_documentation': 'float in seconds or hightime.timedelta',
             },
             {
                 'direction': 'out',

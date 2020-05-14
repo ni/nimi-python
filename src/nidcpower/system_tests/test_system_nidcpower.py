@@ -1,4 +1,4 @@
-import datetime
+import hightime
 import nidcpower
 import os
 import pytest
@@ -223,7 +223,7 @@ def test_wait_for_event_default_timeout(single_channel_session):
 
 def test_wait_for_event_with_timeout(single_channel_session):
     with single_channel_session.initiate():
-        single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, datetime.timedelta(seconds=0.5))
+        single_channel_session.wait_for_event(nidcpower.Event.SOURCE_COMPLETE, hightime.timedelta(seconds=0.5))
 
 
 def test_commit(single_channel_session):

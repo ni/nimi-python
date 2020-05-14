@@ -485,7 +485,7 @@ configure_trigger_digital
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_digital(trigger_source, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_digital(trigger_source, slope=niscope.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0))
 
             Configures the common properties of a digital trigger.
 
@@ -551,7 +551,7 @@ configure_trigger_digital
                 
 
 
-            :type holdoff: float in seconds or datetime.timedelta
+            :type holdoff: float in seconds or hightime.timedelta
             :param delay:
 
 
@@ -562,14 +562,14 @@ configure_trigger_digital
                 
 
 
-            :type delay: float in seconds or datetime.timedelta
+            :type delay: float in seconds or hightime.timedelta
 
 configure_trigger_edge
 ----------------------
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_edge(trigger_source, level, trigger_coupling, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_edge(trigger_source, level, trigger_coupling, slope=niscope.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0))
 
             Configures common properties for analog edge triggering.
 
@@ -645,7 +645,7 @@ configure_trigger_edge
                 
 
 
-            :type holdoff: float in seconds or datetime.timedelta
+            :type holdoff: float in seconds or hightime.timedelta
             :param delay:
 
 
@@ -656,14 +656,14 @@ configure_trigger_edge
                 
 
 
-            :type delay: float in seconds or datetime.timedelta
+            :type delay: float in seconds or hightime.timedelta
 
 configure_trigger_hysteresis
 ----------------------------
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_hysteresis(trigger_source, level, hysteresis, trigger_coupling, slope=niscope.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_hysteresis(trigger_source, level, hysteresis, trigger_coupling, slope=niscope.TriggerSlope.POSITIVE, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0))
 
             Configures common properties for analog hysteresis triggering. This kind
             of trigger specifies an additional value, specified in the
@@ -756,7 +756,7 @@ configure_trigger_hysteresis
                 
 
 
-            :type holdoff: float in seconds or datetime.timedelta
+            :type holdoff: float in seconds or hightime.timedelta
             :param delay:
 
 
@@ -767,7 +767,7 @@ configure_trigger_hysteresis
                 
 
 
-            :type delay: float in seconds or datetime.timedelta
+            :type delay: float in seconds or hightime.timedelta
 
 configure_trigger_immediate
 ---------------------------
@@ -792,7 +792,7 @@ configure_trigger_software
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_software(holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_software(holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0))
 
             Configures common properties for software triggering.
 
@@ -829,7 +829,7 @@ configure_trigger_software
                 
 
 
-            :type holdoff: float in seconds or datetime.timedelta
+            :type holdoff: float in seconds or hightime.timedelta
             :param delay:
 
 
@@ -840,14 +840,14 @@ configure_trigger_software
                 
 
 
-            :type delay: float in seconds or datetime.timedelta
+            :type delay: float in seconds or hightime.timedelta
 
 configure_trigger_video
 -----------------------
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_video(trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_video(trigger_source, signal_format, event, polarity, trigger_coupling, enable_dc_restore=False, line_number=1, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0))
 
             Configures the common properties for video triggering, including the
             signal format, TV event, line number, polarity, and enable DC restore. A
@@ -961,7 +961,7 @@ configure_trigger_video
                 
 
 
-            :type holdoff: float in seconds or datetime.timedelta
+            :type holdoff: float in seconds or hightime.timedelta
             :param delay:
 
 
@@ -972,14 +972,14 @@ configure_trigger_video
                 
 
 
-            :type delay: float in seconds or datetime.timedelta
+            :type delay: float in seconds or hightime.timedelta
 
 configure_trigger_window
 ------------------------
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+    .. py:method:: configure_trigger_window(trigger_source, low_level, high_level, window_mode, trigger_coupling, holdoff=hightime.timedelta(seconds=0.0), delay=hightime.timedelta(seconds=0.0))
 
             Configures common properties for analog window triggering. A window
             trigger occurs when a signal enters or leaves a window you specify with
@@ -1065,7 +1065,7 @@ configure_trigger_window
                 
 
 
-            :type holdoff: float in seconds or datetime.timedelta
+            :type holdoff: float in seconds or hightime.timedelta
             :param delay:
 
 
@@ -1076,7 +1076,7 @@ configure_trigger_window
                 
 
 
-            :type delay: float in seconds or datetime.timedelta
+            :type delay: float in seconds or hightime.timedelta
 
 configure_vertical
 ------------------
@@ -1252,7 +1252,7 @@ fetch
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+    .. py:method:: fetch(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0))
 
             Returns the waveform from a previously initiated acquisition that the
             digitizer acquires for the specified channel. This method returns
@@ -1325,7 +1325,7 @@ fetch
                 
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: float in seconds or hightime.timedelta
 
             :rtype: list of WaveformInfo
             :return:
@@ -1361,7 +1361,7 @@ fetch_into
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: fetch_into(waveform, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+    .. py:method:: fetch_into(waveform, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0))
 
             Returns the waveform from a previously initiated acquisition that the
             digitizer acquires for the specified channel. This method returns
@@ -1448,7 +1448,7 @@ fetch_into
                 
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: float in seconds or hightime.timedelta
 
             :rtype: list of WaveformInfo
             :return:
@@ -1678,7 +1678,7 @@ read
 
     .. py:currentmodule:: niscope.Session
 
-    .. py:method:: read(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=datetime.timedelta(seconds=5.0))
+    .. py:method:: read(num_samples=None, relative_to=niscope.FetchRelativeTo.PRETRIGGER, offset=0, record_number=0, num_records=None, timeout=hightime.timedelta(seconds=5.0))
 
             Initiates an acquisition, waits for it to complete, and retrieves the
             data. The process is similar to calling :py:meth:`niscope.Session._initiate_acquisition`,
@@ -1754,7 +1754,7 @@ read
                 
 
 
-            :type timeout: float in seconds or datetime.timedelta
+            :type timeout: float in seconds or hightime.timedelta
 
             :rtype: list of WaveformInfo
             :return:
@@ -1982,7 +1982,7 @@ absolute_sample_clock_offset
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -2009,7 +2009,7 @@ acquisition_start_time
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -2775,7 +2775,7 @@ end_of_record_to_advance_trigger_holdoff
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -3311,7 +3311,7 @@ horz_time_per_record
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -4159,7 +4159,7 @@ ref_trigger_minimum_quiet_time
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -4862,7 +4862,7 @@ start_to_ref_trigger_holdoff
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -4971,7 +4971,7 @@ trigger_delay_time
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -4999,7 +4999,7 @@ trigger_holdoff
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+

@@ -2,7 +2,6 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -15,6 +14,7 @@ import nidigital.errors as errors
 
 import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
 
+import hightime
 import nitclk
 
 # Used for __repr__
@@ -234,7 +234,7 @@ class _SessionBase(object):
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     frequency_counter_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150069)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -438,7 +438,7 @@ class _SessionBase(object):
     supported_instrument_models = _attributes.AttributeViString(1050327)
     tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
     tdr_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -456,7 +456,7 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -616,7 +616,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            offsets (basic sequence of float in seconds or datetime.timedelta):
+            offsets (basic sequence of float in seconds or hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -628,7 +628,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
+    def _burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
         r'''_burst_pattern
 
         TBD
@@ -646,7 +646,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float in seconds or datetime.timedelta):
+            timeout (float in seconds or hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -765,7 +765,7 @@ class _SessionBase(object):
         Args:
             time_set_name (str):
 
-            strobe_edge (float in seconds or datetime.timedelta):
+            strobe_edge (float in seconds or hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -791,9 +791,9 @@ class _SessionBase(object):
         Args:
             time_set_name (str):
 
-            strobe_edge (float in seconds or datetime.timedelta):
+            strobe_edge (float in seconds or hightime.timedelta):
 
-            strobe2_edge (float in seconds or datetime.timedelta):
+            strobe2_edge (float in seconds or hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -822,13 +822,13 @@ class _SessionBase(object):
 
             format (enums.DriveFormat):
 
-            drive_on_edge (float in seconds or datetime.timedelta):
+            drive_on_edge (float in seconds or hightime.timedelta):
 
-            drive_data_edge (float in seconds or datetime.timedelta):
+            drive_data_edge (float in seconds or hightime.timedelta):
 
-            drive_return_edge (float in seconds or datetime.timedelta):
+            drive_return_edge (float in seconds or hightime.timedelta):
 
-            drive_off_edge (float in seconds or datetime.timedelta):
+            drive_off_edge (float in seconds or hightime.timedelta):
 
         '''
         if type(format) is not enums.DriveFormat:
@@ -862,17 +862,17 @@ class _SessionBase(object):
 
             format (enums.DriveFormat):
 
-            drive_on_edge (float in seconds or datetime.timedelta):
+            drive_on_edge (float in seconds or hightime.timedelta):
 
-            drive_data_edge (float in seconds or datetime.timedelta):
+            drive_data_edge (float in seconds or hightime.timedelta):
 
-            drive_return_edge (float in seconds or datetime.timedelta):
+            drive_return_edge (float in seconds or hightime.timedelta):
 
-            drive_off_edge (float in seconds or datetime.timedelta):
+            drive_off_edge (float in seconds or hightime.timedelta):
 
-            drive_data2_edge (float in seconds or datetime.timedelta):
+            drive_data2_edge (float in seconds or hightime.timedelta):
 
-            drive_return2_edge (float in seconds or datetime.timedelta):
+            drive_return2_edge (float in seconds or hightime.timedelta):
 
         '''
         if type(format) is not enums.DriveFormat:
@@ -936,7 +936,7 @@ class _SessionBase(object):
 
             edge (enums.TimeSetEdgeType):
 
-            time (float in seconds or datetime.timedelta):
+            time (float in seconds or hightime.timedelta):
 
         '''
         if type(edge) is not enums.TimeSetEdgeType:
@@ -1166,7 +1166,7 @@ class _SessionBase(object):
         return
 
     @ivi_synchronized
-    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=datetime.timedelta(seconds=10.0)):
+    def burst_pattern(self, start_label, select_digital_function=True, wait_until_done=True, timeout=hightime.timedelta(seconds=10.0)):
         '''burst_pattern
 
         Uses the start_label you specify to burst the pattern on the sites you specify. If you
@@ -1188,7 +1188,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float in seconds or datetime.timedelta):
+            timeout (float in seconds or hightime.timedelta):
 
 
         Returns:
@@ -1229,7 +1229,7 @@ class _SessionBase(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return data_array, actual_num_waveforms_ctype.value, actual_samples_per_waveform_ctype.value  # (modified)
 
-    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=datetime.timedelta(seconds=10.0)):
+    def fetch_capture_waveform(self, waveform_name, samples_to_read, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_capture_waveform
 
         Returns dictionary where each key is a site number and value is a collection of digital states representing capture waveform data
@@ -1245,7 +1245,7 @@ class _SessionBase(object):
 
             samples_to_read (int):
 
-            timeout (float or datetime.timedelta):
+            timeout (float in seconds or hightime.timedelta):
 
 
         Returns:
@@ -2139,7 +2139,7 @@ class _SessionBase(object):
 
 
         Returns:
-            time (datetime.timedelta):
+            time (hightime.timedelta):
 
         '''
         if type(edge) is not enums.TimeSetEdgeType:
@@ -2507,7 +2507,7 @@ class _SessionBase(object):
 
 
         Returns:
-            offsets (list of datetime.timedelta):
+            offsets (list of hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2759,7 +2759,7 @@ class Session(_SessionBase):
         Args:
             time_set_name (str):
 
-            period (float in seconds or datetime.timedelta):
+            period (float in seconds or hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -2989,7 +2989,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            period (datetime.timedelta):
+            period (hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3274,13 +3274,13 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_until_done(self, timeout=datetime.timedelta(seconds=10.0)):
+    def wait_until_done(self, timeout=hightime.timedelta(seconds=10.0)):
         r'''wait_until_done
 
         TBD
 
         Args:
-            timeout (float in seconds or datetime.timedelta):
+            timeout (float in seconds or hightime.timedelta):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

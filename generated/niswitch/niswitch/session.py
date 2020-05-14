@@ -2,7 +2,6 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -13,6 +12,7 @@ import niswitch._visatype as _visatype
 import niswitch.enums as enums
 import niswitch.errors as errors
 
+import hightime
 
 # Used for __repr__
 import pprint
@@ -408,7 +408,7 @@ class _SessionBase(object):
     '''
     scan_advanced_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScanAdvancedPolarity, 1150011)
     scan_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1250025)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     This property specifies the minimum amount of time the switch device  waits before it asserts the scan advanced output trigger after opening or  closing the switch.  The switch device always waits for debounce before  asserting the trigger. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
@@ -446,7 +446,7 @@ class _SessionBase(object):
     This read-only property returns the serial number for the switch device  controlled by this instrument driver.  If the device does not return a  serial number, the driver returns the IVI_ERROR_ATTRIBUTE_NOT_SUPPORTED error.
     '''
     settling_time = _attributes.AttributeViReal64TimeDeltaSeconds(1250004)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     This channel-based property returns the maximum length of time from after  you make a connection until the signal flowing through the channel  settles. The units are seconds.
     the greater value of the settling time and the value you specify as the  scan delay.
@@ -2355,7 +2355,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_for_debounce(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
+    def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
         r'''wait_for_debounce
 
         Pauses until all created paths have settled. If the time you specify
@@ -2364,7 +2364,7 @@ class Session(_SessionBase):
         NISWITCH_ERROR_MAX_TIME_EXCEEDED error.
 
         Args:
-            maximum_time_ms (int in milliseconds or datetime.timedelta): Specifies the maximum length of time to wait for all relays in the
+            maximum_time_ms (int in milliseconds or hightime.timedelta): Specifies the maximum length of time to wait for all relays in the
                 switch module to activate or deactivate. If the specified time elapses
                 before all relays active or deactivate, a timeout error is returned.
                 Default Value:5000 ms
@@ -2377,7 +2377,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def wait_for_scan_complete(self, maximum_time_ms=datetime.timedelta(milliseconds=5000)):
+    def wait_for_scan_complete(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
         r'''wait_for_scan_complete
 
         Pauses until the switch module stops scanning or the maximum time has
@@ -2387,7 +2387,7 @@ class Session(_SessionBase):
         error.
 
         Args:
-            maximum_time_ms (int in milliseconds or datetime.timedelta): Specifies the maximum length of time to wait for the switch module to
+            maximum_time_ms (int in milliseconds or hightime.timedelta): Specifies the maximum length of time to wait for the switch module to
                 stop scanning. If the specified time elapses before the scan ends,
                 NISWITCH_ERROR_MAX_TIME_EXCEEDED error is returned. Default
                 Value:5000 ms

@@ -5,8 +5,9 @@ import nitclk.errors as errors
 
 import array
 import collections
-import datetime
+import hightime
 import numbers
+import pytest
 
 from functools import singledispatch
 
@@ -144,7 +145,7 @@ def convert_repeated_capabilities_without_prefix(repeated_capability):
 
 def _convert_timedelta(value, library_type, scaling):
     try:
-        # We first assume it is a datetime.timedelta object
+        # We first assume it is a timedelta object
         scaled_value = value.total_seconds() * scaling
     except AttributeError:
         # If that doesn't work, assume it is a value in seconds
@@ -171,7 +172,7 @@ def convert_timedeltas_to_seconds_real64(values):
 
 
 def convert_seconds_real64_to_timedelta(value):
-    return datetime.timedelta(seconds=value)
+    return hightime.timedelta(seconds=value)
 
 
 def convert_seconds_real64_to_timedeltas(values):
@@ -179,7 +180,7 @@ def convert_seconds_real64_to_timedeltas(values):
 
 
 def convert_month_to_timedelta(months):
-    return datetime.timedelta(days=(30.4167 * months))
+    return hightime.timedelta(days=(30.4167 * months))
 
 
 # This converter is not called from the normal codegen path for function. Instead it is
@@ -311,11 +312,11 @@ def test_convert_init_with_options_dictionary():
 
 # Tests - time
 def test_convert_timedelta_to_seconds_double():
-    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=10))
+    test_result = convert_timedelta_to_seconds_real64(hightime.timedelta(seconds=10))
     assert test_result.value == 10.0
     assert isinstance(test_result, _visatype.ViReal64)
-    test_result = convert_timedelta_to_seconds_real64(datetime.timedelta(seconds=-1))
-    assert test_result.value == -1
+    test_result = convert_timedelta_to_seconds_real64(hightime.timedelta(nanoseconds=-0.5))
+    assert test_result.value == pytest.approx(-5e-10)
     assert isinstance(test_result, _visatype.ViReal64)
     test_result = convert_timedelta_to_seconds_real64(10.5)
     assert test_result.value == 10.5
@@ -326,11 +327,11 @@ def test_convert_timedelta_to_seconds_double():
 
 
 def test_convert_timedelta_to_milliseconds_int32():
-    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=10))
+    test_result = convert_timedelta_to_milliseconds_int32(hightime.timedelta(seconds=10))
     assert test_result.value == 10000
     assert isinstance(test_result, _visatype.ViInt32)
-    test_result = convert_timedelta_to_milliseconds_int32(datetime.timedelta(seconds=-1))
-    assert test_result.value == -1000
+    test_result = convert_timedelta_to_milliseconds_int32(hightime.timedelta(seconds=-5))
+    assert test_result.value == -5000
     assert isinstance(test_result, _visatype.ViInt32)
     test_result = convert_timedelta_to_milliseconds_int32(10.5)
     assert test_result.value == 10500
@@ -341,26 +342,28 @@ def test_convert_timedelta_to_milliseconds_int32():
 
 
 def test_convert_timedeltas_to_seconds_real64():
-    time_values = [10.5, -1]
+    time_values = [10.5, -5e-10]
     test_result = convert_timedeltas_to_seconds_real64(time_values)
-    assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
+    assert all([actual.value == pytest.approx(expected) for actual, expected in zip(test_result, time_values)])
     assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
-    timedeltas = [datetime.timedelta(seconds=s, milliseconds=ms) for s, ms in zip([10, -1], [500, 0])]
-    test_result = convert_timedeltas_to_seconds_real64(timedeltas)
-    assert all([actual.value == expected for actual, expected in zip(test_result, time_values)])
+    test_input = [hightime.timedelta(seconds=10.5), hightime.timedelta(nanoseconds=-0.5)]
+    test_result = convert_timedeltas_to_seconds_real64(test_input)
+    assert all([actual.value == pytest.approx(expected) for actual, expected in zip(test_result, time_values)])
     assert all([isinstance(i, _visatype.ViReal64) for i in test_result])
 
 
 def test_convert_seconds_real64_to_timedelta():
-    time_value = 10.5
-    timedelta = convert_seconds_real64_to_timedelta(time_value)
-    assert timedelta.total_seconds() == time_value
+    time_value = -5e-10
+    test_result = convert_seconds_real64_to_timedelta(time_value)
+    assert test_result.total_seconds() == pytest.approx(time_value)
+    assert isinstance(test_result, hightime.timedelta)
 
 
 def test_convert_seconds_real64_to_timedeltas():
-    time_values = [10.5, -1]
-    timedeltas = convert_seconds_real64_to_timedeltas(time_values)
-    assert all([actual.total_seconds() == expected for actual, expected in zip(timedeltas, time_values)])
+    time_values = [10.5, -5e-10]
+    test_result = convert_seconds_real64_to_timedeltas(time_values)
+    assert all([actual.total_seconds() == pytest.approx(expected) for actual, expected in zip(test_result, time_values)])
+    assert all([isinstance(x, hightime.timedelta) for x in test_result])
 
 
 def test_string_to_list_channel():

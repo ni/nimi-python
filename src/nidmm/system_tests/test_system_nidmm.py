@@ -1,4 +1,4 @@
-import datetime
+import hightime
 import math
 import nidmm
 import numpy
@@ -239,7 +239,7 @@ def test_fetch_waveform_error(session):
     try:
         session.configure_waveform_acquisition(nidmm.Function.WAVEFORM_VOLTAGE, 10, 1800000, number_of_points_to_read)
         with session.initiate():
-            session.fetch_waveform(number_of_points_to_read * 2, maximum_time=datetime.timedelta(milliseconds=1))   # trying to fetch points more than configured
+            session.fetch_waveform(number_of_points_to_read * 2, maximum_time=hightime.timedelta(milliseconds=1))   # trying to fetch points more than configured
             assert False
     except nidmm.Error as e:
         assert e.code == -1074126845  # Max Time exceeded before operation completed

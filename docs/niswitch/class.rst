@@ -1163,7 +1163,7 @@ wait_for_debounce
 
     .. py:currentmodule:: niswitch.Session
 
-    .. py:method:: wait_for_debounce(maximum_time_ms=datetime.timedelta(milliseconds=5000))
+    .. py:method:: wait_for_debounce(maximum_time_ms=hightime.timedelta(milliseconds=5000))
 
             Pauses until all created paths have settled. If the time you specify
             with the Maximum Time (ms) parameter elapsed before the switch paths
@@ -1185,14 +1185,14 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: int in milliseconds or datetime.timedelta
+            :type maximum_time_ms: int in milliseconds or hightime.timedelta
 
 wait_for_scan_complete
 ----------------------
 
     .. py:currentmodule:: niswitch.Session
 
-    .. py:method:: wait_for_scan_complete(maximum_time_ms=datetime.timedelta(milliseconds=5000))
+    .. py:method:: wait_for_scan_complete(maximum_time_ms=hightime.timedelta(milliseconds=5000))
 
             Pauses until the switch module stops scanning or the maximum time has
             elapsed and returns a timeout error. If the time you specify with the
@@ -1215,7 +1215,7 @@ wait_for_scan_complete
                 
 
 
-            :type maximum_time_ms: int in milliseconds or datetime.timedelta
+            :type maximum_time_ms: int in milliseconds or hightime.timedelta
 
 
 Properties
@@ -2309,7 +2309,7 @@ scan_delay
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+
@@ -2444,7 +2444,7 @@ settling_time
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+

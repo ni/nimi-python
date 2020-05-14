@@ -405,7 +405,7 @@ def _add_default_attribute_class(a, attributes):
     '''Set 'attribute_class' if not set.
 
     By default, the 'attribute_class' is only based on the 'type'.
-    It can be set in attributes_addon if we want to convert to/from a different datatype, such as datetime.timedelta
+    It can be set in attributes_addon if we want to convert to/from a different datatype, such as hightime.timedelta
     '''
     if 'attribute_class' not in attributes[a]:
         attributes[a]['attribute_class'] = 'Attribute' + attributes[a]['type']
@@ -582,9 +582,6 @@ def add_all_config_metadata(config):
 
     if 'uses_nitclk' not in config:
         config['uses_nitclk'] = False
-
-    if 'uses_hightime' not in config:
-        config['uses_hightime'] = False
 
     return config
 
@@ -1281,7 +1278,6 @@ config_expected = {
         'metadata.enums_addon': {}
     },
     'uses_nitclk': False,
-    'uses_hightime': False,
 }
 
 

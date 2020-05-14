@@ -91,7 +91,7 @@ attributes = {
         'name': 'READ_WRITE_DOUBLE_WITH_CONVERTER',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'float in seconds or hightime.timedelta'
     },
     1000008: {
         'access': 'read-write',
@@ -104,7 +104,7 @@ attributes = {
         'name': 'READ_WRITE_INTEGER_WITH_CONVERTER',
         'resettable': False,
         'type': 'ViInt32',
-        'type_in_documentation': 'float in seconds or datetime.timedelta'
+        'type_in_documentation': 'float in seconds or hightime.timedelta'
     },
     1000009: {
         'access': 'read-write',

@@ -2,7 +2,6 @@
 # This file was generated
 import array  # noqa: F401
 import ctypes
-import datetime  # noqa: F401
 # Used by @ivi_synchronized
 from functools import wraps
 
@@ -13,6 +12,7 @@ import nidmm._visatype as _visatype
 import nidmm.enums as enums
 import nidmm.errors as errors
 
+import hightime
 
 # Used for __repr__
 import pprint
@@ -320,7 +320,7 @@ class _SessionBase(object):
     Specifies the number of measurements the DMM takes each time it receives a  trigger in a multiple point acquisition.
     '''
     sample_interval = _attributes.AttributeViReal64TimeDeltaSeconds(1250303)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     Specifies the amount of time in seconds the DMM waits between measurement cycles.  This property only applies when the sample_trigger property is set to INTERVAL.
     On the NI 4060, the value for this property is used as the settling time.  When this property is set to 0, the NI 4060 does not settle between  measurement cycles. The onboard timing resolution is 1 µs on the NI 4060.
@@ -340,7 +340,7 @@ class _SessionBase(object):
     A string containing the serial number of the instrument. This property corresponds  to the serial number label that is attached to most products.
     '''
     settle_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150028)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     Specifies the settling time in seconds. To override the default settling time,  set this property. To return to the default, set this property to  NIDMM_VAL_SETTLE_TIME_AUTO (-1).
     The NI 4050 and NI 4060 are not supported.
@@ -479,7 +479,7 @@ class _SessionBase(object):
     Refer to the Multiple Point Acquisitions section of the NI Digital Multimeters Help for more information.
     '''
     trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1250005)
-    '''Type: float in seconds or datetime.timedelta
+    '''Type: float in seconds or hightime.timedelta
 
     Specifies the time (in seconds) that the DMM waits after it has received a trigger before taking a measurement.  The default value is AUTO DELAY (-1), which means that the DMM waits an appropriate settling time before taking  the measurement. (-1) signifies that AUTO DELAY is on, and (-2) signifies that AUTO DELAY is off.
     The NI 4065 and NI 4070/4071/4072 use the value specified in this property as additional settling time.  For the The NI 4065 and NI 4070/4071/4072, the valid range for Trigger Delay is AUTO DELAY (-1) or 0.0-149.0  seconds and the onboard timing resolution is 34.72 ns.
@@ -1347,7 +1347,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=datetime.timedelta(seconds=-1)):
+    def configure_multi_point(self, trigger_count, sample_count, sample_trigger=enums.SampleTrigger.IMMEDIATE, sample_interval=hightime.timedelta(seconds=-1)):
         r'''configure_multi_point
 
         Configures the properties for multipoint measurements. These properties
@@ -1379,7 +1379,7 @@ class Session(_SessionBase):
                 `LabWindows/CVI Trigger
                 Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
-            sample_interval (float in seconds or datetime.timedelta): Sets the amount of time in seconds the DMM waits between measurement
+            sample_interval (float in seconds or hightime.timedelta): Sets the amount of time in seconds the DMM waits between measurement
                 cycles. The driver sets sample_interval to this value.
                 Specify a sample interval to add settling time between measurement
                 cycles or to decrease the measurement rate. **sample_interval** only
@@ -1566,7 +1566,7 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def configure_trigger(self, trigger_source, trigger_delay=datetime.timedelta(seconds=-1)):
+    def configure_trigger(self, trigger_source, trigger_delay=hightime.timedelta(seconds=-1)):
         r'''configure_trigger
 
         Configures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to
@@ -1585,7 +1585,7 @@ class Session(_SessionBase):
                 `LabWindows/CVI Trigger
                 Routing <REPLACE_DRIVER_SPECIFIC_URL_1(cvitrigger_routing)>`__ section.
 
-            trigger_delay (float in seconds or datetime.timedelta): Specifies the time that the DMM waits after it has received a trigger
+            trigger_delay (float in seconds or hightime.timedelta): Specifies the time that the DMM waits after it has received a trigger
                 before taking a measurement. The driver sets the
                 trigger_delay property to this value. By default,
                 **trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM
@@ -1792,14 +1792,14 @@ class Session(_SessionBase):
         return
 
     @ivi_synchronized
-    def fetch(self, maximum_time=datetime.timedelta(milliseconds=-1)):
+    def fetch(self, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''fetch
 
         Returns the value from a previously initiated measurement. You must call
         _initiate before calling this method.
 
         Args:
-            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or hightime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1826,7 +1826,7 @@ class Session(_SessionBase):
         return float(reading_ctype.value)
 
     @ivi_synchronized
-    def fetch_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
+    def fetch_multi_point(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''fetch_multi_point
 
         Returns an array of values from a previously initiated multipoint
@@ -1844,7 +1844,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or hightime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1881,7 +1881,7 @@ class Session(_SessionBase):
         return reading_array_array
 
     @ivi_synchronized
-    def fetch_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
+    def fetch_waveform(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1894,7 +1894,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or hightime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -1928,7 +1928,7 @@ class Session(_SessionBase):
         return waveform_array_array
 
     @ivi_synchronized
-    def fetch_waveform_into(self, waveform_array, maximum_time=datetime.timedelta(milliseconds=-1)):
+    def fetch_waveform_into(self, waveform_array, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''fetch_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of
@@ -1939,7 +1939,7 @@ class Session(_SessionBase):
             waveform_array (numpy.array(dtype=numpy.float64)): **Waveform Array** is an array of measurement values stored in waveform
                 data type.
 
-            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or hightime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2060,7 +2060,7 @@ class Session(_SessionBase):
         Note: The NI 4050 and NI 4060 are not supported.
 
         Returns:
-            months (datetime.timedelta): Returns the recommended number of **months** between external
+            months (hightime.timedelta): Returns the recommended number of **months** between external
                 calibrations.
 
         '''
@@ -2094,11 +2094,11 @@ class Session(_SessionBase):
 
 
         Returns:
-            month (datetime.datetime): Indicates date and time of the last calibration.
+            month (hightime.datetime): Indicates date and time of the last calibration.
 
         '''
         month, day, year, hour, minute = self._get_cal_date_and_time(cal_type)
-        return datetime.datetime(year, month, day, hour, minute)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_last_cal_temp(self, cal_type):
@@ -2451,13 +2451,13 @@ class Session(_SessionBase):
         return float(resistance_ctype.value), float(reactance_ctype.value)
 
     @ivi_synchronized
-    def read(self, maximum_time=datetime.timedelta(milliseconds=-1)):
+    def read(self, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''read
 
         Acquires a single measurement and returns the measured value.
 
         Args:
-            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or hightime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2484,7 +2484,7 @@ class Session(_SessionBase):
         return float(reading_ctype.value)
 
     @ivi_synchronized
-    def read_multi_point(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
+    def read_multi_point(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''read_multi_point
 
         Acquires multiple measurements and returns an array of measured values.
@@ -2501,7 +2501,7 @@ class Session(_SessionBase):
                 once. The number of measurements can be a subset. The valid range is any
                 positive ViInt32. The default value is 1.
 
-            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or hightime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been
@@ -2583,7 +2583,7 @@ class Session(_SessionBase):
         return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     @ivi_synchronized
-    def read_waveform(self, array_size, maximum_time=datetime.timedelta(milliseconds=-1)):
+    def read_waveform(self, array_size, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''read_waveform
 
         For the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform
@@ -2598,7 +2598,7 @@ class Session(_SessionBase):
                 parameter of configure_waveform_acquisition. The default value is
                 1.
 
-            maximum_time (int in milliseconds or datetime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
+            maximum_time (int in milliseconds or hightime.timedelta): Specifies the **maximum_time** allowed for this method to complete in
                 milliseconds. If the method does not complete within this time
                 interval, the method returns the NIDMM_ERROR_MAX_TIME_EXCEEDED
                 error code. This may happen if an external trigger has not been

@@ -1597,7 +1597,7 @@ get_ext_cal_last_date_and_time
 
 
 
-            :rtype: datetime.datetime
+            :rtype: hightime.datetime
             :return:
 
 
@@ -1646,7 +1646,7 @@ get_ext_cal_recommended_interval
 
 
 
-            :rtype: datetime.timedelta
+            :rtype: hightime.timedelta
             :return:
 
 
@@ -1708,7 +1708,7 @@ get_self_cal_last_date_and_time
 
 
 
-            :rtype: datetime.datetime
+            :rtype: hightime.datetime
             :return:
 
 
@@ -2398,7 +2398,7 @@ wait_until_done
 
     .. py:currentmodule:: nifgen.Session
 
-    .. py:method:: wait_until_done(max_time=datetime.timedelta(seconds=10.0))
+    .. py:method:: wait_until_done(max_time=hightime.timedelta(seconds=10.0))
 
             Waits until the device is done generating or until the maximum time has
             expired.
@@ -2415,7 +2415,7 @@ wait_until_done
                 
 
 
-            :type max_time: int in milliseconds or datetime.timedelta
+            :type max_time: int in milliseconds or hightime.timedelta
 
 write_script
 ------------
@@ -5770,7 +5770,7 @@ streaming_write_timeout
             +----------------+----------------------------------------+
             | Characteristic | Value                                  |
             +================+========================================+
-            | Datatype       | float in seconds or datetime.timedelta |
+            | Datatype       | float in seconds or hightime.timedelta |
             +----------------+----------------------------------------+
             | Permissions    | read-write                             |
             +----------------+----------------------------------------+

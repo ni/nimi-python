@@ -1,8 +1,8 @@
 import array
 import collections
-import datetime
 import os
 
+import hightime
 import numpy
 import pytest
 
@@ -115,8 +115,8 @@ def test_chained_sites_pins_rep_cap(multi_instrument_session):
 
 def test_instruments_rep_cap(multi_instrument_session):
     multi_instrument_session.timing_absolute_delay_enabled = True
-    delay0 = datetime.timedelta(microseconds=5e-3)
-    delay1 = datetime.timedelta(microseconds=-5e-3)
+    delay0 = hightime.timedelta(microseconds=5e-3)
+    delay1 = hightime.timedelta(microseconds=-5e-3)
     multi_instrument_session.instruments[instruments[0]].timing_absolute_delay = delay0
     multi_instrument_session.instruments[instruments[1]].timing_absolute_delay = delay1
     assert multi_instrument_session.instruments[instruments[0]].timing_absolute_delay == delay0
@@ -739,7 +739,7 @@ def test_clock_generator_generate_clock(multi_instrument_session):
 def test_frequency_counter_measure_frequency(multi_instrument_session):
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
     multi_instrument_session.pins['site0/PinA', 'site1/PinC'].selected_function = nidigital.SelectedFunction.DIGITAL
-    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].frequency_counter_measurement_time = datetime.timedelta(milliseconds=5)
+    multi_instrument_session.pins['site0/PinA', 'site1/PinC'].frequency_counter_measurement_time = hightime.timedelta(milliseconds=5)
     frequencies = multi_instrument_session.pins['site0/PinA', 'site1/PinC'].frequency_counter_measure_frequency()
     assert frequencies == [0] * 2
 
@@ -775,11 +775,11 @@ def test_configure_get_time_set_period(multi_instrument_session):
     - get_time_set_period
     '''
     time_set_name = 'time_set_abc'
-    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_period = hightime.timedelta(microseconds=10)
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
     multi_instrument_session.create_time_set(time_set_name)
-    assert multi_instrument_session.get_time_set_period(time_set_name) == datetime.timedelta(microseconds=1)
+    assert multi_instrument_session.get_time_set_period(time_set_name) == hightime.timedelta(microseconds=1)
     multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
     assert multi_instrument_session.get_time_set_period(time_set_name) == time_set_period
 
@@ -807,7 +807,7 @@ def test_configure_get_time_set_edge(multi_instrument_session):
     - get_time_set_edge
     '''
     time_set_name = 'time_set_abc'
-    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_period = hightime.timedelta(microseconds=10)
     time_set_drive_on = time_set_period * 0.5
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
 
@@ -815,7 +815,7 @@ def test_configure_get_time_set_edge(multi_instrument_session):
     multi_instrument_session.configure_time_set_period(time_set_name, time_set_period)
     assert multi_instrument_session.pins['site0/PinA', 'site1/PinC'].get_time_set_edge(
         time_set_name,
-        nidigital.TimeSetEdgeType.DRIVE_ON) == datetime.timedelta(seconds=0)
+        nidigital.TimeSetEdgeType.DRIVE_ON) == hightime.timedelta(seconds=0)
     multi_instrument_session.pins['site0/PinA', 'site1/PinC'].configure_time_set_edge(
         time_set_name,
         nidigital.TimeSetEdgeType.DRIVE_ON,
@@ -827,7 +827,7 @@ def test_configure_get_time_set_edge(multi_instrument_session):
 
 def test_configure_time_set_drive_edges(multi_instrument_session):
     time_set_name = 'time_set_abc'
-    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_period = hightime.timedelta(microseconds=10)
     time_set_drive_format = nidigital.DriveFormat.RL
     time_set_drive_on = time_set_period * 0.1
     time_set_drive_data = time_set_period * 0.2
@@ -862,7 +862,7 @@ def test_configure_time_set_drive_edges(multi_instrument_session):
 
 def test_configure_time_set_compare_edges_strobe(multi_instrument_session):
     time_set_name = 'time_set_abc'
-    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_period = hightime.timedelta(microseconds=10)
     time_set_strobe = time_set_period * 0.5
 
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
@@ -884,7 +884,7 @@ def test_configure_get_time_set_edge_multiplier(multi_instrument_session):
     - get_time_set_edge_multiplier
     '''
     time_set_name = 'time_set_abc'
-    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_period = hightime.timedelta(microseconds=10)
     time_set_edge_multiplier = 2
 
     multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
@@ -898,7 +898,7 @@ def test_configure_get_time_set_edge_multiplier(multi_instrument_session):
 
 def test_configure_time_set_drive_edges2x(multi_instrument_session):
     time_set_name = 'time_set_abc'
-    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_period = hightime.timedelta(microseconds=10)
     time_set_drive_format = nidigital.DriveFormat.RL
     time_set_drive_on = time_set_period * 0.1
     time_set_drive_data = time_set_period * 0.2
@@ -944,7 +944,7 @@ def test_configure_time_set_drive_edges2x(multi_instrument_session):
 
 def test_configure_time_set_compare_edges_strobe2x(multi_instrument_session):
     time_set_name = 'time_set_abc'
-    time_set_period = datetime.timedelta(microseconds=10)
+    time_set_period = hightime.timedelta(microseconds=10)
     time_set_strobe = time_set_period * 0.4
     time_set_strobe2 = time_set_period * 0.8
 
@@ -1046,7 +1046,7 @@ def test_configure_pattern_burst_sites(multi_instrument_session):
     multi_instrument_session.sites[0, 2, 3].configure_pattern_burst_sites()
 
     multi_instrument_session.initiate()
-    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
+    multi_instrument_session.wait_until_done(timeout=hightime.timedelta(seconds=5.0))
     result = multi_instrument_session.sites[0, 1, 3].get_site_pass_fail()
     assert result == {0: True, 3: True}
 
@@ -1072,7 +1072,7 @@ def test_initiate_context_manager_and_wait_until_done(multi_instrument_session):
 
     with multi_instrument_session.initiate():
         # note that wait_until_done will return immediately with simulated hardware
-        multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
+        multi_instrument_session.wait_until_done(timeout=hightime.timedelta(seconds=5.0))
     assert multi_instrument_session.is_done()
 
 
@@ -1225,7 +1225,7 @@ def test_send_software_edge_trigger(multi_instrument_session):
         trigger_identifier='')
 
     # We shouldn't time out, having sent the trigger, though in simulation it might complete, anyway
-    multi_instrument_session.wait_until_done(timeout=datetime.timedelta(seconds=5.0))
+    multi_instrument_session.wait_until_done(timeout=hightime.timedelta(seconds=5.0))
 
 
 def test_specifications_levels_and_timing_single(multi_instrument_session):
