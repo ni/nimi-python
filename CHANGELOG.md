@@ -52,6 +52,14 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### NI-SCOPE
     * #### Added
+        * `end of acquisition event terminal name` attribute
+        * `end of record event terminal name` attribute
+        * `advance trigger terminal name` attribute
+        * `ref trigger terminal name` attribute
+        * `start trigger terminal name` attribute
+        * `ready for advance event terminal name` attribute
+        * `ready for ref event terminal name` attribute
+        * `ready for start event terminal name` attribute
     * #### Changed
     * #### Removed
 * ### NI-Switch
