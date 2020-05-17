@@ -119,7 +119,7 @@ functions = {
                     'value': 'numOffsets'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'basic sequence of float in seconds or hightime.timedelta'
+                'type_in_documentation': 'basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -165,7 +165,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -346,7 +346,7 @@ functions = {
                 'name': 'strobeEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -378,14 +378,14 @@ functions = {
                 'name': 'strobeEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'strobe2Edge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -423,28 +423,28 @@ functions = {
                 'name': 'driveOnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveDataEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveReturnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveOffEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -482,42 +482,42 @@ functions = {
                 'name': 'driveOnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveDataEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveReturnEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveOffEdge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveData2Edge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
                 'name': 'driveReturn2Edge',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -586,7 +586,7 @@ functions = {
                 'name': 'time',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -641,7 +641,7 @@ functions = {
                 'name': 'period',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -2747,7 +2747,7 @@ conditionalJumpTrigger1, conditionalJumpTrigger2, and conditionalJumpTrigger3.
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'

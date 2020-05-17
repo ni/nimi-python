@@ -741,7 +741,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     measure_complete_event_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150046)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
     for information about supported devices.
@@ -805,7 +805,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     measure_record_delta_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150065)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Queries the amount of time, in seconds, between between the start of two consecutive measurements in a measure record.  Only query this property after the desired measurement settings are committed.
     for information about supported devices.
@@ -1494,7 +1494,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     pulse_off_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150094)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines the length, in seconds, of the off phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -1509,7 +1509,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     pulse_on_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150093)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines the length, in seconds, of the on phase of a pulse.
     Valid Values: 10 microseconds to 167 seconds
@@ -2015,7 +2015,7 @@ class _SessionBase(object):
     nidcpower.Session repeated capabilities container, and calling set/get value on the result.
     '''
     source_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the  measure_when property is set to MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE.
     Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
@@ -2514,7 +2514,7 @@ class _SessionBase(object):
         Args:
             count (int): Specifies the number of measurements to fetch.
 
-            timeout (float in seconds or hightime.timedelta): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete. If the method does not complete within this time interval, NI-DCPower returns an error.
 
                 Note: When setting the timeout interval, ensure you take into account any triggers so that the timeout interval is long enough for your application.
 
@@ -2603,7 +2603,7 @@ class _SessionBase(object):
         nidcpower.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            timeout (float in seconds or hightime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 
@@ -5019,7 +5019,7 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            timeout (float in seconds or hightime.timedelta): Specifies the maximum time allowed for this method to complete, in
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the maximum time allowed for this method to complete, in
                 seconds. If the method does not complete within this time interval,
                 NI-DCPower returns an error.
 

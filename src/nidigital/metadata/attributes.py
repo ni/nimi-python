@@ -440,7 +440,7 @@ attributes = {
         'name': 'TDR_OFFSET',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150052: {
         'access': 'read-write',
@@ -506,7 +506,7 @@ attributes = {
         'name': 'FREQUENCY_COUNTER_MEASUREMENT_TIME',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150071: {
         'access': 'read-write',
@@ -523,7 +523,7 @@ attributes = {
         'repeated_capability_type': 'instruments',
         'resettable': True,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150073: {
         'access': 'read-write',

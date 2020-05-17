@@ -2415,7 +2415,7 @@ wait_until_done
                 
 
 
-            :type max_time: int in milliseconds or hightime.timedelta
+            :type max_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
 write_script
 ------------
@@ -5767,17 +5767,17 @@ streaming_write_timeout
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

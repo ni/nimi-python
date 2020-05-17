@@ -285,7 +285,7 @@ attributes = {
         'name': 'SETTLING_TIME',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250005: {
         'access': 'read only',
@@ -522,7 +522,7 @@ attributes = {
         'name': 'SCAN_DELAY',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250026: {
         'access': 'read-write',

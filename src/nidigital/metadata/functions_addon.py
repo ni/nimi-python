@@ -60,7 +60,7 @@ niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
             },
             {
                 'direction': 'out',
@@ -246,7 +246,7 @@ functions_additional_fetch_capture_waveform = {
                 'name': 'timeout',
                 'type': 'ViReal64',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
             },
             {
                 'direction': 'out',

@@ -197,7 +197,7 @@ finish_sync_pulse_sender_synchronize
             
 
 
-        :type min_time: float in seconds or hightime.timedelta
+        :type min_time: hightime.timedelta, datetime.timedelta, or float in seconds
 
 initiate
 --------
@@ -297,7 +297,7 @@ setup_for_sync_pulse_sender_synchronize
             
 
 
-        :type min_time: float in seconds or hightime.timedelta
+        :type min_time: hightime.timedelta, datetime.timedelta, or float in seconds
 
 synchronize
 -----------
@@ -339,7 +339,7 @@ synchronize
             
 
 
-        :type min_tclk_period: float in seconds or hightime.timedelta
+        :type min_tclk_period: hightime.timedelta, datetime.timedelta, or float in seconds
 
 synchronize_to_sync_pulse_sender
 --------------------------------
@@ -376,7 +376,7 @@ synchronize_to_sync_pulse_sender
             
 
 
-        :type min_time: float in seconds or hightime.timedelta
+        :type min_time: hightime.timedelta, datetime.timedelta, or float in seconds
 
 wait_until_done
 ---------------
@@ -417,7 +417,7 @@ wait_until_done
             
 
 
-        :type timeout: float in seconds or hightime.timedelta
+        :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
 
 SessionReference
@@ -597,17 +597,17 @@ sample_clock_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

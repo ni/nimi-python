@@ -594,7 +594,7 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -605,7 +605,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -668,7 +668,7 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -679,7 +679,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -750,7 +750,7 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -761,7 +761,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -805,7 +805,7 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -816,7 +816,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -906,7 +906,7 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -917,7 +917,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -987,7 +987,7 @@ functions = {
                 'name': 'holdoff',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'default_value': 'hightime.timedelta(seconds=0.0)',
@@ -998,7 +998,7 @@ functions = {
                 'name': 'delay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -1236,7 +1236,7 @@ functions = {
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'python_type': 'float or hightime.timedelta',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'out',
@@ -1373,7 +1373,7 @@ functions = {
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'python_type': 'float or hightime.timedelta',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'out',
@@ -1434,7 +1434,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -1505,7 +1505,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -1595,7 +1595,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -1673,7 +1673,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -1751,7 +1751,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -1875,7 +1875,7 @@ functions = {
                 },
                 'name': 'timeout',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'out',
@@ -1924,7 +1924,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -1981,7 +1981,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -2649,7 +2649,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',
@@ -2718,7 +2718,7 @@ functions = {
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             },
             {
                 'direction': 'in',

@@ -551,7 +551,7 @@ configure_trigger_digital
                 
 
 
-            :type holdoff: float in seconds or hightime.timedelta
+            :type holdoff: hightime.timedelta, datetime.timedelta, or float in seconds
             :param delay:
 
 
@@ -562,7 +562,7 @@ configure_trigger_digital
                 
 
 
-            :type delay: float in seconds or hightime.timedelta
+            :type delay: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_trigger_edge
 ----------------------
@@ -645,7 +645,7 @@ configure_trigger_edge
                 
 
 
-            :type holdoff: float in seconds or hightime.timedelta
+            :type holdoff: hightime.timedelta, datetime.timedelta, or float in seconds
             :param delay:
 
 
@@ -656,7 +656,7 @@ configure_trigger_edge
                 
 
 
-            :type delay: float in seconds or hightime.timedelta
+            :type delay: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_trigger_hysteresis
 ----------------------------
@@ -756,7 +756,7 @@ configure_trigger_hysteresis
                 
 
 
-            :type holdoff: float in seconds or hightime.timedelta
+            :type holdoff: hightime.timedelta, datetime.timedelta, or float in seconds
             :param delay:
 
 
@@ -767,7 +767,7 @@ configure_trigger_hysteresis
                 
 
 
-            :type delay: float in seconds or hightime.timedelta
+            :type delay: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_trigger_immediate
 ---------------------------
@@ -829,7 +829,7 @@ configure_trigger_software
                 
 
 
-            :type holdoff: float in seconds or hightime.timedelta
+            :type holdoff: hightime.timedelta, datetime.timedelta, or float in seconds
             :param delay:
 
 
@@ -840,7 +840,7 @@ configure_trigger_software
                 
 
 
-            :type delay: float in seconds or hightime.timedelta
+            :type delay: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_trigger_video
 -----------------------
@@ -961,7 +961,7 @@ configure_trigger_video
                 
 
 
-            :type holdoff: float in seconds or hightime.timedelta
+            :type holdoff: hightime.timedelta, datetime.timedelta, or float in seconds
             :param delay:
 
 
@@ -972,7 +972,7 @@ configure_trigger_video
                 
 
 
-            :type delay: float in seconds or hightime.timedelta
+            :type delay: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_trigger_window
 ------------------------
@@ -1065,7 +1065,7 @@ configure_trigger_window
                 
 
 
-            :type holdoff: float in seconds or hightime.timedelta
+            :type holdoff: hightime.timedelta, datetime.timedelta, or float in seconds
             :param delay:
 
 
@@ -1076,7 +1076,7 @@ configure_trigger_window
                 
 
 
-            :type delay: float in seconds or hightime.timedelta
+            :type delay: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_vertical
 ------------------
@@ -1325,7 +1325,7 @@ fetch
                 
 
 
-            :type timeout: float in seconds or hightime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
             :rtype: list of WaveformInfo
             :return:
@@ -1448,7 +1448,7 @@ fetch_into
                 
 
 
-            :type timeout: float in seconds or hightime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
             :rtype: list of WaveformInfo
             :return:
@@ -1754,7 +1754,7 @@ read
                 
 
 
-            :type timeout: float in seconds or hightime.timedelta
+            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
             :rtype: list of WaveformInfo
             :return:
@@ -1979,17 +1979,17 @@ absolute_sample_clock_offset
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2006,17 +2006,17 @@ acquisition_start_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2772,17 +2772,17 @@ end_of_record_to_advance_trigger_holdoff
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3308,17 +3308,17 @@ horz_time_per_record
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4156,17 +4156,17 @@ ref_trigger_minimum_quiet_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4859,17 +4859,17 @@ start_to_ref_trigger_holdoff
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4968,17 +4968,17 @@ trigger_delay_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4996,17 +4996,17 @@ trigger_holdoff
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | Yes                                    |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

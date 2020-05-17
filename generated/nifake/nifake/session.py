@@ -148,7 +148,7 @@ class _SessionBase(object):
     A property of type float with read/write access.
     '''
     read_write_double_with_converter = _attributes.AttributeViReal64TimeDeltaSeconds(1000007)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Property in seconds
     '''
@@ -172,7 +172,7 @@ class _SessionBase(object):
     A property of type integer with read/write access.
     '''
     read_write_integer_with_converter = _attributes.AttributeViInt32TimeDeltaMilliseconds(1000008)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
     Property in milliseconds
     '''
@@ -772,7 +772,7 @@ class Session(_SessionBase):
         Accepts list of floats or hightime.timedelta instances representing time delays.
 
         Args:
-            delays (float in seconds or hightime.timedelta): A collection of time delay values.
+            delays (hightime.timedelta, datetime.timedelta, or float in seconds): A collection of time delay values.
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

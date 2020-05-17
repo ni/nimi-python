@@ -396,7 +396,7 @@ configure_multi_point
                 .. note:: This property is not used on the NI 4080/4081/4082 and the NI 4050.
 
 
-            :type sample_interval: float in seconds or hightime.timedelta
+            :type sample_interval: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_rtd_custom
 --------------------
@@ -659,7 +659,7 @@ configure_trigger
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger_delay: float in seconds or hightime.timedelta
+            :type trigger_delay: hightime.timedelta, datetime.timedelta, or float in seconds
 
 configure_waveform_acquisition
 ------------------------------
@@ -904,7 +904,7 @@ fetch
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or hightime.timedelta
+            :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
             :rtype: float
             :return:
@@ -967,7 +967,7 @@ fetch_multi_point
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or hightime.timedelta
+            :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
             :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1039,7 +1039,7 @@ fetch_waveform
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or hightime.timedelta
+            :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1107,7 +1107,7 @@ fetch_waveform_into
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or hightime.timedelta
+            :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -1610,7 +1610,7 @@ read
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or hightime.timedelta
+            :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
             :rtype: float
             :return:
@@ -1672,7 +1672,7 @@ read_multi_point
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or hightime.timedelta
+            :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
             :rtype: tuple (reading_array, actual_number_of_points)
 
@@ -1803,7 +1803,7 @@ read_waveform
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type maximum_time: int in milliseconds or hightime.timedelta
+            :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
             :rtype: tuple (waveform_array, actual_number_of_points)
 
@@ -2999,17 +2999,17 @@ sample_interval
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3086,17 +3086,17 @@ settle_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3761,17 +3761,17 @@ trigger_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

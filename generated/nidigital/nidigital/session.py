@@ -234,7 +234,7 @@ class _SessionBase(object):
     '''
     exported_start_trigger_output_terminal = _attributes.AttributeViString(1150032)
     frequency_counter_measurement_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150069)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -438,7 +438,7 @@ class _SessionBase(object):
     supported_instrument_models = _attributes.AttributeViString(1050327)
     tdr_endpoint_termination = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TDREndpointTermination, 1150081)
     tdr_offset = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -456,7 +456,7 @@ class _SessionBase(object):
     nidigital.Session repeated capabilities container, and calling set/get value on the result.
     '''
     timing_absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150072)
-    '''Type: float in seconds or hightime.timedelta
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Tip:
     This property can use repeated capabilities. If set or get directly on the
@@ -616,7 +616,7 @@ class _SessionBase(object):
         nidigital.Session repeated capabilities container, and calling this method on the result.
 
         Args:
-            offsets (basic sequence of float in seconds or hightime.timedelta):
+            offsets (basic sequence of hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -646,7 +646,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float in seconds or hightime.timedelta):
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -765,7 +765,7 @@ class _SessionBase(object):
         Args:
             time_set_name (str):
 
-            strobe_edge (float in seconds or hightime.timedelta):
+            strobe_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -791,9 +791,9 @@ class _SessionBase(object):
         Args:
             time_set_name (str):
 
-            strobe_edge (float in seconds or hightime.timedelta):
+            strobe_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            strobe2_edge (float in seconds or hightime.timedelta):
+            strobe2_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -822,13 +822,13 @@ class _SessionBase(object):
 
             format (enums.DriveFormat):
 
-            drive_on_edge (float in seconds or hightime.timedelta):
+            drive_on_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_data_edge (float in seconds or hightime.timedelta):
+            drive_data_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_return_edge (float in seconds or hightime.timedelta):
+            drive_return_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_off_edge (float in seconds or hightime.timedelta):
+            drive_off_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         if type(format) is not enums.DriveFormat:
@@ -862,17 +862,17 @@ class _SessionBase(object):
 
             format (enums.DriveFormat):
 
-            drive_on_edge (float in seconds or hightime.timedelta):
+            drive_on_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_data_edge (float in seconds or hightime.timedelta):
+            drive_data_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_return_edge (float in seconds or hightime.timedelta):
+            drive_return_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_off_edge (float in seconds or hightime.timedelta):
+            drive_off_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_data2_edge (float in seconds or hightime.timedelta):
+            drive_data2_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
-            drive_return2_edge (float in seconds or hightime.timedelta):
+            drive_return2_edge (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         if type(format) is not enums.DriveFormat:
@@ -936,7 +936,7 @@ class _SessionBase(object):
 
             edge (enums.TimeSetEdgeType):
 
-            time (float in seconds or hightime.timedelta):
+            time (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         if type(edge) is not enums.TimeSetEdgeType:
@@ -1188,7 +1188,7 @@ class _SessionBase(object):
 
             wait_until_done (bool):
 
-            timeout (float in seconds or hightime.timedelta):
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds):
 
 
         Returns:
@@ -1245,7 +1245,7 @@ class _SessionBase(object):
 
             samples_to_read (int):
 
-            timeout (float in seconds or hightime.timedelta):
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds):
 
 
         Returns:
@@ -2759,7 +2759,7 @@ class Session(_SessionBase):
         Args:
             time_set_name (str):
 
-            period (float in seconds or hightime.timedelta):
+            period (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -3280,7 +3280,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            timeout (float in seconds or hightime.timedelta):
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds):
 
         '''
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

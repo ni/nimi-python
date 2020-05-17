@@ -52,7 +52,7 @@ functions = {
                     'value': 'count'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'

@@ -2879,7 +2879,7 @@ functions = {
                 'name': 'maxTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
             }
         ],
         'returns': 'ViStatus'

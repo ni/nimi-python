@@ -1185,7 +1185,7 @@ wait_for_debounce
                 
 
 
-            :type maximum_time_ms: int in milliseconds or hightime.timedelta
+            :type maximum_time_ms: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
 wait_for_scan_complete
 ----------------------
@@ -1215,7 +1215,7 @@ wait_for_scan_complete
                 
 
 
-            :type maximum_time_ms: int in milliseconds or hightime.timedelta
+            :type maximum_time_ms: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
 
 Properties
@@ -2306,17 +2306,17 @@ scan_delay
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | No                                     |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | No                                                          |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -2441,17 +2441,17 @@ settling_time
 
         The following table lists the characteristics of this property.
 
-            +----------------+----------------------------------------+
-            | Characteristic | Value                                  |
-            +================+========================================+
-            | Datatype       | float in seconds or hightime.timedelta |
-            +----------------+----------------------------------------+
-            | Permissions    | read-write                             |
-            +----------------+----------------------------------------+
-            | Channel Based  | Yes                                    |
-            +----------------+----------------------------------------+
-            | Resettable     | No                                     |
-            +----------------+----------------------------------------+
+            +----------------+-------------------------------------------------------------+
+            | Characteristic | Value                                                       |
+            +================+=============================================================+
+            | Datatype       | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +----------------+-------------------------------------------------------------+
+            | Permissions    | read-write                                                  |
+            +----------------+-------------------------------------------------------------+
+            | Channel Based  | Yes                                                         |
+            +----------------+-------------------------------------------------------------+
+            | Resettable     | No                                                          |
+            +----------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

@@ -258,7 +258,7 @@ attributes = {
         'name': 'SETTLE_TIME',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150029: {
         'access': 'read-write',
@@ -563,7 +563,7 @@ attributes = {
         'name': 'TRIGGER_DELAY',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250006: {
         'access': 'read-write',
@@ -701,7 +701,7 @@ attributes = {
         'name': 'SAMPLE_INTERVAL',
         'resettable': False,
         'type': 'ViReal64',
-        'type_in_documentation': 'float in seconds or hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1250304: {
         'access': 'read-write',

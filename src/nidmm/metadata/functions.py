@@ -187,7 +187,7 @@ functions = {
                 'name': 'sampleInterval',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -477,7 +477,7 @@ functions = {
                 'name': 'triggerDelay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
-                'type_in_documentation': 'float in seconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
             }
         ],
         'returns': 'ViStatus'
@@ -646,7 +646,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
             },
             {
                 'direction': 'out',
@@ -681,7 +681,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
             },
             {
                 'direction': 'in',
@@ -751,7 +751,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
             },
             {
                 'direction': 'in',
@@ -1611,7 +1611,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
             },
             {
                 'direction': 'out',
@@ -1646,7 +1646,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
             },
             {
                 'direction': 'in',
@@ -1761,7 +1761,7 @@ functions = {
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
-                'type_in_documentation': 'int in milliseconds or hightime.timedelta'
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds'
             },
             {
                 'direction': 'in',
