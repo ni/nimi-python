@@ -1132,7 +1132,7 @@ class _SessionBase(object):
     ready_for_ref_event_terminal_name = _attributes.AttributeViString(1150147)
     '''Type: str
 
-    \Returns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.
+    Returns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.
     '''
     ready_for_start_event_output_terminal = _attributes.AttributeViString(1150110)
     '''Type: str

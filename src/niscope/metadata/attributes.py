@@ -1254,7 +1254,7 @@ attributes = {
         'access': 'read only',
         'channel_based': False,
         'documentation': {
-            'description': '\\Returns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.\n'
+            'description': '\nReturns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.\n'
         },
         'lv_property': 'Synchronization:Ready for Reference:Terminal Name',
         'name': 'READY_FOR_REF_EVENT_TERMINAL_NAME',

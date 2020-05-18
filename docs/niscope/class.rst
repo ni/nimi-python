@@ -4124,7 +4124,7 @@ ready_for_ref_event_terminal_name
 
     .. py:attribute:: ready_for_ref_event_terminal_name
 
-        \Returns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.
+        Returns the fully qualified name for the Ready for Reference Event terminal.    You can use this terminal as the source for a trigger.
 
         The following table lists the characteristics of this property.
 
